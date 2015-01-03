@@ -1,0 +1,167 @@
+﻿@using WereViewApp.Models.EntityModel
+@model Review
+
+@{
+	string nameOftheRecord = Html.DisplayFor(model => model.Title).ToString();
+
+    ViewBag.Title = "Details of " + nameOftheRecord;
+	string title = ViewBag.Title;
+    string subtitle = ViewBag.Title;
+	string controller = (string)ViewBag.controller;
+	string viewName = "Details";
+
+}
+<h1 class="h2 gap-from-top-small">
+	<span class="glyphicon glyphicon-print"></span>
+	@Html.SamePageLink(title, subtitle, false)
+</h1>
+<hr />
+<h3 class="h4">To edit the details please click on the edit button.</h3>   
+<div class="form-horizontal">		
+	<div class="form-group">
+		<div class="col-md-10">
+			<div class="btn-group">
+				<a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+				<a href="@Url.Action("Edit", new { id = Model.ReviewID })" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+			</div>
+		</div>	
+		<div class="col-md-2">
+			<a href="@Url.Action("Delete", new { id = Model.ReviewID })" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>			
+		</div>	
+	</div>
+	<table class="table table-hover gap-from-top-small">
+		<thead>
+            <tr>
+                <th>Properties</th>
+                <th></th>
+                <th>Values</th>
+            </tr>
+        </thead>
+		<tbody>			
+	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.Title)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.Title)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.Pros)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.Pros)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.Cons)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.Cons)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.IsSuggest)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.IsSuggest)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.Comment1)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.Comment1)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.Comment2)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.Comment2)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.Comments)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.Comments)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.LikedCount)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.LikedCount)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.DisLikeCount)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.DisLikeCount)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.App.AppName)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.App.AppName)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.User.FirstName)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.User.FirstName)
+					</td>
+				</tr>	
+		
+			
+		</tbody>
+    </table> 
+	<div class="form-group">
+		<div class="col-md-10">
+			<div class="btn-group">
+				<a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+				<a href="@Url.Action("Edit", new { id = Model.ReviewID })" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+			</div>
+		</div>	
+		<div class="col-md-2">
+			<a href="@Url.Action("Delete", new { id = Model.ReviewID })" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>			
+		</div>	
+	</div>
+</div>

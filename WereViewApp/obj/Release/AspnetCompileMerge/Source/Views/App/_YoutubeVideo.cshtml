@@ -1,0 +1,10 @@
+﻿@model WereViewApp.Models.EntityModel.App
+@if (Model.YoutubeEmbedLink != null) {
+    <div id="pane1" class="tab-pane active">
+        <div class="video">
+            <div class="embed-responsive embed-responsive-16by9">
+                @Html.Raw(Model.YoutubeEmbedLink)
+            </div>
+        </div>
+    </div>
+}

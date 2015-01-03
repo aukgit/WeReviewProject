@@ -1,0 +1,52 @@
+﻿@using WereViewApp.Models.POCO.Identity
+@{
+    Layout = null;
+    ApplicationRole role = null;
+    if (User.Identity.IsAuthenticated) {
+        role = (ApplicationRole)ViewBag.Role;
+    }
+}
+
+<div class="container">
+    <div class="topWrap">
+        <!------- topWrap part start -------->
+        <div class="socialWrap">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-google-plus"></i></a>
+        </div>
+    </div><!----- topWrap part end ------->
+    <div class="header row">
+        <div class="logo col-md-3 col-sm-3">
+            <h1 title="@AppVar.Name">
+                <a href="@AppVar.Url" title="@AppVar.Name">@AppVar.Name</a>
+            </h1>
+        </div>
+        @{Html.RenderAction("Menu", "Partials");}
+        @{Html.RenderAction("SearchForm", "Partials");}
+        <div class="postbutton col-md-2 col-sm-2">
+            <a class="btn btn-warning" href="/App/Post">Post Your Apps</a>
+        </div>
+        @if (User.Identity.IsAuthenticated) {
+            <div class="login col-md-2 col-sm-2">
+                <div class="pronav">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#" class="" data-toggle="dropdown"><div class="profile_name">@User.Identity.Name <br /><span>@role.Name</span></div><img src="~/Uploads/Images/avatar.jpg"></a>
+                            <ul class="dropdown-menu">
+                                @Html.GetMenu("UserMenu")
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        } else {
+            <div class="loginWrap col-md-2 col-sm-2">
+                <ul>
+                    <li class="first"><a href="/SignIn">Login</a></li>
+                    <li><a href="/Register">Register</a></li>
+                </ul>
+            </div>
+        }
+    </div><!----- header part end ------->
+</div><!-----Container end ---------->

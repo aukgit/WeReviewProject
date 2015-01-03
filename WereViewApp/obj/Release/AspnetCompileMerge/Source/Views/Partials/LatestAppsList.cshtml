@@ -1,0 +1,34 @@
+﻿@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
+@using WereViewApp.WereViewAppCommon.Structs
+@model IEnumerable<WereViewApp.Models.EntityModel.App>
+
+@{
+    bool isFirst = true;
+    Layout = null;
+}
+<h1 title="Latest Apps of @AppVar.Name"><a href="@Url.Action("Latest", "Apps")"> Latest Apps</a></h1>
+@foreach (var app in Model) {
+    string appName = @app.AppName;
+    string absUrl = @app.GetAppURL();
+    <div class="box row">
+        <div class="imagebox col-md-3 col-sm-3">
+            <a href="@absUrl" title="@appName" data-original-title="@appName" class="tooltip-show">
+                <img class="home-page-image-icon" src="@app.GalleryHomeIconLocation" alt="@appName">
+            </a>
+        </div>
+        <div class="textbox col-md-9 col-sm-9">
+            <a href="@absUrl" itemtype="@absUrl" title="@app.Description" data-original-title="@app.Description" class="tooltip-show">
+                <h1 title="@appName">@Html.Truncate(appName, 20)</h1>
+                <p title="@app.Description">
+                    @Html.Truncate(app.Description, CommonVars.APP_HOME_PAGE_DESCRIPTION_TRUNC_LEN)
+                </p>
+                <i class="fa fa-star"></i>
+                <span class="price" itemprop="value" title="rating of @appName" itemprop="rating">@app.AvgRating</span>
+                <meta itemprop="best" content="10" />
+            </a>
+            <a href="@Url.Action(app.Platform.PlatformName, "Apps")" title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" data-original-title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" class="tooltip-show"><i class="@app.Platform.Icon"></i></a>
+        </div>
+    </div>
+}
+<h2 class="h5" title="Latest Apps of @AppVar.Name"><a href="@Url.Action("Latest", "Apps")" title="Latest Apps of @AppVar.Name" class="btn btn-default tooltip-show" > More...</a></h2>
+

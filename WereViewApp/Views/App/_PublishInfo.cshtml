@@ -1,0 +1,47 @@
+﻿@model WereViewApp.Models.EntityModel.App
+@{
+    var ideasList = @Model.IdeaBy != null ? @Model.IdeaBy.Split(',') : null;
+    var developersList = @Model.Developers != null ? @Model.Developers.Split(',') : null;
+    var publisherList = @Model.Publishers != null ? @Model.Publishers.Split(',') : null;
+
+}
+<div class="publisbox">
+    @if (Model.IdeaBy != null) {
+        <div class="linkboxWrap">
+            <label>Publisher :</label>
+            @foreach (var publisher in publisherList) {
+                <a class="linkbox">@publisher</a>
+            }
+        </div>
+    }
+    @if (Model.Developers != null) {
+        <div class="linkboxWrap">
+            <label>Developer :</label>
+            @foreach (var developer in developersList) {
+                <a class="linkbox">@developer</a>
+            }
+        </div>
+    }
+    @if (Model.IdeaBy != null) {
+        <div class="linkboxWrap">
+            <label>Idea by :</label>
+            @foreach (var idea in ideasList) {
+                <a class="linkbox">@idea</a>
+            }
+        </div>
+    }
+    <div class="linkboxWrap date">
+        <label>Release Date :</label> <span class="date"><a>@Html.DisplayDate(Model.ReleaseDate)</a></span>
+    </div>
+    <div class="buttonWrap">
+        @if (Model.StoreURL != null) {
+            <a class="btn btn-success" href="@Model.StoreURL" title="App Store URL for @Model.AppName"> Store</a>
+        }
+        
+        @if (Model.WebSiteURL != null) {
+            <a class="btn btn-primary" href="@Model.WebSiteURL" title="Official Website for @Model.AppName">WebSite</a>
+        }
+        
+    </div>
+</div>
+

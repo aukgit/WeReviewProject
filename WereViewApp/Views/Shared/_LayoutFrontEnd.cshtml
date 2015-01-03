@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="@AppConfig.Setting.GoogleMetaTag" />
+    <title>@ViewBag.Title</title>
+
+    @if (ViewBag.redTheme == null) {
+        @Styles.Render("~/Content/css/FrontEndDeveloperCSS/bootstrap")
+    } else {
+        @Styles.Render("~/Content/css/bootstrap_red")
+    }
+
+    @Styles.Render("~/Content/css/styles")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("css", required: false)
+    @if (ViewBag.Meta != null) {
+        <meta name="description" content="@ViewBag.Meta" />
+    }
+    @if (ViewBag.Keywords != null) {
+        <meta name="keywords" content="@ViewBag.Keywords" />
+    }
+</head>
+<body>
+
+    @RenderBody()
+
+    <!--  mainContainerwrap part End  -->
+    <!--  footer part start  -->
+    @Html.Partial("_FooterFrontEnd")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/WereViewApps")
+
+
+</body>
+</html>

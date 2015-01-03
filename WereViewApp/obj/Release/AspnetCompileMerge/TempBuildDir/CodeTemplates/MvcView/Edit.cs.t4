@@ -1,0 +1,226 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ include file="Imports.include.t4" #>
+<# string dataTypeNamespace = ViewDataTypeName; #>
+@using <#= dataTypeNamespace.Replace("." + ViewDataTypeName.Split('.').Last(), "") #>
+@model <#= ViewDataTypeName.Split('.').Last() #>
+<# 
+	string primaryKey = "";
+	string displayFieldx = "";
+	int i = 0;
+	// get primary key and display field name , alim ul kairm
+	foreach (PropertyMetadata property in ModelMetadata.Properties) {
+		
+		if (property.IsPrimaryKey) {
+			primaryKey = property.PropertyName;
+			continue;
+        } else if(!string.IsNullOrEmpty(primaryKey)){
+			displayFieldx = property.PropertyName;
+			break;
+        }
+		i++;
+    }
+#>
+<#
+// "form-control" attribute is only supported for all EditorFor() in System.Web.Mvc 5.1.0.0 or later versions, except for checkbox, which uses a div in Bootstrap
+string boolType = "System.Boolean";
+Version requiredMvcVersion = new Version("5.1.0.0");
+bool isControlHtmlAttributesSupported = MvcVersion >= requiredMvcVersion;
+// The following chained if-statement outputs the file header code and markup for a partial view, a view using a layout page, or a regular view.
+if(IsPartialView) {
+#>
+
+<#
+} else if(IsLayoutPageSelected) {
+#>
+
+@{
+    ViewBag.Title = "Editing " + Html.DisplayFor(model => model.<#= displayFieldx #>);
+	string title = ViewBag.Title;
+    string subtitle = ViewBag.Title;
+    var token = (MvcHtmlString)@Html.AntiForgeryToken();
+	string controller = (string)ViewBag.controller;
+	string viewName = "<#= ViewName#>";
+<#
+if (!String.IsNullOrEmpty(LayoutPageFile)) {
+#>
+    Layout = "<#= LayoutPageFile#>";
+<#
+}
+#>
+}
+
+
+<#
+} else {
+#>
+
+@{
+    Layout = null;
+    var token = (MvcHtmlString)@Html.AntiForgeryToken();
+	string viewName = "<#= ViewName#>";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@viewName</title>
+</head>
+<body>
+<#
+    PushIndent("    ");
+}
+#>
+<#
+if (ReferenceScriptLibraries) {
+#>
+<#
+    if (!IsLayoutPageSelected && IsBundleConfigPresent) {
+#>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+<#
+    }
+#>
+<#
+    else if (!IsLayoutPageSelected) {
+#>
+<script src="~/Scripts/jquery-<#= JQueryVersion #>.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<#
+    }
+#>
+
+<#
+}
+#>
+<h1 class="h2 gap-from-top-small">
+	<span class="glyphicon glyphicon-edit"></span>  
+	@Html.SamePageLink(title, subtitle, false)
+</h1>
+<hr />
+@using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) 
+{
+   <div class="form-horizontal">
+		@token
+		<div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="btn-group">
+                    <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+                    <a href="@Url.Action("Delete", new { id = Model.<#=GetPrimaryKeyName()#> })" title="Delete this record?" class="btn btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+                    <div class="input-group-btn inline">
+                        <button title="Save and create new one" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
+                    </div>                    
+                </div>               
+            </div>
+        </div>
+		@Html.Partial("_SuccessMessage")
+		
+<# 
+    if (isControlHtmlAttributesSupported) {
+#>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<#        
+    } else {
+#>
+        @Html.ValidationSummary(true)
+
+<#      
+    }
+foreach (PropertyMetadata property in ModelMetadata.Properties) {
+    if (property.Scaffold && !property.IsReadOnly && !property.IsAssociation) {
+		// If the property is a primary key and Guid, then the Guid is generated in the controller. Hence, this propery is not displayed on the view.
+        if (property.IsPrimaryKey) {#>
+		
+		@Html.HiddenFor(model => model.<#= property.PropertyName #>)
+<# 			continue;
+		} 		   
+        if (property.IsForeignKey) { 
+            if (isControlHtmlAttributesSupported) {
+#>
+        <div class="form-group <#= property.PropertyName #>-main">
+			<div class="controls">
+				<label class="col-md-2 control-label">@Html.DisplayNameFor(m=> m.<#= property.PropertyName #>)<span class="red ">*</span></label>
+				<div class="col-md-10 <#= property.PropertyName #>-combo-div">
+					@Html.DropDownList("<#= property.PropertyName #>", null, htmlAttributes: new { @class = "form-control selectpicker", data_style = "btn-success", data_live_search = true})
+					<a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m=> m.<#= property.PropertyName #>)." title="Please select @Html.DisplayNameFor(m=> m.<#= property.PropertyName #>)." class="tooltip-show"><span class="glyphicon glyphicon-question-sign font-size-22 glyphicon-top-fix almost-white"></span></a>
+				</div>
+			</div>
+		</div>
+<#
+            } else {
+#>
+        <div class="form-group <#= property.PropertyName #>-main">
+			<div class="controls">
+				<label class="col-md-2 control-label">@Html.DisplayNameFor(m=> m.<#= property.PropertyName #>)<span class="red ">*</span></label>
+				<div class="col-md-10 <#= property.PropertyName #>-combo-div">
+					@Html.DropDownList("<#= property.PropertyName #>", String.Empty)
+					<a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m=> m.<#= property.PropertyName #>)." title="Please select @Html.DisplayNameFor(m=> m.<#= property.PropertyName #>)." class="tooltip-show"><span class="glyphicon glyphicon-question-sign font-size-22 glyphicon-top-fix almost-white"></span></a>
+				</div>
+			</div>
+		</div>
+<#
+            }
+        } else {
+#>
+        @Html.EditorFor(model => model.<#= property.PropertyName #>)
+<#
+        }
+	} //if not auto gen
+}//foreach
+#>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="btn-group">
+                    <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+                    <a href="@Url.Action("Delete", new { id = Model.<#=GetPrimaryKeyName()#> })" title="Delete this record?" class="btn btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+                    <div class="input-group-btn inline">
+                        <button title="Save and create new one" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
+                    </div>                    
+                </div>               
+            </div>
+        </div>
+    </div>
+}
+
+@Html.Partial("_ValidatorCommonForm", new ViewDataDictionary { 
+    {"token",token}
+})
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<#
+if(IsLayoutPageSelected && ReferenceScriptLibraries && IsBundleConfigPresent) {
+#>
+<#
+}
+#>
+<#
+else if(IsLayoutPageSelected && ReferenceScriptLibraries) {
+#>
+
+<script src="~/Scripts/jquery-<#= JQueryVersion #>.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<#
+}
+#>
+<#
+// The following code closes the tag used in the case of a view using a layout page and the body and html tags in the case of a regular view page
+#>
+<#
+if(!IsPartialView && !IsLayoutPageSelected) {
+    ClearIndent();
+#>
+</body>
+</html>
+<#
+}
+#>
+<#@ include file="ModelMetadataFunctions.cs.include.t4" #>

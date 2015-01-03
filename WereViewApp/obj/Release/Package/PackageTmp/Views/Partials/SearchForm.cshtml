@@ -1,0 +1,13 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="search col-md-3 col-sm-3">
+    <form role="search" class="navbar-form navbar-left" action="@Url.Action("Search", "Apps")" method="post">
+        @Html.AntiForgeryToken()
+        <input type="text" class="searchbox" value="" placeholder="Search" name="Url">
+        <button class="button" value="">
+            <i class="fa fa-search"></i>
+        </button>
+    </form>
+</div>

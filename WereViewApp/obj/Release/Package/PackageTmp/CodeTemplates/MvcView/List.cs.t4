@@ -1,0 +1,173 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ include file="Imports.include.t4" #>
+<# string dataTypeNamespace = ViewDataTypeName; #>
+@using <#= dataTypeNamespace.Replace("." + ViewDataTypeName.Split('.').Last(), "") #>
+@model IEnumerable<#= "<" + ViewDataTypeName.Split('.').Last() + ">" #>
+<# 
+	string primaryKey = "";
+	string displayFieldx = "";
+	int i = 0;
+	// get primary key and display field name , alim ul kairm
+	foreach (PropertyMetadata property in ModelMetadata.Properties) {
+		
+		if (property.IsPrimaryKey) {
+			primaryKey = property.PropertyName;
+			continue;
+        } else if(!string.IsNullOrEmpty(primaryKey)){
+			displayFieldx = property.PropertyName;
+			break;
+        }
+		i++;
+    }
+#>
+<#
+// The following chained if-statement outputs the file header code and markup for a partial view, a view using a layout page, or a regular view.
+if(IsPartialView) {
+#>
+
+<#
+} else if(IsLayoutPageSelected) {
+#>
+
+@{
+    ViewBag.Title = "<#= ViewDataTypeName.Split('.').Last() #>";
+	string title = ViewBag.Title;
+    string subtitle = ViewBag.Title;
+	string controller = (string)ViewBag.controller;
+    string viewName = "<#= ViewName#>";
+    string editLinkName = "";
+	/*
+	bool noItemsExist = Model == null;
+	if (!noItemsExist) {
+		noItemsExist = Model.Count() == 0;
+	}
+	*/
+<#
+if (!String.IsNullOrEmpty(LayoutPageFile)) {
+#>
+    Layout = "<#= LayoutPageFile#>";
+<#
+}
+#>
+}
+
+<h2 class="h3 gap-from-top-small">
+	<span class="glyphicon glyphicon-th-list"></span> 
+	@Html.SamePageLink(title, subtitle, false)
+</h2>
+<div class="small-bottom-gap"></div>
+
+<#
+} else {
+#>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@viewName</title>
+</head>
+<body>
+<#
+    PushIndent("    ");
+}
+#>
+<p class="create-btn-p">
+    <a href="@Url.Action("Create")" title="Create a new item." class="btn btn-warning create-save"><span class="glyphicon glyphicon-plus"></span> Create</a>
+</p>
+<table class="table table-hover bootstrap-table-do" data-toggle="table" data-toolbar="#filter-bar" data-show-filter="true" data-show-columns="true" data-search="true" data-show-refresh="true" data-show-toggle="true" data-show-export="true" data-pagination="true">
+	<!--<caption>@viewName</caption>-->
+	<thead>
+		<tr>		
+<#
+IEnumerable<PropertyMetadata> properties = ModelMetadata.Properties;
+foreach (PropertyMetadata property in properties) {
+    if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {
+		
+        // We do not want to show any association properties for which there is
+        // no associated foreign key.
+        if (property.IsAssociation && GetRelatedModelMetadata(property) == null) {
+            continue;
+        }
+#>
+			<th data-field="<#= GetValueExpression(property) #>">
+				@Html.DisplayNameFor(model => model.<#= GetValueExpression(property) #>)
+			</th>
+<#
+    }
+}
+#>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model) {
+			<tr>
+<#
+foreach (PropertyMetadata property in properties) {
+    if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {
+        // We do not want to show any association properties for which there is
+        // no associated foreign key.
+        if (property.IsAssociation && GetRelatedModelMetadata(property) == null) {
+            continue;
+        }
+		if (property.PropertyName == displayFieldx) {#>		
+				<td>
+					@{editLinkName = Html.DisplayFor(model => item.<#= displayFieldx #>).ToString();}
+					<a href="@Url.Action("Edit", new { id=item.<#= primaryKey #> })" title="@editLinkName edit..."><span class="glyphicon glyphicon-pencil"></span> @editLinkName</a>
+				</td>
+<# 			
+			continue;
+		} 
+#>
+				<td>
+					@Html.DisplayFor(modelItem => <#= "item." + GetValueExpression(property) #>)
+				</td>
+<#
+    }
+}
+
+string pkName = GetPrimaryKeyName();
+if (pkName != null) {
+#>
+				<td>			
+					<a href="@Url.Action("Details", new { id=item.<#= pkName #> })" title="Details of @editLinkName." class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-print"></span> Details</a>
+					<a href="@Url.Action("Delete", new { id=item.<#= pkName #> })" title="Delete @editLinkName" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>            
+				</td>
+<#
+} else {
+#>
+				<td>					
+					<a href="@Url.Action("Edit", new { /* id=item.PrimaryKey */ })" title="Edit" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+					<a href="@Url.Action("Delete", new { /* id=item.PrimaryKey */ })" title="Delete" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+				</td>
+<#
+}
+#>
+			</tr>
+		}
+	</tbody>
+
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<#
+// The following code closes the tag used in the case of a view using a layout page and the body and html tags in the case of a regular view page
+#>
+<#
+if(!IsPartialView && !IsLayoutPageSelected) {
+    ClearIndent();
+#>
+</body>
+</html>
+<#
+}
+#>
+<#@ include file="ModelMetadataFunctions.cs.include.t4" #>

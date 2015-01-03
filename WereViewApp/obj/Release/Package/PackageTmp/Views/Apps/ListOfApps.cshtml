@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
+}
+<div class="wrapper_inner">
+    @{Html.RenderAction("NavBar", "Partials");}
+</div> 
+
+<div class="mainContainerwrap">
+    <!--  contenCol part start  -->
+    <div class="container gap-from-top">
+        <div class="contenCol col-md-9 col-sm-9">
+            <div class="itemboxWrap row">                
+                @Html.Partial("_ListItemsOfApps")
+            </div>
+        </div>       
+        <!--  rightCol part end  -->
+    </div>
+
+</div>

@@ -1,0 +1,48 @@
+﻿@model WereViewApp.Models.EntityModel.Review
+
+@{
+    ViewBag.Title = "Edit Your Review";
+    var token = (MvcHtmlString)@Html.AntiForgeryToken();
+    string controller = (string)ViewBag.controller;
+    string viewName = "Edit";
+    Layout = null;
+}
+<hr />
+<h1 class="h4">@ViewBag.Title</h1>
+@using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create", role = "form" })) {
+    <div class="form-horizontal">
+        @token
+        @Html.Partial("_SuccessMessage")
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ReviewID)
+        @Html.HiddenFor(model => model.AppID)
+
+        @Html.EditorFor(model => model.Rating, "Rating-10-b", new { @step = 1 })
+        @Html.EditorFor(model => model.Title)
+        @Html.EditorFor(model => model.Pros, "Multiline")
+        @Html.EditorFor(model => model.Cons, "Multiline")
+        @Html.EditorFor(model => model.Comments, "Multiline")
+        @Html.EditorFor(model => model.IsSuggest)
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="btn-group">
+                    <div class="input-group-btn inline">
+                        <button class="btn btn-success" title="Save changes."><i class="glyphicon glyphicon-save"></i> Save Changes</button>
+                        <a id="submitting-review-spinner" data-toggle="tooltip" title="Requesting" data-original-title="Requesting" class="tooltip-show">
+                            <span data-display="Requesting for review" class="glyphicon glyphicon-refresh glyphicon-refresh-animate" title="Requesting"></span>
+                        </a>
+                        <a id="submitting-review-failed-icon" data-toggle="tooltip" data-failed-icon="true" data-original-title="failed." title="failed." class="tooltip-show">
+                            <span class="glyphicon glyphicon-remove  red"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    $('.tooltip-show').tooltip();
+</script>

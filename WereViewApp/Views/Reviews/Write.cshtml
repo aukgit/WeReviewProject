@@ -1,0 +1,56 @@
+﻿@model WereViewApp.Models.EntityModel.Review
+
+@{
+    ViewBag.Title = "Write Review"; 
+    var token = (MvcHtmlString)@Html.AntiForgeryToken();
+    string controller = (string)ViewBag.controller;
+    string viewName = "Write";
+    Layout = null;
+}
+
+
+
+<hr />
+<h1 class="h4">@ViewBag.Title</h1>
+<h4 class="h5 red">Please rate first to proceed next.</h4>
+@using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create", role = "form" })) {
+    <div class="form-horizontal">
+        @token
+        @Html.Partial("_SuccessMessage")
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.AppID)
+        <div data-dev-slide="0" data-dev-visited="false">
+            @Html.EditorFor(model => model.Rating, "Rating-10-b", new { @step = 1 })
+            @Html.EditorFor(model => model.Title)
+        </div>
+        <div data-dev-slide="1" data-dev-visited="false">
+            @Html.EditorFor(model => model.Pros, "Multiline")
+        </div>
+        <div data-dev-slide="2" data-dev-visited="false">
+            @Html.EditorFor(model => model.Cons, "Multiline")
+        </div>
+        <div data-dev-slide="3" data-dev-visited="false" data-last-slide="true">
+            @Html.EditorFor(model => model.Comments, "Multiline")
+            @Html.EditorFor(model => model.IsSuggest)
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="btn-group">
+                    <div class="input-group-btn inline">
+                        <button class="btn btn-success" title="Post new review."><i class="glyphicon glyphicon-plus"></i> Post</button>
+                        <a id="submitting-review-spinner" data-toggle="tooltip" title="Requesting" data-original-title="Requesting" class="tooltip-show">
+                            <span data-display="Requesting for review" class="glyphicon glyphicon-refresh glyphicon-refresh-animate" title="Requesting"></span>
+                        </a>
+                        <a id="submitting-review-failed-icon" data-toggle="tooltip" data-failed-icon="true" data-original-title="failed." title="failed." class="tooltip-show">
+                            <span class="glyphicon glyphicon-remove  red"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    $('.tooltip-show').tooltip();
+</script>

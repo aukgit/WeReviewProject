@@ -1,0 +1,1009 @@
+﻿.flag-combo, .flag-combo:active,.flag-combo:focus {
+    background-image: url("flags32.png") !important;
+    background-repeat: no-repeat;
+    padding-left: 41px;
+}
+
+    .flag-combo.fc-_African_Union {
+        background-position: 5px -31px;
+    }
+
+    .flag-combo.fc-_Arab_League {
+        background-position: 5px -63px;
+    }
+
+    .flag-combo.fc-_ASEAN {
+        background-position: 5px -95px;
+    }
+
+    .flag-combo.fc-_CARICOM {
+        background-position: 5px -127px;
+    }
+
+    .flag-combo.fc-_CIS {
+        background-position: 5px -159px;
+    }
+
+    .flag-combo.fc-_Commonwealth {
+        background-position: 5px -191px;
+    }
+
+    .flag-combo.fc-_England {
+        background-position: 5px -223px;
+    }
+
+    .flag-combo.fc-_European_Union, .flag-combo.fc-eu {
+        background-position: 5px -255px;
+    }
+
+    .flag-combo.fc-_Islamic_Conference {
+        background-position: 5px -287px;
+    }
+
+    .flag-combo.fc-_Kosovo {
+        background-position: 5px -319px;
+    }
+
+    .flag-combo.fc-_NATO {
+        background-position: 5px -351px;
+    }
+
+    .flag-combo.fc-_Northern_Cyprus {
+        background-position: 5px -383px;
+    }
+
+    .flag-combo.fc-_Northern_Ireland {
+        background-position: 5px -415px;
+    }
+
+    .flag-combo.fc-_Olimpic_Movement {
+        background-position: 5px -447px;
+    }
+
+    .flag-combo.fc-_OPEC {
+        background-position: 5px -479px;
+    }
+
+    .flag-combo.fc-_Red_Cross {
+        background-position: 5px -511px;
+    }
+
+    .flag-combo.fc-_Scotland {
+        background-position: 5px -543px;
+    }
+
+    .flag-combo.fc-_Somaliland {
+        background-position: 5px -575px;
+    }
+
+    .flag-combo.fc-_Tibet {
+        background-position: 5px -607px;
+    }
+
+    .flag-combo.fc-_United_Nations {
+        background-position: 5px -639px;
+    }
+
+    .flag-combo.fc-_Wales {
+        background-position: 5px -671px;
+    }
+
+    .flag-combo.fc-ad {
+        background-position: 5px -703px;
+    }
+
+    .flag-combo.fc-ae {
+        background-position: 5px -735px;
+    }
+
+    .flag-combo.fc-af {
+        background-position: 5px -767px;
+    }
+
+    .flag-combo.fc-ag {
+        background-position: 5px -799px;
+    }
+
+    .flag-combo.fc-ai {
+        background-position: 5px -831px;
+    }
+
+    .flag-combo.fc-al {
+        background-position: 5px -863px;
+    }
+
+    .flag-combo.fc-am {
+        background-position: 5px -895px;
+    }
+
+    .flag-combo.fc-ao {
+        background-position: 5px -927px;
+    }
+
+    .flag-combo.fc-aq {
+        background-position: 5px -959px;
+    }
+
+    .flag-combo.fc-ar {
+        background-position: 5px -991px;
+    }
+
+    .flag-combo.fc-as {
+        background-position: 5px -1023px;
+    }
+
+    .flag-combo.fc-at {
+        background-position: 5px -1055px;
+    }
+
+    .flag-combo.fc-au {
+        background-position: 5px -1087px;
+    }
+
+    .flag-combo.fc-aw {
+        background-position: 5px -1119px;
+    }
+
+    .flag-combo.fc-ax {
+        background-position: 5px -1151px;
+    }
+
+    .flag-combo.fc-az {
+        background-position: 5px -1183px;
+    }
+
+    .flag-combo.fc-ba {
+        background-position: 5px -1215px;
+    }
+
+    .flag-combo.fc-bb {
+        background-position: 5px -1247px;
+    }
+
+    .flag-combo.fc-bd {
+        background-position: 5px -1279px;
+    }
+
+    .flag-combo.fc-be {
+        background-position: 5px -1311px;
+    }
+
+    .flag-combo.fc-bf {
+        background-position: 5px -1343px;
+    }
+
+    .flag-combo.fc-bg {
+        background-position: 5px -1375px;
+    }
+
+    .flag-combo.fc-bh {
+        background-position: 5px -1407px;
+    }
+
+    .flag-combo.fc-bi {
+        background-position: 5px -1439px;
+    }
+
+    .flag-combo.fc-bj {
+        background-position: 5px -1471px;
+    }
+
+    .flag-combo.fc-bm {
+        background-position: 5px -1503px;
+    }
+
+    .flag-combo.fc-bn {
+        background-position: 5px -1535px;
+    }
+
+    .flag-combo.fc-bo {
+        background-position: 5px -1567px;
+    }
+
+    .flag-combo.fc-br {
+        background-position: 5px -1599px;
+    }
+
+    .flag-combo.fc-bs {
+        background-position: 5px -1631px;
+    }
+
+    .flag-combo.fc-bt {
+        background-position: 5px -1663px;
+    }
+
+    .flag-combo.fc-bw {
+        background-position: 5px -1695px;
+    }
+
+    .flag-combo.fc-by {
+        background-position: 5px -1727px;
+    }
+
+    .flag-combo.fc-bz {
+        background-position: 5px -1759px;
+    }
+
+    .flag-combo.fc-ca {
+        background-position: 5px -1791px;
+    }
+
+    .flag-combo.fc-cd {
+        background-position: 5px -1823px;
+    }
+
+    .flag-combo.fc-cf {
+        background-position: 5px -1855px;
+    }
+
+    .flag-combo.fc-cg {
+        background-position: 5px -1887px;
+    }
+
+    .flag-combo.fc-ch {
+        background-position: 5px -1919px;
+    }
+
+    .flag-combo.fc-ci {
+        background-position: 5px -1951px;
+    }
+
+    .flag-combo.fc-ck {
+        background-position: 5px -1983px;
+    }
+
+    .flag-combo.fc-cl {
+        background-position: 5px -2015px;
+    }
+
+    .flag-combo.fc-cm {
+        background-position: 5px -2047px;
+    }
+
+    .flag-combo.fc-cn {
+        background-position: 5px -2079px;
+    }
+
+    .flag-combo.fc-co {
+        background-position: 5px -2111px;
+    }
+
+    .flag-combo.fc-cr {
+        background-position: 5px -2143px;
+    }
+
+    .flag-combo.fc-cu {
+        background-position: 5px -2175px;
+    }
+
+    .flag-combo.fc-cv {
+        background-position: 5px -2207px;
+    }
+
+    .flag-combo.fc-cy {
+        background-position: 5px -2239px;
+    }
+
+    .flag-combo.fc-cz {
+        background-position: 5px -2271px;
+    }
+
+    .flag-combo.fc-de {
+        background-position: 5px -2303px;
+    }
+
+    .flag-combo.fc-dj {
+        background-position: 5px -2335px;
+    }
+
+    .flag-combo.fc-dk {
+        background-position: 5px -2367px;
+    }
+
+    .flag-combo.fc-dm {
+        background-position: 5px -2399px;
+    }
+
+    .flag-combo.fc-do {
+        background-position: 5px -2431px;
+    }
+
+    .flag-combo.fc-dz {
+        background-position: 5px -2463px;
+    }
+
+    .flag-combo.fc-ec {
+        background-position: 5px -2495px;
+    }
+
+    .flag-combo.fc-ee {
+        background-position: 5px -2527px;
+    }
+
+    .flag-combo.fc-eg {
+        background-position: 5px -2559px;
+    }
+
+    .flag-combo.fc-eh {
+        background-position: 5px -2591px;
+    }
+
+    .flag-combo.fc-er {
+        background-position: 5px -2623px;
+    }
+
+    .flag-combo.fc-es {
+        background-position: 5px -2655px;
+    }
+
+    .flag-combo.fc-et {
+        background-position: 5px -2687px;
+    }
+
+    .flag-combo.fc-fi {
+        background-position: 5px -2719px;
+    }
+
+    .flag-combo.fc-fj {
+        background-position: 5px -2751px;
+    }
+
+    .flag-combo.fc-fm {
+        background-position: 5px -2783px;
+    }
+
+    .flag-combo.fc-fo {
+        background-position: 5px -2815px;
+    }
+
+    .flag-combo.fc-fr {
+        background-position: 5px -2847px;
+    }
+
+    .flag-combo.fc-bl, .flag-combo.fc-cp, .flag-combo.fc-mf, .flag-combo.fc-yt {
+        background-position: 5px -2847px;
+    }
+
+    .flag-combo.fc-ga {
+        background-position: 5px -2879px;
+    }
+
+    .flag-combo.fc-gb {
+        background-position: 5px -2911px;
+    }
+
+    .flag-combo.fc-sh {
+        background-position: 5px -2911px;
+    }
+
+    .flag-combo.fc-gd {
+        background-position: 5px -2943px;
+    }
+
+    .flag-combo.fc-ge {
+        background-position: 5px -2975px;
+    }
+
+    .flag-combo.fc-gg {
+        background-position: 5px -3007px;
+    }
+
+    .flag-combo.fc-gh {
+        background-position: 5px -3039px;
+    }
+
+    .flag-combo.fc-gi {
+        background-position: 5px -3071px;
+    }
+
+    .flag-combo.fc-gl {
+        background-position: 5px -3103px;
+    }
+
+    .flag-combo.fc-gm {
+        background-position: 5px -3135px;
+    }
+
+    .flag-combo.fc-gn {
+        background-position: 5px -3167px;
+    }
+
+    .flag-combo.fc-gp {
+        background-position: 5px -3199px;
+    }
+
+    .flag-combo.fc-gq {
+        background-position: 5px -3231px;
+    }
+
+    .flag-combo.fc-gr {
+        background-position: 5px -3263px;
+    }
+
+    .flag-combo.fc-gt {
+        background-position: 5px -3295px;
+    }
+
+    .flag-combo.fc-gu {
+        background-position: 5px -3327px;
+    }
+
+    .flag-combo.fc-gw {
+        background-position: 5px -3359px;
+    }
+
+    .flag-combo.fc-gy {
+        background-position: 5px -3391px;
+    }
+
+    .flag-combo.fc-hk {
+        background-position: 5px -3423px;
+    }
+
+    .flag-combo.fc-hn {
+        background-position: 5px -3455px;
+    }
+
+    .flag-combo.fc-hr {
+        background-position: 5px -3487px;
+    }
+
+    .flag-combo.fc-ht {
+        background-position: 5px -3519px;
+    }
+
+    .flag-combo.fc-hu {
+        background-position: 5px -3551px;
+    }
+
+    .flag-combo.fc-id {
+        background-position: 5px -3583px;
+    }
+
+    .flag-combo.fc-mc {
+        background-position: 5px -3583px;
+    }
+
+    .flag-combo.fc-ie {
+        background-position: 5px -3615px;
+    }
+
+    .flag-combo.fc-il {
+        background-position: 5px -3647px;
+    }
+
+    .flag-combo.fc-im {
+        background-position: 5px -3679px;
+    }
+
+    .flag-combo.fc-in {
+        background-position: 5px -3711px;
+    }
+
+    .flag-combo.fc-iq {
+        background-position: 5px -3743px;
+    }
+
+    .flag-combo.fc-ir {
+        background-position: 5px -3775px;
+    }
+
+    .flag-combo.fc-is {
+        background-position: 5px -3807px;
+    }
+
+    .flag-combo.fc-it {
+        background-position: 5px -3839px;
+    }
+
+    .flag-combo.fc-je {
+        background-position: 5px -3871px;
+    }
+
+    .flag-combo.fc-jm {
+        background-position: 5px -3903px;
+    }
+
+    .flag-combo.fc-jo {
+        background-position: 5px -3935px;
+    }
+
+    .flag-combo.fc-jp {
+        background-position: 5px -3967px;
+    }
+
+    .flag-combo.fc-ke {
+        background-position: 5px -3999px;
+    }
+
+    .flag-combo.fc-kg {
+        background-position: 5px -4031px;
+    }
+
+    .flag-combo.fc-kh {
+        background-position: 5px -4063px;
+    }
+
+    .flag-combo.fc-ki {
+        background-position: 5px -4095px;
+    }
+
+    .flag-combo.fc-km {
+        background-position: 5px -4127px;
+    }
+
+    .flag-combo.fc-kn {
+        background-position: 5px -4159px;
+    }
+
+    .flag-combo.fc-kp {
+        background-position: 5px -4191px;
+    }
+
+    .flag-combo.fc-kr {
+        background-position: 5px -4223px;
+    }
+
+    .flag-combo.fc-kw {
+        background-position: 5px -4255px;
+    }
+
+    .flag-combo.fc-ky {
+        background-position: 5px -4287px;
+    }
+
+    .flag-combo.fc-kz {
+        background-position: 5px -4319px;
+    }
+
+    .flag-combo.fc-la {
+        background-position: 5px -4351px;
+    }
+
+    .flag-combo.fc-lb {
+        background-position: 5px -4383px;
+    }
+
+    .flag-combo.fc-lc {
+        background-position: 5px -4415px;
+    }
+
+    .flag-combo.fc-li {
+        background-position: 5px -4447px;
+    }
+
+    .flag-combo.fc-lk {
+        background-position: 5px -4479px;
+    }
+
+    .flag-combo.fc-lr {
+        background-position: 5px -4511px;
+    }
+
+    .flag-combo.fc-ls {
+        background-position: 5px -4543px;
+    }
+
+    .flag-combo.fc-lt {
+        background-position: 5px -4575px;
+    }
+
+    .flag-combo.fc-lu {
+        background-position: 5px -4607px;
+    }
+
+    .flag-combo.fc-lv {
+        background-position: 5px -4639px;
+    }
+
+    .flag-combo.fc-ly {
+        background-position: 5px -4671px;
+    }
+
+    .flag-combo.fc-ma {
+        background-position: 5px -4703px;
+    }
+
+    .flag-combo.fc-md {
+        background-position: 5px -4735px;
+    }
+
+    .flag-combo.fc-me {
+        background-position: 5px -4767px;
+    }
+
+    .flag-combo.fc-mg {
+        background-position: 5px -4799px;
+    }
+
+    .flag-combo.fc-mh {
+        background-position: 5px -4831px;
+    }
+
+    .flag-combo.fc-mk {
+        background-position: 5px -4863px;
+    }
+
+    .flag-combo.fc-ml {
+        background-position: 5px -4895px;
+    }
+
+    .flag-combo.fc-mm {
+        background-position: 5px -4927px;
+    }
+
+    .flag-combo.fc-mn {
+        background-position: 5px -4959px;
+    }
+
+    .flag-combo.fc-mo {
+        background-position: 5px -4991px;
+    }
+
+    .flag-combo.fc-mq {
+        background-position: 5px -5023px;
+    }
+
+    .flag-combo.fc-mr {
+        background-position: 5px -5055px;
+    }
+
+    .flag-combo.fc-ms {
+        background-position: 5px -5087px;
+    }
+
+    .flag-combo.fc-mt {
+        background-position: 5px -5119px;
+    }
+
+    .flag-combo.fc-mu {
+        background-position: 5px -5151px;
+    }
+
+    .flag-combo.fc-mv {
+        background-position: 5px -5183px;
+    }
+
+    .flag-combo.fc-mw {
+        background-position: 5px -5215px;
+    }
+
+    .flag-combo.fc-mx {
+        background-position: 5px -5247px;
+    }
+
+    .flag-combo.fc-my {
+        background-position: 5px -5279px;
+    }
+
+    .flag-combo.fc-mz {
+        background-position: 5px -5311px;
+    }
+
+    .flag-combo.fc-na {
+        background-position: 5px -5343px;
+    }
+
+    .flag-combo.fc-nc {
+        background-position: 5px -5375px;
+    }
+
+    .flag-combo.fc-ne {
+        background-position: 5px -5407px;
+    }
+
+    .flag-combo.fc-ng {
+        background-position: 5px -5439px;
+    }
+
+    .flag-combo.fc-ni {
+        background-position: 5px -5471px;
+    }
+
+    .flag-combo.fc-nl {
+        background-position: 5px -5503px;
+    }
+
+    .flag-combo.fc-bq {
+        background-position: 5px -5503px;
+    }
+
+    .flag-combo.fc-no {
+        background-position: 5px -5535px;
+    }
+
+    .flag-combo.fc-bv, .flag-combo.fc-nq, .flag-combo.fc-sj {
+        background-position: 5px -5535px;
+    }
+
+    .flag-combo.fc-np {
+        background-position: 5px -5567px;
+    }
+
+    .flag-combo.fc-nr {
+        background-position: 5px -5599px;
+    }
+
+    .flag-combo.fc-nz {
+        background-position: 5px -5631px;
+    }
+
+    .flag-combo.fc-om {
+        background-position: 5px -5663px;
+    }
+
+    .flag-combo.fc-pa {
+        background-position: 5px -5695px;
+    }
+
+    .flag-combo.fc-pe {
+        background-position: 5px -5727px;
+    }
+
+    .flag-combo.fc-pf {
+        background-position: 5px -5759px;
+    }
+
+    .flag-combo.fc-pg {
+        background-position: 5px -5791px;
+    }
+
+    .flag-combo.fc-ph {
+        background-position: 5px -5823px;
+    }
+
+    .flag-combo.fc-pk {
+        background-position: 5px -5855px;
+    }
+
+    .flag-combo.fc-pl {
+        background-position: 5px -5887px;
+    }
+
+    .flag-combo.fc-pr {
+        background-position: 5px -5919px;
+    }
+
+    .flag-combo.fc-ps {
+        background-position: 5px -5951px;
+    }
+
+    .flag-combo.fc-pt {
+        background-position: 5px -5983px;
+    }
+
+    .flag-combo.fc-pw {
+        background-position: 5px -6015px;
+    }
+
+    .flag-combo.fc-py {
+        background-position: 5px -6047px;
+    }
+
+    .flag-combo.fc-qa {
+        background-position: 5px -6079px;
+    }
+
+    .flag-combo.fc-re {
+        background-position: 5px -6111px;
+    }
+
+    .flag-combo.fc-ro {
+        background-position: 5px -6143px;
+    }
+
+    .flag-combo.fc-rs {
+        background-position: 5px -6175px;
+    }
+
+    .flag-combo.fc-ru {
+        background-position: 5px -6207px;
+    }
+
+    .flag-combo.fc-rw {
+        background-position: 5px -6239px;
+    }
+
+    .flag-combo.fc-sa {
+        background-position: 5px -6271px;
+    }
+
+    .flag-combo.fc-sb {
+        background-position: 5px -6303px;
+    }
+
+    .flag-combo.fc-sc {
+        background-position: 5px -6335px;
+    }
+
+    .flag-combo.fc-sd {
+        background-position: 5px -6367px;
+    }
+
+    .flag-combo.fc-se {
+        background-position: 5px -6399px;
+    }
+
+    .flag-combo.fc-sg {
+        background-position: 5px -6431px;
+    }
+
+    .flag-combo.fc-si {
+        background-position: 5px -6463px;
+    }
+
+    .flag-combo.fc-sk {
+        background-position: 5px -6495px;
+    }
+
+    .flag-combo.fc-sl {
+        background-position: 5px -6527px;
+    }
+
+    .flag-combo.fc-sm {
+        background-position: 5px -6559px;
+    }
+
+    .flag-combo.fc-sn {
+        background-position: 5px -6591px;
+    }
+
+    .flag-combo.fc-so {
+        background-position: 5px -6623px;
+    }
+
+    .flag-combo.fc-sr {
+        background-position: 5px -6655px;
+    }
+
+    .flag-combo.fc-st {
+        background-position: 5px -6687px;
+    }
+
+    .flag-combo.fc-sv {
+        background-position: 5px -6719px;
+    }
+
+    .flag-combo.fc-sy {
+        background-position: 5px -6751px;
+    }
+
+    .flag-combo.fc-sz {
+        background-position: 5px -6783px;
+    }
+
+    .flag-combo.fc-tc {
+        background-position: 5px -6815px;
+    }
+
+    .flag-combo.fc-td {
+        background-position: 5px -6847px;
+    }
+
+    .flag-combo.fc-tg {
+        background-position: 5px -6879px;
+    }
+
+    .flag-combo.fc-th {
+        background-position: 5px -6911px;
+    }
+
+    .flag-combo.fc-tj {
+        background-position: 5px -6943px;
+    }
+
+    .flag-combo.fc-tl {
+        background-position: 5px -6975px;
+    }
+
+    .flag-combo.fc-tm {
+        background-position: 5px -7007px;
+    }
+
+    .flag-combo.fc-tn {
+        background-position: 5px -7039px;
+    }
+
+    .flag-combo.fc-to {
+        background-position: 5px -7071px;
+    }
+
+    .flag-combo.fc-tr {
+        background-position: 5px -7103px;
+    }
+
+    .flag-combo.fc-tt {
+        background-position: 5px -7135px;
+    }
+
+    .flag-combo.fc-tv {
+        background-position: 5px -7167px;
+    }
+
+    .flag-combo.fc-tw {
+        background-position: 5px -7199px;
+    }
+
+    .flag-combo.fc-tz {
+        background-position: 5px -7231px;
+    }
+
+    .flag-combo.fc-ua {
+        background-position: 5px -7263px;
+    }
+
+    .flag-combo.fc-ug {
+        background-position: 5px -7295px;
+    }
+
+    .flag-combo.fc-us {
+        background-position: 5px -7327px;
+    }
+
+    .flag-combo.fc-uy {
+        background-position: 5px -7359px;
+    }
+
+    .flag-combo.fc-uz {
+        background-position: 5px -7391px;
+    }
+
+    .flag-combo.fc-va {
+        background-position: 5px -7423px;
+    }
+
+    .flag-combo.fc-vc {
+        background-position: 5px -7455px;
+    }
+
+    .flag-combo.fc-ve {
+        background-position: 5px -7487px;
+    }
+
+    .flag-combo.fc-vg {
+        background-position: 5px -7519px;
+    }
+
+    .flag-combo.fc-vi {
+        background-position: 5px -7551px;
+    }
+
+    .flag-combo.fc-vn {
+        background-position: 5px -7583px;
+    }
+
+    .flag-combo.fc-vu {
+        background-position: 5px -7615px;
+    }
+
+    .flag-combo.fc-ws {
+        background-position: 5px -7647px;
+    }
+
+    .flag-combo.fc-ye {
+        background-position: 5px -7679px;
+    }
+
+    .flag-combo.fc-za {
+        background-position: 5px -7711px;
+    }
+
+    .flag-combo.fc-zm {
+        background-position: 5px -7743px;
+    }
+
+    .flag-combo.fc-zw {
+        background-position: 5px -7775px;
+    }
+
+    .flag-combo.fc-sx {
+        background-position: 5px -7807px;
+    }
+
+    .flag-combo.fc-cw {
+        background-position: 5px -7839px;
+    }
+
+    .flag-combo.fc-ss {
+        background-position: 5px -7871px;
+    }

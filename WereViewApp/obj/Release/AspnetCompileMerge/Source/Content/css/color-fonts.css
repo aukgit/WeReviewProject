@@ -1,0 +1,106 @@
+﻿
+/* Colors and Fonts */
+
+.Blackish-Red {
+    color: #330707;
+}
+
+.red {
+    color: Red;
+}
+
+.brownish-red {
+    color: #B31010;
+}
+
+.bold {
+    font-weight: bolder;
+}
+
+.green {
+    color: #008000;
+}
+
+.brown {
+    color: #5E1F1F;
+}
+
+.black {
+    color: Black;
+}
+
+.lightcolor {
+    color: Gray;
+}
+
+.white {
+    color: White;
+}
+
+.blue {
+    color: Blue;
+}
+
+.blue-like {
+    color: #459EC9;
+}
+
+.regular-font {
+    font-size: 13px;
+}
+
+.medium-font {
+    font-size: 122%;
+}
+
+.bigger-font {
+    font-size: 200%;
+}
+
+h1, h2, h3, h4, h5 {
+    font-size: 13px;
+    font-weight: normal;
+
+}
+
+.font-size-22 {
+    font-size: 22px;
+}
+
+
+.bangla, .bangla li {
+    font-family: Bangla,Kalpurush;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+
+
+.almost-white{
+    color:rgb(189, 189, 189);
+}
+
+.mid-error-color{
+     background-color:#DF3B69;
+}
+
+.low-error-color{
+    background-color:#EF3ECC;
+}
+
+.error-solution-link-color{
+    background-color:#2382CC;
+}
+
+a.error-solution-link:hover{
+    text-decoration:none;
+    background-color:#3196E4;
+}
+a.error-solution-link span:hover{
+    text-decoration:none;
+    background-color:#3196E4;
+}
+
+.simple-height-gap{
+    padding: 8px;
+}

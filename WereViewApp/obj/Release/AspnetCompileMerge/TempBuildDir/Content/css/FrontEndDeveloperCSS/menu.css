@@ -1,0 +1,369 @@
+
+.open {
+    -webkit-transition: all .50s ease;
+    -moz-transition: all .50s ease;
+    -ms-transition: all .50s ease;
+    -o-transition: all .50s ease;
+    transition: all .50s ease;
+}
+
+.navbar-inverse .navbar-nav > .dropdown > a .caret {
+    display: none;
+}
+
+/*---------------------------------------
+			       	mainmenu CSS
+-----------------------------------------------*/
+
+/* -----------------------Navigation-----------------------*/
+
+.navbar-toggle {
+    margin-top: 9px;
+    margin-bottom: 9px;
+}
+
+.mainmenu {
+    padding: 0;
+}
+
+    .mainmenu ul,
+    .mainmenu li {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        /*display:inline;*/
+    }
+
+        .mainmenu ul li {
+            float: left;
+            position: relative;
+        }
+
+            .mainmenu ul li a:link,
+            .mainmenu ul li a:visited,
+            .mainmenu ul li a:active {
+                background: #000000;
+                color: #ffffff;
+                font-size: 18px;
+                font-weight: normal;
+                text-decoration: none;
+                padding: 16px;
+                font-weight: bold;
+                text-shadow: 1px 1px 1px #333333;
+            }
+
+            .mainmenu ul li a:focus,
+            .mainmenu ul li.active a:link,
+            .mainmenu ul li.active a:active,
+            .mainmenu ul li.active a:visited,
+            .mainmenu ul li a:hover {
+                background: #000000 !important;
+                text-decoration: none;
+            }
+            /*----------------------- 2nd label start -----------------------*/
+            .mainmenu ul li ul {
+                left: 0;
+                opacity: 0;
+                position: absolute;
+                top: 50px;
+                visibility: hidden;
+                z-index: 1;
+                -webkit-transition: all .50s ease;
+                -moz-transition: all .50s ease;
+                -ms-transition: all .50s ease;
+                -o-transition: all .50s ease;
+                transition: all .50s ease;
+                background: #373b3c;
+                border-radius: 0 0 7px 7px;
+                border: 1px solid #000;
+                border-top: none;
+                margin-left: 0px;
+                text-align: left;
+                padding: 10px 0px;
+                margin-top: 2px;
+                width: 200px;
+            }
+
+            .mainmenu ul li:hover ul {
+                opacity: 1;
+                top: 50px;
+                left: 0px;
+                visibility: visible;
+            }
+
+            .mainmenu ul li ul li ul {
+                margin-left: 199px;
+                opacity: 0 !important;
+                top: 0 !important;
+                border-radius: 5px;
+            }
+
+            .mainmenu ul li ul li:hover ul {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+        /*.mainmenu li:hover li,*/
+        .mainmenu li li {
+            line-height: normal;
+            margin: 0px;
+            float: left;
+            display: block;
+            width: 100%;
+            padding: 2px 5px 0 10px;
+        }
+
+            .mainmenu li.active li a:link,
+            .mainmenu li.active li a:active,
+            .mainmenu li.active li a:visited,
+            .mainmenu li:hover li a:link,
+            .mainmenu li:hover li a:active,
+            .mainmenu li:hover li a:visited,
+            .mainmenu li li a:link,
+            .mainmenu li li a:active,
+            .mainmenu li li a:visited {
+                text-decoration: none;
+                font-size: 12px;
+                color: #fff;
+                border: none;
+                width: 100%;
+                height: auto;
+                line-height: normal;
+                padding: 5px 0px 5px 10px;
+                float: left;
+                display: block;
+                background: none;
+                text-shadow: inherit;
+            }
+
+            .mainmenu li li a:hover {
+                background: none !important;
+                color: #f9f2f2 !important;
+            }
+
+    .mainmenu .navbar-nav .dropdown li.active a:link,
+    .mainmenu .navbar-nav .dropdown li.active a:active,
+    .mainmenu .navbar-nav .dropdown li.active a:visited,
+    .mainmenu .navbar-nav .dropdown li a:hover {
+        color: #2d9ef5 !important;
+        background: none !important;
+    }
+
+    .mainmenu ul li li a:focus,
+    .mainmenu ul li li.active a:link,
+    .mainmenu ul li li.active a:active,
+    .mainmenu ul li li.active a:visited,
+    .mainmenu ul li li a:hover {
+        color: #2d9ef5 !important;
+        background: none !important;
+    }
+
+
+    /*----------------------- end 2nd label -----------------------*/
+
+    .mainmenu li li.active li a:link,
+    .mainmenu li li.active li a:active,
+    .mainmenu li li.active li a:visited,
+    .mainmenu li li:hover li a:link,
+    .mainmenu li li:hover li a:active,
+    .mainmenu li li:hover li a:visited,
+    .mainmenu li li li a:link,
+    .mainmenu li li li a:active,
+    .mainmenu li li li a:visited {
+        text-decoration: none;
+        font-size: 12px;
+        color: #fff;
+    }
+
+    .mainmenu li li li.active a:link,
+    .mainmenu li li li.active a:active,
+    .mainmenu li li li.active a:visited,
+    .mainmenu li li li:hover a:link,
+    .mainmenu li li li:hover a:active,
+    .mainmenu li li li:hover a:visited,
+    .mainmenu li li.active li a:hover,
+    .mainmenu li li:hover li a:hover,
+    .mainmenu li li li a:hover {
+        text-decoration: none;
+        color: #fff;
+        background: none;
+    }
+
+    .mainmenu ul li ul li.parent:hover a {
+        color: #2d9ef5 !important;
+    }
+
+    .mainmenu ul li ul li.parent:hover ul li a:link,
+    .mainmenu ul li ul li.parent:hover ul li a:active,
+    .mainmenu ul li ul li.parent:hover ul li a:visited {
+        color: #ffffff !important;
+    }
+
+    .mainmenu ul li ul li.parent:hover ul li.active a:link,
+    .mainmenu ul li ul li.parent:hover ul li.active a:active,
+    .mainmenu ul li ul li.parent:hover ul li.active a:visited,
+    .mainmenu ul li ul li.parent:hover ul li a:hover {
+        color: #2d9ef5 !important;
+    }
+
+/*----------------------- ************************************ -----------------------*/
+
+
+
+/***************************** Media Queries ******************************/
+
+/*----------------------- Large devices (large desktops, 1200px and up)-----------------------*/
+@media (min-width: 1200px) {
+
+    .container {
+        padding: 0px;
+    }
+}
+
+/*----------------------- Medium devices (desktops, 992px and 1199px) -----------------------*/
+@media (min-width: 992px) and (max-width: 1199px) {
+
+    .navbar .container {
+        padding: 0px;
+    }
+}
+
+/*----------------------- Small devices (tablets, 768px and 991px) -----------------------*/
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .navbar .container {
+        padding: 0px;
+    }
+}
+
+/*----------------------- Extra small devices (phones, up to 767px) -----------------------*/
+@media (max-width: 767px) {
+
+    .mainmenu {
+        margin: 0 !important;
+        width: 100%;
+        border-radius: 10px;
+        border: none;
+        padding: 0;
+    }
+
+        .mainmenu ul {
+            background: #999999;
+            z-index: 10;
+            width: 100%;
+            padding: 10px 0;
+            box-shadow: inherit;
+            border: none !important;
+        }
+
+            .mainmenu ul li {
+                background: none;
+                padding-top: 0px;
+                padding-bottom: 2px;
+                width: 100%;
+                margin: 0;
+            }
+
+                .mainmenu ul li a:link,
+                .mainmenu ul li a:visited,
+                .mainmenu ul li a:active {
+                    background: none;
+                    padding: 5px 15px 5px;
+                    height: inherit;
+                    text-align: left;
+                }
+
+    .navbar .mainmenu ul li.active {
+        background: none;
+        padding-top: 0px;
+        padding-bottom: 2px;
+        padding-right: 0px;
+        width: 100%;
+    }
+
+    .mainmenu ul li ul li ul {
+        margin-left: 0;
+        opacity: 1 !important;
+        visibility: visible !important;
+        padding: 0;
+    }
+
+    .mainmenu ul li ul li:hover ul {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+        .mainmenu ul li ul li:hover ul li,
+        .mainmenu ul li ul li ul li {
+            padding-left: 0;
+        }
+
+
+    /********************* 2nd label start ***********************/
+
+    .mainmenu ul li ul {
+        opacity: 1;
+        position: inherit;
+        top: 0;
+        left: 0;
+        background: inherit;
+        visibility: inherit;
+        width: 100%;
+        display: inline-block;
+        padding: 0 !important;
+        background: none;
+    }
+
+    .mainmenu ul li:hover ul {
+        position: inherit;
+        top: 0;
+        left: 0;
+        opacity: 1;
+    }
+
+    .mainmenu li:hover li,
+    .mainmenu li li {
+        background: none;
+        padding-top: 2px;
+        padding-bottom: 0px;
+        width: 100%;
+    }
+
+        .mainmenu li.active li a:link,
+        .mainmenu li.active li a:active,
+        .mainmenu li.active li a:visited,
+        .mainmenu li:hover li a:link,
+        .mainmenu li:hover li a:active,
+        .mainmenu li:hover li a:visited,
+        .mainmenu li li a:link,
+        .mainmenu li li a:active,
+        .mainmenu li li a:visited {
+            width: 100%;
+            padding: 3px 0;
+            height: inherit;
+        }
+
+        .mainmenu li.active li a:link,
+        .mainmenu li.active li a:active,
+        .mainmenu li.active li a:visited,
+        .mainmenu ul li a:focus,
+        .mainmenu li li a:focus,
+        .mainmenu ul li a:hover {
+            background: none !important;
+            color: #000 !important;
+        }
+
+    .mainmenu ul li ul li.parent:hover a {
+        color: #fff !important;
+    }
+
+        .mainmenu ul li ul li.parent:hover ul li.active a:link,
+        .mainmenu ul li ul li.parent:hover ul li.active a:active,
+        .mainmenu ul li ul li.parent:hover ul li.active a:visited,
+        .mainmenu ul li ul li.parent:hover a:hover {
+            color: #2d9ef5 !important;
+        }
+}
+
+/* =========================== Extra small devices (phones, up to 480px) ========================= */
+@media (max-width: 480px) {
+}

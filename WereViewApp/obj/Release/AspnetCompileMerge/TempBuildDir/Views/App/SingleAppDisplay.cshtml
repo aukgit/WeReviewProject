@@ -1,0 +1,131 @@
+﻿@using WereViewApp.Modules.DevUser
+@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
+@model WereViewApp.Models.EntityModel.App
+
+@{
+    Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
+    string appName = Model.AppName;
+    var currentUrl = @Html.GetCurrentURLString();
+    ViewBag.Title = Model.Platform.PlatformName + " : " +  appName;
+    ViewBag.Meta = appName + "," + @Model.Tags + "," + Model.Description;
+    ViewBag.Keywords = appName + "," + @Model.Tags;
+    var tagsList = @Model.Tags != null ? @Model.Tags.Split(',') : null;
+    bool isFrist = true;
+}
+
+
+
+
+<div class="wrapper_inner">
+    @{Html.RenderAction("NavBar", "Partials");}
+</div> <!---------- wrapper end-------->
+<!-------------------------- mainContainerwrap part start ---------------------->
+<div class="mainContainerwrap">
+    <div class="container">
+        <div class="appsmenu">
+            <h1 class="app-title">
+                <a href="/Apps/@Model.Platform.PlatformName">
+                    <i class="@Model.Platform.Icon"></i>
+                </a>
+                @Html.Partial("_AppEditButton")
+                <a href="@currentUrl" title="@appName" class="app-name">
+                    <strong title="@appName">@appName</strong>
+                </a>
+            </h1>
+
+            <div class="app-subtitle-group">
+                <h1 class="app-subtitle" title="@Model.Category.CategoryName">
+                    <a href="/Apps/Category/@Model.Category.CategoryName" title="@Model.Category.CategoryName">@Model.Category.CategoryName</a>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="container innerContainer">
+        <div class="leftCol col-md-3 col-sm-3">
+            <!----- leftCol part start -------->
+            @Html.Partial("_PublishInfo")
+            @Html.Partial("_FeaturedApps")
+            @Html.Partial("_SuggestedApps")
+
+        </div> <!-------- leftCol part end ---------->
+
+        <div class="contenCol col-md-9 col-sm-9">
+            <!----- contenCol part end -------->
+            <div class="contact">
+                <div class="videoboxWrap">
+                    <div class="tabbable">
+                        <div class="tabmenu clearfix">
+                            <ul class="tabmenu">
+                                @if (Model.YoutubeEmbedLink != null) {
+                                    <li class="active"><a href="#pane1" data-toggle="tab">Promo</a></li>
+                                    <li><a href="#pane2" data-toggle="tab">Preview</a></li>
+                                } else {
+                                    <li class="active"><a href="#pane2" data-toggle="tab">Preview</a></li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            @Html.Partial("_YoutubeVideo")
+                            @Html.Partial("_Gallery")
+                        </div><!-- /.tab-content -->
+                    </div><!-- /.tabbable -->
+                    @Html.Partial("_RatingAndViewed")
+
+
+                    <div class="navbox row">
+                        <div class="navmenu col-md-9 col-sm-9">
+                            <ul class="app-page-description-header">
+                                <li class="share">
+                                    <iframe src="http://www.facebook.com/plugins/like.php?href=@(Html.GetCurrentURLString());width&amp;layout=button&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=80&amp;appId=1481969698749084" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height: 22px;width: 98px;margin-left: -19px;" allowtransparency="true"></iframe>
+                                </li>
+                                <li class="report">
+                                    <i class="fa fa-flag"></i> <a href="#">Report</a> |
+                                </li>
+                                <li class="posted_by">Posted by <a href="#" title="@Model.User.UserName">@Model.User.FirstName</a> |</li>
+                                <li><a href="#">@Html.DisplayDate(Model.CreatedDate)</a></li>
+                                <li class="app-edit-button">@Html.Partial("_AppEditButton")</li>
+                            </ul>
+                        </div>
+                        <div class="review col-md-3 col-sm-3">
+                            <a id="review-requesting-spinner" data-toggle="tooltip" title="Requesting" data-original-title="Requesting" class="tooltip-show">
+                                <span data-display="Requesting for review" class="glyphicon glyphicon-refresh glyphicon-refresh-animate" title="Requesting"></span>
+                            </a>
+                            <a id="WriteReviewButton">Write Review</a>
+                        </div>
+                    </div>
+                    <div class="text">
+                        @Html.Truncate(Model.Description, 200, false)
+                        <span id="example-show">
+                            <span id="elipse-dot">...</span> <a class="showLink" id="app-description-see-more-btn">see more</a>
+                        </span>
+                        <div id="example" class="more">
+                            @Html.Truncate(Model.Description, 200, -1) <a id="app-description-see-less-btn" class="hideLink">less</a>
+                            <div class="tagbox">
+                                <i class="fa fa-tag"></i> Tags:
+                                @foreach (var tag in tagsList) {
+                                    if (!isFrist) {
+                                        <text>,</text>
+                                    }
+                                    <h1 title="@tag - @Model.AppName"><a class="@tag tag-item">@tag</a></h1>
+ { isFrist = false; }
+                                }
+
+                            </div>
+                        </div>
+                        <div id="write-review-form-container">
+
+                        </div>
+                        <div id="review-request-fields">
+                            @Html.HiddenFor(n => n.AppID)
+                            @Html.AntiForgeryToken()
+                        </div>
+                    </div>
+                </div>
+                @Html.Partial("_ReviewsCollection")
+                
+            </div><!----- content part end ------>
+        </div> <!----- contenCol part end ------>
+    </div><!----- container ------>
+
+
+</div>

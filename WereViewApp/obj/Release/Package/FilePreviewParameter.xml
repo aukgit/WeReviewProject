@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="sastwr-001-site2" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^I:\\WereViewApp\\WereViewProject\\WereViewApp\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^I:\\WereViewApp\\WereViewProject\\WereViewApp\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="Add write permission to App_Data Folder" description="Add write permission to App_Data folder" value="sastwr-001-site2/App_Data" tags="Hidden">
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^I:\\WereViewApp\\WereViewProject\\WereViewApp\\obj\\Release\\Package\\PackageTmp\\App_Data$" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=SQL5006.Smarterasp.net;Initial Catalog=DB_9AE7E3_wereviewAccounts;User Id=DB_9AE7E3_wereviewAccounts_admin;Password=eviTY1aFb16;multipleactiveresultsets=True;Connection Timeout=800" tags="">
+    <parameterEntry kind="XmlFile" scope="I:\\WereViewApp\\WereViewProject\\WereViewApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="WereViewAppEntities-Web.config Connection String" description="" value="metadata=res://*/Models.EntityModel.WereViewAppModel.csdl|res://*/Models.EntityModel.WereViewAppModel.ssdl|res://*/Models.EntityModel.WereViewAppModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=SQL5006.Smarterasp.net;Initial Catalog=DB_9AE7E3_wereviewDb;User ID=DB_9AE7E3_wereviewDb_admin;Password=eviTY1aFb16&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="I:\\WereViewApp\\WereViewProject\\WereViewApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='WereViewAppEntities']/@connectionString" />
+  </parameter>
+</parameters>

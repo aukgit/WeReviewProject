@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WereViewApp.Models.POCO.IdentityCustomization.Country>
+
+@{
+    ViewBag.Title = "Country";
+}
+
+<h2 class="h3 gap-from-top-small"><span class="glyphicon glyphicon-th-list"></span> @ViewBag.Title</h2>
+
+<p>
+    <a href="@Url.Action("Create")" title="Create a new item." class="btn btn-warning create-save"><span class="glyphicon glyphicon-plus"></span> Create</a>
+</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Alpha2Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alpha3Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DisplayCountryName)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.IsSingleTimeZone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+  
+    
+
+@foreach (var item in Model) {
+    <tr>       
+        <td>
+            @Html.DisplayFor(modelItem => item.Alpha2Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Alpha3Code)
+        </td>        
+        <td>
+            @Html.DisplayFor(modelItem => item.DisplayCountryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsSingleTimeZone)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CountryID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CountryID }, new {  onclick="return confirm('Are you sure?')" })
+        </td>
+    </tr>
+}
+
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

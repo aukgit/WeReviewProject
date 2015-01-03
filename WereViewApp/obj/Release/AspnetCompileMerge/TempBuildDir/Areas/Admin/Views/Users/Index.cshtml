@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Manage User";
+	string title = ViewBag.Title;
+    string subtitle = ViewBag.Title;	
+}
+
+<h2 class="h3 gap-from-top-small">
+	<span class="glyphicon glyphicon-th-list"></span> 
+	@Html.SamePageLink(title, subtitle, false)
+</h2>
+<div class="small-bottom-gap"></div>
+
+
+<div class="left-button-stacks">
+    <a href="@Url.Action("FilterBlockedUsers")" title="Filter for blocked users." class="btn btn-info"><i class="fa fa-filter"></i> Blocked Users</a>
+</div>
+
+@Html.Partial("_IndexDefault")
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

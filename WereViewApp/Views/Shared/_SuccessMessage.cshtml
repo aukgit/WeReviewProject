@@ -1,0 +1,14 @@
+﻿@if (@ViewBag.Success != null) {
+    <div class="row transaction-status">
+        <div class="col-md-offset-2 col-md-10">
+            <h3 class="h4"><span class="label label-success"><span class="glyphicon glyphicon-ok"></span> @ViewBag.Success</span></h3>
+        </div>
+    </div>
+} else if (@ViewBag.ErrorSave != null) {
+    <div class="row transaction-status">
+        <div class="col-md-offset-2 col-md-10">
+            <h3 class="h4"><span class="label label-danger"><span class="glyphicon glyphicon-remove"></span> @ViewBag.ErrorSave</span></h3>
+            <div class="error-warning-label-1 error-warning-labels">Feel free to @Html.ContactFormActionLink("contact us", "contact us") any moment.</div>
+        </div>
+    </div>
+}
