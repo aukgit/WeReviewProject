@@ -53,14 +53,14 @@
             string absUrl = @app.GetAppURL();
             <div class="box row">
                 <div class="imagebox col-md-3 col-sm-3">
-                    <a href="@absUrl" title="@appName" >
+                    <a href="@absUrl" title="@appName" data-original-title="@appName" class="tooltip-show">
                         <img class="home-page-image-icon" src="@app.GalleryHomeIconLocation" alt="@appName">
                     </a>
                 </div>
                 <div class="textbox col-md-9 col-sm-9">
-                    <a href="@absUrl" itemtype="@absUrl" title="@appName">
+                    <a href="@absUrl" itemtype="@absUrl" title="@app.Description" data-original-title="@app.Description" class="tooltip-show">
                         <h1 title="@appName">@Html.Truncate(appName, 20)</h1>
-                        <p title="@appName">
+                        <p title="@app.Description">
                             @Html.Truncate(app.Description, 50)
                         </p>
                         <i class="fa fa-star"></i>
