@@ -1,5 +1,4 @@
-﻿
-namespace WereViewApp.Modules.Claims {
+﻿namespace WereViewApp.Modules.Claims {
     public struct ProprietaryClaims {
         public const string BIO = "Bio";
         public const string ID = "ID";

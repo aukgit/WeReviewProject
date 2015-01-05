@@ -1,4 +1,5 @@
 ﻿using System.Web;
+
 namespace WereViewApp.Modules.Session {
     public struct SessionNames {
         public const string User = "User";
@@ -12,16 +13,16 @@ namespace WereViewApp.Modules.Session {
         public const string AuthError = "AuthError";
 
         public static bool IsValidationExceed(string methodName, int maxTry = -1) {
-            bool isSessionExist = HttpContext.Current.Session != null;
+            var isSessionExist = HttpContext.Current.Session != null;
 
             if (maxTry == -1) {
                 maxTry = AppConfig.ValidationMaxNumber;
             }
 
-            string nameOfSession = SessionNames.Validator + methodName;
+            var nameOfSession = Validator + methodName;
             var value = HttpContext.Current.Session[nameOfSession];
             if (isSessionExist && value != null) {
-                int count = (int)value;
+                var count = (int) value;
                 if (count <= maxTry) {
                     HttpContext.Current.Session[nameOfSession] = ++count;
                     return false;
@@ -32,7 +33,6 @@ namespace WereViewApp.Modules.Session {
                 return false;
             }
             return true;
-
         }
     }
 }

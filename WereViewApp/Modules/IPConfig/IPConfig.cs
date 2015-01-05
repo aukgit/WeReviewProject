@@ -1,42 +1,38 @@
-﻿using WereViewApp.Modules.Session;
-using System;
+﻿using System;
 using System.Net;
 using System.Web;
+using WereViewApp.Modules.Session;
 
 namespace WereViewApp.Modules.IPConfig {
-
-
     public class IPConfig {
-
         public double IPToValue(string ipAddress) {
             double Dot2LongIP = 0;
-            int PrevPos = 0;
+            var PrevPos = 0;
             int pos;
             int num;
 
-            for (int i = 1; i <= 4; i++) {
+            for (var i = 1; i <= 4; i++) {
                 pos = ipAddress.IndexOf(".", PrevPos) + 1;
                 if (i == 4) {
                     pos = ipAddress.Length + 1;
                 }
                 num = int.Parse(ipAddress.Substring(PrevPos, pos - PrevPos - 1));
                 PrevPos = pos;
-                Dot2LongIP = ((num % 256) * (256 ^ (4 - i))) + Dot2LongIP;
-
+                Dot2LongIP = ((num%256)*(256 ^ (4 - i))) + Dot2LongIP;
             }
             return Dot2LongIP;
         }
 
         /// <summary>
-        /// method to get Client ip address
+        ///     method to get Client ip address
         /// </summary>
         /// <param name="GetLan"> set to true if want to get local(LAN) Connected ip address</param>
         /// <returns></returns>
         public static string GetVisitorIPAddress(bool GetLan = false) {
             if (HttpContext.Current.Session != null && HttpContext.Current.Session[SessionNames.IpAddress] != null) {
-                return (string)HttpContext.Current.Session[SessionNames.IpAddress];
+                return (string) HttpContext.Current.Session[SessionNames.IpAddress];
             }
-            string visitorIPAddress = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            var visitorIPAddress = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
 
             if (String.IsNullOrEmpty(visitorIPAddress))
                 visitorIPAddress = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
@@ -51,11 +47,11 @@ namespace WereViewApp.Modules.IPConfig {
 
             if (GetLan && string.IsNullOrEmpty(visitorIPAddress)) {
                 //This is for Local(LAN) Connected ID Address
-                string stringHostName = Dns.GetHostName();
+                var stringHostName = Dns.GetHostName();
                 //Get Ip Host Entry
-                IPHostEntry ipHostEntries = Dns.GetHostEntry(stringHostName);
+                var ipHostEntries = Dns.GetHostEntry(stringHostName);
                 //Get Ip Address From The Ip Host Entry Address List
-                IPAddress[] arrIpAddress = ipHostEntries.AddressList;
+                var arrIpAddress = ipHostEntries.AddressList;
 
                 try {
                     visitorIPAddress = arrIpAddress[arrIpAddress.Length - 2].ToString();
@@ -71,7 +67,6 @@ namespace WereViewApp.Modules.IPConfig {
                         }
                     }
                 }
-
             }
 
             if (HttpContext.Current.Session != null) {
@@ -79,27 +74,25 @@ namespace WereViewApp.Modules.IPConfig {
             }
             return visitorIPAddress;
         }
+
         public static string GetIPAddress() {
             if (HttpContext.Current.Session != null && HttpContext.Current.Session[SessionNames.IpAddress] != null) {
-                return (string)HttpContext.Current.Session[SessionNames.IpAddress];
+                return (string) HttpContext.Current.Session[SessionNames.IpAddress];
             }
-            System.Web.HttpContext context = System.Web.HttpContext.Current;
-            string ipAddress = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            var context = HttpContext.Current;
+            var ipAddress = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
 
             if (!string.IsNullOrEmpty(ipAddress)) {
-                string[] addresses = ipAddress.Split(',');
+                var addresses = ipAddress.Split(',');
                 if (addresses.Length != 0) {
                     return addresses[0];
                 }
             }
-            string finalIP = HttpContext.Current.Request.UserHostAddress;
+            var finalIP = HttpContext.Current.Request.UserHostAddress;
             if (HttpContext.Current.Session != null) {
                 HttpContext.Current.Session[SessionNames.IpAddress] = finalIP;
             }
             return finalIP;
-
         }
-
-
     }
 }

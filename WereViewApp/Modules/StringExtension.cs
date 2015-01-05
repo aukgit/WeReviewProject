@@ -1,10 +1,7 @@
-﻿
-
-namespace WereViewApp.Modules {
+﻿namespace WereViewApp.Modules {
     public static class StringExtension {
-
         /// <summary>
-        /// Split the string into pieces.
+        ///     Split the string into pieces.
         /// </summary>
         /// <param name="str"></param>
         /// <param name="length">If string len is less then return whole string. Null means whole len.</param>
@@ -17,13 +14,11 @@ namespace WereViewApp.Modules {
             }
             if (str.Length <= length) {
                 return str;
-            } else {
-                return str.Substring(0, (int)length);
             }
+            return str.Substring(0, (int) length);
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="str"></param>
         /// <param name="starting">If previous mid was on 100 , start from 100</param>
@@ -42,9 +37,8 @@ namespace WereViewApp.Modules {
                 length = str.Length;
             }
             length = length - starting;
-         
-            return str.Substring(starting, (int)length);
 
+            return str.Substring(starting, length);
         }
     }
 }

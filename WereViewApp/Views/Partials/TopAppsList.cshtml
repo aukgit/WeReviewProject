@@ -12,22 +12,24 @@
 
 
 <div class="itembox col-md-4 col-sm-4">
-    <h1 title="Top Rated Apps of @AppVar.Name"><a href="@Url.Action("TopRated", "Apps")"> Top Rated Apps</a></h1>
+    <h1 title="Top Rated Apps of @AppVar.Name">
+        <a href="@Url.Action("TopRated", "Apps")"> Top Rated Apps</a>
+    </h1>
     @for (int i = 0; i < firstCount; i++) {
         var app = Model[i];
         string appName = @app.AppName;
         string absUrl = @app.GetAppURL();
         <div class="box row">
             <div class="imagebox col-md-3 col-sm-3">
-                <a href="@absUrl" title="@appName" data-original-title="@appName" class="tooltip-show">
+                <a href="@absUrl" title="@appName">
                     <img class="home-page-image-icon" src="@app.GalleryHomeIconLocation" alt="@appName">
                 </a>
             </div>
             <div class="textbox col-md-9 col-sm-9">
-                <a href="@absUrl" itemtype="@absUrl" title="@app.Description" data-original-title="@app.Description" class="tooltip-show">
+                <a href="@absUrl" itemtype="@absUrl" title="@appName">
                     <h1 title="@appName">@Html.Truncate(appName, 20)</h1>
-                    <p title="@app.Description">
-                       @Html.Truncate(app.Description, CommonVars.APP_HOME_PAGE_DESCRIPTION_TRUNC_LEN)
+                    <p title="@appName">
+                        @Html.Truncate(app.Description, CommonVars.APP_HOME_PAGE_DESCRIPTION_TRUNC_LEN)
                     </p>
                     <i class="fa fa-star"></i>
                     <span class="price" itemprop="value" title="rating of @appName" itemprop="rating">@app.AvgRating</span>

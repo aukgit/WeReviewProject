@@ -5,48 +5,46 @@ using System.Linq;
 
 namespace WereViewApp.Modules.UserError {
     public class ErrorCollector : IDisposable {
-        List<BasicError> errors;
-        short orderIncrementer = 0;
-        string highRisk = "rounded-3 label label-danger";
-        string midRisk = "rounded-3 label label-danger mid-error-color";
-        string lowRisk = "rounded-3 label label-warning low-error-color";
-        public const string SOLUTION_STATE_LINK_CLASS = "rounded-3 label label-info error-solution-link-color";
-        public const string SOLUTION_STATE_CLASS = "rounded-3 label label-success";
         public enum ErrorType {
             High,
             Medium,
             Low
         }
 
-        int defaultCapacity = 60;
-        public class BasicError {
-            [Required]
-            public short OrderID { get; set; }
-            [Required]
-            public string ErrorMessage { get; set; }
-            public string Solution { get; set; }
-            public string Link { get; set; }
-            public string LinkTitle { get; set; }
-            [Required]
-            public ErrorType Type { get; set; }
+        public const string SOLUTION_STATE_LINK_CLASS = "rounded-3 label label-info error-solution-link-color";
+        public const string SOLUTION_STATE_CLASS = "rounded-3 label label-success";
+        private int defaultCapacity = 60;
+        private List<BasicError> errors;
+        private short orderIncrementer;
+        private readonly string highRisk = "rounded-3 label label-danger";
+        private readonly string lowRisk = "rounded-3 label label-warning low-error-color";
+        private readonly string midRisk = "rounded-3 label label-danger mid-error-color";
+
+        public ErrorCollector(int def = 60) {
+            errors = new List<BasicError>(def);
+            defaultCapacity = def;
+        }
+
+        public void Dispose() {
+            errors = null;
+            GC.Collect();
         }
 
         public string GetCSSForError(BasicError e) {
             if (e.Type == ErrorType.High) {
                 return highRisk;
-            } else if (e.Type == ErrorType.Medium) {
+            }
+            if (e.Type == ErrorType.Medium) {
                 return midRisk;
-            } else if (e.Type == ErrorType.Low) {
-                return lowRisk;
-            } else {
+            }
+            if (e.Type == ErrorType.Low) {
                 return lowRisk;
             }
+            return lowRisk;
         }
 
-
-
         /// <summary>
-        /// Is any error exist in the list?
+        ///     Is any error exist in the list?
         /// </summary>
         /// <returns>Returns true if any error exist.</returns>
         public bool IsExist() {
@@ -56,18 +54,13 @@ namespace WereViewApp.Modules.UserError {
             return false;
         }
 
-        public ErrorCollector(int def = 60) {
-            errors = new List<BasicError>(def);
-            defaultCapacity = def;
-        }
-
         /// <summary>
-        /// add error message with low priority
+        ///     add error message with low priority
         /// </summary>
         /// <param name="msg">set your message.</param>
         /// <param name="quantityTypeIsNotValidPleaseSelectAValidQuantityType"></param>
         public int Add(string msg, string solution = "", string link = "", string linkTitle = "") {
-            var error = new BasicError() {
+            var error = new BasicError {
                 OrderID = orderIncrementer++,
                 ErrorMessage = msg,
                 Type = ErrorType.Low
@@ -77,11 +70,11 @@ namespace WereViewApp.Modules.UserError {
         }
 
         /// <summary>
-        /// add error message with high priority
+        ///     add error message with high priority
         /// </summary>
         /// <param name="msg">set your message.</param>
         public int AddHigh(string msg, string solution = "", string link = "", string linkTitle = "") {
-            var error = new BasicError() {
+            var error = new BasicError {
                 Type = ErrorType.High,
                 OrderID = orderIncrementer++,
                 ErrorMessage = msg,
@@ -94,11 +87,11 @@ namespace WereViewApp.Modules.UserError {
         }
 
         /// <summary>
-        /// add error message with medium priority
+        ///     add error message with medium priority
         /// </summary>
         /// <param name="msg">set your message.</param>
         public int AddMedium(string msg, string solution = "", string link = "", string linkTitle = "") {
-            var error = new BasicError() {
+            var error = new BasicError {
                 Type = ErrorType.Medium,
                 OrderID = orderIncrementer++,
                 ErrorMessage = msg,
@@ -111,12 +104,12 @@ namespace WereViewApp.Modules.UserError {
         }
 
         /// <summary>
-        /// add error message with given priority
+        ///     add error message with given priority
         /// </summary>
         /// <param name="msg">set your message.</param>
         /// <param name="type">Type of your error message.</param>
         public int Add(string msg, ErrorType type, string solution = "", string link = "", string linkTitle = "") {
-            var error = new BasicError() {
+            var error = new BasicError {
                 Type = ErrorType.Low,
                 OrderID = orderIncrementer++,
                 ErrorMessage = msg,
@@ -129,24 +122,21 @@ namespace WereViewApp.Modules.UserError {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns>Returns all error message as string list.</returns>
         public List<string> GetMessages() {
             return errors.Select(n => n.ErrorMessage)
-                         .ToList();
+                .ToList();
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns>Returns all error message as Error Object.</returns>
         public List<BasicError> GetErrors() {
             if (errors != null && errors.Count > 0) {
                 return errors.ToList();
-            } else {
-                return null;
             }
+            return null;
         }
 
         public void Remove(int OrderID) {
@@ -164,7 +154,7 @@ namespace WereViewApp.Modules.UserError {
         }
 
         /// <summary>
-        /// Clean counter and clean the error list start from 0.
+        ///     Clean counter and clean the error list start from 0.
         /// </summary>
         public void Clear() {
             orderIncrementer = 0;
@@ -173,7 +163,6 @@ namespace WereViewApp.Modules.UserError {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns>Returns high error message as string list.</returns>
         public List<string> GetMessagesHigh() {
@@ -181,45 +170,48 @@ namespace WereViewApp.Modules.UserError {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns>Returns low error message as string list.</returns>
         public List<string> GetMessagesLow() {
             if (errors.Count > 0) {
                 return errors.Where(n => n.Type == ErrorType.Low).Select(n => n.ErrorMessage).ToList();
-            } else {
-                return null;
             }
+            return null;
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns>Returns medium error message as string list.</returns>
         public List<string> GetMessagesMedium() {
             if (errors.Count > 0) {
                 return errors.Where(n => n.Type == ErrorType.Medium).Select(n => n.ErrorMessage).ToList();
-            } else {
-                return null;
             }
+            return null;
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns>Returns all error message as string list of sorted by order id.</returns>
         public List<string> GetMessagesSorted() {
             if (errors.Count > 0) {
                 return errors.OrderBy(n => n.OrderID).Select(n => n.ErrorMessage).ToList();
-            } else {
-                return null;
             }
+            return null;
         }
 
+        public class BasicError {
+            [Required]
+            public short OrderID { get; set; }
 
-        public void Dispose() {
-            errors = null;
-            GC.Collect();
+            [Required]
+            public string ErrorMessage { get; set; }
+
+            public string Solution { get; set; }
+            public string Link { get; set; }
+            public string LinkTitle { get; set; }
+
+            [Required]
+            public ErrorType Type { get; set; }
         }
     }
 }

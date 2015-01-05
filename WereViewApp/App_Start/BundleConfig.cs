@@ -79,20 +79,20 @@ namespace WereViewApp {
                                 "~/Content/css/bootstrap.theme.unitied.css"
 
             ));
-            //bundles.Add(new StyleBundle("~/Content/css/FrontEndDeveloperCSS/bootstrap").Include(
-            //                    "~/Content/css/frontEnd-bootstrap.min.css",
-            //                    "~/Content/css/FrontEndDeveloperCSS/main.css",
-            //                    "~/Content/css/FrontEndDeveloperCSS/menu.css",
-            //                    "~/Content/css/FrontEndDeveloperCSS/media.css",
-            //                    "~/Content/css/FrontEndDeveloperCSS/nivo-lightbox.css",
-            //                    "~/Content/css/FrontEndDeveloperCSS/nivo-lightbox-extra.css"
-
-            //));
-
             bundles.Add(new StyleBundle("~/Content/css/FrontEndDeveloperCSS/bootstrap").Include(
-                                "~/Content/css/FrontEndDeveloperCSS/FrontEndMinifiedCSS.css"
+                                "~/Content/css/frontEnd-bootstrap.min.css",
+                                "~/Content/css/FrontEndDeveloperCSS/main.css",
+                                "~/Content/css/FrontEndDeveloperCSS/menu.css",
+                                "~/Content/css/FrontEndDeveloperCSS/media.css",
+                                "~/Content/css/FrontEndDeveloperCSS/nivo-lightbox.css",
+                                "~/Content/css/FrontEndDeveloperCSS/nivo-lightbox-extra.css"
 
             ));
+
+            //bundles.Add(new StyleBundle("~/Content/css/FrontEndDeveloperCSS/bootstrap").Include(
+            //                    "~/Content/css/FrontEndDeveloperCSS/FrontEndMinifiedCSS.css"
+
+            //));
             bundles.Add(new StyleBundle("~/Content/css/styles").Include(
                                 "~/Content/css/site.css",
                                 "~/Content/css/flags32.css",
@@ -143,7 +143,7 @@ namespace WereViewApp {
             #region Configs
 
             bundles.UseCdn = false;
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
 
             #endregion
 

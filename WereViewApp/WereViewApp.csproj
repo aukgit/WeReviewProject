@@ -767,6 +767,9 @@
       <DependentUpon>WereViewAppModel.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <Content Include="Scripts\bootstrap.min.js.map">
+      <DependentUpon>bootstrap.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\CustomScripts\ComboOptions.js" />
     <Content Include="Scripts\CustomScripts\CommonJsEveryPage.js" />
@@ -885,7 +888,6 @@
     <Content Include="Views\Reviews\ReviewEdit.cshtml" />
     <Content Include="Views\Apps\ListOfApps.cshtml" />
     <Content Include="Views\Apps\_ListItemsOfApps.cshtml" />
-    <Content Include="Views\Shared\_GalleryHomePageOnly.cshtml" />
     <Content Include="Views\Shared\_NavigationFrontEnd.cshtml" />
     <Content Include="Views\Shared\_HeaderPartFrontEnd.cshtml" />
     <Content Include="Views\Shared\_userLoggedInNavigation.cshtml" />

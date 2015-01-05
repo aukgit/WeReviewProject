@@ -2,12 +2,14 @@
 
 namespace WereViewApp.Modules.Type {
     public class DataTypeSupport {
-
         /// <summary>
-        /// Returns true type is primitive type or guid or string or datetime.
+        ///     Returns true type is primitive type or guid or string or datetime.
         /// </summary>
         /// <param name="o">Pass the object of any type.</param>
-        /// <returns>Returns true type is primitive type or guid or string or datetime. If complex or custom class then returns false.</returns>
+        /// <returns>
+        ///     Returns true type is primitive type or guid or string or datetime. If complex or custom class then returns
+        ///     false.
+        /// </returns>
         public static bool Support(object o) {
             var checkLong = o is long;
             var checkInt = o is int || o is Int16 || o is Int32 || o is Int64;
@@ -18,26 +20,26 @@ namespace WereViewApp.Modules.Type {
             var checkDateTime = o is DateTime;
             var checkByte = o is byte || o is Byte;
 
-            if (checkString || checkByte || checkLong || checkInt || checkDecimal || checkGuid || checkBool || checkDateTime)
+            if (checkString || checkByte || checkLong || checkInt || checkDecimal || checkGuid || checkBool ||
+                checkDateTime)
                 return true;
-            else
-                return false;
+            return false;
         }
 
         public static bool IsNumber(string o2) {
-            object o = (object)o2;
+            object o = o2;
 
             return o is sbyte
-               || o is byte
-               || o is short
-               || o is ushort
-               || o is int
-               || o is uint
-               || o is long
-               || o is ulong
-               || o is float
-               || o is double
-               || o is decimal;
+                   || o is byte
+                   || o is short
+                   || o is ushort
+                   || o is int
+                   || o is uint
+                   || o is long
+                   || o is ulong
+                   || o is float
+                   || o is double
+                   || o is decimal;
         }
     }
 }

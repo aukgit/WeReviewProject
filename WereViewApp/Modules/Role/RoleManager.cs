@@ -1,28 +1,26 @@
-﻿using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Modules.DevUser;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Data.Entity;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using WereViewApp.Models.DesignPattern.Interfaces;
-using WereViewApp.Models.ViewModels;
-using WereViewApp.Models.POCO.IdentityCustomization;
 using System.Threading.Tasks;
+using System.Web;
+using DevMVCComponent;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using WereViewApp.Models.Context;
+using WereViewApp.Models.POCO.Identity;
+using WereViewApp.Models.POCO.IdentityCustomization;
+using WereViewApp.Modules.DevUser;
 
 namespace WereViewApp.Modules.Role {
     /// <summary>
-    /// Developers Organism Role Manager
+    ///     Developers Organism Role Manager
     /// </summary>
     public class RoleManager {
+        private static RoleStore<ApplicationRole, long, ApplicationUserRole> _roleStore =
+            new RoleStore<ApplicationRole, long, ApplicationUserRole>(new ApplicationDbContext());
 
-        private static RoleStore<ApplicationRole, long, ApplicationUserRole> _roleStore = new RoleStore<ApplicationRole, long, ApplicationUserRole>(new ApplicationDbContext());
         private static ApplicationRoleManager _roleManager;
         private static List<ApplicationRole> _cachesOfUsers = new List<ApplicationRole>(1200);
-
         //public class UserRoleCache {
         //    public long UserID { get; set; }
         //    public long RoleID { get; set; }
@@ -32,6 +30,7 @@ namespace WereViewApp.Modules.Role {
         //    public long PointsRequired { get; set; }
         //}
         public int MyProperty { get; set; }
+
         public static ApplicationRoleManager Manager {
             get {
                 if (_roleManager == null) {
@@ -40,17 +39,21 @@ namespace WereViewApp.Modules.Role {
                 return _roleManager;
             }
         }
+
         #region Manager Reset
+
         public static ApplicationRoleManager ResetManager() {
             _roleStore = new RoleStore<ApplicationRole, long, ApplicationUserRole>(new ApplicationDbContext());
             _roleManager = new ApplicationRoleManager(_roleStore);
             return _roleManager;
         }
+
         #endregion
 
         #region Get Users Highest Role
+
         /// <summary>
-        /// Get the high role. Which has low priority in the database.
+        ///     Get the high role. Which has low priority in the database.
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
@@ -67,55 +70,115 @@ namespace WereViewApp.Modules.Role {
 
         #endregion
 
-        #region Create
+        #region Get roles Id
+
         /// <summary>
-        /// First check if role exist or not.
-        /// It will not work if new properties are added to the role table.
-        /// Use overload if new properties are added.
+        /// </summary>
+        /// <param name="roleName"></param>
+        /// <returns>Returns -1 if not exist.</returns>
+        public static long GetRoleId(string roleName) {
+            if (!string.IsNullOrEmpty(roleName)) {
+                var role = GetRole(roleName);
+                if (role != null) {
+                    return role.Id;
+                }
+            }
+            return -1;
+        }
+
+        #endregion
+
+        #region Role Existence check
+
+        /// <summary>
+        ///     if role exists.
+        /// </summary>
+        /// <param name="roleName"></param>
+        public static bool Exists(string roleName) {
+            return Manager.RoleExists(roleName);
+        }
+
+        #endregion
+
+        #region Get and remove temporary role information
+
+        /// <summary>
+        ///     Returns temporary role and remove the infor from temp.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public static async Task<ApplicationRole> ReturnRoleIdFromTempInfoAndRemoveTemp(long userId) {
+            using (var db = new ApplicationDbContext()) {
+                var temp = db.TempUserRoleRelations.FirstOrDefault(n => n.UserID == userId);
+                if (temp != null) {
+                    var role = GetRole(temp.UserRoleID);
+                    if (role != null) {
+                        db.TempUserRoleRelations.Remove(temp);
+                        await db.SaveChangesAsync();
+                        return role;
+                    }
+                    throw new Exception(
+                        "Saved information in temp at the time of registration doesn't match any role in database.");
+                }
+            }
+            return null;
+        }
+
+        #endregion
+
+        #region Create
+
+        /// <summary>
+        ///     First check if role exist or not.
+        ///     It will not work if new properties are added to the role table.
+        ///     Use overload if new properties are added.
         /// </summary>
         /// <param name="roleName"></param>
         public static void CreateRole(string roleName) {
-            var exist = RoleManager.Manager.RoleExists(roleName);
+            var exist = Manager.RoleExists(roleName);
             if (!exist) {
-                var role = new ApplicationRole() {
+                var role = new ApplicationRole {
                     Name = roleName
                 };
                 try {
                     Manager.Create(role);
                 } catch (Exception ex) {
-                    DevMVCComponent.Starter.HanldeError.HandleBy(ex);
+                    Starter.HanldeError.HandleBy(ex);
                 }
             }
         }
+
         /// <summary>
-        /// First check if role exist or not.
+        ///     First check if role exist or not.
         /// </summary>
         /// <param name="roleName"></param>
         public static void CreateRole(ApplicationRole role) {
-            var exist = RoleManager.Manager.RoleExists(role.Name);
+            var exist = Manager.RoleExists(role.Name);
             if (!exist) {
                 try {
                     Manager.Create(role);
                 } catch (Exception ex) {
-                    DevMVCComponent.Starter.HanldeError.HandleBy(ex);
+                    Starter.HanldeError.HandleBy(ex);
                 }
             }
         }
+
         #endregion
 
         #region Get Roles or Single Role
+
         /// <summary>
-        /// Get all the roles.
+        ///     Get all the roles.
         /// </summary>
         /// <param name="roleName"></param>
         public static List<ApplicationRole> GetRoles() {
-            using (ApplicationDbContext db = new ApplicationDbContext()) {
+            using (var db = new ApplicationDbContext()) {
                 return db.Roles.ToList();
             }
         }
 
         /// <summary>
-        /// Get all the roles by search naming the role name with wildcard.
+        ///     Get all the roles by search naming the role name with wildcard.
         /// </summary>
         /// <param name="roleName"></param>
         public static List<ApplicationRole> GetRoles(string search) {
@@ -126,15 +189,17 @@ namespace WereViewApp.Modules.Role {
         public static ApplicationRole GetRole(string roleName) {
             return Manager.Roles.FirstOrDefault(n => n.Name == roleName);
         }
+
         public static ApplicationRole GetRole(long id) {
             return Manager.Roles.FirstOrDefault(n => n.Id == id);
         }
+
         #endregion
 
         #region Is In Role
 
         /// <summary>
-        /// Check if user is in this role.
+        ///     Check if user is in this role.
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="role"></param>
@@ -144,7 +209,7 @@ namespace WereViewApp.Modules.Role {
         }
 
         /// <summary>
-        /// Is current user in checking role.
+        ///     Is current user in checking role.
         /// </summary>
         /// <param name="role"></param>
         /// <returns></returns>
@@ -154,11 +219,13 @@ namespace WereViewApp.Modules.Role {
             }
             return false;
         }
+
         #endregion
 
         #region Get Users Roles
+
         /// <summary>
-        /// Get roles based on user id (Faster);
+        ///     Get roles based on user id (Faster);
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
@@ -167,7 +234,7 @@ namespace WereViewApp.Modules.Role {
         }
 
         /// <summary>
-        /// Get roles based on user id (Faster);
+        ///     Get roles based on user id (Faster);
         /// </summary>
         /// <param name="userId"></param>
         /// <returns>List or null.</returns>
@@ -180,8 +247,8 @@ namespace WereViewApp.Modules.Role {
         }
 
         /// <summary>
-        /// Give all related roles to this user.
-        /// Slower
+        ///     Give all related roles to this user.
+        ///     Slower
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
@@ -194,8 +261,8 @@ namespace WereViewApp.Modules.Role {
         }
 
         /// <summary>
-        /// Give all related roles to this user.
-        /// Faster
+        ///     Give all related roles to this user.
+        ///     Faster
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
@@ -204,12 +271,14 @@ namespace WereViewApp.Modules.Role {
                 return db2.Roles.Where(n => n.Users.Any(u => u.UserId == userId)).ToList();
             }
         }
+
         #endregion
 
         #region Get Underlying roles based on priority
+
         /// <summary>
-        /// Get current one and all underlying roles from this role
-        /// in custom db.
+        ///     Get current one and all underlying roles from this role
+        ///     in custom db.
         /// </summary>
         /// <param name="roleName">Name of your current role will return all underlying priority roles</param>
         /// <returns></returns>
@@ -223,9 +292,10 @@ namespace WereViewApp.Modules.Role {
             }
             return null;
         }
+
         /// <summary>
-        /// Get all underlying roles from this role
-        /// in custom db.
+        ///     Get all underlying roles from this role
+        ///     in custom db.
         /// </summary>
         /// <param name="role">return all underlying priority roles</param>
         /// <returns></returns>
@@ -238,9 +308,11 @@ namespace WereViewApp.Modules.Role {
             }
             return null;
         }
+
         #endregion
 
         #region Add roles by priority : add all underlying roles
+
         /// <summary>
         ///     Add all underlying roles
         ///     Verifies user before adding roles.
@@ -263,6 +335,7 @@ namespace WereViewApp.Modules.Role {
                 throw new Exception("User doesn't exist.");
             }
         }
+
         /// <summary>
         ///     Faster
         ///     Add all underlying roles
@@ -286,6 +359,7 @@ namespace WereViewApp.Modules.Role {
         #endregion
 
         #region Remove by priority : remove all underlying roles
+
         /// <summary>
         ///     Add all underlying roles
         ///     Verifies user before adding roles.
@@ -308,6 +382,7 @@ namespace WereViewApp.Modules.Role {
                 throw new Exception("User doesn't exist.");
             }
         }
+
         /// <summary>
         ///     Faster
         ///     Add all underlying roles
@@ -327,12 +402,12 @@ namespace WereViewApp.Modules.Role {
                 throw new Exception("User doesn't exist.");
             }
         }
+
         #endregion
 
         #region Get users in role
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="roleName"></param>
         /// <returns>Returns null if not exist.</returns>
@@ -345,37 +420,33 @@ namespace WereViewApp.Modules.Role {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="roleName"></param>
         /// <returns>Returns null if not exist.</returns>
         public static List<ApplicationUser> GetUsersInRole(long roleId) {
-            using (ApplicationDbContext db = new ApplicationDbContext()) {
+            using (var db = new ApplicationDbContext()) {
                 return db.Users.Where(e => !e.Roles.All(r => r.RoleId == roleId)).ToList();
             }
         }
 
 
         /// <summary>
-        /// Check if user in role by user name.
+        ///     Check if user in role by user name.
         /// </summary>
         /// <param name="roleName"></param>
         public static bool UserInRole(string username, string role) {
             var user = UserManager.GetUser(username);
             if (user != null) {
                 return UserManager.Manager.IsInRole(user.Id, role);
-
             }
             return false;
         }
 
-
-
         #endregion
 
         #region Is user exist inside a role
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="role"></param>
         /// <returns>Returns false if role doesn't exist or not found any users.</returns>
@@ -388,21 +459,22 @@ namespace WereViewApp.Modules.Role {
         }
 
         /// <summary>
-        /// Faster
+        ///     Faster
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
         public static bool IsAnyRelatedUsers(long roleId) {
-            using (ApplicationDbContext db = new ApplicationDbContext()) {
+            using (var db = new ApplicationDbContext()) {
                 return db.Users.Any(e => e.Roles.All(r => r.RoleId == roleId));
             }
         }
+
         #endregion
 
         #region Remove user roles
 
         /// <summary>
-        /// Faster
+        ///     Faster
         /// </summary>
         /// <param name="role"></param>
         public static void RemoveRole(ApplicationRole role) {
@@ -422,31 +494,13 @@ namespace WereViewApp.Modules.Role {
                 Manager.Delete(role);
             }
         }
-        #endregion
-
-        #region Get roles Id
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="roleName"></param>
-        /// <returns>Returns -1 if not exist.</returns>
-        public static long GetRoleId(string roleName) {
-            if (!string.IsNullOrEmpty(roleName)) {
-                var role = GetRole(roleName);
-                if (role != null) {
-                    return role.Id;
-                }
-            }
-            return -1;
-
-        }
 
         #endregion
 
         #region User belongs to a role
+
         /// <summary>
-        /// Check if user in role by user name.
+        ///     Check if user in role by user name.
         /// </summary>
         /// <param name="roleName"></param>
         public static bool UserInRole(ApplicationUser user, string role) {
@@ -457,27 +511,19 @@ namespace WereViewApp.Modules.Role {
         }
 
         /// <summary>
-        /// Check if current user in role.
+        ///     Check if current user in role.
         /// </summary>
         /// <param name="roleName"></param>
         public static bool UserInRole(string role) {
             return HttpContext.Current.User.IsInRole(role);
         }
-        #endregion
 
-        #region Role Existence check
-        /// <summary>
-        /// if role exists.
-        /// </summary>
-        /// <param name="roleName"></param>
-        public static bool Exists(string roleName) {
-            return Manager.RoleExists(roleName);
-        }
         #endregion
 
         #region Add roles to user
+
         /// <summary>
-        /// Add current user to the role.
+        ///     Add current user to the role.
         /// </summary>
         /// <param name="roleName"></param>
         public static bool AddRoleToUser(string role) {
@@ -487,14 +533,14 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.AddToRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    DevMVCComponent.Starter.HanldeError.HandleBy(ex);
+                    Starter.HanldeError.HandleBy(ex);
                 }
             }
             return false;
         }
 
         /// <summary>
-        /// Add user to the role.
+        ///     Add user to the role.
         /// </summary>
         /// <param name="roleName"></param>
         public static bool AddRoleToUser(string username, string role) {
@@ -504,7 +550,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.AddToRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    DevMVCComponent.Starter.HanldeError.HandleBy(ex);
+                    Starter.HanldeError.HandleBy(ex);
                 }
             }
             return false;
@@ -512,7 +558,7 @@ namespace WereViewApp.Modules.Role {
 
 
         /// <summary>
-        /// Faster
+        ///     Faster
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="roleId"></param>
@@ -520,21 +566,21 @@ namespace WereViewApp.Modules.Role {
         public static bool AddRoleToUser(long userId, long roleId) {
             var role = GetRole(roleId);
             if (role != null) {
-                AddRoleToUser(userId, roleName: role.Name);
+                AddRoleToUser(userId, role.Name);
                 return true;
             }
             return false;
         }
 
         /// <summary>
-        /// More Faster
+        ///     More Faster
         /// </summary>
         public static void AddRoleToUser(long userId, string roleName) {
             UserManager.Manager.AddToRole(userId, roleName);
         }
 
         /// <summary>
-        /// Add user to the role.
+        ///     Add user to the role.
         /// </summary>
         /// <param name="roleName"></param>
         public static bool AddRoleToUser(ApplicationUser user, string role) {
@@ -543,13 +589,14 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.AddToRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    DevMVCComponent.Starter.HanldeError.HandleBy(ex);
+                    Starter.HanldeError.HandleBy(ex);
                 }
             }
             return false;
         }
+
         /// <summary>
-        /// All roles will be added to all those users
+        ///     All roles will be added to all those users
         /// </summary>
         /// <param name="roleName"></param>
         public static void AddRolesToUser(string username, string[] roles) {
@@ -559,7 +606,7 @@ namespace WereViewApp.Modules.Role {
         }
 
         /// <summary>
-        /// All roles will be added to all those users
+        ///     All roles will be added to all those users
         /// </summary>
         /// <param name="roleName"></param>
         public static void AddRoleToUsers(string[] usernames, string role) {
@@ -567,8 +614,9 @@ namespace WereViewApp.Modules.Role {
                 AddRoleToUser(user, role);
             }
         }
+
         /// <summary>
-        /// All roles will be added to all those users
+        ///     All roles will be added to all those users
         /// </summary>
         /// <param name="roleName"></param>
         public static void AddRolesToUsers(string[] usernames, string[] roles) {
@@ -584,7 +632,7 @@ namespace WereViewApp.Modules.Role {
         #region Remove Roles
 
         /// <summary>
-        /// Remove role from user
+        ///     Remove role from user
         /// </summary>
         /// <param name="roleName"></param>
         public static bool RemoveUserRole(string username, string role) {
@@ -594,14 +642,14 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.RemoveFromRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    DevMVCComponent.Starter.HanldeError.HandleBy(ex);
+                    Starter.HanldeError.HandleBy(ex);
                 }
             }
             return false;
         }
 
         /// <summary>
-        /// Faster
+        ///     Faster
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="roleId"></param>
@@ -613,14 +661,14 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.RemoveFromRole(userId, role.Name);
                     return true;
                 } catch (Exception ex) {
-                    DevMVCComponent.Starter.HanldeError.HandleBy(ex);
+                    Starter.HanldeError.HandleBy(ex);
                 }
             }
             return false;
         }
 
         /// <summary>
-        /// More faster
+        ///     More faster
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="roleName"></param>
@@ -628,12 +676,12 @@ namespace WereViewApp.Modules.Role {
             try {
                 UserManager.Manager.RemoveFromRole(userId, roleName);
             } catch (Exception ex) {
-                DevMVCComponent.Starter.HanldeError.HandleBy(ex);
+                Starter.HanldeError.HandleBy(ex);
             }
         }
 
         /// <summary>
-        /// Remove role from user
+        ///     Remove role from user
         /// </summary>
         /// <param name="roleName"></param>
         public static bool RemoveUserRole(ApplicationUser user, string role) {
@@ -642,14 +690,14 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.RemoveFromRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    DevMVCComponent.Starter.HanldeError.HandleBy(ex);
+                    Starter.HanldeError.HandleBy(ex);
                 }
             }
             return false;
         }
 
         /// <summary>
-        /// Remove role from current user
+        ///     Remove role from current user
         /// </summary>
         /// <param name="roleName"></param>
         public static bool RemoveUserRole(string role) {
@@ -659,17 +707,18 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.RemoveFromRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    DevMVCComponent.Starter.HanldeError.HandleBy(ex);
+                    Starter.HanldeError.HandleBy(ex);
                 }
             }
             return false;
         }
+
         #endregion
 
         #region Get all roles of an user.
 
         /// <summary>
-        /// Get Roles by User name
+        ///     Get Roles by User name
         /// </summary>
         /// <param name="roleName"></param>
         public static List<string> GetAllAssignedRoles(string username) {
@@ -681,7 +730,7 @@ namespace WereViewApp.Modules.Role {
         }
 
         /// <summary>
-        /// Get Roles by User 
+        ///     Get Roles by User
         /// </summary>
         /// <param name="roleName"></param>
         public static List<string> GetAllAssignedRoles(ApplicationUser user) {
@@ -692,7 +741,7 @@ namespace WereViewApp.Modules.Role {
         }
 
         /// <summary>
-        /// Get all assigned roles by current user
+        ///     Get all assigned roles by current user
         /// </summary>
         /// <param name="roleName"></param>
         public static List<string> GetAllAssignedRoles() {
@@ -702,12 +751,14 @@ namespace WereViewApp.Modules.Role {
             }
             return null;
         }
+
         #endregion
 
         #region Keep temp role information
+
         /// <summary>
-        /// Faster
-        /// Add a temporary information from the registration process
+        ///     Faster
+        ///     Add a temporary information from the registration process
         /// </summary>
         /// <param name="user"></param>
         /// <param name="roleId">Roles doesn't verify inside the method</param>
@@ -722,7 +773,7 @@ namespace WereViewApp.Modules.Role {
         }
 
         /// <summary>
-        /// Add a temporary information from the registration process
+        ///     Add a temporary information from the registration process
         /// </summary>
         /// <param name="user"></param>
         /// <param name="roleId">Role doesn't verify inside the method</param>
@@ -732,32 +783,7 @@ namespace WereViewApp.Modules.Role {
                 AddTempRoleInfo(user, roleId);
             }
         }
-        #endregion
-
-        #region Get and remove temporary role information
-        /// <summary>
-        /// Returns temporary role and remove the infor from temp.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public static async Task<ApplicationRole> ReturnRoleIdFromTempInfoAndRemoveTemp(long userId) {
-            using (var db = new ApplicationDbContext()) {
-                var temp = db.TempUserRoleRelations.FirstOrDefault(n => n.UserID == userId);
-                if (temp != null) {
-                    var role = GetRole(temp.UserRoleID);
-                    if (role != null) {
-                        db.TempUserRoleRelations.Remove(temp);
-                        await db.SaveChangesAsync();
-                        return role;
-                    } else {
-                        throw new Exception("Saved information in temp at the time of registration doesn't match any role in database.");
-                    }
-                }
-            }
-            return null;
-        }
 
         #endregion
-
     }
 }

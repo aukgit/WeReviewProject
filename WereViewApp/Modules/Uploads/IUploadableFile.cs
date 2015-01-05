@@ -8,6 +8,5 @@ namespace WereViewApp.Modules.Uploads {
         string Title { get; set; }
         string Subtitle { get; set; }
         string Extension { get; set; }
-
     }
 }

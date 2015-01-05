@@ -1,30 +1,14 @@
-﻿using ImageResizer;
-using System;
+﻿using System;
 using System.IO;
 using System.Web;
-using WereViewApp.Models.EntityModel;
+using DevMVCComponent;
+using ImageResizer;
 
 namespace WereViewApp.Modules.Uploads {
     public class UploadProcessor {
-
-        static string appPath = AppDomain.CurrentDomain.BaseDirectory;
-
-        /// <summary>
-        /// "~/Uploads/Images/"
-        /// </summary>
-        public string RootPath { get; set; }
-        /// <summary>
-        /// By default empty
-        /// </summary>
-        public string AdditionalRoots { get; set; }
+        private static readonly string appPath = AppDomain.CurrentDomain.BaseDirectory;
 
         /// <summary>
-        /// filename + "_temp"; will be added with uploaded file.
-        /// default temp value = "_temp"
-        /// </summary>
-        public string FileAdditionalTemp { get; set; }
-        /// <summary>
-        /// 
         /// </summary>
         /// <param name="AdditionalRoot">should contain slash. use : "~/Uploads/Images/" + AdditionalRoot</param>
         public UploadProcessor(string additionalRoot) {
@@ -34,16 +18,6 @@ namespace WereViewApp.Modules.Uploads {
         }
 
         /// <summary>
-        /// /Uploads/Images/ + Additional Root
-        /// no ~ telda is included.
-        /// </summary>
-        /// <returns></returns>
-        public string GetCombinationOfRootAndAdditionalRoot() {
-            return RootPath.Remove(0,1) + AdditionalRoots;
-        }
-
-        /// <summary>
-        /// 
         /// </summary>
         /// <param name="additionalRoot">should contain slash at the end. root + additional path</param>
         /// <param name="root">should contain slash at the end. by default "~/Uploads/Images/"</param>
@@ -52,12 +26,36 @@ namespace WereViewApp.Modules.Uploads {
             RootPath = root;
             FileAdditionalTemp = "_temp";
         }
+
         /// <summary>
-        /// 
+        ///     "~/Uploads/Images/"
+        /// </summary>
+        public string RootPath { get; set; }
+
+        /// <summary>
+        ///     By default empty
+        /// </summary>
+        public string AdditionalRoots { get; set; }
+
+        /// <summary>
+        ///     filename + "_temp"; will be added with uploaded file.
+        ///     default temp value = "_temp"
+        /// </summary>
+        public string FileAdditionalTemp { get; set; }
+
+        /// <summary>
+        ///     /Uploads/Images/ + Additional Root
+        ///     no ~ telda is included.
+        /// </summary>
+        /// <returns></returns>
+        public string GetCombinationOfRootAndAdditionalRoot() {
+            return RootPath.Remove(0, 1) + AdditionalRoots;
+        }
+
+        /// <summary>
         /// </summary>
         /// <param name="submittedFile"></param>
         /// <returns>Returns extension without '.' and filename without extension</returns>
-
         public string GetFilename(HttpPostedFileBase submittedFile, ref string extension) {
             string fileName = null;
 
@@ -71,13 +69,12 @@ namespace WereViewApp.Modules.Uploads {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="submittedFile"></param>
         /// <returns>filename without extension</returns>
         public static string GetFilename(HttpPostedFileBase submittedFile) {
             string fileName = null;
-            string extension = "";
+            var extension = "";
             if (submittedFile != null) {
                 fileName = submittedFile.FileName;
                 extension = Path.GetExtension(fileName);
@@ -85,14 +82,14 @@ namespace WereViewApp.Modules.Uploads {
             }
             return fileName;
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="submittedFile"></param>
         /// <returns>Returns extension without '.'</returns>
         public static string GetExtension(HttpPostedFileBase submittedFile) {
             string fileName = null;
-            string extension = "";
+            var extension = "";
             if (submittedFile != null) {
                 fileName = submittedFile.FileName;
                 extension = Path.GetExtension(fileName);
@@ -101,9 +98,7 @@ namespace WereViewApp.Modules.Uploads {
             return extension;
         }
 
-
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="submittedFile">Give extension and saves the file.</param>
         /// <param name="fileName">pass as 'filename' without extension.</param>
@@ -114,8 +109,9 @@ namespace WereViewApp.Modules.Uploads {
         /// <param name="additinalPathWithRoot">use slash at the end. determinate from constructor's additional path</param>
         /// <param name="rootPath">use slash at the end. Constructors give it efficiently.</param>
         /// <returns>root/private/additionpath/filename-number_temp.jpg</returns>
-        public bool UploadFile(HttpPostedFileBase submittedFile, string fileName, int number = -1, bool isNumbering = false, bool asTemp = false, bool isPrivate = false, string additinalPathWithRoot = null, string rootPath = null) {
-
+        public bool UploadFile(HttpPostedFileBase submittedFile, string fileName, int number = -1,
+            bool isNumbering = false, bool asTemp = false, bool isPrivate = false, string additinalPathWithRoot = null,
+            string rootPath = null) {
             if (submittedFile == null) {
                 return false;
             }
@@ -138,7 +134,7 @@ namespace WereViewApp.Modules.Uploads {
                 fileName = GetFilename(submittedFile);
             }
 
-            string fileExtension = "";
+            var fileExtension = "";
             fileExtension = GetExtension(submittedFile);
 
             if (isNumbering) {
@@ -156,44 +152,48 @@ namespace WereViewApp.Modules.Uploads {
             try {
                 submittedFile.SaveAs(absLocation);
             } catch (Exception ex) {
-                DevMVCComponent.Starter.HanldeError.HandleBy(ex);
+                Starter.HanldeError.HandleBy(ex);
                 return false;
             }
             return true;
-
         }
 
         /// <summary>
-        /// Process to resize.
+        ///     Process to resize.
         /// </summary>
         /// <param name="sourceLocation">"file.jpg" Write as root ~/Uploads/</param>
         /// <param name="processedLocation"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <param name="ext"></param>
-        public void ProcessImage(string sourceLocation, string processedLocation, double width, double height, string ext) {
+        public void ProcessImage(string sourceLocation, string processedLocation, double width, double height,
+            string ext) {
             if (sourceLocation != null && processedLocation != null) {
-                string source = sourceLocation.Replace("~", appPath).Replace('/', '\\');
-                string target = processedLocation.Replace("~", appPath).Replace('/', '\\');
-                string setting = "height=" + height + "&width=" + width + "&mode=stretch&format=" + ext;
+                var source = sourceLocation.Replace("~", appPath).Replace('/', '\\');
+                var target = processedLocation.Replace("~", appPath).Replace('/', '\\');
+                var setting = "height=" + height + "&width=" + width + "&mode=stretch&format=" + ext;
                 ImageBuilder.Current.Build(source, target, new ResizeSettings(setting));
             }
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="category"></param>
         /// <param name="sourceFileName">like "Justuploaded"</param>
         /// <param name="processedFileName"></param>
         /// <param name="isSourceAddTemp">if true then sourceFileName(removing ext) += FileAdditionalTemp</param>
         /// <param name="ext"></param>
-        /// <param name="additionalRootPath">Advertise/ should contain slash. But it should be define at the class creation time. Best way to set it in class constructor.</param>
+        /// <param name="additionalRootPath">
+        ///     Advertise/ should contain slash. But it should be define at the class creation time.
+        ///     Best way to set it in class constructor.
+        /// </param>
         /// <param name="rootPath"></param>
-        public void ProcessImage(IUploadableFile file, IImageCategory category, string sourceFileName = null, string processedFileName = null, bool isSourceAddTemp = true, bool isPrivate = false, string additionalRootPath = null, string rootPath = null) {
+        public void ProcessImage(IUploadableFile file, IImageCategory category, string sourceFileName = null,
+            string processedFileName = null, bool isSourceAddTemp = true, bool isPrivate = false,
+            string additionalRootPath = null, string rootPath = null) {
             if (file != null && category != null) {
                 if (rootPath == null) {
-                    rootPath = this.RootPath;
+                    rootPath = RootPath;
                 }
 
                 if (isPrivate) {
@@ -201,27 +201,26 @@ namespace WereViewApp.Modules.Uploads {
                 }
 
                 if (additionalRootPath == null) {
-                    additionalRootPath = this.AdditionalRoots;
+                    additionalRootPath = AdditionalRoots;
                 }
 
 
                 rootPath += additionalRootPath;
-                sourceFileName = GetOrganizeName(file, true, isSourceAddTemp);//soruce as temp
+                sourceFileName = GetOrganizeName(file, true, isSourceAddTemp); //soruce as temp
                 processedFileName = GetOrganizeName(file, true, false); // target
-                string path1 = rootPath + sourceFileName;
-                string path2 = rootPath + processedFileName;
-                string source = VirtualPathtoAbsoluteServerPath(path1);
-                string target = VirtualPathtoAbsoluteServerPath(path2);
-                string setting = "height=" + category.Height + "&width=" + category.Width + "&mode=stretch&format=" + file.Extension;
+                var path1 = rootPath + sourceFileName;
+                var path2 = rootPath + processedFileName;
+                var source = VirtualPathtoAbsoluteServerPath(path1);
+                var target = VirtualPathtoAbsoluteServerPath(path2);
+                var setting = "height=" + category.Height + "&width=" + category.Width + "&mode=stretch&format=" +
+                              file.Extension;
                 if (File.Exists(target)) {
                     File.Delete(target);
                 }
                 try {
                     ImageBuilder.Current.Build(source, target, new ResizeSettings(setting));
-
                 } catch (Exception ex) {
-                    DevMVCComponent.Starter.HanldeError.HandleBy(ex);
-                    
+                    Starter.HanldeError.HandleBy(ex);
                 }
             } else {
                 throw new Exception("Data missing while upload.");
@@ -230,47 +229,50 @@ namespace WereViewApp.Modules.Uploads {
 
         public string VirtualPathtoAbsoluteServerPath(string virtualPath) {
             if (virtualPath != null && virtualPath.StartsWith(@"~/")) {
-                var abs = appPath +  virtualPath.Remove(0, 2);
+                var abs = appPath + virtualPath.Remove(0, 2);
                 return abs.Replace("/", "\\");
             }
             return virtualPath;
         }
 
         /// <summary>
-        /// Remove temp associated with this file.
+        ///     Remove temp associated with this file.
         /// </summary>
         /// <param name="file"></param>
         /// <param name="isAddTemp"></param>
         /// <param name="isPrivate"></param>
         /// <param name="additionalRootPath"></param>
         /// <param name="rootPath"></param>
-        public void RemoveTempImage(IUploadableFile file, bool isAddTemp = true, bool isPrivate = false, string additionalRootPath = null, string rootPath = null) {
-            string fileName = GetOrganizeName(file, true, isAddTemp);
+        public void RemoveTempImage(IUploadableFile file, bool isAddTemp = true, bool isPrivate = false,
+            string additionalRootPath = null, string rootPath = null) {
+            var fileName = GetOrganizeName(file, true, isAddTemp);
             if (rootPath == null) {
-                rootPath = this.RootPath;
+                rootPath = RootPath;
             }
             if (additionalRootPath == null) {
-                additionalRootPath = this.AdditionalRoots;
+                additionalRootPath = AdditionalRoots;
             }
 
             rootPath += additionalRootPath;
 
-            string path1 = rootPath + fileName;
-            string source = path1.Replace("~", appPath).Replace('/', '\\');
+            var path1 = rootPath + fileName;
+            var source = path1.Replace("~", appPath).Replace('/', '\\');
             try {
                 File.Delete(source);
             } catch (Exception ex) {
-                DevMVCComponent.Starter.HanldeError.HandleBy(ex);
+                Starter.HanldeError.HandleBy(ex);
             }
         }
+
         /// <summary>
-        /// Returns "Guid-Sequence_temp.ext"
+        ///     Returns "Guid-Sequence_temp.ext"
         /// </summary>
         /// <param name="file"></param>
         /// <param name="asTemp">if true then add temp text</param>
         /// <param name="tempString"></param>
         /// <returns>Returns "Guid-Sequence_temp.ext" only returns the filename</returns>
-        public static string GetOrganizeNameStatic(IUploadableFile file, bool includeExtention = false, bool asTemp = false, string tempString = "_temp") {
+        public static string GetOrganizeNameStatic(IUploadableFile file, bool includeExtention = false,
+            bool asTemp = false, string tempString = "_temp") {
             var ext = "";
             if (!asTemp) {
                 tempString = "";
@@ -278,18 +280,18 @@ namespace WereViewApp.Modules.Uploads {
             if (includeExtention) {
                 ext = "." + file.Extension;
             }
-            return file.UploadGuid + "-" +  file.Sequence.ToString() + tempString + ext;
-
+            return file.UploadGuid + "-" + file.Sequence + tempString + ext;
         }
 
         /// <summary>
-        /// Returns "Guid-Sequence_temp.ext"
+        ///     Returns "Guid-Sequence_temp.ext"
         /// </summary>
         /// <param name="file"></param>
         /// <param name="asTemp">if true then add temp text</param>
         /// <param name="tempString"></param>
         /// <returns>Returns "Guid-Sequence_temp.ext" only returns the filename</returns>
-        public string GetOrganizeName(IUploadableFile file, bool includeExtention = false, bool asTemp = false, string tempString = "_temp") {
+        public string GetOrganizeName(IUploadableFile file, bool includeExtention = false, bool asTemp = false,
+            string tempString = "_temp") {
             var ext = "";
             if (!asTemp) {
                 tempString = "";
@@ -297,13 +299,7 @@ namespace WereViewApp.Modules.Uploads {
             if (includeExtention) {
                 ext = "." + file.Extension;
             }
-            return file.UploadGuid + "-" +  file.Sequence.ToString() + tempString + ext;
-
+            return file.UploadGuid + "-" + file.Sequence + tempString + ext;
         }
-
-
-
-
-
     }
 }

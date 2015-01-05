@@ -1,23 +1,27 @@
-﻿using WereViewApp.Modules.ObjectToArray;
-using WereViewApp.Modules.Type;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.Specialized;
 using System.Web;
-
+using WereViewApp.Modules.ObjectToArray;
+using WereViewApp.Modules.Type;
 
 namespace WereViewApp.Modules.Cookie {
     /// <summary>
-    /// Set cookies in response 
-    /// Retrieve cookies from request.
+    ///     Set cookies in response
+    ///     Retrieve cookies from request.
     /// </summary>
     public class CookieProcessor {
+        private readonly string CookieName = "";
+        private readonly DateTime defaultExpiration = DateTime.Now.AddHours(5);
 
+        #region Remove Cookies
 
+        public void Remove(string name) {
+            if (HttpContext.Current.Request.Cookies[name] != null) {
+                HttpContext.Current.Response.Cookies[name].Expires = DateTime.Now.AddDays(-1);
+            }
+        }
 
-        readonly string CookieName = "";
-
-        DateTime defaultExpiration = DateTime.Now.AddHours(5);
+        #endregion
 
         #region Constructor
 
@@ -27,13 +31,12 @@ namespace WereViewApp.Modules.Cookie {
         //}
 
         /// <summary>
-        /// 
         /// </summary>
         public CookieProcessor() {
         }
 
         /// <summary>
-        /// Pass Base.ControllerContext
+        ///     Pass Base.ControllerContext
         /// </summary>
         /// <param name="baseContext">Pass this.HttpContext</param>
         /// <param name="cookieName">Pass the default cookie name.</param>
@@ -46,11 +49,10 @@ namespace WereViewApp.Modules.Cookie {
         // Cookies add will add duplicate cookies.
         // Cookies set will only add unique cookies.
 
-
         #region Save Cookies
 
         /// <summary>
-        /// Add object to cookies whether exist or not.
+        ///     Add object to cookies whether exist or not.
         /// </summary>
         /// <param name="Object"></param>
         public void Save(object Object) {
@@ -58,8 +60,8 @@ namespace WereViewApp.Modules.Cookie {
         }
 
         /// <summary>
-        /// Add object to cookies whether exist or not.
-        /// Default expiration is +5 Hours.
+        ///     Add object to cookies whether exist or not.
+        ///     Default expiration is +5 Hours.
         /// </summary>
         /// <param name="Object">Pass the object.</param>
         /// <param name="cookie">Name of the cookie</param>
@@ -68,9 +70,9 @@ namespace WereViewApp.Modules.Cookie {
         }
 
         /// <summary>
-        /// Save a single object as cookie.
-        /// Save in Response.
-        /// Default expiration is +5 Hours.
+        ///     Save a single object as cookie.
+        ///     Save in Response.
+        ///     Default expiration is +5 Hours.
         /// </summary>
         /// <param name="Object">Pass the object</param>
         /// <param name="checkBeforeExist">Don't save if already exist.</param>
@@ -79,8 +81,8 @@ namespace WereViewApp.Modules.Cookie {
         }
 
         /// <summary>
-        /// Save a single object as cookie.
-        /// Save in Response.
+        ///     Save a single object as cookie.
+        ///     Save in Response.
         /// </summary>
         /// <param name="Object">Pass the object</param>
         /// <param name="cookieName">Cookie name , pass null if constructor CookieName is valid.</param>
@@ -90,8 +92,8 @@ namespace WereViewApp.Modules.Cookie {
         }
 
         /// <summary>
-        /// Save a single object as cookie.
-        /// Save in Response.
+        ///     Save a single object as cookie.
+        ///     Save in Response.
         /// </summary>
         /// <param name="Object">Pass the object</param>
         /// <param name="cookieName">Cookie name , pass null if constructor CookieName is valid.</param>
@@ -111,7 +113,7 @@ namespace WereViewApp.Modules.Cookie {
             //is not null and don't support = complex
             if (Object != null && !isSupport) {
                 //if not a primitive type and thus complex class
-                List<ObjectProperty> list = ObjectToArray.ObjectToArrary.Get(Object);
+                var list = ObjectToArrary.Get(Object);
                 foreach (var item in list) {
                     if (DataTypeSupport.Support(item.Value) && item.Value != null) {
                         httpCookie[item.Name] = item.Value.ToString();
@@ -121,17 +123,17 @@ namespace WereViewApp.Modules.Cookie {
                 }
             } else if (Object != null && isSupport) {
                 // object exist but not a complex type of object.
-                httpCookie.Value = (string)Object;
+                httpCookie.Value = (string) Object;
             }
             HttpContext.Current.Response.Cookies.Set(httpCookie); //only add unique cookies
         }
 
-
         #endregion
 
         #region Get Cookie -> Same as Reading
+
         /// <summary>
-        /// Get Default cookie string value.
+        ///     Get Default cookie string value.
         /// </summary>
         /// <returns>GetDefault cookie string value.</returns>
         public string Get() {
@@ -139,17 +141,19 @@ namespace WereViewApp.Modules.Cookie {
         }
 
         /// <summary>
-        /// Get Default cookie string value.
+        ///     Get Default cookie string value.
         /// </summary>
         /// <returns>GetDefault cookie string value.</returns>
         public string Get(string cookieName) {
             return ReadString(cookieName);
         }
+
         #endregion
 
         #region Set Cookie -> Same as Saving
+
         /// <summary>
-        /// Save cookie. +5 hours expiration.
+        ///     Save cookie. +5 hours expiration.
         /// </summary>
         /// <returns>GetDefault cookie string value.</returns>
         public void Set(string str, string cookieName) {
@@ -157,18 +161,19 @@ namespace WereViewApp.Modules.Cookie {
         }
 
         /// <summary>
-        /// Save cookie. +5 hours expiration.
+        ///     Save cookie. +5 hours expiration.
         /// </summary>
         /// <returns>GetDefault cookie string value.</returns>
         public void Set(string str, string cookieName, DateTime expires) {
             Save(str, cookieName, expires);
         }
+
         #endregion
 
         #region Read Cookie
 
         /// <summary>
-        /// Read cookie from request.
+        ///     Read cookie from request.
         /// </summary>
         /// <returns>Returns string or null.</returns>
         public NameValueCollection Read() {
@@ -177,15 +182,14 @@ namespace WereViewApp.Modules.Cookie {
                 if (httpCookie.Values.Count > 1) {
                     // complex type not a value.
                     return httpCookie.Values;
-                } else {
-                    return null;
                 }
+                return null;
             }
             return null;
         }
 
         /// <summary>
-        /// Read cookie from request.
+        ///     Read cookie from request.
         /// </summary>
         /// <param name="cookieName"></param>
         /// <returns>Return object or null.</returns>
@@ -198,15 +202,14 @@ namespace WereViewApp.Modules.Cookie {
                 if (httpCookie.Values.Count > 1) {
                     // complex type not a value.
                     return httpCookie.Values;
-                } else {
-                    return null;
                 }
+                return null;
             }
             return null;
         }
 
         /// <summary>
-        /// Read cookie from request.
+        ///     Read cookie from request.
         /// </summary>
         /// <param name="cookieName"></param>
         /// <returns>Returns string or null.</returns>
@@ -222,7 +225,7 @@ namespace WereViewApp.Modules.Cookie {
         }
 
         /// <summary>
-        /// Read cookie from request.
+        ///     Read cookie from request.
         /// </summary>
         /// <returns>Returns string or null.</returns>
         public string ReadString() {
@@ -238,14 +241,14 @@ namespace WereViewApp.Modules.Cookie {
 
 
         /// <summary>
-        /// Read cookie from request.
+        ///     Read cookie from request.
         /// </summary>
         /// <param name="cookieName"></param>
         /// <returns>Returns Boolean.</returns>
         public bool ReadBool(string cookieName) {
-            string n = ReadString(cookieName);
+            var n = ReadString(cookieName);
             if (!String.IsNullOrWhiteSpace(n)) {
-                bool res = false;
+                var res = false;
                 if (bool.TryParse(n, out res)) {
                     return res;
                 }
@@ -254,12 +257,12 @@ namespace WereViewApp.Modules.Cookie {
         }
 
         /// <summary>
-        /// Read cookie from request.
+        ///     Read cookie from request.
         /// </summary>
         /// <param name="cookieName"></param>
         /// <returns>Returns decimal.</returns>
         public decimal ReadDecimal(string cookieName) {
-            string n = ReadString(cookieName);
+            var n = ReadString(cookieName);
             decimal res = 0;
             if (!String.IsNullOrWhiteSpace(n)) {
                 if (Decimal.TryParse(n, out res)) {
@@ -270,12 +273,12 @@ namespace WereViewApp.Modules.Cookie {
         }
 
         /// <summary>
-        /// Read cookie from request.
+        ///     Read cookie from request.
         /// </summary>
         /// <param name="cookieName"></param>
         /// <returns>Returns long</returns>
         public long ReadLong(string cookieName) {
-            string n = ReadString(cookieName);
+            var n = ReadString(cookieName);
             long res = 0;
             if (!String.IsNullOrWhiteSpace(n)) {
                 if (long.TryParse(n, out res)) {
@@ -286,13 +289,13 @@ namespace WereViewApp.Modules.Cookie {
         }
 
         /// <summary>
-        /// Read cookie from request.
+        ///     Read cookie from request.
         /// </summary>
         /// <param name="cookieName"></param>
         /// <returns>Returns int.</returns>
         public int ReadInt(string cookieName) {
-            string n = ReadString(cookieName);
-            int res = 0;
+            var n = ReadString(cookieName);
+            var res = 0;
             if (!String.IsNullOrWhiteSpace(n)) {
                 if (int.TryParse(n, out res)) {
                     return res;
@@ -302,12 +305,12 @@ namespace WereViewApp.Modules.Cookie {
         }
 
         /// <summary>
-        /// Read cookie from request.
+        ///     Read cookie from request.
         /// </summary>
         /// <param name="cookieName"></param>
         /// <returns>Return Date time or null.</returns>
         public DateTime? ReadDateTime(string cookieName) {
-            string n = ReadString(cookieName);
+            var n = ReadString(cookieName);
             DateTime res;
             if (!String.IsNullOrWhiteSpace(n)) {
                 if (DateTime.TryParse(n, out res)) {
@@ -317,15 +320,6 @@ namespace WereViewApp.Modules.Cookie {
             return null;
         }
 
-
-        #endregion
-
-        #region Remove Cookies
-        public void Remove(string name) {
-            if (HttpContext.Current.Request.Cookies[name] != null) {
-                HttpContext.Current.Response.Cookies[name].Expires = DateTime.Now.AddDays(-1);
-            }
-        }
         #endregion
     }
 }

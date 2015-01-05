@@ -386,6 +386,7 @@ background: blue;
         display: inline-block;
         margin: 0;
         padding: 15px 0 0 0;
+        margin-left: 9%;
     }
 
     .header .loginWrap {
@@ -654,7 +655,8 @@ background: blue;
     }
 
     .video .carousel-inner > .item > img, .video .carousel-inner > .item > a > img {
-        height: inherit !important;
+        /*height: inherit !important;*/
+        height: 199px !important;
     }
 
     .wrapper {
@@ -711,17 +713,20 @@ background: blue;
     }
 
     .banner .bannertextBox {
-        bottom: 8px;
-        background-color: rgba(255, 255, 255, 0.9);
+        bottom: 26px;
+        /* background-color: rgba(255, 255, 255, 0.9); */
         -moz-border-radius: 4px;
-        -webkit-border-radius: 4px;
+        /* -webkit-border-radius: 4px; */
         border-radius: 4px;
-        padding: 5px;
+        padding: 3px;
         -moz-box-shadow: 1px 1px 1px #000000;
         -webkit-box-shadow: 1px 1px 1px #000000;
         box-shadow: 1px 1px 1px #000000;
-        width: 299px;
-        height: 78px;
+        /* width: 299px; */
+        height: 25px;
+        /* margin: -22px; */
+        margin-bottom: -19px;
+        font-size: .6em;
     }
 
         .banner .bannertextBox .rightpart {

@@ -14,6 +14,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WereViewApp.Filter;
+using WereViewApp.Modules.Extensions.IdentityExtension;
+
 namespace WereViewApp.Controllers {
     [Authorize]
     
