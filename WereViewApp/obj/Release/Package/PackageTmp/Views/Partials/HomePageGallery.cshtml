@@ -5,11 +5,12 @@
     bool isFirst = true;
     Layout = null;
     var length = Model != null ? Model.Count : 0;
+    int i = 0;
 }
 <ol class="carousel-indicators">
-    @for (int i = 0; i < length; i++) {
+    @for (i = 0; i < length; i++) {
         string classActive = isFirst ? "active" : null;
-        <li data-target="#myCarousel" data-slide-to="@i" class="@classActive"></li>
+        <li data-target="#myCarousel" data-slide-to="@i" class="myCarousel-target @classActive"></li>
         {
             isFirst = false;
         }
@@ -22,7 +23,11 @@
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!--  Indicators  -->
     <div class="carousel-inner">
+
         @if (Model != null) {
+            {
+                i = 0;
+            }
             foreach (var app in Model) {
                 string classActive = isFirst ? "active" : null;
                 string appName = @app.AppName;
@@ -30,23 +35,25 @@
                 string category = @app.GetCategoryString();
                 string platform = @app.GetPlatformString();
                 var platformO = @app.GetPlatform();
-                <div class="item @classActive">
-                    <a href="@absUrl" title="@appName"><img src="@app.GalleryHomeFeaturedLocation" alt="@app.AppName" class="img-responsive home-page-gallery-image"></a>
+                <div data-slide-no="@i" class="item carousel-item @classActive">
+                    <a href="@absUrl" title="@appName">
+                        <img src="@app.GalleryHomeFeaturedLocation" alt="@app.AppName" class="img-responsive home-page-gallery-image">
+                    </a>
                     <div class="container">
                         <div class="carousel-caption">
                             <div class="bannertextBox">
-                                <div class="leftpart" itemprop="rating" itemtype="@absUrl">
+                                <div class="leftpart visible-md-block visible-lg-block" itemprop="rating" itemtype="@absUrl">
                                     <span class="rating" itemprop="value" title="rating of @appName">@app.AvgRating</span>
                                     <meta itemprop="best" content="10" />
                                 </div>
                                 <div class="rightpart">
                                     <h1 class="app-title-in-home-gallery @appName" title="@appName">
                                         <i class="@platformO.Icon"></i>
-                                        <a href="@absUrl" title="@platform-@app.PlatformVersion @category @appName">                                            
+                                        <a href="@absUrl" title="@platform-@app.PlatformVersion @category @appName">
                                             @Html.Truncate(@appName, 18)
                                         </a>
                                     </h1>
-                                    <p title="@appName">
+                                    <p title="@appName" class="visible-md-block visible-lg-block">
                                         @Html.Truncate(app.Description, 100)
                                     </p>
                                 </div>
@@ -56,6 +63,7 @@
                 </div>
                 {
                     isFirst = false;
+                    i++;
                 }
             }
         }

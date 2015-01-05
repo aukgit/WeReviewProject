@@ -412,40 +412,58 @@ $(function () {
                     }
                 });
             }
-
-            var $appPageGallery = $('#myCarousel');
+            var nameOfTheCarosul = "#myCarousel";
+            var $appPageGallery = $(nameOfTheCarosul);
             if ($appPageGallery.length > 0) {
-                $appPageGallery.carousel({ interval: 5000 });// handles the carousel thumbnails// when the carousel slides, auto update$('#myCarousel').on('slid', function (e) {  var id = $('.item.active').data('slide-number');  id = parseInt(id);  $('[id^=carousel-selector-]').removeClass('selected');  $('[id=carousel-selector-'+id+']').addClass('selected');});
-                $images = $appPageGallery.find("div.item");
-                var length = $images.length;
-                var $image = null;
-                var slideNo = null;
-
-                for (var i = 0; i < length; i++) {
-                    $image = $($images[i]);
-                    $image.click(function () {
-                        var $imgInside = $(this);
-                        console.log($imgInside);
-                        slideNo = $imgInside.attr("data-slide-number");
-                        console.log(slideNo);
-                        $("#slider-thumbs a#carousel-selector-" + slideNo).trigger('click');
-                    }).css({
-                        'cursor': 'pointer'
+                $appPageGallery
+                    .carousel({ interval: 5000 })
+                    .bind('slid.bs.carousel', function (e) {
+                        var to_slide = $('.carousel-item.active').attr('data-slide-no');
+                        //console.log("slide");
+                        //console.log("active item " + to_slide);
+                        $('.myCarousel-target.active').removeClass('active');
+                        $('.carousel-indicators [data-slide-to=' + to_slide + ']').addClass('active');
                     });
-
-                }
-
-                jQuery(document).bind('keyup', function (e) {
-
-                    if (e.keyCode == 39) {
-                        jQuery('a.carousel-control.right').trigger('click');
-                    }
-
-                    else if (e.keyCode == 37) {
-                        jQuery('a.carousel-control.left').trigger('click');
-                    }
+                $('.myCarousel-target').on('click', function () {
+                    $(nameOfTheCarosul).carousel(parseInt($(this).attr('data-slide-to')));
+                    //console.log("ase");
+                    $('.myCarousel-target.active').removeClass('active');
+                    $(this).addClass('active');
 
                 });
+
+
+
+                //var $images = $appPageGallery.find("div.item");
+                //var length = $images.length;
+                //var $image = null;
+                //var slideNo = null;
+
+                //for (var i = 0; i < length; i++) {
+                //    $image = $($images[i]);
+                //    $image.click(function () {
+                //        var $imgInside = $(this);
+                //        console.log($imgInside);
+                //        slideNo = $imgInside.attr("data-slide-number");
+                //        console.log(slideNo);
+                //        $("#slider-thumbs a#carousel-selector-" + slideNo).trigger('click');
+                //    }).css({
+                //        'cursor': 'pointer'
+                //    });
+
+                //}
+
+                //jQuery(document).bind('keyup', function (e) {
+
+                //    if (e.keyCode == 39) {
+                //        jQuery('a.carousel-control.right').trigger('click');
+                //    }
+
+                //    else if (e.keyCode == 37) {
+                //        jQuery('a.carousel-control.left').trigger('click');
+                //    }
+
+                //});
             }
 
 
@@ -514,7 +532,7 @@ $(function () {
 
         reviewFormSubmit: function (evt) {
             evt.preventDefault();
-            console.log("ase");
+            //console.log("ase");
             $form = $(this);
             var $submittingSpinner = null;
             var length = 0;
