@@ -74,10 +74,10 @@ namespace WereViewApp.Controllers {
             var cat = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.CategoryName == id);
             if (cat != null) {
                 ViewBag.Title = "Category : " + id;
-                int max = 60;
+                const int max = 60;
                 var categoryApps = db.Apps.Where(n => n.CategoryID == cat.CategoryID)
                                         .OrderByDescending(n => n.TotalViewed)
-                                        .OrderByDescending(n => n.AppID)
+                                        .ThenByDescending(n => n.AppID)
                                         .Include(n => n.Platform)
                                         .Take(max)
                                         .ToList();

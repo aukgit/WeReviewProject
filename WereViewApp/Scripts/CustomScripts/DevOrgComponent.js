@@ -14,13 +14,13 @@
  * https://www.facebook.com/DevelopersOrganism
  * mailto:info@developers-organism.com
 */
-$(function () {
+$(function() {
 
     $.fn.extend({
         // jQuery element get all classes
-        getAllClasses: function () {
+        getAllClasses: function() {
             if (this.length === 1) {
-                return this.attr('class').split(/\s+/);
+                return this.attr("class").split(/\s+/);
             }
             return null;
         }
@@ -31,12 +31,19 @@ $(function () {
 
 
         // get all the classes from an jQuery element
-        getAllClasses: function (jQueryHtmlElement) {
+        getAllClasses: function(jQueryHtmlElement) {
             return jQueryHtmlElement.getAllClasses();
         },
 
         // allClassesArray = ['a','b','c'] , exceptClassesArray=['b','c'], results=['a']
-        getClassesExcept: function (allClassesArray, exceptClassesArray) {
+        getClassesExcept: function(allClassesArray, exceptClassesArray) {
+            if (allClassesArray === null || allClassesArray === undefined) {
+                return [];
+            }
+
+            if (exceptClassesArray === null || exceptClassesArray === undefined) {
+                return allClassesArray;
+            }
             var len = allClassesArray.length;
             var results = [];
             for (var i = 0; i < len; i++) {
@@ -49,7 +56,7 @@ $(function () {
         },
         // all Selectors are jQuery Selector Text  only.
         // selectpicker will be called inside function, no need to call outside.
-        countryFlagRefresh: function (countrySelector, dropDownItemsSelector, dropDownBtnSelector) {
+        countryFlagRefresh: function(countrySelector, dropDownItemsSelector, dropDownBtnSelector) {
             var countryBox = $(countrySelector).selectpicker(); // only select a select element then apply the custom bootstrap selector
             var dropDownItems = $(dropDownItemsSelector); // getting generated dropdown items from the custom bootstrap selector
             var dropDownBtn = $(dropDownBtnSelector); // generated new button from the selectpicker option
@@ -57,7 +64,7 @@ $(function () {
             var skippingClassesForBtn = ["btn", "dropdown-toggle", "selectpicker", "btn-success", "flag-combo"];
 
             // console.log(dropDownItems.length);
-            countryBox.change(function (e) {
+            countryBox.change(function(e) {
                 var listItem = dropDownItems.find("li.selected");
                 var anchorItem = listItem.find("a");
                 var listOfAllAnchorClasses = anchorItem.getAllClasses();
@@ -72,24 +79,21 @@ $(function () {
         },
         // countryFlagRefresh must be called first or selectpicker must be called first
         // all Selectors are jQuery Selector Text  only.
-        countryRelatedToPhone: function (countrySelector, dropDownItemsSelector, dropDownBtnSelector, phoneNumberInputSelector) {
+        countryRelatedToPhone: function(countrySelector, dropDownItemsSelector, dropDownBtnSelector, phoneNumberInputSelector) {
             var countryBox = $(countrySelector);
             var dropDownItems = $(dropDownItemsSelector);
             var dropDownBtn = $(dropDownBtnSelector);
             var phoneNumberBox = $(phoneNumberInputSelector);
             var previousCallingCode = "";
 
-            countryBox.ready(selectChangeState).change(selectChangeState);
-            //phoneNumberBox.keyup(selectChangeState);
-            // $("#selectID option")[index].selected = true;
             function selectChangeState() {
                 // console.log("executed");
                 var listItem = dropDownItems.find("li.selected");
-                var spanText = listItem.find("a>span").text().toString();
-                var newCallingCode = $.devOrg.getTextBetween(spanText, '(', ')');
+                var spanText = listItem.find("a > span").text().toString();
+                var newCallingCode = $.devOrg.getTextBetween(spanText, "(", ")");
                 var getWrittenPhoneNumber = phoneNumberBox.val();
                 // console.log(listItem);
-                newCallingCode = $.devOrg.replaceStartsWith(newCallingCode, '+', '');
+                newCallingCode = $.devOrg.replaceStartsWith(newCallingCode, "+", "");
                 if ((!_.isEmpty(getWrittenPhoneNumber) && !_.isEmpty(previousCallingCode))
                     && $.devOrg.isStartsWith(getWrittenPhoneNumber, previousCallingCode)) {
                     getWrittenPhoneNumber = $.devOrg.replaceStartsWith(getWrittenPhoneNumber, previousCallingCode, newCallingCode);
@@ -99,9 +103,13 @@ $(function () {
                 previousCallingCode = newCallingCode;
                 phoneNumberBox.val(getWrittenPhoneNumber);
             }
+
+            countryBox.ready(selectChangeState).change(selectChangeState);
+            //phoneNumberBox.keyup(selectChangeState);
+            // $("#selectID option")[index].selected = true;
         },
 
-        getTextBetween: function (givenString, startSequence, endingSequence) {
+        getTextBetween: function(givenString, startSequence, endingSequence) {
             if (_.isString(givenString)) {
                 var index1 = givenString.indexOf(startSequence);
                 if (index1 > -1) {
@@ -118,7 +126,7 @@ $(function () {
         // it would be better to execute parentjQueryCombo as selectpicker or have a selectpicker class.
         // No combo will appear , even the main div will disappear if no item is received from the link.
         // json sender should sends as id and text only.
-        smartDependableCombo: function (parentjQuerySelector, mainDivContainerSelector, innerDivSelectorForPlacingCombo, urlToGetJson, placeComboName, placedComboId, placedComboClass, placedComboAdditionalClassesWithItems, placedComboAdditionalHtmlWithEachItem) {
+        smartDependableCombo: function(parentjQuerySelector, mainDivContainerSelector, innerDivSelectorForPlacingCombo, urlToGetJson, placeComboName, placedComboId, placedComboClass, placedComboAdditionalClassesWithItems, placedComboAdditionalHtmlWithEachItem) {
             var parentjQueryCombo = $(parentjQuerySelector);
             if (_.isEmpty(parentjQueryCombo)) {
                 console.error.log("error raised from developers organism component's smartDependableCombo that no parent is detected.");
@@ -126,30 +134,8 @@ $(function () {
             }
             var mainDiv = $(mainDivContainerSelector);
             var innerDiv = mainDiv.find(innerDivSelectorForPlacingCombo);
-            _hideDiv();
-            parentjQueryCombo.change(function () {
-                var parentComboValue = parentjQueryCombo.val();
-                var actualUrl = urlToGetJson + "/" + parentComboValue;
-                $.ajax({
-                    type: "POST",
-                    dataType: "JSON",
-                    url: actualUrl,
-                    success: function (response) {
-                        if (response.length === 0) {
-                            _hideDiv();
-                            return;
-                        }
-                        innerDiv = $(mainDivContainerSelector + " " + innerDivSelectorForPlacingCombo);
-                        // items exist.
-                        _showDiv(); //remove inner options if exist any
-                        _createCombo(response); // create if necessary and then append options to it.
-                    },
-                    error: function (xhr, status, error) {
-                        _hideDiv();
-                    }
-                });
-            });
-            function _hideDiv() {
+
+            function hideDiv() {
                 if (mainDiv.length > 0) {
                     mainDiv.hide();
                 } else {
@@ -157,8 +143,9 @@ $(function () {
                 }
             }
 
+            hideDiv();
 
-            function _showDiv() {
+            function showDiv() {
                 // remove select if exist.
                 var options = innerDiv.find("select, div.bootstrap-select");
                 if (options.length > 0) {
@@ -167,7 +154,7 @@ $(function () {
                 mainDiv.show("slow");
             }
 
-            function _createCombo(response) {
+            function createCombo(response) {
                 if (!_.isEmpty(placedComboId)) {
                     placedComboId = " id='" + placedComboId + "' ";
                 } else {
@@ -180,20 +167,43 @@ $(function () {
                 if (_.isEmpty(placeComboName)) {
                     placeComboName = "";
                 } else {
-                    placeComboName = " name='" + placeComboName + "' "
+                    placeComboName = " name='" + placeComboName + "' ";
                 }
 
 
                 innerDiv.prepend("<select " + placeComboName + " class='devOrgSmartCombo form-control " + placedComboClass + " selectpicker'" + placedComboId + "data-style='" + placedComboClass + "' data-live-search='true'></select>");
-                combo = innerDiv.find("select");
+                var combo = innerDiv.find("select");
                 $.devOrg.appenedComboElement(combo, response, placedComboAdditionalHtmlWithEachItem, placedComboAdditionalClassesWithItems);
                 combo.selectpicker();
             }
+
+            parentjQueryCombo.change(function() {
+                var parentComboValue = parentjQueryCombo.val();
+                var actualUrl = urlToGetJson + "/" + parentComboValue;
+                $.ajax({
+                    type: "POST",
+                    dataType: "JSON",
+                    url: actualUrl,
+                    success: function(response) {
+                        if (response.length === 0) {
+                            hideDiv();
+                            return;
+                        }
+                        innerDiv = $(mainDivContainerSelector + " " + innerDivSelectorForPlacingCombo);
+                        // items exist.
+                        showDiv(); //remove inner options if exist any
+                        createCombo(response); // create if necessary and then append options to it.
+                    },
+                    error: function(xhr, status, error) {
+                        hideDiv();
+                    }
+                });
+            });
         },
         // listOfItems = expected a json item with id and text property
         // extraHtmlWithEachElement : represents like below
         // <option .. > extraHtmlWithEachElement Item </option>
-        appenedComboElement: function (combo, listOfItems, extraHtmlWithEachElement, itemClasses) {
+        appenedComboElement: function(combo, listOfItems, extraHtmlWithEachElement, itemClasses) {
             // followed by the best practice : http:// allthingscraig.com/blog/2012/09/28/best-practice-appending-items-to-the-dom-using-jquery/
             if (_.isEmpty(itemClasses)) {
                 itemClasses = "";
@@ -204,7 +214,7 @@ $(function () {
             if (listOfItems.length > 0) {
                 var length = listOfItems.length;
                 var options = "";
-                var selected = " Selected='selected' "
+                var selected = " Selected='selected' ";
                 var optionStarting = "<option class='devorgCombo-item " + itemClasses + "'";
                 var optionEnding = "</option>";
                 for (var i = 0; i < length; i++) {
@@ -216,10 +226,10 @@ $(function () {
                 combo.append(options);
             }
         },
-        bootstrapComboSelectbyFindingValue: function (comboSelector, searchForvalue) {
-            $(comboSelector).selectpicker('val', searchForvalue).trigger('change');
+        bootstrapComboSelectbyFindingValue: function(comboSelector, searchForvalue) {
+            $(comboSelector).selectpicker("val", searchForvalue).trigger("change");
         },
-        bootstrapComboSelectIndex: function (comboSelector, index) {
+        bootstrapComboSelectIndex: function(comboSelector, index) {
             var combo = $(comboSelector + ">option");
             if (combo.length > 0 && index <= (combo.length - 1)) {
 
@@ -231,7 +241,7 @@ $(function () {
 
         // givenString "Example ( Hello )" 
         // startsWith= "Example" ; returns true.
-        isStartsWith: function (givenString, startsWith) {
+        isStartsWith: function(givenString, startsWith) {
             if (_.isString(givenString)) {
                 var subtringOfGiventext = givenString.substr(0, startsWith.length);
                 if (subtringOfGiventext === startsWith) {
@@ -241,7 +251,7 @@ $(function () {
             return false;
         },
 
-        replaceStartsWith: function (givenString, findStartsWith, replaceString) {
+        replaceStartsWith: function(givenString, findStartsWith, replaceString) {
             if (_.isString(givenString) && !_.isEmpty(findStartsWith)) {
                 var subtringOfGiventext = givenString.substr(0, findStartsWith.length);
                 if (subtringOfGiventext === findStartsWith) {
@@ -254,21 +264,21 @@ $(function () {
         },
 
         // jquery formSelector, submitAtLast:true/false
-        enterToNextTextBox: function (formSelector, submitAtLast) {
-            $(formSelector + ' input:text:first').focus();
+        enterToNextTextBox: function(formSelector, submitAtLast) {
+            $(formSelector + " input:text:first").focus();
             var binders = formSelector + " input[type='text']:visible," +
-                          formSelector + " input[type='password']:visible," +
-                          formSelector + " input[type='numeric']:visible," +
-                          formSelector + " input[type='email']:visible," +
-                          //formSelector + " textarea:visible," +
-                          formSelector + " button.selectpicker[type='button']:visible," +
-                          formSelector + " select:visible";
-            $(document).on('keypress', binders, function (e) {
+                formSelector + " input[type='password']:visible," +
+                formSelector + " input[type='numeric']:visible," +
+                formSelector + " input[type='email']:visible," +
+                //formSelector + " textarea:visible," +
+                formSelector + " button.selectpicker[type='button']:visible," +
+                formSelector + " select:visible";
+            $(document).on("keypress", binders, function(e) {
                 // var codeAbove = d.keyCode || d.which;
                 // console.log("above code :" + codeAbove);
                 var code = e.keyCode || e.which;
                 // console.log("inside code :" + code);
-                if (code == 13) { // Enter key
+                if (code === 13) { // Enter key
                     e.preventDefault(); // Skip default behavior of the enter key
                     var n = $(binders).length;
                     var nextIndex = $(binders).index(this) + 1;
@@ -284,14 +294,13 @@ $(function () {
             });
         },
 
-        validateTextInputBasedOnRegEx: function (jQuerySelectorforTextBox, stringRegEx, msgOnInvalidPattern) {
+        validateTextInputBasedOnRegEx: function(jQuerySelectorforTextBox, stringRegEx, msgOnInvalidPattern) {
             /// <summary>
-            /// Validate text input while typing with ASP.NET jquery validation.
-            /// Only the attributes with the text. No event is bound.
+            ///     Validate text input while typing with ASP.NET jquery validation.
+            ///     Only the attributes with the text. No event is bound.
             /// </summary>
             /// <param name="jQuerySelectorforTextBox">string:jQuery Selector</param>
             /// <param name="stringRegEx">string: Regular expression to validate the textinput</param>
-
             $(jQuerySelectorforTextBox).attr("data-val-regex-pattern", stringRegEx);
             if (!_.isEmpty(msgOnInvalidPattern)) {
                 $(jQuerySelectorforTextBox).attr("data-val-regex", msgOnInvalidPattern);
@@ -299,26 +308,25 @@ $(function () {
 
         },
 
-        reSetupjQueryValidate: function (jQueryFormSelector) {
+        reSetupjQueryValidate: function(jQueryFormSelector) {
             /// <summary>
-            /// call after setting new reg ex via validateTextInputBasedOnRegEx
+            ///     call after setting new reg ex via validateTextInputBasedOnRegEx
             /// </summary>
             /// <param name="jQueryFormSelector"></param>
-
             var $form = $(jQueryFormSelector)
-                  .removeData("validator") /* added by the raw jquery.validate plugin */
-                  .removeData("unobtrusiveValidation");
+                .removeData("validator") /* added by the raw jquery.validate plugin */
+                .removeData("unobtrusiveValidation");
             /* added by the jquery unobtrusive plugin */
             $.validator.unobtrusive.parse($form);
         },
 
-        validateTextInputsBasedOnHiddenSpansGiven: function (formSelector) {
+        validateTextInputsBasedOnHiddenSpansGiven: function(formSelector) {
             /// <summary>
-            /// inComplete
-            /// There should be span for each of inputs that needs to be modified or changed.
-            /// hidden span with data-name="same as input" 
-            /// data-display, data-reg, data-reg-fail-msg, data-min,data-max,data-range-failed-msg
-            /// data-placeholder, data-class
+            ///     inComplete
+            ///     There should be span for each of inputs that needs to be modified or changed.
+            ///     hidden span with data-name="same as input"
+            ///     data-display, data-reg, data-reg-fail-msg, data-min,data-max,data-range-failed-msg
+            ///     data-placeholder, data-class
             /// </summary>
             /// <param name="formSelector">jQuery form selector</param>
             var $form = $(formSelector);
@@ -332,10 +340,10 @@ $(function () {
 
             if ($form.length > 0) {
                 var binders = "input[type='text']," +
-                              "input[type='password']," +
-                              "input[type='email']," +
-                              "input[type='numeric']," +
-                              "select:visible";
+                    "input[type='password']," +
+                    "input[type='email']," +
+                    "input[type='numeric']," +
+                    "select:visible";
                 var $inputs = $form.find(binders);
                 for (var i = 0; i < $inputs.length; i++) {
                     var $input = $($inputs[i]);
@@ -352,9 +360,9 @@ $(function () {
             }
         },
 
-        validateInputFromServer: function (jQuerytextBoxSelector, validationURL, internalValidatorSpanClassName, isAlwaysFocusUntilValid, isDisable, minChars, isSubmitTheWholeForm, onInvalidStringStatementInCrossMark, onValidStringStatementInCheckMark, $formGiven, maxTryLimit) {
+        validateInputFromServer: function(jQuerytextBoxSelector, validationUrl, internalValidatorSpanClassName, isAlwaysFocusUntilValid, isDisable, minChars, isSubmitTheWholeForm, onInvalidStringStatementInCrossMark, onValidStringStatementInCheckMark, $formGiven, maxTryLimit) {
             /// <summary>
-            /// Made validation easy on the fly with a server response.
+            ///     Made validation easy on the fly with a server response.
             /// </summary>
             /// <param name="jQuerytextBoxSelector">string: jQuery Selector</param>
             /// <param name="validationURL">string: Url to validate</param>
@@ -364,7 +372,10 @@ $(function () {
             /// <param name="minChars">number: min chars to send the request</param>
             /// <param name="isSubmitTheWholeForm">Boolean:Rather than submitting the small form submit the whole related closet form.</param>
             /// <param name="onInvalidStringStatementInCrossMark">invalid statement show on the cross mark.</param>
-            /// <param name="onValidStringStatementInCheckMark">valid statement show on the check mark. By default: fieldDisplayname + is available and valid</param>
+            /// <param name="onValidStringStatementInCheckMark">
+            ///     valid statement show on the check mark. By default: fieldDisplayname +
+            ///     is available and valid
+            /// </param>
             //if (_.isEmpty(isSubmitTheWholeForm)) {
             //    isSubmitTheWholeForm = false;
             //}
@@ -383,16 +394,16 @@ $(function () {
                 $userTextbox.removeAttr("isDisable");
 
                 if (!isSubmitTheWholeForm) {
-                    $userTextbox.keyup(function () {
+                    $userTextbox.keyup(function() {
                         $("#validation #id").val($userTextbox.val());
                         // console.log(user);
-                    }).focus(function () {
+                    }).focus(function() {
                         $("#validation #id").val($userTextbox.val());
                         // console.log(user);
                     });
                 }
 
-                $userTextbox.blur(function () {
+                $userTextbox.blur(function() {
                     if (!isSubmitTheWholeForm) {
                         $("#validation #id").val($userTextbox.val());
                     }
@@ -426,7 +437,7 @@ $(function () {
                     console.log(formData);
 
                     var validatorName = "span.CustomValidation." + internalValidatorSpanClassName;
-                    var token = $('input[name=__RequestVerificationToken]').val();
+                    var token = $("input[name=__RequestVerificationToken]").val();
                     var processingState1 = "glyphicon-refresh";
                     var processingState2 = "glyphicon-refresh-animate";
                     var isHideClass = "hide";
@@ -435,7 +446,7 @@ $(function () {
                     var correctState = "glyphicon-ok";
                     var incorrectState = "glyphicon-remove";
                     var $validatorBox = $(validatorName);
-                    var displayName = $validatorBox.attr('data-display');
+                    var displayName = $validatorBox.attr("data-display");
                     var correctStateTitle = displayName + " " + onValidStringStatementInCheckMark;
                     var invalidAttrName = "data-invalid";
                     var incorrectStateTitle = displayName + " " + onInvalidStringStatementInCrossMark;
@@ -458,7 +469,7 @@ $(function () {
                         $validatorBox.removeClass(isHideClass);
                     }
                     $tooltipBox.attr("data-original-title", "Validating " + displayName)
-                              .attr("title", "Validating " + displayName);
+                        .attr("title", "Validating " + displayName);
                     // confirming processing state.
                     if (maxTryLimit !== null && maxTryLimit !== undefined && sentRequestCount > maxTryLimit) {
                         return;
@@ -466,9 +477,9 @@ $(function () {
                     $.ajax({
                         type: "POST",
                         dataType: "JSON",
-                        url: validationURL,
+                        url: validationUrl,
                         data: formData,
-                        success: function (response) {
+                        success: function(response) {
                             sentRequestCount = sentRequestCount + 1;
                             // Remove the processing state
                             if ($validatorBox.hasClass(processingState1)) {
@@ -490,19 +501,19 @@ $(function () {
                                     $validatorBox.removeClass(colorRed);
                                 }
                                 $validatorBox.addClass(colorGreen)
-                                            .addClass(correctState)
-                                            .attr('title', correctStateTitle);
+                                    .addClass(correctState)
+                                    .attr("title", correctStateTitle);
 
                                 $tooltipBox.attr("title", correctStateTitle)
-                                          .attr("data-original-title", correctStateTitle);
+                                    .attr("data-original-title", correctStateTitle);
                                 if (isDisable) {
                                     $userTextbox.prop("isDisable", true);
                                 }
 
                                 $userTextbox.addClass("bold")
-                                            .addClass("green")
-                                            .next()
-                                            .focus();
+                                    .addClass("green")
+                                    .next()
+                                    .focus();
 
                                 $userTextbox.removeAttr(invalidAttrName);
                             } else {
@@ -513,15 +524,15 @@ $(function () {
                                     $validatorBox.removeClass(correctState);
                                 }
                                 $userTextbox.prop("isDisable", false)
-                                            .addClass("bold")
-                                            .addClass("red");
+                                    .addClass("bold")
+                                    .addClass("red");
 
                                 $validatorBox.addClass(colorRed)
-                                            .addClass(incorrectState)
-                                            .attr('title', incorrectStateTitle);
+                                    .addClass(incorrectState)
+                                    .attr("title", incorrectStateTitle);
 
                                 $tooltipBox.attr("title", incorrectStateTitle)
-                                          .attr("data-original-title", incorrectStateTitle);
+                                    .attr("data-original-title", incorrectStateTitle);
                                 if (isAlwaysFocusUntilValid === true) {
                                     $userTextbox.focus();
                                 }
@@ -530,7 +541,7 @@ $(function () {
                             $(".tooltip-show").tooltip();
 
                         },
-                        error: function (xhr, status, error) {
+                        error: function(xhr, status, error) {
                             // Remove the processing state
                             if ($validatorBox.hasClass(processingState1)) {
                                 $validatorBox.removeClass(processingState1);
@@ -551,62 +562,62 @@ $(function () {
                                 $validatorBox.removeClass(colorGreen);
                             }
                             $userTextbox.prop("isDisable", false)
-                                       .addClass("bold")
-                                       .addClass("red");
+                                .addClass("bold")
+                                .addClass("red");
 
                             $validatorBox.addClass(colorRed)
-                                        .addClass(incorrectState)
-                                        .attr('title', error);
+                                .addClass(incorrectState)
+                                .attr("title", error);
 
                             $tooltipBox.attr("title", status)
-                                      .attr("data-original-title", error);
+                                .attr("data-original-title", error);
 
                             $(".tooltip-show").tooltip();
                             $userTextbox.attr(invalidAttrName, "true");
                         }
                     }); // ajax end
                 });
-            };// if else end
+            }; // if else end
         },
 
 
-        fillRegisterFieldsOnDemo: function () {
+        fillRegisterFieldsOnDemo: function() {
             var i = 0;
             var controls = $(".form-group");
-            $fields = controls.find("input[type=text]");
-            $.each($fields, function () {
+            var $fields = controls.find("input[type=text]");
+            $.each($fields, function() {
                 this.value = 1111111111111;
             });
 
             $fields = controls.find("input[type=password]");
-            $.each($fields, function () {
+            $.each($fields, function() {
                 this.value = "asdf1234@";
             });
 
 
             $fields = controls.find("input[type=number]");
-            $.each($fields, function () {
+            $.each($fields, function() {
                 this.value = i++;
             });
 
             $fields = controls.find("textarea");
-            $.each($fields, function () {
+            $.each($fields, function() {
                 this.value = "1111111111111";
             });
 
             $fields = controls.find("input[type=email]");
-            $.each($fields, function () {
+            $.each($fields, function() {
                 this.value = "auk.junk@live.com";
             });
 
             $fields = controls.find("input[type=checkbox]");
-            $.each($fields, function () {
-                this.prop("checked", true)
+            $.each($fields, function() {
+                this.prop("checked", true);
             });
 
         },
         //'.make-it-tab'
-        bootstrapTabsMordernize: function (tabSelector) {
+        bootstrapTabsMordernize: function(tabSelector) {
             var bootstrapTabs = $(tabSelector);
             if (bootstrapTabs.length > 0) {
                 var tabHidden = $(".tab-content input[type='hidden'][name='tab']");
@@ -615,21 +626,21 @@ $(function () {
                     var tabHiddenValue = tabHidden.val();
                     if (!_.isEmpty(tabHiddenValue)) {
                         //tab name exist
-                        bootstrapTabs.find("li>a[href='" + tabHiddenValue + "']").tab('show');
+                        bootstrapTabs.find("li>a[href='" + tabHiddenValue + "']").tab("show");
                     } else {
                         //no tab name exist.. select default one.
-                        bootstrapTabs.find("li>a:first").tab('show');
+                        bootstrapTabs.find("li > a:first").tab("show");
                     }
                 }
 
-                bootstrapTabs.click(function (e) {
+                bootstrapTabs.click(function(e) {
                     //e.preventDefault();                    
                     e.preventDefault();
-                    $(this).tab('show');
+                    $(this).tab("show");
 
                 });
 
-                $("ul" + tabSelector + ".nav-tabs > li > a").on("shown.bs.tab", function (e) {
+                $("ul" + tabSelector + ".nav-tabs > li > a").on("shown.bs.tab", function(e) {
                     var valueOfActive = $(e.target).attr("href");
                     // = $(tabSelector + " li.active>a").attr('href');
                     tabHidden.val(valueOfActive);
@@ -637,7 +648,7 @@ $(function () {
                 });
             }
         },
-        ratingMordernize: function () {
+        ratingMordernize: function() {
             var ratingItems = $(".rating-5");
 
             if (ratingItems.length > 0) {
@@ -651,40 +662,41 @@ $(function () {
                 ratingItems.rating({
                     showClear: false,
                     starCaptionClasses: {
-                        0.5: 'label label-danger',
-                        1: 'label label-danger',
-                        1.5: 'label label-danger',
-                        2: 'label label-danger',
-                        2.5: 'label label-danger',
-                        2: 'label label-warning',
-                        2.5: 'label label-warning',
-                        3: 'label label-warning',
-                        3.5: 'label label-warning',
-                        4: 'label label-warning',
-                        4.5: 'label label-warning',
-                        5: 'label label-warning',
-                        5.5: 'label label-info',
-                        6: 'label label-info',
-                        6.5: 'label label-info',
-                        7: 'label label-info',
-                        7.5: 'label label-primary',
-                        8: 'label label-primary',
-                        8.5: 'label label-success',
-                        9: 'label label-success',
-                        9.5: 'label label-success',
-                        10: 'label label-success'
+                        0.5: "label label-danger",
+                        1: "label label-danger",
+                        1.5: "label label-danger",
+                        2: "label label-danger",
+                        2.5: "label label-danger",
+                        2: "label label-warning",
+                        2.5: "label label-warning",
+                        3: "label label-warning",
+                        3.5: "label label-warning",
+                        4: "label label-warning",
+                        4.5: "label label-warning",
+                        5: "label label-warning",
+                        5.5: "label label-info",
+                        6: "label label-info",
+                        6.5: "label label-info",
+                        7: "label label-info",
+                        7.5: "label label-primary",
+                        8: "label label-primary",
+                        8.5: "label label-success",
+                        9: "label label-success",
+                        9.5: "label label-success",
+                        10: "label label-success"
                     }
                 });
             }
         },
 
-        uxFriendlySlide: function (jQueryformSelector, keepOthersVisible, dontSubmit) {
+        uxFriendlySlide: function(jQueryformSelector, keepOthersVisible, dontSubmit) {
             /// <summary>
-            /// hides except for the first div with value 0. Add attributes to divs [data-dev-slide='number-zero-based'][data-dev-visited='false'] and 
-            /// encapsulate inputs. Each click clicked on submit it will verify the inputs if verified next hide ones will be shown
-            /// it will be continuous process until hit the last.
-            /// Always use lower case false
-            /// [data-dev-slide='number-zero-based'][data-dev-visited='false'] 
+            ///     hides except for the first div with value 0. Add attributes to divs
+            ///     [data-dev-slide='number-zero-based'][data-dev-visited='false'] and
+            ///     encapsulate inputs. Each click clicked on submit it will verify the inputs if verified next hide ones will be shown
+            ///     it will be continuous process until hit the last.
+            ///     Always use lower case false
+            ///     [data-dev-slide='number-zero-based'][data-dev-visited='false']
             /// </summary>
             /// <param name="jQueryformSelector">jQuery selector for the form</param>
             /// <param name="keepOthersVisible">Should add new hide ones or previous ones hides and load new ones(divs)</param>
@@ -692,10 +704,10 @@ $(function () {
             var slideObjects = $(jQueryformSelector + " [data-dev-slide][data-dev-visited='false']");
             var executedOnce = false;
             var binders = "input[type='text']:visible," +
-                          "input[type='password']:visible," +
-                          "input[type='email']:visible," +
-                          "input[type='numeric']:visible," +
-                          "select:visible";
+                "input[type='password']:visible," +
+                "input[type='email']:visible," +
+                "input[type='numeric']:visible," +
+                "select:visible";
             var order = 0;
             var totalSliderLength = slideObjects.length;
             var previousSlideNumber = 0;
@@ -704,7 +716,7 @@ $(function () {
                 slideObjects.hide();
                 previousSlideNumber = order;
                 slideObjects.filter("[data-dev-slide='" + (order++) + "'][data-dev-visited='false']").show();
-                $(jQueryformSelector).submit(function (e) {
+                $(jQueryformSelector).submit(function(e) {
                     e.preventDefault();
 
                     var nextOne = slideObjects.filter("[data-dev-slide='" + order + "'][data-dev-visited='false']");
@@ -713,11 +725,11 @@ $(function () {
                     //        nextOne = slideObjects.filter("[data-dev-slide='" + order + "'][data-dev-visited='false']");
                     //    }
                     // }
+                    var previousOne;
+                    var inputBoxes;
                     if (nextOne.length > 0) {
-                        var previousOne = slideObjects.filter("[data-dev-slide='" + (order - 1) + "']");
-                        // console.log(previousOne);
-                        var inputBoxes = previousOne.find("input,textarea");
-                        // still exist , prevent submission
+                        previousOne = slideObjects.filter("[data-dev-slide='" + (order - 1) + "']"); // console.log(previousOne);
+                        inputBoxes = previousOne.find("input, textarea"); // still exist , prevent submission
                         if (inputBoxes.length > 0 && $.devOrg.checkValidInputs(inputBoxes)) {
                             if (!keepOthersVisible) {
                                 previousOne.hide("slow");
@@ -737,9 +749,8 @@ $(function () {
                     } else {
                         // nothing left.
                         // sttil check the validation.
-                        var previousOne = slideObjects.filter("[data-dev-slide='" + (order - 1) + "']");
-                        // console.log(previousOne);
-                        var inputBoxes = previousOne.find("input");
+                        previousOne = slideObjects.filter("[data-dev-slide='" + (order - 1) + "']"); // console.log(previousOne);
+                        inputBoxes = previousOne.find("input");
                         if (inputBoxes.length > 0 && $.devOrg.checkValidInputs(inputBoxes)) {
                             if (!dontSubmit) {
                                 this.submit();
@@ -754,7 +765,7 @@ $(function () {
             }
         },
         // Send inputs array, if any of those false , returns false.
-        checkValidInputs: function (jBinders) {
+        checkValidInputs: function(jBinders) {
             var $currentInput = null;
             var length = jBinders.length;
             var label = "<label class='label label-danger small-font-size'>Please rate first.</label>";
@@ -765,24 +776,24 @@ $(function () {
                     if ($currentInput.hasClass("common-rating")) {
                         var $ratingContainer = $currentInput.closest("div.rating-container");
                         var $wholeContainer = $ratingContainer.closest("div.star-rating");
-                       
+
                         if ($currentInput.val() === "0") {
-                                $ratingContainer.css({
-                                    'text-shadow': '2px 2px red'
-                                });
-                                if (!$wholeContainer.attr('data-warned')) {
-                                    $wholeContainer.append(label);
-                                    $wholeContainer.attr('data-warned', "true");
-                                }
+                            $ratingContainer.css({
+                                'text-shadow': "2px 2px red"
+                            });
+                            if (!$wholeContainer.attr("data-warned")) {
+                                $wholeContainer.append(label);
+                                $wholeContainer.attr("data-warned", "true");
+                            }
                             return false;
                         } else {
                             $ratingContainer.css({
-                                'text-shadow': 'none'
+                                'text-shadow': "none"
                             });
 
-                            if ($wholeContainer.attr('data-warned')) {
+                            if ($wholeContainer.attr("data-warned")) {
                                 $wholeContainer.find("label").remove();
-                                $wholeContainer.attr('data-warned', "false");
+                                $wholeContainer.attr("data-warned", "false");
                             }
                         }
                     }
