@@ -8,37 +8,48 @@ namespace WereViewApp {
             routes.IgnoreRoute("elmah");
 
             #region Login, Register, Authentication Additional Routes
+
+            const string wereviewappControllers = "WereViewApp.Controllers";
+            const string accountController = "Account";
+
             routes.MapRoute(
                    name: "RegisterConfig",
                    url: "Register",
-                   defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional },
-                   namespaces: new string[] { "WereViewApp.Controllers" }
+                   defaults: new { controller = accountController, action = "Register", id = UrlParameter.Optional },
+                   namespaces: new string[] { wereviewappControllers }
                );
             routes.MapRoute(
                 name: "SignInConfig",
                 url: "SignIn",
-                defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional },
-                namespaces: new string[] { "WereViewApp.Controllers" }
+                defaults: new { controller = accountController, action = "Login", id = UrlParameter.Optional },
+                namespaces: new string[] { wereviewappControllers }
             );
             routes.MapRoute(
                 name: "LoginConfig",
                 url: "Login",
-                defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional },
-                namespaces: new string[] { "WereViewApp.Controllers" }
+                defaults: new { controller = accountController, action = "Login", id = UrlParameter.Optional },
+                namespaces: new string[] { wereviewappControllers }
             );
 
             routes.MapRoute(
                 name: "SignOut",
-                url: "SignOut",
-                defaults: new { controller = "Account", action = "SignOut", id = UrlParameter.Optional },
-                namespaces: new string[] { "WereViewApp.Controllers" }
+                url: "Account/SignOut",
+                defaults: new { controller = accountController, action = "SignOutProgrammatically" },
+                namespaces: new string[] { wereviewappControllers }
+            );
+
+            routes.MapRoute(
+                name: "LogOff",
+                url: "Account/LogOff",
+                defaults: new { controller = accountController, action = "SignOutProgrammatically" },
+                namespaces: new string[] { wereviewappControllers }
             );
 
             routes.MapRoute(
                name: "ExternalSigninConfig",
                url: "ExtSignin",
-               defaults: new { controller = "Account", action = "ExternalLogin", id = UrlParameter.Optional },
-               namespaces: new string[] { "WereViewApp.Controllers" }
+               defaults: new { controller = accountController, action = "ExternalLogin", id = UrlParameter.Optional },
+               namespaces: new string[] { wereviewappControllers }
            );
             #endregion
 
@@ -49,14 +60,14 @@ namespace WereViewApp {
                    name: "Direct",
                    url: "{action}",
                    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                   namespaces: new string[] { "WereViewApp.Controllers" }
+                   namespaces: new string[] { wereviewappControllers }
             );
         
             routes.MapRoute(
                    name: "Default",
                    url: "{controller}/{action}/{id}",
                    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                   namespaces: new string[] { "WereViewApp.Controllers" }
+                   namespaces: new string[] { wereviewappControllers }
             );
             #endregion
 
@@ -66,21 +77,21 @@ namespace WereViewApp {
                name: "Apps",
                url: "Apps",
                defaults: new { controller = "App", action = "Index" },
-               namespaces: new string[] { "WereViewApp.Controllers" }
+               namespaces: new string[] { wereviewappControllers }
              );
 
             routes.MapRoute(
                name: "SingleApp",
-               url: "App/{platform}-{platformVersion}/{category}/{url}",
+               url: "Apps/{platform}-{platformVersion}/{category}/{url}",
                defaults: new { controller = "App", action = "SingleAppDisplay", name = UrlParameter.Optional },
-               namespaces: new string[] { "WereViewApp.Controllers" }
+               namespaces: new string[] { wereviewappControllers }
             );
 
             routes.MapRoute(
                name: "platformSearched",
                url: "Apps/{platformName}",
                defaults: new { controller = "Apps", action = "Platform" },
-               namespaces: new string[] { "WereViewApp.Controllers" }
+               namespaces: new string[] { wereviewappControllers }
             );
 
 
