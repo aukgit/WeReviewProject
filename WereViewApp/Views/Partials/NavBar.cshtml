@@ -35,6 +35,13 @@
                             <a href="#" class="" data-toggle="dropdown"><div class="profile_name">@User.Identity.Name <br /><span>@role.Name</span></div><img src="~/Uploads/Images/avatar.jpg"></a>
                             <ul class="dropdown-menu">
                                 @Html.GetMenu("UserMenu")
+                                <li>
+                                    @using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <a href="javascript:document.getElementById('logoutForm').submit()">Sign out</a>
+                                    }
+                                </li>
                             </ul>
                         </li>
                     </ul>

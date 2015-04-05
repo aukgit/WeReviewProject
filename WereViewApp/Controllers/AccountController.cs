@@ -113,7 +113,8 @@ namespace WereViewApp.Controllers {
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         private ActionResult SignOutProgrammatically() {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

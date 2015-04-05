@@ -1,8 +1,8 @@
 @helper ActiveItem(string actionName, string controllerName, string areaName)
 {
-    if (ViewContext.RouteData.Values["action"]== actionName &&
-            ViewContext.RouteData.Values["controller"] == controllerName &&
-            (ViewContext.RouteData.DataTokens["area"] == null || ViewContext.RouteData.DataTokens["area"] == areaName))
+    if ((string) ViewContext.RouteData.Values["action"] == actionName &&
+            (string) ViewContext.RouteData.Values["controller"] == controllerName &&
+            (ViewContext.RouteData.DataTokens["area"] == null || (string) ViewContext.RouteData.DataTokens["area"] == areaName))
     {
         @:active
     }

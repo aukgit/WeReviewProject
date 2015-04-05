@@ -6,20 +6,20 @@ using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
     public static class AppExtend {
-        const string _controllerNameForapp = "App";
+        const string ControllerNameForapp = "Apps";
 
         /// <summary>
-        /// returns a url like "http://url/App/iOs-7/Games/Plant-Vs-Zombies"
+        /// returns a url like "http://url/Apps/iOs-7/Games/Plant-Vs-Zombies"
         /// /App/Platform-PlatformVersion/Category/Url
         /// </summary>
         /// <param name="app"></param>
         /// <returns>Returns absolutue url including website's address</returns>
-        public static string GetAppURL(this App app) {
+        public static string GetAppUrl(this App app) {
             if (app != null) {
                 if (app.AbsUrl == null) {
-                    var returnURL = "/" + _controllerNameForapp + "/" + app.GetPlatformString() + "-" +
+                    var returnUrl = "/" + ControllerNameForapp + "/" + app.GetPlatformString() + "-" +
                                     app.PlatformVersion + "/" + app.GetCategoryString() + "/" + app.URL;
-                    app.AbsUrl = AppVar.Url + returnURL;
+                    app.AbsUrl = AppVar.Url + returnUrl;
                 }
                 return app.AbsUrl;
             }
