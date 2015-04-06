@@ -9,7 +9,7 @@
 <div class="featured-appsbox" title="featured apps of @AppVar.Name">
     <h1><a href="#">Featured Apps</a></h1>
     @foreach (var app in Model) {
-        string url = app.GetAppURL();
+        string url = app.GetAppUrl();
 
         <div class="appsbox" data-sequence="@(i++)">
             <a href="@url" title="@app.AppName">

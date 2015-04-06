@@ -9,7 +9,7 @@
 <h1 title="Latest Apps of @AppVar.Name"><a href="@Url.Action("Latest", "Apps")"> Latest Apps</a></h1>
 @foreach (var app in Model) {
     string appName = @app.AppName;
-    string absUrl = @app.GetAppURL();
+    string absUrl = @app.GetAppUrl();
     <div class="box row">
         <div class="imagebox col-md-3 col-sm-3">
             <a href="@absUrl" title="@appName">

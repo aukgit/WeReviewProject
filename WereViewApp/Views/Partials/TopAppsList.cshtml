@@ -18,7 +18,7 @@
     @for (int i = 0; i < firstCount; i++) {
         var app = Model[i];
         string appName = @app.AppName;
-        string absUrl = @app.GetAppURL();
+        string absUrl = @app.GetAppUrl();
         <div class="box row">
             <div class="imagebox col-md-3 col-sm-3">
                 <a href="@absUrl" title="@appName">
@@ -50,7 +50,7 @@
         @for (int i = secondCountStart; i < count; i++) {
             var app = Model[i];
             string appName = @app.AppName;
-            string absUrl = @app.GetAppURL();
+            string absUrl = @app.GetAppUrl();
             <div class="box row">
                 <div class="imagebox col-md-3 col-sm-3">
                     <a href="@absUrl" title="@appName" data-original-title="@appName" class="tooltip-show">

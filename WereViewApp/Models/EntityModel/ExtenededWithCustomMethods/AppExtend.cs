@@ -13,7 +13,7 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
         /// /App/Platform-PlatformVersion/Category/Url
         /// </summary>
         /// <param name="app"></param>
-        /// <returns>Returns absolutue url including website's address</returns>
+        /// <returns>Returns absolute url including website's address</returns>
         public static string GetAppUrl(this App app) {
             if (app != null) {
                 if (app.AbsUrl == null) {

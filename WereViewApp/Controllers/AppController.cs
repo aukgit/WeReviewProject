@@ -957,7 +957,7 @@ namespace WereViewApp.Controllers {
                 if (state) {
                     ManageTagsInDatabase(app.AppID, app.UploadGuid, app.Tags);
                     AppVar.SetSavedStatus(ViewBag, EditSuccessFully(app.AppName, app.IsPublished)); // Saved Successfully.
-                    return Redirect(app.GetAppURL());
+                    return Redirect(app.GetAppUrl());
 
                 }               
             }

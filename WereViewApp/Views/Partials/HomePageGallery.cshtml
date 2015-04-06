@@ -31,7 +31,7 @@
             foreach (var app in Model) {
                 string classActive = isFirst ? "active" : null;
                 string appName = @app.AppName;
-                string absUrl = @app.GetAppURL();
+                string absUrl = @app.GetAppUrl();
                 string category = @app.GetCategoryString();
                 string platform = @app.GetPlatformString();
                 var platformO = @app.GetPlatform();

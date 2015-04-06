@@ -59,7 +59,7 @@
 			<tr>
                 <td>
                     @{editLinkName = item.App.AppName;}
-                    <a href="@item.App.GetAppURL()" title="View App : @item.App.GetAppURL()"><span class="glyphicon glyphicon-pencil"></span> @editLinkName</a>
+                    <a href="@item.App.GetAppUrl()" title="View App : @item.App.GetAppUrl()"><span class="glyphicon glyphicon-pencil"></span> @editLinkName</a>
                 </td>
 				<td>
                     @Html.Truncate(item.Title, null)					

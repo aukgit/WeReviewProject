@@ -10,7 +10,7 @@
         <h1 title="Suggested Apps"><a title="Suggested Apps">Suggested Apps</a></h1>
 
         @foreach (var app in Model) {
-            string url = app.GetAppURL();
+            string url = app.GetAppUrl();
 
             <div class="appsbox" id="suggested-app-@(i)" data-sequence="@(i++)">
                 <a href="@url" title="@app.AppName">
