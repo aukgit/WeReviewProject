@@ -18,6 +18,13 @@
     <file>/Content/css/base-theme-styles.css</file>
     
     <file>/Content/css/site.css</file>
+    <file>/Content/css/flags32.css</file>
+    <file>/Content/css/flags32-combo.css</file>
+    <file>/Content/css/Upload/jquery.fileupload.css</file>
+    
+    <file>/Content/css/bootstrap-datetimepicker.css</file>
+    <file>/Content/css/bootstrap-table.css</file>
+    <file>/Content/css/bootstrap-select.css</file>
 
     <file>/Content/css/color-fonts.css</file>
     <file>/Content/css/star-rating.css</file>
