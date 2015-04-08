@@ -21,7 +21,7 @@
 
 .make-distance {
     margin: 12px;
-    margin-left: 0;
+    margin-left: 0px;
 }
 
 .Hide, .hide {
@@ -84,11 +84,9 @@
 
 
 /*table related */
-h1, h2, h3, h4, h5 {
-    display: inline;
-}
 
-.h1, .h2, .h3, .h4, .h5 {
+
+.h1,.h2,.h3,.h4,.h5{
     display: block;
     margin: 0;
     padding: 0;
@@ -106,15 +104,9 @@ table caption {
 table td.dot {
     width: 4px;
 }
-
-.table-cell {
-    display: table-cell;
-}
 /*table related */
 
-.table{
-    display:table;
-}
+
 textarea {
     height: 45px;
     resize: none;
@@ -122,17 +114,8 @@ textarea {
     background-color: #FDFDFD;
 }
 
-    textarea:focus,
-    input[type="text"]:focus,
-    input[type="number"]:focus,
-    input[type="date"]:focus,
-    input[type="email"]:focus,
-    textarea:hover,
-    input[type="text"]:hover,
-    input[type="number"]:hover,
-    input[type="date"]:hover,
-    input[type="email"]:hover {
-        border: 1px solid #ACDFEE;
+    textarea:focus, textarea:hover {
+        border: 2px solid #ACDFEE;
     }
 
 .editor-combo {
@@ -236,11 +219,7 @@ hr {
 }
 
 .gap-from-top {
-    margin-top: 50px;
-}
-
-.gap-from-top-small {
-    margin-top: 25px;
+    margin-bottom: 50px;
 }
 
 a.no-hover {
@@ -257,26 +236,4 @@ input.form-control.input-validation-error {
     outline: 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(233, 102, 102, 0.6);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(233, 102, 102, 0.6);
-}
-
-.small-bottom-gap {
-    margin-bottom: 6px;
-}
-
-.unhappy {
-    font-size: 77px;
-    margin-left: -10px;
-}
-
-.unhappy-detail {
-    margin-left: -68px;
-    font-size: 40px;
-}
-
-.unhappy-page {
-    margin-top: 3px;
-}
-
-div.contactus {
-    font-size: 14px;
 }

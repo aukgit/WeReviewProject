@@ -1,0 +1,25 @@
+﻿//@import "lesshat.less";
+//@import "variables.less";
+
+.regular-show-more-btn {
+    clear: both;
+
+    .more-btn {
+        color: white;
+        background-color: @primary-color;
+        &:hover{
+            background-color: #19c234;
+        }
+    }
+
+    @media (max-width:@screen-xs) {
+        .more-btn {
+            width: 100%;
+            .height(40px);
+            font-size: 1.5em;
+            .margin-bottom(5px);
+
+            
+        }
+    }
+}
