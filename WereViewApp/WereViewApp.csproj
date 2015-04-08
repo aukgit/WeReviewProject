@@ -71,13 +71,11 @@
     <Reference Include="Elmah.Mvc">
       <HintPath>..\packages\Elmah.MVC.2.1.1\lib\net40\Elmah.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="ImageResizer">
       <HintPath>ExternalDll\ImageResizer.dll</HintPath>
@@ -150,7 +148,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -413,12 +410,6 @@
     <Content Include="Content\CompactCSS.min.css">
       <DependentUpon>CompactCSS.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\animate.css" />
-    <Content Include="Content\css\base-theme-styles.css" />
-    <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\bootstrap.min.css" />
-    <Content Include="Content\css\color-fonts.css" />
-    <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\css\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\css\fonts\fontawesome-webfont.ttf" />
@@ -428,7 +419,6 @@
     <Content Include="Content\css\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\css\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\css\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\css\front-developer.css" />
     <Content Include="Content\css\Images\---back1.png" />
     <Content Include="Content\css\Images\7_2_start_img.jpg" />
     <Content Include="Content\css\Images\android_icon.jpg" />
@@ -485,16 +475,6 @@
     <Content Include="Content\css\Images\video_img2.jpg" />
     <Content Include="Content\css\Images\windows_icon.jpg" />
     <Content Include="Content\css\Images\window_app.png" />
-    <Content Include="Content\css\miscellaneous.css" />
-    <Content Include="Content\css\override-mvc-css.css" />
-    <Content Include="Content\css\owl.carousel.css" />
-    <Content Include="Content\css\owl.custom.finalize.css" />
-    <Content Include="Content\css\owl.custom.finalize.min.css" />
-    <Content Include="Content\css\owl.theme.css" />
-    <Content Include="Content\css\responsive.css" />
-    <Content Include="Content\css\Site.css" />
-    <Content Include="Content\css\star-rating.css" />
-    <Content Include="Content\css\style.css" />
     <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\css\Tagit\images\ui-bg_flat_10_000000_40x100.png" />
@@ -515,31 +495,77 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\CompactCSS.css.bundle" />
-    <None Include="Content\Less\override-mvc-css.less" />
-    <Content Include="Content\Scripts\FrontEnd\jquery.number.js" />
-    <Content Include="Content\Scripts\FrontEnd\nivo-lightbox.min.js" />
+    <Content Include="Content\CompactCSS.min.css.gz" />
+    <None Include="Content\Less\override-mvc.less" />
+    <Content Include="Content\revolution-slider\assets\arrowleft.png" />
+    <Content Include="Content\revolution-slider\assets\arrowright.png" />
+    <Content Include="Content\revolution-slider\assets\arrow_left.png" />
+    <Content Include="Content\revolution-slider\assets\arrow_left2.png" />
+    <Content Include="Content\revolution-slider\assets\arrow_right.png" />
+    <Content Include="Content\revolution-slider\assets\arrow_right2.png" />
+    <Content Include="Content\revolution-slider\assets\boxed_bgtile.png" />
+    <Content Include="Content\revolution-slider\assets\bullet.png" />
+    <Content Include="Content\revolution-slider\assets\bullets.png" />
+    <Content Include="Content\revolution-slider\assets\bullets2.png" />
+    <Content Include="Content\revolution-slider\assets\bullet_boxed.png" />
+    <Content Include="Content\revolution-slider\assets\coloredbg.png" />
+    <Content Include="Content\revolution-slider\assets\gridtile.png" />
+    <Content Include="Content\revolution-slider\assets\gridtile_3x3.png" />
+    <Content Include="Content\revolution-slider\assets\gridtile_3x3_white.png" />
+    <Content Include="Content\revolution-slider\assets\gridtile_white.png" />
+    <Content Include="Content\revolution-slider\assets\large_left.png" />
+    <Content Include="Content\revolution-slider\assets\large_right.png" />
+    <Content Include="Content\revolution-slider\assets\loader.gif" />
+    <Content Include="Content\revolution-slider\assets\navigdots.png" />
+    <Content Include="Content\revolution-slider\assets\navigdots_bgtile.png" />
+    <Content Include="Content\revolution-slider\assets\shadow1.png" />
+    <Content Include="Content\revolution-slider\assets\shadow2.png" />
+    <Content Include="Content\revolution-slider\assets\shadow3.png" />
+    <Content Include="Content\revolution-slider\assets\small_left.png" />
+    <Content Include="Content\revolution-slider\assets\small_left_boxed.png" />
+    <Content Include="Content\revolution-slider\assets\small_right.png" />
+    <Content Include="Content\revolution-slider\assets\small_right_boxed.png" />
+    <Content Include="Content\revolution-slider\assets\timer.png" />
+    <Content Include="Content\revolution-slider\css\settings.css" />
+    <Content Include="Content\revolution-slider\font\revicons90c6.svg" />
+    <Content Include="Content\revolution-slider\images\gradient\g30.png" />
+    <Content Include="Content\revolution-slider\images\gradient\g40.png" />
+    <Content Include="Content\revolution-slider\js\jquery.themepunch.revolution.min.js" />
+    <Content Include="Content\revolution-slider\js\jquery.themepunch.tools.min.js" />
+    <Content Include="Content\Scripts\bootstrap-datepicker.js" />
+    <Content Include="Content\Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Content\Scripts\bootstrap-select.js" />
+    <Content Include="Content\Scripts\bootstrap-timepicker.js" />
+    <Content Include="Content\Scripts\bootstrap.min.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\ComboOptions.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\CommonJsEveryPage.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\CustomJS.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\DevOrgComponent.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\WereViewApps.js" />
+    <None Include="Content\Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Content\Scripts\jquery-2.1.1.js" />
+    <Content Include="Content\Scripts\jquery-2.1.1.min.js" />
     <Content Include="Content\Scripts\jquery-ui.min.js" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\Scripts\bootstrap-table-filter.js" />
     <Content Include="Content\Scripts\bootstrap.js" />
-    <Content Include="Content\Scripts\jquery-1.10.2.js" />
-    <Content Include="Content\Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Content\Scripts\jquery-1.10.2.min.map" />
     <Content Include="Content\Scripts\jquery.elastic.source.js" />
+    <Content Include="Content\Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Content\Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Content\Scripts\jquery.validate.js" />
     <Content Include="Content\Scripts\jquery.validate.min.js" />
     <Content Include="Content\Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Content\Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Content\Scripts\modernizr-2.6.2.js" />
-    <Content Include="Content\Scripts\respond.js" />
-    <Content Include="Content\Scripts\respond.min.js" />
+    <Content Include="Content\Scripts\modernizr-2.8.3.js" />
+    <Content Include="Content\Scripts\moment.js" />
     <Content Include="Content\Scripts\star-rating.js" />
     <Content Include="Content\Scripts\Tagit\jquery-ui-1.9.2.custom.min.js" />
     <Content Include="Content\Scripts\Tagit\jquery.autoGrowInput.js" />
     <Content Include="Content\Scripts\Tagit\jquery.tagedit.js" />
+    <Content Include="Content\Scripts\underscore.js" />
     <Content Include="Content\Scripts\Upload\bootstrap-progressbar.js" />
     <Content Include="Content\Scripts\Upload\canvas-to-blob.min.js" />
-    <Content Include="Content\Scripts\Upload\devOrgUploadConfig.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\devOrgUploadConfig.js" />
     <Content Include="Content\Scripts\Upload\jquery.fileupload-audio.js" />
     <Content Include="Content\Scripts\Upload\jquery.fileupload-image.js" />
     <Content Include="Content\Scripts\Upload\jquery.fileupload-process.js" />
@@ -550,10 +576,10 @@
     <Content Include="Content\Scripts\Upload\jquery.iframe-transport.js" />
     <Content Include="Content\Scripts\Upload\jquery.ui.widget.js" />
     <Content Include="Content\Scripts\Upload\load-image.all.min.js" />
+    <Content Include="Content\Scripts\validation.js" />
     <Content Include="ExternalDll\DevMVCComponent.dll" />
     <Content Include="ExternalDll\LinqKit.dll" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="How run.txt" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -574,14 +600,8 @@
     <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
     <Content Include="Areas\Admin\Views\Config\Index.cshtml" />
     <Content Include="robots.txt" />
-    <Content Include="Scripts\bootstrap-datepicker.js" />
-    <Content Include="Scripts\bootstrap-datetimepicker.js" />
-    <Content Include="Scripts\bootstrap-select.js" />
     <Content Include="Content\Scripts\bootstrap-table-export.js" />
     <Content Include="Content\Scripts\bootstrap-table.js" />
-    <Content Include="Scripts\bootstrap-timepicker.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\ImageResizeSettings\Create.cshtml" />
     <Content Include="Areas\Admin\Views\ImageResizeSettings\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\ImageResizeSettings\Details.cshtml" />
@@ -648,6 +668,12 @@
     <Content Include="Areas\Admin\Views\FeaturedImages\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\FeaturedImages\Index.cshtml" />
     <Content Include="Areas\Admin\Views\FeaturedImages\_CreateOrEdit.cshtml" />
+    <None Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.3.js" />
+    <Content Include="Scripts\jquery-2.1.3.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Uploads\Images\Advertise\5e324a00-977d-4436-8a15-3ce9e1c424f1-0.jpg" />
     <Content Include="Uploads\Images\Advertise\7fcf1b26-c1e0-4327-ba7f-29d5fd55bd25-0.jpg" />
     <Content Include="Uploads\Images\Advertise\be78fe90-0932-44c6-8cd1-816b35d6d232-0.jpg" />
@@ -758,12 +784,13 @@
     <Content Include="Content\Less\seo-optimize.less" />
     <Content Include="Content\Less\utilities.less" />
     <Content Include="Content\Less\variables.less" />
-    <None Include="Content\Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Content\revolution-slider\font\revicons90c6.eot" />
+    <Content Include="Content\revolution-slider\font\revicons90c6.ttf" />
+    <Content Include="Content\revolution-slider\font\revicons90c6.woff" />
+    <Content Include="Content\Scripts\bootstrap.min.js.map" />
+    <Content Include="Content\Scripts\jquery-2.1.1.min.map" />
     <None Include="Content\Scripts\jquery.validate-vsdoc.js" />
     <None Include="Content\Scripts\_references.js" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <EntityDeploy Include="Models\EntityModel\WereViewAppModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WereViewAppModel.Designer.cs</LastGenOutput>
@@ -772,45 +799,6 @@
       <DependentUpon>WereViewAppModel.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
-    <Content Include="Scripts\bootstrap.min.js.map">
-      <DependentUpon>bootstrap.min.js</DependentUpon>
-    </Content>
-    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
-    <Content Include="Scripts\CustomScripts\ComboOptions.js" />
-    <Content Include="Scripts\CustomScripts\CommonJsEveryPage.js" />
-    <Content Include="Scripts\CustomScripts\CustomJS.js" />
-    <Content Include="Scripts\CustomScripts\DevOrgComponent.js" />
-    <Content Include="Scripts\CustomScripts\WereViewApps.js" />
-    <Content Include="Scripts\filebutton.js" />
-    <Content Include="Scripts\javascript-1.1.min.js" />
-    <Content Include="Scripts\jquery-2.1.1.js" />
-    <Content Include="Scripts\jquery-2.1.1.min.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\less-1.4.1.min.js" />
-    <Content Include="Scripts\markdown.js" />
-    <Content Include="Scripts\MarkdownDeep License.txt" />
-    <Content Include="Scripts\MarkdownDeep Quick Reference.txt" />
-    <Content Include="Scripts\MarkdownDeepLib.min.js" />
-    <Content Include="Scripts\mdd_ajax_loader.gif" />
-    <Content Include="Scripts\mdd_gripper.png" />
-    <Content Include="Scripts\mdd_help.htm" />
-    <Content Include="Scripts\mdd_modal_background.png" />
-    <Content Include="Scripts\mdd_styles.css" />
-    <Content Include="Scripts\mdd_toolbar.png" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\moment.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.matchmedia.addListener.js" />
-    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
-    <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\underscore.js" />
-    <Content Include="Scripts\validation.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -845,7 +833,6 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Shared\_GlobalError.cshtml" />
     <Content Include="Views\Shared\_ValidatorCommonForm.cshtml" />
@@ -901,11 +888,13 @@
     <Content Include="Views\Shared\EditorTemplates\FileMulti.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Scripts\jquery-2.1.3.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataCached\SearchResult\" />
     <Folder Include="App_Data\elmah\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Content\Scripts\FrontEnd\" />
     <Folder Include="Models\DesignPattern\Abstracts\" />
     <Folder Include="Models\POCO\AdditionalDatabase\" />
     <Folder Include="Models\POCO\Plugable\" />
