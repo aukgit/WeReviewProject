@@ -23,14 +23,12 @@ namespace WereViewApp {
             #region Validation Bundle & Form Inputs Processing
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                            "~/Content/Scripts/jquery.validate*",
-                           
                             "~/Scripts/moment.js",
                             "~/Scripts/bootstrap-datetimepicker.js",
                             "~/Scripts/bootstrap-select.js",
                             "~/Content/Scripts/bootstrap-table.js",
                             "~/Content/Scripts/bootstrap-table-filter.js",
                             "~/Content/Scripts/bootstrap-table-export.js",
-                            
                             "~/Content/Scripts/jquery.elastic.source.js",
                             "~/Scripts/CustomScripts/DevOrgComponent.js",
                             "~/Scripts/CustomScripts/CustomJS.js"
@@ -58,7 +56,7 @@ namespace WereViewApp {
             #region Mordernizer
             bundles.Add(new ScriptBundle("~/bundles/modernizr", mordernizerCDN)
                     .Include("~/Content/Scripts/modernizr-*") //if no CDN
-                );
+            );
             #endregion
 
             #region Bootstrap
@@ -131,14 +129,14 @@ namespace WereViewApp {
 
             #region WereViewApp Js
             bundles.Add(new ScriptBundle("~/bundles/WereViewApps").Include(
-                            
+
                            "~/Content/Scripts/FrontEnd/nivo-lightbox.min.js",
                            "~/Content/Scripts/FrontEnd/jquery.number.js",
                            "~/Scripts/CustomScripts/WereViewApps.js"
             ));
             #endregion
 
-   
+
 
             #region Configs
 
