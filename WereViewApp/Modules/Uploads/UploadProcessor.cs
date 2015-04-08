@@ -6,11 +6,12 @@ using ImageResizer;
 
 namespace WereViewApp.Modules.Uploads {
     public class UploadProcessor {
-        private static readonly string appPath = AppDomain.CurrentDomain.BaseDirectory;
+        private static readonly string AppPath = AppDomain.CurrentDomain.BaseDirectory;
 
         /// <summary>
         /// </summary>
         /// <param name="AdditionalRoot">should contain slash. use : "~/Uploads/Images/" + AdditionalRoot</param>
+        /// <param name="additionalRoot"></param>
         public UploadProcessor(string additionalRoot) {
             AdditionalRoots = additionalRoot;
             RootPath = "~/Uploads/Images/";
@@ -169,8 +170,8 @@ namespace WereViewApp.Modules.Uploads {
         public void ProcessImage(string sourceLocation, string processedLocation, double width, double height,
             string ext) {
             if (sourceLocation != null && processedLocation != null) {
-                var source = sourceLocation.Replace("~", appPath).Replace('/', '\\');
-                var target = processedLocation.Replace("~", appPath).Replace('/', '\\');
+                var source = sourceLocation.Replace("~", AppPath).Replace('/', '\\');
+                var target = processedLocation.Replace("~", AppPath).Replace('/', '\\');
                 var setting = "height=" + height + "&width=" + width + "&mode=stretch&format=" + ext;
                 ImageBuilder.Current.Build(source, target, new ResizeSettings(setting));
             }
@@ -229,7 +230,7 @@ namespace WereViewApp.Modules.Uploads {
 
         public string VirtualPathtoAbsoluteServerPath(string virtualPath) {
             if (virtualPath != null && virtualPath.StartsWith(@"~/")) {
-                var abs = appPath + virtualPath.Remove(0, 2);
+                var abs = AppPath + virtualPath.Remove(0, 2);
                 return abs.Replace("/", "\\");
             }
             return virtualPath;
@@ -256,7 +257,7 @@ namespace WereViewApp.Modules.Uploads {
             rootPath += additionalRootPath;
 
             var path1 = rootPath + fileName;
-            var source = path1.Replace("~", appPath).Replace('/', '\\');
+            var source = path1.Replace("~", AppPath).Replace('/', '\\');
             try {
                 File.Delete(source);
             } catch (Exception ex) {
