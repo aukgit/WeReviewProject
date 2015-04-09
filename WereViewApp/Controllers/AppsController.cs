@@ -17,7 +17,8 @@ namespace WereViewApp.Controllers {
     public class AppsController : AdvanceController {
 
         #region Declarations
-        Algorithms algorithms = new Algorithms();
+
+        readonly Algorithms _algorithms = new Algorithms();
         #endregion
 
         #region Constructors
@@ -38,13 +39,13 @@ namespace WereViewApp.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         [OutputCache(CacheProfile = "Long", VaryByParam = "Url")]
-        public ActionResult Search(SearchViewModel search, string Url) {
+        public ActionResult Search(SearchViewModel search, string url) {
             ViewBag.isPostBack = true;
-            if (!string.IsNullOrWhiteSpace(Url)) {
-                var urlGet = algorithms.GenerateURLValid(Url);
+            if (!string.IsNullOrWhiteSpace(url)) {
+                var urlGet = _algorithms.GenerateURLValid(url);
                 var displayList = urlGet.Split('-');
                 var displayStr = string.Join(" ", displayList);
-                var results = algorithms.GetSearchResults(Url, null, null, null, CommonVars.SEARCH_RESULTS_MAX_RESULT_RETURN, db);
+                var results = _algorithms.GetSearchResults(url, null, null, null, CommonVars.SEARCH_RESULTS_MAX_RESULT_RETURN, db);
                 search.DisplaySearchText = displayStr;
                 ViewBag.Results = results;
                 return View(search);
@@ -59,13 +60,13 @@ namespace WereViewApp.Controllers {
         public ActionResult Latest() {
             ViewBag.Title = "Latest Apps";
 
-            var latest = algorithms.GetLatestApps(db, 60);
+            var latest = _algorithms.GetLatestApps(db, 60);
             return View("ListOfApps", latest);
         }
         [OutputCache(CacheProfile = "Day")]
         public ActionResult TopRated() {
             ViewBag.Title = "Top Rated Apps";
-            var latest = algorithms.GetTopRatedApps(db, 60);
+            var latest = _algorithms.GetTopRatedApps(db, 60);
             return View("ListOfApps", latest);
         }
 
@@ -83,7 +84,7 @@ namespace WereViewApp.Controllers {
                                         .ToList();
 
                 if (categoryApps != null) {
-                    algorithms.GetEmbedImagesWithApp(categoryApps, db, max, GalleryCategoryIDs.HomePageIcon);
+                    _algorithms.GetEmbedImagesWithApp(categoryApps, db, max, GalleryCategoryIDs.HomePageIcon);
                 }
                 return View("ListOfApps", categoryApps);
             }
@@ -99,7 +100,7 @@ namespace WereViewApp.Controllers {
 
         }
         [OutputCache(CacheProfile = "Day")]
-        public ActionResult iOS() {
+        public ActionResult IOs() {
             ViewBag.Title = "Apple/iOS Apps";
 
             return PlatformResult(PlatformIDs.iOS);
@@ -129,7 +130,7 @@ namespace WereViewApp.Controllers {
                                     .ToList();
 
             if (platformApps != null) {
-                algorithms.GetEmbedImagesWithApp(platformApps, db, max, GalleryCategoryIDs.HomePageIcon);
+                _algorithms.GetEmbedImagesWithApp(platformApps, db, max, GalleryCategoryIDs.HomePageIcon);
             }
             return View("ListOfApps", platformApps);
 

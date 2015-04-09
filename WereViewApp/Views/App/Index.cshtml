@@ -6,8 +6,7 @@
 	string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
 	string controller = (string)ViewBag.controller;
-    string viewName = "Index";
-    string editLinkName = "";	
+    const string viewName = "Index";
 }
 
 <h2 class="h3 gap-from-top-small">
@@ -47,8 +46,10 @@
 			<tr>
 		
 				<td>
-					@{editLinkName = Html.DisplayFor(model => item.AppName).ToString();}
-					<a href="@Url.Action("Edit", new { id=item.AppID })" title="@editLinkName edit..."><span class="glyphicon glyphicon-pencil"></span> @editLinkName</a>
+				    @{
+				        var editLinkName = Html.DisplayFor(model => item.AppName).ToString();
+				    }
+				    <a href="@Url.Action("Edit", new { id=item.AppID })" title="@editLinkName edit..."><span class="glyphicon glyphicon-pencil"></span> @editLinkName</a>
 				</td>
 				<td>
 					@Html.Truncate(item.Description, AppConfig.TruncateLength)
