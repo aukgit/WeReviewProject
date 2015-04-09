@@ -2,8 +2,8 @@
   "version": 3,
   "file": "seo-optimize.css",
   "sources": [
-    "../Less/seo-optimize.less",
-    "../Less/extra-remixens.less"
+    "../../seo-optimize.less",
+    "../../extra-remixens.less"
   ],
   "names": [],
   "mappings": "AAKA,aAEI;AAFJ,aAEQ;AAFR,aAEY;AAFZ,aAEgB;AAFhB,aAEoB;EACZ,eAAA;ECwBJ,cAAA;EDtBI,mBAAA;;AALR,aAQI;EACI,mBAAA;;AATR,aAaI;EACI,kBAAA;;AAdR,aAkBI,EAAC;EACG,cAAA;;AAnBR,aAkBI,EAAC,MAGG;EACI,cAAA;;AASZ;EACI,cAAA;;AADJ,aAGI;AAHJ,aAGQ;AAHR,aAGY;EACJ,cAAA;;AAGJ,aAAC;EClCD,cAAA;;ADwCJ,yBACI;ECrCA,cAAA;;AD0CJ;EACI,gBAAA;;AAGJ;EACI,2BAAA;;AAGJ;EACI,cAAA;;AAGJ;EACI,gBAAA;;AAGJ;EACI,2BAAA;;AAIJ;ECwII,YAAA;EAKA,cAAA;;ADzIJ;EACI,cAAA"

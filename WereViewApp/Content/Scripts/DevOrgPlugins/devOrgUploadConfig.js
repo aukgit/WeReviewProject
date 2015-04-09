@@ -535,7 +535,6 @@ $(function () {
 
             var uploadersLength = 0;
             var actualSize = acceptedFileSizeInMB * 1024000;
-            var $executingUploader = null;
             var id = 0;
             var $uploaderDiv = $.devOrgUP.$uploaderWorkingDiv;
             var $label = null;

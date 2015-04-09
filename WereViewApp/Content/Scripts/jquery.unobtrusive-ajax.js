@@ -12,7 +12,7 @@
  * below are for informational purposes only.
  *
  * NUGET: END LICENSE TEXT */
-/*!
+/*
 ** Unobtrusive Ajax support library for jQuery
 ** Copyright (C) Microsoft Corporation. All rights reserved.
 */

@@ -414,6 +414,7 @@
     <Content Include="Content\CompactCSS.min.css">
       <DependentUpon>CompactCSS.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\color-fonts.css" />
     <Content Include="Content\css\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\css\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\css\fonts\fontawesome-webfont.ttf" />
@@ -423,6 +424,7 @@
     <Content Include="Content\css\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\css\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\css\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\css\footer-fixing.css" />
     <Content Include="Content\css\front-developer.css" />
     <Content Include="Content\css\front-developer.css.map">
       <DependentUpon>front-developer.css</DependentUpon>
@@ -483,6 +485,9 @@
     <Content Include="Content\css\Images\video_img2.jpg" />
     <Content Include="Content\css\Images\windows_icon.jpg" />
     <Content Include="Content\css\Images\window_app.png" />
+    <Content Include="Content\css\override-mvc.css" />
+    <Content Include="Content\css\owl.custom.finalize.css" />
+    <Content Include="Content\css\seo-optimize.css" />
     <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\css\Tagit\images\ui-bg_flat_10_000000_40x100.png" />
@@ -500,6 +505,7 @@
     <Content Include="Content\css\Tagit\jquery.tagedit.css" />
     <Content Include="Content\css\Tagit\ui-lightness\jquery-ui-1.9.2.custom.min.css" />
     <Content Include="Content\css\Upload\jquery.fileupload.css" />
+    <Content Include="Content\css\utilities.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\CompactCSS.css.bundle" />
@@ -547,12 +553,41 @@
     <Content Include="Content\Scripts\bootstrap-select.js" />
     <Content Include="Content\Scripts\bootstrap-timepicker.js" />
     <Content Include="Content\Scripts\bootstrap.min.js" />
+    <Content Include="Content\Scripts\Bundles\FrontEndJs.js">
+      <DependentUpon>FrontEndJs.js.bundle</DependentUpon>
+    </Content>
+    <Content Include="Content\Scripts\Bundles\FrontEndJs.min.js">
+      <DependentUpon>FrontEndJs.js</DependentUpon>
+    </Content>
+    <Content Include="Content\Scripts\Bundles\UploadJs.js">
+      <DependentUpon>UploadJs.js.bundle</DependentUpon>
+    </Content>
+    <Content Include="Content\Scripts\Bundles\UploadJs.min.js">
+      <DependentUpon>UploadJs.js</DependentUpon>
+    </Content>
     <Content Include="Content\Scripts\DevOrgPlugins\ComboOptions.js" />
-    <Content Include="Content\Scripts\DevOrgPlugins\CommonJsEveryPage.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\every-page.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\CustomJS.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\DevOrgComponent.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\WereViewApps.js" />
+    <Content Include="Content\Scripts\Bundles\UploadJs.js.bundle" />
+    <Content Include="Content\Scripts\Bundles\UploadJs.min.js.map">
+      <DependentUpon>UploadJs.min.js</DependentUpon>
+    </Content>
+    <Content Include="Content\Scripts\Bundles\FrontEndJs.js.bundle" />
+    <Content Include="Content\Scripts\Bundles\FrontEndJs.min.js.map">
+      <DependentUpon>FrontEndJs.min.js</DependentUpon>
+    </Content>
     <None Include="Content\Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Content\Scripts\FrontEnd\base-theme.js" />
+    <Content Include="Content\Scripts\FrontEnd\front-developer.js" />
+    <Content Include="Content\Scripts\FrontEnd\jquery.isotope.min.js" />
+    <Content Include="Content\Scripts\FrontEnd\jquery.number.js" />
+    <Content Include="Content\Scripts\FrontEnd\jquery.stellar.js" />
+    <Content Include="Content\Scripts\FrontEnd\jquery.sticky.js" />
+    <Content Include="Content\Scripts\FrontEnd\main.js" />
+    <Content Include="Content\Scripts\FrontEnd\owl.carousel.min.js" />
+    <Content Include="Content\Scripts\FrontEnd\wow.min.js" />
     <Content Include="Content\Scripts\jquery-2.1.3.js" />
     <Content Include="Content\Scripts\jquery-2.1.3.min.js" />
     <Content Include="Content\Scripts\jquery-ui.min.js" />
@@ -799,14 +834,22 @@
     <Content Include="Content\revolution-slider\font\revicons90c6.woff" />
     <Content Include="Content\Scripts\bootstrap.min.js.map" />
     <Content Include="Content\Scripts\jquery-2.1.3.min.map" />
+    <Content Include="Content\Scripts\jquery-2.1.3.min.js.map">
+      <DependentUpon>jquery-2.1.3.min.js</DependentUpon>
+    </Content>
+    <Content Include="Content\Scripts\jquery.unobtrusive-ajax.min.js.map">
+      <DependentUpon>jquery.unobtrusive-ajax.min.js</DependentUpon>
+    </Content>
     <None Include="Content\Scripts\jquery.validate-vsdoc.js" />
-    <None Include="Content\Scripts\_references.js" />
     <EntityDeploy Include="Models\EntityModel\WereViewAppModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WereViewAppModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Models\EntityModel\WereViewAppModel.edmx.diagram">
       <DependentUpon>WereViewAppModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\Scripts\jquery.validate.min.js.map">
+      <DependentUpon>jquery.validate.min.js</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <Content Include="Web.config">
@@ -903,7 +946,6 @@
     <Folder Include="App_Data\DataCached\SearchResult\" />
     <Folder Include="App_Data\elmah\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Content\Scripts\FrontEnd\" />
     <Folder Include="Models\DesignPattern\Abstracts\" />
     <Folder Include="Models\POCO\AdditionalDatabase\" />
     <Folder Include="Models\POCO\Plugable\" />

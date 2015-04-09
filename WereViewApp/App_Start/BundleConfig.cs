@@ -2,22 +2,22 @@
 using System.Web.Optimization;
 
 namespace WereViewApp {
-    public class BundleConfig {
+    public static class BundleConfig {
         public static void RegisterBundles(BundleCollection bundles) {
 
             #region CDN Constants
-            //const string jQueryCDN = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js";
-            const string jQueryCDN = "http://code.jquery.com/jquery-latest.min.js";
-            const string mordernizerCDN = "http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js";
+            const string jQueryCdn = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js";
+            //const string jQueryCDN = "http://code.jquery.com/jquery-latest.min.js";
+            const string mordernizerCdn = "http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js";
             //const string respondJsCDN = "http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"
             #endregion
 
             #region Java Scripts Bundle
 
             #region jQuery
-            bundles.Add(new ScriptBundle("~/bundles/jquery", jQueryCDN)
-                        .Include("~/Scripts/jquery-2.1.1.min.js") //if no CDN
-                );
+            bundles.Add(new ScriptBundle("~/bundles/jquery", jQueryCdn)
+                        .Include("~/Scripts/jquery-2.1.3.min.js") //if no CDN
+            );
             #endregion
 
             #region Validation Bundle & Form Inputs Processing
@@ -54,7 +54,7 @@ namespace WereViewApp {
             #endregion
 
             #region Mordernizer
-            bundles.Add(new ScriptBundle("~/bundles/modernizr", mordernizerCDN)
+            bundles.Add(new ScriptBundle("~/bundles/modernizr", mordernizerCdn)
                     .Include("~/Content/Scripts/modernizr-*") //if no CDN
             );
             #endregion
