@@ -1,5 +1,5 @@
 ﻿///#source 1 1 /Content/Scripts/Upload/jquery.ui.widget.js
-/*! jQuery UI - v1.11.1 - 2014-09-17
+/* jQuery UI - v1.11.1 - 2014-09-17
 * http://jqueryui.com
 * Includes: widget.js
 * Copyright 2014 jQuery Foundation and other contributors; Licensed MIT */
@@ -15,7 +15,7 @@
 		factory( jQuery );
 	}
 }(function( $ ) {
-/*!
+/*
  * jQuery UI Widget 1.11.1
  * http://jqueryui.com
  *

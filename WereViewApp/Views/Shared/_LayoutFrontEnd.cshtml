@@ -13,14 +13,16 @@
     }
 
     @Styles.Render("~/Content/css/styles")
-    @Scripts.Render("~/bundles/modernizr")
-    @RenderSection("css", required: false)
+    @RenderSection("CSSBefore", required: false)
     @if (ViewBag.Meta != null) {
         <meta name="description" content="@ViewBag.Meta" />
     }
     @if (ViewBag.Keywords != null) {
         <meta name="keywords" content="@ViewBag.Keywords" />
     }
+    @RenderSection("CSSAfter", required: false)
+
+    
 </head>
 <body>
 
