@@ -12,6 +12,63 @@ body #wrap .app-details-page {
 .primary-color {
   color: #ff7200;
 }
+.seo-optimize h1,
+.seo-optimize h2,
+.seo-optimize h3,
+.seo-optimize h4,
+.seo-optimize h5 {
+  display: inline;
+  font-size: 1em;
+  font-weight: normal;
+}
+.seo-optimize strong {
+  font-weight: normal;
+}
+.seo-optimize em {
+  font-style: normal;
+}
+.seo-optimize a:hover {
+  color: #ff7200;
+}
+.seo-optimize a:hover h1 {
+  color: inherit;
+}
+.seo-app-name {
+  color: #FAB37A;
+}
+.seo-app-name h1,
+.seo-app-name em,
+.seo-app-name strong {
+  color: inherit;
+}
+.seo-app-name:hover {
+  color: #ffa500;
+}
+.white-wrapper-background .seo-app-name {
+  color: #757575;
+}
+.semi-bold {
+  font-weight: 600;
+}
+.semi-bold-important {
+  font-weight: 600 !important;
+}
+.font-normal {
+  font-size: 1em;
+}
+.bold {
+  font-weight: 700;
+}
+.bold-important {
+  font-weight: 700 !important;
+}
+header {
+  height: 47px;
+  height: 4.7rem;
+}
+.almost-black {
+  color: #494646;
+}
 .rating-disabled {
   cursor: default;
 }

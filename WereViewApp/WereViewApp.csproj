@@ -404,6 +404,10 @@
     <Content Include="App_Data\DataCached\Database\8435a280-7ead-418b-9b63-f29a0816ec7a-appInfo.mdb" />
     <Content Include="App_Data\DataCached\Database\8d6d1103-2304-4f92-8af5-7ff649d7b557-appInfo.mdb" />
     <Content Include="App_Data\DataCached\Database\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-appInfo.mdb" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CompactCSS.css">
       <DependentUpon>CompactCSS.css.bundle</DependentUpon>
     </Content>
@@ -419,6 +423,10 @@
     <Content Include="Content\css\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\css\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\css\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\css\front-developer.css" />
+    <Content Include="Content\css\front-developer.css.map">
+      <DependentUpon>front-developer.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\Images\---back1.png" />
     <Content Include="Content\css\Images\7_2_start_img.jpg" />
     <Content Include="Content\css\Images\android_icon.jpg" />
@@ -496,6 +504,8 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\CompactCSS.css.bundle" />
     <Content Include="Content\CompactCSS.min.css.gz" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Content\Less\override-mvc.less" />
     <Content Include="Content\revolution-slider\assets\arrowleft.png" />
     <Content Include="Content\revolution-slider\assets\arrowright.png" />
@@ -542,9 +552,9 @@
     <Content Include="Content\Scripts\DevOrgPlugins\CustomJS.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\DevOrgComponent.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\WereViewApps.js" />
-    <None Include="Content\Scripts\jquery-2.1.1.intellisense.js" />
-    <Content Include="Content\Scripts\jquery-2.1.1.js" />
-    <Content Include="Content\Scripts\jquery-2.1.1.min.js" />
+    <None Include="Content\Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Content\Scripts\jquery-2.1.3.js" />
+    <Content Include="Content\Scripts\jquery-2.1.3.min.js" />
     <Content Include="Content\Scripts\jquery-ui.min.js" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\Scripts\bootstrap-table-filter.js" />
@@ -580,6 +590,7 @@
     <Content Include="ExternalDll\DevMVCComponent.dll" />
     <Content Include="ExternalDll\LinqKit.dll" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="How run.txt" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -599,6 +610,7 @@
     <Content Include="CodeTemplates\MvcView\List.cs.t4" />
     <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
     <Content Include="Areas\Admin\Views\Config\Index.cshtml" />
+    <Content Include="Icon.png" />
     <Content Include="robots.txt" />
     <Content Include="Content\Scripts\bootstrap-table-export.js" />
     <Content Include="Content\Scripts\bootstrap-table.js" />
@@ -668,12 +680,10 @@
     <Content Include="Areas\Admin\Views\FeaturedImages\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\FeaturedImages\Index.cshtml" />
     <Content Include="Areas\Admin\Views\FeaturedImages\_CreateOrEdit.cshtml" />
-    <None Include="Scripts\jquery-2.1.3.intellisense.js" />
-    <Content Include="Scripts\jquery-2.1.3.js" />
-    <Content Include="Scripts\jquery-2.1.3.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Uploads\Images\Advertise\5e324a00-977d-4436-8a15-3ce9e1c424f1-0.jpg" />
     <Content Include="Uploads\Images\Advertise\7fcf1b26-c1e0-4327-ba7f-29d5fd55bd25-0.jpg" />
     <Content Include="Uploads\Images\Advertise\be78fe90-0932-44c6-8cd1-816b35d6d232-0.jpg" />
@@ -788,7 +798,7 @@
     <Content Include="Content\revolution-slider\font\revicons90c6.ttf" />
     <Content Include="Content\revolution-slider\font\revicons90c6.woff" />
     <Content Include="Content\Scripts\bootstrap.min.js.map" />
-    <Content Include="Content\Scripts\jquery-2.1.1.min.map" />
+    <Content Include="Content\Scripts\jquery-2.1.3.min.map" />
     <None Include="Content\Scripts\jquery.validate-vsdoc.js" />
     <None Include="Content\Scripts\_references.js" />
     <EntityDeploy Include="Models\EntityModel\WereViewAppModel.edmx">
@@ -888,7 +898,6 @@
     <Content Include="Views\Shared\EditorTemplates\FileMulti.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Scripts\jquery-2.1.3.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataCached\SearchResult\" />
