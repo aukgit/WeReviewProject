@@ -17,7 +17,9 @@
     <file>/Content/Scripts/bootstrap-table.js</file>
     <file>/Content/Scripts/bootstrap-table-filter.js</file>
     <file>/Content/Scripts/bootstrap-table-export.js</file>
-    <file>/Content/Scripts/DevOrgPlugins/dev-component-runner.js</file>
     <file>/Content/Scripts/DevOrgPlugins/developers-organism.component.js</file>
+    <file>/Content/Scripts/DevOrgPlugins/dev-component-runner.js</file>
+    <file>/Content/Scripts/DevOrgPlugins/WereViewApps.js</file>
+
   </files>
 </bundle>

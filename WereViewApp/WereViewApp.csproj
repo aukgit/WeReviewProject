@@ -620,7 +620,7 @@
     <Content Include="Content\Scripts\underscore.js" />
     <Content Include="Content\Scripts\Upload\bootstrap-progressbar.js" />
     <Content Include="Content\Scripts\Upload\canvas-to-blob.min.js" />
-    <Content Include="Content\Scripts\DevOrgPlugins\devOrgUploadConfig.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.upload.js" />
     <Content Include="Content\Scripts\Upload\jquery.fileupload-audio.js" />
     <Content Include="Content\Scripts\Upload\jquery.fileupload-image.js" />
     <Content Include="Content\Scripts\Upload\jquery.fileupload-process.js" />

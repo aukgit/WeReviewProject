@@ -21,6 +21,6 @@
     <file>/Content/Scripts/Upload/jquery.fileupload-audio.js</file>
     <file>/Content/Scripts/Upload/jquery.fileupload-video.js</file>
     <file>/Content/Scripts/Upload/jquery.fileupload-validate.js</file>
-    <file>/Content/Scripts/DevOrgPlugins/devOrgUploadConfig.js</file>
+    <file>/Content/Scripts/DevOrgPlugins/developers-organism.upload.js</file>
   </files>
 </bundle>

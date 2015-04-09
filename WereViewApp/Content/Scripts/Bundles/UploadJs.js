@@ -3065,7 +3065,7 @@ var widget = $.widget;
 
 }));
 
-///#source 1 1 /Content/Scripts/DevOrgPlugins/devOrgUploadConfig.js
+///#source 1 1 /Content/Scripts/DevOrgPlugins/developers-organism.upload.js
 /// <reference path="jquery-1.10.2.js" />
 /// <reference path="jquery-1.10.2.intellisense.js" />
 /// <reference path="jquery.fileupload.js" />

@@ -32,16 +32,17 @@ namespace WereViewApp {
 
                     #region Validation Bundle & Form Inputs Processing
                     bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                                   "~/Content/Scripts/jquery.validate*",
-                                    "~/Scripts/moment.js",
-                                    "~/Scripts/bootstrap-datetimepicker.js",
-                                    "~/Scripts/bootstrap-select.js",
+                                    "~/Content/Scripts/jquery.validate.js",
+                                    "~/Content/Scripts/moment.js",
+                                    "~/Content/Scripts/bootstrap-datetimepicker.js",
+                                    "~/Content/Scripts/bootstrap-select.js",
                                     "~/Content/Scripts/bootstrap-table.js",
                                     "~/Content/Scripts/bootstrap-table-filter.js",
                                     "~/Content/Scripts/bootstrap-table-export.js",
-                                    "~/Content/Scripts/jquery.elastic.source.js",
-                                    "~/Scripts/CustomScripts/DevOrgComponent.js",
-                                    "~/Scripts/CustomScripts/CustomJS.js"
+                                    "~/Content/Scripts/DevOrgPlugins/developers-organism.component.js",
+                                    "~/Content/Scripts/DevOrgPlugins/dev-component-runner.js",
+                                    "~/Content/Scripts/DevOrgPlugins/WereViewApps.js"
+
                                    ));
                     #endregion
 
@@ -58,23 +59,28 @@ namespace WereViewApp {
                                         "~/Content/Scripts/Upload/jquery.fileupload-audio.js",
                                         "~/Content/Scripts/Upload/jquery.fileupload-video.js",
                                         "~/Content/Scripts/Upload/jquery.fileupload-validate.js",
-                                        "~/Content/Scripts/Upload/bootstrap-progressbar.js",
-                                        "~/Content/Scripts/Upload/devOrgUploadConfig.js"
+                                        "~/Content/Scripts/DevOrgPlugins/developers-organism.upload.js"
                                    ));
-                    #endregion
-
-                    #region Mordernizer
-                    //bundles.Add(new ScriptBundle("~/bundles/modernizr", mordernizerCdn)
-                    //        .Include("~/Content/Scripts/modernizr-*") //if no CDN
-                    //);
                     #endregion
 
                     #region Bootstrap
                     bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                                   "~/Content/Scripts/bootstrap.js", // 3.1.2
-                                  "~/Content/Scripts/respond.js",
                                   "~/Content/Scripts/star-rating.js",
-                                   "~/Scripts/underscore.js",
+                                  "~/Scripts/underscore.js",
+                                  "~/Content/Scripts/DevOrgPlugins/every-page.js",
+                                  "~/Content/Scripts/FrontEnd/wow.min.js",
+                                  "~/Content/Scripts/FrontEnd/jquery.sticky.js",
+                                  "~/Content/Scripts/FrontEnd/jquery.stellar.js",
+                                  "~/Content/Scripts/FrontEnd/base-theme.js",
+                                  "~/Content/Scripts/FrontEnd/jquery.isotope.min.js",
+                                  "~/Content/Scripts/FrontEnd/owl.carousel.min.js",
+                                  "~/Content/Scripts/FrontEnd/main.js",
+                                  "~/Content/revolution-slider/js/jquery.themepunch.tools.min.js",
+                                  "~/Content/revolution-slider/js/jquery.themepunch.revolution.min.js",
+                                  "~/Content/Scripts/FrontEnd/front-developer.js",
+                                  "~/Scripts/CustomScripts/CommonJsEveryPage.js",
+
                                   "~/Scripts/CustomScripts/CommonJsEveryPage.js"
 
                                   ));
@@ -83,260 +89,107 @@ namespace WereViewApp {
                     #endregion
 
                     #region CSS Bundles
-                    bundles.Add(new StyleBundle("~/Content/css/bootstrap_red").Include(
-                                        "~/Content/css/bootstrap.theme.unitied.css"
 
-                    ));
-                    bundles.Add(new StyleBundle("~/Content/css/FrontEndDeveloperCSS/bootstrap").Include(
-                                        "~/Content/css/frontEnd-bootstrap.min.css",
-                                        "~/Content/css/FrontEndDeveloperCSS/main.css",
-                                        "~/Content/css/FrontEndDeveloperCSS/menu.css",
-                                        "~/Content/css/FrontEndDeveloperCSS/media.css",
-                                        "~/Content/css/FrontEndDeveloperCSS/nivo-lightbox.css",
-                                        "~/Content/css/FrontEndDeveloperCSS/nivo-lightbox-extra.css"
-
-                    ));
-
-                    //bundles.Add(new StyleBundle("~/Content/css/FrontEndDeveloperCSS/bootstrap").Include(
-                    //                    "~/Content/css/FrontEndDeveloperCSS/FrontEndMinifiedCSS.css"
-
-                    //));
                     bundles.Add(new StyleBundle("~/Content/css/styles").Include(
+                                        "~/Content/css/bootstrap.css",
+                                        "~/Content/css/animate.min.css",
+                                        "~/Content/css/font-awesome.min.css",
+                                        "~/Content/css/base-theme-styles.css",
+
                                         "~/Content/css/site.css",
                                         "~/Content/css/flags32.css",
-                                        "~/Content/css/Upload/jquery.fileupload.css",
                                         "~/Content/css/flags32-combo.css",
+                                        "~/Content/css/Upload/jquery.fileupload.css",
+
                                         "~/Content/css/bootstrap-datetimepicker.css",
                                         "~/Content/css/bootstrap-table.css",
-                                        "~/Content/css/color-fonts.css",
-                                        "~/Content/css/font-awesome.css",
-                                        "~/Content/css/star-rating.css",
-                                        "~/Content/css/miscellaneous.css",
                                         "~/Content/css/bootstrap-select.css",
-                                        "~/Content/css/overridecss.css"
+
+                                        "~/Content/css/color-fonts.css",
+                                        "~/Content/css/star-rating.css",
+                                        "~/Content/css/override-mvc.css",
+
+                                        "~/Content/css/responsive.css",
+                                        "~/Content/revolution-slider/css/settings.css",
+
+                                        "~/Content/css/owl.carousel.css",
+                                        "~/Content/css/owl.theme.css",
+                                        "~/Content/css/owl.custom.finalize.css",
+
+                                        "~/Content/css/seo-optimize.css",
+                                        "~/Content/css/front-developer.css",
+                                        "~/Content/css/footer-fixing.css",
+                                        "~/Content/css/utilities.css"
+
                     ));
 
                     #endregion
 
-                    #region WereViewApp Js
-                    bundles.Add(new ScriptBundle("~/bundles/WereViewApps").Include(
-
-                                   "~/Content/Scripts/FrontEnd/nivo-lightbox.min.js",
-                                   "~/Content/Scripts/FrontEnd/jquery.number.js",
-                                   "~/Scripts/CustomScripts/WereViewApps.js"
-                    ));
-                    #endregion
                     break;
                 case BundleSelector.EveryScriptThroughBundle:
                     #region Java Scripts Bundle
 
-                    #region jQuery
-                    bundles.Add(new ScriptBundle("~/bundles/jquery", jQueryCdn)
-                                .Include("~/Scripts/jquery-2.1.3.min.js") //if no CDN
-                    );
-                    #endregion
-
                     #region Validation Bundle & Form Inputs Processing
                     bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                                   "~/Content/Scripts/jquery.validate*",
-                                    "~/Scripts/moment.js",
-                                    "~/Scripts/bootstrap-datetimepicker.js",
-                                    "~/Scripts/bootstrap-select.js",
-                                    "~/Content/Scripts/bootstrap-table.js",
-                                    "~/Content/Scripts/bootstrap-table-filter.js",
-                                    "~/Content/Scripts/bootstrap-table-export.js",
-                                    "~/Content/Scripts/jquery.elastic.source.js",
-                                    "~/Scripts/CustomScripts/DevOrgComponent.js",
-                                    "~/Scripts/CustomScripts/CustomJS.js"
+                                    "~/Content/Scripts/Bundles/jqueryval.min.js"
                                    ));
                     #endregion
 
 
                     #region Upload
                     bundles.Add(new ScriptBundle("~/bundles/upload").Include(
-                                        "~/Content/Scripts/Upload/jquery.ui.widget.js",
-                                        "~/Content/Scripts/Upload/load-image.all.min.js",
-                                        "~/Content/Scripts/Upload/canvas-to-blob.min.js",
-                                        "~/Content/Scripts/Upload/jquery.iframe-transport.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload-process.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload-image.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload-audio.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload-video.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload-validate.js",
-                                        "~/Content/Scripts/Upload/bootstrap-progressbar.js",
-                                        "~/Content/Scripts/Upload/devOrgUploadConfig.js"
+                                   "~/Content/Scripts/Bundles/UploadJs.min.js"
                                    ));
-                    #endregion
-
-                    #region Mordernizer
-                    //bundles.Add(new ScriptBundle("~/bundles/modernizr", mordernizerCdn)
-                    //        .Include("~/Content/Scripts/modernizr-*") //if no CDN
-                    //);
                     #endregion
 
                     #region Bootstrap
                     bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                                  "~/Content/Scripts/bootstrap.js", // 3.1.2
-                                  "~/Content/Scripts/respond.js",
-                                  "~/Content/Scripts/star-rating.js",
-                                   "~/Scripts/underscore.js",
-                                  "~/Scripts/CustomScripts/CommonJsEveryPage.js"
-
+                                  "~/Content/Scripts/Bundles/FrontEndJs.min.js"
                                   ));
                     #endregion
 
                     #endregion
 
                     #region CSS Bundles
-                    bundles.Add(new StyleBundle("~/Content/css/bootstrap_red").Include(
-                                        "~/Content/css/bootstrap.theme.unitied.css"
 
-                    ));
-                    bundles.Add(new StyleBundle("~/Content/css/FrontEndDeveloperCSS/bootstrap").Include(
-                                        "~/Content/css/frontEnd-bootstrap.min.css",
-                                        "~/Content/css/FrontEndDeveloperCSS/main.css",
-                                        "~/Content/css/FrontEndDeveloperCSS/menu.css",
-                                        "~/Content/css/FrontEndDeveloperCSS/media.css",
-                                        "~/Content/css/FrontEndDeveloperCSS/nivo-lightbox.css",
-                                        "~/Content/css/FrontEndDeveloperCSS/nivo-lightbox-extra.css"
-
-                    ));
-
-                    //bundles.Add(new StyleBundle("~/Content/css/FrontEndDeveloperCSS/bootstrap").Include(
-                    //                    "~/Content/css/FrontEndDeveloperCSS/FrontEndMinifiedCSS.css"
-
-                    //));
                     bundles.Add(new StyleBundle("~/Content/css/styles").Include(
-                                        "~/Content/css/site.css",
-                                        "~/Content/css/flags32.css",
-                                        "~/Content/css/Upload/jquery.fileupload.css",
-                                        "~/Content/css/flags32-combo.css",
-                                        "~/Content/css/bootstrap-datetimepicker.css",
-                                        "~/Content/css/bootstrap-table.css",
-                                        "~/Content/css/color-fonts.css",
-                                        "~/Content/css/font-awesome.css",
-                                        "~/Content/css/star-rating.css",
-                                        "~/Content/css/miscellaneous.css",
-                                        "~/Content/css/bootstrap-select.css",
-                                        "~/Content/css/overridecss.css"
+                                  "~/Content/CompactCSS.min.css"
+
                     ));
 
-                    #endregion
-
-                    #region WereViewApp Js
-                    bundles.Add(new ScriptBundle("~/bundles/WereViewApps").Include(
-
-                                   "~/Content/Scripts/FrontEnd/nivo-lightbox.min.js",
-                                   "~/Content/Scripts/FrontEnd/jquery.number.js",
-                                   "~/Scripts/CustomScripts/WereViewApps.js"
-                    ));
                     #endregion
                     break;
                 case BundleSelector.EveryScriptGzip:
-                    #region Java Scripts Bundle
-
-                    #region jQuery
-                    bundles.Add(new ScriptBundle("~/bundles/jquery", jQueryCdn)
-                                .Include("~/Scripts/jquery-2.1.3.min.js") //if no CDN
-                    );
-                    #endregion
+            #region Java Scripts Bundle
 
                     #region Validation Bundle & Form Inputs Processing
                     bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                                   "~/Content/Scripts/jquery.validate*",
-                                    "~/Scripts/moment.js",
-                                    "~/Scripts/bootstrap-datetimepicker.js",
-                                    "~/Scripts/bootstrap-select.js",
-                                    "~/Content/Scripts/bootstrap-table.js",
-                                    "~/Content/Scripts/bootstrap-table-filter.js",
-                                    "~/Content/Scripts/bootstrap-table-export.js",
-                                    "~/Content/Scripts/jquery.elastic.source.js",
-                                    "~/Scripts/CustomScripts/DevOrgComponent.js",
-                                    "~/Scripts/CustomScripts/CustomJS.js"
+                                    "~/Content/Scripts/Bundles/jqueryval.min.js.gz"
                                    ));
                     #endregion
 
 
                     #region Upload
                     bundles.Add(new ScriptBundle("~/bundles/upload").Include(
-                                        "~/Content/Scripts/Upload/jquery.ui.widget.js",
-                                        "~/Content/Scripts/Upload/load-image.all.min.js",
-                                        "~/Content/Scripts/Upload/canvas-to-blob.min.js",
-                                        "~/Content/Scripts/Upload/jquery.iframe-transport.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload-process.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload-image.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload-audio.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload-video.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload-validate.js",
-                                        "~/Content/Scripts/Upload/bootstrap-progressbar.js",
-                                        "~/Content/Scripts/Upload/devOrgUploadConfig.js"
+                                   "~/Content/Scripts/Bundles/UploadJs.min.js.gz"
                                    ));
-                    #endregion
-
-                    #region Mordernizer
-                    //bundles.Add(new ScriptBundle("~/bundles/modernizr", mordernizerCdn)
-                    //        .Include("~/Content/Scripts/modernizr-*") //if no CDN
-                    //);
                     #endregion
 
                     #region Bootstrap
                     bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                                  "~/Content/Scripts/bootstrap.js", // 3.1.2
-                                  "~/Content/Scripts/respond.js",
-                                  "~/Content/Scripts/star-rating.js",
-                                   "~/Scripts/underscore.js",
-                                  "~/Scripts/CustomScripts/CommonJsEveryPage.js"
-
+                                  "~/Content/Scripts/Bundles/FrontEndJs.min.js.gz"
                                   ));
                     #endregion
 
                     #endregion
 
                     #region CSS Bundles
-                    bundles.Add(new StyleBundle("~/Content/css/bootstrap_red").Include(
-                                        "~/Content/css/bootstrap.theme.unitied.css"
 
-                    ));
-                    bundles.Add(new StyleBundle("~/Content/css/FrontEndDeveloperCSS/bootstrap").Include(
-                                        "~/Content/css/frontEnd-bootstrap.min.css",
-                                        "~/Content/css/FrontEndDeveloperCSS/main.css",
-                                        "~/Content/css/FrontEndDeveloperCSS/menu.css",
-                                        "~/Content/css/FrontEndDeveloperCSS/media.css",
-                                        "~/Content/css/FrontEndDeveloperCSS/nivo-lightbox.css",
-                                        "~/Content/css/FrontEndDeveloperCSS/nivo-lightbox-extra.css"
-
-                    ));
-
-                    //bundles.Add(new StyleBundle("~/Content/css/FrontEndDeveloperCSS/bootstrap").Include(
-                    //                    "~/Content/css/FrontEndDeveloperCSS/FrontEndMinifiedCSS.css"
-
-                    //));
                     bundles.Add(new StyleBundle("~/Content/css/styles").Include(
-                                        "~/Content/css/site.css",
-                                        "~/Content/css/flags32.css",
-                                        "~/Content/css/Upload/jquery.fileupload.css",
-                                        "~/Content/css/flags32-combo.css",
-                                        "~/Content/css/bootstrap-datetimepicker.css",
-                                        "~/Content/css/bootstrap-table.css",
-                                        "~/Content/css/color-fonts.css",
-                                        "~/Content/css/font-awesome.css",
-                                        "~/Content/css/star-rating.css",
-                                        "~/Content/css/miscellaneous.css",
-                                        "~/Content/css/bootstrap-select.css",
-                                        "~/Content/css/overridecss.css"
+                                  "~/Content/CompactCSS.min.css.gz"
+
                     ));
 
-                    #endregion
-
-                    #region WereViewApp Js
-                    bundles.Add(new ScriptBundle("~/bundles/WereViewApps").Include(
-
-                                   "~/Content/Scripts/FrontEnd/nivo-lightbox.min.js",
-                                   "~/Content/Scripts/FrontEnd/jquery.number.js",
-                                   "~/Scripts/CustomScripts/WereViewApps.js"
-                    ));
                     #endregion
                     break;
 
