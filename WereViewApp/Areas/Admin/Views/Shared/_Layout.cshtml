@@ -43,8 +43,10 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        @Html.Partial("_Footer")
     </div>
+    @Html.Partial("_Footer")
+
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

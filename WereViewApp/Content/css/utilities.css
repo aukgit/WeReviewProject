@@ -438,10 +438,12 @@ hr {
   margin-bottom: 8px;
 }
 .gap-from-top {
-  margin-top: 50px;
+  margin-top: 55px;
+  margin-top: 5.5rem;
 }
 .gap-from-top-small {
   margin-top: 25px;
+  margin-top: 2.5rem;
 }
 a.no-hover {
   text-decoration: none;
