@@ -13,6 +13,7 @@
   <!--The order of the <file> elements determines the order of the files in the bundle.-->
   <files>
     <file>/Content/css/bootstrap.css</file>
+    <file>/Content/css/less-imports.css</file>
     <file>/Content/css/animate.min.css</file>
     <file>/Content/css/font-awesome.min.css</file>
     <file>/Content/css/base-theme-styles.css</file>

@@ -92,10 +92,10 @@ namespace WereViewApp {
 
                     bundles.Add(new StyleBundle("~/Content/css/styles").Include(
                                         "~/Content/css/bootstrap.css",
+                                        "~/Content/css/less-imports.css",
                                         "~/Content/css/animate.min.css",
                                         "~/Content/css/font-awesome.min.css",
                                         "~/Content/css/base-theme-styles.css",
-
                                         "~/Content/css/site.css",
                                         "~/Content/css/flags32.css",
                                         "~/Content/css/flags32-combo.css",

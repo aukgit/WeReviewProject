@@ -5,15 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="@AppConfig.Setting.GoogleMetaTag" />
     <title>@ViewBag.Title</title>
-
-    @if (ViewBag.blackTheme == null) {
-        @Styles.Render("~/Content/css/bootstrap_red")
-    } else {
-        @Styles.Render("~/Content/css/FrontEndDeveloperCSS/bootstrap")
-    }
-
     @Styles.Render("~/Content/css/styles")
-    @Scripts.Render("~/bundles/modernizr")
     @RenderSection("css", required: false)
     @if (ViewBag.Meta != null) {
         <meta name="description" content="@ViewBag.Meta" />
@@ -37,7 +29,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="@AppVar.Url" class="navbar-brand" title="@AppVar.Name - @AppVar.Subtitle"><span class="glyphicon glyphicon-home"></span> @AppVar.Name</a></li>
                     @Html.GetMenu("Main")
-                   
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
