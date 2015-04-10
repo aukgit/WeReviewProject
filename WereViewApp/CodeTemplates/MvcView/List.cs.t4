@@ -52,7 +52,7 @@ if (!String.IsNullOrEmpty(LayoutPageFile)) {
 #>
 }
 
-<h2 class="h3 gap-from-top-small">
+<h2 class="h3 gap-from-top">
 	<span class="glyphicon glyphicon-th-list"></span> 
 	@Html.SamePageLink(title, subtitle, false)
 </h2>

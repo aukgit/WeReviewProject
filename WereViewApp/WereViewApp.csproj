@@ -508,6 +508,9 @@
     <Content Include="Content\fonts\fontawesome-webfont78ce.woff" />
     <Content Include="Content\fonts\fontawesome-webfontd41d.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\css\utilities.css.map">
+      <DependentUpon>utilities.css</DependentUpon>
+    </Content>
     <None Include="Content\Less\override-mvc.less" />
     <Content Include="Content\revolution-slider\assets\arrowleft.png" />
     <Content Include="Content\revolution-slider\assets\arrowright.png" />
