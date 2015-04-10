@@ -3,7 +3,7 @@
 @model WereViewApp.Models.EntityModel.App
 
 @{
-    Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
+    //Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
     string appName = Model.AppName;
     var currentUrl = @Html.GetCurrentURLString();
     ViewBag.Title = Model.Platform.PlatformName + " : " +  appName;

@@ -26,7 +26,7 @@
         @Html.HiddenFor(model => model.URL)
         @Html.Partial("_CreateOrEdit")
         @Html.Partial("_Uploaders")
-        
+
         @Html.EditorFor(model => model.IsPublished)
 
         <div class="form-group">
@@ -44,7 +44,9 @@
     </div>
 }
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/upload")
-    
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
 }

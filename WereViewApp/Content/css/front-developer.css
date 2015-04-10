@@ -17,6 +17,13 @@ body #wrap .app-details-page {
 .btn-default:hover {
   color: #333;
 }
+.btn-primary,
+.btn-default {
+  background-color: #ff7200;
+}
+.btn-success {
+  background-color: #19c234;
+}
 .rating-disabled {
   cursor: default;
 }

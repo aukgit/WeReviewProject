@@ -12,7 +12,7 @@
 /// <reference path="../../Content/Scripts/bootstrap-table-filter.js" />
 /// <reference path="../../Content/Scripts/Scripts/jquery.elastic.source.js" />
 
-/*
+/*!
  * Written by Alim Ul Karim
  * Developers Organism
  * https://www.facebook.com/DevelopersOrganism
@@ -100,7 +100,7 @@ $(function () {
         $tables.bootstrapTable();
     }
 
-
+    
     $("select.selectpicker").selectpicker();
     $.devOrg.bootstrapComboSelectIndex("select.selectpicker", 0);
 

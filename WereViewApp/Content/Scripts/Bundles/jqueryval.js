@@ -1364,6 +1364,26 @@ $.extend($.fn, {
 });
 
 }));
+///#source 1 1 /Content/Scripts/jquery.validate.unobtrusive.min.js
+/* NUGET: BEGIN LICENSE TEXT
+ *
+ * Microsoft grants you the right to use these script files for the sole
+ * purpose of either: (i) interacting through your browser with the Microsoft
+ * website or online service, subject to the applicable licensing or use
+ * terms; or (ii) using the files as included with a Microsoft product subject
+ * to that product's license terms. Microsoft reserves all other rights to the
+ * files not expressly granted by Microsoft, whether by implication, estoppel
+ * or otherwise. Insofar as a script file is dual licensed under GPL,
+ * Microsoft neither took the code under GPL nor distributes it thereunder but
+ * under the terms set out in this paragraph. All notices and licenses
+ * below are for informational purposes only.
+ *
+ * NUGET: END LICENSE TEXT */
+/*
+** Unobtrusive validation support library for jQuery and jQuery Validate
+** Copyright (C) Microsoft Corporation. All rights reserved.
+*/
+(function(a){var d=a.validator,b,e="unobtrusiveValidation";function c(a,b,c){a.rules[b]=c;if(a.message)a.messages[b]=a.message}function j(a){return a.replace(/^\s+|\s+$/g,"").split(/\s*,\s*/g)}function f(a){return a.replace(/([!"#$%&'()*+,./:;<=>?@\[\\\]^`{|}~])/g,"\\$1")}function h(a){return a.substr(0,a.lastIndexOf(".")+1)}function g(a,b){if(a.indexOf("*.")===0)a=a.replace("*.",b);return a}function m(c,e){var b=a(this).find("[data-valmsg-for='"+f(e[0].name)+"']"),d=b.attr("data-valmsg-replace"),g=d?a.parseJSON(d)!==false:null;b.removeClass("field-validation-valid").addClass("field-validation-error");c.data("unobtrusiveContainer",b);if(g){b.empty();c.removeClass("input-validation-error").appendTo(b)}else c.hide()}function l(e,d){var c=a(this).find("[data-valmsg-summary=true]"),b=c.find("ul");if(b&&b.length&&d.errorList.length){b.empty();c.addClass("validation-summary-errors").removeClass("validation-summary-valid");a.each(d.errorList,function(){a("<li />").html(this.message).appendTo(b)})}}function k(d){var b=d.data("unobtrusiveContainer"),c=b.attr("data-valmsg-replace"),e=c?a.parseJSON(c):null;if(b){b.addClass("field-validation-valid").removeClass("field-validation-error");d.removeData("unobtrusiveContainer");e&&b.empty()}}function n(){var b=a(this);b.data("validator").resetForm();b.find(".validation-summary-errors").addClass("validation-summary-valid").removeClass("validation-summary-errors");b.find(".field-validation-error").addClass("field-validation-valid").removeClass("field-validation-error").removeData("unobtrusiveContainer").find(">*").removeData("unobtrusiveContainer")}function i(b){var c=a(b),f=c.data(e),i=a.proxy(n,b),g=d.unobtrusive.options||{},h=function(e,d){var c=g[e];c&&a.isFunction(c)&&c.apply(b,d)};if(!f){f={options:{errorClass:g.errorClass||"input-validation-error",errorElement:g.errorElement||"span",errorPlacement:function(){m.apply(b,arguments);h("errorPlacement",arguments)},invalidHandler:function(){l.apply(b,arguments);h("invalidHandler",arguments)},messages:{},rules:{},success:function(){k.apply(b,arguments);h("success",arguments)}},attachValidation:function(){c.off("reset."+e,i).on("reset."+e,i).validate(this.options)},validate:function(){c.validate();return c.valid()}};c.data(e,f)}return f}d.unobtrusive={adapters:[],parseElement:function(b,h){var d=a(b),f=d.parents("form")[0],c,e,g;if(!f)return;c=i(f);c.options.rules[b.name]=e={};c.options.messages[b.name]=g={};a.each(this.adapters,function(){var c="data-val-"+this.name,i=d.attr(c),h={};if(i!==undefined){c+="-";a.each(this.params,function(){h[this]=d.attr(c+this)});this.adapt({element:b,form:f,message:i,params:h,rules:e,messages:g})}});a.extend(e,{__dummy__:true});!h&&c.attachValidation()},parse:function(c){var b=a(c),e=b.parents().addBack().filter("form").add(b.find("form")).has("[data-val=true]");b.find("[data-val=true]").each(function(){d.unobtrusive.parseElement(this,true)});e.each(function(){var a=i(this);a&&a.attachValidation()})}};b=d.unobtrusive.adapters;b.add=function(c,a,b){if(!b){b=a;a=[]}this.push({name:c,params:a,adapt:b});return this};b.addBool=function(a,b){return this.add(a,function(d){c(d,b||a,true)})};b.addMinMax=function(e,g,f,a,d,b){return this.add(e,[d||"min",b||"max"],function(b){var e=b.params.min,d=b.params.max;if(e&&d)c(b,a,[e,d]);else if(e)c(b,g,e);else d&&c(b,f,d)})};b.addSingleVal=function(a,b,d){return this.add(a,[b||"val"],function(e){c(e,d||a,e.params[b])})};d.addMethod("__dummy__",function(){return true});d.addMethod("regex",function(b,c,d){var a;if(this.optional(c))return true;a=(new RegExp(d)).exec(b);return a&&a.index===0&&a[0].length===b.length});d.addMethod("nonalphamin",function(c,d,b){var a;if(b){a=c.match(/\W/g);a=a&&a.length>=b}return a});if(d.methods.extension){b.addSingleVal("accept","mimtype");b.addSingleVal("extension","extension")}else b.addSingleVal("extension","extension","accept");b.addSingleVal("regex","pattern");b.addBool("creditcard").addBool("date").addBool("digits").addBool("email").addBool("number").addBool("url");b.addMinMax("length","minlength","maxlength","rangelength").addMinMax("range","min","max","range");b.addMinMax("minlength","minlength").addMinMax("maxlength","minlength","maxlength");b.add("equalto",["other"],function(b){var i=h(b.element.name),j=b.params.other,d=g(j,i),e=a(b.form).find(":input").filter("[name='"+f(d)+"']")[0];c(b,"equalTo",e)});b.add("required",function(a){(a.element.tagName.toUpperCase()!=="INPUT"||a.element.type.toUpperCase()!=="CHECKBOX")&&c(a,"required",true)});b.add("remote",["url","type","additionalfields"],function(b){var d={url:b.params.url,type:b.params.type||"GET",data:{}},e=h(b.element.name);a.each(j(b.params.additionalfields||b.element.name),function(i,h){var c=g(h,e);d.data[c]=function(){return a(b.form).find(":input").filter("[name='"+f(c)+"']").val()}});c(b,"remote",d)});b.add("password",["min","nonalphamin","regex"],function(a){a.params.min&&c(a,"minlength",a.params.min);a.params.nonalphamin&&c(a,"nonalphamin",a.params.nonalphamin);a.params.regex&&c(a,"regex",a.params.regex)});a(function(){d.unobtrusive.parse(document)})})(jQuery);
 ///#source 1 1 /Content/Scripts/moment.js
 // moment.js
 // version : 2.8.3
@@ -9588,6 +9608,169 @@ THE SOFTWARE.*/
         }
     };
 })(jQuery);
+///#source 1 1 /Content/Scripts/jquery.elastic.source.js
+/**
+*	@name							Elastic
+*	@descripton						Elastic is jQuery plugin that grow and shrink your textareas automatically
+*	@version						1.6.11
+*	@requires						jQuery 1.2.6+
+*
+*	@author							Jan Jarfalk
+*	@author-email					jan.jarfalk@unwrongest.com
+*	@author-website					http://www.unwrongest.com
+*
+*	@licence						MIT License - http://www.opensource.org/licenses/mit-license.php
+*/
+
+(function($){ 
+	jQuery.fn.extend({  
+		elastic: function() {
+		
+			//	We will create a div clone of the textarea
+			//	by copying these attributes from the textarea to the div.
+			var mimics = [
+				'paddingTop',
+				'paddingRight',
+				'paddingBottom',
+				'paddingLeft',
+				'fontSize',
+				'lineHeight',
+				'fontFamily',
+				'width',
+				'fontWeight',
+				'border-top-width',
+				'border-right-width',
+				'border-bottom-width',
+				'border-left-width',
+				'borderTopStyle',
+				'borderTopColor',
+				'borderRightStyle',
+				'borderRightColor',
+				'borderBottomStyle',
+				'borderBottomColor',
+				'borderLeftStyle',
+				'borderLeftColor'
+				];
+			
+			return this.each( function() {
+
+				// Elastic only works on textareas
+				if ( this.type !== 'textarea' ) {
+					return false;
+				}
+					
+			var $textarea	= jQuery(this),
+				$twin		= jQuery('<div />').css({
+					'position'		: 'absolute',
+					'display'		: 'none',
+					'word-wrap'		: 'break-word',
+					'white-space'	:'pre-wrap'
+				}),
+				lineHeight	= parseInt($textarea.css('line-height'),10) || parseInt($textarea.css('font-size'),'10'),
+				minheight	= parseInt($textarea.css('height'),10) || lineHeight*3,
+				maxheight	= parseInt($textarea.css('max-height'),10) || Number.MAX_VALUE,
+				goalheight	= 0;
+				
+				// Opera returns max-height of -1 if not set
+				if (maxheight < 0) { maxheight = Number.MAX_VALUE; }
+					
+				// Append the twin to the DOM
+				// We are going to meassure the height of this, not the textarea.
+				$twin.appendTo($textarea.parent());
+				
+				// Copy the essential styles (mimics) from the textarea to the twin
+				var i = mimics.length;
+				while(i--){
+					$twin.css(mimics[i].toString(),$textarea.css(mimics[i].toString()));
+				}
+				
+				// Updates the width of the twin. (solution for textareas with widths in percent)
+				function setTwinWidth(){
+					var curatedWidth = Math.floor(parseInt($textarea.width(),10));
+					if($twin.width() !== curatedWidth){
+						$twin.css({'width': curatedWidth + 'px'});
+						
+						// Update height of textarea
+						update(true);
+					}
+				}
+				
+				// Sets a given height and overflow state on the textarea
+				function setHeightAndOverflow(height, overflow){
+				
+					var curratedHeight = Math.floor(parseInt(height,10));
+					if($textarea.height() !== curratedHeight){
+						$textarea.css({'height': curratedHeight + 'px','overflow':overflow});
+					}
+				}
+				
+				// This function will update the height of the textarea if necessary 
+				function update(forced) {
+					
+					// Get curated content from the textarea.
+					var textareaContent = $textarea.val().replace(/&/g,'&amp;').replace(/ {2}/g, '&nbsp;').replace(/<|>/g, '&gt;').replace(/\n/g, '<br />');
+					
+					// Compare curated content with curated twin.
+					var twinContent = $twin.html().replace(/<br>/ig,'<br />');
+					
+					if(forced || textareaContent+'&nbsp;' !== twinContent){
+					
+						// Add an extra white space so new rows are added when you are at the end of a row.
+						$twin.html(textareaContent+'&nbsp;');
+						
+						// Change textarea height if twin plus the height of one line differs more than 3 pixel from textarea height
+						if(Math.abs($twin.height() + lineHeight - $textarea.height()) > 3){
+							
+							var goalheight = $twin.height()+lineHeight;
+							if(goalheight >= maxheight) {
+								setHeightAndOverflow(maxheight,'auto');
+							} else if(goalheight <= minheight) {
+								setHeightAndOverflow(minheight,'hidden');
+							} else {
+								setHeightAndOverflow(goalheight,'hidden');
+							}
+							
+						}
+						
+					}
+					
+				}
+				
+				// Hide scrollbars
+				$textarea.css({'overflow':'hidden'});
+				
+				// Update textarea size on keyup, change, cut and paste
+				$textarea.bind('keyup change cut paste', function(){
+					update(); 
+				});
+				
+				// Update width of twin if browser or textarea is resized (solution for textareas with widths in percent)
+				$(window).bind('resize', setTwinWidth);
+				$textarea.bind('resize', setTwinWidth);
+				$textarea.bind('update', update);
+				
+				// Compact textarea on blur
+				$textarea.bind('blur',function(){
+					if($twin.height() < maxheight){
+						if($twin.height() > minheight) {
+							$textarea.height($twin.height());
+						} else {
+							$textarea.height(minheight);
+						}
+					}
+				});
+				
+				// And this line is to catch the browser paste event
+				$textarea.bind('input paste',function(e){ setTimeout( update, 250); });				
+				
+				// Run update once when elastic is initialized
+				update();
+				
+			});
+			
+        } 
+    }); 
+})(jQuery);
 ///#source 1 1 /Content/Scripts/DevOrgPlugins/developers-organism.component.js
 // <reference path="../jquery-2.1.1.js" />
 // <reference path="../jquery-2.1.1.intellisense.js" />
@@ -9599,7 +9782,7 @@ THE SOFTWARE.*/
 // <reference path="../underscore.js" />
 // <reference path="DevOrgComponent.js" />
 
-/*
+/*!
  * Written by Alim Ul Karim
  * Developers Organism
  * https://www.facebook.com/DevelopersOrganism
@@ -10412,7 +10595,7 @@ $(function() {
 /// <reference path="../../Content/Scripts/bootstrap-table-filter.js" />
 /// <reference path="../../Content/Scripts/Scripts/jquery.elastic.source.js" />
 
-/*
+/*!
  * Written by Alim Ul Karim
  * Developers Organism
  * https://www.facebook.com/DevelopersOrganism
@@ -10500,7 +10683,7 @@ $(function () {
         $tables.bootstrapTable();
     }
 
-
+    
     $("select.selectpicker").selectpicker();
     $.devOrg.bootstrapComboSelectIndex("select.selectpicker", 0);
 
@@ -10599,10 +10782,10 @@ $(function () {
     /// </summary>
     $.WereViewApp = {
 
-        appForm: $("form.app-editing-page"), // means both editing and posting
-        appFormEdit: $("form.app-edit"),
-        appFormPost: $("form.app-post"),
-        $allInputs: $("form.app-post input"),
+        appForm: $("form.app-editing-page:first"), // means both editing and posting
+        appFormEdit: $("form.app-edit:first"),
+        appFormPost: $("form.app-post:first"),
+        $allInputs: $("form.app-post:first input"),
         ajaxDraftPostUrl: "/App/SaveDraft",
         $appPageUploaderNotifier: $("label.notify-global-info"),
         homePageUrl: "/",
@@ -10910,9 +11093,9 @@ $(function () {
                 $.devOrg.reSetupjQueryValidate("form");
 
 
-                $.WereViewApp.appForm.find("input,textarea").change(function () {
+                $.WereViewApp.appForm.find("input,textarea").change(function() {
                     $.WereViewApp.appInputChangesExist = true;
-                })
+                });
 
                 $.WereViewApp.appForm.find("select").selectpicker();
 

@@ -131,8 +131,8 @@ section {
 /*=======================================================
 			BUTTON
 ========================================================*/
-
-.btn { background: #ff7200; }
+/*Alim for btns*/
+/*.btn { background: #ff7200; }*/
 
 /*=======================================================
 			HEADING TITTLE
@@ -2845,8 +2845,8 @@ header .active .dropdown a:after { display: none; }
     min-height: 190px;
     padding: 10px 20px;
 }
-
-.contactForm input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus { background-color: rgba(0, 0, 0, 1); }
+/*Alim for multitext*/
+/*.contactForm input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus { background-color: rgba(0, 0, 0, 1); }*/
 
 .contactForm input::-webkit-input-placeholder, input:-moz-placeholder, input::-moz-placeholder, input:-ms-input-placeholder { color: #999; }
 

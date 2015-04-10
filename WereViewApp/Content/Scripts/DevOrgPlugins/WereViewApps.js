@@ -25,10 +25,10 @@ $(function () {
     /// </summary>
     $.WereViewApp = {
 
-        appForm: $("form.app-editing-page"), // means both editing and posting
-        appFormEdit: $("form.app-edit"),
-        appFormPost: $("form.app-post"),
-        $allInputs: $("form.app-post input"),
+        appForm: $("form.app-editing-page:first"), // means both editing and posting
+        appFormEdit: $("form.app-edit:first"),
+        appFormPost: $("form.app-post:first"),
+        $allInputs: $("form.app-post:first input"),
         ajaxDraftPostUrl: "/App/SaveDraft",
         $appPageUploaderNotifier: $("label.notify-global-info"),
         homePageUrl: "/",
@@ -336,9 +336,9 @@ $(function () {
                 $.devOrg.reSetupjQueryValidate("form");
 
 
-                $.WereViewApp.appForm.find("input,textarea").change(function () {
+                $.WereViewApp.appForm.find("input,textarea").change(function() {
                     $.WereViewApp.appInputChangesExist = true;
-                })
+                });
 
                 $.WereViewApp.appForm.find("select").selectpicker();
 

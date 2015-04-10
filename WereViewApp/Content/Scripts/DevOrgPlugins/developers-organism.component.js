@@ -8,7 +8,7 @@
 // <reference path="../underscore.js" />
 // <reference path="DevOrgComponent.js" />
 
-/*
+/*!
  * Written by Alim Ul Karim
  * Developers Organism
  * https://www.facebook.com/DevelopersOrganism

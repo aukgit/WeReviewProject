@@ -11,12 +11,15 @@
   <!--The order of the <file> elements determines the order of the files in the bundle.-->
   <files>
     <file>/Content/Scripts/jquery.validate.js</file>
+    <file>/Content/Scripts/jquery.validate.unobtrusive.min.js</file>
     <file>/Content/Scripts/moment.js</file>
     <file>/Content/Scripts/bootstrap-datetimepicker.js</file>
     <file>/Content/Scripts/bootstrap-select.js</file>
     <file>/Content/Scripts/bootstrap-table.js</file>
     <file>/Content/Scripts/bootstrap-table-filter.js</file>
     <file>/Content/Scripts/bootstrap-table-export.js</file>
+    <file>/Content/Scripts/jquery.elastic.source.js</file>
+
     <file>/Content/Scripts/DevOrgPlugins/developers-organism.component.js</file>
     <file>/Content/Scripts/DevOrgPlugins/dev-component-runner.js</file>
     <file>/Content/Scripts/DevOrgPlugins/WereViewApps.js</file>

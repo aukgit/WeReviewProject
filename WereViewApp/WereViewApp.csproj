@@ -476,6 +476,7 @@
     <Content Include="Content\css\less-imports.css.map">
       <DependentUpon>less-imports.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\menu-fix.css" />
     <Content Include="Content\css\override-mvc.css" />
     <Content Include="Content\css\owl.custom.finalize.css" />
     <Content Include="Content\css\seo-optimize.css" />
@@ -510,6 +511,9 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\css\utilities.css.map">
       <DependentUpon>utilities.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\menu-fix.css.map">
+      <DependentUpon>menu-fix.css</DependentUpon>
     </Content>
     <None Include="Content\Less\override-mvc.less" />
     <Content Include="Content\revolution-slider\assets\arrowleft.png" />

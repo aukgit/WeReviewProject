@@ -33,16 +33,18 @@ namespace WereViewApp {
                     #region Validation Bundle & Form Inputs Processing
                     bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                                     "~/Content/Scripts/jquery.validate.js",
+                                    "~/Content/Scripts/jquery.validate.unobtrusive.js",
+
                                     "~/Content/Scripts/moment.js",
                                     "~/Content/Scripts/bootstrap-datetimepicker.js",
                                     "~/Content/Scripts/bootstrap-select.js",
                                     "~/Content/Scripts/bootstrap-table.js",
                                     "~/Content/Scripts/bootstrap-table-filter.js",
                                     "~/Content/Scripts/bootstrap-table-export.js",
+                                    "~/Content/Scripts/jquery.elastic.source.js",
                                     "~/Content/Scripts/DevOrgPlugins/developers-organism.component.js",
                                     "~/Content/Scripts/DevOrgPlugins/dev-component-runner.js",
                                     "~/Content/Scripts/DevOrgPlugins/WereViewApps.js"
-
                                    ));
                     #endregion
 
@@ -67,7 +69,7 @@ namespace WereViewApp {
                     bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                                   "~/Content/Scripts/bootstrap.js", // 3.1.2
                                   "~/Content/Scripts/star-rating.js",
-                                  "~/Scripts/underscore.js",
+                                  "~/Content/Scripts/underscore.js",
                                   "~/Content/Scripts/DevOrgPlugins/every-page.js",
                                   "~/Content/Scripts/FrontEnd/wow.min.js",
                                   "~/Content/Scripts/FrontEnd/jquery.sticky.js",
