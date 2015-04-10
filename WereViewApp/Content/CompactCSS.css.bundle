@@ -16,7 +16,6 @@
     <file>/Content/css/less-imports.css</file>
     <file>/Content/css/animate.min.css</file>
     <file>/Content/css/font-awesome.min.css</file>
-    <file>/Content/css/base-theme-styles.css</file>
     
     <file>/Content/css/site.css</file>
     <file>/Content/css/flags32.css</file>
@@ -31,6 +30,8 @@
     <file>/Content/css/star-rating.css</file>
     <file>/Content/css/override-mvc.css</file>
     
+    <file>/Content/css/base-theme-styles.css</file>
+    <file>/Content/css/style.css</file>
     <file>/Content/css/responsive.css</file>
     <file>/Content/revolution-slider/css/settings.css</file>
     

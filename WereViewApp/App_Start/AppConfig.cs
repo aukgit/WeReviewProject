@@ -81,7 +81,7 @@ namespace WereViewApp {
         /// Settings will not be null. Default values will be pushed.
         /// </summary>
         /// <returns></returns>
-        public static bool CreateDefaultCoreSetting() {
+        private static bool CreateDefaultCoreSetting() {
             var s = Setting;
             if (s == null) {
                 //no setting exist , need to create a default setting.
@@ -127,7 +127,7 @@ namespace WereViewApp {
                         IsFirstUserFound = false
                     };
                     db.CoreSettings.Add(setting);
-                    int i = db.SaveChanges();
+                    var i = db.SaveChanges();
                     if (i >= 0) {
                         return true;
                     } else {

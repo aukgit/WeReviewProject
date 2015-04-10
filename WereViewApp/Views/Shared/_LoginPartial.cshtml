@@ -1,22 +1,50 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
-
-    <ul class="nav navbar-nav navbar-right">
+@if (Request.IsAuthenticated) {
+    using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" })) {
+        @Html.AntiForgeryToken()
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: new { area="" }, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: new { area = "" }, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Sign out</a></li>
-    </ul>
     }
-}
-else
-{
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: new { area="" }, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: new { Area = "" }, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+} else {
+    <li title="Login in WeReviewApp.com">
+        <a href="#" title="Login in WeReviewApp.com">
+            <h1 title="Login in WeReviewApp.com">
+                <strong title="Login in WeReviewApp.com">
+                    <em title="Login in WeReviewApp.com">
+                        Login
+                    </em>
+                </strong>
+            </h1>
+        </a>
+        <ul class="dropdown animated fadeIn">
+            <li>
+                <a href="@AppVar.Url/Login" title="Login in WeReviewApp.com">
+                    <h1 title="Login in WeReviewApp.com">
+                        <strong title="Login in WeReviewApp.com">
+                            <em title="Login in WeReviewApp.com">
+                                Login
+                            </em>
+                        </strong>
+                    </h1>
+                </a>
+            </li>
+            <li>
+                <a href="@AppVar.Url/Register" title="Register in WeReviewApp.com">
+                    <h1 title="Register in WeReviewApp.com">
+                        <strong title="Register in WeReviewApp.com">
+                            <em title="Register in WeReviewApp.com">
+                                Login
+                            </em>
+                        </strong>
+                    </h1>
+                </a>
+            </li>
+        </ul>
+    </li>
+    @*<ul class="nav navbar-nav navbar-right">
+            <li>@Url.Action("Register", "Account", routeValues: new { area="" })</li>
+            <li>@Url.Action("Login", "Account", routeValues: new { Area = "" })</li>
+        </ul>*@
 }

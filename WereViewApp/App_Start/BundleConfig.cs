@@ -17,11 +17,11 @@ namespace WereViewApp {
             const string mordernizerCdn = "http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js";
             //const string respondJsCDN = "http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"
             #endregion
-            const BundleSelector bundleSelector = BundleSelector.EveryScriptGzip;
+            const BundleSelector bundleSelector = BundleSelector.ShowEveryScript;
 
             #region jQuery
             bundles.Add(new ScriptBundle("~/bundles/jquery", jQueryCdn)
-                        .Include("~/Scripts/jquery-2.1.3.min.js") //if no CDN
+                        .Include("~/Content/Scripts/jquery-2.1.3.min.js") //if no CDN
             );
             #endregion
 
@@ -79,8 +79,6 @@ namespace WereViewApp {
                                   "~/Content/revolution-slider/js/jquery.themepunch.tools.min.js",
                                   "~/Content/revolution-slider/js/jquery.themepunch.revolution.min.js",
                                   "~/Content/Scripts/FrontEnd/front-developer.js",
-                                  "~/Scripts/CustomScripts/CommonJsEveryPage.js",
-
                                   "~/Scripts/CustomScripts/CommonJsEveryPage.js"
 
                                   ));
@@ -95,7 +93,6 @@ namespace WereViewApp {
                                         "~/Content/css/less-imports.css",
                                         "~/Content/css/animate.min.css",
                                         "~/Content/css/font-awesome.min.css",
-                                        "~/Content/css/base-theme-styles.css",
                                         "~/Content/css/site.css",
                                         "~/Content/css/flags32.css",
                                         "~/Content/css/flags32-combo.css",
@@ -108,6 +105,9 @@ namespace WereViewApp {
                                         "~/Content/css/color-fonts.css",
                                         "~/Content/css/star-rating.css",
                                         "~/Content/css/override-mvc.css",
+
+                                        "~/Content/css/base-theme-styles.css",
+                                        "~/Content/css/style.css",
 
                                         "~/Content/css/responsive.css",
                                         "~/Content/revolution-slider/css/settings.css",
@@ -160,7 +160,7 @@ namespace WereViewApp {
                     #endregion
                     break;
                 case BundleSelector.EveryScriptGzip:
-            #region Java Scripts Bundle
+                    #region Java Scripts Bundle
 
                     #region Validation Bundle & Form Inputs Processing
                     bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
