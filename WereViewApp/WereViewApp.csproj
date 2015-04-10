@@ -558,10 +558,9 @@
     <Content Include="Content\revolution-slider\images\gradient\g40.png" />
     <Content Include="Content\revolution-slider\js\jquery.themepunch.revolution.min.js" />
     <Content Include="Content\revolution-slider\js\jquery.themepunch.tools.min.js" />
-    <Content Include="Content\Scripts\bootstrap-datepicker.js" />
     <Content Include="Content\Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Content\Scripts\bootstrap-select.js" />
-    <Content Include="Content\Scripts\bootstrap-timepicker.js" />
+    <Content Include="Content\Scripts\bootstrap-table.js" />
     <Content Include="Content\Scripts\bootstrap.min.js" />
     <Content Include="Content\Scripts\Bundles\FrontEndJs.js">
       <DependentUpon>FrontEndJs.js.bundle</DependentUpon>
@@ -761,7 +760,6 @@
     <Content Include="images\thumb9.jpg" />
     <Content Include="robots.txt" />
     <Content Include="Content\Scripts\bootstrap-table-export.js" />
-    <Content Include="Content\Scripts\bootstrap-table.js" />
     <Content Include="Areas\Admin\Views\ImageResizeSettings\Create.cshtml" />
     <Content Include="Areas\Admin\Views\ImageResizeSettings\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\ImageResizeSettings\Details.cshtml" />
