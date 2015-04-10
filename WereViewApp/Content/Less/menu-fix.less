@@ -97,12 +97,15 @@
         font-weight: normal;
     }
 
-    ul.dropdown li:hover > a {
+    ul.dropdown li:hover > a, ul.dropdown li:hover > form > a {
         background-color: @bg-menu-li-hover-color;
     }
 }
 
 .menu {
+    a {
+        cursor:pointer;
+    }
     .navbar-form {
         margin: 0;
         padding: 0;

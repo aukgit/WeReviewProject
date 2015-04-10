@@ -299,13 +299,9 @@
   width: 100%;
 }
 /*table related */
-h1,
-h2,
-h3,
-h4,
-h5 {
-  display: inline;
-}
+/*h1, h2, h3, h4, h5 {
+    display: inline;
+}*/
 .h1,
 .h2,
 .h3,
@@ -315,7 +311,9 @@ h5 {
   margin: 0;
   padding: 0;
   padding-bottom: 3px;
+  padding-bottom: 0.3rem;
   padding-top: 9px;
+  padding-top: 0.9rem;
 }
 table caption {
   background-color: #D0DEC2;

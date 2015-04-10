@@ -11,6 +11,12 @@ body #wrap .app-details-page {
 .primary-color {
   color: #ff7200;
 }
+.btn-default {
+  color: white;
+}
+.btn-default:hover {
+  color: #333;
+}
 .rating-disabled {
   cursor: default;
 }
@@ -318,8 +324,12 @@ body #wrap .app-details-page {
 .jetmenu strong {
   font-weight: normal;
 }
-.jetmenu ul.dropdown li:hover > a {
+.jetmenu ul.dropdown li:hover > a,
+.jetmenu ul.dropdown li:hover > form > a {
   background-color: #90d8f7;
+}
+.menu a {
+  cursor: pointer;
 }
 .menu .navbar-form {
   margin: 0;
