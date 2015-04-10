@@ -1,14 +1,25 @@
 ﻿@{
-    ViewBag.Title = @AppVar.Name;
+    ViewBag.Title = @AppVar.Name + " : " + AppVar.Subtitle;
     //Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
 }
+
+@{Html.RenderAction("HomePageGallery", "Partials");}
+@{Html.RenderAction("LatestAppsList", "Partials");}
+@{Html.RenderAction("TopAppsList", "Partials");}
+
+
+
+
+
+
+
+
 <!-- slideshow part start -->
 @*<div class="banner">
     <div class="row">
         <div class="wrapper">
             @{Html.RenderAction("NavBar", "Partials");}
         </div> <!--    wrapper end - -->
-        @{Html.RenderAction("HomePageGallery", "Partials");}
     </div>
     <div class="shadeBox">&nbsp;</div>
 </div>
@@ -20,10 +31,8 @@
         <div class="contenCol col-md-9 col-sm-9">
             <div class="itemboxWrap row">
                 <div class="itembox col-md-4 col-sm-4 first">
-                    @{Html.RenderAction("LatestAppsList", "Partials");}
                 </div>
 
-                @{Html.RenderAction("TopAppsList", "Partials");}
 
             </div>
         </div>

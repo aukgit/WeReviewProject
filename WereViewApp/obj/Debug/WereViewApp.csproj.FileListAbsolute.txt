@@ -279,3 +279,4 @@ E:\Working\GitHub\WereViewProject\WereViewApp\bin\System.Web.WebPages.Razor.xml
 E:\Working\GitHub\WereViewProject\WereViewApp\bin\System.Web.Optimization.xml
 E:\Working\GitHub\WereViewProject\WereViewApp\obj\Debug\WereViewApp.dll
 E:\Working\GitHub\WereViewProject\WereViewApp\obj\Debug\WereViewApp.pdb
+E:\Working\GitHub\WereViewProject\WereViewApp\obj\Debug\WereViewApp.csprojResolveAssemblyReference.cache

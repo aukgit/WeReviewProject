@@ -1,29 +1,120 @@
-@helper ActiveItem(string actionName, string controllerName, string areaName)
-{
-    if ((string) ViewContext.RouteData.Values["action"] == actionName &&
-            (string) ViewContext.RouteData.Values["controller"] == controllerName &&
-            (ViewContext.RouteData.DataTokens["area"] == null || (string) ViewContext.RouteData.DataTokens["area"] == areaName))
-    {
+@helper ActiveItem(string actionName, string controllerName, string areaName) {
+    if ((string)ViewContext.RouteData.Values["action"] == actionName &&
+            (string)ViewContext.RouteData.Values["controller"] == controllerName &&
+            (ViewContext.RouteData.DataTokens["area"] == null || (string)ViewContext.RouteData.DataTokens["area"] == areaName)) {
         @:active
     }
 }
 
-<div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+@{
+    var appUrl = AppVar.Url ;
+}
 
+<div class="header-2">
+    <header class="sticky">
+        <div class="container">
+            <!--======= LOGO =========-->
+            <a class="logo" href="@appUrl" title="wereviewapp.com: App Review websie">
+                <h1 title="wereviewapp.com" class="wereviewapp.com website-head-title">
+                    <strong class="almost-black" title="App Review websie">we</strong><strong class="red" title="App Review websie">review</strong><strong class="orange-color" title="App Review websie">app.com</strong>
+                </h1>
+            </a>
+            <nav>
+                <ul class="jetmenu menu seo-optimize">
+                    <li class="active">
+                        <a href='@appUrl' title="App Review websie : Home"><strong title="App Review websie : Home">Home</strong></a>
+                    </li>
+                    <!--======= MEGA MENU =========-->
+                    <li>
+                        <a title="Mobile Apps">Apps</a>
+
+                        <ul class="dropdown animated fadeIn">
+                            <!--======= DROP MENU =========-->
+                            <li>
+                                <a href="@appUrl/Apps" title="Mobile Apps">Archived Mobile Apps</a>
+                            </li>
+                            <li>
+                                <a title="Mobile Apps Category">Category</a>
+                                <ul class="dropdown animated fadeIn">
+                                    <li> <a href="@appUrl/Category" title="Mobile Apps Category"><h1><strong>All Category</strong></h1><span class="badge float-right">4</span></a></li>
+                                    <li> <a href="08_Portfolio_1.html"><h1><strong>Agriculture</strong></h1><span class="badge float-right">4</span></a></li>
+                                    <li> <a href="09_Portfolio_2.html"><h1><strong>Health</strong></h1><span class="badge float-right">4</span></a></li>
+                                    <li> <a href="10_Portfolio_3.html"><h1><strong>LifeStyle</strong></h1><span class="badge float-right">4</span></a></li>
+                                    <li> <a href="12_Portfolio_4.html"><h1><strong>Games</strong></h1><span class="badge float-right">4</span></a></li>
+                                    <li> <a href="13_Portfolio_5.html"><h1><strong>Category 2</strong></h1><span class="badge float-right">4</span></a> </li>
+                                    <li> <a href="14_Portfolio_6.html"><h1><strong>Games</strong></h1><span class="badge float-right">4</span></a> </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="15_Portfolio_8.html">Platforms</a>
+                                <!--======= DROP MENU =========-->
+                                <ul class="dropdown animated fadeIn">
+                                    <li> <a href="08_Portfolio_1.html"><h1><strong>All Platform</strong></h1><span class="badge float-right">4</span></a></li>
+                                    <li title="Android Apps">
+                                        <a href="15_Portfolio_8.html">
+                                            <h1 title="Android Apps">
+                                                <i title="Android Apps" class="fa fa-android green"></i>
+                                                <strong title="Android Apps">Android Apps</strong>
+                                            </h1>
+                                            <span class="badge float-right">4</span>
+                                        </a>
+                                    </li>
+                                    <li title="Apple App">
+                                        <a href="15_Portfolio_8.html" title="Apple App">
+                                            <h1 title="Apple App">
+                                                <i title="Apple App" class="fa fa-apple"></i>
+                                                <strong title="Apple App">Apple Apps</strong>
+                                            </h1>
+                                            <span class="badge float-right">4</span>
+                                        </a>
+                                    </li>
+                                    <li title="Microsoft Apps">
+                                        <a href="15_Portfolio_8.html" title="Microsoft Apps">
+                                            <h1 title="Microsoft Apps">
+                                                <i title="Microsoft Apps" class="fa fa-windows sky-blue"></i>
+                                                <strong title="Microsoft Apps">Microsoft Apps</strong>
+                                            </h1>
+                                            <span class="badge float-right">4</span>
+                                        </a>
+                                    </li>
+                                    <li title="Others Mobile Apps">
+                                        <a href="15_Portfolio_8.html" title="Others Mobile Apps">
+                                            <h1 title="Others Mobile Apps">
+                                                <strong title="Microsoft Apps">Others Mobile Apps</strong>
+                                            </h1>
+                                            <span class="badge float-right">4</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li title="Contact review website's admin'">
+                        <a href="40_Contact_Us.html" title="Contact review website's admin"> Contact</a>
+                    </li>
+                    <li class="post-app-btn-wrapper btn-type">
+                        <a href="40_Contact_Us.html" class="btn btn-primary post-app-btn">
+                            Post App
+                        </a>
+                    </li>
+                    @Html.Partial("_LoginPartial")
+
+
+
+
+                    <li class="search-bar btn-type">
+                        <form class="navbar-form" role="search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search" name="q">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="@AppVar.Url" class="navbar-brand" title="@AppVar.Name - @AppVar.Subtitle"><span class="glyphicon glyphicon-home"></span> @AppVar.Name</a></li>
-                @Html.GetMenu("Main")
-            </ul>
-            @Html.Partial("_LoginPartial")
-        </div>
-    </div>
+    </header>
 </div>

@@ -6,7 +6,50 @@
     bool isFirst = true;
     Layout = null;
 }
-<h1 title="Latest Apps of @AppVar.Name"><a href="@Url.Action("Latest", "Apps")"> Latest Apps</a></h1>
+<h1 title="Latest Apps of @AppVar.Name"><a href="@Url.Action("Latest", "Apps")"> Latest Apps</a>
+</h1>
+
+<div class="apps-list-header-row">
+    <a class="title" href="#" title="Latest mobiles apps review of @AppVar.Name">
+        <h1 title="Latest mobiles apps review of @AppVar.Name" class="float-left">
+            <strong title="Latest mobiles apps review of @AppVar.Name">Latest Apps</strong>
+        </h1>
+    </a>
+    <a class="float-right btn btn-primary btn-more" href="#">
+        More
+    </a>
+    <div class="clear"></div>
+</div>
+<div class="owl-carousel owl-theme owl-list" itemprop="itemListElement" itemscope itemtype="http://schema.org/Book">
+    <a class="app-box" href="#">
+        <img class="app-icon" itemprop="image" src="/images/b-avatar-1.jpg" />
+        <div class="app-description-wrapper">
+            <div class="app-title-container">
+                <div class="app-title-row">
+                    <h1 itemprop="name" class="app-title ubuntu-font">
+                        <i class="fa fa-apple"></i>
+                        <strong>
+                            <em>
+                                Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                            </em>
+                        </strong>
+                    </h1>
+                    <span class="paragraph-end"></span>
+                </div>
+                <div class="published-by" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                    <span itemprop="name">Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</span>
+                    <span class="paragraph-end"></span>
+                </div>
+                <div class="seo-rating seo-hide" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                    <span itemprop="ratingValue">3.9</span> stars based on
+                    <meta itemprop="best" content="5" />
+                    <span itemprop="reviewCount">25</span> reviews
+                </div>
+                <input class="rating-5-front" value="3.5" min="0" max="5" step="0.5" data-readonly="true" data-size="xs">
+            </div>
+        </div>
+    </a>
+</div>
 @foreach (var app in Model) {
     string appName = @app.AppName;
     string absUrl = @app.GetAppUrl();
