@@ -463,10 +463,10 @@
     .rights .pull-right {
         float: none !important;
     }
-
-    .content {
+    /*Alim to fix all other inputs*/
+    /*.content {
         text-align: center;
-    }
+    }*/
 
         .content .img-responsive {
             display: inline-block;

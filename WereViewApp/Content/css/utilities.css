@@ -2,17 +2,25 @@
   margin-bottom: 8px;
   margin-bottom: 0.8rem;
 }
+.bottom-gap-2x {
+  margin-bottom: 16px;
+  margin-bottom: 1.6rem;
+}
 .bottom-gap-small {
   margin-bottom: 5px;
   margin-bottom: 0.5rem;
 }
 .top-gap {
-  margin-bottom: 8px;
-  margin-bottom: 0.8rem;
+  margin-top: 8px;
+  margin-top: 0.8rem;
+}
+.top-gap-2x {
+  margin-top: 16px;
+  margin-top: 1.6rem;
 }
 .top-gap-small {
-  margin-bottom: 5px;
-  margin-bottom: 0.5rem;
+  margin-top: 5px;
+  margin-top: 0.5rem;
 }
 .margin-r-20 {
   margin-right: 20px;

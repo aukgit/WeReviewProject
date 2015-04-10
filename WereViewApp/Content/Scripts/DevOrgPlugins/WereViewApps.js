@@ -366,9 +366,9 @@ $(function () {
 
         frontEndJavaScript: function () {
             var image = null;
-            $('.pricebox').number(true, 0);
+            //$('.pricebox').number(true, 0);
 
-            $('#slider-thumbs a').nivoLightbox({ effect: 'fade', keyboardNav: true });
+            //$('#slider-thumbs a').nivoLightbox({ effect: 'fade', keyboardNav: true });
 
 
 

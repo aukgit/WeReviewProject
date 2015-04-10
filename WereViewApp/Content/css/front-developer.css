@@ -93,7 +93,7 @@ body #wrap .app-details-page {
   height: 196px;
   height: 19.6rem;
   line-height: 1;
-  border: 2px solid #d0d0d0;
+  border: 2px solid #EAEAEA;
   width: 147px;
   width: 14.7rem;
   /*position:relative;*/
@@ -187,9 +187,6 @@ body #wrap .app-details-page {
 .app-box:hover .paragraph-end {
   background: none;
 }
-.app-box:hover .published-by {
-  color: darkblue;
-}
 .tp-caption .large_bold_grey {
   font-size: 31px;
 }
@@ -209,6 +206,12 @@ body #wrap .app-details-page {
   font-size: 24px;
   font-size: 1em;
   color: gray;
+}
+.gallery-home .app-title h1 strong {
+  font-weight: normal;
+}
+.gallery-home .app-title .app-category {
+  font-weight: normal;
 }
 .gallery-home .platform-icon {
   font-size: 43px;

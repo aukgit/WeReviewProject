@@ -410,6 +410,7 @@
     <Content Include="Content\CompactCSS.min.css">
       <DependentUpon>CompactCSS.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\bootstrap-datetimepicker.css" />
     <Content Include="Content\css\color-fonts.css" />
     <Content Include="Content\css\footer-fixing.css" />
     <Content Include="Content\css\front-developer.css" />
@@ -515,6 +516,12 @@
     <Content Include="Content\css\menu-fix.css.map">
       <DependentUpon>menu-fix.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\override-mvc.css.map">
+      <DependentUpon>override-mvc.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\bootstrap-datetimepicker.css.map">
+      <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
+    </Content>
     <None Include="Content\Less\override-mvc.less" />
     <Content Include="Content\revolution-slider\assets\arrowleft.png" />
     <Content Include="Content\revolution-slider\assets\arrowright.png" />
@@ -591,6 +598,7 @@
     <Content Include="Content\Scripts\Bundles\jqueryval.min.js.map">
       <DependentUpon>jqueryval.min.js</DependentUpon>
     </Content>
+    <Content Include="Content\Less\bootstrap-datetimepicker.less" />
     <None Include="Content\Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />
     <Content Include="Content\Scripts\FrontEnd\front-developer.js" />
