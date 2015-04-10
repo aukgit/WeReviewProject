@@ -404,10 +404,6 @@
     <Content Include="App_Data\DataCached\Database\8435a280-7ead-418b-9b63-f29a0816ec7a-appInfo.mdb" />
     <Content Include="App_Data\DataCached\Database\8d6d1103-2304-4f92-8af5-7ff649d7b557-appInfo.mdb" />
     <Content Include="App_Data\DataCached\Database\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-appInfo.mdb" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CompactCSS.css">
       <DependentUpon>CompactCSS.css.bundle</DependentUpon>
     </Content>
@@ -510,8 +506,6 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\CompactCSS.css.bundle" />
     <Content Include="Content\CompactCSS.min.css.gz" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
     <None Include="Content\Less\override-mvc.less" />
     <Content Include="Content\revolution-slider\assets\arrowleft.png" />
     <Content Include="Content\revolution-slider\assets\arrowright.png" />
@@ -943,9 +937,7 @@
     <Content Include="Views\Reviews\ReviewEdit.cshtml" />
     <Content Include="Views\Apps\ListOfApps.cshtml" />
     <Content Include="Views\Apps\_ListItemsOfApps.cshtml" />
-    <Content Include="Views\Shared\_LayoutFrontEnd.cshtml" />
     <Content Include="Views\Shared\_ListOfApps.cshtml" />
-    <Content Include="Views\Shared\_AdvertiseFrontEnd.cshtml" />
     <Content Include="Views\Shared\_AppNotFound.cshtml" />
     <Content Include="Views\Shared\_LoginUrlPage.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\FileMulti.cshtml">
