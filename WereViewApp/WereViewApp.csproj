@@ -383,15 +383,6 @@
     <Compile Include="Modules\UserError\MessageConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Modules\ValidatorExtentions\DateTimeExtensions.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Modules\ValidatorExtentions\MarkdownHelper.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Modules\ValidatorExtentions\Validation.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\DatabaseTables\Country.table" />

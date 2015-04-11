@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Administration</title>
     @Styles.Render("~/Content/css/styles")
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
 <body>
     @{
@@ -30,7 +35,7 @@
                                 <a href="@AppVar.Url/Admin" title="@AppVar.Name - @AppVar.Subtitle">Admin</a>
                             </li>
                             <li>
-                                <a href="#" >Developers Organsim <b class="caret"></b></a>
+                                <a href="#">Developers Organsim <b class="caret"></b></a>
                                 <ul class="dropdown animated fadeIn">
                                     @Html.GetMenu("Admin")
                                     <li>@Html.ActionLink("Feedback", "Index", new { Controller = "Feedback" })</li>
