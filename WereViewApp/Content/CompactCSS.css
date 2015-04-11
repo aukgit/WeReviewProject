@@ -22261,7 +22261,7 @@ body #wrap .app-details-page {
   color: white;
 }
 .table-hover > tbody > tr:hover a {
-  color: inherit;
+  color: white;
 }
 .float-left {
   float: left;
