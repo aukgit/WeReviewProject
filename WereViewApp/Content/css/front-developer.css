@@ -11,6 +11,10 @@ body #wrap .app-details-page {
 .primary-color {
   color: #ff7200;
 }
+.btn {
+  font-weight: normal;
+  text-transform: none;
+}
 .btn-default {
   color: white;
 }
@@ -103,6 +107,9 @@ body #wrap .app-details-page {
   height: 11.5rem;
   width: 122px;
   width: 12.2rem;
+  -webkit-border-radius: 3.5px;
+  -moz-border-radius: 3.5px;
+  border-radius: 3.5px;
 }
 .app-box .app-description-wrapper {
   background-color: white;

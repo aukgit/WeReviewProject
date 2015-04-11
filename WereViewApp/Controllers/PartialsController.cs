@@ -115,17 +115,16 @@ namespace WereViewApp.Controllers {
         /// <returns></returns>
         [OutputCache(Duration = 300)]
         public ActionResult LatestAppsList() {
-            var advertiseImages = algorithms.GetLatestApps(db, 5);
-            return PartialView(advertiseImages);
+            var latestApps = algorithms.GetLatestApps(db, 25);
+            return PartialView(latestApps);
         }
         #endregion
 
         #region Top Apps
         [OutputCache(Duration = 86400)]
-
         public ActionResult TopAppsList() {
-            var advertiseImages = algorithms.GetTopRatedApps(db, 10);
-            return PartialView(advertiseImages);
+            var topApps = algorithms.GetTopRatedApps(db, 25);
+            return PartialView(topApps);
         }
         #endregion
     }

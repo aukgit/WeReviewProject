@@ -3,14 +3,12 @@
 @model IEnumerable<WereViewApp.Models.EntityModel.App>
 
 @{
-    bool isFirst = true;
     Layout = null;
 }
-<h1 title="Latest Apps of @AppVar.Name"><a href="@Url.Action("Latest", "Apps")"> Latest Apps</a>
-</h1>
+
 
 <div class="apps-list-header-row">
-    <a class="title" href="#" title="Latest mobiles apps review of @AppVar.Name">
+    <a class="title" href="@Url.Action("Latest", "Apps")" title="Latest mobiles apps review of @AppVar.Name">
         <h1 title="Latest mobiles apps review of @AppVar.Name" class="float-left">
             <strong title="Latest mobiles apps review of @AppVar.Name">Latest Apps</strong>
         </h1>
@@ -21,58 +19,63 @@
     <div class="clear"></div>
 </div>
 <div class="owl-carousel owl-theme owl-list" itemprop="itemListElement" itemscope itemtype="http://schema.org/Book">
-    <a class="app-box" href="#">
-        <img class="app-icon" itemprop="image" src="/images/b-avatar-1.jpg" />
-        <div class="app-description-wrapper">
-            <div class="app-title-container">
-                <div class="app-title-row">
-                    <h1 itemprop="name" class="app-title ubuntu-font">
-                        <i class="fa fa-apple"></i>
-                        <strong>
-                            <em>
-                                Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
-                            </em>
-                        </strong>
-                    </h1>
-                    <span class="paragraph-end"></span>
+    @foreach (var app in Model) {
+        string appName = @app.AppName;
+        string absUrl = @app.GetAppUrl();
+        string category = @app.GetCategoryString();
+        string platformIcon = @app.Platform.Icon;
+        string subtitleOfApp = @category + "mobile app : " + @appName;
+        string postedUserName = @app.User.UserName;
+        <a class="app-box" itemtype="@absUrl" href="@absUrl" title="@appName">
+            <img class="app-icon" itemprop="image" src="@app.GalleryHomeIconLocation" alt="@subtitleOfApp" />
+            <div class="app-description-wrapper" title="@subtitleOfApp">
+                <div class="app-title-container" title="@subtitleOfApp">
+                    <div class="app-title-row" title="@subtitleOfApp">
+                        <h1 itemprop="name" class="app-title ubuntu-font" title="@subtitleOfApp">
+                            <i class="@platformIcon"></i>
+                            <strong title="@subtitleOfApp">
+                                <em title="@appName">
+                                    @appName
+                                </em>
+                            </strong>
+                        </h1>
+                        <span class="paragraph-end"></span>
+                    </div>
+                    <div class="published-by" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                        <span itemprop="name">@postedUserName</span>
+                        <span class="paragraph-end"></span>
+                    </div>
+                    <div title="rating of @appName" class="seo-rating seo-hide" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                        <span itemprop="ratingValue">@app.AvgRating</span> stars based on
+                        <meta itemprop="best" content="5" />
+                        <span itemprop="reviewCount">@app.ReviewsCount</span> reviews
+                    </div>
+                    <input title="rating of @appName" class="rating-5-front" value="3.5" min="0" max="5" step="0.5" data-readonly="true" data-size="xs">
                 </div>
-                <div class="published-by" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-                    <span itemprop="name">Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</span>
-                    <span class="paragraph-end"></span>
-                </div>
-                <div class="seo-rating seo-hide" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-                    <span itemprop="ratingValue">3.9</span> stars based on
-                    <meta itemprop="best" content="5" />
-                    <span itemprop="reviewCount">25</span> reviews
-                </div>
-                <input class="rating-5-front" value="3.5" min="0" max="5" step="0.5" data-readonly="true" data-size="xs">
             </div>
-        </div>
-    </a>
-</div>
-@foreach (var app in Model) {
-    string appName = @app.AppName;
-    string absUrl = @app.GetAppUrl();
-    <div class="box row">
-        <div class="imagebox col-md-3 col-sm-3">
-            <a href="@absUrl" title="@appName">
-                <img class="home-page-image-icon" src="@app.GalleryHomeIconLocation" alt="@appName">
-            </a>
-        </div>
+        </a>
+        @*<div class="box row">
+                <div class="imagebox col-md-3 col-sm-3">
+                    <a href="">
+                        <img class="home-page-image-icon" src="@app.GalleryHomeIconLocation" alt="@appName">
+                    </a>
+                </div>
 
-        <div class="textbox col-md-9 col-sm-9">
-            <a href="@absUrl" itemtype="@absUrl" title="@appName">
-                <h1 title="@appName">@Html.Truncate(appName, 20)</h1>
-                <p title="@appName">
-                    @Html.Truncate(app.Description, CommonVars.APP_HOME_PAGE_DESCRIPTION_TRUNC_LEN)
-                </p>
-                <i class="fa fa-star"></i>
-                <span class="price" itemprop="value" title="rating of @appName" itemprop="rating">@app.AvgRating</span>
-                <meta itemprop="best" content="10" />
-            </a>
-            <a href="@Url.Action(app.Platform.PlatformName, "Apps")" title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" data-original-title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" class="tooltip-show"><i class="@app.Platform.Icon"></i></a>
-        </div>
-    </div>
-}
-<h2 class="h5" title="Latest Apps of @AppVar.Name"><a href="@Url.Action("Latest", "Apps")" title="Latest Apps of @AppVar.Name" class="btn btn-default tooltip-show" > More...</a></h2>
+                <div class="textbox col-md-9 col-sm-9">
+                    <a href="@absUrl" itemtype="@absUrl" title="@appName">
+                        <h1 title="@appName">@Html.Truncate(appName, 20)</h1>
+                        <p title="@appName">
+                            @Html.Truncate(app.Description, CommonVars.APP_HOME_PAGE_DESCRIPTION_TRUNC_LEN)
+                        </p>
+                        <i class="fa fa-star"></i>
+                        <span class="price" itemprop="value" title="rating of @appName" itemprop="rating">@app.AvgRating</span>
+                        <meta itemprop="best" content="10" />
+                    </a>
+                    <a href="@Url.Action(app.Platform.PlatformName, "Apps")" title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" data-original-title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" class="tooltip-show"><i class="@app.Platform.Icon"></i></a>
+                </div>
+            </div>*@
+    }
+
+</div>
+
 

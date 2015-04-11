@@ -80,6 +80,7 @@ namespace WereViewApp.AlgorithmsWereViewApp {
         public List<App> GetLatestApps(WereViewAppEntities db, int max) {
             var apps = db.Apps
                 .Include(n => n.Platform)
+                .Include(n => n.User)
                 .OrderByDescending(n => n.AppID)
                 .Where(n => n.IsPublished && !n.IsBlocked)
                 .Take(max).ToList();
@@ -99,7 +100,10 @@ namespace WereViewApp.AlgorithmsWereViewApp {
         /// <param name="max"></param>
         /// <returns></returns>
         public List<App> GetTopRatedApps(WereViewAppEntities db, int max) {
-            var apps = db.Apps.Include(n => n.Platform).Where(n => n.IsPublished && !n.IsBlocked);
+            var apps = db.Apps
+                         .Include(n => n.Platform)
+                         .Include(n => n.User)
+                         .Where(n => n.IsPublished && !n.IsBlocked);
 
             addOrderingForSuggestions(ref apps, isMosRecent: false);
             var list = apps.Take(max).ToList();
@@ -158,8 +162,7 @@ namespace WereViewApp.AlgorithmsWereViewApp {
             }
             return null;
         }
-        #endregion
-        #region Home page gallery
+
 
         /// <summary>
         /// Returns apps which are related to home page gallery 

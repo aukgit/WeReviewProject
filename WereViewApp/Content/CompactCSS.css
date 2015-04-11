@@ -1,5 +1,4 @@
-﻿@import url("//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic");
-/*!
+﻿/*!
  * bootswatch v3.3.1+1
  * Homepage: http://bootswatch.com
  * Copyright 2012-2014 Thomas Park
@@ -6337,8 +6336,8 @@ button.close {
   text-transform: uppercase;
 }
 .btn:hover {
-  margin-top: 1px;
-  border-bottom-width: 3px;
+  /*margin-top: 1px;
+  border-bottom-width: 3px;*/
 }
 .btn:active {
   margin-top: 2px;
@@ -22234,6 +22233,10 @@ body #wrap .app-details-page {
 .primary-color {
   color: #ff7200;
 }
+.btn {
+  font-weight: normal;
+  text-transform: none;
+}
 .btn-default {
   color: white;
 }
@@ -22326,6 +22329,9 @@ body #wrap .app-details-page {
   height: 11.5rem;
   width: 122px;
   width: 12.2rem;
+  -webkit-border-radius: 3.5px;
+  -moz-border-radius: 3.5px;
+  border-radius: 3.5px;
 }
 .app-box .app-description-wrapper {
   background-color: white;
