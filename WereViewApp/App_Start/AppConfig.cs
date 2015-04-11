@@ -7,6 +7,7 @@ using WereViewApp.Modules.Session;
 using WereViewApp.Modules.TimeZone;
 using WereViewApp.Modules.UserError;
 using System;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -203,7 +204,9 @@ namespace WereViewApp {
 
         #region Connection Strings and Constants
         //public const string DefaultConnection = @"Data Source=(LocalDb)\v11.0;AttachDbFilename=|DataDirectory|\WereViewApp-Accounts.mdf;Initial Catalog=WereViewApp-Accounts;Integrated Security=True";
-        public const string DefaultConnection = @"Data Source=SQL5006.Smarterasp.net;Initial Catalog=DB_9AE7E3_wereviewAccounts;User Id=DB_9AE7E3_wereviewAccounts_admin;Password=eviTY1aFb16;";
+        private static readonly string DefaultConnection = ConfigurationManager
+                              .ConnectionStrings["DefaultConnection"]
+                              .ConnectionString;
         public enum ConnectionStringType {
             DefaultConnection,
             Secondary

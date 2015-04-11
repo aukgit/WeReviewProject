@@ -21,6 +21,7 @@ body #wrap .app-details-page {
 }
 // other imports
 //@import "seo-optimize.less";
+//bootstrap overrides
 .btn {
     font-weight: normal;
     text-transform: none;
@@ -48,6 +49,15 @@ body #wrap .app-details-page {
 
 .display-table {
     display: table;
+}
+
+.table-hover > tbody > tr:hover {
+    background-color: orange;
+    color: white;
+
+    a {
+        color: inherit;
+    }
 }
 
 .float-left {

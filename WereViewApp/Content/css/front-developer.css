@@ -34,6 +34,13 @@ body #wrap .app-details-page {
 .display-table {
   display: table;
 }
+.table-hover > tbody > tr:hover {
+  background-color: orange;
+  color: white;
+}
+.table-hover > tbody > tr:hover a {
+  color: inherit;
+}
 .float-left {
   float: left;
 }

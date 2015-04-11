@@ -4,51 +4,62 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Administration</title>
-    @Styles.Render("~/Content/css/bootstrap_red")
     @Styles.Render("~/Content/css/styles")
-    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-default navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="@AppVar.Url/Admin" class="navbar-brand" title="@AppVar.Name - @AppVar.Subtitle"><span class="glyphicon glyphicon-wrench"></span>Admin</a></li>
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Developers Organsim <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            @Html.GetMenu("Admin")
-                            <li>@Html.ActionLink("Feedback", "Index", new { Controller = "Feedback" })</li>
+    @{
+        var appUrl = AppVar.Url;
+    }
+    <div id="wrap" class="home-page">
+        <div class="header-2">
+            <header class="sticky">
+                <div class="container">
+                    <!--======= LOGO =========-->
+                    <a class="logo" href="@appUrl" title="wereviewapp.com: App Review websie">
+                        <h1 title="wereviewapp.com" class="wereviewapp.com website-head-title">
+                            <strong class="almost-black" title="App Review websie">we</strong><strong class="red" title="App Review websie">review</strong><strong class="orange-color" title="App Review websie">app.com</strong>
+                        </h1>
+                    </a>
+                    <nav>
+                        <ul class="jetmenu menu seo-optimize">
+                            <li>
+                                <a href='@appUrl' title="App Review websie : Home"><strong title="App Review websie : Home">Home</strong></a>
+                            </li>
+                            <!--======= MEGA MENU =========-->
+                            <li>
+                                <a href="@AppVar.Url/Admin" title="@AppVar.Name - @AppVar.Subtitle">Admin</a>
+                            </li>
+                            <li>
+                                <a href="#" >Developers Organsim <b class="caret"></b></a>
+                                <ul class="dropdown animated fadeIn">
+                                    @Html.GetMenu("Admin")
+                                    <li>@Html.ActionLink("Feedback", "Index", new { Controller = "Feedback" })</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">ViewWereApp <b class="caret"></b></a>
+                                <ul class="dropdown animated fadeIn">
+                                    @Html.GetMenu("ViewWereApp")
+                                </ul>
+                            </li>
+                            @Html.Partial("_LoginPartial")
                         </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">ViewWereApp <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            @Html.GetMenu("ViewWereApp")
-                        </ul>
-                    </li>
-
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+                    </nav>
+                </div>
+            </header>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-    </div>
-    @Html.Partial("_Footer")
+
+        <div class="content">
+            <div class="container">
+                @RenderBody()
+            </div>
+            @Html.Partial("_Footer")
+        </div>
 
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </div>
 </body>
 </html>
