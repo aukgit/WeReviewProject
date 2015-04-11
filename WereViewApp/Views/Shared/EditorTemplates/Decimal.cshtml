@@ -1,4 +1,4 @@
-@using WereViewApp.Modules.ValidatorExtentions
+
 @model decimal?
 
 @{
@@ -42,7 +42,7 @@
     htmlAttributes.Add("title", @htmlAttributes["placeholder"]);
 }
 
-<div class="form-group@(Html.ValidationErrorFor(m => m, " has-error")) form-row-@ViewData.ModelMetadata.PropertyName">
+<div class="form-group form-row-@ViewData.ModelMetadata.PropertyName">
     <div class="controls custom-string">
         <label class="col-md-2 control-label form-label-@ViewData.ModelMetadata.PropertyName" for="@ViewData.ModelMetadata.PropertyName">@ViewData.ModelMetadata.DisplayName<span class="red">@isRequiredStar</span></label>
         <div class="col-md-10 form-input-@ViewData.ModelMetadata.PropertyName">

@@ -1,4 +1,4 @@
-@using WereViewApp.Modules.ValidatorExtentions
+
 @model Boolean?
 
 @{
@@ -25,7 +25,7 @@
     htmlAttributes.Add("title", @htmlAttributes["placeholder"]);
 }
 
-<div class="form-group@(Html.ValidationErrorFor(m => m, " has-error")) check-boxes form-row-@ViewData.ModelMetadata.PropertyName">
+<div class="form-group check-boxes form-row-@ViewData.ModelMetadata.PropertyName">
     <div class="controls custom-checkbox">
         <div class="col-md-offset-2 col-md-10">
             <label class="control-label form-label-@ViewData.ModelMetadata.PropertyName form-input-@ViewData.ModelMetadata.PropertyName" for="@ViewData.ModelMetadata.PropertyName">

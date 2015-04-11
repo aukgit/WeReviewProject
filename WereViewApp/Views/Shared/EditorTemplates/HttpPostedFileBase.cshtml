@@ -1,4 +1,4 @@
-@using WereViewApp.Modules.ValidatorExtentions
+
 @model object
 
 @{
@@ -50,7 +50,7 @@
     }
 }
 
-<div class="form-row-uploader form-group@(Html.ValidationErrorFor(m => m, " has-error")) form-row-@ViewData.ModelMetadata.PropertyName">
+<div class="form-row-uploader form-group form-row-@ViewData.ModelMetadata.PropertyName">
     <div class="controls custom-uploader-single-Or-multi">
         <label class="col-md-2 upload-label control-label form-label-@ViewData.ModelMetadata.PropertyName" for="@ViewData.ModelMetadata.PropertyName">
             @if (@ViewData.ModelMetadata.Description != null) {

@@ -1,4 +1,4 @@
-@using WereViewApp.Modules.ValidatorExtentions
+
 @model object
 
 @{
@@ -25,7 +25,7 @@
     htmlAttributes.Add("title", @htmlAttributes["placeholder"]);
 }
 
-<div class="form-group@(Html.ValidationErrorFor(m => m, " has-error")) form-row-@ViewData.ModelMetadata.PropertyName">
+<div class="form-group form-row-@ViewData.ModelMetadata.PropertyName">
     <div class="controls custom-url-input">
         <div class="col-md-12 search-url-div-col">
             @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)

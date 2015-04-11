@@ -1,4 +1,4 @@
-@using WereViewApp.Modules.ValidatorExtentions
+
 @model string
 
 @{
@@ -31,7 +31,7 @@
     htmlAttributes.Add("title", @htmlAttributes["placeholder"]);
 }
 
-<div class="form-group@(Html.ValidationErrorFor(m => m, " has-error")) form-row-@ViewData.ModelMetadata.PropertyName  string-multiline-div">
+<div class="form-group form-row-@ViewData.ModelMetadata.PropertyName  string-multiline-div">
     <div class="controls custom-string-multiline">
         <label class="col-md-2 control-label form-label-@ViewData.ModelMetadata.PropertyName" for="@ViewData.ModelMetadata.PropertyName">
             @ViewData.ModelMetadata.DisplayName
