@@ -4069,7 +4069,7 @@ function revslider_showDoubleJqueryError(e){var t="Revolution Slider Error: You 
 /// <reference path="bootstrap-rating.min.js" />
 /// <reference path="underscore-min.js" />
 
-$(function () {
+$(function (d, s, id) {
 
     $(".seo-hide").hide();
 
@@ -4200,6 +4200,21 @@ $(function () {
             }
 
         });
+    }
+    //facebook like script
+    $.facebookLikeScript = {
+        execute: function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1481969698749084&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    };
+    // execute
+    if (d.getElementById("app-deails-page") !== undefined) {
+        $.facebookLikeScript.execute();
     }
 
     $.frontEndAppDetailsPage = {

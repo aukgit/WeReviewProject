@@ -78,6 +78,7 @@ namespace WereViewApp {
                                   "~/Content/Scripts/FrontEnd/jquery.isotope.min.js",
                                   "~/Content/Scripts/FrontEnd/owl.carousel.min.js",
                                   "~/Content/Scripts/FrontEnd/main.js",
+                                  "~/Content/Scripts/FrontEnd/jquery.number.js",
                                   "~/Content/revolution-slider/js/jquery.themepunch.tools.min.js",
                                   "~/Content/revolution-slider/js/jquery.themepunch.revolution.min.js",
                                   "~/Content/Scripts/FrontEnd/front-developer.js",

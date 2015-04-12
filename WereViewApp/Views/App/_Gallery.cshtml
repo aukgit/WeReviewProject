@@ -2,56 +2,29 @@
 @model WereViewApp.Models.EntityModel.App
 
 @{
-    var isActive = @Model.YoutubeEmbedLink == null ? "active" : null;
-    var length = 0;
+    int length = 0;
     int i = 0;
-}
-
-@{
     if (Model.GalleryGalleryImages != null) {
         length = Model.GalleryGalleryImages.Count;
     }
 }
-<div id="pane2" class="tab-pane @isActive">
-    <div class="video clearfix">
-        <!-- main slider carousel -->
-        <div class="row" style="padding-bottom: 5px;">
-            <div class="col-md-12" id="slider" style="padding:0;">
-                <div class="col-md-12" id="carousel-bounding-box" style="padding:0;">
-                    <div id="myCarousel" class="carousel slide">
-                        <!-- main slider carousel items -->
-                        <div class="carousel-inner">
-                            @for (i = 0; i < length; i++) {
-                                var imageDisplay = Model.GalleryGalleryImages[i];
-                                var showActive = i == 0 ? "active" : null;
-                                <div class="item @showActive" data-slide-number="@i">
-                                    <img src="@imageDisplay.GalleryImageLocation" alt="@imageDisplay.Title" class="img-responsive">
-                                </div>
-                            }
-                        </div>
-                        <!-- main slider carousel nav controls -->
-                        <a class="carousel-control left" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-                        <a class="carousel-control right" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a
-                    </div>
-                </div>
+<div id="apps-preview" itemprop="itemListElement" itemscope itemtype="http://schema.org/Book">
+    @if (Model.YoutubeEmbedLink != null) {
+        <div class="youtube-video">
+            <div class="embed-responsive embed-responsive-16by9">
+                <a class="playable-btn" href="#playvideo">
+                    <i class="fa fa-play-circle-o"></i>
+                    <img class="img-responsive" src="/images/f-b-img-3.jpg" alt="">
+                </a>
+                @Html.Raw(Model.YoutubeEmbedLink)
+                <!--<iframe src="https://www.youtube.com/embed/zyk4jAiffRk" frameborder="0" allowfullscreen></iframe>-->
             </div>
         </div>
-
-        <!--/main slider carousel-->
-        <!-- thumb navigation carousel -->
-        <div class="col-md-12 hidden-sm hidden-xs" id="slider-thumbs" style="padding:0;">
-            <!-- thumb navigation carousel items -->
-            <ul class="list-inline">
-                @for (i = 0; i < length; i++) {
-                    var imageDisplay = Model.GalleryGalleryImages[i];
-                    var showActive = i == 0 ? "selected" : null;                  
-                    <li>
-                        <a id="carousel-selector-@i" class="@showActive" data-lightbox-gallery="gallery1" href="@imageDisplay.GalleryImageLocation" title="@imageDisplay.Title">
-                            <img src="@imageDisplay.GalleryIconLocation" title="@imageDisplay.Title" class="img-responsive">
-                        </a>
-                    </li>
-                }
-            </ul>
+    }
+    @for (i = 0; i < length; i++) {
+        var imageDisplay = Model.GalleryGalleryImages[i];
+        <div>
+            <img itemprop="image" class="img-responsive" src="@imageDisplay.GalleryImageLocation" alt="@imageDisplay.Title">
         </div>
-    </div>
+    }
 </div>

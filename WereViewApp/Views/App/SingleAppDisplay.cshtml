@@ -6,20 +6,397 @@
     //Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
     string appName = Model.AppName;
     var currentUrl = @Html.GetCurrentURLString();
-    ViewBag.Title = Model.Platform.PlatformName + " : " +  appName;
+    ViewBag.Title = Model.Platform.PlatformName + " : " + appName;
     ViewBag.Meta = appName + "," + @Model.Tags + "," + Model.Description;
     ViewBag.Keywords = appName + "," + @Model.Tags;
-    var tagsList = @Model.Tags != null ? @Model.Tags.Split(',') : null;
+    string[] tagsList = @Model.Tags != null ? @Model.Tags.Split(',') : null;
     bool isFrist = true;
+
+    string appSubtitle = "";
+    string platformSubtitle = "";
+    string categorySubtitle = "";
+    
 }
 
 
+<div class="app-details-page" id="app-deails-page">
+    <div id="fb-root"></div>
+    <div class="row" itemscope itemtype="http://schema.org/Product">
+        <div class="col-md-12 app-detail app-title-wrapper">
+            <div class="app-title-row float-left">
+                <a href="/Apps/@Model.Platform.PlatformName" class="app-platform" title="@platformSubtitle">
+                    <i class="@Model.Platform.Icon" title="@platformSubtitle">
+                        <em title="@platformSubtitle" class="seo-hide">@platformSubtitle</em>
+                    </i>
+                </a>
+                @Html.Partial("_AppEditButton")
+                <a href="@currentUrl" class="app-title" title="@appSubtitle">
+                    <h1 title="@appSubtitle">
+                        <strong title="@appSubtitle">
+                            <em itemprop="name" title="@appSubtitle">
+                                @appName
+                            </em>
+                        </strong>
+                    </h1>
+                    <span class="paragraph-end"></span>
+                </a>
+                <a href="/Apps/Category/@Model.Category.CategoryName" class="app-category" title="@categorySubtitle">
+                    <h2 class="category" title="@categorySubtitle">
+                        <strong title="@categorySubtitle">@Model.Category.CategoryName</strong>
+                    </h2>
+                </a>
+                <span class="paragraph-end"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="blog" class="blog-pages">
+    <div class="b-post">
+        @Html.Partial("_Gallery")
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="rating-box-row">
+                            <div>
+                                <div class="star-image start-box float-left">0</div>
+                                <div class="user-rating-box float-left">
+                                    <h4>Your Rating</h4>
+                                    <div class="price rating-display">
+                                        <input class="rating-5-page-details" value="3" min="0" max="5" step="1" data-size="xs">
+                                        <meta itemprop="best" content="10">
+                                    </div>
+                                    <div class="user">
+                                        <span class="number">0</span> Rating from <a>0 users</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 app-viewed-box">
+                        <h1 class="app-viewed-numbers">12213324</h1>
+                        <div class="views-text">views</div>
+                    </div>
+                </div>
+                <ul class="post-info seo-optimize">
+                    <li> By <a href="#."> <h1><strong><em>Alim Ul Karim</em></strong></h1></a> <span> . </span> </li>
+                    <li><a href="#" class="report-app"><h1><strong><em>Report</em></strong></h1></a> <span> . </span></li>
+                    <li> <a href="#."> <h1><strong><em>Website</em></strong></h1></a> <span> . </span></li>
+                    <li> <a href="#."> <h1><strong><em>Store</em></strong></h1></a></li>
+                    <li class="share-btn write-review-btn white"> <a href="#."> <h1><strong><em>Write Review</em></strong></h1></a></li>
 
+                    <li class="share-btn facebook">
+                        <div class="fb-like" data-href="http://localhost:2191/apps-details-page-2.html" data-width="110px" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+                    </li>
+                </ul>
+                <div class="app-description seo-optimize">
+                    A mob of fun-loving zombies is about to invade your home, and your only defense is an arsenal of 49 zombie-zapping plants. Use Peashooters, Wall-nuts, Cherry Bombs and more to slow down, confuse, weak
+                    <span class="show-more-btns-container" data-ref="app-description">
+                        <span class="elipse-dot">...</span>
+                        <a class="see-more-btn" data-ref="app-description">see more</a>
+                    </span>
+                    <div class="more" data-ref="app-description">
+                        en and mulchify 26 types of zombies before they can reach your front door. Each zombie has its own special skills, so be careful how you use your limited supply of greens and seeds… as you battle the fun-dead, obstacles like a setting sun, creeping fog and a swimming pool add to the challenge.
+                        <a class="less-btn" data-ref="app-description">less</a>
+                        <div class="tagbox">
+                            <i class="fa fa-tag"></i> Tags:
+                            <a class="Plant tag-item" href="#">
+                                <h1 title="Plant - Plant VS Zombies 2">Plant</h1>
+                            </a>
+                            ,
+                            <a class="Zombies tag-item" href="#">
+                                <h1 title=" Zombies - Plant VS Zombies 2"> Zombies</h1>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="review-collection-box seo-optimize">
+                    <div class="review-wrapper">
+                        <section class="single-review row review@id is-recommended wow slideInLeft" data-wow-offset="2" data-wow-duration="1s" data-sequence="@id" itemprop="review" itemscope itemtype="http://schema.org/Review">
+                            <div class="col-sm-10">
+                                <header class="review-writer-wrapper">
+                                    <a class="review-title-anchor" href="#">
+                                        <h1 itemprop="name" class="review-title" title="Plant VS Zombies , Review : Take a Look">
+                                            <i class="fa fa-check-circle"></i>
+                                            Take a Look
+                                        </h1>
+                                    </a>
+                                    <ul class="reviewed-by-wrapper">
+                                        <li class="posted-by-wrapper">
+                                            Posted by
+                                            <a href="#">
+                                                <h1 itemprop="author">developer</h1>
+                                            </a> |
+                                        </li>
+                                        <li class="date">
+                                            01-Jan-01 |
+                                            <meta itemprop="datePublished" content="2011-04-01">
+                                        </li>
+                                        <li class="report">
+                                            <a href="#">
+                                                Report
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </header>
+                                <article title="reiview contents" class="review-contents">
+                                    Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc
+                                    <span class="show-more-btns-container" data-ref="app-review" data-id="@id">
+                                        <span class="elipse-dot">...</span>
+                                        <a class="see-more-btn" data-ref="app-review" data-id="@id">see more</a>
+                                    </span>
+                                    <div class="more" data-ref="app-review" data-id="@id">
+                                        Take a Look Take a Look
+                                        <a>
+                                            <h1 title="pros of Plant VS Zombies" class="h5 green">Pros:</h1>
+                                        </a>
+                                        <blockquote title="pros of Plant VS Zombies">
+                                            pros review Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                                        </blockquote>
+                                        <a>
+                                            <h1 title="cons of Plant VS Zombies" class="h5 red">Cons:</h1>
+                                        </a>
+                                        <blockquote title="cons of Plant VS Zombies">
+                                            cons review Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                                        </blockquote>
+                                        <a class="less-btn" data-ref="app-review" data-id="@id">less</a>
+                                    </div>
+                                </article>
+                            </div>
 
-<div class="wrapper_inner">
-    @{Html.RenderAction("NavBar", "Partials");}
-</div> <!---------- wrapper end-------->
-<!-------------------------- mainContainerwrap part start ---------------------->
+                            <div class="review-thumbs-up-wrappper col-sm-2 text-center">
+                                <div class="star-image start-box center-margin">
+                                    3
+                                </div>
+                                <a id="review-thumbs-up-click-0" data-sequence="0" data-review-like-btn="true" href="/Reviews/Like/4"><i class="fa fa-thumbs-up"></i></a>
+                                <a id="review-thumbs-down-click-0" data-sequence="0" data-review-dislike-btn="true" href="/Reviews/Dislike/4"><i class="fa fa-thumbs-down"></i></a>
+                                <div class="seo-hide seo-rating" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+                                    <meta itemprop="worstRating" content="1">
+                                    <span itemprop="ratingValue">1</span>/
+                                    <span itemprop="bestRating">5</span>stars
+                                </div>
+                            </div>
+                        </section>
+                        <section class="single-review row wow slideInRight" data-wow-offset="2" data-wow-duration="1s" data-sequence="@id2" itemprop="review" itemscope itemtype="http://schema.org/Review">
+                            <div class="col-sm-10">
+                                <header class="review-writer-wrapper">
+                                    <a class="review-title-anchor" href="#">
+                                        <h1 itemprop="name" class="review-title" title="Plant VS Zombies , Review : Take a Look"><i class="fa fa-check-circle"></i>Take a Look</h1>
+                                    </a>
+                                    <ul class="reviewed-by-wrapper">
+                                        <li class="posted-by-wrapper">
+                                            Posted by
+                                            <a href="#">
+                                                <h1 itemprop="author">developer</h1>
+                                            </a> |
+                                        </li>
+                                        <li class="date">
+                                            01-Jan-01
+                                            <meta itemprop="datePublished" content="2011-04-01">
+                                        </li>
+                                    </ul>
+                                </header>
+                                <article title="reiview contents" class="review-contents">
+                                    Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc
+                                    <span class="show-more-btns-container" data-ref="app-review" data-id="@id2">
+                                        <span class="elipse-dot">...</span>
+                                        <a class="see-more-btn" data-ref="app-review" data-id="@id2">see more</a>
+                                    </span>
+                                    <div class="more" data-ref="app-review" data-id="@id2">
+                                        Take a Look Take a Look
+                                        <a>
+                                            <h1 title="pros of Plant VS Zombies" class="h5 green">Pros:</h1>
+                                        </a>
+                                        <blockquote title="pros of Plant VS Zombies">
+                                            pros review Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                                        </blockquote>
+                                        <a>
+                                            <h1 title="cons of Plant VS Zombies" class="h5 red">Cons:</h1>
+                                        </a>
+                                        <blockquote title="cons of Plant VS Zombies">
+                                            cons review Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                                        </blockquote>
+                                        <a class="less-btn" data-ref="app-review" data-id="@id2">less</a>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <div class="review-thumbs-up-wrappper col-sm-2 text-center">
+                                <div class="star-image start-box center-margin">
+                                    3
+                                </div>
+                                <a id="review-thumbs-up-click-0" data-sequence="0" data-review-like-btn="true" href="/Reviews/Like/4"><i class="fa fa-thumbs-up"></i></a>
+                                <a id="review-thumbs-down-click-0" data-sequence="0" data-review-dislike-btn="true" href="/Reviews/Dislike/4"><i class="fa fa-thumbs-down"></i></a>
+                                <div class="seo-hide seo-rating" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+                                    <meta itemprop="worstRating" content="1">
+                                    <span itemprop="ratingValue">1</span>/
+                                    <span itemprop="bestRating">5</span>stars
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <!--<a class="read-more" href="#.">Reed More</a>-->
+            </div>
+        <div class="col-md-3 ">
+            @Html.Partial("_FeaturedApps")
+            @Html.Partial("_SuggestedApps")
+            <div class="app-suggested-list-wrapper featured-apps-wrapper">
+                <div class="app-suggested-list float-right">
+                    <div class="apps-list-header-row">
+                        <a class="title" href="#" title="Latest Mobile Apps">
+                            <h1 title="" class="float-right">Featured Apps</h1>
+                        </a>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="app-suggested-list-items featured-apps-list-items">
+                        <a class="app-box" href="#">
+                            <img class="app-icon" itemprop="image" src="images/games-image.jpg"/>
+                            <div class="app-description-wrapper">
+                                <div class="app-title-container">
+                                    <div class="app-title-row">
+                                        <h1 itemprop="name" class="app-title ubuntu-font">
+                                            <i class="fa fa-apple"></i>
+                                            <strong>Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</strong>
+                                        </h1>
+                                        <span class="paragraph-end"></span>
+                                    </div>
+                                    <div class="published-by" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                                        <span itemprop="name">Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</span>
+                                        <span class="paragraph-end"></span>
+                                    </div>
+                                    <div class="seo-rating seo-hide" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                                        <span itemprop="ratingValue">3.9</span> stars based on
+                                        <meta itemprop="best" content="5"/>
+                                        <span itemprop="reviewCount">25</span> reviews
+                                    </div>
+                                    <input class="rating-5-front" value="3.5" min="0" max="5" step="0.5" data-readonly="true" data-size="xs">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="app-suggested-list-wrapper developers-apps-list-wrapper featured-apps-wrapper">
+                <div class="app-suggested-list float-right">
+                    <div class="apps-list-header-row">
+                        <a class="title" href="#" title="Latest Mobile Apps">
+                            <h1 title="" class="float-right">Developers Apps</h1>
+                        </a>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="app-suggested-list-items featured-apps-list-items">
+                        <a class="app-box" href="#">
+                            <img class="app-icon" itemprop="image" src="images/games-image.jpg"/>
+                            <div class="app-description-wrapper">
+                                <div class="app-title-container">
+                                    <div class="app-title-row">
+                                        <h1 itemprop="name" class="app-title ubuntu-font">
+                                            <i class="fa fa-apple"></i>
+                                            <strong>Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</strong>
+                                        </h1>
+                                        <span class="paragraph-end"></span>
+                                    </div>
+                                    <div class="published-by" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                                        <span itemprop="name">Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</span>
+                                        <span class="paragraph-end"></span>
+                                    </div>
+                                    <div class="seo-rating seo-hide" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                                        <span itemprop="ratingValue">3.9</span> stars based on
+                                        <meta itemprop="best" content="5"/>
+                                        <span itemprop="reviewCount">25</span> reviews
+                                    </div>
+                                    <input class="rating-5-front" value="3.5" min="0" max="5" step="0.5" data-readonly="true" data-size="xs">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="app-suggested-list-wrapper hidden-xs hidden-sm">
+                <div class="app-suggested-list float-right">
+                    <div class="apps-list-header-row">
+                        <a class="title" href="#" title="Latest Mobile Apps">
+                            <h1 title="" class="float-right">Suggested Apps</h1>
+                        </a>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="app-suggested-list-items">
+                        <a class="app-box" href="#">
+                            <img class="app-icon" itemprop="image" src="images/games-image.jpg"/>
+                            <div class="app-description-wrapper">
+                                <div class="app-title-container">
+                                    <div class="app-title-row">
+                                        <h1 itemprop="name" class="app-title ubuntu-font">
+                                            <i class="fa fa-apple"></i>
+                                            <strong>
+                                                <em>
+                                                    Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                                                </em>
+                                            </strong>
+                                        </h1>
+                                        <span class="paragraph-end"></span>
+                                    </div>
+                                    <div class="published-by" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                                        <span itemprop="name">Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</span>
+                                        <span class="paragraph-end"></span>
+                                    </div>
+                                    <div class="seo-rating seo-hide" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                                        <span itemprop="ratingValue">3.9</span> stars based on
+                                        <span itemprop="reviewCount">25</span> reviews
+                                    </div>
+                                    <input class="rating-5-front" value="3.5" min="0" max="5" step="0.5" data-readonly="true" data-size="xs">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="app-suggested-list-wrapper visible-sm-block visible-xs-block">
+                <div class="app-suggested-list float-right">
+                    <div class="apps-list-header-row">
+                        <a class="title" href="#" title="Latest Mobile Apps">
+                            <h1 title="" class="float-right">Suggested Apps</h1>
+                        </a>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="app-suggested-list-items app-suggested-list-items-mobile">
+                        <a class="app-box" href="#">
+                            <img class="app-icon" itemprop="image" src="images/games-image.jpg"/>
+                            <div class="app-description-wrapper">
+                                <div class="app-title-container">
+                                    <div class="app-title-row">
+                                        <h1 itemprop="name" class="app-title ubuntu-font">
+                                            <i class="fa fa-apple"></i>
+                                            <strong>
+                                                <em>
+                                                    Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                                                </em>
+                                            </strong>
+                                        </h1>
+                                        <span class="paragraph-end"></span>
+                                    </div>
+                                    <div class="published-by" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                                        <span itemprop="name">Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</span>
+                                        <span class="paragraph-end"></span>
+                                    </div>
+                                    <div class="seo-rating seo-hide" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                                        <span itemprop="ratingValue">3.9</span> stars based on
+                                        <span itemprop="reviewCount">25</span> reviews
+                                    </div>
+                                    <input class="rating-5-front" value="3.5" min="0" max="5" step="0.5" data-readonly="true" data-size="xs">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
 <div class="mainContainerwrap">
     <div class="container">
         <div class="appsmenu">
@@ -27,7 +404,6 @@
                 <a href="/Apps/@Model.Platform.PlatformName">
                     <i class="@Model.Platform.Icon"></i>
                 </a>
-                @Html.Partial("_AppEditButton")
                 <a href="@currentUrl" title="@appName" class="app-name">
                     <strong title="@appName">@appName</strong>
                 </a>
@@ -44,8 +420,7 @@
         <div class="leftCol col-md-3 col-sm-3">
             <!----- leftCol part start -------->
             @Html.Partial("_PublishInfo")
-            @Html.Partial("_FeaturedApps")
-            @Html.Partial("_SuggestedApps")
+            
 
         </div> <!-------- leftCol part end ---------->
 
@@ -66,7 +441,6 @@
                         </div>
                         <div class="tab-content">
                             @Html.Partial("_YoutubeVideo")
-                            @Html.Partial("_Gallery")
                         </div><!-- /.tab-content -->
                     </div><!-- /.tabbable -->
                     @Html.Partial("_RatingAndViewed")
@@ -122,7 +496,7 @@
                     </div>
                 </div>
                 @Html.Partial("_ReviewsCollection")
-                
+
             </div><!----- content part end ------>
         </div> <!----- contenCol part end ------>
     </div><!----- container ------>
