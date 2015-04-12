@@ -471,6 +471,7 @@
     <Content Include="Content\css\menu-fix.css" />
     <Content Include="Content\css\override-mvc.css" />
     <Content Include="Content\css\owl.custom.finalize.css" />
+    <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\seo-optimize.css" />
     <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
@@ -512,6 +513,9 @@
     </Content>
     <Content Include="Content\css\bootstrap-datetimepicker.css.map">
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\responsive.css.map">
+      <DependentUpon>responsive.css</DependentUpon>
     </Content>
     <None Include="Content\Less\override-mvc.less" />
     <Content Include="Content\revolution-slider\assets\arrowleft.png" />
@@ -589,6 +593,7 @@
       <DependentUpon>jqueryval.min.js</DependentUpon>
     </Content>
     <Content Include="Content\Less\bootstrap-datetimepicker.less" />
+    <Content Include="Content\Less\responsive.less" />
     <None Include="Content\Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />
     <Content Include="Content\Scripts\FrontEnd\front-developer.js" />

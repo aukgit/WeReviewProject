@@ -160,7 +160,7 @@ body #wrap .app-details-page {
   min-width: 10.8rem;
   width: 100%;
   overflow: hidden;
-  color: black;
+  color: #919191;
   font-size: 12px;
   font-size: 0.75em;
   margin: 0px 0px 0px 1px;
@@ -200,7 +200,7 @@ body #wrap .app-details-page {
   border-bottom: 2px solid red;
 }
 .app-box:hover .app-title {
-  color: red;
+  color: black;
 }
 .app-box:hover .paragraph-end {
   background: none;
@@ -924,6 +924,12 @@ q:after {
 #apps-preview .youtube-video {
   position: relative;
   max-height: 400px;
+}
+#apps-preview .youtube-video .img-responsive {
+  border: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
 }
 #apps-preview .youtube-video i.fa {
   font-size: 10em;
