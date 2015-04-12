@@ -171,13 +171,14 @@ namespace WereViewApp.AlgorithmsWereViewApp {
         /// <param name="db"></param>
         /// <param name="max"></param>
         /// <returns></returns>
-        public List<App> GetFeaturedOnlyImages(App app, WereViewAppEntities db, int max) {
+        public List<App> GetFeaturedAppsWithImages(App app, WereViewAppEntities db, int max) {
             //app = GetAppFromStaticCache(app.AppID);
 
             var tagsIds = GetTagIds(app, db);
             if (tagsIds != null) {
                 var appsRelatedToHomePage = db.FeaturedImages
                     .Include(n => n.App)
+                    .Include(n => n.App.User)
                     .Where(n => n.IsFeatured)
                     .Where(feature =>
                                 tagsIds.Any(tagId =>
@@ -1081,6 +1082,7 @@ namespace WereViewApp.AlgorithmsWereViewApp {
 
             // same user same platform and category apps with 
             var appsCollectionNotAsSameId = db.Apps
+                .Include(n=> n.User)
                 .Where(n => n.AppID != app.AppID)
                 .Where(n => n.IsPublished && !n.IsBlocked);
 

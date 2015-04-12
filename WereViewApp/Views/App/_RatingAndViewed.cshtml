@@ -4,24 +4,30 @@
     var isHaveRated = Model.CurrentUserRatedAppValue != null ? true : false;
 
 }
-<div class="startboxWrap row">
-    <div class="leftbox col-md-9">
-        <div class="starleft">@Model.AvgRating</div>
-        <div class="starright">
-            <h4>Your Rating</h4>
-            <div class="price rating-display">
-                <!--div class="ratingBox" data-average="5" data-id="2"></div>
-                <span>-/10</span-->
-                @if (isHaveRated) {
-                    <input id="input-21f" itemprop="value" title="rating of @Model.AppName" class="rating-10 app-page-rating-display" value="@Model.CurrentUserRatedAppValue" type="number" min=0 max="10" step="0.5" data-size="xs" data-stars="10" data-readonly="true">
-                } else {
-                    <input id="input-21f" itemprop="value" title="rating of @Model.AppName"  class="rating-10 app-page-rating-display" value="0" type="number" min=0 max="10" step="0.5" data-size="xs" data-stars="10">
-                }
-                <meta itemprop="best" content="10" />
+
+
+<div class="col-sm-8">
+    <div class="rating-box-row">
+        <div>
+            <div class="star-image start-box float-left">0</div>
+            <div class="user-rating-box float-left">
+                <h4>Your Rating</h4>
+                <div class="price rating-display">
+                    @if (isHaveRated) {
+                        <input data-readonly="true" class="rating-5-page-details" title="rating of @Model.AppName" value="@Model.CurrentUserRatedAppValue" min="0" max="5" step="1" data-size="xs">
+                    } else {
+                        <input class="rating-5-page-details" title="rating of @Model.AppName" value="0" min="0" max="5" step="1" data-size="xs">
+                    }
+                    <meta itemprop="best" content="5">
+                </div>
+                <div class="user">
+                    <span class="number">@Model.AvgRating</span> Rating from <a>@Model.ReviewsCount users</a>
+                </div>
             </div>
-            <div class="user"><span class="number">@Model.AvgRating</span> Rating from <a>@Model.ReviewsCount users</a></div>
-            <!--<div class="reviewuser">Review from <a href="#">3 users</a> | <a href="#">4 critic</a></div>-->
         </div>
     </div>
-    <div class="pricebox col-md-3">@Model.TotalViewed</div>
+</div>
+<div class="col-sm-4 app-viewed-box">
+    <h1 class="app-viewed-numbers">@Model.TotalViewed</h1>
+    <div class="views-text">views</div>
 </div>

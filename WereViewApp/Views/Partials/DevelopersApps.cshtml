@@ -3,18 +3,22 @@
 @model List<App>
 @{
     Layout = null;
+    string userName = "";
+    if (Model != null && Model.Count > 0) {
+        userName = ViewBag.UserName;
+    }
+    string divSubtitle = userName + "'s apps collection in" + AppVar.Name;
 }
-
 @if (Model != null) {
-    <div class="app-suggested-list-wrapper featured-apps-wrapper" title="featured apps of @AppVar.Name">
+    <div class="app-suggested-list-wrapper featured-apps-wrapper" title="@divSubtitle">
         <div class="app-suggested-list float-right">
             <div class="apps-list-header-row">
-                <a class="title" href="#" title="Latest Mobile Apps">
-                    <h1 title="" class="float-right">Featured Apps</h1>
+                <a class="title" href="#" title="@divSubtitle">
+                    <h1 title="" class="float-right">Developers Apps</h1>
                 </a>
                 <div class="clear"></div>
             </div>
-            <div class="app-suggested-list-items featured-apps-list-items" title="featured apps of @AppVar.Name">
+            <div class="app-suggested-list-items featured-apps-list-items" title="@divSubtitle">
                 @foreach (var app in Model) {
                     string url = app.GetAppUrl();
                     Platform platform = @app.GetPlatform();

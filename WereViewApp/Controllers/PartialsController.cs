@@ -89,7 +89,7 @@ namespace WereViewApp.Controllers {
         public ActionResult FeaturedApps(long? appID) {
             if (appID != null) {
                 var app = algorithms.GetAppFromStaticCache((long)appID);
-                var featuredApps = algorithms.GetFeaturedOnlyImages(app, db, 4);
+                var featuredApps = algorithms.GetFeaturedAppsWithImages(app, db, 20);
                 return PartialView(featuredApps);
             }
             return PartialView();
