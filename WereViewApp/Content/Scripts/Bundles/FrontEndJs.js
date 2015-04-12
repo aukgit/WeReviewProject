@@ -4214,7 +4214,7 @@ $(function (d, s, id) {
     };
     // execute
     if (d.getElementById("app-deails-page") !== undefined) {
-        $.facebookLikeScript.execute();
+        $.facebookLikeScript.execute(d,s,id);
     }
 
     $.frontEndAppDetailsPage = {

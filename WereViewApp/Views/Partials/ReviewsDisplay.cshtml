@@ -1,177 +1,85 @@
-﻿@using WereViewApp.Modules.DevUser
+﻿@using DevMVCComponent.Miscellaneous.Extensions
+@using WereViewApp.Modules.DevUser
 @using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
 @model WereViewApp.Models.EntityModel.App
 @{
-    var i = 0;
+    int sequenceOfReview = 0;
     var userId = UserManager.GetLoggedUserId();
     Layout = null;
 }
 <div class="review-collection-box seo-optimize">
     <div class="review-wrapper">
-        <section class="single-review row review@id is-recommended wow slideInLeft" data-wow-offset="2" data-wow-duration="1s" data-sequence="@id" itemprop="review" itemscope itemtype="http://schema.org/Review">
-            <div class="col-sm-10">
-                <header class="review-writer-wrapper">
-                    <a class="review-title-anchor" href="#">
-                        <h1 itemprop="name" class="review-title" title="Plant VS Zombies , Review : Take a Look">
-                            <i class="fa fa-check-circle"></i>
-                            Take a Look
-                        </h1>
-                    </a>
-                    <ul class="reviewed-by-wrapper">
-                        <li class="posted-by-wrapper">
-                            Posted by
-                            <a href="#">
-                                <h1 itemprop="author">developer</h1>
-                            </a> |
-                        </li>
-                        <li class="date">
-                            01-Jan-01 |
-                            <meta itemprop="datePublished" content="2011-04-01">
-                        </li>
-                        <li class="report">
-                            <a href="#">
-                                Report
+        @if (Model.Reviews != null && Model.Reviews.Count > 0) {
+            foreach (var review in Model.Reviews) {
+                <section class="single-review row is-recommended wow slideInLeft" data-wow-offset="2" data-wow-duration=".5s" data-sequence="@sequenceOfReview" itemprop="review" itemscope itemtype="http://schema.org/Review">
+                    <div class="col-sm-10">
+                        <header class="review-writer-wrapper">
+                            <a class="review-title-anchor" href="#">
+                                <h1 itemprop="name" class="review-title" title="Plant VS Zombies , Review : Take a Look">
+                                    <i class="fa fa-check-circle"></i>
+                                    Take a Look
+                                </h1>
                             </a>
-                        </li>
-                    </ul>
-                </header>
-                <article title="reiview contents" class="review-contents">
-                    Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc
-                    <span class="show-more-btns-container" data-ref="app-review" data-id="@id">
-                        <span class="elipse-dot">...</span>
-                        <a class="see-more-btn" data-ref="app-review" data-id="@id">see more</a>
-                    </span>
-                    <div class="more" data-ref="app-review" data-id="@id">
-                        Take a Look Take a Look
-                        <a>
-                            <h1 title="pros of Plant VS Zombies" class="h5 green">Pros:</h1>
-                        </a>
-                        <blockquote title="pros of Plant VS Zombies">
-                            pros review Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
-                        </blockquote>
-                        <a>
-                            <h1 title="cons of Plant VS Zombies" class="h5 red">Cons:</h1>
-                        </a>
-                        <blockquote title="cons of Plant VS Zombies">
-                            cons review Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
-                        </blockquote>
-                        <a class="less-btn" data-ref="app-review" data-id="@id">less</a>
-                    </div>
-                </article>
-            </div>
-
-            <div class="review-thumbs-up-wrappper col-sm-2 text-center">
-                <div class="star-image start-box center-margin">
-                    3
-                </div>
-                <a id="review-thumbs-up-click-0" data-sequence="0" data-review-like-btn="true" href="/Reviews/Like/4"><i class="fa fa-thumbs-up"></i></a>
-                <a id="review-thumbs-down-click-0" data-sequence="0" data-review-dislike-btn="true" href="/Reviews/Dislike/4"><i class="fa fa-thumbs-down"></i></a>
-                <div class="seo-hide seo-rating" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
-                    <meta itemprop="worstRating" content="1">
-                    <span itemprop="ratingValue">1</span>/
-                    <span itemprop="bestRating">5</span>stars
-                </div>
-            </div>
-        </section>
-        <section class="single-review row wow slideInRight" data-wow-offset="2" data-wow-duration="1s" data-sequence="@id2" itemprop="review" itemscope itemtype="http://schema.org/Review">
-            <div class="col-sm-10">
-                <header class="review-writer-wrapper">
-                    <a class="review-title-anchor" href="#">
-                        <h1 itemprop="name" class="review-title" title="Plant VS Zombies , Review : Take a Look"><i class="fa fa-check-circle"></i>Take a Look</h1>
-                    </a>
-                    <ul class="reviewed-by-wrapper">
-                        <li class="posted-by-wrapper">
-                            Posted by
-                            <a href="#">
-                                <h1 itemprop="author">developer</h1>
-                            </a> |
-                        </li>
-                        <li class="date">
-                            01-Jan-01
-                            <meta itemprop="datePublished" content="2011-04-01">
-                        </li>
-                    </ul>
-                </header>
-                <article title="reiview contents" class="review-contents">
-                    Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc
-                    <span class="show-more-btns-container" data-ref="app-review" data-id="@id2">
-                        <span class="elipse-dot">...</span>
-                        <a class="see-more-btn" data-ref="app-review" data-id="@id2">see more</a>
-                    </span>
-                    <div class="more" data-ref="app-review" data-id="@id2">
-                        Take a Look Take a Look
-                        <a>
-                            <h1 title="pros of Plant VS Zombies" class="h5 green">Pros:</h1>
-                        </a>
-                        <blockquote title="pros of Plant VS Zombies">
-                            pros review Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
-                        </blockquote>
-                        <a>
-                            <h1 title="cons of Plant VS Zombies" class="h5 red">Cons:</h1>
-                        </a>
-                        <blockquote title="cons of Plant VS Zombies">
-                            cons review Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
-                        </blockquote>
-                        <a class="less-btn" data-ref="app-review" data-id="@id2">less</a>
-                    </div>
-                </article>
-            </div>
-
-            <div class="review-thumbs-up-wrappper col-sm-2 text-center">
-                <div class="star-image start-box center-margin">
-                    3
-                </div>
-                <a id="review-thumbs-up-click-0" data-sequence="0" data-review-like-btn="true" href="/Reviews/Like/4"><i class="fa fa-thumbs-up"></i></a>
-                <a id="review-thumbs-down-click-0" data-sequence="0" data-review-dislike-btn="true" href="/Reviews/Dislike/4"><i class="fa fa-thumbs-down"></i></a>
-                <div class="seo-hide seo-rating" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
-                    <meta itemprop="worstRating" content="1">
-                    <span itemprop="ratingValue">1</span>/
-                    <span itemprop="bestRating">5</span>stars
-                </div>
-            </div>
-        </section>
-    </div>
-</div>
-<div id="review-collection">
-    @if (Model.Reviews != null && Model.Reviews.Count > 0) {
-
-        <div class="blogitemWrap">
-            @foreach (var review in Model.Reviews) {
-                <div class="blogitembox row review@(i)" data-sequence="@(i)">
-                    <div class="textbox col-md-10 col-sm-10">
-                        <h3 title="@Model.AppName , Review : @review.Title">@review.Title</h3>
-                        <div class="navmenu">
-                            <ul>
-                                <li class="posted_by">Posted by <a href="#">@review.User.UserName</a> |</li>
-                                <li class="date">@Html.DisplayDate(review.CreatedDate)</li>
+                            <ul class="reviewed-by-wrapper">
+                                <li class="posted-by-wrapper">
+                                    Posted by
+                                    <a href="#" title="@App.">
+                                        <h1 itemprop="author">developer</h1>
+                                    </a> |
+                                </li>
+                                <li class="date">
+                                    01-Jan-01 |
+                                    <meta itemprop="datePublished" content="2011-04-01">
+                                </li>
+                                <li class="report">
+                                    <a href="#">
+                                        Report
+                                    </a>
+                                </li>
                             </ul>
-                        </div>
-                        <div title="reiview contents">
-                            @review.Comment1<a id="show_review@(i)" data-sequence="@(i)" class="showLink"><span id="elipse-dot">...</span> see more</a><div id="less_review@(i)" class="more">
+                        </header>
+                        <article title="reiview contents" class="review-contents">
+                            @review.Comment1
+                            <span class="show-more-btns-container" data-ref="app-review" data-id="@sequenceOfReview">
+                                <span class="elipse-dot">...</span>
+                                <a class="see-more-btn" data-ref="app-review" data-id="@sequenceOfReview">see more</a>
+                            </span>
+                            <div class="more" data-ref="app-review" data-id="@sequenceOfReview">
                                 @review.Comment2
-                                <h1 title="pros of @Model.AppName" class="h5 green">Pros:</h1>
-                                <p title="pros of @Model.AppName">@review.Pros</p>
-                                <h1 title="cons of @Model.AppName" class="h5 red">Cons:</h1>
-                                <p title="cons of @Model.AppName">@review.Cons</p>
-                                <a id="hide_review@(i)" class="hideLink" data-sequence="@(i)">less</a>
+                                <a>
+                                    <h1 title="pros of @Model.AppName" class="h5 green">Pros:</h1>
+                                </a>
+                                <blockquote title="pros of @Model.AppName">
+                                    @review.Pros
+                                </blockquote>
+                                <a>
+                                    <h1 title="cons of @Model.AppName" class="h5 red">Cons:</h1>
+                                </a>
+                                <blockquote title="cons of @Model.AppName">
+                                    @review.Cons
+                                </blockquote>
+                                <a class="less-btn" data-ref="app-review" data-id="@sequenceOfReview">less</a>
                             </div>
-                        </div>
+                        </article>
                     </div>
 
-                    <div class="imgbox col-md-2 col-sm-2">
-                        <div class="starbox">
-                            <span class="rating-value">@review.Rating</span>
+                    <div class="review-thumbs-up-wrappper col-sm-2 text-center">
+                        <div class="star-image start-box center-margin">
+                            @review.Rating
                         </div>
-                        <a id="review-thumbs-up-click-@(i)" data-sequence="@(i)" data-review-like-btn="true" href="@Url.Action("Like", "Reviews", new { id = @review.ReviewID })"><i class="fa fa-thumbs-up"></i></a>
-                        <a id="review-thumbs-down-click-@(i)" data-sequence="@(i)" data-review-dislike-btn="true" href="@Url.Action("Dislike", "Reviews", new { id = @review.ReviewID })"><i class="fa fa-thumbs-down"></i></a>
+                        <a id="review-thumbs-up-click-@sequenceOfReview" data-sequence="@sequenceOfReview" data-review-like-btn="true" href="@Url.Action("Like", "Reviews", new {id = @review.ReviewID})"><i class="fa fa-thumbs-up"></i></a>
+                        <a id="review-thumbs-down-click-@sequenceOfReview" data-sequence="@sequenceOfReview" data-review-dislike-btn="true" href="@Url.Action("DisLike", "Reviews", new {id = @review.ReviewID})"><i class="fa fa-thumbs-down"></i></a>
+                        <div class="seo-hide seo-rating" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+                            <meta itemprop="worstRating" content="1">
+                            <span itemprop="ratingValue">@review.Rating</span>/
+                            <span itemprop="bestRating">5</span>stars
+                        </div>
                     </div>
-                </div>
+                </section>
                 {
-                    i++;
+                    sequenceOfReview++;
                 }
             }
-
-        </div>
-        <div class="morewrap" id="review-load-more-btn"><a class="loadmore">Load More</a></div>
-    }
+        }
+    </div>
 </div>

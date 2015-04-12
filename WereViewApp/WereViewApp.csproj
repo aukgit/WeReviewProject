@@ -1012,16 +1012,12 @@
     <Content Include="Views\Partials\SearchForm.cshtml" />
     <Content Include="Views\Partials\Menu.cshtml" />
     <Content Include="Views\Partials\NavBar.cshtml" />
-    <Content Include="Views\Partials\SuggestedApps.cshtml" />
     <Content Include="Views\Partials\ReviewsDisplay.cshtml" />
     <Content Include="Views\Partials\FeaturedApps.cshtml" />
     <Content Include="Views\App\_PublishInfo.cshtml" />
-    <Content Include="Views\App\_FeaturedApps.cshtml" />
     <Content Include="Views\App\_SuggestedApps.cshtml" />
-    <Content Include="Views\App\_YoutubeVideo.cshtml" />
     <Content Include="Views\App\_Gallery.cshtml" />
     <Content Include="Views\App\_WriteReviewForm.cshtml" />
-    <Content Include="Views\App\_ReviewsCollection.cshtml" />
     <Content Include="Views\App\_RatingAndViewed.cshtml" />
     <Content Include="Views\App\_AppEditButton.cshtml" />
     <Content Include="Views\Reviews\AlreadyReviewed.cshtml" />
@@ -1034,6 +1030,8 @@
     <Content Include="Views\Shared\EditorTemplates\FileMulti.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Partials\DevelopersApps.cshtml" />
+    <Content Include="Views\Partials\SuggestedApps.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataCached\SearchResult\" />
