@@ -107,6 +107,9 @@ body #wrap .app-details-page {
   border: 2px solid #EAEAEA;
   width: 147px;
   width: 14.7rem;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
   /*position:relative;*/
 }
 .app-box .app-icon {
@@ -194,6 +197,7 @@ body #wrap .app-details-page {
 }
 .app-box:hover {
   background-color: #CACACA;
+  border-bottom: 2px solid red;
 }
 .app-box:hover .app-title {
   color: red;
@@ -911,6 +915,12 @@ q:after {
 #apps-preview .owl-wrapper-outer {
   max-height: 400px;
 }
+#apps-preview .img-responsive {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border-bottom: 2px solid red;
+}
 #apps-preview .youtube-video {
   position: relative;
   max-height: 400px;
@@ -1429,6 +1439,34 @@ q:after {
 .pagination-wrapper {
   margin: 0 20px;
   margin: 0 2rem;
+}
+.app-detail.app-title-wrapper .single-app-edit-btn,
+.single-app-edit-btn,
+.post-info li.app-edit-button .single-app-edit-btn {
+  font-size: 0.8em;
+  /* top: 62%; */
+  color: white;
+  background-color: #62c562;
+  border-radius: 5px;
+  padding: 3px 6px;
+  display: inline-block;
+}
+.app-detail.app-title-wrapper .single-app-edit-btn .glyphicon,
+.single-app-edit-btn .glyphicon,
+.post-info li.app-edit-button .single-app-edit-btn .glyphicon {
+  font-size: inherit;
+  padding: 0;
+  margin: 0;
+}
+.app-detail.app-title-wrapper .single-app-edit-btn {
+  font-size: 0.6em;
+  position: relative;
+  bottom: 3px;
+}
+@media (min-width: 768px) {
+  .app-detail.app-title-wrapper .single-app-edit-btn {
+    bottom: 9px;
+  }
 }
 .blog-page-private .white-wrapper-background .seo-app-name:hover {
   color: deepskyblue;

@@ -7,10 +7,9 @@
     var postedUserId = Model.PostedByUserID;
     var isEditable = currentUserId == postedUserId;
     string appName = Model.AppName;
-
 }
 @if (isEditable) {
-    <a href="@Url.Action("Edit", "App", new { id= Model.AppID})" title="Edit @appName" class="btn btn-info btn-xs">
+    <a href="@Url.Action("Edit", "App", new { id= Model.AppID})" title="Edit @appName" class="single-app-edit-btn">
         <span class="glyphicon glyphicon-pencil"></span> Edit
     </a>
 }
