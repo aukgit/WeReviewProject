@@ -10,10 +10,15 @@
 
     @RenderSection("css", required: false)
     @if (ViewBag.Meta != null) {
-        <meta name="description" content="@ViewBag.Meta" />
+        <meta name="description" content="@ViewBag.Meta"/>
+    } else {
+        <meta name="description" content="@AppVar.Name,@AppVar.Subtitle, Review, Mobile Apps, Apple Apps, Android Apps, Reviewing website, mobile apps rating website" />
     }
+
     @if (ViewBag.Keywords != null) {
-        <meta name="keywords" content="@ViewBag.Keywords" />
+        <meta name="keywords" content="@ViewBag.Keywords"/>
+    } else {
+        <meta name="keywords" content="@AppVar.Name,@AppVar.Subtitle, Review, Mobile Apps, Apple Apps, Android Apps, Reviewing website, mobile apps rating website" />
     }
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -22,7 +27,7 @@
 </head>
 <body>
     <div id="wrap" class="home-page">
-        @Html.Partial("_Navbar")
+        @{ Html.RenderAction("NavBar", "Partials"); }
         <div class="content">
             <div class="container">
                 @RenderBody()

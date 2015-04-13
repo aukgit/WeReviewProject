@@ -1,7 +1,9 @@
 {
   "version": 3,
   "file": "less-imports.css",
-  "sources": [],
+  "sources": [
+    "../../less-imports.less"
+  ],
   "names": [],
-  "mappings": ""
+  "mappings": ";YACY"
 }

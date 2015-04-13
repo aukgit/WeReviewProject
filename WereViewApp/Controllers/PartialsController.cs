@@ -28,10 +28,10 @@ namespace WereViewApp.Controllers {
         #region Header
         //[OutputCache(CacheProfile = "Hour")]
         public ActionResult NavBar() {
-            if (User.Identity.IsAuthenticated) {
-                var userid = UserManager.GetLoggedUserId();
-                ViewBag.Role = RoleManager.GetHighestRole(userid);
-            }
+            //if (User.Identity.IsAuthenticated) {
+            //    var userid = UserManager.GetLoggedUserId();
+            //    ViewBag.Role = RoleManager.GetHighestRole(userid);
+            //}
             return PartialView();
         }
 
