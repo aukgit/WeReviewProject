@@ -271,6 +271,7 @@
     </Compile>
     <Compile Include="Models\ViewModels\DisplayGalleryImages.cs" />
     <Compile Include="Models\ViewModels\SearchViewModel.cs" />
+    <Compile Include="Modules\Reponse\RemoveETagModule.cs" />
     <Compile Include="Modules\StringExtension.cs" />
     <Compile Include="WereViewAppCommon\Structs\CommonVars.cs" />
     <Compile Include="WereViewAppCommon\WereViewStatics.cs" />
@@ -492,7 +493,6 @@
     <Content Include="Content\css\Upload\jquery.fileupload.css" />
     <Content Include="Content\css\utilities.css" />
     <Content Include="Content\CompactCSS.css.bundle" />
-    <Content Include="Content\CompactCSS.min.css.gz" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
@@ -516,6 +516,9 @@
     </Content>
     <Content Include="Content\css\responsive.css.map">
       <DependentUpon>responsive.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\seo-optimize.css.map">
+      <DependentUpon>seo-optimize.css</DependentUpon>
     </Content>
     <None Include="Content\Less\override-mvc.less" />
     <Content Include="Content\revolution-slider\assets\arrowleft.png" />

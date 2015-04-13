@@ -4,7 +4,7 @@
 @{
     //Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
     string appName = Model.AppName;
-    string currentUrl = @Html.GetCurrentURLString();
+    string currentUrl = @Html.GetCurrentURLString(); // Apps/Apple-7/Games/plant-vs-zombies
     ViewBag.Title = Model.Platform.PlatformName + " App : " + appName;
     ViewBag.Meta = appName + "," + @Model.Tags + "," + Model.Description;
     ViewBag.Keywords = appName + "," + @Model.Tags;
@@ -14,9 +14,9 @@
     string appSubtitle = ViewBag.Title;
     string platformSubtitle = Model.Platform.PlatformName + " mobile apps";
     string categorySubtitle = Model.GetCategoryString() + " category mobile apps";
-    string appUrl = AppVar.Url;
+    string softwareUrl = AppVar.Url;//we review app
     string publishDate = @Html.DisplayDate(Model.CreatedDate).ToString();
-    
+    string currentAppUrlNameOnly = Model.URL; //plant-vs-zombies
 }
 
 
@@ -34,7 +34,7 @@
     <div class="row" itemscope itemtype="http://schema.org/Product">
         <div class="col-md-12 app-detail app-title-wrapper">
             <div class="app-title-row float-left">
-                <a href="@appUrl/Apps/@Model.Platform.PlatformName" class="app-platform" title="@platformSubtitle">
+                <a href="@softwareUrl/Apps/@Model.Platform.PlatformName" class="app-platform" title="@platformSubtitle">
                     <i class="@Model.Platform.Icon" title="@platformSubtitle">
                         <em title="@platformSubtitle" class="seo-hide">@platformSubtitle</em>
                     </i>
@@ -50,7 +50,7 @@
                     </h1>
                     <span class="paragraph-end"></span>
                 </a>
-                <a href="@appUrl/Apps/Category/@Model.Category.CategoryName" class="app-category" title="@categorySubtitle">
+                <a href="@softwareUrl/Apps/Category/@Model.Category.CategoryName" class="app-category" title="@categorySubtitle">
                     <h2 class="category" title="@categorySubtitle">
                         <strong title="@categorySubtitle">@Model.Category.CategoryName</strong>
                     </h2>
@@ -70,7 +70,7 @@
                     </div>
                     <ul class="post-info seo-optimize">
                         <li>
-                            By <a href="@appUrl/Developer/@Model.User.UserName">
+                            By <a href="@softwareUrl/Profile/@Model.User.UserName">
                                 <h1>
                                     <strong>
                                         <em title="@Model.User.FirstName @Model.User.LastName developer apps">@Html.Truncate(@Model.User.UserName, 10, false)</em>
@@ -79,10 +79,10 @@
                             </a> <span> . </span>
                         </li>
                         <li>
-                            <a href="#" class="report-app">
-                                <h1>
-                                    <strong>
-                                        <em>Report</em>
+                            <a href="/Report/@currentAppUrlNameOnly" class="report-app">
+                                <h1 title="Report @appName">
+                                    <strong title="Report @appName">
+                                        <em title="Report @appName">Report</em>
                                     </strong>
                                 </h1>
                             </a> <span> . </span>
@@ -106,10 +106,10 @@
                             </a>
                         </li>
                         <li class="share-btn write-review-btn white">
-                            <a href="#.">
-                                <h1>
-                                    <strong>
-                                        <em>Write Review</em>
+                            <a href="#." title="Write Review for @appName">
+                                <h1 title="Write Review for @appName">
+                                    <strong title="Write Review for @appName">
+                                        <em title="Write Review for @appName">Write Review</em>
                                     </strong>
                                 </h1>
                             </a>
@@ -119,13 +119,110 @@
                             <div class="fb-like" data-href="@currentUrl" data-width="110px" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
                         </li>
                     </ul>
-                    <div class="app-description seo-optimize">
+                    <div class="seo-hide">
+                        <a href="@softwareUrl@currentUrl" title="@platformSubtitle : @appName (@categorySubtitle)">
+                            <h1 class="h1" title="@platformSubtitle : @appName (@categorySubtitle)">
+                                <strong title="@platformSubtitle : @appName (@categorySubtitle)">
+                                    <em title="@platformSubtitle : @appName (@categorySubtitle)">@softwareUrl@currentUrl</em>
+                                </strong>
+                            </h1>
+                        </a>
+                        <a href="@softwareUrl@currentUrl" title="@platformSubtitle : @appName (@categorySubtitle)">
+                            <h1 class="h1" title="@platformSubtitle : @appName (@categorySubtitle)">
+                                <strong title="@platformSubtitle : @appName (@categorySubtitle)">
+                                    <em title="@platformSubtitle : @appName (@categorySubtitle)">@softwareUrl@currentUrl</em>
+                                </strong>
+                            </h1>
+                        </a>
+                        <a href="@softwareUrl@currentUrl" title="@platformSubtitle : @appName">
+                            <h1 class="h1" title="@platformSubtitle : @appName">
+                                <strong title="@platformSubtitle : @appName">
+                                    <em title="@platformSubtitle : @appName">@softwareUrl@currentUrl</em>
+                                </strong>
+                            </h1>
+                        </a>
+                        <a href="@softwareUrl@currentUrl" title="@platformSubtitle : @appName (@categorySubtitle)">
+                            <h1 class="h1" title="@platformSubtitle : @appName (@categorySubtitle)">
+                                <strong title="@platformSubtitle : @appName (@categorySubtitle)">
+                                    <em title="@platformSubtitle : @appName (@categorySubtitle)">@platformSubtitle : @appName (@categorySubtitle)</em>
+                                </strong>
+                            </h1>
+                        </a>
+                        <a href="@softwareUrl@currentUrl" title="@platformSubtitle : @appName (@categorySubtitle)">
+                            <h1 class="h1" title="@platformSubtitle">
+                                <strong title="@platformSubtitle">
+                                    <em title="@platformSubtitle">@platformSubtitle</em>
+                                </strong>
+                            </h1>
+                            <h1 class="h1" title="@appName">
+                                <strong title="@appName">
+                                    <em title="@appName">@appName</em>
+                                </strong>
+                            </h1>
+                            <h1 class="h1" title="@categorySubtitle">
+                                <strong title="@categorySubtitle">
+                                    <em title="@categorySubtitle">@categorySubtitle</em>
+                                </strong>
+                            </h1>
+                        </a>
+                        <a href="@softwareUrl@currentUrl" title="@appName">
+                            <h1 class="h1" title="@appName">
+                                <strong title="@appName">
+                                    <em title="@appName">@appName</em>
+                                </strong>
+                            </h1>
+                        </a>
+                        <a href="@softwareUrl" title="Apps review website">
+                            <h1 class="h1" title="Apps review website">
+                                <strong title="Apps review website">
+                                    <em title="Apps review website">Apps review website</em>
+                                </strong>
+                            </h1>
+                        </a>
+                        <a href="@softwareUrl" title="Apps review">
+                            <h1 class="h1" title="Apps review ">
+                                <strong title="Apps review ">
+                                    <em title="Apps review ">Apps review </em>
+                                </strong>
+                            </h1>
+                        </a>
+                        <a href="@currentUrl" title="Apps review website">
+                            <h1 class="h1" title="apps">
+                                <strong title="apps">
+                                    <em title="apps">apps</em>
+                                </strong>
+                            </h1>
+                            <h1 class="h1" title="review">
+                                <strong title="review">
+                                    <em title="review">review</em>
+                                </strong>
+                            </h1>
+                            <h1 class="h1" title="website">
+                                <strong title="website">
+                                    <em title="website">website</em>
+                                </strong>
+                            </h1>
+                        </a>
+                        <a href="@currentUrl" title="Apps review">
+                            <h1 class="h1" title="review">
+                                <strong title="review">
+                                    <em title="review">review</em>
+                                </strong>
+                            </h1>
+                            <h1 class="h1" title="apps">
+                                <strong title="apps">
+                                    <em title="apps">apps</em>
+                                </strong>
+                            </h1>
+                        </a>
+                    </div>
+                    <div class="app-description seo-optimize" title="@appName description">
                         @Html.Truncate(Model.Description, 200, false)
                         <span class="show-more-btns-container" data-ref="app-description">
                             <span class="elipse-dot">...</span>
                             <a class="see-more-btn" data-ref="app-description">see more</a>
                         </span>
-                        <div class="more" data-ref="app-description">
+                        <div class="more" data-ref="app-description" title="@appName description">
                             @Html.Truncate(Model.Description, 200, -1)
                             <a class="less-btn" data-ref="app-description">less</a>
                             <div class="top-gap-small">
@@ -136,7 +233,7 @@
                                             if (!isFrist) {
                                                 <text>,</text>
                                             }
-                                            <a class="Plant tag-item" href="@appUrl/Tags/" title="@platformSubtitle : @Model.AppName is a type of @tag">
+                                            <a class="Plant tag-item" href="@softwareUrl/Tags/" title="@platformSubtitle : @Model.AppName is a type of @tag">
                                                 <h1 title="@platformSubtitle : @Model.AppName is a type of @tag">
                                                     <em title="@Model.AppName" class="seo-hide">@Model.AppName</em>
                                                     @tag
@@ -148,14 +245,14 @@
                                         }
                                     </div>
                                 }
-                            <div class="punlished-date inline indent-1">
-                                <i class="fa fa-calendar-o"></i>
-                                Published date:
-                                <a href="@publishDate" title="Mobiles apps review on @publishDate">@publishDate</a>
+                                <div class="punlished-date inline indent-1">
+                                    <i class="fa fa-calendar-o"></i>
+                                    Published date:
+                                    <a href="@publishDate" title="Mobiles apps review on @publishDate">@publishDate</a>
+                                </div>
                             </div>
                         </div>
-                        </div>
-                       
+
                         <div class="clear"></div>
                     </div>
                     @{ Html.RenderAction("ReviewsDisplay", "Partials", new { id = Model.AppID }); }

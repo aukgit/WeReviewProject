@@ -17,7 +17,7 @@ namespace WereViewApp {
             const string mordernizerCdn = "http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js";
             //const string respondJsCDN = "http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"
             #endregion
-            const BundleSelector bundleSelector = BundleSelector.ShowEveryScript;
+            const BundleSelector bundleSelector = BundleSelector.EveryScriptThroughBundle;
 
             #region jQuery
             bundles.Add(new ScriptBundle("~/bundles/jquery", jQueryCdn)
