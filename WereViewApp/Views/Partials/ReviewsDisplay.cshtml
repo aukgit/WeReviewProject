@@ -1,4 +1,5 @@
 ﻿@using DevMVCComponent.Miscellaneous.Extensions
+@using WereViewApp.Models.EntityModel
 @using WereViewApp.Modules.DevUser
 @using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
 @model WereViewApp.Models.EntityModel.App
@@ -6,33 +7,50 @@
     int sequenceOfReview = 0;
     var userId = UserManager.GetLoggedUserId();
     Layout = null;
+    string currentUrl = @Html.GetCurrentURLString(); // Apps/Apple-7/Games/plant-vs-zombies
+    string softwareUrl = AppVar.Url;//we review app
+
+    string appName = Model.AppName;
+    string isRecommended, animateRightLeft;
 }
 <div class="review-collection-box seo-optimize">
     <div class="review-wrapper">
         @if (Model.Reviews != null && Model.Reviews.Count > 0) {
             foreach (var review in Model.Reviews) {
-                <section class="single-review row is-recommended wow slideInLeft" data-wow-offset="2" data-wow-duration=".5s" data-sequence="@sequenceOfReview" itemprop="review" itemscope itemtype="http://schema.org/Review">
+                isRecommended = review.IsSuggest ? "is-recommended" : "";
+                animateRightLeft = sequenceOfReview % 2 == 0 ? "slideInLeft" : "slideInRight";
+                <section class="single-review row @isRecommended wow @animateRightLeft" data-wow-offset="1" data-wow-duration=".4s" data-sequence="@sequenceOfReview" itemprop="review" itemscope itemtype="http://schema.org/Review">
                     <div class="col-sm-10">
-                        <header class="review-writer-wrapper">
+                        <header class="review-writer-wrapper" title="@appName review">
+                            <div class="seo-hide">
+                                <a href="@softwareUrl@currentUrl" title="@appName review">
+                                    <h1 class="h1" title="@appName review">
+                                        <strong title="@appName review">
+                                            <em title="@appName review">@appName review</em>
+                                        </strong>
+                                    </h1>
+                                </a>
+                            </div>
                             <a class="review-title-anchor" href="#">
                                 <h1 itemprop="name" class="review-title" title="Plant VS Zombies , Review : Take a Look">
                                     <i class="fa fa-check-circle"></i>
-                                    Take a Look
+
+                                    @review.Title
                                 </h1>
                             </a>
                             <ul class="reviewed-by-wrapper">
                                 <li class="posted-by-wrapper">
                                     Posted by
-                                    <a href="#" title="@App.">
-                                        <h1 itemprop="author">developer</h1>
+                                    <a href="@AppVar.Url/User/Reviews/@review.User.UserName" title="@App.">
+                                        <h1 itemprop="author">@review.User.UserName</h1>
                                     </a> |
                                 </li>
                                 <li class="date">
-                                    01-Jan-01 |
+                                    @Html.DisplayDate(@review.CreatedDate) |
                                     <meta itemprop="datePublished" content="2011-04-01">
                                 </li>
                                 <li class="report">
-                                    <a href="#">
+                                    <a href="@AppVar.Url/Report/Reviews/@review.ReviewID">
                                         Report
                                     </a>
                                 </li>
