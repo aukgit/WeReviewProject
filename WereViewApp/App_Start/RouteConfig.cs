@@ -17,7 +17,7 @@ namespace WereViewApp {
                    url: "Register",
                    defaults: new { controller = accountController, action = "Register", id = UrlParameter.Optional },
                    namespaces: new string[] { wereviewappControllers }
-               );
+            );
             routes.MapRoute(
                 name: "SignInConfig",
                 url: "SignIn",
@@ -96,6 +96,15 @@ namespace WereViewApp {
 
 
 
+            #endregion
+
+            #region profile
+            routes.MapRoute(
+              name: "profile",
+              url: "Profile/{username}",
+              defaults: new { controller = "Profile", action = "Index" },
+              namespaces: new string[] { wereviewappControllers }
+           );
             #endregion
 
 

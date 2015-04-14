@@ -13,9 +13,8 @@ namespace WereViewApp.Controllers
         public ActionResult Index(string username) {
             var user = UserManager.GetUser(username);
             if (user != null) {
-                
+                return View(user);
             }
-            return View();
         }
     }
 }

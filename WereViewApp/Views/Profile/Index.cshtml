@@ -1,3 +1,32 @@
-﻿
+﻿@model WereViewApp.Models.POCO.Identity.ApplicationUser
+@{
+    string username = Model.UserName;
+}
 
-<h2 class="h2" title="profile of "></h2>
+<h2 class="h2" title="profile of @username">@username</h2>
+<table>
+    <tbody>
+        <tr>
+            <td>Name</td>
+            <td>:</td>
+            <td>@Model.DisplayName</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>:</td>
+            <td>@Model.Email.Replace("@", "{at}")</td>
+        </tr>
+    </tbody>
+</table>
+<div class="row app-date-seperation seo-optimize">
+    <div class="col-md-10"></div>
+    <div class="col-md-2  text-right">
+        <a href="#">
+            <h1 class="month-seperation regular-color bold-important">
+                <time datetime="Jun 2015">Jun 2015</time>
+            </h1>
+            <span class="fa fa-calendar"></span>
+        </a>
+
+    </div>
+</div>
