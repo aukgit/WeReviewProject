@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Controllers;
+using WereViewApp.Models.POCO.IdentityCustomization;
 
 namespace WereViewApp.Areas.Admin.Controllers {
     public class FeedbacksController : BasicController {
@@ -19,7 +15,6 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         public FeedbacksController()
             : base(true) {
-
         }
 
         public void GetDropDowns() {
@@ -41,7 +36,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View("Index", db.Feedbacks.Where(n => n.IsSolved).ToList());
         }
 
-        public ActionResult Details(System.Int64 id) {
+        public ActionResult Details(Int64 id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -52,9 +47,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(feedback);
         }
 
-
-
-        public ActionResult Edit(System.Int64 id) {
+        public ActionResult Edit(Int64 id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -65,8 +58,6 @@ namespace WereViewApp.Areas.Admin.Controllers {
             GetDropDowns();
             return View(feedback);
         }
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -86,14 +77,11 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(feedback);
         }
 
-
         public ActionResult Delete(long id) {
             var feedback = db.Feedbacks.Find(id);
             db.Feedbacks.Remove(feedback);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-
     }
 }

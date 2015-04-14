@@ -1,23 +1,17 @@
-﻿
-<h1 class="text-danger h1 gap-from-top-small">@ViewBag.Title</h1>
+﻿<h1 class="text-danger h1 gap-from-top-small">
+    You are not allowed
+</h1>
 
-<div class="container unhappy-page">
-    <div class="row">
-        <p class="col-md-2 unhappy">
-            :(
-        </p>
-        <div class="col-md-9">
-            <p class="h4">
-                @ViewData["ErrorMessage"]
-                Sorry you don't have the permission to visit this page.
-            </p>            
-        </div>
-        <div class="col-md-12 contactus">
-            Please feel free to @Html.ContactFormActionLink("contact us", "Contact Us - " + @AppVar.Name).
+<div class="container">
+    <div class="top-gap-2x">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="~/images/error-icon-bucket.png" alt="app not found" />
+            </div>
+            <div class="col-md-8">
+                <p>Sorry for the inconvience , you <strong class="red bold">are not authorized</strong> to view this page. Please check with admin to understand more about the situation.</p>
+                <div class="contactus">Please feel free to @Html.ContactFormActionLink("contact us", "Contact Us - " + @AppVar.Name).</div>
+            </div>
         </div>
     </div>
 </div>
-
-
-
-

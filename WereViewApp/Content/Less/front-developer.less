@@ -27,12 +27,22 @@ body #wrap .app-details-page {
     text-transform: none;
 }
 
+
+
 .btn-default {
     color: white;
 }
 
 .btn-default:hover {
     color: #333;
+}
+
+.btn-warning:hover {
+    background-color: #E7711C;
+}
+
+.btn-info:hover {
+    background-color: rgb(75, 112, 126);
 }
 
 .btn-primary, .btn-default {
@@ -52,11 +62,13 @@ body #wrap .app-details-page {
 }
 
 .table-hover > tbody > tr:hover {
-    background-color: orange;
-    color: white;
+    //background-color: orange;
+    //color: white;
+    background-color: #e5f7fc;
+    color: #1a1a1a;
 
     a {
-        color: inherit;
+       // color: inherit;
     }
 }
 
@@ -877,8 +889,9 @@ q:after {
     .youtube-video {
         position: relative;
         max-height: 400px;
-        .img-responsive{
-            border:none;
+
+        .img-responsive {
+            border: none;
             .border-rounded(0);
         }
 

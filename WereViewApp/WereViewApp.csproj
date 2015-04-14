@@ -250,6 +250,8 @@
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\AppsController.cs" />
     <Compile Include="Controllers\PartialsController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Models\EntityModel\Derivables\IApp.cs">
@@ -273,6 +275,7 @@
     <Compile Include="Models\ViewModels\SearchViewModel.cs" />
     <Compile Include="Modules\Reponse\RemoveETagModule.cs" />
     <Compile Include="Modules\StringExtension.cs" />
+    <Compile Include="Controllers\ViewTestController.cs" />
     <Compile Include="WereViewAppCommon\Structs\CommonVars.cs" />
     <Compile Include="WereViewAppCommon\WereViewStatics.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -689,6 +692,7 @@
     <Content Include="images\chart-img-2.png" />
     <Content Include="images\chart-img-3.png" />
     <Content Include="images\chart-img-4.png" />
+    <Content Include="images\error-icon-bucket.png" />
     <Content Include="images\f-b-img-1.jpg" />
     <Content Include="images\f-b-img-2.jpg" />
     <Content Include="images\f-b-img-3.jpg" />
@@ -1039,6 +1043,7 @@
     </Content>
     <Content Include="Views\Partials\DevelopersApps.cshtml" />
     <Content Include="Views\Partials\SuggestedApps.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataCached\SearchResult\" />
@@ -1051,7 +1056,9 @@
     <Folder Include="Uploads\Files\Private\" />
     <Folder Include="Uploads\Images\Private\" />
     <Folder Include="Views\Basic\" />
+    <Folder Include="Views\Report\" />
     <Folder Include="Views\Search\" />
+    <Folder Include="Views\ViewTest\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

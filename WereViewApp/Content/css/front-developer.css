@@ -21,6 +21,12 @@ body #wrap .app-details-page {
 .btn-default:hover {
   color: #333;
 }
+.btn-warning:hover {
+  background-color: #E7711C;
+}
+.btn-info:hover {
+  background-color: #4b707e;
+}
 .btn-primary,
 .btn-default {
   background-color: #ff7200;
@@ -35,11 +41,8 @@ body #wrap .app-details-page {
   display: table;
 }
 .table-hover > tbody > tr:hover {
-  background-color: orange;
-  color: white;
-}
-.table-hover > tbody > tr:hover a {
-  color: inherit;
+  background-color: #e5f7fc;
+  color: #1a1a1a;
 }
 .float-left {
   float: left;

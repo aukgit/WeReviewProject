@@ -1,4 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
+@{
+    string username = @User.Identity.GetUserName();
+}
 @if (Request.IsAuthenticated) {
     <li>
         <a href="@AppVar.Url/Account/Manage" title="Manage your account">
@@ -6,16 +9,12 @@
         </a>
         <ul class="dropdown animated fadeIn">
             <li>
-                <a href="@AppVar.Url/Account/Manage" title="Manage your account">
-                    <h1>
-                        <strong>
-                            <em>
-                                Manage
-                            </em>
-                        </strong>
-                    </h1>
-                </a>
+                <a href="@AppVar.Url/Account/Manage" title="Manage your account">Manage</a>
             </li>
+            <li>
+                <a href="@AppVar.Url/Profile/@username" title="Public profile  of @username">Public Profile</a>
+            </li>
+            @Html.GetMenu("AppPost")
             <li title="Sign out">
                 @using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new { @id = "logoutForm" })) {
                     @Html.AntiForgeryToken()

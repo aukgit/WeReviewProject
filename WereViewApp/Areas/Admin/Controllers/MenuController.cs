@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region using block
 
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.IdentityCustomization;
+
+#endregion
 
 namespace WereViewApp.Areas.Admin.Controllers {
     public class MenuController : Controller {
@@ -16,8 +17,6 @@ namespace WereViewApp.Areas.Admin.Controllers {
         public ActionResult Index() {
             return View(db.Navigations.Include(n => n.NavigationItems).ToList());
         }
-
-
 
         public ActionResult Create() {
             return View();
@@ -35,11 +34,11 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(navigation);
         }
 
-        public ActionResult Edit(System.Int32 id) {
+        public ActionResult Edit(Int32 id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Navigation navigation = db.Navigations.Find(id);
+            var navigation = db.Navigations.Find(id);
             if (navigation == null) {
                 return HttpNotFound();
             }
@@ -58,23 +57,21 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(navigation);
         }
 
-
-        public ActionResult Delete(System.Int32 id) {
+        public ActionResult Delete(Int32 id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Navigation navigation = db.Navigations.Find(id);
+            var navigation = db.Navigations.Find(id);
             if (navigation == null) {
                 return HttpNotFound();
             }
             return View(navigation);
         }
 
-
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            Navigation navigation = db.Navigations.Find(id);
+            var navigation = db.Navigations.Find(id);
             db.Navigations.Remove(navigation);
             db.SaveChanges();
             return RedirectToAction("Index");

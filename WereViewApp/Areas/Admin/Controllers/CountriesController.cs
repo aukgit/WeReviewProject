@@ -18,10 +18,6 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(CachedQueriedData.GetCountries().ToList());
         }
 
-
-
-
-
         public ActionResult Edit(System.Int32 id) {
             var zones = CachedQueriedData.GetTimezones(id);
             ViewBag.Timezone = new SelectList(db.UserTimeZones.ToList(), "UserTimeZoneID", "Display");
