@@ -34,7 +34,7 @@ namespace WereViewApp.Controllers {
                         algorithms.GetEmbedImagesWithApp(appsForThisPage, db, (int)pageInfo.ItemsInPage, GalleryCategoryIDs.SearchIcon);
                         ViewBag.Apps = appsForThisPage;
                         string eachUrl = "/Profile/" + user.UserName + "/@page";
-                        ViewBag.paginationHtml = Pagination.GetList(pageInfo, eachUrl, "");
+                        ViewBag.paginationHtml = Pagination.GetList(pageInfo, eachUrl, "", maxNumbersOfPagesShow:1);
                         return View(user);
                     }
                 }

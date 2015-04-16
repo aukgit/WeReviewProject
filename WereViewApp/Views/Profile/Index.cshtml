@@ -9,7 +9,7 @@
 }
 
 <h2 class="h2" title="profile of @username">@username</h2>
-<table>
+<table class="float-right">
     <tbody>
         <tr>
             <td>Name</td>
@@ -40,7 +40,7 @@
                 <li class="slim-app-view" data-app-type="@platform.Icon">
                     <a class="app-url" href="@app.GetAppUrl()">
                         <div class="app-icon">
-                            <img src="@app.GallerySearchIconLocation" alt="app" />
+                            <img src="@app.GallerySearchIconLocation" alt="app"/>
                         </div>
                         <div class="app-content">
                             <h1 class="app-title">
@@ -59,9 +59,10 @@
                         </div>
                     </a>
                 </li>
-            }   
-           
+            }
+
         </ul>
+        <div class="clear"></div>
         <div class="pagination-wrapper text-center">
             <ul class="pagination">
                 @ViewBag.paginationHtml
