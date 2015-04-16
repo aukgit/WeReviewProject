@@ -654,7 +654,6 @@ namespace WereViewApp.AlgorithmsWereViewApp {
         /// <param name="db"></param>
         /// <returns></returns>
         public App GetSingleAppForDisplay(string platform, float platformVersion, string category, string url, int maxReviewLoad, WereViewAppEntities db) {
-
             if (platform != null && platformVersion != null && category != null && url != null) {
                 if (CommonVars.AppsFoundForSingleDisplay == null) {
                     CommonVars.AppsFoundForSingleDisplay = new List<App>(800);
@@ -686,9 +685,7 @@ namespace WereViewApp.AlgorithmsWereViewApp {
                                 app.CurrentUserRatedAppValue = null;
                             }
                         }
-
                         LoadReviewIntoApp(app, maxReviewLoad, db);
-
                         return app;
                     }
                     // app not found.
