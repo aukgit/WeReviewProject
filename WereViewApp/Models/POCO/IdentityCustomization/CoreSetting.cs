@@ -128,8 +128,11 @@ namespace WereViewApp.Models.POCO.IdentityCustomization {
         [Column(TypeName = "VARCHAR")]
         [StringLength(40)]
         public string FacebookSecret { get; set; }
+        [Display(Name = "Gallery Max", Description = "App details page , max gallery image number to upload.")]
 
         public byte GalleryMaxPictures { get; set; }
+        [Display(Name = "Max Draft", Description = "Apps max draft number.")]
+
         public byte MaxDraftPostByUsers { get; set; }
         //[DefaultValue(1)]
         //[Required]

@@ -30,7 +30,7 @@ namespace WereViewApp.Controllers {
                             ItemsInPage = AppConfig.Setting.PageItems,
                             PageNumber = page
                         };
-                        var appsForThisPage = apps.GetPageData(pageInfo, CacheNames.ProfilePaginationData, true).ToList();
+                        var appsForThisPage = apps.GetPageData (pageInfo, CacheNames.ProfilePaginationData, true).ToList();
                         algorithms.GetEmbedImagesWithApp(appsForThisPage, db, (int)pageInfo.ItemsInPage, GalleryCategoryIDs.SearchIcon);
                         ViewBag.Apps = appsForThisPage;
                         string eachUrl = "/Profile/" + user.UserName + "/@page";
