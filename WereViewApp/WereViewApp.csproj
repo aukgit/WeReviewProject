@@ -302,7 +302,7 @@
     <Compile Include="Models\CustomQuery\CommonQueriesWereViewApp.cs" />
     <Compile Include="Models\DesignPattern\Interfaces\IDevUserRole.cs" />
     <Compile Include="Models\DesignPattern\Interfaces\IDevUser.cs" />
-    <Compile Include="Models\EntityModel\Context\WereViewAppModel.Context.cs" />
+    <Compile Include="Models\EntityModel\Context\WereViewAppEntities.cs" />
     <Compile Include="Models\EntityModel\POCO\App.cs" />
     <Compile Include="Models\EntityModel\POCO\AppDraft.cs" />
     <Compile Include="Models\EntityModel\POCO\Category.cs" />
@@ -1044,6 +1044,8 @@
     <Content Include="Views\Partials\DevelopersApps.cshtml" />
     <Content Include="Views\Partials\SuggestedApps.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Shared\_404.cshtml" />
+    <Content Include="Views\Shared\_NotExist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataCached\SearchResult\" />

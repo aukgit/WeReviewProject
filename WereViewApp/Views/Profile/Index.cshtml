@@ -1,6 +1,9 @@
-﻿@model WereViewApp.Models.POCO.Identity.ApplicationUser
+﻿@using WereViewApp.Models.EntityModel
+@model WereViewApp.Models.POCO.Identity.ApplicationUser
 @{
     string username = Model.UserName;
+    List<App> apps = (List<App>)ViewBag.Apps;
+    
 }
 
 <h2 class="h2" title="profile of @username">@username</h2>
@@ -21,12 +24,51 @@
 <div class="row app-date-seperation seo-optimize">
     <div class="col-md-10"></div>
     <div class="col-md-2  text-right">
-        <a href="#">
-            <h1 class="month-seperation regular-color bold-important">
-                <time datetime="Jun 2015">Jun 2015</time>
-            </h1>
-            <span class="fa fa-calendar"></span>
+        <a>
+            <h1 class="month-seperation regular-color bold-important"></h1>
         </a>
-
     </div>
+</div>
+
+<div class="row">
+    <div class="archive-app-collection-wrapper">
+        <ul class="seo-optimize regular-color archive-app-collection-list search-page-apps-list pagination-required">
+            @foreach (var app in apps) {
+                <li class="slim-app-view" data-app-type="@app.pl">
+                    <a class="app-url" href="#">
+                        <div class="app-icon">
+                            <img src="images/games-image.jpg" alt="app" />
+                        </div>
+                        <div class="app-content">
+                            <h1 class="app-title">
+                                <i class="fa fa-android"></i>
+                                Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                                <span class="paragraph-end"></span>
+                            </h1>
+                            <h3>
+                                Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                                <span class="paragraph-end"></span>
+                            </h3>
+                            <span class="rating">
+                                <i class="fa fa-star"></i>
+                                3/5
+                            </span>
+                        </div>
+                    </a>
+                </li>
+                </li>
+            }   
+           
+        </ul>
+        <div class="pagination-wrapper text-center">
+            <ul class="pagination">
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+            </ul>
+        </div>
+    </div>
+
 </div>

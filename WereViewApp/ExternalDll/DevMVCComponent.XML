@@ -1,0 +1,599 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DevMVCComponent</name>
+    </assembly>
+    <members>
+        <member name="T:DevMVCComponent.Cache.CacheProcessor">
+            <summary>
+            Default Sliding 2 Hours
+            Default Expiration 5 Hours
+            </summary>
+        </member>
+        <member name="F:DevMVCComponent.Cache.CacheProcessor.defaultCacheDependency">
+            <summary>
+            Will be maintained by each db table as single file single text in a 
+            specific folder.
+            </summary>
+        </member>
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.#ctor">
+            <summary>
+            Default expiration on +5 hours
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.#ctor(System.DateTime,System.TimeSpan)">
+            <summary>
+            Instantiate CacheProssor
+            </summary>
+            <param name="context"></param>
+            <param name="expiration"></param>
+            <param name="sliding">If data is not accessed for certain time , then it will be removed from cache.</param>
+        </member>
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.#ctor(System.String,System.DateTime,System.TimeSpan)">
+            <summary>
+            Instantiate CacheProssor
+            </summary>
+            <param name="context"></param>
+            <param name="cacheName"></param>
+            <param name="expiration"></param>
+            <param name="sliding">Change Default Sliding: If data is not accessed for certain time , then it will be removed from cache.</param>
+        </member>
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.#ctor(System.String,System.DateTime)">
+            <summary>
+            Instantiate CacheProssor
+            </summary>
+            <param name="context"></param>
+            <param name="cacheName"></param>
+            <param name="expiration"></param>
+        </member>
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object)">
+            <summary>
+            Save cache. No Expiration and no sliding.
+            </summary>
+            <param name="key"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.String)">
+            <summary>
+            Save object as cache.
+            </summary>
+            <param name="key">Key object to look for.</param>
+            <param name="data">Save any type of data.</param>
+            <param name="tableName">Name of the table to create dependencies in file (AppData\DatabaseTables\table.table). Change the file manually if table is updated.</param>
+        </member>
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.DateTime)">
+            <summary>
+            Save object as cache.
+            </summary>
+            <param name="key">Key object to look for.</param>
+            <param name="data">Save any type of data.</param>
+            <param name="expires"></param>
+        </member>
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.TimeSpan)">
+            <summary>
+            Save object as cache.
+            </summary>
+            <param name="key">Key object to look for.</param>
+            <param name="data">Save any type of data.</param>
+            <param name="expires"></param>
+            <param name="sliding">If data is not accessed for certain time then it will be deleted from the cache memory.</param>
+        </member>
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.TimeSpan,System.String)">
+            <summary>
+            Save object as cache.
+            </summary>
+            <param name="key">Key object to look for.</param>
+            <param name="data">Save any type of data.</param>
+            <param name="expires"></param>
+            <param name="sliding">If data is not accessed for certain time then it will be deleted from the cache memory.</param>
+            <param name="tableName">Name of the table for dependency.</param>
+        </member>
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.DateTime,System.String)">
+            <summary>
+            Save object as cache.
+            </summary>
+            <param name="key">Key object to look for.</param>
+            <param name="data">Save any type of data.</param>
+            <param name="expires"></param>
+            <param name="tableName">Name of the table to create dependencies in file (AppData\DatabaseTables\table.table). Change the file manually if table is updated.</param>
+        </member>
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.Nullable{System.DateTime},System.Nullable{System.TimeSpan},System.String,System.Web.Caching.CacheItemPriority)">
+            <summary>
+            Save object as cache.
+            </summary>
+            <param name="key">Key object to look for.</param>
+            <param name="data">Save any type of data.</param>
+            <param name="expires"></param>
+            <param name="sliding">If data is not accessed for certain time then it will be deleted from the cache memory.</param>
+            <param name="tableName">Name of the table to create dependencies in file (AppData\DatabaseTables\table.table). Change the file manually if table is updated.</param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.Nullable{System.DateTime},System.Nullable{System.TimeSpan},System.Web.Caching.CacheDependency,System.Web.Caching.CacheItemPriority)">
+            <summary>
+            Save object as cache.
+            </summary>
+            <param name="key">Key object to look for.</param>
+            <param name="data">Save any type of data.</param>
+            <param name="expires">If put expire then don't put sliding</param>
+            <param name="sliding">If data is not accessed for certain time then it will be deleted from the cache memory.</param>
+            <param name="cacheDependency">New dependency cache.</param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.Nullable{System.DateTime},System.Nullable{System.TimeSpan},System.Web.Caching.CacheDependency,System.Web.Caching.CacheItemPriority,System.Web.Caching.CacheItemRemovedCallback)">
+            <summary>
+            Save object as cache.
+            </summary>
+            <param name="key">Key object to look for.</param>
+            <param name="data">Save any type of data.</param>
+            <param name="expires">If put expire then don't put sliding</param>
+            <param name="sliding">If data is not accessed for certain time then it will be deleted from the cache memory.</param>
+            <param name="cacheDependency">New dependency cache.</param>
+            <param name="priority"></param>
+            <param name="onRemoveMethod">on remove method name</param>
+        </member>
+        <member name="T:DevMVCComponent.Config">
+            <summary>
+            Must setup this class.
+            </summary>
+        </member>
+        <member name="F:DevMVCComponent.Config.AdminEmail">
+            <summary>
+            System admin email
+            </summary>
+        </member>
+        <member name="F:DevMVCComponent.Config.DeveloperEmail">
+            <summary>
+            Developer email
+            </summary>
+        </member>
+        <member name="F:DevMVCComponent.Config.Assembly">
+            <summary>
+            Sets Assembly = Assembly.GetExecutingAssembly();
+            </summary>
+        </member>
+        <member name="F:DevMVCComponent.Config.ApplicationName">
+            <summary>
+            Running application name
+            </summary>
+        </member>
+        <member name="F:DevMVCComponent.Config.IsNotifyDeveloper">
+            <summary>
+            Notify Developer on Error if true.
+            </summary>
+        </member>
+        <member name="M:DevMVCComponent.Config.GetApplicationNameHTML">
+            <summary>
+            Attach application information from the AssemblyInfo given the Assembly = Assembly.GetExecutingAssembly().
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DevMVCComponent.Cookie.CookieProcessor">
+            <summary>
+            Set cookies in response 
+            Retrieve cookies from request.
+            </summary>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.#ctor(System.String)">
+            <summary>
+            Pass Base.ControllerContext
+            </summary>
+            <param name="baseContext">Pass this.HttpContext</param>
+            <param name="cookieName">Pass the default cookie name.</param>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.Save(System.Object)">
+            <summary>
+            Add object to cookies whether exist or not.
+            </summary>
+            <param name="Object"></param>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.Save(System.Object,System.String)">
+            <summary>
+            Add object to cookies whether exist or not.
+            Default expiration is +5 Hours.
+            </summary>
+            <param name="Object">Pass the object.</param>
+            <param name="cookie">Name of the cookie</param>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.Save(System.Object,System.Boolean)">
+            <summary>
+            Save a single object as cookie.
+            Save in Response.
+            Default expiration is +5 Hours.
+            </summary>
+            <param name="Object">Pass the object</param>
+            <param name="checkBeforeExist">Don't save if already exist.</param>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.Save(System.Object,System.String,System.DateTime)">
+            <summary>
+            Save a single object as cookie.
+            Save in Response.
+            </summary>
+            <param name="Object">Pass the object</param>
+            <param name="cookieName">Cookie name , pass null if constructor CookieName is valid.</param>
+            <param name="expiration"></param>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.Save(System.Object,System.String,System.Boolean,System.DateTime)">
+            <summary>
+            Save a single object as cookie.
+            Save in Response.
+            </summary>
+            <param name="Object">Pass the object</param>
+            <param name="cookieName">Cookie name , pass null if constructor CookieName is valid.</param>
+            <param name="checkBeforeExist">True: Don't save if already exist. </param>
+            <param name="expiration"></param>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.Get">
+            <summary>
+            Get Default cookie string value.
+            </summary>
+            <returns>GetDefault cookie string value.</returns>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.Get(System.String)">
+            <summary>
+            Get Default cookie string value.
+            </summary>
+            <returns>GetDefault cookie string value.</returns>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.Set(System.String,System.String)">
+            <summary>
+            Save cookie. +5 hours expiration.
+            </summary>
+            <returns>GetDefault cookie string value.</returns>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.Set(System.String,System.String,System.DateTime)">
+            <summary>
+            Save cookie. +5 hours expiration.
+            </summary>
+            <returns>GetDefault cookie string value.</returns>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.Read">
+            <summary>
+            Read cookie from request.
+            </summary>
+            <returns>Returns string or null.</returns>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.Read(System.String)">
+            <summary>
+            Read cookie from request.
+            </summary>
+            <param name="cookieName"></param>
+            <returns>Return object or null.</returns>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.ReadString(System.String)">
+            <summary>
+            Read cookie from request.
+            </summary>
+            <param name="cookieName"></param>
+            <returns>Returns string or null.</returns>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.ReadString">
+            <summary>
+            Read cookie from request.
+            </summary>
+            <returns>Returns string or null.</returns>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.ReadBool(System.String)">
+            <summary>
+            Read cookie from request.
+            </summary>
+            <param name="cookieName"></param>
+            <returns>Returns Boolean.</returns>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.ReadDecimal(System.String)">
+            <summary>
+            Read cookie from request.
+            </summary>
+            <param name="cookieName"></param>
+            <returns>Returns decimal.</returns>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.ReadLong(System.String)">
+            <summary>
+            Read cookie from request.
+            </summary>
+            <param name="cookieName"></param>
+            <returns>Returns long</returns>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.ReadInt(System.String)">
+            <summary>
+            Read cookie from request.
+            </summary>
+            <param name="cookieName"></param>
+            <returns>Returns int.</returns>
+        </member>
+        <member name="M:DevMVCComponent.Cookie.CookieProcessor.ReadDateTime(System.String)">
+            <summary>
+            Read cookie from request.
+            </summary>
+            <param name="cookieName"></param>
+            <returns>Return Date time or null.</returns>
+        </member>
+        <member name="M:DevMVCComponent.Database.EntityToString.GetHTMLTableRow(System.Object,System.Nullable{System.Int32})">
+            <summary>
+            Generating single row of this object.
+            </summary>
+            <param name="Class"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DevMVCComponent.Database.Pagination">
+            <summary>
+            Generates pagination
+            </summary>
+        </member>
+        <member name="M:DevMVCComponent.Database.Pagination.GetPageData``1(System.Linq.IQueryable{``0},System.Nullable{System.Int64}@,System.Nullable{System.Int64},System.Nullable{System.Int64})">
+            <summary>
+            Get pagination data based on the page number.
+            </summary>
+            <param name="entities">Sent Entities as IQueryable</param>
+            <param name="Pages">Send a ref of integer to get the pages number. It will be generated from method. Use it to generate pages. It indicated how many pages exist</param>
+            <param name="Page">Based on the page number it returns data. </param>
+            <param name="Items">How many items should a page contain? (Default is 30 defined in the PageItems Property of the class)</param>
+            <returns>IQueryable data based on the page number.</returns>
+        </member>
+        <member name="P:DevMVCComponent.Database.Pagination.PageItems">
+            <summary>
+            Total number of items in a page.
+            </summary>
+        </member>
+        <member name="M:DevMVCComponent.Error.Handle.#ctor(System.Exception)">
+            <summary>
+            Sends an email to the developer if run into any errors.
+            </summary>
+            <param name="ex"></param>
+        </member>
+        <member name="M:DevMVCComponent.Error.Handle.#ctor(System.Exception,System.String)">
+            <summary>
+            Sends an email to the developer if run into any errors.
+            </summary>
+            <param name="ex"></param>
+            <param name="method">Method name should contains parenthesis.()</param>
+        </member>
+        <member name="M:DevMVCComponent.Error.Handle.#ctor(System.Exception,System.String,System.String)">
+            <summary>
+            Sends an email to the developer if run into any errors.
+            </summary>
+            <param name="ex"></param>
+            <param name="method">Method name should contains parenthesis.()</param>
+            <param name="subject">Email subject</param>
+        </member>
+        <member name="M:DevMVCComponent.Error.Handle.#ctor(System.Exception,System.String,System.String,System.Object)">
+            <summary>
+            Sends an email to the developer if run into any errors.
+            </summary>
+            <param name="ex"></param>
+            <param name="method">Method name should contains parenthesis.()</param>
+            <param name="subject">Email subject</param>
+            <param name="entity">Single entity data that you are trying to save. You can also pass null.</param>
+        </member>
+        <member name="M:DevMVCComponent.Error.Handle.HandleBy(System.Exception,System.String)">
+            <summary>
+            Sends an email to the developer if run into any errors.
+            </summary>
+            <param name="ex"></param>
+            <param name="method">Method name should contains parenthesis.()</param>
+        </member>
+        <member name="M:DevMVCComponent.Error.Handle.HandleBy(System.Exception,System.String,System.String)">
+            <summary>
+            Sends an email to the developer if run into any errors.
+            </summary>
+            <param name="ex"></param>
+            <param name="method">Method name should contains parenthesis.()</param>
+            <param name="subject">Email subject</param>
+        </member>
+        <member name="M:DevMVCComponent.Error.Handle.HandleBy(System.Exception,System.String,System.Object)">
+            <summary>
+            Sends an email to the developer if run into any errors.
+            </summary>
+            <param name="ex"></param>
+            <param name="method">Method name should contains parenthesis.()</param>
+            <param name="entity">Single entity data that you are trying to save. You can also pass null.</param>
+        </member>
+        <member name="M:DevMVCComponent.Error.Handle.HandleBy(System.Exception,System.String,System.String,System.Object)">
+            <summary>
+            Sends an email to the developer if run into any errors.
+            </summary>
+            <param name="exception"></param>
+            <param name="method">Method name should contains parenthesis.()</param>
+            <param name="subject">Email subject</param>
+            <param name="entity">Single entity data that you are trying to save. You can also pass null.</param>
+        </member>
+        <member name="M:DevMVCComponent.Mailers.MailConfig.#ctor">
+            <summary>
+            By default:
+            UseDefaultCredentials = false;
+            EnableSsl = true;
+            DeliveryMethod = SmtpDeliveryMethod.Network;
+            Timeout = 10000;
+            </summary>
+        </member>
+        <member name="M:DevMVCComponent.Mailers.MailConfig.ChangeCredentials(System.String,System.String)">
+            <summary>
+            Change Credentials
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+        </member>
+        <member name="M:DevMVCComponent.Mailers.MailConfig.SetupCredentials">
+            <summary>
+            Setup credentials automatic.
+            </summary>
+        </member>
+        <member name="M:DevMVCComponent.Mailers.MailConfig.MailSetup(System.String,System.String)">
+            <param name="senderMailAddress">Your mail address</param>
+        </member>
+        <member name="M:DevMVCComponent.Mailers.MailConfig.QuickSend(System.String,System.String,System.String,DevMVCComponent.Enums.MailingType,System.Boolean)">
+            <summary>
+            Sends mail asynchronously.
+            </summary>
+            <param name="to">Comma to seperate multiple email addresses.</param>
+            <param name="subject"></param>
+            <param name="body"></param>
+            <param name="type">Regular, CC, BCC</param>
+        </member>
+        <member name="M:DevMVCComponent.Mailers.MailConfig.QuickSend(System.String,System.String,System.String,System.String,System.String,DevMVCComponent.Enums.MailingType)">
+            <summary>
+            Sends mail asynchronously.
+            </summary>
+            <param name="to">Comma to seperate multiple email addresses.</param>
+            <param name="subject"></param>
+            <param name="body"></param>
+            <param name="from"></param>
+            <param name="password"></param>
+            <param name="type">Regular, CC, BCC</param>
+        </member>
+        <member name="M:DevMVCComponent.Mailers.MailConfig.HostSetup">
+            <summary>
+            Specific host setup. Must ensure the boolean isHostConfigured = true.
+            </summary>
+            <param name="host">for example gmail: smtp.gmail.com</param>
+            <param name="port">for example gmail enablessl port: 587</param>
+        </member>
+        <member name="P:DevMVCComponent.Mailers.MailConfig.SenderEmail">
+            <summary>
+            Setup credentials automatic.
+            </summary>
+        </member>
+        <member name="P:DevMVCComponent.Mailers.MailConfig.SenderEmailPassword">
+            <summary>
+            Setup credentials automatic.
+            </summary>
+        </member>
+        <member name="P:DevMVCComponent.Mailers.MailConfig.SendAsynchronousEmails">
+            <summary>
+            Default = true
+            </summary>
+        </member>
+        <member name="M:DevMVCComponent.Mailers.CustomMailConfig.#ctor(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            SSL true
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <param name="host"></param>
+            <param name="port"></param>
+        </member>
+        <member name="M:DevMVCComponent.Miscellaneous.Extensions.ClassExtention.GetPropertiesNames(System.Object)">
+            <summary>
+            Returns null if no propertise are found.
+            </summary>
+            <param name="objectType">Type of any object/class/</param>
+            <returns>Returns the list of propertise in the class.</returns>
+        </member>
+        <member name="M:DevMVCComponent.Miscellaneous.Extensions.ClassExtention.GetProperties(System.Object)">
+            <summary>
+            Returns null if no propertise are found.
+            </summary>
+            <param name="objectType">Type of any object/class/</param>
+            <returns>Returns the list of propertise in the class.</returns>
+        </member>
+        <member name="M:DevMVCComponent.Miscellaneous.Extensions.ClassExtention.GetPropertiesValues(System.Object)">
+            <summary>
+            Returns null if no propertise are found. 
+            </summary>
+            <param name="objectType">Type of any object/class/</param>
+            <returns>Returns the list of propertise with values in the class.</returns>
+        </member>
+        <member name="M:DevMVCComponent.Miscellaneous.Extensions.ClassExtention.IsEmpty(System.Object)">
+            <summary>
+            Checks if IsNullOrWhiteSpace.
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DevMVCComponent.Starter">
+            <summary>
+            Must setup this starter class and Config class.
+            </summary>
+        </member>
+        <member name="F:DevMVCComponent.Starter.Mailer">
+            <summary>
+            Must resetup with appropriate developer credentials.
+            </summary>
+        </member>
+        <member name="M:DevMVCComponent.UserError.ErrorCollector.IsExist">
+            <summary>
+            Is any error exist in the list?
+            </summary>
+            <returns>Returns true if any error exist.</returns>
+        </member>
+        <member name="M:DevMVCComponent.UserError.ErrorCollector.Add(System.String,System.String)">
+            <summary>
+            add error message with low priority
+            </summary>
+            <param name="msg">set your message.</param>
+            <param name="quantityTypeIsNotValidPleaseSelectAValidQuantityType"></param>
+        </member>
+        <member name="M:DevMVCComponent.UserError.ErrorCollector.AddHigh(System.String)">
+            <summary>
+            add error message with high priority
+            </summary>
+            <param name="msg">set your message.</param>
+        </member>
+        <member name="M:DevMVCComponent.UserError.ErrorCollector.AddMedium(System.String)">
+            <summary>
+            add error message with medium priority
+            </summary>
+            <param name="msg">set your message.</param>
+        </member>
+        <member name="M:DevMVCComponent.UserError.ErrorCollector.Add(System.String)">
+            <summary>
+            add error message with low priority
+            </summary>
+            <param name="msg">set your message.</param>
+            <param name="type">Type of your error message.</param>
+        </member>
+        <member name="M:DevMVCComponent.UserError.ErrorCollector.Add(System.String,DevMVCComponent.UserError.ErrorCollector.ErrorType)">
+            <summary>
+            add error message with given priority
+            </summary>
+            <param name="msg">set your message.</param>
+            <param name="type">Type of your error message.</param>
+        </member>
+        <member name="M:DevMVCComponent.UserError.ErrorCollector.GetMessages">
+            <summary>
+            
+            </summary>
+            <returns>Returns all error message as string list.</returns>
+        </member>
+        <member name="M:DevMVCComponent.UserError.ErrorCollector.GetErrors">
+            <summary>
+            
+            </summary>
+            <returns>Returns all error message as Error Object.</returns>
+        </member>
+        <member name="M:DevMVCComponent.UserError.ErrorCollector.Clear">
+            <summary>
+            Clean counter and clean the error list start from 0.
+            </summary>
+        </member>
+        <member name="M:DevMVCComponent.UserError.ErrorCollector.GetMessagesHigh">
+            <summary>
+            
+            </summary>
+            <returns>Returns high error message as string list.</returns>
+        </member>
+        <member name="M:DevMVCComponent.UserError.ErrorCollector.GetMessagesLow">
+            <summary>
+            
+            </summary>
+            <returns>Returns low error message as string list.</returns>
+        </member>
+        <member name="M:DevMVCComponent.UserError.ErrorCollector.GetMessagesMedium">
+            <summary>
+            
+            </summary>
+            <returns>Returns medium error message as string list.</returns>
+        </member>
+        <member name="M:DevMVCComponent.UserError.ErrorCollector.GetMessagesSorted">
+            <summary>
+            
+            </summary>
+            <returns>Returns all error message as string list of sorted by order id.</returns>
+        </member>
+    </members>
+</doc>
