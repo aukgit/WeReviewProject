@@ -20,13 +20,13 @@ namespace WereViewApp.Modules.Reponse {
 
         void OnPostSendRequestHeaders(object sender, EventArgs e) {
              HttpContext.Current.Response.Headers.Remove("ETag");
-             HttpContext.Current.Response.Headers.Remove("Cookie");
+             //HttpContext.Current.Response.Headers.Remove("Cookie");
              HttpContext.Current.Response.Headers.Remove("X-Powered-By");
              HttpContext.Current.Response.Headers.Remove("Server");
              HttpContext.Current.Response.Headers.Remove("X-SourceFiles");
 
              HttpContext.Current.Request.Headers.Remove("ETag");
-             HttpContext.Current.Request.Headers.Remove("Cookie");
+             //HttpContext.Current.Request.Headers.Remove("Cookie");
              HttpContext.Current.Request.Headers.Remove("X-Powered-By");
              HttpContext.Current.Request.Headers.Remove("Server");
              HttpContext.Current.Request.Headers.Remove("X-SourceFiles");
