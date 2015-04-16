@@ -54,6 +54,14 @@ namespace WereViewApp {
             #endregion
 
 
+            #region profile
+            routes.MapRoute(
+              name: "profile",
+              url: "Profile/{username}/{page}",
+              defaults: new { controller = "Profile", action = "Index", page = UrlParameter.Optional },
+              namespaces: new string[] { wereviewappControllers }
+           );
+            #endregion
 
             #region Default Route
             routes.MapRoute(
@@ -62,7 +70,7 @@ namespace WereViewApp {
                    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                    namespaces: new string[] { wereviewappControllers }
             );
-        
+
             routes.MapRoute(
                    name: "Default",
                    url: "{controller}/{action}/{id}",
@@ -98,14 +106,6 @@ namespace WereViewApp {
 
             #endregion
 
-            #region profile
-            routes.MapRoute(
-              name: "profile",
-              url: "Profile/{username}",
-              defaults: new { controller = "Profile", action = "Index" },
-              namespaces: new string[] { wereviewappControllers }
-           );
-            #endregion
 
 
         }
