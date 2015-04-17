@@ -1,15 +1,11 @@
-﻿using WereViewApp.Modules.Cache;
-using WereViewApp.Modules.Session;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
+using WereViewApp.Modules.Cache;
+using WereViewApp.Modules.Session;
 
 namespace WereViewApp.Controllers {
     //[CompressFilter]
     public class CommonController : Controller {
-
         [OutputCache(CacheProfile = "Day", VaryByParam = "id")]
         public ActionResult GetTimeZone(int id) {
             if (SessionNames.IsValidationExceed("GetTimeZone", 100)) {
@@ -17,11 +13,12 @@ namespace WereViewApp.Controllers {
             }
             var getZones = CachedQueriedData.GetTimezones(id);
             if (getZones != null) {
-                var represent = getZones.Select(n => new { text = n.Display, id = n.UserTimeZoneID });
+                var represent = getZones.Select(n => new {text = n.Display, id = n.UserTimeZoneID});
                 return Json(represent.ToList(), JsonRequestBehavior.AllowGet);
             }
             return Json(null, JsonRequestBehavior.AllowGet);
         }
+
         //[OutputCache(CacheProfile = "Day", VaryByParam = "id")]
         public ActionResult GetLanguage(int id) {
             if (SessionNames.IsValidationExceed("GetLanguage", 100)) {
@@ -29,7 +26,8 @@ namespace WereViewApp.Controllers {
             }
             var languges = CachedQueriedData.GetLanguages(id);
             if (languges != null) {
-                var represent = languges.Select(n => new { text = n.Language + " - " + n.NativeName, id = n.CountryLanguageID });
+                var represent =
+                    languges.Select(n => new {text = n.Language + " - " + n.NativeName, id = n.CountryLanguageID});
                 return Json(represent.ToList(), JsonRequestBehavior.AllowGet);
             }
             return Json(null, JsonRequestBehavior.AllowGet);

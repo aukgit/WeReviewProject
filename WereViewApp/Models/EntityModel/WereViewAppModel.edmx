@@ -1029,10 +1029,10 @@
           <Property Name="LikedCount" Type="Int32" Nullable="false" />
           <Property Name="DisLikeCount" Type="Int32" Nullable="false" />
           <Property Name="Rating" Type="Byte" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="App" Relationship="WereViewAppModel.FK_Review_App" FromRole="Review" ToRole="App" />
           <NavigationProperty Name="User" Relationship="WereViewAppModel.FK_Review_User" FromRole="Review" ToRole="User" />
           <NavigationProperty Name="ReviewLikeDislikes" Relationship="WereViewAppModel.FK_ReviewLikeDislike_Review" FromRole="Review" ToRole="ReviewLikeDislike" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="ReviewLikeDislike">
           <Key>

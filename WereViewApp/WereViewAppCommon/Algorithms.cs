@@ -28,12 +28,41 @@ namespace WereViewApp.WereViewAppCommon {
 
             var categories = WereViewStatics.AppCategoriesCache;
             foreach (var category in categories) {
-                category.Apps = db.Apps.Include(n=> n.User).OrderByDescending(n=> n.AppID).Where(n => n.CategoryID == category.CategoryID).Take(eachSlotAppsNumber).ToList();
+                category.Apps = db.Apps
+                                  .Include(n => n.User)
+                                  .OrderByDescending(n => n.AppID)
+                                  .Where(n => n.CategoryID == category.CategoryID)
+                                  .Take(eachSlotAppsNumber)
+                                  .ToList();
                 if (category.Apps != null && category.Apps.Count > 0) {
-                    GetEmbedImagesWithApp((List<App>)category.Apps, db,eachSlotAppsNumber,GalleryCategoryIDs.SearchIcon);
+                    GetEmbedImagesWithApp((List<App>)category.Apps, db, eachSlotAppsNumber, GalleryCategoryIDs.SearchIcon);
                 }
             }
             return categories;
+        }
+        #endregion
+
+        #region Category page : specific apps
+        /// <summary>
+        /// Category page : specific apps
+        /// </summary>
+        /// <returns></returns>
+        public Category GetCategoryPageApps(string categoryName = "", int pageNo = 1, WereViewAppEntities db = null, int eachPageItems = 20) {
+            if (db == null) {
+                db = new WereViewAppEntities();
+            }
+
+            var category = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.CategoryName == categoryName);
+            category.Apps = db.Apps
+                              .Include(n => n.User)
+                              .OrderByDescending(n => n.AppID)
+                              .Where(n => n.CategoryID == category.CategoryID)
+                              .Take(eachPageItems)
+                              .ToList();
+            if (category.Apps != null && category.Apps.Count > 0) {
+                GetEmbedImagesWithApp((List<App>)category.Apps, db, eachPageItems, GalleryCategoryIDs.SearchIcon);
+            }
+            return category;
         }
         #endregion
 
