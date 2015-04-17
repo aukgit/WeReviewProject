@@ -220,6 +220,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\Sitemaps\ISitemapGenerator.cs" />
+    <Compile Include="Modules\Sitemaps\ISitemapItem.cs" />
+    <Compile Include="Modules\Sitemaps\SitemapChangeFrequency.cs" />
+    <Compile Include="Modules\Sitemaps\SitemapGenerator.cs" />
+    <Compile Include="Modules\Sitemaps\SitemapItem.cs" />
     <Compile Include="WereViewAppCommon\Algorithms.cs" />
     <Compile Include="App_Start\AppConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -1045,7 +1050,6 @@
     <Content Include="Views\Profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AlgorithmsWereViewApp\" />
     <Folder Include="App_Data\DataCached\SearchResult\" />
     <Folder Include="App_Data\elmah\" />
     <Folder Include="Areas\Admin\Models\" />
