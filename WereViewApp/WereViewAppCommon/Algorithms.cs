@@ -12,6 +12,8 @@ using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.WereViewAppCommon.Structs;
+using DevMVCComponent.Database;
+using WereViewApp.Modules.Cache;
 
 namespace WereViewApp.WereViewAppCommon {
     public class Algorithms {
@@ -47,22 +49,28 @@ namespace WereViewApp.WereViewAppCommon {
         /// Category page : specific apps
         /// </summary>
         /// <returns></returns>
-        public Category GetCategoryPageApps(string categoryName = "", int pageNo = 1, WereViewAppEntities db = null, int eachPageItems = 20) {
+        public Category GetCategoryPageApps(string categoryName, PaginationInfo pageInfo, WereViewAppEntities db = null) {
             if (db == null) {
                 db = new WereViewAppEntities();
             }
 
             var category = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.CategoryName == categoryName);
-            category.Apps = db.Apps
-                              .Include(n => n.User)
-                              .OrderByDescending(n => n.AppID)
-                              .Where(n => n.CategoryID == category.CategoryID)
-                              .Take(eachPageItems)
-                              .ToList();
-            if (category.Apps != null && category.Apps.Count > 0) {
-                GetEmbedImagesWithApp((List<App>)category.Apps, db, eachPageItems, GalleryCategoryIDs.SearchIcon);
+            if (category != null) {
+                var appsConditions = db.Apps
+                    .Include(n => n.User)
+                    .OrderByDescending(n => n.AppID)
+                    .Where(n => n.CategoryID == category.CategoryID);
+
+                var pagedApps = appsConditions.GetPageData(pageInfo, CacheNames.CategoryPageSpecificPagesCount).ToList();
+
+                if (pagedApps.Count > 0) {
+                    GetEmbedImagesWithApp((List<App>)pagedApps, db, (int)pageInfo.ItemsInPage, GalleryCategoryIDs.SearchIcon);
+                }
+                category.Apps = pagedApps;
+
+                return category;
             }
-            return category;
+            return null;
         }
         #endregion
 

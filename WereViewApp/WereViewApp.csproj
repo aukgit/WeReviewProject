@@ -409,6 +409,14 @@
     <Content Include="App_Data\DataCached\Database\8435a280-7ead-418b-9b63-f29a0816ec7a-appInfo.mdb" />
     <Content Include="App_Data\DataCached\Database\8d6d1103-2304-4f92-8af5-7ff649d7b557-appInfo.mdb" />
     <Content Include="App_Data\DataCached\Database\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-appInfo.mdb" />
+    <Content Include="App_Data\WereViewApp-Accounts.mdf" />
+    <Content Include="App_Data\WereViewApp-Accounts_log.ldf">
+      <DependentUpon>WereViewApp-Accounts.mdf</DependentUpon>
+    </Content>
+    <Content Include="App_Data\WereViewApp.mdf" />
+    <Content Include="App_Data\WereViewApp_log.ldf">
+      <DependentUpon>WereViewApp.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\CompactCSS.css">
       <DependentUpon>CompactCSS.css.bundle</DependentUpon>
     </Content>
@@ -1070,6 +1078,7 @@
     <Content Include="Views\Shared\_NotExist.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\Specific.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataCached\SearchResult\" />

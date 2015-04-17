@@ -23701,6 +23701,21 @@ footer .story-header h1 {
 .footer-link-fix .white-wrapper-background .show-more-btns-container a:hover {
   color: deepskyblue;
 }
+.error-page-title-version-2 {
+  background-color: #ff3000;
+  color: white;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.43);
+  padding: 7px;
+}
+.error-page-title-version-2.text-danger:hover {
+  color: white;
+}
+.reason-of-error {
+  color: #fa1515;
+  font-weight: bold;
+}
 /*# sourceMappingURL=footer-fixing.css.map */
 /*table related */
 /*h1, h2, h3, h4, h5 {

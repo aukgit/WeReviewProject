@@ -6,6 +6,7 @@
         public const string UsertimezoneTableName = "UserTimeZone";
         public const string ProfilePaginationDataForSpecificProfile = "ProfilePaginationDataForSpecificProfile";
         public const string ProfilePaginationDataCount = "ProfilePaginationDataCount";
+        public const string CategoryPageSpecificPagesCount = "CategoryPageSpecificPagesCount";
 
     }
 }
