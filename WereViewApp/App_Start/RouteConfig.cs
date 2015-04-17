@@ -68,6 +68,7 @@ namespace WereViewApp {
               namespaces: new string[] { wereviewappControllers }
            );
             #endregion
+
             #region sitemap
             routes.MapRoute(
               name: "sitemap",

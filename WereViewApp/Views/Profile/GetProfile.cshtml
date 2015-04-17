@@ -5,28 +5,32 @@
     string username = Model.UserName;
     List<App> apps = (List<App>)ViewBag.Apps;
 }
-<h2 class="h2" title="profile of @username">@Model.DisplayName</h2>
+<a title="Apps of @Model.DisplayName" href="@Html.GetCurrentURLString()">
+    <h2 class="h2" title="profile of @username">@Model.DisplayName</h2>
+</a>
 <table class="top-gap-2x ">
     <tbody>
         <tr>
             <td class="bold">Name</td>
             <td class="red">:</td>
-            <td> @Model.DisplayName</td>
+            <td> <a title="Apps of @Model.DisplayName" href="@Html.GetCurrentURLString()">@Model.DisplayName</a></td>
         </tr>
         <tr>
-            <td class="bold">User name</td>
+            <td class="bold">
+                User name
+            </td>
             <td class="red">:</td>
             <td> @username</td>
         </tr>
-    <tr>
-        <td class="bold">Email</td>
-        <td class="red">:</td>
-        <td> @Model.Email.Replace("@", "{at}")</td>
-    </tr>
+        <tr>
+            <td class="bold">Email</td>
+            <td class="red">:</td>
+            <td> @Model.Email.Replace("@", "{at}")</td>
+        </tr>
         <tr>
             <td class="bold">Member since</td>
             <td class="red">:</td>
-            <td> @Html.DisplayDate("dd MMM, YYYY",@Model.CreatedDate)</td>
+            <td> @Html.DisplayDate("dd MMMM, yyyy", @Model.CreatedDate)</td>
         </tr>
     </tbody>
 </table>

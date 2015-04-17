@@ -29,7 +29,7 @@ namespace WereViewApp.Controllers {
                 new SitemapItem(appUrl+"/Report",modifiedDate, SitemapChangeFrequency.Daily),
                 new SitemapItem(appUrl+"/Search",modifiedDate, SitemapChangeFrequency.Daily),
                 new SitemapItem(appUrl+"/Sitemap",modifiedDate, SitemapChangeFrequency.Daily),
-                new SitemapItem(appUrl+"/Sitemap.xml",modifiedDate, SitemapChangeFrequency.Daily),
+                //new SitemapItem(appUrl+"/Sitemap.xml",modifiedDate, SitemapChangeFrequency.Daily),
             
             };
             Algorithms algorithms = new Algorithms();
