@@ -23285,8 +23285,8 @@ q:after {
   position: relative;
 }
 .slim-app-view h3 {
-  margin-top: 5px;
-  margin-top: 0.5rem;
+  margin: 5px 0;
+  margin: 0.5rem 0;
 }
 .slim-app-view .app-title {
   font-size: 1.2em;

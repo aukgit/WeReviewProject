@@ -15,7 +15,9 @@ namespace WereViewApp.Controllers {
         [OutputCache(CacheProfile = "Day", VaryByParam = "page")]
         public ActionResult Index(int page = 1) {
             //var db2 = new ApplicationDbContext();
-
+            ViewBag.Title = "Developers apps list with reviews";
+            ViewBag.Meta = "Mobile apps, apps review, apple apps, android apps,reviews, app review site, " + ViewBag.Title;
+            ViewBag.Keywords = ViewBag.Meta ;
             var users = UserManager
                 .GetAllUsersAsIQueryable();
 
@@ -46,6 +48,9 @@ namespace WereViewApp.Controllers {
         public ActionResult GetProfile(string username, int page = 1) {
             if (!string.IsNullOrWhiteSpace(username)) {
                 var algorithms = new Algorithms();
+                ViewBag.Title = username + "'s apps collection";
+                ViewBag.Meta = "Mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
+                ViewBag.Keywords = ViewBag.Meta;
 
                 var user = UserManager.GetUser(username);
                 if (user != null) {
@@ -57,7 +62,8 @@ namespace WereViewApp.Controllers {
 
                         var pageInfo = new PaginationInfo {
                             ItemsInPage = AppConfig.Setting.PageItems,
-                            PageNumber = page
+                            PageNumber = page,
+                            PagesExists = -1
                         };
                         var appsForThisPage =
                             apps.GetPageData(pageInfo, CacheNames.ProfilePaginationDataForSpecificProfile, true)

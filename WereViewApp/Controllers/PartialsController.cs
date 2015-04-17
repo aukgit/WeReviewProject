@@ -52,9 +52,7 @@ namespace WereViewApp.Controllers {
 
         #region Homepage Gallery
         public ActionResult HomePageGallery() {
-
             var max = db.FeaturedImages.Count();
-
             var homePageGalleryApps = algorithms.GetHomePageGalleryImages(db, max);
             return PartialView(homePageGalleryApps);
         }
@@ -83,6 +81,7 @@ namespace WereViewApp.Controllers {
 
 
         #endregion
+
         #region Suggested & Featured Apps
 
         //[OutputCache(Duration = 86400, VaryByParam = "appID")]

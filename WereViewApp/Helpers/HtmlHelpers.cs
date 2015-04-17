@@ -481,6 +481,13 @@ namespace WereViewApp.Helpers {
             return new HtmlString(Zone.GetDate(dt));
         }
 
+        public static HtmlString DisplayDate(this HtmlHelper helper, string format, DateTime? dt = null) {
+            if (dt == null) {
+                return new HtmlString("");
+            }
+            return new HtmlString(Zone.GetDate(dt, format));
+        }
+
         public static HtmlString DisplayTime(this HtmlHelper helper, TimeZoneInfo timeZone, DateTime? dt = null) {
             if (dt == null || timeZone == null) {
                 return new HtmlString("");

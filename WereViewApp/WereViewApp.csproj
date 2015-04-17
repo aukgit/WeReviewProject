@@ -220,11 +220,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapGenerator.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapItem.cs" />
     <Compile Include="Modules\Sitemaps\SitemapChangeFrequency.cs" />
     <Compile Include="Modules\Sitemaps\SitemapGenerator.cs" />
     <Compile Include="Modules\Sitemaps\SitemapItem.cs" />
+    <Compile Include="Modules\Sitemaps\SitemapResult.cs" />
     <Compile Include="WereViewAppCommon\Algorithms.cs" />
     <Compile Include="App_Start\AppConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -407,6 +409,7 @@
       <DependentUpon>CompactCSS.css</DependentUpon>
     </Content>
     <Content Include="Content\css\bootstrap-datetimepicker.css" />
+    <Content Include="Content\css\category-page.css" />
     <Content Include="Content\css\color-fonts.css" />
     <Content Include="Content\css\footer-fixing.css" />
     <Content Include="Content\css\front-developer.css" />
@@ -523,6 +526,9 @@
     </Content>
     <Content Include="Content\css\seo-optimize.css.map">
       <DependentUpon>seo-optimize.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\category-page.css.map">
+      <DependentUpon>category-page.css</DependentUpon>
     </Content>
     <None Include="Content\Less\override-mvc.less" />
     <Content Include="Content\revolution-slider\assets\arrowleft.png" />
@@ -1062,6 +1068,7 @@
     <Folder Include="Views\Basic\" />
     <Folder Include="Views\Report\" />
     <Folder Include="Views\Search\" />
+    <Folder Include="Views\Sitemap\" />
     <Folder Include="Views\ViewTest\" />
   </ItemGroup>
   <ItemGroup>

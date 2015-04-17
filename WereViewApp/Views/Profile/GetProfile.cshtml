@@ -18,10 +18,15 @@
             <td class="red">:</td>
             <td> @username</td>
         </tr>
+    <tr>
+        <td class="bold">Email</td>
+        <td class="red">:</td>
+        <td> @Model.Email.Replace("@", "{at}")</td>
+    </tr>
         <tr>
-            <td class="bold">Email</td>
+            <td class="bold">Member since</td>
             <td class="red">:</td>
-            <td> @Model.Email.Replace("@", "{at}")</td>
+            <td> @Html.DisplayDate("dd MMM, YYYY",@Model.CreatedDate)</td>
         </tr>
     </tbody>
 </table>

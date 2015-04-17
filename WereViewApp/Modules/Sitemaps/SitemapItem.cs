@@ -8,7 +8,7 @@ namespace WereViewApp.Modules.Sitemaps
     public class SitemapItem : ISitemapItem
     {
         /// <summary>
-        /// Creates a new instance of <see cref="SitemapItem"/>
+        /// Creates a new instance of SitemapItem
         /// </summary>
         /// <param name="url">URL of the page. Optional.</param>
         /// <param name="lastModified">The date of last modification of the file. Optional.</param>
