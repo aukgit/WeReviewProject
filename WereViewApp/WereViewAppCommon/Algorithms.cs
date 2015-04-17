@@ -49,19 +49,19 @@ namespace WereViewApp.WereViewAppCommon {
         /// Category page : specific apps
         /// </summary>
         /// <returns></returns>
-        public Category GetCategoryPageApps(string categoryName, PaginationInfo pageInfo, WereViewAppEntities db = null) {
+        public Category GetCategoryPageApps(string categoryName, PaginationInfo pageInfo, string cacheName, WereViewAppEntities db = null) {
             if (db == null) {
                 db = new WereViewAppEntities();
             }
 
-            var category = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.CategoryName == categoryName);
+            var category = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.CategoryName.Equals(categoryName, StringComparison.OrdinalIgnoreCase));
             if (category != null) {
                 var appsConditions = db.Apps
                     .Include(n => n.User)
                     .OrderByDescending(n => n.AppID)
                     .Where(n => n.CategoryID == category.CategoryID);
 
-                var pagedApps = appsConditions.GetPageData(pageInfo, CacheNames.CategoryPageSpecificPagesCount).ToList();
+                var pagedApps = appsConditions.GetPageData(pageInfo,cacheName ).ToList();
 
                 if (pagedApps.Count > 0) {
                     GetEmbedImagesWithApp((List<App>)pagedApps, db, (int)pageInfo.ItemsInPage, GalleryCategoryIDs.SearchIcon);

@@ -27,7 +27,9 @@ namespace WereViewApp.Controllers {
                     ItemsInPage = AppConfig.Setting.PageItems,
                     PageNumber = page
                 };
-                var category = alg.GetCategoryPageApps(categoryName, pageInfo);
+                var category = alg.GetCategoryPageApps(categoryName, 
+                                pageInfo, 
+                                CacheNames.CategoryPageSpecificPagesCount + "-" + categoryName);
                 if (category != null) {
                     ViewBag.Title = "Mobile apps category : " + category.CategoryName;
                     ViewBag.Meta = "Mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
