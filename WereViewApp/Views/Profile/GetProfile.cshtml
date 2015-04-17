@@ -4,8 +4,10 @@
 @{
     string username = Model.UserName;
     List<App> apps = (List<App>)ViewBag.Apps;
+    string urlToFirstpage = AppVar.Url + "/Profile/" + username;
+    
 }
-<a title="Apps of @Model.DisplayName" href="@Html.GetCurrentURLString()">
+<a title="Apps of @Model.DisplayName" href="@urlToFirstpage">
     <h2 class="h2" title="profile of @username">@Model.DisplayName</h2>
 </a>
 <table class="top-gap-2x ">
@@ -13,7 +15,7 @@
         <tr>
             <td class="bold">Name</td>
             <td class="red">:</td>
-            <td> <a title="Apps of @Model.DisplayName" href="@Html.GetCurrentURLString()">@Model.DisplayName</a></td>
+            <td> <a title="Apps of @Model.DisplayName" href="@urlToFirstpage">@Model.DisplayName</a></td>
         </tr>
         <tr>
             <td class="bold">
