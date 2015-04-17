@@ -18,7 +18,6 @@ using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Uploads;
 using WereViewApp.WereViewAppCommon.Structs;
-using WereViewApp.AlgorithmsWereViewApp;
 using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 
 namespace WereViewApp.Controllers {

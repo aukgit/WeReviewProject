@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WereViewApp.AlgorithmsWereViewApp;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Role;
+using WereViewApp.WereViewAppCommon;
 using WereViewApp.WereViewAppCommon.Structs;
 
 namespace WereViewApp.Controllers {

@@ -220,7 +220,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlgorithmsWereViewApp\Algorithms.cs" />
+    <Compile Include="WereViewAppCommon\Algorithms.cs" />
     <Compile Include="App_Start\AppConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -1045,6 +1045,7 @@
     <Content Include="Views\Profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AlgorithmsWereViewApp\" />
     <Folder Include="App_Data\DataCached\SearchResult\" />
     <Folder Include="App_Data\elmah\" />
     <Folder Include="Areas\Admin\Models\" />

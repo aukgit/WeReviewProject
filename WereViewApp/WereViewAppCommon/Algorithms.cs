@@ -1,20 +1,19 @@
-﻿using LinqKit;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Data.Entity;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Web;
+using LinqKit;
 using WereViewApp.Models.EntityModel;
+using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WereViewApp.Models.EntityModel.Structs;
+using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.WereViewAppCommon.Structs;
-using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
-using WereViewApp.Models.ViewModels;
-using System.Text.RegularExpressions;
-using WereViewApp.WereViewAppCommon;
-using System.Threading;
 
-namespace WereViewApp.AlgorithmsWereViewApp {
+namespace WereViewApp.WereViewAppCommon {
     public class Algorithms {
 
         #region Lame Gallery Queries

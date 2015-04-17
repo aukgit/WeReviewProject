@@ -5,11 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using WereViewApp.AlgorithmsWereViewApp;
 using WereViewApp.Controllers;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules;
+using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Controllers {
     [Authorize]

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using System.Web.Mvc;
-using WereViewApp.AlgorithmsWereViewApp;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.WereViewAppCommon;
 using WereViewApp.WereViewAppCommon.Structs;
