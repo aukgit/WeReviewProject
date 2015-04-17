@@ -4,6 +4,8 @@
         public const string CountryTableName = "Country";
         public const string LanguageTableName = "CountryLanguage";
         public const string UsertimezoneTableName = "UserTimeZone";
-        public const string ProfilePaginationData = "ProfilePaginationData";
+        public const string ProfilePaginationDataForSpecificProfile = "ProfilePaginationDataForSpecificProfile";
+        public const string ProfilePaginationDataCount = "ProfilePaginationDataCount";
+
     }
 }
