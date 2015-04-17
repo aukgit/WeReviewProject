@@ -17,7 +17,6 @@ namespace WereViewApp.Modules.Sitemaps
         /// <exception cref="System.ArgumentNullException">If the <paramref name="url"/> is null or empty.</exception>
         public SitemapItem(string url, DateTime? lastModified = null, SitemapChangeFrequency? changeFrequency = null, double? priority = null)
         {
-            Ensure.Argument.NotNullOrEmpty(url, "url");
 
             Url = url;
             LastModified = lastModified;
