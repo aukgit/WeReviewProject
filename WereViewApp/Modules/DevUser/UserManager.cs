@@ -30,11 +30,19 @@ namespace WereViewApp.Modules.DevUser {
         #region Get Every User
 
         /// <summary>
+        /// Get all the list of users.
         /// </summary>
-        /// <param name="username"></param>
         /// <returns>Returns all stored users in the database.</returns>
-        public static List<ApplicationUser> GetEveryUser() {
+        public static List<ApplicationUser> GetAllUsers() {
             return Manager.Users.ToList();
+        }
+
+        /// <summary>
+        /// Get all the list of users.
+        /// </summary>
+        /// <returns>Returns all stored users as IQueryable for pagination.</returns>
+        public static IQueryable<ApplicationUser> GetAllUsersAsIQueryable() {
+            return Manager.Users;
         }
 
         #endregion

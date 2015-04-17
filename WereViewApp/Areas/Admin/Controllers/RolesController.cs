@@ -74,7 +74,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
                 RoleManager.RemoveRole(id);
             }
             return RedirectToActionPermanent("Index");
-            //var users = UserManager.GetEveryUser();
+            //var users = UserManager.GetAllUsers();
             //return View(users);
         }
 

@@ -113,7 +113,7 @@ namespace WereViewApp.Controllers {
         /// 5 mins
         /// </summary>
         /// <returns></returns>
-        [OutputCache(Duration = 300)]
+        [OutputCache(Duration = 600)]
         public ActionResult LatestAppsList() {
             var latestApps = algorithms.GetLatestApps(db, 25);
             return PartialView(latestApps);
