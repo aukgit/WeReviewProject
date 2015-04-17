@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WereViewApp.AlgorithmsWereViewApp;
+using WereViewApp.Models.Context;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Modules.Cache;
@@ -18,9 +19,13 @@ namespace WereViewApp.Controllers {
 
         [OutputCache(CacheProfile = "Day", VaryByParam = "page")]
         public ActionResult Index(int page = 1) {
-            var users = UserManager.GetAllUsersAsIQueryable();
+            var db2 = new ApplicationDbContext();
+
+            var users = UserManager
+                        .GetAllUsersAsIQueryable(db2)
+                        .OrderByDescending(n=> n.UserID);
             var pageInfo = new PaginationInfo() {
-                ItemsInPage = AppConfig.Setting.PageItems + 20,
+                ItemsInPage = AppConfig.Setting.PageItems + 40,
                 PageNumber = page
             };
             var usersForThisPage = users.GetPageData(pageInfo, CacheNames.ProfilePaginationDataCount).ToList();

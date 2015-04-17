@@ -41,8 +41,8 @@ namespace WereViewApp.Modules.DevUser {
         /// Get all the list of users.
         /// </summary>
         /// <returns>Returns all stored users as IQueryable for pagination.</returns>
-        public static IQueryable<ApplicationUser> GetAllUsersAsIQueryable() {
-            return Manager.Users;
+        public static IQueryable<ApplicationUser> GetAllUsersAsIQueryable(ApplicationDbContext db2) {
+            return db2.Users;
         }
 
         #endregion
@@ -308,11 +308,11 @@ namespace WereViewApp.Modules.DevUser {
         public static ApplicationUser GetUserFromSession() {
             var userSession = HttpContext.Current.Session[SessionNames.User];
             if (userSession != null) {
-                return (ApplicationUser) userSession;
+                return (ApplicationUser)userSession;
             }
             userSession = HttpContext.Current.Session[SessionNames.LastUser];
             if (userSession != null) {
-                return (ApplicationUser) userSession;
+                return (ApplicationUser)userSession;
             }
             return null;
         }
@@ -388,9 +388,9 @@ namespace WereViewApp.Modules.DevUser {
         public static long GetLoggedUserId() {
             if (HttpContext.Current.User.Identity.IsAuthenticated) {
                 //ApplicationUser user = null;
-                var userid = (long?) HttpContext.Current.Session[SessionNames.UserID];
+                var userid = (long?)HttpContext.Current.Session[SessionNames.UserID];
                 if (userid != null) {
-                    return (long) userid;
+                    return (long)userid;
                 }
                 return GetCurrentUser().UserID;
             }
