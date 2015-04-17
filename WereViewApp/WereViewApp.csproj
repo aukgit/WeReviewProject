@@ -60,6 +60,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="DevTrends.MvcDonutCaching">
+      <HintPath>..\packages\MvcDonutCaching.1.3.0\lib\net40\DevTrends.MvcDonutCaching.dll</HintPath>
+    </Reference>
     <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
@@ -654,6 +657,7 @@
     <Content Include="Content\Scripts\Upload\jquery.ui.widget.js" />
     <Content Include="Content\Scripts\Upload\load-image.all.min.js" />
     <Content Include="Content\Scripts\validation.js" />
+    <Content Include="DevTrends.MvcDonutCaching.README.txt" />
     <Content Include="ExternalDll\DevMVCComponent.dll" />
     <Content Include="ExternalDll\LinqKit.dll" />
     <Content Include="favicon.ico" />
