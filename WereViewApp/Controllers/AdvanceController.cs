@@ -1,33 +1,27 @@
-﻿using WereViewApp.Models.Context;
-using WereViewApp.Modules.UserError;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using WereViewApp.Models.EntityModel;
+﻿using System.Web.Mvc;
 using WereViewApp.Filter;
+using WereViewApp.Models.EntityModel;
+using WereViewApp.Modules.UserError;
 
 namespace WereViewApp.Controllers {
-
     //[CompressFilter]
     [CacheFilter(Duration = 8)]
     public abstract class AdvanceController : Controller {
+        internal ErrorCollector ErrorCollector;
         internal readonly WereViewAppEntities db;
-        internal ErrorCollector _errorCollector;
-
 
         public AdvanceController() {
-
         }
+
         public AdvanceController(bool applicationDbContextRequried) {
             if (applicationDbContextRequried) {
                 db = new WereViewAppEntities();
             }
         }
+
         public AdvanceController(bool applicationDbContextRequried, bool errorCollectorRequried) {
             if (errorCollectorRequried) {
-                _errorCollector = new ErrorCollector();
+                ErrorCollector = new ErrorCollector();
             }
             if (applicationDbContextRequried) {
                 db = new WereViewAppEntities();
@@ -38,8 +32,8 @@ namespace WereViewApp.Controllers {
             if (db != null) {
                 db.Dispose();
             }
-            if (_errorCollector != null) {
-                _errorCollector.Dispose();
+            if (ErrorCollector != null) {
+                ErrorCollector.Dispose();
             }
             base.Dispose(disposing);
         }
