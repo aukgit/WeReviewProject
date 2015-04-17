@@ -14,23 +14,33 @@ using WereViewApp.Modules.DevUser;
 
 namespace WereViewApp.Controllers {
     public class ProfileController : Controller {
-
-        private int _maxNumbersOfPagesShow = 8;
+        private const int MaxNumbersOfPagesShow = 8;
 
         [OutputCache(CacheProfile = "Day", VaryByParam = "page")]
         public ActionResult Index(int page = 1) {
-            var db2 = new ApplicationDbContext();
+            //var db2 = new ApplicationDbContext();
 
             var users = UserManager
-                        .GetAllUsersAsIQueryable(db2)
-                        .OrderByDescending(n=> n.UserID);
+                        .GetAllUsersAsIQueryable();
+
+                        
+            var cachePagesString = AppConfig.Caches.Get(CacheNames.ProfilePaginationDataCount);
+            int count = -1;
+            if (cachePagesString == null) {
+                count = users.Select(n => n.Id).Count();
+            } else {
+                count = (int)cachePagesString;
+            }
+            // add ordered by
+            users = users.OrderByDescending(n => n.Id);
             var pageInfo = new PaginationInfo() {
                 ItemsInPage = AppConfig.Setting.PageItems + 40,
-                PageNumber = page
+                PageNumber = page,
+                PagesExists = count
             };
-            var usersForThisPage = users.GetPageData(pageInfo, CacheNames.ProfilePaginationDataCount).ToList();
+            var usersForThisPage = users.GetPageData(pageInfo, CacheNames.ProfilePaginationDataCount,false).ToList();
             const string eachUrl = "/Profile?page=@page";
-            ViewBag.paginationHtml = Pagination.GetList(pageInfo, eachUrl, "", maxNumbersOfPagesShow: _maxNumbersOfPagesShow);
+            ViewBag.paginationHtml = Pagination.GetList(pageInfo, eachUrl, "", maxNumbersOfPagesShow: MaxNumbersOfPagesShow);
             return View(usersForThisPage);
         }
         // GET: Profile/username
@@ -55,7 +65,7 @@ namespace WereViewApp.Controllers {
                         algorithms.GetEmbedImagesWithApp(appsForThisPage, db, (int)pageInfo.ItemsInPage, GalleryCategoryIDs.SearchIcon);
                         ViewBag.Apps = appsForThisPage;
                         string eachUrl = "/Profile/" + user.UserName + "/@page";
-                        ViewBag.paginationHtml = Pagination.GetList(pageInfo, eachUrl, "", maxNumbersOfPagesShow: _maxNumbersOfPagesShow);
+                        ViewBag.paginationHtml = Pagination.GetList(pageInfo, eachUrl, "", maxNumbersOfPagesShow: MaxNumbersOfPagesShow);
                         return View(user);
                     }
                 }

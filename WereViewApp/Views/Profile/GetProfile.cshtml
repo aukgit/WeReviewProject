@@ -6,22 +6,22 @@
     List<App> apps = (List<App>)ViewBag.Apps;
 }
 <h2 class="h2" title="profile of @username">@Model.DisplayName</h2>
-<table class="">
+<table class="top-gap-2x ">
     <tbody>
         <tr>
-            <td>Name</td>
-            <td>:</td>
-            <td>@Model.DisplayName</td>
+            <td class="bold">Name</td>
+            <td class="red">:</td>
+            <td> @Model.DisplayName</td>
         </tr>
         <tr>
-            <td>Username</td>
-            <td>:</td>
-            <td>@username</td>
+            <td class="bold">User name</td>
+            <td class="red">:</td>
+            <td> @username</td>
         </tr>
         <tr>
-            <td>Email</td>
-            <td>:</td>
-            <td>@Model.Email.Replace("@", "{at}")</td>
+            <td class="bold">Email</td>
+            <td class="red">:</td>
+            <td> @Model.Email.Replace("@", "{at}")</td>
         </tr>
     </tbody>
 </table>

@@ -41,8 +41,8 @@ namespace WereViewApp.Modules.DevUser {
         /// Get all the list of users.
         /// </summary>
         /// <returns>Returns all stored users as IQueryable for pagination.</returns>
-        public static IQueryable<ApplicationUser> GetAllUsersAsIQueryable(ApplicationDbContext db2) {
-            return db2.Users;
+        public static IQueryable<ApplicationUser> GetAllUsersAsIQueryable() {
+            return Manager.Users;
         }
 
         #endregion

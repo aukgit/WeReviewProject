@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure.Annotations;
 using WereViewApp.Models.POCO.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using WereViewApp.Models.POCO.IdentityCustomization;
@@ -34,6 +36,7 @@ namespace WereViewApp.Models.Context {
             modelBuilder.Properties<string>()
             .Where(x => x.Name == "Name")
             .Configure(c => c.HasMaxLength(25));
+      
 
             modelBuilder.Properties<DateTime>()
             .Configure(c => c.HasColumnType("date"));
@@ -46,6 +49,14 @@ namespace WereViewApp.Models.Context {
             modelBuilder.Entity<ApplicationUser>()
                 .Property(n => n.Email)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .Property(n => n.Id)
+                .HasColumnName("UserID");
+                //.HasColumnAnnotation("Index",new IndexAnnotation(new IndexAttribute("ix_primary_key_index_of_users") { IsClustered = true}));
+
+            modelBuilder.Entity<ApplicationUser>()
+                .Ignore(n => n.UserID);
 
             modelBuilder.Entity<ApplicationUser>()
                 .Property(n => n.UserName)

@@ -16,7 +16,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         public UsersController()
             : base(true) {
-            ViewBag.controller = _controllerName;
+            ViewBag.controller = ControllerName;
         }
 
         #endregion
@@ -150,21 +150,21 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         #region Constants
 
-        private const string _deletedError =
+        private const string DeletedError =
             "Sorry for the inconvenience, last record is not removed. Please be in touch with admin.";
 
-        private const string _deletedSaved = "Removed successfully.";
-        private const string _editedSaved = "Modified successfully.";
+        private const string DeletedSaved = "Removed successfully.";
+        private const string EditedSaved = "Modified successfully.";
 
-        private const string _editedError =
+        private const string EditedError =
             "Sorry for the inconvenience, transaction is failed to save into the database. Please be in touch with admin.";
 
-        private const string _createdError = "Sorry for the inconvenience, couldn't create the last transaction record.";
-        private const string _createdSaved = "Transaction is successfully added to the database.";
-        private const string _controllerName = "Users";
+        private const string CreatedError = "Sorry for the inconvenience, couldn't create the last transaction record.";
+        private const string CreatedSaved = "Transaction is successfully added to the database.";
+        private const string ControllerName = "Users";
 
         /// Constant value for where the controller is actually visible.
-        private const string _controllerVisibleUrl = "";
+        private const string ControllerVisibleUrl = "";
 
         #endregion
 
@@ -198,13 +198,13 @@ namespace WereViewApp.Areas.Admin.Controllers {
         public ActionResult ManageRoles(long id) {
             var user = UserManager.GetUser(id);
 
-            var ManageRole = new ManageRolesViewModel();
-            ManageRole.AllRoles = RoleManager.GetRoles();
-            ManageRole.UserInRoles = RoleManager.GetUserRolesAsApplicationRole(id).ToList();
-            ManageRole.UserDisplayName = user.DisplayName;
-            ManageRole.UserId = user.UserID;
+            var manageRole = new ManageRolesViewModel();
+            manageRole.AllRoles = RoleManager.GetRoles();
+            manageRole.UserInRoles = RoleManager.GetUserRolesAsApplicationRole(id).ToList();
+            manageRole.UserDisplayName = user.DisplayName;
+            manageRole.UserId = user.UserID;
 
-            return View(ManageRole);
+            return View(manageRole);
         }
 
         #region Add Roles
@@ -259,10 +259,10 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
                     return RedirectToAction("Index");
                 }
-                AppVar.SetErrorStatus(ViewBag, _editedError);
+                AppVar.SetErrorStatus(ViewBag, EditedError);
                 return View(user);
             }
-            AppVar.SetErrorStatus(ViewBag, _editedError);
+            AppVar.SetErrorStatus(ViewBag, EditedError);
             return View(user);
         }
 
@@ -298,10 +298,10 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
                     return RedirectToAction("Index");
                 }
-                AppVar.SetErrorStatus(ViewBag, _editedError);
+                AppVar.SetErrorStatus(ViewBag, EditedError);
                 return View(user);
             }
-            AppVar.SetErrorStatus(ViewBag, _editedError);
+            AppVar.SetErrorStatus(ViewBag, EditedError);
             return View(user);
         }
 
