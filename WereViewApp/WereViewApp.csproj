@@ -73,6 +73,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FluentScheduler">
+      <HintPath>..\packages\FluentScheduler.3.1.45\lib\net40\FluentScheduler.dll</HintPath>
+    </Reference>
     <Reference Include="ImageResizer">
       <HintPath>ExternalDll\ImageResizer.dll</HintPath>
     </Reference>
@@ -840,6 +843,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Uploads\Images\Advertise\5e324a00-977d-4436-8a15-3ce9e1c424f1-0.jpg" />
     <Content Include="Uploads\Images\Advertise\7fcf1b26-c1e0-4327-ba7f-29d5fd55bd25-0.jpg" />
     <Content Include="Uploads\Images\Advertise\be78fe90-0932-44c6-8cd1-816b35d6d232-0.jpg" />
