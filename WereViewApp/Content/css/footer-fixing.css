@@ -123,4 +123,10 @@ footer .story-header h1 {
 .footer-link-fix .white-wrapper-background a:hover {
   color: deepskyblue;
 }
+.footer-link-fix .white-wrapper-background .show-more-btns-container a {
+  color: #00ffff;
+}
+.footer-link-fix .white-wrapper-background .show-more-btns-container a:hover {
+  color: deepskyblue;
+}
 /*# sourceMappingURL=footer-fixing.css.map */

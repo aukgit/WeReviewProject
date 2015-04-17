@@ -537,6 +537,9 @@
     <Content Include="Content\css\category-page.css.map">
       <DependentUpon>category-page.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\footer-fixing.css.map">
+      <DependentUpon>footer-fixing.css</DependentUpon>
+    </Content>
     <None Include="Content\Less\override-mvc.less" />
     <Content Include="Content\revolution-slider\assets\arrowleft.png" />
     <Content Include="Content\revolution-slider\assets\arrowright.png" />

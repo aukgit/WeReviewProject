@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
     public static class AppExtend {
-        const string ControllerNameForapp = "Apps";
+        private const string ControllerNameForapp = "Apps";
 
         /// <summary>
-        /// returns a url like "http://url/Apps/iOs-7/Games/Plant-Vs-Zombies"
-        /// /App/Platform-PlatformVersion/Category/Url
+        ///     returns a url like "http://url/Apps/iOs-7/Games/Plant-Vs-Zombies"
+        ///     /App/Platform-PlatformVersion/Category/Url
         /// </summary>
         /// <param name="app"></param>
         /// <returns>Returns absolute url including website's address</returns>
@@ -35,9 +32,7 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
             return null;
         }
 
-
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="app"></param>
         /// <returns>Return category string from cache data empty string if not found.</returns>
@@ -48,12 +43,11 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
             }
             return "";
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="app"></param>
         /// <returns>Return platform string from cache data empty string if not found.</returns>
-
         public static string GetPlatformString(this App app) {
             var platform = WereViewStatics.AppPlatformsCache.FirstOrDefault(n => n.PlatformID == app.PlatformID);
             if (platform != null) {
@@ -69,6 +63,5 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
             }
             return null;
         }
-
     }
 }

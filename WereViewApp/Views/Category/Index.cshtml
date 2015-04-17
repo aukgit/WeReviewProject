@@ -1,14 +1,16 @@
-﻿@{
+﻿@using WereViewApp.Models.EntityModel
+@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
+@model List<WereViewApp.Models.EntityModel.Category>
+@{
     ViewBag.Title = "Mobile App Categories / Category";
-    string currentPageStaticUrl = AppVar.Url + Html.GetCurrentURLString();
-    
+    string currentPageStaticUrl = AppVar.Url +"/Apps"+ Html.GetCurrentURLString();
 }
 <div class="app-details-page category-page search-page category-listing-page">
 
     <div class="row">
         <div class="col-md-12 app-detail app-title-wrapper" title="Mobile Apps Categories">
             <div class="app-title-row float-left">
-                <a href="#" class="app-title">
+                <a href="@currentPageStaticUrl" class="app-title">
                     <h1 title="Mobile Apps Categories">
                         <strong title="Mobile Apps Categories">
                             <em title="Mobile Apps Categories">Mobile Apps</em>
@@ -27,103 +29,70 @@
         </div>
     </div>
     <div class="category-listing-displays-with-apps-container bottom-gap">
-        <div class="row no-margin">
-            <div class="col-md-12 app-detail app-title-wrapper category-title" title="Mobile App Categories">
-                <div class="app-title-row float-left">
-                    <a href="#" class="app-title">
-                        <h1 title="Education">
-                            <strong title="Education">
-                                <em title="Education">Education</em>
-                            </strong>
-                        </h1>
-                        <h2 class="app-category" title="(Latest Apps)">
-                            <strong class="search-quote" title="Mobile App Categories">
-                                (Latest Apps)
-                            </strong>
-                        </h2>
-                    </a>
+        @foreach (var category in Model) {
+            string appNonExistClass = category.Apps == null || category.Apps.Count == 0 ? "seo-hide" : "";
+            <div class="row no-margin @appNonExistClass">
+                <div class="col-md-12 app-detail app-title-wrapper category-title" title="Mobile App Categories">
+                    <div class="app-title-row float-left">
+                        <a href="@currentPageStaticUrl/@category.CategoryName" title="@category.CategoryName category mobile apps" class="app-title">
+                            <h1 title="@category.CategoryName">
+                                <strong title="@category.CategoryName category mobile apps">
+                                    <em title="@category.CategoryName category mobile apps">@category.CategoryName</em>
+                                </strong>
+                            </h1>
+                            <h2 class="app-category" title="(Latest Apps)">
+                                <strong class="search-quote" title="@category.CategoryName Categories latest apps">
+                                    (Latest Apps)
+                                </strong>
+                            </h2>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row no-margin">
-            <div class="archive-app-collection-wrapper">
-                <ul class="seo-optimize regular-color archive-app-collection-list category-listing-page-apps-list pagination-required">
-                    <li class="slim-app-view" data-app-type="fa-android">
-                        <a class="app-url" href="#">
-                            <div class="app-icon">
-                                <img src="/images/games-image.jpg" alt="app"/>
-                            </div>
-                            <div class="app-content">
-                                <h1 class="app-title">
-                                    <i class="fa fa-android"></i>
-                                    Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
-                                    <span class="paragraph-end"></span>
-                                </h1>
-                                <h3>
-                                    Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
-                                    <span class="paragraph-end"></span>
-                                </h3>
-                                <span class="rating">
-                                    <i class="fa fa-star"></i>
-                                    3/5
-                                </span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="slim-app-view" data-app-type="fa-apple">
-                        <a class="app-url" href="#">
-                            <div class="app-icon">
-                                <img src="/images/games-image.jpg" alt="app"/>
-                            </div>
-                            <div class="app-content">
-                                <h1 class="app-title">
-                                    <i class="fa fa-apple"></i>
-                                    Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
-                                    <span class="paragraph-end"></span>
-                                </h1>
-                                <h3>
-                                    Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
-                                    <span class="paragraph-end"></span>
-                                </h3>
-                                <span class="rating">
-                                    <i class="fa fa-star"></i>
-                                    3/5
-                                </span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="slim-app-view" data-app-type="fa-windows">
-                        <a class="app-url" href="#">
-                            <div class="app-icon">
-                                <img src="/images/games-image.jpg" alt="app"/>
-                            </div>
-                            <div class="app-content">
-                                <h1 class="app-title">
-                                    <i class="fa fa-windows"></i>
-                                    Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
-                                    <span class="paragraph-end"></span>
-                                </h1>
-                                <h3>
-                                    Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
-                                    <span class="paragraph-end"></span>
-                                </h3>
-                                <span class="rating">
-                                    <i class="fa fa-star"></i>
-                                    3/5
-                                </span>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <div class="regular-show-more-btn">
-                    <a href="#" class="btn more-btn white pull-right">Education : See More</a>
+            <div class="row no-margin @appNonExistClass">
+                <div class="archive-app-collection-wrapper">
+                    <ul class="seo-optimize regular-color archive-app-collection-list category-listing-page-apps-list pagination-required">
+                        @if (appNonExistClass == "") {
+                            foreach (var app in category.Apps) {
+                                Platform platform = app.GetPlatform();
+                                <li class="slim-app-view" data-app-type="@platform.Icon">
+                                    <a class="app-url" href="@app.GetAppUrl()" title="App Review : @app.AppName">
+                                        <div class="app-icon">
+                                            <img src="@app.GallerySearchIconLocation" alt="app" />
+                                        </div>
+                                        <div class="app-content">
+                                            <h1 class="app-title" title="App Review : @app.AppName">
+                                                <i class="fa @platform.Icon"></i>
+                                                @app.AppName
+                                                <span class="paragraph-end"></span>
+                                            </h1>
+                                            <h3>
+                                                @app.User.UserName
+                                                <span class="paragraph-end"></span>
+                                            </h3>
+                                            <span class="rating">
+                                                <i class="fa fa-star"></i>
+                                                @app.AvgRating/5
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    <div class="regular-show-more-btn">
+                        <a href="@currentPageStaticUrl/@category.CategoryName" title="@category.CategoryName category mobile apps" class="btn more-btn white pull-right">@category.CategoryName : See More</a>
+                    </div>
                 </div>
             </div>
-        </div>
+
+
+        }
+
     </div>
 </div>
 
-<div class="">
+<div class="seo-hide">
     <a href="@currentPageStaticUrl" class="seo-app-name" title="WeReviewApp.com : App Reviews website.">
         <h1 title="WeReviewApp.com : App Reviews website.">
             <strong title="WeReviewApp.com : App Reviews website."><em title="WeReviewApp.com : App Reviews website.">We</em></strong><strong title="WeReviewApp.com : App Reviews website."><em title="WeReviewApp.com : App Reviews website.">Review</em></strong><strong title="WeReviewApp.com : App Reviews website."><em title="WeReviewApp.com : App Reviews website.">App</em></strong><strong title="WeReviewApp.com : App Reviews website."><em title="WeReviewApp.com : App Reviews website.">.com</em></strong>

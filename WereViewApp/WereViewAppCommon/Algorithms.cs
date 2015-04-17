@@ -21,14 +21,17 @@ namespace WereViewApp.WereViewAppCommon {
         /// Category wise apps for category page
         /// </summary>
         /// <returns></returns>
-        public List<Category> GetCategoryWiseAppsForCategoryPage(WereViewAppEntities db = null, int eachSlotAppsNumber = 15) {
+        public List<Category> GetCategoryWiseAppsForCategoryPage(WereViewAppEntities db = null, int eachSlotAppsNumber = 8) {
             if (db == null) {
                 db = new WereViewAppEntities();
             }
 
             var categories = WereViewStatics.AppCategoriesCache;
             foreach (var category in categories) {
-                category.Apps = db.Apps.Where(n => n.CategoryID == category.CategoryID).Take(eachSlotAppsNumber).ToList();
+                category.Apps = db.Apps.Include(n=> n.User).OrderByDescending(n=> n.AppID).Where(n => n.CategoryID == category.CategoryID).Take(eachSlotAppsNumber).ToList();
+                if (category.Apps != null && category.Apps.Count > 0) {
+                    GetEmbedImagesWithApp((List<App>)category.Apps, db,eachSlotAppsNumber,GalleryCategoryIDs.SearchIcon);
+                }
             }
             return categories;
         }

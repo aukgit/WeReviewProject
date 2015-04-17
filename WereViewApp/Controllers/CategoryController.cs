@@ -12,8 +12,8 @@ namespace WereViewApp.Controllers
         // GET: Category
         public ActionResult Index() {
             var alg = new Algorithms();
-            //alg.
-            return View();
+            var categories = alg.GetCategoryWiseAppsForCategoryPage();
+            return View(categories);
         }
     }
 }

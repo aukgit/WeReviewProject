@@ -23695,6 +23695,12 @@ footer .story-header h1 {
 .footer-link-fix .white-wrapper-background a:hover {
   color: deepskyblue;
 }
+.footer-link-fix .white-wrapper-background .show-more-btns-container a {
+  color: #00ffff;
+}
+.footer-link-fix .white-wrapper-background .show-more-btns-container a:hover {
+  color: deepskyblue;
+}
 /*# sourceMappingURL=footer-fixing.css.map */
 /*table related */
 /*h1, h2, h3, h4, h5 {
@@ -24223,7 +24229,7 @@ div.contactus {
     width: 100%;
     height: 40px;
     height: 4rem;
-    font-size: 1.5em;
+    font-size: 1.2em;
     margin-bottom: 5px;
     margin-bottom: 0.5rem;
   }
