@@ -117,4 +117,10 @@ footer .story-header h1 {
     display: block;
   }
 }
+.footer-link-fix .white-wrapper-background a {
+  color: azure;
+}
+.footer-link-fix .white-wrapper-background a:hover {
+  color: deepskyblue;
+}
 /*# sourceMappingURL=footer-fixing.css.map */

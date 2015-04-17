@@ -60,38 +60,24 @@ namespace WereViewApp {
               url: "Profile/{username}/{page}",
               defaults: new { controller = "Profile", action = "GetProfile", page = UrlParameter.Optional },
               namespaces: new string[] { wereviewappControllers }
-           );
-            routes.MapRoute(
-              name: "profile_index",
-              url: "Profile",
-              defaults: new { controller = "Profile", action = "Index", page = UrlParameter.Optional },
-              namespaces: new string[] { wereviewappControllers }
-           );
+            );   
             #endregion
 
-            #region sitemap
-            routes.MapRoute(
-              name: "sitemap",
-              url: "Sitemap",
-              defaults: new { controller = "Sitemap", action = "Index"},
-              namespaces: new string[] { wereviewappControllers }
-            );
-            routes.MapRoute(
-              name: "sitemap_xml",
-              url: "Sitemap.xml",
-              defaults: new { controller = "Sitemap", action = "Index" },
-              namespaces: new string[] { wereviewappControllers }
-            );
-            #endregion
+      
 
             #region Default Route
+            //routes.MapRoute(
+            //       name: "Direct",
+            //       url: "{action}",
+            //       defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+            //       namespaces: new string[] { wereviewappControllers }
+            //);
             routes.MapRoute(
-                   name: "Direct",
-                   url: "{action}",
-                   defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                   name: "ContactUs",
+                   url: "ContactUs",
+                   defaults: new { controller = "Home", action = "ContactUs", id = UrlParameter.Optional },
                    namespaces: new string[] { wereviewappControllers }
             );
-
             routes.MapRoute(
                    name: "Default",
                    url: "{controller}/{action}/{id}",

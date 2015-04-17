@@ -226,6 +226,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapGenerator.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapItem.cs" />
@@ -1065,6 +1066,7 @@
     <Content Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_NotExist.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataCached\SearchResult\" />
@@ -1079,7 +1081,6 @@
     <Folder Include="Views\Basic\" />
     <Folder Include="Views\Report\" />
     <Folder Include="Views\Search\" />
-    <Folder Include="Views\Sitemap\" />
     <Folder Include="Views\ViewTest\" />
   </ItemGroup>
   <ItemGroup>

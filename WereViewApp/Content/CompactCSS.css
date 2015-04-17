@@ -23689,6 +23689,12 @@ footer .story-header h1 {
     display: block;
   }
 }
+.footer-link-fix .white-wrapper-background a {
+  color: azure;
+}
+.footer-link-fix .white-wrapper-background a:hover {
+  color: deepskyblue;
+}
 /*# sourceMappingURL=footer-fixing.css.map */
 /*table related */
 /*h1, h2, h3, h4, h5 {

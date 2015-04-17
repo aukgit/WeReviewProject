@@ -16,6 +16,24 @@ using WereViewApp.WereViewAppCommon.Structs;
 namespace WereViewApp.WereViewAppCommon {
     public class Algorithms {
 
+        #region Category wise apps for category page
+        /// <summary>
+        /// Category wise apps for category page
+        /// </summary>
+        /// <returns></returns>
+        public List<Category> GetCategoryWiseAppsForCategoryPage(WereViewAppEntities db = null, int eachSlotAppsNumber = 15) {
+            if (db == null) {
+                db = new WereViewAppEntities();
+            }
+
+            var categories = WereViewStatics.AppCategoriesCache;
+            foreach (var category in categories) {
+                category.Apps = db.Apps.Where(n => n.CategoryID == category.CategoryID).Take(eachSlotAppsNumber).ToList();
+            }
+            return categories;
+        }
+        #endregion
+
         #region Lame Gallery Queries
 
 
@@ -1078,7 +1096,7 @@ namespace WereViewApp.WereViewAppCommon {
 
             // same user same platform and category apps with 
             var appsCollectionNotAsSameId = db.Apps
-                .Include(n=> n.User)
+                .Include(n => n.User)
                 .Where(n => n.AppID != app.AppID)
                 .Where(n => n.IsPublished && !n.IsBlocked);
 
