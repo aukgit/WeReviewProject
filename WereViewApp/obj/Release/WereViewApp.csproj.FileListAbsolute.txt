@@ -140,3 +140,10 @@ E:\Working\GitHub\WereViewProject\WereViewApp\bin\System.Web.Optimization.xml
 E:\Working\GitHub\WereViewProject\WereViewApp\obj\Release\WereViewApp.csprojResolveAssemblyReference.cache
 E:\Working\GitHub\WereViewProject\WereViewApp\obj\Release\WereViewApp.dll
 E:\Working\GitHub\WereViewProject\WereViewApp\obj\Release\WereViewApp.pdb
+E:\Working\GitHub\WereViewProject\WereViewApp\bin\DevTrends.MvcDonutCaching.dll
+E:\Working\GitHub\WereViewProject\WereViewApp\bin\FluentScheduler.dll
+E:\Working\GitHub\WereViewProject\WereViewApp\bin\DevMVCComponent.pdb
+E:\Working\GitHub\WereViewProject\WereViewApp\bin\DevMVCComponent.xml
+E:\Working\GitHub\WereViewProject\WereViewApp\bin\DevTrends.MvcDonutCaching.pdb
+E:\Working\GitHub\WereViewProject\WereViewApp\bin\DevTrends.MvcDonutCaching.xml
+E:\Working\GitHub\WereViewProject\WereViewApp\bin\FluentScheduler.pdb

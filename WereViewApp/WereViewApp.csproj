@@ -1074,11 +1074,15 @@
     <Content Include="Views\Partials\DevelopersApps.cshtml" />
     <Content Include="Views\Partials\SuggestedApps.cshtml" />
     <Content Include="Views\Profile\GetProfile.cshtml" />
-    <Content Include="Views\Shared\_404.cshtml" />
-    <Content Include="Views\Shared\_NotExist.cshtml" />
+    <Content Include="Views\Shared\_500.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Category\Specific.cshtml" />
+    <Content Include="Views\Shared\_403.cshtml" />
+    <Content Include="Views\Shared\_451.cshtml" />
+    <Content Include="Views\Shared\_415.cshtml" />
+    <None Include="Views\Shared\_404.cshtml" />
+    <Content Include="Views\Shared\_502.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataCached\SearchResult\" />

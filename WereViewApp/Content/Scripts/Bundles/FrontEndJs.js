@@ -4143,6 +4143,7 @@ $(function () {
         showClear: false,
         showCaption: true,
         starCaptions: {
+            0: "0",
             0.5: "0.5",
             1: "1",
             1.5: "1.5",
@@ -4153,6 +4154,20 @@ $(function () {
             4: "4",
             4.5: "4.5",
             5: "5"
+        },
+        starCaptionClasses: {
+            0: 'label label-danger',
+
+            0.5: 'label label-danger',
+            1: 'label label-danger',
+            1.5: 'label label-warning',
+            2: 'label label-warning',
+            2.5: 'label label-info',
+            3: 'label label-info',
+            3.5: 'label label-primary',
+            4: 'label label-primary',
+            4.5: 'label label-success',
+            5: 'label label-success'
         }
     });
 
@@ -4201,7 +4216,7 @@ $(function () {
 
         });
     }
-    
+
 
     $.frontEndAppDetailsPage = {
         $showMoreBtnContainer: $(".show-more-btns-container"),
