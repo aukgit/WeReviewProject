@@ -16,14 +16,14 @@ namespace WereViewApp.Controllers {
         }
         #region Search
 
-        public ActionResult Search() {
+        public ActionResult Index() {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [OutputCache(CacheProfile = "Long", VaryByParam = "Url")]
-        public ActionResult Search(SearchViewModel search, string url) {
+        public ActionResult Index(SearchViewModel search, string url) {
             ViewBag.isPostBack = true;
             if (!string.IsNullOrWhiteSpace(url)) {
                 var urlGet = _algorithms.GenerateURLValid(url);

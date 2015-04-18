@@ -4,10 +4,11 @@
     if (ViewBag.Reason == null) {
         ViewBag.Reason = "Requested page is not found.";
     }
+    ViewBag.Title = "404 : Not found";
 }
 <div class="custom-error-page">
     <h1 class="text-danger h1 gap-from-top-small error-page-title-version-2">
-        404 : Not found
+        ViewBag.Title
     </h1>
     <div class="top-gap-2x">
         <div class="row">
