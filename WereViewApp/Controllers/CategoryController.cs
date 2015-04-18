@@ -41,7 +41,7 @@ namespace WereViewApp.Controllers {
             }
 
             ViewBag.Reason = "Category not found.";
-            return View("_NotExist");
+            return View("_404");
         }
     }
 }

@@ -29,7 +29,7 @@ namespace WereViewApp.Controllers {
                     pageInfo,
                     CacheNames.PlatformPageSpecificPagesCount + "-" + platformName);
                 if (platform != null) {
-                    ViewBag.Title = "Mobile apps category : " + platform.PlatformName;
+                    ViewBag.Title = "Apps Review platform : " + platform.PlatformName;
                     ViewBag.Meta = "Mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
                     ViewBag.Keywords = ViewBag.Meta;
 
@@ -41,7 +41,7 @@ namespace WereViewApp.Controllers {
             }
 
             ViewBag.Reason = "Category not found.";
-            return View("_NotExist");
+            return View("_404");
         }
     }
 }

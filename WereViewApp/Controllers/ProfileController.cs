@@ -84,7 +84,7 @@ namespace WereViewApp.Controllers {
                 }
             }
             ViewBag.Reason = "User not found.";
-            return View("_NotExist");
+            return View("_404");
         }
     }
 }
