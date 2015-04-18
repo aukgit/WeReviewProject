@@ -1,11 +1,14 @@
-﻿@using WereViewApp.Modules.DevUser
+﻿@using DevMVCComponent.Miscellaneous.Extensions
+@using WereViewApp.Models.EntityModel
+@using WereViewApp.Modules.DevUser
+@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
 @model WereViewApp.Models.EntityModel.App
 @{
-    var sequenceOfReview = 0;
+    int sequenceOfReview = 0;
     var userId = UserManager.GetLoggedUserId();
     Layout = null;
-    var currentUrl = @Html.GetCurrentURLString(); // Apps/Apple-7/Games/plant-vs-zombies
-    var softwareUrl = AppVar.Url; //we review app
+    string currentUrl = @Html.GetCurrentURLString(); // Apps/Apple-7/Games/plant-vs-zombies
+    string softwareUrl = AppVar.Url;//we review app
 
     string appName = Model.AppName;
     string isRecommended, animateRightLeft;
@@ -15,7 +18,7 @@
         @if (Model.Reviews != null && Model.Reviews.Count > 0) {
             foreach (var review in Model.Reviews) {
                 isRecommended = review.IsSuggest ? "is-recommended" : "";
-                animateRightLeft = sequenceOfReview%2 == 0 ? "slideInLeft" : "slideInRight";
+                animateRightLeft = sequenceOfReview % 2 == 0 ? "slideInLeft" : "slideInRight";
                 <section class="single-review row @isRecommended wow @animateRightLeft" data-wow-offset="1" data-wow-duration=".4s" data-sequence="@sequenceOfReview" itemprop="review" itemscope itemtype="http://schema.org/Review">
                     <div class="col-sm-10">
                         <header class="review-writer-wrapper" title="@appName review">
@@ -82,12 +85,8 @@
                         <div class="star-image start-box center-margin">
                             @review.Rating
                         </div>
-                        <a id="review-thumbs-up-click-@sequenceOfReview" data-sequence="@sequenceOfReview" data-review-like-btn="true" href="@Url.Action("Like", "Reviews", new {id = @review.ReviewID})">
-                            <i class="fa fa-thumbs-up"></i>
-                        </a>
-                        <a id="review-thumbs-down-click-@sequenceOfReview" data-sequence="@sequenceOfReview" data-review-dislike-btn="true" href="@Url.Action("DisLike", "Reviews", new {id = @review.ReviewID})">
-                            <i class="fa fa-thumbs-down"></i>
-                        </a>
+                        <a id="review-thumbs-up-click-@sequenceOfReview" data-sequence="@sequenceOfReview" data-review-like-btn="true" href="@Url.Action("Like", "Reviews", new {id = @review.ReviewID})"><i class="fa fa-thumbs-up"></i></a>
+                        <a id="review-thumbs-down-click-@sequenceOfReview" data-sequence="@sequenceOfReview" data-review-dislike-btn="true" href="@Url.Action("DisLike", "Reviews", new {id = @review.ReviewID})"><i class="fa fa-thumbs-down"></i></a>
                         <div class="seo-hide seo-rating" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
                             <meta itemprop="worstRating" content="1">
                             <span itemprop="ratingValue">@review.Rating</span>/

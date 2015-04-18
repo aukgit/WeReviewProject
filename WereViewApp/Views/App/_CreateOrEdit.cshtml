@@ -1,42 +1,41 @@
 ﻿@model WereViewApp.Models.EntityModel.App
 
 
+
 <label id="notify-global-info-top" class="col-md-offset-2 label label-danger"></label>
+
+
 
 
 <div data-dev-slide="0" data-dev-visited="@ViewBag.ShowAllDivs">
     @Html.EditorFor(model => model.AppName)
     <div class="form-group PlatformID-main">
         <div class="controls">
-            <label class="col-md-2 control-label">
-                @Html.DisplayNameFor(m => m.PlatformID)<span class="red ">*</span></label>
+            <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.PlatformID)<span class="red ">*</span></label>
             <div class="col-md-10 PlatformID-combo-div">
-                @Html.DropDownList("PlatformID", null, new {@class = "form-control", data_style = "btn-success", data_live_search = true})
-                <a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m => m.PlatformID)." title="Please select @Html.DisplayNameFor(m => m.PlatformID)." class="tooltip-show">
-                    <span class="glyphicon glyphicon-question-sign font-size-22 glyphicon-top-fix almost-white"></span></a>
+                @Html.DropDownList("PlatformID", null, htmlAttributes: new { @class = "form-control", data_style = "btn-success", data_live_search = true })
+                <a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m=> m.PlatformID)." title="Please select @Html.DisplayNameFor(m=> m.PlatformID)." class="tooltip-show"><span class="glyphicon glyphicon-question-sign font-size-22 glyphicon-top-fix almost-white"></span></a>
             </div>
         </div>
     </div>
     @Html.EditorFor(model => model.PlatformVersion)
     <div class="form-group CategoryID-main">
         <div class="controls">
-            <label class="col-md-2 control-label">
-                @Html.DisplayNameFor(m => m.CategoryID)<span class="red ">*</span></label>
+            <label class="col-md-2 control-label">@Html.DisplayNameFor(m => m.CategoryID)<span class="red ">*</span></label>
             <div class="col-md-10 CategoryID-combo-div">
-                @Html.DropDownList("CategoryID", null, new {@class = "form-control", data_style = "btn-success", data_live_search = true})
-                <a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m => m.CategoryID)." title="Please select @Html.DisplayNameFor(m => m.CategoryID)." class="tooltip-show">
-                    <span class="glyphicon glyphicon-question-sign font-size-22 glyphicon-top-fix almost-white"></span></a>
+                @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control", data_style = "btn-success", data_live_search = true })
+                <a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m=> m.CategoryID)." title="Please select @Html.DisplayNameFor(m=> m.CategoryID)." class="tooltip-show"><span class="glyphicon glyphicon-question-sign font-size-22 glyphicon-top-fix almost-white"></span></a>
             </div>
         </div>
     </div>
 
     @Html.EditorFor(model => model.Tags, "Multiline")
-    @Html.EditorFor(model => model.Description, "Multiline", new {@class = "big-multiline"})
+    @Html.EditorFor(model => model.Description, "Multiline", new { @class = "big-multiline" })
 </div>
 
 <div data-dev-slide="1" data-dev-visited="@ViewBag.ShowAllDivs">
     @Html.EditorFor(model => model.ReleaseDate, "Date")
-    @Html.EditorFor(model => model.YoutubeEmbedLink, new {@class = "url-input"})
+    @Html.EditorFor(model => model.YoutubeEmbedLink, new { @class = "url-input" })
     @Html.EditorFor(model => model.WebSiteURL)
     @Html.EditorFor(model => model.StoreURL)
 </div>

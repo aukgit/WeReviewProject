@@ -1,9 +1,11 @@
-﻿@using WereViewApp.WereViewAppCommon
+﻿@using WereViewApp.Models.EntityModel
+@using WereViewApp.WereViewAppCommon
 @{
-    var appUrl = AppVar.Url;
-    var categories = WereViewStatics.AppCategoriesCache;
-    var platforms = WereViewStatics.AppPlatformsCache;
+    string appUrl = AppVar.Url;
+    List<Category> categories = WereViewStatics.AppCategoriesCache;
+    List<Platform> platforms = WereViewStatics.AppPlatformsCache;
     //string role = ViewBag.Role;
+
 }
 <div class="header-2">
     <header class="sticky">
@@ -16,9 +18,7 @@
             <nav>
                 <ul class="jetmenu menu seo-optimize">
                     <li class="active">
-                        <a href="@appUrl" title="App Review websie : Home">
-                            <strong title="App Review websie : Home">Home</strong>
-                        </a>
+                        <a href='@appUrl' title="App Review websie : Home"><strong title="App Review websie : Home">Home</strong></a>
                     </li>
                     <li>
                         <a title="Mobile Apps">Apps</a>
@@ -29,21 +29,9 @@
                             <li>
                                 <a title="Mobile Apps Category">Category</a>
                                 <ul class="dropdown animated fadeIn">
-                                    <li>
-                                        <a href="@appUrl/Apps/Category" title="Mobile Apps Category">
-                                            <h1>
-                                                <strong>All Category</strong>
-                                            </h1>
-                                        </a>
-                                    </li>
-                                    @foreach (var category in categories) {
-                                        <li>
-                                            <a href="@appUrl/Apps/Category/@category.CategoryName">
-                                                <h1 title="Mobile @category.CategoryName apps">
-                                                    <strong title="Mobile @category.CategoryName apps">@category.CategoryName</strong>
-                                                </h1>
-                                            </a>
-                                        </li>
+                                    <li> <a href="@appUrl/Apps/Category" title="Mobile Apps Category"><h1><strong>All Category</strong></h1></a></li>
+                                    @foreach (Category category in categories) {
+                                        <li> <a href="@appUrl/Apps/Category/@category.CategoryName"><h1 title="Mobile @category.CategoryName apps"><strong title="Mobile @category.CategoryName apps">@category.CategoryName</strong></h1></a></li>
                                     }
                                 </ul>
                             </li>
@@ -51,14 +39,8 @@
                                 <a href="15_Portfolio_8.html">Platforms</a>
                                 <!--======= DROP MENU =========-->
                                 <ul class="dropdown animated fadeIn">
-                                    <li>
-                                        <a href="08_Portfolio_1.html">
-                                            <h1>
-                                                <strong>All Platform</strong>
-                                            </h1>
-                                        </a>
-                                    </li>
-                                    @foreach (var platform in platforms) {
+                                    <li> <a href="08_Portfolio_1.html"><h1><strong>All Platform</strong></h1></a></li>
+                                    @foreach (Platform platform in platforms) {
                                         <li title="Android Apps">
                                             <a href="@appUrl/@platform.PlatformName">
                                                 <h1 title="@platform.PlatformName Apps">
@@ -90,9 +72,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search" name="q" title="Search in app review website">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">
-                                        <i class="glyphicon glyphicon-search"></i>
-                                    </button>
+                                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                                 </div>
                             </div>
                         </form>

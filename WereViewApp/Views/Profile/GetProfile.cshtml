@@ -3,38 +3,37 @@
 @model WereViewApp.Models.POCO.Identity.ApplicationUser
 @{
     string username = Model.UserName;
-    var apps = (List<App>) ViewBag.Apps;
-    var urlToFirstpage = AppVar.Url + "/Profile/" + username;
+    List<App> apps = (List<App>)ViewBag.Apps;
+    string urlToFirstpage = AppVar.Url + "/Profile/" + username;
+    
 }
 <a title="Apps of @Model.DisplayName" href="@urlToFirstpage">
     <h2 class="h2" title="profile of @username">@Model.DisplayName</h2>
 </a>
 <table class="top-gap-2x ">
     <tbody>
-    <tr>
-        <td class="bold">Name</td>
-        <td class="red indent-1">:</td>
-        <td class="indent-1">
-            <a title="Apps of @Model.DisplayName" href="@urlToFirstpage">@Model.DisplayName</a>
-        </td>
-    </tr>
-    <tr>
-        <td class="bold">
-            User name
-        </td>
-        <td class="red indent-1">:</td>
-        <td class="indent-1"> @username</td>
-    </tr>
-    <tr>
-        <td class="bold">Email</td>
-        <td class="red indent-1">:</td>
-        <td class="indent-1"> @Model.Email.Replace("@", "{at}")</td>
-    </tr>
-    <tr>
-        <td class="bold">Member since</td>
-        <td class="red indent-1">:</td>
-        <td class="indent-1"> @Html.DisplayDate("dd MMMM, yyyy", @Model.CreatedDate)</td>
-    </tr>
+        <tr>
+            <td class="bold">Name</td>
+            <td class="red indent-1">:</td>
+            <td class="indent-1"> <a title="Apps of @Model.DisplayName" href="@urlToFirstpage">@Model.DisplayName</a></td>
+        </tr>
+        <tr>
+            <td class="bold">
+                User name
+            </td>
+            <td class="red indent-1">:</td>
+            <td class="indent-1"> @username</td>
+        </tr>
+        <tr>
+            <td class="bold">Email</td>
+            <td class="red indent-1">:</td>
+            <td class="indent-1"> @Model.Email.Replace("@", "{at}")</td>
+        </tr>
+        <tr>
+            <td class="bold">Member since</td>
+            <td class="red indent-1">:</td>
+            <td class="indent-1"> @Html.DisplayDate("dd MMMM, yyyy", @Model.CreatedDate)</td>
+        </tr>
     </tbody>
 </table>
 <div class="row app-date-seperation seo-optimize">
@@ -49,12 +48,12 @@
 <div class="row">
     <div class="archive-app-collection-wrapper">
         <ul class="seo-optimize regular-color archive-app-collection-list search-page-apps-list pagination-required">
-            @foreach (var app in apps) {
-                var platform = app.GetPlatform();
+            @foreach (App app in apps) {
+                Platform platform = app.GetPlatform();
                 <li class="slim-app-view" data-app-type="@platform.Icon">
                     <a class="app-url" href="@app.GetAppUrl()" title="App Review : @app.AppName">
                         <div class="app-icon">
-                            <img src="@app.GallerySearchIconLocation" alt="app"/>
+                            <img src="@app.GallerySearchIconLocation" alt="app" />
                         </div>
                         <div class="app-content">
                             <h1 class="app-title" title="App Review : @app.AppName">

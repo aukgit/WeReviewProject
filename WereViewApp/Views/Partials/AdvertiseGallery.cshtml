@@ -1,7 +1,9 @@
-﻿@model IEnumerable<WereViewApp.Models.ViewModels.DisplayGalleryImages>
+﻿@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
+
+@model IEnumerable<WereViewApp.Models.ViewModels.DisplayGalleryImages>
 
 @{
-    var isFirst = true;
+    bool isFirst = true;
     Layout = null;
 }
 
@@ -9,7 +11,7 @@
 
     <div class="carousel-inner">
         @foreach (var image in Model) {
-            var classActive = isFirst ? "active" : null;
+            string classActive = isFirst ? "active" : null;
             <div class="item @classActive">
                 <h1 class="h4" title="@image.Title">@image.Title</h1>
                 <img src="@image.GalleryImageLocation" alt="@image.Title" class="img-responsive">

@@ -5,6 +5,6 @@
 <h2 class="h2">Confirmed</h2>
 <div>
     <p>
-        @ViewBag.Title. Thank you for confirming your account. Please @Html.ActionLink("click here to log in", "Login", "Account", null, new {id = "loginLink"})
+        @ViewBag.Title. Thank you for confirming your account. Please @Html.ActionLink("click here to log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
     </p>
 </div>

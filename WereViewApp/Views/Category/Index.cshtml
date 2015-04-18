@@ -1,8 +1,9 @@
 ﻿@using WereViewApp.Models.EntityModel
+@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
 @model List<WereViewApp.Models.EntityModel.Category>
 @{
     ViewBag.Title = "Mobile App Categories / Category";
-    var currentPageStaticUrl = AppVar.Url + Html.GetCurrentURLString();
+    string currentPageStaticUrl = AppVar.Url + Html.GetCurrentURLString();
 }
 <div class="app-details-page category-page search-page category-listing-page">
 
@@ -29,7 +30,7 @@
     </div>
     <div class="category-listing-displays-with-apps-container bottom-gap">
         @foreach (var category in Model) {
-            var appNonExistClass = category.Apps == null || category.Apps.Count == 0 ? "seo-hide" : "";
+            string appNonExistClass = category.Apps == null || category.Apps.Count == 0 ? "seo-hide" : "";
             <div class="row no-margin @appNonExistClass">
                 <div class="col-md-12 app-detail app-title-wrapper category-title" title="Mobile App Categories">
                     <div class="app-title-row float-left">
@@ -57,7 +58,7 @@
                                 <li class="slim-app-view" data-app-type="@platform.Icon">
                                     <a class="app-url" href="@app.GetAppUrl()" title="App Review : @app.AppName">
                                         <div class="app-icon">
-                                            <img src="@app.GallerySearchIconLocation" alt="app"/>
+                                            <img src="@app.GallerySearchIconLocation" alt="app" />
                                         </div>
                                         <div class="app-content">
                                             <h1 class="app-title" title="App Review : @app.AppName">
@@ -84,6 +85,8 @@
                     </div>
                 </div>
             </div>
+
+
         }
 
     </div>
@@ -92,25 +95,13 @@
 <div class="seo-hide">
     <a href="@currentPageStaticUrl" class="seo-app-name" title="WeReviewApp.com : App Reviews website.">
         <h1 title="WeReviewApp.com : App Reviews website.">
-            <strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">We</em>
-            </strong><strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">Review</em>
-            </strong><strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">App</em>
-            </strong><strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">.com</em>
-            </strong>
+            <strong title="WeReviewApp.com : App Reviews website."><em title="WeReviewApp.com : App Reviews website.">We</em></strong><strong title="WeReviewApp.com : App Reviews website."><em title="WeReviewApp.com : App Reviews website.">Review</em></strong><strong title="WeReviewApp.com : App Reviews website."><em title="WeReviewApp.com : App Reviews website.">App</em></strong><strong title="WeReviewApp.com : App Reviews website."><em title="WeReviewApp.com : App Reviews website.">.com</em></strong>
         </h1>
     </a>
     is great
     <a href="@currentPageStaticUrl" class="seo-app-name" title="WeReviewApp.com : App Reviews website.">
         <h1 title="WeReviewApp.com : App Reviews website.">
-            <strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">web</em>
-            </strong><strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">site</em>
-            </strong>
+            <strong title="WeReviewApp.com : App Reviews website."><em title="WeReviewApp.com : App Reviews website.">web</em></strong><strong title="WeReviewApp.com : App Reviews website."><em title="WeReviewApp.com : App Reviews website.">site</em></strong>
             @currentPageStaticUrl
         </h1>
     </a> for both developers and users who use
@@ -127,11 +118,5 @@
             </strong>
         </h1>
     </a>
-    Collection of <a href="@Html.GetCurrentURLString()" title="">
-        <h1>
-            <strong>
-                <em>reviews : @currentPageStaticUrl</em>
-            </strong>
-        </h1>
-    </a>
+    Collection of <a href="@Html.GetCurrentURLString()" title=""><h1><strong><em>reviews : @currentPageStaticUrl</em></strong></h1></a>
 </div>

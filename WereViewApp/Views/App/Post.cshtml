@@ -2,42 +2,44 @@
 
 @{
     ViewBag.Title = "Post App";
-    string title = ViewBag.Title;
+	string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    var controller = (string) ViewBag.controller;
-    var token = @Html.AntiForgeryToken();
+	string controller = (string)ViewBag.controller;
+    var token = (MvcHtmlString)@Html.AntiForgeryToken();
+    
+	string viewName = "Post";
 
-    var viewName = "Post";
 }
 
 
 <h1 class="h2 gap-from-top-small">
-    <span class="glyphicon glyphicon-plus-sign"></span>  
-    @Html.SamePageLink(title, subtitle, false)
+	<span class="glyphicon glyphicon-plus-sign"></span>  
+	@Html.SamePageLink(title, subtitle, false)
 </h1>
-<hr/>
-@using (Html.BeginForm(viewName, controller, FormMethod.Post, new {@class = "form-horizontal app-editing-page app-post Create-" + @ViewBag.Title, role = "form"})) {
-    <div class="form-horizontal">
-        @Html.Partial("_SuccessMessage")
-        @token
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-
-        @Html.Partial("_CreateOrEdit")
-        @Html.Partial("_Uploaders")
+<hr />
+@using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal app-editing-page app-post Create-" + @ViewBag.Title, role = "form" })) 
+{
+   <div class="form-horizontal">
+		@Html.Partial("_SuccessMessage")
+        @token		
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        @Html.Partial("_CreateOrEdit")        
+        @Html.Partial("_Uploaders")        
         @Html.EditorFor(model => model.IsPublished)
         @Html.Partial("_SuccessMessage")
 
-
+        
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <div class="btn-group">
                     <div class="input-group-btn inline">
                         <button class="btn btn-warning" title="Draft" id="draft-btn"><i class="glyphicon glyphicon-floppy-disk"></i> Draft</button>
-                    </div>
+                    </div>        
                     <div class="input-group-btn inline">
                         <button class="btn btn-success" title="Save and create a new one."><i class="glyphicon glyphicon-floppy-saved"></i> Create</button>
-                    </div>
-                </div>
+                    </div>                    
+                </div>               
             </div>
         </div>
     </div>

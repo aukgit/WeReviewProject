@@ -2,22 +2,22 @@
 
 @{
     ViewBag.Title = "Edit Your Review";
-    var token = @Html.AntiForgeryToken();
-    var controller = (string) ViewBag.controller;
-    var viewName = "Edit";
+    var token = (MvcHtmlString)@Html.AntiForgeryToken();
+    string controller = (string)ViewBag.controller;
+    string viewName = "Edit";
     Layout = null;
 }
-<hr/>
+<hr />
 <h1 class="h4">@ViewBag.Title</h1>
-@using (Html.BeginForm(viewName, controller, FormMethod.Post, new {@class = "form-horizontal Create", role = "form"})) {
+@using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create", role = "form" })) {
     <div class="form-horizontal">
         @token
         @Html.Partial("_SuccessMessage")
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ReviewID)
         @Html.HiddenFor(model => model.AppID)
 
-        @Html.EditorFor(model => model.Rating, "Rating-10-b", new {@step = 1})
+        @Html.EditorFor(model => model.Rating, "Rating-10-b", new { @step = 1 })
         @Html.EditorFor(model => model.Title)
         @Html.EditorFor(model => model.Pros, "Multiline")
         @Html.EditorFor(model => model.Cons, "Multiline")
@@ -44,5 +44,5 @@
 }
 @Scripts.Render("~/bundles/jqueryval")
 <script type="text/javascript">
-    $(".tooltip-show").tooltip();
+    $('.tooltip-show').tooltip();
 </script>

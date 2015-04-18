@@ -1,4 +1,5 @@
-﻿@using WereViewApp.WereViewAppCommon.Structs
+﻿@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
+@using WereViewApp.WereViewAppCommon.Structs
 @model List<WereViewApp.Models.EntityModel.App>
 
 @{
@@ -6,19 +7,17 @@
     var count = Model != null ? Model.Count() : 0;
 
     var firstCount = count >= 20 ? 20 : count;
-
+    
     var secondCountStart = count >= 20 ? 20 : 0;
     var secondCountEnd = count >= 40 ? 40 : count;
-
+    
     var thirdCountStart = count >= 40 ? 40 : 0;
 }
 
 
 <div class="itembox col-md-4 col-sm-4">
-    <h1 title="@ViewBag.Title">
-        <a href="@Html.GetCurrentURLString()"> @ViewBag.Title</a>
-    </h1>
-    @for (var i = 0; i < firstCount; i++) {
+    <h1 title="@ViewBag.Title"><a href="@Html.GetCurrentURLString()"> @ViewBag.Title</a></h1>
+    @for (int i = 0; i < firstCount; i++) {
         var app = Model[i];
         string appName = @app.AppName;
         string absUrl = @app.GetAppUrl();
@@ -32,24 +31,22 @@
                 <a href="@absUrl" itemtype="@absUrl" title="@app.Description" data-original-title="@app.Description" class="tooltip-show">
                     <h1 title="@appName">@Html.Truncate(appName, 20)</h1>
                     <p title="@app.Description">
-                        @Html.Truncate(app.Description, CommonVars.APP_HOME_PAGE_DESCRIPTION_TRUNC_LEN)
+                       @Html.Truncate(app.Description, CommonVars.APP_HOME_PAGE_DESCRIPTION_TRUNC_LEN)
                     </p>
                     <i class="fa fa-star"></i>
                     <span class="price" itemprop="value" title="rating of @appName" itemprop="rating">@app.AvgRating</span>
-                    <meta itemprop="best" content="10"/>
+                    <meta itemprop="best" content="10" />
                 </a>
-                <a href="@Url.Action(app.Platform.PlatformName, "Apps")" title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" data-original-title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" class="tooltip-show">
-                    <i class="@app.Platform.Icon"></i>
-                </a>
+                <a href="@Url.Action(app.Platform.PlatformName, "Apps")" title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" data-original-title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" class="tooltip-show"><i class="@app.Platform.Icon"></i></a>
             </div>
         </div>
     }
 
-
+ 
 </div>
-@if (secondCountStart > 0) {
+@if (secondCountStart > 0) { 
     <div class="itembox col-md-4 col-sm-4 third-list-home-page">
-        @for (var i = secondCountStart; i < secondCountEnd; i++) {
+        @for (int i = secondCountStart; i < secondCountEnd; i++) {
             var app = Model[i];
             string appName = @app.AppName;
             string absUrl = @app.GetAppUrl();
@@ -67,20 +64,20 @@
                         </p>
                         <i class="fa fa-star"></i>
                         <span class="price" itemprop="value" title="rating of @appName" itemprop="rating">@app.AvgRating</span>
-                        <meta itemprop="best" content="10"/>
+                        <meta itemprop="best" content="10" />
                     </a>
-                    <a href="@Url.Action(app.Platform.PlatformName, "Apps")" title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" data-original-title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" class="tooltip-show">
-                        <i class="@app.Platform.Icon"></i>
-                    </a>
+                    <a href="@Url.Action(app.Platform.PlatformName, "Apps")" title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" data-original-title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" class="tooltip-show"><i class="@app.Platform.Icon"></i></a>
                 </div>
             </div>
         }
     </div>
+
+
 }
 
 @if (thirdCountStart > 0) {
     <div class="itembox col-md-4 col-sm-4 third-list-home-page">
-        @for (var i = thirdCountStart; i < count; i++) {
+        @for (int i = thirdCountStart; i < count; i++) {
             var app = Model[i];
             string appName = @app.AppName;
             string absUrl = @app.GetAppUrl();
@@ -98,13 +95,13 @@
                         </p>
                         <i class="fa fa-star"></i>
                         <span class="price" itemprop="value" title="rating of @appName" itemprop="rating">@app.AvgRating</span>
-                        <meta itemprop="best" content="10"/>
+                        <meta itemprop="best" content="10" />
                     </a>
-                    <a href="@Url.Action(app.Platform.PlatformName, "Apps")" title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" data-original-title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" class="tooltip-show">
-                        <i class="@app.Platform.Icon"></i>
-                    </a>
+                    <a href="@Url.Action(app.Platform.PlatformName, "Apps")" title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" data-original-title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" class="tooltip-show"><i class="@app.Platform.Icon"></i></a>
                 </div>
             </div>
         }
     </div>
+
+
 }

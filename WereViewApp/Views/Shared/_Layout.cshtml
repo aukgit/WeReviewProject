@@ -1,24 +1,24 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="@AppConfig.Setting.GoogleMetaTag"/>
+    <meta name="google-site-verification" content="@AppConfig.Setting.GoogleMetaTag" />
     <meta name="author" content="Alim Ul Karim">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css/styles")
 
-    @RenderSection("css", false)
+    @RenderSection("css", required: false)
     @if (ViewBag.Meta != null) {
         <meta name="description" content="@ViewBag.Meta"/>
     } else {
-        <meta name="description" content="@AppVar.Name,@AppVar.Subtitle, Review, Mobile Apps, Apple Apps, Android Apps, Reviewing website, mobile apps rating website"/>
+        <meta name="description" content="@AppVar.Name,@AppVar.Subtitle, Review, Mobile Apps, Apple Apps, Android Apps, Reviewing website, mobile apps rating website" />
     }
 
     @if (ViewBag.Keywords != null) {
         <meta name="keywords" content="@ViewBag.Keywords"/>
     } else {
-        <meta name="keywords" content="@AppVar.Name,@AppVar.Subtitle, Review, Mobile Apps, Apple Apps, Android Apps, Reviewing website, mobile apps rating website"/>
+        <meta name="keywords" content="@AppVar.Name,@AppVar.Subtitle, Review, Mobile Apps, Apple Apps, Android Apps, Reviewing website, mobile apps rating website" />
     }
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -26,20 +26,20 @@
     <![endif]-->
 </head>
 <body>
-<div id="wrap" class="home-page">
-    @{ Html.RenderAction("NavBar", "Partials"); }
-    <div class="content">
-        <div class="container">
-            @RenderBody()
+    <div id="wrap" class="home-page">
+        @{ Html.RenderAction("NavBar", "Partials"); }
+        <div class="content">
+            <div class="container">
+                @RenderBody()
+            </div>
+            @Html.Partial("_Footer")
         </div>
-        @Html.Partial("_Footer")
     </div>
-</div>
 
-@RenderSection("featured", false)
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", false)
+    @RenderSection("featured", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 
 </body>
 </html>

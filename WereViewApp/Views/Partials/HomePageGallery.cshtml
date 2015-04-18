@@ -1,4 +1,5 @@
-﻿@model List<WereViewApp.Models.EntityModel.App>
+﻿@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
+@model List<WereViewApp.Models.EntityModel.App>
 
 @{
     Layout = null;
@@ -100,7 +101,7 @@
                                     @app.AvgRating<span style="font-weight: 300;">/5 Stars</span>
                                     <div class="seo-rating seo-hide" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                                         <span itemprop="ratingValue">@app.AvgRating</span> stars based on
-                                        <meta itemprop="best" content="5"/>
+                                        <meta itemprop="best" content="5" />
                                         <span itemprop="reviewCount">@app.ReviewsCount</span> reviews
                                     </div>
                                 </div>
