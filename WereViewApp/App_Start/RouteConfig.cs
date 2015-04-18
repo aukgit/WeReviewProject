@@ -63,6 +63,14 @@ namespace WereViewApp {
             );   
             #endregion
 
+            //#region Errors
+            //routes.MapRoute(
+            //  name: "errors",
+            //  url: "Errors/{number}",
+            //  defaults: new { controller = "Errors", action = "Error_{number}" },
+            //  namespaces: new string[] { wereviewappControllers }
+            //);
+            //#endregion
 
             #region App Routes
             routes.MapRoute(

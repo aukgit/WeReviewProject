@@ -226,6 +226,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\PlatformsController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
@@ -1098,6 +1099,7 @@
     <Folder Include="Uploads\Files\Private\" />
     <Folder Include="Uploads\Images\Private\" />
     <Folder Include="Views\Basic\" />
+    <Folder Include="Views\Errors\" />
     <Folder Include="Views\Report\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>

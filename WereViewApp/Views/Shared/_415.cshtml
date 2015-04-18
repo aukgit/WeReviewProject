@@ -1,6 +1,9 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     HttpContext.Current.Response.StatusCode = 415;
+    if (ViewBag.Reason == null) {
+        ViewBag.Reason = "File type unsupported.";
+    }
 }
 <h1 class="text-danger h1 gap-from-top-small error-page-title-version-2">
     415 : Unsupported Media Type

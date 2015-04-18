@@ -7,14 +7,12 @@
     <meta name="author" content="Alim Ul Karim">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css/styles")
-
     @RenderSection("css", false)
     @if (ViewBag.Meta != null) {
         <meta name="description" content="@ViewBag.Meta"/>
     } else {
         <meta name="description" content="@AppVar.Name,@AppVar.Subtitle, Review, Mobile Apps, Apple Apps, Android Apps, Reviewing website, mobile apps rating website"/>
     }
-
     @if (ViewBag.Keywords != null) {
         <meta name="keywords" content="@ViewBag.Keywords"/>
     } else {

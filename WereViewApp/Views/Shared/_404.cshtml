@@ -1,6 +1,9 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     HttpContext.Current.Response.StatusCode = 404;
+    if (ViewBag.Reason == null) {
+        ViewBag.Reason = "Requested page is not found.";
+    }
 }
 <h1 class="text-danger h1 gap-from-top-small error-page-title-version-2">
     404 : Not found

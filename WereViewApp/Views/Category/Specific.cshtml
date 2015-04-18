@@ -9,17 +9,17 @@
     <div class="row">
         <div class="col-md-12 app-detail app-title-wrapper" title="Mobile Apps Categories">
             <div class="app-title-row float-left">
-                <a href="@currentPageStaticUrl" class="app-title">
+                <a href="@currentPageStaticUrl" class="app-title" title="@Model.CategoryName Mobile apps category">
                     <h1 title="Mobile Apps Categories">
                         <strong title="Mobile Apps Categories">
-                            <em title="Mobile Apps Categories">Mobile Apps</em>
+                            <em title="@Model.CategoryName">@Model.CategoryName</em>
                         </strong>
                     </h1>
                 </a>
-                <a class="app-category" href="#">
+                <a class="app-category" href="@currentPageStaticUrl">
                     <h2 class="category" title="Mobile Apps Categories">
-                        <strong class="search-quote" title="Mobile App Categories">
-                            Categories
+                        <strong class="search-quote" title="@Model.CategoryName Mobile Apps">
+                            Mobile Apps
                         </strong>
                     </h2>
                 </a>

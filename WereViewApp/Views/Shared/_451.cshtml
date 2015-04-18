@@ -1,6 +1,9 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     HttpContext.Current.Response.StatusCode = 451;
+    if (ViewBag.Reason == null) {
+        ViewBag.Reason = "You are not authorized to view this.";
+    }
 }
 <h1 class="text-danger h1 gap-from-top-small error-page-title-version-2">
     451 : Unavailable For Legal Reasons (Internet draft)
