@@ -278,8 +278,22 @@ namespace WereViewApp.Helpers {
             return new HtmlString(markup);
         }
 
+        /// <summary>
+        /// Returns url without the host name. 
+        /// Slash is included
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <returns>Returns url without the host name.</returns>
         public static string GetCurrentURLString(this HtmlHelper helper) {
             return HttpContext.Current.Request.RawUrl;
+        }
+        /// <summary>
+        /// Returns url whole page url with the host name. 
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <returns>Returns url whole page url with the host name. </returns>
+        public static string GetCurrentURLWithHostName(this HtmlHelper helper) {
+            return AppVar.Url + HttpContext.Current.Request.RawUrl;
         }
 
         /// <summary>

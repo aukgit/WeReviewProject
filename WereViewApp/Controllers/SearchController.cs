@@ -15,14 +15,14 @@ namespace WereViewApp.Controllers {
             
         }
         #region Search
-
-        public ActionResult Index() {
+        [HttpGet]
+        public ActionResult Index(string url) {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [OutputCache(CacheProfile = "Long", VaryByParam = "Url")]
+        [OutputCache(CacheProfile = "Long", VaryByParam = "url")]
         public ActionResult Index(SearchViewModel search, string url) {
             ViewBag.isPostBack = true;
             if (!string.IsNullOrWhiteSpace(url)) {
@@ -31,7 +31,7 @@ namespace WereViewApp.Controllers {
                 var displayStr = string.Join(" ", displayList);
                 var results = _algorithms.GetSearchResults(url, null, null, null,
                     CommonVars.SEARCH_RESULTS_MAX_RESULT_RETURN, db);
-                search.DisplaySearchText = displayStr;
+                search.SearchQuery = displayStr;
                 ViewBag.Results = results;
                 return View(search);
             }

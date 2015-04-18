@@ -1084,8 +1084,14 @@
     <Content Include="Views\Shared\_415.cshtml" />
     <Content Include="Views\Platforms\Index.cshtml" />
     <Content Include="Views\Platforms\Specific.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Shared\_429.cshtml" />
+    <Content Include="Views\Shared\_400.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
+    <Content Include="Views\Shared\_RequestNotValid.cshtml" />
+    <Content Include="Views\Shared\_431.cshtml" />
+    <Content Include="Views\Shared\_414.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataCached\SearchResult\" />
@@ -1100,7 +1106,6 @@
     <Folder Include="Views\Basic\" />
     <Folder Include="Views\Errors\" />
     <Folder Include="Views\Report\" />
-    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

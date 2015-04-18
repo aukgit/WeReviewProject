@@ -60,17 +60,19 @@ namespace WereViewApp {
               url: "Profile/{username}/{page}",
               defaults: new { controller = "Profile", action = "GetProfile", page = UrlParameter.Optional },
               namespaces: new string[] { wereviewappControllers }
-            );   
+            );
             #endregion
 
-            //#region Errors
-            //routes.MapRoute(
-            //  name: "errors",
-            //  url: "Errors/{number}",
-            //  defaults: new { controller = "Errors", action = "Error_{number}" },
-            //  namespaces: new string[] { wereviewappControllers }
-            //);
-            //#endregion
+            #region Errors
+            routes.MapRoute(
+              name: "search",
+              url: "Search/{url}",
+              defaults: new {
+                  controller = "Search", action = "Index"
+              },
+              namespaces: new string[] { wereviewappControllers }
+            );
+            #endregion
 
             #region App Routes
             routes.MapRoute(
@@ -117,10 +119,8 @@ namespace WereViewApp {
                defaults: new { controller = "Apps", action = "Platform" },
                namespaces: new string[] { wereviewappControllers }
             );
-
-
-
             #endregion
+
             #region Default Route
             //routes.MapRoute(
             //       name: "Direct",
@@ -141,11 +141,6 @@ namespace WereViewApp {
                    namespaces: new string[] { wereviewappControllers }
             );
             #endregion
-
-       
-
-
-
         }
     }
 }
