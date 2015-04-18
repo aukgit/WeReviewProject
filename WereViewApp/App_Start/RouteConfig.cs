@@ -63,7 +63,7 @@ namespace WereViewApp {
             );
             #endregion
 
-            #region Errors
+            #region Search
             //routes.MapRoute(
             //   name: "search_url",
             //   url: "Search/{url}",
@@ -71,12 +71,12 @@ namespace WereViewApp {
             //   namespaces: new string[] { wereviewappControllers }
             //);
             
-            routes.MapRoute(
-               name: "searchXS",
-               url: "SearchX",
-               defaults: new { controller = "SearchPage", action = "Index" },
-               namespaces: new string[] { wereviewappControllers }
-            );
+            //routes.MapRoute(
+            //   name: "searchXS",
+            //   url: "SearchX",
+            //   defaults: new { controller = "SearchPage", action = "Index" },
+            //   namespaces: new string[] { wereviewappControllers }
+            //);
 
             #endregion
 

@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace WereViewApp.Controllers
 {
-    public class SampleTestController : Controller
+    public class SearchController : Controller
     {
-        // GET: SampleTest
+        // GET: Search
         public ActionResult Index()
         {
             return View();

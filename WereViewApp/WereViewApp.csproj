@@ -232,7 +232,7 @@
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\PlatformsController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
-    <Compile Include="Controllers\SampleTestController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapGenerator.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapItem.cs" />
@@ -269,7 +269,6 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ReviewsController.cs" />
-    <Compile Include="Controllers\SearchPageController.cs" />
     <Compile Include="Models\EntityModel\Derivables\IApp.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -1091,7 +1090,7 @@
     <Content Include="Views\SearchPage\Index.cshtml" />
     <Content Include="Views\Shared\_429.cshtml" />
     <Content Include="Views\Shared\_400.cshtml" />
-    <Content Include="Views\SampleTest\Index.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />
