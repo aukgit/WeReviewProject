@@ -1,12 +1,12 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    HttpContext.Current.Response.StatusCode = 500;
+    HttpContext.Current.Response.StatusCode = 502;
     if (ViewBag.Reason == null) {
-        ViewBag.Reason = "Server processing failed or requested method has never been created.";
+        ViewBag.Reason = "Bad gateway. Hosting server failure.";
     }
 }
 <h1 class="text-danger h1 gap-from-top-small error-page-title-version-2">
-    500 : Internal Server Error
+    502 : Bad Gateway
 </h1>
 <div class="top-gap-2x">
     <div class="row">
@@ -16,7 +16,7 @@
         <div class="col-md-8">
             <p>
                 Sorry for the inconvience , there might be some issue with
-                <strong class="red bold">server processing</strong>.
+                <strong class="red bold">bad gateway</strong>.
 
                 Our engineers has been notified and will be fixed soon.
 
