@@ -5,11 +5,10 @@
         ViewBag.Reason = "Bad gateway. Hosting server failure.";
     }
     ViewBag.Title = "502 : Bad Gateway";
-    
 }
 <div class="custom-error-page">
     <h1 class="text-danger h1 gap-from-top-small error-page-title-version-2">
-        502 : Bad Gateway
+        @ViewBag.Title
     </h1>
     <div class="top-gap-2x">
         <div class="row">
