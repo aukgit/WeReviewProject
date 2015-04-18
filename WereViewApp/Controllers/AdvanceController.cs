@@ -9,7 +9,7 @@ using WereViewApp.Modules.UserError;
 
 namespace WereViewApp.Controllers {
     //[CompressFilter]
-    [CacheFilter(Duration = 8)]
+    //[CacheFilter(Duration = 8)]
     public abstract class AdvanceController : Controller {
         internal ErrorCollector ErrorCollector;
         internal readonly WereViewAppEntities db;

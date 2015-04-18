@@ -64,17 +64,17 @@ namespace WereViewApp {
             #endregion
 
             #region Errors
-            routes.MapRoute(
-               name: "search_url",
-               url: "Search/{url}",
-               defaults: new {controller = "Search", action = "Index", url = UrlParameter.Optional},
-               namespaces: new string[] { wereviewappControllers }
-            );
+            //routes.MapRoute(
+            //   name: "search_url",
+            //   url: "Search/{url}",
+            //   defaults: new { controller = "SearchPage", action = "Index", url = UrlParameter.Optional },
+            //   namespaces: new string[] { wereviewappControllers }
+            //);
             
             routes.MapRoute(
-               name: "search",
-               url: "Search",
-               defaults: new {controller = "Search", action = "Index"},
+               name: "searchXS",
+               url: "SearchX",
+               defaults: new { controller = "SearchPage", action = "Index" },
                namespaces: new string[] { wereviewappControllers }
             );
 
@@ -104,13 +104,14 @@ namespace WereViewApp {
                url: "Apps/Category",
                defaults: new { controller = "Category", action = "Index" },
                namespaces: new string[] { wereviewappControllers }
-             );
+            );
+            
             routes.MapRoute(
                name: "Apps",
                url: "Apps",
                defaults: new { controller = "App", action = "Index" },
                namespaces: new string[] { wereviewappControllers }
-             );
+            );
 
             routes.MapRoute(
                name: "SingleApp",

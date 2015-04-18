@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.WereViewAppCommon;
+using DevTrends.MvcDonutCaching;
 
 #endregion
 
@@ -101,7 +102,7 @@ namespace WereViewApp.Controllers {
         #endregion
 
         #region Search Form
-
+        //[DonutOutputCache(CacheProfile="TwoSec")]
         public ActionResult SearchForm() {
             return PartialView();
         }

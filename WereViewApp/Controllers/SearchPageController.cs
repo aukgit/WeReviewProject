@@ -8,22 +8,25 @@ using WereViewApp.WereViewAppCommon.Structs;
 #endregion
 
 namespace WereViewApp.Controllers {
-    public class SearchController : AdvanceController {
-        private readonly Algorithms _algorithms = new Algorithms();
+    public class SearchPageController : AdvanceController {
 
-        protected SearchController() : base(true) {
-            
+        protected SearchPageController()
+            : base(true) {
+
         }
         #region Search
         [HttpGet]
-        public ActionResult Index() {
-            return View();
+        public string Index(string id) {
+            //return View();
+            return "Jello";
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [OutputCache(CacheProfile = "Long", VaryByParam = "url")]
         public ActionResult Index(SearchViewModel search, string url) {
+            var _algorithms = new Algorithms();
+
             ViewBag.isPostBack = true;
             if (!string.IsNullOrWhiteSpace(url)) {
                 var urlGet = _algorithms.GenerateURLValid(url);
