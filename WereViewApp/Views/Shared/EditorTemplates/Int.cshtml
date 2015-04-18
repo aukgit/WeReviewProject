@@ -1,29 +1,21 @@
-
 @model int?
 
 @{
     int i;
-    if (!Model.HasValue)
-    {
+    if (!Model.HasValue) {
         i = 0;
-    }
-    else
-    {
+    } else {
         i = Model.Value;
     }
-    
+
     var htmlAttributes = new RouteValueDictionary();
-    if (ViewBag.@class != null)
-    {
+    if (ViewBag.@class != null) {
         htmlAttributes.Add("class", "form-control " + ViewBag.@class);
-    }
-    else
-    {
+    } else {
         htmlAttributes.Add("class", "form-control");
     }
-       
-    if (ViewBag.placeholder != null)
-    {
+
+    if (ViewBag.placeholder != null) {
         htmlAttributes.Add("placeholder", ViewBag.placeholder);
     }
 
@@ -32,12 +24,12 @@
     }
 }
 <div class="form-group form-row-@ViewData.ModelMetadata.PropertyName">
-    @Html.LabelFor(m => m, new { @class = "control-label" })
+    @Html.LabelFor(m => m, new {@class = "control-label"})
     <div class="controls">
         @Html.TextBox(
             "",
             ViewData.TemplateInfo.FormattedModelValue,
             htmlAttributes)
-        @Html.ValidationMessageFor(m => m, null, new { @class = "help-block" })
+        @Html.ValidationMessageFor(m => m, null, new {@class = "help-block"})
     </div>
 </div>

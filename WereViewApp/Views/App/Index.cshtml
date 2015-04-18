@@ -1,17 +1,16 @@
-﻿@using WereViewApp.Models.EntityModel
-@model IEnumerable<App>
+﻿@model IEnumerable<WereViewApp.Models.EntityModel.App>
 
 @{
     ViewBag.Title = "Apps List";
-	string title = ViewBag.Title;
+    string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-	string controller = (string)ViewBag.controller;
+    string controller = (string) ViewBag.controller;
     const string viewName = "Index";
 }
 
 <h2 class="h3 top-gap">
-	<span class="glyphicon glyphicon-th-list"></span> 
-	@Html.SamePageLink(title, subtitle, false)
+    <span class="glyphicon glyphicon-th-list"></span> 
+    @Html.SamePageLink(title, subtitle, false)
 </h2>
 <div class="small-bottom-gap"></div>
 
@@ -19,59 +18,60 @@
     <a href="@Url.Action("Post")" title="Create a new item." class="btn btn-warning create-save"><span class="glyphicon glyphicon-plus"></span> Create</a>
     <a href="@Url.Action("Drafts")" title="Get drafted apps." class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> Drafts</a>
 </p>
-<table class="table table-hover bootstrap-table-do"  data-show-columns="true" data-search="true"  data-pagination="true">
-	<!--<caption>@viewName</caption>-->
-	<thead>
-		<tr>		
-			<th data-field="AppName">
-				@Html.DisplayNameFor(model => model.AppName)
-			</th>
-			<th data-field="Description">
-				@Html.DisplayNameFor(model => model.Description)
-			</th>
-            <th data-field="Platform">
-                Platform
-            </th>				
-			<th data-field="IsPublished">
-				Published
-			</th>			
-            <th data-field="ReviewsCount">
-                Reviews
-            </th>						
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var item in Model) {
-			<tr>
-		
-				<td>
-				    @{
-				        var editLinkName = Html.DisplayFor(model => item.AppName).ToString();
-				    }
-				    <a href="@Url.Action("Edit", new { id=item.AppID })" title="@editLinkName edit..."><span class="glyphicon glyphicon-pencil"></span> @editLinkName</a>
-				</td>
-				<td>
-					@Html.Truncate(item.Description, AppConfig.TruncateLength)
-                    <span class="hide">@item.Description</span>
-				</td>
-				<td>
-                    <label class="label label-info" title="@item.Platform.PlatformName->@item.Category.CategoryName->@item.PlatformVersion">@item.Platform.PlatformName->@item.Category.CategoryName->@item.PlatformVersion</label>
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.IsPublished)
-				</td>				
-				<td>
-					@Html.DisplayFor(modelItem => item.ReviewsCount)
-				</td>
-				<td>			
-                    <a href="@Url.Action("Edit", new { id=item.AppID })" title="@editLinkName edit..." class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-					<a href="@Url.Action("Details", new { id=item.AppID })" title="View App @editLinkName." class="btn btn-warning btn-xs"> View</a>
-					@*<a href="@Url.Action("Delete", new { id=item.AppID })" title="Delete @editLinkName" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>*@            
-				</td>
-			</tr>
-		}
-	</tbody>
+<table class="table table-hover bootstrap-table-do" data-show-columns="true" data-search="true" data-pagination="true">
+    <!--<caption>@viewName</caption>-->
+    <thead>
+    <tr>
+        <th data-field="AppName">
+            @Html.DisplayNameFor(model => model.AppName)
+        </th>
+        <th data-field="Description">
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th data-field="Platform">
+            Platform
+        </th>
+        <th data-field="IsPublished">
+            Published
+        </th>
+        <th data-field="ReviewsCount">
+            Reviews
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+
+            <td>
+                @{
+                    var editLinkName = Html.DisplayFor(model => item.AppName).ToString();
+                }
+                <a href="@Url.Action("Edit", new {id = item.AppID})" title="@editLinkName edit...">
+                    <span class="glyphicon glyphicon-pencil"></span> @editLinkName</a>
+            </td>
+            <td>
+                @Html.Truncate(item.Description, AppConfig.TruncateLength)
+                <span class="hide">@item.Description</span>
+            </td>
+            <td>
+                <label class="label label-info" title="@item.Platform.PlatformName->@item.Category.CategoryName->@item.PlatformVersion">@item.Platform.PlatformName->@item.Category.CategoryName->@item.PlatformVersion</label>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPublished)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewsCount)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new {id = item.AppID})" title="@editLinkName edit..." class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                <a href="@Url.Action("Details", new {id = item.AppID})" title="View App @editLinkName." class="btn btn-warning btn-xs"> View</a>
+                @*<a href="@Url.Action("Delete", new { id=item.AppID })" title="Delete @editLinkName" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>*@
+            </td>
+        </tr>
+    }
+    </tbody>
 
 </table>
 @section Scripts {

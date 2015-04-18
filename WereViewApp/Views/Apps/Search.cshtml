@@ -1,20 +1,20 @@
 ﻿@{
     //Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
 }
-@using WereViewApp.Models.ViewModels
+@using WereViewApp.Models.EntityModel
 @using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
-@model SearchViewModel
+@model WereViewApp.Models.ViewModels.SearchViewModel
 
 @{
-    var apps = (List<WereViewApp.Models.EntityModel.App>)ViewBag.Results;
+    var apps = (List<App>) ViewBag.Results;
     bool isFirst = true;
 }
 <div class="wrapper_inner">
-    @{Html.RenderAction("NavBar", "Partials");}
+    @{ Html.RenderAction("NavBar", "Partials"); }
 </div>
 
 <div class="mainContainerwrap">
-    <form role="form" action="@Url.Action("Search","Apps")" method="post">
+    <form role="form" action="@Url.Action("Search", "Apps")" method="post">
         <div class="container toppart">
             @if (ViewBag.isPostBack != null) {
                 <h1>
@@ -28,8 +28,7 @@
             @*<div class="searchboxWrap form-group">
                     <input type="text" class="searchbox form-control" value="Angry Birds" />
                     <input type="submit" value="Search" class="searchbutton btn btn-success" />
-                </div>*@
-            @Html.EditorFor(i => i.Url, "Search")
+                </div>*@@Html.EditorFor(i => i.Url, "Search")
             @Html.AntiForgeryToken()
         </div>
         <div class="container innerContainer inner">
@@ -40,10 +39,12 @@
                             foreach (var app in apps) {
                                 string url = app.GetAppUrl();
                                 var platform = app.GetPlatform();
-                                
+
                                 <div class="row appsitemBox">
                                     <div class="imgWrap col-md-2 col-sm-2">
-                                        <a href="@url"><img src="@app.GallerySearchIconLocation" class="img-responsive" alt="@app.AppName"></a>
+                                        <a href="@url">
+                                            <img src="@app.GallerySearchIconLocation" class="img-responsive" alt="@app.AppName">
+                                        </a>
                                     </div>
                                     <div class="textWrap col-md-10 col-sm-10">
                                         <div class="name">
@@ -71,11 +72,11 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                  
+
                                         <p>
-                                           @Html.Truncate(@app.Description , 100)
+                                            @Html.Truncate(@app.Description, 100)
                                         </p>
-                                       
+
                                     </div>
                                 </div>
                             }
@@ -109,8 +110,12 @@
                     </div>
                 </div>
                 <div class="rediobutton">
-                    <div class="rediobox"><input type="radio" class="radio" name="sorted_by"><label>Sorted by Relevancy</label></div>
-                    <div class="rediobox"><input type="radio" class="radio" name="sorted_by"><label>Sorted by Rating</label></div>
+                    <div class="rediobox">
+                        <input type="radio" class="radio" name="sorted_by"><label>Sorted by Relevancy</label>
+                    </div>
+                    <div class="rediobox">
+                        <input type="radio" class="radio" name="sorted_by"><label>Sorted by Rating</label>
+                    </div>
                 </div>
             </div>-->
 

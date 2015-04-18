@@ -20,7 +20,7 @@
                     Platform platform = @app.GetPlatform();
                     string platformSubtitle = platform.PlatformName + " mobile apps";
                     <a class="app-box" href="@url" title="@app.AppName">
-                        <img class="app-icon" itemprop="image" src="@app.GallerySuggestionIconLocation" alt="@app.AppName" />
+                        <img class="app-icon" itemprop="image" src="@app.GallerySuggestionIconLocation" alt="@app.AppName"/>
                         <div class="app-description-wrapper">
                             <div class="app-title-container">
                                 <div class="app-title-row">
@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="seo-rating seo-hide" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                                     <span itemprop="ratingValue">@app.AvgRating</span> stars based on
-                                    <meta itemprop="best" content="5" />
+                                    <meta itemprop="best" content="5"/>
                                     <span itemprop="reviewCount">@app.ReviewsCount</span> reviews
                                 </div>
                                 <input class="rating-5-front" value="@app.AvgRating" min="0" max="5" step="0.5" data-readonly="true" data-size="xs">

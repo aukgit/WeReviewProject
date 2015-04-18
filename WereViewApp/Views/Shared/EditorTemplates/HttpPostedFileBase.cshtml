@@ -1,4 +1,3 @@
-
 @model object
 
 @{
@@ -54,7 +53,8 @@
     <div class="controls custom-uploader-single-Or-multi">
         <label class="col-md-2 upload-label control-label form-label-@ViewData.ModelMetadata.PropertyName" for="@ViewData.ModelMetadata.PropertyName">
             @if (@ViewData.ModelMetadata.Description != null) {
-                <a data-toggle="tooltip" data-original-title="@ViewData.ModelMetadata.Description" title="@ViewData.ModelMetadata.Description" class="tooltip-show"><span class="glyphicon glyphicon-question-sign font-size-22 almost-white"></span></a>
+                <a data-toggle="tooltip" data-original-title="@ViewData.ModelMetadata.Description" title="@ViewData.ModelMetadata.Description" class="tooltip-show">
+                    <span class="glyphicon glyphicon-question-sign font-size-22 almost-white"></span></a>
             }
         </label>
         <div data-id="@ViewBag.data_id_val" class="col-md-10 form-input-@ViewData.ModelMetadata.PropertyName">
@@ -85,8 +85,10 @@
                         <span data-id="@ViewBag.data_id_val" data-uploader-percent-value="" class="bold green"></span>
                     </a>
                 </div>
-                <a data-toggle="tooltip" data-id="@ViewBag.data_id_val" data-success-icon="true" data-original-title="" title="" class="tooltip-show"><span class="glyphicon glyphicon-ok green"></span> </a>
-                <a data-toggle="tooltip" data-id="@ViewBag.data_id_val" data-failed-icon="true" data-original-title="" title="" class="tooltip-show"><span class="glyphicon glyphicon-remove  red"></span> </a>
+                <a data-toggle="tooltip" data-id="@ViewBag.data_id_val" data-success-icon="true" data-original-title="" title="" class="tooltip-show">
+                    <span class="glyphicon glyphicon-ok green"></span> </a>
+                <a data-toggle="tooltip" data-id="@ViewBag.data_id_val" data-failed-icon="true" data-original-title="" title="" class="tooltip-show">
+                    <span class="glyphicon glyphicon-remove  red"></span> </a>
 
                 @if (ViewBag.uploadedFiles > 0) {
                     <label data-id="@ViewBag.data_id_val" data-label-file-uploaded="true" class="label label-success file-uploaded-notify-label-@ViewBag.data_id_val" data-max-upload-count="@ViewBag.maxUpload" data-uploaded-count="@ViewBag.uploadedFiles" data-upload-pre-exist-count="@ViewBag.uploadPreexist">
@@ -96,7 +98,7 @@
                     <label data-id="@ViewBag.data_id_val" data-label-file-uploaded="true" class="label label-success file-uploaded-notify-label-@ViewBag.data_id_val" data-max-upload-count="@ViewBag.maxUpload" data-uploaded-count="@ViewBag.uploadedFiles" data-upload-pre-exist-count="@ViewBag.uploadPreexist"></label>
                 }
             </div>
-            @Html.ValidationMessageFor(m => m, null, new { @class = "rounded-3 label label-danger fixed-width-294 validation-box" })
+            @Html.ValidationMessageFor(m => m, null, new {@class = "rounded-3 label label-danger fixed-width-294 validation-box"})
         </div>
     </div>
 </div>

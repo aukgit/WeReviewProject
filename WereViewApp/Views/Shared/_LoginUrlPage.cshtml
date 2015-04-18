@@ -1,15 +1,15 @@
 ﻿<div class="transaction-status">
-    <hr />
+    <hr/>
     <h1 class="h3 red">Authentication Required</h1>
     <div class="login-url-description">
-        Sorry you haven't @Html.ActionLink("log in", "Login", "Account", routeValues: new { Area = "" }, htmlAttributes: new { id = "loginLink" }). This task required user authentication.
-        Please login @Html.ActionLink("here", "Login", "Account", routeValues: new { Area = "" }, htmlAttributes: new { id = "loginLink" }) .
+        Sorry you haven't @Html.ActionLink("log in", "Login", "Account", new {Area = ""}, new {id = "loginLink"}). This task required user authentication.
+        Please login @Html.ActionLink("here", "Login", "Account", new {Area = ""}, new {id = "loginLink"}) .
     </div>
 </div>
 
 @section scripts {
     <script type="text/javascript" defer="defer">
-        $(function () {
+        $(function() {
             transactionStatusHide();
         });
     </script>
