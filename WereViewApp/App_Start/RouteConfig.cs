@@ -66,6 +66,18 @@ namespace WereViewApp {
 
             #region App Routes
             routes.MapRoute(
+              name: "platform_specific",
+              url: "Apps/Mobile/Platforms/{platformName}/{page}",
+              defaults: new { controller = "Platforms", action = "Specific", page = UrlParameter.Optional },
+              namespaces: new string[] { wereviewappControllers }
+            );
+            routes.MapRoute(
+               name: "platform",
+               url: "Apps/Mobile/Platforms",
+               defaults: new { controller = "Platforms", action = "Index" },
+               namespaces: new string[] { wereviewappControllers }
+            );
+            routes.MapRoute(
               name: "category_specific",
               url: "Apps/Category/{categoryName}/{page}",
               defaults: new { controller = "Category", action = "Specific", page = UrlParameter.Optional },

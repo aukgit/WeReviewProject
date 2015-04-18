@@ -49,11 +49,11 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="15_Portfolio_8.html">Platforms</a>
+                                <a title="All mobile platforms : Android, Apple, Windows, FireFox OS">Platforms <em class="seo-hide">Android, Apple, Windows, FireFox OS</em></a>
                                 <!--======= DROP MENU =========-->
                                 <ul class="dropdown animated fadeIn">
                                     <li>
-                                        <a href="08_Portfolio_1.html">
+                                        <a href="@appUrl/Apps/Mobile/Platforms">
                                             <h1>
                                                 <strong>All Platform</strong>
                                             </h1>
@@ -61,7 +61,7 @@
                                     </li>
                                     @foreach (Platform platform in platforms) {
                                         <li title="Android Apps">
-                                            <a href="@appUrl/@platform.PlatformName">
+                                            <a href="@appUrl/Apps/Mobile/Platforms/@platform.PlatformName">
                                                 <h1 title="@platform.PlatformName Apps">
                                                     <i title="@platform.PlatformName Apps" class="fa @platform.Icon"></i>
                                                     <strong title="@platform.PlatformName Apps">@platform.PlatformName Apps</strong>

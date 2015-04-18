@@ -1082,6 +1082,8 @@
     <Content Include="Views\Shared\_403.cshtml" />
     <Content Include="Views\Shared\_451.cshtml" />
     <Content Include="Views\Shared\_415.cshtml" />
+    <Content Include="Views\Platforms\Index.cshtml" />
+    <Content Include="Views\Platforms\Specific.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
   </ItemGroup>
@@ -1098,7 +1100,6 @@
     <Folder Include="Views\Basic\" />
     <Folder Include="Views\Report\" />
     <Folder Include="Views\Search\" />
-    <Folder Include="Views\ViewTest\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

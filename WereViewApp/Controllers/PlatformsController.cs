@@ -29,7 +29,7 @@ namespace WereViewApp.Controllers {
                     pageInfo,
                     CacheNames.PlatformPageSpecificPagesCount + "-" + platformName);
                 if (platform != null) {
-                    var eachUrl = "/Platform/" + platform.PlatformName + "/@page";
+                    var eachUrl = "/Apps/Mobile/Platforms/" + platform.PlatformName + "/@page";
                     ViewBag.paginationHtml = Pagination.GetList(pageInfo, eachUrl, "",
                         maxNumbersOfPagesShow: MaxNumbersOfPagesShow);
                     return View(platform);
