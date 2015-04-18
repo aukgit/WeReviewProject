@@ -1,26 +1,30 @@
 ﻿@using WereViewApp.Models.EntityModel
 @using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
-@model List<Category>
+@model List<Platform>
 @{
-    ViewBag.Title = "Mobile App Categories / Category";
+    ViewBag.Title = "Mobile App Platforms / Platform : Android, Apple, Windows, FireFox Os";
+    string allPlatformsString = "Android, Apple, Windows, FireFox OS";
     string currentPageStaticUrl = AppVar.Url + Html.GetCurrentURLString();
+    string titlesSubtitle = "Mobile Platform : " + allPlatformsString;
+    
 }
 <div class="app-details-page category-page search-page category-listing-page">
 
     <div class="row">
-        <div class="col-md-12 app-detail app-title-wrapper" title="Mobile Apps Categories">
-            <div class="app-title-row float-left">
-                <a href="@currentPageStaticUrl" class="app-title">
-                    <h1 title="Mobile Apps Categories">
-                        <strong title="Mobile Apps Categories">
-                            <em title="Mobile Apps Categories">Mobile Apps</em>
+        <div class="col-md-12 app-detail app-title-wrapper" title="@titlesSubtitle">
+            <div class="app-title-row float-left" title="@titlesSubtitle">
+                <a href="@currentPageStaticUrl" class="app-title" title="@titlesSubtitle">
+                    <h1 title="@titlesSubtitle">
+                        <strong title="@titlesSubtitle">
+                            <em title="@titlesSubtitle">Mobile Apps</em>
+                            <em class="seo-hide">@titlesSubtitle</em>
                         </strong>
                     </h1>
                 </a>
-                <a class="app-category" href="@currentPageStaticUrl" title="Mobile Apps Categories">
-                    <h2 class="category" title="Mobile Apps Categories">
-                        <strong class="search-quote" title="Mobile App Categories">
-                            Categories
+                <a class="app-category" href="@currentPageStaticUrl" title="@titlesSubtitle">
+                    <h2 class="category" title="@titlesSubtitle">
+                        <strong class="search-quote" title="@titlesSubtitle">
+                            Platforms<em class="seo-hide">@titlesSubtitle</em>
                         </strong>
                     </h2>
                 </a>

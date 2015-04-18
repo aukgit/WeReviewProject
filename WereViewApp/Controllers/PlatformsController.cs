@@ -40,7 +40,7 @@ namespace WereViewApp.Controllers {
                 }
             }
 
-            ViewBag.Reason = "Category not found.";
+            ViewBag.Reason = "Platform not found. Please try /Android or /Apple";
             return View("_404");
         }
     }
