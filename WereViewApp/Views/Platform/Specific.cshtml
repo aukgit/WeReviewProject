@@ -1,46 +1,46 @@
 ﻿@using WereViewApp.Models.EntityModel
 @using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
-@model Category
+@model Platform
 @{
-    ViewBag.Title = "Mobile App Category : " + Model.CategoryName;
-    string currentPageStaticUrl = AppVar.Url + "/Apps" + Html.GetCurrentURLString();
+    ViewBag.Title = Model.PlatformName + " Mobile Apps";
+    string currentPageStaticUrl = AppVar.Url + Html.GetCurrentURLString();
+    string titlesSubtitle = ViewBag.Title;
 }
-<div class="app-details-page category-page search-page category-listing-page">
-
+<div class="app-details-page category-page search-page category-listing-page" >
     <div class="row">
-        <div class="col-md-12 app-detail app-title-wrapper" title="Mobile Apps Categories">
-            <div class="app-title-row float-left">
-                <a href="@currentPageStaticUrl" class="app-title">
-                    <h1 title="Mobile Apps Categories">
-                        <strong title="Mobile Apps Categories">
-                            <em title="Mobile Apps Categories">Mobile Apps</em>
+        <div class="col-md-12 app-detail app-title-wrapper" title="@titlesSubtitle">
+            <div class="app-title-row float-left" title="@titlesSubtitle">
+                <a href="@currentPageStaticUrl" class="app-title" title="@titlesSubtitle">
+                    <h1 title="@titlesSubtitle">
+                        <strong title="@titlesSubtitle">
+                            <em title="@titlesSubtitle">@Model.PlatformName Mobile Apps</em>
+                            <em class="seo-hide">@titlesSubtitle</em>
                         </strong>
                     </h1>
                 </a>
-                <a class="app-category" href="#">
-                    <h2 class="category" title="Mobile Apps Categories">
-                        <strong class="search-quote" title="Mobile App Categories">
-                            Categories
+                <a class="app-category" href="@currentPageStaticUrl" title="@titlesSubtitle">
+                    <h2 class="category" title="@titlesSubtitle">
+                        <strong class="search-quote" title="@titlesSubtitle">
+                            @Model.PlatformName <em class="seo-hide">@Model.PlatformName</em>
                         </strong>
                     </h2>
                 </a>
             </div>
-
         </div>
     </div>
-    <div class="category-listing-displays-with-apps-container bottom-gap">
+    <div class="category-listing-displays-with-apps-container bottom-gap" >
         @{ var appNonExistClass = Model.Apps == null || Model.Apps.Count == 0 ? "seo-hide" : ""; }
-        <div class="row no-margin @appNonExistClass">
-            <div class="col-md-12 app-detail app-title-wrapper category-title" title="Mobile App Categories">
-                <div class="app-title-row float-left">
-                    <a href="@currentPageStaticUrl/@Model.CategoryName" title="@Model.CategoryName category mobile apps" class="app-title">
-                        <h1 title="@Model.CategoryName">
-                            <strong title="@Model.CategoryName category mobile apps">
-                                <em title="@Model.CategoryName category mobile apps">@Model.CategoryName</em>
+        <div class="row no-margin @appNonExistClass" >
+            <div class="col-md-12 app-detail app-title-wrapper category-title" title="Mobile App Categories" >
+                <div class="app-title-row float-left" >
+                    <a href="@currentPageStaticUrl/@Model.PlatformName" title="@Model.PlatformName category mobile apps" class="app-title" >
+                        <h1 title="@Model.PlatformName" >
+                            <strong title="@Model.PlatformName category mobile apps" >
+                                <em title="@Model.PlatformName category mobile apps" >@Model.PlatformName</em>
                             </strong>
                         </h1>
-                        <h2 class="app-category" title="(Latest Apps)">
-                            <strong class="search-quote" title="@Model.CategoryName Categories latest apps">
+                        <h2 class="app-category" title="(Latest Apps)" >
+                            <strong class="search-quote" title="@Model.PlatformName Categories latest apps" >
                                 (Latest Apps)
                             </strong>
                         </h2>
@@ -48,20 +48,19 @@
                 </div>
             </div>
         </div>
-        <div class="row no-margin @appNonExistClass">
-            <div class="archive-app-collection-wrapper">
-                <ul class="seo-optimize regular-color archive-app-collection-list category-listing-page-apps-list pagination-required">
+        <div class="row no-margin @appNonExistClass" >
+            <div class="archive-app-collection-wrapper" >
+                <ul class="seo-optimize regular-color archive-app-collection-list category-listing-page-apps-list pagination-required" >
                     @if (appNonExistClass == "") {
                         foreach (var app in Model.Apps) {
-                            Platform platform = app.GetPlatform();
-                            <li class="slim-app-view" data-app-type="@platform.Icon">
-                                <a class="app-url" href="@app.GetAppUrl()" title="App Review : @app.AppName">
-                                    <div class="app-icon">
-                                        <img src="@app.GallerySearchIconLocation" alt="app"/>
+                            <li class="slim-app-view" data-app-type="@Model.Icon" >
+                                <a class="app-url" href="@app.GetAppUrl()" title="App Review : @app.AppName" >
+                                    <div class="app-icon" >
+                                        <img src="@app.GallerySearchIconLocation" alt="app" />
                                     </div>
-                                    <div class="app-content">
-                                        <h1 class="app-title" title="App Review : @app.AppName">
-                                            <i class="fa @platform.Icon"></i>
+                                    <div class="app-content" >
+                                        <h1 class="app-title" title="App Review : @app.AppName" >
+                                            <i class="fa @Model.Icon" ></i>
                                             @app.AppName
                                             <span class="paragraph-end"></span>
                                         </h1>
@@ -79,58 +78,55 @@
                         }
                     }
                 </ul>
-
             </div>
         </div>
-
-        <div class="clear"></div>
-        <div class="pagination-wrapper text-center">
-            <ul class="pagination">
+        <div class="clear" ></div>
+        <div class="pagination-wrapper text-center" >
+            <ul class="pagination" >
                 @ViewBag.paginationHtml
             </ul>
         </div>
     </div>
 </div>
-
-<div class="seo-hide">
-    <a href="@currentPageStaticUrl" class="seo-app-name" title="WeReviewApp.com : App Reviews website.">
-        <h1 title="WeReviewApp.com : App Reviews website.">
-            <strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">We</em>
-            </strong><strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">Review</em>
-            </strong><strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">App</em>
-            </strong><strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">.com</em>
+<div class="seo-hide" >
+    <a href="@currentPageStaticUrl" class="seo-app-name" title="WeReviewApp.com : App Reviews website." >
+        <h1 title="WeReviewApp.com : App Reviews website." >
+            <strong title="WeReviewApp.com : App Reviews website." >
+                <em title="WeReviewApp.com : App Reviews website." >We</em>
+            </strong><strong title="WeReviewApp.com : App Reviews website." >
+                <em title="WeReviewApp.com : App Reviews website." >Review</em>
+            </strong><strong title="WeReviewApp.com : App Reviews website." >
+                <em title="WeReviewApp.com : App Reviews website." >App</em>
+            </strong><strong title="WeReviewApp.com : App Reviews website." >
+                <em title="WeReviewApp.com : App Reviews website." >.com</em>
             </strong>
         </h1>
     </a>
     is great
-    <a href="@currentPageStaticUrl" class="seo-app-name" title="WeReviewApp.com : App Reviews website.">
-        <h1 title="WeReviewApp.com : App Reviews website.">
-            <strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">web</em>
-            </strong><strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">site</em>
+    <a href="@currentPageStaticUrl" class="seo-app-name" title="WeReviewApp.com : App Reviews website." >
+        <h1 title="WeReviewApp.com : App Reviews website." >
+            <strong title="WeReviewApp.com : App Reviews website." >
+                <em title="WeReviewApp.com : App Reviews website." >web</em>
+            </strong><strong title="WeReviewApp.com : App Reviews website." >
+                <em title="WeReviewApp.com : App Reviews website." >site</em>
             </strong>
             @currentPageStaticUrl
         </h1>
     </a> for both developers and users who use
-    <a href="@currentPageStaticUrl" class="seo-app-name" title="mobile Apps users">
-        <h1 title="mobile Apps users">
-            <strong title="mobile Apps users">
-                <em title="mobile Apps users">mobile</em>
+    <a href="@currentPageStaticUrl" class="seo-app-name" title="mobile Apps users" >
+        <h1 title="mobile Apps users" >
+            <strong title="mobile Apps users" >
+                <em title="mobile Apps users" >mobile</em>
             </strong>
-            <strong title="mobile Apps users">
-                <em title="mobile Apps users">apps</em>
+            <strong title="mobile Apps users" >
+                <em title="mobile Apps users" >apps</em>
             </strong>
-            <strong title="mobile Apps users">
-                <em title="mobile Apps users">users</em>
+            <strong title="mobile Apps users" >
+                <em title="mobile Apps users" >users</em>
             </strong>
         </h1>
     </a>
-    Collection of <a href="@Html.GetCurrentURLString()" title="">
+    Collection of <a href="@Html.GetCurrentURLString()" title="" >
         <h1>
             <strong>
                 <em>reviews : @currentPageStaticUrl</em>

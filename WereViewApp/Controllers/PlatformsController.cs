@@ -29,10 +29,6 @@ namespace WereViewApp.Controllers {
                     pageInfo,
                     CacheNames.PlatformPageSpecificPagesCount + "-" + platformName);
                 if (platform != null) {
-                    ViewBag.Title = "Apps Review platform : " + platform.PlatformName;
-                    ViewBag.Meta = "Mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
-                    ViewBag.Keywords = ViewBag.Meta;
-
                     var eachUrl = "/Platform/" + platform.PlatformName + "/@page";
                     ViewBag.paginationHtml = Pagination.GetList(pageInfo, eachUrl, "",
                         maxNumbersOfPagesShow: MaxNumbersOfPagesShow);
