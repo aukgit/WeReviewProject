@@ -3,7 +3,7 @@
 @model List<WereViewApp.Models.EntityModel.Category>
 @{
     ViewBag.Title = "Mobile App Categories / Category";
-    string currentPageStaticUrl = AppVar.Url +"/Apps"+ Html.GetCurrentURLString();
+    string currentPageStaticUrl = AppVar.Url + Html.GetCurrentURLString();
 }
 <div class="app-details-page category-page search-page category-listing-page">
 
@@ -72,7 +72,7 @@
                                             </h3>
                                             <span class="rating">
                                                 <i class="fa fa-star"></i>
-                                                @app.AvgRating/5
+                                                @app.AvgRating/5 from @app.ReviewsCount users
                                             </span>
                                         </div>
                                     </a>

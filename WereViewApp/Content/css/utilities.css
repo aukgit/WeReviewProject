@@ -516,6 +516,7 @@ div.contactus {
 .regular-show-more-btn .more-btn {
   color: white;
   background-color: #ff7200;
+  padding: 10px 24px;
 }
 .regular-show-more-btn .more-btn:hover {
   background-color: #19c234;

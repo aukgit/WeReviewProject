@@ -14,25 +14,25 @@
     <tbody>
         <tr>
             <td class="bold">Name</td>
-            <td class="red">:</td>
-            <td> <a title="Apps of @Model.DisplayName" href="@urlToFirstpage">@Model.DisplayName</a></td>
+            <td class="red indent-1">:</td>
+            <td class="indent-1"> <a title="Apps of @Model.DisplayName" href="@urlToFirstpage">@Model.DisplayName</a></td>
         </tr>
         <tr>
             <td class="bold">
                 User name
             </td>
-            <td class="red">:</td>
-            <td> @username</td>
+            <td class="red indent-1">:</td>
+            <td class="indent-1"> @username</td>
         </tr>
         <tr>
             <td class="bold">Email</td>
-            <td class="red">:</td>
-            <td> @Model.Email.Replace("@", "{at}")</td>
+            <td class="red indent-1">:</td>
+            <td class="indent-1"> @Model.Email.Replace("@", "{at}")</td>
         </tr>
         <tr>
             <td class="bold">Member since</td>
-            <td class="red">:</td>
-            <td> @Html.DisplayDate("dd MMMM, yyyy", @Model.CreatedDate)</td>
+            <td class="red indent-1">:</td>
+            <td class="indent-1"> @Html.DisplayDate("dd MMMM, yyyy", @Model.CreatedDate)</td>
         </tr>
     </tbody>
 </table>
@@ -67,7 +67,7 @@
                             </h3>
                             <span class="rating">
                                 <i class="fa fa-star"></i>
-                                @app.AvgRating/5
+                                @app.AvgRating/5 from @app.ReviewsCount users
                             </span>
                         </div>
                     </a>
