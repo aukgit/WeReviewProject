@@ -22,13 +22,6 @@
 .website-head-title strong {
   font-weight: normal;
 }
-.search-bar input {
-  max-height: 34.4px;
-  max-height: 3.4rem;
-}
-.search-bar .input-group-btn .btn {
-  margin-left: 0;
-}
 @media (min-width: 768px) and (max-width: 990px) {
   .website-head-title {
     margin: 0;
