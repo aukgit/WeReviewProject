@@ -16,7 +16,7 @@ namespace WereViewApp.Controllers {
         }
         #region Search
         [HttpGet]
-        public ActionResult Index(string url) {
+        public ActionResult Index() {
             return View();
         }
 

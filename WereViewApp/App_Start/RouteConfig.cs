@@ -65,13 +65,19 @@ namespace WereViewApp {
 
             #region Errors
             routes.MapRoute(
-              name: "search",
-              url: "Search/{url}",
-              defaults: new {
-                  controller = "Search", action = "Index"
-              },
-              namespaces: new string[] { wereviewappControllers }
+               name: "search_url",
+               url: "Search/{url}",
+               defaults: new {controller = "Search", action = "Index", url = UrlParameter.Optional},
+               namespaces: new string[] { wereviewappControllers }
             );
+            
+            routes.MapRoute(
+               name: "search",
+               url: "Search",
+               defaults: new {controller = "Search", action = "Index"},
+               namespaces: new string[] { wereviewappControllers }
+            );
+
             #endregion
 
             #region App Routes
