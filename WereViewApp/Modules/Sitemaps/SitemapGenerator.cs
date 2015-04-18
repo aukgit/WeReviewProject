@@ -21,7 +21,7 @@ namespace WereViewApp.Modules.Sitemaps
                     new XElement(Xmlns + "urlset",
                       new XAttribute("xmlns", Xmlns),
                       new XAttribute(XNamespace.Xmlns + "xsi", Xsi),
-                      new XAttribute(Xsi + "schemaLocation", "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"),
+                      new XAttribute(Xsi + "schemaLocation", "http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"),
                       from item in items
                         select CreateItemElement(item)
                       )
@@ -32,7 +32,7 @@ namespace WereViewApp.Modules.Sitemaps
 
         private XElement CreateItemElement(ISitemapItem item)
         {           
-            var itemElement = new XElement(Xmlns + "url", new XElement(Xmlns + "loc", item.Url.ToLowerInvariant()));
+            var itemElement = new XElement(Xmlns + "url", new XElement(Xmlns + "loc", item.Url));
 
             // all other elements are optional
 
@@ -40,7 +40,7 @@ namespace WereViewApp.Modules.Sitemaps
                 itemElement.Add(new XElement(Xmlns + "lastmod", item.LastModified.Value.ToString("yyyy-MM-dd")));
 
             if (item.ChangeFrequency.HasValue)
-                itemElement.Add(new XElement(Xmlns + "changefreq", item.ChangeFrequency.Value.ToString().ToLower()));
+                itemElement.Add(new XElement(Xmlns + "changefreq", item.ChangeFrequency.Value));
 
             if (item.Priority.HasValue)
                 itemElement.Add(new XElement(Xmlns + "priority", item.Priority.Value.ToString("F1", CultureInfo.InvariantCulture)));
