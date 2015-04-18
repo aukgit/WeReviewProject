@@ -23,7 +23,7 @@ namespace WereViewApp.Controllers {
                 new SitemapItem(appUrl+"/Apps",modifiedDate, SitemapChangeFrequency.Daily),
                 new SitemapItem(appUrl+"/App/Post",modifiedDate, SitemapChangeFrequency.Daily),
                 new SitemapItem(appUrl+"/App/Drafts",modifiedDate, SitemapChangeFrequency.Daily),
-                new SitemapItem(appUrl+"/Category",modifiedDate, SitemapChangeFrequency.Daily),
+                new SitemapItem(appUrl+"/Apps/Category",modifiedDate, SitemapChangeFrequency.Daily),
                 new SitemapItem(appUrl+"/Platforms",modifiedDate, SitemapChangeFrequency.Daily),
                 new SitemapItem(appUrl+"/AboutUs",modifiedDate, SitemapChangeFrequency.Daily),
                 new SitemapItem(appUrl+"/Report",modifiedDate, SitemapChangeFrequency.Daily),
@@ -41,6 +41,9 @@ namespace WereViewApp.Controllers {
 
                 var latestApps = algorithms.GetLatestApps(db, 50);
                 sitemapItems.AddRange(latestApps.Select(app => new SitemapItem(app.GetAppUrl(), modifiedDate)));
+
+                var categories = WereViewStatics.AppCategoriesCache;
+                sitemapItems.AddRange(categories.Select(category => new SitemapItem(appUrl + "/Apps/Category/" + category.CategoryName, modifiedDate)));
             }
 
             return new SitemapResult(sitemapItems);
