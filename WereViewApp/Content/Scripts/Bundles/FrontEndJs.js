@@ -470,7 +470,8 @@ if(typeof jQuery=="undefined")throw new Error("Bootstrap's JavaScript requires j
         clearButtonTitle: 'Clear',
         clearButtonBaseClass: 'clear-rating',
         clearButtonActiveClass: 'clear-rating-active',
-        clearCaption: 'Not Rated',
+        //clearCaption: 'Not Rated',
+        clearCaption: '0',
         clearCaptionClass: 'label label-default',
         clearValue: 0,
         captionElement: null,
@@ -4157,7 +4158,6 @@ $(function () {
         },
         starCaptionClasses: {
             0: 'label label-danger',
-
             0.5: 'label label-danger',
             1: 'label label-danger',
             1.5: 'label label-warning',
