@@ -1,4 +1,4 @@
-﻿@using WereViewApp.Models
+﻿@using WereViewApp.Models.ViewModels
 @model WereViewApp.Models.ViewModels.LoginViewModel
 
 @{
@@ -9,15 +9,15 @@
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+            @using (Html.BeginForm("Login", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", role = "form"})) {
                 @Html.AntiForgeryToken()
                 <h4>Use a local account to log in. If you don't have any account please @Html.ActionLink("sign up", "Register").</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <hr/>
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
 
-                @Html.EditorFor(m => m.Email, new { @class = "form-control" })
+                @Html.EditorFor(m => m.Email, new {@class = "form-control"})
 
-                @Html.EditorFor(m => m.Password, new { @class = "form-control" })
+                @Html.EditorFor(m => m.Password, new {@class = "form-control"})
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <div class="checkbox col-md-4">
@@ -25,7 +25,7 @@
                             @Html.LabelFor(m => m.RememberMe)
                         </div>
                         <div class="col-md-offset-1 col-md-7 col-lg-offset-1 col-lg-7 col-sm-offset-1 col-sm-7">
-                            <input type="submit" value="Log in" class="btn btn-primary" />
+                            <input type="submit" value="Log in" class="btn btn-primary"/>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
     </div>
     <div class="col-md-4">
         <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new WereViewApp.Models.ViewModels.ExternalLoginListViewModel { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel {Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl})
         </section>
     </div>
 </div>

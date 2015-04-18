@@ -2,7 +2,7 @@
 <div id="write-review-form">
     <br><br>
     <h3>Write a Review</h3>
-    @using (Html.BeginForm("Write", "Review", FormMethod.Post, new { @class = "form-horizontal Create-" + @ViewBag.Title, role = "form" })) {
+    @using (Html.BeginForm("Write", "Review", FormMethod.Post, new {@class = "form-horizontal Create-" + @ViewBag.Title, role = "form"})) {
         @Html.EditorFor(model => model.Title)
         @Html.EditorFor(model => model.Pros)
         @Html.EditorFor(model => model.Cons)

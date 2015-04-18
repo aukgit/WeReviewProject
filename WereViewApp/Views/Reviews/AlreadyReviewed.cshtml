@@ -4,12 +4,11 @@
     ViewBag.Title = "Write Review";
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    var token = (MvcHtmlString)@Html.AntiForgeryToken();
-    string controller = (string)ViewBag.controller;
-    string viewName = "Write";
+    var token = @Html.AntiForgeryToken();
+    var controller = (string) ViewBag.controller;
+    var viewName = "Write";
     Layout = null;
 }
 
 
-
-<hr />
+<hr/>

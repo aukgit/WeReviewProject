@@ -1,5 +1,4 @@
-﻿@using WereViewApp.Models.ViewModels
-@model IEnumerable<UploadedGalleryImageEditViewModel>
+﻿@model IEnumerable<UploadedGalleryImageEditViewModel>
 @{
     Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,14 +7,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-btn="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-btn="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title h3">Edit Gallery Images</h4>
             </div>
             <div class="modal-body">
                 @foreach (var item in Model) {
                     <div class="row" data-id="0" data-sequence="@item.Sequence">
                         <div class="col-md-2">
-                            <img data-id="0" data-sequence="@item.Sequence" class="dev-upload-plugin-image-@item.UploadGuid-@item.Sequence image-size-fixed-for-model" src="@item.ImageURL" alt="@item.Tile" />
+                            <img data-id="0" data-sequence="@item.Sequence" class="dev-upload-plugin-image-@item.UploadGuid-@item.Sequence image-size-fixed-for-model" src="@item.ImageURL" alt="@item.Tile"/>
                         </div>
                         <div class="col-md-10">
                             @*@Html.EditorFor(n => item.Tile, "String-NoLabel")
