@@ -3,7 +3,7 @@
 @model Category
 @{
     ViewBag.Title = "Mobile App Category : " + Model.CategoryName;
-    var currentPageStaticUrl = AppVar.Url + "/Apps" + Html.GetCurrentURLString();
+    string currentPageStaticUrl = AppVar.Url + "/Apps" + Html.GetCurrentURLString();
 }
 <div class="app-details-page category-page search-page category-listing-page">
 
