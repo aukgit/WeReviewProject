@@ -1,10 +1,44 @@
 ﻿#region using block
 
 using System.Web.Mvc;
+using WereViewApp.Models.ViewModels;
+using WereViewApp.WereViewAppCommon;
+using WereViewApp.WereViewAppCommon.Structs;
 
 #endregion
 
 namespace WereViewApp.Controllers {
-    public class SearchController : Controller {
+    public class SearchController : AdvanceController {
+        private readonly Algorithms _algorithms = new Algorithms();
+
+        protected SearchController() : base(true) {
+            
+        }
+        #region Search
+
+        public ActionResult Search() {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [OutputCache(CacheProfile = "Long", VaryByParam = "Url")]
+        public ActionResult Search(SearchViewModel search, string url) {
+            ViewBag.isPostBack = true;
+            if (!string.IsNullOrWhiteSpace(url)) {
+                var urlGet = _algorithms.GenerateURLValid(url);
+                var displayList = urlGet.Split('-');
+                var displayStr = string.Join(" ", displayList);
+                var results = _algorithms.GetSearchResults(url, null, null, null,
+                    CommonVars.SEARCH_RESULTS_MAX_RESULT_RETURN, db);
+                search.DisplaySearchText = displayStr;
+                ViewBag.Results = results;
+                return View(search);
+            }
+            ViewBag.Results = null;
+            return View();
+        }
+
+        #endregion
     }
 }

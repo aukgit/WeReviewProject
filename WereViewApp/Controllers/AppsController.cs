@@ -106,31 +106,5 @@ namespace WereViewApp.Controllers {
             return View("ListOfApps", platformApps);
         }
 
-        #region Search
-
-        public ActionResult Search() {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [OutputCache(CacheProfile = "Long", VaryByParam = "Url")]
-        public ActionResult Search(SearchViewModel search, string url) {
-            ViewBag.isPostBack = true;
-            if (!string.IsNullOrWhiteSpace(url)) {
-                var urlGet = _algorithms.GenerateURLValid(url);
-                var displayList = urlGet.Split('-');
-                var displayStr = string.Join(" ", displayList);
-                var results = _algorithms.GetSearchResults(url, null, null, null,
-                    CommonVars.SEARCH_RESULTS_MAX_RESULT_RETURN, db);
-                search.DisplaySearchText = displayStr;
-                ViewBag.Results = results;
-                return View(search);
-            }
-            ViewBag.Results = null;
-            return View();
-        }
-
-        #endregion
     }
 }

@@ -17,17 +17,17 @@ namespace WereViewApp.Controllers {
         public AdvanceController() {
         }
 
-        public AdvanceController(bool applicationDbContextRequried) {
-            if (applicationDbContextRequried) {
+        public AdvanceController(bool dbContextRequried) {
+            if (dbContextRequried) {
                 db = new WereViewAppEntities();
             }
         }
 
-        public AdvanceController(bool applicationDbContextRequried, bool errorCollectorRequried) {
+        public AdvanceController(bool dbContextRequried, bool errorCollectorRequried) {
             if (errorCollectorRequried) {
                 ErrorCollector = new ErrorCollector();
             }
-            if (applicationDbContextRequried) {
+            if (dbContextRequried) {
                 db = new WereViewAppEntities();
             }
         }

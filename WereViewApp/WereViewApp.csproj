@@ -1053,7 +1053,6 @@
     <Content Include="Views\Partials\TopAppsList.cshtml" />
     <Content Include="Views\Partials\LatestAppsList.cshtml" />
     <Content Include="Views\Partials\SearchForm.cshtml" />
-    <Content Include="Views\Partials\Menu.cshtml" />
     <Content Include="Views\Partials\NavBar.cshtml" />
     <Content Include="Views\Partials\ReviewsDisplay.cshtml" />
     <Content Include="Views\Partials\FeaturedApps.cshtml" />
