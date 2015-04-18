@@ -33,7 +33,7 @@ namespace WereViewApp.Controllers {
                     ViewBag.Meta = "Mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
                     ViewBag.Keywords = ViewBag.Meta;
 
-                    var eachUrl = "/Platform/Category/" + platform.CategoryName + "/@page";
+                    var eachUrl = "/Platform/" + platform.PlatformName + "/@page";
                     ViewBag.paginationHtml = Pagination.GetList(pageInfo, eachUrl, "",
                         maxNumbersOfPagesShow: MaxNumbersOfPagesShow);
                     return View(platform);
