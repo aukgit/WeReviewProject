@@ -1,7 +1,11 @@
-﻿using System.Linq;
+﻿#region using block
+
+using System.Linq;
 using System.Web.Mvc;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.WereViewAppCommon;
+
+#endregion
 
 namespace WereViewApp.Controllers {
     public class PartialsController : AdvanceController {

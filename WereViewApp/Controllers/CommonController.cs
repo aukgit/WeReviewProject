@@ -1,7 +1,11 @@
-﻿using System.Linq;
+﻿#region using block
+
+using System.Linq;
 using System.Web.Mvc;
 using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.Session;
+
+#endregion
 
 namespace WereViewApp.Controllers {
     //[CompressFilter]

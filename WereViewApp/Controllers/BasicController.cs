@@ -1,26 +1,30 @@
-﻿using System.Web.Mvc;
+﻿#region using block
+
+using System.Web.Mvc;
 using WereViewApp.Models.Context;
 using WereViewApp.Modules.UserError;
+
+#endregion
 
 namespace WereViewApp.Controllers {
     //[CompressFilter(Order = 1)]
 
     public abstract class BasicController : Controller {
-        internal ErrorCollector _errorCollector;
+        internal ErrorCollector ErrorCollector;
         internal readonly ApplicationDbContext db;
 
-        public BasicController() {
+        protected BasicController() {
         }
 
-        public BasicController(bool applicationDbContextRequried) {
+        protected BasicController(bool applicationDbContextRequried) {
             if (applicationDbContextRequried) {
                 db = new ApplicationDbContext();
             }
         }
 
-        public BasicController(bool applicationDbContextRequried, bool errorCollectorRequried) {
+        protected BasicController(bool applicationDbContextRequried, bool errorCollectorRequried) {
             if (errorCollectorRequried) {
-                _errorCollector = new ErrorCollector();
+                ErrorCollector = new ErrorCollector();
             }
             if (applicationDbContextRequried) {
                 db = new ApplicationDbContext();
@@ -31,8 +35,8 @@ namespace WereViewApp.Controllers {
             if (db != null) {
                 db.Dispose();
             }
-            if (_errorCollector != null) {
-                _errorCollector.Dispose();
+            if (ErrorCollector != null) {
+                ErrorCollector.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿#region using block
+
 using System.Web.Mvc;
 
-namespace WereViewApp.Controllers
-{
-    public class SearchController : Controller
-    {
-        
-      
+#endregion
+
+namespace WereViewApp.Controllers {
+    public class SearchController : Controller {
     }
 }

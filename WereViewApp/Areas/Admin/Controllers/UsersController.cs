@@ -71,7 +71,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             }
 
             try {
-                var changes = db.SaveChanges(applicationUser);
+                var changes = Db.SaveChanges(applicationUser);
                 if (changes > 0) {
                     return true;
                 }
@@ -87,7 +87,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         public ActionResult Index() {
             var viewOf = ViewTapping(ViewStates.Index);
-            return View(db.Users.ToList());
+            return View(Db.Users.ToList());
         }
 
         #endregion
@@ -96,7 +96,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         public ActionResult FilterBlockedUsers() {
             var viewOf = ViewTapping(ViewStates.FilterBlockedUsers);
-            return View("FilterBlockedUsers", db.Users.Where(n => n.IsBlocked).ToList());
+            return View("FilterBlockedUsers", Db.Users.Where(n => n.IsBlocked).ToList());
         }
 
         #endregion
@@ -104,7 +104,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         #region Details
 
         public ActionResult Details(long id) {
-            var applicationUser = db.Users.Find(id);
+            var applicationUser = Db.Users.Find(id);
             if (applicationUser == null) {
                 return HttpNotFound();
             }
@@ -172,15 +172,15 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         public void GetDropDowns(ApplicationUser applicationUser) {
             ViewBag.CountryID =
-                new SelectList(db.Countries.Where(n => n.CountryID == applicationUser.CountryID).ToList(), "CountryID",
+                new SelectList(Db.Countries.Where(n => n.CountryID == applicationUser.CountryID).ToList(), "CountryID",
                     "CountryName", applicationUser.CountryID);
             ViewBag.UserTimeZoneID =
                 new SelectList(
-                    db.UserTimeZones.Where(n => n.UserTimeZoneID == applicationUser.UserTimeZoneID).ToList(),
+                    Db.UserTimeZones.Where(n => n.UserTimeZoneID == applicationUser.UserTimeZoneID).ToList(),
                     "UserTimeZoneID", "UTCName", applicationUser.UserTimeZoneID);
             ViewBag.CountryLanguageID =
                 new SelectList(
-                    db.CountryLanguages.Where(n => n.CountryLanguageID == applicationUser.CountryLanguageID).ToList(),
+                    Db.CountryLanguages.Where(n => n.CountryLanguageID == applicationUser.CountryLanguageID).ToList(),
                     "CountryLanguageID", "Language", applicationUser.CountryLanguageID);
         }
 
@@ -244,12 +244,12 @@ namespace WereViewApp.Areas.Admin.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult UserBlock(UserBlockViewModel model) {
-            var user = db.Users.Find(model.UserId);
+            var user = Db.Users.Find(model.UserId);
             if (user != null) {
                 //same user
                 user.IsBlocked = true;
                 user.BlockedbyUserId = UserManager.GetLoggedUserId();
-                db.Entry(user).State = EntityState.Modified;
+                Db.Entry(user).State = EntityState.Modified;
                 if (SaveDatabase(ViewStates.EditPost, user)) {
                     var currentUserName = UserManager.GetCurrentUser().DisplayName;
 
@@ -282,13 +282,13 @@ namespace WereViewApp.Areas.Admin.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EnableUserBlock(UserBlockViewModel model) {
-            var user = db.Users.Find(model.UserId);
+            var user = Db.Users.Find(model.UserId);
             if (user != null) {
                 //same user
                 user.IsBlocked = false;
                 user.BlockedbyUserId = 0;
                 user.BlockingReason = "";
-                db.Entry(user).State = EntityState.Modified;
+                Db.Entry(user).State = EntityState.Modified;
                 if (SaveDatabase(ViewStates.EditPost, user)) {
                     var currentUserName = UserManager.GetCurrentUser().DisplayName;
 

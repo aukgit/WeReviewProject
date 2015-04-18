@@ -7,6 +7,7 @@
         public const string ProfilePaginationDataForSpecificProfile = "ProfilePaginationDataForSpecificProfile";
         public const string ProfilePaginationDataCount = "ProfilePaginationDataCount";
         public const string CategoryPageSpecificPagesCount = "CategoryPageSpecificPagesCount";
+        public const string PlatformPageSpecificPagesCount = "PlatformPageSpecificPagesCount";
 
     }
 }

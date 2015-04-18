@@ -18,6 +18,67 @@ using WereViewApp.Modules.Cache;
 namespace WereViewApp.WereViewAppCommon {
     public class Algorithms {
 
+        #region Platform Controller
+
+        #region Platform wise apps for category page
+        /// <summary>
+        /// Platform wise apps for Platform page
+        /// </summary>
+        /// <returns></returns>
+        public List<Platform> GetPlatformWiseAppsForPlatformPage(WereViewAppEntities db = null, int eachSlotAppsNumber = 8) {
+            if (db == null) {
+                db = new WereViewAppEntities();
+            }
+
+            var platforms = WereViewStatics.AppPlatformsCache;
+            foreach (var platform in platforms) {
+                platform.Apps = db.Apps
+                                  .Include(n => n.User)
+                                  .OrderByDescending(n => n.AppID)
+                                  .Where(n => n.PlatformID == platform.PlatformID)
+                                  .Take(eachSlotAppsNumber)
+                                  .ToList();
+                if (platform.Apps != null && platform.Apps.Count > 0) {
+                    GetEmbedImagesWithApp((List<App>)platform.Apps, db, eachSlotAppsNumber, GalleryCategoryIDs.SearchIcon);
+                }
+            }
+            return platforms;
+        }
+        #endregion
+
+        #region specific apps
+        /// <summary>
+        /// Platform page : specific apps
+        /// </summary>
+        /// <returns></returns>
+        public Platform GetPlatformPageApps(string platformName, PaginationInfo pageInfo, string cacheName, WereViewAppEntities db = null) {
+            if (db == null) {
+                db = new WereViewAppEntities();
+            }
+
+            var platform = WereViewStatics.AppPlatformsCache.FirstOrDefault(n => n.PlatformName.Equals(platformName, StringComparison.OrdinalIgnoreCase));
+            if (platform != null) {
+                var appsConditions = db.Apps
+                    .Include(n => n.User)
+                    .OrderByDescending(n => n.AppID)
+                    .Where(n => n.PlatformID == platform.PlatformID);
+
+                var pagedApps = appsConditions.GetPageData(pageInfo, cacheName).ToList();
+
+                if (pagedApps.Count > 0) {
+                    GetEmbedImagesWithApp((List<App>)pagedApps, db, (int)pageInfo.ItemsInPage, GalleryCategoryIDs.SearchIcon);
+                }
+                platform.Apps = pagedApps;
+
+                return platform;
+            }
+            return null;
+        }
+        #endregion
+
+        #endregion
+        #region Category Controller
+
         #region Category wise apps for category page
         /// <summary>
         /// Category wise apps for category page
@@ -61,7 +122,7 @@ namespace WereViewApp.WereViewAppCommon {
                     .OrderByDescending(n => n.AppID)
                     .Where(n => n.CategoryID == category.CategoryID);
 
-                var pagedApps = appsConditions.GetPageData(pageInfo,cacheName ).ToList();
+                var pagedApps = appsConditions.GetPageData(pageInfo, cacheName).ToList();
 
                 if (pagedApps.Count > 0) {
                     GetEmbedImagesWithApp((List<App>)pagedApps, db, (int)pageInfo.ItemsInPage, GalleryCategoryIDs.SearchIcon);
@@ -72,6 +133,8 @@ namespace WereViewApp.WereViewAppCommon {
             }
             return null;
         }
+        #endregion 
+
         #endregion
 
         #region Lame Gallery Queries

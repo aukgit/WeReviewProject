@@ -226,6 +226,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\PlatformsController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapGenerator.cs" />

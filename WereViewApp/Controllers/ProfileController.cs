@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿#region using block
+
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using DevMVCComponent.Database;
@@ -8,6 +10,8 @@ using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.WereViewAppCommon;
 
+#endregion
+
 namespace WereViewApp.Controllers {
     public class ProfileController : Controller {
         private const int MaxNumbersOfPagesShow = 8;
@@ -16,8 +20,9 @@ namespace WereViewApp.Controllers {
         public ActionResult Index(int page = 1) {
             //var db2 = new ApplicationDbContext();
             ViewBag.Title = "Developers apps list with reviews";
-            ViewBag.Meta = "Mobile apps, apps review, apple apps, android apps,reviews, app review site, " + ViewBag.Title;
-            ViewBag.Keywords = ViewBag.Meta ;
+            ViewBag.Meta = "Mobile apps, apps review, apple apps, android apps,reviews, app review site, " +
+                           ViewBag.Title;
+            ViewBag.Keywords = ViewBag.Meta;
             var users = UserManager
                 .GetAllUsersAsIQueryable();
 

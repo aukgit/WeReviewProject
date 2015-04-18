@@ -2,7 +2,7 @@
 @using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
 @model WereViewApp.Models.EntityModel.Category
 @{
-    ViewBag.Title = "Mobile App Categories / Category";
+    ViewBag.Title = "Mobile App Category : " + Model.CategoryName;
     string currentPageStaticUrl = AppVar.Url + "/Apps" + Html.GetCurrentURLString();
 }
 <div class="app-details-page category-page search-page category-listing-page">

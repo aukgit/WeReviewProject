@@ -1,7 +1,11 @@
-﻿using System.Web.Mvc;
+﻿#region using block
+
+using System.Web.Mvc;
 using WereViewApp.Filter;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Modules.UserError;
+
+#endregion
 
 namespace WereViewApp.Controllers {
     //[CompressFilter]
