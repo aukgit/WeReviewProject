@@ -98,9 +98,9 @@
                 @if (isEmptySearchString || !Model.IsAppExist) {
                     <li class="slim-app-view no-result">
                         @if (!isEmptySearchString && Model.SearchQuery.Length < 3) {
-                            <p class="f-em-11 ">
+                            <div class="f-em-11 gray">
                                 Please extend your search text to get more appropriate results.
-                            </p>
+                            </div>
                         }
                     </li>
                 } else {
