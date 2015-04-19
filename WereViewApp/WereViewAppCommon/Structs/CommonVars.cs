@@ -124,9 +124,9 @@ namespace WereViewApp.WereViewAppCommon.Structs {
         public const string AdditionalRootSuggestedIconLocation = "SuggestionThumbs/";
 
         /// <summary>
-        /// "SuggestionThumbs/"
+        /// "YoutubeCovers/"
         /// </summary>
-        public const string YouTubeCoverImageLocation = "SuggestionThumbs/";
+        public const string YouTubeCoverImageLocation = "YoutubeCovers/";
         #endregion
 
         #region Apps Suggestions Number
@@ -136,11 +136,9 @@ namespace WereViewApp.WereViewAppCommon.Structs {
         public const int SuggestHighestSameAppName = 3;
         public const int SuggestHighestAndSimilarQuery = 10;
         public const int SuggestHighestOrSimilarQuery = 10;
-
         public const int SearchResultsMaxResultReturn = 80;
-
-
         #endregion
+
         #region Truncate Len
         public const int AppHomePageDescriptionTruncLen = 45;
         
