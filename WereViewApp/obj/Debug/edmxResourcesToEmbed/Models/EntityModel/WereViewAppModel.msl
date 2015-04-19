@@ -4,7 +4,7 @@
     <EntitySetMapping Name="Apps">
       <EntityTypeMapping TypeName="WereViewAppModel.App">
         <MappingFragment StoreEntitySet="App">
-          <ScalarProperty Name="URLWithoutEscapseSequence" ColumnName="URLWithoutEscapseSequence" />
+          <ScalarProperty Name="UrlWithoutEscapseSequence" ColumnName="UrlWithoutEscapseSequence" />
           <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />

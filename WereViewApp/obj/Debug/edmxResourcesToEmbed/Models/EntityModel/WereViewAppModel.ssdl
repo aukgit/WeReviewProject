@@ -27,7 +27,7 @@
     <Property Name="ReleaseDate" Type="date" Nullable="false" />
     <Property Name="CreatedDate" Type="date" Nullable="false" />
     <Property Name="LastModifiedDate" Type="date" />
-    <Property Name="URLWithoutEscapseSequence" Type="varchar" MaxLength="70" Nullable="false" />
+    <Property Name="UrlWithoutEscapseSequence" Type="varchar" MaxLength="70" Nullable="false" />
   </EntityType>
   <EntityType Name="AppDraft">
     <Key>
