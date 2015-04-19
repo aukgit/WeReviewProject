@@ -1022,12 +1022,12 @@ namespace WereViewApp.Controllers {
 
         #endregion
 
-        #region Suggestion Icon Upload
+        #region Youtube Cover Upload
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult UploadSuggestionIcon(App app, HttpPostedFileBase suggestionIcon) {
-            return ProcessSingleUploads(app, suggestionIcon, GalleryCategoryIDs.SuggestionIcon,
+        public JsonResult YoutubeCoverUpload(App app, HttpPostedFileBase youtubeCoverImage) {
+            return ProcessSingleUploads(app, youtubeCoverImage, GalleryCategoryIDs.AppPageGallery,
                 WereViewStatics.uProcessorSuggestionIcons);
         }
 

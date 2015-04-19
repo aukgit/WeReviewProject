@@ -73,9 +73,9 @@ namespace WereViewApp.Controllers {
 
         [OutputCache(CacheProfile = "Day")]
         public ActionResult IOs() {
-            ViewBag.Title = "Apple/iOS Apps";
+            ViewBag.Title = "Apple/Apple Apps";
 
-            return PlatformResult(PlatformIDs.iOS);
+            return PlatformResult(PlatformIDs.Apple);
         }
 
         [OutputCache(CacheProfile = "Day")]

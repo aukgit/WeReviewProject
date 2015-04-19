@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace WereViewApp.Models.EntityModel.Structs {
+﻿namespace WereViewApp.Models.EntityModel.Structs {
     public struct GalleryCategoryIDs {
         #region Gallery Category IDs
+
         public const int HomePageFeatured = 1;
         public const int SuggestionIcon = 2;
         public const int AppPageGallery = 3;
@@ -13,6 +9,7 @@ namespace WereViewApp.Models.EntityModel.Structs {
         public const int SearchIcon = 5;
         public const int Advertise = 6;
         public const int HomePageIcon = 7;
+        public const int YoutubeCoverImage = 8;
 
         #endregion
     }
