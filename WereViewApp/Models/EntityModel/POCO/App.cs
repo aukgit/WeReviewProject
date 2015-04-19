@@ -102,7 +102,7 @@ namespace WereViewApp.Models.EntityModel
 
         public string HomeFeaturedBigImageLocation { get; set; }
         public string SuggestionIconLocation { get; set; }
-        public string GallerySearchIconLocation { get; set; }
+        public string SearchIconLocation { get; set; }
         public string GalleryHomeIconLocation { get; set; }
         public List<DisplayGalleryImages> GalleryGalleryImages { get; set; }
 
