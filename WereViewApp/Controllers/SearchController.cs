@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WereViewApp.Models.ViewModels;
+using WereViewApp.WereViewAppCommon;
+using WereViewApp.WereViewAppCommon.Structs;
 
 namespace WereViewApp.Controllers
 {
@@ -12,6 +15,30 @@ namespace WereViewApp.Controllers
         public ActionResult Index()
         {
             return View();
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [OutputCache(CacheProfile = "Long", VaryByParam = "SearchQuery")]
+        public ActionResult Index(string SearchQuery) {
+            SearchViewModel search = new SearchViewModel();
+            var algorithms = new Algorithms();
+            //ViewBag.isPostBack = true;
+            if (!string.IsNullOrWhiteSpace(SearchQuery)) {
+                search.SearchQuery = SearchQuery;
+                var urlGet = algorithms.GenerateURLValid(SearchQuery);
+                var displayList = urlGet.Split('-');
+                var displayStr = string.Join(" ", displayList);
+                var results = algorithms.GetSearchResults(SearchQuery, null, null, null,
+                                         CommonVars.SEARCH_RESULTS_MAX_RESULT_RETURN);
+                search.DisplayStringToUser = displayStr;
+                search.FoundApps = results;
+                return View(search);
+            }
+            search.DisplayStringToUser = "";
+            search.FoundApps = null;
+            return View(search);
         }
     }
 }

@@ -500,6 +500,7 @@
     <Content Include="Content\css\override-mvc.css" />
     <Content Include="Content\css\owl.custom.finalize.css" />
     <Content Include="Content\css\responsive.css" />
+    <Content Include="Content\css\search-page.css" />
     <Content Include="Content\css\seo-optimize.css" />
     <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
@@ -552,6 +553,9 @@
     </Content>
     <Content Include="Content\css\footer-fixing.css.map">
       <DependentUpon>footer-fixing.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\search-page.css.map">
+      <DependentUpon>search-page.css</DependentUpon>
     </Content>
     <None Include="Content\Less\override-mvc.less" />
     <Content Include="Content\revolution-slider\assets\arrowleft.png" />

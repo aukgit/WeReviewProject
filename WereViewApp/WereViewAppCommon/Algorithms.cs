@@ -133,7 +133,7 @@ namespace WereViewApp.WereViewAppCommon {
             }
             return null;
         }
-        #endregion 
+        #endregion
 
         #endregion
 
@@ -225,7 +225,7 @@ namespace WereViewApp.WereViewAppCommon {
                          .Include(n => n.User)
                          .Where(n => n.IsPublished && !n.IsBlocked);
 
-            addOrderingForSuggestions(ref apps, isMosRecent: false);
+            AddOrderingForSuggestions(ref apps, isMosRecent: false);
             var list = apps.Take(max).ToList();
             if (list != null) {
                 GetEmbedImagesWithApp(list, db, max, GalleryCategoryIDs.HomePageIcon);
@@ -353,9 +353,9 @@ namespace WereViewApp.WereViewAppCommon {
         #endregion
 
         #region Get App From Cache
-        public App GetAppFromStaticCache(long appID) {
+        public App GetAppFromStaticCache(long appId) {
             if (CommonVars.AppsFoundForSingleDisplay != null) {
-                return CommonVars.AppsFoundForSingleDisplay.FirstOrDefault(n => n.AppID == appID);
+                return CommonVars.AppsFoundForSingleDisplay.FirstOrDefault(n => n.AppID == appId);
             }
             return null;
         }
@@ -372,7 +372,10 @@ namespace WereViewApp.WereViewAppCommon {
         /// <param name="tags">tag1,tag2...</param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public List<App> GetSearchResults(string searchText, float? rating, string platform, string tags, int max, WereViewAppEntities db) {
+        public List<App> GetSearchResults(string searchText, float? rating, string platform, string tags, int max, WereViewAppEntities db = null) {
+            if (db == null) {
+                db = new WereViewAppEntities();
+            }
             //var hash = DevHash.Get(searchText, rating, platform, tags);
             //var cacheReaderSaver = new CacheDataInFile(CommonVars.APP_SEARCH_RESULTS_ADDITIONALPATH);
             //var cache = cacheReaderSaver.ReadObjectFromBinaryFileAsCache(hash, CommonVars.APP_SEARCH_RESULTS_EXPIRE_IN_HOURS);
@@ -395,58 +398,63 @@ namespace WereViewApp.WereViewAppCommon {
             List<App> executeAppsWithSimilarNameAnd = null;
 
             var tagIds = GetTagIds(db, tags);
-
+            int minSearchChars = 3;
             IQueryable<App> appsSameName = null;
             IQueryable<App> appsSimilarNameAnd = null;
+            bool isSearchable = false;
 
             var url = GenerateURLValid(searchText);
-            var validUrlList = GetURLListExceptEscapeSequence(url);
-
-            var platformObject = WereViewStatics.AppPlatformsCache.FirstOrDefault(n => n.PlatformName == platform);
+            var validUrlList = GetUrlListExceptEscapeSequence(url);
             byte? platformId = null;
-            if (platformObject != null) {
-                platformId = platformObject.PlatformID;
+            if (platform != null) {
+                var platformObject = WereViewStatics.AppPlatformsCache.FirstOrDefault(n => n.PlatformName == platform);
+                if (platformObject != null) {
+                    platformId = platformObject.PlatformID;
+                }
             }
             if (searchText != null) {
                 searchText = searchText.Trim();
-                if (searchText.Length > 2) {
+                if (searchText.Length >= minSearchChars) {
+                    isSearchable = true;
                     appsSameName = db.Apps.Where(n => n.AppName.StartsWith(searchText));
+                    appsSimilarNameAnd = db.Apps;
+
+                    foreach (var singleValidUrl in validUrlList) {
+                        appsSimilarNameAnd = appsSimilarNameAnd
+                                            .Where(n =>
+                                                n.URLWithoutEscapseSequence.StartsWith(singleValidUrl + "-") ||
+                                                n.URLWithoutEscapseSequence.Contains("-" + singleValidUrl + "-") ||
+                                                n.URLWithoutEscapseSequence.EndsWith("-" + singleValidUrl)
+                                             );
+                    }
                 }
 
-                appsSimilarNameAnd = db.Apps;
 
-                foreach (var singleValidURL in validUrlList) {
-
-                    appsSimilarNameAnd = appsSimilarNameAnd
-                                        .Where(n =>
-                                            n.URLWithoutEscapseSequence.StartsWith(singleValidURL + "-") ||
-                                            n.URLWithoutEscapseSequence.Contains("-" + singleValidURL + "-") ||
-                                            n.URLWithoutEscapseSequence.EndsWith("-" + singleValidURL)
-                                         );
+            }
+            if (isSearchable) {
+                if (appsSameName == null) {
+                    appsSameName = db.Apps;
                 }
+                AddConditionsForSearch(ref appsSameName, tagIds, rating, platformId);
+                AddOrderingForSuggestions(ref appsSameName, isMosRecent: true);
+                executeAppsWithSameName = appsSameName.Include(n => n.User).ToList();
+
+                var sameIds = executeAppsWithSameName.Select(n => n.AppID).ToArray();
+
+
+                AddConditionsForSearch(ref appsSimilarNameAnd, tagIds, rating, platformId);
+                AddOrderingForSuggestions(ref appsSimilarNameAnd, isMosRecent: true);
+                AddConditionOfRemovingPreviousFoundIDs(ref appsSimilarNameAnd, sameIds, null);
+
+                int getSimilarMax = maxCount / 2;
+
+                executeAppsWithSimilarNameAnd = appsSimilarNameAnd
+                    .Include(n => n.User)
+                    .Take(getSimilarMax)
+                    .ToList();
+                return MergeSearchResultsLists(executeAppsWithSameName, executeAppsWithSimilarNameAnd, null, null, maxCount * 2);
             }
-            if (appsSameName == null) {
-                appsSameName = db.Apps;
-            }
-            addConditionsForSearch(ref appsSameName, tagIds, rating, platformId);
-            addOrderingForSuggestions(ref appsSameName, isMosRecent: true);
-            executeAppsWithSameName = appsSameName.Include(n => n.User).ToList();
-
-            var sameIds = executeAppsWithSameName.Select(n => n.AppID).ToArray();
-
-
-            addConditionsForSearch(ref appsSimilarNameAnd, tagIds, rating, platformId);
-            addOrderingForSuggestions(ref appsSimilarNameAnd, isMosRecent: true);
-            addConditionOfRemovingPreviousFoundIDs(ref appsSimilarNameAnd, sameIds, null);
-
-            int getSimilarMax = maxCount / 2;
-
-            executeAppsWithSimilarNameAnd = appsSimilarNameAnd
-                .Include(n => n.User)
-                .Take(getSimilarMax)
-                .ToList();
-            return MergeSearchResultsLists(executeAppsWithSameName, executeAppsWithSimilarNameAnd, null, null, maxCount * 2);
-
+            return null;
         }
         /// <summary>
         /// Merge the list of search results.
@@ -498,8 +506,8 @@ namespace WereViewApp.WereViewAppCommon {
         /// <param name="apps"></param>
         /// <param name="tagsIDs"></param>
         /// <param name="rating"></param>
-        /// <param name="platformID"></param>
-        void addConditionsForSearch(ref IQueryable<App> apps, List<long> tagsIDs = null, float? rating = null, byte? platformID = null) {
+        /// <param name="platformId"></param>
+        void AddConditionsForSearch(ref IQueryable<App> apps, List<long> tagsIDs = null, float? rating = null, byte? platformId = null) {
             if (tagsIDs != null) {
                 apps = apps.Where(n => tagsIDs.All(tagId => n.TagAppRelations.Any(tagRel => tagRel.TagID == tagId)));
             }
@@ -508,8 +516,8 @@ namespace WereViewApp.WereViewAppCommon {
                 apps = apps.Where(a => a.AvgRating >= rate);
             }
 
-            if (platformID != null) {
-                var id = (byte)platformID;
+            if (platformId != null) {
+                var id = (byte)platformId;
 
                 apps = apps.Where(a => a.PlatformID >= id);
             }
@@ -578,12 +586,12 @@ namespace WereViewApp.WereViewAppCommon {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="AppID"></param>
+        /// <param name="appId"></param>
         /// <param name="db"></param>
         /// <returns>Returns true if did review the app.</returns>
-        public bool IsCurrentUserReviewedThisApp(long AppID, WereViewAppEntities db) {
+        public bool IsCurrentUserReviewedThisApp(long appId, WereViewAppEntities db) {
             var userid = UserManager.GetLoggedUserId();
-            return db.Reviews.Any(n => n.AppID == AppID && n.UserID == userid);
+            return db.Reviews.Any(n => n.AppID == appId && n.UserID == userid);
         }
 
         #endregion
@@ -593,12 +601,12 @@ namespace WereViewApp.WereViewAppCommon {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="AppID"></param>
+        /// <param name="appId"></param>
         /// <param name="db"></param>
         /// <returns>Returns true if did review the app.</returns>
-        public Review GetUserReviewedApp(long AppID, WereViewAppEntities db) {
+        public Review GetUserReviewedApp(long appId, WereViewAppEntities db) {
             var userid = UserManager.GetLoggedUserId();
-            return db.Reviews.FirstOrDefault(n => n.AppID == AppID && n.UserID == userid);
+            return db.Reviews.FirstOrDefault(n => n.AppID == appId && n.UserID == userid);
         }
 
         #endregion
@@ -606,7 +614,7 @@ namespace WereViewApp.WereViewAppCommon {
         #endregion
 
         #region Fix Iframe Tag
-        string getSqureIFrameTag(string str) {
+        string GetSqureIFrameTag(string str) {
             if (!string.IsNullOrWhiteSpace(str)) {
                 //|embed|object|frameset|frame|iframe|
                 //str = str.ToLower();
@@ -619,7 +627,7 @@ namespace WereViewApp.WereViewAppCommon {
         }
 
 
-        string getRawIframeString(string str) {
+        string GetRawIframeString(string str) {
             if (!string.IsNullOrWhiteSpace(str)) {
                 //|embed|object|frameset|frame|iframe|                
                 str = str.Replace("[iframe", "<iframe");
@@ -656,8 +664,8 @@ namespace WereViewApp.WereViewAppCommon {
         /// <param name="app"></param>
         /// <param name="UserSettingsId">UserPointsSettingIDs.PostApp</param>
         /// <param name="db"></param>
-        public void AddNotification(long userId, byte NotificationTypeID, string msg, WereViewAppEntities db) {
-            var type = WereViewStatics.GetNotificationType(NotificationTypeID);
+        public void AddNotification(long userId, byte notificationTypeId, string msg, WereViewAppEntities db) {
+            var type = WereViewStatics.GetNotificationType(notificationTypeId);
 
             var notify = new Notification();
             notify.UserID = userId;
@@ -694,10 +702,10 @@ namespace WereViewApp.WereViewAppCommon {
         /// Add points + Update user profile
         /// </summary>
         /// <param name="app"></param>
-        /// <param name="UserSettingsId">UserPointsSettingIDs.PostApp</param>
+        /// <param name="userSettingsId">UserPointsSettingIDs.PostApp</param>
         /// <param name="db"></param>
-        public void AddPoints(App app, byte UserSettingsId, WereViewAppEntities db) {
-            var point = WereViewStatics.GetUserSettingPoint(UserSettingsId);
+        public void AddPoints(App app, byte userSettingsId, WereViewAppEntities db) {
+            var point = WereViewStatics.GetUserSettingPoint(userSettingsId);
             var userId = UserManager.GetLoggedUserId();
 
             var userPoint = new UserPoint();
@@ -782,12 +790,12 @@ namespace WereViewApp.WereViewAppCommon {
                 var platformO = WereViewStatics.AppPlatformsCache.FirstOrDefault(n => n.PlatformName.Equals(platform));
                 var categoryO = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.CategoryName.Equals(category));
                 if (platformO != null && categoryO != null) {
-                    var platformID = platformO.PlatformID;
+                    var platformId = platformO.PlatformID;
                     var categoryId = categoryO.CategoryID;
                     app = CommonVars.AppsFoundForSingleDisplay
                                     .FirstOrDefault(n =>
                                         n.URL.Equals(url) &&
-                                        n.PlatformID == platformID &&
+                                        n.PlatformID == platformId &&
                                         n.CategoryID == categoryId);
 
                     // found in  the static cache.
@@ -815,12 +823,12 @@ namespace WereViewApp.WereViewAppCommon {
                             .Where(n => n.IsPublished && !n.IsBlocked)
                             .FirstOrDefault(n =>
                             n.URL.Equals(url) &&
-                            n.PlatformID == platformID &&
+                            n.PlatformID == platformId &&
                             n.CategoryID == categoryId);
                     if (app != null) {
                         app.Category = categoryO;
                         app.Platform = platformO;
-                        app.YoutubeEmbedLink = getRawIframeString(app.YoutubeEmbedLink);
+                        app.YoutubeEmbedLink = GetRawIframeString(app.YoutubeEmbedLink);
                         var appId = app.AppID;
 
                         LoadReviewIntoApp(app, maxReviewLoad, db);
@@ -910,21 +918,21 @@ namespace WereViewApp.WereViewAppCommon {
         /// </summary>
         /// <param name="url">title-tile-2</param>
         /// <returns></returns>
-        public List<string> GetURLListExceptEscapeSequence(string url) {
+        public List<string> GetUrlListExceptEscapeSequence(string url) {
             if (url != null) {
                 var urlList = url.Split('-');
 
-                List<string> validURL = new List<string>(urlList.Length);
+                List<string> validUrl = new List<string>(urlList.Length);
 
                 foreach (var valid in urlList) {
                     if (!CommonVars.SearchingEscapeSequence.Any(escapse => escapse.Equals(valid))) {
                         bool isNumber = Regex.IsMatch(valid, @"^\d+$");
                         if (!isNumber) {
-                            validURL.Add(valid);
+                            validUrl.Add(valid);
                         }
                     }
                 }
-                return validURL;
+                return validUrl;
 
             }
             return null;
@@ -934,11 +942,11 @@ namespace WereViewApp.WereViewAppCommon {
         /// </summary>
         /// <param name="url">title-tile-2</param>
         /// <returns></returns>
-        public string GetURLStringExceptEscapeSequence(string url) {
+        public string GetUrlStringExceptEscapeSequence(string url) {
             if (url != null) {
-                List<string> validURL = GetURLListExceptEscapeSequence(url);
+                List<string> validUrl = GetUrlListExceptEscapeSequence(url);
                 string returnStr = null;
-                returnStr = string.Join("-", validURL);
+                returnStr = string.Join("-", validUrl);
                 return returnStr;
             }
             return null;
@@ -1195,7 +1203,7 @@ namespace WereViewApp.WereViewAppCommon {
             var validUrlList = url.Split('-');
 
 
-            long userID = app.PostedByUserID;
+            long userId = app.PostedByUserID;
 
             // same user same platform and category apps with 
             var appsCollectionNotAsSameId = db.Apps
@@ -1209,23 +1217,23 @@ namespace WereViewApp.WereViewAppCommon {
 
 
             IQueryable<App> appsNameSimilariesWithAnd = appsCollectionNotAsSameId;
-            foreach (var singleValidURL in validUrlList) {
+            foreach (var singleValidUrl in validUrlList) {
 
                 appsNameSimilariesWithAnd = appsNameSimilariesWithAnd
-                                    .Where(n => n.URLWithoutEscapseSequence.StartsWith(singleValidURL + "-") ||
-                                                n.URLWithoutEscapseSequence.Contains("-" + singleValidURL + "-") ||
-                                                n.URLWithoutEscapseSequence.EndsWith("-" + singleValidURL)
+                                    .Where(n => n.URLWithoutEscapseSequence.StartsWith(singleValidUrl + "-") ||
+                                                n.URLWithoutEscapseSequence.Contains("-" + singleValidUrl + "-") ||
+                                                n.URLWithoutEscapseSequence.EndsWith("-" + singleValidUrl)
                                                 );
             }
 
             IQueryable<App> appsNameSimilariesWithOr = appsCollectionNotAsSameId;
             var orPredicate = PredicateBuilder.False<App>();
-            foreach (var singleValidURL in validUrlList) {
+            foreach (var singleValidUrl in validUrlList) {
 
                 orPredicate =
-                    orPredicate.Or(n => n.URLWithoutEscapseSequence.StartsWith(singleValidURL + "-") ||
-                                    n.URLWithoutEscapseSequence.Contains("-" + singleValidURL + "-") ||
-                                    n.URLWithoutEscapseSequence.EndsWith("-" + singleValidURL)
+                    orPredicate.Or(n => n.URLWithoutEscapseSequence.StartsWith(singleValidUrl + "-") ||
+                                    n.URLWithoutEscapseSequence.Contains("-" + singleValidUrl + "-") ||
+                                    n.URLWithoutEscapseSequence.EndsWith("-" + singleValidUrl)
                                     );
             }
 
@@ -1240,11 +1248,11 @@ namespace WereViewApp.WereViewAppCommon {
 
 
             // add condition to reduce the redundant apps in the suggestion.
-            addConditionOfRemovingPreviousFoundIDs(ref appsNameSimilariesWithAnd, sameNameIds);
+            AddConditionOfRemovingPreviousFoundIDs(ref appsNameSimilariesWithAnd, sameNameIds);
             // add tag conditions
-            addTagFindingCondition(ref appsNameSimilariesWithAnd, tagIds);
+            AddTagFindingCondition(ref appsNameSimilariesWithAnd, tagIds);
             // add ordering
-            addOrderingForSuggestions(ref appsNameSimilariesWithAnd, isMosRecent: true);
+            AddOrderingForSuggestions(ref appsNameSimilariesWithAnd, isMosRecent: true);
 
             var executeSimilarNamesAppsAnd = appsNameSimilariesWithAnd
                 // exclude blocked or not published
@@ -1259,20 +1267,20 @@ namespace WereViewApp.WereViewAppCommon {
 
             List<App> executeSimilarAppsPostedByCurrentUser = null;
             long[] usersAppsIds = null;
-            if (userID != -1) {
+            if (userId != -1) {
 
                 // add condition to reduce the redundant apps in the suggestion.
-                addConditionOfRemovingPreviousFoundIDs(ref appsNameSimilariesWithAnd, similarNameAndQueryIds);
+                AddConditionOfRemovingPreviousFoundIDs(ref appsNameSimilariesWithAnd, similarNameAndQueryIds);
                 // add tag conditions
-                addTagFindingCondition(ref appsNameSimilariesWithAnd, tagIds);
+                AddTagFindingCondition(ref appsNameSimilariesWithAnd, tagIds);
                 // add ordering
-                addOrderingForSuggestions(ref appsNameSimilariesWithAnd, isMosRecent: false);
+                AddOrderingForSuggestions(ref appsNameSimilariesWithAnd, isMosRecent: false);
 
 
                 executeSimilarAppsPostedByCurrentUser = appsNameSimilariesWithAnd
                     // exclude blocked or not published
                                                 .Where(n => n.IsPublished && !n.IsBlocked)
-                                                .Where(n => n.PostedByUserID == userID)
+                                                .Where(n => n.PostedByUserID == userId)
                                                 .Take(CommonVars.SUGGEST_HIGHEST_TAKE)
                                                 .ToList();
 
@@ -1316,28 +1324,28 @@ namespace WereViewApp.WereViewAppCommon {
         /// If previous any found with same id then exclude those.
         /// </summary>
         /// <param name="apps"></param>
-        /// <param name="FoundIds1"></param>
-        /// <param name="FoundIds2"></param>
-        /// <param name="FoundIds3"></param>
-        /// <param name="FoundIds4"></param>
+        /// <param name="foundIds1"></param>
+        /// <param name="foundIds2"></param>
+        /// <param name="foundIds3"></param>
+        /// <param name="foundIds4"></param>
         /// <returns></returns>
-        void addConditionOfRemovingPreviousFoundIDs(ref IQueryable<App> apps, long[] FoundIds1, long[] FoundIds2 = null, long[] FoundIds3 = null, long[] FoundIds4 = null) {
-            apps = apps.Where(n => !FoundIds1.Any(id => id == n.AppID));
-            if (FoundIds2 != null) {
-                apps = apps.Where(n => !FoundIds2.Any(id => id == n.AppID));
+        void AddConditionOfRemovingPreviousFoundIDs(ref IQueryable<App> apps, long[] foundIds1, long[] foundIds2 = null, long[] foundIds3 = null, long[] foundIds4 = null) {
+            apps = apps.Where(n => !foundIds1.Any(id => id == n.AppID));
+            if (foundIds2 != null) {
+                apps = apps.Where(n => !foundIds2.Any(id => id == n.AppID));
             }
 
-            if (FoundIds3 != null) {
-                apps = apps.Where(n => !FoundIds3.Any(id => id == n.AppID));
+            if (foundIds3 != null) {
+                apps = apps.Where(n => !foundIds3.Any(id => id == n.AppID));
             }
 
-            if (FoundIds4 != null) {
-                apps = apps.Where(n => !FoundIds4.Any(id => id == n.AppID));
+            if (foundIds4 != null) {
+                apps = apps.Where(n => !foundIds4.Any(id => id == n.AppID));
             }
 
         }
 
-        void addTagFindingCondition(ref IQueryable<App> apps, List<long> tagIds) {
+        void AddTagFindingCondition(ref IQueryable<App> apps, List<long> tagIds) {
             if (tagIds != null) {
                 apps = apps.Where(singleApp =>
                                 tagIds.Any(tagId =>
@@ -1351,7 +1359,7 @@ namespace WereViewApp.WereViewAppCommon {
         /// </summary>
         /// <param name="apps"></param>
         /// <param name="isMosRecent">True: Find records which is most recent + most viewed. False : means most viewed the most rated and new</param>
-        void addOrderingForSuggestions(ref IQueryable<App> apps, bool isMosRecent) {
+        void AddOrderingForSuggestions(ref IQueryable<App> apps, bool isMosRecent) {
             if (isMosRecent) {
                 apps = apps.OrderByDescending(n => n.AppID)
                            .OrderByDescending(n => n.TotalViewed)
@@ -1368,53 +1376,53 @@ namespace WereViewApp.WereViewAppCommon {
             //return apps;
         }
 
-        public List<App> FormalizeAppsListFromSeveralLogics(List<App> SimilarName, List<App> PostedByUser, List<App> AlmostSimilarNameWithAND, List<App> AlmostSimilarNameWithOr) {
+        public List<App> FormalizeAppsListFromSeveralLogics(List<App> similarName, List<App> postedByUser, List<App> almostSimilarNameWithAnd, List<App> almostSimilarNameWithOr) {
             List<App> apps = new List<App>(CommonVars.SUGGEST_HIGHEST_DISPLAY_NUMBER_SUGGESTIONS + 10);
 
-            if (SimilarName != null) {
+            if (similarName != null) {
                 int conditionNumber = CommonVars.SUGGEST_HIGHEST_SAME_APP_NAME;
-                int length = SimilarName.Count > conditionNumber ?
-                            conditionNumber : SimilarName.Count;
+                int length = similarName.Count > conditionNumber ?
+                            conditionNumber : similarName.Count;
 
                 for (int i = 0; i < length; i++) {
-                    var current = SimilarName[i];
+                    var current = similarName[i];
                     apps.Add(current);
                 }
             }
 
-            if (PostedByUser != null && apps.Count < CommonVars.SUGGEST_HIGHEST_DISPLAY_NUMBER_SUGGESTIONS) {
+            if (postedByUser != null && apps.Count < CommonVars.SUGGEST_HIGHEST_DISPLAY_NUMBER_SUGGESTIONS) {
                 int conditionNumber = CommonVars.SUGGEST_HIGHEST_FROM_SAME_USER;
-                int length = PostedByUser.Count > conditionNumber ?
-                            conditionNumber : PostedByUser.Count;
+                int length = postedByUser.Count > conditionNumber ?
+                            conditionNumber : postedByUser.Count;
 
                 for (int i = 0; i < length; i++) {
-                    var current = PostedByUser[i];
+                    var current = postedByUser[i];
                     if (!apps.Any(n => n.AppID == current.AppID)) {
                         apps.Add(current);
                     }
                 }
             }
 
-            if (AlmostSimilarNameWithAND != null && apps.Count < CommonVars.SUGGEST_HIGHEST_DISPLAY_NUMBER_SUGGESTIONS) {
+            if (almostSimilarNameWithAnd != null && apps.Count < CommonVars.SUGGEST_HIGHEST_DISPLAY_NUMBER_SUGGESTIONS) {
                 int conditionNumber = CommonVars.SUGGEST_HIGHEST_AND_SIMILAR_QUERY;
-                int length = AlmostSimilarNameWithAND.Count > conditionNumber ?
-                            conditionNumber : AlmostSimilarNameWithAND.Count;
+                int length = almostSimilarNameWithAnd.Count > conditionNumber ?
+                            conditionNumber : almostSimilarNameWithAnd.Count;
 
                 for (int i = 0; i < length; i++) {
-                    var current = AlmostSimilarNameWithAND[i];
+                    var current = almostSimilarNameWithAnd[i];
                     if (!apps.Any(n => n.AppID == current.AppID)) {
                         apps.Add(current);
                     }
                 }
             }
 
-            if (AlmostSimilarNameWithOr != null && apps.Count < CommonVars.SUGGEST_HIGHEST_DISPLAY_NUMBER_SUGGESTIONS) {
+            if (almostSimilarNameWithOr != null && apps.Count < CommonVars.SUGGEST_HIGHEST_DISPLAY_NUMBER_SUGGESTIONS) {
                 int conditionNumber = CommonVars.SUGGEST_HIGHEST_OR_SIMILAR_QUERY;
-                int length = AlmostSimilarNameWithOr.Count > conditionNumber ?
-                            conditionNumber : AlmostSimilarNameWithOr.Count;
+                int length = almostSimilarNameWithOr.Count > conditionNumber ?
+                            conditionNumber : almostSimilarNameWithOr.Count;
 
                 for (int i = 0; i < length; i++) {
-                    var current = AlmostSimilarNameWithOr[i];
+                    var current = almostSimilarNameWithOr[i];
                     if (!apps.Any(n => n.AppID == current.AppID)) {
                         apps.Add(current);
                     }
