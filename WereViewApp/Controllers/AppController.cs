@@ -71,17 +71,17 @@ namespace WereViewApp.Controllers {
         public JsonResult DeleteGalleryImage(Guid uploadGuid, byte sequence, string requestVerificationToken) {
             var gallery = db.Galleries.FirstOrDefault(n => n.UploadGuid == uploadGuid && n.Sequence == sequence);
             if (gallery != null) {
-                var fileName = WereViewStatics.uProcessorGallery.GetOrganizeName(gallery, true);
+                var fileName = WereViewStatics.UProcessorGallery.GetOrganizeName(gallery, true);
                 var absPath =
-                    WereViewStatics.uProcessorGallery.VirtualPathtoAbsoluteServerPath(
-                        WereViewStatics.uProcessorGallery.GetCombinationOfRootAndAdditionalRoot() + fileName);
+                    WereViewStatics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(
+                        WereViewStatics.UProcessorGallery.GetCombinationOfRootAndAdditionalRoot() + fileName);
                 if (System.IO.File.Exists(absPath)) {
                     System.IO.File.Delete(absPath);
                 }
 
                 absPath =
-                    WereViewStatics.uProcessorGallery.VirtualPathtoAbsoluteServerPath(
-                        WereViewStatics.uProcessorGallery.GetCombinationOfRootAndAdditionalRoot() + fileName);
+                    WereViewStatics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(
+                        WereViewStatics.UProcessorGallery.GetCombinationOfRootAndAdditionalRoot() + fileName);
                 if (System.IO.File.Exists(absPath)) {
                     System.IO.File.Delete(absPath);
                 }
@@ -109,8 +109,8 @@ namespace WereViewApp.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult EditGalleryUploads(App app) {
             var token = Request["__RequestVerificationToken"];
-            var path = AppVar.Url + WereViewStatics.uProcessorGallery.RootPath.Replace("~/", "/") +
-                       WereViewStatics.uProcessorGallery.AdditionalRoots;
+            var path = AppVar.Url + WereViewStatics.UProcessorGallery.RootPath.Replace("~/", "/") +
+                       WereViewStatics.UProcessorGallery.AdditionalRoots;
 
             var uploadedImages = db.Galleries
                 .Where(n => n.GalleryCategoryID == GalleryCategoryIDs.AppPageGallery && n.UploadGuid == app.UploadGuid)
@@ -850,7 +850,7 @@ namespace WereViewApp.Controllers {
                         }
 
                         //upload app-details page gallery image
-                        WereViewStatics.uProcessorGallery.UploadFile(file, fileName, nextSequence, true, true);
+                        WereViewStatics.UProcessorGallery.UploadFile(file, fileName, nextSequence, true, true);
 
 
                         //successfully uploaded now save a gallery info
@@ -896,13 +896,13 @@ namespace WereViewApp.Controllers {
                         //checking if resize-source image already exist.
                         if (
                            System.IO.File.Exists(
-                               WereViewStatics.uProcessorGallery.VirtualPathtoAbsoluteServerPath(source))) {
+                               WereViewStatics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(source))) {
                             // if processed image exist then remove  the temp.
-                            WereViewStatics.uProcessorGallery.RemoveTempImage(gallery);
+                            WereViewStatics.UProcessorGallery.RemoveTempImage(gallery);
                         }
                         // resize app-details page gallery image
 
-                        WereViewStatics.uProcessorGallery.ProcessImage(gallery, galleryCategory);
+                        WereViewStatics.UProcessorGallery.ProcessImage(gallery, galleryCategory);
                         //var source = "~/Uploads/Images/" + CommonVars.ADDITIONAL_ROOT_GALLERY_LOCATION +
                         //             UploadProcessor.GetOrganizeNameStatic(gallery, true, true);
                         //var target = "~/Uploads/Images/" + CommonVars.ADDITIONAL_ROOT_GALLERY_ICON_LOCATION +
@@ -984,7 +984,7 @@ namespace WereViewApp.Controllers {
         [ValidateAntiForgeryToken]
         public JsonResult UploadHomeFeatured(App app, HttpPostedFileBase homePageFeatured) {
             return ProcessSingleUploads(app, homePageFeatured, GalleryCategoryIDs.HomePageFeatured,
-                WereViewStatics.uProcessorHomeFeatured);
+                WereViewStatics.UProcessorHomeFeatured);
         }
 
         #endregion
@@ -995,7 +995,7 @@ namespace WereViewApp.Controllers {
         [ValidateAntiForgeryToken]
         public JsonResult UploadHomePageIcon(App app, HttpPostedFileBase homePageIcon) {
             return ProcessSingleUploads(app, homePageIcon, GalleryCategoryIDs.HomePageIcon,
-                WereViewStatics.uProcessorHomeIcons);
+                WereViewStatics.UProcessorHomeIcons);
         }
 
         #endregion
@@ -1006,7 +1006,7 @@ namespace WereViewApp.Controllers {
         [ValidateAntiForgeryToken]
         public JsonResult UploadSearchIcon(App app, HttpPostedFileBase searchIcon) {
             return ProcessSingleUploads(app, searchIcon, GalleryCategoryIDs.SearchIcon,
-                WereViewStatics.uProcessorSearchIcons);
+                WereViewStatics.UProcessorSearchIcons);
         }
 
         #endregion
@@ -1017,7 +1017,7 @@ namespace WereViewApp.Controllers {
         [ValidateAntiForgeryToken]
         public JsonResult UploadSuggestionIcon(App app, HttpPostedFileBase suggestionIcon) {
             return ProcessSingleUploads(app, suggestionIcon, GalleryCategoryIDs.SuggestionIcon,
-                WereViewStatics.uProcessorSuggestionIcons);
+                WereViewStatics.UProcessorSuggestionIcons);
         }
 
         #endregion
@@ -1028,7 +1028,7 @@ namespace WereViewApp.Controllers {
         [ValidateAntiForgeryToken]
         public JsonResult YoutubeCoverUpload(App app, HttpPostedFileBase youtubeCoverImage) {
             return ProcessSingleUploads(app, youtubeCoverImage, GalleryCategoryIDs.YoutubeCoverImage,
-                WereViewStatics.uProcessorSuggestionIcons);
+                WereViewStatics.UProcessorSuggestionIcons);
         }
 
         #endregion

@@ -22,38 +22,38 @@ namespace WereViewApp.WereViewAppCommon {
         /// <summary>
         /// Icons means thumbs , "Gallery/"
         /// </summary>
-        public static UploadProcessor uProcessorGallery = new UploadProcessor(CommonVars.AdditionalRootGalleryLocation);
+        public static UploadProcessor UProcessorGallery = new UploadProcessor(CommonVars.AdditionalRootGalleryLocation);
         /// <summary>
         /// Icons means thumbs , "GalleryThumbs/"
         /// </summary>
-        public static UploadProcessor uProcessorGalleryIcons = new UploadProcessor(CommonVars.AdditionalRootGalleryIconLocation);
+        public static UploadProcessor UProcessorGalleryIcons = new UploadProcessor(CommonVars.AdditionalRootGalleryIconLocation);
         /// <summary>
         /// Icons means thumbs , "SearchThumbs/"
         /// </summary>
-        public static UploadProcessor uProcessorSearchIcons = new UploadProcessor(CommonVars.AdditionalRootSearchIconLocation);
+        public static UploadProcessor UProcessorSearchIcons = new UploadProcessor(CommonVars.AdditionalRootSearchIconLocation);
         /// <summary>
         /// Icons means thumbs , "HomePageThumbs/"
         /// </summary>
-        public static UploadProcessor uProcessorHomeIcons = new UploadProcessor(CommonVars.AdditionalRootHomeIconLocation);
+        public static UploadProcessor UProcessorHomeIcons = new UploadProcessor(CommonVars.AdditionalRootHomeIconLocation);
         /// <summary>
         /// "HomePageFeatured/"
         /// </summary>
-        public static UploadProcessor uProcessorHomeFeatured = new UploadProcessor(CommonVars.AdditionalRootHomeLocation);
+        public static UploadProcessor UProcessorHomeFeatured = new UploadProcessor(CommonVars.AdditionalRootHomeLocation);
         /// <summary>
         /// Icons means thumbs ,  "SuggestionThumbs/"
         /// </summary>
-        public static UploadProcessor uProcessorSuggestionIcons = new UploadProcessor(CommonVars.AdditionalRootSuggestedIconLocation);
+        public static UploadProcessor UProcessorSuggestionIcons = new UploadProcessor(CommonVars.AdditionalRootSuggestedIconLocation);
 
 
         /// <summary>
         /// Icons means thumbs ,  "YoutubeCovers/"
         /// </summary>
-        public static UploadProcessor uProcessorSuggestionIcons = new UploadProcessor(CommonVars.AdditionalRootSuggestedIconLocation);
+        public static UploadProcessor UProcessorYoutubeCover = new UploadProcessor(CommonVars.YouTubeCoverImageLocation);
 
         /// <summary>
         /// Icons means thumbs ,  "Advertise/"
         /// </summary>
-        public static UploadProcessor uProcessorAdvertiseImages = new UploadProcessor(CommonVars.AdditionalRootAdvertiseLocation);
+        public static UploadProcessor UProcessorAdvertiseImages = new UploadProcessor(CommonVars.AdditionalRootAdvertiseLocation);
 
 
         #endregion
@@ -144,9 +144,9 @@ namespace WereViewApp.WereViewAppCommon {
             }
             return null;
         }
-        static string getAppLocation(Guid UploadGuid) {
-            if (UploadGuid != null) {
-                return UploadGuid.ToString() + "-appInfo.mdb";
+        static string getAppLocation(Guid uploadGuid) {
+            if (uploadGuid != null) {
+                return uploadGuid.ToString() + "-appInfo.mdb";
             }
             return null;
         }
