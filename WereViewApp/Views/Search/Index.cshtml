@@ -6,7 +6,7 @@
     ViewBag.Title = "Search app reviews";
     bool isModelNotNull = Model != null;
     bool isEmptySearchString = true;//isModelNotNull && ;
-    
+
     if (isModelNotNull) {
         isEmptySearchString = string.IsNullOrEmpty(Model.SearchQuery);
     }
@@ -38,9 +38,10 @@
                 </a>
             }
         </div>
-
     </div>
+
 </div>
+
 <div>
     <div class="search-box-wrapper">
         <form role="search" action="@AppVar.Url/Search" title="Search in app review website" method="post">
@@ -95,7 +96,13 @@
         <div class="archive-app-collection-wrapper">
             <ul class="seo-optimize regular-color archive-app-collection-list search-page-apps-list pagination-required">
                 @if (isEmptySearchString || !Model.IsAppExist) {
-                    <li class="slim-app-view no-result"></li>
+                    <li class="slim-app-view no-result">
+                        @if (!isEmptySearchString && Model.SearchQuery.Length < 3) {
+                            <p class="f-em-11 ">
+                                Please extend your search text to get more appropriate results.
+                            </p>
+                        }
+                    </li>
                 } else {
                     foreach (App app in Model.FoundApps) {
                         Platform platform = app.GetPlatform();
@@ -126,16 +133,16 @@
                 }
             </ul>
             @*@if (isModelNotNull && Model.IsAppExist) {
-                <div class="pagination-wrapper text-center">
-                    <ul class="pagination">
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                    </ul>
-                </div>
-            }*@
+                    <div class="pagination-wrapper text-center">
+                        <ul class="pagination">
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                }*@
         </div>
     </div>
 </div>

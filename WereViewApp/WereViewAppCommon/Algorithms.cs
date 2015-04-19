@@ -428,8 +428,6 @@ namespace WereViewApp.WereViewAppCommon {
                                              );
                     }
                 }
-
-
             }
             if (isSearchable) {
                 if (appsSameName == null) {
