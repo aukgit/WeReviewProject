@@ -902,14 +902,14 @@ namespace WereViewApp.Controllers {
                         }
                         // resize app-details page gallery image
 
-                        WereViewStatics.UProcessorGallery.ProcessImage(gallery, galleryCategory);
+                        WereViewStatics.UProcessorGallery.ResizeImageAndProcessImage(gallery, galleryCategory);
                         //var source = "~/Uploads/Images/" + CommonVars.ADDITIONAL_ROOT_GALLERY_LOCATION +
                         //             UploadProcessor.GetOrganizeNameStatic(gallery, true, true);
                         //var target = "~/Uploads/Images/" + CommonVars.ADDITIONAL_ROOT_GALLERY_ICON_LOCATION +
                         //             UploadProcessor.GetOrganizeNameStatic(gallery, true);
                         
                         // #apps detail page gallery thumbs generate
-                        //WereViewStatics.uProcessorGallery.ProcessImage(source, target, thumbsCategory.Width,
+                        //WereViewStatics.uProcessorGallery.ResizeImageAndProcessImage(source, target, thumbsCategory.Width,
                         //    thumbsCategory.Height, gallery.Extension);
                        
                         countDone++;
@@ -967,7 +967,7 @@ namespace WereViewApp.Controllers {
                     // resize
                     //new Thread(() => {
 
-                    uploadProcessorSepecific.ProcessImage(gallery, galleryCategory);
+                    uploadProcessorSepecific.ResizeImageAndProcessImage(gallery, galleryCategory);
                     uploadProcessorSepecific.RemoveTempImage(gallery);
                     //}).Start();
                 }
