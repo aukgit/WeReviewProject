@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WereViewApp.Models.EntityModel
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace WereViewApp.Models.EntityModel.POCO
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-    
     public partial class Platform
     {
         public Platform()

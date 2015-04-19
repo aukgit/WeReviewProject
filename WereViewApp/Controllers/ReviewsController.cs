@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WereViewApp.Models.EntityModel;
+using WereViewApp.Models.EntityModel.POCO;
 using WereViewApp.Modules;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.WereViewAppCommon;

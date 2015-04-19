@@ -7,11 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WereViewApp.Models.EntityModel
+using System;
+
+namespace WereViewApp.Models.EntityModel.POCO
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class Message
     {
         public long MessageID { get; set; }

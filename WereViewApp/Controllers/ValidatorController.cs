@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using WereViewApp.Models.EntityModel;
+using WereViewApp.Models.EntityModel.POCO;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Session;
 using WereViewApp.WereViewAppCommon.Structs;

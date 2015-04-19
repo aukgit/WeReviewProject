@@ -1,6 +1,7 @@
 ﻿@using WereViewApp.Models.EntityModel
 @using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
-@model List<Category>
+@using WereViewApp.Models.EntityModel.POCO
+@model List<WereViewApp.Models.EntityModel.POCO.Category>
 @{
     ViewBag.Title = "Mobile App Categories / Category";
     string currentPageStaticUrl = AppVar.Url + Html.GetCurrentURLString();

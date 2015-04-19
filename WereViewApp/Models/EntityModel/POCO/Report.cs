@@ -7,10 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WereViewApp.Models.EntityModel {
-    using System;
-    using System.Collections.Generic;
-
+namespace WereViewApp.Models.EntityModel.POCO {
     public partial class Report {
         public long ReportID { get; set; }
         public long AppID { get; set; }

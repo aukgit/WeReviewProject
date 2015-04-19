@@ -7,10 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WereViewApp.Models.EntityModel {
-    using System;
-    using System.Collections.Generic;
+using System.Collections.Generic;
 
+namespace WereViewApp.Models.EntityModel.POCO {
     public partial class UserPointSetting {
         public UserPointSetting() {
             this.UserPoints = new HashSet<UserPoint>();

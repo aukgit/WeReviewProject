@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WereViewApp.Models.EntityModel {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
+namespace WereViewApp.Models.EntityModel.POCO {
     public partial class Review {
         public Review() {
             this.ReviewLikeDislikes = new HashSet<ReviewLikeDislike>();

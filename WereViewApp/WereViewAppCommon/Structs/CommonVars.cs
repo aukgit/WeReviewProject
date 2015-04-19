@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WereViewApp.Models.EntityModel;
+using WereViewApp.Models.EntityModel.POCO;
 
 namespace WereViewApp.WereViewAppCommon.Structs {
     public struct CommonVars {

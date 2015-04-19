@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using WereViewApp.Models.EntityModel.POCO;
+
 namespace WereViewApp.Models.EntityModel {
     using System;
     using System.Data.Entity;

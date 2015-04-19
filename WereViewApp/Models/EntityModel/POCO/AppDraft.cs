@@ -1,9 +1,8 @@
-namespace WereViewApp.Models.EntityModel
-{
-    using System;
-    using System.Collections.Generic;
-    using WereViewApp.Models.EntityModel.Derivables;
+using System;
+using WereViewApp.Models.EntityModel.Derivables;
 
+namespace WereViewApp.Models.EntityModel.POCO
+{
     public partial class AppDraft : IApp
     {
         public long AppDraftID { get; set; }

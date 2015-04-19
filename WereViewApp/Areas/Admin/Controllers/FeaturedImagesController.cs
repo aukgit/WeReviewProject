@@ -9,6 +9,7 @@ using WereViewApp.Controllers;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WereViewApp.Models.EntityModel.POCO;
 
 namespace WereViewApp.Areas.Admin.Controllers {
     public class FeaturedImagesController : AdvanceController {

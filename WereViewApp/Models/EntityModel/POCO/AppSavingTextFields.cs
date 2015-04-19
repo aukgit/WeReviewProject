@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
-namespace WereViewApp.Models.EntityModel{
+namespace WereViewApp.Models.EntityModel.POCO{
     [Serializable]
     public class AppSavingTextFields {
         #region Virtual

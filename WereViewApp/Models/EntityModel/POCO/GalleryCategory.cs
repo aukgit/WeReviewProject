@@ -7,13 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WereViewApp.Models.EntityModel
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using WereViewApp.Modules.Uploads;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using WereViewApp.Modules.Uploads;
 
+namespace WereViewApp.Models.EntityModel.POCO
+{
     public partial class GalleryCategory : IImageCategory
     {
         public GalleryCategory()

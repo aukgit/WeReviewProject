@@ -7,11 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WereViewApp.Models.EntityModel
+using System.Collections.Generic;
+
+namespace WereViewApp.Models.EntityModel.POCO
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class NotificationType
     {
         public NotificationType()

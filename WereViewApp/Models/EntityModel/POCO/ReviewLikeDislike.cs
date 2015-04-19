@@ -7,11 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WereViewApp.Models.EntityModel
+namespace WereViewApp.Models.EntityModel.POCO
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class ReviewLikeDislike
     {
         public long ReviewLikeDislikeID { get; set; }
