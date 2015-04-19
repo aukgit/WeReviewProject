@@ -40,12 +40,12 @@ body #wrap .app-details-page {
   border-radius: 5px;
 }
 .form-control {
-  max-height: 34.4px;
-  max-height: 3.4rem;
+  height: 34.4px;
+  height: 3.4rem;
 }
 .input-group input {
-  max-height: 34.4px;
-  max-height: 3.4rem;
+  height: 34.4px;
+  height: 3.4rem;
 }
 .input-group-btn:last-child > .btn,
 .input-group-btn:last-child > .btn-group {
