@@ -77,7 +77,7 @@ namespace WereViewApp.Models.EntityModel
 
 
         [StringLength(70)]
-        public string URLWithoutEscapseSequence { get; set; }
+        public string UrlWithoutEscapseSequence { get; set; }
 
         #region Virtual Propertise
 

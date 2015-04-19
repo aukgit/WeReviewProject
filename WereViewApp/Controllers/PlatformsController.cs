@@ -35,7 +35,6 @@ namespace WereViewApp.Controllers {
                     return View(platform);
                 }
             }
-
             ViewBag.Reason = "Platform not found. Please try /Android or /Apple";
             return View("_404");
         }

@@ -422,9 +422,9 @@ namespace WereViewApp.WereViewAppCommon {
                     foreach (var singleValidUrl in validUrlList) {
                         appsSimilarNameAnd = appsSimilarNameAnd
                                             .Where(n =>
-                                                n.URLWithoutEscapseSequence.StartsWith(singleValidUrl + "-") ||
-                                                n.URLWithoutEscapseSequence.Contains("-" + singleValidUrl + "-") ||
-                                                n.URLWithoutEscapseSequence.EndsWith("-" + singleValidUrl)
+                                                n.UrlWithoutEscapseSequence.StartsWith(singleValidUrl + "-") ||
+                                                n.UrlWithoutEscapseSequence.Contains("-" + singleValidUrl + "-") ||
+                                                n.UrlWithoutEscapseSequence.EndsWith("-" + singleValidUrl)
                                              );
                     }
                 }
@@ -1197,7 +1197,7 @@ namespace WereViewApp.WereViewAppCommon {
                 return null;
             }
             var tagIds = GetTagIds(app, db);
-            var url = app.URLWithoutEscapseSequence;
+            var url = app.UrlWithoutEscapseSequence;
             var validUrlList = url.Split('-');
 
 
@@ -1211,16 +1211,16 @@ namespace WereViewApp.WereViewAppCommon {
 
             // like starts with query
             var appsSameNameAsCurrent = appsCollectionNotAsSameId
-                                        .Where(n => n.URLWithoutEscapseSequence.StartsWith(url));
+                                        .Where(n => n.UrlWithoutEscapseSequence.StartsWith(url));
 
 
             IQueryable<App> appsNameSimilariesWithAnd = appsCollectionNotAsSameId;
             foreach (var singleValidUrl in validUrlList) {
 
                 appsNameSimilariesWithAnd = appsNameSimilariesWithAnd
-                                    .Where(n => n.URLWithoutEscapseSequence.StartsWith(singleValidUrl + "-") ||
-                                                n.URLWithoutEscapseSequence.Contains("-" + singleValidUrl + "-") ||
-                                                n.URLWithoutEscapseSequence.EndsWith("-" + singleValidUrl)
+                                    .Where(n => n.UrlWithoutEscapseSequence.StartsWith(singleValidUrl + "-") ||
+                                                n.UrlWithoutEscapseSequence.Contains("-" + singleValidUrl + "-") ||
+                                                n.UrlWithoutEscapseSequence.EndsWith("-" + singleValidUrl)
                                                 );
             }
 
@@ -1229,9 +1229,9 @@ namespace WereViewApp.WereViewAppCommon {
             foreach (var singleValidUrl in validUrlList) {
 
                 orPredicate =
-                    orPredicate.Or(n => n.URLWithoutEscapseSequence.StartsWith(singleValidUrl + "-") ||
-                                    n.URLWithoutEscapseSequence.Contains("-" + singleValidUrl + "-") ||
-                                    n.URLWithoutEscapseSequence.EndsWith("-" + singleValidUrl)
+                    orPredicate.Or(n => n.UrlWithoutEscapseSequence.StartsWith(singleValidUrl + "-") ||
+                                    n.UrlWithoutEscapseSequence.Contains("-" + singleValidUrl + "-") ||
+                                    n.UrlWithoutEscapseSequence.EndsWith("-" + singleValidUrl)
                                     );
             }
 
