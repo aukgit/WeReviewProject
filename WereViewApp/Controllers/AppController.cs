@@ -891,7 +891,7 @@ namespace WereViewApp.Controllers {
                         // resize
                         //new Thread(() => {
                         
-                        var source = "~/Uploads/Images/" + CommonVars.ADDITIONAL_ROOT_GALLERY_LOCATION +
+                        var source = "~/Uploads/Images/" + CommonVars.AdditionalRootGalleryLocation +
                                      UploadProcessor.GetOrganizeNameStatic(gallery, true, true);
                         //checking if resize-source image already exist.
                         if (
@@ -1027,7 +1027,7 @@ namespace WereViewApp.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult YoutubeCoverUpload(App app, HttpPostedFileBase youtubeCoverImage) {
-            return ProcessSingleUploads(app, youtubeCoverImage, GalleryCategoryIDs.AppPageGallery,
+            return ProcessSingleUploads(app, youtubeCoverImage, GalleryCategoryIDs.YoutubeCoverImage,
                 WereViewStatics.uProcessorSuggestionIcons);
         }
 

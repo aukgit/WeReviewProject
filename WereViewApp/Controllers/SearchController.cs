@@ -40,7 +40,7 @@ namespace WereViewApp.Controllers
                 var displayList = urlGet.Split('-');
                 var displayStr = string.Join(" ", displayList);
                 var results = algorithms.GetSearchResults(SearchQuery, null, null, null,
-                                         CommonVars.SEARCH_RESULTS_MAX_RESULT_RETURN);
+                                         CommonVars.SearchResultsMaxResultReturn);
                 search.DisplayStringToUser = displayStr;
                 search.FoundApps = results;
                 return View(search);

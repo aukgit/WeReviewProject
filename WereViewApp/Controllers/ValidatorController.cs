@@ -102,7 +102,7 @@ namespace WereViewApp.Controllers {
         private string GetFriendlyURLFromString(string title) {
             if (!string.IsNullOrEmpty(title)) {
                 title = title.Trim();
-                title = Regex.Replace(title, CommonVars.FRIENDLY_URL_REGEX, "-");
+                title = Regex.Replace(title, CommonVars.FriendlyUrlRegex, "-");
                 return title;
             }
             return title;

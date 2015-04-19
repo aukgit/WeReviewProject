@@ -33,7 +33,7 @@
                 <a href="@absUrl" itemtype="@absUrl" title="@app.Description" data-original-title="@app.Description" class="tooltip-show">
                     <h1 title="@appName">@Html.Truncate(appName, 20)</h1>
                     <p title="@app.Description">
-                        @Html.Truncate(app.Description, CommonVars.APP_HOME_PAGE_DESCRIPTION_TRUNC_LEN)
+                        @Html.Truncate(app.Description, CommonVars.AppHomePageDescriptionTruncLen)
                     </p>
                     <i class="fa fa-star"></i>
                     <span class="price" itemprop="value" title="rating of @appName" itemprop="rating">@app.AvgRating</span>

@@ -1111,6 +1111,7 @@
     <Folder Include="Modules\Filters\" />
     <Folder Include="Uploads\Files\Private\" />
     <Folder Include="Uploads\Images\Private\" />
+    <Folder Include="Uploads\Images\YoutubeCovers\" />
     <Folder Include="Views\Basic\" />
     <Folder Include="Views\Errors\" />
     <Folder Include="Views\Report\" />

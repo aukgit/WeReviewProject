@@ -382,7 +382,7 @@ namespace WereViewApp.WereViewAppCommon {
             //var cache = cacheReaderSaver.ReadObjectFromBinaryFileAsCache(hash, CommonVars.APP_SEARCH_RESULTS_EXPIRE_IN_HOURS);
             //if (cache == null) {
             // cache doesn't exist
-            var results = AppSearchAlgorithm(searchText, rating, platform, tags, CommonVars.SEARCH_RESULTS_MAX_RESULT_RETURN, db);
+            var results = AppSearchAlgorithm(searchText, rating, platform, tags, CommonVars.SearchResultsMaxResultReturn, db);
             //cacheReaderSaver.SaveInBinaryAsync(hash, results);
             GetEmbedImagesWithApp(results, db, max, GalleryCategoryIDs.SearchIcon);
 
@@ -967,7 +967,7 @@ namespace WereViewApp.WereViewAppCommon {
         public string GenerateURLValid(double platformVersion, short categoryId, string title, byte platformId, WereViewAppEntities db, long currentAppId) {
             if (!string.IsNullOrEmpty(title)) {
                 title = title.Trim();
-                title = Regex.Replace(title, CommonVars.FRIENDLY_URL_REGEX, "-").ToLower();
+                title = Regex.Replace(title, CommonVars.FriendlyUrlRegex, "-").ToLower();
             checkAgain:
                 bool exist = false;
                 if (currentAppId < 1) {
@@ -1001,7 +1001,7 @@ namespace WereViewApp.WereViewAppCommon {
         public string GenerateURLValid(string title) {
             if (!string.IsNullOrEmpty(title)) {
                 title = title.Trim();
-                title = Regex.Replace(title, CommonVars.FRIENDLY_URL_REGEX, "-").ToLower();
+                title = Regex.Replace(title, CommonVars.FriendlyUrlRegex, "-").ToLower();
                 return title;
             }
             return title;
@@ -1075,7 +1075,7 @@ namespace WereViewApp.WereViewAppCommon {
                     return;
                 }
                 var galleries = db.Database.SqlQuery<Gallery>(sql)
-                      .Take(CommonVars.SUGGEST_HIGHEST_DISPLAY_NUMBER_SUGGESTIONS)
+                      .Take(CommonVars.SuggestHighestDisplayNumberSuggestions)
                       .ToList();
 
 
@@ -1240,7 +1240,7 @@ namespace WereViewApp.WereViewAppCommon {
 
             // exclude blocked or not published
             var executeAlmostSameNameApps = appsSameNameAsCurrent
-                                            .Take(CommonVars.SUGGEST_HIGHEST_TAKE)
+                                            .Take(CommonVars.SuggestHighestTake)
                                             .ToList();
 
             var sameNameIds = executeAlmostSameNameApps.Select(n => n.AppID).ToArray();
@@ -1256,7 +1256,7 @@ namespace WereViewApp.WereViewAppCommon {
             var executeSimilarNamesAppsAnd = appsNameSimilariesWithAnd
                 // exclude blocked or not published
                                             .Where(n => n.IsPublished && !n.IsBlocked)
-                                            .Take(CommonVars.SUGGEST_HIGHEST_TAKE)
+                                            .Take(CommonVars.SuggestHighestTake)
                                             .ToList();
 
 
@@ -1280,7 +1280,7 @@ namespace WereViewApp.WereViewAppCommon {
                     // exclude blocked or not published
                                                 .Where(n => n.IsPublished && !n.IsBlocked)
                                                 .Where(n => n.PostedByUserID == userId)
-                                                .Take(CommonVars.SUGGEST_HIGHEST_TAKE)
+                                                .Take(CommonVars.SuggestHighestTake)
                                                 .ToList();
 
                 usersAppsIds = executeSimilarAppsPostedByCurrentUser.Select(n => n.AppID).ToArray();
@@ -1376,10 +1376,10 @@ namespace WereViewApp.WereViewAppCommon {
         }
 
         public List<App> FormalizeAppsListFromSeveralLogics(List<App> similarName, List<App> postedByUser, List<App> almostSimilarNameWithAnd, List<App> almostSimilarNameWithOr) {
-            List<App> apps = new List<App>(CommonVars.SUGGEST_HIGHEST_DISPLAY_NUMBER_SUGGESTIONS + 10);
+            List<App> apps = new List<App>(CommonVars.SuggestHighestDisplayNumberSuggestions + 10);
 
             if (similarName != null) {
-                int conditionNumber = CommonVars.SUGGEST_HIGHEST_SAME_APP_NAME;
+                int conditionNumber = CommonVars.SuggestHighestSameAppName;
                 int length = similarName.Count > conditionNumber ?
                             conditionNumber : similarName.Count;
 
@@ -1389,8 +1389,8 @@ namespace WereViewApp.WereViewAppCommon {
                 }
             }
 
-            if (postedByUser != null && apps.Count < CommonVars.SUGGEST_HIGHEST_DISPLAY_NUMBER_SUGGESTIONS) {
-                int conditionNumber = CommonVars.SUGGEST_HIGHEST_FROM_SAME_USER;
+            if (postedByUser != null && apps.Count < CommonVars.SuggestHighestDisplayNumberSuggestions) {
+                int conditionNumber = CommonVars.SuggestHighestFromSameUser;
                 int length = postedByUser.Count > conditionNumber ?
                             conditionNumber : postedByUser.Count;
 
@@ -1402,8 +1402,8 @@ namespace WereViewApp.WereViewAppCommon {
                 }
             }
 
-            if (almostSimilarNameWithAnd != null && apps.Count < CommonVars.SUGGEST_HIGHEST_DISPLAY_NUMBER_SUGGESTIONS) {
-                int conditionNumber = CommonVars.SUGGEST_HIGHEST_AND_SIMILAR_QUERY;
+            if (almostSimilarNameWithAnd != null && apps.Count < CommonVars.SuggestHighestDisplayNumberSuggestions) {
+                int conditionNumber = CommonVars.SuggestHighestAndSimilarQuery;
                 int length = almostSimilarNameWithAnd.Count > conditionNumber ?
                             conditionNumber : almostSimilarNameWithAnd.Count;
 
@@ -1415,8 +1415,8 @@ namespace WereViewApp.WereViewAppCommon {
                 }
             }
 
-            if (almostSimilarNameWithOr != null && apps.Count < CommonVars.SUGGEST_HIGHEST_DISPLAY_NUMBER_SUGGESTIONS) {
-                int conditionNumber = CommonVars.SUGGEST_HIGHEST_OR_SIMILAR_QUERY;
+            if (almostSimilarNameWithOr != null && apps.Count < CommonVars.SuggestHighestDisplayNumberSuggestions) {
+                int conditionNumber = CommonVars.SuggestHighestOrSimilarQuery;
                 int length = almostSimilarNameWithOr.Count > conditionNumber ?
                             conditionNumber : almostSimilarNameWithOr.Count;
 
@@ -1448,19 +1448,19 @@ namespace WereViewApp.WereViewAppCommon {
 
 
         public void RemoveOutputCacheSuggested() {
-            HttpResponse.RemoveOutputCacheItem(CommonVars.OUTPUTCAHE_SUGGESTED_APPS);
+            HttpResponse.RemoveOutputCacheItem(CommonVars.OutputcaheSuggestedApps);
         }
 
         public void RemoveOutputCacheFeatured() {
-            HttpResponse.RemoveOutputCacheItem(CommonVars.OUTPUTCAHE_FEATUREDAPPS_APPS);
+            HttpResponse.RemoveOutputCacheItem(CommonVars.OutputcaheFeaturedappsApps);
         }
 
         public void RemoveOutputCacheLatest() {
-            HttpResponse.RemoveOutputCacheItem(CommonVars.OUTPUTCAHE_LATESTAPPSLIST_APPS);
+            HttpResponse.RemoveOutputCacheItem(CommonVars.OutputcaheLatestappslistApps);
         }
 
         public void RemoveOutputCacheTopRated() {
-            HttpResponse.RemoveOutputCacheItem(CommonVars.OUTPUTCAHE_TOPAPPSLIST_APPS);
+            HttpResponse.RemoveOutputCacheItem(CommonVars.OutputcaheTopappslistApps);
         }
         #endregion
     }

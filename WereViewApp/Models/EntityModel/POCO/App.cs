@@ -66,7 +66,7 @@ namespace WereViewApp.Models.EntityModel {
         [Display(Name = "Title", Description ="(ASCII 50 chars) Title gives unique URLs which includes platform version, platform, category. Please specify those correctly to get a unique name. Eg. Plant vs. Zombies v2")]
         public string AppName { get; set; }
 
-        [Display(Name = "Platform", Description = "Eg. Like iOS Platform version 7, Windows platform version 8.1 so on.")]
+        [Display(Name = "Platform", Description = "Eg. Like Apple Platform version 7, Windows platform version 8.1 so on.")]
         [Range(0, 3000, ErrorMessage = "Sorry you have to been the range of 0-3000")]
         [Required]
         public byte PlatformID { get; set; }

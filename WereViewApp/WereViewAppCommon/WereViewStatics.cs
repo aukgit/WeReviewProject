@@ -22,32 +22,38 @@ namespace WereViewApp.WereViewAppCommon {
         /// <summary>
         /// Icons means thumbs , "Gallery/"
         /// </summary>
-        public static UploadProcessor uProcessorGallery = new UploadProcessor(CommonVars.ADDITIONAL_ROOT_GALLERY_LOCATION);
+        public static UploadProcessor uProcessorGallery = new UploadProcessor(CommonVars.AdditionalRootGalleryLocation);
         /// <summary>
         /// Icons means thumbs , "GalleryThumbs/"
         /// </summary>
-        public static UploadProcessor uProcessorGalleryIcons = new UploadProcessor(CommonVars.ADDITIONAL_ROOT_GALLERY_ICON_LOCATION);
+        public static UploadProcessor uProcessorGalleryIcons = new UploadProcessor(CommonVars.AdditionalRootGalleryIconLocation);
         /// <summary>
         /// Icons means thumbs , "SearchThumbs/"
         /// </summary>
-        public static UploadProcessor uProcessorSearchIcons = new UploadProcessor(CommonVars.ADDITIONAL_ROOT_SEARCH_ICON_LOCATION);
+        public static UploadProcessor uProcessorSearchIcons = new UploadProcessor(CommonVars.AdditionalRootSearchIconLocation);
         /// <summary>
         /// Icons means thumbs , "HomePageThumbs/"
         /// </summary>
-        public static UploadProcessor uProcessorHomeIcons = new UploadProcessor(CommonVars.ADDITIONAL_ROOT_HOME_ICON_LOCATION);
+        public static UploadProcessor uProcessorHomeIcons = new UploadProcessor(CommonVars.AdditionalRootHomeIconLocation);
         /// <summary>
         /// "HomePageFeatured/"
         /// </summary>
-        public static UploadProcessor uProcessorHomeFeatured = new UploadProcessor(CommonVars.ADDITIONAL_ROOT_HOME_LOCATION);
+        public static UploadProcessor uProcessorHomeFeatured = new UploadProcessor(CommonVars.AdditionalRootHomeLocation);
         /// <summary>
         /// Icons means thumbs ,  "SuggestionThumbs/"
         /// </summary>
-        public static UploadProcessor uProcessorSuggestionIcons = new UploadProcessor(CommonVars.ADDITIONAL_ROOT_SUGGESTED_ICON_LOCATION);
+        public static UploadProcessor uProcessorSuggestionIcons = new UploadProcessor(CommonVars.AdditionalRootSuggestedIconLocation);
+
+
+        /// <summary>
+        /// Icons means thumbs ,  "YoutubeCovers/"
+        /// </summary>
+        public static UploadProcessor uProcessorSuggestionIcons = new UploadProcessor(CommonVars.AdditionalRootSuggestedIconLocation);
 
         /// <summary>
         /// Icons means thumbs ,  "Advertise/"
         /// </summary>
-        public static UploadProcessor uProcessorAdvertiseImages = new UploadProcessor(CommonVars.ADDITIONAL_ROOT_ADVERTISE_LOCATION);
+        public static UploadProcessor uProcessorAdvertiseImages = new UploadProcessor(CommonVars.AdditionalRootAdvertiseLocation);
 
 
         #endregion
@@ -145,7 +151,7 @@ namespace WereViewApp.WereViewAppCommon {
             return null;
         }
         public static void SavingAppInDirectory(AppSavingTextFields app) {
-            var textCache = new CacheDataInFile(CommonVars.APP_VIRTUAL_FIELDS_SAVING_ADDITIONALPATH);
+            var textCache = new CacheDataInFile(CommonVars.AppVirtualFieldsSavingAdditionalpath);
             var location = getAppLocation(app);
             textCache.SaveInBinary(location, app);
         }
@@ -153,7 +159,7 @@ namespace WereViewApp.WereViewAppCommon {
             return ReadAppFromDirectory(app.UploadGuid);
         }
         public static AppSavingTextFields ReadAppFromDirectory(Guid uploadGuid) {
-            var textCache = new CacheDataInFile(CommonVars.APP_VIRTUAL_FIELDS_SAVING_ADDITIONALPATH);
+            var textCache = new CacheDataInFile(CommonVars.AppVirtualFieldsSavingAdditionalpath);
             var location = getAppLocation(uploadGuid);
             return (AppSavingTextFields)textCache.ReadObjectFromBinaryFile(location);
         }

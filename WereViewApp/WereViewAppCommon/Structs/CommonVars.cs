@@ -48,21 +48,21 @@ namespace WereViewApp.WereViewAppCommon.Structs {
         #endregion
 
         #region Output Cache URLS
-        public const string OUTPUTCAHE_SUGGESTED_APPS = @"/Partials/SuggestedApps";
-        public const string OUTPUTCAHE_FEATUREDAPPS_APPS = @"/Partials/FeaturedApps";
-        public const string OUTPUTCAHE_REVIEWSDISPLAY_APPS = @"/Partials/ReviewsDisplay/";
-        public const string OUTPUTCAHE_ADVERTISEGALLERY_APPS = @"/Partials/AdvertiseGallery";
-        public const string OUTPUTCAHE_LATESTAPPSLIST_APPS = @"/Partials/LatestAppsList";
-        public const string OUTPUTCAHE_TOPAPPSLIST_APPS = @"/Partials/TopAppsList";
+        public const string OutputcaheSuggestedApps = @"/Partials/SuggestedApps";
+        public const string OutputcaheFeaturedappsApps = @"/Partials/FeaturedApps";
+        public const string OutputcaheReviewsdisplayApps = @"/Partials/ReviewsDisplay/";
+        public const string OutputcaheAdvertisegalleryApps = @"/Partials/AdvertiseGallery";
+        public const string OutputcaheLatestappslistApps = @"/Partials/LatestAppsList";
+        public const string OutputcaheTopappslistApps = @"/Partials/TopAppsList";
         
 
         #endregion
 
         #region Caching Data In file Locations
 
-        public const string APP_VIRTUAL_FIELDS_SAVING_ADDITIONALPATH = @"Database\";
-        public const string APP_SUGGESTED_ADDITIONALPATH = @"Suggested\";
-        public const string APP_SEARCH_RESULTS_ADDITIONALPATH = @"SearchResult\";
+        public const string AppVirtualFieldsSavingAdditionalpath = @"Database\";
+        public const string AppSuggestedAdditionalpath = @"Suggested\";
+        public const string AppSearchResultsAdditionalpath = @"SearchResult\";
 
         #endregion
 
@@ -72,7 +72,7 @@ namespace WereViewApp.WereViewAppCommon.Structs {
         #endregion
 
         #region Reg expressions
-        public const string FRIENDLY_URL_REGEX = @"[^A-Za-z0-9_\.~]+";
+        public const string FriendlyUrlRegex = @"[^A-Za-z0-9_\.~]+";
         #endregion
 
         #region regular constants
@@ -90,62 +90,66 @@ namespace WereViewApp.WereViewAppCommon.Structs {
 
         #region Data Saving on File
 
-        public const string APP_SAVING_EXTENSION = @".mdb";
+        public const string AppSavingExtension = @".mdb";
 
         #endregion
 
         #region Location of Images in Gallery Constants
 
-        public const string ADDITIONAL_ROOT_ADVERTISE_LOCATION = "Advertise/";
+        public const string AdditionalRootAdvertiseLocation = "Advertise/";
 
         /// <summary>
         /// "Gallery/"
         /// </summary>
-        public const string ADDITIONAL_ROOT_GALLERY_LOCATION = "Gallery/";
+        public const string AdditionalRootGalleryLocation = "Gallery/";
         /// <summary>
         /// "GalleryThumbs/"
         /// </summary>
-        public const string ADDITIONAL_ROOT_GALLERY_ICON_LOCATION = "GalleryThumbs/";
+        public const string AdditionalRootGalleryIconLocation = "GalleryThumbs/";
         /// <summary>
         /// "SearchThumbs/"
         /// </summary>
-        public const string ADDITIONAL_ROOT_SEARCH_ICON_LOCATION = "SearchThumbs/";
+        public const string AdditionalRootSearchIconLocation = "SearchThumbs/";
         /// <summary>
         /// "HomePageThumbs/"
         /// </summary>
-        public const string ADDITIONAL_ROOT_HOME_ICON_LOCATION = "HomePageThumbs/";
+        public const string AdditionalRootHomeIconLocation = "HomePageThumbs/";
         /// <summary>
         /// "HomePageFeatured/"
         /// </summary>
-        public const string ADDITIONAL_ROOT_HOME_LOCATION = "HomePageFeatured/";
+        public const string AdditionalRootHomeLocation = "HomePageFeatured/";
         /// <summary>
         /// "SuggestionThumbs/"
         /// </summary>
-        public const string ADDITIONAL_ROOT_SUGGESTED_ICON_LOCATION = "SuggestionThumbs/";
+        public const string AdditionalRootSuggestedIconLocation = "SuggestionThumbs/";
 
+        /// <summary>
+        /// "SuggestionThumbs/"
+        /// </summary>
+        public const string YouTubeCoverImageLocation = "SuggestionThumbs/";
         #endregion
 
         #region Apps Suggestions Number
-        public const int SUGGEST_HIGHEST_TAKE = 10;
-        public const int SUGGEST_HIGHEST_DISPLAY_NUMBER_SUGGESTIONS = 12;
-        public const int SUGGEST_HIGHEST_FROM_SAME_USER = 3;
-        public const int SUGGEST_HIGHEST_SAME_APP_NAME = 3;
-        public const int SUGGEST_HIGHEST_AND_SIMILAR_QUERY = 10;
-        public const int SUGGEST_HIGHEST_OR_SIMILAR_QUERY = 10;
+        public const int SuggestHighestTake = 10;
+        public const int SuggestHighestDisplayNumberSuggestions = 12;
+        public const int SuggestHighestFromSameUser = 3;
+        public const int SuggestHighestSameAppName = 3;
+        public const int SuggestHighestAndSimilarQuery = 10;
+        public const int SuggestHighestOrSimilarQuery = 10;
 
-        public const int SEARCH_RESULTS_MAX_RESULT_RETURN = 80;
+        public const int SearchResultsMaxResultReturn = 80;
 
 
         #endregion
         #region Truncate Len
-        public const int APP_HOME_PAGE_DESCRIPTION_TRUNC_LEN = 45;
+        public const int AppHomePageDescriptionTruncLen = 45;
         
         #endregion
 
         #region Cache in file max expire time
 
-        public const int APP_SEARCH_RESULTS_EXPIRE_IN_HOURS = 36;
-        public const int APP_SUGGESTED_RESULTS_EXPIRE_IN_HOURS = 36;
+        public const int AppSearchResultsExpireInHours = 36;
+        public const int AppSuggestedResultsExpireInHours = 36;
 
         #endregion
     }
