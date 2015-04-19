@@ -1022,17 +1022,6 @@ namespace WereViewApp.Controllers {
 
         #endregion
 
-        #region Suggestion Icon Upload
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public JsonResult UploadSuggestionIcon(App app, HttpPostedFileBase suggestionIcon) {
-            return ProcessSingleUploads(app, suggestionIcon, GalleryCategoryIDs.SuggestionIcon,
-                WereViewStatics.uProcessorSuggestionIcons);
-        }
-
-        #endregion
-
         #endregion
 
         #region Edit or modify record
