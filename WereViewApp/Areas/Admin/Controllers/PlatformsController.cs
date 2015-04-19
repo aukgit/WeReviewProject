@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using WereViewApp.Controllers;
 using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.EntityModel.POCO;
 using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Areas.Admin.Controllers

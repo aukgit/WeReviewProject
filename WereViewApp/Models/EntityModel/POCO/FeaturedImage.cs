@@ -7,10 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-
-namespace WereViewApp.Models.EntityModel.POCO
+namespace WereViewApp.Models.EntityModel
 {
+    using System;
+    using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+    
     public partial class FeaturedImage
     {
         public long FeaturedImageID { get; set; }

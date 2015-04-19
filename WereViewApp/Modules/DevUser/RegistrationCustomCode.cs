@@ -1,5 +1,4 @@
 ﻿using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.EntityModel.POCO;
 using WereViewApp.Models.POCO.Identity;
 
 namespace WereViewApp.Modules.DevUser {

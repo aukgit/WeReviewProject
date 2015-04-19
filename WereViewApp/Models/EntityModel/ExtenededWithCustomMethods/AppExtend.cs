@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using WereViewApp.Models.EntityModel.POCO;
 using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {

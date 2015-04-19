@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.EntityModel.POCO;
 
 namespace WereViewApp.Models.ViewModels {
     public class SearchViewModel {

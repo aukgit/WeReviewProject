@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.EntityModel.POCO;
 using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.Uploads;
 using WereViewApp.WereViewAppCommon.Structs;

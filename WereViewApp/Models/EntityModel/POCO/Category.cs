@@ -7,10 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-
-namespace WereViewApp.Models.EntityModel.POCO
+namespace WereViewApp.Models.EntityModel
 {
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Category
     {
         public Category()

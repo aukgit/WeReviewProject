@@ -13,7 +13,6 @@ using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.WereViewAppCommon.Structs;
 using DevMVCComponent.Database;
-using WereViewApp.Models.EntityModel.POCO;
 using WereViewApp.Modules.Cache;
 
 namespace WereViewApp.WereViewAppCommon {

@@ -7,10 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-
-namespace WereViewApp.Models.EntityModel.POCO
+namespace WereViewApp.Models.EntityModel
 {
+    using System;
+    using System.Collections.Generic;
+    
     public partial class TempUpload
     {
         public System.Guid TempUploadID { get; set; }

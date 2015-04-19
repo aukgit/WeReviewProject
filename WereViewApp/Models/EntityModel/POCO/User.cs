@@ -7,10 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using WereViewApp.Models.DesignPattern.Interfaces;
+namespace WereViewApp.Models.EntityModel {
+    using System;
+    using System.Collections.Generic;
+    using WereViewApp.Models.DesignPattern.Interfaces;
 
-namespace WereViewApp.Models.EntityModel.POCO {
     public partial class User:IDevUser {
         public User() {
             this.Apps = new HashSet<App>();
