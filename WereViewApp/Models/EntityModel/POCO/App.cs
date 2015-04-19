@@ -81,15 +81,18 @@ namespace WereViewApp.Models.EntityModel
 
         #region Virtual Propertise
 
-        [Display(Name = "Gallery Images", Description = "[Max number 6 each 1MB] Resolution 713x285, however whatever you upload will be resized.")]
+        [Display(Name = "Youtube video cover", Description = "[Single image 1MB] Resolution 481x440, however whatever you upload will be resized.")]
+        public IEnumerable<HttpPostedFileBase> YoutubeCoverImage { get; set; }
+
+        [Display(Name = "Gallery Images", Description = "[Max number 6 each 1MB] Resolution 1140x400, however whatever you upload will be resized.")]
         public IEnumerable<HttpPostedFileBase> Galleries { get; set; }
-        [Display(Name = "Home Page (Featured)", Description = "[Single image 1MB] Resolution 1900 × 400, however whatever you upload will be resized.")]
+        [Display(Name = "Home Page (Featured)", Description = "[Single image 1MB] Resolution 1900 × 400, however whatever you upload will be resized. Better if you use png for this purpose.")]
         public HttpPostedFileBase HomePageFeatured { get; set; }
-        [Display(Name = "Front Page Icon", Description = "[Single image 1MB] Resolution 61x56, however whatever you upload will be resized.")]
+        [Display(Name = "Front Page Icon", Description = "[Single image 1MB] Resolution 122x115, however whatever you upload will be resized.")]
         public HttpPostedFileBase HomePageIcon { get; set; }
         [Display(Name = "Search Icon", Description = "[Single image 1MB] Resolution 117x177, however whatever you upload will be resized.")]
         public HttpPostedFileBase SearchIcon { get; set; }
-        [Display(Name = "Suggestion Icon", Description = "[Single image 1MB] Best resolution 221x127, however whatever you upload will be resized.")]
+        [Display(Name = "Suggestion Icon", Description = "[Single image 1MB] Best resolution 192x119, however whatever you upload will be resized.")]
         public HttpPostedFileBase SuggestionIcon { get; set; }
 
         #endregion
@@ -97,7 +100,7 @@ namespace WereViewApp.Models.EntityModel
 
         #region Virtual Fields Add Not Saving anywhere
 
-        public string GalleryHomeFeaturedLocation { get; set; }
+        public string HomeFeaturedBigImageLocation { get; set; }
         public string GallerySuggestionIconLocation { get; set; }
         public string GallerySearchIconLocation { get; set; }
         public string GalleryHomeIconLocation { get; set; }
