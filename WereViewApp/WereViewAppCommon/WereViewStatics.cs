@@ -10,13 +10,8 @@ using WereViewApp.WereViewAppCommon.Structs;
 
 namespace WereViewApp.WereViewAppCommon {
     public static class WereViewStatics {
-
-
-
         static List<Category> _appCategoriesCache = null;
         static List<Platform> _appPlatformsCache = null;
-
-
         #region Declaration
 
         /// <summary>

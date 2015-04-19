@@ -167,7 +167,7 @@ namespace WereViewApp.Modules.Uploads {
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <param name="ext"></param>
-        public void ProcessImage(string sourceLocation, string processedLocation, double width, double height,
+        public void ResizeImageAndProcessImage(string sourceLocation, string processedLocation, double width, double height,
             string ext) {
             if (sourceLocation != null && processedLocation != null) {
                 var source = sourceLocation.Replace("~", AppPath).Replace('/', '\\');
@@ -178,6 +178,7 @@ namespace WereViewApp.Modules.Uploads {
         }
 
         /// <summary>
+        /// Resize the image
         /// </summary>
         /// <param name="category"></param>
         /// <param name="sourceFileName">like "Justuploaded"</param>
@@ -189,7 +190,7 @@ namespace WereViewApp.Modules.Uploads {
         ///     Best way to set it in class constructor.
         /// </param>
         /// <param name="rootPath"></param>
-        public void ProcessImage(IUploadableFile file, IImageCategory category, string sourceFileName = null,
+        public void ResizeImageAndProcessImage(IUploadableFile file, IImageCategory category, string sourceFileName = null,
             string processedFileName = null, bool isSourceAddTemp = true, bool isPrivate = false,
             string additionalRootPath = null, string rootPath = null) {
             if (file != null && category != null) {

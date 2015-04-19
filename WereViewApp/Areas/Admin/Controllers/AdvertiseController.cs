@@ -275,7 +275,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
                 using (var db2 = new WereViewAppEntities()) {
                     var category = db2.GalleryCategories.Find(gallery.GalleryCategoryID);
                     if (category != null) {         
-                        WereViewStatics.UProcessorAdvertiseImages.ProcessImage(gallery,category);
+                        WereViewStatics.UProcessorAdvertiseImages.ResizeImageAndProcessImage(gallery,category);
                         WereViewStatics.UProcessorAdvertiseImages.RemoveTempImage(gallery, true);
                     }
                 }
