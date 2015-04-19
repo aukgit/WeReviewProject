@@ -103,9 +103,12 @@ namespace WereViewApp.Models.EntityModel
         public string HomeFeaturedBigImageLocation { get; set; }
         public string SuggestionIconLocation { get; set; }
         public string SearchIconLocation { get; set; }
-        public string GalleryHomeIconLocation { get; set; }
-        public List<DisplayGalleryImages> GalleryGalleryImages { get; set; }
-
+        public string HomePageIconLocation { get; set; }
+        public string YoutubeCoverImageLocation { get; set; }
+        public List<DisplayGalleryImages> AppDetailsGalleryImages { get; set; }
+        /// <summary>
+        /// Only will be set from extension method of App. GetAppUrl()
+        /// </summary>
         public string AbsUrl { get; set; }
         /// <summary>
         /// if false then load review.

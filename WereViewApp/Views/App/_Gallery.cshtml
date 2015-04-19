@@ -3,8 +3,8 @@
 @{
     int length = 0;
     int i = 0;
-    if (Model.GalleryGalleryImages != null) {
-        length = Model.GalleryGalleryImages.Count;
+    if (Model.AppDetailsGalleryImages != null) {
+        length = Model.AppDetailsGalleryImages.Count;
     }
 }
 <div id="apps-preview" itemprop="itemListElement" itemscope itemtype="http://schema.org/Book">
@@ -21,7 +21,7 @@
         </div>
     }
     @for (i = 0; i < length; i++) {
-        var imageDisplay = Model.GalleryGalleryImages[i];
+        var imageDisplay = Model.AppDetailsGalleryImages[i];
         <div>
             <img itemprop="image" class="img-responsive" src="@imageDisplay.GalleryImageLocation" alt="@imageDisplay.Title">
         </div>

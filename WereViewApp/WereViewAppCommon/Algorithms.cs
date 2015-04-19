@@ -1122,7 +1122,7 @@ namespace WereViewApp.WereViewAppCommon {
                 if (galleriesWithApp != null) {
                     galleriesWithApp = galleriesWithApp.OrderBy(n => n.Sequence).ToList();
 
-                    app.GalleryGalleryImages = galleriesWithApp;
+                    app.AppDetailsGalleryImages = galleriesWithApp;
                 }
             }
 
@@ -1142,7 +1142,7 @@ namespace WereViewApp.WereViewAppCommon {
         ///    if (categoryId == GalleryCategoryIDs.HomePageFeatured) {
         ///        tempApp.HomeFeaturedBigImageLocation = location;
         ///    } else if (categoryId == GalleryCategoryIDs.HomePageIcon) {
-        ///        tempApp.GalleryHomeIconLocation = location;
+        ///        tempApp.HomePageIconLocation = location;
         ///    } else if (categoryId == GalleryCategoryIDs.SearchIcon) {
         ///        tempApp.SearchIconLocation = location;
         ///    } else if (categoryId == GalleryCategoryIDs.SuggestionIcon) {
@@ -1169,7 +1169,7 @@ namespace WereViewApp.WereViewAppCommon {
                         if (categoryId == GalleryCategoryIDs.HomePageFeatured) {
                             tempApp.HomeFeaturedBigImageLocation = location;
                         } else if (categoryId == GalleryCategoryIDs.HomePageIcon) {
-                            tempApp.GalleryHomeIconLocation = location;
+                            tempApp.HomePageIconLocation = location;
                         } else if (categoryId == GalleryCategoryIDs.SearchIcon) {
                             tempApp.SearchIconLocation = location;
                         } else if (categoryId == GalleryCategoryIDs.SuggestionIcon) {
