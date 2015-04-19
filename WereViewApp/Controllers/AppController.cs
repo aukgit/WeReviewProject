@@ -1026,8 +1026,8 @@ namespace WereViewApp.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult YoutubeCoverUpload(App app, HttpPostedFileBase youtubeCoverImage) {
-            return ProcessSingleUploads(app, youtubeCoverImage, GalleryCategoryIDs.YoutubeCoverImage,
+        public JsonResult YoutubeCoverUpload(App app, HttpPostedFileBase YoutubeCoverImage) {
+            return ProcessSingleUploads(app, YoutubeCoverImage, GalleryCategoryIDs.YoutubeCoverImage,
                 WereViewStatics.UProcessorYoutubeCover);
         }
 
