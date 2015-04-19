@@ -63,14 +63,10 @@ namespace WereViewApp.Models.EntityModel {
 
         [StringLength(50)]
         [Required]
-        [Display(Name = "Title",
-            Description =
-                "(ASCII 50 chars) Title gives unique URLs which includes platform version, platform, category. Please specify those correctly to get a unique name. Eg. Plant vs. Zombies v2"
-            )]
+        [Display(Name = "Title", Description ="(ASCII 50 chars) Title gives unique URLs which includes platform version, platform, category. Please specify those correctly to get a unique name. Eg. Plant vs. Zombies v2")]
         public string AppName { get; set; }
 
-        [Display(Name = "Platform", Description = "Eg. Like iOS Platform version 7, Windows platform version 8.1 so on."
-            )]
+        [Display(Name = "Platform", Description = "Eg. Like iOS Platform version 7, Windows platform version 8.1 so on.")]
         [Range(0, 3000, ErrorMessage = "Sorry you have to been the range of 0-3000")]
         [Required]
         public byte PlatformID { get; set; }
@@ -79,18 +75,12 @@ namespace WereViewApp.Models.EntityModel {
         [Required]
         public short CategoryID { get; set; }
 
-        [Display(Name = "Description",
-            Description =
-                "(Unicode 2000 chars) Describe your app fully the much you describe the much its optimized and rank. Try to include tags and app name to make it more SEO friendly."
-            )]
+        [Display(Name = "Description",Description ="(Unicode 2000 chars) Describe your app fully the much you describe the much its optimized and rank. Try to include tags and app name to make it more SEO friendly.")]
         [StringLength(2000)]
         [Required]
         public string Description { get; set; }
 
-        [Display(Name = "Embed Video Link",
-            Description =
-                "Embed video link from youtube or anywhere. An embed video can boost your audiences. Even-though it's optional however we recommend to add a video."
-            )]
+        [Display(Name = "Embed Video Link",Description ="Embed video link from youtube or anywhere. An embed video can boost your audiences. Even-though it's optional however we recommend to add a video.")]
         [StringLength(255)]
         public string YoutubeEmbedLink { get; set; }
 
@@ -98,10 +88,7 @@ namespace WereViewApp.Models.EntityModel {
         [StringLength(255)]
         public string WebSiteURL { get; set; }
 
-        [Display(Name = "App Store",
-            Description =
-                "Please be relevant with your store URL because it help you get up to speed in sales and get in touch with more audenices.."
-            )]
+        [Display(Name = "App Store",Description ="Please be relevant with your store URL because it help you get up to speed in sales and get in touch with more audenices..")]
         [StringLength(255)]
         public string StoreURL { get; set; }
 
@@ -110,30 +97,22 @@ namespace WereViewApp.Models.EntityModel {
 
         #region Virtual Propertise
 
-        [Display(Name = "Youtube video cover",
-            Description = "[Single image 1MB] Resolution 481x440, however whatever you upload will be resized.")]
+        [Display(Name = "Youtube video cover",Description = "[Single image 1MB] Resolution 481x440, however whatever you upload will be resized.")]
         public IEnumerable<HttpPostedFileBase> YoutubeCoverImage { get; set; }
 
-        [Display(Name = "Gallery Images",
-            Description = "[Max number 6 each 1MB] Resolution 1140x400, however whatever you upload will be resized.")]
+        [Display(Name = "Gallery Images", Description = "[Max number 6 each 1MB] Resolution 1140x400, however whatever you upload will be resized.")]
         public IEnumerable<HttpPostedFileBase> Galleries { get; set; }
 
-        [Display(Name = "Home Page (Featured)",
-            Description =
-                "[Single image 1MB] Resolution 1900 × 400, however whatever you upload will be resized. Better if you use png for this purpose."
-            )]
+        [Display(Name = "Home Page (Featured)",Description ="[Single image 1MB] Resolution 1900 × 400, however whatever you upload will be resized. Better if you use png for this purpose.")]
         public HttpPostedFileBase HomePageFeatured { get; set; }
 
-        [Display(Name = "Front Page Icon",
-            Description = "[Single image 1MB] Resolution 122x115, however whatever you upload will be resized.")]
+        [Display(Name = "Front Page Icon",Description = "[Single image 1MB] Resolution 122x115, however whatever you upload will be resized.")]
         public HttpPostedFileBase HomePageIcon { get; set; }
 
-        [Display(Name = "Search Icon",
-            Description = "[Single image 1MB] Resolution 117x177, however whatever you upload will be resized.")]
+        [Display(Name = "Search Icon",Description = "[Single image 1MB] Resolution 117x177, however whatever you upload will be resized.")]
         public HttpPostedFileBase SearchIcon { get; set; }
 
-        [Display(Name = "Suggestion Icon",
-            Description = "[Single image 1MB] Best resolution 192x119, however whatever you upload will be resized.")]
+        [Display(Name = "Suggestion Icon", Description = "[Single image 1MB] Best resolution 192x119, however whatever you upload will be resized.")]
         public HttpPostedFileBase SuggestionIcon { get; set; }
 
         #endregion

@@ -12,16 +12,16 @@ namespace WereViewApp.Models.EntityModel
         public short CategoryID { get; set; }
         public string Description { get; set; }
         public long PostedByUserID { get; set; }
-        public Nullable<short> ReviewsCount { get; set; }
-        public Nullable<bool> IsVideoExist { get; set; }
+        public short? ReviewsCount { get; set; }
+        public bool? IsVideoExist { get; set; }
         public string YoutubeEmbedLink { get; set; }
         public string WebSiteURL { get; set; }
         public string StoreURL { get; set; }
-        public Nullable<bool> IsBlocked { get; set; }
-        public Nullable<bool> IsPublished { get; set; }
-        public Nullable<double> PlatformVersion { get; set; }
+        public bool? IsBlocked { get; set; }
+        public bool? IsPublished { get; set; }
+        public double? PlatformVersion { get; set; }
         public Guid UploadGuid { get; set; }
-        public Nullable<long> TotalViewed { get; set; }
+        public long? TotalViewed { get; set; }
         public string URL { get; set; }
 
         public DateTime ReleaseDate { get; set; }
