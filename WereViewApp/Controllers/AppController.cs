@@ -849,13 +849,13 @@ namespace WereViewApp.Controllers {
                             firstTime = false;
                         }
 
-                        //upload the image
+                        //upload app-details page gallery image
                         WereViewStatics.uProcessorGallery.UploadFile(file, fileName, nextSequence, true, true);
 
 
                         //successfully uploaded now save a gallery info
                         var galleryCategory = await db.GalleryCategories.FindAsync(GalleryCategoryIDs.AppPageGallery);
-                        var thumbsCategory = await db.GalleryCategories.FindAsync(GalleryCategoryIDs.GalleryIcon);
+                        //var thumbsCategory = await db.GalleryCategories.FindAsync(GalleryCategoryIDs.GalleryIcon);
                         var gallery =
                             await
                                 db.Galleries.FirstOrDefaultAsync(
@@ -864,6 +864,7 @@ namespace WereViewApp.Controllers {
                                         n.GalleryCategoryID == galleryCategory.GalleryCategoryID &&
                                         n.Sequence == nextSequence);
 
+                        // saving in the database
                         if (gallery == null) {
                             // we didn't get the error
                             // image sequence and guid is correct.
@@ -889,19 +890,28 @@ namespace WereViewApp.Controllers {
 
                         // resize
                         //new Thread(() => {
-                        WereViewStatics.uProcessorGallery.ProcessImage(gallery, galleryCategory);
+                        
                         var source = "~/Uploads/Images/" + CommonVars.ADDITIONAL_ROOT_GALLERY_LOCATION +
                                      UploadProcessor.GetOrganizeNameStatic(gallery, true, true);
-                        var target = "~/Uploads/Images/" + CommonVars.ADDITIONAL_ROOT_GALLERY_ICON_LOCATION +
-                                     UploadProcessor.GetOrganizeNameStatic(gallery, true);
-                        WereViewStatics.uProcessorGallery.ProcessImage(source, target, thumbsCategory.Width,
-                            thumbsCategory.Height, gallery.Extension);
+                        //checking if resize-source image already exist.
                         if (
-                            System.IO.File.Exists(
-                                WereViewStatics.uProcessorGallery.VirtualPathtoAbsoluteServerPath(target))) {
+                           System.IO.File.Exists(
+                               WereViewStatics.uProcessorGallery.VirtualPathtoAbsoluteServerPath(source))) {
                             // if processed image exist then remove  the temp.
                             WereViewStatics.uProcessorGallery.RemoveTempImage(gallery);
                         }
+                        // resize app-details page gallery image
+
+                        WereViewStatics.uProcessorGallery.ProcessImage(gallery, galleryCategory);
+                        //var source = "~/Uploads/Images/" + CommonVars.ADDITIONAL_ROOT_GALLERY_LOCATION +
+                        //             UploadProcessor.GetOrganizeNameStatic(gallery, true, true);
+                        //var target = "~/Uploads/Images/" + CommonVars.ADDITIONAL_ROOT_GALLERY_ICON_LOCATION +
+                        //             UploadProcessor.GetOrganizeNameStatic(gallery, true);
+                        
+                        // #apps detail page gallery thumbs generate
+                        //WereViewStatics.uProcessorGallery.ProcessImage(source, target, thumbsCategory.Width,
+                        //    thumbsCategory.Height, gallery.Extension);
+                       
                         countDone++;
                         //}).Start();
                     }
