@@ -77,6 +77,7 @@ namespace WereViewApp.WereViewAppCommon {
         #endregion
 
         #endregion
+
         #region Category Controller
 
         #region Category wise apps for category page
@@ -263,7 +264,7 @@ namespace WereViewApp.WereViewAppCommon {
 
         /// <summary>
         /// Returns apps which are related to home page gallery 
-        /// Use GalleryHomeFeaturedLocation to src display image.
+        /// Use HomeFeaturedBigImageLocation to src display image.
         /// </summary>
         /// <param name="db"></param>
         /// <param name="max"></param>
@@ -1139,7 +1140,7 @@ namespace WereViewApp.WereViewAppCommon {
         /// <param name="categoryId">
         /// if (tempApp != null) {
         ///    if (categoryId == GalleryCategoryIDs.HomePageFeatured) {
-        ///        tempApp.GalleryHomeFeaturedLocation = location;
+        ///        tempApp.HomeFeaturedBigImageLocation = location;
         ///    } else if (categoryId == GalleryCategoryIDs.HomePageIcon) {
         ///        tempApp.GalleryHomeIconLocation = location;
         ///    } else if (categoryId == GalleryCategoryIDs.SearchIcon) {
@@ -1166,7 +1167,7 @@ namespace WereViewApp.WereViewAppCommon {
                     string location = gallery.GetHtppUrl();
                     if (tempApp != null) {
                         if (categoryId == GalleryCategoryIDs.HomePageFeatured) {
-                            tempApp.GalleryHomeFeaturedLocation = location;
+                            tempApp.HomeFeaturedBigImageLocation = location;
                         } else if (categoryId == GalleryCategoryIDs.HomePageIcon) {
                             tempApp.GalleryHomeIconLocation = location;
                         } else if (categoryId == GalleryCategoryIDs.SearchIcon) {
