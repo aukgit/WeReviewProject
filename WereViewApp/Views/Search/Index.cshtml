@@ -48,9 +48,9 @@
             <div class="input-group">
                 @Html.AntiForgeryToken()
                 @if (!isEmptySearchString) {
-                    <input type="text" value="@Model.SearchQuery" class="form-control" placeholder="Search for mobile apps" name="SearchQuery">
+                    <input type="text" value="@Model.SearchQuery" class="form-control" placeholder="Search for mobile apps" name="SearchQuery" autofocus>
                 } else {
-                    <input type="text" class="form-control" placeholder="Search for mobile apps" name="SearchQuery">
+                    <input type="text" class="form-control" placeholder="Search for mobile apps" name="SearchQuery" autofocus>
                 }
                 <div class="input-group-btn">
                     <button class="btn btn-default" type="submit">
