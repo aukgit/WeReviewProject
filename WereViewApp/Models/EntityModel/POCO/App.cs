@@ -101,7 +101,7 @@ namespace WereViewApp.Models.EntityModel
         #region Virtual Fields Add Not Saving anywhere
 
         public string HomeFeaturedBigImageLocation { get; set; }
-        public string GallerySuggestionIconLocation { get; set; }
+        public string SuggestionIconLocation { get; set; }
         public string GallerySearchIconLocation { get; set; }
         public string GalleryHomeIconLocation { get; set; }
         public List<DisplayGalleryImages> GalleryGalleryImages { get; set; }

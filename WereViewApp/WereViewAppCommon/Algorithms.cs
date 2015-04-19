@@ -1085,7 +1085,7 @@ namespace WereViewApp.WereViewAppCommon {
                     string location = gallery.GetHtppUrl();
 
                     if (tempApp != null) {
-                        tempApp.GallerySuggestionIconLocation = location;
+                        tempApp.SuggestionIconLocation = location;
                     }
                 }
             }
@@ -1146,7 +1146,7 @@ namespace WereViewApp.WereViewAppCommon {
         ///    } else if (categoryId == GalleryCategoryIDs.SearchIcon) {
         ///        tempApp.GallerySearchIconLocation = location;
         ///    } else if (categoryId == GalleryCategoryIDs.SuggestionIcon) {
-        ///        tempApp.GallerySuggestionIconLocation = location;
+        ///        tempApp.SuggestionIconLocation = location;
         ///    }
         /// }    
         /// </param>
@@ -1173,7 +1173,7 @@ namespace WereViewApp.WereViewAppCommon {
                         } else if (categoryId == GalleryCategoryIDs.SearchIcon) {
                             tempApp.GallerySearchIconLocation = location;
                         } else if (categoryId == GalleryCategoryIDs.SuggestionIcon) {
-                            tempApp.GallerySuggestionIconLocation = location;
+                            tempApp.SuggestionIconLocation = location;
                         }
                     }
                 }
