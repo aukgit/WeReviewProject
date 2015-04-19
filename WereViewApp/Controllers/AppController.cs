@@ -20,6 +20,7 @@ using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Uploads;
 using WereViewApp.WereViewAppCommon;
 using WereViewApp.WereViewAppCommon.Structs;
+using FileSys = System.IO.File;
 
 #endregion
 
@@ -891,15 +892,7 @@ namespace WereViewApp.Controllers {
                         // resize
                         //new Thread(() => {
                         
-                        var source = "~/Uploads/Images/" + CommonVars.AdditionalRootGalleryLocation +
-                                     UploadProcessor.GetOrganizeNameStatic(gallery, true, true);
-                        //checking if resize-source image already exist.
-                        if (
-                           System.IO.File.Exists(
-                               WereViewStatics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(source))) {
-                            // if processed image exist then remove  the temp.
-                            WereViewStatics.UProcessorGallery.RemoveTempImage(gallery);
-                        }
+                       
                         // resize app-details page gallery image
 
                         WereViewStatics.UProcessorGallery.ResizeImageAndProcessImage(gallery, galleryCategory);
@@ -911,7 +904,15 @@ namespace WereViewApp.Controllers {
                         // #apps detail page gallery thumbs generate
                         //WereViewStatics.uProcessorGallery.ResizeImageAndProcessImage(source, target, thumbsCategory.Width,
                         //    thumbsCategory.Height, gallery.Extension);
-                       
+                        
+                        
+                        var source = "~/Uploads/Images/" + CommonVars.AdditionalRootGalleryLocation +
+                                     UploadProcessor.GetOrganizeNameStatic(gallery, true, true);
+                        //removing temp image what was exact uploaded after resizing it.
+                        if (FileSys.Exists(WereViewStatics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(source))) {
+                            // if processed image exist then remove  the temp.
+                            WereViewStatics.UProcessorGallery.RemoveTempImage(gallery);
+                        }
                         countDone++;
                         //}).Start();
                     }
