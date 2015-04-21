@@ -98,7 +98,7 @@ namespace WereViewApp.Models.EntityModel {
         #region Virtual Propertise
 
         [Display(Name = "Youtube video cover", Description = "[Single image 1MB] Resolution 1140x400, however whatever you upload will be resized.")]
-        public IEnumerable<HttpPostedFileBase> YoutubeCoverImage { get; set; }
+        public HttpPostedFileBase YoutubeCoverImage { get; set; }
 
         [Display(Name = "Gallery Images", Description = "[Max number 6 each 1MB] Resolution 1140x400, however whatever you upload will be resized.")]
         public IEnumerable<HttpPostedFileBase> Galleries { get; set; }
@@ -120,10 +120,30 @@ namespace WereViewApp.Models.EntityModel {
         #region Virtual Fields Add Not Saving anywhere
 
         public string HomeFeaturedBigImageLocation { get; set; }
+        /// <summary>
+        /// Virtual Property not going to save.
+        /// Used to get the location of App-details suggestion app icons
+        /// </summary>
         public string SuggestionIconLocation { get; set; }
+        /// <summary>
+        /// Virtual Property not going to save.
+        /// Used to get the location of Search/Profile/Category page app icons
+        /// </summary>
         public string SearchIconLocation { get; set; }
+        /// <summary>
+        /// Virtual Property not going to save.
+        /// Used to get the location of Home page app icons
+        /// </summary>
         public string HomePageIconLocation { get; set; }
+        /// <summary>
+        /// Virtual Property not going to save.
+        /// Used to get the location of youtube cover image
+        /// </summary>
         public string YoutubeCoverImageLocation { get; set; }
+        /// <summary>
+        /// Virtual Property not going to save.
+        /// It is use to display gallery images in app-details page
+        /// </summary>
         public List<DisplayGalleryImages> AppDetailsGalleryImages { get; set; }
 
         /// <summary>
