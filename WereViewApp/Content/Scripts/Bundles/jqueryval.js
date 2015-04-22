@@ -10776,14 +10776,14 @@ $(function () {
 /// <reference path="../../Content/Scripts/star-rating.js" />
 /// <reference path="../../Content/Scripts/bootstrap-table-filter.js" />
 /// <reference path="../../Content/Scripts/Scripts/jquery.elastic.source.js" />
-/// <reference path="I:\WereViewApp\WereViewProject\WereViewApp\Content/Scripts/Upload/devOrgUploadConfig.js" />
+/// <reference path="I:\WeReviewApp\WereViewProject\WeReviewApp\Content/Scripts/Upload/devOrgUploadConfig.js" />
 
 
 $(function () {
     /// <summary>
     /// Were view app plug-in written by Alim Ul Karim
     /// </summary>
-    $.WereViewApp = {
+    $.WeReviewApp = {
 
         $appForm: $("form.app-editing-page:first"), // means both editing and posting
         $appFormEdit: $("form.app-edit:first"),
@@ -10843,32 +10843,52 @@ $(function () {
             /// 
             /// </param>
             var ifAnyUploadfails = false;
-            if ($.WereViewApp.$appFormPost.length > 0) {
+
+            function raiseUploaderInvalidMessage(failedBoolean) {
+                if (failedBoolean) {
+                    $.WeReviewApp.$appPageUploaderNotifier.text("Please upload all necessary files to proceed next.");
+                } else {
+                    $.WeReviewApp.$appPageUploaderNotifier.text("");
+                }
+            }
+
+            function isInvalidateUploader($uploaderx) {
+                var idAttr = $uploaderx.attr("data-id"); //always use jquery to get attr
+                var loadedValues = $.devOrgUP.getCountOfHowManyFilesUploaded(idAttr);
+
+                if (loadedValues === 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            if ($.WeReviewApp.$appFormPost.length > 0) {
                 e.preventDefault();
 
                 // only check uploader when posting time
 
                 // first check if form is valid or not.
-                var visibleInputsExceptFile = $.WereViewApp.$allInputs.filter("[type!=file]:visible");
+                var visibleInputsExceptFile = $.WeReviewApp.$allInputs.filter("[type!=file]:visible");
                 var len = visibleInputsExceptFile.length;
-                if (!$.WereViewApp.isAppTitleValid()) {
-                    $.WereViewApp.$globalTopErrorLabel.text("Please fill out the title correctly. It's very important for your app.");
-                    $.WereViewApp.$globalTopErrorLabel.show();
+                if (!$.WeReviewApp.isAppTitleValid()) {
+                    $.WeReviewApp.$globalTopErrorLabel.text("Please fill out the title correctly. It's very important for your app.");
+                    $.WeReviewApp.$globalTopErrorLabel.show();
                     return;
                 }
 
                 for (var i = 0; i < len; i++) {
                     var $singleInput = $(visibleInputsExceptFile[i]);
                     if (!$singleInput.valid()) {
-                        $.WereViewApp.$globalTopErrorLabel.text("Please fill out the required fields.");
+                        $.WeReviewApp.$globalTopErrorLabel.text("Please fill out the required fields.");
                         return;
                     }
                 }
 
-                $.WereViewApp.$globalTopErrorLabel.text("");
+                $.WeReviewApp.$globalTopErrorLabel.text("");
 
                 // first check if the uploaders are visible or not
-                var $uploaderRows = $.WereViewApp.$appForm.find($.WereViewApp.selectorForUploaderRows);
+                var $uploaderRows = $.WeReviewApp.$appForm.find($.WeReviewApp.selectorForUploaderRows);
 
                 //visibility check
 
@@ -10883,8 +10903,8 @@ $(function () {
                         }
                     }
                     if ($uploaderRow.is(":hidden")) {
-                        if ($.WereViewApp.$howtoUseUploaderInfoLabel.is(":hidden")) {
-                            $.WereViewApp.$howtoUseUploaderInfoLabel.show();
+                        if ($.WeReviewApp.$howtoUseUploaderInfoLabel.is(":hidden")) {
+                            $.WeReviewApp.$howtoUseUploaderInfoLabel.show();
                         }
                         raiseUploaderInvalidMessage(ifAnyUploadfails);
 
@@ -10895,7 +10915,7 @@ $(function () {
 
 
                 // checking uploadeers if valid
-                var $uploaders = $.WereViewApp.$appForm.find("#collection-uploaders");
+                var $uploaders = $.WeReviewApp.$appForm.find("#collection-uploaders");
                 if ($uploaders.length > 0) {
                     // only validate uploads if any uploader exist.
                     var countUploaders = $uploaders.length;
@@ -10908,10 +10928,10 @@ $(function () {
                     raiseUploaderInvalidMessage(ifAnyUploadfails);
                 }
 
-                if (!ifAnyUploadfails && $.WereViewApp.isAppTitleValid()) {
+                if (!ifAnyUploadfails && $.WeReviewApp.isAppTitleValid()) {
                     //everything is successful
-                    $.WereViewApp.appInputChangesExist = false;
-                    $.WereViewApp.fixAllInputIframeDataOrHtmlToSquare();
+                    $.WeReviewApp.appInputChangesExist = false;
+                    $.WeReviewApp.fixAllInputIframeDataOrHtmlToSquare();
 
                     this.submit();
                 }
@@ -10920,31 +10940,14 @@ $(function () {
             //function preventDefaultInside(evt, formCanbeSent) {
             //    if (!ifAnyUploadfails && formCanbeSent) {
             //        // all uploads has been done.
-            //        $.WereViewApp.appInputChangesExist = false; // no change exist on the unbin method ... direct submit.
+            //        $.WeReviewApp.appInputChangesExist = false; // no change exist on the unbin method ... direct submit.
             //    }
             //}
-            function isInvalidateUploader($uploaderx) {
-                var idAttr = $uploaderx.attr("data-id"); //always use jquery to get attr
-                var loadedValues = $.devOrgUP.getCountOfHowManyFilesUploaded(idAttr);
-
-                if (loadedValues === 0) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-            function raiseUploaderInvalidMessage(failedBoolean) {
-                if (failedBoolean) {
-                    $.WereViewApp.$appPageUploaderNotifier.text("Please upload all necessary files to proceed next.");
-                } else {
-                    $.WereViewApp.$appPageUploaderNotifier.text("");
-                }
-            }
         },
 
         isAppTitleValid: function () {
             var $appName = $("#AppName");
-            var hasInvalidAttr = $appName.attr($.WereViewApp.invalidAttrName);
+            var hasInvalidAttr = $appName.attr($.WeReviewApp.invalidAttrName);
 
             if (hasInvalidAttr) {
                 return false;
@@ -10955,53 +10958,54 @@ $(function () {
 
         appEditingSubmitEvent: function (e) {
             e.preventDefault();
-            if ($.WereViewApp.isAppTitleValid()) {
-                var count = $.devOrgUP.getCountOfHowManyFilesUploaded($.WereViewApp.galleryImageUploaderId);
+            if ($.WeReviewApp.isAppTitleValid()) {
+                var count = $.devOrgUP.getCountOfHowManyFilesUploaded($.WeReviewApp.galleryImageUploaderId);
                 if (count > 0) {
                     //fix square brackets
-                    $.WereViewApp.fixAllInputIframeDataOrHtmlToSquare();
+                    $.WeReviewApp.fixAllInputIframeDataOrHtmlToSquare();
                     // remove msg
-                    $.WereViewApp.appInputChangesExist = false;
+                    $.WeReviewApp.appInputChangesExist = false;
                     //submit
                     this.submit();
                 } else {
-                    $.WereViewApp.$appPageUploaderNotifier.text("Please upload all necessary files to proceed next.");
+                    $.WeReviewApp.$appPageUploaderNotifier.text("Please upload all necessary files to proceed next.");
                 }
             }
         },
 
         fixAllInputIframeDataOrHtmlToSquare: function () {
             var inputSelectors = "input.url-input"
-            var inputFields = $.WereViewApp.$appForm.find(inputSelectors);
+            var inputFields = $.WeReviewApp.$appForm.find(inputSelectors);
             if (inputFields.length > 0) {
                 for (var i = 0; i < inputFields.length; i++) {
                     var $eachInputfield = $(inputFields[i]);
-                    $.WereViewApp.fixIframeTag($eachInputfield);
+                    $.WeReviewApp.fixIframeTag($eachInputfield);
                 }
             }
         },
         invertAllInputIframeDataOrSquareToHtml: function () {
-            var inputSelectors = "input.url-input"
-            var inputFields = $.WereViewApp.$appForm.find(inputSelectors);
+            var inputSelectors = "input.url-input";
+            var inputFields = $.WeReviewApp.$appForm.find(inputSelectors);
             if (inputFields.length > 0) {
                 for (var i = 0; i < inputFields.length; i++) {
                     var $eachInputfield = $(inputFields[i]);
-                    $.WereViewApp.iframeSquareToActualTag($eachInputfield);
+                    $.WeReviewApp.iframeSquareToActualTag($eachInputfield);
                 }
             }
         },
+        fixYouTubeVideoPropertise
 
         /// it doesn't include fixing html inputs
         /// return as ajax response, add methods like success or fail to do something with it.
         ajaxDraftSaveApp: function (e) {
             var formData;
-            formData = $.WereViewApp.$appForm.serializeArray();
+            formData = $.WeReviewApp.$appForm.serializeArray();
 
             // ajax post to save draft app
             return $.ajax({
                 type: "POST",
                 dataType: "JSON",
-                url: $.WereViewApp.ajaxDraftPostUrl,
+                url: $.WeReviewApp.ajaxDraftPostUrl,
                 data: formData
             }); // ajax end
         },
@@ -11011,84 +11015,84 @@ $(function () {
             /// Only sends to draft if in the app posting page.
             /// </summary>
             /// <returns type=""></returns>
-            if ($.WereViewApp.appInputChangesExist) {
+            if ($.WeReviewApp.appInputChangesExist) {
 
-                if ($.WereViewApp.$appFormPost.length > 0) {
+                if ($.WeReviewApp.$appFormPost.length > 0) {
                     // app posting page
                     // send as ajax post
-                    if ($.WereViewApp.sendingDraftNumber <= $.WereViewApp.numberOfDraftPossible) {
+                    if ($.WeReviewApp.sendingDraftNumber <= $.WeReviewApp.numberOfDraftPossible) {
                         // fix all html inputs
-                        $.WereViewApp.fixAllInputIframeDataOrHtmlToSquare();
+                        $.WeReviewApp.fixAllInputIframeDataOrHtmlToSquare();
 
-                        $.WereViewApp.ajaxDraftSaveApp();
+                        $.WeReviewApp.ajaxDraftSaveApp();
                     }
 
                 }// app posting page if else end.
 
 
-                return "Are you sure you wanted to leave? Your app will be saved as a draft if you leave (you can have up to " + $.WereViewApp.numberOfDraftPossible + " draft posts).";
+                return "Are you sure you wanted to leave? Your app will be saved as a draft if you leave (you can have up to " + $.WeReviewApp.numberOfDraftPossible + " draft posts).";
             }
         },
 
 
 
         appFormDraftBtnClicked: function () {
-            $.WereViewApp.$appForm.find("#draft-btn").click(function (e) {
+            $.WeReviewApp.$appForm.find("#draft-btn").click(function (e) {
                 e.preventDefault();
-                $.WereViewApp.appInputChangesExist = false;
+                $.WeReviewApp.appInputChangesExist = false;
                 // fix html input type to relevant square brackets
                 // fix all html inputs
-                $.WereViewApp.fixAllInputIframeDataOrHtmlToSquare();
+                $.WeReviewApp.fixAllInputIframeDataOrHtmlToSquare();
 
                 //send ajax request to draft save.
-                $.WereViewApp.ajaxDraftSaveApp()
+                $.WeReviewApp.ajaxDraftSaveApp()
                 .done(function (data) {
                     // if successful then move to redirect page.
-                    window.location.href = $.WereViewApp.afterDraftPostRedirectPageUrl;
+                    window.location.href = $.WeReviewApp.afterDraftPostRedirectPageUrl;
                 })
                 .fail(function (jqXHR, textStatus) {
-                    $.WereViewApp.$globalTopErrorLabel.text($.WereViewApp.draftSavingFailedErrorMsg);
+                    $.WeReviewApp.$globalTopErrorLabel.text($.WeReviewApp.draftSavingFailedErrorMsg);
                 });
             });
         },
 
         appEditingPageOnReady: function () {
-            var $formInputs = $.WereViewApp.$appForm.find("select,input[name!=YoutubeEmbedLink]");
+            var $formInputs = $.WeReviewApp.$appForm.find("select,input[name!=YoutubeEmbedLink]");
             //console.log($formInputs);
 
-            $.devOrg.validateInputFromServer("#AppName", "/Validator/GetValidUrlEditing", "AppName", false, false, 3, true, " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.", null, $formInputs, $.WereViewApp.maxTryInputSubmit);
-            $.WereViewApp.$appForm.submit($.WereViewApp.appEditingSubmitEvent);
+            $.devOrg.validateInputFromServer("#AppName", "/Validator/GetValidUrlEditing", "AppName", false, false, 3, true, " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.", null, $formInputs, $.WeReviewApp.maxTryInputSubmit);
+            $.WeReviewApp.$appForm.submit($.WeReviewApp.appEditingSubmitEvent);
 
-            $.WereViewApp.invertAllInputIframeDataOrSquareToHtml();
+            $.WeReviewApp.invertAllInputIframeDataOrSquareToHtml();
         },
 
         appPostingPageOnReady: function () {
             $.devOrg.uxFriendlySlide("form.app-post", true, true);
-            var $formInputs = $.WereViewApp.$appForm.find("select,input[name!=YoutubeEmbedLink]");
+            var $formInputs = $.WeReviewApp.$appForm.find("select,input[name!=YoutubeEmbedLink]");
             console.log($formInputs);
-            $.devOrg.validateInputFromServer("#AppName", "/Validator/GetValidUrl", "AppName", false, false, 3, true, " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.", null, $formInputs, $.WereViewApp.maxTryInputSubmit);
+            $.devOrg.validateInputFromServer("#AppName", "/Validator/GetValidUrl", "AppName", false, false, 3, true, " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.", null, $formInputs, $.WeReviewApp.maxTryInputSubmit);
 
             ///hiding the uploader on the app loader page for every time before posting a new app.
-            $.WereViewApp.$appForm.find($.WereViewApp.selectorForUploaderRows).hide();
+            $.WeReviewApp.$appForm.find($.WeReviewApp.selectorForUploaderRows).hide();
 
             // stop form submitting the form if any file upload is not done.
-            $.WereViewApp.$appForm.submit($.WereViewApp.appformPostEvent);
+            $.WeReviewApp.$appForm.submit($.WeReviewApp.appformPostEvent);
 
-            $.WereViewApp.appFormDraftBtnClicked();
+            $.WeReviewApp.appFormDraftBtnClicked();
 
         },
 
         generalAppFormEditingOrPostingPageOnReady: function (e) {
 
-            if ($.WereViewApp.$appForm.length > 0) {
-                $.WereViewApp.$howtoUseUploaderInfoLabel.hide(); //hide uploader info label.
+            if ($.WeReviewApp.$appForm.length > 0) {
+                $.WeReviewApp.$howtoUseUploaderInfoLabel.hide(); //hide uploader info label.
 
-                if ($.WereViewApp.$appFormPost.length > 0) {
+                if ($.WeReviewApp.$appFormPost.length > 0) {
                     // app posting
-                    $.WereViewApp.appPostingPageOnReady();
-                } else if ($.WereViewApp.$appFormEdit.length > 0) {
+                    $.WeReviewApp.appPostingPageOnReady();
+                } else if ($.WeReviewApp.$appFormEdit.length > 0) {
                     // app editing
-                    $.WereViewApp.appEditingPageOnReady();
+                    $.WeReviewApp.appEditingPageOnReady();
                 }
 
                 $.devOrg.validateTextInputBasedOnRegEx("#AppName", "^([A-zZ.]+\\s*)+(\\d*)\\s*([aA-zZ.]+\\s*)+(\\d*)", "Sorry your app name is not valid. Valid name example eg. Plant Vs. Zombies v2.");
@@ -11096,17 +11100,17 @@ $(function () {
                 $.devOrg.reSetupjQueryValidate("form");
 
 
-                $.WereViewApp.$appForm.find("input,textarea").change(function() {
-                    $.WereViewApp.appInputChangesExist = true;
+                $.WeReviewApp.$appForm.find("input,textarea").change(function() {
+                    $.WeReviewApp.appInputChangesExist = true;
                 });
 
-                $.WereViewApp.$appForm.find("select").selectpicker();
+                $.WeReviewApp.$appForm.find("select").selectpicker();
 
                 // enter to go next
                 $.devOrg.enterToNextTextBox("form.app-editing-page", true); // means both editing and posting
 
                 // Only sends to draft if in the app posting page.
-                $(window).bind('beforeunload', $.WereViewApp.beforeUnloadEvent);
+                $(window).bind('beforeunload', $.WeReviewApp.beforeUnloadEvent);
 
                 // triggering appname blur when change any of these. Because all are related to URL generate.
                 $(".selectpicker,select").change(function () {
@@ -11118,9 +11122,6 @@ $(function () {
                     $("#AppName").trigger("blur");
                     //console.log("dev");
                 });
-
-
-
             }
         },
 
@@ -11303,7 +11304,7 @@ $(function () {
             var $lastDiv = $form.find("div[data-last-slide=true]:visible");
             var url = $form.attr("action");
 
-            if ((url === $.WereViewApp.reviewFormSubmitUrl && $lastDiv.length > 0) || url !== $.WereViewApp.reviewFormSubmitUrl) {
+            if ((url === $.WeReviewApp.reviewFormSubmitUrl && $lastDiv.length > 0) || url !== $.WeReviewApp.reviewFormSubmitUrl) {
                 $inputs = $lastDiv.find("input");
                 var $comment = $("#Comments");
                 var commentValue = $comment.val();
@@ -11339,11 +11340,11 @@ $(function () {
         },
 
         askForReviewForm: function () {
-            var $reviewSpinner = $($.WereViewApp.reviewSpinnerSelector).hide();
+            var $reviewSpinner = $($.WeReviewApp.reviewSpinnerSelector).hide();
 
             if ($reviewSpinner.length > 0) {
                 $("#WriteReviewButton").click(function () {
-                    var $container = $($.WereViewApp.reviewFormContainerSelectorInAppPage);
+                    var $container = $($.WeReviewApp.reviewFormContainerSelectorInAppPage);
                     var text = $container.text().trim();
                     if (text.length === 0) {
                         $container.hide();
@@ -11354,10 +11355,10 @@ $(function () {
                         $.ajax({
                             type: "POST",
                             dataType: "html",
-                            url: $.WereViewApp.writeReviewFormUrl,
+                            url: $.WeReviewApp.writeReviewFormUrl,
                             data: reqVerifyFields,
                             success: function (response) {
-                                var selectForm = $.WereViewApp.reviewFormContainerSelectorInAppPage + " form";
+                                var selectForm = $.WeReviewApp.reviewFormContainerSelectorInAppPage + " form";
                                 var $submittingSpinner = null;
                                 var $response = $(response);
                                 $container.html(response);
@@ -11373,7 +11374,7 @@ $(function () {
                                     $submittingSpinner = $response.find("#submitting-review-spinner");
                                     $submittingSpinner.hide();
 
-                                    $container.find("form").submit($.WereViewApp.reviewFormSubmit);
+                                    $container.find("form").submit($.WeReviewApp.reviewFormSubmit);
                                     //$container.find("button.btn.btn-success").click(function () {
                                     //    console.log("at place");
                                     //});
@@ -11523,30 +11524,30 @@ $(function () {
 
 
         /* 
-        * hides all uploader at first : $.WereViewApp.$appForm.find("#collection-uploaders uploader-auto").hide();
-        * modify $.WereViewApp.appInputChangesExist based on user input
+        * hides all uploader at first : $.WeReviewApp.$appForm.find("#collection-uploaders uploader-auto").hide();
+        * modify $.WeReviewApp.appInputChangesExist based on user input
         * enter to next line bind : $.devOrg.enterToNextTextBox("form.app-editing-page", true);
-        * bind with form submit-> which binds to $.WereViewApp.appformPostEvent
-        * draftbtnClicked : $.WereViewApp.appFormDraftBtnClicked();
-        * binds with beforeunload which binds with $.WereViewApp.beforeUnloadEvent
+        * bind with form submit-> which binds to $.WeReviewApp.appformPostEvent
+        * draftbtnClicked : $.WeReviewApp.appFormDraftBtnClicked();
+        * binds with beforeunload which binds with $.WeReviewApp.beforeUnloadEvent
         */
         executeActions: function () {
-            $.WereViewApp.generalAppFormEditingOrPostingPageOnReady();
+            $.WeReviewApp.generalAppFormEditingOrPostingPageOnReady();
 
-            $.WereViewApp.frontEndJavaScript();
+            $.WeReviewApp.frontEndJavaScript();
 
             //data-last-slide="true"
-            $.WereViewApp.askForReviewForm();
+            $.WeReviewApp.askForReviewForm();
 
-            $.WereViewApp.suggestedOrReviewLoadmoreBtnLeft();
+            $.WeReviewApp.suggestedOrReviewLoadmoreBtnLeft();
 
-            $.WereViewApp.reviewLikeDisLikeClicked();
+            $.WeReviewApp.reviewLikeDisLikeClicked();
             $("#developers-organism").addClass("hide");
             // fix date inputs
-            $.WereViewApp.fixDateInputs();
+            $.WeReviewApp.fixDateInputs();
         }
     };
 
     // this will call all the other events
-    $.WereViewApp.executeActions();
+    $.WeReviewApp.executeActions();
 });
