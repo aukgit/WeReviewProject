@@ -10792,7 +10792,7 @@ $(function () {
         ajaxDraftPostUrl: "/App/SaveDraft",
         $appPageUploaderNotifier: $("label.notify-global-info"),
         homePageUrl: "/",
-        $selectorForUploaderRows: "#collection-uploaders .form-row-uploader",
+        selectorForUploaderRows: "#collection-uploaders .form-row-uploader",
         afterDraftPostRedirectPageUrl: "/",
         appInputChangesExist: false,
         $globalTopErrorLabel: $("#notify-global-info-top"),
@@ -10868,7 +10868,7 @@ $(function () {
                 $.WereViewApp.$globalTopErrorLabel.text("");
 
                 // first check if the uploaders are visible or not
-                var $uploaderRows = $.WereViewApp.$appForm.find($.WereViewApp.$selectorForUploaderRows);
+                var $uploaderRows = $.WereViewApp.$appForm.find($.WereViewApp.selectorForUploaderRows);
 
                 //visibility check
 
@@ -11069,7 +11069,7 @@ $(function () {
             $.devOrg.validateInputFromServer("#AppName", "/Validator/GetValidUrl", "AppName", false, false, 3, true, " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.", null, $formInputs, $.WereViewApp.maxTryInputSubmit);
 
             ///hiding the uploader on the app loader page for every time before posting a new app.
-            $.WereViewApp.$appForm.find($.WereViewApp.$selectorForUploaderRows).hide();
+            $.WereViewApp.$appForm.find($.WereViewApp.selectorForUploaderRows).hide();
 
             // stop form submitting the form if any file upload is not done.
             $.WereViewApp.$appForm.submit($.WereViewApp.appformPostEvent);

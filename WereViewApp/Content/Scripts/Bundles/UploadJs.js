@@ -3075,7 +3075,7 @@ var widget = $.widget;
 /// <reference path="modernizr-2.6.2.js" />
 /// <reference path="bootstrap.js" />
 /// <reference path="bootstrap-progressbar.js" />
-/// <reference path="I:\WereViewApp\WereViewProject\WereViewApp\Scripts/underscore.js" />
+/// <reference path="I:\WeReviewApp\WereViewProject\WeReviewApp\Scripts/underscore.js" />
 
 $(function () {
     'use strict';
