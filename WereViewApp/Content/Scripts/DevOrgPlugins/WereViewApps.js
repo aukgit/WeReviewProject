@@ -25,14 +25,14 @@ $(function () {
     /// </summary>
     $.WereViewApp = {
 
-        appForm: $("form.app-editing-page:first"), // means both editing and posting
-        appFormEdit: $("form.app-edit:first"),
-        appFormPost: $("form.app-post:first"),
+        $appForm: $("form.app-editing-page:first"), // means both editing and posting
+        $appFormEdit: $("form.app-edit:first"),
+        $appFormPost: $("form.app-post:first"),
         $allInputs: $("form.app-post:first input"),
         ajaxDraftPostUrl: "/App/SaveDraft",
         $appPageUploaderNotifier: $("label.notify-global-info"),
         homePageUrl: "/",
-        jquerySelectorForUploaderRows: "#collection-uploaders .form-row-uploader",
+        $selectorForUploaderRows: "#collection-uploaders .form-row-uploader",
         afterDraftPostRedirectPageUrl: "/",
         appInputChangesExist: false,
         $globalTopErrorLabel: $("#notify-global-info-top"),
@@ -83,7 +83,7 @@ $(function () {
             /// 
             /// </param>
             var ifAnyUploadfails = false;
-            if ($.WereViewApp.appFormPost.length > 0) {
+            if ($.WereViewApp.$appFormPost.length > 0) {
                 e.preventDefault();
 
                 // only check uploader when posting time
@@ -108,7 +108,7 @@ $(function () {
                 $.WereViewApp.$globalTopErrorLabel.text("");
 
                 // first check if the uploaders are visible or not
-                var $uploaderRows = $.WereViewApp.appForm.find($.WereViewApp.jquerySelectorForUploaderRows);
+                var $uploaderRows = $.WereViewApp.$appForm.find($.WereViewApp.$selectorForUploaderRows);
 
                 //visibility check
 
@@ -135,7 +135,7 @@ $(function () {
 
 
                 // checking uploadeers if valid
-                var $uploaders = $.WereViewApp.appForm.find("#collection-uploaders");
+                var $uploaders = $.WereViewApp.$appForm.find("#collection-uploaders");
                 if ($uploaders.length > 0) {
                     // only validate uploads if any uploader exist.
                     var countUploaders = $uploaders.length;
@@ -212,7 +212,7 @@ $(function () {
 
         fixAllInputIframeDataOrHtmlToSquare: function () {
             var inputSelectors = "input.url-input"
-            var inputFields = $.WereViewApp.appForm.find(inputSelectors);
+            var inputFields = $.WereViewApp.$appForm.find(inputSelectors);
             if (inputFields.length > 0) {
                 for (var i = 0; i < inputFields.length; i++) {
                     var $eachInputfield = $(inputFields[i]);
@@ -222,7 +222,7 @@ $(function () {
         },
         invertAllInputIframeDataOrSquareToHtml: function () {
             var inputSelectors = "input.url-input"
-            var inputFields = $.WereViewApp.appForm.find(inputSelectors);
+            var inputFields = $.WereViewApp.$appForm.find(inputSelectors);
             if (inputFields.length > 0) {
                 for (var i = 0; i < inputFields.length; i++) {
                     var $eachInputfield = $(inputFields[i]);
@@ -235,7 +235,7 @@ $(function () {
         /// return as ajax response, add methods like success or fail to do something with it.
         ajaxDraftSaveApp: function (e) {
             var formData;
-            formData = $.WereViewApp.appForm.serializeArray();
+            formData = $.WereViewApp.$appForm.serializeArray();
 
             // ajax post to save draft app
             return $.ajax({
@@ -253,7 +253,7 @@ $(function () {
             /// <returns type=""></returns>
             if ($.WereViewApp.appInputChangesExist) {
 
-                if ($.WereViewApp.appFormPost.length > 0) {
+                if ($.WereViewApp.$appFormPost.length > 0) {
                     // app posting page
                     // send as ajax post
                     if ($.WereViewApp.sendingDraftNumber <= $.WereViewApp.numberOfDraftPossible) {
@@ -273,7 +273,7 @@ $(function () {
 
 
         appFormDraftBtnClicked: function () {
-            $.WereViewApp.appForm.find("#draft-btn").click(function (e) {
+            $.WereViewApp.$appForm.find("#draft-btn").click(function (e) {
                 e.preventDefault();
                 $.WereViewApp.appInputChangesExist = false;
                 // fix html input type to relevant square brackets
@@ -293,26 +293,26 @@ $(function () {
         },
 
         appEditingPageOnReady: function () {
-            var $formInputs = $.WereViewApp.appForm.find("select,input[name!=YoutubeEmbedLink]");
+            var $formInputs = $.WereViewApp.$appForm.find("select,input[name!=YoutubeEmbedLink]");
             //console.log($formInputs);
 
             $.devOrg.validateInputFromServer("#AppName", "/Validator/GetValidUrlEditing", "AppName", false, false, 3, true, " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.", null, $formInputs, $.WereViewApp.maxTryInputSubmit);
-            $.WereViewApp.appForm.submit($.WereViewApp.appEditingSubmitEvent);
+            $.WereViewApp.$appForm.submit($.WereViewApp.appEditingSubmitEvent);
 
             $.WereViewApp.invertAllInputIframeDataOrSquareToHtml();
         },
 
         appPostingPageOnReady: function () {
             $.devOrg.uxFriendlySlide("form.app-post", true, true);
-            var $formInputs = $.WereViewApp.appForm.find("select,input[name!=YoutubeEmbedLink]");
+            var $formInputs = $.WereViewApp.$appForm.find("select,input[name!=YoutubeEmbedLink]");
             console.log($formInputs);
             $.devOrg.validateInputFromServer("#AppName", "/Validator/GetValidUrl", "AppName", false, false, 3, true, " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.", null, $formInputs, $.WereViewApp.maxTryInputSubmit);
 
             ///hiding the uploader on the app loader page for every time before posting a new app.
-            $.WereViewApp.appForm.find($.WereViewApp.jquerySelectorForUploaderRows).hide();
+            $.WereViewApp.$appForm.find($.WereViewApp.$selectorForUploaderRows).hide();
 
             // stop form submitting the form if any file upload is not done.
-            $.WereViewApp.appForm.submit($.WereViewApp.appformPostEvent);
+            $.WereViewApp.$appForm.submit($.WereViewApp.appformPostEvent);
 
             $.WereViewApp.appFormDraftBtnClicked();
 
@@ -320,13 +320,13 @@ $(function () {
 
         generalAppFormEditingOrPostingPageOnReady: function (e) {
 
-            if ($.WereViewApp.appForm.length > 0) {
+            if ($.WereViewApp.$appForm.length > 0) {
                 $.WereViewApp.$howtoUseUploaderInfoLabel.hide(); //hide uploader info label.
 
-                if ($.WereViewApp.appFormPost.length > 0) {
+                if ($.WereViewApp.$appFormPost.length > 0) {
                     // app posting
                     $.WereViewApp.appPostingPageOnReady();
-                } else if ($.WereViewApp.appFormEdit.length > 0) {
+                } else if ($.WereViewApp.$appFormEdit.length > 0) {
                     // app editing
                     $.WereViewApp.appEditingPageOnReady();
                 }
@@ -336,11 +336,11 @@ $(function () {
                 $.devOrg.reSetupjQueryValidate("form");
 
 
-                $.WereViewApp.appForm.find("input,textarea").change(function() {
+                $.WereViewApp.$appForm.find("input,textarea").change(function() {
                     $.WereViewApp.appInputChangesExist = true;
                 });
 
-                $.WereViewApp.appForm.find("select").selectpicker();
+                $.WereViewApp.$appForm.find("select").selectpicker();
 
                 // enter to go next
                 $.devOrg.enterToNextTextBox("form.app-editing-page", true); // means both editing and posting
@@ -763,7 +763,7 @@ $(function () {
 
 
         /* 
-        * hides all uploader at first : $.WereViewApp.appForm.find("#collection-uploaders uploader-auto").hide();
+        * hides all uploader at first : $.WereViewApp.$appForm.find("#collection-uploaders uploader-auto").hide();
         * modify $.WereViewApp.appInputChangesExist based on user input
         * enter to next line bind : $.devOrg.enterToNextTextBox("form.app-editing-page", true);
         * bind with form submit-> which binds to $.WereViewApp.appformPostEvent
