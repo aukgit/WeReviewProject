@@ -5,3 +5,5 @@ Register.cshtml order changed
 first user don't give email verify lin
 Upload JS
 enterToNextTextBox
+
+changed
