@@ -24,7 +24,7 @@ $(function () {
     /// Were view app plug-in written by Alim Ul Karim
     /// </summary>
     $.WeReviewApp = {
-
+        ///appForm represents both app-edit and app-posting form
         $appForm: $("form.app-editing-page:first"), // means both editing and posting
         $appFormEdit: $("form.app-edit:first"),
         $appFormPost: $("form.app-post:first"),
@@ -172,7 +172,7 @@ $(function () {
                     //everything is successful
                     $.WeReviewApp.appInputChangesExist = false;
                     $.WeReviewApp.fixAllInputIframeDataOrHtmlToSquare();
-
+                    // all conditions fulfilled so submit the form
                     this.submit();
                 }
 
@@ -195,7 +195,7 @@ $(function () {
                 return true;
             }
         },
-
+        // before app editing submit
         appEditingSubmitEvent: function (e) {
             e.preventDefault();
             if ($.WeReviewApp.isAppTitleValid()) {
@@ -214,7 +214,7 @@ $(function () {
         },
 
         fixAllInputIframeDataOrHtmlToSquare: function () {
-            var inputSelectors = "input.url-input"
+            var inputSelectors = "input.url-input";
             var inputFields = $.WeReviewApp.$appForm.find(inputSelectors);
             if (inputFields.length > 0) {
                 for (var i = 0; i < inputFields.length; i++) {
@@ -233,7 +233,31 @@ $(function () {
                 }
             }
         },
-        fixYouTubeVideoPropertise
+        getAttributeRemoveRegularExpressionFor:function(attributeName) {
+            return "("+ attributeName +".*=.*[\"\"'])([a-zA-Z0-9:;\.\s\(\)\-\,]*)([\"\"'])";
+        },
+        removeHeightWidthAttributes: function ($jQueryInputText) {
+            var currentText = $jQueryInputText.val();
+            //currentText = currentText.toLowerCase();
+            var heightRegEx = $.WeReviewApp.getAttributeRemoveRegularExpressionFor("Height");
+            var widthRegEx = $.WeReviewApp.getAttributeRemoveRegularExpressionFor("Width");
+
+            var reg = new RegExp(heightRegEx, 'gi');
+            currentText = currentText.replace(reg, "");
+            reg = new RegExp(widthRegEx, 'gi');
+            currentText = currentText.replace(reg, "");
+            $jQueryInputText.val(currentText);
+        },
+        fixYouTubeVideoPropertise:function() {
+            var inputSelectors = "input.url-input";
+            var inputFields = $.WeReviewApp.$appForm.find(inputSelectors);
+            if (inputFields.length > 0) {
+                for (var i = 0; i < inputFields.length; i++) {
+                    var $eachInputfield = $(inputFields[i]);
+                    $.WeReviewApp.removeHeightWidthAttributes($eachInputfield);
+                }
+            }
+        },
 
         /// it doesn't include fixing html inputs
         /// return as ajax response, add methods like success or fail to do something with it.
@@ -274,8 +298,6 @@ $(function () {
             }
         },
 
-
-
         appFormDraftBtnClicked: function () {
             $.WeReviewApp.$appForm.find("#draft-btn").click(function (e) {
                 e.preventDefault();
@@ -295,21 +317,30 @@ $(function () {
                 });
             });
         },
-
+        /*
+         * This method is related to display contents 
+         * when **only** app-editing page is ready
+         */
         appEditingPageOnReady: function () {
             var $formInputs = $.WeReviewApp.$appForm.find("select,input[name!=YoutubeEmbedLink]");
             //console.log($formInputs);
 
             $.devOrg.validateInputFromServer("#AppName", "/Validator/GetValidUrlEditing", "AppName", false, false, 3, true, " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.", null, $formInputs, $.WeReviewApp.maxTryInputSubmit);
-            $.WeReviewApp.$appForm.submit($.WeReviewApp.appEditingSubmitEvent);
 
+            //stop form submitting the form if any file upload is not done.
+            // before app editing submit method
+            $.WeReviewApp.$appForm.submit($.WeReviewApp.appEditingSubmitEvent);
+            // fix square brackets to html brackets
             $.WeReviewApp.invertAllInputIframeDataOrSquareToHtml();
         },
-
+        /*
+         * This method is related to display contents 
+         * when **only** app-posting page is ready
+         */
         appPostingPageOnReady: function () {
             $.devOrg.uxFriendlySlide("form.app-post", true, true);
             var $formInputs = $.WeReviewApp.$appForm.find("select,input[name!=YoutubeEmbedLink]");
-            console.log($formInputs);
+            //console.log($formInputs);
             $.devOrg.validateInputFromServer("#AppName", "/Validator/GetValidUrl", "AppName", false, false, 3, true, " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.", null, $formInputs, $.WeReviewApp.maxTryInputSubmit);
 
             ///hiding the uploader on the app loader page for every time before posting a new app.
@@ -321,20 +352,29 @@ $(function () {
             $.WeReviewApp.appFormDraftBtnClicked();
 
         },
-
+        /**
+         * App edit or post before action.
+         * Determination point of app edit or post.
+         */
         generalAppFormEditingOrPostingPageOnReady: function (e) {
-
+            
             if ($.WeReviewApp.$appForm.length > 0) {
                 $.WeReviewApp.$howtoUseUploaderInfoLabel.hide(); //hide uploader info label.
 
                 if ($.WeReviewApp.$appFormPost.length > 0) {
                     // app posting
                     $.WeReviewApp.appPostingPageOnReady();
+
+                    // Only sends to draft if in the app posting page.
+                    $(window).bind('beforeunload', $.WeReviewApp.beforeUnloadEvent);
                 } else if ($.WeReviewApp.$appFormEdit.length > 0) {
                     // app editing
                     $.WeReviewApp.appEditingPageOnReady();
                 }
 
+                // .app-editing-page class represent both editing and posting
+
+                // Validate app-name
                 $.devOrg.validateTextInputBasedOnRegEx("#AppName", "^([A-zZ.]+\\s*)+(\\d*)\\s*([aA-zZ.]+\\s*)+(\\d*)", "Sorry your app name is not valid. Valid name example eg. Plant Vs. Zombies v2.");
 
                 $.devOrg.reSetupjQueryValidate("form");
@@ -348,16 +388,15 @@ $(function () {
 
                 // enter to go next
                 $.devOrg.enterToNextTextBox("form.app-editing-page", true); // means both editing and posting
+                                
 
-                // Only sends to draft if in the app posting page.
-                $(window).bind('beforeunload', $.WeReviewApp.beforeUnloadEvent);
-
-                // triggering appname blur when change any of these. Because all are related to URL generate.
+                // triggering appname blur when change any of these.
+                // Because all are related to URL generate.
                 $(".selectpicker,select").change(function () {
                     $("#AppName").trigger("blur");
 
                 });
-
+                // to validate the app-name, triggering blur on app-name field
                 $("#PlatformVersion").blur(function () {
                     $("#AppName").trigger("blur");
                     //console.log("dev");
@@ -688,7 +727,7 @@ $(function () {
 
                 for (var i = 0; i < length; i++) {
                     if (i >= showAfterCount) {
-                        $appBox = $($appBoxes[i])
+                        $appBox = $($appBoxes[i]);
                         $appBox.hide();
                         $appBox.attr("data-hide", "true");
 
