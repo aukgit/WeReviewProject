@@ -25,7 +25,7 @@ namespace WereViewApp.Models.EntityModel {
         public long AppID { get; set; }
 
         public long PostedByUserID { get; set; }
-        public short ReviewsCount { get; set; }
+        
         public bool IsVideoExist { get; set; }
         public bool IsBlocked { get; set; }
 
@@ -114,49 +114,87 @@ namespace WereViewApp.Models.EntityModel {
 
         [Display(Name = "Suggestion Icon", Description = "[Single image 1MB] Best resolution 192x119, however whatever you upload will be resized.")]
         public HttpPostedFileBase SuggestionIcon { get; set; }
-
+      
         #endregion
 
         #region Virtual Fields Add Not Saving anywhere
 
+        /**
+         * app-details page indicates 
+         * Controller : App
+         * Action : SingleAppDisplay
+         * URL: /Apps/Apple-8/Games/plant-vs-zombies
+         * */
+
+        /// <summary>
+        /// Virtual Field : Home page gallery image location for this app
+        /// </summary>
         public string HomeFeaturedBigImageLocation { get; set; }
         /// <summary>
+        /// Virtual Field :
         /// Virtual Property not going to save.
         /// Used to get the location of App-details suggestion app icons
         /// </summary>
         public string SuggestionIconLocation { get; set; }
         /// <summary>
+        /// Virtual Field :
         /// Virtual Property not going to save.
         /// Used to get the location of Search/Profile/Category page app icons
         /// </summary>
         public string SearchIconLocation { get; set; }
         /// <summary>
+        /// Virtual Field :
         /// Virtual Property not going to save.
         /// Used to get the location of Home page app icons
         /// </summary>
         public string HomePageIconLocation { get; set; }
         /// <summary>
+        /// Virtual Field :
         /// Virtual Property not going to save.
         /// Used to get the location of youtube cover image
         /// </summary>
         public string YoutubeCoverImageLocation { get; set; }
         /// <summary>
-        /// Virtual Property not going to save.
+        /// Virtual Field :
+        /// not going to save.
         /// It is use to display gallery images in app-details page
         /// </summary>
         public List<DisplayGalleryImages> AppDetailsGalleryImages { get; set; }
 
         /// <summary>
-        ///     Only will be set from extension method of App. GetAppUrl()
+        /// Virtual Field : 
+        /// Will be only set from extension method of App.GetAppUrl()
         /// </summary>
         public string AbsUrl { get; set; }
 
         /// <summary>
-        ///     if false then load review.
+        /// Virtual Field : 
+        /// if false then load review.
         /// </summary>
         public bool IsReviewLoaded { get; set; }
-
+        /// <summary>
+        /// Virtual Field 
+        /// </summary>
         public byte? CurrentUserRatedAppValue { get; set; }
+
+        /// <summary>
+        /// Virtual Field : 
+        /// to only keep the review likes and dislikes
+        /// </summary>
+        public virtual List<ReviewLikeDislike> ReviewLikeDislikesCollection { get; set; }
+
+        /// <summary>
+        /// Virtual Field : 
+        /// To count total possible pages of reviews exist.
+        /// </summary>
+        public int? TotalReviewPages { get; set; }
+
+        /// <summary>
+        /// Virtual Field : 
+        /// This property is loaded from 
+        /// Algorithms.cs->LoadReviewIntoApp() method
+        /// </summary>
+        public short ReviewsCount { get; set; }
 
         #endregion
     }

@@ -543,8 +543,8 @@ $(function () {
             }
         },
         reviewLikeDisLikeClicked: function () {
-            var $likeBtns = $("div.blogitemWrap a[data-review-like-btn=true]");
-            var $disLikeBtns = $("div.blogitemWrap a[data-review-dislike-btn=true]");
+            var $likeBtns = $("#app-deails-page a[data-review-like-btn=true]");
+            var $disLikeBtns = $("#app-deails-page a[data-review-dislike-btn=true]");
 
             function btnClicked(e) {
                 e.preventDefault();

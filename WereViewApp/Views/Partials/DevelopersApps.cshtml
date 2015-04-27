@@ -9,7 +9,7 @@
     }
     string divSubtitle = userName + "'s apps collection in" + AppVar.Name;
 }
-@if (Model != null) {
+@if (Model != null && Model.Count > 0) {
     <div class="app-suggested-list-wrapper featured-apps-wrapper" title="@divSubtitle">
         <div class="app-suggested-list float-right">
             <div class="apps-list-header-row">

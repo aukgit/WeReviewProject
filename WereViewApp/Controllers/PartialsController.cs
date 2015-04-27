@@ -45,9 +45,9 @@ namespace WereViewApp.Controllers {
 
         #endregion
 
-        #region Show Reivew
+        #region Riviews Display
 
-        [OutputCache(Duration = 30, VaryByParam = "id")]
+        [OutputCache(Duration = 800, VaryByParam = "id")]
         public ActionResult ReviewsDisplay(long id) {
             var app = algorithms.GetAppFromStaticCache(id);
             if (app != null) {

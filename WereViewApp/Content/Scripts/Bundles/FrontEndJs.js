@@ -4817,7 +4817,7 @@ $(function () {
                                     //        it doesn't work because (may be) it is not in the page html.
                                     $form.submit(function (evt) {
                                         evt.preventDefault();
-                                        var $sendingForm = $(this);
+                                        //var $sendingForm = $(this);
                                         $.WeReviewApp.reviewFormSubmit(evt, $form);
                                     });
 
@@ -4841,8 +4841,8 @@ $(function () {
             }
         },
         reviewLikeDisLikeClicked: function () {
-            var $likeBtns = $("div.blogitemWrap a[data-review-like-btn=true]");
-            var $disLikeBtns = $("div.blogitemWrap a[data-review-dislike-btn=true]");
+            var $likeBtns = $("#app-deails-page a[data-review-like-btn=true]");
+            var $disLikeBtns = $("#app-deails-page a[data-review-dislike-btn=true]");
 
             function btnClicked(e) {
                 e.preventDefault();

@@ -10,7 +10,6 @@
     ViewBag.Keywords = appName + "," + @Model.Tags;
     string[] tagsList = @Model.Tags != null ? @Model.Tags.Split(',') : null;
     bool isFrist = true;
-
     string appSubtitle = ViewBag.Title;
     string platformSubtitle = Model.Platform.PlatformName + " mobile apps";
     string categorySubtitle = Model.GetCategoryString() + " category mobile apps";
@@ -18,8 +17,6 @@
     string publishDate = @Html.DisplayDate(Model.CreatedDate).ToString();
     string currentAppUrlNameOnly = Model.URL; //plant-vs-zombies
 }
-
-
 <div class="app-details-page" id="app-deails-page">
     <div id="fb-root"></div>
     <script>
@@ -259,9 +256,9 @@
                     </div>
                     @{ Html.RenderAction("ReviewsDisplay", "Partials", new { id = Model.AppID }); }
                     <div id="write-review-form-container">
-
                     </div>
                     <div id="review-request-fields">
+                        <!-- request fields to get review-form -->
                         @Html.HiddenFor(n => n.AppID)
                         @Html.AntiForgeryToken()
                     </div>

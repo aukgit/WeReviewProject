@@ -640,7 +640,7 @@ namespace WereViewApp.WereViewAppCommon {
 
         #region Reading Virtual Fields In App
         /// <summary>
-        /// Reading from binary
+        /// Reading from binary : read only fields from text which are not saved in database.
         /// </summary>
         /// <param name="app"></param>
         /// <returns></returns>
@@ -737,11 +737,12 @@ namespace WereViewApp.WereViewAppCommon {
         }
         #endregion
 
-        #region Load Review into app
+        #region Review Load Related : Load Review into app
 
         /// <summary>
         /// Only load reviews if needed.
         /// Based on app.IsReviewLoaded prop
+        /// Also generate ReviewCount Value
         /// </summary>
         /// <param name="app"></param>
         /// <param name="maxReviewLoad"></param>
@@ -750,6 +751,26 @@ namespace WereViewApp.WereViewAppCommon {
             if (app != null) {
                 var appId = app.AppID;
                 if (app.IsReviewLoaded == false) {
+                    var reviews = db.Reviews
+                                    .Include(n => n.ReviewLikeDislikes)
+                                    .Include(n => n.User)
+                                    .OrderByDescending(n => n.LikedCount)
+                                    .OrderBy(n => n.DisLikeCount)
+                                    .Where(n => n.AppID == appId);
+                    app.TotalReviewPages = reviews.Count();
+                    app.Reviews = reviews.Take(maxReviewLoad)
+                                  .ToList();
+                    app.ReviewsCount = (short)db.Reviews.Count(n => n.AppID == appId);
+                    app.IsReviewLoaded = true;
+                }
+            }
+        }
+
+        public void GetAppReviewLikeDislikes(App app, int maxReviewLoad, WereViewAppEntities db) {
+            if (app != null) {
+                var appId = app.AppID;
+                if (app.IsReviewLoaded == true) {
+
                     app.Reviews = db.Reviews
                         //.Include(n => n.ReviewLikeDislikes)
                                     .Include(n => n.User)
@@ -769,9 +790,11 @@ namespace WereViewApp.WereViewAppCommon {
         /// <summary>
         /// First try to get the app from the static list.
         /// Static app list contain 500 of apps in memory.
-        /// To remove cache static call RemoveSingleAppFromCacheOfStatic()
+        /// To remove cache static 
+        /// call RemoveSingleAppFromCacheOfStatic().
         /// If static app is not found.
-        /// Then get the app from db and attach gallery images and icons with it.
+        /// Then get the app from db and attach 
+        /// gallery images and icons with it.
         /// and then save it into the cache.
         /// </summary>
         /// <param name="platform"></param>
@@ -819,6 +842,7 @@ namespace WereViewApp.WereViewAppCommon {
                     // search in db
                     app = db.Apps
                             .Include(n => n.User)
+                        //if published and not block then only display it
                             .Where(n => n.IsPublished && !n.IsBlocked)
                             .FirstOrDefault(n =>
                             n.URL.Equals(url) &&
@@ -832,9 +856,10 @@ namespace WereViewApp.WereViewAppCommon {
 
                         LoadReviewIntoApp(app, maxReviewLoad, db);
 
+                        //Get current user app-rating.
                         if (UserManager.IsAuthenticated()) {
                             var userId = UserManager.GetLoggedUserId();
-
+                            // current user rating for the app
                             var currentUserRated = db.Reviews.FirstOrDefault(n => n.AppID == appId && n.UserID == userId);
                             if (currentUserRated != null) {
                                 app.CurrentUserRatedAppValue = currentUserRated.Rating;

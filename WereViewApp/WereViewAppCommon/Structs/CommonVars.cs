@@ -67,6 +67,12 @@ namespace WereViewApp.WereViewAppCommon.Structs {
         #endregion
 
         #region Apps Already Found
+        /// <summary>
+        /// Will contain the recent app which is stored from App-Details page tap
+        /// Controller : App
+        /// Action : SingleAppDisplay
+        /// Url : /Apps/Apple-7/Games/plant-vs-zombies
+        /// </summary>
         public static List<App> AppsFoundForSingleDisplay { get; set; }
 
         #endregion
