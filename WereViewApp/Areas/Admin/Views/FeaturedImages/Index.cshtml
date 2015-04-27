@@ -50,7 +50,7 @@
                     @{
                         editLinkName = item.App.AppName;
                     }
-                    <a href="@Url.Action("Edit", new { id = item.FeaturedImageID })" title="Edit of @editLinkName." ><span class="glyphicon glyphicon-pencil"></span> @item.App.GetAppURLWithoutHostName()</a>
+                    <a href="@Url.Action("Edit", new { id = item.FeaturedImageID })" title="Edit of @editLinkName." ><span class="glyphicon glyphicon-pencil"></span> @item.App.GetAppUrlWithoutHostName()</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.User.FirstName)

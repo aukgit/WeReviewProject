@@ -136,7 +136,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
                 .AsParallel()
                 .Select(n => 
                 new { AppID = n.AppID, 
-                    AppName = n.GetAppURLWithoutHostName() 
+                    AppName = n.GetAppUrlWithoutHostName() 
                 }).ToList();
 
             if (featuredImage != null) {

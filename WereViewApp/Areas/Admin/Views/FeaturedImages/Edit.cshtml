@@ -3,7 +3,7 @@
 @model FeaturedImage
 
 @{
-    ViewBag.Title = "Editing '" + Model.App.GetAppURLWithoutHostName() + "'";
+    ViewBag.Title = "Editing '" + Model.App.GetAppUrlWithoutHostName() + "'";
 	string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
     var token = (MvcHtmlString)@Html.AntiForgeryToken();
