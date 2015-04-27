@@ -25,15 +25,15 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
         }
 
 
-        public static ReviewLikeDislike GetCurrentUserMark(List<ReviewLikeDislike> likeDislikes, Review review, long UserId) {
-            return likeDislikes.FirstOrDefault(n => n.ReviewID == review.ReviewID && n.UserID == UserId);
+        public static ReviewLikeDislike GetCurrentUserMark(List<ReviewLikeDislike> likeDislikes, Review review, long userId) {
+            return likeDislikes.FirstOrDefault(n => n.ReviewID == review.ReviewID && n.UserID == userId);
         }
 
-        public static string GetAppURLWithoutHostName(this App app) {
+        public static string GetAppUrlWithoutHostName(this App app) {
             if (app != null) {
-                var returnURL = app.GetPlatformString() + "-" +
+                var returnUrl = app.GetPlatformString() + "-" +
                                 app.PlatformVersion + "/" + app.GetCategoryString() + "/" + app.URL;
-                return returnURL;
+                return returnUrl;
             }
             return null;
         }
