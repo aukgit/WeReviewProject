@@ -15,8 +15,6 @@
 $(function () {
 
     $(".seo-hide").hide();
-
-
     //$('.tp-banner').show().revolution({
     //    dottedOverlay: "none",
     //    delay: 8000,

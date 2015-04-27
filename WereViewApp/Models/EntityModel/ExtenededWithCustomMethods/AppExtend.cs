@@ -8,6 +8,7 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
 
         /// <summary>
         ///     returns a url like "http://url/Apps/iOs-7/Games/Plant-Vs-Zombies"
+        ///     and then put it in the "app.AbsUrl"
         ///     /App/Platform-PlatformVersion/Category/Url
         /// </summary>
         /// <param name="app"></param>
@@ -25,9 +26,9 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
         }
 
 
-        public static ReviewLikeDislike GetCurrentUserReviewLikeDislike(List<ReviewLikeDislike> likeDislikes, Review review, long userId) {
-            if (likeDislikes != null && review != null) {
-                return likeDislikes
+        public static ReviewLikeDislike GetCurrentUserReviewLikeDislike(this App app, Review review, long userId) {
+            if (app.ReviewLikeDislikesCollection != null && review != null) {
+                return app.ReviewLikeDislikesCollection
                     .FirstOrDefault(
                         n => n.ReviewID == review.ReviewID &&
                         n.UserID == userId);
@@ -35,24 +36,31 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
             return null;
         }
 
-        public static bool IsReviewLiked(ReviewLikeDislike likeDislike) {
-            if (likeDislike == null) {
-                return false;
-            }
-            return likeDislike.IsLiked;
-        }
-        public static bool IsReviewDisliked(ReviewLikeDislike likeDislike) {
-            if (likeDislike == null) {
-                return false;
-            }
-            return likeDislike.IsDisliked;
-        }
-        public static bool IsReviewNoneSelected(ReviewLikeDislike likeDislike) {
-            if (likeDislike == null) {
-                return false;
-            }
-            return likeDislike.IsNone;
-        }
+        ///// <summary>
+        ///// If the review is liked or not
+        ///// </summary>
+        ///// <param name="likeDislike">Null can throw exception</param>
+        ///// <returns>Returns true/false based if that review is liked by that user.</returns>
+        //public static bool HasReviewLiked(ReviewLikeDislike likeDislike) {
+        //    return likeDislike.IsLiked;
+        //}
+        ///// <summary>
+        ///// If the review is disliked or not
+        ///// </summary>
+        ///// <param name="likeDislike">Null can throw exception, no null checking</param>
+        ///// <returns>Returns true/false based if that review is disliked by that user.</returns>
+        //public static bool HasReviewDisliked(ReviewLikeDislike likeDislike) {
+        //    return likeDislike.IsDisliked;
+        //}
+        ///// <summary>
+        ///// If the review is neither
+        ///// </summary>
+        ///// <param name="likeDislike">Null can throw exception, no null checking</param>
+        ///// <returns></returns>
+        //public static bool HasReviewNoneSelected(ReviewLikeDislike likeDislike) {
+            
+        //    return likeDislike.IsNone;
+        //}
 
         public static string GetAppUrlWithoutHostName(this App app) {
             if (app != null) {

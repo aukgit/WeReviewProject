@@ -731,6 +731,7 @@ namespace WereViewApp.WereViewAppCommon {
         public void ForceAppReviewToLoad(long appId) {
             var app = GetAppFromStaticCache(appId);
             if (app != null) {
+                RemoveOutputCache("/Partials/ReviewsDisplay/" + app.AppID);
                 app.IsReviewLoaded = false;
             }
         }

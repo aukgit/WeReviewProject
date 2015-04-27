@@ -893,6 +893,28 @@ h1.review-title {
     a {
         .height(34px);
         display: inline-block;
+
+        &.postive {
+            .active {
+                color: green;
+            }
+        }
+
+        &.negative {
+            .active {
+                color: red;
+            }
+        }
+
+        &:hover {
+            &.postive {
+                color: green;
+            }
+
+            &.negative {
+                color: red;
+            }
+        }
     }
 
     .fa {
@@ -1217,8 +1239,8 @@ q:after {
 
     span {
         font-size: 1em;
-        margin: 0; 
-        padding:0;
+        margin: 0;
+        padding: 0;
     }
 }
 //pagination

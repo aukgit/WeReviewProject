@@ -542,17 +542,25 @@ $(function () {
                 });
             }
         },
+        /**
+         * App review : like-dislike functionality
+         */
         reviewLikeDisLikeClicked: function () {
             var $likeBtns = $("#app-deails-page a[data-review-like-btn=true]");
             var $disLikeBtns = $("#app-deails-page a[data-review-dislike-btn=true]");
-
-            function btnClicked(e) {
+            // Views/Reviews/ReviewsDisplay.cshtml contains that id
+            var serializedInputs = $("#review-like-dislike-form-submit").serialize();
+            var likeUrl = "/Reviews/Like";
+            var dislikeUrl = "/Reviews/DisLike";
+            function btnClicked(e, url) {
                 e.preventDefault();
                 var $this = $(this);
-                var url = $this.attr("href");
+                var reviewId = $this.attr("data-review-id");
+                var data = serializedInputs + "&reviewId=" + reviewId;
                 $.ajax({
-                    type: "GET",
+                    type: "POST",
                     url: url,
+                    data: data,
                     success: function (response) {
 
                     }
@@ -571,11 +579,15 @@ $(function () {
             }
 
             if ($likeBtns.length > 0) {
-                $likeBtns.click(btnClicked);
+                $likeBtns.click(function(evt) {
+                     btnClicked(evt, likeUrl);
+                });
             }
 
             if ($disLikeBtns.length > 0) {
-                $disLikeBtns.click(btnClicked);
+                $disLikeBtns.click(function (evt) {
+                    btnClicked(evt, dislikeUrl);
+                });
             }
         },
         suggestedOrReviewLoadmoreBtnLeft: function () {

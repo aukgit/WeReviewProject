@@ -110,10 +110,11 @@ namespace WereViewApp.Controllers {
         #endregion
 
         #region Like
-
-        public void Like(long id) {
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public void Like(long reviewId, long appId) {
             var userId = UserManager.GetLoggedUserId();
-            var likeDislike = db.ReviewLikeDislikes.FirstOrDefault(n => n.ReviewID == id && n.UserID == userId);
+            var likeDislike = db.ReviewLikeDislikes.FirstOrDefault(n => n.ReviewID == reviewId && n.UserID == userId);
 
             if (likeDislike == null) {
                 var like = new ReviewLikeDislike();
@@ -121,7 +122,7 @@ namespace WereViewApp.Controllers {
                 like.IsDisliked = false;
                 like.IsNone = false;
                 like.UserID = userId;
-                like.ReviewID = id;
+                like.ReviewID = reviewId;
                 db.ReviewLikeDislikes.Add(like);
             } else {
                 if (likeDislike.IsLiked) {
@@ -135,15 +136,19 @@ namespace WereViewApp.Controllers {
             }
 
             db.SaveChanges();
+            algorithms.ForceAppReviewToLoad(appId);
+
+
         }
 
         #endregion
 
-        #region Like
-
-        public void DisLike(long id) {
+        #region Dilsike
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public void DisLike(long reviewId, long appId) {
             var userId = UserManager.GetLoggedUserId();
-            var likeDislike = db.ReviewLikeDislikes.FirstOrDefault(n => n.ReviewID == id && n.UserID == userId);
+            var likeDislike = db.ReviewLikeDislikes.FirstOrDefault(n => n.ReviewID == reviewId && n.UserID == userId);
 
             if (likeDislike == null) {
                 var like = new ReviewLikeDislike();
@@ -151,11 +156,10 @@ namespace WereViewApp.Controllers {
                 like.IsDisliked = false;
                 like.IsNone = false;
                 like.UserID = userId;
-                like.ReviewID = id;
+                like.ReviewID = reviewId;
                 db.ReviewLikeDislikes.Add(like);
             } else {
                 likeDislike.IsLiked = false;
-
                 if (likeDislike.IsDisliked) {
                     likeDislike.IsDisliked = false;
                     likeDislike.IsNone = true;
@@ -166,9 +170,13 @@ namespace WereViewApp.Controllers {
             }
 
             db.SaveChanges();
+
+            algorithms.ForceAppReviewToLoad(appId);
         }
 
         #endregion
+
+       
 
         #region Edit or modify record
 

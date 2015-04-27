@@ -930,6 +930,18 @@ h1.review-title {
   height: 3.4rem;
   display: inline-block;
 }
+.review-thumbs-up-wrappper a.postive .active {
+  color: green;
+}
+.review-thumbs-up-wrappper a.negative .active {
+  color: red;
+}
+.review-thumbs-up-wrappper a:hover.postive {
+  color: green;
+}
+.review-thumbs-up-wrappper a:hover.negative {
+  color: red;
+}
 .review-thumbs-up-wrappper .fa {
   font-size: 1.8em;
   padding: 5px;
