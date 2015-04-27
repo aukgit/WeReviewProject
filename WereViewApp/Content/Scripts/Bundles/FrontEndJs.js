@@ -4531,8 +4531,8 @@ $(function () {
                 }
             }
         },
-        getAttributeRemoveRegularExpressionFor:function(attributeName) {
-            return "("+ attributeName +".*=.*[\"\"'])([a-zA-Z0-9:;\.\s\(\)\-\,]*)([\"\"'])";
+        getAttributeRemoveRegularExpressionFor: function (attributeName) {
+            return "(" + attributeName + ".*=.*[\"\"'])([a-zA-Z0-9:;\.\s\(\)\-\,]*)([\"\"'])";
         },
         removeHeightWidthAttributes: function ($jQueryInputText) {
             var currentText = $jQueryInputText.val();
@@ -4546,7 +4546,7 @@ $(function () {
             currentText = currentText.replace(reg, "");
             $jQueryInputText.val(currentText);
         },
-        fixYouTubeVideoPropertise:function() {
+        fixYouTubeVideoPropertise: function () {
             var inputSelectors = "input.url-input";
             var inputFields = $.WeReviewApp.$appForm.find(inputSelectors);
             if (inputFields.length > 0) {
@@ -4659,7 +4659,7 @@ $(function () {
          * Determination point of app edit or post.
          */
         generalAppFormEditingOrPostingPageOnReady: function (e) {
-            
+
             if ($.WeReviewApp.$appForm.length > 0) {
                 $.WeReviewApp.$howtoUseUploaderInfoLabel.hide(); //hide uploader info label.
 
@@ -4682,7 +4682,7 @@ $(function () {
                 $.devOrg.reSetupjQueryValidate("form");
 
 
-                $.WeReviewApp.$appForm.find("input,textarea").change(function() {
+                $.WeReviewApp.$appForm.find("input,textarea").change(function () {
                     $.WeReviewApp.appInputChangesExist = true;
                 });
 
@@ -4690,7 +4690,7 @@ $(function () {
 
                 // enter to go next
                 $.devOrg.enterToNextTextBox("form.app-editing-page", true); // means both editing and posting
-                                
+
 
                 // triggering appname blur when change any of these.
                 // Because all are related to URL generate.
@@ -4707,27 +4707,32 @@ $(function () {
         },
 
 
+        /**
+         * Processing review submit/save button click or submission process.
+         */
+        reviewFormSubmit: function (evt, $form) {
+            evt.preventDefault(); //stop from submitting.
 
-        reviewFormSubmit: function (evt) {
-            evt.preventDefault();
             //console.log("ase");
-            $form = $(this);
             var $submittingSpinner = null;
-            var length = 0;
-            var $inputs, $input, currformData = 0;
+            var $inputs, currformData = 0;
             $submittingSpinner = $form.find("#submitting-review-spinner");
             var $failedIcon = $form.find("#submitting-review-failed-icon");
-
+            // indicates if it is in the review posting page or in editing page\
+            // $lastDiv.length == 0 indicates it's in review edit mode
             var $lastDiv = $form.find("div[data-last-slide=true]:visible");
             var url = $form.attr("action");
+            var isInReviewPostingMode = (url === $.WeReviewApp.reviewFormSubmitUrl && $lastDiv.length > 0);
+            // indicates in review edit mode
+            var isFormSubmitUrlIsSameAsReviewSubmitUrl = url !== $.WeReviewApp.reviewFormSubmitUrl;
 
-            if ((url === $.WeReviewApp.reviewFormSubmitUrl && $lastDiv.length > 0) || url !== $.WeReviewApp.reviewFormSubmitUrl) {
+            if (isInReviewPostingMode || isFormSubmitUrlIsSameAsReviewSubmitUrl) {
                 $inputs = $lastDiv.find("input");
                 var $comment = $("#Comments");
                 var commentValue = $comment.val();
 
                 if ($.devOrg.checkValidInputs($inputs) && !_.isEmpty(commentValue)) {
-                    // now we can submit, all are valid.
+                    // now we can submit, all inputs are valid.
                     $submittingSpinner.fadeIn("slow");
                     currformData = $form.serializeArray();
                     console.log(currformData);
@@ -4741,12 +4746,13 @@ $(function () {
                             var isDone = response.isDone;
                             var msg = response.msg;
                             if (isDone) {
+                                // reload the page, because we can't change the review from here.
                                 location.reload(true);
+                                //$container.fadeOut("slow");
                             } else {
                                 $failedIcon.fadeIn("slow");
                             }
                             $submittingSpinner.fadeOut("slow");
-
                         },
                         error: function (xhr, status, error) {
 
@@ -4754,8 +4760,12 @@ $(function () {
                     }); // ajax end
                 }
             }
-        },
 
+        },
+        /**
+         * After clicking on "Write Review" in app-details page.
+         * Everything stars from here.
+         */
         askForReviewForm: function () {
             var $reviewSpinner = $($.WeReviewApp.reviewSpinnerSelector).hide();
 
@@ -4784,22 +4794,36 @@ $(function () {
                                 $failedIcon.hide();
 
                                 $container.show("slow");
-                                var $form = $response.filter("form");
+
+                                //var $form = $response.filter("form");
+                                var $form = $container.find("form:first");
 
                                 if ($form.length > 0) {
-
-                                    $submittingSpinner = $response.find("#submitting-review-spinner");
+                                    $submittingSpinner = $("#submitting-review-spinner");
                                     $submittingSpinner.hide();
 
-                                    $container.find("form").submit($.WeReviewApp.reviewFormSubmit);
-                                    //$container.find("button.btn.btn-success").click(function () {
-                                    //    console.log("at place");
-                                    //});
-
+                                    //stop submitting and go through the processes and pages
                                     $.devOrg.uxFriendlySlide(
                                         selectForm,
                                         true,
-                                        true);
+                                        true //don't submit
+                                        );
+
+                                    // stop submitting , process review submit button actions
+                                    // anonymous function would be faster 
+                                    // however it would be dis-organized and since
+                                    // it's only be used few times so it's okay.
+                                    // note : $form.submit() doesn't work ! don't know why?
+                                    //        it doesn't work because (may be) it is not in the page html.
+                                    $form.submit(function (evt) {
+                                        evt.preventDefault();
+                                        var $sendingForm = $(this);
+                                        $.WeReviewApp.reviewFormSubmit(evt, $form);
+                                    });
+
+                                    //$container.find("button.btn.btn-success").click(function () {
+                                    //    console.log("at place");
+                                    //});
 
 
                                 }
@@ -4813,9 +4837,6 @@ $(function () {
                     } else {
                         $container.toggle("slow");
                     }
-
-                }).css({
-                    'cursor': 'pointer'
                 });
             }
         },

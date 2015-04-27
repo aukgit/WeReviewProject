@@ -1095,6 +1095,8 @@
     <Content Include="Views\Shared\_429.cshtml" />
     <Content Include="Views\Shared\_400.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Rating-5-b.cshtml" />
+    <Content Include="Views\Reviews\_SavingButton.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />
