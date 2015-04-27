@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
@@ -21,6 +22,11 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
                 return app.AbsUrl;
             }
             return null;
+        }
+
+
+        public static ReviewLikeDislike GetCurrentUserMark(List<ReviewLikeDislike> likeDislikes, Review review, long UserId) {
+            return likeDislikes.FirstOrDefault(n => n.ReviewID == review.ReviewID && n.UserID == UserId);
         }
 
         public static string GetAppURLWithoutHostName(this App app) {
