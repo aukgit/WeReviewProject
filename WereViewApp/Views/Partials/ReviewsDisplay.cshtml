@@ -1,5 +1,4 @@
-﻿@using WereViewApp.Models.EntityModel
-@using WereViewApp.Modules.DevUser
+﻿@using WereViewApp.Modules.DevUser
 @model WereViewApp.Models.EntityModel.App
 @{
     int sequenceOfReview = 0;
@@ -16,12 +15,12 @@
 <div class="review-collection-box seo-optimize">
     <div class="review-wrapper">
         @if (Model.Reviews != null && Model.Reviews.Count > 0) {
-            foreach (Review review in Model.Reviews) {
+            foreach (var review in Model.Reviews) {
                 isRecommended = review.IsSuggest ? "is-recommended" : "";
                 animateRightLeft = sequenceOfReview%2 == 0 ? "slideInLeft" : "slideInRight";
                 if (userId > -1) {
                     // user logged in
-                    dynamic reviewDislike = App.GetCurrentUserReviewLikeDislike(Model.ReviewLikeDislikesCollection, review, userId);
+                    var reviewDislike = Model.GetCurrentUserReviewLikeDislike(Model.ReviewLikeDislikesCollection, review, userId);
                 }
                 <section class="single-review row @isRecommended wow @animateRightLeft" data-wow-offset="1" data-wow-duration=".4s" data-sequence="@sequenceOfReview" itemprop="review" itemscope itemtype="http://schema.org/Review">
                     <div class="col-sm-10">
