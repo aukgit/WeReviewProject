@@ -483,7 +483,7 @@
       if (this.options.size == 'auto') {
         var getSize = function () {
           var minHeight,
-              lisVis = that.$lis.not('.hide');
+              lisVis = that.$lis.not('.Hide');
 
           posVert();
           menuHeight = selectOffsetBot - menuExtras;
@@ -824,7 +824,7 @@
         that.$menu.find('.active').removeClass('active');
         if (!!that.$searchbox.val()) {
           that.$searchbox.val('');
-          that.$lis.not('.is-hidden').removeClass('hide');
+          that.$lis.not('.is-hidden').removeClass('Hide');
           if (!!no_results.parent().length) no_results.remove();
         }
         if (!that.multiple) that.$menu.find('.selected').addClass('active');
@@ -837,9 +837,9 @@
         if (that.$searchbox.val()) {
 
           if (that.options.searchAccentInsensitive) {
-            that.$lis.not('.is-hidden').removeClass('hide').find('a').not(':aicontains(' + normalizeToBase(that.$searchbox.val()) + ')').parent().addClass('hide');
+            that.$lis.not('.is-hidden').removeClass('Hide').find('a').not(':aicontains(' + normalizeToBase(that.$searchbox.val()) + ')').parent().addClass('Hide');
           } else {
-            that.$lis.not('.is-hidden').removeClass('hide').find('a').not(':icontains(' + that.$searchbox.val() + ')').parent().addClass('hide');
+            that.$lis.not('.is-hidden').removeClass('Hide').find('a').not(':icontains(' + that.$searchbox.val() + ')').parent().addClass('Hide');
           }
 
           if (!that.$menu.find('li').filter(':visible:not(.no-results)').length) {
@@ -851,7 +851,7 @@
           }
 
         } else {
-          that.$lis.not('.is-hidden').removeClass('hide');
+          that.$lis.not('.is-hidden').removeClass('Hide');
           if (!!no_results.parent().length) no_results.remove();
         }
 

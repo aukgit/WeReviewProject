@@ -25,5 +25,6 @@
     <file>/Content/revolution-slider/js/jquery.themepunch.tools.min.js</file>
     <file>/Content/revolution-slider/js/jquery.themepunch.revolution.min.js</file>
     <file>/Content/Scripts/FrontEnd/front-developer.js</file>
+    <file>/Content/Scripts/DevOrgPlugins/WeReviewApps.js</file>
   </files>
 </bundle>

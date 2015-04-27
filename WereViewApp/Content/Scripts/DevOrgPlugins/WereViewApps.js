@@ -469,13 +469,13 @@ $(function () {
                         $container.hide();
                         $reviewSpinner.fadeIn("slow");
                         // load write form
-                        var reqVerifyFields = $("#review-request-fields input").serializeArray();
+                        var reqVerifyFieldsArray = $("#review-request-fields input").serializeArray();
                         //console.log(reqVerifyFields);
                         $.ajax({
                             type: "POST",
                             dataType: "html",
                             url: $.WeReviewApp.writeReviewFormUrl,
-                            data: reqVerifyFields,
+                            data: reqVerifyFieldsArray,
                             success: function (response) {
                                 var selectForm = $.WeReviewApp.reviewFormContainerSelectorInAppPage + " form";
                                 var $submittingSpinner = null;
@@ -563,12 +563,13 @@ $(function () {
             var showAfterCount = 5;
             var $appBoxes;
             var $div;
+            var i;
             if ($loadMoreBtn.length > 0) {
                 $div = $("#suggested-apps-list-div");
                 $appBoxes = $div.find("div.appsbox[data-sequence]");
                 length = $appBoxes.length;
 
-                for (var i = 0; i < length; i++) {
+                for (i = 0; i < length; i++) {
                     if (i >= showAfterCount) {
                         $appBox = $($appBoxes[i]);
                         $appBox.hide();
@@ -586,7 +587,7 @@ $(function () {
                 $loadMoreBtn.click(function () {
                     $appBoxes = $div.find("div.appsbox[data-sequence][data-hide=true]");
                     for (var i = 0; i < length; i++) {
-                        $appBox = $($appBoxes[i])
+                        $appBox = $($appBoxes[i]);
                         $appBox.show("slow");
                         $appBox.attr("data-hide", "false");
                     }
@@ -601,9 +602,9 @@ $(function () {
                 $appBoxes = $div.find("div.blogitembox[data-sequence]");
                 length = $appBoxes.length;
 
-                for (var i = 0; i < length; i++) {
+                for (i = 0; i < length; i++) {
                     if (i >= showAfterCount) {
-                        $appBox = $($appBoxes[i])
+                        $appBox = $($appBoxes[i]);
                         $appBox.hide();
                         $appBox.attr("data-hide", "true");
                     }
@@ -618,7 +619,7 @@ $(function () {
                 $reviewLoadMoreBtn.click(function () {
                     $appBoxes = $div.find("div.blogitembox[data-sequence][data-hide=true]");
                     for (var i = 0; i < length; i++) {
-                        $appBox = $($appBoxes[i])
+                        $appBox = $($appBoxes[i]);
                         $appBox.show("slow");
                         $appBox.attr("data-hide", "false");
                     }

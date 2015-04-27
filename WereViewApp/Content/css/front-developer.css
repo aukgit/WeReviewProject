@@ -54,6 +54,11 @@ body #wrap .app-details-page {
 .input-group-btn .btn {
   margin-left: 0;
 }
+label.control-label {
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-size: 14px;
+  font-size: 0.875em;
+}
 .custom-error-page p,
 .custom-error-page div {
   text-align: justify;
@@ -1467,9 +1472,20 @@ q:after {
   border-bottom: 3px solid red;
   margin-left: 10px;
   margin-left: 1rem;
+  cursor: pointer;
 }
 .write-review-btn:hover {
   border-bottom-color: orange;
+}
+#review-requesting-spinner {
+  display: none;
+  height: 19px;
+  height: 1.9rem;
+}
+#review-requesting-spinner span {
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
 }
 .pagination-wrapper {
   margin: 0 20px;

@@ -78,6 +78,11 @@ body #wrap .app-details-page {
 }
 
 
+label.control-label {
+    .ubuntu-font;
+    .font-size(14px);
+}
+
 //error pages start
 .custom-error-page {
     p, div {
@@ -1199,9 +1204,21 @@ q:after {
 .write-review-btn {
     border-bottom: 3px solid red;
     .margin-left(10px);
+    cursor: pointer;
 
     &:hover {
         border-bottom-color: orange;
+    }
+}
+
+#review-requesting-spinner {
+    display: none;
+    .height(19px);
+
+    span {
+        font-size: 1em;
+        margin: 0; 
+        padding:0;
     }
 }
 //pagination
