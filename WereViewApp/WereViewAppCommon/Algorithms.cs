@@ -1504,7 +1504,7 @@ namespace WereViewApp.WereViewAppCommon {
         }
 
         public void RemoveOutputCacheApp(App app) {
-            HttpResponse.RemoveOutputCacheItem("/" + app.GetAppURLWithoutHostName());
+            HttpResponse.RemoveOutputCacheItem("/" + app.GetAppUrlWithoutHostName());
         }
 
         //public void RemoveOutputCacheReview(App app) {
