@@ -25,8 +25,33 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
         }
 
 
-        public static ReviewLikeDislike GetCurrentUserMark(List<ReviewLikeDislike> likeDislikes, Review review, long userId) {
-            return likeDislikes.FirstOrDefault(n => n.ReviewID == review.ReviewID && n.UserID == userId);
+        public static ReviewLikeDislike GetCurrentUserReviewLikeDislike(List<ReviewLikeDislike> likeDislikes, Review review, long userId) {
+            if (likeDislikes != null && review != null) {
+                return likeDislikes
+                    .FirstOrDefault(
+                        n => n.ReviewID == review.ReviewID &&
+                        n.UserID == userId);
+            }
+            return null;
+        }
+
+        public static bool IsReviewLiked(ReviewLikeDislike likeDislike) {
+            if (likeDislike == null) {
+                return false;
+            }
+            return likeDislike.IsLiked;
+        }
+        public static bool IsReviewDisliked(ReviewLikeDislike likeDislike) {
+            if (likeDislike == null) {
+                return false;
+            }
+            return likeDislike.IsDisliked;
+        }
+        public static bool IsReviewNoneSelected(ReviewLikeDislike likeDislike) {
+            if (likeDislike == null) {
+                return false;
+            }
+            return likeDislike.IsNone;
         }
 
         public static string GetAppUrlWithoutHostName(this App app) {

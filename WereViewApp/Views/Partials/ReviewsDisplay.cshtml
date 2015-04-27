@@ -1,21 +1,28 @@
-﻿@using WereViewApp.Modules.DevUser
+﻿@using WereViewApp.Models.EntityModel
+@using WereViewApp.Modules.DevUser
 @model WereViewApp.Models.EntityModel.App
 @{
     int sequenceOfReview = 0;
-    var userId = UserManager.GetLoggedUserId();
+    long userId = UserManager.GetLoggedUserId();
     Layout = null;
     string currentUrl = @Html.GetCurrentURLString(); // Apps/Apple-7/Games/plant-vs-zombies
     string softwareUrl = AppVar.Url; //we review app
 
     string appName = Model.AppName;
     string isRecommended, animateRightLeft;
+    string disLikeActive = "", likeActive = "";
+    
 }
 <div class="review-collection-box seo-optimize">
     <div class="review-wrapper">
         @if (Model.Reviews != null && Model.Reviews.Count > 0) {
-            foreach (var review in Model.Reviews) {
+            foreach (Review review in Model.Reviews) {
                 isRecommended = review.IsSuggest ? "is-recommended" : "";
                 animateRightLeft = sequenceOfReview%2 == 0 ? "slideInLeft" : "slideInRight";
+                if (userId > -1) {
+                    // user logged in
+                    dynamic reviewDislike = App.GetCurrentUserReviewLikeDislike(Model.ReviewLikeDislikesCollection, review, userId);
+                }
                 <section class="single-review row @isRecommended wow @animateRightLeft" data-wow-offset="1" data-wow-duration=".4s" data-sequence="@sequenceOfReview" itemprop="review" itemscope itemtype="http://schema.org/Review">
                     <div class="col-sm-10">
                         <header class="review-writer-wrapper" title="@appName review">
