@@ -183,11 +183,7 @@ namespace WereViewApp.Models.EntityModel {
         /// </summary>
         public virtual List<ReviewLikeDislike> ReviewLikeDislikesCollection { get; set; }
 
-        /// <summary>
-        /// Virtual Field : 
-        /// To count total possible pages of reviews exist.
-        /// </summary>
-        public int? TotalReviewPages { get; set; }
+
 
         /// <summary>
         /// Virtual Field : 
@@ -196,6 +192,15 @@ namespace WereViewApp.Models.EntityModel {
         /// </summary>
         public short ReviewsCount { get; set; }
 
+
+        /// <summary>
+        /// Virtual Field : 
+        /// How many reviews displaying in app-detail page.
+        /// Algorithms.cs->LoadReviewIntoApp() method
+        /// Only be updated if skip  = 0 from that method 
+        /// otherwise update it from the partial controller
+        /// </summary>
+        public int? ReviewDisplayingCount { get; set; }
         #endregion
     }
 }

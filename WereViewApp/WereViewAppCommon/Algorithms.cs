@@ -260,7 +260,7 @@ namespace WereViewApp.WereViewAppCommon {
         }
         #endregion
 
-        #region Home page gallery
+        #region Home page : gallery
 
         /// <summary>
         /// Returns apps which are related to home page gallery 
@@ -595,7 +595,6 @@ namespace WereViewApp.WereViewAppCommon {
 
         #endregion
 
-
         #region get user reviewed app
         /// <summary>
         /// 
@@ -737,50 +736,78 @@ namespace WereViewApp.WereViewAppCommon {
         }
         #endregion
 
-        #region Review Load Related : Load Review into app
+        #region App-Details Page : Review Load app + Review Like Dislikes
 
         /// <summary>
         /// Only load reviews if needed.
         /// Based on app.IsReviewLoaded prop
         /// Also generate ReviewCount Value
+        /// To make it force to load make sure "app.IsReviewLoaded == false"
+        /// Also load Review Like Dislikes efficiently
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="skip">how many to skip</param>
+        /// <param name="maxReviewLoad"></param>
+        /// <param name="loadAppIfNotExist">Try load the app from cache or from database if not exist</param>
+        /// <param name="db"></param>
+        /// <param name="appId">Must pass app id when loadAppIfNotExist = true</param>
+        /// <returns>App with reviews if successfully done</returns>
+        public App LoadReviewAndThenReviewLikeDislikesIntoApp(App app, int skip, int maxReviewLoad, WereViewAppEntities db = null, bool loadAppIfNotExist = false, long appId = -1) {
+            if (loadAppIfNotExist && app == null) {
+                // forcing + app is not exist
+                app = GetAppFromStaticCache(appId);
+                if (app == null) {
+                    // app doesn't exist in the cache 
+
+                    // now we don't need to pull the whole app
+                    // just create a new one to hold these reviews.
+                    app = new App() {
+                        AppID = appId
+                    };
+
+                }
+            }
+            if (app != null && app.IsReviewLoaded == false) {
+                appId = app.AppID;
+                var reviews = db.Reviews
+                    //.Include(n => n.ReviewLikeDislikes)
+                                .Include(n => n.User)
+                                .OrderByDescending(n => n.LikedCount)
+                                .ThenBy(n => n.DisLikeCount)
+                                .Where(n => n.AppID == appId)
+                                .Skip(skip).Take(maxReviewLoad);
+                app.Reviews = reviews
+                              .ToList();
+                if (skip == 0) {
+                    app.ReviewDisplayingCount = app.Reviews.Count;
+                }
+                app.ReviewsCount = (short)db.Reviews.Count(n => n.AppID == appId);
+                app.IsReviewLoaded = true;
+                // load review like dislikes by this authenticated user.
+                // app.ReviewLikeDislikesCollection will have the like dislikes
+                LoadAppReviewLikeDislikesIntoApp(app, maxReviewLoad, db);
+                return app;
+            }
+            return null;
+        }
+        /// <summary>
+        /// Load ReviewLikeDislikes efficiently
         /// </summary>
         /// <param name="app"></param>
         /// <param name="maxReviewLoad"></param>
         /// <param name="db"></param>
-        public void LoadReviewIntoApp(App app, int maxReviewLoad, WereViewAppEntities db) {
-            if (app != null) {
-                var appId = app.AppID;
-                if (app.IsReviewLoaded == false) {
-                    var reviews = db.Reviews
-                                    .Include(n => n.ReviewLikeDislikes)
-                                    .Include(n => n.User)
-                                    .OrderByDescending(n => n.LikedCount)
-                                    .OrderBy(n => n.DisLikeCount)
-                                    .Where(n => n.AppID == appId);
-                    app.TotalReviewPages = reviews.Count();
-                    app.Reviews = reviews.Take(maxReviewLoad)
-                                  .ToList();
-                    app.ReviewsCount = (short)db.Reviews.Count(n => n.AppID == appId);
-                    app.IsReviewLoaded = true;
-                }
-            }
-        }
+        public void LoadAppReviewLikeDislikesIntoApp(App app, int maxReviewLoad, WereViewAppEntities db) {
+            if (app != null && UserManager.IsAuthenticated()) {
+                var currentUserId = UserManager.GetLoggedUserId();
 
-        public void GetAppReviewLikeDislikes(App app, int maxReviewLoad, WereViewAppEntities db) {
-            if (app != null) {
-                var appId = app.AppID;
                 if (app.IsReviewLoaded == true) {
-
-                    app.Reviews = db.Reviews
-                        //.Include(n => n.ReviewLikeDislikes)
-                                    .Include(n => n.User)
-                                    .OrderByDescending(n => n.LikedCount)
-                                    .OrderBy(n => n.DisLikeCount)
-                                    .Where(n => n.AppID == appId)
-                                    .Take(maxReviewLoad)
-                                    .ToList();
-                    app.ReviewsCount = (short)db.Reviews.Count(n => n.AppID == appId);
-                    app.IsReviewLoaded = true;
+                    var reviewIds = app.Reviews.Select(n => n.ReviewID).ToArray();
+                    var reviewIdsString = string.Join(",", reviewIds);
+                    // getting the like dislike based on reviews those are loaded 
+                    // and if and only if current user has done any.
+                    string sql = string.Format("SELECT * FROM ReviewLikeDislike WHERE ReviewID IN ({0}) AND UserID ={1}", reviewIdsString, currentUserId.ToString());
+                    //var reviewLikeDislikes = db.Database.SqlQuery<ReviewLikeDislike>(sql);
+                    app.ReviewLikeDislikesCollection = db.Database.SqlQuery<ReviewLikeDislike>(sql).ToList();
                 }
             }
         }
@@ -828,14 +855,21 @@ namespace WereViewApp.WereViewAppCommon {
                         if (UserManager.IsAuthenticated()) {
                             var userId = UserManager.GetLoggedUserId();
 
-                            var currentUserRated = db.Reviews.FirstOrDefault(n => n.AppID == appId && n.UserID == userId);
+                            var currentUserRated =
+                                    db.Reviews
+                                      .FirstOrDefault(n =>
+                                         n.AppID == appId &&
+                                         n.UserID == userId);
                             if (currentUserRated != null) {
                                 app.CurrentUserRatedAppValue = currentUserRated.Rating;
                             } else {
                                 app.CurrentUserRatedAppValue = null;
                             }
                         }
-                        LoadReviewIntoApp(app, maxReviewLoad, db);
+                        // only load if needed : 
+                        // determinate by the flag : app.IsReviewLoaded == false
+                        // Also load app review like dislikes
+                        LoadReviewAndThenReviewLikeDislikesIntoApp(app, 0, maxReviewLoad, db);
                         return app;
                     }
                     // app not found.
@@ -854,11 +888,16 @@ namespace WereViewApp.WereViewAppCommon {
                         app.YoutubeEmbedLink = GetRawIframeString(app.YoutubeEmbedLink);
                         var appId = app.AppID;
 
-                        LoadReviewIntoApp(app, maxReviewLoad, db);
+                        // Loading app reviews into app
+                        // only load if needed : determinate by the flag
+                        // app.IsReviewLoaded == false
+                        // Also load app review like dislikes
+                        LoadReviewAndThenReviewLikeDislikesIntoApp(app, 0, maxReviewLoad, db);
 
                         //Get current user app-rating.
                         if (UserManager.IsAuthenticated()) {
                             var userId = UserManager.GetLoggedUserId();
+
                             // current user rating for the app
                             var currentUserRated = db.Reviews.FirstOrDefault(n => n.AppID == appId && n.UserID == userId);
                             if (currentUserRated != null) {
@@ -870,6 +909,8 @@ namespace WereViewApp.WereViewAppCommon {
                         ReadVirtualFields(app);
                         // adding gallery images with app
                         GetEmbedGalleryImagesWithCurrentApp(app, db);
+
+                        // clear few old cache if close overflowing
                         if (CommonVars.AppsFoundForSingleDisplay.Count > 795) {
                             CommonVars.AppsFoundForSingleDisplay.RemoveRange(0, 200);
                         }
