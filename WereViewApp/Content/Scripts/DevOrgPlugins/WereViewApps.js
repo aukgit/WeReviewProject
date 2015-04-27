@@ -557,6 +557,7 @@ $(function () {
                 var $this = $(this);
                 var reviewId = $this.attr("data-review-id");
                 var data = serializedInputs + "&reviewId=" + reviewId;
+
                 $.ajax({
                     type: "POST",
                     url: url,
