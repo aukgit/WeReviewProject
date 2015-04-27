@@ -297,7 +297,9 @@ $(function () {
                 return "Are you sure you wanted to leave? Your app will be saved as a draft if you leave (you can have up to " + $.WeReviewApp.numberOfDraftPossible + " draft posts).";
             }
         },
-
+        /**
+         * When draft button is clicked from app-posting page.
+         */
         appFormDraftBtnClicked: function () {
             $.WeReviewApp.$appForm.find("#draft-btn").click(function (e) {
                 e.preventDefault();
@@ -319,7 +321,8 @@ $(function () {
         },
         /*
          * This method is related to display contents 
-         * when **only** app-editing page is ready
+         * when **only** app-editing page is ready (not submitting)
+         * For submitting $.WeReviewApp.appEditingSubmitEvent method is called
          */
         appEditingPageOnReady: function () {
             var $formInputs = $.WeReviewApp.$appForm.find("select,input[name!=YoutubeEmbedLink]");
@@ -335,7 +338,8 @@ $(function () {
         },
         /*
          * This method is related to display contents 
-         * when **only** app-posting page is ready
+         * when **only** app-posting page is ready (not submitting)
+         * for submitting $.WeReviewApp.appformPostEvent method is called.
          */
         appPostingPageOnReady: function () {
             $.devOrg.uxFriendlySlide("form.app-post", true, true);
@@ -404,171 +408,7 @@ $(function () {
             }
         },
 
-        frontEndJavaScript: function () {
-            var image = null;
-            //$('.pricebox').number(true, 0);
 
-            //$('#slider-thumbs a').nivoLightbox({ effect: 'fade', keyboardNav: true });
-
-
-
-            //$("#input-21f").rating();
-
-            var $ratingItems = $(".rating-5");
-
-            if ($ratingItems.length > 0) {
-                $ratingItems.rating({
-                    showClear: false
-                });
-            }
-            $ratingItems = $(".rating-10");
-
-            if ($ratingItems.length > 0) {
-                $ratingItems.rating({
-                    showClear: false,
-                    starCaptionClasses: {
-                        0.5: 'label label-danger',
-                        1: 'label label-danger',
-                        1.5: 'label label-danger',
-                        2: 'label label-danger',
-                        2.5: 'label label-danger',
-                        2: 'label label-warning',
-                        2.5: 'label label-warning',
-                        3: 'label label-warning',
-                        3.5: 'label label-warning',
-                        4: 'label label-warning',
-                        4.5: 'label label-warning',
-                        5: 'label label-warning',
-                        5.5: 'label label-info',
-                        6: 'label label-info',
-                        6.5: 'label label-info',
-                        7: 'label label-info',
-                        7.5: 'label label-primary',
-                        8: 'label label-primary',
-                        8.5: 'label label-success',
-                        9: 'label label-success',
-                        9.5: 'label label-success',
-                        10: 'label label-success'
-                    }
-                });
-            }
-            var nameOfTheCarosul = "#myCarousel";
-            var $appPageGallery = $(nameOfTheCarosul);
-            if ($appPageGallery.length > 0) {
-                $appPageGallery
-                    .carousel({ interval: 5000 })
-                    .bind('slid.bs.carousel', function (e) {
-                        var to_slide = $('.carousel-item.active').attr('data-slide-no');
-                        //console.log("slide");
-                        //console.log("active item " + to_slide);
-                        $('.myCarousel-target.active').removeClass('active');
-                        $('.carousel-indicators [data-slide-to=' + to_slide + ']').addClass('active');
-                    });
-                $('.myCarousel-target').on('click', function () {
-                    $(nameOfTheCarosul).carousel(parseInt($(this).attr('data-slide-to')));
-                    //console.log("ase");
-                    $('.myCarousel-target.active').removeClass('active');
-                    $(this).addClass('active');
-
-                });
-
-
-
-                //var $images = $appPageGallery.find("div.item");
-                //var length = $images.length;
-                //var $image = null;
-                //var slideNo = null;
-
-                //for (var i = 0; i < length; i++) {
-                //    $image = $($images[i]);
-                //    $image.click(function () {
-                //        var $imgInside = $(this);
-                //        console.log($imgInside);
-                //        slideNo = $imgInside.attr("data-slide-number");
-                //        console.log(slideNo);
-                //        $("#slider-thumbs a#carousel-selector-" + slideNo).trigger('click');
-                //    }).css({
-                //        'cursor': 'pointer'
-                //    });
-
-                //}
-
-                //jQuery(document).bind('keyup', function (e) {
-
-                //    if (e.keyCode == 39) {
-                //        jQuery('a.carousel-control.right').trigger('click');
-                //    }
-
-                //    else if (e.keyCode == 37) {
-                //        jQuery('a.carousel-control.left').trigger('click');
-                //    }
-
-                //});
-            }
-
-
-            function showHide(shID) {
-                if (document.getElementById(shID)) {
-                    if (document.getElementById(shID + '-show').style.display != 'none') {
-                        // already hidden
-                        document.getElementById(shID + '-show').style.display = 'none';
-                        document.getElementById(shID).style.display = 'inline';
-                        $("span#elipse-dot").hide();
-                    } else {
-                        document.getElementById(shID + '-show').style.display = 'inline';
-                        document.getElementById(shID).style.display = 'none';
-                        $("span#elipse-dot").show();
-                    }
-                }
-            }
-            function showHideForReview(i) {
-
-                if (document.getElementById('show_review' + i).style.display != 'none') {
-                    document.getElementById('show_review' + i).style.display = 'none';
-                    document.getElementById('less_review' + i).style.display = 'inline';
-                }
-                else {
-                    document.getElementById('show_review' + i).style.display = 'inline';
-                    document.getElementById('less_review' + i).style.display = 'none';
-                }
-            }
-
-            function showAppsInfoMore(i) {
-
-                if (document.getElementById('show_hide_id_more' + i).style.display != 'none') {
-                    document.getElementById('show_hide_id_more' + i).style.display = 'none';
-                    document.getElementById('show_hide_id_less' + i).style.display = 'inline';
-                }
-                else {
-                    document.getElementById('show_hide_id_more' + i).style.display = 'inline';
-                    document.getElementById('show_hide_id_less' + i).style.display = 'none';
-                }
-            }
-
-            $("#app-description-see-more-btn,#app-description-see-less-btn").click(function () {
-                showHide("example");
-            }).css({
-                'cursor': 'pointer'
-            });;
-            var $showBtns = $("div.blogitemWrap a.showLink");
-            var $hideBtns = $("div.blogitemWrap a.hideLink");
-            $showBtns.click(doProcessMoreNLessBtns).css({
-                'cursor': 'pointer'
-            });
-            $hideBtns.click(doProcessMoreNLessBtns).css({
-                'cursor': 'pointer'
-
-            });
-
-
-            function doProcessMoreNLessBtns(e) {
-                e.preventDefault();
-                var $this = $(this);
-                var id = $this.attr("data-sequence");
-                showHideForReview(id);
-            }
-
-        },
 
         reviewFormSubmit: function (evt) {
             evt.preventDefault();
@@ -684,13 +524,7 @@ $(function () {
         reviewLikeDisLikeClicked: function () {
             var $likeBtns = $("div.blogitemWrap a[data-review-like-btn=true]");
             var $disLikeBtns = $("div.blogitemWrap a[data-review-dislike-btn=true]");
-            if ($likeBtns.length > 0) {
-                $likeBtns.click(btnClicked);
-            }
 
-            if ($disLikeBtns.length > 0) {
-                $disLikeBtns.click(btnClicked);
-            }
             function btnClicked(e) {
                 e.preventDefault();
                 var $this = $(this);
@@ -714,15 +548,24 @@ $(function () {
                 $otherA.find("i").removeClass("active");
                 $this.find("i").toggleClass("active");
             }
+
+            if ($likeBtns.length > 0) {
+                $likeBtns.click(btnClicked);
+            }
+
+            if ($disLikeBtns.length > 0) {
+                $disLikeBtns.click(btnClicked);
+            }
         },
         suggestedOrReviewLoadmoreBtnLeft: function () {
             var $loadMoreBtn = $("#suggested-load-more-btn");
             var length, $appBox = 0;
             var showAfterCount = 5;
+            var $appBoxes;
+            var $div;
             if ($loadMoreBtn.length > 0) {
-
-                var $div = $("#suggested-apps-list-div");
-                var $appBoxes = $div.find("div.appsbox[data-sequence]");
+                $div = $("#suggested-apps-list-div");
+                $appBoxes = $div.find("div.appsbox[data-sequence]");
                 length = $appBoxes.length;
 
                 for (var i = 0; i < length; i++) {
@@ -754,8 +597,8 @@ $(function () {
             var $reviewLoadMoreBtn = $("#review-load-more-btn");
             var reviewShows = 4;
             if ($reviewLoadMoreBtn.length > 0) {
-                var $div = $("#review-collection");
-                var $appBoxes = $div.find("div.blogitembox[data-sequence]");
+                $div = $("#review-collection");
+                $appBoxes = $div.find("div.blogitembox[data-sequence]");
                 length = $appBoxes.length;
 
                 for (var i = 0; i < length; i++) {
@@ -812,8 +655,8 @@ $(function () {
         */
         executeActions: function () {
             $.WeReviewApp.generalAppFormEditingOrPostingPageOnReady();
-
-            $.WeReviewApp.frontEndJavaScript();
+            //don't require anymore , it has been called from the fron-end.js script
+            //$.WeReviewApp.frontEndJavaScript();
 
             //data-last-slide="true"
             $.WeReviewApp.askForReviewForm();
