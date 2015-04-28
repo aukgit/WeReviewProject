@@ -1,4 +1,232 @@
-﻿///#source 1 1 /Content/Scripts/bootstrap.min.js
+﻿///#source 1 1 /Content/Scripts/DevOrgPlugins/faster-jQuery.js
+/// <reference path="../jquery-2.1.3.js" />
+/// <reference path="../jquery-2.1.3.intellisense.js" />
+
+$.faster = {
+    browserName: null,
+    browserVersion: 0,
+    isBrowsersDetected: false,
+    isOpera: null,
+    isInternetExplorer: null,
+    isSafari: null,
+    isChrome: null,
+    isFirefox: null,
+    getById: function (findElementById) {
+        "use strict";
+        /// <summary>
+        /// Get your element by id, there is no need to use #.
+        /// However if there is a hash then it will be removed.
+        /// </summary>
+        /// <param name="findElementById">Your element id, there is no need to use #</param>
+        /// <returns>jQuery object , check length property to understand if any exist</returns>
+        if (findElementById !== undefined && findElementById !== null && findElementById !== "") {
+            var elementsById;
+            if (findElementById.charAt(0) !== "#") {
+                elementsById = document.getElementById(findElementById);
+                return $(elementsById);
+            } else {
+                var newId = findElementById.slice(1, findElementById.length);
+                elementsById = document.getElementById(newId);
+                return $(elementsById);
+            }
+        }
+        return $(null);
+    },
+    //http://jsperf.com/jquery-vs-queryselectorall-selection
+    isQuerySelectorSupported: function () {
+        if ($.faster.isChrome && $.faster.browserVersion >= 35) {
+            return true;
+        } else if ($.faster.isFirefox && $.faster.browserVersion >= 8) {
+            return true;
+        } else if ($.faster.isInternetExplorer && $.faster.browserVersion >= 10) {
+            return true;
+        } else if ($.faster.isSafari && $.faster.browserVersion >= 5) {
+            return true;
+        } else if ($.faster.isOpera && $.faster.browserVersion >= 8) {
+            return true;
+        }
+        return false;
+    },
+    printBrowser: function () {
+        var name = $.faster.browserName + " " + $.faster.browserVersion;
+        console.log(name);
+        return name;
+    },
+
+    setBrowserDetectedFlags: function () {
+        $.faster.isBrowsersDetected = true;
+        $.faster.isChrome = false;
+        $.faster.isOpera = false;
+        $.faster.isSafari = false;
+        $.faster.isFirefox = false;
+        $.faster.isInternetExplorer = false;
+
+        if ($.faster.browserName === "Chrome") {
+            $.faster.isChrome = true;
+        } else if ($.faster.browserName === "Firefox") {
+            $.faster.isFirefox = true;
+        } else if ($.faster.browserName === "IE") {
+            $.faster.isInternetExplorer = true;
+        } else if ($.faster.browserName === "Safari") {
+            $.faster.isSafari = true;
+        } else if ($.faster.browserName === "Opera") {
+            $.faster.isOpera = true;
+        }
+
+        //console.log("Chrome : " + $.faster.isChrome);
+        //console.log("Firefox : " + $.faster.isFirefox);
+        //console.log("IE : " + $.faster.isInternetExplorer);
+        //console.log("Safari : " + $.faster.isSafari);
+        //console.log("Opera : " + $.faster.isOpera);
+
+    },
+    detectBrowser: function () {
+        if ($.faster.isBrowsersDetected) {
+            return $.faster.printBrowser();
+        }
+        var ua = navigator.userAgent, tem,
+        M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+        if (/trident/i.test(M[1])) {
+            tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
+            //internet explorer
+            $.faster.browserName = "IE";
+            $.faster.browserVersion = tem[1] || '';
+            //return 'IE ' + (tem[1] || '');
+
+            // all browser flags : isOpera, isChrome..
+            $.faster.setBrowserDetectedFlags();
+            return $.faster.printBrowser();
+        }
+        if (M[1] === 'Chrome') {
+            tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
+            if (tem != null) {
+                //opera
+                // slice example 
+                /**
+                 * var fruits = ['Banana', 'Orange', 'Lemon', 'Apple', 'Mango'];
+                 * var citrus = fruits.slice(1, 3);
+                 * citrus contains ['Orange','Lemon']
+                 */
+                var simpleBrowserName = tem.slice(1); // get browser name [0] = browser and [1] = version
+                $.faster.browserName = simpleBrowserName[0].replace('OPR', 'Opera');
+                $.faster.browserVersion = simpleBrowserName[1];
+                // all browser flags : isOpera, isChrome..
+                $.faster.setBrowserDetectedFlags();
+
+                return $.faster.printBrowser();
+            }
+        }
+        M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
+        if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1]);
+        var simpleBrowserName2 = M.join(' ').split(" ");
+        $.faster.browserName = simpleBrowserName2[0];
+        $.faster.browserVersion = simpleBrowserName2[1];
+        // all browser flags : isOpera, isChrome..
+        $.faster.setBrowserDetectedFlags();
+        return $.faster.printBrowser();
+
+    },
+    queryAll: function (cssSelector) {
+        "use strict";
+        /// <summary>
+        /// Find all elements and returns as jQuery element and
+        /// carefully check which browser it supports and then 
+        /// decide which one to choose.
+        /// jQuery vs document.querySelector, querySelector is much more faster than jQuery selector. 
+        /// In chrome 35 above has better performance so it checks
+        /// https://jsperf.com/jquery-vs-document-queryselector
+        /// </summary>
+        /// <param name="cssSelector">Find all elements</param>
+        /// <returns>jQuery object , check length property to understand if any exist</returns>
+        if (cssSelector !== undefined && cssSelector !== null && cssSelector !== "") {
+            if ($.faster.isQuerySelectorSupported) {
+                var elements;
+                elements = document.querySelectorAll(cssSelector);
+                return $(elements);
+            } else {
+                return $(cssSelector);
+            }
+        }
+        return $(null);
+    },
+    queryFirst: function (cssSelector) {
+        "use strict";
+        /// <summary>
+        /// Find only first element and returns as jQuery element,
+        /// it will automatically add :first with your selector
+        /// carefully check which browser it supports and then 
+        /// decide which one to choose.
+        /// jQuery vs document.querySelector, querySelector is much more faster than jQuery selector. 
+        /// In chrome 35 above has better performance than jQuery so it checks and usages based on that.
+        /// https://jsperf.com/jquery-vs-document-queryselector
+        /// </summary>
+        /// <param name="cssSelector">Find first element and add ":first" with your selector</param>
+        /// <returns>jQuery object , check length property to understand if any exist</returns>
+        if (cssSelector !== undefined && cssSelector !== null && cssSelector !== "") {
+            if ($.faster.isQuerySelectorSupported) {
+                var elements;
+                elements = document.querySelector(cssSelector);
+                return $(elements);
+            } else {
+                return $(cssSelector + ":first");
+            }
+        }
+        return $(null);
+    }
+
+}
+$.faster.detectBrowser();
+
+
+$.queryAll = function (cssSelector) {
+    /// <summary>
+    /// Find all elements and returns as jQuery element,
+    /// Carefully check which browser it supports and then 
+    /// decide which one to choose.
+    /// document.querySelectorAll is much more faster than jQuery selector 
+    /// In chrome 35 above has better performance so it checks
+    /// </summary>
+    /// <param name="cssSelector">Find all elements</param>
+    /// <returns>jQuery object , check length property to understand if any exist</returns>
+    return $.faster.queryAll(cssSelector);
+}
+
+$.queryFirst = function (cssSelector) {
+    /// <summary>
+    /// Find only first element and returns as jQuery element
+    /// it will automatically add :first with your selector
+    /// Carefully check which browser it supports and then 
+    /// decide which one to choose.
+    /// document.querySelector is much more faster than jQuery selector 
+    /// In chrome 35 above has better performance so it checks
+    /// https://jsperf.com/jquery-vs-document-queryselector
+    /// </summary>
+    /// <param name="cssSelector">Find first element and add ":first" with your selector</param>
+    /// <returns>jQuery object , check length property to understand if any exist</returns>
+    return $.faster.queryFirst(cssSelector);
+}
+$.byId = function (findElementById) {
+    /// <summary>
+    /// Get your element by id, there is no need to use #.
+    /// However if there is a hash then it will be removed.
+    /// </summary>
+    /// <param name="findElementById">Your element id, there is no need to use #</param>
+    /// <returns>jQuery object , check length property to understand if any exist</returns>
+    if (findElementById !== undefined && findElementById !== null && findElementById !== "") {
+        var elementsById;
+        if (findElementById.charAt(0) !== "#") {
+            elementsById = document.getElementById(findElementById);
+            return $(elementsById);
+        } else {
+            var newId = findElementById.slice(1, findElementById.length);
+            elementsById = document.getElementById(newId);
+            return $(elementsById);
+        }
+    }
+    return $(null);
+}
+
+///#source 1 1 /Content/Scripts/bootstrap.min.js
 if(typeof jQuery=="undefined")throw new Error("Bootstrap's JavaScript requires jQuery");+function(n){"use strict";var t=n.fn.jquery.split(" ")[0].split(".");if(t[0]<2&&t[1]<9||t[0]==1&&t[1]==9&&t[2]<1)throw new Error("Bootstrap's JavaScript requires jQuery version 1.9.1 or higher");}(jQuery);+function(n){"use strict";function t(){var i=document.createElement("bootstrap"),n={WebkitTransition:"webkitTransitionEnd",MozTransition:"transitionend",OTransition:"oTransitionEnd otransitionend",transition:"transitionend"};for(var t in n)if(i.style[t]!==undefined)return{end:n[t]};return!1}n.fn.emulateTransitionEnd=function(t){var i=!1,u=this,r;n(this).one("bsTransitionEnd",function(){i=!0});return r=function(){i||n(u).trigger(n.support.transition.end)},setTimeout(r,t),this};n(function(){(n.support.transition=t(),n.support.transition)&&(n.event.special.bsTransitionEnd={bindType:n.support.transition.end,delegateType:n.support.transition.end,handle:function(t){if(n(t.target).is(this))return t.handleObj.handler.apply(this,arguments)}})})}(jQuery);+function(n){"use strict";function u(i){return this.each(function(){var r=n(this),u=r.data("bs.alert");u||r.data("bs.alert",u=new t(this));typeof i=="string"&&u[i].call(r)})}var i='[data-dismiss="alert"]',t=function(t){n(t).on("click",i,this.close)},r;t.VERSION="3.3.4";t.TRANSITION_DURATION=150;t.prototype.close=function(i){function e(){r.detach().trigger("closed.bs.alert").remove()}var f=n(this),u=f.attr("data-target"),r;(u||(u=f.attr("href"),u=u&&u.replace(/.*(?=#[^\s]*$)/,"")),r=n(u),i&&i.preventDefault(),r.length||(r=f.closest(".alert")),r.trigger(i=n.Event("close.bs.alert")),i.isDefaultPrevented())||(r.removeClass("in"),n.support.transition&&r.hasClass("fade")?r.one("bsTransitionEnd",e).emulateTransitionEnd(t.TRANSITION_DURATION):e())};r=n.fn.alert;n.fn.alert=u;n.fn.alert.Constructor=t;n.fn.alert.noConflict=function(){return n.fn.alert=r,this};n(document).on("click.bs.alert.data-api",i,t.prototype.close)}(jQuery);+function(n){"use strict";function i(i){return this.each(function(){var u=n(this),r=u.data("bs.button"),f=typeof i=="object"&&i;r||u.data("bs.button",r=new t(this,f));i=="toggle"?r.toggle():i&&r.setState(i)})}var t=function(i,r){this.$element=n(i);this.options=n.extend({},t.DEFAULTS,r);this.isLoading=!1},r;t.VERSION="3.3.4";t.DEFAULTS={loadingText:"loading..."};t.prototype.setState=function(t){var r="disabled",i=this.$element,f=i.is("input")?"val":"html",u=i.data();t=t+"Text";u.resetText==null&&i.data("resetText",i[f]());setTimeout(n.proxy(function(){i[f](u[t]==null?this.options[t]:u[t]);t=="loadingText"?(this.isLoading=!0,i.addClass(r).attr(r,r)):this.isLoading&&(this.isLoading=!1,i.removeClass(r).removeAttr(r))},this),0)};t.prototype.toggle=function(){var t=!0,i=this.$element.closest('[data-toggle="buttons"]'),n;i.length?(n=this.$element.find("input"),n.prop("type")=="radio"&&(n.prop("checked")&&this.$element.hasClass("active")?t=!1:i.find(".active").removeClass("active")),t&&n.prop("checked",!this.$element.hasClass("active")).trigger("change")):this.$element.attr("aria-pressed",!this.$element.hasClass("active"));t&&this.$element.toggleClass("active")};r=n.fn.button;n.fn.button=i;n.fn.button.Constructor=t;n.fn.button.noConflict=function(){return n.fn.button=r,this};n(document).on("click.bs.button.data-api",'[data-toggle^="button"]',function(t){var r=n(t.target);r.hasClass("btn")||(r=r.closest(".btn"));i.call(r,"toggle");t.preventDefault()}).on("focus.bs.button.data-api blur.bs.button.data-api",'[data-toggle^="button"]',function(t){n(t.target).closest(".btn").toggleClass("focus",/^focus(in)?$/.test(t.type))})}(jQuery);+function(n){"use strict";function i(i){return this.each(function(){var u=n(this),r=u.data("bs.carousel"),f=n.extend({},t.DEFAULTS,u.data(),typeof i=="object"&&i),e=typeof i=="string"?i:f.slide;r||u.data("bs.carousel",r=new t(this,f));typeof i=="number"?r.to(i):e?r[e]():f.interval&&r.pause().cycle()})}var t=function(t,i){this.$element=n(t);this.$indicators=this.$element.find(".carousel-indicators");this.options=i;this.paused=null;this.sliding=null;this.interval=null;this.$active=null;this.$items=null;this.options.keyboard&&this.$element.on("keydown.bs.carousel",n.proxy(this.keydown,this));this.options.pause!="hover"||"ontouchstart"in document.documentElement||this.$element.on("mouseenter.bs.carousel",n.proxy(this.pause,this)).on("mouseleave.bs.carousel",n.proxy(this.cycle,this))},u,r;t.VERSION="3.3.4";t.TRANSITION_DURATION=600;t.DEFAULTS={interval:5e3,pause:"hover",wrap:!0,keyboard:!0};t.prototype.keydown=function(n){if(!/input|textarea/i.test(n.target.tagName)){switch(n.which){case 37:this.prev();break;case 39:this.next();break;default:return}n.preventDefault()}};t.prototype.cycle=function(t){return t||(this.paused=!1),this.interval&&clearInterval(this.interval),this.options.interval&&!this.paused&&(this.interval=setInterval(n.proxy(this.next,this),this.options.interval)),this};t.prototype.getItemIndex=function(n){return this.$items=n.parent().children(".item"),this.$items.index(n||this.$active)};t.prototype.getItemForDirection=function(n,t){var i=this.getItemIndex(t),f=n=="prev"&&i===0||n=="next"&&i==this.$items.length-1,r,u;return f&&!this.options.wrap?t:(r=n=="prev"?-1:1,u=(i+r)%this.$items.length,this.$items.eq(u))};t.prototype.to=function(n){var i=this,t=this.getItemIndex(this.$active=this.$element.find(".item.active"));if(!(n>this.$items.length-1)&&!(n<0))return this.sliding?this.$element.one("slid.bs.carousel",function(){i.to(n)}):t==n?this.pause().cycle():this.slide(n>t?"next":"prev",this.$items.eq(n))};t.prototype.pause=function(t){return t||(this.paused=!0),this.$element.find(".next, .prev").length&&n.support.transition&&(this.$element.trigger(n.support.transition.end),this.cycle(!0)),this.interval=clearInterval(this.interval),this};t.prototype.next=function(){if(!this.sliding)return this.slide("next")};t.prototype.prev=function(){if(!this.sliding)return this.slide("prev")};t.prototype.slide=function(i,r){var e=this.$element.find(".item.active"),u=r||this.getItemForDirection(i,e),l=this.interval,f=i=="next"?"left":"right",a=this,o,s,h,c;return u.hasClass("active")?this.sliding=!1:(o=u[0],s=n.Event("slide.bs.carousel",{relatedTarget:o,direction:f}),this.$element.trigger(s),s.isDefaultPrevented())?void 0:(this.sliding=!0,l&&this.pause(),this.$indicators.length&&(this.$indicators.find(".active").removeClass("active"),h=n(this.$indicators.children()[this.getItemIndex(u)]),h&&h.addClass("active")),c=n.Event("slid.bs.carousel",{relatedTarget:o,direction:f}),n.support.transition&&this.$element.hasClass("slide")?(u.addClass(i),u[0].offsetWidth,e.addClass(f),u.addClass(f),e.one("bsTransitionEnd",function(){u.removeClass([i,f].join(" ")).addClass("active");e.removeClass(["active",f].join(" "));a.sliding=!1;setTimeout(function(){a.$element.trigger(c)},0)}).emulateTransitionEnd(t.TRANSITION_DURATION)):(e.removeClass("active"),u.addClass("active"),this.sliding=!1,this.$element.trigger(c)),l&&this.cycle(),this)};u=n.fn.carousel;n.fn.carousel=i;n.fn.carousel.Constructor=t;n.fn.carousel.noConflict=function(){return n.fn.carousel=u,this};r=function(t){var o,r=n(this),u=n(r.attr("data-target")||(o=r.attr("href"))&&o.replace(/.*(?=#[^\s]+$)/,"")),e,f;u.hasClass("carousel")&&(e=n.extend({},u.data(),r.data()),f=r.attr("data-slide-to"),f&&(e.interval=!1),i.call(u,e),f&&u.data("bs.carousel").to(f),t.preventDefault())};n(document).on("click.bs.carousel.data-api","[data-slide]",r).on("click.bs.carousel.data-api","[data-slide-to]",r);n(window).on("load",function(){n('[data-ride="carousel"]').each(function(){var t=n(this);i.call(t,t.data())})})}(jQuery);+function(n){"use strict";function r(t){var i,r=t.attr("data-target")||(i=t.attr("href"))&&i.replace(/.*(?=#[^\s]+$)/,"");return n(r)}function i(i){return this.each(function(){var u=n(this),r=u.data("bs.collapse"),f=n.extend({},t.DEFAULTS,u.data(),typeof i=="object"&&i);!r&&f.toggle&&/show|hide/.test(i)&&(f.toggle=!1);r||u.data("bs.collapse",r=new t(this,f));typeof i=="string"&&r[i]()})}var t=function(i,r){this.$element=n(i);this.options=n.extend({},t.DEFAULTS,r);this.$trigger=n('[data-toggle="collapse"][href="#'+i.id+'"],[data-toggle="collapse"][data-target="#'+i.id+'"]');this.transitioning=null;this.options.parent?this.$parent=this.getParent():this.addAriaAndCollapsedClass(this.$element,this.$trigger);this.options.toggle&&this.toggle()},u;t.VERSION="3.3.4";t.TRANSITION_DURATION=350;t.DEFAULTS={toggle:!0};t.prototype.dimension=function(){var n=this.$element.hasClass("width");return n?"width":"height"};t.prototype.show=function(){var f,r,e,u,o,s;if(!this.transitioning&&!this.$element.hasClass("in")&&(r=this.$parent&&this.$parent.children(".panel").children(".in, .collapsing"),!r||!r.length||(f=r.data("bs.collapse"),!f||!f.transitioning))&&(e=n.Event("show.bs.collapse"),this.$element.trigger(e),!e.isDefaultPrevented())){if(r&&r.length&&(i.call(r,"hide"),f||r.data("bs.collapse",null)),u=this.dimension(),this.$element.removeClass("collapse").addClass("collapsing")[u](0).attr("aria-expanded",!0),this.$trigger.removeClass("collapsed").attr("aria-expanded",!0),this.transitioning=1,o=function(){this.$element.removeClass("collapsing").addClass("collapse in")[u]("");this.transitioning=0;this.$element.trigger("shown.bs.collapse")},!n.support.transition)return o.call(this);s=n.camelCase(["scroll",u].join("-"));this.$element.one("bsTransitionEnd",n.proxy(o,this)).emulateTransitionEnd(t.TRANSITION_DURATION)[u](this.$element[0][s])}};t.prototype.hide=function(){var r,i,u;if(!this.transitioning&&this.$element.hasClass("in")&&(r=n.Event("hide.bs.collapse"),this.$element.trigger(r),!r.isDefaultPrevented())){if(i=this.dimension(),this.$element[i](this.$element[i]())[0].offsetHeight,this.$element.addClass("collapsing").removeClass("collapse in").attr("aria-expanded",!1),this.$trigger.addClass("collapsed").attr("aria-expanded",!1),this.transitioning=1,u=function(){this.transitioning=0;this.$element.removeClass("collapsing").addClass("collapse").trigger("hidden.bs.collapse")},!n.support.transition)return u.call(this);this.$element[i](0).one("bsTransitionEnd",n.proxy(u,this)).emulateTransitionEnd(t.TRANSITION_DURATION)}};t.prototype.toggle=function(){this[this.$element.hasClass("in")?"hide":"show"]()};t.prototype.getParent=function(){return n(this.options.parent).find('[data-toggle="collapse"][data-parent="'+this.options.parent+'"]').each(n.proxy(function(t,i){var u=n(i);this.addAriaAndCollapsedClass(r(u),u)},this)).end()};t.prototype.addAriaAndCollapsedClass=function(n,t){var i=n.hasClass("in");n.attr("aria-expanded",i);t.toggleClass("collapsed",!i).attr("aria-expanded",i)};u=n.fn.collapse;n.fn.collapse=i;n.fn.collapse.Constructor=t;n.fn.collapse.noConflict=function(){return n.fn.collapse=u,this};n(document).on("click.bs.collapse.data-api",'[data-toggle="collapse"]',function(t){var u=n(this);u.attr("data-target")||t.preventDefault();var f=r(u),e=f.data("bs.collapse"),o=e?"toggle":u.data();i.call(f,o)})}(jQuery);+function(n){"use strict";function r(t){t&&t.which===3||(n(e).remove(),n(i).each(function(){var r=n(this),i=u(r),f={relatedTarget:this};i.hasClass("open")&&((i.trigger(t=n.Event("hide.bs.dropdown",f)),t.isDefaultPrevented())||(r.attr("aria-expanded","false"),i.removeClass("open").trigger("hidden.bs.dropdown",f)))}))}function u(t){var i=t.attr("data-target"),r;return i||(i=t.attr("href"),i=i&&/#[A-Za-z]/.test(i)&&i.replace(/.*(?=#[^\s]*$)/,"")),r=i&&n(i),r&&r.length?r:t.parent()}function o(i){return this.each(function(){var r=n(this),u=r.data("bs.dropdown");u||r.data("bs.dropdown",u=new t(this));typeof i=="string"&&u[i].call(r)})}var e=".dropdown-backdrop",i='[data-toggle="dropdown"]',t=function(t){n(t).on("click.bs.dropdown",this.toggle)},f;t.VERSION="3.3.4";t.prototype.toggle=function(t){var f=n(this),i,o,e;if(!f.is(".disabled, :disabled")){if(i=u(f),o=i.hasClass("open"),r(),!o){if("ontouchstart"in document.documentElement&&!i.closest(".navbar-nav").length)n('<div class="dropdown-backdrop"/>').insertAfter(n(this)).on("click",r);if(e={relatedTarget:this},i.trigger(t=n.Event("show.bs.dropdown",e)),t.isDefaultPrevented())return;f.trigger("focus").attr("aria-expanded","true");i.toggleClass("open").trigger("shown.bs.dropdown",e)}return!1}};t.prototype.keydown=function(t){var e,o,s,h,f,r;if(/(38|40|27|32)/.test(t.which)&&!/input|textarea/i.test(t.target.tagName)&&(e=n(this),t.preventDefault(),t.stopPropagation(),!e.is(".disabled, :disabled"))){if(o=u(e),s=o.hasClass("open"),!s&&t.which!=27||s&&t.which==27)return t.which==27&&o.find(i).trigger("focus"),e.trigger("click");(h=" li:not(.disabled):visible a",f=o.find('[role="menu"]'+h+', [role="listbox"]'+h),f.length)&&(r=f.index(t.target),t.which==38&&r>0&&r--,t.which==40&&r<f.length-1&&r++,~r||(r=0),f.eq(r).trigger("focus"))}};f=n.fn.dropdown;n.fn.dropdown=o;n.fn.dropdown.Constructor=t;n.fn.dropdown.noConflict=function(){return n.fn.dropdown=f,this};n(document).on("click.bs.dropdown.data-api",r).on("click.bs.dropdown.data-api",".dropdown form",function(n){n.stopPropagation()}).on("click.bs.dropdown.data-api",i,t.prototype.toggle).on("keydown.bs.dropdown.data-api",i,t.prototype.keydown).on("keydown.bs.dropdown.data-api",'[role="menu"]',t.prototype.keydown).on("keydown.bs.dropdown.data-api",'[role="listbox"]',t.prototype.keydown)}(jQuery);+function(n){"use strict";function i(i,r){return this.each(function(){var f=n(this),u=f.data("bs.modal"),e=n.extend({},t.DEFAULTS,f.data(),typeof i=="object"&&i);u||f.data("bs.modal",u=new t(this,e));typeof i=="string"?u[i](r):e.show&&u.show(r)})}var t=function(t,i){this.options=i;this.$body=n(document.body);this.$element=n(t);this.$dialog=this.$element.find(".modal-dialog");this.$backdrop=null;this.isShown=null;this.originalBodyPad=null;this.scrollbarWidth=0;this.ignoreBackdropClick=!1;this.options.remote&&this.$element.find(".modal-content").load(this.options.remote,n.proxy(function(){this.$element.trigger("loaded.bs.modal")},this))},r;t.VERSION="3.3.4";t.TRANSITION_DURATION=300;t.BACKDROP_TRANSITION_DURATION=150;t.DEFAULTS={backdrop:!0,keyboard:!0,show:!0};t.prototype.toggle=function(n){return this.isShown?this.hide():this.show(n)};t.prototype.show=function(i){var r=this,u=n.Event("show.bs.modal",{relatedTarget:i});if(this.$element.trigger(u),!this.isShown&&!u.isDefaultPrevented()){this.isShown=!0;this.checkScrollbar();this.setScrollbar();this.$body.addClass("modal-open");this.escape();this.resize();this.$element.on("click.dismiss.bs.modal",'[data-dismiss="modal"]',n.proxy(this.hide,this));this.$dialog.on("mousedown.dismiss.bs.modal",function(){r.$element.one("mouseup.dismiss.bs.modal",function(t){n(t.target).is(r.$element)&&(r.ignoreBackdropClick=!0)})});this.backdrop(function(){var f=n.support.transition&&r.$element.hasClass("fade"),u;r.$element.parent().length||r.$element.appendTo(r.$body);r.$element.show().scrollTop(0);r.adjustDialog();f&&r.$element[0].offsetWidth;r.$element.addClass("in").attr("aria-hidden",!1);r.enforceFocus();u=n.Event("shown.bs.modal",{relatedTarget:i});f?r.$dialog.one("bsTransitionEnd",function(){r.$element.trigger("focus").trigger(u)}).emulateTransitionEnd(t.TRANSITION_DURATION):r.$element.trigger("focus").trigger(u)})}};t.prototype.hide=function(i){(i&&i.preventDefault(),i=n.Event("hide.bs.modal"),this.$element.trigger(i),this.isShown&&!i.isDefaultPrevented())&&(this.isShown=!1,this.escape(),this.resize(),n(document).off("focusin.bs.modal"),this.$element.removeClass("in").attr("aria-hidden",!0).off("click.dismiss.bs.modal").off("mouseup.dismiss.bs.modal"),this.$dialog.off("mousedown.dismiss.bs.modal"),n.support.transition&&this.$element.hasClass("fade")?this.$element.one("bsTransitionEnd",n.proxy(this.hideModal,this)).emulateTransitionEnd(t.TRANSITION_DURATION):this.hideModal())};t.prototype.enforceFocus=function(){n(document).off("focusin.bs.modal").on("focusin.bs.modal",n.proxy(function(n){this.$element[0]===n.target||this.$element.has(n.target).length||this.$element.trigger("focus")},this))};t.prototype.escape=function(){if(this.isShown&&this.options.keyboard)this.$element.on("keydown.dismiss.bs.modal",n.proxy(function(n){n.which==27&&this.hide()},this));else this.isShown||this.$element.off("keydown.dismiss.bs.modal")};t.prototype.resize=function(){if(this.isShown)n(window).on("resize.bs.modal",n.proxy(this.handleUpdate,this));else n(window).off("resize.bs.modal")};t.prototype.hideModal=function(){var n=this;this.$element.hide();this.backdrop(function(){n.$body.removeClass("modal-open");n.resetAdjustments();n.resetScrollbar();n.$element.trigger("hidden.bs.modal")})};t.prototype.removeBackdrop=function(){this.$backdrop&&this.$backdrop.remove();this.$backdrop=null};t.prototype.backdrop=function(i){var e=this,f=this.$element.hasClass("fade")?"fade":"",r,u;if(this.isShown&&this.options.backdrop){r=n.support.transition&&f;this.$backdrop=n('<div class="modal-backdrop '+f+'" />').appendTo(this.$body);this.$element.on("click.dismiss.bs.modal",n.proxy(function(n){if(this.ignoreBackdropClick){this.ignoreBackdropClick=!1;return}n.target===n.currentTarget&&(this.options.backdrop=="static"?this.$element[0].focus():this.hide())},this));if(r&&this.$backdrop[0].offsetWidth,this.$backdrop.addClass("in"),!i)return;r?this.$backdrop.one("bsTransitionEnd",i).emulateTransitionEnd(t.BACKDROP_TRANSITION_DURATION):i()}else!this.isShown&&this.$backdrop?(this.$backdrop.removeClass("in"),u=function(){e.removeBackdrop();i&&i()},n.support.transition&&this.$element.hasClass("fade")?this.$backdrop.one("bsTransitionEnd",u).emulateTransitionEnd(t.BACKDROP_TRANSITION_DURATION):u()):i&&i()};t.prototype.handleUpdate=function(){this.adjustDialog()};t.prototype.adjustDialog=function(){var n=this.$element[0].scrollHeight>document.documentElement.clientHeight;this.$element.css({paddingLeft:!this.bodyIsOverflowing&&n?this.scrollbarWidth:"",paddingRight:this.bodyIsOverflowing&&!n?this.scrollbarWidth:""})};t.prototype.resetAdjustments=function(){this.$element.css({paddingLeft:"",paddingRight:""})};t.prototype.checkScrollbar=function(){var n=window.innerWidth,t;n||(t=document.documentElement.getBoundingClientRect(),n=t.right-Math.abs(t.left));this.bodyIsOverflowing=document.body.clientWidth<n;this.scrollbarWidth=this.measureScrollbar()};t.prototype.setScrollbar=function(){var n=parseInt(this.$body.css("padding-right")||0,10);this.originalBodyPad=document.body.style.paddingRight||"";this.bodyIsOverflowing&&this.$body.css("padding-right",n+this.scrollbarWidth)};t.prototype.resetScrollbar=function(){this.$body.css("padding-right",this.originalBodyPad)};t.prototype.measureScrollbar=function(){var n=document.createElement("div"),t;return n.className="modal-scrollbar-measure",this.$body.append(n),t=n.offsetWidth-n.clientWidth,this.$body[0].removeChild(n),t};r=n.fn.modal;n.fn.modal=i;n.fn.modal.Constructor=t;n.fn.modal.noConflict=function(){return n.fn.modal=r,this};n(document).on("click.bs.modal.data-api",'[data-toggle="modal"]',function(t){var r=n(this),f=r.attr("href"),u=n(r.attr("data-target")||f&&f.replace(/.*(?=#[^\s]+$)/,"")),e=u.data("bs.modal")?"toggle":n.extend({remote:!/#/.test(f)&&f},u.data(),r.data());r.is("a")&&t.preventDefault();u.one("show.bs.modal",function(n){if(!n.isDefaultPrevented())u.one("hidden.bs.modal",function(){r.is(":visible")&&r.trigger("focus")})});i.call(u,e,this)})}(jQuery);+function(n){"use strict";function r(i){return this.each(function(){var u=n(this),r=u.data("bs.tooltip"),f=typeof i=="object"&&i;(r||!/destroy|hide/.test(i))&&(r||u.data("bs.tooltip",r=new t(this,f)),typeof i=="string"&&r[i]())})}var t=function(n,t){this.type=null;this.options=null;this.enabled=null;this.timeout=null;this.hoverState=null;this.$element=null;this.init("tooltip",n,t)},i;t.VERSION="3.3.4";t.TRANSITION_DURATION=150;t.DEFAULTS={animation:!0,placement:"top",selector:!1,template:'<div class="tooltip" role="tooltip"><div class="tooltip-arrow"><\/div><div class="tooltip-inner"><\/div><\/div>',trigger:"hover focus",title:"",delay:0,html:!1,container:!1,viewport:{selector:"body",padding:0}};t.prototype.init=function(t,i,r){var f,e,u,o,s;if(this.enabled=!0,this.type=t,this.$element=n(i),this.options=this.getOptions(r),this.$viewport=this.options.viewport&&n(this.options.viewport.selector||this.options.viewport),this.$element[0]instanceof document.constructor&&!this.options.selector)throw new Error("`selector` option must be specified when initializing "+this.type+" on the window.document object!");for(f=this.options.trigger.split(" "),e=f.length;e--;)if(u=f[e],u=="click")this.$element.on("click."+this.type,this.options.selector,n.proxy(this.toggle,this));else if(u!="manual"){o=u=="hover"?"mouseenter":"focusin";s=u=="hover"?"mouseleave":"focusout";this.$element.on(o+"."+this.type,this.options.selector,n.proxy(this.enter,this));this.$element.on(s+"."+this.type,this.options.selector,n.proxy(this.leave,this))}this.options.selector?this._options=n.extend({},this.options,{trigger:"manual",selector:""}):this.fixTitle()};t.prototype.getDefaults=function(){return t.DEFAULTS};t.prototype.getOptions=function(t){return t=n.extend({},this.getDefaults(),this.$element.data(),t),t.delay&&typeof t.delay=="number"&&(t.delay={show:t.delay,hide:t.delay}),t};t.prototype.getDelegateOptions=function(){var t={},i=this.getDefaults();return this._options&&n.each(this._options,function(n,r){i[n]!=r&&(t[n]=r)}),t};t.prototype.enter=function(t){var i=t instanceof this.constructor?t:n(t.currentTarget).data("bs."+this.type);if(i&&i.$tip&&i.$tip.is(":visible")){i.hoverState="in";return}if(i||(i=new this.constructor(t.currentTarget,this.getDelegateOptions()),n(t.currentTarget).data("bs."+this.type,i)),clearTimeout(i.timeout),i.hoverState="in",!i.options.delay||!i.options.delay.show)return i.show();i.timeout=setTimeout(function(){i.hoverState=="in"&&i.show()},i.options.delay.show)};t.prototype.leave=function(t){var i=t instanceof this.constructor?t:n(t.currentTarget).data("bs."+this.type);if(i||(i=new this.constructor(t.currentTarget,this.getDelegateOptions()),n(t.currentTarget).data("bs."+this.type,i)),clearTimeout(i.timeout),i.hoverState="out",!i.options.delay||!i.options.delay.hide)return i.hide();i.timeout=setTimeout(function(){i.hoverState=="out"&&i.hide()},i.options.delay.hide)};t.prototype.show=function(){var c=n.Event("show.bs."+this.type),l,p,h;if(this.hasContent()&&this.enabled){if(this.$element.trigger(c),l=n.contains(this.$element[0].ownerDocument.documentElement,this.$element[0]),c.isDefaultPrevented()||!l)return;var u=this,r=this.tip(),a=this.getUID(this.type);this.setContent();r.attr("id",a);this.$element.attr("aria-describedby",a);this.options.animation&&r.addClass("fade");var i=typeof this.options.placement=="function"?this.options.placement.call(this,r[0],this.$element[0]):this.options.placement,v=/\s?auto?\s?/i,y=v.test(i);y&&(i=i.replace(v,"")||"top");r.detach().css({top:0,left:0,display:"block"}).addClass(i).data("bs."+this.type,this);this.options.container?r.appendTo(this.options.container):r.insertAfter(this.$element);var f=this.getPosition(),o=r[0].offsetWidth,s=r[0].offsetHeight;if(y){var w=i,b=this.options.container?n(this.options.container):this.$element.parent(),e=this.getPosition(b);i=i=="bottom"&&f.bottom+s>e.bottom?"top":i=="top"&&f.top-s<e.top?"bottom":i=="right"&&f.right+o>e.width?"left":i=="left"&&f.left-o<e.left?"right":i;r.removeClass(w).addClass(i)}p=this.getCalculatedOffset(i,f,o,s);this.applyPlacement(p,i);h=function(){var n=u.hoverState;u.$element.trigger("shown.bs."+u.type);u.hoverState=null;n=="out"&&u.leave(u)};n.support.transition&&this.$tip.hasClass("fade")?r.one("bsTransitionEnd",h).emulateTransitionEnd(t.TRANSITION_DURATION):h()}};t.prototype.applyPlacement=function(t,i){var r=this.tip(),l=r[0].offsetWidth,e=r[0].offsetHeight,o=parseInt(r.css("margin-top"),10),s=parseInt(r.css("margin-left"),10),h,f,u;isNaN(o)&&(o=0);isNaN(s)&&(s=0);t.top=t.top+o;t.left=t.left+s;n.offset.setOffset(r[0],n.extend({using:function(n){r.css({top:Math.round(n.top),left:Math.round(n.left)})}},t),0);r.addClass("in");h=r[0].offsetWidth;f=r[0].offsetHeight;i=="top"&&f!=e&&(t.top=t.top+e-f);u=this.getViewportAdjustedDelta(i,t,h,f);u.left?t.left+=u.left:t.top+=u.top;var c=/top|bottom/.test(i),a=c?u.left*2-l+h:u.top*2-e+f,v=c?"offsetWidth":"offsetHeight";r.offset(t);this.replaceArrow(a,r[0][v],c)};t.prototype.replaceArrow=function(n,t,i){this.arrow().css(i?"left":"top",50*(1-n/t)+"%").css(i?"top":"left","")};t.prototype.setContent=function(){var n=this.tip(),t=this.getTitle();n.find(".tooltip-inner")[this.options.html?"html":"text"](t);n.removeClass("fade in top bottom left right")};t.prototype.hide=function(i){function e(){u.hoverState!="in"&&r.detach();u.$element.removeAttr("aria-describedby").trigger("hidden.bs."+u.type);i&&i()}var u=this,r=n(this.$tip),f=n.Event("hide.bs."+this.type);if(this.$element.trigger(f),!f.isDefaultPrevented())return r.removeClass("in"),n.support.transition&&r.hasClass("fade")?r.one("bsTransitionEnd",e).emulateTransitionEnd(t.TRANSITION_DURATION):e(),this.hoverState=null,this};t.prototype.fixTitle=function(){var n=this.$element;(n.attr("title")||typeof n.attr("data-original-title")!="string")&&n.attr("data-original-title",n.attr("title")||"").attr("title","")};t.prototype.hasContent=function(){return this.getTitle()};t.prototype.getPosition=function(t){t=t||this.$element;var u=t[0],r=u.tagName=="BODY",i=u.getBoundingClientRect();i.width==null&&(i=n.extend({},i,{width:i.right-i.left,height:i.bottom-i.top}));var f=r?{top:0,left:0}:t.offset(),e={scroll:r?document.documentElement.scrollTop||document.body.scrollTop:t.scrollTop()},o=r?{width:n(window).width(),height:n(window).height()}:null;return n.extend({},i,e,o,f)};t.prototype.getCalculatedOffset=function(n,t,i,r){return n=="bottom"?{top:t.top+t.height,left:t.left+t.width/2-i/2}:n=="top"?{top:t.top-r,left:t.left+t.width/2-i/2}:n=="left"?{top:t.top+t.height/2-r/2,left:t.left-i}:{top:t.top+t.height/2-r/2,left:t.left+t.width}};t.prototype.getViewportAdjustedDelta=function(n,t,i,r){var f={top:0,left:0},e,u,o,s,h,c;return this.$viewport?(e=this.options.viewport&&this.options.viewport.padding||0,u=this.getPosition(this.$viewport),/right|left/.test(n)?(o=t.top-e-u.scroll,s=t.top+e-u.scroll+r,o<u.top?f.top=u.top-o:s>u.top+u.height&&(f.top=u.top+u.height-s)):(h=t.left-e,c=t.left+e+i,h<u.left?f.left=u.left-h:c>u.width&&(f.left=u.left+u.width-c)),f):f};t.prototype.getTitle=function(){var t=this.$element,n=this.options;return t.attr("data-original-title")||(typeof n.title=="function"?n.title.call(t[0]):n.title)};t.prototype.getUID=function(n){do n+=~~(Math.random()*1e6);while(document.getElementById(n));return n};t.prototype.tip=function(){return this.$tip=this.$tip||n(this.options.template)};t.prototype.arrow=function(){return this.$arrow=this.$arrow||this.tip().find(".tooltip-arrow")};t.prototype.enable=function(){this.enabled=!0};t.prototype.disable=function(){this.enabled=!1};t.prototype.toggleEnabled=function(){this.enabled=!this.enabled};t.prototype.toggle=function(t){var i=this;t&&(i=n(t.currentTarget).data("bs."+this.type),i||(i=new this.constructor(t.currentTarget,this.getDelegateOptions()),n(t.currentTarget).data("bs."+this.type,i)));i.tip().hasClass("in")?i.leave(i):i.enter(i)};t.prototype.destroy=function(){var n=this;clearTimeout(this.timeout);this.hide(function(){n.$element.off("."+n.type).removeData("bs."+n.type)})};i=n.fn.tooltip;n.fn.tooltip=r;n.fn.tooltip.Constructor=t;n.fn.tooltip.noConflict=function(){return n.fn.tooltip=i,this}}(jQuery);+function(n){"use strict";function r(i){return this.each(function(){var u=n(this),r=u.data("bs.popover"),f=typeof i=="object"&&i;(r||!/destroy|hide/.test(i))&&(r||u.data("bs.popover",r=new t(this,f)),typeof i=="string"&&r[i]())})}var t=function(n,t){this.init("popover",n,t)},i;if(!n.fn.tooltip)throw new Error("Popover requires tooltip.js");t.VERSION="3.3.4";t.DEFAULTS=n.extend({},n.fn.tooltip.Constructor.DEFAULTS,{placement:"right",trigger:"click",content:"",template:'<div class="popover" role="tooltip"><div class="arrow"><\/div><h3 class="popover-title"><\/h3><div class="popover-content"><\/div><\/div>'});t.prototype=n.extend({},n.fn.tooltip.Constructor.prototype);t.prototype.constructor=t;t.prototype.getDefaults=function(){return t.DEFAULTS};t.prototype.setContent=function(){var n=this.tip(),i=this.getTitle(),t=this.getContent();n.find(".popover-title")[this.options.html?"html":"text"](i);n.find(".popover-content").children().detach().end()[this.options.html?typeof t=="string"?"html":"append":"text"](t);n.removeClass("fade top bottom left right in");n.find(".popover-title").html()||n.find(".popover-title").hide()};t.prototype.hasContent=function(){return this.getTitle()||this.getContent()};t.prototype.getContent=function(){var t=this.$element,n=this.options;return t.attr("data-content")||(typeof n.content=="function"?n.content.call(t[0]):n.content)};t.prototype.arrow=function(){return this.$arrow=this.$arrow||this.tip().find(".arrow")};i=n.fn.popover;n.fn.popover=r;n.fn.popover.Constructor=t;n.fn.popover.noConflict=function(){return n.fn.popover=i,this}}(jQuery);+function(n){"use strict";function t(i,r){this.$body=n(document.body);this.$scrollElement=n(i).is(document.body)?n(window):n(i);this.options=n.extend({},t.DEFAULTS,r);this.selector=(this.options.target||"")+" .nav li > a";this.offsets=[];this.targets=[];this.activeTarget=null;this.scrollHeight=0;this.$scrollElement.on("scroll.bs.scrollspy",n.proxy(this.process,this));this.refresh();this.process()}function i(i){return this.each(function(){var u=n(this),r=u.data("bs.scrollspy"),f=typeof i=="object"&&i;r||u.data("bs.scrollspy",r=new t(this,f));typeof i=="string"&&r[i]()})}t.VERSION="3.3.4";t.DEFAULTS={offset:10};t.prototype.getScrollHeight=function(){return this.$scrollElement[0].scrollHeight||Math.max(this.$body[0].scrollHeight,document.documentElement.scrollHeight)};t.prototype.refresh=function(){var t=this,i="offset",r=0;this.offsets=[];this.targets=[];this.scrollHeight=this.getScrollHeight();n.isWindow(this.$scrollElement[0])||(i="position",r=this.$scrollElement.scrollTop());this.$body.find(this.selector).map(function(){var f=n(this),u=f.data("target")||f.attr("href"),t=/^#./.test(u)&&n(u);return t&&t.length&&t.is(":visible")&&[[t[i]().top+r,u]]||null}).sort(function(n,t){return n[0]-t[0]}).each(function(){t.offsets.push(this[0]);t.targets.push(this[1])})};t.prototype.process=function(){var i=this.$scrollElement.scrollTop()+this.options.offset,f=this.getScrollHeight(),e=this.options.offset+f-this.$scrollElement.height(),t=this.offsets,r=this.targets,u=this.activeTarget,n;if(this.scrollHeight!=f&&this.refresh(),i>=e)return u!=(n=r[r.length-1])&&this.activate(n);if(u&&i<t[0])return this.activeTarget=null,this.clear();for(n=t.length;n--;)u!=r[n]&&i>=t[n]&&(t[n+1]===undefined||i<t[n+1])&&this.activate(r[n])};t.prototype.activate=function(t){this.activeTarget=t;this.clear();var r=this.selector+'[data-target="'+t+'"],'+this.selector+'[href="'+t+'"]',i=n(r).parents("li").addClass("active");i.parent(".dropdown-menu").length&&(i=i.closest("li.dropdown").addClass("active"));i.trigger("activate.bs.scrollspy")};t.prototype.clear=function(){n(this.selector).parentsUntil(this.options.target,".active").removeClass("active")};var r=n.fn.scrollspy;n.fn.scrollspy=i;n.fn.scrollspy.Constructor=t;n.fn.scrollspy.noConflict=function(){return n.fn.scrollspy=r,this};n(window).on("load.bs.scrollspy.data-api",function(){n('[data-spy="scroll"]').each(function(){var t=n(this);i.call(t,t.data())})})}(jQuery);+function(n){"use strict";function r(i){return this.each(function(){var u=n(this),r=u.data("bs.tab");r||u.data("bs.tab",r=new t(this));typeof i=="string"&&r[i]()})}var t=function(t){this.element=n(t)},u,i;t.VERSION="3.3.4";t.TRANSITION_DURATION=150;t.prototype.show=function(){var t=this.element,f=t.closest("ul:not(.dropdown-menu)"),i=t.data("target"),u;if(i||(i=t.attr("href"),i=i&&i.replace(/.*(?=#[^\s]*$)/,"")),!t.parent("li").hasClass("active")){var r=f.find(".active:last a"),e=n.Event("hide.bs.tab",{relatedTarget:t[0]}),o=n.Event("show.bs.tab",{relatedTarget:r[0]});(r.trigger(e),t.trigger(o),o.isDefaultPrevented()||e.isDefaultPrevented())||(u=n(i),this.activate(t.closest("li"),f),this.activate(u,u.parent(),function(){r.trigger({type:"hidden.bs.tab",relatedTarget:t[0]});t.trigger({type:"shown.bs.tab",relatedTarget:r[0]})}))}};t.prototype.activate=function(i,r,u){function o(){f.removeClass("active").find("> .dropdown-menu > .active").removeClass("active").end().find('[data-toggle="tab"]').attr("aria-expanded",!1);i.addClass("active").find('[data-toggle="tab"]').attr("aria-expanded",!0);e?(i[0].offsetWidth,i.addClass("in")):i.removeClass("fade");i.parent(".dropdown-menu").length&&i.closest("li.dropdown").addClass("active").end().find('[data-toggle="tab"]').attr("aria-expanded",!0);u&&u()}var f=r.find("> .active"),e=u&&n.support.transition&&(f.length&&f.hasClass("fade")||!!r.find("> .fade").length);f.length&&e?f.one("bsTransitionEnd",o).emulateTransitionEnd(t.TRANSITION_DURATION):o();f.removeClass("in")};u=n.fn.tab;n.fn.tab=r;n.fn.tab.Constructor=t;n.fn.tab.noConflict=function(){return n.fn.tab=u,this};i=function(t){t.preventDefault();r.call(n(this),"show")};n(document).on("click.bs.tab.data-api",'[data-toggle="tab"]',i).on("click.bs.tab.data-api",'[data-toggle="pill"]',i)}(jQuery);+function(n){"use strict";function i(i){return this.each(function(){var u=n(this),r=u.data("bs.affix"),f=typeof i=="object"&&i;r||u.data("bs.affix",r=new t(this,f));typeof i=="string"&&r[i]()})}var t=function(i,r){this.options=n.extend({},t.DEFAULTS,r);this.$target=n(this.options.target).on("scroll.bs.affix.data-api",n.proxy(this.checkPosition,this)).on("click.bs.affix.data-api",n.proxy(this.checkPositionWithEventLoop,this));this.$element=n(i);this.affixed=null;this.unpin=null;this.pinnedOffset=null;this.checkPosition()},r;t.VERSION="3.3.4";t.RESET="affix affix-top affix-bottom";t.DEFAULTS={offset:0,target:window};t.prototype.getState=function(n,t,i,r){var u=this.$target.scrollTop(),f=this.$element.offset(),e=this.$target.height();if(i!=null&&this.affixed=="top")return u<i?"top":!1;if(this.affixed=="bottom")return i!=null?u+this.unpin<=f.top?!1:"bottom":u+e<=n-r?!1:"bottom";var o=this.affixed==null,s=o?u:f.top,h=o?e:t;return i!=null&&u<=i?"top":r!=null&&s+h>=n-r?"bottom":!1};t.prototype.getPinnedOffset=function(){if(this.pinnedOffset)return this.pinnedOffset;this.$element.removeClass(t.RESET).addClass("affix");var n=this.$target.scrollTop(),i=this.$element.offset();return this.pinnedOffset=i.top-n};t.prototype.checkPositionWithEventLoop=function(){setTimeout(n.proxy(this.checkPosition,this),1)};t.prototype.checkPosition=function(){var i,e,o;if(this.$element.is(":visible")){var s=this.$element.height(),r=this.options.offset,f=r.top,u=r.bottom,h=n(document.body).height();if(typeof r!="object"&&(u=f=r),typeof f=="function"&&(f=r.top(this.$element)),typeof u=="function"&&(u=r.bottom(this.$element)),i=this.getState(h,s,f,u),this.affixed!=i){if(this.unpin!=null&&this.$element.css("top",""),e="affix"+(i?"-"+i:""),o=n.Event(e+".bs.affix"),this.$element.trigger(o),o.isDefaultPrevented())return;this.affixed=i;this.unpin=i=="bottom"?this.getPinnedOffset():null;this.$element.removeClass(t.RESET).addClass(e).trigger(e.replace("affix","affixed")+".bs.affix")}i=="bottom"&&this.$element.offset({top:h-s-u})}};r=n.fn.affix;n.fn.affix=i;n.fn.affix.Constructor=t;n.fn.affix.noConflict=function(){return n.fn.affix=r,this};n(window).on("load",function(){n('[data-spy="affix"]').each(function(){var r=n(this),t=r.data();t.offset=t.offset||{};t.offsetBottom!=null&&(t.offset.bottom=t.offsetBottom);t.offsetTop!=null&&(t.offset.top=t.offsetTop);i.call(r,t)})})}(jQuery);
 /*
 //# sourceMappingURL=bootstrap.min.js.map
@@ -4073,8 +4301,6 @@ function revslider_showDoubleJqueryError(e){var t="Revolution Slider Error: You 
 $(function () {
 
     $(".seo-hide").hide();
-
-
     //$('.tp-banner').show().revolution({
     //    dottedOverlay: "none",
     //    delay: 8000,
@@ -4295,3 +4521,725 @@ $(function () {
 
 });
 
+///#source 1 1 /Content/Scripts/DevOrgPlugins/WeReviewApps.js
+/// <reference path="CustomJS.js" />
+/// <reference path="CommonJsEveryPage.js" />
+/// <reference path="../bootstrap.js" />
+/// <reference path="../jquery-2.1.1.js" />
+/// <reference path="../jquery-2.1.1.intellisense.js" />
+/// <reference path="../jquery.validate.js" />
+/// <reference path="../moment.js" />
+/// <reference path="../validation.js" />
+/// <reference path="../respond.js" />
+/// <reference path="../bootstrap-datepicker.js" />
+/// <reference path="../bootstrap-datetimepicker.js" />
+/// <reference path="../bootstrap-select.js" />
+/// <reference path="../bootstrap-timepicker.js" />
+/// <reference path="DevOrgComponent.js" />
+/// <reference path="../underscore.js" />
+/// <reference path="../../Content/Scripts/star-rating.js" />
+/// <reference path="../../Content/Scripts/bootstrap-table-filter.js" />
+/// <reference path="../../Content/Scripts/Scripts/jquery.elastic.source.js" />
+/// <reference path="I:\WeReviewApp\WereViewProject\WeReviewApp\Content/Scripts/Upload/devOrgUploadConfig.js" />
+/// <reference path="faster-jQuery.js" />
+
+
+/**
+ * Written by Alim Ul Karim
+ * Developers Organism
+ * Written  : 14 Nov 2014
+ * Modified : 28 Apr 2015
+ */
+
+$(function () {
+    /// <summary>
+    /// Were view app plug-in written by Alim Ul Karim
+    /// </summary>
+    $.WeReviewApp = {
+        ///appForm represents both app-edit and app-posting form
+        $appForm: $.queryAll("form.app-editing-page:first"), // means both editing and posting
+        $appFormEdit: $.queryAll("form.app-edit:first"),
+        $appFormPost: $.queryAll("form.app-post:first"),
+        $allInputs: $.queryAll("form.app-post:first input"),
+        ajaxDraftPostUrl: "/App/SaveDraft",
+        $appPageUploaderNotifier: $.queryAll("label.notify-global-info"),
+        homePageUrl: "/",
+        selectorForUploaderRows: "#collection-uploaders .form-row-uploader",
+        afterDraftPostRedirectPageUrl: "/",
+        appInputChangesExist: false,
+        $globalTopErrorLabel: $.byId("notify-global-info-top"),
+        $howtoUseUploaderInfoLabel: $.byId("how-to-use-uploader-info"),
+        isTesting: false,
+        draftSavingFailedErrorMsg: "Sorry couldn't save the draft , possible reason maybe connection lost or your draft buffer is exceeded.",
+        numberOfDraftPossible: 10,
+        invalidAttrName: "data-invalid",
+        galleryImageUploaderId: 0,
+        maxTryInputSubmit: 250,
+        sendingDraftNumber: 0,
+        writeReviewFormUrl: "/Reviews/GetReviewForm",
+        reviewSpinnerSelector: "#review-requesting-spinner",
+        reviewFormContainerSelectorInAppPage: "div#write-review-form-container",
+        reviewFormSubmitUrl: "/Reviews/Write",
+        ///consist of # : "#app-deails-page"
+        appDetailsPageParentId : "#app-deails-page",
+
+        fixIframeTag: function ($jQueryInputText) {
+            //<iframe width="560" height="315" src="//www.youtube.com/embed/ob-P2a6Mrjs" frameborder="0" allowfullscreen></iframe>
+            var currentText = $jQueryInputText.val();
+            //currentText = currentText.toLowerCase();
+            var reg = new RegExp("<iframe", 'gi');
+            currentText = currentText.replace(reg, "[iframe");
+            reg = new RegExp("</iframe>", 'gi');
+            currentText = currentText.replace(reg, "[/iframe]");
+            currentText = currentText.replace(">", "]");
+            $jQueryInputText.val(currentText);
+        },
+
+        iframeSquareToActualTag: function ($jQueryInputText) {
+            //[iframe width="560" height="315" src="//www.youtube.com/embed/ob-P2a6Mrjs" frameborder="0" allowfullscreen></iframe]
+            var currentText = $jQueryInputText.val();
+            //currentText = currentText.toLowerCase();
+            var reg = new RegExp("\\[iframe", 'gi');
+            currentText = currentText.replace(reg, "<iframe");
+            reg = new RegExp("\\[/iframe\\]", 'gi');
+            currentText = currentText.replace(reg, "</iframe>");
+            currentText = currentText.replace("]", ">");
+            $jQueryInputText.val(currentText);
+        },
+
+        /// App post submitting event from both edit or posting page.
+        appformPostEvent: function (e) {
+            /// <summary>
+            /// posting a new app event
+            /// </summary>
+            /// <param name="e">
+            /// 
+            /// </param>
+            var ifAnyUploadfails = false;
+
+            function raiseUploaderInvalidMessage(failedBoolean) {
+                if (failedBoolean) {
+                    $.WeReviewApp.$appPageUploaderNotifier.text("Please upload all necessary files to proceed next.");
+                } else {
+                    $.WeReviewApp.$appPageUploaderNotifier.text("");
+                }
+            }
+
+            function isInvalidateUploader($uploaderx) {
+                var idAttr = $uploaderx.attr("data-id"); //always use jquery to get attr
+                var loadedValues = $.devOrgUP.getCountOfHowManyFilesUploaded(idAttr);
+
+                if (loadedValues === 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            if ($.WeReviewApp.$appFormPost.length > 0) {
+                e.preventDefault();
+
+                // only check uploader when posting time
+
+                // first check if form is valid or not.
+                var visibleInputsExceptFile = $.WeReviewApp.$allInputs.filter("[type!=file]:visible");
+                var len = visibleInputsExceptFile.length;
+                if (!$.WeReviewApp.isAppTitleValid()) {
+                    $.WeReviewApp.$globalTopErrorLabel.text("Please fill out the title correctly. It's very important for your app.");
+                    $.WeReviewApp.$globalTopErrorLabel.show();
+                    return;
+                }
+
+                for (var i = 0; i < len; i++) {
+                    var $singleInput = $(visibleInputsExceptFile[i]);
+                    if (!$singleInput.valid()) {
+                        $.WeReviewApp.$globalTopErrorLabel.text("Please fill out the required fields.");
+                        return;
+                    }
+                }
+
+                $.WeReviewApp.$globalTopErrorLabel.text("");
+
+                // first check if the uploaders are visible or not
+                var $uploaderRows = $.WeReviewApp.$appForm.find($.WeReviewApp.selectorForUploaderRows);
+
+                //visibility check
+
+                for (i = 0; i < $uploaderRows.length; i++) {
+                    var $uploaderRow = $($uploaderRows[i]);
+                    if ($uploaderRow.is(":visible")) {
+                        var $currentUploader = $uploaderRow.find("input[type='file']");
+                        ifAnyUploadfails = isInvalidateUploader($currentUploader);
+                        if (ifAnyUploadfails) {
+                            raiseUploaderInvalidMessage(ifAnyUploadfails);
+                            return;
+                        }
+                    }
+                    if ($uploaderRow.is(":hidden")) {
+                        if ($.WeReviewApp.$howtoUseUploaderInfoLabel.is(":hidden")) {
+                            $.WeReviewApp.$howtoUseUploaderInfoLabel.show();
+                        }
+                        raiseUploaderInvalidMessage(ifAnyUploadfails);
+
+                        $uploaderRow.show("slow");
+                        return;
+                    }
+                }
+
+
+                // checking uploadeers if valid
+                var $uploaders = $.WeReviewApp.$appForm.find("#collection-uploaders");
+                if ($uploaders.length > 0) {
+                    // only validate uploads if any uploader exist.
+                    var countUploaders = $uploaders.length;
+
+                    var $uploaders2 = $uploaders.find("input[type='file']");
+                    for (i = 0; i < countUploaders; i++) {
+                        var $uploader = $($uploaders2[i]);
+                        ifAnyUploadfails = isInvalidateUploader($uploader);
+                    }
+                    raiseUploaderInvalidMessage(ifAnyUploadfails);
+                }
+
+                if (!ifAnyUploadfails && $.WeReviewApp.isAppTitleValid()) {
+                    //everything is successful
+                    $.WeReviewApp.appInputChangesExist = false;
+                    $.WeReviewApp.fixAllInputIframeDataOrHtmlToSquare();
+                    // all conditions fulfilled so submit the form
+                    this.submit();
+                }
+
+            }
+            //function preventDefaultInside(evt, formCanbeSent) {
+            //    if (!ifAnyUploadfails && formCanbeSent) {
+            //        // all uploads has been done.
+            //        $.WeReviewApp.appInputChangesExist = false; // no change exist on the unbin method ... direct submit.
+            //    }
+            //}
+        },
+
+        isAppTitleValid: function () {
+            var $appName = $("#AppName");
+            var hasInvalidAttr = $appName.attr($.WeReviewApp.invalidAttrName);
+
+            if (hasInvalidAttr) {
+                return false;
+            } else {
+                return true;
+            }
+        },
+        // before app editing submit
+        appEditingSubmitEvent: function (e) {
+            e.preventDefault();
+            if ($.WeReviewApp.isAppTitleValid()) {
+                var count = $.devOrgUP.getCountOfHowManyFilesUploaded($.WeReviewApp.galleryImageUploaderId);
+                if (count > 0) {
+                    //fix square brackets
+                    $.WeReviewApp.fixAllInputIframeDataOrHtmlToSquare();
+                    // remove msg
+                    $.WeReviewApp.appInputChangesExist = false;
+                    //submit
+                    this.submit();
+                } else {
+                    $.WeReviewApp.$appPageUploaderNotifier.text("Please upload all necessary files to proceed next.");
+                }
+            }
+        },
+
+        fixAllInputIframeDataOrHtmlToSquare: function () {
+            var inputSelectors = "input.url-input";
+            var inputFields = $.WeReviewApp.$appForm.find(inputSelectors);
+            if (inputFields.length > 0) {
+                for (var i = 0; i < inputFields.length; i++) {
+                    var $eachInputfield = $(inputFields[i]);
+                    $.WeReviewApp.fixIframeTag($eachInputfield);
+                }
+            }
+        },
+        invertAllInputIframeDataOrSquareToHtml: function () {
+            var inputSelectors = "input.url-input";
+            var inputFields = $.WeReviewApp.$appForm.find(inputSelectors);
+            if (inputFields.length > 0) {
+                for (var i = 0; i < inputFields.length; i++) {
+                    var $eachInputfield = $(inputFields[i]);
+                    $.WeReviewApp.iframeSquareToActualTag($eachInputfield);
+                }
+            }
+        },
+        getAttributeRemoveRegularExpressionFor: function (attributeName) {
+            return "(" + attributeName + ".*=.*[\"\"'])([a-zA-Z0-9:;\.\s\(\)\-\,]*)([\"\"'])";
+        },
+        removeHeightWidthAttributes: function ($jQueryInputText) {
+            var currentText = $jQueryInputText.val();
+            //currentText = currentText.toLowerCase();
+            var heightRegEx = $.WeReviewApp.getAttributeRemoveRegularExpressionFor("Height");
+            var widthRegEx = $.WeReviewApp.getAttributeRemoveRegularExpressionFor("Width");
+
+            var reg = new RegExp(heightRegEx, 'gi');
+            currentText = currentText.replace(reg, "");
+            reg = new RegExp(widthRegEx, 'gi');
+            currentText = currentText.replace(reg, "");
+            $jQueryInputText.val(currentText);
+        },
+        fixYouTubeVideoPropertise: function () {
+            var inputSelectors = "input.url-input";
+            var inputFields = $.WeReviewApp.$appForm.find(inputSelectors);
+            if (inputFields.length > 0) {
+                for (var i = 0; i < inputFields.length; i++) {
+                    var $eachInputfield = $(inputFields[i]);
+                    $.WeReviewApp.removeHeightWidthAttributes($eachInputfield);
+                }
+            }
+        },
+
+        /// it doesn't include fixing html inputs
+        /// return as ajax response, add methods like success or fail to do something with it.
+        ajaxDraftSaveApp: function (e) {
+            var formData;
+            formData = $.WeReviewApp.$appForm.serializeArray();
+
+            // ajax post to save draft app
+            return $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: $.WeReviewApp.ajaxDraftPostUrl,
+                data: formData
+            }); // ajax end
+        },
+
+        beforeUnloadEvent: function () {
+            /// <summary>
+            /// Only sends to draft if in the app posting page.
+            /// </summary>
+            /// <returns type=""></returns>
+            if ($.WeReviewApp.appInputChangesExist) {
+
+                if ($.WeReviewApp.$appFormPost.length > 0) {
+                    // app posting page
+                    // send as ajax post
+                    if ($.WeReviewApp.sendingDraftNumber <= $.WeReviewApp.numberOfDraftPossible) {
+                        // fix all html inputs
+                        $.WeReviewApp.fixAllInputIframeDataOrHtmlToSquare();
+
+                        $.WeReviewApp.ajaxDraftSaveApp();
+                    }
+
+                }// app posting page if else end.
+
+
+                return "Are you sure you wanted to leave? Your app will be saved as a draft if you leave (you can have up to " + $.WeReviewApp.numberOfDraftPossible + " draft posts).";
+            }
+        },
+        /**
+         * When draft button is clicked from app-posting page.
+         */
+        appFormDraftBtnClicked: function () {
+            $.WeReviewApp.$appForm.find("#draft-btn").click(function (e) {
+                e.preventDefault();
+                $.WeReviewApp.appInputChangesExist = false;
+                // fix html input type to relevant square brackets
+                // fix all html inputs
+                $.WeReviewApp.fixAllInputIframeDataOrHtmlToSquare();
+
+                //send ajax request to draft save.
+                $.WeReviewApp.ajaxDraftSaveApp()
+                .done(function (data) {
+                    // if successful then move to redirect page.
+                    window.location.href = $.WeReviewApp.afterDraftPostRedirectPageUrl;
+                })
+                .fail(function (jqXHR, textStatus) {
+                    $.WeReviewApp.$globalTopErrorLabel.text($.WeReviewApp.draftSavingFailedErrorMsg);
+                });
+            });
+        },
+        /*
+         * This method is related to display contents 
+         * when **only** app-editing page is ready (not submitting)
+         * For submitting $.WeReviewApp.appEditingSubmitEvent method is called
+         */
+        appEditingPageOnReady: function () {
+            var $formInputs = $.WeReviewApp.$appForm.find("select,input[name!=YoutubeEmbedLink]");
+            //console.log($formInputs);
+
+            $.devOrg.validateInputFromServer("#AppName", "/Validator/GetValidUrlEditing", "AppName", false, false, 3, true, " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.", null, $formInputs, $.WeReviewApp.maxTryInputSubmit);
+
+            //stop form submitting the form if any file upload is not done.
+            // before app editing submit method
+            $.WeReviewApp.$appForm.submit($.WeReviewApp.appEditingSubmitEvent);
+            // fix square brackets to html brackets
+            $.WeReviewApp.invertAllInputIframeDataOrSquareToHtml();
+        },
+        /*
+         * This method is related to display contents 
+         * when **only** app-posting page is ready (not submitting)
+         * for submitting $.WeReviewApp.appformPostEvent method is called.
+         */
+        appPostingPageOnReady: function () {
+            $.devOrg.uxFriendlySlide("form.app-post", true, true);
+            var $formInputs = $.WeReviewApp.$appForm.find("select,input[name!=YoutubeEmbedLink]");
+            //console.log($formInputs);
+            $.devOrg.validateInputFromServer("#AppName", "/Validator/GetValidUrl", "AppName", false, false, 3, true, " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.", null, $formInputs, $.WeReviewApp.maxTryInputSubmit);
+
+            ///hiding the uploader on the app loader page for every time before posting a new app.
+            $.WeReviewApp.$appForm.find($.WeReviewApp.selectorForUploaderRows).hide();
+
+            // stop form submitting the form if any file upload is not done.
+            $.WeReviewApp.$appForm.submit($.WeReviewApp.appformPostEvent);
+
+            $.WeReviewApp.appFormDraftBtnClicked();
+
+        },
+        /**
+         * App edit or post before action.
+         * Determination point of app edit or post.
+         */
+        generalAppFormEditingOrPostingPageOnReady: function (e) {
+
+            if ($.WeReviewApp.$appForm.length > 0) {
+                $.WeReviewApp.$howtoUseUploaderInfoLabel.hide(); //hide uploader info label.
+
+                if ($.WeReviewApp.$appFormPost.length > 0) {
+                    // app posting
+                    $.WeReviewApp.appPostingPageOnReady();
+
+                    // Only sends to draft if in the app posting page.
+                    $(window).bind('beforeunload', $.WeReviewApp.beforeUnloadEvent);
+                } else if ($.WeReviewApp.$appFormEdit.length > 0) {
+                    // app editing
+                    $.WeReviewApp.appEditingPageOnReady();
+                }
+
+                // .app-editing-page class represent both editing and posting
+
+                // Validate app-name
+                $.devOrg.validateTextInputBasedOnRegEx("#AppName", "^([A-zZ.]+\\s*)+(\\d*)\\s*([aA-zZ.]+\\s*)+(\\d*)", "Sorry your app name is not valid. Valid name example eg. Plant Vs. Zombies v2.");
+
+                $.devOrg.reSetupjQueryValidate("form");
+
+
+                $.WeReviewApp.$appForm.find("input,textarea").change(function () {
+                    $.WeReviewApp.appInputChangesExist = true;
+                });
+
+                $.WeReviewApp.$appForm.find("select").selectpicker();
+
+                // enter to go next
+                $.devOrg.enterToNextTextBox("form.app-editing-page", true); // means both editing and posting
+
+
+                // triggering appname blur when change any of these.
+                // Because all are related to URL generate.
+                $(".selectpicker,select").change(function () {
+                    $("#AppName").trigger("blur");
+
+                });
+                // to validate the app-name, triggering blur on app-name field
+                $("#PlatformVersion").blur(function () {
+                    $("#AppName").trigger("blur");
+                    //console.log("dev");
+                });
+            }
+        },
+
+
+        /**
+         * Processing review submit/save button click or submission process.
+         */
+        reviewFormSubmit: function (evt, $form) {
+            evt.preventDefault(); //stop from submitting.
+
+            //console.log("ase");
+            var $submittingSpinner = null;
+            var $inputs, currformData = 0;
+            $submittingSpinner = $form.find("#submitting-review-spinner");
+            var $failedIcon = $form.find("#submitting-review-failed-icon");
+            // indicates if it is in the review posting page or in editing page\
+            // $lastDiv.length == 0 indicates it's in review edit mode
+            var $lastDiv = $form.find("div[data-last-slide=true]:visible");
+            var url = $form.attr("action");
+            var isInReviewPostingMode = (url === $.WeReviewApp.reviewFormSubmitUrl && $lastDiv.length > 0);
+            // indicates in review edit mode
+            var isFormSubmitUrlIsSameAsReviewSubmitUrl = url !== $.WeReviewApp.reviewFormSubmitUrl;
+
+            if (isInReviewPostingMode || isFormSubmitUrlIsSameAsReviewSubmitUrl) {
+                $inputs = $lastDiv.find("input");
+                var $comment = $("#Comments");
+                var commentValue = $comment.val();
+
+                if ($.devOrg.checkValidInputs($inputs) && !_.isEmpty(commentValue)) {
+                    // now we can submit, all inputs are valid.
+                    $submittingSpinner.fadeIn("slow");
+                    currformData = $form.serializeArray();
+                    console.log(currformData);
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: url,
+                        data: currformData,
+                        success: function (response) {
+                            console.log(response);
+                            var isDone = response.isDone;
+                            var msg = response.msg;
+                            if (isDone) {
+                                // reload the page, because we can't change the review from here.
+                                location.reload(true);
+                                //$container.fadeOut("slow");
+                            } else {
+                                $failedIcon.fadeIn("slow");
+                            }
+                            $submittingSpinner.fadeOut("slow");
+                        },
+                        error: function (xhr, status, error) {
+
+                        }
+                    }); // ajax end
+                }
+            }
+
+        },
+        /**
+         * After clicking on "Write Review" in app-details page.
+         * Everything stars from here.
+         */
+        askForReviewForm: function () {
+            var $reviewSpinner = $($.WeReviewApp.reviewSpinnerSelector).hide();
+
+            if ($reviewSpinner.length > 0) {
+                $("#WriteReviewButton").click(function () {
+                    var $container = $($.WeReviewApp.reviewFormContainerSelectorInAppPage);
+                    var text = $container.text().trim();
+                    if (text.length === 0) {
+                        $container.hide();
+                        $reviewSpinner.fadeIn("slow");
+                        // load write form
+                        var reqVerifyFieldsArray = $("#review-request-fields input").serializeArray();
+                        //console.log(reqVerifyFields);
+                        $.ajax({
+                            type: "POST",
+                            dataType: "html",
+                            url: $.WeReviewApp.writeReviewFormUrl,
+                            data: reqVerifyFieldsArray,
+                            success: function (response) {
+                                var selectForm = $.WeReviewApp.reviewFormContainerSelectorInAppPage + " form";
+                                var $submittingSpinner = null;
+                                var $response = $(response);
+                                $container.html(response);
+
+                                var $failedIcon = $("#submitting-review-failed-icon");
+                                $failedIcon.hide();
+
+                                $container.show("slow");
+
+                                //var $form = $response.filter("form");
+                                var $form = $container.find("form:first");
+
+                                if ($form.length > 0) {
+                                    $submittingSpinner = $("#submitting-review-spinner");
+                                    $submittingSpinner.hide();
+
+                                    //stop submitting and go through the processes and pages
+                                    $.devOrg.uxFriendlySlide(
+                                        selectForm,
+                                        true,
+                                        true //don't submit
+                                        );
+
+                                    // stop submitting , process review submit button actions
+                                    // anonymous function would be faster 
+                                    // however it would be dis-organized and since
+                                    // it's only be used few times so it's okay.
+                                    // note : $form.submit() doesn't work ! don't know why?
+                                    //        it doesn't work because (may be) it is not in the page html.
+                                    $form.submit(function (evt) {
+                                        evt.preventDefault();
+                                        //var $sendingForm = $(this);
+                                        $.WeReviewApp.reviewFormSubmit(evt, $form);
+                                    });
+
+                                    //$container.find("button.btn.btn-success").click(function () {
+                                    //    console.log("at place");
+                                    //});
+
+
+                                }
+                                //console.log(response);
+                                $reviewSpinner.fadeOut("slow");
+                            },
+                            error: function (xhr, status, error) {
+
+                            }
+                        }); // ajax end
+                    } else {
+                        $container.toggle("slow");
+                    }
+                });
+            }
+        },
+        /**
+         * App review : like-dislike functionality
+         */
+        reviewLikeDisLikeClicked: function () {
+            var $likeBtns = $.queryAll("#app-deails-page a[data-review-like-btn=true]");
+            // Views/Reviews/ReviewsDisplay.cshtml contains that id
+            var likeUrl = "/Reviews/Like";
+            var dislikeUrl = "/Reviews/DisLike";
+            // what happens when like or dislike is clicked
+            // ajax request send
+            function btnClicked(e, url, serializedInputs) {
+                e.preventDefault();
+                var $this = $(this);
+                var reviewId = $this.attr("data-review-id");
+                var data = serializedInputs + "&reviewId=" + reviewId;
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data,
+                    success: function (response) {
+
+                    }
+                }); // ajax end
+                var sequence = $this.attr("data-sequence");
+                var isLikeBtn = $this.attr("data-review-like-btn");
+
+                var $otherA = null;
+
+                if (isLikeBtn) {
+                    $otherA = $.byId("review-thumbs-down-click-" + sequence);
+                } else {
+                    $otherA = $.byId("review-thumbs-up-click-" + sequence);
+                }
+                $otherA.find("i").removeClass("active");
+                $this.find("i").toggleClass("active");
+            }
+
+            if ($likeBtns.length > 0) {
+                var $disLikeBtns = $("#app-deails-page a[data-review-dislike-btn=true]");
+                var serializedData = $("#review-like-dislike-form-submit").serialize();
+                var $spinners = $(".spinner-for-like").hide();
+                //like btns
+                $likeBtns.click(function (evt) {
+                    btnClicked(evt, likeUrl, serializedData);
+                });
+                //dislike btns
+                $disLikeBtns.click(function (evt) {
+                    btnClicked(evt, dislikeUrl, serializedData);
+                });
+            }
+        },
+
+        suggestedOrReviewLoadmoreBtnLeft: function () {
+            var $loadMoreBtn = $("#suggested-load-more-btn");
+            var length, $appBox = 0;
+            var showAfterCount = 5;
+            var $appBoxes;
+            var $div;
+            var i;
+            if ($loadMoreBtn.length > 0) {
+                $div = $("#suggested-apps-list-div");
+                $appBoxes = $div.find("div.appsbox[data-sequence]");
+                length = $appBoxes.length;
+
+                for (i = 0; i < length; i++) {
+                    if (i >= showAfterCount) {
+                        $appBox = $($appBoxes[i]);
+                        $appBox.hide();
+                        $appBox.attr("data-hide", "true");
+                    }
+                }
+                if ($loadMoreBtn.is(":hidden") && length > showAfterCount) {
+                    $loadMoreBtn.show("slow");
+                } else if ($loadMoreBtn.is(":visible") && length < showAfterCount) {
+                    $loadMoreBtn.hide();
+                }
+
+                $loadMoreBtn.click(function () {
+                    $appBoxes = $div.find("div.appsbox[data-sequence][data-hide=true]");
+                    for (var i = 0; i < length; i++) {
+                        $appBox = $($appBoxes[i]);
+                        $appBox.show("slow");
+                        $appBox.attr("data-hide", "false");
+                    }
+                    $loadMoreBtn.hide("slow");
+                });
+            }
+
+            var $reviewLoadMoreBtn = $("#review-load-more-btn");
+            var reviewShows = 4;
+            if ($reviewLoadMoreBtn.length > 0) {
+                $div = $("#review-collection");
+                $appBoxes = $div.find("div.blogitembox[data-sequence]");
+                length = $appBoxes.length;
+
+                for (i = 0; i < length; i++) {
+                    if (i >= showAfterCount) {
+                        $appBox = $($appBoxes[i]);
+                        $appBox.hide();
+                        $appBox.attr("data-hide", "true");
+                    }
+                }
+
+                if ($reviewLoadMoreBtn.is(":hidden") && length > showAfterCount) {
+                    $reviewLoadMoreBtn.show("slow");
+                } else if ($reviewLoadMoreBtn.is(":visible") && length < showAfterCount) {
+                    $reviewLoadMoreBtn.hide();
+                }
+
+                $reviewLoadMoreBtn.click(function () {
+                    $appBoxes = $div.find("div.blogitembox[data-sequence][data-hide=true]");
+                    for (var i = 0; i < length; i++) {
+                        $appBox = $($appBoxes[i]);
+                        $appBox.show("slow");
+                        $appBox.attr("data-hide", "false");
+                    }
+                    $reviewLoadMoreBtn.hide("slow");
+                });
+            }
+        },
+
+        fixDateInputs: function () {
+            var $dateInputs = $("form input.date-input");
+            var $dateInput = null;
+            var length = $dateInputs.length;
+            var text = null;
+            if (length > 0) {
+                for (var i = 0; i < length; i++) {
+                    $dateInput = $($dateInputs[i]);
+                    text = $dateInput.val();
+                    if (!_.isEmpty(text)) {
+                        text = text.replace(/\-/ig, "/");
+                        $dateInput.val(text);
+                    }
+                }
+            }
+        },
+
+
+        /* 
+        * hides all uploader at first : $.WeReviewApp.$appForm.find("#collection-uploaders uploader-auto").hide();
+        * modify $.WeReviewApp.appInputChangesExist based on user input
+        * enter to next line bind : $.devOrg.enterToNextTextBox("form.app-editing-page", true);
+        * bind with form submit-> which binds to $.WeReviewApp.appformPostEvent
+        * draftbtnClicked : $.WeReviewApp.appFormDraftBtnClicked();
+        * binds with beforeunload which binds with $.WeReviewApp.beforeUnloadEvent
+        */
+        executeActions: function () {
+            $.WeReviewApp.generalAppFormEditingOrPostingPageOnReady();
+            //don't require anymore , it has been called from the fron-end.js script
+            //$.WeReviewApp.frontEndJavaScript();
+
+            //data-last-slide="true"
+            $.WeReviewApp.askForReviewForm();
+
+            $.WeReviewApp.suggestedOrReviewLoadmoreBtnLeft();
+
+            $.WeReviewApp.reviewLikeDisLikeClicked();
+            $("#developers-organism").addClass("hide");
+            // fix date inputs
+            $.WeReviewApp.fixDateInputs();
+        }
+    };
+
+    // this will call all the other events
+    $.WeReviewApp.executeActions();
+});

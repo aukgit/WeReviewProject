@@ -619,6 +619,7 @@
     <Content Include="Content\Scripts\DevOrgPlugins\every-page.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\dev-component-runner.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.component.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\fasterJquery.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\WeReviewApps.js" />
     <Content Include="Content\Scripts\Bundles\UploadJs.js.bundle" />
     <Content Include="Content\Scripts\Bundles\FrontEndJs.js.bundle" />

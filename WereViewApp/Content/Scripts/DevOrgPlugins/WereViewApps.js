@@ -17,7 +17,15 @@
 /// <reference path="../../Content/Scripts/bootstrap-table-filter.js" />
 /// <reference path="../../Content/Scripts/Scripts/jquery.elastic.source.js" />
 /// <reference path="I:\WeReviewApp\WereViewProject\WeReviewApp\Content/Scripts/Upload/devOrgUploadConfig.js" />
+/// <reference path="faster-jQuery.js" />
 
+
+/**
+ * Written by Alim Ul Karim
+ * Developers Organism
+ * Written  : 14 Nov 2014
+ * Modified : 28 Apr 2015
+ */
 
 $(function () {
     /// <summary>
@@ -25,18 +33,18 @@ $(function () {
     /// </summary>
     $.WeReviewApp = {
         ///appForm represents both app-edit and app-posting form
-        $appForm: $("form.app-editing-page:first"), // means both editing and posting
-        $appFormEdit: $("form.app-edit:first"),
-        $appFormPost: $("form.app-post:first"),
-        $allInputs: $("form.app-post:first input"),
+        $appForm: $.queryAll("form.app-editing-page:first"), // means both editing and posting
+        $appFormEdit: $.queryAll("form.app-edit:first"),
+        $appFormPost: $.queryAll("form.app-post:first"),
+        $allInputs: $.queryAll("form.app-post:first input"),
         ajaxDraftPostUrl: "/App/SaveDraft",
-        $appPageUploaderNotifier: $("label.notify-global-info"),
+        $appPageUploaderNotifier: $.queryAll("label.notify-global-info"),
         homePageUrl: "/",
         selectorForUploaderRows: "#collection-uploaders .form-row-uploader",
         afterDraftPostRedirectPageUrl: "/",
         appInputChangesExist: false,
-        $globalTopErrorLabel: $("#notify-global-info-top"),
-        $howtoUseUploaderInfoLabel: $("#how-to-use-uploader-info"),
+        $globalTopErrorLabel: $.byId("notify-global-info-top"),
+        $howtoUseUploaderInfoLabel: $.byId("how-to-use-uploader-info"),
         isTesting: false,
         draftSavingFailedErrorMsg: "Sorry couldn't save the draft , possible reason maybe connection lost or your draft buffer is exceeded.",
         numberOfDraftPossible: 10,
@@ -48,7 +56,8 @@ $(function () {
         reviewSpinnerSelector: "#review-requesting-spinner",
         reviewFormContainerSelectorInAppPage: "div#write-review-form-container",
         reviewFormSubmitUrl: "/Reviews/Write",
-
+        ///consist of # : "#app-deails-page"
+        appDetailsPageParentId : "#app-deails-page",
 
         fixIframeTag: function ($jQueryInputText) {
             //<iframe width="560" height="315" src="//www.youtube.com/embed/ob-P2a6Mrjs" frameborder="0" allowfullscreen></iframe>
@@ -546,13 +555,13 @@ $(function () {
          * App review : like-dislike functionality
          */
         reviewLikeDisLikeClicked: function () {
-            var $likeBtns = $("#app-deails-page a[data-review-like-btn=true]");
-            var $disLikeBtns = $("#app-deails-page a[data-review-dislike-btn=true]");
+            var $likeBtns = $.queryAll("#app-deails-page a[data-review-like-btn=true]");
             // Views/Reviews/ReviewsDisplay.cshtml contains that id
-            var serializedInputs = $("#review-like-dislike-form-submit").serialize();
             var likeUrl = "/Reviews/Like";
             var dislikeUrl = "/Reviews/DisLike";
-            function btnClicked(e, url) {
+            // what happens when like or dislike is clicked
+            // ajax request send
+            function btnClicked(e, url, serializedInputs) {
                 e.preventDefault();
                 var $this = $(this);
                 var reviewId = $this.attr("data-review-id");
@@ -570,27 +579,31 @@ $(function () {
                 var isLikeBtn = $this.attr("data-review-like-btn");
 
                 var $otherA = null;
+
                 if (isLikeBtn) {
-                    $otherA = $("#review-thumbs-down-click-" + sequence);
+                    $otherA = $.byId("review-thumbs-down-click-" + sequence);
                 } else {
-                    $otherA = $("#review-thumbs-up-click-" + sequence);
+                    $otherA = $.byId("review-thumbs-up-click-" + sequence);
                 }
                 $otherA.find("i").removeClass("active");
                 $this.find("i").toggleClass("active");
             }
 
             if ($likeBtns.length > 0) {
-                $likeBtns.click(function(evt) {
-                     btnClicked(evt, likeUrl);
+                var $disLikeBtns = $("#app-deails-page a[data-review-dislike-btn=true]");
+                var serializedData = $("#review-like-dislike-form-submit").serialize();
+                var $spinners = $(".spinner-for-like").hide();
+                //like btns
+                $likeBtns.click(function (evt) {
+                    btnClicked(evt, likeUrl, serializedData);
                 });
-            }
-
-            if ($disLikeBtns.length > 0) {
+                //dislike btns
                 $disLikeBtns.click(function (evt) {
-                    btnClicked(evt, dislikeUrl);
+                    btnClicked(evt, dislikeUrl, serializedData);
                 });
             }
         },
+
         suggestedOrReviewLoadmoreBtnLeft: function () {
             var $loadMoreBtn = $("#suggested-load-more-btn");
             var length, $appBox = 0;
@@ -608,10 +621,8 @@ $(function () {
                         $appBox = $($appBoxes[i]);
                         $appBox.hide();
                         $appBox.attr("data-hide", "true");
-
                     }
                 }
-
                 if ($loadMoreBtn.is(":hidden") && length > showAfterCount) {
                     $loadMoreBtn.show("slow");
                 } else if ($loadMoreBtn.is(":visible") && length < showAfterCount) {

@@ -14,7 +14,6 @@
     
 }
 <div class="review-collection-box seo-optimize">
-
     <div class="review-wrapper">
         @if (Model.Reviews != null && Model.Reviews.Count > 0) {
             foreach (Review review in Model.Reviews) {
@@ -103,7 +102,7 @@
                         <a id="review-thumbs-up-click-@sequenceOfReview" class="postive" data-sequence="@sequenceOfReview" data-review-like-btn="true" data-review-id="@review.ReviewID">
                             <i class="fa fa-thumbs-up @likeActive"></i>
                         </a>
-                        <a data-toggle="tooltip" title="Requesting" data-original-title="Requesting" class="tooltip-show ">
+                        <a id="spinner-@sequenceOfReview" data-toggle="tooltip" title="Requesting" data-original-title="Requesting" class="tooltip-show spinner-for-like">
                             <span data-display="Requesting" class="glyphicon glyphicon-refresh glyphicon-refresh-animate" title="Requesting"></span>
                         </a>
                         <a id="review-thumbs-down-click-@sequenceOfReview" class="negative" data-sequence="@sequenceOfReview" data-review-dislike-btn="true" data-review-id="@review.ReviewID">
