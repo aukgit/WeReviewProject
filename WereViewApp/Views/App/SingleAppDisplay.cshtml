@@ -254,9 +254,10 @@
                         </div>
                         <div class="clear"></div>
                     </div>
-                    @{ Html.RenderAction("ReviewsDisplay", "Partials", new { id = Model.AppID }); }
                     <div id="write-review-form-container">
                     </div>
+                    @{ Html.RenderAction("ReviewsDisplay", "Partials", new { id = Model.AppID }); }
+                    
                     <div id="review-request-fields">
                         <!-- request fields to get review-form -->
                         @Html.HiddenFor(n => n.AppID)

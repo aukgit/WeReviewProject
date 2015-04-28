@@ -1,12 +1,14 @@
-﻿// <reference path="../jquery-2.1.1.js" />
-// <reference path="../jquery-2.1.1.intellisense.js" />
-// <reference path="../bootstrap.js" />
-// <reference path="../bootstrap-select.js" />
-// <reference path="../bootstrap-datepicker.js" />
-// <reference path="../bootstrap-datetimepicker.js" />
+/// <reference path="faster-jQuery.js" />
+/// <reference path="../jquery-2.1.3.js" />
+/// <reference path="../jquery-2.1.3.intellisense.js" />
+/// <reference path="../bootstrap.min.js" />
+/// <reference path="../bootstrap-table.js" />
+/// <reference path="../jquery.validate.js" />
+/// <reference path="../modernizr-2.8.3.js" />
+/// <reference path="../star-rating.js" />
+/// <reference path="../moment.js" />
+/// <reference path="../underscore.js" />
 
-// <reference path="../underscore.js" />
-// <reference path="DevOrgComponent.js" />
 
 /*!
  * Written by Alim Ul Karim
@@ -213,17 +215,17 @@ $(function() {
             }
             if (listOfItems.length > 0) {
                 var length = listOfItems.length;
-                var options = "";
+                var options = new Array(length + 5);
                 var selected = " Selected='selected' ";
                 var optionStarting = "<option class='devorgCombo-item " + itemClasses + "'";
                 var optionEnding = "</option>";
                 for (var i = 0; i < length; i++) {
-                    if (i == 0) {
+                    if (i === 0) {
                         selected = "";
                     }
-                    options += optionStarting + selected + "value='" + listOfItems[i].id + "'>" + extraHtmlWithEachElement + listOfItems[i].text + optionEnding;
+                    options[i] = optionStarting + selected + "value='" + listOfItems[i].id + "'>" + extraHtmlWithEachElement + listOfItems[i].text + optionEnding;
                 }
-                combo.append(options);
+                combo.append(options.join(""));
             }
         },
         bootstrapComboSelectbyFindingValue: function(comboSelector, searchForvalue) {
@@ -426,7 +428,7 @@ $(function() {
                     var formData;
                     if ($formGiven === null || $formGiven === undefined || $formGiven.length == 0) {
                         if (!isSubmitTheWholeForm) {
-                            formData = $("#validation").serialize();
+                            formData = $.byId("validation").serialize();
                         } else {
                             formData = $userTextbox.closest("form").serializeArray();
                         }
@@ -434,7 +436,7 @@ $(function() {
                         formData = $formGiven.serializeArray();
                     }
 
-                    console.log(formData);
+                    //console.log(formData);
 
                     var validatorName = "span.CustomValidation." + internalValidatorSpanClassName;
                     var token = $("input[name=__RequestVerificationToken]").val();

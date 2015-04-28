@@ -13,6 +13,7 @@ using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.WereViewAppCommon.Structs;
 using DevMVCComponent.Database;
+using DevTrends.MvcDonutCaching;
 using WereViewApp.Modules.Cache;
 
 namespace WereViewApp.WereViewAppCommon {
@@ -731,9 +732,9 @@ namespace WereViewApp.WereViewAppCommon {
         public void ForceAppReviewToLoad(long appId) {
             var app = GetAppFromStaticCache(appId);
             if (app != null) {
-                RemoveOutputCache("/Partials/ReviewsDisplay/" + app.AppID);
                 app.IsReviewLoaded = false;
             }
+            RemoveDonutCaching("Partials", "ReviewsDisplay", new { @id = appId });
         }
         #endregion
 
@@ -1528,6 +1529,20 @@ namespace WereViewApp.WereViewAppCommon {
 
         public void RemoveOutputCacheTopRated() {
             HttpResponse.RemoveOutputCacheItem(CommonVars.OutputcaheTopappslistApps);
+        }
+
+
+        public void RemoveDonutCaching(string controllerName) {
+            var cacheManager = new OutputCacheManager();
+            cacheManager.RemoveItems(controllerName);
+        }
+        public void RemoveDonutCaching(string controllerName, string action) {
+            var cacheManager = new OutputCacheManager();
+            cacheManager.RemoveItems(controllerName, action);
+        }
+        public void RemoveDonutCaching(string controllerName, string action, object routes) {
+            var cacheManager = new OutputCacheManager();
+            cacheManager.RemoveItems(controllerName, action, routes);
         }
         #endregion
     }

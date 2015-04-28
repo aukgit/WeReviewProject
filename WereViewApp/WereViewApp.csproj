@@ -619,7 +619,7 @@
     <Content Include="Content\Scripts\DevOrgPlugins\every-page.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\dev-component-runner.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.component.js" />
-    <Content Include="Content\Scripts\DevOrgPlugins\fasterJquery.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\faster-jQuery.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\WeReviewApps.js" />
     <Content Include="Content\Scripts\Bundles\UploadJs.js.bundle" />
     <Content Include="Content\Scripts\Bundles\FrontEndJs.js.bundle" />
@@ -873,6 +873,10 @@
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Styles\CompactCSS.css" />
+    <Content Include="Styles\CompactCSS.min.css">
+      <DependentUpon>CompactCSS.css</DependentUpon>
+    </Content>
     <Content Include="Uploads\Images\Advertise\5e324a00-977d-4436-8a15-3ce9e1c424f1-0.jpg" />
     <Content Include="Uploads\Images\Advertise\7fcf1b26-c1e0-4327-ba7f-29d5fd55bd25-0.jpg" />
     <Content Include="Uploads\Images\Advertise\be78fe90-0932-44c6-8cd1-816b35d6d232-0.jpg" />

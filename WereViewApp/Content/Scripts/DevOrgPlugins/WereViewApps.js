@@ -33,10 +33,10 @@ $(function () {
     /// </summary>
     $.WeReviewApp = {
         ///appForm represents both app-edit and app-posting form
-        $appForm: $.queryAll("form.app-editing-page:first"), // means both editing and posting
-        $appFormEdit: $.queryAll("form.app-edit:first"),
-        $appFormPost: $.queryAll("form.app-post:first"),
-        $allInputs: $.queryAll("form.app-post:first input"),
+        $appForm: $.queryFirst("form.app-editing-page"), // means both editing and posting
+        $appFormEdit: $.queryFirst("form.app-edit"),
+        $appFormPost: $.queryFirst("form.app-post"),
+        $allInputs: $.queryAll("form.app-post input"),
         ajaxDraftPostUrl: "/App/SaveDraft",
         $appPageUploaderNotifier: $.queryAll("label.notify-global-info"),
         homePageUrl: "/",

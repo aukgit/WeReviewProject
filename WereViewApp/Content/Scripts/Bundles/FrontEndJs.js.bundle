@@ -25,6 +25,9 @@
     <file>/Content/Scripts/FrontEnd/jquery.number.js</file>
     <file>/Content/revolution-slider/js/jquery.themepunch.tools.min.js</file>
     <file>/Content/revolution-slider/js/jquery.themepunch.revolution.min.js</file>
+    
+    <file>/Content/Scripts/DevOrgPlugins/developers-organism.component.js</file>
+
     <file>/Content/Scripts/FrontEnd/front-developer.js</file>
     <file>/Content/Scripts/DevOrgPlugins/WeReviewApps.js</file>
   </files>

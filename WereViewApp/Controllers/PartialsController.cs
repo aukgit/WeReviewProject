@@ -47,7 +47,7 @@ namespace WereViewApp.Controllers {
 
         #region Riviews Display
 
-        [OutputCache(Duration = 30, VaryByParam = "id")]
+        [DonutOutputCache(CacheProfile="Day", VaryByParam = "id")]
         public ActionResult ReviewsDisplay(long id) {
             var app = algorithms.GetAppFromStaticCache(id);
             if (app != null) {

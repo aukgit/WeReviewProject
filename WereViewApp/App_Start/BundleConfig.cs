@@ -43,7 +43,6 @@ namespace WereViewApp {
                                     "~/Content/Scripts/bootstrap-table-filter.js",
                                     "~/Content/Scripts/bootstrap-table-export.js",
                                     "~/Content/Scripts/jquery.elastic.source.js",
-                                    "~/Content/Scripts/DevOrgPlugins/developers-organism.component.js",
                                     "~/Content/Scripts/DevOrgPlugins/dev-component-runner.js"
                                     
                                    ));
@@ -83,6 +82,8 @@ namespace WereViewApp {
                                   "~/Content/Scripts/FrontEnd/jquery.number.js",
                                   "~/Content/revolution-slider/js/jquery.themepunch.tools.min.js",
                                   "~/Content/revolution-slider/js/jquery.themepunch.revolution.min.js",
+                                  "~/Content/Scripts/DevOrgPlugins/developers-organism.component.js",
+
                                   "~/Content/Scripts/FrontEnd/front-developer.js",
                                   "~/Content/Scripts/DevOrgPlugins/WeReviewApps.js"
 
