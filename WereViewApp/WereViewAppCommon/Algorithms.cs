@@ -803,13 +803,15 @@ namespace WereViewApp.WereViewAppCommon {
                 var currentUserId = UserManager.GetLoggedUserId();
 
                 if (app.IsReviewLoaded == true) {
-                    var reviewIds = app.Reviews.Select(n => n.ReviewID).ToArray();
-                    var reviewIdsString = string.Join(",", reviewIds);
-                    // getting the like dislike based on reviews those are loaded 
-                    // and if and only if current user has done any.
-                    string sql = string.Format("SELECT * FROM ReviewLikeDislike WHERE ReviewID IN ({0}) AND UserID ={1}", reviewIdsString, currentUserId.ToString());
-                    //var reviewLikeDislikes = db.Database.SqlQuery<ReviewLikeDislike>(sql);
-                    app.ReviewLikeDislikesCollection = db.Database.SqlQuery<ReviewLikeDislike>(sql).ToList();
+                    if (app.Reviews.Count > 0) {
+                        var reviewIds = app.Reviews.Select(n => n.ReviewID).ToArray();
+                        var reviewIdsString = string.Join(",", reviewIds);
+                        // getting the like dislike based on reviews those are loaded 
+                        // and if and only if current user has done any.
+                        string sql = string.Format("SELECT * FROM ReviewLikeDislike WHERE ReviewID IN ({0}) AND UserID ={1}", reviewIdsString, currentUserId.ToString());
+                        //var reviewLikeDislikes = db.Database.SqlQuery<ReviewLikeDislike>(sql);
+                        app.ReviewLikeDislikesCollection = db.Database.SqlQuery<ReviewLikeDislike>(sql).ToList();
+                    }
                 }
             }
         }
@@ -1136,8 +1138,11 @@ namespace WereViewApp.WereViewAppCommon {
         /// <param name="db"></param>
         /// <returns></returns>
         public void GetEmbededSuggestedIconsWithApps(List<App> apps, WereViewAppEntities db) {
-            if (apps != null) {
+            if (apps != null && apps.Count > 0) {
                 var guidsStringList = GetGuidStringConcat(apps);
+                if (guidsStringList == "") {
+                    return;
+                }
                 string sql = string.Format("SELECT * FROM Gallery WHERE UploadGuid IN ({0}) AND GalleryCategoryID ={1}", guidsStringList, GalleryCategoryIDs.SuggestionIcon);
                 if (string.IsNullOrEmpty(guidsStringList)) {
                     return;
@@ -1220,8 +1225,11 @@ namespace WereViewApp.WereViewAppCommon {
         /// </param>
 
         public void GetEmbedImagesWithApp(List<App> apps, WereViewAppEntities db, int totalTakeCount, int categoryId) {
-            if (apps != null) {
+            if (apps != null && apps.Count > 0) {
                 var guidsStringList = GetGuidStringConcat(apps);
+                if (guidsStringList == "") {
+                    return;
+                }
                 string sql = string.Format("SELECT * FROM Gallery WHERE UploadGuid IN ({0}) AND GalleryCategoryID ={1}", guidsStringList, categoryId);
                 if (string.IsNullOrEmpty(guidsStringList)) {
                     return;
