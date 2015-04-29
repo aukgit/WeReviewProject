@@ -37,7 +37,7 @@
                 @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
             </span>
             <a data-toggle="tooltip" title="Validating" data-original-title="Validating" class="tooltip-show CustomValidation @ViewData.ModelMetadata.PropertyName no-hover">
-                <span class="CustomValidation @ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-refresh-animate hide" title="Validating"></span>
+                <span class="CustomValidation @ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-spin hide" title="Validating"></span>
             </a>
             @if (@ViewData.ModelMetadata.Description != null) {
                 <a data-toggle="tooltip" data-original-title="@ViewData.ModelMetadata.Description" title="@ViewData.ModelMetadata.Description" class="tooltip-show">

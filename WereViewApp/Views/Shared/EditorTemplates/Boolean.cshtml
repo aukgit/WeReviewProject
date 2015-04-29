@@ -36,7 +36,7 @@
                     <span class="glyphicon glyphicon-question-sign font-size-22 glyphicon-top-fix almost-white"></span></a>
             }
             <a data-toggle="tooltip" title="Validating" data-original-title="Validating" class="tooltip-show CustomValidation @ViewData.ModelMetadata.PropertyName no-hover">
-                <span data-display="@ViewData.ModelMetadata.DisplayName" class="CustomValidation @ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-refresh-animate hide" title="Validating"></span>
+                <span data-display="@ViewData.ModelMetadata.DisplayName" class="CustomValidation @ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-spin hide" title="Validating"></span>
             </a>
             @Html.ValidationMessageFor(m => m, null, new {@class = "rounded-3 label label-danger fixed-width-294 validation-box"})
         </div>
