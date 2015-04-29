@@ -82,7 +82,7 @@ namespace WereViewApp.Controllers {
 
         #endregion
 
-        #region Header
+        #region Header : Navigaion
 
         [DonutOutputCache(CacheProfile = "Hour", VaryByCustom = "byuser")]
         public ActionResult NavBar() {
@@ -92,14 +92,6 @@ namespace WereViewApp.Controllers {
             //}
             return PartialView();
         }
-
-        #region Menu
-
-        public ActionResult Menu() {
-            return PartialView();
-        }
-
-        #endregion
 
         #region Search Form
         //[DonutOutputCache(CacheProfile="TwoSec")]

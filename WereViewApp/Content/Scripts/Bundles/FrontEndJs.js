@@ -4683,17 +4683,17 @@ $(function() {
 
                 if (!isSubmitTheWholeForm) {
                     $userTextbox.keyup(function() {
-                        $("#validation #id").val($userTextbox.val());
+                        $.queryAll("#validation #id").val($userTextbox.val());
                         // console.log(user);
                     }).focus(function() {
-                        $("#validation #id").val($userTextbox.val());
+                        $.queryAll("#validation #id").val($userTextbox.val());
                         // console.log(user);
                     });
                 }
 
                 $userTextbox.blur(function() {
                     if (!isSubmitTheWholeForm) {
-                        $("#validation #id").val($userTextbox.val());
+                        $.queryAll("#validation #id").val($userTextbox.val());
                     }
                     var $passingText = $userTextbox.val();
                     if (_.isEmpty($passingText) || $passingText.length < minChars) {
@@ -4727,7 +4727,7 @@ $(function() {
                     var validatorName = "span.CustomValidation." + internalValidatorSpanClassName;
                     var token = $("input[name=__RequestVerificationToken]").val();
                     var processingState1 = "glyphicon-refresh";
-                    var processingState2 = "glyphicon-refresh-animate";
+                    var processingState2 = "glyphicon-refresh-spin";
                     var isHideClass = "hide";
                     var colorGreen = "green";
                     var colorRed = "red";

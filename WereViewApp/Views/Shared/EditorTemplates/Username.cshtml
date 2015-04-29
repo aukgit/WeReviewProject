@@ -33,7 +33,7 @@
             @ViewData.ModelMetadata.DisplayName<span class="red">@isRequiredStar</span></label>
         <div class="col-md-10 form-input-@ViewData.ModelMetadata.PropertyName">
             <span class="inner-addon left-addon">
-                <i class="glyphicon glyphicon-user"></i>
+                <i class="fa fa-user"></i>
                 @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
             </span>
             @if (@ViewData.ModelMetadata.Description != null) {

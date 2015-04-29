@@ -34,14 +34,14 @@ namespace WereViewApp {
             routes.MapRoute(
                 name: "SignOut",
                 url: "SignOut",
-                defaults: new { controller = accountController, action = "SignOutProgrammatically" },
+                defaults: new { controller = accountController, action = "SignOut" },
                 namespaces: new string[] { wereviewappControllers }
             );
 
             routes.MapRoute(
                 name: "LogOff",
                 url: "LogOff",
-                defaults: new { controller = accountController, action = "SignOutProgrammatically" },
+                defaults: new { controller = accountController, action = "SignOut" },
                 namespaces: new string[] { wereviewappControllers }
             );
 

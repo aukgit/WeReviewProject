@@ -18,12 +18,13 @@ namespace WereViewApp {
 
         public override string GetVaryByCustomString(HttpContext context, string arg) {
             if (arg != null && arg.Equals("byuser", StringComparison.OrdinalIgnoreCase) || arg.Equals("user", StringComparison.OrdinalIgnoreCase)) {
-                HttpCookie cookie = context.Request.Cookies["ASP.NET_SessionID"];
-                if (cookie != null) {
-                    return cookie.Value.ToString();
-                    //} else {
-                    //    return "const-none";
-                }
+                //HttpCookie cookie = context.Request.Cookies["ASP.NET_SessionID"];
+                //if (cookie != null) {
+                //    return cookie.Value.ToString();
+                //    //} else {
+                //    //    return "const-none";
+                //}
+                return User.Identity.Name;
             }
             return base.GetVaryByCustomString(context, arg);
         }
