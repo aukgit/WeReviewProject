@@ -52,3 +52,22 @@ ALTER TABLE dbo.App
 
                         }
                     }); // ajax end
+
+// refresh rotate
+http://jsfiddle.net/chadkuehn/1twpzLz8/
+
+<h4>FontAwesome</h4>
+
+<i class="fa fa-spinner fa-spin"></i>
+
+<i class="fa fa-circle-o-notch fa-spin"></i>
+
+<i class="fa fa-refresh fa-spin"></i>
+
+<i class="fa fa-refresh fa-spin-custom"></i>
+
+<br />
+<br />
+
+<h4>Glyphicons</h4>
+ <span class="glyphicon glyphicon-refresh glyphicon-spin"></span>

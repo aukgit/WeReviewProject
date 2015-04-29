@@ -622,16 +622,6 @@ $(function () {
                         $otherA.find("i").removeClass("active");
                         if (response.isDone) {
                             $button.find("i").toggleClass("active");
-                            //Use window.location.href to get the complete URL.
-                            //Use window.location.pathname to get URL leaving the host.
-                            $.ajax({
-                                type: "HTML",
-                                url: window.location.pathname
-                            });
-                            $.ajax({
-                                type: "HTML",
-                                url: window.location.href
-                            });
                         } else if (!response.isDone) {
                             $button.find("i").removeClass("active");
                             //errorExecute(null, "Can't get the right response.", null);

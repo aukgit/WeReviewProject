@@ -99,6 +99,7 @@ namespace WereViewApp {
                                         "~/Content/css/less-imports.css",
                                         "~/Content/css/animate.min.css",
                                         "~/Content/css/font-awesome.min.css",
+                                        "~/Content/css/animate-refresh.css",
                                         "~/Content/css/site.css",
                                         "~/Content/css/flags32.css",
                                         "~/Content/css/flags32-combo.css",

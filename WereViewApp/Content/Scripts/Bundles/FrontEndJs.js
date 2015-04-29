@@ -5935,11 +5935,11 @@ $(function () {
                     $spinnerForthisLike.hide();
                     var $clone = $spinnerForthisLike.clone();
                     var $span = $clone.find("span");
-                    var failedMessage = "like/dislike request failed , please refresh page. Reason : " + textStatus;
+                    var failedMessage = "like/dislike request failed , please refresh page. Reason : " + errorThrown;
 
                     $span.attr("class", "fa fa-times")
                         .attr("title", failedMessage);
-                    $clone.attr("data-original-title", errorThrown)
+                    $clone.attr("data-original-title", failedMessage)
                         .attr("title", failedMessage)
                         .show();
                     console.log(failedMessage);
@@ -5957,12 +5957,6 @@ $(function () {
                         $otherA.find("i").removeClass("active");
                         if (response.isDone) {
                             $button.find("i").toggleClass("active");
-                            //Use window.location.href to get the complete URL.
-                            //Use window.location.pathname to get URL leaving the host.
-                            $.ajax({
-                                type: "HTML",
-                                url: window.location.pathname
-                            });
                         } else if (!response.isDone) {
                             $button.find("i").removeClass("active");
                             //errorExecute(null, "Can't get the right response.", null);
