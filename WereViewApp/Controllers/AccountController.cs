@@ -30,6 +30,7 @@ namespace WereViewApp.Controllers {
         #region Constructors
 
         public AccountController() {
+            ViewBag.dynamicLoadPartialController = DynamicLoadPartialController;
             Manager = UserManager.Manager;
         }
 

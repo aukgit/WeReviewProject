@@ -3,7 +3,7 @@
 @{
     string partialController = ViewBag.dynamicLoadPartialController;
 }
-@Html.EditorFor(model => model.CountryID, "DropDownDynamic", new { @Url = @partialController + "GetCountryID", @IsHtml = "true" /* ,@IsDependable = "false",@LiveSearch = "true",@Style = "class",@Id = "id", @DynamicLoad = "true"*/})
+@Html.EditorFor(model => model.CountryID, "DropDownDynamic", new { @Url = @partialController + "GetCountryID", @IsHtmlRequest = "true", @IsStyled = "false" /* ,@IsDependable = "false",@LiveSearch = "true",@Style = "class",@Id = "id", @DynamicLoad = "true"*/})
 <div class="form-group timezone-main">
     <div class="controls">
         <label class="col-md-2 control-label">Timezone<span class="red ">*</span></label>

@@ -13,8 +13,6 @@
 <h1 class="h5">Create a new account for <strong class="@AppVar.Name">@AppVar.Name</strong>
 </h1>
 <hr/>
-
-
 @Html.Partial("_GlobalError")
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new {@class = "form-horizontal register-form", role = "form", enctype = "multipart/form-data"})) {
     @token

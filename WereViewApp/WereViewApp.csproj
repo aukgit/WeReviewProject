@@ -299,7 +299,6 @@
     <Compile Include="Controllers\BasicController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValidatorController.cs" />
     <Compile Include="Filter\AreaAuthorizationFilter.cs">
@@ -621,6 +620,7 @@
       <DependentUpon>UploadJs.js</DependentUpon>
     </Content>
     <Content Include="Content\Scripts\DevOrgPlugins\ComboOptions.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.dynamicSelect.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\every-page.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\dev-component-runner.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.component.js" />
@@ -1107,6 +1107,7 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Rating-5-b.cshtml" />
     <Content Include="Views\Reviews\_SavingButton.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DropDownDynamic.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />

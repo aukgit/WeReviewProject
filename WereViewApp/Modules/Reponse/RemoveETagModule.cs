@@ -30,11 +30,11 @@ namespace WereViewApp.Modules.Reponse {
              HttpContext.Current.Request.Headers.Remove("X-Powered-By");
              HttpContext.Current.Request.Headers.Remove("Server");
              HttpContext.Current.Request.Headers.Remove("X-SourceFiles");
+             //HttpContext.Current.Request.Headers.Add("Expires","10000");
         }
 
         void OnPreSendRequestHeaders(object sender, EventArgs e) {
-
-          
+            //HttpContext.Current.Request.Headers.Add("Expires", "10000");
         }
     }
 }

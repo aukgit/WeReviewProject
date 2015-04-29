@@ -1,6 +1,8 @@
 ﻿#region using block
 
+using System;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.WereViewAppCommon;
@@ -15,15 +17,18 @@ using WereViewApp.Modules.Session;
 namespace WereViewApp.Controllers {
     public class PartialsController : AdvanceController {
 
+
         #region Drop down : Country, timezone, language
         [OutputCache(CacheProfile = "YearNoParam")]
         public string GetCountryId() {
+          
             var countries = CachedQueriedData.GetCountries();
             return HtmlHelpers.DropDownCountry(countries);
         }
 
         [OutputCache(CacheProfile = "Day", VaryByParam = "id")]
         public ActionResult GetTimeZone(int id) {
+        
             if (SessionNames.IsValidationExceed("GetTimeZone", 100)) {
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
@@ -60,6 +65,7 @@ namespace WereViewApp.Controllers {
 
         public PartialsController()
             : base(true) {
+            
         }
 
         #endregion

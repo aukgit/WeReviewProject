@@ -19,7 +19,9 @@
     <file>/Content/Scripts/bootstrap-table-filter.js</file>
     <file>/Content/Scripts/bootstrap-table-export.js</file>
     <file>/Content/Scripts/jquery.elastic.source.js</file>
-    
+
+    <file>/Content/Scripts/DevOrgPlugins/developers-organism.dynamicSelect.js</file>
+
     <file>/Content/Scripts/DevOrgPlugins/dev-component-runner.js</file>
   </files>
 </bundle>

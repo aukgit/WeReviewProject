@@ -44,8 +44,11 @@
         ViewBag.IsDependable = "false";
     }
 
-    if (ViewBag.IsHtml == null) {
-        ViewBag.IsHtml = "false";
+    if (ViewBag.IsHtmlRequest == null) {
+        ViewBag.IsHtmlRequest = "false";
+    }
+    if (ViewBag.IsStyled == null) {
+        ViewBag.IsStyled = "true";
     }
 }
 <div class="form-group form-row-@ViewData.ModelMetadata.PropertyName dynamic-select-container" data-dynamic-select-container="true">
@@ -64,7 +67,8 @@
                  data-live-search="@ViewBag.LiveSearch"
                  data-dependable="@ViewBag.IsDependable"
                  data-dependable-prop-name="@ViewBag.DependablePropertyName"
-                 dev-isHtml ="@ViewBag.IsHtml"
+                 dev-ishtml="@ViewBag.IsHtmlRequest"
+                 dev-isStyled="@ViewBag.IsStyled"
                  @ViewBag.Id>
 
             </div>
