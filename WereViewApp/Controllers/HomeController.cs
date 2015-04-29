@@ -14,13 +14,13 @@ namespace WereViewApp.Controllers {
             : base(true) {
         }
 
-        [OutputCache(CacheProfile = "Hour")]
+        [OutputCache(CacheProfile = "Hour", VaryByCustom = "byuser")]
         public ActionResult Index() {
             return View();
         }
 
         //[OutputCache(Duration=84731)]
-        [OutputCache(CacheProfile = "Hour")]
+        [OutputCache(CacheProfile = "Hour", VaryByCustom = "byuser")]
         public ActionResult ContactUs() {
             ViewBag.FeedbackCateoryID = new SelectList(db.FeedbackCategories.ToList(), "FeedbackCategoryID", "Category");
             AppVar.GetTitlePageMeta(ViewBag, "Contact Us", null, "Contact Us - " + AppVar.Name,

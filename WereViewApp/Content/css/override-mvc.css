@@ -25,18 +25,20 @@ textarea.form-control {
 .inner-addon {
   position: relative;
 }
-/* style icon */
-.inner-addon .glyphicon {
+.inner-addon .glyphicon,
+.inner-addon .fa {
   position: absolute;
   /*padding: 10px;*/
-  padding: 1px 11px 2px 7px;
+  padding: 10px 11px 2px 9px;
   pointer-events: none;
 }
 /* align icon */
-.left-addon .glyphicon {
+.left-addon .glyphicon,
+.left-addon .fa {
   left: 0;
 }
-.right-addon .glyphicon {
+.right-addon .glyphicon,
+.right-addon .fa {
   right: 0;
 }
 /* add padding  */

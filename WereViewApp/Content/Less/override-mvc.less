@@ -32,20 +32,21 @@ textarea.form-control {
 /* enable absolute positioning */
 .inner-addon {
     position: relative;
+
+    .glyphicon, .fa {
+        position: absolute;
+        /*padding: 10px;*/
+        padding: 10px 11px 2px 9px;
+        pointer-events: none;
+    }
 }
-/* style icon */
-.inner-addon .glyphicon {
-    position: absolute;
-    /*padding: 10px;*/
-    padding: 1px 11px 2px 7px;
-    pointer-events: none;
-}
+
 /* align icon */
-.left-addon .glyphicon {
+.left-addon .glyphicon,.left-addon .fa {
     left: 0;
 }
 
-.right-addon .glyphicon {
+.right-addon .glyphicon,.right-addon .fa {
     right: 0;
 }
 /* add padding  */

@@ -84,7 +84,7 @@ namespace WereViewApp.Controllers {
 
         #region Header
 
-        //[OutputCache(CacheProfile = "Hour")]
+        [DonutOutputCache(CacheProfile = "Hour", VaryByCustom = "byuser")]
         public ActionResult NavBar() {
             //if (User.Identity.IsAuthenticated) {
             //    var userid = UserManager.GetLoggedUserId();
