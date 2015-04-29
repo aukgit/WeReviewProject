@@ -149,7 +149,7 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
 				<label class="col-md-2 control-label">@Html.DisplayNameFor(m=> m.<#= property.PropertyName #>)<span class="red ">*</span></label>
 				<div class="col-md-10 <#= property.PropertyName #>-combo-div">
 					@Html.DropDownList("<#= property.PropertyName #>", null, htmlAttributes: new { @class = "form-control selectpicker", data_style = "btn-success", data_live_search = true})
-					<a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m=> m.<#= property.PropertyName #>)." title="Please select @Html.DisplayNameFor(m=> m.<#= property.PropertyName #>)." class="tooltip-show"><span class="glyphicon glyphicon-question-sign font-size-22 glyphicon-top-fix almost-white"></span></a>
+					<a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m=> m.<#= property.PropertyName #>)." title="Please select @Html.DisplayNameFor(m=> m.<#= property.PropertyName #>)." class="tooltip-show"><span class="description-icon"></span></a>
 				</div>
 			</div>
 		</div>
@@ -161,7 +161,7 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
 				<label class="col-md-2 control-label">@Html.DisplayNameFor(m=> m.<#= property.PropertyName #>)<span class="red ">*</span></label>
 				<div class="col-md-10 <#= property.PropertyName #>-combo-div">
 					@Html.DropDownList("<#= property.PropertyName #>", String.Empty)
-					<a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m=> m.<#= property.PropertyName #>)." title="Please select @Html.DisplayNameFor(m=> m.<#= property.PropertyName #>)." class="tooltip-show"><span class="glyphicon glyphicon-question-sign font-size-22 glyphicon-top-fix almost-white"></span></a>
+					<a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m=> m.<#= property.PropertyName #>)." title="Please select @Html.DisplayNameFor(m=> m.<#= property.PropertyName #>)." class="tooltip-show"><span class="description-icon"></span></a>
 				</div>
 			</div>
 		</div>
