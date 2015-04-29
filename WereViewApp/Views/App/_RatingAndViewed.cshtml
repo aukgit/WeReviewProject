@@ -1,10 +1,8 @@
 ﻿@model WereViewApp.Models.EntityModel.App
 
 @{
-    var isHaveRated = Model.CurrentUserRatedAppValue != null ? true : false;
+    bool hasRated = Model.CurrentUserRatedAppValue != null;
 }
-
-
 <div class="col-sm-8">
     <div class="rating-box-row">
         <div>
@@ -12,7 +10,7 @@
             <div class="user-rating-box float-left">
                 <h4>Your Rating</h4>
                 <div class="price rating-display">
-                    @if (isHaveRated) {
+                    @if (hasRated) {
                         <input data-readonly="true" class="rating-5-page-details" title="rating of @Model.AppName" value="@Model.CurrentUserRatedAppValue" min="0" max="5" step="1" data-size="xs">
                     } else {
                         <input class="rating-5-page-details" title="rating of @Model.AppName" value="0" min="0" max="5" step="1" data-size="xs">

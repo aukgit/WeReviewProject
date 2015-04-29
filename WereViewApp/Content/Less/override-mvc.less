@@ -42,11 +42,11 @@ textarea.form-control {
 }
 
 /* align icon */
-.left-addon .glyphicon,.left-addon .fa {
+.left-addon .glyphicon, .left-addon .fa {
     left: 0;
 }
 
-.right-addon .glyphicon,.right-addon .fa {
+.right-addon .glyphicon, .right-addon .fa {
     right: 0;
 }
 /* add padding  */
@@ -296,5 +296,23 @@ body div.container.body-content h1.gap-from-top-small > .glyphicon {
 .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
     color: #333;
     background-color: #9dd1ec;
+}
+
+.description-icon {
+    top: 5px;
+    color: #bdbdbd;
+    font-size: 1.375em;
+    position: relative;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    &:before {
+        content: "\e085";
+    }
 }
 /*# sourceMappingURL=override-mvc-css.css.map */

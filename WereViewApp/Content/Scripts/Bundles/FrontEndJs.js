@@ -4727,7 +4727,7 @@ $(function() {
                     var validatorName = "span.CustomValidation." + internalValidatorSpanClassName;
                     var token = $("input[name=__RequestVerificationToken]").val();
                     var processingState1 = "glyphicon-refresh";
-                    var processingState2 = "glyphicon-refresh-spin";
+                    var processingState2 = "glyphicon-spin";
                     var isHideClass = "hide";
                     var colorGreen = "green";
                     var colorRed = "red";
