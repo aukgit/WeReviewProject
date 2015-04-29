@@ -169,7 +169,8 @@ namespace WereViewApp.Models.EntityModel {
 
         /// <summary>
         /// Virtual Field : 
-        /// if false then load review.
+        /// if false then load review by force.
+        /// Or else it will load from cache.
         /// </summary>
         public bool IsReviewLoaded { get; set; }
         /// <summary>

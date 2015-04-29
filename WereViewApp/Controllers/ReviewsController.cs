@@ -4,6 +4,7 @@ using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using WereViewApp.Models.EntityModel;
@@ -112,10 +113,10 @@ namespace WereViewApp.Controllers {
         #region Like
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public void Like(long reviewId, long appId) {
+        public JsonResult Like(long reviewId, long appId) {
             var userId = UserManager.GetLoggedUserId();
             var likeDislike = db.ReviewLikeDislikes.FirstOrDefault(n => n.ReviewID == reviewId && n.UserID == userId);
-
+            bool result = true;
             if (likeDislike == null) {
                 var like = new ReviewLikeDislike();
                 like.IsLiked = true;
@@ -128,6 +129,7 @@ namespace WereViewApp.Controllers {
                 if (likeDislike.IsLiked) {
                     likeDislike.IsLiked = false;
                     likeDislike.IsNone = true;
+                    result = false;
                 } else {
                     likeDislike.IsLiked = true;
                     likeDislike.IsNone = false;
@@ -137,7 +139,9 @@ namespace WereViewApp.Controllers {
 
             db.SaveChanges();
             algorithms.ForceAppReviewToLoad(appId);
+            Thread.Sleep(1000);
 
+            return Json(new { isDone = result }, "text/html");
 
         }
 
@@ -146,9 +150,10 @@ namespace WereViewApp.Controllers {
         #region Dilsike
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public void DisLike(long reviewId, long appId) {
+        public JsonResult DisLike(long reviewId, long appId) {
             var userId = UserManager.GetLoggedUserId();
             var likeDislike = db.ReviewLikeDislikes.FirstOrDefault(n => n.ReviewID == reviewId && n.UserID == userId);
+            bool result = true;
 
             if (likeDislike == null) {
                 var like = new ReviewLikeDislike();
@@ -163,6 +168,7 @@ namespace WereViewApp.Controllers {
                 if (likeDislike.IsDisliked) {
                     likeDislike.IsDisliked = false;
                     likeDislike.IsNone = true;
+                    result = false;
                 } else {
                     likeDislike.IsDisliked = true;
                     likeDislike.IsNone = false;
@@ -170,13 +176,14 @@ namespace WereViewApp.Controllers {
             }
 
             db.SaveChanges();
-
+            Thread.Sleep(1000);
             algorithms.ForceAppReviewToLoad(appId);
+            return Json(new { isDone = result }, "text/html");
         }
 
         #endregion
 
-       
+
 
         #region Edit or modify record
 
@@ -191,10 +198,10 @@ namespace WereViewApp.Controllers {
                 if (state) {
                     algorithms.AfterReviewIsSavedFixRatingNReviewCountInApp(review, false, db);
                     algorithms.ForceAppReviewToLoad(review.AppID);
-                    return Json(new {isDone = true, msg = "Successful."}, JsonRequestBehavior.AllowGet); // return true;
+                    return Json(new { isDone = true, msg = "Successful." }, JsonRequestBehavior.AllowGet); // return true;
                 }
             }
-            return Json(new {isDone = false, msg = "failed."}, JsonRequestBehavior.AllowGet); // return true;
+            return Json(new { isDone = false, msg = "failed." }, JsonRequestBehavior.AllowGet); // return true;
         }
 
         #endregion
@@ -317,10 +324,10 @@ namespace WereViewApp.Controllers {
                     AppVar.SetSavedStatus(ViewBag, _createdSaved); // Saved Successfully.          
                 }
 
-                return Json(new {isDone = true, msg = "Successful."}, JsonRequestBehavior.AllowGet); // return true;
+                return Json(new { isDone = true, msg = "Successful." }, JsonRequestBehavior.AllowGet); // return true;
             }
 
-            return Json(new {isDone = false, msg = "failed."}, JsonRequestBehavior.AllowGet); // return true;
+            return Json(new { isDone = false, msg = "failed." }, JsonRequestBehavior.AllowGet); // return true;
         }
 
         private void AddNecessaryFields(Review review) {

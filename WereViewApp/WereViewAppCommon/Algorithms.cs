@@ -802,13 +802,13 @@ namespace WereViewApp.WereViewAppCommon {
             if (app != null && UserManager.IsAuthenticated()) {
                 var currentUserId = UserManager.GetLoggedUserId();
 
-                if (app.IsReviewLoaded == true) {
+                if (app.IsReviewLoaded) {
                     if (app.Reviews.Count > 0) {
                         var reviewIds = app.Reviews.Select(n => n.ReviewID).ToArray();
                         var reviewIdsString = string.Join(",", reviewIds);
                         // getting the like dislike based on reviews those are loaded 
                         // and if and only if current user has done any.
-                        string sql = string.Format("SELECT * FROM ReviewLikeDislike WHERE ReviewID IN ({0}) AND UserID ={1}", reviewIdsString, currentUserId.ToString());
+                        string sql = string.Format("SELECT * FROM ReviewLikeDislike WHERE ReviewID IN ({0}) AND UserID = {1}", reviewIdsString, currentUserId.ToString());
                         //var reviewLikeDislikes = db.Database.SqlQuery<ReviewLikeDislike>(sql);
                         app.ReviewLikeDislikesCollection = db.Database.SqlQuery<ReviewLikeDislike>(sql).ToList();
                     }

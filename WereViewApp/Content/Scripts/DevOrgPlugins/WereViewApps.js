@@ -57,8 +57,10 @@ $(function () {
         reviewFormContainerSelectorInAppPage: "div#write-review-form-container",
         reviewFormSubmitUrl: "/Reviews/Write",
         ///consist of # : "#app-deails-page"
-        appDetailsPageParentId : "#app-deails-page",
-
+        appDetailsPageParentId: "#app-deails-page",
+        /**
+         * single input IFRAME code HTML  to Square
+         */
         fixIframeTag: function ($jQueryInputText) {
             //<iframe width="560" height="315" src="//www.youtube.com/embed/ob-P2a6Mrjs" frameborder="0" allowfullscreen></iframe>
             var currentText = $jQueryInputText.val();
@@ -70,7 +72,9 @@ $(function () {
             currentText = currentText.replace(">", "]");
             $jQueryInputText.val(currentText);
         },
-
+        /**
+         * single input IFRAME code Square  to HTML
+         */
         iframeSquareToActualTag: function ($jQueryInputText) {
             //[iframe width="560" height="315" src="//www.youtube.com/embed/ob-P2a6Mrjs" frameborder="0" allowfullscreen></iframe]
             var currentText = $jQueryInputText.val();
@@ -221,7 +225,9 @@ $(function () {
                 }
             }
         },
-
+        /**
+         * Covert all url inputs IFRAME code HTML to Square
+         */
         fixAllInputIframeDataOrHtmlToSquare: function () {
             var inputSelectors = "input.url-input";
             var inputFields = $.WeReviewApp.$appForm.find(inputSelectors);
@@ -232,6 +238,9 @@ $(function () {
                 }
             }
         },
+        /**
+         * Covert all url inputs IFRAME code Square to HTML
+         */
         invertAllInputIframeDataOrSquareToHtml: function () {
             var inputSelectors = "input.url-input";
             var inputFields = $.WeReviewApp.$appForm.find(inputSelectors);
@@ -242,6 +251,9 @@ $(function () {
                 }
             }
         },
+        /**
+         * get a string regular expression based on parameter
+         */
         getAttributeRemoveRegularExpressionFor: function (attributeName) {
             return "(" + attributeName + ".*=.*[\"\"'])([a-zA-Z0-9:;\.\s\(\)\-\,]*)([\"\"'])";
         },
@@ -561,45 +573,87 @@ $(function () {
             var dislikeUrl = "/Reviews/DisLike";
             // what happens when like or dislike is clicked
             // ajax request send
-            function btnClicked(e, url, serializedInputs) {
+            var $spinners = null;
+
+            function btnClicked($button, e, url, serializedInputs) {
                 e.preventDefault();
-                var $this = $(this);
-                var reviewId = $this.attr("data-review-id");
+                var reviewId = $button.attr("data-review-id");
                 var data = serializedInputs + "&reviewId=" + reviewId;
-
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: data,
-                    success: function (response) {
-
-                    }
-                }); // ajax end
-                var sequence = $this.attr("data-sequence");
-                var isLikeBtn = $this.attr("data-review-like-btn");
-
+                var sequence = $button.attr("data-sequence");
+                var $spinnerForthisLike = $spinners.filter("#spinner-" + sequence);
+                var isLikeBtn = $button.attr("data-review-like-btn");
                 var $otherA = null;
+                //console.log($button);
+
+                //console.log(reviewId);
 
                 if (isLikeBtn) {
                     $otherA = $.byId("review-thumbs-down-click-" + sequence);
                 } else {
                     $otherA = $.byId("review-thumbs-up-click-" + sequence);
                 }
-                $otherA.find("i").removeClass("active");
-                $this.find("i").toggleClass("active");
-            }
+                $button.hide();
+                $spinnerForthisLike.show(); // show spinner until load
+                console.log($spinnerForthisLike);
 
+                function errorExecute(jqXHR, textStatus, errorThrown) {
+                    $spinnerForthisLike.hide();
+                    var $clone = $spinnerForthisLike.clone();
+                    var $span = $clone.find("span");
+                    var failedMessage = "like/dislike request failed , please refresh page. Reason : " + errorThrown;
+
+                    $span.attr("class", "fa fa-times")
+                        .attr("title", failedMessage);
+                    $clone.attr("data-original-title", failedMessage)
+                        .attr("title", failedMessage)
+                        .show();
+                    console.log(failedMessage);
+                    $spinnerForthisLike.after($clone);
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data,
+                    success: function (response) {
+                        response = $.parseJSON(response);
+                        $spinnerForthisLike.hide();
+                        $button.show();
+                        $otherA.find("i").removeClass("active");
+                        if (response.isDone) {
+                            $button.find("i").toggleClass("active");
+                            //Use window.location.href to get the complete URL.
+                            //Use window.location.pathname to get URL leaving the host.
+                            $.ajax({
+                                type: "HTML",
+                                url: window.location.pathname
+                            });
+                            $.ajax({
+                                type: "HTML",
+                                url: window.location.href
+                            });
+                        } else if (!response.isDone) {
+                            $button.find("i").removeClass("active");
+                            //errorExecute(null, "Can't get the right response.", null);
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        errorExecute(jqXHR, textStatus, errorThrown);
+                    }
+                }); // ajax end
+            }
             if ($likeBtns.length > 0) {
-                var $disLikeBtns = $("#app-deails-page a[data-review-dislike-btn=true]");
-                var serializedData = $("#review-like-dislike-form-submit").serialize();
-                var $spinners = $(".spinner-for-like").hide();
-                //like btns
+                var $disLikeBtns = $.queryAll("#app-deails-page a[data-review-dislike-btn=true]");
+                var serializedData = $.byId("review-like-dislike-form-submit").serialize();
+                $spinners = $.queryAll(".spinner-for-like").hide(); //like btns
                 $likeBtns.click(function (evt) {
-                    btnClicked(evt, likeUrl, serializedData);
+                    var $button = $(this);
+                    btnClicked($button, evt, likeUrl, serializedData);
                 });
                 //dislike btns
                 $disLikeBtns.click(function (evt) {
-                    btnClicked(evt, dislikeUrl, serializedData);
+                    var $button = $(this);
+                    btnClicked($button, evt, dislikeUrl, serializedData);
                 });
             }
         },
