@@ -31,7 +31,6 @@ $(function() {
 
     $.devOrg = {
 
-
         // get all the classes from an jQuery element
         getAllClasses: function(jQueryHtmlElement) {
             return jQueryHtmlElement.getAllClasses();
@@ -172,7 +171,6 @@ $(function() {
                     placeComboName = " name='" + placeComboName + "' ";
                 }
 
-
                 innerDiv.prepend("<select " + placeComboName + " class='devOrgSmartCombo form-control " + placedComboClass + " selectpicker'" + placedComboId + "data-style='" + placedComboClass + "' data-live-search='true'></select>");
                 var combo = innerDiv.find("select");
                 $.devOrg.appenedComboElement(combo, response, placedComboAdditionalHtmlWithEachItem, placedComboAdditionalClassesWithItems);
@@ -216,9 +214,9 @@ $(function() {
             if (listOfItems.length > 0) {
                 var length = listOfItems.length;
                 var options = new Array(length + 5);
-                var selected = " Selected='selected' ";
+                var selected = " selected='selected' ";
                 var optionStarting = "<option class='devorgCombo-item " + itemClasses + "'";
-                var optionEnding = "</option>";
+                var optionEnding   = "</option>";
                 for (var i = 0; i < length; i++) {
                     if (i === 0) {
                         selected = "";

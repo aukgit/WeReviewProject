@@ -11,10 +11,11 @@
 /// <reference path="../../rs-plugin/js/jquery.themepunch.revolution.min.js" />
 /// <reference path="bootstrap-rating.min.js" />
 /// <reference path="underscore-min.js" />
+/// <reference path="../DevOrgPlugins/faster-jQuery.js" />
 
 $(function () {
 
-    $(".seo-hide").hide();
+    $.queryAll(".seo-hide").hide();
     //$('.tp-banner').show().revolution({
     //    dottedOverlay: "none",
     //    delay: 8000,
@@ -35,7 +36,7 @@ $(function () {
     //    stopLoop: "off"
     //});
 
-    $(".tp-banner").show().revolution({
+    $.queryAll(".tp-banner").show().revolution({
         dottedOverlay: "none",
         delay: 5000,
         startwidth: 960,
@@ -48,7 +49,7 @@ $(function () {
     });
 
 
-    $(".owl-list").owlCarousel({
+    $.queryAll(".owl-list").owlCarousel({
         navigation: true,
         navigationText: [
           "<i class='fa fa-chevron-circle-left'></i>",
@@ -75,12 +76,12 @@ $(function () {
 
     //});
 
-    $(".rating-5-front").rating({
+    $.queryAll(".rating-5-front").rating({
         showClear: false,
         showCaption: false
     });
 
-    $(".rating-5-page-details").rating({
+    $.queryAll(".rating-5-page-details").rating({
         showClear: false,
         showCaption: true,
         starCaptions: {
@@ -111,7 +112,7 @@ $(function () {
         }
     });
 
-    $("#apps-preview").owlCarousel({
+    $.queryAll("#apps-preview").owlCarousel({
         slideSpeed: 300,
         paginationSpeed: 400,
         singleItem: true,
@@ -159,17 +160,17 @@ $(function () {
 
 
     $.frontEndAppDetailsPage = {
-        $showMoreBtnContainer: $(".show-more-btns-container"),
-        $showMoreBtns: $(".see-more-btn"),
-        $showLessBtns: $(".less-btn"),
-        $moreExcert: $(".more"),
+        $showMoreBtnContainer: $.queryAll(".show-more-btns-container"),
+        $showMoreBtns: $.queryAll(".see-more-btn"),
+        $showLessBtns: $.queryAll(".less-btn"),
+        $moreExcert: $.queryAll(".more"),
         execute: function () {
             this.$moreExcert.hide();
 
             //filtering through isotop
             var $isotopContainer = $("ul.search-page-apps-list:first");
 
-            $('.filter li a').click(function () {
+            $.queryAll('.filter li a').click(function () {
                 $('.filter li a').removeClass('active');
                 $(this).addClass('active');
                 var selector = $(this).attr('data-filter');
@@ -227,10 +228,5 @@ $(function () {
             });
         }
     };
-
     $.frontEndAppDetailsPage.execute();
-
-
-
-
 });

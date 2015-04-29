@@ -2153,7 +2153,7 @@ if(typeof jQuery=="undefined")throw new Error("Bootstrap's JavaScript requires j
 
 
 function transactionStatusHide() {
-    var $transactionStatus = $(".transaction-status");
+    var $transactionStatus = $.queryAll(".transaction-status");
     if ($transactionStatus.length > 0) {
         $transactionStatus.delay(3500).fadeOut(2500);
     }
@@ -2168,7 +2168,7 @@ $(function () {
     //        history.back();
     //    });
     //} 
-    $('.tooltip-show').tooltip();
+    $.queryAll('.tooltip-show').tooltip();
     
 
 
@@ -4317,7 +4317,6 @@ $(function() {
 
     $.devOrg = {
 
-
         // get all the classes from an jQuery element
         getAllClasses: function(jQueryHtmlElement) {
             return jQueryHtmlElement.getAllClasses();
@@ -4458,7 +4457,6 @@ $(function() {
                     placeComboName = " name='" + placeComboName + "' ";
                 }
 
-
                 innerDiv.prepend("<select " + placeComboName + " class='devOrgSmartCombo form-control " + placedComboClass + " selectpicker'" + placedComboId + "data-style='" + placedComboClass + "' data-live-search='true'></select>");
                 var combo = innerDiv.find("select");
                 $.devOrg.appenedComboElement(combo, response, placedComboAdditionalHtmlWithEachItem, placedComboAdditionalClassesWithItems);
@@ -4502,9 +4500,9 @@ $(function() {
             if (listOfItems.length > 0) {
                 var length = listOfItems.length;
                 var options = new Array(length + 5);
-                var selected = " Selected='selected' ";
+                var selected = " selected='selected' ";
                 var optionStarting = "<option class='devorgCombo-item " + itemClasses + "'";
-                var optionEnding = "</option>";
+                var optionEnding   = "</option>";
                 for (var i = 0; i < length; i++) {
                     if (i === 0) {
                         selected = "";
@@ -5108,10 +5106,11 @@ $(function() {
 /// <reference path="../../rs-plugin/js/jquery.themepunch.revolution.min.js" />
 /// <reference path="bootstrap-rating.min.js" />
 /// <reference path="underscore-min.js" />
+/// <reference path="../DevOrgPlugins/faster-jQuery.js" />
 
 $(function () {
 
-    $(".seo-hide").hide();
+    $.queryAll(".seo-hide").hide();
     //$('.tp-banner').show().revolution({
     //    dottedOverlay: "none",
     //    delay: 8000,
@@ -5132,7 +5131,7 @@ $(function () {
     //    stopLoop: "off"
     //});
 
-    $(".tp-banner").show().revolution({
+    $.queryAll(".tp-banner").show().revolution({
         dottedOverlay: "none",
         delay: 5000,
         startwidth: 960,
@@ -5145,7 +5144,7 @@ $(function () {
     });
 
 
-    $(".owl-list").owlCarousel({
+    $.queryAll(".owl-list").owlCarousel({
         navigation: true,
         navigationText: [
           "<i class='fa fa-chevron-circle-left'></i>",
@@ -5172,12 +5171,12 @@ $(function () {
 
     //});
 
-    $(".rating-5-front").rating({
+    $.queryAll(".rating-5-front").rating({
         showClear: false,
         showCaption: false
     });
 
-    $(".rating-5-page-details").rating({
+    $.queryAll(".rating-5-page-details").rating({
         showClear: false,
         showCaption: true,
         starCaptions: {
@@ -5208,7 +5207,7 @@ $(function () {
         }
     });
 
-    $("#apps-preview").owlCarousel({
+    $.queryAll("#apps-preview").owlCarousel({
         slideSpeed: 300,
         paginationSpeed: 400,
         singleItem: true,
@@ -5256,17 +5255,17 @@ $(function () {
 
 
     $.frontEndAppDetailsPage = {
-        $showMoreBtnContainer: $(".show-more-btns-container"),
-        $showMoreBtns: $(".see-more-btn"),
-        $showLessBtns: $(".less-btn"),
-        $moreExcert: $(".more"),
+        $showMoreBtnContainer: $.queryAll(".show-more-btns-container"),
+        $showMoreBtns: $.queryAll(".see-more-btn"),
+        $showLessBtns: $.queryAll(".less-btn"),
+        $moreExcert: $.queryAll(".more"),
         execute: function () {
             this.$moreExcert.hide();
 
             //filtering through isotop
             var $isotopContainer = $("ul.search-page-apps-list:first");
 
-            $('.filter li a').click(function () {
+            $.queryAll('.filter li a').click(function () {
                 $('.filter li a').removeClass('active');
                 $(this).addClass('active');
                 var selector = $(this).attr('data-filter');
@@ -5326,10 +5325,6 @@ $(function () {
     };
 
     $.frontEndAppDetailsPage.execute();
-
-
-
-
 });
 
 ///#source 1 1 /Content/Scripts/DevOrgPlugins/WeReviewApps.js

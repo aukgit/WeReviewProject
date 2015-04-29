@@ -109,20 +109,18 @@ namespace WereViewApp.Helpers {
         #region Drop Downs
 
         #region Country
-
         /// <summary>
         /// </summary>
-        /// <param name="helper"></param>
         /// <param name="countries"></param>
         /// <param name="classes">use  spaces to describe the classes</param>
         /// <param name="otherAttributes"></param>
         /// <returns></returns>
-        public static HtmlString DropDownCountry(this HtmlHelper helper, List<Country> countries, string classes = "",
+        public static string DropDownCountry(List<Country> countries, string classes = "",
             string otherAttributes = "", string contentAddedString = "") {
             var countryOptionsGenerate = "<select class='form-control selectpicker " + classes +
                                          " country-combo' data-live-search='true' name='CountryID' " + otherAttributes +
                                          " title='Country' data-style='btn-success flag-combo fc-af'>";
-            var sb = new StringBuilder(countryOptionsGenerate, countries.Count*7);
+            var sb = new StringBuilder(countryOptionsGenerate, countries.Count * 7);
             foreach (var country in countries) {
                 sb.Append(string.Format("<option class='flag-country-combo flag {0}' title='| {1}' value='{2}'>",
                     country.Alpha2Code.ToLower(), country.DisplayCountryName, country.CountryID));
@@ -132,7 +130,19 @@ namespace WereViewApp.Helpers {
                 sb.Append("</option>").AppendLine();
             }
             sb.AppendLine("</select>");
-            return new HtmlString(sb.ToString());
+            return sb.ToString();
+        }
+        /// <summary>
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="countries"></param>
+        /// <param name="classes">use  spaces to describe the classes</param>
+        /// <param name="otherAttributes"></param>
+        /// <returns></returns>
+        public static HtmlString DropDownCountry(this HtmlHelper helper, List<Country> countries, string classes = "",
+            string otherAttributes = "", string contentAddedString = "") {
+            string strHtml = DropDownCountry(countries, classes, otherAttributes, contentAddedString);
+            return new HtmlString(strHtml);
         }
 
         #endregion

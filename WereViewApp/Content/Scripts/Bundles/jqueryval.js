@@ -9815,8 +9815,8 @@ $(function () {
         usernameValidationUrl: "/Validator/Username",
         //"/Validator/Email"        
         emailAddressValidationUrl: "/Validator/Email",
-        timeZoneJsonUrl: "/Common/GetTimeZone", // look like this /Common/GetTimeZone/CountryID
-        languageJsonUrl: "/Common/GetLanguage" // look like this /Common/GetTimeZone/CountryID
+        timeZoneJsonUrl: "/Partials/GetTimeZone", // look like this /Partials/GetTimeZone/CountryID
+        languageJsonUrl: "/Partials/GetLanguage" // look like this /Partials/GetTimeZone/CountryID
     };
 
     if ($.devOrg.Constants.registerForm.length > 0) {
@@ -9871,18 +9871,19 @@ $(function () {
     }
 
 
-
+    // make tables look nice with pagination
     var $tables = $("table.bootstrap-table-do");
     if ($tables.length > 0) {
         $tables.bootstrapTable();
     }
 
+
+    // load dynamic and depended select or combo
+    $.devOrg.dynamicSelect.initialize();
     
     $("select.selectpicker").selectpicker();
     $.devOrg.bootstrapComboSelectIndex("select.selectpicker", 0);
 
-
-    
 
     ///Implement .rating-5,.rating-10
     $.devOrg.ratingMordernize();
@@ -9903,7 +9904,7 @@ $(function () {
             });
         }
     }
-
+    //menu edit page 
     workWithMenuPage();
 
 

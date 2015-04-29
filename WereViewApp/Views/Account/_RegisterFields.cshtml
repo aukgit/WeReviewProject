@@ -1,19 +1,9 @@
 ﻿@using WereViewApp.Models.POCO.IdentityCustomization
 @model WereViewApp.Models.ViewModels.RegisterViewModel
 @{
-    var countries = (List<Country>) ViewBag.Country;
+    string partialController = ViewBag.dynamicLoadPartialController;
 }
-
-<div class="form-group">
-    <div class="controls">
-        <label class="col-md-2 control-label">Country<span class="red ">*</span></label>
-        <div class="col-md-10">
-            @Html.DropDownCountry(countries)
-            <a href="#" data-toggle="tooltip" data-original-title="Please select your country, it's going to verify against your IP." title="Please select your country, it's going to verify against your IP." class="tooltip-show">
-                <span class="description-icon"></span></a>
-        </div>
-    </div>
-</div>
+@Html.EditorFor(model => model.CountryID, "DropDownDynamic", new { @Url = @partialController + "GetCountryID", @IsHtml = "true" /* ,@IsDependable = "false",@LiveSearch = "true",@Style = "class",@Id = "id", @DynamicLoad = "true"*/})
 <div class="form-group timezone-main">
     <div class="controls">
         <label class="col-md-2 control-label">Timezone<span class="red ">*</span></label>

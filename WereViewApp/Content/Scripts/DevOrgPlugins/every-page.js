@@ -8,7 +8,7 @@
 
 
 function transactionStatusHide() {
-    var $transactionStatus = $(".transaction-status");
+    var $transactionStatus = $.queryAll(".transaction-status");
     if ($transactionStatus.length > 0) {
         $transactionStatus.delay(3500).fadeOut(2500);
     }
@@ -23,7 +23,7 @@ $(function () {
     //        history.back();
     //    });
     //} 
-    $('.tooltip-show').tooltip();
+    $.queryAll('.tooltip-show').tooltip();
     
 
 
