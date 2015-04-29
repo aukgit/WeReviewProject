@@ -428,6 +428,7 @@
     <Content Include="Content\CompactCSS.min.css">
       <DependentUpon>CompactCSS.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\animate-refresh.css" />
     <Content Include="Content\css\bootstrap-datetimepicker.css" />
     <Content Include="Content\css\category-page.css" />
     <Content Include="Content\css\color-fonts.css" />
@@ -556,6 +557,10 @@
     </Content>
     <Content Include="Content\css\search-page.css.map">
       <DependentUpon>search-page.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\animate-refresh.less" />
+    <Content Include="Content\css\animate-refresh.css.map">
+      <DependentUpon>animate-refresh.css</DependentUpon>
     </Content>
     <None Include="Content\Less\override-mvc.less" />
     <Content Include="Content\revolution-slider\assets\arrowleft.png" />
