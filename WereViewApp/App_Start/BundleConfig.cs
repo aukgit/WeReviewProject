@@ -44,8 +44,8 @@ namespace WereViewApp {
                                     "~/Content/Scripts/bootstrap-table-export.js",
                                     "~/Content/Scripts/jquery.elastic.source.js",
                                     "~/Content/Scripts/DevOrgPlugins/developers-organism.dynamicSelect.js",
+                                    "~/Content/Scripts/DevOrgPlugins/developers-organism.country-phone.js",
                                     "~/Content/Scripts/DevOrgPlugins/dev-component-runner.js"
-                                    
                                    ));
                     #endregion
 

@@ -1,16 +1,12 @@
-﻿/// <reference path="DevOrgRegSlide.js" />
-/// <reference path="../jquery-2.1.1.js" />
-/// <reference path="../jquery-2.1.1.intellisense.js" />
-/// <reference path="../bootstrap.js" />
-/// <reference path="../bootstrap-select.js" />
-/// <reference path="../bootstrap-datepicker.js" />
-/// <reference path="../bootstrap-datetimepicker.js" />
-/// <reference path="DevOrgComponent.js" />
-/// <reference path="../dataTables.bootstrap.js" />
+﻿/// <reference path="developers-organism.component.js" />
+/// <reference path="developers-organism.dynamicSelect.js" />
+/// <reference path="developers-organism.upload.js" />
+/// <reference path="faster-jQuery.js" />
+/// <reference path="WeReviewApps.js" />
+/// <reference path="../star-rating.js" />
+/// <reference path="../validation.js" />
 /// <reference path="../underscore.js" />
-/// <reference path="../../Content/Scripts/star-rating.js" />
-/// <reference path="../../Content/Scripts/bootstrap-table-filter.js" />
-/// <reference path="../../Content/Scripts/Scripts/jquery.elastic.source.js" />
+/// <reference path="developers-organism.country-phone.js" />
 
 /*!
  * Written by Alim Ul Karim
@@ -25,9 +21,6 @@ $(function () {
 
     $.devOrg.Constants = {
         registerForm: $("form.register-form"),
-        countryComboSelector: ".form-control.selectpicker.country-combo",
-        countryDropDownItemsSelector: "ul.dropdown-menu.inner.selectpicker",
-        btnSelector: "button.btn.dropdown-toggle.selectpicker.btn-success.flag-combo",
         userName: "UserName",
         email: "Email",
         phoneNumberSelector: "#Phone",
@@ -38,11 +31,18 @@ $(function () {
         usernameValidationUrl: "/Validator/Username",
         //"/Validator/Email"        
         emailAddressValidationUrl: "/Validator/Email",
+        countryJsonUrl: "/Content/Scripts/Data/country-info.json", // look like this /Partials/GetTimeZone/CountryID
         timeZoneJsonUrl: "/Partials/GetTimeZone", // look like this /Partials/GetTimeZone/CountryID
         languageJsonUrl: "/Partials/GetLanguage" // look like this /Partials/GetTimeZone/CountryID
     };
 
+
     if ($.devOrg.Constants.registerForm.length > 0) {
+        $.devOrg
+            .countryTimezonePhoneComponent
+            .initialize($.devOrg.Constants.countryJsonUrl,
+                $.devOrg.Constants.timeZoneJsonUrl,
+                $.devOrg.Constants.languageJsonUrl);
 
         $.devOrg.validateInputFromServer("#" + $.devOrg.Constants.userName,
                                           $.devOrg.Constants.usernameValidationUrl,
@@ -59,39 +59,18 @@ $(function () {
         
         $.devOrg.enterToNextTextBox(".register-form", false);
         //$.devOrg.uxFriendlySlide("form.register-form", true);
-        $.devOrg.countryFlagRefresh($.devOrg.Constants.countryComboSelector,
-                                    $.devOrg.Constants.countryDropDownItemsSelector,
-                                    $.devOrg.Constants.btnSelector);
-
-        $.devOrg.countryRelatedToPhone($.devOrg.Constants.countryComboSelector,
-                                        $.devOrg.Constants.countryDropDownItemsSelector,
-                                        $.devOrg.Constants.btnSelector,
-                                        $.devOrg.Constants.phoneNumberSelector);
-        //country dependable load
-        $.devOrg.smartDependableCombo("select.country-combo",
-                                      ".timezone-main",
-                                      ".timezone-combo-div",
-                                      $.devOrg.Constants.timeZoneJsonUrl,
-                                      "UserTimeZoneID", //name
-                                      "", //id
-                                      "btn-success", //class
-                                      ""
-                                      );
-        $.devOrg.smartDependableCombo("select.country-combo",
-                                      ".language-main",
-                                      ".language-combo-div",
-                                      $.devOrg.Constants.languageJsonUrl,
-                                      "CountryLanguageID", //name
-                                      "",//id
-                                      "btn-success",//class
-                                      ""
-                                      );
+        
         $("button.fillit").click(function () {
             $.devOrg.fillRegisterFieldsOnDemo();
         });
         $.devOrg.bootstrapComboSelectbyFindingValue("select.country-combo", '1');
 
     }
+
+
+    // load dynamic and depended select or combo
+    $.devOrg.dynamicSelect.initialize();
+
 
 
     // make tables look nice with pagination
@@ -101,8 +80,7 @@ $(function () {
     }
 
 
-    // load dynamic and depended select or combo
-    $.devOrg.dynamicSelect.initialize();
+
     
     $("select.selectpicker").selectpicker();
     $.devOrg.bootstrapComboSelectIndex("select.selectpicker", 0);

@@ -138,7 +138,7 @@ $.faster = {
         /// <param name="cssSelector">Find all elements</param>
         /// <returns>jQuery object , check length property to understand if any exist</returns>
         if (cssSelector !== undefined && cssSelector !== null && cssSelector !== "") {
-            if ($.faster.isQuerySelectorSupported) {
+            if ($.faster.isQuerySelectorSupported()) {
                 var elements;
                 elements = document.querySelectorAll(cssSelector);
                 return $(elements);

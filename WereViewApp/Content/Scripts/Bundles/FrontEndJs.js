@@ -139,7 +139,7 @@ $.faster = {
         /// <param name="cssSelector">Find all elements</param>
         /// <returns>jQuery object , check length property to understand if any exist</returns>
         if (cssSelector !== undefined && cssSelector !== null && cssSelector !== "") {
-            if ($.faster.isQuerySelectorSupported) {
+            if ($.faster.isQuerySelectorSupported()) {
                 var elements;
                 elements = document.querySelectorAll(cssSelector);
                 return $(elements);
@@ -4344,12 +4344,18 @@ $.devOrg = {
     // all Selectors are jQuery Selector Text  only.
     // selectpicker will be called inside function, no need to call outside.
     countryFlagRefresh: function (countrySelector, dropDownItemsSelector, dropDownBtnSelector) {
-        var countryBox = $(countrySelector).selectpicker(); // only select a select element then apply the custom bootstrap selector
-        var dropDownItems = $(dropDownItemsSelector); // getting generated dropdown items from the custom bootstrap selector
-        var dropDownBtn = $(dropDownBtnSelector); // generated new button from the selectpicker option
+        /// <summary>
+        /// Make country selector to selector
+        /// and get refresh flag 
+        /// </summary>
+        /// <param name="countrySelector">Select country and make it selectpicker()</param>
+        /// <param name="dropDownItemsSelector"></param>
+        /// <param name="dropDownBtnSelector"></param>
+        var countryBox = $.queryAll(countrySelector).selectpicker(); // only select a select element then apply the custom bootstrap selector
+        var dropDownItems = $.queryAll(dropDownItemsSelector); // getting generated dropdown items from the custom bootstrap selector
+        var dropDownBtn = $.queryAll(dropDownBtnSelector); // generated new button from the selectpicker option
         var skippingClassesAnchor = ["flag-country-combo", "flag"];
         var skippingClassesForBtn = ["btn", "dropdown-toggle", "selectpicker", "btn-success", "flag-combo"];
-
         // console.log(dropDownItems.length);
         countryBox.change(function (e) {
             var listItem = dropDownItems.find("li.selected");
@@ -4414,17 +4420,17 @@ $.devOrg = {
     // No combo will appear , even the main div will disappear if no item is received from the link.
     // json sender should sends as id and text only.
     smartDependableCombo: function (parentjQuerySelector, mainDivContainerSelector, innerDivSelectorForPlacingCombo, urlToGetJson, placeComboName, placedComboId, placedComboClass, placedComboAdditionalClassesWithItems, placedComboAdditionalHtmlWithEachItem) {
-        var parentjQueryCombo = $(parentjQuerySelector);
+        var parentjQueryCombo = $.queryAll(parentjQuerySelector);
         if (_.isEmpty(parentjQueryCombo)) {
             console.error.log("error raised from developers organism component's smartDependableCombo that no parent is detected.");
             return; // nothing exist in parent.
         }
-        var mainDiv = $(mainDivContainerSelector);
-        var innerDiv = mainDiv.find(innerDivSelectorForPlacingCombo);
+        var $mainDiv = $.queryAll(mainDivContainerSelector);
+        var $innerDiv = $mainDiv.find(innerDivSelectorForPlacingCombo);
 
         function hideDiv() {
-            if (mainDiv.length > 0) {
-                mainDiv.hide();
+            if ($mainDiv.length > 0) {
+                $mainDiv.hide();
             } else {
                 console.error.log("devOrg->smartDependableCombo: main div not found for '" + mainDivContainerSelector + "'");
             }
@@ -4434,11 +4440,11 @@ $.devOrg = {
 
         function showDiv() {
             // remove select if exist.
-            var options = innerDiv.find("select, div.bootstrap-select");
+            var options = $innerDiv.find("select, div.bootstrap-select");
             if (options.length > 0) {
                 options.remove();
             }
-            mainDiv.show("slow");
+            $mainDiv.show("slow");
         }
 
         function createCombo(response) {
@@ -4457,8 +4463,8 @@ $.devOrg = {
                 placeComboName = " name='" + placeComboName + "' ";
             }
 
-            innerDiv.prepend("<select " + placeComboName + " class='devOrgSmartCombo form-control " + placedComboClass + " selectpicker'" + placedComboId + "data-style='" + placedComboClass + "' data-live-search='true'></select>");
-            var combo = innerDiv.find("select");
+            $innerDiv.prepend("<select " + placeComboName + " class='devOrgSmartCombo form-control " + placedComboClass + " selectpicker'" + placedComboId + "data-style='" + placedComboClass + "' data-live-search='true'></select>");
+            var combo = $innerDiv.find("select");
             $.devOrg.appenedComboElement(combo, response, placedComboAdditionalHtmlWithEachItem, placedComboAdditionalClassesWithItems);
             combo.selectpicker();
         }
@@ -4475,7 +4481,7 @@ $.devOrg = {
                         hideDiv();
                         return;
                     }
-                    innerDiv = $(mainDivContainerSelector + " " + innerDivSelectorForPlacingCombo);
+                    $innerDiv = $(mainDivContainerSelector + " " + innerDivSelectorForPlacingCombo);
                     // items exist.
                     showDiv(); //remove inner options if exist any
                     createCombo(response); // create if necessary and then append options to it.
@@ -4501,13 +4507,13 @@ $.devOrg = {
             var length = listOfItems.length;
             var options = new Array(length + 5);
             var selected = " selected='selected' ";
-            var optionStarting = "<option class='devorgCombo-item " + itemClasses + "'";
+            var optionStarting = "<option class='" + itemClasses + "'";
             var optionEnding = "</option>";
             for (var i = 0; i < length; i++) {
                 if (i === 0) {
                     selected = "";
                 }
-                options[i] = optionStarting + selected + "value='" + listOfItems[i].id + "'>" + extraHtmlWithEachElement + listOfItems[i].text + optionEnding;
+                options[i] = optionStarting + selected + "value='" + listOfItems[i].id + "'>" + extraHtmlWithEachElement + listOfItems[i].display + optionEnding;
             }
             combo.append(options.join(""));
         }

@@ -3,6 +3,7 @@
 using System;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.WereViewAppCommon;
@@ -19,14 +20,17 @@ namespace WereViewApp.Controllers {
 
 
         #region Drop down : Country, timezone, language
-        [OutputCache(CacheProfile = "YearNoParam")]
-        public string GetCountryId() {
-          
-            var countries = CachedQueriedData.GetCountries();
-            return HtmlHelpers.DropDownCountry(countries);
-        }
+        //[OutputCache(CacheProfile = "YearNoParam")]
+        //public JsonResult GetCountryId() {
+        //    var countries = CachedQueriedData.GetCountries().Select(n=> new {
+        //        display = n.DisplayCountryName,
+        //        id = n.CountryID,
+        //        countryCode = n.Alpha2Code
+        //    }).ToList();
+        //    return Json(countries, JsonRequestBehavior.AllowGet);
+        //}
 
-        [OutputCache(CacheProfile = "Day", VaryByParam = "id")]
+        [OutputCache(CacheProfile = "Year", VaryByParam = "id")]
         public ActionResult GetTimeZone(int id) {
         
             if (SessionNames.IsValidationExceed("GetTimeZone", 100)) {
@@ -34,7 +38,7 @@ namespace WereViewApp.Controllers {
             }
             var getZones = CachedQueriedData.GetTimezones(id);
             if (getZones != null) {
-                var represent = getZones.Select(n => new { text = n.Display, id = n.UserTimeZoneID });
+                var represent = getZones.Select(n => new { display = n.Display, id = n.UserTimeZoneID });
                 return Json(represent.ToList(), JsonRequestBehavior.AllowGet);
             }
             return Json(null, JsonRequestBehavior.AllowGet);
@@ -48,7 +52,7 @@ namespace WereViewApp.Controllers {
             var languges = CachedQueriedData.GetLanguages(id);
             if (languges != null) {
                 var represent =
-                    languges.Select(n => new { text = n.Language + " - " + n.NativeName, id = n.CountryLanguageID });
+                    languges.Select(n => new { display = n.Language + " - " + n.NativeName, id = n.CountryLanguageID });
                 return Json(represent.ToList(), JsonRequestBehavior.AllowGet);
             }
             return Json(null, JsonRequestBehavior.AllowGet);
