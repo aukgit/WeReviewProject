@@ -4,11 +4,11 @@ $(document).ready(function ($) {
     /*    Parallax
     /*-----------------------------------------------------------------------------------*/
 
-    jQuery.stellar({
-        horizontalScrolling: false,
-        scrollProperty: 'scroll',
-        positionProperty: 'position'
-    });
+    //jQuery.stellar({
+    //    horizontalScrolling: false,
+    //    scrollProperty: 'scroll',
+    //    positionProperty: 'position'
+    //});
     /*-----------------------------------------------------------------------------------*/
     /*	Easy Pie Chart
     /*-----------------------------------------------------------------------------------*/
@@ -86,7 +86,7 @@ $(document).ready(function ($) {
     /*    STICKY NAVIGATION
     /*-----------------------------------------------------------------------------------*/
 
-    $(".sticky").sticky({ topSpacing: 0 });
+    //$(".sticky").sticky({ topSpacing: 0 });
 
 
 

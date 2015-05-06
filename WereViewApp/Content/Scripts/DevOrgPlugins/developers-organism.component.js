@@ -277,10 +277,10 @@ $.devOrg = {
         function createCombo(responseJson) {
             //(comboName, comboClass, comboId, additionalAttributes, jsonItems, extraHtmlWithEachElement, itemClasses)
             var comboString = $.devOrg.getWholeComboStringWithJsonItems(responseJson, placingComboName, placedComboClass, placedComboId, placedComboAdditionalAttributes, placedComboAdditionalHtmlWithEachItem, placedComboAdditionalClassesWithEachItem);
-            var insideDivHtml = $innerDiv.html();
-            var wholeCombo = comboString + insideDivHtml;
+            //var insideDivHtml = $innerDiv.html();
+            //var wholeCombo = comboString + insideDivHtml;
+            $innerDiv.prepend(comboString);
 
-            $innerDiv.html(wholeCombo);
             var $combo = $innerDiv.find("select");
             $combo.selectpicker();
         }

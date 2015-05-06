@@ -102,7 +102,7 @@ $.devOrg.countryTimezonePhoneComponent = {
         var comboName = $.devOrg.countryTimezonePhoneComponent.countryFieldName;
 
         var $countryInnerDiv = $.queryAll($.devOrg.countryTimezonePhoneComponent.countryComboDivInnerSelector);
-        console.log($countryInnerDiv);
+        //console.log($countryInnerDiv);
         // first generate country
         if ($countryInnerDiv.length > 0) {
             $.ajax({

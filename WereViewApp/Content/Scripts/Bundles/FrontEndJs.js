@@ -3477,11 +3477,11 @@ $(document).ready(function ($) {
     /*    Parallax
     /*-----------------------------------------------------------------------------------*/
 
-    jQuery.stellar({
-        horizontalScrolling: false,
-        scrollProperty: 'scroll',
-        positionProperty: 'position'
-    });
+    //jQuery.stellar({
+    //    horizontalScrolling: false,
+    //    scrollProperty: 'scroll',
+    //    positionProperty: 'position'
+    //});
     /*-----------------------------------------------------------------------------------*/
     /*	Easy Pie Chart
     /*-----------------------------------------------------------------------------------*/
@@ -3559,7 +3559,7 @@ $(document).ready(function ($) {
     /*    STICKY NAVIGATION
     /*-----------------------------------------------------------------------------------*/
 
-    $(".sticky").sticky({ topSpacing: 0 });
+    //$(".sticky").sticky({ topSpacing: 0 });
 
 
 
@@ -4567,10 +4567,10 @@ $.devOrg = {
         function createCombo(responseJson) {
             //(comboName, comboClass, comboId, additionalAttributes, jsonItems, extraHtmlWithEachElement, itemClasses)
             var comboString = $.devOrg.getWholeComboStringWithJsonItems(responseJson, placingComboName, placedComboClass, placedComboId, placedComboAdditionalAttributes, placedComboAdditionalHtmlWithEachItem, placedComboAdditionalClassesWithEachItem);
-            var insideDivHtml = $innerDiv.html();
-            var wholeCombo = comboString + insideDivHtml;
+            //var insideDivHtml = $innerDiv.html();
+            //var wholeCombo = comboString + insideDivHtml;
+            $innerDiv.prepend(comboString);
 
-            $innerDiv.html(wholeCombo);
             var $combo = $innerDiv.find("select");
             $combo.selectpicker();
         }
