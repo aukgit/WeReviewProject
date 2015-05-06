@@ -4424,13 +4424,14 @@ $.devOrg = {
     getComboStringWithJsonItems: function (htmlStringCombo, jsonItems, extraHtmlWithEachElement, itemClasses) {
 
     },
-    getComboString: function (comboName, comboClass, comboId, additionalAttributes) {
+    getComboString: function (comboName, comboClass, comboId, stringOptionItems, additionalAttributes) {
         /// <summary>
         /// returns a select/combo making string
         /// </summary>
         /// <param name="comboName"></param>
         /// <param name="comboClass"></param>
         /// <param name="comboId">Just pass the id or give null, it will automatically formatted</param>
+        /// <param name="stringOptionItems">Option items passed as an string</param>
         /// <param name="additionalAttributes">Add additional attributes with the select, however user have to format it. Eg. id='hello' </param>
         if (!_.isEmpty(comboId)) {
             comboId = " id='" + comboId + "' ";
@@ -4439,6 +4440,9 @@ $.devOrg = {
         }
         if (_.isEmpty(comboClass)) {
             comboClass = "";
+        }
+        if (_.isEmpty(stringOptionItems)) {
+            stringOptionItems = "";
         }
         if (_.isEmpty(comboName)) {
             comboName = "";
@@ -4451,7 +4455,9 @@ $.devOrg = {
                               " selectpicker'" + comboId +
                               " data-style='" + comboClass + "' " +
                               additionalAttributes +
-                              " data-live-search='true'></select>";
+                              " data-live-search='true'>" +
+                              stringOptionItems +
+                              " </select>";
 
         return comboString;
     },
@@ -4572,10 +4578,10 @@ $.devOrg = {
         $(comboSelector).selectpicker("val", searchForvalue).trigger("change");
     },
     bootstrapComboSelectIndex: function (comboSelector, index) {
-        var combo = $(comboSelector + ">option");
-        if (combo.length > 0 && index <= (combo.length - 1)) {
+        var $combo = $.queryAll(comboSelector + ">option");
+        if ($combo.length > 0 && index <= ($combo.length - 1)) {
 
-            var itemFound = $(combo[index]);
+            var itemFound = $($combo[index]);
             var value = itemFound.val();
             $.devOrg.bootstrapComboSelectbyFindingValue(comboSelector, value);
         }
@@ -4607,15 +4613,25 @@ $.devOrg = {
 
     // jquery formSelector, submitAtLast:true/false
     enterToNextTextBox: function (formSelector, submitAtLast) {
-        $(formSelector + " input:text:first").focus();
-        var binders = formSelector + " input[type='text']:visible," +
-            formSelector + " input[type='password']:visible," +
-            formSelector + " input[type='numeric']:visible," +
-            formSelector + " input[type='email']:visible," +
-            //formSelector + " textarea:visible," +
-            formSelector + " button.selectpicker[type='button']:visible," +
-            formSelector + " select:visible";
-        $(document).on("keypress", binders, function (e) {
+        var $form = $.queryAll(formSelector);
+
+        $form.find("input:text:first-child").focus();
+
+        //var binders = formSelector + " input[type='text']:visible," +
+        //    formSelector + " input[type='password']:visible," +
+        //    formSelector + " input[type='numeric']:visible," +
+        //    formSelector + " input[type='email']:visible," +
+        //    //formSelector + " textarea:visible," +
+        //    formSelector + " button.selectpicker[type='button']:visible," +
+        //    formSelector + " select:visible";
+        var binders = "input[type='text']:visible," +
+                     "input[type='password']:visible," +
+                     "input[type='numeric']:visible," +
+                     "input[type='email']:visible," +
+                    //formSelector + " textarea:visible," +
+                     "button.selectpicker[type='button']:visible," +
+                     "select:visible";
+        $form.on("keypress", binders, function (e) {
             // var codeAbove = d.keyCode || d.which;
             // console.log("above code :" + codeAbove);
             var code = e.keyCode || e.which;
@@ -5329,7 +5345,7 @@ $(function () {
                     });
                 }
             }
-            var $numberElement = $(".app-viewed-numbers:first-child");
+            var $numberElement = $.queryAll(".app-viewed-numbers:first-child");
             if ($numberElement.length > 0) {
                 $numberElement.number(true);
             }
