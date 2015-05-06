@@ -3,7 +3,7 @@
 @model List<Category>
 @{
     ViewBag.Title = "Mobile App Categories / Category";
-    string currentPageStaticUrl = AppVar.Url + Html.GetCurrentURLString();
+    string currentPageStaticUrl = AppVar.Url + Html.GetCurrentUrlString();
 }
 <div class="app-details-page category-page search-page category-listing-page">
     <div class="row">
@@ -129,7 +129,7 @@
             </strong>
         </h1>
     </a>
-    Collection of <a href="@Html.GetCurrentURLString()" title="">
+    Collection of <a href="@Html.GetCurrentUrlString()" title="">
         <h1>
             <strong>
                 <em>reviews : @currentPageStaticUrl</em>

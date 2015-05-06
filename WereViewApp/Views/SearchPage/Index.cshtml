@@ -1,6 +1,6 @@
 ﻿@model WereViewApp.Models.ViewModels.SearchViewModel
 @{
-    string currentUrl = Html.GetCurrentURLWithHostName();
+    string currentUrl = Html.GetCurrentUrlWithHostName();
     ViewBag.Title = "Search app reviews";
     bool isEmptySearchString = string.IsNullOrEmpty(Model.SearchQuery);
 }

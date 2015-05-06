@@ -3,7 +3,7 @@
 @{
     //Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
     string appName = Model.AppName;
-    string currentUrl = @Html.GetCurrentURLString(); // Apps/Apple-7/Games/plant-vs-zombies
+    string currentUrl = @Html.GetCurrentUrlString(); // Apps/Apple-7/Games/plant-vs-zombies
     ViewBag.Title = Model.Platform.PlatformName + " App : " + appName;
     ViewBag.Meta = appName + "," + @Model.Tags + "," + Model.Description;
     ViewBag.Keywords = appName + "," + @Model.Tags;

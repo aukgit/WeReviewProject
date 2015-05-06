@@ -2,7 +2,7 @@
 @using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
 @model WereViewApp.Models.ViewModels.SearchViewModel
 @{
-    string currentUrl = Html.GetCurrentURLWithHostName();
+    string currentUrl = Html.GetCurrentUrlWithHostName();
     ViewBag.Title = "Search app reviews";
     bool isModelNotNull = Model != null;
     bool isEmptySearchString = true;//isModelNotNull && ;

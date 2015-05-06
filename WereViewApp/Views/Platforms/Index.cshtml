@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "Mobile App Platforms / Platform : Android, Apple, Windows, FireFox Os";
     string allPlatformsString = "Android, Apple, Windows, FireFox OS";
-    string currentPageStaticUrl = AppVar.Url + Html.GetCurrentURLString();
+    string currentPageStaticUrl = AppVar.Url + Html.GetCurrentUrlString();
     string titlesSubtitle = "Mobile Platform : " + allPlatformsString;
 }
 <div class="app-details-page category-page search-page category-listing-page" >
@@ -135,7 +135,7 @@
             </strong>
         </h1>
     </a>
-    Collection of <a href="@Html.GetCurrentURLString()" title="" >
+    Collection of <a href="@Html.GetCurrentUrlString()" title="" >
         <h1>
             <strong>
                 <em>reviews : @currentPageStaticUrl</em>

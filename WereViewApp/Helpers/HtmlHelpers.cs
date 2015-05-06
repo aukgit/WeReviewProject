@@ -16,7 +16,7 @@ using WereViewApp.Modules.Uploads;
 
 namespace WereViewApp.Helpers {
     public static class HtmlHelpers {
-        private const string _selected = "selected='selected'";
+        private const string Selected = "selected='selected'";
         public static int TruncateLength = AppConfig.TruncateLength;
 
         #region Icons generate : badge
@@ -202,7 +202,7 @@ namespace WereViewApp.Helpers {
                 for (var i = 0; i < dt.Rows.Count; i++) {
                     row = dt.Rows[i];
                     if (row[valueField].Equals(modelValue)) {
-                        selected = _selected;
+                        selected = Selected;
                     }
                     sb.Append(string.Format("<option value='{0}' {1} {2}>{2}</option>", row[valueField], selected,
                         row[textField]));
@@ -300,7 +300,7 @@ namespace WereViewApp.Helpers {
         /// </summary>
         /// <param name="helper"></param>
         /// <returns>Returns url without the host name.</returns>
-        public static string GetCurrentURLString(this HtmlHelper helper) {
+        public static string GetCurrentUrlString(this HtmlHelper helper) {
             return HttpContext.Current.Request.RawUrl;
         }
         /// <summary>
@@ -308,7 +308,7 @@ namespace WereViewApp.Helpers {
         /// </summary>
         /// <param name="helper"></param>
         /// <returns>Returns url whole page url with the host name. </returns>
-        public static string GetCurrentURLWithHostName(this HtmlHelper helper) {
+        public static string GetCurrentUrlWithHostName(this HtmlHelper helper) {
             return AppVar.Url + HttpContext.Current.Request.RawUrl;
         }
 
