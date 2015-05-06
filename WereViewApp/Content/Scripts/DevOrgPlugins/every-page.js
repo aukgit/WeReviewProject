@@ -10,7 +10,7 @@
 function transactionStatusHide() {
     var $transactionStatus = $.queryAll(".transaction-status");
     if ($transactionStatus.length > 0) {
-        $transactionStatus.delay(3500).fadeOut(2500);
+        $transactionStatus.delay(1500).fadeOut(2500);
     }
 }
 
@@ -23,9 +23,13 @@ $(function () {
     //        history.back();
     //    });
     //} 
-    $.queryAll('.tooltip-show').tooltip();
-    
-
-
+    var $tooltipItems = $.queryAll('.tooltip-show');
+    if ($tooltipItems.length > 0) {
+        $tooltipItems.tooltip();
+    }
+    var $seoHideItems = $.queryAll(".seo-hide");
+    if ($seoHideItems.length > 0) {
+        $seoHideItems.hide();
+    }
     transactionStatusHide();
 });

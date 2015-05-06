@@ -15,139 +15,12 @@
 
 $(function () {
 
-    $.queryAll(".seo-hide").hide();
-    //$('.tp-banner').show().revolution({
-    //    dottedOverlay: "none",
-    //    delay: 8000,
-    //    startwidth: 960,
-    //    startheight: 500,
-    //    hideThumbs: 150,
-    //    thumbWidth: 50,
-    //    thumbHeight: 50,
-    //    thumbAmount: 20,
-    //    navigationType: "bullet",
-    //    navigationArrows: "solo",
-    //    navigationStyle: "preview4",
-    //    touchenabled: "on",
-    //    onHoverStop: "on",
-    //    fullWidth: "off",
-    //    fullScreen: "off",
-    //    spinner: "spinner4",
-    //    stopLoop: "off"
-    //});
 
-    $.queryAll(".tp-banner").show().revolution({
-        dottedOverlay: "none",
-        delay: 5000,
-        startwidth: 960,
-        startheight: 320,
-        hideThumbs: 10,
-        fullWidth: "off",
-        navigationType: "bullet",
-        navigationStyle: "preview2",
-        forceFullWidth: "off"
-    });
-
-
-    $.queryAll(".owl-list").owlCarousel({
-        navigation: true,
-        navigationText: [
-          "<i class='fa fa-chevron-circle-left'></i>",
-          "<i class='fa fa-chevron-circle-right'></i>"
-        ],
-        items: 7, //10 items above 1000px browser width
-        itemsDesktop: [1152, 6], //5 items between 1000px and 901px
-        itemsDesktopSmall: [966, 5], // betweem 900px and 601px
-        itemsTabletSmall: [730, 4],
-        itemsTablet: [600, 3], //2 items between 600 and 0
-        //itemsCustom: [[0, 2], [435, 3], [450, 2], [600, 3], [730, 4], [900, 5],  [950, 6]], // [[740, 6], [1000, 8], [1200, 10], [1600, 16]]
-        itemsMobile: [450, 2]
-        //itemsScaleUp: false
-
-    });
-
-    //$(".app-suggested-list").owlCarousel({
-    //    navigation: true,
-    //    navigationText: [
-    //      "<i class='fa fa-chevron-circle-left'></i>",
-    //      "<i class='fa fa-chevron-circle-right'></i>"
-    //    ],
-    //    items:1
-
-    //});
-
-    $.queryAll(".rating-5-front").rating({
-        showClear: false,
-        showCaption: false
-    });
-
-    $.queryAll(".rating-5-page-details").rating({
-        showClear: false,
-        showCaption: true,
-        starCaptions: {
-            0: "0",
-            0.5: "0.5",
-            1: "1",
-            1.5: "1.5",
-            2: "2",
-            2.5: "2.5",
-            3: "3",
-            3.5: "3.5",
-            4: "4",
-            4.5: "4.5",
-            5: "5"
-        },
-        starCaptionClasses: {
-            0: 'label label-danger',
-            0.5: 'label label-danger',
-            1: 'label label-danger',
-            1.5: 'label label-warning',
-            2: 'label label-warning',
-            2.5: 'label label-info',
-            3: 'label label-info',
-            3.5: 'label label-primary',
-            4: 'label label-primary',
-            4.5: 'label label-success',
-            5: 'label label-success'
-        }
-    });
-
-    $.queryAll("#apps-preview").owlCarousel({
-        slideSpeed: 300,
-        paginationSpeed: 400,
-        singleItem: true,
-        items: 1,
-        itemsDesktop: false,
-        itemsDesktopSmall: false,
-        itemsTablet: false,
-        itemsMobile: false,
-        stopOnHover: true,
-        navigation: true, // Show next and prev buttons
-        pagination: false,
-        autoHeight: true,
-        navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
-    });
-
-
-    $("div.app-suggested-list-items-mobile:first,div.featured-apps-list-items").owlCarousel({
-        navigation: true,
-        navigationText: [
-          "<i class='fa fa-chevron-circle-left'></i>",
-          "<i class='fa fa-chevron-circle-right'></i>"
-        ],
-        items: 1, //10 items above 1000px browser width
-        //itemsDesktop: [1152, 6], //5 items between 1000px and 901px
-        //itemsDesktopSmall: [900, 4], // betweem 900px and 601px
-        //itemsTablet: [600, 3], //2 items between 600 and 0
-        //itemsMobile: [450, 2],
-        itemsCustom: [370, 1]
-    });
-
-    var selectForYoutubeVideoOnDetailsPage = "body.app-details-page:first .youtube-video:first";
-    var $youtubeVideoContainer = $(selectForYoutubeVideoOnDetailsPage);
+    var selectForYoutubeVideoOnDetailsPage = "body.app-details-page:first-child .youtube-video:first-child";
+    var $youtubeVideoContainer = $.queryAll(selectForYoutubeVideoOnDetailsPage);
     if ($youtubeVideoContainer.length === 1) {
-        $youtubeVideoContainer.find(".playable-btn:first").click(function () {
-            var $iframe = $youtubeVideoContainer.find("iframe:first");
+        $youtubeVideoContainer.find(".playable-btn:first-child").click(function () {
+            var $iframe = $youtubeVideoContainer.find("iframe:first-child");
             var $this = $(this);
             if ($iframe.length === 1) {
                 $iframe[0].src += "?rel=0&controls=1&autoplay=1";
@@ -165,23 +38,147 @@ $(function () {
         $showLessBtns: $.queryAll(".less-btn"),
         $moreExcert: $.queryAll(".more"),
         execute: function () {
-            this.$moreExcert.hide();
+            $.queryAll("div.app-suggested-list-items-mobile:first-child,div.featured-apps-list-items").owlCarousel({
+                navigation: true,
+                navigationText: [
+                  "<i class='fa fa-chevron-circle-left'></i>",
+                  "<i class='fa fa-chevron-circle-right'></i>"
+                ],
+                items: 1, //10 items above 1000px browser width
+                //itemsDesktop: [1152, 6], //5 items between 1000px and 901px
+                //itemsDesktopSmall: [900, 4], // betweem 900px and 601px
+                //itemsTablet: [600, 3], //2 items between 600 and 0
+                //itemsMobile: [450, 2],
+                itemsCustom: [370, 1]
+            });
+
+
+            var $frontPageGallyery = $.queryAll(".tp-banner");
+            if ($frontPageGallyery.length > 0) {
+                $frontPageGallyery.show().revolution({
+                    dottedOverlay: "none",
+                    delay: 5000,
+                    startwidth: 960,
+                    startheight: 320,
+                    hideThumbs: 10,
+                    fullWidth: "off",
+                    navigationType: "bullet",
+                    navigationStyle: "preview2",
+                    forceFullWidth: "off"
+                });
+            }
+
+            var $suggestionCarosel = $.queryAll(".owl-list");
+            if ($suggestionCarosel.length > 0) {
+                $suggestionCarosel.owlCarousel({
+                    navigation: true,
+                    navigationText: [
+                      "<i class='fa fa-chevron-circle-left'></i>",
+                      "<i class='fa fa-chevron-circle-right'></i>"
+                    ],
+                    items: 7, //10 items above 1000px browser width
+                    itemsDesktop: [1152, 6], //5 items between 1000px and 901px
+                    itemsDesktopSmall: [966, 5], // betweem 900px and 601px
+                    itemsTabletSmall: [730, 4],
+                    itemsTablet: [600, 3], //2 items between 600 and 0
+                    //itemsCustom: [[0, 2], [435, 3], [450, 2], [600, 3], [730, 4], [900, 5],  [950, 6]], // [[740, 6], [1000, 8], [1200, 10], [1600, 16]]
+                    itemsMobile: [450, 2]
+                    //itemsScaleUp: false
+
+                });
+            }
+            //$(".app-suggested-list").owlCarousel({
+            //    navigation: true,
+            //    navigationText: [
+            //      "<i class='fa fa-chevron-circle-left'></i>",
+            //      "<i class='fa fa-chevron-circle-right'></i>"
+            //    ],
+            //    items:1
+
+            //});
+
+            var $frontPageRatings = $.queryAll(".rating-5-front");
+            if ($frontPageRatings.length > 0) {
+                $frontPageRatings.rating({
+                    showClear: false,
+                    showCaption: false
+                });
+            }
+
+            var $detailPageRatingDisplayItems = $.queryAll(".rating-5-page-details");
+            if ($detailPageRatingDisplayItems.length > 0) {
+                $detailPageRatingDisplayItems.rating({
+                    showClear: false,
+                    showCaption: true,
+                    starCaptions: {
+                        0: "0",
+                        0.5: "0.5",
+                        1: "1",
+                        1.5: "1.5",
+                        2: "2",
+                        2.5: "2.5",
+                        3: "3",
+                        3.5: "3.5",
+                        4: "4",
+                        4.5: "4.5",
+                        5: "5"
+                    },
+                    starCaptionClasses: {
+                        0: 'label label-danger',
+                        0.5: 'label label-danger',
+                        1: 'label label-danger',
+                        1.5: 'label label-warning',
+                        2: 'label label-warning',
+                        2.5: 'label label-info',
+                        3: 'label label-info',
+                        3.5: 'label label-primary',
+                        4: 'label label-primary',
+                        4.5: 'label label-success',
+                        5: 'label label-success'
+                    }
+                });
+            }
+            var $appsPreview = $.queryAll("#apps-preview");
+            if ($appsPreview.length > 0) {
+                $appsPreview.owlCarousel({
+                    slideSpeed: 300,
+                    paginationSpeed: 400,
+                    singleItem: true,
+                    items: 1,
+                    itemsDesktop: false,
+                    itemsDesktopSmall: false,
+                    itemsTablet: false,
+                    itemsMobile: false,
+                    stopOnHover: true,
+                    navigation: true, // Show next and prev buttons
+                    pagination: false,
+                    autoHeight: true,
+                    navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
+                });
+            }
+
+            if (this.$moreExcert.length > 0) {
+                this.$moreExcert.hide();
+            }
 
             //filtering through isotop
             var $isotopContainer = $("ul.search-page-apps-list:first");
+            if ($isotopContainer.length > 0) {
+                var $filterIsotopItems = $.queryAll('.filter li a');
+                if ($filterIsotopItems.length > 0) {
+                    $filterIsotopItems.click(function () {
+                        $('.filter li a').removeClass('active');
+                        $(this).addClass('active');
+                        var selector = $(this).attr('data-filter');
 
-            $.queryAll('.filter li a').click(function () {
-                $('.filter li a').removeClass('active');
-                $(this).addClass('active');
-                var selector = $(this).attr('data-filter');
-
-                $isotopContainer.isotope({
-                    filter: selector
-                });
-                return false;
-            });
-
-            var $numberElement = $(".app-viewed-numbers:first");
+                        $isotopContainer.isotope({
+                            filter: selector
+                        });
+                        return false;
+                    });
+                }
+            }
+            var $numberElement = $.queryAll(".app-viewed-numbers:first-child");
             if ($numberElement.length > 0) {
                 $numberElement.number(true);
             }

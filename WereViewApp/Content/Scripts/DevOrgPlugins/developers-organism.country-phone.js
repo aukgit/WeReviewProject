@@ -32,7 +32,7 @@ $.devOrg.countryTimezonePhoneComponent = {
                 dataType: "json" //, // "Text" , "HTML", "xml", "script" 
             }).done(function (response) {
                 console.log(response);
-
+                $.devOrg.appenedComboElement()
                 $countryInnerDiv.append(response);
 
             }).fail(function (jqXHR, textStatus, ex) {

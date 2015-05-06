@@ -2155,7 +2155,7 @@ if(typeof jQuery=="undefined")throw new Error("Bootstrap's JavaScript requires j
 function transactionStatusHide() {
     var $transactionStatus = $.queryAll(".transaction-status");
     if ($transactionStatus.length > 0) {
-        $transactionStatus.delay(3500).fadeOut(2500);
+        $transactionStatus.delay(1500).fadeOut(2500);
     }
 }
 
@@ -2168,10 +2168,14 @@ $(function () {
     //        history.back();
     //    });
     //} 
-    $.queryAll('.tooltip-show').tooltip();
-    
-
-
+    var $tooltipItems = $.queryAll('.tooltip-show');
+    if ($tooltipItems.length > 0) {
+        $tooltipItems.tooltip();
+    }
+    var $seoHideItems = $.queryAll(".seo-hide");
+    if ($seoHideItems.length > 0) {
+        $seoHideItems.hide();
+    }
     transactionStatusHide();
 });
 
@@ -4317,6 +4321,8 @@ $.fn.extend({
 
 $.devOrg = {
 
+    genericComboClass: "devCombo",
+
     // get all the classes from an jQuery element
     getAllClasses: function (jQueryHtmlElement) {
         return jQueryHtmlElement.getAllClasses();
@@ -4373,10 +4379,10 @@ $.devOrg = {
     // countryFlagRefresh must be called first or selectpicker must be called first
     // all Selectors are jQuery Selector Text  only.
     countryRelatedToPhone: function (countrySelector, dropDownItemsSelector, dropDownBtnSelector, phoneNumberInputSelector) {
-        var countryBox = $(countrySelector);
-        var dropDownItems = $(dropDownItemsSelector);
-        var dropDownBtn = $(dropDownBtnSelector);
-        var phoneNumberBox = $(phoneNumberInputSelector);
+        var countryBox = $.queryAll(countrySelector);
+        var dropDownItems = $.queryAll(dropDownItemsSelector);
+        //var dropDownBtn = $.queryAll(dropDownBtnSelector);
+        var phoneNumberBox = $.queryAll(phoneNumberInputSelector);
         var previousCallingCode = "";
 
         function selectChangeState() {
@@ -4415,13 +4421,64 @@ $.devOrg = {
         }
         return null;
     },
-    // parentjQueryCombo = passJqueryElement , mainDivContainerSelector = ".something-main", innerDivSelectorForPlacingCombo= ".somthing-combo-div"
-    // it would be better to execute parentjQueryCombo as selectpicker or have a selectpicker class.
-    // No combo will appear , even the main div will disappear if no item is received from the link.
-    // json sender should sends as id and text only.
-    smartDependableCombo: function (parentjQuerySelector, mainDivContainerSelector, innerDivSelectorForPlacingCombo, urlToGetJson, placeComboName, placedComboId, placedComboClass, placedComboAdditionalClassesWithItems, placedComboAdditionalHtmlWithEachItem) {
-        var parentjQueryCombo = $.queryAll(parentjQuerySelector);
-        if (_.isEmpty(parentjQueryCombo)) {
+    getComboStringWithJsonItems: function (htmlStringCombo, jsonItems, extraHtmlWithEachElement, itemClasses) {
+
+    },
+    getComboString: function (comboName, comboClass, comboId, additionalAttributes) {
+        /// <summary>
+        /// returns a select/combo making string
+        /// </summary>
+        /// <param name="comboName"></param>
+        /// <param name="comboClass"></param>
+        /// <param name="comboId">Just pass the id or give null, it will automatically formatted</param>
+        /// <param name="additionalAttributes">Add additional attributes with the select, however user have to format it. Eg. id='hello' </param>
+        if (!_.isEmpty(comboId)) {
+            comboId = " id='" + comboId + "' ";
+        } else {
+            comboId = "";
+        }
+        if (_.isEmpty(comboClass)) {
+            comboClass = "";
+        }
+        if (_.isEmpty(comboName)) {
+            comboName = "";
+        } else {
+            comboName = " name='" + comboName + "' ";
+        }
+        var comboString = "<select " + comboName +
+                              " class='" + $.devOrg.genericComboClass +
+                              " form-control " + comboClass +
+                              " selectpicker'" + comboId +
+                              " data-style='" + comboClass + "' " +
+                              additionalAttributes +
+                              " data-live-search='true'></select>";
+
+        return comboString;
+    },
+    smartDependableCombo: function (parentSelectsjQuerySelector,
+                                    mainDivContainerSelector,
+                                    innerDivSelectorForPlacingCombo,
+                                    receivingJsonUrl,
+                                    placeComboName,
+                                    placedComboId,
+                                    placedComboClass,
+                                    placedComboAdditionalClassesWithEachItem,
+                                    placedComboAdditionalHtmlWithEachItem) {
+        /// <summary>
+        /// Create dependable combo based on parent and given url to get json list.
+        /// Warning: No combo/select will appear , even the main div will disappear if no item is received from the receivingJsonUrl.
+        /// </summary>
+        /// <param name="parentSelectsjQuerySelector">Write jQuery selector for only the parent combo/select</param>
+        /// <param name="mainDivContainerSelector">Main container div of that select/combo. Reason is to hide all including labels when no items found from url.</param>
+        /// <param name="innerDivSelectorForPlacingCombo">Where to place the combo/slect</param>
+        /// <param name="receivingJsonUrl">Url to get json list, data must contain at least {display= value to display, id = value to put}</param>
+        /// <param name="placeComboName">Name of the select/combo</param>
+        /// <param name="placedComboId">Id of the select/combo</param>
+        /// <param name="placedComboClass">classes of the select/combo</param>
+        /// <param name="placedComboAdditionalClassesWithEachItem"></param>
+        /// <param name="placedComboAdditionalHtmlWithEachItem"></param>
+        var $parentCombo = $.queryAll(parentSelectsjQuerySelector);
+        if (_.isEmpty($parentCombo)) {
             console.error.log("error raised from developers organism component's smartDependableCombo that no parent is detected.");
             return; // nothing exist in parent.
         }
@@ -4448,30 +4505,18 @@ $.devOrg = {
         }
 
         function createCombo(response) {
-            if (!_.isEmpty(placedComboId)) {
-                placedComboId = " id='" + placedComboId + "' ";
-            } else {
-                placedComboId = "";
-            }
-            if (_.isEmpty(placedComboClass)) {
-                placedComboClass = "";
-            }
-
-            if (_.isEmpty(placeComboName)) {
-                placeComboName = "";
-            } else {
-                placeComboName = " name='" + placeComboName + "' ";
-            }
-
             $innerDiv.prepend("<select " + placeComboName + " class='devOrgSmartCombo form-control " + placedComboClass + " selectpicker'" + placedComboId + "data-style='" + placedComboClass + "' data-live-search='true'></select>");
-            var combo = $innerDiv.find("select");
-            $.devOrg.appenedComboElement(combo, response, placedComboAdditionalHtmlWithEachItem, placedComboAdditionalClassesWithItems);
-            combo.selectpicker();
+            var $combo = $innerDiv.find("select");
+            $.devOrg.appenedComboElement($combo, response, placedComboAdditionalHtmlWithEachItem, placedComboAdditionalClassesWithEachItem);
+            $combo.selectpicker();
         }
-
-        parentjQueryCombo.change(function () {
-            var parentComboValue = parentjQueryCombo.val();
-            var actualUrl = urlToGetJson + "/" + parentComboValue;
+        //when parent combo/select is changed
+        $parentCombo.change(function () {
+            /// <summary>
+            /// What will happen when parent combo/select changes item.
+            /// </summary>
+            var parentComboValue = $parentCombo.val();
+            var actualUrl = receivingJsonUrl + "/" + parentComboValue;
             $.ajax({
                 type: "POST",
                 dataType: "JSON",
@@ -4481,7 +4526,7 @@ $.devOrg = {
                         hideDiv();
                         return;
                     }
-                    $innerDiv = $(mainDivContainerSelector + " " + innerDivSelectorForPlacingCombo);
+                    $innerDiv = $.queryAll(mainDivContainerSelector + " " + innerDivSelectorForPlacingCombo);
                     // items exist.
                     showDiv(); //remove inner options if exist any
                     createCombo(response); // create if necessary and then append options to it.
@@ -4492,31 +4537,36 @@ $.devOrg = {
             });
         });
     },
-    // listOfItems = expected a json item with id and text property
-    // extraHtmlWithEachElement : represents like below
-    // <option .. > extraHtmlWithEachElement Item </option>
-    appenedComboElement: function (combo, listOfItems, extraHtmlWithEachElement, itemClasses) {
-        // followed by the best practice : http:// allthingscraig.com/blog/2012/09/28/best-practice-appending-items-to-the-dom-using-jquery/
+
+    getcomboOptionsStringFromJson: function (jsonItems, extraHtmlWithEachElement, itemClasses) {
+        /// <summary>
+        /// Generates and append "option" items to the given $select. 
+        /// </summary>
+        /// <param name="$select">Give jQuery item, specially combo/$select</param>
+        /// <param name="jsonItems">must contain display and id value for every 'option' item.</param>
+        /// <param name="extraHtmlWithEachElement">add the extra html content with option display value</param>
+        /// <param name="itemClasses">add classes with each option.</param>
         if (_.isEmpty(itemClasses)) {
             itemClasses = "";
         }
         if (_.isEmpty(extraHtmlWithEachElement)) {
             extraHtmlWithEachElement = "";
         }
-        if (listOfItems.length > 0) {
-            var length = listOfItems.length;
+        if (jsonItems.length > 0) {
+            var length = jsonItems.length;
             var options = new Array(length + 5);
             var selected = " selected='selected' ";
             var optionStarting = "<option class='" + itemClasses + "'";
             var optionEnding = "</option>";
             for (var i = 0; i < length; i++) {
                 if (i === 0) {
-                    selected = "";
+                    selected = ""; //only first one will be selected
                 }
-                options[i] = optionStarting + selected + "value='" + listOfItems[i].id + "'>" + extraHtmlWithEachElement + listOfItems[i].display + optionEnding;
+                options[i] = optionStarting + selected + "value='" + jsonItems[i].id + "'>" + extraHtmlWithEachElement + jsonItems[i].display + optionEnding;
             }
-            combo.append(options.join(""));
+            return options.join("");
         }
+        return "";
     },
     bootstrapComboSelectbyFindingValue: function (comboSelector, searchForvalue) {
         $(comboSelector).selectpicker("val", searchForvalue).trigger("change");
@@ -5116,139 +5166,12 @@ $.devOrg = {
 
 $(function () {
 
-    $.queryAll(".seo-hide").hide();
-    //$('.tp-banner').show().revolution({
-    //    dottedOverlay: "none",
-    //    delay: 8000,
-    //    startwidth: 960,
-    //    startheight: 500,
-    //    hideThumbs: 150,
-    //    thumbWidth: 50,
-    //    thumbHeight: 50,
-    //    thumbAmount: 20,
-    //    navigationType: "bullet",
-    //    navigationArrows: "solo",
-    //    navigationStyle: "preview4",
-    //    touchenabled: "on",
-    //    onHoverStop: "on",
-    //    fullWidth: "off",
-    //    fullScreen: "off",
-    //    spinner: "spinner4",
-    //    stopLoop: "off"
-    //});
 
-    $.queryAll(".tp-banner").show().revolution({
-        dottedOverlay: "none",
-        delay: 5000,
-        startwidth: 960,
-        startheight: 320,
-        hideThumbs: 10,
-        fullWidth: "off",
-        navigationType: "bullet",
-        navigationStyle: "preview2",
-        forceFullWidth: "off"
-    });
-
-
-    $.queryAll(".owl-list").owlCarousel({
-        navigation: true,
-        navigationText: [
-          "<i class='fa fa-chevron-circle-left'></i>",
-          "<i class='fa fa-chevron-circle-right'></i>"
-        ],
-        items: 7, //10 items above 1000px browser width
-        itemsDesktop: [1152, 6], //5 items between 1000px and 901px
-        itemsDesktopSmall: [966, 5], // betweem 900px and 601px
-        itemsTabletSmall: [730, 4],
-        itemsTablet: [600, 3], //2 items between 600 and 0
-        //itemsCustom: [[0, 2], [435, 3], [450, 2], [600, 3], [730, 4], [900, 5],  [950, 6]], // [[740, 6], [1000, 8], [1200, 10], [1600, 16]]
-        itemsMobile: [450, 2]
-        //itemsScaleUp: false
-
-    });
-
-    //$(".app-suggested-list").owlCarousel({
-    //    navigation: true,
-    //    navigationText: [
-    //      "<i class='fa fa-chevron-circle-left'></i>",
-    //      "<i class='fa fa-chevron-circle-right'></i>"
-    //    ],
-    //    items:1
-
-    //});
-
-    $.queryAll(".rating-5-front").rating({
-        showClear: false,
-        showCaption: false
-    });
-
-    $.queryAll(".rating-5-page-details").rating({
-        showClear: false,
-        showCaption: true,
-        starCaptions: {
-            0: "0",
-            0.5: "0.5",
-            1: "1",
-            1.5: "1.5",
-            2: "2",
-            2.5: "2.5",
-            3: "3",
-            3.5: "3.5",
-            4: "4",
-            4.5: "4.5",
-            5: "5"
-        },
-        starCaptionClasses: {
-            0: 'label label-danger',
-            0.5: 'label label-danger',
-            1: 'label label-danger',
-            1.5: 'label label-warning',
-            2: 'label label-warning',
-            2.5: 'label label-info',
-            3: 'label label-info',
-            3.5: 'label label-primary',
-            4: 'label label-primary',
-            4.5: 'label label-success',
-            5: 'label label-success'
-        }
-    });
-
-    $.queryAll("#apps-preview").owlCarousel({
-        slideSpeed: 300,
-        paginationSpeed: 400,
-        singleItem: true,
-        items: 1,
-        itemsDesktop: false,
-        itemsDesktopSmall: false,
-        itemsTablet: false,
-        itemsMobile: false,
-        stopOnHover: true,
-        navigation: true, // Show next and prev buttons
-        pagination: false,
-        autoHeight: true,
-        navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
-    });
-
-
-    $("div.app-suggested-list-items-mobile:first,div.featured-apps-list-items").owlCarousel({
-        navigation: true,
-        navigationText: [
-          "<i class='fa fa-chevron-circle-left'></i>",
-          "<i class='fa fa-chevron-circle-right'></i>"
-        ],
-        items: 1, //10 items above 1000px browser width
-        //itemsDesktop: [1152, 6], //5 items between 1000px and 901px
-        //itemsDesktopSmall: [900, 4], // betweem 900px and 601px
-        //itemsTablet: [600, 3], //2 items between 600 and 0
-        //itemsMobile: [450, 2],
-        itemsCustom: [370, 1]
-    });
-
-    var selectForYoutubeVideoOnDetailsPage = "body.app-details-page:first .youtube-video:first";
-    var $youtubeVideoContainer = $(selectForYoutubeVideoOnDetailsPage);
+    var selectForYoutubeVideoOnDetailsPage = "body.app-details-page:first-child .youtube-video:first-child";
+    var $youtubeVideoContainer = $.queryAll(selectForYoutubeVideoOnDetailsPage);
     if ($youtubeVideoContainer.length === 1) {
-        $youtubeVideoContainer.find(".playable-btn:first").click(function () {
-            var $iframe = $youtubeVideoContainer.find("iframe:first");
+        $youtubeVideoContainer.find(".playable-btn:first-child").click(function () {
+            var $iframe = $youtubeVideoContainer.find("iframe:first-child");
             var $this = $(this);
             if ($iframe.length === 1) {
                 $iframe[0].src += "?rel=0&controls=1&autoplay=1";
@@ -5266,23 +5189,147 @@ $(function () {
         $showLessBtns: $.queryAll(".less-btn"),
         $moreExcert: $.queryAll(".more"),
         execute: function () {
-            this.$moreExcert.hide();
+            $.queryAll("div.app-suggested-list-items-mobile:first-child,div.featured-apps-list-items").owlCarousel({
+                navigation: true,
+                navigationText: [
+                  "<i class='fa fa-chevron-circle-left'></i>",
+                  "<i class='fa fa-chevron-circle-right'></i>"
+                ],
+                items: 1, //10 items above 1000px browser width
+                //itemsDesktop: [1152, 6], //5 items between 1000px and 901px
+                //itemsDesktopSmall: [900, 4], // betweem 900px and 601px
+                //itemsTablet: [600, 3], //2 items between 600 and 0
+                //itemsMobile: [450, 2],
+                itemsCustom: [370, 1]
+            });
+
+
+            var $frontPageGallyery = $.queryAll(".tp-banner");
+            if ($frontPageGallyery.length > 0) {
+                $frontPageGallyery.show().revolution({
+                    dottedOverlay: "none",
+                    delay: 5000,
+                    startwidth: 960,
+                    startheight: 320,
+                    hideThumbs: 10,
+                    fullWidth: "off",
+                    navigationType: "bullet",
+                    navigationStyle: "preview2",
+                    forceFullWidth: "off"
+                });
+            }
+
+            var $suggestionCarosel = $.queryAll(".owl-list");
+            if ($suggestionCarosel.length > 0) {
+                $suggestionCarosel.owlCarousel({
+                    navigation: true,
+                    navigationText: [
+                      "<i class='fa fa-chevron-circle-left'></i>",
+                      "<i class='fa fa-chevron-circle-right'></i>"
+                    ],
+                    items: 7, //10 items above 1000px browser width
+                    itemsDesktop: [1152, 6], //5 items between 1000px and 901px
+                    itemsDesktopSmall: [966, 5], // betweem 900px and 601px
+                    itemsTabletSmall: [730, 4],
+                    itemsTablet: [600, 3], //2 items between 600 and 0
+                    //itemsCustom: [[0, 2], [435, 3], [450, 2], [600, 3], [730, 4], [900, 5],  [950, 6]], // [[740, 6], [1000, 8], [1200, 10], [1600, 16]]
+                    itemsMobile: [450, 2]
+                    //itemsScaleUp: false
+
+                });
+            }
+            //$(".app-suggested-list").owlCarousel({
+            //    navigation: true,
+            //    navigationText: [
+            //      "<i class='fa fa-chevron-circle-left'></i>",
+            //      "<i class='fa fa-chevron-circle-right'></i>"
+            //    ],
+            //    items:1
+
+            //});
+
+            var $frontPageRatings = $.queryAll(".rating-5-front");
+            if ($frontPageRatings.length > 0) {
+                $frontPageRatings.rating({
+                    showClear: false,
+                    showCaption: false
+                });
+            }
+
+            var $detailPageRatingDisplayItems = $.queryAll(".rating-5-page-details");
+            if ($detailPageRatingDisplayItems.length > 0) {
+                $detailPageRatingDisplayItems.rating({
+                    showClear: false,
+                    showCaption: true,
+                    starCaptions: {
+                        0: "0",
+                        0.5: "0.5",
+                        1: "1",
+                        1.5: "1.5",
+                        2: "2",
+                        2.5: "2.5",
+                        3: "3",
+                        3.5: "3.5",
+                        4: "4",
+                        4.5: "4.5",
+                        5: "5"
+                    },
+                    starCaptionClasses: {
+                        0: 'label label-danger',
+                        0.5: 'label label-danger',
+                        1: 'label label-danger',
+                        1.5: 'label label-warning',
+                        2: 'label label-warning',
+                        2.5: 'label label-info',
+                        3: 'label label-info',
+                        3.5: 'label label-primary',
+                        4: 'label label-primary',
+                        4.5: 'label label-success',
+                        5: 'label label-success'
+                    }
+                });
+            }
+            var $appsPreview = $.queryAll("#apps-preview");
+            if ($appsPreview.length > 0) {
+                $appsPreview.owlCarousel({
+                    slideSpeed: 300,
+                    paginationSpeed: 400,
+                    singleItem: true,
+                    items: 1,
+                    itemsDesktop: false,
+                    itemsDesktopSmall: false,
+                    itemsTablet: false,
+                    itemsMobile: false,
+                    stopOnHover: true,
+                    navigation: true, // Show next and prev buttons
+                    pagination: false,
+                    autoHeight: true,
+                    navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
+                });
+            }
+
+            if (this.$moreExcert.length > 0) {
+                this.$moreExcert.hide();
+            }
 
             //filtering through isotop
             var $isotopContainer = $("ul.search-page-apps-list:first");
+            if ($isotopContainer.length > 0) {
+                var $filterIsotopItems = $.queryAll('.filter li a');
+                if ($filterIsotopItems.length > 0) {
+                    $filterIsotopItems.click(function () {
+                        $('.filter li a').removeClass('active');
+                        $(this).addClass('active');
+                        var selector = $(this).attr('data-filter');
 
-            $.queryAll('.filter li a').click(function () {
-                $('.filter li a').removeClass('active');
-                $(this).addClass('active');
-                var selector = $(this).attr('data-filter');
-
-                $isotopContainer.isotope({
-                    filter: selector
-                });
-                return false;
-            });
-
-            var $numberElement = $(".app-viewed-numbers:first");
+                        $isotopContainer.isotope({
+                            filter: selector
+                        });
+                        return false;
+                    });
+                }
+            }
+            var $numberElement = $(".app-viewed-numbers:first-child");
             if ($numberElement.length > 0) {
                 $numberElement.number(true);
             }
