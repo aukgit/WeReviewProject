@@ -22,11 +22,14 @@ namespace WereViewApp.Controllers {
         #region Drop down : Country, timezone, language
         //[OutputCache(CacheProfile = "YearNoParam")]
         //public JsonResult GetCountryId() {
+        //    //var countries = CachedQueriedData.GetCountries();
+
         //    var countries = CachedQueriedData.GetCountries().Select(n => new {
         //        display = n.DisplayCountryName,
         //        id = n.CountryID,
         //        countryCode = n.Alpha2Code.ToLower()
         //    }).ToList();
+        //    //return HtmlHelpers.DropDownCountry(countries);
         //    return Json(countries, JsonRequestBehavior.AllowGet);
         //}
 
