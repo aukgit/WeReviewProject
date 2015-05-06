@@ -74,8 +74,14 @@ namespace WereViewApp.Helpers {
         #endregion
 
         #region Confirming Buttons
-
-        public static HtmlString SubmitButton(this HtmlHelper helper, string buttonName = "Save",
+        /// <summary>
+        /// Confirms before submit.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="buttonName"></param>
+        /// <param name="alertMessage"></param>
+        /// <returns></returns>
+        public static HtmlString ConfirmingSubmitButton(this HtmlHelper helper, string buttonName = "Save",
             string alertMessage = "Are you sure about this action?") {
             var sendbtn = String.Format(
                 "<input type=\"submit\" value=\"{0}\" onClick=\"return confirm('{1}');\" />",

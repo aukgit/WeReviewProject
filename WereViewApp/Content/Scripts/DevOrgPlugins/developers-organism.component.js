@@ -8,6 +8,7 @@
 /// <reference path="../star-rating.js" />
 /// <reference path="../moment.js" />
 /// <reference path="../underscore.js" />
+/// <reference path="developers-organism.component.js" />
 
 
 /*!
@@ -131,15 +132,13 @@ $.devOrg = {
         }
         return null;
     },
-    getComboStringWithJsonItems: function (htmlStringCombo, jsonItems, extraHtmlWithEachElement, itemClasses) {
-
-    },
+    
     getComboString: function (comboName, comboClass, comboId, stringOptionItems, additionalAttributes) {
         /// <summary>
         /// returns a select/combo making string
         /// </summary>
-        /// <param name="comboName"></param>
-        /// <param name="comboClass"></param>
+        /// <param name="comboName">Name of the combo/select</param>
+        /// <param name="comboClass">Class for the combo/select</param>
         /// <param name="comboId">Just pass the id or give null, it will automatically formatted</param>
         /// <param name="stringOptionItems">Option items passed as an string</param>
         /// <param name="additionalAttributes">Add additional attributes with the select, however user have to format it. Eg. id='hello' </param>
@@ -171,94 +170,10 @@ $.devOrg = {
 
         return comboString;
     },
-    smartDependableCombo: function (parentSelectsjQuerySelector,
-                                    mainDivContainerSelector,
-                                    innerDivSelectorForPlacingCombo,
-                                    receivingJsonUrl,
-                                    placeComboName,
-                                    placedComboId,
-                                    placedComboClass,
-                                    placedComboAdditionalClassesWithEachItem,
-                                    placedComboAdditionalHtmlWithEachItem) {
-        /// <summary>
-        /// Create dependable combo based on parent and given url to get json list.
-        /// Warning: No combo/select will appear , even the main div will disappear if no item is received from the receivingJsonUrl.
-        /// </summary>
-        /// <param name="parentSelectsjQuerySelector">Write jQuery selector for only the parent combo/select</param>
-        /// <param name="mainDivContainerSelector">Main container div of that select/combo. Reason is to hide all including labels when no items found from url.</param>
-        /// <param name="innerDivSelectorForPlacingCombo">Where to place the combo/slect</param>
-        /// <param name="receivingJsonUrl">Url to get json list, data must contain at least {display= value to display, id = value to put}</param>
-        /// <param name="placeComboName">Name of the select/combo</param>
-        /// <param name="placedComboId">Id of the select/combo</param>
-        /// <param name="placedComboClass">classes of the select/combo</param>
-        /// <param name="placedComboAdditionalClassesWithEachItem"></param>
-        /// <param name="placedComboAdditionalHtmlWithEachItem"></param>
-        var $parentCombo = $.queryAll(parentSelectsjQuerySelector);
-        if (_.isEmpty($parentCombo)) {
-            console.error.log("error raised from developers organism component's smartDependableCombo that no parent is detected.");
-            return; // nothing exist in parent.
-        }
-        var $mainDiv = $.queryAll(mainDivContainerSelector);
-        var $innerDiv = $mainDiv.find(innerDivSelectorForPlacingCombo);
-
-        function hideDiv() {
-            if ($mainDiv.length > 0) {
-                $mainDiv.hide();
-            } else {
-                console.error.log("devOrg->smartDependableCombo: main div not found for '" + mainDivContainerSelector + "'");
-            }
-        }
-
-        hideDiv();
-
-        function showDiv() {
-            // remove select if exist.
-            var options = $innerDiv.find("select, div.bootstrap-select");
-            if (options.length > 0) {
-                options.remove();
-            }
-            $mainDiv.show("slow");
-        }
-
-        function createCombo(response) {
-            $innerDiv.prepend("<select " + placeComboName + " class='devOrgSmartCombo form-control " + placedComboClass + " selectpicker'" + placedComboId + "data-style='" + placedComboClass + "' data-live-search='true'></select>");
-            var $combo = $innerDiv.find("select");
-            $.devOrg.appenedComboElement($combo, response, placedComboAdditionalHtmlWithEachItem, placedComboAdditionalClassesWithEachItem);
-            $combo.selectpicker();
-        }
-        //when parent combo/select is changed
-        $parentCombo.change(function () {
-            /// <summary>
-            /// What will happen when parent combo/select changes item.
-            /// </summary>
-            var parentComboValue = $parentCombo.val();
-            var actualUrl = receivingJsonUrl + "/" + parentComboValue;
-            $.ajax({
-                type: "POST",
-                dataType: "JSON",
-                url: actualUrl,
-                success: function (response) {
-                    if (response.length === 0) {
-                        hideDiv();
-                        return;
-                    }
-                    $innerDiv = $.queryAll(mainDivContainerSelector + " " + innerDivSelectorForPlacingCombo);
-                    // items exist.
-                    showDiv(); //remove inner options if exist any
-                    createCombo(response); // create if necessary and then append options to it.
-                },
-                error: function (xhr, status, error) {
-                    hideDiv();
-                }
-            });
-        });
-    },
-
-    getcomboOptionsStringFromJson: function (jsonItems, extraHtmlWithEachElement, itemClasses) {
+    getComboOptionsStringFromJson: function (jsonItems, extraHtmlWithEachElement, itemClasses) {
         /// <summary>
         /// Generates and append "option" items to the given $select. 
         /// </summary>
-        /// <param name="$select">Give jQuery item, specially combo/$select</param>
         /// <param name="jsonItems">must contain display and id value for every 'option' item.</param>
         /// <param name="extraHtmlWithEachElement">add the extra html content with option display value</param>
         /// <param name="itemClasses">add classes with each option.</param>
@@ -284,6 +199,112 @@ $.devOrg = {
         }
         return "";
     },
+    getWholeComboStringWithJsonItems: function (comboName, comboClass, comboId, additionalAttributesWithCombo, jsonItems, extraHtmlWithEachElement, eachOptionItemClasses) {
+        /// <summary>
+        /// Returns a full combo/select based on json items
+        /// Developer should inject this into document
+        /// </summary>
+        /// <param name="comboName">Name of the combo/select</param>
+        /// <param name="comboClass">Class for the combo/select</param>
+        /// <param name="comboId">Just pass the id or give null, it will automatically formatted</param>
+        /// <param name="stringOptionItems">Option items passed as an string</param>
+        /// <param name="additionalAttributes">Add additional attributes with the select, however user have to format it. Eg. id='hello' </param>
+        /// <param name="jsonItems">must contain display and id value for every 'option' item.</param>
+        /// <param name="extraHtmlWithEachElement">add the extra html content with option display value</param>
+        /// <param name="itemClasses">add classes with each option.</param>
+        var optionsString = $.devOrg.getcomboOptionsStringFromJson(jsonItems, extraHtmlWithEachElement, eachOptionItemClasses);
+        var comboString = $.devOrg.getComboString(comboName, comboClass, comboId, optionsString, additionalAttributesWithCombo);
+        return comboString;
+    },
+    smartDependableCombo: function (parentSelectsjQuerySelector,
+                                    mainDivContainerSelector,
+                                    innerDivSelectorForPlacingCombo,
+                                    receivingJsonUrl,
+                                    placingComboName,
+                                    placedComboId,
+                                    placedComboClass,
+                                    placedComboAdditionalAttributes,
+                                    placedComboAdditionalClassesWithEachItem,
+                                    placedComboAdditionalHtmlWithEachItem) {
+        /// <summary>
+        /// Create dependable combo based on parent and given url to get json list.
+        /// Warning: No combo/select will appear , even the main div will disappear if no item is received from the receivingJsonUrl.
+        /// </summary>
+        /// <param name="parentSelectsjQuerySelector">Write jQuery selector for only the parent combo/select</param>
+        /// <param name="mainDivContainerSelector">Main container div of that select/combo. Reason is to hide all including labels when no items found from url.</param>
+        /// <param name="innerDivSelectorForPlacingCombo">Where to place the combo/slect</param>
+        /// <param name="receivingJsonUrl">Url to get json list, data must contain at least {display= value to display, id = value to put}</param>
+        /// <param name="placingComboName">Name of the select/combo</param>
+        /// <param name="placedComboId">Id of the select/combo</param>
+        /// <param name="placedComboClass">classes of the select/combo</param>
+        /// <param name="placedComboAdditionalAttributes">Add additional attributes with the select, however user have to format it. Eg. id='hello'</param>
+        /// <param name="placedComboAdditionalClassesWithEachItem">Add extra classes with every option, only write the class names with space.</param>
+        /// <param name="placedComboAdditionalHtmlWithEachItem">Add extra html content with each option item</param>
+        var $parentCombo = $.queryAll(parentSelectsjQuerySelector);
+        if (_.isEmpty($parentCombo)) {
+            console.error.log("error raised from developers organism component's smartDependableCombo that no parent is detected.");
+            return; // nothing exist in parent.
+        }
+        // row container
+        var $mainDiv = $.queryAll(mainDivContainerSelector);
+        // container for  the select
+        var $innerDiv = $mainDiv.find(innerDivSelectorForPlacingCombo);
+
+        function hideDiv() {
+            if ($mainDiv.length > 0) {
+                $mainDiv.hide();
+            } else {
+                console.error.log("devOrg->smartDependableCombo: main div not found for '" + mainDivContainerSelector + "'");
+            }
+        }
+
+        hideDiv();
+
+        function removeSelectIfExist() {
+            var options = $innerDiv.find("select, div.bootstrap-select");
+            if (options.length > 0) {
+                options.remove();
+            }
+        }
+
+        function createCombo(responseJson) {
+            //(comboName, comboClass, comboId, additionalAttributes, jsonItems, extraHtmlWithEachElement, itemClasses)
+            var comboString = $.devOrg.getWholeComboStringWithJsonItems(placingComboName, placedComboClass, placedComboId, placedComboAdditionalAttributes, responseJson, placedComboAdditionalHtmlWithEachItem, placedComboAdditionalClassesWithEachItem);
+            $innerDiv.prepend(comboString);
+            var $combo = $innerDiv.find("select");
+            $combo.selectpicker();
+        }
+        //when parent combo/select is changed
+        $parentCombo.change(function () {
+            /// <summary>
+            /// What will happen when parent combo/select changes item.
+            /// </summary>
+            var parentComboValue = $parentCombo.val();
+            var actualUrl = receivingJsonUrl + "/" + parentComboValue;
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: actualUrl,
+                success: function (response) {
+                    if (response.length === 0) {
+                        hideDiv();
+                        return;
+                    }
+                    $innerDiv = $.queryAll(mainDivContainerSelector + " " + innerDivSelectorForPlacingCombo);
+                    // items exist.
+                    // $innerDiv is used to check if select exist or not.
+                    removeSelectIfExist(); //remove inner options if exist any
+                    $mainDiv.show("slow");
+                    createCombo(response); // create if necessary and then append options to it.
+                },
+                error: function (xhr, status, error) {
+                    hideDiv();
+                }
+            });
+        });
+    },
+
+    
     bootstrapComboSelectbyFindingValue: function (comboSelector, searchForvalue) {
         $(comboSelector).selectpicker("val", searchForvalue).trigger("change");
     },
