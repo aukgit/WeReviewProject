@@ -642,7 +642,7 @@
     <Content Include="Content\Scripts\Bundles\UploadJs.min.js.map">
       <DependentUpon>UploadJs.min.js</DependentUpon>
     </Content>
-    <None Include="Content\Scripts\Data\country-info-select-ready.text" />
+    <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <None Include="Content\Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />

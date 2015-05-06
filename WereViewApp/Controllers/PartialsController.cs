@@ -35,7 +35,6 @@ namespace WereViewApp.Controllers {
 
         [OutputCache(CacheProfile = "Year", VaryByParam = "id")]
         public ActionResult GetTimeZone(int id) {
-        
             if (SessionNames.IsValidationExceed("GetTimeZone", 100)) {
                 return Json(null, JsonRequestBehavior.AllowGet);
             }

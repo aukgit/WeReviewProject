@@ -10000,7 +10000,6 @@ $.devOrg.dynamicSelect = {
 
 
 $.devOrg.countryTimezonePhoneComponent = {
-
     countryUrl: "",
     timezoneUrl: "",
     languageUrl: "",
@@ -10010,7 +10009,7 @@ $.devOrg.countryTimezonePhoneComponent = {
     countryComboDivInnerSelector: ".country-combo-div",
     countryDropDownItemsSelector: "ul.dropdown-menu.inner.selectpicker",
     btnSelector: "button.btn.dropdown-toggle.selectpicker.btn-success.flag-combo",
-    
+    isCountryRetriveAsHtml: false,
     getCountryComboOptionsStringFromJson: function (jsonItems, extraHtmlWithEachElement, itemClasses) {
         /// <summary>
         /// Generates and append "option" items to the given $select. 
@@ -10028,7 +10027,7 @@ $.devOrg.countryTimezonePhoneComponent = {
             var length = jsonItems.length;
             var options = new Array(length + 5);
             var selected = " selected='selected' ";
-            var optionStarting = "<option class='" + itemClasses ;
+            var optionStarting = "<option class='" + itemClasses;
             var optionEnding = "</option>";
             for (var i = 0; i < length; i++) {
                 if (i !== 0 && selected !== "") {
@@ -10078,10 +10077,19 @@ $.devOrg.countryTimezonePhoneComponent = {
         var comboString = $.devOrg.getComboString(comboName, comboClass, comboName, optionsString, additionalAttributesWithCombo);
         return comboString;
     },
-    initialize: function (countryUrl, timeZoneUrl, languageUrl) {
+    initialize: function (countryUrl, timeZoneUrl, languageUrl, retriveAsHtml) {
+        /// <summary>
+        /// Initialize country , timezone and phone number fields
+        /// </summary>
+        /// <param name="countryUrl"></param>
+        /// <param name="timeZoneUrl"></param>
+        /// <param name="languageUrl"></param>
+        /// <param name="retriveAsHtml">boolean : should retrieve only html or process the json. True means no processing.</param>
+
         $.devOrg.countryTimezonePhoneComponent.countryUrl = countryUrl;
         $.devOrg.countryTimezonePhoneComponent.timezoneUrl = timeZoneUrl;
         $.devOrg.countryTimezonePhoneComponent.languageUrl = languageUrl;
+        $.devOrg.countryTimezonePhoneComponent.isCountryRetriveAsHtml = retriveAsHtml;
         var comboName = $.devOrg.countryTimezonePhoneComponent.countryFieldName;
 
         var $countryInnerDiv = $.queryAll($.devOrg.countryTimezonePhoneComponent.countryComboDivInnerSelector);
@@ -10091,15 +10099,18 @@ $.devOrg.countryTimezonePhoneComponent = {
             $.ajax({
                 method: "Get", // by default "GET"
                 url: $.devOrg.countryTimezonePhoneComponent.countryUrl,
-                dataType: "json" //, // "Text" , "HTML", "xml", "script" 
+                dataType: "text" //, // "Text" , "HTML", "xml", "script" 
             }).done(function (response) {
                 //console.log(response);
-                var comboString = $.devOrg
-                    .countryTimezonePhoneComponent
-                    .getCountryWholeComboStringWithJsonItems(response, comboName, "", "", "");
-                //var innerHtmlDiv = $countryInnerDiv.html();
-                //var wholeComboHtmlString = comboString + innerHtmlDiv;
-
+                var comboString;
+                if (retriveAsHtml === false) {
+                    comboString = $.devOrg
+                        .countryTimezonePhoneComponent
+                        .getCountryWholeComboStringWithJsonItems(response, comboName, "", "", ""); //var innerHtmlDiv = $countryInnerDiv.html();
+                    //var wholeComboHtmlString = comboString + innerHtmlDiv;
+                } else {
+                    comboString = response; // html
+                }
 
                 $countryInnerDiv.prepend(comboString);
                 $countryInnerDiv.find("select:first-child").selectpicker();
@@ -10115,13 +10126,13 @@ $.devOrg.countryTimezonePhoneComponent = {
             }).fail(function (jqXHR, textStatus, ex) {
                 console.log("Request failed: " + ex);
             });
-            
+
         }
     },
     setupRefreshingCountryFlag: function () {
-        $.devOrg.countryFlagRefresh($.devOrg.Constants.countryComboSelector,
-                                    $.devOrg.Constants.countryDropDownItemsSelector,
-                                    $.devOrg.Constants.btnSelector);
+        $.devOrg.countryFlagRefresh($.devOrg.countryTimezonePhoneComponent.countryComboSelector,
+                                    $.devOrg.countryTimezonePhoneComponent.countryDropDownItemsSelector,
+                                    $.devOrg.countryTimezonePhoneComponent.btnSelector);
 
 
     },
@@ -10193,18 +10204,21 @@ $(function () {
         usernameValidationUrl: "/Validator/Username",
         //"/Validator/Email"        
         emailAddressValidationUrl: "/Validator/Email",
-        countryJsonUrl: "/Content/Scripts/Data/country-info.json", // look like this /Partials/GetTimeZone/CountryID
+        countryJsonUrl: "/Content/Scripts/Data/country-info-select-ready.json", // look like this /Partials/GetTimeZone/CountryID
         timeZoneJsonUrl: "/Partials/GetTimeZone", // look like this /Partials/GetTimeZone/CountryID
         languageJsonUrl: "/Partials/GetLanguage" // look like this /Partials/GetTimeZone/CountryID
     };
 
 
     if ($.devOrg.Constants.registerForm.length > 0) {
+        // country , timezone, and phone initialize
         $.devOrg
             .countryTimezonePhoneComponent
             .initialize($.devOrg.Constants.countryJsonUrl,
                 $.devOrg.Constants.timeZoneJsonUrl,
-                $.devOrg.Constants.languageJsonUrl);
+                $.devOrg.Constants.languageJsonUrl,
+                true // retrieve as html, to have the processed version  , make it false and change the url.
+                );
 
         $.devOrg.validateInputFromServer("#" + $.devOrg.Constants.userName,
                                           $.devOrg.Constants.usernameValidationUrl,

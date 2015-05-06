@@ -31,18 +31,21 @@ $(function () {
         usernameValidationUrl: "/Validator/Username",
         //"/Validator/Email"        
         emailAddressValidationUrl: "/Validator/Email",
-        countryJsonUrl: "/Content/Scripts/Data/country-info.json", // look like this /Partials/GetTimeZone/CountryID
+        countryJsonUrl: "/Content/Scripts/Data/country-info-select-ready.json", // look like this /Partials/GetTimeZone/CountryID
         timeZoneJsonUrl: "/Partials/GetTimeZone", // look like this /Partials/GetTimeZone/CountryID
         languageJsonUrl: "/Partials/GetLanguage" // look like this /Partials/GetTimeZone/CountryID
     };
 
 
     if ($.devOrg.Constants.registerForm.length > 0) {
+        // country , timezone, and phone initialize
         $.devOrg
             .countryTimezonePhoneComponent
             .initialize($.devOrg.Constants.countryJsonUrl,
                 $.devOrg.Constants.timeZoneJsonUrl,
-                $.devOrg.Constants.languageJsonUrl);
+                $.devOrg.Constants.languageJsonUrl,
+                true // retrieve as html, to have the processed version  , make it false and change the url.
+                );
 
         $.devOrg.validateInputFromServer("#" + $.devOrg.Constants.userName,
                                           $.devOrg.Constants.usernameValidationUrl,
