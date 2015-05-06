@@ -31,10 +31,13 @@ namespace WereViewApp.Modules.Reponse {
              HttpContext.Current.Request.Headers.Remove("Server");
              HttpContext.Current.Request.Headers.Remove("X-SourceFiles");
              //HttpContext.Current.Request.Headers.Add("Expires","10000");
+             
         }
 
         void OnPreSendRequestHeaders(object sender, EventArgs e) {
-            //HttpContext.Current.Request.Headers.Add("Expires", "10000");
+            //HttpContext.Current.Request.Headers.Add("Expires", "100000");
+            HttpContext.Current.Response.Cache.SetExpires(DateTime.Now.AddYears(1));
+            HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.Public);
         }
     }
 }

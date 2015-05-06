@@ -4480,16 +4480,23 @@ $.devOrg = {
             var optionStarting = "<option class='" + itemClasses + "'";
             var optionEnding = "</option>";
             for (var i = 0; i < length; i++) {
-                if (i === 0) {
+                if (i !== 0 && selected !== "") {
                     selected = ""; //only first one will be selected
                 }
-                options[i] = optionStarting + selected + "value='" + jsonItems[i].id + "'>" + extraHtmlWithEachElement + jsonItems[i].display + optionEnding;
+                options[i] = optionStarting +
+                             selected +
+                             " value='" +
+                             jsonItems[i].id +
+                             "'>" +
+                             extraHtmlWithEachElement +
+                             jsonItems[i].display +
+                             optionEnding;
             }
             return options.join("");
         }
         return "";
     },
-    getWholeComboStringWithJsonItems: function (comboName, comboClass, comboId, additionalAttributesWithCombo, jsonItems, extraHtmlWithEachElement, eachOptionItemClasses) {
+    getWholeComboStringWithJsonItems: function (jsonItems, comboName, comboClass, comboId, additionalAttributesWithCombo, extraHtmlWithEachElement, eachOptionItemClasses) {
         /// <summary>
         /// Returns a full combo/select based on json items
         /// Developer should inject this into document
@@ -4502,7 +4509,7 @@ $.devOrg = {
         /// <param name="jsonItems">must contain display and id value for every 'option' item.</param>
         /// <param name="extraHtmlWithEachElement">add the extra html content with option display value</param>
         /// <param name="itemClasses">add classes with each option.</param>
-        var optionsString = $.devOrg.getcomboOptionsStringFromJson(jsonItems, extraHtmlWithEachElement, eachOptionItemClasses);
+        var optionsString = $.devOrg.getComboOptionsStringFromJson(jsonItems, extraHtmlWithEachElement, eachOptionItemClasses);
         var comboString = $.devOrg.getComboString(comboName, comboClass, comboId, optionsString, additionalAttributesWithCombo);
         return comboString;
     },
@@ -4559,8 +4566,11 @@ $.devOrg = {
 
         function createCombo(responseJson) {
             //(comboName, comboClass, comboId, additionalAttributes, jsonItems, extraHtmlWithEachElement, itemClasses)
-            var comboString = $.devOrg.getWholeComboStringWithJsonItems(placingComboName, placedComboClass, placedComboId, placedComboAdditionalAttributes, responseJson, placedComboAdditionalHtmlWithEachItem, placedComboAdditionalClassesWithEachItem);
-            $innerDiv.prepend(comboString);
+            var comboString = $.devOrg.getWholeComboStringWithJsonItems(responseJson, placingComboName, placedComboClass, placedComboId, placedComboAdditionalAttributes, placedComboAdditionalHtmlWithEachItem, placedComboAdditionalClassesWithEachItem);
+            var insideDivHtml = $innerDiv.html();
+            var wholeCombo = comboString + insideDivHtml;
+
+            $innerDiv.html(wholeCombo);
             var $combo = $innerDiv.find("select");
             $combo.selectpicker();
         }
