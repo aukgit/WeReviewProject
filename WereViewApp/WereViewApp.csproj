@@ -381,7 +381,7 @@
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Modules\DevHash.cs" />
     <Compile Include="Modules\HTMLGenerator.cs" />
-    <Compile Include="Modules\IPConfig\IPConfig.cs" />
+    <Compile Include="Modules\InternetProtocolRelations\IpConfigRelations.cs" />
     <Compile Include="Modules\Mail\MailHtml.cs" />
     <Compile Include="Modules\Mail\MailSender.cs" />
     <Compile Include="Modules\Menu\GenerateMenu.cs" />

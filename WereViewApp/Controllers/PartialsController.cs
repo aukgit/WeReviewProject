@@ -10,7 +10,9 @@ using WereViewApp.WereViewAppCommon;
 using DevTrends.MvcDonutCaching;
 using WereViewApp.Helpers;
 using WereViewApp.Models.Context;
+using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Cache;
+using WereViewApp.Modules.InternetProtocolRelations;
 using WereViewApp.Modules.Session;
 
 #endregion
@@ -32,6 +34,26 @@ namespace WereViewApp.Controllers {
         //    //return HtmlHelpers.DropDownCountry(countries);
         //    return Json(countries, JsonRequestBehavior.AllowGet);
         //}
+
+        public string GetCountryId(string id) {
+            //var countries = CachedQueriedData.GetCountries();
+            //var countryId = IpConfigRelations.GetCountryId(id);
+            Country country = null;
+
+            var value = IpConfigRelations.IpToValue(id);
+            using (var db = new ApplicationDbContext()) {
+                //SELECT * FROM [ip-to-country] WHERE (([BeginingIP] <= ?) AND ([EndingIP] >= ?))
+                var countryIp = db.CountryDetectByIPs.FirstOrDefault(n => n.BeginingIP <= value && n.EndingIP >= value );
+                if (countryIp != null) {
+                    country = CachedQueriedData.GetCountries().FirstOrDefault(n =>
+                       n.CountryID == countryIp.CountryID
+                   );
+                }
+            }
+
+            //return HtmlHelpers.DropDownCountry(countries);
+            return country.DisplayCountryName + " : val : " + value + ", ip :" + id;
+        }
 
         [OutputCache(CacheProfile = "Year", VaryByParam = "id")]
         public ActionResult GetTimeZone(int id) {
@@ -71,7 +93,7 @@ namespace WereViewApp.Controllers {
 
         public PartialsController()
             : base(true) {
-            
+
         }
 
         #endregion

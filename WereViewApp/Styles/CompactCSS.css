@@ -9452,10 +9452,11 @@ div.fixed-table-scroll-outer {
 
 .bootstrap-select.btn-group .dropdown-menu {
     min-width: 100%;
-    z-index: 1035;
+    z-index: 50000;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    max-height: 270px !important;
 }
 
     .bootstrap-select.btn-group .dropdown-menu.inner {
@@ -9466,6 +9467,8 @@ div.fixed-table-scroll-outer {
         border-radius: 0;
         -webkit-box-shadow: none;
         box-shadow: none;
+        width: 100%;
+        width: 294px;
     }
 
     .bootstrap-select.btn-group .dropdown-menu li {
