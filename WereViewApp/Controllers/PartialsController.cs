@@ -43,16 +43,19 @@ namespace WereViewApp.Controllers {
             var value = IpConfigRelations.IpToValue(id);
             using (var db = new ApplicationDbContext()) {
                 //SELECT * FROM [ip-to-country] WHERE (([BeginingIP] <= ?) AND ([EndingIP] >= ?))
-                var countryIp = db.CountryDetectByIPs.FirstOrDefault(n => n.BeginingIP <= value && n.EndingIP >= value );
+                var countryIp = db.CountryDetectByIPs.FirstOrDefault(n => n.BeginingIP <= value && n.EndingIP >= value);
                 if (countryIp != null) {
                     country = CachedQueriedData.GetCountries().FirstOrDefault(n =>
                        n.CountryID == countryIp.CountryID
                    );
+                    if (country != null) {
+                        return country.DisplayCountryName + " : val : " + value + ", ip :" + id;
+                    } 
                 }
             }
+            return "-1 : " + id + " : " + value;
 
             //return HtmlHelpers.DropDownCountry(countries);
-            return country.DisplayCountryName + " : val : " + value + ", ip :" + id;
         }
 
         [OutputCache(CacheProfile = "Year", VaryByParam = "id")]
