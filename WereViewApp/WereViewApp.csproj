@@ -1099,6 +1099,7 @@
     <Content Include="Views\Shared\EditorTemplates\Rating-5-b.cshtml" />
     <Content Include="Views\Reviews\_SavingButton.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DropDownDynamic.cshtml" />
+    <Content Include="Views\Report\Report.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />
@@ -1118,7 +1119,6 @@
     <Folder Include="Uploads\Images\YoutubeCovers\" />
     <Folder Include="Views\Basic\" />
     <Folder Include="Views\Errors\" />
-    <Folder Include="Views\Report\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

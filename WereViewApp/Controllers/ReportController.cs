@@ -22,7 +22,6 @@ namespace WereViewApp.Controllers {
             if (app != null) {
                 return View();
             }
-            return View("_404");
         }
     }
 }
