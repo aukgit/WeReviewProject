@@ -183,8 +183,6 @@ namespace WereViewApp.Controllers {
 
         #endregion
 
-
-
         #region Edit or modify record
 
         [HttpPost]

@@ -12,6 +12,14 @@ namespace WereViewApp.Controllers {
             return View("_Error");
         }
 
+        public ActionResult Error(int number, string title, string reason) {
+            ViewBag.title = title;
+            ViewBag.Reason = reason;
+
+            return View("_" + number);
+        }
+
+
         public ActionResult Error_400() {
             return View("_400");
         }

@@ -42,7 +42,7 @@ namespace WereViewApp.Controllers {
 
         #endregion
 
-        #region Single App Display Page
+        #region Single App Display Page : site.com/Apps/Apple-8/Games/plant-vs-zombies
 
         [AllowAnonymous]
         [OutputCache(CacheProfile = "Short", VaryByParam = "platform;platformVersion;category;url")]

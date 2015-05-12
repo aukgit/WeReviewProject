@@ -1,0 +1,157 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ include file="Imports.include.t4" #>
+<# string dataTypeNamespace = ViewDataTypeName; #>
+@using <#= dataTypeNamespace.Replace("." + ViewDataTypeName.Split('.').Last(), "") #>
+@model <#= ViewDataTypeName.Split('.').Last() #>
+<# 
+	string primaryKey = "";
+	string displayFieldx = "";
+	int i = 0;
+	// get primary key and display field name , alim ul kairm
+	foreach (PropertyMetadata property in ModelMetadata.Properties) {
+		
+		if (property.IsPrimaryKey) {
+			primaryKey = property.PropertyName;
+			continue;
+        } else if(!string.IsNullOrEmpty(primaryKey)){
+			displayFieldx = property.PropertyName;
+			break;
+        }
+		i++;
+    }
+#>
+<#
+// The following chained if-statement outputs the file header code and markup for a partial view, a view using a layout page, or a regular view.
+if(IsPartialView) {
+#>
+
+<#
+} else if(IsLayoutPageSelected) {
+#>
+
+@{
+    ViewBag.Title = "Deleting " + Html.DisplayFor(model => model.<#= displayFieldx #>);
+    string title = ViewBag.Title;
+    string subtitle = ViewBag.Title;
+	string asking = "Are you sure you want to delete this?";
+	string controller = (string)ViewBag.controller;
+	string viewName = "<#= ViewName#>";
+	var token = (MvcHtmlString)@Html.AntiForgeryToken();
+<#
+if (!String.IsNullOrEmpty(LayoutPageFile)) {
+#>
+    Layout = "<#= LayoutPageFile#>";
+<#
+}
+#>
+}
+<#
+} else {
+#>
+@{
+    Layout = null;
+	string viewName = "<#= ViewName#>";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@viewName</title>
+</head>
+<body>
+<#
+    PushIndent("    ");
+}
+#>
+<h1 class="h2 gap-from-top-small">
+	<span class="glyphicon glyphicon-trash"></span>
+	@Html.SamePageLink(title, subtitle, false)
+</h1>
+<hr />
+<h3 class="h4">@asking</h3>   
+    <div class="form-horizontal">
+		@using (Html.BeginForm()) {
+			@token		
+			<div class="form-group">
+				<div class="col-md-11">
+					<div class="btn-group">
+						<a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> No, back</a>
+						<div class="input-group-btn inline">
+							<button class="btn btn-danger" title="Remove this record permanently.."><i class="glyphicon glyphicon-remove"></i> Yes, delete permanently</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-1">
+					<a href="@Url.Action("Edit", new { id = Model.<#= primaryKey #> })" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+				</div>
+			</div>
+			<table class="table table-hover gap-from-top-small">
+				<thead>
+					<tr>
+						<th>Properties</th>
+						<th></th>
+						<th>Values</th>
+					</tr>
+				</thead>
+				<tbody>			
+<#
+foreach (PropertyMetadata property in ModelMetadata.Properties) {
+    if (property.Scaffold && !property.IsForeignKey) {
+		if (property.IsPrimaryKey) {#>
+		
+			@Html.HiddenFor(model => model.<#= primaryKey #>)
+<# 			continue;
+		} 	
+        // We do not want to show any association properties for which there is
+        // no associated foreign key.
+        if (property.IsAssociation && GetRelatedModelMetadata(property) == null) {
+            continue;
+        }
+#>			
+					<tr>
+						<td class="dev-label-property">
+							@Html.DisplayNameFor(model => model.<#= GetValueExpression(property) #>)
+						</td>
+						<td>:</td>
+						<td class="dev-label-value">
+							@Html.DisplayFor(model => model.<#= GetValueExpression(property) #>)
+						</td>
+					</tr>	
+<#
+    }
+}
+#>   
+				</tbody>
+			</table> 
+
+			<div class="form-group">
+				<div class="col-md-11">
+					<div class="btn-group">
+						<a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+						<div class="input-group-btn inline">
+							<button class="btn btn-danger" title="Remove this record permanently.."><i class="glyphicon glyphicon-remove"></i>Yes, delete permanently</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-1">
+					<a href="@Url.Action("Edit", new { id = Model.<#= primaryKey #> })" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+				</div>
+			</div>
+		}
+	</div>
+<#
+// The following code closes the tag used in the case of a view using a layout page and the body and html tags in the case of a regular view page
+#>
+<#
+if(!IsPartialView && !IsLayoutPageSelected) {
+    ClearIndent();
+#>
+</body>
+</html>
+<#
+}
+#>
+<#@ include file="ModelMetadataFunctions.cs.include.t4" #>

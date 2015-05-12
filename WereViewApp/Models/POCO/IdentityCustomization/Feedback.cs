@@ -47,8 +47,15 @@ namespace WereViewApp.Models.POCO.IdentityCustomization {
         public bool HasMarkedToFollowUpDate { get; set; }
         public DateTime PostedDate { get; set; }
         public DateTime? FollowUpdateDate { get; set; }
+        /// <summary>
+        /// Represents a possibility of app or review has been reported by a user
+        /// </summary>
+        public bool HasAppOrReviewReport { get; set; }
 
         public byte FeedbackCategoryID { get; set; }
+        [ForeignKey("FeedbackID")]
+        public ICollection<FeedbackAppReviewRelation> FeedbackAppReviewRelations { get; set; }
+
 
 
     }

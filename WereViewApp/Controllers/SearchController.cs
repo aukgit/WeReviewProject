@@ -8,13 +8,10 @@ using WereViewApp.Modules.Session;
 using WereViewApp.WereViewAppCommon;
 using WereViewApp.WereViewAppCommon.Structs;
 
-namespace WereViewApp.Controllers
-{
-    public class SearchController : Controller
-    {
+namespace WereViewApp.Controllers {
+    public class SearchController : Controller {
         // GET: Search
-        public ActionResult Index()
-        {
+        public ActionResult Index() {
             return View();
 
         }
@@ -31,8 +28,9 @@ namespace WereViewApp.Controllers
             if (!string.IsNullOrWhiteSpace(SearchQuery)) {
                 if (!AppVar.Setting.IsInTestingEnvironment) {
                     if (SessionNames.IsValidationExceed("SearchingFormCount", max)) {
-                        ViewBag.Reason = "You have exceed your search cases. Perhaps you should try tomorrow.";
-                        return View("_429");
+                        var errorRoute = new ErrorsController();
+                        return errorRoute.Error(429, null,
+                            "You have exceed your search cases. Perhaps you should try tomorrow.");
                     }
                 }
                 search.SearchQuery = SearchQuery;

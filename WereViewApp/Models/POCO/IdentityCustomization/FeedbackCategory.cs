@@ -15,6 +15,7 @@ namespace WereViewApp.Models.POCO.IdentityCustomization {
         [Required]
         [StringLength(30)]
         public string Category { get; set; }
+
         [ForeignKey("FeedbackCategoryID")]
         public ICollection<Feedback> Feedbacks { get; set; }
 

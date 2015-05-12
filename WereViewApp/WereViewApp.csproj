@@ -234,6 +234,7 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
+    <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapGenerator.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapItem.cs" />
     <Compile Include="Modules\Sitemaps\SitemapChangeFrequency.cs" />
@@ -347,7 +348,7 @@
     <Compile Include="Models\POCO\IdentityCustomization\CountryTimezoneRelation.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\CountryTranslation.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\Feedback.cs" />
-    <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
+    <Compile Include="Models\POCO\IdentityCustomization\FeedbackAppReviewRelation.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\ImageResizeSetting.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\Navigation.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\NavigationItem.cs" />
@@ -699,18 +700,6 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="CodeTemplates\MvcControllerWithContext\Controller.cs.t4">
-      <Parameters>&lt;%3fxml version="1.0" encoding="utf-16"%3f&gt;
-&lt;ArrayOfParameterStorage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Parameters>
-    </Content>
-    <Content Include="CodeTemplates\MvcView\Create.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Delete.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Details.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Edit.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Empty.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
-    <Content Include="CodeTemplates\MvcView\List.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
     <Content Include="Areas\Admin\Views\Config\Index.cshtml" />
     <Content Include="Icon.png" />
     <Content Include="images\app-screen.png" />
@@ -839,9 +828,7 @@
     <Content Include="Areas\Admin\Views\Feedbacks\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Feedbacks\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
-    <Content Include="CodeTemplates\MvcView\DetailsNoTable.t4" />
     <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
-    <Content Include="CodeTemplates\MvcView\Delete.cs - Copy.t4" />
     <Content Include="Areas\Admin\Views\Users\FilterBlockedUsers.cshtml" />
     <Content Include="Areas\Admin\Views\Users\_IndexDefault.cshtml" />
     <Content Include="Areas\Admin\Views\Users\UserBlock.cshtml" />
