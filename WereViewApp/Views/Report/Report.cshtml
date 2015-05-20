@@ -1,45 +1,52 @@
-﻿@using WereViewApp.Modules.DevUser
+﻿@using WereViewApp.Models.POCO.Identity
 @model WereViewApp.Models.POCO.IdentityCustomization.Feedback
+
 @{
     string title = ViewBag.Title;
-    string subtitle = ViewBag.Title;
-    var token = (MvcHtmlString)@Html.AntiForgeryToken();
-    string controller = (string)ViewBag.controller;
-    const string viewName = "App";
-    bool dropDownDynamic = (bool)ViewBag.dropDownDynamic;
-    string partialController = ViewBag.dynamicLoadPartialController;
-    //bool isAppReport = ViewBag.isAppReport;
-    long appOrReviewId = ViewBag.appOrReviewId;
-}
 
-<h1 class="h2" title="@title">
+    MvcHtmlString token = @Html.AntiForgeryToken();
+    string controller = (string) ViewBag.controller;
+    bool dropDownDynamic = (bool) ViewBag.dropDownDynamic;
+    string partialController = ViewBag.dynamicLoadPartialController;
+    
+    // comes from controller
+    long appOrReviewId = ViewBag.appOrReviewId;
+    bool isAppReport = ViewBag.isAppReport != null && ViewBag.isAppReport;
+    string postingAction = isAppReport ? "App" : "Review";
+    ApplicationUser user = (ApplicationUser) ViewBag.user;
+    string viewName = "Reporting " + postingAction;
+    string subtitle = ViewBag.subtitle;
+}
+<h1 class="h2">
     <i class="fa fa-weixin"></i>
     @Html.SamePageLink(@title, @title, false, "")
+    <small>
+        @subtitle
+    </small>
 </h1>
 <hr />
 <!--ViewContext.RouteData.Values["Controller"].ToString()-->
-@using (Html.BeginForm("ContactUs", "", FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {
+@using (Html.BeginForm(postingAction, viewName, FormMethod.Post, new {@class = "form-horizontal Create-@ViewBag.Title", role = "form"})) {
     <div class="form-horizontal">
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
         @Html.Partial("_SuccessMessage")
         @Html.Hidden("appOrReviewId", appOrReviewId)
-        @if (!Request.IsAuthenticated) {
-            @Html.Hidden("Username", user.UserName)
-            @Html.Hidden("Name", user.DisplayName)
-            @Html.Hidden("Email", user.Email)
-        }
+        @Html.Hidden("HasAppId", isAppReport)
+        @Html.Hidden("Username", user.UserName)
+        @Html.Hidden("Email", user.Email)
+
         @Html.EditorFor(model => model.RateUrgency, "Rating-10")
         @Html.EditorFor(model => model.Subject)
         @if (dropDownDynamic) {
-            @Html.EditorFor(model => model.FeedbackCategoryID, "DropDownDynamic", new { @Url = @partialController + "GetFeedbackCategoryID" /* ,@IsDependable = "false",@LiveSearch = "true",@Style = "class",@Id = "id", @DynamicLoad = "true"*/})
+            @Html.EditorFor(model => model.FeedbackCategoryID, "DropDownDynamic", new {@Url = @partialController + "GetFeedbackCategoryID" /* ,@IsDependable = "false",@LiveSearch = "true",@Style = "class",@Id = "id", @DynamicLoad = "true"*/})
         } else {
-            @Html.EditorFor(model => model.FeedbackCategoryID, "DropDown", new { @SelectData = ViewBag.CustomerID })
+            @Html.EditorFor(model => model.FeedbackCategoryID, "DropDown", new {@SelectData = ViewBag.CustomerID})
         }
         @Html.EditorFor(model => model.Message, "Multiline")
     </div>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
+        <div class="col-md-10 col-md-offset-2">
             <button type="submit" class="btn btn-success">
                 <i class="fa fa-paper-plane"></i>
                 Send
@@ -49,18 +56,7 @@
 }
 <div class="row">
     <div class="col-md-10 col-md-offset-2">
-        <address>
-            <strong title="@AppVar.Name">@AppVar.Name</strong><br />
-            <strong title="Company - @AppVar.Setting.CompanyName">@AppVar.Setting.CompanyName</strong><br />
-            @AppVar.Setting.ApplicationSubtitle<br />
-            @AppVar.Setting.Address<br />
-            @Html.PhoneNumberLink(AppVar.Setting.OfficePhone, AppVar.Name + " - Official Phone")<br />
-            @Html.EmailLink(AppVar.Setting.OfficeEmail, AppVar.Name + " - Official Email Address")
-        </address>
-        <address>
-            <strong>Support:</strong> @Html.EmailLink(AppVar.Setting.SupportEmail, @AppVar.Name + " - Official Support Email") , @Html.PhoneNumberLink(AppVar.Setting.SupportPhone, @AppVar.Name + " - Support Phone") <br />
-            <strong>Marketing:</strong> @Html.EmailLink(AppVar.Setting.MarketingEmail, @AppVar.Name + " - Official Marking Email") , @Html.PhoneNumberLink(AppVar.Setting.MarketingPhone, @AppVar.Name + " - Marketing Phone")
-        </address>
+        We will get back to you very shortly. Thank you.
     </div>
 </div>
 @section Scripts {
