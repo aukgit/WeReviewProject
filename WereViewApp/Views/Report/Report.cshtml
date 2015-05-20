@@ -25,10 +25,6 @@
         @Html.Partial("_SuccessMessage")
         @Html.Hidden("appOrReviewId", appOrReviewId)
         @if (!Request.IsAuthenticated) {
-            @Html.EditorFor(model => model.Name)
-            @Html.EditorFor(model => model.Email, "EmailAddress")
-        } else {
-            var user = UserManager.GetCurrentUser();
             @Html.Hidden("Username", user.UserName)
             @Html.Hidden("Name", user.DisplayName)
             @Html.Hidden("Email", user.Email)
