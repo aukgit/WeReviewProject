@@ -7,6 +7,14 @@ using System.Web.Mvc;
 
 namespace WereViewApp.Modules.Extensions.ViewEngine {
     public class RenderingView {
+        /// <summary>
+        /// return view to string
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="viewPath"></param>
+        /// <param name="model"></param>
+        /// <param name="partial"></param>
+        /// <returns></returns>
         static string RenderViewToString(ControllerContext context,
                                     string viewPath,
                                     object model = null,
