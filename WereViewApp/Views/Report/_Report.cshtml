@@ -1,4 +1,5 @@
 ﻿@using WereViewApp.Models.POCO.Identity
+@using WereViewApp.Modules.DevUser
 @model WereViewApp.Models.POCO.IdentityCustomization.Feedback
 
 @{
@@ -13,8 +14,7 @@
     long appOrReviewId = ViewBag.appOrReviewId;
     bool isAppReport = ViewBag.isAppReport != null && ViewBag.isAppReport;
     string postingAction = isAppReport ? "App" : "Review";
-    ApplicationUser user = (ApplicationUser) ViewBag.user;
-    string viewName = "Reporting " + postingAction;
+    ApplicationUser user = UserManager.GetCurrentUser();
     string subtitle = ViewBag.subtitle;
 }
 <h1 class="h2">
@@ -26,16 +26,15 @@
 </h1>
 <hr />
 <!--ViewContext.RouteData.Values["Controller"].ToString()-->
-@using (Html.BeginForm(postingAction, viewName, FormMethod.Post, new {@class = "form-horizontal Create-@ViewBag.Title", role = "form"})) {
+@using (Html.BeginForm(postingAction, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {
     <div class="form-horizontal">
-        @Html.AntiForgeryToken()
+        @token
         @Html.ValidationSummary(true, "", new {@class = "text-danger"})
         @Html.Partial("_SuccessMessage")
         @Html.Hidden("appOrReviewId", appOrReviewId)
         @Html.Hidden("HasAppId", isAppReport)
         @Html.Hidden("Username", user.UserName)
         @Html.Hidden("Email", user.Email)
-
         @Html.EditorFor(model => model.RateUrgency, "Rating-10")
         @Html.EditorFor(model => model.Subject)
         @if (dropDownDynamic) {
