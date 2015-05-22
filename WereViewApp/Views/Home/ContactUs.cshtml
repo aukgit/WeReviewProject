@@ -3,6 +3,10 @@
 @{
     string title = ViewBag.Title;
     var categories = (SelectList) ViewBag.FeedbackCateoryID;
+    string controller = (string)ViewBag.controller;
+    bool dropDownDynamic = (bool)ViewBag.dropDownDynamic;
+    string partialController = ViewBag.dynamicLoadPartialController;
+    
 }
 <h1 class="h2" title="@title">
     <i class="fa fa-weixin"></i>
@@ -26,7 +30,7 @@
         }
         @Html.EditorFor(model => model.RateUrgency, "Rating-10")
         @Html.EditorFor(model => model.Subject)
-        <div class="form-group">
+        @*<div class="form-group">
             <div class="controls">
                 <label class="col-md-2 control-label">Category<span class="red ">*</span></label>
                 <div class="col-md-10">
@@ -35,7 +39,10 @@
                         <span class="description-icon"></span></a>
                 </div>
             </div>
-        </div>
+        </div>*@
+        @Html.EditorFor(model => model.FeedbackCategoryID, "DropDownDynamic", new { @Url = @partialController + "GetFeedbackCategoryID" /* ,@IsDependable = "false",@LiveSearch = "true",@Style = "class",@Id = "id", @DynamicLoad = "true"*/})
+
+
         @Html.EditorFor(model => model.Message, "Multiline")
     </div>
     <div class="form-group">

@@ -22,7 +22,7 @@ namespace WereViewApp.Controllers {
         const string ControllerName = "Report";
         ///Constant value for where the controller is actually visible.
         const string ControllerVisibleUrl = "/Report/";
-        const string CurrentControllerRemoveOutputCacheUrl = "/Partials/ReportID";
+        const string CurrentControllerRemoveOutputCacheUrl = "/Partials/GetReportID";
         const string DynamicLoadPartialController = "/Partials/";
         bool DropDownDynamic = true;
         #endregion
@@ -33,7 +33,6 @@ namespace WereViewApp.Controllers {
             ViewBag.dropDownDynamic = DropDownDynamic;
             ViewBag.dynamicLoadPartialController = DynamicLoadPartialController;
         }
-      
 
 
         public void SetDefaults() {

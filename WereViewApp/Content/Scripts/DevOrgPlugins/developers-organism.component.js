@@ -748,17 +748,10 @@ $.devOrg = {
         }
     },
     ratingMordernize: function () {
-        var ratingItems = $(".rating-5");
+        var $ratingItems = $(".rating-5,.rating-10");
 
-        if (ratingItems.length > 0) {
-            ratingItems.rating({
-                showClear: false
-            });
-        }
-        ratingItems = $(".rating-10");
-
-        if (ratingItems.length > 0) {
-            ratingItems.rating({
+        if ($ratingItems.length > 0) {
+            $ratingItems.rating({
                 showClear: false,
                 starCaptionClasses: {
                     0.5: "label label-danger",

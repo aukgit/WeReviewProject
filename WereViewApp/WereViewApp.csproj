@@ -424,12 +424,6 @@
     <Content Include="App_Data\WereViewApp_log.ldf">
       <DependentUpon>WereViewApp.mdf</DependentUpon>
     </Content>
-    <Content Include="Content\CompactCSS.css">
-      <DependentUpon>CompactCSS.css.bundle</DependentUpon>
-    </Content>
-    <Content Include="Content\CompactCSS.min.css">
-      <DependentUpon>CompactCSS.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\animate-refresh.css" />
     <Content Include="Content\css\animate-refresh.css.map">
       <DependentUpon>animate-refresh.css</DependentUpon>
@@ -550,7 +544,6 @@
     <Content Include="Content\css\Tagit\jquery.tagedit.css" />
     <Content Include="Content\css\Tagit\ui-lightness\jquery-ui-1.9.2.custom.min.css" />
     <Content Include="Content\css\Upload\jquery.fileupload.css" />
-    <Content Include="Content\CompactCSS.css.bundle" />
     <Content Include="Content\css\utilities.css" />
     <Content Include="Content\css\utilities.css.map">
       <DependentUpon>utilities.css</DependentUpon>
@@ -1084,7 +1077,7 @@
     <Folder Include="App_Data\DataCached\SearchResult\" />
     <Folder Include="App_Data\elmah\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Content\Scripts\Bundles\" />
+    <Folder Include="Content\Bundles\" />
     <Folder Include="Models\DesignPattern\Abstracts\" />
     <Folder Include="Models\POCO\AdditionalDatabase\" />
     <Folder Include="Models\POCO\Plugable\" />

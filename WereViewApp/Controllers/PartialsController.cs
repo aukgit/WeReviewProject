@@ -10,6 +10,7 @@ using WereViewApp.WereViewAppCommon;
 using DevTrends.MvcDonutCaching;
 using WereViewApp.Helpers;
 using WereViewApp.Models.Context;
+using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.InternetProtocolRelations;
@@ -20,6 +21,21 @@ using WereViewApp.Modules.Session;
 namespace WereViewApp.Controllers {
     public class PartialsController : AdvanceController {
 
+        #region Drop downs
+        [OutputCache(CacheProfile = "Day")]
+        public ActionResult GetFeedbackCategoryID() {
+            if (SessionNames.IsValidationExceed("GetFeedbackCategoryID", 100)) {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            } else {
+                using (var db = new ApplicationDbContext()) {
+                    var categories = db.FeedbackCategories
+                                       .Select(n => new { display = n.Category, id = n.FeedbackCategoryID })
+                                       .ToList();
+                    return Json(categories, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+        #endregion
 
         #region Drop down : Country, timezone, language
         //[OutputCache(CacheProfile = "YearNoParam")]
@@ -50,7 +66,7 @@ namespace WereViewApp.Controllers {
                    );
                     if (country != null) {
                         return country.DisplayCountryName + " : val : " + value + ", ip :" + id;
-                    } 
+                    }
                 }
             }
             return "-1 : " + id + " : " + value;

@@ -136,7 +136,7 @@ $.devOrg.dynamicSelect = {
         var propName = $div.attr($.devOrg.dynamicSelect.propertyNameAttribute);
         var addAttr = "data-style='" + additionCss + "'" +
                       "data-live-search='" + liveSearch + "'";
-        var selectBoxStart = "<select name='" + propName + "' " + addAttr + " class='selectpicker form-control' >";
+        var selectBoxStart = "<select name='" + propName + "' " + addAttr + " class=' form-control' >";
         var selectBoxEnd = "</select>";
         var selectOfParentDiv = "div.form-row-" + propName + ":first";
         var $containerDiv = $(selectOfParentDiv);
@@ -154,7 +154,8 @@ $.devOrg.dynamicSelect = {
                     //$div.hide();
                     //successfully got  the json
                     var compactSelectHtml = "";
-                    if (!isHtml) {
+                    if (isHtml === 'false') {
+                        response = JSON.parse(response);
                         //json type
                         var options = new Array(response.length + 5);
                         for (var i = 0; i < response.length; i++) { // build options
@@ -165,8 +166,7 @@ $.devOrg.dynamicSelect = {
                             }
                         }
                         compactSelectHtml = selectBoxStart + options.join("") + selectBoxEnd;
-                        $div.html(compactSelectHtml);
-
+                        $div.prepend(compactSelectHtml);
                     } else {
                         // html
                         $div.html(response);
@@ -179,7 +179,7 @@ $.devOrg.dynamicSelect = {
                     var isItemsExist = $parentSelect.find("option:first").length === 1;
                     $.devOrg.dynamicSelect.selectFirstItemInSelectAndGetValue($parentSelect);
 
-                    if (isStyled) {
+                    if (isStyled === 'true') {
                         $parentSelect.selectpicker();
                     }
 

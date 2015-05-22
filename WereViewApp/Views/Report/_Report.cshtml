@@ -18,7 +18,7 @@
     string subtitle = ViewBag.subtitle;
 }
 <h1 class="h2">
-    <i class="fa fa-weixin"></i>
+    <i class="fa fa-flag"></i>
     @Html.SamePageLink(@title, @title, false, "")
     <small>
         @subtitle
@@ -50,14 +50,12 @@
                 <i class="fa fa-paper-plane"></i>
                 Send
             </button>
+            We will get back to you very shortly. Thank you.
         </div>
     </div>
 }
 <div class="row">
     <div class="col-md-10 col-md-offset-2">
-        We will get back to you very shortly. Thank you.
+       
     </div>
 </div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
