@@ -35,8 +35,8 @@ namespace WereViewApp {
         public static ErrorCollector GetNewErrorCollector() {
             return new ErrorCollector();
         }
-        private static CoreSetting setting = null;
-        private static bool initalized = false;
+        private static CoreSetting _setting = null;
+        private static bool _initalized = false;
         private static int _truncateLength = 30;
 
         public static int ValidationMaxNumber { get { return 10; } }
@@ -52,13 +52,13 @@ namespace WereViewApp {
 
 
         private static void InitalizeDevelopersOrganismComponent(bool force = false) {
-            if (!initalized || force) {
+            if (!_initalized || force) {
                 DevMVCComponent.Config.ApplicationName = AppVar.Name;
                 DevMVCComponent.Config.AdminEmail = Setting.AdminEmail;
                 DevMVCComponent.Config.DeveloperEmail = Setting.DeveloperEmail;
                 DevMVCComponent.Config.Assembly = System.Reflection.Assembly.GetExecutingAssembly();
                 Zone.LoadTimeZonesIntoMemory();
-                initalized = true;
+                _initalized = true;
             }
         }
 
@@ -69,12 +69,12 @@ namespace WereViewApp {
 
         public static CoreSetting Setting {
             get {
-                if (setting == null) {
+                if (_setting == null) {
                     using (DevIdentityDbContext db = new DevIdentityDbContext()) {
-                        setting = db.CoreSettings.FirstOrDefault();
+                        _setting = db.CoreSettings.FirstOrDefault();
                     }
                 }
-                return setting;
+                return _setting;
             }
         }
 
@@ -87,7 +87,7 @@ namespace WereViewApp {
             if (s == null) {
                 //no setting exist , need to create a default setting.
                 using (DevIdentityDbContext db = new DevIdentityDbContext()) {
-                    setting = new CoreSetting() {
+                    _setting = new CoreSetting() {
                         // Set the id to be auto in db.
                         CoreSettingID = 1,
                         ApplicationName = "Developers Organism Component",
@@ -127,7 +127,7 @@ namespace WereViewApp {
                         IsSMTPSSL = true,
                         IsFirstUserFound = false
                     };
-                    db.CoreSettings.Add(setting);
+                    db.CoreSettings.Add(_setting);
                     var i = db.SaveChanges();
                     if (i >= 0) {
                         return true;
@@ -144,8 +144,8 @@ namespace WereViewApp {
             using (var db = new DevIdentityDbContext()) {
                 CreateDefaultCoreSetting();
 
-                setting = db.CoreSettings.FirstOrDefault();
-                if (setting == null) {
+                _setting = db.CoreSettings.FirstOrDefault();
+                if (_setting == null) {
                     throw new Exception("Couldn't create or get the core settings. Please check the creation.");
                 }
                 InitalizeDevelopersOrganismComponent(true);
@@ -264,7 +264,7 @@ namespace WereViewApp {
             }
             return null;
         }
-        static string getCommonMetadescription() {
+        static string GetCommonMetadescription() {
             string finalMeta = "";
             if (_productNameMeta == null) {
                 var nameList = AppVar.Name.Split(' ').ToList();
@@ -309,8 +309,8 @@ namespace WereViewApp {
         public static void GetTitlePageMeta(dynamic viewBag, string title, string msg = "", string meta = null, string keywords = null) {
             viewBag.Title = title;
             viewBag.Message = msg;
-            viewBag.Meta = meta + "," + getCommonMetadescription();
-            viewBag.Keywords = keywords + "," + getCommonMetadescription();
+            viewBag.Meta = meta + "," + GetCommonMetadescription();
+            viewBag.Keywords = keywords + "," + GetCommonMetadescription();
         }
         public static void SetSavedStatus(dynamic viewBag, string msg = null) {
             if (msg == null) {

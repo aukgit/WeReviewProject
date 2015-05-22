@@ -14,16 +14,16 @@ namespace WereViewApp.Controllers {
         internal ErrorCollector ErrorCollector;
         internal readonly WereViewAppEntities db;
 
-        public AdvanceController() {
+        protected AdvanceController() {
         }
 
-        public AdvanceController(bool dbContextRequried) {
+        protected AdvanceController(bool dbContextRequried) {
             if (dbContextRequried) {
                 db = new WereViewAppEntities();
             }
         }
 
-        public AdvanceController(bool dbContextRequried, bool errorCollectorRequried) {
+        protected AdvanceController(bool dbContextRequried, bool errorCollectorRequried) {
             if (errorCollectorRequried) {
                 ErrorCollector = new ErrorCollector();
             }

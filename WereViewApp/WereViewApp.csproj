@@ -236,7 +236,6 @@
     <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
     <Compile Include="Models\POCO\Structs\FeedbackCategoryIDs.cs" />
-    <Compile Include="Modules\Authentication\Auth.cs" />
     <Compile Include="Modules\Extensions\ViewEngine\RenderingView.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapGenerator.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapItem.cs" />
@@ -1102,7 +1101,9 @@
     <Content Include="Views\Shared\EditorTemplates\Rating-5-b.cshtml" />
     <Content Include="Views\Reviews\_SavingButton.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DropDownDynamic.cshtml" />
-    <Content Include="Views\Report\Report.cshtml" />
+    <Content Include="Views\Report\_Report.cshtml" />
+    <Content Include="Views\Shared\_401.cshtml" />
+    <Content Include="Views\Report\App.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />
