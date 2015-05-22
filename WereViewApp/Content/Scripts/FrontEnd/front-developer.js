@@ -17,7 +17,7 @@ $(function () {
 
 
     var selectForYoutubeVideoOnDetailsPage = "body.app-details-page:first-child .youtube-video:first-child";
-    var $youtubeVideoContainer = $.queryAll(selectForYoutubeVideoOnDetailsPage);
+    var $youtubeVideoContainer = $(selectForYoutubeVideoOnDetailsPage);
     if ($youtubeVideoContainer.length === 1) {
         $youtubeVideoContainer.find(".playable-btn:first-child").click(function () {
             var $iframe = $youtubeVideoContainer.find("iframe:first-child");
@@ -33,12 +33,12 @@ $(function () {
 
 
     $.frontEndAppDetailsPage = {
-        $showMoreBtnContainer: $.queryAll(".show-more-btns-container"),
-        $showMoreBtns: $.queryAll(".see-more-btn"),
-        $showLessBtns: $.queryAll(".less-btn"),
-        $moreExcert: $.queryAll(".more"),
+        $showMoreBtnContainer: $(".show-more-btns-container"),
+        $showMoreBtns: $(".see-more-btn"),
+        $showLessBtns: $(".less-btn"),
+        $moreExcert: $(".more"),
         execute: function () {
-            $.queryAll("div.app-suggested-list-items-mobile:first-child,div.featured-apps-list-items").owlCarousel({
+            $("div.app-suggested-list-items-mobile:first-child,div.featured-apps-list-items").owlCarousel({
                 navigation: true,
                 navigationText: [
                   "<i class='fa fa-chevron-circle-left'></i>",
@@ -53,7 +53,7 @@ $(function () {
             });
 
 
-            var $frontPageGallyery = $.queryAll(".tp-banner");
+            var $frontPageGallyery = $(".tp-banner");
             if ($frontPageGallyery.length > 0) {
                 $frontPageGallyery.show().revolution({
                     dottedOverlay: "none",
@@ -68,7 +68,7 @@ $(function () {
                 });
             }
 
-            var $suggestionCarosel = $.queryAll(".owl-list");
+            var $suggestionCarosel = $(".owl-list");
             if ($suggestionCarosel.length > 0) {
                 $suggestionCarosel.owlCarousel({
                     navigation: true,
@@ -97,7 +97,7 @@ $(function () {
 
             //});
 
-            var $frontPageRatings = $.queryAll(".rating-5-front");
+            var $frontPageRatings = $(".rating-5-front");
             if ($frontPageRatings.length > 0) {
                 $frontPageRatings.rating({
                     showClear: false,
@@ -105,7 +105,7 @@ $(function () {
                 });
             }
 
-            var $detailPageRatingDisplayItems = $.queryAll(".rating-5-page-details");
+            var $detailPageRatingDisplayItems = $(".rating-5-page-details");
             if ($detailPageRatingDisplayItems.length > 0) {
                 $detailPageRatingDisplayItems.rating({
                     showClear: false,
@@ -138,7 +138,7 @@ $(function () {
                     }
                 });
             }
-            var $appsPreview = $.queryAll("#apps-preview");
+            var $appsPreview = $("#apps-preview");
             if ($appsPreview.length > 0) {
                 $appsPreview.owlCarousel({
                     slideSpeed: 300,
@@ -164,7 +164,7 @@ $(function () {
             //filtering through isotop
             var $isotopContainer = $("ul.search-page-apps-list:first");
             if ($isotopContainer.length > 0) {
-                var $filterIsotopItems = $.queryAll('.filter li a');
+                var $filterIsotopItems = $('.filter li a');
                 if ($filterIsotopItems.length > 0) {
                     $filterIsotopItems.click(function () {
                         $('.filter li a').removeClass('active');
@@ -178,7 +178,7 @@ $(function () {
                     });
                 }
             }
-            var $numberElement = $.queryAll(".app-viewed-numbers:first-child");
+            var $numberElement = $(".app-viewed-numbers:first-child");
             if ($numberElement.length > 0) {
                 $numberElement.number(true);
             }

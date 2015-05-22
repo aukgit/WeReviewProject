@@ -605,46 +605,16 @@
     <Content Include="Content\Scripts\bootstrap-select.js" />
     <Content Include="Content\Scripts\bootstrap-table.js" />
     <Content Include="Content\Scripts\bootstrap.min.js" />
-    <Content Include="Content\Scripts\Bundles\FrontEndJs.js">
-      <DependentUpon>FrontEndJs.js.bundle</DependentUpon>
-    </Content>
-    <Content Include="Content\Scripts\Bundles\FrontEndJs.min.js">
-      <DependentUpon>FrontEndJs.js</DependentUpon>
-    </Content>
-    <Content Include="Content\Scripts\Bundles\jqueryval.js">
-      <DependentUpon>jqueryval.js.bundle</DependentUpon>
-    </Content>
-    <Content Include="Content\Scripts\Bundles\jqueryval.min.js">
-      <DependentUpon>jqueryval.js</DependentUpon>
-    </Content>
-    <Content Include="Content\Scripts\Bundles\UploadJs.js">
-      <DependentUpon>UploadJs.js.bundle</DependentUpon>
-    </Content>
-    <Content Include="Content\Scripts\Bundles\UploadJs.min.js">
-      <DependentUpon>UploadJs.js</DependentUpon>
-    </Content>
     <Content Include="Content\Scripts\DevOrgPlugins\ComboOptions.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.country-phone.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.dynamicSelect.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\every-page.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\dev-component-runner.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.component.js" />
-    <Content Include="Content\Scripts\DevOrgPlugins\faster-jQuery.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\byId.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\WeReviewApps.js" />
-    <Content Include="Content\Scripts\Bundles\UploadJs.js.bundle" />
-    <Content Include="Content\Scripts\Bundles\FrontEndJs.js.bundle" />
-    <Content Include="Content\Scripts\Bundles\jqueryval.js.bundle" />
     <Content Include="Content\Less\bootstrap-datetimepicker.less" />
     <Content Include="Content\Less\responsive.less" />
-    <Content Include="Content\Scripts\Bundles\jqueryval.min.js.map">
-      <DependentUpon>jqueryval.min.js</DependentUpon>
-    </Content>
-    <Content Include="Content\Scripts\Bundles\FrontEndJs.min.js.map">
-      <DependentUpon>FrontEndJs.min.js</DependentUpon>
-    </Content>
-    <Content Include="Content\Scripts\Bundles\UploadJs.min.js.map">
-      <DependentUpon>UploadJs.min.js</DependentUpon>
-    </Content>
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <None Include="Content\Scripts\jquery-2.1.3.intellisense.js" />
@@ -1114,6 +1084,7 @@
     <Folder Include="App_Data\DataCached\SearchResult\" />
     <Folder Include="App_Data\elmah\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Content\Scripts\Bundles\" />
     <Folder Include="Models\DesignPattern\Abstracts\" />
     <Folder Include="Models\POCO\AdditionalDatabase\" />
     <Folder Include="Models\POCO\Plugable\" />

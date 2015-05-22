@@ -10,7 +10,7 @@
   </settings>
   <!--The order of the <file> elements determines the order of the files in the bundle.-->
   <files>
-    <file>/Content/Scripts/DevOrgPlugins/faster-jQuery.js</file>
+    <file>/Content/Scripts/DevOrgPlugins/byId.js</file>
     <file>/Content/Scripts/bootstrap.min.js</file>
     <file>/Content/Scripts/star-rating.js</file>
     <file>/Content/Scripts/underscore.js</file>

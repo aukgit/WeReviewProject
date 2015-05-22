@@ -36,9 +36,9 @@ $(function () {
         $appForm: $.queryFirst("form.app-editing-page"), // means both editing and posting
         $appFormEdit: $.queryFirst("form.app-edit"),
         $appFormPost: $.queryFirst("form.app-post"),
-        $allInputs: $.queryAll("form.app-post input"),
+        $allInputs: $("form.app-post input"),
         ajaxDraftPostUrl: "/App/SaveDraft",
-        $appPageUploaderNotifier: $.queryAll("label.notify-global-info"),
+        $appPageUploaderNotifier: $("label.notify-global-info"),
         homePageUrl: "/",
         selectorForUploaderRows: "#collection-uploaders .form-row-uploader",
         afterDraftPostRedirectPageUrl: "/",
@@ -567,7 +567,7 @@ $(function () {
          * App review : like-dislike functionality
          */
         reviewLikeDisLikeClicked: function () {
-            var $likeBtns = $.queryAll("#app-deails-page a[data-review-like-btn=true]");
+            var $likeBtns = $("#app-deails-page a[data-review-like-btn=true]");
             // Views/Reviews/ReviewsDisplay.cshtml contains that id
             var likeUrl = "/Reviews/Like";
             var dislikeUrl = "/Reviews/DisLike";
@@ -633,9 +633,9 @@ $(function () {
                 }); // ajax end
             }
             if ($likeBtns.length > 0) {
-                var $disLikeBtns = $.queryAll("#app-deails-page a[data-review-dislike-btn=true]");
+                var $disLikeBtns = $("#app-deails-page a[data-review-dislike-btn=true]");
                 var serializedData = $.byId("review-like-dislike-form-submit").serialize();
-                $spinners = $.queryAll(".spinner-for-like").hide(); //like btns
+                $spinners = $(".spinner-for-like").hide(); //like btns
                 $likeBtns.click(function (evt) {
                     var $button = $(this);
                     btnClicked($button, evt, likeUrl, serializedData);

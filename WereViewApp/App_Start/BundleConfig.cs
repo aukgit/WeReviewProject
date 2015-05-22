@@ -29,7 +29,7 @@ namespace WereViewApp {
 
             switch (bundleSelector) {
                 case BundleSelector.ShowEveryScript:
-                    #region Java Scripts Bundle
+                    #region JavaScripts Bundle
 
                     #region Validation Bundle & Form Inputs Processing
                     bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -68,7 +68,7 @@ namespace WereViewApp {
 
                     #region Bootstrap
                     bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                                  "~/Content/Scripts/DevOrgPlugins/faster-jQuery.js", 
+                                  "~/Content/Scripts/DevOrgPlugins/byId.js", 
                                   "~/Content/Scripts/bootstrap.js", // 3.1.2
                                   "~/Content/Scripts/star-rating.js",
                                   "~/Content/Scripts/underscore.js",

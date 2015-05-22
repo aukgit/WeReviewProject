@@ -101,7 +101,7 @@ $.devOrg.countryTimezonePhoneComponent = {
         $.devOrg.countryTimezonePhoneComponent.isCountryRetriveAsHtml = retriveAsHtml;
         var comboName = $.devOrg.countryTimezonePhoneComponent.countryFieldName;
 
-        var $countryInnerDiv = $.queryAll($.devOrg.countryTimezonePhoneComponent.countryComboDivInnerSelector);
+        var $countryInnerDiv = $($.devOrg.countryTimezonePhoneComponent.countryComboDivInnerSelector);
         //console.log($countryInnerDiv);
         // first generate country
         if ($countryInnerDiv.length > 0) {

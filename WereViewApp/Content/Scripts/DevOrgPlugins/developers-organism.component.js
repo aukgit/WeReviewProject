@@ -68,9 +68,9 @@ $.devOrg = {
         /// <param name="countrySelector">Select country and make it selectpicker()</param>
         /// <param name="dropDownItemsSelector"></param>
         /// <param name="dropDownBtnSelector"></param>
-        var countryBox = $.queryAll(countrySelector).selectpicker(); // only select a select element then apply the custom bootstrap selector
-        var dropDownItems = $.queryAll(dropDownItemsSelector); // getting generated dropdown items from the custom bootstrap selector
-        var dropDownBtn = $.queryAll(dropDownBtnSelector); // generated new button from the selectpicker option
+        var countryBox = $(countrySelector).selectpicker(); // only select a select element then apply the custom bootstrap selector
+        var dropDownItems = $(dropDownItemsSelector); // getting generated dropdown items from the custom bootstrap selector
+        var dropDownBtn = $(dropDownBtnSelector); // generated new button from the selectpicker option
         var skippingClassesAnchor = ["flag-country-combo", "flag"];
         var skippingClassesForBtn = ["btn", "dropdown-toggle", "selectpicker", "btn-success", "flag-combo"];
         // console.log(dropDownItems.length);
@@ -90,10 +90,10 @@ $.devOrg = {
     // countryFlagRefresh must be called first or selectpicker must be called first
     // all Selectors are jQuery Selector Text  only.
     countryRelatedToPhone: function (countrySelector, dropDownItemsSelector, dropDownBtnSelector, phoneNumberInputSelector) {
-        var countryBox = $.queryAll(countrySelector);
-        var dropDownItems = $.queryAll(dropDownItemsSelector);
-        //var dropDownBtn = $.queryAll(dropDownBtnSelector);
-        var phoneNumberBox = $.queryAll(phoneNumberInputSelector);
+        var countryBox = $(countrySelector);
+        var dropDownItems = $(dropDownItemsSelector);
+        //var dropDownBtn = $(dropDownBtnSelector);
+        var phoneNumberBox = $(phoneNumberInputSelector);
         var previousCallingCode = "";
 
         function selectChangeState() {
@@ -247,13 +247,13 @@ $.devOrg = {
         /// <param name="placedComboAdditionalAttributes">Add additional attributes with the select, however user have to format it. Eg. id='hello'</param>
         /// <param name="placedComboAdditionalClassesWithEachItem">Add extra classes with every option, only write the class names with space.</param>
         /// <param name="placedComboAdditionalHtmlWithEachItem">Add extra html content with each option item</param>
-        var $parentCombo = $.queryAll(parentSelectsjQuerySelector);
+        var $parentCombo = $(parentSelectsjQuerySelector);
         if (_.isEmpty($parentCombo)) {
             console.error.log("error raised from developers organism component's smartDependableCombo that no parent is detected.");
             return; // nothing exist in parent.
         }
         // row container
-        var $mainDiv = $.queryAll(mainDivContainerSelector);
+        var $mainDiv = $(mainDivContainerSelector);
         // container for  the select
         var $innerDiv = $mainDiv.find(innerDivSelectorForPlacingCombo);
 
@@ -300,7 +300,7 @@ $.devOrg = {
                         hideDiv();
                         return;
                     }
-                    $innerDiv = $.queryAll(mainDivContainerSelector + " " + innerDivSelectorForPlacingCombo);
+                    $innerDiv = $(mainDivContainerSelector + " " + innerDivSelectorForPlacingCombo);
                     // items exist.
                     // $innerDiv is used to check if select exist or not.
                     removeSelectIfExist(); //remove inner options if exist any
@@ -319,7 +319,7 @@ $.devOrg = {
         $(comboSelector).selectpicker("val", searchForvalue).trigger("change");
     },
     bootstrapComboSelectIndex: function (comboSelector, index) {
-        var $combo = $.queryAll(comboSelector + ">option");
+        var $combo = $(comboSelector + ">option");
         if ($combo.length > 0 && index <= ($combo.length - 1)) {
 
             var itemFound = $($combo[index]);
@@ -354,7 +354,7 @@ $.devOrg = {
 
     // jquery formSelector, submitAtLast:true/false
     enterToNextTextBox: function (formSelector, submitAtLast) {
-        var $form = $.queryAll(formSelector);
+        var $form = $(formSelector);
 
         $form.find("input:text:first-child").focus();
 
@@ -494,17 +494,17 @@ $.devOrg = {
 
             if (!isSubmitTheWholeForm) {
                 $userTextbox.keyup(function () {
-                    $.queryAll("#validation #id").val($userTextbox.val());
+                    $("#validation #id").val($userTextbox.val());
                     // console.log(user);
                 }).focus(function () {
-                    $.queryAll("#validation #id").val($userTextbox.val());
+                    $("#validation #id").val($userTextbox.val());
                     // console.log(user);
                 });
             }
 
             $userTextbox.blur(function () {
                 if (!isSubmitTheWholeForm) {
-                    $.queryAll("#validation #id").val($userTextbox.val());
+                    $("#validation #id").val($userTextbox.val());
                 }
                 var $passingText = $userTextbox.val();
                 if (_.isEmpty($passingText) || $passingText.length < minChars) {
