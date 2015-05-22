@@ -41,7 +41,7 @@
             @ViewData.ModelMetadata.DisplayName
             @if (@ViewData.ModelMetadata.Description != null) {
                 <a data-toggle="tooltip" data-original-title="@ViewData.ModelMetadata.Description" title="@ViewData.ModelMetadata.Description" class="tooltip-show">
-                    <span class="fa fa-question font-size-22 glyphicon-top-fix almost-white"></span></a>
+                    <span class="description-icon"></span></a>
             }
             <span class="red">@isRequiredStar</span>
         </label>
