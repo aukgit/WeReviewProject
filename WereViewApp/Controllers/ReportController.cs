@@ -47,6 +47,7 @@ namespace WereViewApp.Controllers {
             var app = db.Apps.Find(id);
             if (app != null) {
                 ViewBag.id = id;
+                ViewBag.app = app;
                 return View();
             }
             return View("_404");
@@ -58,6 +59,11 @@ namespace WereViewApp.Controllers {
             }
             var review = db.Reviews.Find(id);
             if (review != null) {
+                var app = db.Apps.Find(id);
+                ViewBag.app = app;
+                ViewBag.review = review;
+                ViewBag.id = id;
+
                 return View();
             }
             return View("_404");

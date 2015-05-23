@@ -1067,6 +1067,7 @@
     <Content Include="Views\Report\_Report.cshtml" />
     <Content Include="Views\Shared\_401.cshtml" />
     <Content Include="Views\Report\App.cshtml" />
+    <Content Include="Views\Report\Review.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />

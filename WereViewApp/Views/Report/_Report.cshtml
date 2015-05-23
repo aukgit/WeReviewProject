@@ -1,4 +1,6 @@
-﻿@using WereViewApp.Models.POCO.Identity
+﻿@using WereViewApp.Models.EntityModel
+@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
+@using WereViewApp.Models.POCO.Identity
 @using WereViewApp.Modules.DevUser
 @model WereViewApp.Models.POCO.IdentityCustomization.Feedback
 
@@ -6,16 +8,29 @@
     string title = ViewBag.Title;
 
     MvcHtmlString token = @Html.AntiForgeryToken();
-    string controller = (string) ViewBag.controller;
-    bool dropDownDynamic = (bool) ViewBag.dropDownDynamic;
+    string controller = (string)ViewBag.controller;
+    bool dropDownDynamic = (bool)ViewBag.dropDownDynamic;
     string partialController = ViewBag.dynamicLoadPartialController;
-    
+
     // comes from controller
     long appOrReviewId = ViewBag.appOrReviewId;
     bool isAppReport = ViewBag.isAppReport != null && ViewBag.isAppReport;
     string postingAction = isAppReport ? "App" : "Review";
     ApplicationUser user = UserManager.GetCurrentUser();
     string subtitle = ViewBag.subtitle;
+    App app = null;
+    Review review = null;
+
+
+}
+
+@{
+    if (isAppReport) {
+        app = ViewBag.app;
+    } else {
+        app = ViewBag.app;
+        review = ViewBag.review;
+    }
 }
 <h1 class="h2">
     <i class="fa fa-flag"></i>
@@ -27,21 +42,36 @@
 <hr />
 <!--ViewContext.RouteData.Values["Controller"].ToString()-->
 @using (Html.BeginForm(postingAction, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {
+
     <div class="form-horizontal">
         @token
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.Partial("_SuccessMessage")
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10 controls">
+                @if (isAppReport) {
+                    <h2 class="h4 red f-em-1">
+                        You are reporting on "<a href="@app.GetAppUrl()">@app.AppName</a>" app. Please make sure that you are not spamming.
+                    </h2>
+                } else {
+                    <h2 class="h4 red f-em-1">
+                        You are reporting on "<a href="@app.GetAppUrl()">@review.Title</a>" review. Please make sure that you are not spamming.
+                    </h2>
+                }
+            </div>
+        </div>
         @Html.Hidden("appOrReviewId", appOrReviewId)
         @Html.Hidden("HasAppId", isAppReport)
         @Html.Hidden("Username", user.UserName)
         @Html.Hidden("Email", user.Email)
         @Html.EditorFor(model => model.RateUrgency, "Rating-10")
         @Html.EditorFor(model => model.Subject)
-        @if (dropDownDynamic) {
-            @Html.EditorFor(model => model.FeedbackCategoryID, "DropDownDynamic", new {@Url = @partialController + "GetFeedbackCategoryID" /* ,@IsDependable = "false",@LiveSearch = "true",@Style = "class",@Id = "id", @DynamicLoad = "true"*/})
-        } else {
-            @Html.EditorFor(model => model.FeedbackCategoryID, "DropDown", new {@SelectData = ViewBag.CustomerID})
-        }
+        @Html.HiddenFor(model => model.FeedbackCategoryID, new { @Value = ViewBag.CategoryId })
+        @*@if (dropDownDynamic) {
+                @Html.EditorFor(model => model.FeedbackCategoryID, "DropDownDynamic", new {@Url = @partialController + "GetFeedbackCategoryID" /* ,@IsDependable = "false",@LiveSearch = "true",@Style = "class",@Id = "id", @DynamicLoad = "true"*/})
+            } else {
+                @Html.EditorFor(model => model.FeedbackCategoryID, "DropDown", new {@SelectData = ViewBag.CustomerID})
+            }*@
         @Html.EditorFor(model => model.Message, "Multiline")
     </div>
     <div class="form-group">
@@ -56,6 +86,6 @@
 }
 <div class="row">
     <div class="col-md-10 col-md-offset-2">
-       
+
     </div>
 </div>
