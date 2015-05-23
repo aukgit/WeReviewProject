@@ -1,14 +1,16 @@
-﻿@{
+﻿@using WereViewApp.Modules.Session
+@using WereViewApp.Modules.UserError
+@{
     var errors = AppConfig.GetGlobalError();
-    var auth  = Session[WereViewApp.Modules.Session.SessionNames.AuthError];
+    var auth = Session[SessionNames.AuthError];
 }
 @if (auth != null) {
-    <h1 class="h3"><label class="label label-danger"></label>auth</h1>
-    Session[WereViewApp.Modules.Session.SessionNames.AuthError] = null;
+    <h1 class="h3"><label class="label label-danger"></label>auth
+    </h1>
+    Session[SessionNames.AuthError] = null;
 }
 
 @if (errors != null) {
-
     var errorList = errors.GetErrors();
     if (errorList != null) {
         <div class="col-md-12 col-sm-12 col-lg-12 global-error">
@@ -18,11 +20,11 @@
                     <li>
                         <span class="@errors.GetCSSForError(error)">@error.ErrorMessage</span>
                         @if (@error.Solution != null) {
-                            <span class="@WereViewApp.Modules.UserError.ErrorCollector.SOLUTION_STATE_CLASS">@error.Solution</span>
+                            <span class="@ErrorCollector.SOLUTION_STATE_CLASS">@error.Solution</span>
                         }
                         @if (@error.Link != null) {
                             <a href="@error.Link" class="error-solution-link" title="@error.LinkTitle">
-                                <span class="@WereViewApp.Modules.UserError.ErrorCollector.SOLUTION_STATE_LINK_CLASS" title="@error.LinkTitle">@error.LinkTitle</span>
+                                <span class="@ErrorCollector.SOLUTION_STATE_LINK_CLASS" title="@error.LinkTitle">@error.LinkTitle</span>
                             </a>
                         }
                     </li>

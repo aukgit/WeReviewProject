@@ -17,7 +17,7 @@
     */
 }
 
-<h2 class="h3 gap-from-top-small">
+<h2 class="h3 top-gap">
     <span class="glyphicon glyphicon-th-list"></span>
     @Html.SamePageLink(title, subtitle, false)
 </h2>
@@ -50,7 +50,7 @@
                     @{
                         editLinkName = item.App.AppName;
                     }
-                    <a href="@Url.Action("Edit", new { id = item.FeaturedImageID })" title="Edit of @editLinkName." ><span class="glyphicon glyphicon-pencil"></span> @item.App.GetAppURLWithoutHostName()</a>
+                    <a href="@Url.Action("Edit", new { id = item.FeaturedImageID })" title="Edit of @editLinkName." ><span class="glyphicon glyphicon-pencil"></span> @item.App.GetAppUrlWithoutHostName()</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.User.FirstName)

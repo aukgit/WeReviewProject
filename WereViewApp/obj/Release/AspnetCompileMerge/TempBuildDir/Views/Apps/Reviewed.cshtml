@@ -1,15 +1,14 @@
-﻿@using WereViewApp.Models.EntityModel
-@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
-@model IEnumerable<Review>
+﻿@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
+@model IEnumerable<WereViewApp.Models.EntityModel.Review>
 
 @{
     ViewBag.Title = "Reviewed";
-	string title = ViewBag.Title;
+    string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-	string controller = (string)ViewBag.controller;
+    string controller = (string) ViewBag.controller;
     string viewName = "Index";
     string editLinkName = "";
-	/*
+    /*
 	bool noItemsExist = Model == null;
 	if (!noItemsExist) {
 		noItemsExist = Model.Count() == 0;
@@ -17,79 +16,79 @@
 	*/
 }
 
-<h2 class="h3 gap-from-top-small">
-	<span class="glyphicon glyphicon-th-list"></span> 
-	@Html.SamePageLink(title, subtitle, false)
+<h2 class="h3 top-gap">
+    <span class="glyphicon glyphicon-th-list"></span> 
+    @Html.SamePageLink(title, subtitle, false)
 </h2>
 
 
-
 <table class="table table-hover bootstrap-table-do" data-toggle="table" data-toolbar="#filter-bar" data-show-filter="true" data-show-columns="true" data-search="true" data-show-refresh="true" data-show-toggle="true" data-show-export="true" data-pagination="true">
-	<!--<caption>@viewName</caption>-->
-	<thead>
-		<tr>		
-            <th data-field="App.AppName">
-                @Html.DisplayNameFor(model => model.App.AppName)
-            </th>
-			<th data-field="Title">
-				@Html.DisplayNameFor(model => model.Title)
-			</th>
-			<th data-field="Pros">
-				@Html.DisplayNameFor(model => model.Pros)
-			</th>
-			<th data-field="Cons">
-				@Html.DisplayNameFor(model => model.Cons)
-			</th>				
-			<th data-field="Comments">
-				@Html.DisplayNameFor(model => model.Comments)
-			</th>
-			<th data-field="LikedCount">
-				@Html.DisplayNameFor(model => model.LikedCount)
-			</th>
-			<th data-field="DisLikeCount">
-				@Html.DisplayNameFor(model => model.DisLikeCount)
-			</th>
-			
-		
-			@*<th></th>*@
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var item in Model) {
-			<tr>
-                <td>
-                    @{editLinkName = item.App.AppName;}
-                    <a href="@item.App.GetAppURL()" title="View App : @item.App.GetAppURL()"><span class="glyphicon glyphicon-pencil"></span> @editLinkName</a>
-                </td>
-				<td>
-                    @Html.Truncate(item.Title, null)					
-				</td>
-				<td>
-                    @Html.Truncate(item.Pros, null)
-				</td>
-				<td>
-                    @Html.Truncate(item.Cons, null)
-				</td>	
-		
-				<td>
-                    @Html.Truncate(item.Comments, null)
-                    
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.LikedCount)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.DisLikeCount)
-				</td>
-				
-			
-				@*<td>			
+    <!--<caption>@viewName</caption>-->
+    <thead>
+    <tr>
+        <th data-field="App.AppName">
+            @Html.DisplayNameFor(model => model.App.AppName)
+        </th>
+        <th data-field="Title">
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th data-field="Pros">
+            @Html.DisplayNameFor(model => model.Pros)
+        </th>
+        <th data-field="Cons">
+            @Html.DisplayNameFor(model => model.Cons)
+        </th>
+        <th data-field="Comments">
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th data-field="LikedCount">
+            @Html.DisplayNameFor(model => model.LikedCount)
+        </th>
+        <th data-field="DisLikeCount">
+            @Html.DisplayNameFor(model => model.DisLikeCount)
+        </th>
+
+
+        @*<th></th>*@
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @{ editLinkName = item.App.AppName; }
+                <a href="@item.App.GetAppUrl()" title="View App : @item.App.GetAppUrl()">
+                    <span class="glyphicon glyphicon-pencil"></span> @editLinkName</a>
+            </td>
+            <td>
+                @Html.Truncate(item.Title, null)
+            </td>
+            <td>
+                @Html.Truncate(item.Pros, null)
+            </td>
+            <td>
+                @Html.Truncate(item.Cons, null)
+            </td>
+
+            <td>
+                @Html.Truncate(item.Comments, null)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LikedCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisLikeCount)
+            </td>
+
+
+            @*<td>			
 					<a href="@Url.Action("Details", new { id=item.ReviewID })" title="Details of @editLinkName." class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-print"></span> Details</a>
 					<a href="@Url.Action("Delete", new { id=item.ReviewID })" title="Delete @editLinkName" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>            
 				</td>*@
-			</tr>
-		}
-	</tbody>
+        </tr>
+    }
+    </tbody>
 
 </table>
 @section Scripts {

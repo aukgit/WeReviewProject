@@ -5,21 +5,19 @@
 
     var token = Html.AntiForgeryToken();
     if (AppVar.Setting.IsRegisterCodeRequiredToRegister) {
-        roles = (SelectList)ViewBag.Roles;
+        roles = (SelectList) ViewBag.Roles;
     }
 }
 
 <h1 class="h3">@ViewBag.Title</h1>
-<h1 class="h5">Create a new account for <strong class="@AppVar.Name">@AppVar.Name</strong></h1>
-<hr />
-
-
-
+<h1 class="h5">Create a new account for <strong class="@AppVar.Name">@AppVar.Name</strong>
+</h1>
+<hr/>
 @Html.Partial("_GlobalError")
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal register-form", role = "form", enctype = "multipart/form-data" })) {
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new {@class = "form-horizontal register-form", role = "form", enctype = "multipart/form-data"})) {
     @token
     <div data-dev-slide="0" data-dev-visited='false'>
-        @Html.EditorFor(m => m.UserName, "Username")        
+        @Html.EditorFor(m => m.UserName, "Username")
     </div>
     <div data-dev-slide="2" data-dev-visited='false'>
         @Html.EditorFor(m => m.FirstName)
@@ -32,12 +30,13 @@
                 <div class="controls">
                     <label class="col-md-2 control-label">Role<span class="red ">*</span></label>
                     <div class="col-md-10">
-                        @Html.DropDownList("Roles", roles, new { @class = "form-control selectpicker", title = "Roles" })
-                        <a href="#" data-toggle="tooltip" data-original-title="Please select your role." title="Please select your role." class="tooltip-show"><span class="glyphicon glyphicon-question-sign font-size-22 glyphicon-top-fix almost-white"></span></a>
+                        @Html.DropDownList("Roles", roles, new {@class = "form-control selectpicker", title = "Roles"})
+                        <a href="#" data-toggle="tooltip" data-original-title="Please select your role." title="Please select your role." class="tooltip-show">
+                            <span class="description-icon"></span></a>
                     </div>
                 </div>
             </div>
-        </div>    
+        </div>
     }
     <div data-dev-slide="1" data-dev-visited='false'>
         @Html.EditorFor(m => m.Email)
@@ -49,7 +48,7 @@
         @Html.EditorFor(m => m.Phone, "Phone")
     </div>
     <div data-dev-slide="4" data-dev-visited='false'>
-        @Html.EditorFor(m => m.DateOfBirth, "date")       
+        @Html.EditorFor(m => m.DateOfBirth, "date")
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
@@ -66,7 +65,7 @@
 }
 
 @Html.Partial("_ValidatorCommonForm", new ViewDataDictionary {
-    {"token",token}
+    {"token", token}
 })
 
 @section Scripts {

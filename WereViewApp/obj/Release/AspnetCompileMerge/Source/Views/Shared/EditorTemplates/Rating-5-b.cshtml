@@ -1,0 +1,56 @@
+@model byte?
+@{
+    var isRequired = ViewData.ModelMetadata.IsRequired;
+    string isRequiredStar = isRequired ? "*" : "";
+    var htmlAttributes = new RouteValueDictionary();
+    if (@ViewData.ModelMetadata.DisplayName == null) {
+        ViewData.ModelMetadata.DisplayName = ViewData.ModelMetadata.PropertyName;
+    }
+    if (ViewBag.@class != null) {
+        htmlAttributes.Add("class", "form-control " + ViewBag.@class);
+    } else {
+        htmlAttributes.Add("class", "form-control rating-5 common-rating");
+    }
+
+    if (ViewBag.@type != null) {
+        htmlAttributes.Add("type", ViewBag.@type);
+    } else {
+        htmlAttributes.Add("type", "number");
+    }
+
+    if (ViewBag.placeholder != null) {
+        htmlAttributes.Add("placeholder", ViewBag.placeholder);
+    } else {
+        if (isRequired) {
+            htmlAttributes.Add("placeholder", @ViewData.ModelMetadata.DisplayName + isRequiredStar);
+        } else {
+            htmlAttributes.Add("placeholder", "[" + @ViewData.ModelMetadata.DisplayName + "]");
+        }
+    }
+
+    htmlAttributes.Add("title", @htmlAttributes["placeholder"]);
+    htmlAttributes.Add("min", 0);
+    htmlAttributes.Add("max", 5);
+    htmlAttributes.Add("step", 1);
+    htmlAttributes.Add("data-size", "xs");
+}
+<div class="form-group form-row-@ViewData.ModelMetadata.PropertyName">
+    <div class="controls custom-rating-5 custom-rating">
+        <label class="col-md-2 control-label" for="@ViewData.ModelMetadata.PropertyName">
+            @ViewData.ModelMetadata.DisplayName
+            @if (@ViewData.ModelMetadata.Description != null) {
+                <a data-toggle="tooltip" data-original-title="@ViewData.ModelMetadata.Description" title="@ViewData.ModelMetadata.Description" class="tooltip-show">
+                    <span class="description-icon"></span>
+                </a>
+            }
+            <span class="red">@isRequiredStar</span>
+        </label>
+        <div class="col-md-10">
+            @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
+            <a data-toggle="tooltip" title="Validating" data-original-title="Validating" class="tooltip-show CustomValidation @ViewData.ModelMetadata.PropertyName no-hover">
+                <span data-display="@ViewData.ModelMetadata.DisplayName" class="CustomValidation @ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-spin hide" title="Validating"></span>
+            </a>
+            @Html.ValidationMessageFor(m => m, null, new { @class = "rounded-3 label label-danger fixed-width-294 validation-box" })
+        </div>
+    </div>
+</div>

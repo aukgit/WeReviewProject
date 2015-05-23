@@ -1,9 +1,0 @@
-﻿<publishData>
-    <publishProfile
-publishUrl="https://sastwr-001-site2.smarterasp.net:8172/msdeploy.axd"
-msdeploySite="sastwr-001-site2"
-destinationAppUrl="http://sastwr-001-site2.smarterasp.net/"
-profileName="Default Settings"
-publishMethod="MSDeploy"
-userName="ifc\sastwr-001" />
-</publishData>

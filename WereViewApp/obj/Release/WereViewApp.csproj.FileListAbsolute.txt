@@ -147,3 +147,4 @@ E:\Working\GitHub\WereViewProject\WereViewApp\bin\DevMVCComponent.xml
 E:\Working\GitHub\WereViewProject\WereViewApp\bin\DevTrends.MvcDonutCaching.pdb
 E:\Working\GitHub\WereViewProject\WereViewApp\bin\DevTrends.MvcDonutCaching.xml
 E:\Working\GitHub\WereViewProject\WereViewApp\bin\FluentScheduler.pdb
+E:\Working\GitHub\WereViewProject\WereViewApp\bin\RouteDebugger.dll

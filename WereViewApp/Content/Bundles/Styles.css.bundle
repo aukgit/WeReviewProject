@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<bundle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://vswebessentials.com/schemas/v1/bundle.xsd">
+  <settings>
+    <!--Determines if the bundle file should be automatically optimized after creation/update.-->
+    <minify>true</minify>
+    <!--Determin whether to generate/re-generate this bundle on building the solution.-->
+    <runOnBuild>true</runOnBuild>
+    <!--Use absolute path in the generated CSS files. By default, the URLs are relative to generated bundled CSS file.-->
+    <adjustRelativePaths>true</adjustRelativePaths>
+    <!--Specifies a custom subfolder to save files to. By default, compiled output will be placed in the same folder and nested under the original file.-->
+    <outputDirectory>../published.styles</outputDirectory>
+  </settings>
+  <!--The order of the <file> elements determines the order of the files in the bundle.-->
+  <files>
+    <file>/Content/css/bootstrap.css</file>
+    <file>/Content/css/less-imports.css</file>
+    <file>/Content/css/animate.min.css</file>
+    <file>/Content/css/font-awesome.min.css</file>
+    <file>/Content/css/animate-refresh.css</file>
+
+    <file>/Content/css/site.css</file>
+    <file>/Content/css/flags32.css</file>
+    <file>/Content/css/flags32-combo.css</file>
+    <file>/Content/css/Upload/jquery.fileupload.css</file>
+    
+    <file>/Content/css/bootstrap-datetimepicker.css</file>
+    <file>/Content/css/bootstrap-table.css</file>
+    <file>/Content/css/bootstrap-select.css</file>
+
+    <file>/Content/css/color-fonts.css</file>
+    <file>/Content/css/star-rating.css</file>
+    <file>/Content/css/override-mvc.css</file>
+    
+    <file>/Content/css/base-theme-styles.css</file>
+    <file>/Content/css/style.css</file>
+    <file>/Content/css/responsive.css</file>
+    <file>/Content/revolution-slider/css/settings.css</file>
+    
+    
+    <file>/Content/css/owl.carousel.css</file>
+    <file>/Content/css/owl.theme.css</file>
+    <file>/Content/css/owl.custom.finalize.css</file>
+    
+    <file>/Content/css/seo-optimize.css</file>
+    <file>/Content/css/front-developer.css</file>
+    <file>/Content/css/footer-fixing.css</file>
+    <file>/Content/css/utilities.css</file>
+
+  </files>
+</bundle>

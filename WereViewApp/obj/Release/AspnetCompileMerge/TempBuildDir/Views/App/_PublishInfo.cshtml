@@ -3,7 +3,6 @@
     var ideasList = @Model.IdeaBy != null ? @Model.IdeaBy.Split(',') : null;
     var developersList = @Model.Developers != null ? @Model.Developers.Split(',') : null;
     var publisherList = @Model.Publishers != null ? @Model.Publishers.Split(',') : null;
-
 }
 <div class="publisbox">
     @if (Model.IdeaBy != null) {
@@ -37,11 +36,11 @@
         @if (Model.StoreURL != null) {
             <a class="btn btn-success" href="@Model.StoreURL" title="App Store URL for @Model.AppName"> Store</a>
         }
-        
+
         @if (Model.WebSiteURL != null) {
             <a class="btn btn-primary" href="@Model.WebSiteURL" title="Official Website for @Model.AppName">WebSite</a>
         }
-        
+
     </div>
 </div>
 

@@ -1,53 +1,14 @@
 ﻿@{
-    ViewBag.Title = @AppVar.Name;
-    Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
+    ViewBag.Title = @AppVar.Name + " : " + AppVar.Subtitle;
+    //Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
 }
-<!-- slideshow part start -->
-<div class="banner">
-    <div class="row">
-        <div class="wrapper">
-            @{Html.RenderAction("NavBar", "Partials");}
-        </div> <!--    wrapper end - -->
-        @{Html.RenderAction("HomePageGallery", "Partials");}
+
+<div class="home-page">
+    @{ Html.RenderAction("HomePageGallery", "Partials"); }
+    <div class="top-gap-2x">
+        @{ Html.RenderAction("LatestAppsList", "Partials"); }
     </div>
-    <div class="shadeBox">&nbsp;</div>
-</div>
-<!--  slideshow part end  -->
-<!--  mainContainerwrap part start  -->
-<div class="mainContainerwrap">
-    <!--  contenCol part start  -->
-    <div class="container">
-        <div class="contenCol col-md-9 col-sm-9">
-            <div class="itemboxWrap row">
-                <div class="itembox col-md-4 col-sm-4 first">
-                    @{Html.RenderAction("LatestAppsList", "Partials");}
-                </div>
-
-                @{Html.RenderAction("TopAppsList", "Partials");}
-
-            </div>
-        </div>
-        <!--  contenCol part end   -->
-        <!--  rightCol part start  -->
-        <div class="rightCol col-md-3 col-sm-3">
-            <div class="appsBox">
-                <h1>
-                    <a href="@Url.Action("Windows","Apps")"><i class="fa fa-windows"></i></a>
-                </h1>
-                <h1>
-                    <a href="@Url.Action("Android","Apps")"><i class="fa fa-android"></i></a>
-                </h1>
-                <h1>
-                    <a href="@Url.Action("iOS","Apps")"><i class="fa fa-apple"></i></a>
-                </h1>
-            </div>
-            <div class="facebook">
-                <div class="bs-example">
-                    @{Html.RenderAction("AdvertiseGallery", "Partials");}
-                </div>
-            </div>
-        </div>
-        <!--  rightCol part end  -->
+    <div class="top-gap-2x">
+        @{ Html.RenderAction("TopAppsList", "Partials"); }
     </div>
-
 </div>

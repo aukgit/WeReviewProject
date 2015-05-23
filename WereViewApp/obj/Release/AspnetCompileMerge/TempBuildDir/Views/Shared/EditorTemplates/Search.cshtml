@@ -1,4 +1,3 @@
-@using WereViewApp.Modules.ValidatorExtentions
 @model object
 
 @{
@@ -25,13 +24,13 @@
     htmlAttributes.Add("title", @htmlAttributes["placeholder"]);
 }
 
-<div class="form-group@(Html.ValidationErrorFor(m => m, " has-error")) form-row-@ViewData.ModelMetadata.PropertyName">
+<div class="form-group form-row-@ViewData.ModelMetadata.PropertyName">
     <div class="controls custom-url-input">
         <div class="col-md-12 search-url-div-col">
             @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
             <button class="btn btn-success" title="Search your app."><i class="glyphicon glyphicon-search"></i> Search</button>
             <a data-toggle="tooltip" title="Validating" data-original-title="Validating" class="tooltip-show CustomValidation @ViewData.ModelMetadata.PropertyName no-hover">
-                <span data-display="@ViewData.ModelMetadata.DisplayName" class="CustomValidation @ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-refresh-animate hide" title="Validating"></span>
+                <span data-display="@ViewData.ModelMetadata.DisplayName" class="CustomValidation @ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-spin hide" title="Validating"></span>
             </a>
         </div>
     </div>

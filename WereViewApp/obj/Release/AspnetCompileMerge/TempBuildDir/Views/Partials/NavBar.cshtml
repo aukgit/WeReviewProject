@@ -1,52 +1,96 @@
-﻿@using WereViewApp.Models.POCO.Identity
+﻿@using WereViewApp.Models.EntityModel
+@using WereViewApp.WereViewAppCommon
 @{
-    Layout = null;
-    ApplicationRole role = null;
-    if (User.Identity.IsAuthenticated) {
-        role = (ApplicationRole)ViewBag.Role;
-    }
+    string appUrl = AppVar.Url;
+    List<Category> categories = WereViewStatics.AppCategoriesCache;
+    List<Platform> platforms = WereViewStatics.AppPlatformsCache;
+    //string role = ViewBag.Role;
 }
+<div class="header-2">
+    <header class="sticky">
+        <div class="container">
+            <a class="logo" href="@appUrl" title="wereviewapp.com: App Review websie">
+                <h1 title="wereviewapp.com" class="wereviewapp.com website-head-title">
+                    <strong class="almost-black" title="App Review websie">we</strong><strong class="red" title="App Review websie">review</strong><strong class="orange-color" title="App Review websie">app.com</strong>
+                </h1>
+            </a>
+            <nav>
+                <ul class="jetmenu menu seo-optimize">
+                    <li class="active">
+                        <a href="@appUrl" title="App Review websie : Home">
+                            <strong title="App Review websie : Home">Home</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a title="Mobile Apps">Apps</a>
+                        <ul class="dropdown animated fadeIn">
+                            <li>
+                                <a href="@appUrl/Apps" title="Mobile Apps">Archived Mobile Apps</a>
+                            </li>
+                            <li>
+                                <a title="Mobile Apps Category">Category</a>
+                                <ul class="dropdown animated fadeIn">
+                                    <li>
+                                        <a href="@appUrl/Apps/Category" title="Mobile Apps Category">
+                                            <h1>
+                                                <strong>All Category</strong>
+                                            </h1>
+                                        </a>
+                                    </li>
+                                    @foreach (Category category in categories) {
+                                        <li>
+                                            <a href="@appUrl/Apps/Category/@category.CategoryName">
+                                                <h1 title="Mobile @category.CategoryName apps">
+                                                    <strong title="Mobile @category.CategoryName apps">@category.CategoryName</strong>
+                                                </h1>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                            <li>
+                                <a title="All mobile platforms : Android, Apple, Windows, FireFox OS">Platforms <em class="seo-hide">Android, Apple, Windows, FireFox OS</em></a>
+                                <!--======= DROP MENU =========-->
+                                <ul class="dropdown animated fadeIn">
+                                    <li>
+                                        <a href="@appUrl/Apps/Mobile/Platforms">
+                                            <h1>
+                                                <strong>All Platform</strong>
+                                            </h1>
+                                        </a>
+                                    </li>
+                                    @foreach (Platform platform in platforms) {
+                                        <li title="Android Apps">
+                                            <a href="@appUrl/Apps/Mobile/Platforms/@platform.PlatformName">
+                                                <h1 title="@platform.PlatformName Apps">
+                                                    <i title="@platform.PlatformName Apps" class="fa @platform.Icon"></i>
+                                                    <strong title="@platform.PlatformName Apps">@platform.PlatformName Apps</strong>
+                                                </h1>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
 
-<div class="container">
-    <div class="topWrap">
-        <!------- topWrap part start -------->
-        <div class="socialWrap">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-google-plus"></i></a>
-        </div>
-    </div><!----- topWrap part end ------->
-    <div class="header row">
-        <div class="logo col-md-3 col-sm-3">
-            <h1 title="@AppVar.Name">
-                <a href="@AppVar.Url" title="@AppVar.Name">@AppVar.Name</a>
-            </h1>
-        </div>
-        @{Html.RenderAction("Menu", "Partials");}
-        @{Html.RenderAction("SearchForm", "Partials");}
-        <div class="postbutton col-md-2 col-sm-2">
-            <a class="btn btn-warning" href="/App/Post">Post Your Apps</a>
-        </div>
-        @if (User.Identity.IsAuthenticated) {
-            <div class="login col-md-2 col-sm-2">
-                <div class="pronav">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="#" class="" data-toggle="dropdown"><div class="profile_name">@User.Identity.Name <br /><span>@role.Name</span></div><img src="~/Uploads/Images/avatar.jpg"></a>
-                            <ul class="dropdown-menu">
-                                @Html.GetMenu("UserMenu")
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        } else {
-            <div class="loginWrap col-md-2 col-sm-2">
-                <ul>
-                    <li class="first"><a href="/SignIn">Login</a></li>
-                    <li><a href="/Register">Register</a></li>
+                        </ul>
+                    </li>
+                    <li title="Contact review website's admin">
+                        <a href="@appUrl/ContactUs" title="Contact review website's admin"> Contact</a>
+                    </li>
+                    <li class="post-app-btn-wrapper btn-type" title="Post your mobile to app review website">
+                        <a title="Post your mobile to app review website" href="@appUrl/App/Post" class="btn btn-primary post-app-btn">
+                            <strong title="Post your mobile to app review website">
+                                <em title="Post your mobile to app review website">Post App</em>
+                            </strong>
+                            <em class="seo-hide" title="Post your mobile to app review website">Post your mobile to app review website</em>
+                        </a>
+                    </li>
+                    @Html.Partial("_LoginPartial")
+                    <li class="search-bar btn-type" title="Search in app review website">
+                        @{ Html.RenderAction("SearchForm", "Partials"); }
+                    </li>
                 </ul>
-            </div>
-        }
-    </div><!----- header part end ------->
-</div><!-----Container end ---------->
+            </nav>
+        </div>
+    </header>
+</div>
