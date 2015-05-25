@@ -19,6 +19,7 @@ namespace WereViewApp.Controllers {
         }
 
         public ActionResult Specific(string categoryName, int page = 1) {
+            //categoryName= Url.de
             if (!string.IsNullOrWhiteSpace(categoryName)) {
                 var alg = new Algorithms();
                 var pageInfo = new PaginationInfo {

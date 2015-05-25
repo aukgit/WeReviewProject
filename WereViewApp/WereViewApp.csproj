@@ -697,6 +697,7 @@
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Config\Index.cshtml" />
     <Content Include="Icon.png" />
+    <Content Include="Images\error-icon-bucket.png" />
     <Content Include="Images\slider-background-image.jpg" />
     <Content Include="robots.txt" />
     <Content Include="Content\Scripts\bootstrap-table-export.js" />

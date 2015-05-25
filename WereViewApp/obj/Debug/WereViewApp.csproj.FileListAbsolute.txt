@@ -287,3 +287,4 @@ E:\Working\GitHub\WeReviewApp\WereViewProject\WereViewApp\bin\System.Web.WebPage
 E:\Working\GitHub\WeReviewApp\WereViewProject\WereViewApp\bin\System.Web.Optimization.xml
 E:\Working\GitHub\WeReviewApp\WereViewProject\WereViewApp\obj\Debug\WereViewApp.dll
 E:\Working\GitHub\WeReviewApp\WereViewProject\WereViewApp\obj\Debug\WereViewApp.pdb
+E:\Working\GitHub\WeReviewApp\WereViewProject\WereViewApp\obj\Debug\WereViewApp.csprojResolveAssemblyReference.cache
