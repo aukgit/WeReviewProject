@@ -60,6 +60,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="DevMVCComponent, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevMVCComponent.1.0.2\lib\DevMVCComponent.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevTrends.MvcDonutCaching">
       <HintPath>..\packages\MvcDonutCaching.1.3.0\lib\net40\DevTrends.MvcDonutCaching.dll</HintPath>
     </Reference>
@@ -560,10 +564,6 @@
     <Content Include="Content\fonts\fontawesome-webfontd41d.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\Less\animate-refresh.less" />
-    <Content Include="Content\Bundles\Styles.css.bundle" />
-    <Content Include="Content\Bundles\jqueryval.js.bundle" />
-    <Content Include="Content\Bundles\upload.js.bundle" />
-    <Content Include="Content\Bundles\front-end.js.bundle" />
     <None Include="Content\Less\override-mvc.less" />
     <Content Include="Content\Published.Scripts\front-end.js" />
     <Content Include="Content\Published.Scripts\front-end.min.js">
@@ -1046,6 +1046,7 @@
     <Folder Include="App_Data\DataCached\SearchResult\" />
     <Folder Include="App_Data\elmah\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Content\Bundles\" />
     <Folder Include="Models\DesignPattern\Abstracts\" />
     <Folder Include="Models\POCO\AdditionalDatabase\" />
     <Folder Include="Models\POCO\Plugable\" />
