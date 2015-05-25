@@ -1,5 +1,6 @@
 ﻿@using WereViewApp.Models.EntityModel
 @using WereViewApp.WereViewAppCommon
+@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
 @{
     string appUrl = AppVar.Url;
     List<Category> categories = WereViewStatics.AppCategoriesCache;
@@ -39,7 +40,7 @@
                                     </li>
                                     @foreach (Category category in categories) {
                                         <li>
-                                            <a href="@appUrl/Apps/Category/@category.Slug">
+                                            <a href="@category.GetAbsoluteUrl()">
                                                 <h1 title="Mobile @category.CategoryName apps">
                                                     <strong title="Mobile @category.CategoryName apps">@category.CategoryName</strong>
                                                 </h1>

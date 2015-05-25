@@ -60,7 +60,7 @@ namespace WereViewApp.Controllers {
                 var user = UserManager.GetUser(username);
                 if (user != null) {
                     using (var db = new WereViewAppEntities()) {
-                        var apps = db.Apps
+                        var apps = algorithms.GetViewableApps(db)
                             .Where(n => n.PostedByUserID == user.UserID)
                             .Include(n => n.User)
                             .OrderByDescending(n => n.AppID);

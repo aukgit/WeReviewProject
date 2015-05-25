@@ -37,7 +37,7 @@
                     <div class="appsitemWraper">
                         @if (apps != null && apps.Count > 0) {
                             foreach (var app in apps) {
-                                string url = app.GetAppUrl();
+                                string url = app.GetAbsoluteUrl();
                                 var platform = app.GetPlatform();
 
                                 <div class="row appsitemBox">

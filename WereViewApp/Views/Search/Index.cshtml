@@ -111,7 +111,7 @@
                     foreach (App app in Model.FoundApps) {
                         Platform platform = app.GetPlatform();
                         <li class="slim-app-view" data-app-type="@platform.Icon">
-                            <a class="app-url" href="@app.GetAppUrl()">
+                            <a class="app-url" href="@app.GetAbsoluteUrl()">
                                 <div class="app-icon">
                                     <img src="@app.SearchIconLocation" alt="@app.AppName" />
                                 </div>

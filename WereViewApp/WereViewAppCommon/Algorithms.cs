@@ -19,6 +19,21 @@ using WereViewApp.Modules.Cache;
 namespace WereViewApp.WereViewAppCommon {
     public class Algorithms {
 
+        #region Viewable Apps : Apps which are published
+        /// <summary>
+        /// Get apps which can be viewable. 
+        /// Apps are not block and published.
+        /// </summary>
+        /// <param name="db"></param>
+        /// <returns>Returns IQueryable which are not block and published.</returns>
+        public IQueryable<App> GetViewableApps(WereViewAppEntities db = null) {
+            if (db == null) {
+                db = new WereViewAppEntities();
+            }
+            return db.Apps.Where(n => n.IsBlocked == false && n.IsPublished == true);
+        }
+        #endregion
+
         #region Platform Controller
 
         #region Platform wise apps for category page
@@ -833,18 +848,18 @@ namespace WereViewApp.WereViewAppCommon {
         /// </summary>
         /// <param name="platform"></param>
         /// <param name="platformVersion"></param>
-        /// <param name="category"></param>
+        /// <param name="categorySlug"></param>
         /// <param name="url"></param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public App GetSingleAppForDisplay(string platform, float platformVersion, string category, string url, int maxReviewLoad, WereViewAppEntities db) {
-            if (platform != null && platformVersion != null && category != null && url != null) {
+        public App GetSingleAppForDisplay(string platform, float platformVersion, string categorySlug, string url, int maxReviewLoad, WereViewAppEntities db) {
+            if (platform != null && platformVersion != null && categorySlug != null && url != null) {
                 if (CommonVars.AppsFoundForSingleDisplay == null) {
                     CommonVars.AppsFoundForSingleDisplay = new List<App>(800);
                 }
                 App app = null;
-                var platformO = WereViewStatics.AppPlatformsCache.FirstOrDefault(n => n.PlatformName.Equals(platform));
-                var categoryO = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.CategoryName.Equals(category));
+                var platformO = WereViewStatics.AppPlatformsCache.FirstOrDefault(n => n.PlatformName.Equals(platform, StringComparison.OrdinalIgnoreCase));
+                var categoryO = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.Slug.Equals(categorySlug,StringComparison.OrdinalIgnoreCase));
                 if (platformO != null && categoryO != null) {
                     var platformId = platformO.PlatformID;
                     var categoryId = categoryO.CategoryID;
@@ -881,10 +896,8 @@ namespace WereViewApp.WereViewAppCommon {
                     }
                     // app not found.
                     // search in db
-                    app = db.Apps
+                    app = GetViewableApps(db) //means not blocked and published
                             .Include(n => n.User)
-                        //if published and not block then only display it
-                            .Where(n => n.IsPublished && !n.IsBlocked)
                             .FirstOrDefault(n =>
                             n.URL.Equals(url) &&
                             n.PlatformID == platformId &&
