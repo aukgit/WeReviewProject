@@ -22,6 +22,8 @@ namespace WereViewApp.Models.EntityModel
         }
     
         public short CategoryID { get; set; }
+        [Display(Name = "Category", Description = "Mobile application category name.")]
+
         public string CategoryName { get; set; }
         [Display(Name="Slug", Description="/App/Category/slug-name to display the category apps")]
         public string Slug { get; set; }

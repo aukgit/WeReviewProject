@@ -95,7 +95,7 @@ namespace WereViewApp {
             );
             routes.MapRoute(
               name: "category_specific",
-              url: "Apps/Category/{categoryName}/{page}",
+              url: "Apps/Category/{slug}/{page}",
               defaults: new { controller = "Category", action = "Specific", page = UrlParameter.Optional },
               namespaces: new string[] { wereviewappControllers }
             );

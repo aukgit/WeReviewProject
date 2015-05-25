@@ -28,23 +28,29 @@
 <table class="table table-hover bootstrap-table-do" data-toggle="table" data-toolbar="#filter-bar" data-show-filter="true" data-show-columns="true" data-search="true" data-show-refresh="true" data-show-toggle="true" data-show-export="true" data-pagination="true">
 	<!--<caption>@viewName</caption>-->
 	<thead>
-		<tr>		
-			<th data-field="CategoryName">
-				@Html.DisplayNameFor(model => model.CategoryName)
-			</th>
+		<tr>
+		    <th data-field="CategoryName">
+		        @Html.DisplayNameFor(model => model.CategoryName)
+		    </th>
+            <th data-field="slug">
+                @Html.DisplayNameFor(model => model.Slug)
+            </th>
 			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		@foreach (var item in Model) {
 			<tr>
-		
-				<td>
-					@{editLinkName = Html.DisplayFor(model => item.CategoryName).ToString();}
-					<a href="@Url.Action("Edit", new { id=item.CategoryID })" title="@editLinkName edit..."><span class="glyphicon glyphicon-pencil"></span> @editLinkName</a>
-				</td>
+			    <td>
+			        @{editLinkName = Html.DisplayFor(model => item.CategoryName).ToString();}
+			        <a href="@Url.Action("Edit", new {id = item.CategoryID})" title="@editLinkName edit..."><span class="glyphicon glyphicon-pencil"></span> @editLinkName</a>
+			    </td>
+                <td>
+                    @item.Slug
+                </td>
 				<td>			
-					<a href="@Url.Action("Details", new { id=item.CategoryID })" title="Details of @editLinkName." class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-print"></span> Details</a>
+                    <a href="@Url.Action("Details", new { id=item.CategoryID })" title="Details of @editLinkName." class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-print"></span> Details</a>
+					<a href="@Url.Action("Edit", new { id=item.CategoryID })" title="Edit of @editLinkName." class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
 					<a href="@Url.Action("Delete", new { id=item.CategoryID })" title="Delete @editLinkName" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>            
 				</td>
 			</tr>

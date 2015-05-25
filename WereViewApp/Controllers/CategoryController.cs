@@ -18,17 +18,17 @@ namespace WereViewApp.Controllers {
             return View(categories);
         }
 
-        public ActionResult Specific(string categoryName, int page = 1) {
+        public ActionResult Specific(string slug, int page = 1) {
             //categoryName= Url.de
-            if (!string.IsNullOrWhiteSpace(categoryName)) {
+            if (!string.IsNullOrWhiteSpace(slug)) {
                 var alg = new Algorithms();
                 var pageInfo = new PaginationInfo {
                     ItemsInPage = AppConfig.Setting.PageItems,
                     PageNumber = page
                 };
-                var category = alg.GetCategoryPageApps(categoryName,
+                var category = alg.GetCategoryPageApps(slug,
                     pageInfo,
-                    CacheNames.CategoryPageSpecificPagesCount + "-" + categoryName);
+                    CacheNames.CategoryPageSpecificPagesCount + "-" + slug);
                 if (category != null) {
                     ViewBag.Title = "Mobile apps category : " + category.CategoryName;
                     ViewBag.Meta = "Mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;

@@ -111,13 +111,16 @@ namespace WereViewApp.WereViewAppCommon {
         /// <summary>
         /// Category page : specific apps
         /// </summary>
-        /// <returns></returns>
-        public Category GetCategoryPageApps(string categoryName, PaginationInfo pageInfo, string cacheName, WereViewAppEntities db = null) {
+        /// <param name="slug">Slug of the category</param>
+        /// <param name="pageInfo"></param>
+        /// <param name="cacheName"></param>
+        /// <param name="db"></param>
+        /// <returns>Returns category item with apps contained inside.</returns>
+        public Category GetCategoryPageApps(string slug, PaginationInfo pageInfo, string cacheName, WereViewAppEntities db = null) {
             if (db == null) {
                 db = new WereViewAppEntities();
             }
-
-            var category = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.CategoryName.Equals(categoryName, StringComparison.OrdinalIgnoreCase));
+            var category = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase));
             if (category != null) {
                 var appsConditions = db.Apps
                     .Include(n => n.User)

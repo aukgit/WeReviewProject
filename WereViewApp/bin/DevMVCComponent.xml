@@ -6,112 +6,113 @@
     <members>
         <member name="T:DevMVCComponent.Cache.CacheProcessor">
             <summary>
-            Default Sliding 2 Hours
-            Default Expiration 5 Hours
+                Default Sliding 2 Hours
+                Default Expiration 5 Hours
             </summary>
         </member>
         <member name="F:DevMVCComponent.Cache.CacheProcessor.defaultCacheDependency">
             <summary>
-            Will be maintained by each db table as single file single text in a 
-            specific folder.
+                Will be maintained by each db table as single file single text in a
+                specific folder.
+            </summary>
+        </member>
+        <member name="F:DevMVCComponent.Cache.CacheProcessor.defaultSliding">
+            <summary>
+                Time between inserted and last access
             </summary>
         </member>
         <member name="M:DevMVCComponent.Cache.CacheProcessor.#ctor">
             <summary>
-            Default expiration on +5 hours
+                Default expiration on +8 hours
             </summary>
             <param name="context"></param>
         </member>
-        <member name="M:DevMVCComponent.Cache.CacheProcessor.#ctor(System.DateTime,System.TimeSpan)">
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.#ctor(System.Int32)">
             <summary>
-            Instantiate CacheProssor
+            </summary>
+            <param name="expiration">in mins</param>
+        </member>
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.#ctor(System.Int32,System.Int32)">
+            <summary>
+                Instantiate CacheProssor
             </summary>
             <param name="context"></param>
-            <param name="expiration"></param>
-            <param name="sliding">If data is not accessed for certain time , then it will be removed from cache.</param>
+            <param name="expiration">in mins</param>
+            <param name="sliding">[in mins] If data is not accessed for certain time , then it will be removed from cache.</param>
         </member>
-        <member name="M:DevMVCComponent.Cache.CacheProcessor.#ctor(System.String,System.DateTime,System.TimeSpan)">
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.#ctor(System.String,System.Int32,System.Int32)">
             <summary>
-            Instantiate CacheProssor
+                Instantiate CacheProssor
             </summary>
             <param name="context"></param>
             <param name="cacheName"></param>
-            <param name="expiration"></param>
-            <param name="sliding">Change Default Sliding: If data is not accessed for certain time , then it will be removed from cache.</param>
+            <param name="expiration">in mins</param>
+            <param name="sliding">
+                Change Default Sliding: If data is not accessed for certain time , then it will be removed from
+                cache. [in mins]
+            </param>
         </member>
-        <member name="M:DevMVCComponent.Cache.CacheProcessor.#ctor(System.String,System.DateTime)">
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.#ctor(System.String,System.Int32)">
             <summary>
-            Instantiate CacheProssor
+                Instantiate CacheProssor
             </summary>
             <param name="context"></param>
             <param name="cacheName"></param>
-            <param name="expiration"></param>
+            <param name="expiration">in mins</param>
         </member>
         <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object)">
             <summary>
-            Save cache. No Expiration and no sliding.
+                Save cache. No Expiration and no sliding.
             </summary>
             <param name="key"></param>
             <param name="data"></param>
         </member>
         <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.String)">
             <summary>
-            Save object as cache.
+                Save object as cache.
             </summary>
             <param name="key">Key object to look for.</param>
             <param name="data">Save any type of data.</param>
-            <param name="tableName">Name of the table to create dependencies in file (AppData\DatabaseTables\table.table). Change the file manually if table is updated.</param>
+            <param name="tableName">
+                Name of the table to create dependencies in file (AppData\DatabaseTables\table.table). Change
+                the file manually if table is updated.
+            </param>
         </member>
-        <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.DateTime)">
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.Int32)">
             <summary>
-            Save object as cache.
+                Save object as cache.
             </summary>
             <param name="key">Key object to look for.</param>
             <param name="data">Save any type of data.</param>
-            <param name="expires"></param>
+            <param name="expires">[in mins]</param>
         </member>
-        <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.TimeSpan)">
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.Int32,System.String)">
             <summary>
-            Save object as cache.
+                Save object as cache.
             </summary>
             <param name="key">Key object to look for.</param>
             <param name="data">Save any type of data.</param>
-            <param name="expires"></param>
-            <param name="sliding">If data is not accessed for certain time then it will be deleted from the cache memory.</param>
-        </member>
-        <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.TimeSpan,System.String)">
-            <summary>
-            Save object as cache.
-            </summary>
-            <param name="key">Key object to look for.</param>
-            <param name="data">Save any type of data.</param>
-            <param name="expires"></param>
-            <param name="sliding">If data is not accessed for certain time then it will be deleted from the cache memory.</param>
+            <param name="expires">[in mins]</param>
+            <param name="sliding">[in mins]If data is not accessed for certain time then it will be deleted from the cache memory.</param>
             <param name="tableName">Name of the table for dependency.</param>
         </member>
-        <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.DateTime,System.String)">
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Web.Caching.CacheItemPriority)">
             <summary>
-            Save object as cache.
+                Save object as cache.
             </summary>
             <param name="key">Key object to look for.</param>
             <param name="data">Save any type of data.</param>
-            <param name="expires"></param>
-            <param name="tableName">Name of the table to create dependencies in file (AppData\DatabaseTables\table.table). Change the file manually if table is updated.</param>
-        </member>
-        <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.Nullable{System.DateTime},System.Nullable{System.TimeSpan},System.String,System.Web.Caching.CacheItemPriority)">
-            <summary>
-            Save object as cache.
-            </summary>
-            <param name="key">Key object to look for.</param>
-            <param name="data">Save any type of data.</param>
-            <param name="expires"></param>
-            <param name="sliding">If data is not accessed for certain time then it will be deleted from the cache memory.</param>
-            <param name="tableName">Name of the table to create dependencies in file (AppData\DatabaseTables\table.table). Change the file manually if table is updated.</param>
+            <param name="expires">[in mins]</param>
+            <param name="sliding">[in mins]If data is not accessed for certain time then it will be deleted from the cache memory.</param>
+            <param name="tableName">
+                Name of the table to create dependencies in file (AppData\DatabaseTables\table.table). Change
+                the file manually if table is updated.
+            </param>
             <param name="priority"></param>
         </member>
         <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.Nullable{System.DateTime},System.Nullable{System.TimeSpan},System.Web.Caching.CacheDependency,System.Web.Caching.CacheItemPriority)">
             <summary>
-            Save object as cache.
+                Save object as cache.
             </summary>
             <param name="key">Key object to look for.</param>
             <param name="data">Save any type of data.</param>
@@ -122,7 +123,7 @@
         </member>
         <member name="M:DevMVCComponent.Cache.CacheProcessor.Set(System.String,System.Object,System.Nullable{System.DateTime},System.Nullable{System.TimeSpan},System.Web.Caching.CacheDependency,System.Web.Caching.CacheItemPriority,System.Web.Caching.CacheItemRemovedCallback)">
             <summary>
-            Save object as cache.
+                Save object as cache.
             </summary>
             <param name="key">Key object to look for.</param>
             <param name="data">Save any type of data.</param>
@@ -131,6 +132,14 @@
             <param name="cacheDependency">New dependency cache.</param>
             <param name="priority"></param>
             <param name="onRemoveMethod">on remove method name</param>
+        </member>
+        <member name="M:DevMVCComponent.Cache.CacheProcessor.TableStatusCheck(System.String)">
+            <summary>
+                No update in the table since the cache.
+                True : No-Update, False: Updated.
+            </summary>
+            <param name="table"></param>
+            <returns>True : No-Update, False: Updated.</returns>
         </member>
         <member name="T:DevMVCComponent.Config">
             <summary>
@@ -325,19 +334,62 @@
             Generates pagination
             </summary>
         </member>
-        <member name="M:DevMVCComponent.Database.Pagination.GetPageData``1(System.Linq.IQueryable{``0},System.Nullable{System.Int64}@,System.Nullable{System.Int64},System.Nullable{System.Int64})">
+        <member name="M:DevMVCComponent.Database.Pagination.GetPageData``1(System.Linq.IQueryable{``0},System.String,System.Nullable{System.Int32}@,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Boolean)">
             <summary>
-            Get pagination data based on the page number.
+            Get pagination data based on the page number with cached pages count.
             </summary>
             <param name="entities">Sent Entities as IQueryable</param>
-            <param name="Pages">Send a ref of integer to get the pages number. It will be generated from method. Use it to generate pages. It indicated how many pages exist</param>
-            <param name="Page">Based on the page number it returns data. </param>
-            <param name="Items">How many items should a page contain? (Default is 30 defined in the PageItems Property of the class)</param>
+            <param name="pages">Send a ref of integer to get the pages number. It will be generated from method. Use it to generate pages. It indicated how many pages exist</param>
+            <param name="page">Based on the page number it returns data. </param>
+            <param name="items">How many items should a page contain? (Default is 30 defined in the PageItems Property of the class)</param>
+            <param name="cacheName">Create cache by this exact same name. If null then no cache created.</param>
+            <param name="retrivePagesExist">If false then no count query will be executed. If yes then count query will only generated if needed and not exist in the cache.</param>
             <returns>IQueryable data based on the page number.</returns>
+        </member>
+        <member name="M:DevMVCComponent.Database.Pagination.GetPageData``1(System.Linq.IQueryable{``0},DevMVCComponent.Database.PaginationInfo,System.String,System.Boolean)">
+            <summary>
+            Get pagination data based on the page number with cached pages count.
+            </summary>
+            <param name="entities">Sent Entities as IQueryable</param>
+            <param name="pageInfo">Send a ref of integer to get the pages number. It will be generated from method. Use it to generate pages. It indicated how many pages exist</param>
+            <param name="cacheName">Create cache by this exact same name. If null then no cache created.</param>
+            <param name="retrivePagesExist">If false then no count query will be executed. If yes then count query will only generated if needed and not exist in the cache.</param>
+            <returns>IQueryable data based on the page number.</returns>
+        </member>
+        <member name="M:DevMVCComponent.Database.Pagination.GetList(DevMVCComponent.Database.PaginationInfo,System.String,System.String,System.String,System.String,System.Boolean,System.String,System.String,System.String,System.Int32,System.String)">
+            <summary>
+            Generates list items with unordered list with bootstrap pagination.
+            </summary>
+            <param name="pageInfo"></param>
+            <param name="url"></param>
+            <param name="content"></param>
+            <param name="title"></param>
+            <param name="unorderedListClass"></param>
+            <param name="liClass"></param>
+            <param name="cacheName"></param>
+            <param name="class"></param>
+            <param name="maxNumbersOfPagesShow"></param>
+            <param name="format"></param>
+            <returns></returns>
         </member>
         <member name="P:DevMVCComponent.Database.Pagination.PageItems">
             <summary>
             Total number of items in a page.
+            </summary>
+        </member>
+        <member name="P:DevMVCComponent.Database.PaginationInfo.ItemsInPage">
+            <summary>
+            Set from user side to indicate the user numbers.
+            </summary>
+        </member>
+        <member name="P:DevMVCComponent.Database.PaginationInfo.PagesExists">
+            <summary>
+            Receive from method
+            </summary>
+        </member>
+        <member name="P:DevMVCComponent.Database.PaginationInfo.PageNumber">
+            <summary>
+            Set from user side. To get the items for that page.
             </summary>
         </member>
         <member name="M:DevMVCComponent.Error.Handle.#ctor(System.Exception)">
