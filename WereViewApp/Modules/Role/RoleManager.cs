@@ -196,7 +196,7 @@ namespace WereViewApp.Modules.Role {
 
         #endregion
 
-        #region Is In Role
+        #region Is In Role/ Has Role
 
         /// <summary>
         ///     Check if user is in this role.
@@ -220,6 +220,24 @@ namespace WereViewApp.Modules.Role {
             return false;
         }
 
+        public static bool HasMiniumRole(long userId, string roleName) {
+            var role = GetRole(roleName);
+            if (role != null) {
+                using (var db = new ApplicationDbContext()) {
+                    var anyAboveRoles = db.Roles.Where(r => r.PriorityLevel <= role.PriorityLevel);
+                    return anyAboveRoles.Any(n => IsInRole(userId, n.Name));
+                }
+            }
+            return false;
+        }
+
+        public static bool HasMiniumRole(string roleName) {
+            if (UserManager.IsAuthenticated()) {
+                var userId = UserManager.GetCurrentUser().UserID;
+                return HasMiniumRole(userId, roleName);
+            }
+            return false;
+        }
         #endregion
 
         #region Get Users Roles
@@ -279,6 +297,7 @@ namespace WereViewApp.Modules.Role {
         /// <summary>
         ///     Get current one and all underlying roles from this role
         ///     in custom db.
+        /// Condition :  Return all above priority value roles which represents the underlying roles.
         /// </summary>
         /// <param name="roleName">Name of your current role will return all underlying priority roles</param>
         /// <returns></returns>
@@ -337,9 +356,10 @@ namespace WereViewApp.Modules.Role {
         }
 
         /// <summary>
-        ///     Faster
-        ///     Add all underlying roles
+        ///     
+        ///     Add all underlying roles based on (
         ///     Verifies user before adding roles.
+        ///     (Faster)
         /// </summary>
         /// <param name="log">Username</param>
         /// <param name="role">Current role will add all underlying roles</param>
@@ -447,6 +467,7 @@ namespace WereViewApp.Modules.Role {
         #region Is user exist inside a role
 
         /// <summary>
+        /// if any user exist with this given role
         /// </summary>
         /// <param name="role"></param>
         /// <returns>Returns false if role doesn't exist or not found any users.</returns>
@@ -459,7 +480,8 @@ namespace WereViewApp.Modules.Role {
         }
 
         /// <summary>
-        ///     Faster
+        /// if any user exist with this given role  
+        ///   (Faster)
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
@@ -474,6 +496,7 @@ namespace WereViewApp.Modules.Role {
         #region Remove user roles
 
         /// <summary>
+        /// Remove role from the user.
         ///     Faster
         /// </summary>
         /// <param name="role"></param>
@@ -481,13 +504,20 @@ namespace WereViewApp.Modules.Role {
             Manager.Delete(role);
         }
 
+        /// <summary>
+        /// Remove role from the user.
+        /// </summary>
+        /// <param name="roleName"></param>
         public static void RemoveRole(string roleName) {
             var role = GetRole(roleName);
             if (role != null) {
                 Manager.Delete(role);
             }
         }
-
+        /// <summary>
+        /// Remove role from the user.
+        /// </summary>
+        /// <param name="roleId"></param>
         public static void RemoveRole(long roleId) {
             var role = GetRole(roleId);
             if (role != null) {

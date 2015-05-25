@@ -1,18 +1,19 @@
-﻿
-<h1 class="text-danger h1 gap-from-top-small">Sorry your requested app is not found.</h1>
+﻿@{
+    ViewBag.Title = "Mobile application not found";
+}
+<h1 class="text-danger h1 gap-from-top-small error-page-title-version-2">
+    App not found
+</h1>
 
-<div class="container unhappy-page">
+<div class="top-gap-2x">
     <div class="row">
-        <p class="col-md-2 unhappy">
-            :(
-        </p>
-        <div class="col-md-9">
-            <p class="h4">
-                Sorry for the inconvience . Url doesn't lead to a valid app.
-            </p>            
+        <div class="col-md-4">
+            <img src="~/images/error-icon-bucket.png" alt="app not found"/>
         </div>
-        <div class="col-md-12 contactus">
-            Please feel free to @Html.ContactFormActionLink("contact us", "Contact Us - " + @AppVar.Name).
+        <div class="col-md-8">
+            <p>Sorry for the inconvience , your given <strong class="red bold">URL</strong> doesn't lead to a valid app. Please try again from home page or list of apps. For further information , please be in touch with admin.
+            </p>
+            <div class="contactus">Please feel free to @Html.ContactFormActionLink("contact us", "Contact Us - " + @AppVar.Name).</div>
         </div>
     </div>
 </div>

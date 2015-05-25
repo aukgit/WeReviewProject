@@ -1,39 +1,48 @@
-﻿@model WereViewApp.Models.POCO.IdentityCustomization.Feedback
+﻿@using WereViewApp.Modules.DevUser
+@model WereViewApp.Models.POCO.IdentityCustomization.Feedback
 @{
     string title = ViewBag.Title;
-    var categories = (SelectList)ViewBag.FeedbackCateoryID;
+    var categories = (SelectList) ViewBag.FeedbackCateoryID;
+    string controller = (string)ViewBag.controller;
+    bool dropDownDynamic = (bool)ViewBag.dropDownDynamic;
+    string partialController = ViewBag.dynamicLoadPartialController;
+    
 }
 <h1 class="h2" title="@title">
     <i class="fa fa-weixin"></i>
     @Html.SamePageLink(@title, @title, false, "")
 </h1>
-<hr />
+<hr/>
 <!--ViewContext.RouteData.Values["Controller"].ToString()-->
-@using (Html.BeginForm("ContactUs", "", FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {
+@using (Html.BeginForm("ContactUs", "", FormMethod.Post, new {@class = "form-horizontal Create-@ViewBag.Title", role = "form"})) {
     <div class="form-horizontal">
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
         @Html.Partial("_SuccessMessage")
         @if (!Request.IsAuthenticated) {
             @Html.EditorFor(model => model.Name)
             @Html.EditorFor(model => model.Email, "EmailAddress")
         } else {
-            var user = WereViewApp.Modules.DevUser.UserManager.GetCurrentUser();
+            var user = UserManager.GetCurrentUser();
             @Html.Hidden("Username", user.UserName)
             @Html.Hidden("Name", user.DisplayName)
             @Html.Hidden("Email", user.Email)
         }
         @Html.EditorFor(model => model.RateUrgency, "Rating-10")
         @Html.EditorFor(model => model.Subject)
-        <div class="form-group">
+        @*<div class="form-group">
             <div class="controls">
                 <label class="col-md-2 control-label">Category<span class="red ">*</span></label>
                 <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.FeedbackCategoryID, categories, new { @class = "form-control selectpicker" })
-                    <a href="#" data-toggle="tooltip" data-original-title="Please select your category." title="Please select your category." class="tooltip-show"><span class="glyphicon glyphicon-question-sign font-size-22 glyphicon-top-fix almost-white"></span></a>
+                    @Html.DropDownListFor(m => m.FeedbackCategoryID, categories, new {@class = "form-control selectpicker"})
+                    <a href="#" data-toggle="tooltip" data-original-title="Please select your category." title="Please select your category." class="tooltip-show">
+                        <span class="description-icon"></span></a>
                 </div>
             </div>
-        </div>
+        </div>*@
+        @Html.EditorFor(model => model.FeedbackCategoryID, "DropDownDynamic", new { @Url = @partialController + "GetFeedbackCategoryID" /* ,@IsDependable = "false",@LiveSearch = "true",@Style = "class",@Id = "id", @DynamicLoad = "true"*/})
+
+
         @Html.EditorFor(model => model.Message, "Multiline")
     </div>
     <div class="form-group">
@@ -48,16 +57,16 @@
 <div class="row">
     <div class="col-md-10 col-md-offset-2">
         <address>
-            <strong title="@AppVar.Name">@AppVar.Name</strong><br />
-            <strong title="Company - @AppVar.Setting.CompanyName">@AppVar.Setting.CompanyName</strong><br />
-            @AppVar.Setting.ApplicationSubtitle<br />
-            @AppVar.Setting.Address<br />
-            @Html.PhoneNumberLink(AppVar.Setting.OfficePhone, AppVar.Name + " - Official Phone")<br />
+            <strong title="@AppVar.Name">@AppVar.Name</strong><br/>
+            <strong title="Company - @AppVar.Setting.CompanyName">@AppVar.Setting.CompanyName</strong><br/>
+            @AppVar.Setting.ApplicationSubtitle<br/>
+            @AppVar.Setting.Address<br/>
+            @Html.PhoneNumberLink(AppVar.Setting.OfficePhone, AppVar.Name + " - Official Phone")<br/>
             @Html.EmailLink(AppVar.Setting.OfficeEmail, AppVar.Name + " - Official Email Address")
         </address>
 
         <address>
-            <strong>Support:</strong>   @Html.EmailLink(AppVar.Setting.SupportEmail, @AppVar.Name + " - Official Support Email") , @Html.PhoneNumberLink(AppVar.Setting.SupportPhone, @AppVar.Name + " - Support Phone") <br />
+            <strong>Support:</strong> @Html.EmailLink(AppVar.Setting.SupportEmail, @AppVar.Name + " - Official Support Email") , @Html.PhoneNumberLink(AppVar.Setting.SupportPhone, @AppVar.Name + " - Support Phone") <br/>
             <strong>Marketing:</strong> @Html.EmailLink(AppVar.Setting.MarketingEmail, @AppVar.Name + " - Official Marking Email") , @Html.PhoneNumberLink(AppVar.Setting.MarketingPhone, @AppVar.Name + " - Marketing Phone")
         </address>
     </div>

@@ -1,0 +1,48 @@
+﻿@model WereViewApp.Models.POCO.IdentityCustomization.NavigationItem
+
+@{
+    ViewBag.Title = "Editing for menu '" + ViewBag.MenuName + "'";
+    var token = (MvcHtmlString)@Html.AntiForgeryToken();
+}
+
+
+<h1 class="h2">
+    <span class="glyphicon glyphicon-plus"></span>
+    @ViewBag.Title
+</h1>
+<hr />
+@using (Html.BeginForm("Edit", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {
+    <div class="form-horizontal">
+        @token
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="btn-group">
+                    <a href="@Url.Action("List", new { id = Model.NavigationID })" title="List" class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> List</a>
+                    <a href="@Url.Action("Delete", new { id = Model.NavigationItemID, NavigationID = Model.NavigationID })" title="Delete this record?" class="btn btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+                    <div class="input-group-btn inline">
+                        <button title="Save and create new one" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @Html.Partial("_CreateOrEdit")
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="btn-group">
+                    <a href="@Url.Action("List", new { id = Model.NavigationID })" title="List" class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> List</a>
+                    <a href="@Url.Action("Delete", new { id = Model.NavigationItemID, NavigationID = Model.NavigationID })" title="Delete this record?" class="btn btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+                    <div class="input-group-btn inline">
+                        <button title="Save and create new one" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

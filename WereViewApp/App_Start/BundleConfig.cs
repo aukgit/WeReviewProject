@@ -12,7 +12,7 @@ namespace WereViewApp {
         public static void RegisterBundles(BundleCollection bundles) {
 
             #region CDN Constants
-            const string jQueryCdn = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js";
+            const string jQueryCdn = @"//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js";
             //const string jQueryCDN = "http://code.jquery.com/jquery-latest.min.js";
             const string mordernizerCdn = "http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js";
             //const string respondJsCDN = "http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"
@@ -29,7 +29,7 @@ namespace WereViewApp {
 
             switch (bundleSelector) {
                 case BundleSelector.ShowEveryScript:
-                    #region Java Scripts Bundle
+                    #region JavaScripts Bundle
 
                     #region Validation Bundle & Form Inputs Processing
                     bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -68,7 +68,7 @@ namespace WereViewApp {
 
                     #region Bootstrap
                     bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                                  "~/Content/Scripts/DevOrgPlugins/faster-jQuery.js", 
+                                  "~/Content/Scripts/DevOrgPlugins/byId.js", 
                                   "~/Content/Scripts/bootstrap.js", // 3.1.2
                                   "~/Content/Scripts/star-rating.js",
                                   "~/Content/Scripts/underscore.js",
@@ -139,20 +139,20 @@ namespace WereViewApp {
 
                     #region Validation Bundle & Form Inputs Processing
                     bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                                    "~/Content/Scripts/Bundles/jqueryval.min.js"
+                                    "~/Content/Published.Scripts/jqueryval.min.js"
                                    ));
                     #endregion
 
 
                     #region Upload
                     bundles.Add(new ScriptBundle("~/bundles/upload").Include(
-                                   "~/Content/Scripts/Bundles/UploadJs.min.js"
+                                   "~/Content/Published.Scripts/upload.min.js"
                                    ));
                     #endregion
 
                     #region Bootstrap
                     bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                                  "~/Content/Scripts/Bundles/FrontEndJs.min.js"
+                                  "~/Content/Published.Scripts/front-end.min.js"
                                   ));
                     #endregion
 
@@ -161,7 +161,7 @@ namespace WereViewApp {
                     #region CSS Bundles
 
                     bundles.Add(new StyleBundle("~/Content/css/styles").Include(
-                                  "~/Content/CompactCSS.min.css"
+                                  "~/Content/Published.Styles/Styles.min.css"
 
                     ));
 
@@ -208,7 +208,7 @@ namespace WereViewApp {
 
             #region Configs
 
-            bundles.UseCdn = false;
+            bundles.UseCdn = true;
             BundleTable.EnableOptimizations = false;
 
             #endregion

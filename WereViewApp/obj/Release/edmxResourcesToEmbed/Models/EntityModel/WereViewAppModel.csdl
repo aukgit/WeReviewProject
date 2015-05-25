@@ -147,7 +147,7 @@
     <Property Name="ReleaseDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="LastModifiedDate" Type="DateTime" Precision="0" />
-    <Property Name="URLWithoutEscapseSequence" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="UrlWithoutEscapseSequence" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Category" Relationship="WereViewAppModel.FK_App_Category" FromRole="App" ToRole="Category" />
     <NavigationProperty Name="Platform" Relationship="WereViewAppModel.FK_App_Platform" FromRole="App" ToRole="Platform" />
     <NavigationProperty Name="User" Relationship="WereViewAppModel.FK_App_User" FromRole="App" ToRole="User" />

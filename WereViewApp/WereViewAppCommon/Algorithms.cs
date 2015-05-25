@@ -1507,7 +1507,6 @@ namespace WereViewApp.WereViewAppCommon {
         }
         #endregion
 
-
         #region Remove Output Cahces
         public void RemoveOutputCache(string url) {
             HttpResponse.RemoveOutputCacheItem(url);

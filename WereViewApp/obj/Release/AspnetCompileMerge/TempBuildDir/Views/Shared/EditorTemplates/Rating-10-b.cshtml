@@ -1,4 +1,3 @@
-@using WereViewApp.Modules.ValidatorExtentions
 @model byte?
 
 @{
@@ -46,7 +45,7 @@
         ViewBag.step = .5;
     }
 
-    
+
     htmlAttributes.Add("title", @htmlAttributes["placeholder"]);
     htmlAttributes.Add("min", ViewBag.min);
     htmlAttributes.Add("max", ViewBag.max);
@@ -55,12 +54,13 @@
     htmlAttributes.Add("data-step", ViewBag.step);
 }
 
-<div class="form-group@(Html.ValidationErrorFor(m => m, " has-error")) form-row-@ViewData.ModelMetadata.PropertyName">
+<div class="form-group form-row-@ViewData.ModelMetadata.PropertyName">
     <div class="controls custom-rating-10 custom-rating">
         <label class="col-md-2 control-label" for="@ViewData.ModelMetadata.PropertyName">
             @ViewData.ModelMetadata.DisplayName
             @if (@ViewData.ModelMetadata.Description != null) {
-                <a data-toggle="tooltip" data-original-title="@ViewData.ModelMetadata.Description" title="@ViewData.ModelMetadata.Description" class="tooltip-show"><span class="fa fa-question font-size-22 glyphicon-top-fix almost-white"></span></a>
+                <a data-toggle="tooltip" data-original-title="@ViewData.ModelMetadata.Description" title="@ViewData.ModelMetadata.Description" class="tooltip-show">
+                    <span class="description-icon"></span></a>
             }
             <span class="red">@isRequiredStar</span>
         </label>
@@ -68,9 +68,9 @@
             @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
 
             <a data-toggle="tooltip" title="Validating" data-original-title="Validating" class="tooltip-show CustomValidation @ViewData.ModelMetadata.PropertyName no-hover">
-                <span data-display="@ViewData.ModelMetadata.DisplayName" class="CustomValidation @ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-refresh-animate hide" title="Validating"></span>
+                <span data-display="@ViewData.ModelMetadata.DisplayName" class="CustomValidation @ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-spin hide" title="Validating"></span>
             </a>
-            @Html.ValidationMessageFor(m => m, null, new { @class = "rounded-3 label label-danger fixed-width-294 validation-box" })
+            @Html.ValidationMessageFor(m => m, null, new {@class = "rounded-3 label label-danger fixed-width-294 validation-box"})
         </div>
     </div>
 </div>

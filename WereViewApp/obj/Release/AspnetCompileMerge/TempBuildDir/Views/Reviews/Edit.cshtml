@@ -1,42 +1,40 @@
-﻿@using WereViewApp.Models.EntityModel
-@model Review
+﻿@model WereViewApp.Models.EntityModel.Review
 
 @{
     ViewBag.Title = "Editing " + Html.DisplayFor(model => model.Title);
-	string title = ViewBag.Title;
+    string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    var token = (MvcHtmlString)@Html.AntiForgeryToken();
-	string controller = (string)ViewBag.controller;
-	string viewName = "Edit";
+    var token = @Html.AntiForgeryToken();
+    string controller = (string) ViewBag.controller;
+    string viewName = "Edit";
 }
 
 
 <h1 class="h2 gap-from-top-small">
-	<span class="glyphicon glyphicon-edit"></span>  
-	@Html.SamePageLink(title, subtitle, false)
+    <span class="glyphicon glyphicon-edit"></span>  
+    @Html.SamePageLink(title, subtitle, false)
 </h1>
-<hr />
-@using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) 
-{
-   <div class="form-horizontal">
-		@token
-		<div class="form-group">
+<hr/>
+@using (Html.BeginForm(viewName, controller, FormMethod.Post, new {@class = "form-horizontal Create-@ViewBag.Title", role = "form"})) {
+    <div class="form-horizontal">
+        @token
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <div class="btn-group">
                     <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                    <a href="@Url.Action("Delete", new { id = Model.ReviewID })" title="Delete this record?" class="btn btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+                    <a href="@Url.Action("Delete", new {id = Model.ReviewID})" title="Delete this record?" class="btn btn-danger" onclick=" return confirm('Are you sure?') "><span class="glyphicon glyphicon-remove"></span> Delete</a>
                     <div class="input-group-btn inline">
                         <button title="Save and create new one" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
-                    </div>                    
-                </div>               
+                    </div>
+                </div>
             </div>
         </div>
-		@Html.Partial("_SuccessMessage")
-		
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.Partial("_SuccessMessage")
 
-		
-		@Html.HiddenFor(model => model.ReviewID)
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+
+        @Html.HiddenFor(model => model.ReviewID)
         @Html.EditorFor(model => model.Title)
         @Html.EditorFor(model => model.Pros)
         @Html.EditorFor(model => model.Cons)
@@ -44,23 +42,27 @@
         @Html.EditorFor(model => model.Comment1)
         @Html.EditorFor(model => model.Comment2)
         <div class="form-group AppID-main">
-			<div class="controls">
-				<label class="col-md-2 control-label">@Html.DisplayNameFor(m=> m.AppID)<span class="red ">*</span></label>
-				<div class="col-md-10 AppID-combo-div">
-					@Html.DropDownList("AppID", null, htmlAttributes: new { @class = "form-control" })
-					<a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m=> m.AppID)." title="Please select @Html.DisplayNameFor(m=> m.AppID)." class="tooltip-show"><span class="glyphicon glyphicon-question-sign font-size-22 glyphicon-top-fix almost-white"></span></a>
-				</div>
-			</div>
-		</div>
+            <div class="controls">
+                <label class="col-md-2 control-label">
+                    @Html.DisplayNameFor(m => m.AppID)<span class="red ">*</span></label>
+                <div class="col-md-10 AppID-combo-div">
+                    @Html.DropDownList("AppID", null, new {@class = "form-control"})
+                    <a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m => m.AppID)." title="Please select @Html.DisplayNameFor(m => m.AppID)." class="tooltip-show">
+                        <span class="description-icon"></span></a>
+                </div>
+            </div>
+        </div>
         <div class="form-group UserID-main">
-			<div class="controls">
-				<label class="col-md-2 control-label">@Html.DisplayNameFor(m=> m.UserID)<span class="red ">*</span></label>
-				<div class="col-md-10 UserID-combo-div">
-					@Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control" })
-					<a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m=> m.UserID)." title="Please select @Html.DisplayNameFor(m=> m.UserID)." class="tooltip-show"><span class="glyphicon glyphicon-question-sign font-size-22 glyphicon-top-fix almost-white"></span></a>
-				</div>
-			</div>
-		</div>
+            <div class="controls">
+                <label class="col-md-2 control-label">
+                    @Html.DisplayNameFor(m => m.UserID)<span class="red ">*</span></label>
+                <div class="col-md-10 UserID-combo-div">
+                    @Html.DropDownList("UserID", null, new {@class = "form-control"})
+                    <a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m => m.UserID)." title="Please select @Html.DisplayNameFor(m => m.UserID)." class="tooltip-show">
+                        <span class="description-icon"></span></a>
+                </div>
+            </div>
+        </div>
         @Html.EditorFor(model => model.Comments)
         @Html.EditorFor(model => model.LikedCount)
         @Html.EditorFor(model => model.DisLikeCount)
@@ -68,18 +70,18 @@
             <div class="col-md-offset-2 col-md-10">
                 <div class="btn-group">
                     <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                    <a href="@Url.Action("Delete", new { id = Model.ReviewID })" title="Delete this record?" class="btn btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+                    <a href="@Url.Action("Delete", new {id = Model.ReviewID})" title="Delete this record?" class="btn btn-danger" onclick=" return confirm('Are you sure?') "><span class="glyphicon glyphicon-remove"></span> Delete</a>
                     <div class="input-group-btn inline">
                         <button title="Save and create new one" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
-                    </div>                    
-                </div>               
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 }
 
-@Html.Partial("_ValidatorCommonForm", new ViewDataDictionary { 
-    {"token",token}
+@Html.Partial("_ValidatorCommonForm", new ViewDataDictionary {
+    {"token", token}
 })
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

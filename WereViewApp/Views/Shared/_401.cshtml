@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    HttpContext.Current.Response.StatusCode = 401;
+    if (ViewBag.Reason == null) {
+        ViewBag.Reason = "Sorry you are not authorized, maybe you have not validated your email address.";
+    }
+    ViewBag.Title = "401 : Unauthorized";
+    
+}
+<div class="custom-error-page">
+    <h1 class="text-danger h1 gap-from-top-small error-page-title-version-2">
+        @ViewBag.Title
+    </h1>
+    <div class="top-gap-2x">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="~/images/error-icon-bucket.png" alt="Not authorized" />
+            </div>
+            <div class="col-md-8">
+                <p class="error-content">
+                    Sorry for the inconvience , you  
+                    <strong class="red bold">are not authrozied</strong> here.
+                    Please check if you have validated your email or registered successfully.
+                    Please check in your inbox or spam folder for email verification.
+                    Please feel free to contact with for any nessary feedback or help.
+                </p>
+                <p class="reason-of-error">Possible reason : @ViewBag.Reason</p>
+
+                <div class="contactus">Please feel free to @Html.ContactFormActionLink("contact us", "Contact Us - " + @AppVar.Name).</div>
+            </div>
+        </div>
+    </div>
+</div>

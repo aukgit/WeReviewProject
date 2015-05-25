@@ -1,4 +1,3 @@
-@using WereViewApp.Modules.ValidatorExtentions
 @model DateTime?
 
 @{
@@ -28,13 +27,14 @@
     htmlAttributes.Add("data-date-format", "DD/MMM/YYYY");
 }
 
-<div class="form-group@(Html.ValidationErrorFor(m => m, " has-error")) form-row-@ViewData.ModelMetadata.PropertyName">
+<div class="form-group form-row-@ViewData.ModelMetadata.PropertyName">
     <div class="controls">
-        <label class="col-md-2 control-label form-label-@ViewData.ModelMetadata.PropertyName" for="@ViewData.ModelMetadata.PropertyName">@ViewData.ModelMetadata.DisplayName<span class="red">@isRequiredStar</span></label>
+        <label class="col-md-2 control-label form-label-@ViewData.ModelMetadata.PropertyName" for="@ViewData.ModelMetadata.PropertyName">
+            @ViewData.ModelMetadata.DisplayName<span class="red">@isRequiredStar</span></label>
         <div class="col-md-10">
             <div class="input-group date datepicker inline form-input-@ViewData.ModelMetadata.PropertyName">
                 @if (Model != null) {
-                    var dt = (DateTime)Model;
+                    var dt = (DateTime) Model;
                     @Html.TextBox("", dt.ToString(@"dd/MMM/yyyy"), htmlAttributes)
                 } else {
                     @Html.TextBox("", "", htmlAttributes)
@@ -44,12 +44,14 @@
                 </span>
             </div>
             @if (@ViewData.ModelMetadata.Description != null) {
-                <a data-toggle="tooltip" data-original-title="@ViewData.ModelMetadata.Description" title="@ViewData.ModelMetadata.Description" class="tooltip-show inline"><span class="glyphicon glyphicon-question-sign font-size-22 glyphicon-top-fix almost-white"></span></a>
+                <a data-toggle="tooltip" data-original-title="@ViewData.ModelMetadata.Description" title="@ViewData.ModelMetadata.Description" class="tooltip-show inline">
+                    <span class="description-icon"></span>
+                </a>
             }
             <a data-toggle="tooltip" title="Validating" data-original-title="Validating" class="tooltip-show CustomValidation @ViewData.ModelMetadata.PropertyName no-hover">
-                <span data-display="@ViewData.ModelMetadata.DisplayName" class="CustomValidation @ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-refresh-animate hide" title="Validating"></span>
+                <span data-display="@ViewData.ModelMetadata.DisplayName" class="CustomValidation @ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-spin hide" title="Validating"></span>
             </a>
-            @Html.ValidationMessageFor(m => m, null, new { @class = "inline-block rounded-3 label label-danger fixed-width-294 validation-box table-cell" })
+            @Html.ValidationMessageFor(m => m, null, new {@class = "inline-block rounded-3 label label-danger fixed-width-294 validation-box table-cell"})
         </div>
     </div>
 </div>

@@ -1,0 +1,60 @@
+﻿@using WereViewApp.Models.EntityModel
+@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
+@model List<App>
+@{
+    Layout = null;
+    string userName = "";
+    if (Model != null && Model.Count > 0) {
+        userName = ViewBag.UserName;
+    }
+    string divSubtitle = userName + "'s apps collection in" + AppVar.Name;
+}
+@if (Model != null && Model.Count > 0) {
+    <div class="app-suggested-list-wrapper featured-apps-wrapper" title="@divSubtitle">
+        <div class="app-suggested-list float-right">
+            <div class="apps-list-header-row">
+                <a class="title" href="#" title="@divSubtitle">
+                    <h1 title="" class="float-right">Developers Apps</h1>
+                </a>
+                <div class="clear"></div>
+            </div>
+            <div class="app-suggested-list-items featured-apps-list-items" title="@divSubtitle">
+                @foreach (var app in Model) {
+                    string url = app.GetAppUrl();
+                    Platform platform = @app.GetPlatform();
+                    string platformSubtitle = platform.PlatformName + " mobile apps";
+                    <a class="app-box" href="@url" title="@app.AppName">
+                        <img class="app-icon" itemprop="image" src="@app.SuggestionIconLocation" alt="@app.AppName"/>
+                        <div class="app-description-wrapper">
+                            <div class="app-title-container">
+                                <div class="app-title-row">
+                                    <h1 itemprop="name" class="app-title ubuntu-font">
+                                        <i class="@platform.Icon">
+                                            <em title="@platformSubtitle" class="seo-hide">@platformSubtitle</em>
+                                        </i>
+                                        <strong title="@app.AppName">
+                                            @app.AppName
+                                        </strong>
+                                    </h1>
+                                    <span class="paragraph-end"></span>
+                                </div>
+                                <div class="published-by" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                                    <span itemprop="name">
+                                        @app.User.UserName
+                                    </span>
+                                    <span class="paragraph-end"></span>
+                                </div>
+                                <div class="seo-rating seo-hide" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                                    <span itemprop="ratingValue">@app.AvgRating</span> stars based on
+                                    <meta itemprop="best" content="5"/>
+                                    <span itemprop="reviewCount">@app.ReviewsCount</span> reviews
+                                </div>
+                                <input class="rating-5-front" value="@app.AvgRating" min="0" max="5" step="0.5" data-readonly="true" data-size="xs">
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+}

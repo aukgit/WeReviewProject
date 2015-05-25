@@ -60,6 +60,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="DevMVCComponent, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevMVCComponent.1.0.2\lib\DevMVCComponent.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevTrends.MvcDonutCaching">
       <HintPath>..\packages\MvcDonutCaching.1.3.0\lib\net40\DevTrends.MvcDonutCaching.dll</HintPath>
     </Reference>
@@ -236,12 +240,15 @@
     <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
     <Compile Include="Models\POCO\Structs\FeedbackCategoryIDs.cs" />
+    <Compile Include="Modules\Extensions\ViewEngine\RenderingView.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapGenerator.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapItem.cs" />
     <Compile Include="Modules\Sitemaps\SitemapChangeFrequency.cs" />
     <Compile Include="Modules\Sitemaps\SitemapGenerator.cs" />
     <Compile Include="Modules\Sitemaps\SitemapItem.cs" />
     <Compile Include="Modules\Sitemaps\SitemapResult.cs" />
+    <Compile Include="Scheduler\WeReviewScheduler.cs" />
+    <Compile Include="Scheduler\SchedulerRunner.cs" />
     <Compile Include="WereViewAppCommon\Algorithms.cs" />
     <Compile Include="App_Start\AppConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -423,12 +430,6 @@
     <Content Include="App_Data\WereViewApp_log.ldf">
       <DependentUpon>WereViewApp.mdf</DependentUpon>
     </Content>
-    <Content Include="Content\CompactCSS.css">
-      <DependentUpon>CompactCSS.css.bundle</DependentUpon>
-    </Content>
-    <Content Include="Content\CompactCSS.min.css">
-      <DependentUpon>CompactCSS.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\animate-refresh.css" />
     <Content Include="Content\css\animate-refresh.css.map">
       <DependentUpon>animate-refresh.css</DependentUpon>
@@ -549,7 +550,6 @@
     <Content Include="Content\css\Tagit\jquery.tagedit.css" />
     <Content Include="Content\css\Tagit\ui-lightness\jquery-ui-1.9.2.custom.min.css" />
     <Content Include="Content\css\Upload\jquery.fileupload.css" />
-    <Content Include="Content\CompactCSS.css.bundle" />
     <Content Include="Content\css\utilities.css" />
     <Content Include="Content\css\utilities.css.map">
       <DependentUpon>utilities.css</DependentUpon>
@@ -565,6 +565,22 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\Less\animate-refresh.less" />
     <None Include="Content\Less\override-mvc.less" />
+    <Content Include="Content\Published.Scripts\front-end.js" />
+    <Content Include="Content\Published.Scripts\front-end.min.js">
+      <DependentUpon>front-end.js</DependentUpon>
+    </Content>
+    <Content Include="Content\Published.Scripts\jqueryval.js" />
+    <Content Include="Content\Published.Scripts\jqueryval.min.js">
+      <DependentUpon>jqueryval.js</DependentUpon>
+    </Content>
+    <Content Include="Content\Published.Scripts\upload.js" />
+    <Content Include="Content\Published.Scripts\upload.min.js">
+      <DependentUpon>upload.js</DependentUpon>
+    </Content>
+    <Content Include="Content\Published.Styles\Styles.css" />
+    <Content Include="Content\Published.Styles\Styles.min.css">
+      <DependentUpon>Styles.css</DependentUpon>
+    </Content>
     <Content Include="Content\revolution-slider\assets\arrowleft.png" />
     <Content Include="Content\revolution-slider\assets\arrowright.png" />
     <Content Include="Content\revolution-slider\assets\arrow_left.png" />
@@ -604,45 +620,24 @@
     <Content Include="Content\Scripts\bootstrap-select.js" />
     <Content Include="Content\Scripts\bootstrap-table.js" />
     <Content Include="Content\Scripts\bootstrap.min.js" />
-    <Content Include="Content\Scripts\Bundles\FrontEndJs.js">
-      <DependentUpon>FrontEndJs.js.bundle</DependentUpon>
-    </Content>
-    <Content Include="Content\Scripts\Bundles\FrontEndJs.min.js">
-      <DependentUpon>FrontEndJs.js</DependentUpon>
-    </Content>
-    <Content Include="Content\Scripts\Bundles\jqueryval.js">
-      <DependentUpon>jqueryval.js.bundle</DependentUpon>
-    </Content>
-    <Content Include="Content\Scripts\Bundles\jqueryval.min.js">
-      <DependentUpon>jqueryval.js</DependentUpon>
-    </Content>
-    <Content Include="Content\Scripts\Bundles\UploadJs.js">
-      <DependentUpon>UploadJs.js.bundle</DependentUpon>
-    </Content>
-    <Content Include="Content\Scripts\Bundles\UploadJs.min.js">
-      <DependentUpon>UploadJs.js</DependentUpon>
-    </Content>
     <Content Include="Content\Scripts\DevOrgPlugins\ComboOptions.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.country-phone.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.dynamicSelect.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\every-page.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\dev-component-runner.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.component.js" />
-    <Content Include="Content\Scripts\DevOrgPlugins\faster-jQuery.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\byId.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\WeReviewApps.js" />
-    <Content Include="Content\Scripts\Bundles\UploadJs.js.bundle" />
-    <Content Include="Content\Scripts\Bundles\FrontEndJs.js.bundle" />
-    <Content Include="Content\Scripts\Bundles\jqueryval.js.bundle" />
     <Content Include="Content\Less\bootstrap-datetimepicker.less" />
     <Content Include="Content\Less\responsive.less" />
-    <Content Include="Content\Scripts\Bundles\jqueryval.min.js.map">
+    <Content Include="Content\Published.Scripts\front-end.min.js.map">
+      <DependentUpon>front-end.min.js</DependentUpon>
+    </Content>
+    <Content Include="Content\Published.Scripts\jqueryval.min.js.map">
       <DependentUpon>jqueryval.min.js</DependentUpon>
     </Content>
-    <Content Include="Content\Scripts\Bundles\FrontEndJs.min.js.map">
-      <DependentUpon>FrontEndJs.min.js</DependentUpon>
-    </Content>
-    <Content Include="Content\Scripts\Bundles\UploadJs.min.js.map">
-      <DependentUpon>UploadJs.min.js</DependentUpon>
+    <Content Include="Content\Published.Scripts\upload.min.js.map">
+      <DependentUpon>upload.min.js</DependentUpon>
     </Content>
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
@@ -696,106 +691,14 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="How run.txt" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Config\Index.cshtml" />
     <Content Include="Icon.png" />
-    <Content Include="images\app-screen.png" />
-    <Content Include="images\avatar.png" />
-    <Content Include="images\b-avatar-1.jpg" />
-    <Content Include="images\b-avatar-3.jpg" />
-    <Content Include="images\b-avatar-4.jpg" />
-    <Content Include="images\b-avatar-5.jpg" />
-    <Content Include="images\b-avatar.jpg" />
-    <Content Include="images\b-img-1.jpg" />
-    <Content Include="images\b-img-2.jpg" />
-    <Content Include="images\b-img-3.jpg" />
-    <Content Include="images\background\texti-bg.html" />
-    <Content Include="images\bg\bg-1.jpg" />
-    <Content Include="images\bg\body-pattern.jpg" />
-    <Content Include="images\bg\pattern-bg.jpg" />
-    <Content Include="images\bg\pattern-port.jpg" />
-    <Content Include="images\bg\pro-bnr-bg.jpg" />
-    <Content Include="images\bg\sub-banner.jpg" />
-    <Content Include="images\bg\team-bg.jpg" />
-    <Content Include="images\bg\tweet-bg.jpg" />
-    <Content Include="images\browser-img.png" />
-    <Content Include="images\chart-img-1.png" />
-    <Content Include="images\chart-img-2.png" />
-    <Content Include="images\chart-img-3.png" />
-    <Content Include="images\chart-img-4.png" />
-    <Content Include="images\error-icon-bucket.png" />
-    <Content Include="images\f-b-img-1.jpg" />
-    <Content Include="images\f-b-img-2.jpg" />
-    <Content Include="images\f-b-img-3.jpg" />
-    <Content Include="images\favicon.ico" />
-    <Content Include="images\fixed\graph.png" />
-    <Content Include="images\fixed\slidebg1.jpg" />
-    <Content Include="images\fixed\woman.png" />
-    <Content Include="images\flag-1.png" />
-    <Content Include="images\flag-2.png" />
-    <Content Include="images\flag-3.png" />
-    <Content Include="images\flag-4.png" />
-    <Content Include="images\games-image.jpg" />
-    <Content Include="images\icon-1.png" />
-    <Content Include="images\icon-2.png" />
-    <Content Include="images\icon-3.png" />
-    <Content Include="images\icon-4.png" />
-    <Content Include="images\img-1.jpg" />
-    <Content Include="images\img-2.jpg" />
-    <Content Include="images\img-3.jpg" />
-    <Content Include="images\img-4.jpg" />
-    <Content Include="images\img-5.jpg" />
-    <Content Include="images\img-6.jpg" />
-    <Content Include="images\ipad.png" />
-    <Content Include="images\iphone-half.png" />
-    <Content Include="images\iphone-land.png" />
-    <Content Include="images\iphone.png" />
-    <Content Include="images\item-img-1.jpg" />
-    <Content Include="images\item-img-2.jpg" />
-    <Content Include="images\logo-blue.png" />
-    <Content Include="images\logo-dark.png" />
-    <Content Include="images\logo-white.png" />
-    <Content Include="images\logo.png" />
-    <Content Include="images\mobile.png" />
-    <Content Include="images\p-s-img.jpg" />
-    <Content Include="images\product-img-1.jpg" />
-    <Content Include="images\product-img-2.jpg" />
-    <Content Include="images\product-img-3.jpg" />
-    <Content Include="images\product-img-4.jpg" />
-    <Content Include="images\side-img-1.jpg" />
-    <Content Include="images\slides\rs-slide-1.jpg" />
-    <Content Include="images\slides\rs-slide-2.jpg" />
-    <Content Include="images\slides\rs-slide-3.jpg" />
-    <Content Include="images\slides\slide-img-1.png" />
-    <Content Include="images\slides\slide-img-2.png" />
-    <Content Include="images\slides\slide-img-3.png" />
-    <Content Include="images\slides\slide1.jpg" />
-    <Content Include="images\slides\slide4.jpg" />
-    <Content Include="images\slide_1.png" />
-    <Content Include="images\team-1.png" />
-    <Content Include="images\team-2.png" />
-    <Content Include="images\team-3.png" />
-    <Content Include="images\team-4.png" />
-    <Content Include="images\texti-hr.html" />
-    <Content Include="images\thumb-h-1.jpg" />
-    <Content Include="images\thumb-h.jpg" />
-    <Content Include="images\thumb-m-2.jpg" />
-    <Content Include="images\thumb-m-5.jpg" />
-    <Content Include="images\thumb-m.jpg" />
-    <Content Include="images\thumb1.jpg" />
-    <Content Include="images\thumb10.jpg" />
-    <Content Include="images\thumb2.jpg" />
-    <Content Include="images\thumb3.jpg" />
-    <Content Include="images\thumb4.jpg" />
-    <Content Include="images\thumb5.jpg" />
-    <Content Include="images\thumb6.jpg" />
-    <Content Include="images\thumb7.jpg" />
-    <Content Include="images\thumb8.jpg" />
-    <Content Include="images\thumb9.jpg" />
+    <Content Include="Images\error-icon-bucket.png" />
+    <Content Include="Images\slider-background-image.jpg" />
     <Content Include="robots.txt" />
     <Content Include="Content\Scripts\bootstrap-table-export.js" />
     <Content Include="Areas\Admin\Views\ImageResizeSettings\Create.cshtml" />
@@ -898,11 +801,20 @@
     <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-6.jpg" />
     <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-7.jpg" />
     <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-8.jpg" />
+    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-2.jpg" />
+    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-3.jpg" />
+    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-4.jpg" />
+    <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-2.jpg" />
+    <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-3.jpg" />
     <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-1.jpg" />
     <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-2.jpg" />
     <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-3.jpg" />
     <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-4.jpg" />
     <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-5.jpg" />
+    <Content Include="Uploads\Images\Gallery\5dc57933-5c3d-4b94-9d30-0a311418037e-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\61dd3da2-07e9-4863-ac61-50930156905e-1.jpg" />
     <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-1.jpg" />
     <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-2.jpg" />
     <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-3.jpg" />
@@ -910,6 +822,12 @@
     <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-5.jpg" />
     <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-6.jpg" />
     <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-7.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-2.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-3.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-4.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-5.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-6.jpg" />
     <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-1.jpg" />
     <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-2.jpg" />
     <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-3.jpg" />
@@ -918,18 +836,37 @@
     <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-6.jpg" />
     <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-7.jpg" />
     <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-8.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
     <Content Include="Uploads\Images\HomePageFeatured\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\61dd3da2-07e9-4863-ac61-50930156905e-0.jpg" />
     <Content Include="Uploads\Images\HomePageFeatured\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
     <Content Include="Uploads\Images\HomePageFeatured\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
     <Content Include="Uploads\Images\HomePageThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
     <Content Include="Uploads\Images\HomePageThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
     <Content Include="Uploads\Images\HomePageThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
     <Content Include="Uploads\Images\SearchThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
     <Content Include="Uploads\Images\SearchThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
     <Content Include="Uploads\Images\SearchThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
     <Content Include="Uploads\Images\SuggestionThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
     <Content Include="Uploads\Images\SuggestionThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
     <Content Include="Uploads\Images\SuggestionThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.png" />
     <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Byte.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
@@ -958,7 +895,6 @@
     <Content Include="Views\Shared\EditorTemplates\UploaderAuto.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UploaderPlain.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Username.cshtml" />
-    <Content Include="WereViewApp.publish.xml" />
     <Content Include="App_Data\DataCached\Suggested\1" />
     <Content Include="App_Data\DataCached\Suggested\2" />
     <Content Include="Content\Less\blog-page.less" />
@@ -999,14 +935,10 @@
     <Content Include="Content\Scripts\jquery.validate.min.js.map">
       <DependentUpon>jquery.validate.min.js</DependentUpon>
     </Content>
-    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
@@ -1100,7 +1032,11 @@
     <Content Include="Views\Shared\EditorTemplates\Rating-5-b.cshtml" />
     <Content Include="Views\Reviews\_SavingButton.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DropDownDynamic.cshtml" />
-    <Content Include="Views\Report\Report.cshtml" />
+    <Content Include="Views\Report\_Report.cshtml" />
+    <Content Include="Views\Shared\_401.cshtml" />
+    <Content Include="Views\Report\App.cshtml" />
+    <Content Include="Views\Report\Review.cshtml" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />
@@ -1111,13 +1047,13 @@
     <Folder Include="App_Data\DataCached\SearchResult\" />
     <Folder Include="App_Data\elmah\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Content\Bundles\" />
     <Folder Include="Models\DesignPattern\Abstracts\" />
     <Folder Include="Models\POCO\AdditionalDatabase\" />
     <Folder Include="Models\POCO\Plugable\" />
     <Folder Include="Modules\Filters\" />
     <Folder Include="Uploads\Files\Private\" />
     <Folder Include="Uploads\Images\Private\" />
-    <Folder Include="Uploads\Images\YoutubeCovers\" />
     <Folder Include="Views\Basic\" />
     <Folder Include="Views\Errors\" />
   </ItemGroup>
@@ -1125,16 +1061,9 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\DevMVCComponent\DevMVCComponent\DevMVCComponent\DevMVCComponent.csproj">
-      <Project>{9302c6e3-fbe2-4a99-9be3-81e80724cec6}</Project>
-      <Name>DevMVCComponent</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

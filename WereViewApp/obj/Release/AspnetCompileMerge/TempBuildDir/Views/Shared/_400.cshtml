@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    HttpContext.Current.Response.StatusCode = 400;
+    if (ViewBag.Reason == null) {
+        ViewBag.Reason = "You have made a bad request.";
+    }
+    ViewBag.Title = "400 : Bad Request";
+}
+<div class="custom-error-page">
+    <h1 class="text-danger h1 gap-from-top-small error-page-title-version-2">
+        @ViewBag.Title
+    </h1>
+    <div class="top-gap-2x">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="~/images/error-icon-bucket.png" alt="app not found" />
+            </div>
+            <div class="col-md-8">
+                <p class="error-content">
+                    Sorry for the inconvience , however your requested page seems to be a
+                    <strong class="red bold">bad request</strong>.
+                    Please try again from home page or list of apps.
+                    For further information , please be in touch with admin.
+                </p>
+                <p class="reason-of-error">Possible reason : @ViewBag.Reason</p>
+
+                <div class="contactus">Please feel free to @Html.ContactFormActionLink("contact us", "Contact Us - " + @AppVar.Name).</div>
+            </div>
+        </div>
+    </div>
+</div>

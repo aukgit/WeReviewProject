@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<bundle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://vswebessentials.com/schemas/v1/bundle.xsd">
+  <settings>
+    <!--Determines if the bundle file should be automatically optimized after creation/update.-->
+    <minify>true</minify>
+    <!--Determin whether to generate/re-generate this bundle on building the solution.-->
+    <runOnBuild>true</runOnBuild>
+    <adjustRelativePaths>true</adjustRelativePaths>
+
+    <!--Specifies a custom subfolder to save files to. By default, compiled output will be placed in the same folder and nested under the original file.-->
+    <outputDirectory>../published.scripts</outputDirectory>
+  </settings>
+  <!--The order of the <file> elements determines the order of the files in the bundle.-->
+  <files>
+    <file>/Content/Scripts/jquery.validate.js</file>
+    <file>/Content/Scripts/jquery.validate.unobtrusive.min.js</file>
+    <file>/Content/Scripts/moment.js</file>
+    <file>/Content/Scripts/bootstrap-datetimepicker.js</file>
+    <file>/Content/Scripts/bootstrap-select.js</file>
+    <file>/Content/Scripts/bootstrap-table.js</file>
+    <file>/Content/Scripts/bootstrap-table-filter.js</file>
+    <file>/Content/Scripts/bootstrap-table-export.js</file>
+    <file>/Content/Scripts/jquery.elastic.source.js</file>
+
+    <file>/Content/Scripts/DevOrgPlugins/developers-organism.dynamicSelect.js</file>
+    <file>/Content/Scripts/DevOrgPlugins/developers-organism.country-phone.js</file>
+    <file>/Content/Scripts/DevOrgPlugins/dev-component-runner.js</file>
+  </files>
+</bundle>

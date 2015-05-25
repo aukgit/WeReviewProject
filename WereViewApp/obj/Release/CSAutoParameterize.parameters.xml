@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\v11.0;AttachDbFilename=|DataDirectory|\WereViewApp-Accounts.mdf;Initial Catalog=WereViewApp-Accounts;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="E:\\Working\\GitHub\\WereViewProject\\WereViewApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="WereViewAppEntities-Web.config Connection String" description="WereViewAppEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.EntityModel.WereViewAppModel.csdl|res://*/Models.EntityModel.WereViewAppModel.ssdl|res://*/Models.EntityModel.WereViewAppModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=(LocalDB)\v11.0;attachdbfilename=|DataDirectory|\WereViewApp.mdf;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="E:\\Working\\GitHub\\WereViewProject\\WereViewApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='WereViewAppEntities']/@connectionString" />
+  </parameter>
+</parameters>

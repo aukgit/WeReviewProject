@@ -2,75 +2,133 @@
 @model List<WereViewApp.Models.EntityModel.App>
 
 @{
-    bool isFirst = true;
     Layout = null;
     var length = Model != null ? Model.Count : 0;
-    int i = 0;
-}
-<ol class="carousel-indicators">
-    @for (i = 0; i < length; i++) {
-        string classActive = isFirst ? "active" : null;
-        <li data-target="#myCarousel" data-slide-to="@i" class="myCarousel-target @classActive"></li>
-        {
-            isFirst = false;
-        }
-    }
-</ol>
-@{
-    isFirst = true;
 }
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!--  Indicators  -->
-    <div class="carousel-inner">
+<div id="tp-slider" class="slider-bg-static">
+    <div class="tp-banner-container">
+        <div class="tp-banner gallery-home">
+            <ul itemprop="itemListElement" itemscope itemtype="http://schema.org/Book">
+                <!-- SLIDE 1 -->
+                <!-- LAYER NR. 1 -->
+                @if (Model != null) {
+                    foreach (var app in Model) {
+                        string appName = @app.AppName;
+                        string absUrl = @app.GetAppUrl();
+                        string category = @app.GetCategoryString();
+                        string platform = @app.GetPlatformString();
+                        var platformO = @app.GetPlatform();
 
-        @if (Model != null) {
-            {
-                i = 0;
-            }
-            foreach (var app in Model) {
-                string classActive = isFirst ? "active" : null;
-                string appName = @app.AppName;
-                string absUrl = @app.GetAppURL();
-                string category = @app.GetCategoryString();
-                string platform = @app.GetPlatformString();
-                var platformO = @app.GetPlatform();
-                <div data-slide-no="@i" class="item carousel-item @classActive">
-                    <a href="@absUrl" title="@appName">
-                        <img src="@app.GalleryHomeFeaturedLocation" alt="@app.AppName" class="img-responsive home-page-gallery-image">
-                    </a>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <div class="bannertextBox">
-                                <div class="leftpart visible-md-block visible-lg-block" itemprop="rating" itemtype="@absUrl">
-                                    <span class="rating" itemprop="value" title="rating of @appName">@app.AvgRating</span>
-                                    <meta itemprop="best" content="10" />
+
+                        <li data-transition="fadetobottomfadefromtop" data-slotamount="7" data-masterspeed="2500">
+                            <!-- MAIN IMAGE -->
+                            <img src="/images/slider-background-image.jpg" alt="background" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+                            <!-- LAYERS -->
+                            <!-- LAYER NR. 1 -->
+                            <a href="@absUrl" title="@appName">
+                                <!-- LAYER NR. 2 -->
+                                <div class="tp-caption customin customout"
+                                     data-x="462.916667"
+                                     data-y="top"
+                                     data-customin="x:50;y:150;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.5;scaleY:0.5;skewX:0;skewY:0;opacity:0;transformPerspective:0;transformOrigin:50% 50%;"
+                                     data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                     data-speed="800"
+                                     data-start="700"
+                                     data-easing="Power4.easeOut"
+                                     data-endspeed="500"
+                                     data-endeasing="Power4.easeIn"
+                                     style="z-index: 3">
+                                    <img itemprop="image" src="@app.HomeFeaturedBigImageLocation" alt="Mobile App : @appName">
                                 </div>
-                                <div class="rightpart">
-                                    <h1 class="app-title-in-home-gallery @appName" title="@appName">
-                                        <i class="@platformO.Icon"></i>
-                                        <a href="@absUrl" title="@platform-@app.PlatformVersion @category @appName">
-                                            @Html.Truncate(@appName, 18)
-                                        </a>
-                                    </h1>
-                                    <p title="@appName" class="visible-md-block visible-lg-block">
-                                        @Html.Truncate(app.Description, 100)
-                                    </p>
+                                <!-- LAYER NR. 3 -->
+                                <div class="tp-caption large_bold_grey skewfromrightshort customout app-title"
+                                     data-x="68.752749"
+                                     data-y="7.895833"
+                                     data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                     data-speed="500"
+                                     data-start="800"
+                                     data-easing="Back.easeOut"
+                                     data-endspeed="500"
+                                     data-endeasing="Power4.easeIn"
+                                     data-captionhidden="on"
+                                     style="z-index: 4">
+                                    <h1 class="inline" itemprop="name">
+                                        <strong title="@appName" class="font-normal">@Html.Truncate(@appName, 25)</strong>
+                                    </h1> <span class="app-category inline">@category</span>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {
-                    isFirst = false;
-                    i++;
+                                <!-- LAYER NR. 7 -->
+                                <div class="tp-caption app-description small_thin_grey customin customout"
+                                     data-x="36.333333"
+                                     data-y="105"
+                                     data-customin="x:0;y:100;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:1;scaleY:3;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:0% 0%;"
+                                     data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                     data-speed="500"
+                                     data-start="1300"
+                                     data-easing="Power4.easeOut"
+                                     data-endspeed="500"
+                                     data-endeasing="Power4.easeIn"
+                                     data-captionhidden="on"
+                                     style="z-index: 8">
+                                    @Html.Truncate(app.Description, 100)
+                                </div>
+                                <!-- LAYER NR. 9 -->
+                                <div class="tp-caption platform-icon skewfromleftshort customout"
+                                     data-x="38.87"
+                                     data-y="10.588542"
+                                     data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                     data-speed="500"
+                                     data-start="1600"
+                                     data-easing="Back.easeOut"
+                                     data-endspeed="500"
+                                     data-endeasing="Power4.easeIn"
+                                     data-captionhidden="on"
+                                     style="z-index: 10">
+                                    <i class="@platformO.Icon"></i>
+                                </div>
+                                <!-- LAYER NR. 14 -->
+                                <div class="rating-value-display tp-caption medium_bold_orange skewfromleftshort customout"
+                                     data-x="148.10111"
+                                     data-y="57.347557"
+                                     data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                     data-speed="500"
+                                     data-start="2250"
+                                     data-easing="Back.easeOut"
+                                     data-endspeed="500"
+                                     data-endeasing="Power4.easeIn"
+                                     data-captionhidden="on"
+                                     style="z-index: 15">
+                                    @app.AvgRating<span style="font-weight: 300;">/5 Stars</span>
+                                    <div class="seo-rating seo-hide" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                                        <span itemprop="ratingValue">@app.AvgRating</span> stars based on
+                                        <meta itemprop="best" content="5"/>
+                                        <span itemprop="reviewCount">@app.ReviewsCount</span> reviews
+                                    </div>
+                                </div>
+
+
+                                <!-- LAYER NR. 19 -->
+                                <div class="tp-caption customin customout"
+                                     data-x="36.434444"
+                                     data-y="58.770833"
+                                     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:5;scaleY:5;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                     data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                     data-speed="1000"
+                                     data-start="2000"
+                                     data-easing="Power4.easeOut"
+                                     data-endspeed="500"
+                                     data-endeasing="Power4.easeIn"
+                                     data-captionhidden="on"
+                                     style="z-index: 20">
+                                    <input class="rating-5-front" value="@app.AvgRating" min="0" max="5" step="0.5" data-readonly="true" data-size="xs">
+                                </div>
+                            </a>
+
+                        </li>
+                    }
                 }
-            }
-        }
+            </ul>
+            <div class="tp-bannertimer tp-bottom"></div>
+        </div>
     </div>
-
-    <div class="container">
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="fa fa-chevron-right"></i></a>
-    </div>
-</div><!-- /.carousel -->
+</div>
