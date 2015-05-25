@@ -63,6 +63,7 @@
           </Key>
           <Property Name="CategoryID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Slug" Type="varchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <EntityType Name="CellPhone">
           <Key>
@@ -175,18 +176,6 @@
           <Property Name="PlatformID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PlatformName" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="Icon" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Report">
-          <Key>
-            <PropertyRef Name="ReportID" />
-          </Key>
-          <Property Name="ReportID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AppID" Type="bigint" Nullable="false" />
-          <Property Name="UserID" Type="bigint" Nullable="false" />
-          <Property Name="IsFalseReport" Type="bit" Nullable="false" />
-          <Property Name="IsChecked" Type="bit" Nullable="false" />
-          <Property Name="ActionTakenMessageToSender" Type="varchar" MaxLength="50" />
-          <Property Name="ActionTakenMessageToHolder" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Review">
           <Key>
@@ -440,30 +429,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Report_App">
-          <End Role="App" Type="Self.App" Multiplicity="1" />
-          <End Role="Report" Type="Self.Report" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="App">
-              <PropertyRef Name="AppID" />
-            </Principal>
-            <Dependent Role="Report">
-              <PropertyRef Name="AppID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Report_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Report" Type="Self.Report" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Report">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Review_App">
           <End Role="App" Type="Self.App" Multiplicity="1" />
           <End Role="Review" Type="Self.Review" Multiplicity="*" />
@@ -574,7 +539,6 @@
           <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NotificationType" EntityType="Self.NotificationType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Platform" EntityType="Self.Platform" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReviewLikeDislike" EntityType="Self.ReviewLikeDislike" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
@@ -639,14 +603,6 @@
             <End Role="NotificationType" EntitySet="NotificationType" />
             <End Role="Notification" EntitySet="Notification" />
           </AssociationSet>
-          <AssociationSet Name="FK_Report_App" Association="Self.FK_Report_App">
-            <End Role="App" EntitySet="App" />
-            <End Role="Report" EntitySet="Report" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Report_User" Association="Self.FK_Report_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Report" EntitySet="Report" />
-          </AssociationSet>
           <AssociationSet Name="FK_Review_App" Association="Self.FK_Review_App">
             <End Role="App" EntitySet="App" />
             <End Role="Review" EntitySet="Review" />
@@ -698,7 +654,6 @@
           <EntitySet Name="Notifications" EntityType="WereViewAppModel.Notification" />
           <EntitySet Name="NotificationTypes" EntityType="WereViewAppModel.NotificationType" />
           <EntitySet Name="Platforms" EntityType="WereViewAppModel.Platform" />
-          <EntitySet Name="Reports" EntityType="WereViewAppModel.Report" />
           <EntitySet Name="Reviews" EntityType="WereViewAppModel.Review" />
           <EntitySet Name="ReviewLikeDislikes" EntityType="WereViewAppModel.ReviewLikeDislike" />
           <EntitySet Name="Tags" EntityType="WereViewAppModel.Tag" />
@@ -722,10 +677,6 @@
           <AssociationSet Name="FK_FeaturedImage_App" Association="WereViewAppModel.FK_FeaturedImage_App">
             <End Role="App" EntitySet="Apps" />
             <End Role="FeaturedImage" EntitySet="FeaturedImages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Report_App" Association="WereViewAppModel.FK_Report_App">
-            <End Role="App" EntitySet="Apps" />
-            <End Role="Report" EntitySet="Reports" />
           </AssociationSet>
           <AssociationSet Name="FK_Review_App" Association="WereViewAppModel.FK_Review_App">
             <End Role="App" EntitySet="Apps" />
@@ -774,10 +725,6 @@
           <AssociationSet Name="FK_Notification_NotificationType" Association="WereViewAppModel.FK_Notification_NotificationType">
             <End Role="NotificationType" EntitySet="NotificationTypes" />
             <End Role="Notification" EntitySet="Notifications" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Report_User" Association="WereViewAppModel.FK_Report_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Report" EntitySet="Reports" />
           </AssociationSet>
           <AssociationSet Name="FK_Review_User" Association="WereViewAppModel.FK_Review_User">
             <End Role="User" EntitySet="Users" />
@@ -836,7 +783,6 @@
           <NavigationProperty Name="Platform" Relationship="WereViewAppModel.FK_App_Platform" FromRole="App" ToRole="Platform" />
           <NavigationProperty Name="User" Relationship="WereViewAppModel.FK_App_User" FromRole="App" ToRole="User" />
           <NavigationProperty Name="FeaturedImages" Relationship="WereViewAppModel.FK_FeaturedImage_App" FromRole="App" ToRole="FeaturedImage" />
-          <NavigationProperty Name="Reports" Relationship="WereViewAppModel.FK_Report_App" FromRole="App" ToRole="Report" />
           <NavigationProperty Name="Reviews" Relationship="WereViewAppModel.FK_Review_App" FromRole="App" ToRole="Review" />
           <NavigationProperty Name="TagAppRelations" Relationship="WereViewAppModel.FK_TagAppRelation_App" FromRole="App" ToRole="TagAppRelation" />
         </EntityType>
@@ -869,6 +815,7 @@
           </Key>
           <Property Name="CategoryID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Slug" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Apps" Relationship="WereViewAppModel.FK_App_Category" FromRole="Category" ToRole="App" />
         </EntityType>
         <EntityType Name="CellPhone">
@@ -998,20 +945,6 @@
           <NavigationProperty Name="Apps" Relationship="WereViewAppModel.FK_App_Platform" FromRole="Platform" ToRole="App" />
           <NavigationProperty Name="CellPhones" Relationship="WereViewAppModel.FK_CellPhone_Platform" FromRole="Platform" ToRole="CellPhone" />
         </EntityType>
-        <EntityType Name="Report">
-          <Key>
-            <PropertyRef Name="ReportID" />
-          </Key>
-          <Property Name="ReportID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AppID" Type="Int64" Nullable="false" />
-          <Property Name="UserID" Type="Int64" Nullable="false" />
-          <Property Name="IsFalseReport" Type="Boolean" Nullable="false" />
-          <Property Name="IsChecked" Type="Boolean" Nullable="false" />
-          <Property Name="ActionTakenMessageToSender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ActionTakenMessageToHolder" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="App" Relationship="WereViewAppModel.FK_Report_App" FromRole="Report" ToRole="App" />
-          <NavigationProperty Name="User" Relationship="WereViewAppModel.FK_Report_User" FromRole="Report" ToRole="User" />
-        </EntityType>
         <EntityType Name="Review">
           <Key>
             <PropertyRef Name="ReviewID" />
@@ -1093,7 +1026,6 @@
           <NavigationProperty Name="Messages1" Relationship="WereViewAppModel.FK_Message_User1" FromRole="User" ToRole="Message" />
           <NavigationProperty Name="MessageSeens" Relationship="WereViewAppModel.FK_MessageSeen_User" FromRole="User" ToRole="MessageSeen" />
           <NavigationProperty Name="MessageSeens1" Relationship="WereViewAppModel.FK_MessageSeen_User1" FromRole="User" ToRole="MessageSeen" />
-          <NavigationProperty Name="Reports" Relationship="WereViewAppModel.FK_Report_User" FromRole="User" ToRole="Report" />
           <NavigationProperty Name="Reviews" Relationship="WereViewAppModel.FK_Review_User" FromRole="User" ToRole="Review" />
           <NavigationProperty Name="ReviewLikeDislikes" Relationship="WereViewAppModel.FK_ReviewLikeDislike_User" FromRole="User" ToRole="ReviewLikeDislike" />
           <NavigationProperty Name="UserPoints" Relationship="WereViewAppModel.FK_UserPoint_User" FromRole="User" ToRole="UserPoint" />
@@ -1163,18 +1095,6 @@
               <PropertyRef Name="AppID" />
             </Principal>
             <Dependent Role="FeaturedImage">
-              <PropertyRef Name="AppID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Report_App">
-          <End Type="WereViewAppModel.App" Role="App" Multiplicity="1" />
-          <End Type="WereViewAppModel.Report" Role="Report" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="App">
-              <PropertyRef Name="AppID" />
-            </Principal>
-            <Dependent Role="Report">
               <PropertyRef Name="AppID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1323,18 +1243,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Report_User">
-          <End Type="WereViewAppModel.User" Role="User" Multiplicity="1" />
-          <End Type="WereViewAppModel.Report" Role="Report" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Report">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Review_User">
           <End Type="WereViewAppModel.User" Role="User" Multiplicity="1" />
           <End Type="WereViewAppModel.Review" Role="Review" Multiplicity="*" />
@@ -1470,6 +1378,7 @@
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="WereViewAppModel.Category">
               <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
               </MappingFragment>
@@ -1594,19 +1503,6 @@
                 <ScalarProperty Name="Icon" ColumnName="Icon" />
                 <ScalarProperty Name="PlatformName" ColumnName="PlatformName" />
                 <ScalarProperty Name="PlatformID" ColumnName="PlatformID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Reports">
-            <EntityTypeMapping TypeName="WereViewAppModel.Report">
-              <MappingFragment StoreEntitySet="Report">
-                <ScalarProperty Name="ActionTakenMessageToHolder" ColumnName="ActionTakenMessageToHolder" />
-                <ScalarProperty Name="ActionTakenMessageToSender" ColumnName="ActionTakenMessageToSender" />
-                <ScalarProperty Name="IsChecked" ColumnName="IsChecked" />
-                <ScalarProperty Name="IsFalseReport" ColumnName="IsFalseReport" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="AppID" ColumnName="AppID" />
-                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
