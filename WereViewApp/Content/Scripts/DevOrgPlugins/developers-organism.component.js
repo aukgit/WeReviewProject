@@ -11,11 +11,12 @@
 /// <reference path="developers-organism.component.js" />
 
 
-/*!
- * Written by Alim Ul Karim
- * Developers Organism
- * https://www.facebook.com/DevelopersOrganism
- * mailto:info@developers-organism.com
+/*
+* Version 2.2
+* Written by Alim Ul Karim
+* Developers Organism
+* https://www.facebook.com/DevelopersOrganism
+* mailto:info@developers-organism.com
 */
 
 
@@ -39,8 +40,13 @@ $.devOrg = {
         return jQueryHtmlElement.getAllClasses();
     },
 
-    // allClassesArray = ['a','b','c'] , exceptClassesArray=['b','c'], results=['a']
     getClassesExcept: function (allClassesArray, exceptClassesArray) {
+        /// <summary>
+        /// allClassesArray = ['a','b','c'] , exceptClassesArray=['b','c'], results=['a']
+        /// </summary>
+        /// <param name="allClassesArray"></param>
+        /// <param name="exceptClassesArray"></param>
+        "use strict";
         if (allClassesArray === null || allClassesArray === undefined) {
             return [];
         }
@@ -58,16 +64,15 @@ $.devOrg = {
         }
         return results;
     },
-    // all Selectors are jQuery Selector Text  only.
-    // selectpicker will be called inside function, no need to call outside.
     countryFlagRefresh: function (countrySelector, dropDownItemsSelector, dropDownBtnSelector) {
         /// <summary>
-        /// Make country selector to selector
-        /// and get refresh flag 
+        /// all Selectors are jQuery Selector Text  only.
+        /// selectpicker will be called inside function, no need to call outside.
         /// </summary>
         /// <param name="countrySelector">Select country and make it selectpicker()</param>
         /// <param name="dropDownItemsSelector"></param>
         /// <param name="dropDownBtnSelector"></param>
+        "use strict";
         var countryBox = $(countrySelector).selectpicker(); // only select a select element then apply the custom bootstrap selector
         var dropDownItems = $(dropDownItemsSelector); // getting generated dropdown items from the custom bootstrap selector
         var dropDownBtn = $(dropDownBtnSelector); // generated new button from the selectpicker option
@@ -87,9 +92,16 @@ $.devOrg = {
             dropDownBtn.addClass("fc-" + flagClass[0]);
         });
     },
-    // countryFlagRefresh must be called first or selectpicker must be called first
-    // all Selectors are jQuery Selector Text  only.
     countryRelatedToPhone: function (countrySelector, dropDownItemsSelector, dropDownBtnSelector, phoneNumberInputSelector) {
+        /// <summary>
+        /// countryFlagRefresh must be called first or selectpicker must be called first
+        /// all Selectors are jQuery Selector Text  only.
+        /// </summary>
+        /// <param name="countrySelector"></param>
+        /// <param name="dropDownItemsSelector"></param>
+        /// <param name="dropDownBtnSelector"></param>
+        /// <param name="phoneNumberInputSelector"></param>
+        "use strict";
         var countryBox = $(countrySelector);
         var dropDownItems = $(dropDownItemsSelector);
         //var dropDownBtn = $(dropDownBtnSelector);
@@ -100,7 +112,7 @@ $.devOrg = {
             // console.log("executed");
             var listItem = dropDownItems.find("li.selected");
             var spanText = listItem.find("a > span").text().toString();
-            var newCallingCode = $.devOrg.getTextBetween(spanText, "(", ")");
+            var newCallingCode = $.devOrg.subStringMod(spanText, "(", ")");
             var getWrittenPhoneNumber = phoneNumberBox.val();
             // console.log(listItem);
             newCallingCode = $.devOrg.replaceStartsWith(newCallingCode, "+", "");
@@ -119,7 +131,15 @@ $.devOrg = {
         // $("#selectID option")[index].selected = true;
     },
 
-    getTextBetween: function (givenString, startSequence, endingSequence) {
+    subStringMod: function (givenString, startSequence, endingSequence) {
+        /// <summary>
+        /// Give the sub string by searching the start and end sequence.
+        /// subStringMod("Hello (World)", "(", ")") returns "World"
+        /// </summary>
+        /// <param name="givenString">Given string</param>
+        /// <param name="startSequence">What find first.</param>
+        /// <param name="endingSequence">What is the ending string.</param>
+        "use strict";
         if (_.isString(givenString)) {
             var index1 = givenString.indexOf(startSequence);
             if (index1 > -1) {
@@ -394,6 +414,7 @@ $.devOrg = {
     },
 
     validateTextInputBasedOnRegEx: function (jQuerySelectorforTextBox, stringRegEx, msgOnInvalidPattern) {
+        "use strict";
         /// <summary>
         ///     Validate text input while typing with ASP.NET jquery validation.
         ///     Only the attributes with the text. No event is bound.
@@ -408,6 +429,7 @@ $.devOrg = {
     },
 
     reSetupjQueryValidate: function (jQueryFormSelector) {
+        "use strict";
         /// <summary>
         ///     call after setting new reg ex via validateTextInputBasedOnRegEx
         /// </summary>
@@ -420,6 +442,7 @@ $.devOrg = {
     },
 
     validateTextInputsBasedOnHiddenSpansGiven: function (formSelector) {
+        "use strict";
         /// <summary>
         ///     inComplete
         ///     There should be span for each of inputs that needs to be modified or changed.
@@ -475,6 +498,9 @@ $.devOrg = {
         ///     valid statement show on the check mark. By default: fieldDisplayname +
         ///     is available and valid
         /// </param>
+
+        "use strict";
+
         //if (_.isEmpty(isSubmitTheWholeForm)) {
         //    isSubmitTheWholeForm = false;
         //}
@@ -503,6 +529,7 @@ $.devOrg = {
             }
 
             $userTextbox.blur(function () {
+                "use strict";
                 if (!isSubmitTheWholeForm) {
                     $("#validation #id").val($userTextbox.val());
                 }
@@ -681,6 +708,9 @@ $.devOrg = {
 
 
     fillRegisterFieldsOnDemo: function () {
+        /// <summary>
+        /// Test Function
+        /// </summary>
         var i = 0;
         var controls = $(".form-group");
         var $fields = controls.find("input[type=text]");
@@ -717,6 +747,11 @@ $.devOrg = {
     },
     //'.make-it-tab'
     bootstrapTabsMordernize: function (tabSelector) {
+        /// <summary>
+        /// give jQuery selector to add tab functionality
+        /// </summary>
+        /// <param name="tabSelector"></param>
+        "use strict";
         var bootstrapTabs = $(tabSelector);
         if (bootstrapTabs.length > 0) {
             var tabHidden = $(".tab-content input[type='hidden'][name='tab']");
@@ -748,10 +783,18 @@ $.devOrg = {
         }
     },
     ratingMordernize: function () {
-        var $ratingItems = $(".rating-5,.rating-10");
 
-        if ($ratingItems.length > 0) {
-            $ratingItems.rating({
+        var ratingItems = $(".rating-5");
+
+        if (ratingItems.length > 0) {
+            ratingItems.rating({
+                showClear: false
+            });
+        }
+        ratingItems = $(".rating-10");
+
+        if (ratingItems.length > 0) {
+            ratingItems.rating({
                 showClear: false,
                 starCaptionClasses: {
                     0.5: "label label-danger",
@@ -793,6 +836,8 @@ $.devOrg = {
         /// <param name="jQueryformSelector">jQuery selector for the form</param>
         /// <param name="keepOthersVisible">Should add new hide ones or previous ones hides and load new ones(divs)</param>
         /// <param name="dontSubmit">When none left , do we submit? True: don't submit</param>
+        "use strict";
+        
         var slideObjects = $(jQueryformSelector + " [data-dev-slide][data-dev-visited='false']");
         var executedOnce = false;
         var binders = "input[type='text']:visible," +
@@ -858,6 +903,8 @@ $.devOrg = {
     },
     // Send inputs array, if any of those false , returns false.
     checkValidInputs: function (jBinders) {
+        "use strict";
+
         var $currentInput = null;
         var length = jBinders.length;
         var label = "<label class='label label-danger small-font-size'>Please rate first.</label>";
