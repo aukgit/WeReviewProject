@@ -32,9 +32,9 @@
         <label class="col-md-2 control-label form-label-@ViewData.ModelMetadata.PropertyName" for="@ViewData.ModelMetadata.PropertyName">
             @ViewData.ModelMetadata.DisplayName<span class="red">@isRequiredStar</span></label>
         <div class="col-md-10">
-            <div class="input-group date datepicker inline form-input-@ViewData.ModelMetadata.PropertyName">
+            <div class="input-group datepicker-start inline form-input-@ViewData.ModelMetadata.PropertyName">
                 @if (Model != null) {
-                    var dt = (DateTime) Model;
+                    var dt = Model == null ? DateTime.Now : (DateTime)Model;
                     @Html.TextBox("", dt.ToString(@"dd/MMM/yyyy"), htmlAttributes)
                 } else {
                     @Html.TextBox("", "", htmlAttributes)

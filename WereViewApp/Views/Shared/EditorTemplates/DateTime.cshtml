@@ -32,15 +32,15 @@
         <label class="col-md-2 control-label form-label-@ViewData.ModelMetadata.PropertyName" for="@ViewData.ModelMetadata.PropertyName">
             @ViewData.ModelMetadata.DisplayName<span class="red">@isRequiredStar</span></label>
         <div class="col-md-10">
-            <div class="input-group date datetimepicker inline form-input-@ViewData.ModelMetadata.PropertyName">
+            <div class='input-group datetimepicker-start inline form-input-@ViewData.ModelMetadata.PropertyName'>
                 @if (Model != null) {
-                    var dt = (DateTime) Model;
+                    var dt = Model == null ? DateTime.Now : (DateTime)Model;
                     @Html.TextBox("", dt.ToString(@"dd/MMM/yyyy h:mm:ss tt"), htmlAttributes)
                 } else {
                     @Html.TextBox("", "", htmlAttributes)
                 }
                 <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-time"></span>
+                    <span class="fa-calendar fa"></span>
                 </span>
             </div>
             @if (@ViewData.ModelMetadata.Description != null) {
