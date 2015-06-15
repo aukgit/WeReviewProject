@@ -420,11 +420,6 @@
     <Content Include="App_Data\DatabaseTables\CountryLanguage-Country-20.table" />
     <Content Include="App_Data\DatabaseTables\UserTimeZone-Country-20.table" />
     <Content Include="App_Data\DatabaseTables\UserTimeZone-Country-239.table" />
-    <Content Include="App_Data\DataCached\Database\45040001-5666-4427-aee6-8ad3b566db51-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\7324f4fb-bda6-4faf-b0b2-dbfa472cf013-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\8435a280-7ead-418b-9b63-f29a0816ec7a-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\8d6d1103-2304-4f92-8af5-7ff649d7b557-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-appInfo.mdb" />
     <Content Include="App_Data\WereViewApp-Accounts.mdf" />
     <Content Include="App_Data\WereViewApp-Accounts_log.ldf">
       <DependentUpon>WereViewApp-Accounts.mdf</DependentUpon>
@@ -437,16 +432,26 @@
     <Content Include="Content\css\animate-refresh.css.map">
       <DependentUpon>animate-refresh.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\base-theme-styles.css" />
     <Content Include="Content\css\bootstrap-datetimepicker.css" />
     <Content Include="Content\css\bootstrap-datetimepicker.css.map">
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\bootstrap-select.css" />
+    <Content Include="Content\css\bootstrap-table.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\category-page.css" />
     <Content Include="Content\css\category-page.css.map">
       <DependentUpon>category-page.css</DependentUpon>
     </Content>
     <Content Include="Content\css\color-fonts.css" />
+    <Content Include="Content\css\dataTables.bootstrap.css" />
+    <Content Include="Content\css\flags32-combo.css" />
+    <Content Include="Content\css\flags32.css" />
     <Content Include="Content\css\flags32.png" />
+    <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\footer-fixing.css" />
     <Content Include="Content\css\footer-fixing.css.map">
       <DependentUpon>footer-fixing.css</DependentUpon>
@@ -455,62 +460,6 @@
     <Content Include="Content\css\front-developer.css.map">
       <DependentUpon>front-developer.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Images\---back1.png" />
-    <Content Include="Content\css\Images\7_2_start_img.jpg" />
-    <Content Include="Content\css\Images\android_icon.jpg" />
-    <Content Include="Content\css\Images\apple_app.png" />
-    <Content Include="Content\css\Images\appsmenu_li_bg.jpg" />
-    <Content Include="Content\css\Images\avarter_img.jpg" />
-    <Content Include="Content\css\Images\back1.jpg" />
-    <Content Include="Content\css\Images\back1.png" />
-    <Content Include="Content\css\Images\big_start_72.png" />
-    <Content Include="Content\css\Images\big_start_sm_72.png" />
-    <Content Include="Content\css\Images\blue_arrow.png" />
-    <Content Include="Content\css\Images\close%402x.png" />
-    <Content Include="Content\css\Images\close.png" />
-    <Content Include="Content\css\Images\facebook.png" />
-    <Content Include="Content\css\Images\facebook_img.jpg" />
-    <Content Include="Content\css\Images\glyphicons-halflings-white.png" />
-    <Content Include="Content\css\Images\glyphicons-halflings.png" />
-    <Content Include="Content\css\Images\google-plus.png" />
-    <Content Include="Content\css\Images\google_img.png" />
-    <Content Include="Content\css\Images\gray_start.jpg" />
-    <Content Include="Content\css\Images\img.jpg" />
-    <Content Include="Content\css\Images\img_1.jpg" />
-    <Content Include="Content\css\Images\like_img.png" />
-    <Content Include="Content\css\Images\loading%402x.gif" />
-    <Content Include="Content\css\Images\loading.gif" />
-    <Content Include="Content\css\Images\login_li_bg.jpg" />
-    <Content Include="Content\css\Images\mess_hover_img.png" />
-    <Content Include="Content\css\Images\mess_img.png" />
-    <Content Include="Content\css\Images\nav_menu_li_bg.jpg" />
-    <Content Include="Content\css\Images\next%402x.png" />
-    <Content Include="Content\css\Images\next.png" />
-    <Content Include="Content\css\Images\next_bg.png" />
-    <Content Include="Content\css\Images\next_sm_bg.png" />
-    <Content Include="Content\css\Images\photo.jpg" />
-    <Content Include="Content\css\Images\photo2.jpg" />
-    <Content Include="Content\css\Images\prev%402x.png" />
-    <Content Include="Content\css\Images\prev.png" />
-    <Content Include="Content\css\Images\prev_bg.png" />
-    <Content Include="Content\css\Images\prev_sm_bg.png" />
-    <Content Include="Content\css\Images\report_img.png" />
-    <Content Include="Content\css\Images\sample_image_1.jpg" />
-    <Content Include="Content\css\Images\sample_image_2.jpg" />
-    <Content Include="Content\css\Images\sample_image_3.jpg" />
-    <Content Include="Content\css\Images\search_bg.png" />
-    <Content Include="Content\css\Images\search_button.png" />
-    <Content Include="Content\css\Images\search_button_bg.png" />
-    <Content Include="Content\css\Images\share_img.png" />
-    <Content Include="Content\css\Images\star1.png" />
-    <Content Include="Content\css\Images\star1_sm.png" />
-    <Content Include="Content\css\Images\start_ing.jpg" />
-    <Content Include="Content\css\Images\star_green.png" />
-    <Content Include="Content\css\Images\twitter.png" />
-    <Content Include="Content\css\Images\video_img.jpg" />
-    <Content Include="Content\css\Images\video_img2.jpg" />
-    <Content Include="Content\css\Images\windows_icon.jpg" />
-    <Content Include="Content\css\Images\window_app.png" />
     <Content Include="Content\css\less-imports.css" />
     <Content Include="Content\css\less-imports.css.map">
       <DependentUpon>less-imports.css</DependentUpon>
@@ -519,11 +468,15 @@
     <Content Include="Content\css\menu-fix.css.map">
       <DependentUpon>menu-fix.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\miscellaneous.css" />
     <Content Include="Content\css\override-mvc.css" />
     <Content Include="Content\css\override-mvc.css.map">
       <DependentUpon>override-mvc.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\owl.carousel.css" />
     <Content Include="Content\css\owl.custom.finalize.css" />
+    <Content Include="Content\css\owl.custom.finalize.min.css" />
+    <Content Include="Content\css\owl.theme.css" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\responsive.css.map">
       <DependentUpon>responsive.css</DependentUpon>
@@ -536,6 +489,9 @@
     <Content Include="Content\css\seo-optimize.css.map">
       <DependentUpon>seo-optimize.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\Site.css" />
+    <Content Include="Content\css\star-rating.css" />
+    <Content Include="Content\css\style.css" />
     <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\css\Tagit\images\ui-bg_flat_10_000000_40x100.png" />
@@ -569,6 +525,8 @@
     <Content Include="Content\Less\animate-refresh.less" />
     <Content Include="Areas\Admin\Views\AppCategories\_CreateOrEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_NavBar.cshtml" />
+    <Content Include="Content\css\color-fonts.css.map" />
+    <Content Include="Content\css\owl.custom.finalize.css.map" />
     <None Include="Content\Less\override-mvc.less" />
     <Content Include="Content\Published.Scripts\front-end.js" />
     <Content Include="Content\Published.Scripts\front-end.min.js">
