@@ -11,6 +11,8 @@
 /*!
  * Written by Alim Ul Karim
  * Developers Organism
+ * Dated : 14 June 2015
+ * Version : 1.2
  * https://www.facebook.com/DevelopersOrganism
  * mailto:info@developers-organism.com
 */
