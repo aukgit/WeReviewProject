@@ -2,4 +2,5 @@
 	<s:String x:Key="/Default/CodeInspection/Highlighting/AnalysisEnabled/@EntryValue">VISIBLE_FILES</s:String>
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="E:\Working\GitHub\WereViewProject\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll" /&gt;&#xD;
+  &lt;Assembly Path="E:\Working\GitHub\WeReviewApp\WereViewProject\WereViewApp\ExternalDll\DevMVCComponent.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>

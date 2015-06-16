@@ -43,7 +43,14 @@ namespace WereViewApp.Controllers {
         #endregion
 
         #region Single App Display Page : site.com/Apps/Apple-8/Games/plant-vs-zombies
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="platform"></param>
+        /// <param name="platformVersion"></param>
+        /// <param name="category">Category slug</param>
+        /// <param name="url"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [OutputCache(CacheProfile = "Short", VaryByParam = "platform;platformVersion;category;url")]
         public ActionResult SingleAppDisplay(string platform, float platformVersion, string category, string url) {
@@ -1065,7 +1072,7 @@ namespace WereViewApp.Controllers {
                     ManageTagsInDatabase(app.AppID, app.UploadGuid, app.Tags);
                     AppVar.SetSavedStatus(ViewBag, EditSuccessFully(app.AppName, app.IsPublished));
                         // Saved Successfully.
-                    return Redirect(app.GetAppUrl());
+                    return Redirect(app.GetAbsoluteUrl());
                 }
             }
 

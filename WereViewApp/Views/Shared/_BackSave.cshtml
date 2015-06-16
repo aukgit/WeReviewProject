@@ -1,0 +1,19 @@
+﻿@{
+    string controller = ViewBag.controllerName;
+    string areaName = ViewBag.areaName;
+    string link = Url.Action("Index", controller, new { area = areaName });
+}
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <div class="btn-group">
+            <a href="@link" title="Back" class="btn btn-info">
+                <span class="fa fa-arrow-left"></span> Back
+            </a>
+            <div class="input-group-btn inline">
+                <button title="Save" class="btn btn-success">
+                    <i class="fa fa-floppy-o"></i> Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

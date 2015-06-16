@@ -1,5 +1,6 @@
-﻿@import "lesshat.less";
-
+@import "remixens/lesshat.less";
+@import "remixens/variables.less";
+  
 .bootstrap-datetimepicker-widget {
     border-radius: 4px;
     left: 0;
@@ -12,7 +13,7 @@
 
 .bootstrap-datetimepicker-widget.timepicker-sbs {
     width: 600px;
-}
+} 
 
 .bootstrap-datetimepicker-widget.bottom:before {
     border-bottom: 7px solid #ccc;
@@ -256,7 +257,6 @@
     display: block;
     height: 16px;
     width: 16px;
-    .padding(4px, 2px, 0px, 0px);
 }
 
 .bootstrap-datetimepicker-widget.left-oriented:before {
@@ -270,7 +270,7 @@
 }
 
 .bootstrap-datetimepicker-widget ul.list-unstyled li div.timepicker div.timepicker-picker table.table-condensed tbody > tr > td {
-    padding: 0 !important;
+    padding: 0px !important;
 }
 
 @media screen and (max-width: 767px) {
@@ -280,26 +280,14 @@
 }
 //alim
 /*@media screen and (max-width: 768px) {*/
-.timepicker {
-    tr:nth-child(2) {
-        position: relative;
+    .timepicker {
+        tr:nth-child(2) {
+            position: relative;
 
-        td:nth-child(7) {
-            position: absolute;
-            right: 8px;
+            td:nth-child(7) {
+                position: absolute;
+                right: 8px;
+            }
         }
     }
-}
 /*}*/
-//alim for we review datetime hover
-.datepicker , .timepicker {
-    .input-group-addon {
-        cursor:pointer;
-    }
-    .input-group-addon:hover{
-        background-color:#428bca;
-        span{
-            color:white;
-        }
-    }
-}

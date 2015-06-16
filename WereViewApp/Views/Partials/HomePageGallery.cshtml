@@ -15,7 +15,7 @@
                 @if (Model != null) {
                     foreach (var app in Model) {
                         string appName = @app.AppName;
-                        string absUrl = @app.GetAppUrl();
+                        string absUrl = @app.GetAbsoluteUrl();
                         string category = @app.GetCategoryString();
                         string platform = @app.GetPlatformString();
                         var platformO = @app.GetPlatform();

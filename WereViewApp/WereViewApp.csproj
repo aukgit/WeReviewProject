@@ -60,6 +60,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="DevMVCComponent, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevMVCComponent.1.0.4\lib\DevMVCComponent.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevTrends.MvcDonutCaching">
       <HintPath>..\packages\MvcDonutCaching.1.3.0\lib\net40\DevTrends.MvcDonutCaching.dll</HintPath>
     </Reference>
@@ -229,11 +233,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Admin\Controllers\ServicesController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\PlatformsController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
+    <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\CategoryExtend.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
     <Compile Include="Models\POCO\Structs\FeedbackCategoryIDs.cs" />
     <Compile Include="Modules\Extensions\ViewEngine\RenderingView.cs" />
@@ -243,6 +249,7 @@
     <Compile Include="Modules\Sitemaps\SitemapGenerator.cs" />
     <Compile Include="Modules\Sitemaps\SitemapItem.cs" />
     <Compile Include="Modules\Sitemaps\SitemapResult.cs" />
+    <Compile Include="Scheduler\WeReviewDownloadScheduler.cs" />
     <Compile Include="Scheduler\WeReviewScheduler.cs" />
     <Compile Include="Scheduler\SchedulerRunner.cs" />
     <Compile Include="WereViewAppCommon\Algorithms.cs" />
@@ -413,11 +420,6 @@
     <Content Include="App_Data\DatabaseTables\CountryLanguage-Country-20.table" />
     <Content Include="App_Data\DatabaseTables\UserTimeZone-Country-20.table" />
     <Content Include="App_Data\DatabaseTables\UserTimeZone-Country-239.table" />
-    <Content Include="App_Data\DataCached\Database\45040001-5666-4427-aee6-8ad3b566db51-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\7324f4fb-bda6-4faf-b0b2-dbfa472cf013-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\8435a280-7ead-418b-9b63-f29a0816ec7a-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\8d6d1103-2304-4f92-8af5-7ff649d7b557-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-appInfo.mdb" />
     <Content Include="App_Data\WereViewApp-Accounts.mdf" />
     <Content Include="App_Data\WereViewApp-Accounts_log.ldf">
       <DependentUpon>WereViewApp-Accounts.mdf</DependentUpon>
@@ -430,16 +432,26 @@
     <Content Include="Content\css\animate-refresh.css.map">
       <DependentUpon>animate-refresh.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\base-theme-styles.css" />
     <Content Include="Content\css\bootstrap-datetimepicker.css" />
     <Content Include="Content\css\bootstrap-datetimepicker.css.map">
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\bootstrap-select.css" />
+    <Content Include="Content\css\bootstrap-table.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\category-page.css" />
     <Content Include="Content\css\category-page.css.map">
       <DependentUpon>category-page.css</DependentUpon>
     </Content>
     <Content Include="Content\css\color-fonts.css" />
+    <Content Include="Content\css\dataTables.bootstrap.css" />
+    <Content Include="Content\css\flags32-combo.css" />
+    <Content Include="Content\css\flags32.css" />
     <Content Include="Content\css\flags32.png" />
+    <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\footer-fixing.css" />
     <Content Include="Content\css\footer-fixing.css.map">
       <DependentUpon>footer-fixing.css</DependentUpon>
@@ -448,62 +460,6 @@
     <Content Include="Content\css\front-developer.css.map">
       <DependentUpon>front-developer.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Images\---back1.png" />
-    <Content Include="Content\css\Images\7_2_start_img.jpg" />
-    <Content Include="Content\css\Images\android_icon.jpg" />
-    <Content Include="Content\css\Images\apple_app.png" />
-    <Content Include="Content\css\Images\appsmenu_li_bg.jpg" />
-    <Content Include="Content\css\Images\avarter_img.jpg" />
-    <Content Include="Content\css\Images\back1.jpg" />
-    <Content Include="Content\css\Images\back1.png" />
-    <Content Include="Content\css\Images\big_start_72.png" />
-    <Content Include="Content\css\Images\big_start_sm_72.png" />
-    <Content Include="Content\css\Images\blue_arrow.png" />
-    <Content Include="Content\css\Images\close%402x.png" />
-    <Content Include="Content\css\Images\close.png" />
-    <Content Include="Content\css\Images\facebook.png" />
-    <Content Include="Content\css\Images\facebook_img.jpg" />
-    <Content Include="Content\css\Images\glyphicons-halflings-white.png" />
-    <Content Include="Content\css\Images\glyphicons-halflings.png" />
-    <Content Include="Content\css\Images\google-plus.png" />
-    <Content Include="Content\css\Images\google_img.png" />
-    <Content Include="Content\css\Images\gray_start.jpg" />
-    <Content Include="Content\css\Images\img.jpg" />
-    <Content Include="Content\css\Images\img_1.jpg" />
-    <Content Include="Content\css\Images\like_img.png" />
-    <Content Include="Content\css\Images\loading%402x.gif" />
-    <Content Include="Content\css\Images\loading.gif" />
-    <Content Include="Content\css\Images\login_li_bg.jpg" />
-    <Content Include="Content\css\Images\mess_hover_img.png" />
-    <Content Include="Content\css\Images\mess_img.png" />
-    <Content Include="Content\css\Images\nav_menu_li_bg.jpg" />
-    <Content Include="Content\css\Images\next%402x.png" />
-    <Content Include="Content\css\Images\next.png" />
-    <Content Include="Content\css\Images\next_bg.png" />
-    <Content Include="Content\css\Images\next_sm_bg.png" />
-    <Content Include="Content\css\Images\photo.jpg" />
-    <Content Include="Content\css\Images\photo2.jpg" />
-    <Content Include="Content\css\Images\prev%402x.png" />
-    <Content Include="Content\css\Images\prev.png" />
-    <Content Include="Content\css\Images\prev_bg.png" />
-    <Content Include="Content\css\Images\prev_sm_bg.png" />
-    <Content Include="Content\css\Images\report_img.png" />
-    <Content Include="Content\css\Images\sample_image_1.jpg" />
-    <Content Include="Content\css\Images\sample_image_2.jpg" />
-    <Content Include="Content\css\Images\sample_image_3.jpg" />
-    <Content Include="Content\css\Images\search_bg.png" />
-    <Content Include="Content\css\Images\search_button.png" />
-    <Content Include="Content\css\Images\search_button_bg.png" />
-    <Content Include="Content\css\Images\share_img.png" />
-    <Content Include="Content\css\Images\star1.png" />
-    <Content Include="Content\css\Images\star1_sm.png" />
-    <Content Include="Content\css\Images\start_ing.jpg" />
-    <Content Include="Content\css\Images\star_green.png" />
-    <Content Include="Content\css\Images\twitter.png" />
-    <Content Include="Content\css\Images\video_img.jpg" />
-    <Content Include="Content\css\Images\video_img2.jpg" />
-    <Content Include="Content\css\Images\windows_icon.jpg" />
-    <Content Include="Content\css\Images\window_app.png" />
     <Content Include="Content\css\less-imports.css" />
     <Content Include="Content\css\less-imports.css.map">
       <DependentUpon>less-imports.css</DependentUpon>
@@ -512,11 +468,15 @@
     <Content Include="Content\css\menu-fix.css.map">
       <DependentUpon>menu-fix.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\miscellaneous.css" />
     <Content Include="Content\css\override-mvc.css" />
     <Content Include="Content\css\override-mvc.css.map">
       <DependentUpon>override-mvc.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\owl.carousel.css" />
     <Content Include="Content\css\owl.custom.finalize.css" />
+    <Content Include="Content\css\owl.custom.finalize.min.css" />
+    <Content Include="Content\css\owl.theme.css" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\responsive.css.map">
       <DependentUpon>responsive.css</DependentUpon>
@@ -529,6 +489,9 @@
     <Content Include="Content\css\seo-optimize.css.map">
       <DependentUpon>seo-optimize.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\Site.css" />
+    <Content Include="Content\css\star-rating.css" />
+    <Content Include="Content\css\style.css" />
     <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\css\Tagit\images\ui-bg_flat_10_000000_40x100.png" />
@@ -560,10 +523,10 @@
     <Content Include="Content\fonts\fontawesome-webfontd41d.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\Less\animate-refresh.less" />
-    <Content Include="Content\Bundles\Styles.css.bundle" />
-    <Content Include="Content\Bundles\jqueryval.js.bundle" />
-    <Content Include="Content\Bundles\upload.js.bundle" />
-    <Content Include="Content\Bundles\front-end.js.bundle" />
+    <Content Include="Areas\Admin\Views\AppCategories\_CreateOrEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_NavBar.cshtml" />
+    <Content Include="Content\css\color-fonts.css.map" />
+    <Content Include="Content\css\owl.custom.finalize.css.map" />
     <None Include="Content\Less\override-mvc.less" />
     <Content Include="Content\Published.Scripts\front-end.js" />
     <Content Include="Content\Published.Scripts\front-end.min.js">
@@ -697,6 +660,7 @@
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Config\Index.cshtml" />
     <Content Include="Icon.png" />
+    <Content Include="Images\error-icon-bucket.png" />
     <Content Include="Images\slider-background-image.jpg" />
     <Content Include="robots.txt" />
     <Content Include="Content\Scripts\bootstrap-table-export.js" />
@@ -768,10 +732,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Styles\CompactCSS.css" />
     <Content Include="Styles\CompactCSS.min.css">
       <DependentUpon>CompactCSS.css</DependentUpon>
@@ -894,7 +854,6 @@
     <Content Include="Views\Shared\EditorTemplates\UploaderAuto.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UploaderPlain.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Username.cshtml" />
-    <Content Include="WereViewApp.publish.xml" />
     <Content Include="App_Data\DataCached\Suggested\1" />
     <Content Include="App_Data\DataCached\Suggested\2" />
     <Content Include="Content\Less\blog-page.less" />
@@ -939,9 +898,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
@@ -1050,6 +1006,8 @@
     <Folder Include="App_Data\DataCached\SearchResult\" />
     <Folder Include="App_Data\elmah\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Services\" />
+    <Folder Include="Content\Bundles\" />
     <Folder Include="Models\DesignPattern\Abstracts\" />
     <Folder Include="Models\POCO\AdditionalDatabase\" />
     <Folder Include="Models\POCO\Plugable\" />
@@ -1068,10 +1026,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DevMVCComponent\DevMVCComponent\DevMVCComponent\DevMVCComponent.csproj">
-      <Project>{9302c6e3-fbe2-4a99-9be3-81e80724cec6}</Project>
-      <Name>DevMVCComponent</Name>
-    </ProjectReference>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

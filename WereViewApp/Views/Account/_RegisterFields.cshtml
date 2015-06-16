@@ -3,19 +3,7 @@
 @{
     string partialController = ViewBag.dynamicLoadPartialController;
 }
-@*@Html.EditorFor(model => model.CountryID, "DropDownDynamic", new { @Url = @partialController + "GetCountryID", @IsHtmlRequest = "true", @IsStyled = "false" /* ,@IsDependable = "false",@LiveSearch = "true",@Style = "class",@Id = "id", @DynamicLoad = "true"*/})*@
-
-<div class="form-group country-main">
-    <div class="controls">
-        <label class="col-md-2 control-label">Country<span class="red ">*</span></label>
-        <div class="col-md-10 country-combo-div">
-            <!--select will be added here. -->
-            <a href="#" data-toggle="tooltip" data-original-title="Please select your sepecific timezone." title="Please select your sepecific timezone." class="tooltip-show">
-                <span class="description-icon"></span>
-            </a>
-        </div>
-    </div>
-</div>
+@Html.EditorFor(model => model.CountryID, "DropDownDynamic", new { @Url = @partialController + "GetCountryID", @IsHtml = "true" /* ,@IsDependable = "false",@LiveSearch = "true",@Style = "class",@Id = "id", @DynamicLoad = "true"*/})
 <div class="form-group timezone-main">
     <div class="controls">
         <label class="col-md-2 control-label">Timezone<span class="red ">*</span></label>

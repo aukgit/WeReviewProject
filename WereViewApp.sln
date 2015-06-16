@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WereViewApp", "WereViewApp\WereViewApp.csproj", "{DA31CE6F-86EB-4C1F-8EB7-9EACDE88AF8C}"
 EndProject
@@ -9,10 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B42D1C
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevMVCComponent", "..\DevMVCComponent\DevMVCComponent\DevMVCComponent\DevMVCComponent.csproj", "{9302C6E3-FBE2-4A99-9BE3-81E80724CEC6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevMVCComponent", "..\..\DevMVCComponent\DevMVCComponent\DevMVCComponent\DevMVCComponent.csproj", "{9302C6E3-FBE2-4A99-9BE3-81E80724CEC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

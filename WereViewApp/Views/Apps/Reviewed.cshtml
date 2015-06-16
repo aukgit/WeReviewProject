@@ -57,7 +57,7 @@
         <tr>
             <td>
                 @{ editLinkName = item.App.AppName; }
-                <a href="@item.App.GetAppUrl()" title="View App : @item.App.GetAppUrl()">
+                <a href="@item.App.GetAbsoluteUrl()" title="View App : @item.App.GetAbsoluteUrl()">
                     <span class="glyphicon glyphicon-pencil"></span> @editLinkName</a>
             </td>
             <td>

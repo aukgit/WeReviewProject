@@ -1,0 +1,57 @@
+@model Boolean?
+
+@{
+    var isRequired = ViewData.ModelMetadata.IsRequired;
+    string isRequiredStar = isRequired ? "*" : "";
+    var htmlAttributes = new RouteValueDictionary();
+    if (@ViewData.ModelMetadata.DisplayName == null) {
+        ViewData.ModelMetadata.DisplayName = ViewData.ModelMetadata.PropertyName;
+    }
+    if (ViewBag.@class != null) {
+        htmlAttributes.Add("class", ViewBag.@class);
+    }
+
+    if (ViewBag.@type != null) {
+        htmlAttributes.Add("type", ViewBag.@type);
+    }
+
+    if (ViewBag.placeholder != null) {
+        htmlAttributes.Add("placeholder", ViewBag.placeholder);
+    } else {
+        htmlAttributes.Add("placeholder", @ViewData.ModelMetadata.DisplayName + isRequiredStar);
+    }
+    if (ViewBag.label == null) {
+        ViewBag.label = ViewData.ModelMetadata.DisplayName;
+    }
+
+    if (ViewBag.labelColumn == null) {
+        ViewBag.labelColumn = "";
+    }
+    if (ViewBag.textColumn == null) {
+        ViewBag.textColumn = "";
+    }
+    htmlAttributes.Add("title", @htmlAttributes["placeholder"]);
+}
+
+<div class="form-group check-boxes form-row-@ViewData.ModelMetadata.PropertyName">
+    <div class="controls controls-vertical custom-checkbox">
+        <div class="@ViewBag.labelColumn @ViewBag.textColumn remember-me-box">
+            <label class="control-label form-label-@ViewData.ModelMetadata.PropertyName form-input-@ViewData.ModelMetadata.PropertyName" for="@ViewData.ModelMetadata.PropertyName">
+                @Html.CheckBox("", Model.HasValue && Model.Value, htmlAttributes)
+                @ViewBag.label
+            </label>
+            @if (@ViewData.ModelMetadata.Description != null) {
+                <a data-toggle="tooltip" data-original-title="@ViewData.ModelMetadata.Description" title="@ViewData.ModelMetadata.Description" class="tooltip-show">
+                    <span class="description-icon"></span>
+                </a>
+            }
+            <a data-toggle="tooltip" title="Validating" data-original-title="Validating" class="tooltip-show CustomValidation @ViewData.ModelMetadata.PropertyName no-hover">
+                <span data-display="@ViewData.ModelMetadata.DisplayName" class="CustomValidation @ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-spin hide" title="Validating"></span>
+            </a>
+            @Html.ValidationMessageFor(m => m, null, new { @class = "rounded-3 label label-danger fixed-width-294 validation-box" })
+            <div class="pull-right">
+                <button title="Sign in" class="btn btn-primary"><i class="fa fa-sign-in"></i> Login</button>
+            </div>
+        </div>
+    </div>
+</div>

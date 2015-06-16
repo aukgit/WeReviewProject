@@ -11,32 +11,32 @@ namespace WereViewApp.Modules.Cache {
     ///     Default Expiration 5 Hours
     /// </summary>
     public class CacheProcessor {
-        private const string changed = "Changed";
-        private const string unChanged = "UnChanged";
+        private const string Changed = "Changed";
+        private const string UnChanged = "UnChanged";
 
         /// <summary>
         ///     Will be maintained by each db table as single file single text in a
         ///     specific folder.
         /// </summary>
-        private CacheDependency defaultCacheDependency;
+        private CacheDependency _defaultCacheDependency;
 
-        private string defaultDependencyFileLocation;
-        private readonly string appData = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
-        private readonly string CacheName = "";
-        private readonly int defaultExpiration;
+        private string _defaultDependencyFileLocation;
+        private readonly string _appData = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
+        private readonly string _cacheName = "";
+        private readonly int _defaultExpiration;
 
         /// <summary>
         ///     Time between inserted and last access
         /// </summary>
-        private readonly int defaultSliding;
+        private readonly int _defaultSliding;
 
         private void SetDefaults() {
-            defaultDependencyFileLocation = appData + @"\DatabaseTables\";
+            _defaultDependencyFileLocation = _appData + @"\DatabaseTables\";
         }
 
         #region Retrieve Cache Value
 
-        public dynamic Get(string name) {
+        public object Get(string name) {
             if (HttpContext.Current.Cache != null) {
                 return HttpContext.Current.Cache[name];
             }
@@ -62,7 +62,7 @@ namespace WereViewApp.Modules.Cache {
         }
 
         public CacheProcessor(string cacheName) {
-            CacheName = cacheName;
+            _cacheName = cacheName;
             SetDefaults();
         }
 
@@ -72,7 +72,7 @@ namespace WereViewApp.Modules.Cache {
         public CacheProcessor(int expiration) {
             SetDefaults();
             //override after defaults.
-            defaultExpiration = expiration;
+            _defaultExpiration = expiration;
         }
 
         /// <summary>
@@ -84,8 +84,8 @@ namespace WereViewApp.Modules.Cache {
         public CacheProcessor(int expiration, int sliding) {
             SetDefaults();
             //override after defaults.
-            defaultExpiration = expiration;
-            defaultSliding = sliding;
+            _defaultExpiration = expiration;
+            _defaultSliding = sliding;
         }
 
         /// <summary>
@@ -99,11 +99,11 @@ namespace WereViewApp.Modules.Cache {
         ///     cache. [in mins]
         /// </param>
         public CacheProcessor(string cacheName, int expiration, int sliding) {
-            CacheName = cacheName;
+            _cacheName = cacheName;
             SetDefaults();
             //override after defaults.
-            defaultExpiration = expiration;
-            defaultSliding = sliding;
+            _defaultExpiration = expiration;
+            _defaultSliding = sliding;
         }
 
         /// <summary>
@@ -113,10 +113,10 @@ namespace WereViewApp.Modules.Cache {
         /// <param name="cacheName"></param>
         /// <param name="expiration">in mins</param>
         public CacheProcessor(string cacheName, int expiration) {
-            CacheName = cacheName;
+            _cacheName = cacheName;
             SetDefaults();
             //override after defaults.
-            defaultExpiration = expiration;
+            _defaultExpiration = expiration;
         }
 
         #endregion
@@ -142,7 +142,7 @@ namespace WereViewApp.Modules.Cache {
         ///     the file manually if table is updated.
         /// </param>
         public void Set(string key, object data, string tableName) {
-            Set(key, data, defaultExpiration, defaultSliding, tableName, CacheItemPriority.Default);
+            Set(key, data, _defaultExpiration, _defaultSliding, tableName, CacheItemPriority.Default);
         }
 
         /// <summary>
@@ -186,8 +186,8 @@ namespace WereViewApp.Modules.Cache {
             var cache = HttpContext.Current.Cache;
 
 
-            defaultCacheDependency = tableName != null
-                ? new CacheDependency(defaultDependencyFileLocation + tableName + ".table")
+            _defaultCacheDependency = tableName != null
+                ? new CacheDependency(_defaultDependencyFileLocation + tableName + ".table")
                 : null;
             var expiration = System.Web.Caching.Cache.NoAbsoluteExpiration;
             var cacheSliding = System.Web.Caching.Cache.NoSlidingExpiration;
@@ -203,7 +203,7 @@ namespace WereViewApp.Modules.Cache {
 
             if (data != null && key != null) {
                 new Thread(
-                    () => { cache.Insert(key, data, defaultCacheDependency, expiration, cacheSliding, priority, null); })
+                    () => { cache.Insert(key, data, _defaultCacheDependency, expiration, cacheSliding, priority, null); })
                     .Start();
             }
         }
@@ -267,13 +267,13 @@ namespace WereViewApp.Modules.Cache {
         #region Notify File
 
         public void TableStatusSetChanged(string table) {
-            var path = defaultDependencyFileLocation + table + ".table";
-            File.WriteAllText(path, changed);
+            var path = _defaultDependencyFileLocation + table + ".table";
+            File.WriteAllText(path, Changed);
         }
 
         public void TableStatusSetUnChanged(string table) {
-            var path = defaultDependencyFileLocation + table + ".table";
-            File.WriteAllText(path, unChanged);
+            var path = _defaultDependencyFileLocation + table + ".table";
+            File.WriteAllText(path, UnChanged);
         }
 
         /// <summary>
@@ -283,10 +283,10 @@ namespace WereViewApp.Modules.Cache {
         /// <param name="table"></param>
         /// <returns>True : No-Update, False: Updated.</returns>
         public bool TableStatusCheck(string table) {
-            var path = defaultDependencyFileLocation + table + ".table";
+            var path = _defaultDependencyFileLocation + table + ".table";
             if (File.Exists(path)) {
                 var readFromText = File.ReadAllText(path);
-                if (readFromText.StartsWith(unChanged)) {
+                if (readFromText.StartsWith(UnChanged)) {
                     return true; // no update
                 }
             }

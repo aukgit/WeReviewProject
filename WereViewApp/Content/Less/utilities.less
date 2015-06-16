@@ -52,6 +52,7 @@ textarea:hover,
 input[type="text"]:hover,
 input[type="number"]:hover,
 input[type="date"]:hover,
+input[type="password"]:hover,
 input[type="email"]:hover {
     border: 1px solid #ACDFEE;
 }
@@ -97,7 +98,7 @@ div.Error-List ul {
     display: block;
     margin-top: 6px;
     background-color: white;
-    height: 22px;
+    .height(22px);
     padding-left: 8px; /*rounded border*/
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -112,21 +113,52 @@ div.Error-List ul {
 }
 
 .plugin-a-white li a {
-    display: block;
-    padding-left: 8px;
+    -khbtml-border-radius: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
-    -khbtml-border-radius: 3px;
+    border-radius: 3px;
+    display: block;
+    padding-left: 8px;
 }
 
-/*LI*/
+.Opacity-10 {
+    .opacity(.1); /* for all other browsers*/
+}
 
+.Opacity-20 {
+    .opacity(.2); /* for all other browsers*/
+}
+
+.Opacity-30 {
+    .opacity(.3); /* for all other browsers*/
+}
+
+.Opacity-40 {
+    .opacity(.4); /* for all other browsers*/
+}
+
+.Opacity-50 {
+    .opacity(.5); /* for all other browsers*/
+}
+
+.Opacity-60 {
+    .opacity(.6); /* for all other browsers*/
+}
+.Opacity-70 {
+    .opacity(.7); /* for all other browsers*/
+}
 .Opacity-80 {
-    opacity: .8; /* for all other browsers*/
-    filter: alpha(opacity=80); /*for Ie-7*/
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; /*for IE8*/
+    .opacity(.8); /* for all other browsers*/
+}
+.Opacity-90 {
+    .opacity(.9); /* for all other browsers*/
 }
 
+.Opacity-100 {
+    .opacity(1); /* for all other browsers*/
+}
+
+// display properties
 .inline {
     display: inline;
 }
@@ -139,21 +171,51 @@ div.Error-List ul {
     display: block;
 }
 
+.display-table {
+    display: table;
+}
+.display-table-cell {
+    display: table-cell;
+}
+.table-cell {
+    display: table-cell;
+}
 .fixed-width-294 {
-    min-width: 294px;
+    .min-width(294px);
     width: auto;
 }
 
+// rounded properties
+.rounded-1 {
+    .border-rounded(1px);
+}
+.rounded-2 {
+    .border-rounded(1px);
+}
 .rounded-3 {
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    -khbtml-border-radius: 3px;
+    .border-rounded(3px);
 }
 
+.rounded-4 {
+    .border-rounded(4px);
+}
+
+.rounded-5 {
+    .border-rounded(5px);
+}
+
+.rounded-6 {
+    .border-rounded(6px);
+}
+.rounded-7 {
+    .border-rounded(7px);
+}
+.rounded-8 {
+    .border-rounded(8px);
+}
 hr {
-    margin-top: 8px;
     margin-bottom: 8px;
+    margin-top: 8px;
 }
 
 .gap-from-top {

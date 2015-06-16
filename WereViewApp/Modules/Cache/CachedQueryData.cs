@@ -222,8 +222,8 @@ namespace WereViewApp.Modules.Cache {
         ///     return from cache
         /// </summary>
         /// <returns></returns>
-        public static UserTimeZone GetTimezone(int UserTimeZoneID) {
-            return GetTimezones().FirstOrDefault(n => n.UserTimeZoneID == UserTimeZoneID);
+        public static UserTimeZone GetTimezone(int userTimeZoneId) {
+            return GetTimezones().FirstOrDefault(n => n.UserTimeZoneID == userTimeZoneId);
         }
 
         /// <summary>
@@ -238,8 +238,8 @@ namespace WereViewApp.Modules.Cache {
         ///     return from cache
         /// </summary>
         /// <returns></returns>
-        public static Country GetCountry(int CountryID) {
-            return GetCountries().FirstOrDefault(n => n.CountryID == CountryID);
+        public static Country GetCountry(int countryId) {
+            return GetCountries().FirstOrDefault(n => n.CountryID == countryId);
         }
 
         public static Country GetCountry(ApplicationUser user) {

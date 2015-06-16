@@ -58,6 +58,24 @@ $(function () {
         reviewFormSubmitUrl: "/Reviews/Write",
         ///consist of # : "#app-deails-page"
         appDetailsPageParentId: "#app-deails-page",
+        friendlyUrlRegularExpression: "[^A-Za-z0-9_\.~]+",
+
+        getFriendlyUrlSlug: function (str) {
+            /// <summary>
+            /// Returns friendly url slug from given string
+            /// Hello World -> hello-world
+            /// </summary>
+            /// <param name="str"></param>
+            //"[^A-Za-z0-9_\.~]+"
+            if (_.isEmpty(str) === false) {
+                var regexString = $.WeReviewApp.friendlyUrlRegularExpression;
+                str = str.trim();
+                var regExp = new RegExp(regexString, 'gi');
+                return str.replace(regExp, "-");
+            } else {
+                return "";
+            }
+        },
         /**
          * single input IFRAME code HTML  to Square
          */
@@ -257,6 +275,7 @@ $(function () {
         getAttributeRemoveRegularExpressionFor: function (attributeName) {
             return "(" + attributeName + ".*=.*[\"\"'])([a-zA-Z0-9:;\.\s\(\)\-\,]*)([\"\"'])";
         },
+
         removeHeightWidthAttributes: function ($jQueryInputText) {
             var currentText = $jQueryInputText.val();
             //currentText = currentText.toLowerCase();
@@ -269,6 +288,7 @@ $(function () {
             currentText = currentText.replace(reg, "");
             $jQueryInputText.val(currentText);
         },
+
         fixYouTubeVideoPropertise: function () {
             var inputSelectors = "input.url-input";
             var inputFields = $.WeReviewApp.$appForm.find(inputSelectors);
@@ -685,7 +705,7 @@ $(function () {
             }
 
             var $reviewLoadMoreBtn = $("#review-load-more-btn");
-            var reviewShows = 4;
+            //var reviewShows = 4;
             if ($reviewLoadMoreBtn.length > 0) {
                 $div = $("#review-collection");
                 $appBoxes = $div.find("div.blogitembox[data-sequence]");
@@ -734,6 +754,34 @@ $(function () {
             }
         },
 
+        adminArea: function () {
+            /// <summary>
+            /// All codes related to admin area
+            /// </summary>
+            var $adminArea = $.byId("admin-area");
+            var i = 0;
+            if ($adminArea.length > 0) {
+                var controllers = [
+                    {
+                        execute: function category() {
+                            var $categoryPage = $.byId("app-category-editing-page");
+                            if ($categoryPage.length > 0) {
+                                var $slug = $.byId("Slug");
+                                var $category = $.byId("CategoryName");
+                                $category.keyup(function () {
+                                    var slugString = $.WeReviewApp.getFriendlyUrlSlug($category.val());
+                                    $slug.val(slugString);
+                                });
+                            }
+                        }
+                    }
+                ];
+
+                for (i = 0; i < controllers.length; i++) {
+                    controllers[i].execute();
+                }
+            }
+        },
 
         /* 
         * hides all uploader at first : $.WeReviewApp.$appForm.find("#collection-uploaders uploader-auto").hide();
@@ -744,6 +792,9 @@ $(function () {
         * binds with beforeunload which binds with $.WeReviewApp.beforeUnloadEvent
         */
         executeActions: function () {
+            /// <summary>
+            /// Runs every other method.
+            /// </summary>
             $.WeReviewApp.generalAppFormEditingOrPostingPageOnReady();
             //don't require anymore , it has been called from the fron-end.js script
             //$.WeReviewApp.frontEndJavaScript();
@@ -757,6 +808,10 @@ $(function () {
             $("#developers-organism").addClass("hide");
             // fix date inputs
             $.WeReviewApp.fixDateInputs();
+
+            // run other pages
+            $.WeReviewApp.adminArea();
+
         }
     };
 

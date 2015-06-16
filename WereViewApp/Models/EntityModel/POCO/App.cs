@@ -163,7 +163,7 @@ namespace WereViewApp.Models.EntityModel {
 
         /// <summary>
         /// Virtual Field : 
-        /// Will be only set from extension method of App.GetAppUrl()
+        /// Will be only set from extension method of App.GetAbsoluteUrl()
         /// </summary>
         public string AbsUrl { get; set; }
 
