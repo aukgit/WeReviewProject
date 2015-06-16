@@ -1,5 +1,4 @@
-@model float?
-
+@model object
 @{
     var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
@@ -8,16 +7,9 @@
         styleProperty = propLower,
         displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
         description = ViewData.ModelMetadata.Description;
-    float i;
-    if (!Model.HasValue) {
-        i = 0;
-    } else {
-        i = Model.Value;
-    }
+
     var htmlAttributes = new RouteValueDictionary();
-    if (displayName == null) {
-        ViewData.ModelMetadata.DisplayName = ViewData.ModelMetadata.PropertyName;
-    }
+
     if (ViewBag.@class != null) {
         htmlAttributes.Add("class", "form-control " + ViewBag.@class);
     } else {
@@ -26,25 +18,25 @@
 
     if (ViewBag.type != null) {
         htmlAttributes.Add("type", ViewBag.type);
-    } else {
-        htmlAttributes.Add("type", "number");
     }
 
     if (ViewBag.placeholder != null) {
         htmlAttributes.Add("placeholder", ViewBag.placeholder);
     } else {
         if (isRequired) {
-            htmlAttributes.Add("placeholder", displayName + isRequiredStar);
+            htmlAttributes.Add("placeholder", ViewData.ModelMetadata.DisplayName + isRequiredStar);
         } else {
-            htmlAttributes.Add("placeholder", "[" + displayName + "]");
+            htmlAttributes.Add("placeholder", "[" + ViewData.ModelMetadata.DisplayName + "]");
         }
     }
     if (ViewBag.Value != null) {
         htmlAttributes.Add("Value", ViewBag.Value);
     }
+
     if (ViewBag.label != null) {
         displayName = ViewBag.label;
     }
+
     if (ViewBag.labelColumn == null) {
         ViewBag.labelColumn = "col-md-2";
     }
@@ -54,17 +46,18 @@
     if (ViewBag.url != null) {
         htmlAttributes.Add("data-url", ViewBag.url);
     }
+
     htmlAttributes.Add("title", htmlAttributes["placeholder"]);
 }
-
 <div class="form-group form-row @styleProperty" data-prop="@styleProperty">
-    <div class="controls dev-plugin plugin-container float">
+    <div class="controls dev-plugin plugin-container text-type">
         <label class="@ViewBag.textColumn control-label form-label @styleProperty" for="@styleProperty" data-prop="@styleProperty">
-            @displayName <span class="red">@isRequiredStar</span>
+            @displayName
+            <span class="red">@isRequiredStar</span>
         </label>
         <div class="@ViewBag.textColumn form-input @styleProperty" data-prop="@styleProperty">
             <div class="input-validator-container">
-            @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
+                @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
                 <div class="validator-container">
                     <div class="validator">
                         <a>
@@ -78,7 +71,7 @@
                     <span class="description-icon"></span>
                 </a>
             }
-            @Html.ValidationMessageFor(m => m, null, new {@class = "rounded-3 label label-danger fixed-width-294 validation-box"})
+            @Html.ValidationMessageFor(m => m, null, new { @class = "rounded-3 label label-danger fixed-width-294 validation-box" })
         </div>
     </div>
 </div>

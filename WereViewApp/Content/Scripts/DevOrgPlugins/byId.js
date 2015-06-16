@@ -1,20 +1,26 @@
-﻿/// <reference path="../jquery-2.1.3.js" />
-/// <reference path="../jquery-2.1.3.intellisense.js" />
-
-$.byId = function (findElementById) {
+﻿/**!
+ * Written by Alim Ul Karim
+ * Email: devorg.bd{at}gmail.com
+ * Dated : 10 Jun 2015
+ * Version : 1.0
+ * Performance test against jQuery http://jsperf.com/jquery-vs-fasterjquery
+ * @param {string} elementIdString 
+ * @returns a jQuery object. 
+ */
+;$.byId = function (elementIdString) {
     /// <summary>
     /// Get your element by id, there is no need to use #.
     /// However if there is a hash then it will be removed.
     /// </summary>
     /// <param name="findElementById">Your element id, there is no need to use #</param>
     /// <returns>jQuery object , check length property to understand if any exist</returns>
-    if (findElementById !== undefined && findElementById !== null && findElementById !== "") {
+    if (elementIdString !== undefined && elementIdString !== null && elementIdString !== "" && typeof elementIdString === 'string') {
         var elementsById;
-        if (findElementById.charAt(0) !== "#") {
-            elementsById = document.getElementById(findElementById);
+        if (elementIdString.charAt(0) !== "#") {
+            elementsById = document.getElementById(elementIdString);
             return $(elementsById);
         } else {
-            var newId = findElementById.slice(1, findElementById.length);
+            var newId = elementIdString.slice(1, elementIdString.length);
             elementsById = document.getElementById(newId);
             return $(elementsById);
         }
