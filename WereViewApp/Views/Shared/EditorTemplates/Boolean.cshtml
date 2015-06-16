@@ -1,44 +1,63 @@
 @model Boolean?
-
 @{
-    var isRequired = ViewData.ModelMetadata.IsRequired;
-    string isRequiredStar = isRequired ? "*" : "";
+    bool isRequired = ViewData.ModelMetadata.IsRequired;
+    string isRequiredStar = isRequired ? "*" : "",
+        prop = ViewData.ModelMetadata.PropertyName.ToString(),
+        propLower = prop.ToLower(),
+        styleProperty = propLower,
+        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+        description = ViewData.ModelMetadata.Description;
+
+
     var htmlAttributes = new RouteValueDictionary();
-    if (@ViewData.ModelMetadata.DisplayName == null) {
-        ViewData.ModelMetadata.DisplayName = ViewData.ModelMetadata.PropertyName;
-    }
+    
     if (ViewBag.@class != null) {
         htmlAttributes.Add("class", ViewBag.@class);
     }
-
-    if (ViewBag.@type != null) {
-        htmlAttributes.Add("type", ViewBag.@type);
+    if (ViewBag.type != null) {
+        htmlAttributes.Add("type", ViewBag.type);
     }
 
     if (ViewBag.placeholder != null) {
         htmlAttributes.Add("placeholder", ViewBag.placeholder);
     } else {
-        htmlAttributes.Add("placeholder", @ViewData.ModelMetadata.DisplayName + isRequiredStar);
+        if (isRequired) {
+            htmlAttributes.Add("placeholder", @ViewData.ModelMetadata.DisplayName + isRequiredStar);
+        } else {
+            htmlAttributes.Add("placeholder", "[" + @ViewData.ModelMetadata.DisplayName + "]");
+        }
+    }
+    if (ViewBag.Value != null) {
+        htmlAttributes.Add("Value", ViewBag.Value);
     }
 
-    htmlAttributes.Add("title", @htmlAttributes["placeholder"]);
-}
+    if (ViewBag.label == null) {
+        ViewBag.label = displayName;
+    }
 
-<div class="form-group check-boxes form-row-@ViewData.ModelMetadata.PropertyName">
-    <div class="controls custom-checkbox">
-        <div class="col-md-offset-2 col-md-10">
-            <label class="control-label form-label-@ViewData.ModelMetadata.PropertyName form-input-@ViewData.ModelMetadata.PropertyName" for="@ViewData.ModelMetadata.PropertyName">
-                @Html.CheckBox("", Model.HasValue && Model.Value, htmlAttributes)
-                @ViewData.ModelMetadata.DisplayName@*<span class="red">@isRequiredStar</span>*@
-            </label>
-            @if (@ViewData.ModelMetadata.Description != null) {
-                <a data-toggle="tooltip" data-original-title="@ViewData.ModelMetadata.Description" title="@ViewData.ModelMetadata.Description" class="tooltip-show">
-                    <span class="description-icon"></span></a>
-            }
-            <a data-toggle="tooltip" title="Validating" data-original-title="Validating" class="tooltip-show CustomValidation @ViewData.ModelMetadata.PropertyName no-hover">
-                <span data-display="@ViewData.ModelMetadata.DisplayName" class="CustomValidation @ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-spin hide" title="Validating"></span>
-            </a>
-            @Html.ValidationMessageFor(m => m, null, new {@class = "rounded-3 label label-danger fixed-width-294 validation-box"})
+    if (ViewBag.labelColumn == null) {
+        ViewBag.labelColumn = "col-md-offset-2";
+    }
+    if (ViewBag.textColumn == null) {
+        ViewBag.textColumn = "col-md-10";
+    }
+    htmlAttributes.Add("title", htmlAttributes["placeholder"]);
+}
+<div class="form-row @styleProperty" data-prop="@styleProperty">
+    <div class="dev-plugin plugin-container checkbox-type">
+        <div class="@ViewBag.labelColumn @ViewBag.textColumn">
+            <div class="checkbox">
+                <label class="form-input" for="@styleProperty">
+                    @Html.CheckBox("", Model.HasValue && Model.Value, htmlAttributes)
+                    ViewBag.label
+                </label>
+                @if (description != null) {
+                    <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">
+                        <span class="description-icon"></span>
+                    </a>
+                }
+                @Html.ValidationMessageFor(m => m, null, new { @class = "rounded-3 label label-danger fixed-width-294 validation-box" })
+            </div>
         </div>
     </div>
 </div>
