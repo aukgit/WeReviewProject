@@ -10,20 +10,20 @@
 }
 
 
-<h1 class="h2 gap-from-top-small">
+<h1 class="gap-from-top-small h2">
     <span class="glyphicon glyphicon-edit"></span>  
     @Html.SamePageLink(title, subtitle, false)
 </h1>
-<hr/>
+<hr />
 @using (Html.BeginForm(viewName, controller, FormMethod.Post, new {@class = "form-horizontal Create-@ViewBag.Title", role = "form"})) {
     <div class="form-horizontal">
         @token
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-10 col-md-offset-2">
                 <div class="btn-group">
                     <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
                     <a href="@Url.Action("Delete", new {id = Model.ReviewID})" title="Delete this record?" class="btn btn-danger" onclick=" return confirm('Are you sure?') "><span class="glyphicon glyphicon-remove"></span> Delete</a>
-                    <div class="input-group-btn inline">
+                    <div class="inline input-group-btn">
                         <button title="Save and create new one" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
                     </div>
                 </div>
@@ -41,11 +41,11 @@
         @Html.EditorFor(model => model.IsSuggest)
         @Html.EditorFor(model => model.Comment1)
         @Html.EditorFor(model => model.Comment2)
-        <div class="form-group AppID-main">
+        <div class="AppID-main form-group">
             <div class="controls">
                 <label class="col-md-2 control-label">
                     @Html.DisplayNameFor(m => m.AppID)<span class="red ">*</span></label>
-                <div class="col-md-10 AppID-combo-div">
+                <div class="AppID-combo-div col-md-10">
                     @Html.DropDownList("AppID", null, new {@class = "form-control"})
                     <a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m => m.AppID)." title="Please select @Html.DisplayNameFor(m => m.AppID)." class="tooltip-show">
                         <span class="description-icon"></span></a>
@@ -67,11 +67,11 @@
         @Html.EditorFor(model => model.LikedCount)
         @Html.EditorFor(model => model.DisLikeCount)
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-10 col-md-offset-2">
                 <div class="btn-group">
                     <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
                     <a href="@Url.Action("Delete", new {id = Model.ReviewID})" title="Delete this record?" class="btn btn-danger" onclick=" return confirm('Are you sure?') "><span class="glyphicon glyphicon-remove"></span> Delete</a>
-                    <div class="input-group-btn inline">
+                    <div class="inline input-group-btn">
                         <button title="Save and create new one" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
                     </div>
                 </div>

@@ -8,8 +8,8 @@
     string title = ViewBag.Title;
 
     MvcHtmlString token = @Html.AntiForgeryToken();
-    string controller = (string)ViewBag.controller;
-    bool dropDownDynamic = (bool)ViewBag.dropDownDynamic;
+    string controller = (string) ViewBag.controller;
+    bool dropDownDynamic = (bool) ViewBag.dropDownDynamic;
     string partialController = ViewBag.dynamicLoadPartialController;
 
     // comes from controller
@@ -20,8 +20,6 @@
     string subtitle = ViewBag.subtitle;
     App app = null;
     Review review = null;
-
-
 }
 
 @{
@@ -41,20 +39,19 @@
 </h1>
 <hr />
 <!--ViewContext.RouteData.Values["Controller"].ToString()-->
-@using (Html.BeginForm(postingAction, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {
-
+@using (Html.BeginForm(postingAction, controller, FormMethod.Post, new {@class = "form-horizontal Create-@ViewBag.Title", role = "form"})) {
     <div class="form-horizontal">
         @token
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
         @Html.Partial("_SuccessMessage")
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10 controls">
+            <div class="col-md-10 col-md-offset-2 controls">
                 @if (isAppReport) {
-                    <h2 class="h4 red f-em-1">
+                    <h2 class="f-em-1 h4 red">
                         You are reporting on "<a href="@app.GetAbsoluteUrl()">@app.AppName</a>" app. Please make sure that you are not spamming.
                     </h2>
                 } else {
-                    <h2 class="h4 red f-em-1">
+                    <h2 class="f-em-1 h4 red">
                         You are reporting on "<a href="@app.GetAbsoluteUrl()">@review.Title</a>" review. Please make sure that you are not spamming.
                     </h2>
                 }
@@ -66,7 +63,7 @@
         @Html.Hidden("Email", user.Email)
         @Html.EditorFor(model => model.RateUrgency, "Rating-10")
         @Html.EditorFor(model => model.Subject)
-        @Html.HiddenFor(model => model.FeedbackCategoryID, new { @Value = ViewBag.CategoryId })
+        @Html.HiddenFor(model => model.FeedbackCategoryID, new {@Value = ViewBag.CategoryId})
         @*@if (dropDownDynamic) {
                 @Html.EditorFor(model => model.FeedbackCategoryID, "DropDownDynamic", new {@Url = @partialController + "GetFeedbackCategoryID" /* ,@IsDependable = "false",@LiveSearch = "true",@Style = "class",@Id = "id", @DynamicLoad = "true"*/})
             } else {

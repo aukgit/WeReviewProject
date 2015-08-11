@@ -15,7 +15,7 @@
 }
 
 
-<div class="itembox col-md-4 col-sm-4">
+<div class="col-md-4 col-sm-4 itembox">
     <h1 title="@ViewBag.Title">
         <a href="@Html.GetCurrentUrlString()"> @ViewBag.Title</a>
     </h1>
@@ -24,12 +24,12 @@
         string appName = @app.AppName;
         string absUrl = @app.GetAbsoluteUrl();
         <div class="box row">
-            <div class="imagebox col-md-3 col-sm-3">
+            <div class="col-md-3 col-sm-3 imagebox">
                 <a href="@absUrl" title="@appName" data-original-title="@appName" class="tooltip-show">
                     <img class="home-page-image-icon" src="@app.HomePageIconLocation" alt="@appName">
                 </a>
             </div>
-            <div class="textbox col-md-9 col-sm-9">
+            <div class="col-md-9 col-sm-9 textbox">
                 <a href="@absUrl" itemtype="@absUrl" title="@app.Description" data-original-title="@app.Description" class="tooltip-show">
                     <h1 title="@appName">@Html.Truncate(appName, 20)</h1>
                     <p title="@app.Description">
@@ -37,7 +37,7 @@
                     </p>
                     <i class="fa fa-star"></i>
                     <span class="price" itemprop="value" title="rating of @appName" itemprop="rating">@app.AvgRating</span>
-                    <meta itemprop="best" content="10"/>
+                    <meta itemprop="best" content="10" />
                 </a>
                 <a href="@Url.Action(app.Platform.PlatformName, "Apps")" title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" data-original-title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" class="tooltip-show">
                     <i class="@app.Platform.Icon"></i>
@@ -49,18 +49,18 @@
 
 </div>
 @if (secondCountStart > 0) {
-    <div class="itembox col-md-4 col-sm-4 third-list-home-page">
+    <div class="col-md-4 col-sm-4 itembox third-list-home-page">
         @for (int i = secondCountStart; i < secondCountEnd; i++) {
             var app = Model[i];
             string appName = @app.AppName;
             string absUrl = @app.GetAbsoluteUrl();
             <div class="box row">
-                <div class="imagebox col-md-3 col-sm-3">
+                <div class="col-md-3 col-sm-3 imagebox">
                     <a href="@absUrl" title="@appName" data-original-title="@appName" class="tooltip-show">
                         <img class="home-page-image-icon" src="@app.HomePageIconLocation" alt="@appName">
                     </a>
                 </div>
-                <div class="textbox col-md-9 col-sm-9">
+                <div class="col-md-9 col-sm-9 textbox">
                     <a href="@absUrl" itemtype="@absUrl" title="@app.Description" data-original-title="@app.Description" class="tooltip-show">
                         <h1 title="@appName">@Html.Truncate(appName, 20)</h1>
                         <p title="@app.Description">
@@ -68,7 +68,7 @@
                         </p>
                         <i class="fa fa-star"></i>
                         <span class="price" itemprop="value" title="rating of @appName" itemprop="rating">@app.AvgRating</span>
-                        <meta itemprop="best" content="10"/>
+                        <meta itemprop="best" content="10" />
                     </a>
                     <a href="@Url.Action(app.Platform.PlatformName, "Apps")" title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" data-original-title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" class="tooltip-show">
                         <i class="@app.Platform.Icon"></i>
@@ -80,18 +80,18 @@
 }
 
 @if (thirdCountStart > 0) {
-    <div class="itembox col-md-4 col-sm-4 third-list-home-page">
+    <div class="col-md-4 col-sm-4 itembox third-list-home-page">
         @for (int i = thirdCountStart; i < count; i++) {
             var app = Model[i];
             string appName = @app.AppName;
             string absUrl = @app.GetAbsoluteUrl();
             <div class="box row">
-                <div class="imagebox col-md-3 col-sm-3">
+                <div class="col-md-3 col-sm-3 imagebox">
                     <a href="@absUrl" title="@appName" data-original-title="@appName" class="tooltip-show">
                         <img class="home-page-image-icon" src="@app.HomePageIconLocation" alt="@appName">
                     </a>
                 </div>
-                <div class="textbox col-md-9 col-sm-9">
+                <div class="col-md-9 col-sm-9 textbox">
                     <a href="@absUrl" itemtype="@absUrl" title="@app.Description" data-original-title="@app.Description" class="tooltip-show">
                         <h1 title="@appName">@Html.Truncate(appName, 20)</h1>
                         <p title="@app.Description">
@@ -99,7 +99,7 @@
                         </p>
                         <i class="fa fa-star"></i>
                         <span class="price" itemprop="value" title="rating of @appName" itemprop="rating">@app.AvgRating</span>
-                        <meta itemprop="best" content="10"/>
+                        <meta itemprop="best" content="10" />
                     </a>
                     <a href="@Url.Action(app.Platform.PlatformName, "Apps")" title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" data-original-title="@(app.Platform.PlatformName)-@(app.PlatformVersion)" class="tooltip-show">
                         <i class="@app.Platform.Icon"></i>

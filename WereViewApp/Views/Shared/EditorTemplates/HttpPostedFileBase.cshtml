@@ -3,7 +3,7 @@
 @{
     var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
+        prop = ViewData.ModelMetadata.PropertyName,
         propLower = prop.ToLower(),
         styleProperty = propLower,
         displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
@@ -54,10 +54,11 @@
     }
 }
 <div class="form-row-uploader form-group form-row-@ViewData.ModelMetadata.PropertyName">
-    <div class="controls dev-plugin plugin-container uploader file-base">
+    <div class="controls dev-plugin file-base plugin-container uploader">
         <label class="col-md-2 upload-label control-label form-label-@ViewData.ModelMetadata.PropertyName" for="@ViewData.ModelMetadata.PropertyName">
             @if (description != null) {
-                <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show"><span class="glyphicon glyphicon-question-sign font-size-22 almost-white"></span></a>
+                <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">
+                    <span class="almost-white font-size-22 glyphicon glyphicon-question-sign"></span></a>
             }
         </label>
         <div data-id="@ViewBag.data_id_val" class="col-md-10 form-input-@ViewData.ModelMetadata.PropertyName">

@@ -1,16 +1,16 @@
 ﻿@model List<WereViewApp.Models.POCO.Identity.ApplicationUser>
 <h2 class="h2" title="Developers Profile">Developers Profile</h2>
-<div class="row app-date-seperation seo-optimize">
+<div class="app-date-seperation row seo-optimize">
     <div class="col-md-10"></div>
     <div class="col-md-2  text-right">
         <a>
-            <h1 class="month-seperation regular-color bold-important"></h1>
+            <h1 class="bold-important month-seperation regular-color"></h1>
         </a>
     </div>
 </div>
 <div class="row">
     <div class="archive-app-collection-wrapper">
-        <ul class="seo-optimize regular-color archive-app-collection-list search-page-apps-list pagination-required">
+        <ul class="archive-app-collection-list pagination-required regular-color search-page-apps-list seo-optimize">
             @foreach (var user in Model) {
                 <li class="slim-app-view">
                     <a class="app-url" href="@AppVar.Url/Profile/@user.UserName" title="user apps:  @user.FirstName @user.LastName">

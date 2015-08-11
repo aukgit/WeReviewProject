@@ -2,7 +2,7 @@
 @{
     bool isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
+        prop = ViewData.ModelMetadata.PropertyName,
         propLower = prop.ToLower(),
         styleProperty = propLower,
         displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
@@ -10,7 +10,7 @@
 
 
     var htmlAttributes = new RouteValueDictionary();
-    
+
     if (ViewBag.@class != null) {
         htmlAttributes.Add("class", ViewBag.@class);
     }
@@ -44,7 +44,7 @@
     htmlAttributes.Add("title", htmlAttributes["placeholder"]);
 }
 <div class="form-row @styleProperty" data-prop="@styleProperty">
-    <div class="dev-plugin plugin-container checkbox-type">
+    <div class="checkbox-type dev-plugin plugin-container">
         <div class="@ViewBag.labelColumn @ViewBag.textColumn">
             <div class="checkbox">
                 <label class="form-input" for="@styleProperty">
@@ -56,7 +56,7 @@
                         <span class="description-icon"></span>
                     </a>
                 }
-                @Html.ValidationMessageFor(m => m, null, new { @class = "rounded-3 label label-danger fixed-width-294 validation-box" })
+                @Html.ValidationMessageFor(m => m, null, new {@class = "rounded-3 label label-danger fixed-width-294 validation-box"})
             </div>
         </div>
     </div>

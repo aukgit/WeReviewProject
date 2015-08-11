@@ -18,11 +18,11 @@
         </div>
     </div>
     @Html.EditorFor(model => model.PlatformVersion)
-    <div class="form-group CategoryID-main">
+    <div class="CategoryID-main form-group">
         <div class="controls">
             <label class="col-md-2 control-label">
                 @Html.DisplayNameFor(m => m.CategoryID)<span class="red ">*</span></label>
-            <div class="col-md-10 CategoryID-combo-div">
+            <div class="CategoryID-combo-div col-md-10">
                 @Html.DropDownList("CategoryID", null, new {@class = "form-control", data_style = "btn-success", data_live_search = true})
                 <a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m => m.CategoryID)." title="Please select @Html.DisplayNameFor(m => m.CategoryID)." class="tooltip-show">
                     <span class="description-icon"></span></a>

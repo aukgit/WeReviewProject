@@ -2,7 +2,7 @@
 @{
     bool isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
+        prop = ViewData.ModelMetadata.PropertyName,
         propLower = prop.ToLower(),
         styleProperty = propLower,
         displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
@@ -10,7 +10,7 @@
 
 
     var htmlAttributes = new RouteValueDictionary();
-    
+
     if (ViewBag.@class != null) {
         htmlAttributes.Add("class", "form-control " + ViewBag.@class);
     } else {
@@ -31,7 +31,7 @@
         } else {
             htmlAttributes.Add("placeholder", "[" + displayName + "]");
         }
-    }   
+    }
     if (ViewBag.label == null) {
         ViewBag.label = displayName;
     }
@@ -48,8 +48,8 @@
     htmlAttributes.Add("title", htmlAttributes["placeholder"]);
 }
 
-<div class="form-group form-row @styleProperty"  data-prop="@styleProperty">
-    <div class="controls dev-plugin plugin-container email-type">
+<div class="form-group form-row @styleProperty" data-prop="@styleProperty">
+    <div class="controls dev-plugin email-type plugin-container">
         <label class="@ViewBag.labelColumn control-label form-label @styleProperty" for="@styleProperty" data-prop="@styleProperty">
             @ViewBag.label<span class="red">@isRequiredStar</span>
         </label>

@@ -5,14 +5,14 @@
     string currentUrl = Html.GetCurrentUrlWithHostName();
     ViewBag.Title = "Search app reviews";
     bool isModelNotNull = Model != null;
-    bool isEmptySearchString = true;//isModelNotNull && ;
+    bool isEmptySearchString = true; //isModelNotNull && ;
 
     if (isModelNotNull) {
         isEmptySearchString = string.IsNullOrEmpty(Model.SearchQuery);
     }
 }
 <div class="row">
-    <div class="col-md-12 app-detail app-title-wrapper">
+    <div class="app-detail app-title-wrapper col-md-12">
         <div class="app-title-row float-left">
             <a href="@currentUrl" class="app-title" title="Search app reviews">
                 <h1 title="Search app reviews">
@@ -63,40 +63,42 @@
     </div>
     @if (!isEmptySearchString && Model.IsAppExist) {
         <ul class="filter">
-            <li><a class="active" href="#" data-filter="*">All</a></li>
+            <li>
+                <a class="active" href="#" data-filter="*">All</a>
+            </li>
             <li>
                 <a href="#" data-filter="[data-app-type='fa fa-android']">
                     <i class="fa fa-android"></i>
-                    <span class="hidden-xs hidden-sm">Android Apps</span>
+                    <span class="hidden-sm hidden-xs">Android Apps</span>
                 </a>
             </li>
             <li>
                 <a href="#" data-filter="[data-app-type='fa fa-apple']">
                     <i class="fa fa-apple"></i>
-                    <span class="hidden-xs hidden-sm">Apple Apps</span>
+                    <span class="hidden-sm hidden-xs">Apple Apps</span>
                 </a>
             </li>
             <li>
                 <a href="#" data-filter="[data-app-type='fa fa-windows']">
                     <i class="fa fa-windows"></i>
-                    <span class="hidden-xs hidden-sm">Windows Apps</span>
+                    <span class="hidden-sm hidden-xs">Windows Apps</span>
                 </a>
             </li>
         </ul>
-        <div class="row app-date-seperation seo-optimize">
+        <div class="app-date-seperation row seo-optimize">
             <div class="col-md-10"></div>
             <div class="col-md-2  text-right">
                 <a href="#">
-                    <h1 class="month-seperation regular-color bold-important"></h1>
+                    <h1 class="bold-important month-seperation regular-color"></h1>
                 </a>
             </div>
         </div>
     }
     <div class="row">
         <div class="archive-app-collection-wrapper">
-            <ul class="seo-optimize regular-color archive-app-collection-list search-page-apps-list pagination-required">
+            <ul class="archive-app-collection-list pagination-required regular-color search-page-apps-list seo-optimize">
                 @if (isEmptySearchString || !Model.IsAppExist) {
-                    <li class="slim-app-view no-result">
+                    <li class="no-result slim-app-view">
                         @if (!isEmptySearchString && Model.SearchQuery.Length < 3) {
                             <div class="f-em-11 gray">
                                 Please extend your search text to get more appropriate results.
@@ -133,7 +135,6 @@
                             </a>
                         </li>
                     }
-
                 }
             </ul>
             @*@if (isModelNotNull && Model.IsAppExist) {

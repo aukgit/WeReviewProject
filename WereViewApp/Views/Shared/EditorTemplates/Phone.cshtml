@@ -20,7 +20,7 @@
         htmlAttributes.Add("placeholder", ViewBag.placeholder);
     } else {
         if (isRequired) {
-        htmlAttributes.Add("placeholder", @ViewData.ModelMetadata.DisplayName + isRequiredStar);
+            htmlAttributes.Add("placeholder", @ViewData.ModelMetadata.DisplayName + isRequiredStar);
         } else {
             htmlAttributes.Add("placeholder", "[" + @ViewData.ModelMetadata.DisplayName + "]");
         }
@@ -48,7 +48,7 @@
         <label class="@ViewBag.labelColumn control-label form-label-@ViewData.ModelMetadata.PropertyName" for="@ViewData.ModelMetadata.PropertyName">
             @ViewBag.label <span class="red">@isRequiredStar</span>
         </label>
-	<div class="@ViewBag.textColumn form-input-@ViewData.ModelMetadata.PropertyName">
+        <div class="@ViewBag.textColumn form-input-@ViewData.ModelMetadata.PropertyName">
             <span class="inner-addon left-addon phone-input">
                 <i class="@ViewBag.icon"></i>
                 @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)

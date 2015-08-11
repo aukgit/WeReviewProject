@@ -34,7 +34,7 @@
         <div class="col-md-10">
             <div class="input-group datepicker-start inline form-input-@ViewData.ModelMetadata.PropertyName">
                 @if (Model != null) {
-                    var dt = Model == null ? DateTime.Now : (DateTime)Model;
+                    var dt = Model == null ? DateTime.Now : (DateTime) Model;
                     @Html.TextBox("", dt.ToString(@"dd/MMM/yyyy"), htmlAttributes)
                 } else {
                     @Html.TextBox("", "", htmlAttributes)
@@ -44,7 +44,7 @@
                 </span>
             </div>
             @if (@ViewData.ModelMetadata.Description != null) {
-                <a data-toggle="tooltip" data-original-title="@ViewData.ModelMetadata.Description" title="@ViewData.ModelMetadata.Description" class="tooltip-show inline">
+                <a data-toggle="tooltip" data-original-title="@ViewData.ModelMetadata.Description" title="@ViewData.ModelMetadata.Description" class="inline tooltip-show">
                     <span class="description-icon"></span>
                 </a>
             }

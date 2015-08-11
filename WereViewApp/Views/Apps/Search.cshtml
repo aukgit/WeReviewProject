@@ -24,15 +24,14 @@
                         }
                     </strong><strong class="red">"</strong>
                 </h1>
-            }
-            @*<div class="searchboxWrap form-group">
+            }@*<div class="searchboxWrap form-group">
                     <input type="text" class="searchbox form-control" value="Angry Birds" />
                     <input type="submit" value="Search" class="searchbutton btn btn-success" />
                 </div>*@@Html.EditorFor(i => i.Url, "Search")
             @Html.AntiForgeryToken()
         </div>
-        <div class="container innerContainer inner">
-            <div class="contenCol col-md-9 col-sm-9">
+        <div class="container inner innerContainer">
+            <div class="col-md-9 col-sm-9 contenCol">
                 <div class="content">
                     <div class="appsitemWraper">
                         @if (apps != null && apps.Count > 0) {
@@ -40,13 +39,13 @@
                                 string url = app.GetAbsoluteUrl();
                                 var platform = app.GetPlatform();
 
-                                <div class="row appsitemBox">
-                                    <div class="imgWrap col-md-2 col-sm-2">
+                                <div class="appsitemBox row">
+                                    <div class="col-md-2 col-sm-2 imgWrap">
                                         <a href="@url">
                                             <img src="@app.SearchIconLocation" class="img-responsive" alt="@app.AppName">
                                         </a>
                                     </div>
-                                    <div class="textWrap col-md-10 col-sm-10">
+                                    <div class="col-md-10 col-sm-10 textWrap">
                                         <div class="name">
                                             <h1 title="@app.AppName">
                                                 <a href="@url" title="@app.AppName">
@@ -85,7 +84,7 @@
                     @*<div class="morewrap"><a class="loadmore">Load More</a></div>*@
                 </div><!----- content part end ------>
             </div><!----- contenCol part end ------>
-            <!--<div class="rightCol col-md-3 col-sm-3 form-group">
+            <!--<div class="col-md-3 col-sm-3 form-group rightCol">
                 <div class="selectWrap">
                     <div class="boxWrap row">
                         @*<label><input type="checkbox" class="checkbox " value=""> Rating:</label>*@
@@ -98,7 +97,7 @@
                     </div>
                     <div class="boxWrap">
                         <label><input type="checkbox" class="checkbox" value=""> Type:</label>
-                        <input type="text" value="" class="textbox form-control">
+                        <input type="text" value="" class="form-control textbox">
                     </div>
                     <div class="boxWrap">
                         <label><input type="checkbox" class="checkbox" value=""> Platform:</label>

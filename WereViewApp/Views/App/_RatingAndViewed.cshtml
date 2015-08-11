@@ -6,8 +6,8 @@
 <div class="col-sm-8">
     <div class="rating-box-row">
         <div>
-            <div class="star-image start-box float-left">@Model.AvgRating</div>
-            <div class="user-rating-box float-left">
+            <div class="float-left star-image start-box">@Model.AvgRating</div>
+            <div class="float-left user-rating-box">
                 <h4>Your Rating</h4>
                 <div class="price rating-display">
                     @if (hasRated) {
@@ -24,7 +24,7 @@
         </div>
     </div>
 </div>
-<div class="col-sm-4 app-viewed-box">
+<div class="app-viewed-box col-sm-4">
     <h1 class="app-viewed-numbers">@Model.TotalViewed</h1>
     <div class="views-text">views</div>
 </div>

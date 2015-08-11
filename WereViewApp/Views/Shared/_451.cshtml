@@ -5,11 +5,10 @@
         ViewBag.Reason = "You are not authorized to view this.";
     }
     ViewBag.Title = "451 : Unavailable For Legal Reasons (draft)";
-    
 }
 <div class="custom-error-page">
-    <h1 class="text-danger h1 gap-from-top-small error-page-title-version-2">
-       @ViewBag.Title
+    <h1 class="error-page-title-version-2 gap-from-top-small h1 text-danger">
+        @ViewBag.Title
     </h1>
     <div class="top-gap-2x">
         <div class="row">
@@ -19,7 +18,7 @@
             <div class="col-md-8">
                 <p class="error-content">
                     Sorry for the inconvience , your requested page is restricted for
-                    <strong class="red bold">legal reasons</strong>.
+                    <strong class="bold red">legal reasons</strong>.
                     Please try again from home page or list of apps.
                     For further information , please be in touch with admin.
                 </p>

@@ -46,7 +46,7 @@
             @ViewBag.label<span class="red">@isRequiredStar</span>
         </label>
         <div class="@ViewBag.textColumn">
-            <div class='input-group datetimepicker-start inline form-input-@ViewData.ModelMetadata.PropertyName'>
+            <div class="input-group datetimepicker-start inline form-input-@ViewData.ModelMetadata.PropertyName">
                 @if (Model != null) {
                     var dt = Model ?? DateTime.Now;
                     @Html.TextBox("", dt.ToString(@"dd/MMM/yyyy h:mm:ss tt"), htmlAttributes)
@@ -54,11 +54,11 @@
                     @Html.TextBox("", "", htmlAttributes)
                 }
                 <span class="input-group-addon">
-                    <span class="fa-calendar fa"></span>
+                    <span class="fa fa-calendar"></span>
                 </span>
             </div>
             @if (description != null) {
-                <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show inline">
+                <a data-toggle="tooltip" data-original-title="@description" title="@description" class="inline tooltip-show">
                     <span class="description-icon"></span>
                 </a>
             }

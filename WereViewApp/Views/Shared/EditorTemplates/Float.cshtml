@@ -3,7 +3,7 @@
 @{
     var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
+        prop = ViewData.ModelMetadata.PropertyName,
         propLower = prop.ToLower(),
         styleProperty = propLower,
         displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
@@ -58,13 +58,13 @@
 }
 
 <div class="form-group form-row @styleProperty" data-prop="@styleProperty">
-    <div class="controls dev-plugin plugin-container float">
+    <div class="controls dev-plugin float plugin-container">
         <label class="@ViewBag.textColumn control-label form-label @styleProperty" for="@styleProperty" data-prop="@styleProperty">
             @displayName <span class="red">@isRequiredStar</span>
         </label>
         <div class="@ViewBag.textColumn form-input @styleProperty" data-prop="@styleProperty">
             <div class="input-validator-container">
-            @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
+                @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
                 <div class="validator-container">
                     <div class="validator">
                         <a>
