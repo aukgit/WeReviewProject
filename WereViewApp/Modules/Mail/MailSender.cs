@@ -1,4 +1,5 @@
 ﻿using System;
+using DevMvcComponent;
 
 namespace WereViewApp.Modules.Mail {
     public class MailSender {

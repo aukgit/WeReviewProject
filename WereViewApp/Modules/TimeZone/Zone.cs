@@ -8,6 +8,7 @@ using System.Web;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.Cookie;
+using WereViewApp.Modules.DevUser;
 
 #endregion
 
