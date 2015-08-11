@@ -135,7 +135,7 @@ namespace WereViewApp.Modules.Cache {
         private static dynamic GetTableContentsFromCache(string tableName) {
             var tableHasNoUpdate = AppConfig.Caches.TableStatusCheck(tableName);
             var cached = AppConfig.Caches.Get(tableName);
-            bool cacheExist = cached != null;
+            var cacheExist = cached != null;
             if (cacheExist && tableHasNoUpdate) {
                 return cached; //no updates
             }

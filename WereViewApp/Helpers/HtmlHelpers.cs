@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using DevMVCComponent.Enums;
+using DevMvcComponent.Enums;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.DevUser;

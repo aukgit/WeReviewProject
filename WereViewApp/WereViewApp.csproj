@@ -60,8 +60,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="DevMVCComponent, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DevMVCComponent.1.0.4\lib\DevMVCComponent.dll</HintPath>
+    <Reference Include="DevMvcComponent, Version=1.0.20.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevMVCComponent.1.0.20\lib\DevMvcComponent.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DevTrends.MvcDonutCaching">
@@ -387,9 +387,7 @@
     <Compile Include="Modules\Extensions\IdentityExtension\ExtentsionUserIdentityMethods.cs" />
     <Compile Include="Models\POCO\Identity\IdentityModel.cs" />
     <Compile Include="Modules\Cache\CacheNames.cs" />
-    <Compile Include="Modules\Cache\CacheProcessor.cs" />
     <Compile Include="Modules\Cookie\CookieNames.cs" />
-    <Compile Include="Modules\Cookie\CookieProcessor.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Modules\DevHash.cs" />
     <Compile Include="Modules\HTMLGenerator.cs" />
@@ -649,7 +647,6 @@
     <Content Include="Content\Scripts\Upload\load-image.all.min.js" />
     <Content Include="Content\Scripts\validation.js" />
     <Content Include="DevTrends.MvcDonutCaching.README.txt" />
-    <Content Include="ExternalDll\DevMVCComponent.dll" />
     <Content Include="ExternalDll\LinqKit.dll" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

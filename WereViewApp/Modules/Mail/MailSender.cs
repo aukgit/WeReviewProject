@@ -1,5 +1,4 @@
 ﻿using System;
-using DevMVCComponent;
 
 namespace WereViewApp.Modules.Mail {
     public class MailSender {
@@ -65,7 +64,7 @@ namespace WereViewApp.Modules.Mail {
                     }
                     subject += " on method [" + method + "()]";
 
-                    Starter.HanldeError.HandleBy(exception, method, subject, entity);
+                    Starter.Error.HandleBy(exception, method, subject, entity);
                 }
         }
     }

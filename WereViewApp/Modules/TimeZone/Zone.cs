@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region using block
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -6,14 +8,15 @@ using System.Web;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.Cookie;
-using WereViewApp.Modules.DevUser;
+
+#endregion
 
 namespace WereViewApp.Modules.TimeZone {
     public class Zone {
         #region Application Startup function for database
 
         public static void LoadTimeZonesIntoMemory() {
-            dbTimeZones = CachedQueriedData.GetTimezones();
+            _dbTimeZones = CachedQueriedData.GetTimezones();
         }
 
         #endregion
@@ -43,9 +46,9 @@ namespace WereViewApp.Modules.TimeZone {
 
         #region Fields
 
-        private static string defaultTimeFormat = "hh:mm:ss tt";
-        private static string defaultDateFormat = "dd-MMM-yy";
-        private static string defaultDateTimeFormat = "dd-MMM-yy hh:mm:ss tt";
+        private static string _defaultTimeFormat = "hh:mm:ss tt";
+        private static string _defaultDateFormat = "dd-MMM-yy";
+        private static string _defaultDateTimeFormat = "dd-MMM-yy hh:mm:ss tt";
 
         #endregion
 
@@ -54,30 +57,33 @@ namespace WereViewApp.Modules.TimeZone {
         /// <summary>
         ///     hh:mm:ss tt
         /// </summary>
-        public static string TimeFormat {
-            get { return defaultTimeFormat; }
-            set { defaultTimeFormat = value; }
+        public static string TimeFormat
+        {
+            get { return _defaultTimeFormat; }
+            set { _defaultTimeFormat = value; }
         }
 
         /// <summary>
         ///     dd-MMM-yy
         /// </summary>
-        public static string DateFormat {
-            get { return defaultDateFormat; }
-            set { defaultDateFormat = value; }
+        public static string DateFormat
+        {
+            get { return _defaultDateFormat; }
+            set { _defaultDateFormat = value; }
         }
 
         /// <summary>
         ///     dd-MMM-yy
         /// </summary>
-        public static string DateTimeFormat {
-            get { return defaultDateTimeFormat; }
-            set { defaultDateTimeFormat = value; }
+        public static string DateTimeFormat
+        {
+            get { return _defaultDateTimeFormat; }
+            set { _defaultDateTimeFormat = value; }
         }
 
 
         private static readonly ReadOnlyCollection<TimeZoneInfo> SystemTimeZones = TimeZoneInfo.GetSystemTimeZones();
-        private static List<UserTimeZone> dbTimeZones;
+        private static List<UserTimeZone> _dbTimeZones;
 
         #endregion
 
@@ -87,12 +93,12 @@ namespace WereViewApp.Modules.TimeZone {
         }
 
         public Zone(string timeFormat, string dateFormat = null, string dateTimeFormat = null) {
-            defaultTimeFormat = timeFormat;
+            _defaultTimeFormat = timeFormat;
             if (dateFormat != null) {
-                defaultDateFormat = dateFormat;
+                _defaultDateFormat = dateFormat;
             }
             if (dateTimeFormat != null) {
-                defaultDateTimeFormat = dateTimeFormat;
+                _defaultDateTimeFormat = dateTimeFormat;
             }
         }
 
@@ -129,7 +135,7 @@ namespace WereViewApp.Modules.TimeZone {
             //if cache time zone not exist.
             var user = UserManager.GetUser(username);
             if (user != null) {
-                var timezoneDb = dbTimeZones.FirstOrDefault(n => n.UserTimeZoneID == user.UserTimeZoneID);
+                var timezoneDb = _dbTimeZones.FirstOrDefault(n => n.UserTimeZoneID == user.UserTimeZoneID);
                 if (timezoneDb != null) {
                     timeZoneInfo = SystemTimeZones.FirstOrDefault(n => n.Id == timezoneDb.InfoID);
                 }
@@ -162,7 +168,7 @@ namespace WereViewApp.Modules.TimeZone {
         /// <returns></returns>
         private static TimeZoneInfo GetSavedTimeZone(string log) {
             //save to cookie 
-            if (!String.IsNullOrWhiteSpace(log)) {
+            if (!string.IsNullOrWhiteSpace(log)) {
                 var cZone = (TimeZoneInfo) AppConfig.Caches.Get(CookiesNames.ZoneInfo + log);
                 if (cZone == null) {
                     // try cookie.
@@ -216,20 +222,10 @@ namespace WereViewApp.Modules.TimeZone {
         /// <param name="format">if format null then default format.</param>
         /// <returns>Returns nice string format based on logged user's selected time zone.</returns>
         public static string GetTime(DateTime? dt, string format = null) {
-            if (dt == null) {
-                return "";
-            }
-            var dt2 = (DateTime) dt;
-            var timeZone = Get();
-            if (timeZone == null) {
-                return "";
-            }
-            //time zone found.
-            var newDate = TimeZoneInfo.ConvertTime(dt2, timeZone);
             if (format == null) {
                 format = TimeFormat;
             }
-            return newDate.ToString(format);
+            return GetDateTimeDefault(dt, format);
         }
 
         /// <summary>
@@ -239,15 +235,10 @@ namespace WereViewApp.Modules.TimeZone {
         /// <param name="format">if format null then default format.</param>
         /// <returns>Returns nice string format based on logged user's selected time zone.</returns>
         public static string GetDate(DateTime? dt, string format = null) {
-            if (dt == null) {
-                return "";
-            }
-            var dt2 = (DateTime) dt;
-            //time zone found.
             if (format == null) {
                 format = DateFormat;
             }
-            return dt2.ToString(format);
+            return GetDateTimeDefault(dt, format);
         }
 
         /// <summary>
@@ -259,20 +250,10 @@ namespace WereViewApp.Modules.TimeZone {
         /// <param name="format">if format null then default format.</param>
         /// <returns>Returns nice string format based on logged user's selected time zone. If no logged user then empty string.</returns>
         public static string GetDateTime(DateTime? dt, string format = null) {
-            if (dt == null) {
-                return "";
-            }
-            var dt2 = (DateTime) dt;
-            var timeZone = Get();
-            if (timeZone == null) {
-                return "";
-            }
-            //time zone found.
-            var newDate = TimeZoneInfo.ConvertTime(dt2, timeZone);
             if (format == null) {
                 format = DateTimeFormat;
             }
-            return newDate.ToString(format);
+            return GetDateTimeDefault(dt, format);
         }
 
         /// <summary>
@@ -284,20 +265,11 @@ namespace WereViewApp.Modules.TimeZone {
         /// <param name="format">if format null then default format.</param>
         /// <returns>Returns nice string format based on logged user's selected time zone. If no logged user then default datetime.</returns>
         public static string GetDateTimeDefault(DateTime? dt, string format = null) {
-            if (dt == null) {
-                return "";
-            }
-            var dt2 = (DateTime) dt;
-            var timeZone = Get();
-            if (timeZone == null) {
-                return dt2.ToString(format);
-            }
-            //time zone found.
-            var newDate = TimeZoneInfo.ConvertTime(dt2, timeZone);
             if (format == null) {
                 format = DateTimeFormat;
             }
-            return newDate.ToString(format);
+            var timeZone = Get();
+            return GetDateTime(timeZone, dt, format);
         }
 
         #endregion
@@ -314,17 +286,10 @@ namespace WereViewApp.Modules.TimeZone {
         /// <param name="format">if format null then default format.</param>
         /// <returns>Returns nice string format based on logged user's selected time zone.</returns>
         public static string GetTime(TimeZoneInfo timeZone, DateTime? dt, string format = null) {
-            if (dt == null) {
-                return "";
-            }
-            var dt2 = (DateTime) dt;
-
-            //time zone found.
-            var newDate = TimeZoneInfo.ConvertTime(dt2, timeZone);
             if (format == null) {
                 format = TimeFormat;
             }
-            return newDate.ToString(format);
+            return GetDateTime(timeZone, dt, format);
         }
 
         /// <summary>
@@ -335,16 +300,10 @@ namespace WereViewApp.Modules.TimeZone {
         /// <param name="format">if format null then default format.</param>
         /// <returns>Returns nice string format based on logged user's selected time zone.</returns>
         public static string GetDate(TimeZoneInfo timeZone, DateTime? dt, string format = null) {
-            if (dt == null) {
-                return "";
-            }
-            var dt2 = (DateTime) dt;
-            //time zone found.
-            //var newDate = TimeZoneInfo.ConvertTime(dt2, timeZone);
             if (format == null) {
                 format = DateFormat;
             }
-            return dt2.ToString(format);
+            return GetDateTime(timeZone, dt, format);
         }
 
 
@@ -385,11 +344,15 @@ namespace WereViewApp.Modules.TimeZone {
             }
             var dt2 = (DateTime) dt;
 
-            //time zone found.
-            var newDate = TimeZoneInfo.ConvertTime(dt2, timeZone);
             if (format == null) {
                 format = DateTimeFormat;
             }
+            if (timeZone == null) {
+                return dt2.ToString(format);
+            }
+            //time zone found.
+            var newDate = TimeZoneInfo.ConvertTime(dt2, timeZone);
+
             return newDate.ToString(format);
         }
 

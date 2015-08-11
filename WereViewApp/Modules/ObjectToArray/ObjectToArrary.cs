@@ -21,10 +21,7 @@ namespace WereViewApp.Modules.ObjectToArray {
                 foreach (var prop in propertise) {
                     var val = prop.GetValue(Class, null);
                     var propertyName = prop.Name;
-                    var obj = new ObjectProperty {
-                        Name = propertyName,
-                        Value = val
-                    };
+                    var obj = new ObjectProperty {Name = propertyName, Value = val};
                     list.Add(obj);
                 }
                 return list;

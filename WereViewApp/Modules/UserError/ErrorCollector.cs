@@ -13,12 +13,12 @@ namespace WereViewApp.Modules.UserError {
 
         public const string SOLUTION_STATE_LINK_CLASS = "rounded-3 label label-info error-solution-link-color";
         public const string SOLUTION_STATE_CLASS = "rounded-3 label label-success";
-        private int defaultCapacity = 60;
-        private List<BasicError> errors;
-        private short orderIncrementer;
         private readonly string highRisk = "rounded-3 label label-danger";
         private readonly string lowRisk = "rounded-3 label label-warning low-error-color";
         private readonly string midRisk = "rounded-3 label label-danger mid-error-color";
+        private int defaultCapacity = 60;
+        private List<BasicError> errors;
+        private short orderIncrementer;
 
         public ErrorCollector(int def = 60) {
             errors = new List<BasicError>(def);
@@ -60,11 +60,7 @@ namespace WereViewApp.Modules.UserError {
         /// <param name="msg">set your message.</param>
         /// <param name="quantityTypeIsNotValidPleaseSelectAValidQuantityType"></param>
         public int Add(string msg, string solution = "", string link = "", string linkTitle = "") {
-            var error = new BasicError {
-                OrderID = orderIncrementer++,
-                ErrorMessage = msg,
-                Type = ErrorType.Low
-            };
+            var error = new BasicError {OrderID = orderIncrementer++, ErrorMessage = msg, Type = ErrorType.Low};
             errors.Add(error);
             return error.OrderID;
         }
@@ -125,8 +121,7 @@ namespace WereViewApp.Modules.UserError {
         /// </summary>
         /// <returns>Returns all error message as string list.</returns>
         public List<string> GetMessages() {
-            return errors.Select(n => n.ErrorMessage)
-                .ToList();
+            return errors.Select(n => n.ErrorMessage).ToList();
         }
 
         /// <summary>

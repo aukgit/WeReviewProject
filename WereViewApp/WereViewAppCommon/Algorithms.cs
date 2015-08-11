@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
+using DevMvcComponent.Pagination;
 using LinqKit;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
@@ -12,9 +13,7 @@ using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.WereViewAppCommon.Structs;
-using DevMVCComponent.Database;
 using DevTrends.MvcDonutCaching;
-using WereViewApp.Modules.Cache;
 
 namespace WereViewApp.WereViewAppCommon {
     public class Algorithms {

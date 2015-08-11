@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Net;
 using System.Web.Mvc;
-using DevMVCComponent;
+using DevMvcComponent;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.IdentityCustomization;
 

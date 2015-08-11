@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using DevMVCComponent;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using WereViewApp.Models.Context;
@@ -31,8 +30,10 @@ namespace WereViewApp.Modules.Role {
         //}
         public int MyProperty { get; set; }
 
-        public static ApplicationRoleManager Manager {
-            get {
+        public static ApplicationRoleManager Manager
+        {
+            get
+            {
                 if (_roleManager == null) {
                     _roleManager = new ApplicationRoleManager(_roleStore);
                 }
@@ -137,13 +138,11 @@ namespace WereViewApp.Modules.Role {
         public static void CreateRole(string roleName) {
             var exist = Manager.RoleExists(roleName);
             if (!exist) {
-                var role = new ApplicationRole {
-                    Name = roleName
-                };
+                var role = new ApplicationRole {Name = roleName};
                 try {
                     Manager.Create(role);
                 } catch (Exception ex) {
-                    Starter.HanldeError.HandleBy(ex);
+                    Starter.Error.HandleBy(ex);
                 }
             }
         }
@@ -158,7 +157,7 @@ namespace WereViewApp.Modules.Role {
                 try {
                     Manager.Create(role);
                 } catch (Exception ex) {
-                    Starter.HanldeError.HandleBy(ex);
+                    Starter.Error.HandleBy(ex);
                 }
             }
         }
@@ -238,6 +237,7 @@ namespace WereViewApp.Modules.Role {
             }
             return false;
         }
+
         #endregion
 
         #region Get Users Roles
@@ -297,7 +297,7 @@ namespace WereViewApp.Modules.Role {
         /// <summary>
         ///     Get current one and all underlying roles from this role
         ///     in custom db.
-        /// Condition :  Return all above priority value roles which represents the underlying roles.
+        ///     Condition :  Return all above priority value roles which represents the underlying roles.
         /// </summary>
         /// <param name="roleName">Name of your current role will return all underlying priority roles</param>
         /// <returns></returns>
@@ -339,7 +339,7 @@ namespace WereViewApp.Modules.Role {
         /// <param name="log">Username</param>
         /// <param name="role">Current role will add all underlying roles</param>
         public static void AddUnderlyingRoles(string log, string role) {
-            if (String.IsNullOrWhiteSpace(log) || String.IsNullOrWhiteSpace(role)) {
+            if (string.IsNullOrWhiteSpace(log) || string.IsNullOrWhiteSpace(role)) {
                 return;
             }
             var user = UserManager.GetUser(log);
@@ -356,7 +356,6 @@ namespace WereViewApp.Modules.Role {
         }
 
         /// <summary>
-        ///     
         ///     Add all underlying roles based on (
         ///     Verifies user before adding roles.
         ///     (Faster)
@@ -387,7 +386,7 @@ namespace WereViewApp.Modules.Role {
         /// <param name="log">Username</param>
         /// <param name="role">Current role will add all underlying roles</param>
         public static void RemoveUnderlyingRoles(string log, string role) {
-            if (String.IsNullOrWhiteSpace(log) || String.IsNullOrWhiteSpace(role)) {
+            if (string.IsNullOrWhiteSpace(log) || string.IsNullOrWhiteSpace(role)) {
                 return;
             }
             var user = UserManager.GetUser(log);
@@ -467,7 +466,7 @@ namespace WereViewApp.Modules.Role {
         #region Is user exist inside a role
 
         /// <summary>
-        /// if any user exist with this given role
+        ///     if any user exist with this given role
         /// </summary>
         /// <param name="role"></param>
         /// <returns>Returns false if role doesn't exist or not found any users.</returns>
@@ -480,8 +479,8 @@ namespace WereViewApp.Modules.Role {
         }
 
         /// <summary>
-        /// if any user exist with this given role  
-        ///   (Faster)
+        ///     if any user exist with this given role
+        ///     (Faster)
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
@@ -496,7 +495,7 @@ namespace WereViewApp.Modules.Role {
         #region Remove user roles
 
         /// <summary>
-        /// Remove role from the user.
+        ///     Remove role from the user.
         ///     Faster
         /// </summary>
         /// <param name="role"></param>
@@ -505,7 +504,7 @@ namespace WereViewApp.Modules.Role {
         }
 
         /// <summary>
-        /// Remove role from the user.
+        ///     Remove role from the user.
         /// </summary>
         /// <param name="roleName"></param>
         public static void RemoveRole(string roleName) {
@@ -514,8 +513,9 @@ namespace WereViewApp.Modules.Role {
                 Manager.Delete(role);
             }
         }
+
         /// <summary>
-        /// Remove role from the user.
+        ///     Remove role from the user.
         /// </summary>
         /// <param name="roleId"></param>
         public static void RemoveRole(long roleId) {
@@ -563,7 +563,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.AddToRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.HanldeError.HandleBy(ex);
+                    Starter.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -580,7 +580,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.AddToRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.HanldeError.HandleBy(ex);
+                    Starter.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -619,7 +619,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.AddToRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.HanldeError.HandleBy(ex);
+                    Starter.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -672,7 +672,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.RemoveFromRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.HanldeError.HandleBy(ex);
+                    Starter.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -691,7 +691,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.RemoveFromRole(userId, role.Name);
                     return true;
                 } catch (Exception ex) {
-                    Starter.HanldeError.HandleBy(ex);
+                    Starter.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -706,7 +706,7 @@ namespace WereViewApp.Modules.Role {
             try {
                 UserManager.Manager.RemoveFromRole(userId, roleName);
             } catch (Exception ex) {
-                Starter.HanldeError.HandleBy(ex);
+                Starter.Error.HandleBy(ex);
             }
         }
 
@@ -720,7 +720,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.RemoveFromRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.HanldeError.HandleBy(ex);
+                    Starter.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -737,7 +737,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.RemoveFromRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.HanldeError.HandleBy(ex);
+                    Starter.Error.HandleBy(ex);
                 }
             }
             return false;

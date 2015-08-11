@@ -9,12 +9,10 @@ namespace WereViewApp.Modules.Extensions.Context {
         public DevDbContext() {
         }
 
-        public DevDbContext(string connectionStringName)
-            : base(connectionStringName) {
+        public DevDbContext(string connectionStringName) : base(connectionStringName) {
         }
 
-        public DevDbContext(DbCompiledModel compiledModel)
-            : base(compiledModel) {
+        public DevDbContext(DbCompiledModel compiledModel) : base(compiledModel) {
         }
 
         public DevDbContext(string connectionStringName, DbCompiledModel compiledModel)

@@ -6,8 +6,10 @@ namespace WereViewApp.Modules.Mail {
     public static class MailHtml {
         #region Propertise
 
-        private static StringBuilder SB {
-            get {
+        private static StringBuilder SB
+        {
+            get
+            {
                 if (_sb != null) {
                     return _sb;
                 }

@@ -3,7 +3,7 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using DevMVCComponent.Database;
+using DevMvcComponent.Pagination;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Modules.Cache;
