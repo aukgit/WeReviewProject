@@ -13,8 +13,8 @@
     string platformSubtitle = Model.Platform.PlatformName + " mobile apps";
     string categorySubtitle = Model.GetCategoryString() + " category mobile apps";
     string softwareUrl = AppVar.Url; //we review app
-    string publishDate = @Html.DisplayDate(Model.CreatedDate).ToString();
-    string currentAppUrlNameOnly = Model.URL; //plant-vs-zombies
+    string publishDate = @Html.DisplayDateTime(Model.CreatedDate,DevMvcComponent.Enums.DateTimeFormatType.Date, addTimeZoneString:true).ToString();
+    //string currentAppUrlNameOnly = Model.URL; //plant-vs-zombies
 }
 <div class="app-details-page" id="app-deails-page">
 <div id="fb-root"></div>
