@@ -21,7 +21,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         public ActionResult SendEmail(string tab) {
             ViewBag.tab = "#email-setup";
-            Starter.Mailer.QuickSend(AppVar.Setting.DeveloperEmail, "Test Email", "Test Email at " + DateTime.Now.ToString());
+            Mvc.Mailer.QuickSend(AppVar.Setting.DeveloperEmail, "Test Email", "Test Email at " + DateTime.Now.ToString());
             try {
                 throw new Exception("Testing error mail.");
             } catch (Exception ex) {

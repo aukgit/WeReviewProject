@@ -153,7 +153,7 @@ namespace WereViewApp.Modules.Uploads {
             try {
                 submittedFile.SaveAs(absLocation);
             } catch (Exception ex) {
-                Starter.Error.HandleBy(ex);
+                Mvc.Error.HandleBy(ex);
                 return false;
             }
             return true;
@@ -222,7 +222,7 @@ namespace WereViewApp.Modules.Uploads {
                 try {
                     ImageBuilder.Current.Build(source, target, new ResizeSettings(setting));
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             } else {
                 throw new Exception("Data missing while upload.");
@@ -262,7 +262,7 @@ namespace WereViewApp.Modules.Uploads {
             try {
                 File.Delete(source);
             } catch (Exception ex) {
-                Starter.Error.HandleBy(ex);
+                Mvc.Error.HandleBy(ex);
             }
         }
 
