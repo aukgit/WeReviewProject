@@ -518,6 +518,9 @@
       <DependentUpon>utilities.css</DependentUpon>
     </Content>
     <Content Include="Content\css\validator.css" />
+    <Content Include="Content\css\validator.min.css">
+      <DependentUpon>validator.css</DependentUpon>
+    </Content>
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
