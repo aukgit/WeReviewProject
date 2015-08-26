@@ -431,13 +431,16 @@
     <Content Include="Content\css\animate-refresh.css.map">
       <DependentUpon>animate-refresh.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\animate.min.css" />
     <Content Include="Content\css\base-theme-styles.css" />
+    <Content Include="Content\css\blog-page.css" />
     <Content Include="Content\css\bootstrap-datetimepicker.css" />
     <Content Include="Content\css\bootstrap-datetimepicker.css.map">
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
     </Content>
     <Content Include="Content\css\bootstrap-select.css" />
     <Content Include="Content\css\bootstrap-table.css" />
+    <Content Include="Content\css\bootstrap-tag.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\category-page.css" />
@@ -459,6 +462,7 @@
     <Content Include="Content\css\front-developer.css.map">
       <DependentUpon>front-developer.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\header.css" />
     <Content Include="Content\css\less-imports.css" />
     <Content Include="Content\css\less-imports.css.map">
       <DependentUpon>less-imports.css</DependentUpon>
@@ -484,6 +488,7 @@
     <Content Include="Content\css\search-page.css.map">
       <DependentUpon>search-page.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\see-more-btn.css" />
     <Content Include="Content\css\seo-optimize.css" />
     <Content Include="Content\css\seo-optimize.css.map">
       <DependentUpon>seo-optimize.css</DependentUpon>
@@ -512,21 +517,34 @@
     <Content Include="Content\css\utilities.css.map">
       <DependentUpon>utilities.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\validator.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\Less\less-imports.less" />
     <Content Include="Content\fonts\fontawesome-webfont78ce.eot" />
     <Content Include="Content\fonts\fontawesome-webfont78ce.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont78ce.woff" />
     <Content Include="Content\fonts\fontawesome-webfontd41d.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Content\Less\animate-refresh.less" />
     <Content Include="Areas\Admin\Views\AppCategories\_CreateOrEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_NavBar.cshtml" />
     <Content Include="Content\css\color-fonts.css.map" />
     <Content Include="Content\css\owl.custom.finalize.css.map" />
-    <None Include="Content\Less\override-mvc.less" />
+    <Content Include="Content\Less\animate-refresh.less" />
+    <Content Include="Content\Less\blog-page.less" />
+    <Content Include="Content\Less\bootstrap-datetimepicker.less" />
+    <Content Include="Content\Less\category-page.less" />
+    <Content Include="Content\Less\color-fonts.less" />
+    <Content Include="Content\Less\footer-fixing.less" />
+    <Content Include="Content\Less\front-developer.less" />
+    <Content Include="Content\Less\less-imports.less" />
+    <Content Include="Content\Less\menu-fix.less" />
+    <Content Include="Content\Less\owl.custom.finalize.less" />
+    <Content Include="Content\Less\responsive.less" />
+    <Content Include="Content\Less\search-page.less" />
+    <Content Include="Content\Less\see-more-btn.less" />
+    <Content Include="Content\Less\seo-optimize.less" />
+    <Content Include="Content\Less\utilities.less" />
     <Content Include="Content\Published.Scripts\front-end.js" />
     <Content Include="Content\Published.Scripts\front-end.min.js">
       <DependentUpon>front-end.js</DependentUpon>
@@ -590,8 +608,6 @@
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.component.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\byId.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\WeReviewApps.js" />
-    <Content Include="Content\Less\bootstrap-datetimepicker.less" />
-    <Content Include="Content\Less\responsive.less" />
     <Content Include="Content\Published.Scripts\front-end.min.js.map">
       <DependentUpon>front-end.min.js</DependentUpon>
     </Content>
@@ -601,6 +617,42 @@
     <Content Include="Content\Published.Scripts\upload.min.js.map">
       <DependentUpon>upload.min.js</DependentUpon>
     </Content>
+    <Content Include="Content\Less\bootstrap-select.less" />
+    <Content Include="Content\Less\bootstrap-select.variables.less" />
+    <Content Include="Content\Less\bootstrap-tag.less" />
+    <Content Include="Content\Less\editor-templates.less" />
+    <Content Include="Content\Less\editor-templates.variables.less" />
+    <Content Include="Content\Less\fonts-rimixens.less" />
+    <Content Include="Content\Less\footer.variables.less" />
+    <Content Include="Content\Less\front-developer.variables.less" />
+    <Content Include="Content\Less\header.less" />
+    <Content Include="Content\Less\override-mvc.less" />
+    <Content Include="Content\Less\remixens\elements.less" />
+    <Content Include="Content\Less\remixens\extra-remixens.less" />
+    <Content Include="Content\Less\remixens\global.less" />
+    <Content Include="Content\Less\remixens\lesshat.less" />
+    <Content Include="Content\Less\remixens\variables.less" />
+    <Content Include="Content\Less\validator.less" />
+    <Content Include="Content\css\bootstrap-select.css.map">
+      <DependentUpon>bootstrap-select.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\header.variables.less" />
+    <Content Include="Content\css\see-more-btn.css.map">
+      <DependentUpon>see-more-btn.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\validator.css.map">
+      <DependentUpon>validator.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\bootstrap-tag.css.map">
+      <DependentUpon>bootstrap-tag.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\blog-page.css.map">
+      <DependentUpon>blog-page.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\header.css.map">
+      <DependentUpon>header.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\override-mvc.variables.less" />
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <None Include="Content\Scripts\jquery-2.1.3.intellisense.js" />
@@ -854,22 +906,6 @@
     <Content Include="Views\Shared\EditorTemplates\Username.cshtml" />
     <Content Include="App_Data\DataCached\Suggested\1" />
     <Content Include="App_Data\DataCached\Suggested\2" />
-    <Content Include="Content\Less\blog-page.less" />
-    <Content Include="Content\Less\category-page.less" />
-    <Content Include="Content\Less\color-fonts.less" />
-    <Content Include="Content\Less\elements.less" />
-    <Content Include="Content\Less\extra-remixens.less" />
-    <Content Include="Content\Less\footer-fixing.less" />
-    <Content Include="Content\Less\front-developer.less" />
-    <Content Include="Content\Less\global.less" />
-    <Content Include="Content\Less\lesshat.less" />
-    <Content Include="Content\Less\menu-fix.less" />
-    <Content Include="Content\Less\owl.custom.finalize.less" />
-    <Content Include="Content\Less\search-page.less" />
-    <Content Include="Content\Less\see-more-btn.less" />
-    <Content Include="Content\Less\seo-optimize.less" />
-    <Content Include="Content\Less\utilities.less" />
-    <Content Include="Content\Less\variables.less" />
     <Content Include="Content\revolution-slider\font\revicons90c6.eot" />
     <Content Include="Content\revolution-slider\font\revicons90c6.ttf" />
     <Content Include="Content\revolution-slider\font\revicons90c6.woff" />
@@ -994,6 +1030,8 @@
     <Content Include="Views\Report\App.cshtml" />
     <Content Include="Views\Report\Review.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <Content Include="Views\Shared\EditorTemplates\Double.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />

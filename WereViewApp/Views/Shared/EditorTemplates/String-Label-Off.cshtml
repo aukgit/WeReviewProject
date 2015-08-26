@@ -1,16 +1,16 @@
-@model decimal?
+@model string
 @{
-    bool isRequired = ViewData.ModelMetadata.IsRequired;
+    var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
         prop = ViewData.ModelMetadata.PropertyName.ToString(),
         propLower = prop.ToLower(),
         styleProperty = propLower,
         displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        templateName = "decimal",
-        description = ViewData.ModelMetadata.Description;
-
-
+        description = ViewData.ModelMetadata.Description,
+        isValidate = ViewBag.isValidate ?? "false",
+        templateName = "string-label-off";
     var htmlAttributes = new RouteValueDictionary();
+
     if (ViewBag.@class != null) {
         htmlAttributes.Add("class", "form-control " + ViewBag.@class);
     } else {
@@ -19,19 +19,8 @@
 
     if (ViewBag.type != null) {
         htmlAttributes.Add("type", ViewBag.type);
-    } else {
-        htmlAttributes.Add("type", "number");
     }
-    if (ViewBag.label != null) {
-        displayName = ViewBag.label;
-    }
-    if (ViewBag.labelColumn == null) {
-        ViewBag.labelColumn = "col-md-2";
-    }
-    if (ViewBag.textColumn == null) {
-        ViewBag.textColumn = "col-md-10";
-    }
-    
+
     if (ViewBag.placeholder != null) {
         htmlAttributes.Add("placeholder", ViewBag.placeholder);
     } else {
@@ -41,27 +30,41 @@
             htmlAttributes.Add("placeholder", "[" + displayName + "]");
         }
     }
+    if (ViewBag.Value != null) {
+        htmlAttributes.Add("Value", ViewBag.Value);
+    }
+
+    if (ViewBag.label != null) {
+        displayName = ViewBag.label;
+    }
+
+    if (ViewBag.labelColumn == null) {
+        ViewBag.labelColumn = "col-md-2";
+    }
+    if (ViewBag.textColumn == null) {
+        ViewBag.textColumn = "col-md-10";
+    }
+    if (ViewBag.url != null) {
+        htmlAttributes.Add("data-url", ViewBag.url);
+    }
     htmlAttributes.Add("title", htmlAttributes["placeholder"]);
     htmlAttributes.Add("data-prop", styleProperty);
     htmlAttributes.Add("data-template", templateName);
 }
-
 <div class="form-group form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty">
     <div class="controls dev-plugin">
-        <label class="@ViewBag.labelColumn control-label form-label @styleProperty" for="@styleProperty" data-prop="@styleProperty">
-            @displayName
-            <span class="red">@isRequiredStar</span>
-        </label>
         <div class="@ViewBag.textColumn form-input @styleProperty" data-prop="@styleProperty">
-            @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
+            <div class="input-validator-container">
+                @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
+                <div class="validator-container">
+                    <div class="validator"></div>
+                </div>
+            </div>
             @if (description != null) {
                 <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">
                     <span class="description-icon"></span>
                 </a>
             }
-            <a data-toggle="tooltip" title="Validating" data-original-title="Validating" class="tooltip-show @styleProperty no-hover">
-                <span data-display="@displayName" class="@ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-spin hide" title="Validating"></span>
-            </a>
             @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
         </div>
     </div>

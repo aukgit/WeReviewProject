@@ -1,13 +1,19 @@
 @model DateTime?
-
 @{
+    bool isRequired = ViewData.ModelMetadata.IsRequired;
+    string isRequiredStar = isRequired ? "*" : "",
+        prop = ViewData.ModelMetadata.PropertyName.ToString(),
+        propLower = prop.ToLower(),
+        styleProperty = propLower,
+        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+        description = ViewData.ModelMetadata.Description,
+        templateName = "datetime",
+        icon = ViewBag.icon ?? "fa fa-calendar",
+        csharpDateTimeFormat = @"dd/MMM/yyyy h:mm:ss tt",
+        pickerDateTimeFormat = @"DD/MMM/YYYY hh:mm a";
 
-    var isRequired = ViewData.ModelMetadata.IsRequired;
-    string isRequiredStar = isRequired ? "*" : "";
+
     var htmlAttributes = new RouteValueDictionary();
-    if (@ViewData.ModelMetadata.DisplayName == null) {
-        ViewData.ModelMetadata.DisplayName = ViewData.ModelMetadata.PropertyName;
-    }
     if (ViewBag.@class != null) {
         htmlAttributes.Add("class", "form-control datetime-input " + ViewBag.@class);
     } else {
@@ -15,57 +21,55 @@
     }
     if (ViewBag.type != null) {
         htmlAttributes.Add("type", ViewBag.type);
+    }  
+   if (ViewBag.label != null) {
+        displayName = ViewBag.label;
     }
-
-    if (ViewBag.placeholder != null) {
-        htmlAttributes.Add("placeholder", ViewBag.placeholder);
-    } else {
-        if (isRequired) {
-            htmlAttributes.Add("placeholder", @ViewData.ModelMetadata.DisplayName + isRequiredStar);
-        } else {
-            htmlAttributes.Add("placeholder", "[" + @ViewData.ModelMetadata.DisplayName + "]");
-        }
-    }
-
-    if (ViewBag.label == null) {
-        ViewBag.label = displayName;
-    }
-
     if (ViewBag.labelColumn == null) {
-        ViewBag.labelColumn = "col-md-offset-2";
+        ViewBag.labelColumn = "col-md-2";
     }
     if (ViewBag.textColumn == null) {
         ViewBag.textColumn = "col-md-10";
     }
+    
+    if (ViewBag.placeholder != null) {
+        htmlAttributes.Add("placeholder", ViewBag.placeholder);
+    } else {
+        if (isRequired) {
+            htmlAttributes.Add("placeholder", displayName + isRequiredStar);
+        } else {
+            htmlAttributes.Add("placeholder", "[" + displayName + "]");
+        }
+    }
     htmlAttributes.Add("title", htmlAttributes["placeholder"]);
-    htmlAttributes.Add("data-date-format", "DD/MMM/YYYY hh:mm a");
+    htmlAttributes.Add("data-date-format", pickerDateTimeFormat);
+    htmlAttributes.Add("data-prop", styleProperty);
+    htmlAttributes.Add("data-template", templateName);
 }
-<div class="form-group form-row @styleProperty" data-prop="@styleProperty">
-    <div class="controls">
+<div class="form-group form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty">
+    <div class="controls dev-plugin">
         <label class="@ViewBag.labelColumn control-label form-label @styleProperty" for="@styleProperty" data-prop="@styleProperty">
-            @ViewBag.label<span class="red">@isRequiredStar</span>
+            @displayName
+            <span class="red">@isRequiredStar</span>
         </label>
-        <div class="@ViewBag.textColumn">
-            <div class="input-group datetimepicker-start inline form-input-@ViewData.ModelMetadata.PropertyName">
+        <div class="@ViewBag.textColumn form-input @styleProperty" data-prop="@styleProperty">
+            <div class='input-group datetimepicker-start inline form-input @styleProperty' data-prop="@styleProperty">
                 @if (Model != null) {
                     var dt = Model ?? DateTime.Now;
-                    @Html.TextBox("", dt.ToString(@"dd/MMM/yyyy h:mm:ss tt"), htmlAttributes)
+                    @Html.TextBox("", dt.ToString(csharpDateTimeFormat), htmlAttributes)
                 } else {
                     @Html.TextBox("", "", htmlAttributes)
                 }
                 <span class="input-group-addon">
-                    <span class="fa fa-calendar"></span>
+                    <span class="@icon"></span>
                 </span>
             </div>
             @if (description != null) {
-                <a data-toggle="tooltip" data-original-title="@description" title="@description" class="inline tooltip-show">
+                <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show inline">
                     <span class="description-icon"></span>
                 </a>
             }
-            <a data-toggle="tooltip" title="Validating" data-original-title="Validating" class="tooltip-show CustomValidation @ViewData.ModelMetadata.PropertyName no-hover">
-                <span data-display="@ViewData.ModelMetadata.DisplayName" class="CustomValidation @ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-spin hide" title="Validating"></span>
-            </a>
-            @Html.ValidationMessageFor(m => m, null, new {@class = "inline-block rounded-3 label label-danger fixed-width-294 validation-box table-cell"})
         </div>
     </div>
+    @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input break-line" })
 </div>

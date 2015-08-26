@@ -1,33 +1,6 @@
 ﻿//@import "Global.less";
 //@import "lesshat.less";
 //@import "variables.less";
-
-.center-margin() {
-    margin: 0 auto;
-    display: block;
-}
-.default-hyperlink-hover-color() {
-    color: @default-hyperlink-hover-color;
-}
-
-.default-hyperlink-color() {
-    color: @regular-hyperlink-color;
-}
-.color-inherit() {
-    color: inherit;
-}
-
-.ubuntu-font() {
-    font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-}
-
-.ubuntu-light-font() {
-    font-family: UbuntuLight, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-}
-
-.helvetica-font() {
-    font-family: Helvetica, Arial, sans-serif !important;
-}
 // ===== FONT MIXINS =====
 .font-size(@value) {
     font-size: @value;
@@ -298,4 +271,14 @@
 .bottom(@value) when (ispixel(@value)) {
     @rem-value: ~`pxtorem('@{value}')`;
     bottom: @rem-value;
+}
+
+
+.fa(){
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }

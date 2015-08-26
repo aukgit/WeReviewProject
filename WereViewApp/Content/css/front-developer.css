@@ -3,13 +3,13 @@
   -webkit-font-smoothing: subpixel-antialiased;
 }
 body #wrap .app-details-page {
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .regular-color {
   color: #647383;
 }
 .primary-color {
-  color: #ff7200;
+  color: #206397;
 }
 .btn {
   font-weight: normal;
@@ -55,7 +55,7 @@ body #wrap .app-details-page {
   margin-left: 0;
 }
 label.control-label {
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-size: 0.875em;
 }
@@ -93,7 +93,7 @@ label.control-label {
   margin-top: 1rem;
 }
 .apps-list-header-row {
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .apps-list-header-row .title h1 {
   margin: 0px 0px 10px 5px;
@@ -248,7 +248,7 @@ label.control-label {
   left: 38.333333px;
   top: 5px;
   font-size: 26px;
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .gallery-home .app-title h1 {
   display: inline;
@@ -287,7 +287,7 @@ label.control-label {
 }
 .gallery-home .rating-value-display,
 .gallery-home .app-description {
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .gallery-home .app-description {
   color: #626262;
@@ -327,7 +327,7 @@ label.control-label {
   color: black;
   margin: 8px 0px 0px 0px;
   margin: 0.8rem 0 0 0;
-  font-family: UbuntuLight, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: UbuntuLight, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .website-head-title strong {
   font-weight: normal;
@@ -416,7 +416,7 @@ label.control-label {
 .menu .post-app-btn {
   height: 33px;
   height: 3.3rem;
-  background-color: #ff7200;
+  background-color: #206397;
 }
 .header-2 nav li.btn-type a:after {
   background-color: transparent;
@@ -535,7 +535,7 @@ label.control-label {
   display: inline-block;
   font-size: 1.5em;
   color: #ff4d00;
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: left;
   white-space: nowrap;
   overflow: hidden;
@@ -673,7 +673,7 @@ label.control-label {
     border: 1px solid transparent;
     border-radius: 4px;
     color: #333;
-    background-color: #ff7200;
+    background-color: #206397;
   }
   .less-btn:hover,
   .show-more-btns-container .see-more-btn:hover {
@@ -697,7 +697,7 @@ label.control-label {
   font-weight: bold;
 }
 #blog {
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #blog .owl-theme .owl-controls {
   margin-top: 0;
@@ -1082,7 +1082,7 @@ q:after {
   }
 }
 #blog.blog-pages .b-tittle {
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #blog.blog-pages p {
   font-size: 1em;
@@ -1134,7 +1134,7 @@ q:after {
   margin-top: 6px;
   margin-top: 0.6rem;
   height: auto;
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
   width: 161px;
   width: 16.1rem;
 }
@@ -1213,7 +1213,7 @@ q:after {
   margin-bottom: 5px;
   margin-bottom: 0.5rem;
   display: block;
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .slim-app-view .app-url:hover {
   color: #647383;
@@ -1374,7 +1374,7 @@ q:after {
   }
 }
 .category-listing-page .category-title .app-title:hover {
-  color: #ff7200;
+  color: #206397;
 }
 .category-listing-page .category-title .app-title:hover .app-category {
   color: inherit;

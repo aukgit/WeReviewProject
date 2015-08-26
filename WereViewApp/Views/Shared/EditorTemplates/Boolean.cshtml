@@ -2,11 +2,12 @@
 @{
     bool isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName,
+        prop = ViewData.ModelMetadata.PropertyName.ToString(),
         propLower = prop.ToLower(),
         styleProperty = propLower,
         displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        description = ViewData.ModelMetadata.Description;
+        description = ViewData.ModelMetadata.Description,
+        templateName = "boolean";
 
 
     var htmlAttributes = new RouteValueDictionary();
@@ -18,21 +19,8 @@
         htmlAttributes.Add("type", ViewBag.type);
     }
 
-    if (ViewBag.placeholder != null) {
-        htmlAttributes.Add("placeholder", ViewBag.placeholder);
-    } else {
-        if (isRequired) {
-            htmlAttributes.Add("placeholder", @ViewData.ModelMetadata.DisplayName + isRequiredStar);
-        } else {
-            htmlAttributes.Add("placeholder", "[" + @ViewData.ModelMetadata.DisplayName + "]");
-        }
-    }
-    if (ViewBag.Value != null) {
-        htmlAttributes.Add("Value", ViewBag.Value);
-    }
-
-    if (ViewBag.label == null) {
-        ViewBag.label = displayName;
+    if (ViewBag.label != null) {
+        displayName = ViewBag.label;
     }
 
     if (ViewBag.labelColumn == null) {
@@ -41,22 +29,36 @@
     if (ViewBag.textColumn == null) {
         ViewBag.textColumn = "col-md-10";
     }
+    
+    if (ViewBag.placeholder != null) {
+        htmlAttributes.Add("placeholder", ViewBag.placeholder);
+    } else {
+        if (isRequired) {
+            htmlAttributes.Add("placeholder", displayName + isRequiredStar);
+        } else {
+            htmlAttributes.Add("placeholder", "[" + displayName + "]");
+        }
+    }
+    
     htmlAttributes.Add("title", htmlAttributes["placeholder"]);
+
+    htmlAttributes.Add("data-prop", styleProperty);
+    htmlAttributes.Add("data-template", templateName);
 }
-<div class="form-row @styleProperty" data-prop="@styleProperty">
-    <div class="checkbox-type dev-plugin plugin-container">
-        <div class="@ViewBag.labelColumn @ViewBag.textColumn">
+<div class="form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty">
+    <div class="dev-plugin">
+        <div class="@ViewBag.textColumn @ViewBag.labelColumn">
             <div class="checkbox">
                 <label class="form-input" for="@styleProperty">
                     @Html.CheckBox("", Model.HasValue && Model.Value, htmlAttributes)
-                    ViewBag.label
+                    @displayName
                 </label>
                 @if (description != null) {
                     <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">
                         <span class="description-icon"></span>
                     </a>
                 }
-                @Html.ValidationMessageFor(m => m, null, new {@class = "rounded-3 label label-danger fixed-width-294 validation-box"})
+                @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
             </div>
         </div>
     </div>
