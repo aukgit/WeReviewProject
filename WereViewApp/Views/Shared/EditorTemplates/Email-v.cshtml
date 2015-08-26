@@ -1,0 +1,87 @@
+@model object
+@{
+    bool isRequired = ViewData.ModelMetadata.IsRequired;
+    string isRequiredStar = isRequired ? "*" : "",
+        prop = ViewData.ModelMetadata.PropertyName.ToString(),
+        propLower = prop.ToLower(),
+        styleProperty = propLower,
+        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+        description = ViewData.ModelMetadata.Description,
+        isValidate = ViewBag.isValidate ?? "false",
+        templateName = "email-v",
+        icon = ViewBag.icon ?? "fa fa-envelope-o";
+
+
+    var htmlAttributes = new RouteValueDictionary();
+
+    if (ViewBag.@class != null) {
+        htmlAttributes.Add("class", "form-control " + ViewBag.@class);
+    } else {
+        htmlAttributes.Add("class", "form-control");
+    }
+
+    if (ViewBag.type != null) {
+        htmlAttributes.Add("type", ViewBag.type);
+    } else {
+        htmlAttributes.Add("type", "email");
+    }
+
+    if (ViewBag.placeholder != null) {
+        htmlAttributes.Add("placeholder", ViewBag.placeholder);
+    } else {
+        if (isRequired) {
+            htmlAttributes.Add("placeholder", displayName + isRequiredStar);
+        } else {
+            htmlAttributes.Add("placeholder", "[" + displayName + "]");
+        }
+    }
+    if (ViewBag.label != null) {
+        displayName = ViewBag.label;
+    }
+
+    if (ViewBag.labelColumn == null) {
+        ViewBag.labelColumn = "";
+    }
+    if (ViewBag.textColumn == null) {
+        ViewBag.textColumn = "";
+    }
+    if (ViewBag.Value != null) {
+        htmlAttributes.Add("Value", ViewBag.Value);
+    }
+    if (ViewBag.icon == null) {
+        ViewBag.icon = "fa fa-envelope-o";
+    }
+    htmlAttributes.Add("title", htmlAttributes["placeholder"]);
+
+    htmlAttributes.Add("data-prop", styleProperty);
+    htmlAttributes.Add("data-template", templateName);
+}
+
+<div class="form-group form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty" data-is-validate="@isValidate">
+    <div class="controls dev-plugin controls-vertical">
+        <label class="@ViewBag.labelColumn control-label form-label @styleProperty" for="@styleProperty" data-prop="@styleProperty">
+            @displayName<span class="red">@isRequiredStar</span>
+        </label>
+        <div class="@ViewBag.textColumn form-input @styleProperty" data-prop="@styleProperty">
+            <div class="input-validator-container">
+                <span class="inner-addon left-addon">
+                    <i class="@icon"></i>
+                    @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
+                </span>
+                <div class="validator-container">
+                    <div class="validator">
+                        <a>
+                            <i class=""></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @if (description != null) {
+                <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">
+                    <span class="description-icon"></span>
+                </a>
+            }
+            @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
+        </div>
+    </div>
+</div>

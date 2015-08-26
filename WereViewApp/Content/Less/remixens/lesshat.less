@@ -7,6 +7,7 @@
     @process_ms: ~`(function(t){return t=t||"stretch","flex-start"==t?t="start":"flex-end"==t?t="end":"space-between"==t?t="justify":"space-around"==t&&(t="distribute"),t})((function(){var r="@{arguments}";return r=r.replace(/^\[|\]$/g,"")})())`;
     -webkit-align-content: @process;
     -ms-flex-line-pack: @process_ms;
+    -ms-align-content: @process_ms;
     align-content: @process;
 }
 

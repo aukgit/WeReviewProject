@@ -44,6 +44,9 @@ Temporary Items
 .apdisk
 WereViewApp/WereViewApp.publish.xml
 WereViewApp/App_Data/elmah/*.*
-WereViewApp/obj/Debug/WereViewApp.pdb
-WereViewApp/obj/Debug/WereViewApp.pdb
+WereViewApp/obj/Debug/
+WereViewApp/obj/Debug/*.*
+WereViewProject/WereViewApp/bin
+WereViewProject/WereViewApp/bin/*.*
 *.pdb
+WereViewApp.v12.suo

@@ -214,8 +214,6 @@
   display: block;
   height: 16px;
   width: 16px;
-  padding: 4px 2px 0px 0px;
-  padding: 0.4rem 0.2rem 0 0;
 }
 .bootstrap-datetimepicker-widget.left-oriented:before {
   left: auto;
@@ -226,7 +224,7 @@
   right: 7px;
 }
 .bootstrap-datetimepicker-widget ul.list-unstyled li div.timepicker div.timepicker-picker table.table-condensed tbody > tr > td {
-  padding: 0 !important;
+  padding: 0px !important;
 }
 @media screen and (max-width: 767px) {
   .bootstrap-datetimepicker-widget.timepicker-sbs {
@@ -240,18 +238,5 @@
 .timepicker tr:nth-child(2) td:nth-child(7) {
   position: absolute;
   right: 8px;
-}
-/*}*/
-.datepicker .input-group-addon,
-.timepicker .input-group-addon {
-  cursor: pointer;
-}
-.datepicker .input-group-addon:hover,
-.timepicker .input-group-addon:hover {
-  background-color: #428bca;
-}
-.datepicker .input-group-addon:hover span,
-.timepicker .input-group-addon:hover span {
-  color: white;
 }
 /*# sourceMappingURL=bootstrap-datetimepicker.css.map */
