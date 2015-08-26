@@ -110,7 +110,7 @@
   },
   "Less": {
     "AdjustRelativePaths": true,
-    "CompileOnBuild": true,
+    "CompileOnBuild": false,
     "CompileOnSave": true,
     "EnableChainCompilation": true,
     "GenerateSourceMaps": true,
