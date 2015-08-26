@@ -655,6 +655,7 @@ namespace WereViewApp.Helpers {
         /// Returns a date-time without using any timezone.
         /// </summary>
         /// <param name="helper"></param>
+        /// <param name="withoutTimezone"></param>
         /// <param name="dt"></param>
         /// <param name="formatType">
         /// switch (type) {
@@ -682,10 +683,10 @@ namespace WereViewApp.Helpers {
         /// <returns>Returns a data-time without using timezone</returns>
         public static string DisplayDate(
             this HtmlHelper helper,
+            bool withoutTimezone = true,
             DateTime? dt = null,
             DateTimeFormatType formatType = DateTimeFormatType.Date,
             string customFormat = null) {
-
             var format = GetDefaultTimeZoneFormat(formatType, customFormat);
             return dt.HasValue ? dt.Value.ToString(format) : "";
         }
