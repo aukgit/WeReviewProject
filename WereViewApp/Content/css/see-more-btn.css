@@ -1,0 +1,22 @@
+﻿.regular-show-more-btn {
+  clear: both;
+}
+.regular-show-more-btn .more-btn {
+  color: white;
+  background-color: #206397;
+  padding: 10px 24px;
+}
+.regular-show-more-btn .more-btn:hover {
+  background-color: #19c234;
+}
+@media (max-width: 480px) {
+  .regular-show-more-btn .more-btn {
+    width: 100%;
+    height: 40px;
+    height: 4rem;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    margin-bottom: 0.5rem;
+  }
+}
+/*# sourceMappingURL=see-more-btn.css.map */
