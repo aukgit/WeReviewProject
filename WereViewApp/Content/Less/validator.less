@@ -6,7 +6,6 @@
     .min-width(@inputs-max-width);
     //width: auto;
     display: inline;
-    padding: .2em .6em .3em;
     font-size: 75%;
     font-weight: bold;
     line-height: 1;
@@ -17,8 +16,9 @@
 
     &.field-validation-error {
         background-color: @input-error-bg-color;
+        padding: .2em .6em .3em;
 
-        &.break-line {
+        &.break-line { 
             display: block;
             margin-top: 4px;
             .width(@inputs-max-width);
@@ -97,4 +97,3 @@
         margin-bottom: 14px;
     }
 }
- 

@@ -504,6 +504,7 @@ namespace WereViewApp.Controllers {
         ///     returns draft if it is related to current user.
         /// </summary>
         /// <param name="draftId"></param>
+        /// <param name="appDraft">App draft</param>
         /// <returns></returns>
         private App GetAppfromDraft(AppDraft appDraft) {
             if (appDraft == null) {

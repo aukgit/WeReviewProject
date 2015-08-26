@@ -21,6 +21,7 @@ namespace WereViewApp.Modules.TimeZone {
         #region Fields
 
         private static string _defaultTimeFormat = "hh:mm:ss tt";
+        private const string GmtConst = "GMT ";
         private static string _defaultDateFormat = "dd-MMM-yy";
         private static string _defaultDateTimeFormat = "dd-MMM-yy hh:mm:ss tt";
 
@@ -441,7 +442,7 @@ namespace WereViewApp.Modules.TimeZone {
             string additionalString = "";
             if (addTimeZoneString) {
                 var userZone = timeZone.UserTimezone;
-                additionalString = "(" + userZone.TimePartOnly + ")";
+                additionalString = "(" + GmtConst  + userZone.TimePartOnly + ")";
             }
             return newDate.ToString(format) + additionalString;
         }

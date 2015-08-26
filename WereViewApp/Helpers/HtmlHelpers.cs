@@ -465,10 +465,10 @@ namespace WereViewApp.Helpers {
             }
             switch (type) {
                 case DateTimeFormatType.Date:
-                    format = "dd-MMM-yyyy";
+                    format = "dd-MMM-yy";
                     break;
                 case DateTimeFormatType.DateTimeSimple:
-                    format = "dd-MMM-yyyy hh:mm:ss tt";
+                    format = "dd-MMM-yy hh:mm:ss tt";
                     break;
                 case DateTimeFormatType.DateTimeFull:
                     format = "MMMM dd, yyyy hh:mm:ss tt";
@@ -480,7 +480,7 @@ namespace WereViewApp.Helpers {
                     format = "hh:mm:ss tt";
                     break;
                 default:
-                    format = "dd-MMM-yyyy";
+                    format = "dd-MMM-yy";
                     break;
             }
 
@@ -488,7 +488,7 @@ namespace WereViewApp.Helpers {
         }
 
         /// <summary>
-        /// Returns a date-time using time-zone
+        /// Returns a date-time using time-zone via TimeZoneSet
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="timeZone">Timezone set</param>
@@ -530,7 +530,7 @@ namespace WereViewApp.Helpers {
         }
 
         /// <summary>
-        /// Returns a date-time using time-zone
+        /// Returns a date-time using time-zone via UserId
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="userId">User id</param>
@@ -650,6 +650,47 @@ namespace WereViewApp.Helpers {
             bool addTimeZoneString = false) {
             return DisplayDateTime(helper, dt, DateTimeFormatType.Date, customFormat, addTimeZoneString);
         }
+
+        /// <summary>
+        /// Returns a date-time without using any timezone.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="withoutTimezone"></param>
+        /// <param name="dt"></param>
+        /// <param name="formatType">
+        /// switch (type) {
+        ///     case DateTimeFormatType.Date:
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeSimple:
+        ///         format = "dd-MMM-yyyy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeFull:
+        ///         format = "MMMM dd, yyyy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeShort:
+        ///         format = "d-MMM-yy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.Time:
+        ///         format = "hh:mm:ss tt";
+        ///         break;
+        ///     default:
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
+        /// }
+        /// </param>
+        /// <param name="customFormat">If anything passed then this format will be used.</param>
+        /// <returns>Returns a data-time without using timezone</returns>
+        public static string DisplayDate(
+            this HtmlHelper helper,
+            bool withoutTimezone = true,
+            DateTime? dt = null,
+            DateTimeFormatType formatType = DateTimeFormatType.Date,
+            string customFormat = null) {
+            var format = GetDefaultTimeZoneFormat(formatType, customFormat);
+            return dt.HasValue ? dt.Value.ToString(format) : "";
+        }
+
 
         #endregion
     }
