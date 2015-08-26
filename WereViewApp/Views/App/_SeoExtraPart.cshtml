@@ -1,0 +1,108 @@
+﻿@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
+@model WereViewApp.Models.EntityModel.App
+@{
+    string currentUrl = @Html.GetCurrentUrlString(); // Apps/Apple-7/Games/plant-vs-zombies
+    string platformSubtitle = Model.Platform.PlatformName + " mobile apps";
+    string categorySubtitle = Model.GetCategoryString() + " category mobile apps";
+    string softwareUrl = AppVar.Url; //we review app
+        //string currentAppUrlNameOnly = Model.URL; //plant-vs-zombies
+    string appName = Model.AppName;
+        
+}
+<div class="seo-hide">
+    <a href="@softwareUrl@currentUrl" title="@platformSubtitle : @appName (@categorySubtitle)">
+        <h1 class="h1" title="@platformSubtitle : @appName (@categorySubtitle)">
+            <strong title="@platformSubtitle : @appName (@categorySubtitle)">
+                <em title="@platformSubtitle : @appName (@categorySubtitle)">@softwareUrl@currentUrl</em>
+            </strong>
+        </h1>
+    </a>
+    <a href="@softwareUrl@currentUrl" title="@platformSubtitle : @appName (@categorySubtitle)">
+        <h1 class="h1" title="@platformSubtitle : @appName (@categorySubtitle)">
+            <strong title="@platformSubtitle : @appName (@categorySubtitle)">
+                <em title="@platformSubtitle : @appName (@categorySubtitle)">@softwareUrl@currentUrl</em>
+            </strong>
+        </h1>
+    </a>
+    <a href="@softwareUrl@currentUrl" title="@platformSubtitle : @appName">
+        <h1 class="h1" title="@platformSubtitle : @appName">
+            <strong title="@platformSubtitle : @appName">
+                <em title="@platformSubtitle : @appName">@softwareUrl@currentUrl</em>
+            </strong>
+        </h1>
+    </a>
+    <a href="@softwareUrl@currentUrl" title="@platformSubtitle : @appName (@categorySubtitle)">
+        <h1 class="h1" title="@platformSubtitle : @appName (@categorySubtitle)">
+            <strong title="@platformSubtitle : @appName (@categorySubtitle)">
+                <em title="@platformSubtitle : @appName (@categorySubtitle)">@platformSubtitle : @appName (@categorySubtitle)</em>
+            </strong>
+        </h1>
+    </a>
+    <a href="@softwareUrl@currentUrl" title="@platformSubtitle : @appName (@categorySubtitle)">
+        <h1 class="h1" title="@platformSubtitle">
+            <strong title="@platformSubtitle">
+                <em title="@platformSubtitle">@platformSubtitle</em>
+            </strong>
+        </h1>
+        <h1 class="h1" title="@appName">
+            <strong title="@appName">
+                <em title="@appName">@appName</em>
+            </strong>
+        </h1>
+        <h1 class="h1" title="@categorySubtitle">
+            <strong title="@categorySubtitle">
+                <em title="@categorySubtitle">@categorySubtitle</em>
+            </strong>
+        </h1>
+    </a>
+    <a href="@softwareUrl@currentUrl" title="@appName">
+        <h1 class="h1" title="@appName">
+            <strong title="@appName">
+                <em title="@appName">@appName</em>
+            </strong>
+        </h1>
+    </a>
+    <a href="@softwareUrl" title="Apps review website">
+        <h1 class="h1" title="Apps review website">
+            <strong title="Apps review website">
+                <em title="Apps review website">Apps review website</em>
+            </strong>
+        </h1>
+    </a>
+    <a href="@softwareUrl" title="Apps review">
+        <h1 class="h1" title="Apps review ">
+            <strong title="Apps review ">
+                <em title="Apps review ">Apps review </em>
+            </strong>
+        </h1>
+    </a>
+    <a href="@currentUrl" title="Apps review website">
+        <h1 class="h1" title="apps">
+            <strong title="apps">
+                <em title="apps">apps</em>
+            </strong>
+        </h1>
+        <h1 class="h1" title="review">
+            <strong title="review">
+                <em title="review">review</em>
+            </strong>
+        </h1>
+        <h1 class="h1" title="website">
+            <strong title="website">
+                <em title="website">website</em>
+            </strong>
+        </h1>
+    </a>
+    <a href="@currentUrl" title="Apps review">
+        <h1 class="h1" title="review">
+            <strong title="review">
+                <em title="review">review</em>
+            </strong>
+        </h1>
+        <h1 class="h1" title="apps">
+            <strong title="apps">
+                <em title="apps">apps</em>
+            </strong>
+        </h1>
+    </a>
+</div>
