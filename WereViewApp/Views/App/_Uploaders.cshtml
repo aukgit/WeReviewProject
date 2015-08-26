@@ -8,12 +8,12 @@
         ViewBag.onePreexist = ViewBag.preexistGallery == null ? 0 : 1;
     }
     <div id="collection-uploaders">
-        <!--Visibility controled from WereViewApps.js-->
+        <!--Visibility controlled from WereViewApps.js-->
         @Html.EditorFor(model => model.YoutubeCoverImage, "HttpPostedFileBase", new {@data_id = "5", @data_url = "/App/YoutubeCoverUpload", @data_single = "true", @uploadPreexist = @ViewBag.onePreexist})
         @Html.EditorFor(model => model.Galleries, "FileMulti", new {@data_id = "0", @data_url = "/App/UploadGallery", @maxUpload = 6, @editUrl = "/App/EditGalleryUploads", @hasEditBtn = "true", @uploadPreexist = ViewBag.preexistGallery})
-        @Html.EditorFor(model => model.HomePageFeatured, new {@data_id = "1", @data_url = "/App/UploadHomeFeatured", @data_single = "true", @uploadPreexist = @ViewBag.onePreexist})
-        @Html.EditorFor(model => model.HomePageIcon, new {@data_id = "4", @data_url = "/App/UploadHomePageIcon", @data_single = "true", @uploadPreexist = @ViewBag.onePreexist})
-        @Html.EditorFor(model => model.SuggestionIcon, new {@data_id = "2", @data_url = "/App/UploadSuggestionIcon", @data_single = "true", @uploadPreexist = @ViewBag.onePreexist})
-        @Html.EditorFor(model => model.SearchIcon, new {@data_id = "3", @data_url = "/App/UploadSearchIcon", @data_single = "true", @uploadPreexist = @ViewBag.onePreexist})
+        @Html.EditorFor(model => model.HomePageFeatured, "HttpPostedFileBase", new { @data_id = "1", @data_url = "/App/UploadHomeFeatured", @data_single = "true", @uploadPreexist = @ViewBag.onePreexist })
+        @Html.EditorFor(model => model.HomePageIcon, "HttpPostedFileBase", new { @data_id = "4", @data_url = "/App/UploadHomePageIcon", @data_single = "true", @uploadPreexist = @ViewBag.onePreexist })
+        @Html.EditorFor(model => model.SuggestionIcon, "HttpPostedFileBase", new { @data_id = "2", @data_url = "/App/UploadSuggestionIcon", @data_single = "true", @uploadPreexist = @ViewBag.onePreexist })
+        @Html.EditorFor(model => model.SearchIcon, "HttpPostedFileBase", new { @data_id = "3", @data_url = "/App/UploadSearchIcon", @data_single = "true", @uploadPreexist = @ViewBag.onePreexist })
     </div>
 }

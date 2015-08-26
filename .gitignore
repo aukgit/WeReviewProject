@@ -50,3 +50,6 @@ WereViewProject/WereViewApp/bin
 WereViewProject/WereViewApp/bin/*.*
 *.pdb
 WereViewApp.v12.suo
+WereViewApp/App_Data/DataCached/Database/*.*
+
+WereViewApp/Content/css/*.map
