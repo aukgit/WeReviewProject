@@ -9,7 +9,7 @@ body #wrap .app-details-page {
   color: #647383;
 }
 .primary-color {
-  color: #206397;
+  color: #ff7200;
 }
 .btn {
   font-weight: normal;
@@ -416,7 +416,7 @@ label.control-label {
 .menu .post-app-btn {
   height: 33px;
   height: 3.3rem;
-  background-color: #206397;
+  background-color: #ff7200;
 }
 .header-2 nav li.btn-type a:after {
   background-color: transparent;
@@ -673,7 +673,7 @@ label.control-label {
     border: 1px solid transparent;
     border-radius: 4px;
     color: #333;
-    background-color: #206397;
+    background-color: #ff7200;
   }
   .less-btn:hover,
   .show-more-btns-container .see-more-btn:hover {
@@ -1374,7 +1374,7 @@ q:after {
   }
 }
 .category-listing-page .category-title .app-title:hover {
-  color: #206397;
+  color: #ff7200;
 }
 .category-listing-page .category-title .app-title:hover .app-category {
   color: inherit;
