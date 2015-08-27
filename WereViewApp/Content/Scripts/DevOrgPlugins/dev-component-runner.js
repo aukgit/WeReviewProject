@@ -123,7 +123,7 @@ $(function () {
     //making textarea's elastic
     $("textarea").elastic().trigger('update');
 
-    $(".datetimepicker").datetimepicker({
+    $(".datetimepicker-start").datetimepicker({
         pickDate: true,                 //en/disables the date picker
         pickTime: true,                 //en/disables the time picker
         useMinutes: true,               //en/disables the minutes picker
@@ -137,7 +137,7 @@ $(function () {
 
     });
 
-    $(".datepicker").datetimepicker({
+    $(".datepicker-start").datetimepicker({
         pickDate: true,                 //en/disables the date picker
         pickTime: false,                 //en/disables the time picker
         useMinutes: false,               //en/disables the minutes picker
