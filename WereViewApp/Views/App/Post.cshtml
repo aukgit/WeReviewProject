@@ -12,8 +12,10 @@
 
 
 <h1 class="gap-from-top-small h2">
-    <span class="glyphicon glyphicon-plus-sign"></span>  
-    @Html.SamePageLink(title, subtitle, false)
+    <a class="" href="@Html.GetCurrentUrlWithHostName()">
+        <span class="fa fa-plus-circle"></span>
+        @title
+    </a>
 </h1>
 <hr />
 @using (Html.BeginForm(viewName, controller, FormMethod.Post, new {@class = "form-horizontal app-editing-page app-post Create-" + @ViewBag.Title, role = "form"})) {
