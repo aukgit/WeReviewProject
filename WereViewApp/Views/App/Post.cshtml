@@ -6,17 +6,10 @@
     string subtitle = ViewBag.Title;
     string controller = (string) ViewBag.controller;
     MvcHtmlString token = @Html.AntiForgeryToken();
-
     string viewName = "Post";
 }
 
-
-<h1 class="gap-from-top-small h2">
-    <a class="" href="@Html.GetCurrentUrlWithHostName()">
-        <span class="fa fa-plus-circle"></span>
-        @title
-    </a>
-</h1>
+@Html.SamePageLinkWithIcon(title, title, "fa fa-plus-circle")
 <hr />
 @using (Html.BeginForm(viewName, controller, FormMethod.Post, new {@class = "form-horizontal app-editing-page app-post Create-" + @ViewBag.Title, role = "form"})) {
     <div class="form-horizontal">

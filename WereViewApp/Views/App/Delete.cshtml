@@ -9,7 +9,7 @@
     string viewName = "Delete";
     var token = @Html.AntiForgeryToken();
 }
-<h1 class="gap-from-top-small h2">
+<h1 class="top-margin-space h2">
     <span class="glyphicon glyphicon-trash"></span>
     @Html.SamePageLink(title, subtitle, false)
 </h1>
@@ -31,7 +31,7 @@
                 <a href="@Url.Action("Edit", new {id = Model.AppID})" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
             </div>
         </div>
-        <table class="gap-from-top-small table table-hover">
+        <table class="top-margin-space table table-hover">
             <thead>
             <tr>
                 <th>Properties</th>
