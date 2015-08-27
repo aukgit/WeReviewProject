@@ -10,12 +10,7 @@
     string controller = (string) ViewBag.controller;
     string viewName = "Edit";
 }
-
-
-<h1 class="top-margin-space h2">
-    <span class="glyphicon glyphicon-edit"></span>
-    @Html.SamePageLink(title, subtitle, false)
-</h1>
+@Html.SamePageLinkWithIcon(title, title, "fa fa-edit")
 <hr />
 @using (Html.BeginForm(viewName, controller, FormMethod.Post, new {@class = "form-horizontal app-editing-page app-edit Edit-App", role = "form"})) {
     <div class="form-horizontal">
