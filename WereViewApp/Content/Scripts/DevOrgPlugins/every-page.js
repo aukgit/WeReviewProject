@@ -25,7 +25,7 @@ $(function () {
     //} 
     var $tooltipItems = $('.tooltip-show');
     if ($tooltipItems.length > 0) {
-        $tooltipItems.tooltip();
+        $tooltipItems.tooltip({container:'body'});
     }
     var $seoHideItems = $(".seo-hide");
     if ($seoHideItems.length > 0) {

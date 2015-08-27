@@ -6,7 +6,7 @@
     string subtitle = ViewBag.Title;
     string controller = (string)ViewBag.controller;
 }
-<h1 class="h2 gap-from-top-small">
+<h1 class="h2 top-margin-space">
     <span class="glyphicon glyphicon-print"></span>
     @Html.SamePageLink(title, subtitle, false)
 </h1>
@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-    <table class="table table-hover gap-from-top-small">
+    <table class="table table-hover top-margin-space">
         <thead>
             <tr>
                 <th>Properties</th>
@@ -168,7 +168,7 @@
 
         </tbody>
     </table>
-    <div class="form-group gap-from-top-small">
+    <div class="form-group top-margin-space">
         <div class="col-md-12">
             <div class="btn-group">
                 <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>

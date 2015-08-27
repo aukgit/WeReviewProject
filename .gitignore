@@ -42,14 +42,24 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.cache
+*.pdb
+*.v12.suo
+*.suo
 WereViewApp/WereViewApp.publish.xml
 WereViewApp/App_Data/elmah/*.*
+WereViewApp/obj/*.*
 WereViewApp/obj/Debug/
 WereViewApp/obj/Debug/*.*
+WereViewApp/obj/Debug/*.cache
 WereViewProject/WereViewApp/bin
 WereViewProject/WereViewApp/bin/*.*
-*.pdb
+
 WereViewApp.v12.suo
 WereViewApp/App_Data/DataCached/Database/*.*
 
+WereViewApp/Content/css/*.css.map
 WereViewApp/Content/css/*.map
+
+WereViewApp/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.user

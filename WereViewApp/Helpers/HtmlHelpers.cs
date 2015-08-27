@@ -6,6 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Enums;
+using DevMvcComponent.Extensions;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.DevUser;
@@ -36,7 +37,7 @@ namespace WereViewApp.Helpers {
             if (isDependOnUserLogState && UserManager.IsAuthenticated()) {
                 cacheName += UserManager.GetCurrentUserName();
             }
-            var cache = (string) AppConfig.Caches.Get(cacheName);
+            var cache = (string)AppConfig.Caches.Get(cacheName);
 
             if (cache != null && !string.IsNullOrWhiteSpace(cache)) {
                 return new HtmlString(cache);
@@ -195,7 +196,7 @@ namespace WereViewApp.Helpers {
             var countryOptionsGenerate = "<select class='form-control selectpicker " + classes +
                                          "' data-live-search='true' name='" + htmlName + "' " + otherAttributes +
                                          " title='Choose...' data-style='" + classes + "'>";
-            var dt = CachedQueriedData.GetTable(tableName, connectionType, new[] {valueField, textField});
+            var dt = CachedQueriedData.GetTable(tableName, connectionType, new[] { valueField, textField });
             if (dt != null && dt.Rows.Count > 0) {
                 var sb = new StringBuilder(countryOptionsGenerate, dt.Rows.Count + 10);
                 DataRow row;
@@ -231,9 +232,9 @@ namespace WereViewApp.Helpers {
                 return input;
             }
             if (isShowElipseDot) {
-                return input.Substring(0, (int) length) + "...";
+                return input.Substring(0, (int)length) + "...";
             }
-            return input.Substring(0, (int) length);
+            return input.Substring(0, (int)length);
         }
 
         public static string Truncate(this HtmlHelper helper, string input, int starting, int length) {
@@ -276,20 +277,45 @@ namespace WereViewApp.Helpers {
             //var area = HttpContext.Current.Request.RequestContext.RouteData.DataTokens["area"];
             //var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"];
             //var action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"];
+            return SamePageLinkWithIcon(helper, linkName, title, null, h1, addClass);
+        }
 
+        /// <summary>
+        /// Generates same page url anchor with an icon left or right
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="linkName">Link display name</param>
+        /// <param name="title">Link tooltip title</param>
+        /// <param name="iconClass">Icon classes: Font-awesome icons or bootstrap icon classes</param>
+        /// <param name="h1">Is nested inside a H1 element (W3c valid).</param>
+        /// <param name="addClass">Anchor class</param>
+        /// <param name="isLeft"></param>
+        /// <returns></returns>
+        public static HtmlString SamePageLinkWithIcon(this HtmlHelper helper,
+            string linkName,
+            string title,
+            string iconClass,
+            bool h1 = true,
+            string addClass = "",
+            bool isLeft = true) {
             var markup = "";
-
-
-            //if (area != null) {
-            //    markup = string.Format("<a href='/{0}/{1}/{2}' class='{3}' title='{4}'>{5}</a>", area, controller, action, addClass, title, linkName);
-            //} else {
-            //    markup = string.Format("<a href='/{0}/{1}' class='{2}' title='{3}'>{4}</a>", controller, action, addClass, title, linkName);
-            //}
             var uri = HttpContext.Current.Request.RawUrl;
             uri = AppVar.Url + uri;
-            markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{3}</a>", uri, addClass, title, linkName);
+
+            string icon = "";
+            if (!string.IsNullOrEmpty(iconClass)) {
+                icon = string.Format("<i class='{0}'></i>", iconClass);
+            }
+            if (isLeft) {
+                //left icon
+                markup = string.Format("<div class='top-margin-space'><a href='{0}' class='{1}' title='{2}'>{4}{3}</a></div>", uri, addClass, title, linkName, icon);
+
+            } else {
+                //right icon
+                markup = string.Format("<div class='top-margin-space'><a href='{0}' class='{1}' title='{2}'>{3}{4}</a></div>", uri, addClass, title, linkName, icon);
+            }
             if (h1) {
-                markup = string.Format("<h1 title='{0}'>{1}</h1>", title, markup);
+                markup = string.Format("<h1 title='{0}' class='h3'>{1}</h1>", title, markup);
             }
             return new HtmlString(markup);
         }

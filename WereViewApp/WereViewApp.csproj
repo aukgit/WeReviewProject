@@ -449,6 +449,10 @@
     </Content>
     <Content Include="Content\css\color-fonts.css" />
     <Content Include="Content\css\dataTables.bootstrap.css" />
+    <Content Include="Content\css\editor-templates.css" />
+    <Content Include="Content\css\editor-templates.min.css">
+      <DependentUpon>editor-templates.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\flags32-combo.css" />
     <Content Include="Content\css\flags32.css" />
     <Content Include="Content\css\flags32.png" />
@@ -656,6 +660,9 @@
       <DependentUpon>header.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\override-mvc.variables.less" />
+    <Content Include="Content\css\editor-templates.css.map">
+      <DependentUpon>editor-templates.css</DependentUpon>
+    </Content>
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <None Include="Content\Scripts\jquery-2.1.3.intellisense.js" />
