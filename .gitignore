@@ -58,6 +58,7 @@ WereViewProject/WereViewApp/bin/*.*
 WereViewApp.v12.suo
 WereViewApp/App_Data/DataCached/Database/*.*
 
+WereViewApp/Content/css/*.css.map
 WereViewApp/Content/css/*.map
 
 WereViewApp/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache

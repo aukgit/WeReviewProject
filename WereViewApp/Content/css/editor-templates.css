@@ -100,4 +100,19 @@
   margin-top: 8.5px;
   margin-bottom: 14px;
 }
-/*# sourceMappingURL=validator.css.map */
+/*
+  Warning(.css file): Please don't modify styles from css file. Please modify the styles in the respective.less file in the less folder. CSS files will be replaced with new .less file styles.
+  FYI: This file (.less file) contains styles for editor-templates.
+*/
+/*.controls {
+    overflow: hidden;
+}*/
+a.tooltip-show:focus,
+a.tooltip-show:hover {
+  text-decoration: none;
+}
+.form-group.boolean-type {
+  margin-top: 0;
+  padding-top: 0;
+}
+/*# sourceMappingURL=editor-templates.css.map */

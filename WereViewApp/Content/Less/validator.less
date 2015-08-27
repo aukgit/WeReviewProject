@@ -6,7 +6,7 @@
     .min-width(@inputs-max-width);
     //width: auto;
     display: inline;
-    font-size: 75%;
+    .font-size(11px);
     font-weight: bold;
     line-height: 1;
     color: #ffffff;
@@ -16,13 +16,22 @@
 
     &.field-validation-error {
         background-color: @input-error-bg-color;
-        padding: .2em .6em .3em;
+        //padding: .2em .6em .3em;
+        .padding(3px, 11px);
 
-        &.break-line { 
+        &.break-line {
             display: block;
             margin-top: 4px;
             .width(@inputs-max-width);
         }
+    }
+
+    &.table {
+        display: table;
+        line-height: 1.6;
+        .width(@inputs-max-width);
+        .padding(4px, 15px);
+        .margin(-2px);
     }
 }
 
