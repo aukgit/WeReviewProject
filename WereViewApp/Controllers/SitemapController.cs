@@ -45,7 +45,7 @@ namespace WereViewApp.Controllers {
                 var categories = WereViewStatics.AppCategoriesCache;
                 sitemapItems.AddRange(
                     categories.Select(
-                        category => new SitemapItem(appUrl + "/Apps/Category/" + category.CategoryName, modifiedDate)));
+                        category => new SitemapItem(appUrl + "/Apps/Category/" + category.Slug, modifiedDate)));
             }
 
             return new SitemapResult(sitemapItems);
