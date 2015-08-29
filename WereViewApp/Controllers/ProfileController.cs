@@ -2,6 +2,7 @@
 
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Pagination;
 using WereViewApp.Models.EntityModel;
@@ -37,14 +38,14 @@ namespace WereViewApp.Controllers {
             // add ordered by
             users = users.OrderByDescending(n => n.Id);
             var pageInfo = new PaginationInfo {
-                ItemsInPage = AppConfig.Setting.PageItems + 40,
+                ItemsInPage = AppConfig.Setting.PageItems,
                 PageNumber = page,
                 PagesExists = count
             };
             var usersForThisPage = users.GetPageData(pageInfo, CacheNames.ProfilePaginationDataCount, false).ToList();
             const string eachUrl = "/Profile?page=@page";
-            ViewBag.paginationHtml = Pagination.GetList(pageInfo, eachUrl, "",
-                maxNumbersOfPagesShow: MaxNumbersOfPagesShow);
+            ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
+                maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
             return View(usersForThisPage);
         }
 
@@ -77,8 +78,8 @@ namespace WereViewApp.Controllers {
                             GalleryCategoryIDs.SearchIcon);
                         ViewBag.Apps = appsForThisPage;
                         var eachUrl = "/Profile/" + user.UserName + "/@page";
-                        ViewBag.paginationHtml = Pagination.GetList(pageInfo, eachUrl, "",
-                            maxNumbersOfPagesShow: MaxNumbersOfPagesShow);
+                        ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
+                            maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
                         return View(user);
                     }
                 }

@@ -1,5 +1,5 @@
-﻿@model IEnumerable<WereViewApp.Models.EntityModel.App>
-
+﻿@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
+@model IEnumerable<WereViewApp.Models.EntityModel.App>
 @{
     ViewBag.Title = "Apps List";
     string title = ViewBag.Title;
@@ -8,7 +8,7 @@
     const string viewName = "Index";
 }
 @Html.SamePageLinkWithIcon(title, subtitle, "glyphicon glyphicon-th-list")
-<div class="small-bottom-gap"></div>
+<div class="top-gap-2x"></div>
 <p class="create-btn-p">
     <a href="@Url.Action("Post")" title="Create a new item." class="btn btn-warning create-save"><span class="glyphicon glyphicon-plus"></span> Create</a>
     <a href="@Url.Action("Drafts")" title="Get drafted apps." class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> Drafts</a>
@@ -41,7 +41,7 @@
                     @{
             var editLinkName = Html.DisplayFor(model => item.AppName).ToString();
                     }
-                    <a href="@Url.Action("Edit", new {id = item.AppID})" title="@editLinkName edit...">
+                    <a href="@Url.Action("Edit", new { id = item.AppID })" title="@editLinkName edit...">
                         <span class="glyphicon glyphicon-pencil"></span> @editLinkName
                     </a>
                 </td>
@@ -59,8 +59,8 @@
                     @Html.DisplayFor(modelItem => item.ReviewsCount)
                 </td>
                 <td>
-                    <a href="@Url.Action("Edit", new {id = item.AppID})" title="@editLinkName edit..." class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-                    <a href="@Url.Action("Details", new {id = item.AppID})" title="View App @editLinkName." class="btn btn-warning btn-xs"> View</a>
+                    <a href="@Url.Action("Edit", new { id = item.AppID })" title="@editLinkName edit..." class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                    <a href="@item.GetAbsoluteUrl()" title="View App @editLinkName." class="btn btn-warning btn-xs"> View</a>
                 </td>
             </tr>
         }

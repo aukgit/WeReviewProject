@@ -466,6 +466,9 @@
     <Content Include="Content\css\front-developer.css.map">
       <DependentUpon>front-developer.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\front-developer.min.css">
+      <DependentUpon>front-developer.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\header.css" />
     <Content Include="Content\css\less-imports.css" />
     <Content Include="Content\css\less-imports.css.map">
@@ -1008,8 +1011,6 @@
     <Content Include="Views\App\_AppEditButton.cshtml" />
     <Content Include="Views\Reviews\AlreadyReviewed.cshtml" />
     <Content Include="Views\Reviews\ReviewEdit.cshtml" />
-    <Content Include="Views\Apps\ListOfApps.cshtml" />
-    <Content Include="Views\Apps\_ListItemsOfApps.cshtml" />
     <Content Include="Views\Shared\_ListOfApps.cshtml" />
     <Content Include="Views\Shared\_AppNotFound.cshtml" />
     <Content Include="Views\Shared\_LoginUrlPage.cshtml" />
@@ -1043,6 +1044,8 @@
     <Content Include="Views\Shared\EditorTemplates\Double.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
     <Content Include="Views\App\_SeoExtraPart.cshtml" />
+    <Content Include="Views\Category\_SeoHide.cshtml" />
+    <Content Include="Views\Apps\Index.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />

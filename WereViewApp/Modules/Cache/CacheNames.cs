@@ -5,6 +5,7 @@
         public const string LanguageTableName = "CountryLanguage";
         public const string UsertimezoneTableName = "UserTimeZone";
         public const string ProfilePaginationDataForSpecificProfile = "ProfilePaginationDataForSpecificProfile";
+        public const string LastestAppsArchived = "LastestAppsArchived";
         public const string ProfilePaginationDataCount = "ProfilePaginationDataCount";
         public const string CategoryPageSpecificPagesCount = "CategoryPageSpecificPagesCount";
         public const string PlatformPageSpecificPagesCount = "PlatformPageSpecificPagesCount";

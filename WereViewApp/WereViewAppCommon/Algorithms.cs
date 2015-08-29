@@ -14,6 +14,7 @@ using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.WereViewAppCommon.Structs;
 using DevTrends.MvcDonutCaching;
+using WereViewApp.Modules.Cache;
 
 namespace WereViewApp.WereViewAppCommon {
     public class Algorithms {
@@ -217,16 +218,40 @@ namespace WereViewApp.WereViewAppCommon {
 
         #region Latest Apps With Icons
         public List<App> GetLatestApps(WereViewAppEntities db, int max) {
-            var apps = db.Apps
+            var apps = GetViewableApps(db)
                 .Include(n => n.Platform)
                 .Include(n => n.User)
                 .OrderByDescending(n => n.AppID)
-                .Where(n => n.IsPublished && !n.IsBlocked)
-                .Take(max).ToList();
+                .Take(max)
+                .ToList();
             if (apps != null) {
                 GetEmbedImagesWithApp(apps, db, max, GalleryCategoryIDs.HomePageIcon);
             }
             return apps;
+        }
+
+        public List<App> GetLatestApps(WereViewAppEntities db, bool pagination, int page,out HtmlString paginationListItems) {
+            var apps = GetViewableApps(db)
+                .Include(n => n.Platform)
+                .Include(n => n.User)
+                .OrderByDescending(n => n.AppID);
+
+            var pageInfo = new PaginationInfo {
+                ItemsInPage = AppConfig.Setting.PageItems,
+                PageNumber = page,
+                PagesExists = -1
+            };
+
+            var pagedApps = apps.GetPageData(pageInfo, CacheNames.LastestAppsArchived, true)
+                                .ToList();
+            if (pagedApps != null && pagedApps.Count > 0) {
+                GetEmbedImagesWithApp(pagedApps, db, (int)AppConfig.Setting.PageItems, GalleryCategoryIDs.HomePageIcon);
+            }
+
+            var eachUrl = "/Apps?Page=@page";
+            paginationListItems = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
+                           maxNumbersOfPagesShow: 8));
+            return pagedApps;
         }
 
         #endregion
