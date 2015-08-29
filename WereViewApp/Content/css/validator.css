@@ -32,8 +32,9 @@
   width: 29.4rem;
   padding: 4px 15px;
   padding: 0.4rem 1.5rem;
-  margin: -2px;
-  margin: -0.2rem;
+  margin: -4px 0px 0px 1px;
+  margin: -0.4rem 0 0 0.1rem;
+  border-radius: 4px;
 }
 /*.validator-container {
     position: relative;

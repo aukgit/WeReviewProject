@@ -466,6 +466,9 @@
     <Content Include="Content\css\front-developer.css.map">
       <DependentUpon>front-developer.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\front-developer.min.css">
+      <DependentUpon>front-developer.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\header.css" />
     <Content Include="Content\css\less-imports.css" />
     <Content Include="Content\css\less-imports.css.map">

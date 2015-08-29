@@ -32,12 +32,17 @@
 /// </summary>
 $.WeReviewApp = {
     ///appForm represents both app-edit and app-posting form
-    $appForm: $("form.app-editing-page"), // means both editing and posting
-    $appFormEdit: $("form.app-edit"),
-    $appFormPost: $("form.app-post"),
-    $allInputs: $("form.app-post input"),
+    ///appFormSelector : form.app-editing-page
+    $appFormWrapper: [],
+    $appForm: [],//$("form.app-editing-page"), // means both editing and posting
+    // appFormEdit selector : form.app-edit
+    $appFormEdit: [], //$("form.app-edit"),
+    // app form post  :form.app-post
+    $appFormPost: [], //$("form.app-post"),
+    // all input inside form app-port
+    $allInputs: [],// $("form.app-post input"),
     ajaxDraftPostUrl: "/App/SaveDraft",
-    $appPageUploaderNotifier: $("label.notify-global-info"),
+    $appPageUploaderNotifier: $.byId("notify-global-info-second"),
     homePageUrl: "/",
     selectorForUploaderRows: "#collection-uploaders .form-row-uploader",
     afterDraftPostRedirectPageUrl: "/",
@@ -412,7 +417,6 @@ $.WeReviewApp = {
      */
     generalAppFormEditingOrPostingPageOnReady: function (e) {
         var self = $.WeReviewApp;
-
         if (self.$appForm.length > 0) {
             self.$howtoUseUploaderInfoLabel.hide(); //hide uploader info label.
 
@@ -520,8 +524,8 @@ $.WeReviewApp = {
      * Everything stars from here.
      */
     askForReviewForm: function () {
-        var $reviewSpinner = $($.WeReviewApp.reviewSpinnerSelector).hide();
         var self = $.WeReviewApp;
+        var $reviewSpinner = $(self.reviewSpinnerSelector).hide();
 
         if ($reviewSpinner.length > 0) {
             $("#WriteReviewButton").click(function () {
@@ -531,7 +535,7 @@ $.WeReviewApp = {
                     $container.hide();
                     $reviewSpinner.fadeIn("slow");
                     // load write form
-                    var reqVerifyFieldsArray = $("#review-request-fields input").serializeArray();
+                    var reqVerifyFieldsArray = $("#review-request-fields").find("input").serializeArray();
                     //console.log(reqVerifyFields);
                     $.ajax({
                         type: "POST",
@@ -688,7 +692,7 @@ $.WeReviewApp = {
         var i;
         if ($loadMoreBtn.length > 0) {
             $div = $("#suggested-apps-list-div");
-            $appBoxes = $div.find("div.appsbox[data-sequence]");
+            $appBoxes = $div.find(".appsbox[data-sequence]");
             length = $appBoxes.length;
 
             for (i = 0; i < length; i++) {
@@ -705,9 +709,9 @@ $.WeReviewApp = {
             }
 
             $loadMoreBtn.click(function () {
-                $appBoxes = $div.find("div.appsbox[data-sequence][data-hide=true]");
+                var $appBoxesHidden = $appBoxes.filter("[data-hide=true]");
                 for (var i = 0; i < length; i++) {
-                    $appBox = $($appBoxes[i]);
+                    $appBox = $($appBoxesHidden[i]);
                     $appBox.show("slow");
                     $appBox.attr("data-hide", "false");
                 }
@@ -793,7 +797,21 @@ $.WeReviewApp = {
             }
         }
     },
-
+    initializeAppForms : function() {
+        var self = $.WeReviewApp;
+        self.$appFormWrapper = $.byId("app-form");
+        var $fromWrapper = self.$appFormWrapper;
+        if ($fromWrapper.length > 0) {
+            var dataType = $fromWrapper.attr("data-type");
+            self.$appForm = $fromWrapper.find(".app-editing-page");
+            if (dataType === "post") {
+                self.$appFormPost = self.$appForm;
+                self.$allInputs = self.$appForm.find("input");
+            } else if (dataType === "edit") {
+                self.$appFormEdit = self.$appForm;
+            }
+        }
+    },
     /* 
     * hides all uploader at first : $.WeReviewApp.$appForm.find("#collection-uploaders uploader-auto").hide();
     * modify $.WeReviewApp.appInputChangesExist based on user input
@@ -807,6 +825,7 @@ $.WeReviewApp = {
         /// Runs every other method.
         /// </summary>
         var self = $.WeReviewApp;
+        self.initializeAppForms();
         self.generalAppFormEditingOrPostingPageOnReady();
         //don't require anymore , it has been called from the fron-end.js script
         //self.frontEndJavaScript();
