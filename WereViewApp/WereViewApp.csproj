@@ -483,6 +483,9 @@
     <Content Include="Content\css\override-mvc.css.map">
       <DependentUpon>override-mvc.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\override-mvc.min.css">
+      <DependentUpon>override-mvc.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\owl.carousel.css" />
     <Content Include="Content\css\owl.custom.finalize.css" />
     <Content Include="Content\css\owl.custom.finalize.min.css" />
@@ -735,9 +738,6 @@
     <Content Include="Areas\Admin\Views\Roles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Countries\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Countries\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Countries\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Edit.cshtml" />

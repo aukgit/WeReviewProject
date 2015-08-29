@@ -7,10 +7,7 @@
     string controller = (string)ViewBag.controller;
     string viewName = "UserBlock";
 }
-<h1 class="h2 top-margin-space">
-    <span class="glyphicon glyphicon-edit"></span>
-    @Html.SamePageLink(title, subtitle, false)
-</h1>
+@Html.SamePageLinkWithIcon(title, subtitle, "fa  fa-ban")
 <hr />
 <h4 class="h4">Do you confirm blocking this user?</h4>
 @using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {

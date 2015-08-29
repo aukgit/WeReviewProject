@@ -2,9 +2,11 @@
 
 @{
     ViewBag.Title = "NavigationItem";
+    string title = ViewBag.Title;
+    string subtitle = ViewBag.Title;
 }
 
-<h2 class="h3"><span class="glyphicon glyphicon-th-list"></span> @ViewBag.Title</h2>
+@Html.SamePageLinkWithIcon(title, subtitle, "glyphicon glyphicon-th-list")
 
 <p class="right">
     <a href="@Url.Action("Add", new { id = ViewBag.NavigationID })" title="Create a new item." class="btn btn-warning create-save"><span class="glyphicon glyphicon-plus"></span> Create</a>

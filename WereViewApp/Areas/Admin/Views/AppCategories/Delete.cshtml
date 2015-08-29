@@ -10,10 +10,7 @@
 	string viewName = "Delete";
 	var token = (MvcHtmlString)@Html.AntiForgeryToken();
 }
-<h1 class="h2 top-margin-space">
-	<span class="glyphicon glyphicon-trash"></span>
-	@Html.SamePageLink(title, subtitle, false)
-</h1>
+@Html.SamePageLinkWithIcon(title, subtitle, "fa fa-trash")
 <hr />
 <h3 class="h4">@asking</h3>   
     <div class="form-horizontal">
