@@ -105,13 +105,28 @@ namespace WereViewApp {
                defaults: new { controller = "Category", action = "Index" },
                namespaces: new string[] { wereviewappControllers }
             );
-            
+     
             routes.MapRoute(
-               name: "Apps",
-               url: "Apps",
-               defaults: new { controller = "App", action = "Index" },
-               namespaces: new string[] { wereviewappControllers }
+              name: "apps-index",
+              url: "Apps",
+              defaults: new { controller = "Apps", action = "Index", id = UrlParameter.Optional },
+              namespaces: new string[] { wereviewappControllers }
+          );
+
+            routes.MapRoute(
+                name: "apps-latest",
+                url: "Apps/Latest",
+                defaults: new { controller = "Apps", action = "Latest", id = UrlParameter.Optional },
+                namespaces: new string[] { wereviewappControllers }
             );
+
+            routes.MapRoute(
+                name: "apps-top",
+                url: "Apps/Top",
+                defaults: new { controller = "Apps", action = "Top", id = UrlParameter.Optional },
+                namespaces: new string[] { wereviewappControllers }
+            );
+
 
             routes.MapRoute(
                name: "SingleApp",
@@ -126,6 +141,8 @@ namespace WereViewApp {
                defaults: new { controller = "Apps", action = "Platform" },
                namespaces: new string[] { wereviewappControllers }
             );
+
+          
             #endregion
 
             #region Default Route
