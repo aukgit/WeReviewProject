@@ -19,11 +19,10 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.AppID)
             @Html.HiddenFor(model => model.URL)
+            @Html.HiddenFor(model => model.CreatedDate)
             @Html.Partial("_CreateOrEdit")
             @Html.Partial("_Uploaders")
-
             @Html.EditorFor(model => model.IsPublished)
-
             <div class="form-group">
                 <div class="col-md-10 col-md-offset-2">
                     <div class="btn-group">
