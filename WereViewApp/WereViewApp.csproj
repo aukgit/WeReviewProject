@@ -620,6 +620,7 @@
     <Content Include="Content\Scripts\DevOrgPlugins\dev-component-runner.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.component.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\byId.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\jquery.server-validate.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\WeReviewApps.js" />
     <Content Include="Content\Published.Scripts\front-end.min.js.map">
       <DependentUpon>front-end.min.js</DependentUpon>
