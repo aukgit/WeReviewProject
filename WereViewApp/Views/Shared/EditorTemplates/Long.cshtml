@@ -68,13 +68,7 @@
         <div class="@ViewBag.textColumn form-input @styleProperty" data-prop="@styleProperty">
             <div class="input-validator-container">
                 @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
-                <div class="validator-container">
-                    <div class="validator">
-                        <a>
-                            <i class=""></i>
-                        </a>
-                    </div>
-                </div>
+                <div class="validator-container"><div class="validator"></div></div>
             </div>
             @if (description != null) {
                 <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">

@@ -60,10 +60,13 @@
             @displayName <span class="red">@isRequiredStar</span>
         </label>
         <div class="@ViewBag.textColumn form-input @styleProperty" data-prop="@styleProperty">
-            <span class="inner-addon left-addon">
-                <i class="@icon"></i>
-                @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
-            </span>
+            <div class="input-validator-container">
+                <span class="inner-addon left-addon">
+                    <i class="@icon"></i>
+                    @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
+                </span>
+                <div class="validator-container"><div class="validator"></div></div>
+            </div>
             @if (description != null) {
                 <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">
                     <span class="description-icon"></span>
