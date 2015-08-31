@@ -2,14 +2,14 @@
 
 @{
     ViewBag.Title = "Editing Feedback";
+    string title = ViewBag.Title;
+    string subtitle = ViewBag.Title;
     var token = (MvcHtmlString)@Html.AntiForgeryToken();
 }
 
 
-<h1 class="h2 gap-from-top-small">
-	<span class="glyphicon glyphicon-plus"></span>  
-	@ViewBag.Title
-</h1>
+@Html.SamePageLinkWithIcon(title, subtitle, "fa fa-edit")
+
 <hr />
 @using (Html.BeginForm("Edit", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) 
 {

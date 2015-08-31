@@ -11,10 +11,8 @@
 }
 
 
-<h1 class="h2 gap-from-top-small">
-    <span class="glyphicon glyphicon-edit"></span>
-    @Html.SamePageLink(title, subtitle, false)
-</h1>
+@Html.SamePageLinkWithIcon(title, subtitle, "fa fa-edit")
+
 @{
     string imgSrc = Html.UploadedImageSrc("Advertise/", Model);
 }

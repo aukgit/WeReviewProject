@@ -9,11 +9,17 @@ body #wrap .app-details-page {
   color: #647383;
 }
 .primary-color {
-  color: #206397;
+  color: #ff7200;
 }
 .btn {
   font-weight: normal;
   text-transform: none;
+  padding: 7px 12px 7px 12px;
+  padding: 0.7rem 1.2rem 0.7rem 1.2rem;
+  border: none;
+}
+.btn-xs {
+  padding: 1px 5px;
 }
 .btn-default {
   color: white;
@@ -108,9 +114,6 @@ label.control-label {
 .apps-list-header-row .float-right.btn {
   margin: 0px 5px 0px 0px;
   margin: 0 0.5rem 0 0;
-}
-.btn {
-  border: none;
 }
 .paragraph-end {
   height: 19px;
@@ -294,11 +297,19 @@ label.control-label {
   width: 385px;
   width: 38.5rem;
   text-align: left;
+  -ms-text-overflow: ellipsis !important;
+  -o-text-overflow: ellipsis !important;
+  text-overflow: ellipsis !important;
+  white-space: normal;
 }
 .gallery-home .app-description p {
   text-align: justify;
   -ms-word-wrap: break-word;
   word-wrap: break-word;
+  -ms-text-overflow: inherit;
+  -o-text-overflow: inherit;
+  text-overflow: inherit;
+  white-space: inherit;
 }
 .gallery-home .app-description-wrapper {
   width: 400px;
@@ -416,7 +427,7 @@ label.control-label {
 .menu .post-app-btn {
   height: 33px;
   height: 3.3rem;
-  background-color: #206397;
+  background-color: #ff7200;
 }
 .header-2 nav li.btn-type a:after {
   background-color: transparent;
@@ -673,7 +684,7 @@ label.control-label {
     border: 1px solid transparent;
     border-radius: 4px;
     color: #333;
-    background-color: #206397;
+    background-color: #ff7200;
   }
   .less-btn:hover,
   .show-more-btns-container .see-more-btn:hover {
@@ -1374,7 +1385,7 @@ q:after {
   }
 }
 .category-listing-page .category-title .app-title:hover {
-  color: #206397;
+  color: #ff7200;
 }
 .category-listing-page .category-title .app-title:hover .app-category {
   color: inherit;

@@ -20,14 +20,13 @@
                 <h1>
                     Search results for <strong class="red">"</strong><strong class="black">
                         @if (Model != null) {
-                            @Model.DisplaySearchText
+                            @Model.DisplayStringToUser
                         }
                     </strong><strong class="red">"</strong>
                 </h1>
-            }@*<div class="searchboxWrap form-group">
-                    <input type="text" class="searchbox form-control" value="Angry Birds" />
-                    <input type="submit" value="Search" class="searchbutton btn btn-success" />
-                </div>*@@Html.EditorFor(i => i.Url, "Search")
+            }
+
+            @Html.EditorFor(i => i.DisplayStringToUser, "Search")
             @Html.AntiForgeryToken()
         </div>
         <div class="container inner innerContainer">
@@ -81,43 +80,8 @@
                             }
                         }
                     </div>
-                    @*<div class="morewrap"><a class="loadmore">Load More</a></div>*@
-                </div><!----- content part end ------>
-            </div><!----- contenCol part end ------>
-            <!--<div class="col-md-3 col-sm-3 form-group rightCol">
-                <div class="selectWrap">
-                    <div class="boxWrap row">
-                        @*<label><input type="checkbox" class="checkbox " value=""> Rating:</label>*@
-                        @*@Html.EditorFor(n=> n.isRatingCheck)*@
-                        <select class="form-control">
-                            <option>Mustard</option>
-                            <option>Ketchup</option>
-                            <option>Relish</option>
-                        </select>
-                    </div>
-                    <div class="boxWrap">
-                        <label><input type="checkbox" class="checkbox" value=""> Type:</label>
-                        <input type="text" value="" class="form-control textbox">
-                    </div>
-                    <div class="boxWrap">
-                        <label><input type="checkbox" class="checkbox" value=""> Platform:</label>
-                        <select class="form-control">
-                            <option>Mustard</option>
-                            <option>Ketchup</option>
-                            <option>Relish</option>
-                        </select>
-                    </div>
                 </div>
-                <div class="rediobutton">
-                    <div class="rediobox">
-                        <input type="radio" class="radio" name="sorted_by"><label>Sorted by Relevancy</label>
-                    </div>
-                    <div class="rediobox">
-                        <input type="radio" class="radio" name="sorted_by"><label>Sorted by Rating</label>
-                    </div>
-                </div>
-            </div>-->
-
-        </div><!----- container ------>
+            </div>
+        </div>
     </form>
 </div>

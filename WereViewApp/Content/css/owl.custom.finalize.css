@@ -308,7 +308,7 @@ pre.pre-show {
   width: 33.3333333%;
 }
 .demo-lazy .demo-slide .bg {
-  background: url(../img/AjaxLoader.gif) no-repeat center center #aebab6;
+  background: url('../img/AjaxLoader.gif') no-repeat center center #aebab6;
 }
 /* Auto Height */
 .demo-height .demo-slide {

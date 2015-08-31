@@ -3,7 +3,7 @@
 @model List<Category>
 @{
     ViewBag.Title = "Mobile App Categories / Category";
-    string currentPageStaticUrl = AppVar.Url + Html.GetCurrentUrlString();
+    string currentPageStaticUrl = Html.GetCurrentUrlWithHostName();
 }
 <div class="app-details-page category-listing-page category-page search-page">
     <div class="row">
@@ -84,56 +84,11 @@
                         }
                     </ul>
                     <div class="regular-show-more-btn">
-                        <a href="@currentPageStaticUrl/@category.CategoryName" title="@category.CategoryName category mobile apps" class="btn more-btn pull-right white">@category.CategoryName : See More</a>
+                        <a href="@currentPageStaticUrl/@category.CategoryName" title="@category.CategoryName category mobile apps" class="btn more-btn pull-right white">More...</a>
                     </div>
                 </div>
             </div>
         }
     </div>
 </div>
-<div class="seo-hide">
-    <a href="@currentPageStaticUrl" class="seo-app-name" title="WeReviewApp.com : App Reviews website.">
-        <h1 title="WeReviewApp.com : App Reviews website.">
-            <strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">We</em>
-            </strong><strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">Review</em>
-            </strong><strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">App</em>
-            </strong><strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">.com</em>
-            </strong>
-        </h1>
-    </a>
-    is great
-    <a href="@currentPageStaticUrl" class="seo-app-name" title="WeReviewApp.com : App Reviews website.">
-        <h1 title="WeReviewApp.com : App Reviews website.">
-            <strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">web</em>
-            </strong><strong title="WeReviewApp.com : App Reviews website.">
-                <em title="WeReviewApp.com : App Reviews website.">site</em>
-            </strong>
-            @currentPageStaticUrl
-        </h1>
-    </a> for both developers and users who use
-    <a href="@currentPageStaticUrl" class="seo-app-name" title="mobile Apps users">
-        <h1 title="mobile Apps users">
-            <strong title="mobile Apps users">
-                <em title="mobile Apps users">mobile</em>
-            </strong>
-            <strong title="mobile Apps users">
-                <em title="mobile Apps users">apps</em>
-            </strong>
-            <strong title="mobile Apps users">
-                <em title="mobile Apps users">users</em>
-            </strong>
-        </h1>
-    </a>
-    Collection of <a href="@Html.GetCurrentUrlString()" title="">
-        <h1>
-            <strong>
-                <em>reviews : @currentPageStaticUrl</em>
-            </strong>
-        </h1>
-    </a>
-</div>
+@Html.Partial("_SeoHide")

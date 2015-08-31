@@ -449,6 +449,10 @@
     </Content>
     <Content Include="Content\css\color-fonts.css" />
     <Content Include="Content\css\dataTables.bootstrap.css" />
+    <Content Include="Content\css\editor-templates.css" />
+    <Content Include="Content\css\editor-templates.min.css">
+      <DependentUpon>editor-templates.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\flags32-combo.css" />
     <Content Include="Content\css\flags32.css" />
     <Content Include="Content\css\flags32.png" />
@@ -460,6 +464,9 @@
     </Content>
     <Content Include="Content\css\front-developer.css" />
     <Content Include="Content\css\front-developer.css.map">
+      <DependentUpon>front-developer.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\front-developer.min.css">
       <DependentUpon>front-developer.css</DependentUpon>
     </Content>
     <Content Include="Content\css\header.css" />
@@ -474,6 +481,9 @@
     <Content Include="Content\css\miscellaneous.css" />
     <Content Include="Content\css\override-mvc.css" />
     <Content Include="Content\css\override-mvc.css.map">
+      <DependentUpon>override-mvc.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\override-mvc.min.css">
       <DependentUpon>override-mvc.css</DependentUpon>
     </Content>
     <Content Include="Content\css\owl.carousel.css" />
@@ -518,6 +528,9 @@
       <DependentUpon>utilities.css</DependentUpon>
     </Content>
     <Content Include="Content\css\validator.css" />
+    <Content Include="Content\css\validator.min.css">
+      <DependentUpon>validator.css</DependentUpon>
+    </Content>
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
@@ -653,6 +666,9 @@
       <DependentUpon>header.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\override-mvc.variables.less" />
+    <Content Include="Content\css\editor-templates.css.map">
+      <DependentUpon>editor-templates.css</DependentUpon>
+    </Content>
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <None Include="Content\Scripts\jquery-2.1.3.intellisense.js" />
@@ -722,9 +738,6 @@
     <Content Include="Areas\Admin\Views\Roles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Countries\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Countries\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Countries\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Edit.cshtml" />
@@ -998,8 +1011,6 @@
     <Content Include="Views\App\_AppEditButton.cshtml" />
     <Content Include="Views\Reviews\AlreadyReviewed.cshtml" />
     <Content Include="Views\Reviews\ReviewEdit.cshtml" />
-    <Content Include="Views\Apps\ListOfApps.cshtml" />
-    <Content Include="Views\Apps\_ListItemsOfApps.cshtml" />
     <Content Include="Views\Shared\_ListOfApps.cshtml" />
     <Content Include="Views\Shared\_AppNotFound.cshtml" />
     <Content Include="Views\Shared\_LoginUrlPage.cshtml" />
@@ -1032,6 +1043,9 @@
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <Content Include="Views\Shared\EditorTemplates\Double.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
+    <Content Include="Views\App\_SeoExtraPart.cshtml" />
+    <Content Include="Views\Category\_SeoHide.cshtml" />
+    <Content Include="Views\Apps\Index.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />

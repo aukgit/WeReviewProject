@@ -100,6 +100,9 @@
   font-size: 22px;
   font-size: 1.375em;
 }
+.ubuntu-font {
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 .bangla,
 .bangla li {
   font-family: Bangla,Kalpurush;

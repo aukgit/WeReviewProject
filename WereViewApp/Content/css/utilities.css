@@ -273,7 +273,7 @@ hr {
   margin-top: 55px;
   margin-top: 5.5rem;
 }
-.gap-from-top-small {
+.top-margin-space {
   margin-top: 25px;
   margin-top: 2.5rem;
 }
@@ -730,7 +730,7 @@ div.contactus {
 }
 .regular-show-more-btn .more-btn {
   color: white;
-  background-color: #206397;
+  background-color: #ff7200;
   padding: 10px 24px;
 }
 .regular-show-more-btn .more-btn:hover {
