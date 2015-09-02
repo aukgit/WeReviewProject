@@ -17,10 +17,9 @@
  * mailto:info@developers-organism.com
 */
 
-$(function () {
-    //tooltip trigger
+$.devOrg = $.devOrg || {};
 
-
+$.devOrg.runner = function() {
     $.devOrg.Constants = {
         registerForm: $("form.register-form"),
         userName: "UserName",
@@ -61,10 +60,10 @@ $(function () {
                                           false,
                                           false,
                                           4);
-        
+
         $.devOrg.enterToNextTextBox(".register-form", false);
         //$.devOrg.uxFriendlySlide("form.register-form", true);
-        
+
         $("button.fillit").click(function () {
             $.devOrg.fillRegisterFieldsOnDemo();
         });
@@ -86,7 +85,7 @@ $(function () {
 
 
 
-    
+
     $("select.selectpicker").selectpicker();
     $.devOrg.bootstrapComboSelectIndex("select.selectpicker", 0);
 
@@ -153,5 +152,23 @@ $(function () {
     });
 
 
+    var serverValidationActivate = function () {
+        var $processForm = $.byId("server-validation-form");
+        $processForm.serverValidate({
+            crossDomain: false,
+            multipleRequests: true,
+            checkValidationBeforeSendingRequest: true,
+            dontSendSameRequestTwice: false,
+            disableInputOnValidation: false,
+            focusPersistIfNotValid: false,
+            hideOnValidation: false
+        });
+    }
 
+
+    serverValidationActivate();
+}
+
+$(function () {
+    $.devOrg.runner();
 });

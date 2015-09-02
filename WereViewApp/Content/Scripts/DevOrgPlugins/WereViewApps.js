@@ -368,6 +368,30 @@ $.WeReviewApp = {
         // fix square brackets to html brackets
         self.invertAllInputIframeDataOrSquareToHtml();
     },
+
+    appNameOnBlur : function() {
+        /// <summary>
+        /// What happens when appname field is blured
+        /// </summary>
+        /// <returns type=""></returns>
+        var $appNameInput = $.byId("AppName"),
+            $tagsInput = $.byId("Tags");
+        //var $formInputs = self.$appForm.find("select,input[name!=YoutubeEmbedLink]");
+
+        $appNameInput.blur(function() {
+            var value = $appNameInput.val(),
+                tagsArray = value.split(' '),
+                tagsExistingText = $tagsInput.val();
+            tagsArray.push(value);
+            if (tagsExistingText) {
+                tagsArray.push(tagsExistingText);
+            }
+            var uniqueArray = _.uniq(tagsArray);
+            var tags = uniqueArray.join(",");
+            $tagsInput.val(tags);
+        });
+    },
+
     /*
      * This method is related to display contents 
      * when **only** app-posting page is ready (not submitting)
@@ -376,36 +400,10 @@ $.WeReviewApp = {
     appPostingPageOnReady: function () {
         var self = $.WeReviewApp;
         $.devOrg.uxFriendlySlide("form.app-post", true, true);
-        var $formInputs = self.$appForm.find("select,input[name!=YoutubeEmbedLink]");
-        //console.log($formInputs);
-        $.devOrg.validateInputFromServer(
-            "#AppName",
-            "/Validator/GetValidUrl",
-            "AppName",
-            false,
-            false,
-            3,
-            true,
-            " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.",
-            null,
-            $formInputs,
-            self.maxTryInputSubmit,
-            function onComplete() {
-                // on success
-                // tag names
-                var $appName = $.byId("AppName"),
-                    value = $appName.val(),
-                    tagsArray = value.split(' '),
-                    $tagsInput = $.byId("#Tags"),
-                    tagsExistingText = $tagsInput.val();
-                tagsArray.push(value);
-                if (tagsExistingText) {
-                    tagsArray.push(tagsExistingText);
-                }
-                var uniqueArray = _.uniq(tagsArray);
-                var tags = uniqueArray.join(",");
-                $tagsInput.val(tags);
-            });
+     
+
+        //bind with blur event of AppName
+        self.appNameOnBlur();
 
         ///hiding the uploader on the app loader page for every time before posting a new app.
         self.$appForm.find(self.selectorForUploaderRows).hide();

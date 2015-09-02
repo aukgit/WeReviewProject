@@ -6,7 +6,7 @@
 
 <div data-dev-slide="0" data-dev-visited="@ViewBag.ShowAllDivs">
     <div id="server-validation-form">
-        @Html.EditorFor(model => model.AppName, "String", new { url = "/Validator/GetValidUrl",  })
+        @Html.EditorFor(model => model.AppName, "String", new { url = "/Validator/GetValidUrl", isValidate = "true", data_submit_method="post"})
     </div>
     <div class="form-group PlatformID-main">
         <div class="controls">

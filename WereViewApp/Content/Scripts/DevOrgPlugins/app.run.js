@@ -19,7 +19,6 @@ $.app.run = function () {
 
     this.init = function() {
         this.general();
-        this.serverValidationActivate();
     }
     this.general = function() {
         var $tooltipItems = $('.tooltip-show');
@@ -32,47 +31,7 @@ $.app.run = function () {
         }
     }
 
-    this.serverValidationActivate = function() {
-        var $processForm = $.byId("server-validation-form");
-        $processForm.serverValidate({
-            crossDomain: false,
-            multipleRequests: true,
-            checkValidationBeforeSendingRequest: true,
-            dontSendSameRequestTwice: false,
-            disableInputOnValidation: false,
-            focusPersistIfNotValid: false,
-            hideOnValidation: false,
-            messages: {
-                requesting: "Requesting data..."
-            },
-            selectors: {
-                divContainer: ".form-row",
-                validatorContainer: ".validator-container",
-                validator: ".validator",
-                additionalFields: [
-                    "[name=__RequestVerificationToken]"
-                ]
-            },
-            attributes: {
-                url: "data-url",
-                isValidate: "data-is-validate",
-                submitMethod: "data-submit-method"
-            },
-            icons: {
-                // if user wanted to change the icon
-                invalid: "validation-icon-invalid fa fa-times",
-                valid: "validation-icon-valid fa fa-check",
-                spinner: "validation-icon-spinner fa fa-refresh fa-spin-custom",
-                error: "validation-icon-error fa fa-exclamation-circle"
-            },
-            iconsIdPrefixes: {
-                invalid: "invalid-mark-",
-                valid: "valid-mark-",
-                spinner: "validation-spinner-",
-                error: "validation-error-"
-            }
-        });
-    }
+  
     this.init();
 }
 
@@ -85,5 +44,5 @@ $(function () {
     //    });
     //} 
 
-    $.app.run.init();
+    $.app.run();
 });
