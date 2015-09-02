@@ -7,7 +7,7 @@
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
     var token = @Html.AntiForgeryToken();
-    string controller = (string) ViewBag.controller;
+    string controller = (string)ViewBag.controller;
     string viewName = "Edit";
 }
 @Html.SamePageLinkWithIcon(title, title, "fa fa-edit")
@@ -21,6 +21,7 @@
             @Html.HiddenFor(model => model.URL)
             @Html.HiddenFor(model => model.CreatedDate)
             @Html.Partial("_CreateOrEdit")
+
             @Html.Partial("_Uploaders")
             @Html.EditorFor(model => model.IsPublished)
             <div class="form-group">

@@ -4,7 +4,7 @@
     ViewBag.Title = "Post App";
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    string controller = (string) ViewBag.controller;
+    string controller = (string)ViewBag.controller;
     MvcHtmlString token = @Html.AntiForgeryToken();
     string viewName = "Post";
 }
@@ -12,6 +12,7 @@
 @Html.SamePageLinkWithIcon(title, title, "fa fa-plus-circle")
 <hr />
 <div id="app-form" data-type="post">
+
     @using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal app-editing-page app-post Create-" + @ViewBag.Title, role = "form" })) {
         <div class="form-horizontal">
             @Html.Partial("_SuccessMessage")

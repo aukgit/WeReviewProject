@@ -439,6 +439,9 @@
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
     </Content>
     <Content Include="Content\css\bootstrap-select.css" />
+    <Content Include="Content\css\bootstrap-select.min.css">
+      <DependentUpon>bootstrap-select.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\bootstrap-table.css" />
     <Content Include="Content\css\bootstrap-tag.css" />
     <Content Include="Content\css\bootstrap.css" />
@@ -616,7 +619,7 @@
     <Content Include="Content\Scripts\DevOrgPlugins\ComboOptions.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.country-phone.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.dynamicSelect.js" />
-    <Content Include="Content\Scripts\DevOrgPlugins\every-page.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\app.run.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\dev-component-runner.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.component.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\byId.js" />

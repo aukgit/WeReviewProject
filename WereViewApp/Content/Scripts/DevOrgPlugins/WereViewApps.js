@@ -1,7 +1,4 @@
-﻿
-
-
-/**
+﻿/**
  * Written by Alim Ul Karim
  * Developers Organism
  * Written  : 14 Nov 2014
@@ -484,8 +481,8 @@ $.WeReviewApp = {
         //console.log("ase");
         var $submittingSpinner = null;
         var $inputs, currformData = 0;
-        $submittingSpinner = $form.find("#submitting-review-spinner");
-        var $failedIcon = $form.find("#submitting-review-failed-icon");
+        $submittingSpinner = $("#submitting-review-spinner");
+        var $failedIcon = $("#submitting-review-failed-icon");
         // indicates if it is in the review posting page or in editing page\
         // $lastDiv.length == 0 indicates it's in review edit mode
         var $lastDiv = $form.find("div[data-last-slide=true]:visible");
@@ -556,7 +553,7 @@ $.WeReviewApp = {
                         success: function (response) {
                             var selectForm = self.reviewFormContainerSelectorInAppPage + " form";
                             var $submittingSpinner = null;
-                            var $response = $(response);
+                            //var $response = $(response);
                             $container.html(response);
 
                             var $failedIcon = $("#submitting-review-failed-icon");
@@ -621,7 +618,7 @@ $.WeReviewApp = {
         // ajax request send
         var $spinners = null;
 
-        function btnClicked($button, e, url, serializedInputs) {
+        var btnClicked = function ($button, e, url, serializedInputs) {
             e.preventDefault();
             var reviewId = $button.attr("data-review-id");
             var data = serializedInputs + "&reviewId=" + reviewId;
