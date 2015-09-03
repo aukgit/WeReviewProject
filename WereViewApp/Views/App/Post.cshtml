@@ -5,7 +5,7 @@
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
     string controller = (string)ViewBag.controller;
-    MvcHtmlString token = @Html.AntiForgeryToken();
+    ViewBag.token = @Html.AntiForgeryToken();
     string viewName = "Post";
 }
 
@@ -16,7 +16,6 @@
     @using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal app-editing-page app-post Create-" + @ViewBag.Title, role = "form" })) {
         <div class="form-horizontal">
             @Html.Partial("_SuccessMessage")
-            @token
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.Partial("_CreateOrEdit")
             @Html.Partial("_Uploaders")

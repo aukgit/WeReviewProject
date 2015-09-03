@@ -73,7 +73,7 @@ namespace WereViewApp.WereViewAppCommon.Structs {
         /// Action : SingleAppDisplay
         /// Url : /Apps/Apple-7/Games/plant-vs-zombies
         /// </summary>
-        public static List<App> AppsFoundForSingleDisplay { get; set; }
+        public static List<App> StaticAppsList { get; set; }
 
         #endregion
 

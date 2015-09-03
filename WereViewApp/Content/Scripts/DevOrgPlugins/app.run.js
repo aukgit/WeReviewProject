@@ -17,32 +17,26 @@ $.app = $.app || {};
 
 $.app.run = function () {
 
-    this.init = function() {
-        this.general();
+    this.init = function () {
+        this.toolTipShow();
+        this.seoHide();
     }
-    this.general = function() {
+    this.toolTipShow = function () {
         var $tooltipItems = $('.tooltip-show');
         if ($tooltipItems.length > 0) {
             $tooltipItems.tooltip({ container: 'body' });
         }
+
+    }
+    this.seoHide = function () {
         var $seoHideItems = $(".seo-hide");
         if ($seoHideItems.length > 0) {
             $seoHideItems.hide();
         }
     }
-
-  
     this.init();
 }
 
 $(function () {
-    //var devBackBtns = $("a.dev-btn-back");
-    //if (devBackBtns.length > 0) {
-    //    devBackBtns.click(function (e) {
-    //        e.preventDefault();
-    //        history.back();
-    //    });
-    //} 
-
     $.app.run();
 });

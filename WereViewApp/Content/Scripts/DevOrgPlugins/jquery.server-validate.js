@@ -106,15 +106,19 @@
 
     var processAdditionalFields = function ($elementContainer, additionalFields) {
         var addFields = [];
-        var $element = $elementContainer.find(additionalFields);
-        if ($element.length > 0) {
-            var nameOfElement = $element.attr("name");
-            var valueOfElement = $element.attr("value");
-            var pushingElement = {
-                name: nameOfElement,
-                value: valueOfElement
-            };
-            addFields.push(pushingElement);
+        var $elements = $elementContainer.find(additionalFields);
+        if ($elements.length > 0) {
+            for (var i = 0; i < $elements.length; i++) {
+                var $element = $($elements[i]);
+                var nameOfElement = $element.attr("name");
+                var valueOfElement = $element.attr("value");
+                var pushingElement = {
+                    name: nameOfElement,
+                    value: valueOfElement
+                };
+                addFields.push(pushingElement);
+            }
+         
         }
         return addFields;
     }
@@ -346,14 +350,13 @@
             addFields.push(fields);
             return addFields;
         },
-        getSubmitMethod: function ($input) {
+        getSubmitMethod: function () {
             /// <summary>
             /// Returns submit method is it post or get
             /// </summary>
             /// <param name="$div"></param>
             /// <returns type=""></returns>
-            var attrs = this.getSettings().attributes;
-            return $input.attr(attrs.submitMethod);
+            return this.getSettings().submitMethod;
         },
         abortPreviousAjaxRequest: function ($input) {
             /// <summary>
