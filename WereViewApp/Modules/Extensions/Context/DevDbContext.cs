@@ -3,6 +3,7 @@ using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
+using DevMvcComponent;
 
 namespace WereViewApp.Modules.Extensions.Context {
     public abstract class DevDbContext : DbContext {
