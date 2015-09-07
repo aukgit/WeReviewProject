@@ -1,0 +1,109 @@
+﻿@import "override-mvc.variables.less";
+@import "editor-templates.variables.less";
+
+.invalid-input {
+    .border-rounded(3px);
+    .min-width(@inputs-max-width);
+    //width: auto;
+    display: inline;
+    .font-size(11px);
+    font-weight: bold;
+    line-height: 1;
+    color: #ffffff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+
+    &.field-validation-error {
+        background-color: @input-error-bg-color;
+        //padding: .2em .6em .3em;
+        .padding(3px, 11px);
+
+        &.break-line {
+            display: block;
+            margin-top: 4px;
+            .width(@inputs-max-width);
+        }
+    }
+
+    &.table {
+        display: table;
+        line-height: 1.6;
+        .width(@inputs-max-width);
+        .padding(4px, 15px);
+        .margin(-4px, 0px, 0px, 1px);
+        border-radius: 4px;
+    }
+}
+
+/*.validator-container {
+    position: relative;
+}*/
+
+.tooltipColorApply(@givenColor) {
+    @color: @givenColor;
+
+    .tooltip-inner {
+        background-color: @color;
+    }
+
+    .tooltip-arrow {
+        border-top-color: @color;
+    }
+
+    .fa {
+        color: @color;
+    }
+}
+
+.validator-container {
+    display: block;
+
+    [id*='wrapper-invalid-mark-'], [id*='wrapper-validation-error-'] {
+        .tooltipColorApply(@tooltip-invalid-bg-color);
+    }
+
+    [id*='wrapper-valid-mark-'] {
+        .tooltipColorApply(@tooltip-valid-bg-color);
+    }
+
+    [id*='wrapper-validation-spinner-'] {
+        .tooltipColorApply(@tooltip-spinner-bg-color);
+    }
+}
+
+/*.validator {
+    position: absolute;
+    top: -26px;
+    right: 8px;
+}*/
+.validator {
+    display: inherit;
+}
+
+.validation-icon-wrapper {
+    position: static;
+    display: inherit;
+    margin-top: -26px;
+    margin-left: 273px;
+}
+
+.input-validator-container {
+    display: inline-block;
+    width: 100%;
+    .max-width(@inputs-max-width);
+}
+
+
+.relative {
+    position: relative;
+}
+
+.form-group {
+    &[data-icon-added] {
+        /*margin-bottom: 14px;
+        margin-top: 15px;*/
+        margin-top: 8.5px;
+        margin-bottom: 14px;
+    }
+}

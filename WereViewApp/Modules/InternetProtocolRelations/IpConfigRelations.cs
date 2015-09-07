@@ -1,15 +1,11 @@
-﻿using System;
+﻿using System.Linq;
 using System.Net;
 using System.Web;
-using System.Linq;
-using System.Data.Entity;
 using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Session;
 
 namespace WereViewApp.Modules.InternetProtocolRelations {
     public class IpConfigRelations {
-
         public static int GetCountryId(string ipAddress) {
             var value = IpToValue(ipAddress);
             using (var db = new ApplicationDbContext()) {
@@ -32,11 +28,10 @@ namespace WereViewApp.Modules.InternetProtocolRelations {
                 isX = long.TryParse(ipArrary[1], out x);
                 isY = long.TryParse(ipArrary[2], out y);
                 isZ = long.TryParse(ipArrary[3], out z);
-                if (isW == isX == isY == isZ == true) {
-                    result = 16777216 * w + 65536 * x + 256 * y + z;
+                if (isW == isX == isY == isZ) {
+                    result = 16777216*w + 65536*x + 256*y + z;
                     return result;
                 }
-
             }
 
             return -1;
@@ -49,11 +44,11 @@ namespace WereViewApp.Modules.InternetProtocolRelations {
         /// <returns></returns>
         public static string GetVisitorIpAddress(bool getLan = false) {
             if (HttpContext.Current.Session != null && HttpContext.Current.Session[SessionNames.IpAddress] != null) {
-                return (string)HttpContext.Current.Session[SessionNames.IpAddress];
+                return (string) HttpContext.Current.Session[SessionNames.IpAddress];
             }
             var visitorIpAddress = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
 
-            if (String.IsNullOrEmpty(visitorIpAddress))
+            if (string.IsNullOrEmpty(visitorIpAddress))
                 visitorIpAddress = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
 
             if (string.IsNullOrEmpty(visitorIpAddress))
@@ -96,7 +91,7 @@ namespace WereViewApp.Modules.InternetProtocolRelations {
 
         public static string GetIpAddress() {
             if (HttpContext.Current.Session != null && HttpContext.Current.Session[SessionNames.IpAddress] != null) {
-                return (string)HttpContext.Current.Session[SessionNames.IpAddress];
+                return (string) HttpContext.Current.Session[SessionNames.IpAddress];
             }
             var context = HttpContext.Current;
             var ipAddress = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];

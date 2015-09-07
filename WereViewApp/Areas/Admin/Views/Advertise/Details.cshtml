@@ -12,10 +12,7 @@
     string viewName = "Details";
 
 }
-<h1 class="h2 gap-from-top-small">
-    <span class="glyphicon glyphicon-print"></span>
-    @Html.SamePageLink(title, subtitle, false)
-</h1>
+@Html.SamePageLinkWithIcon(title, subtitle, "fa fa-print")
 <hr />
 <h3 class="h4">To edit the details please click on the edit button.</h3>
 <div class="form-horizontal">
@@ -30,7 +27,7 @@
             <a href="@Url.Action("Delete", new { id = Model.GalleryID })" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>
         </div>
     </div>
-    <table class="table table-hover gap-from-top-small">
+    <table class="table table-hover top-margin-space">
         <thead>
             <tr>
                 <th>Properties</th>

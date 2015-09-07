@@ -1,5 +1,5 @@
-﻿@import "lesshat.less";
-@import "variables.less";
+﻿@import "header.variables.less";
+@import "fonts-rimixens.less";
 /* Colors and Fonts */
 
 
@@ -26,7 +26,18 @@
 .bold-important {
     font-weight: bolder !important;
 }
-
+.orangred {
+  color: orangered;
+}
+.orangred-important {
+  color: orangered !important;
+}
+.game-pressure-organge {
+  color: #e64600;
+}
+.deep-orange {
+  color: #e45c21;
+}
 .green {
     color: #008000;
 }
@@ -119,8 +130,11 @@
     .font-size(22px);
 }
 
-
-.bangla, .bangla li {
+.ubuntu-font {
+    .ubuntu-font();
+}
+.bangla,
+.bangla li {
     font-family: Bangla,Kalpurush;
     .regular-font;
     font-weight: normal;

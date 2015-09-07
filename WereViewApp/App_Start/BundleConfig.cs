@@ -45,6 +45,7 @@ namespace WereViewApp {
                                     "~/Content/Scripts/jquery.elastic.source.js",
                                     "~/Content/Scripts/DevOrgPlugins/developers-organism.dynamicSelect.js",
                                     "~/Content/Scripts/DevOrgPlugins/developers-organism.country-phone.js",
+                                    "~/Content/Scripts/DevOrgPlugins/jquery.server-validate.js",
                                     "~/Content/Scripts/DevOrgPlugins/dev-component-runner.js"
                                    ));
                     #endregion
@@ -70,9 +71,9 @@ namespace WereViewApp {
                     bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                                   "~/Content/Scripts/DevOrgPlugins/byId.js", 
                                   "~/Content/Scripts/bootstrap.js", // 3.1.2
+                                  "~/Content/Scripts/DevOrgPlugins/app.run.js",
                                   "~/Content/Scripts/star-rating.js",
                                   "~/Content/Scripts/underscore.js",
-                                  "~/Content/Scripts/DevOrgPlugins/every-page.js",
                                   "~/Content/Scripts/FrontEnd/wow.min.js",
                                   "~/Content/Scripts/FrontEnd/jquery.sticky.js",
                                   "~/Content/Scripts/FrontEnd/jquery.stellar.js",
@@ -113,6 +114,8 @@ namespace WereViewApp {
                                         "~/Content/css/color-fonts.css",
                                         "~/Content/css/star-rating.css",
                                         "~/Content/css/override-mvc.css",
+                                        "~/Content/css/validator.css",
+                                        "~/Content/css/editor-templates.css",
 
                                         "~/Content/css/base-theme-styles.css",
                                         "~/Content/css/style.css",

@@ -58,6 +58,7 @@
     </Key>
     <Property Name="CategoryID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CategoryName" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="Slug" Type="varchar" MaxLength="40" Nullable="false" />
   </EntityType>
   <EntityType Name="CellPhone">
     <Key>
@@ -170,18 +171,6 @@
     <Property Name="PlatformID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PlatformName" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="Icon" Type="varchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="Report">
-    <Key>
-      <PropertyRef Name="ReportID" />
-    </Key>
-    <Property Name="ReportID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="AppID" Type="bigint" Nullable="false" />
-    <Property Name="UserID" Type="bigint" Nullable="false" />
-    <Property Name="IsFalseReport" Type="bit" Nullable="false" />
-    <Property Name="IsChecked" Type="bit" Nullable="false" />
-    <Property Name="ActionTakenMessageToSender" Type="varchar" MaxLength="50" />
-    <Property Name="ActionTakenMessageToHolder" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Review">
     <Key>
@@ -435,30 +424,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Report_App">
-    <End Role="App" Type="Self.App" Multiplicity="1" />
-    <End Role="Report" Type="Self.Report" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="App">
-        <PropertyRef Name="AppID" />
-      </Principal>
-      <Dependent Role="Report">
-        <PropertyRef Name="AppID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Report_User">
-    <End Role="User" Type="Self.User" Multiplicity="1" />
-    <End Role="Report" Type="Self.Report" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="UserID" />
-      </Principal>
-      <Dependent Role="Report">
-        <PropertyRef Name="UserID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Review_App">
     <End Role="App" Type="Self.App" Multiplicity="1" />
     <End Role="Review" Type="Self.Review" Multiplicity="*" />
@@ -569,7 +534,6 @@
     <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NotificationType" EntityType="Self.NotificationType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Platform" EntityType="Self.Platform" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReviewLikeDislike" EntityType="Self.ReviewLikeDislike" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
@@ -633,14 +597,6 @@
     <AssociationSet Name="FK_Notification_NotificationType" Association="Self.FK_Notification_NotificationType">
       <End Role="NotificationType" EntitySet="NotificationType" />
       <End Role="Notification" EntitySet="Notification" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Report_App" Association="Self.FK_Report_App">
-      <End Role="App" EntitySet="App" />
-      <End Role="Report" EntitySet="Report" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Report_User" Association="Self.FK_Report_User">
-      <End Role="User" EntitySet="User" />
-      <End Role="Report" EntitySet="Report" />
     </AssociationSet>
     <AssociationSet Name="FK_Review_App" Association="Self.FK_Review_App">
       <End Role="App" EntitySet="App" />

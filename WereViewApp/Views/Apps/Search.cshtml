@@ -20,33 +20,31 @@
                 <h1>
                     Search results for <strong class="red">"</strong><strong class="black">
                         @if (Model != null) {
-                            @Model.DisplaySearchText
+                            @Model.DisplayStringToUser
                         }
                     </strong><strong class="red">"</strong>
                 </h1>
             }
-            @*<div class="searchboxWrap form-group">
-                    <input type="text" class="searchbox form-control" value="Angry Birds" />
-                    <input type="submit" value="Search" class="searchbutton btn btn-success" />
-                </div>*@@Html.EditorFor(i => i.Url, "Search")
+
+            @Html.EditorFor(i => i.DisplayStringToUser, "Search")
             @Html.AntiForgeryToken()
         </div>
-        <div class="container innerContainer inner">
-            <div class="contenCol col-md-9 col-sm-9">
+        <div class="container inner innerContainer">
+            <div class="col-md-9 col-sm-9 contenCol">
                 <div class="content">
                     <div class="appsitemWraper">
                         @if (apps != null && apps.Count > 0) {
                             foreach (var app in apps) {
-                                string url = app.GetAppUrl();
+                                string url = app.GetAbsoluteUrl();
                                 var platform = app.GetPlatform();
 
-                                <div class="row appsitemBox">
-                                    <div class="imgWrap col-md-2 col-sm-2">
+                                <div class="appsitemBox row">
+                                    <div class="col-md-2 col-sm-2 imgWrap">
                                         <a href="@url">
                                             <img src="@app.SearchIconLocation" class="img-responsive" alt="@app.AppName">
                                         </a>
                                     </div>
-                                    <div class="textWrap col-md-10 col-sm-10">
+                                    <div class="col-md-10 col-sm-10 textWrap">
                                         <div class="name">
                                             <h1 title="@app.AppName">
                                                 <a href="@url" title="@app.AppName">
@@ -82,43 +80,8 @@
                             }
                         }
                     </div>
-                    @*<div class="morewrap"><a class="loadmore">Load More</a></div>*@
-                </div><!----- content part end ------>
-            </div><!----- contenCol part end ------>
-            <!--<div class="rightCol col-md-3 col-sm-3 form-group">
-                <div class="selectWrap">
-                    <div class="boxWrap row">
-                        @*<label><input type="checkbox" class="checkbox " value=""> Rating:</label>*@
-                        @*@Html.EditorFor(n=> n.isRatingCheck)*@
-                        <select class="form-control">
-                            <option>Mustard</option>
-                            <option>Ketchup</option>
-                            <option>Relish</option>
-                        </select>
-                    </div>
-                    <div class="boxWrap">
-                        <label><input type="checkbox" class="checkbox" value=""> Type:</label>
-                        <input type="text" value="" class="textbox form-control">
-                    </div>
-                    <div class="boxWrap">
-                        <label><input type="checkbox" class="checkbox" value=""> Platform:</label>
-                        <select class="form-control">
-                            <option>Mustard</option>
-                            <option>Ketchup</option>
-                            <option>Relish</option>
-                        </select>
-                    </div>
                 </div>
-                <div class="rediobutton">
-                    <div class="rediobox">
-                        <input type="radio" class="radio" name="sorted_by"><label>Sorted by Relevancy</label>
-                    </div>
-                    <div class="rediobox">
-                        <input type="radio" class="radio" name="sorted_by"><label>Sorted by Rating</label>
-                    </div>
-                </div>
-            </div>-->
-
-        </div><!----- container ------>
+            </div>
+        </div>
     </form>
 </div>

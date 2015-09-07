@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using DevMvcComponent.Error;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using WereViewApp.Models.Context;
@@ -23,26 +24,6 @@ namespace WereViewApp.Modules.DevUser {
 
         public static bool IsAuthenticated() {
             return HttpContext.Current.User.Identity.IsAuthenticated;
-        }
-
-        #endregion
-
-        #region Get Every User
-
-        /// <summary>
-        /// Get all the list of users.
-        /// </summary>
-        /// <returns>Returns all stored users in the database.</returns>
-        public static List<ApplicationUser> GetAllUsers() {
-            return Manager.Users.ToList();
-        }
-
-        /// <summary>
-        /// Get all the list of users.
-        /// </summary>
-        /// <returns>Returns all stored users as IQueryable for pagination.</returns>
-        public static IQueryable<ApplicationUser> GetAllUsersAsIQueryable() {
-            return Manager.Users;
         }
 
         #endregion
@@ -123,10 +104,7 @@ namespace WereViewApp.Modules.DevUser {
 
         public void LinkUserWithRegistrationCode(ApplicationUser user, Guid code) {
             if (user != null) {
-                var relation = new RegisterCodeUserRelation {
-                    UserID = user.Id,
-                    RegisterCodeUserRelationID = code
-                };
+                var relation = new RegisterCodeUserRelation {UserID = user.Id, RegisterCodeUserRelationID = code};
                 using (var db = new ApplicationDbContext()) {
                     db.RegisterCodeUserRelations.Add(relation);
                     db.SaveChanges();
@@ -226,12 +204,34 @@ namespace WereViewApp.Modules.DevUser {
 
         #endregion
 
+        #region Get Every User
+
+        /// <summary>
+        ///     Get all the list of users.
+        /// </summary>
+        /// <returns>Returns all stored users in the database.</returns>
+        public static List<ApplicationUser> GetAllUsers() {
+            return Manager.Users.ToList();
+        }
+
+        /// <summary>
+        ///     Get all the list of users.
+        /// </summary>
+        /// <returns>Returns all stored users as IQueryable for pagination.</returns>
+        public static IQueryable<ApplicationUser> GetAllUsersAsIQueryable() {
+            return Manager.Users;
+        }
+
+        #endregion
+
         #region Declaration
 
         private static ApplicationUserManager _userManager;
 
-        public static ApplicationUserManager Manager {
-            get {
+        public static ApplicationUserManager Manager
+        {
+            get
+            {
                 return _userManager ?? HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
             private set { _userManager = value; }
@@ -308,11 +308,11 @@ namespace WereViewApp.Modules.DevUser {
         public static ApplicationUser GetUserFromSession() {
             var userSession = HttpContext.Current.Session[SessionNames.User];
             if (userSession != null) {
-                return (ApplicationUser)userSession;
+                return (ApplicationUser) userSession;
             }
             userSession = HttpContext.Current.Session[SessionNames.LastUser];
             if (userSession != null) {
-                return (ApplicationUser)userSession;
+                return (ApplicationUser) userSession;
             }
             return null;
         }
@@ -388,9 +388,9 @@ namespace WereViewApp.Modules.DevUser {
         public static long GetLoggedUserId() {
             if (HttpContext.Current.User.Identity.IsAuthenticated) {
                 //ApplicationUser user = null;
-                var userid = (long?)HttpContext.Current.Session[SessionNames.UserID];
+                var userid = (long?) HttpContext.Current.Session[SessionNames.UserID];
                 if (userid != null) {
-                    return (long)userid;
+                    return (long) userid;
                 }
                 return GetCurrentUser().UserID;
             }

@@ -2,12 +2,11 @@
 
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using WereViewApp.Models.EntityModel.Structs;
-using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.WereViewAppCommon;
-using WereViewApp.WereViewAppCommon.Structs;
+
 
 #endregion
 
@@ -28,82 +27,42 @@ namespace WereViewApp.Controllers {
         #endregion
 
         [OutputCache(CacheProfile = "Day")]
-        public ActionResult Latest() {
-            ViewBag.Title = "Latest Apps";
-
-            var latest = _algorithms.GetLatestApps(db, 60);
-            return View("ListOfApps", latest);
+        public ActionResult Index(int page = 1) {
+            HtmlString paginationHtml;
+            var archivedApps = _algorithms.GetLatestApps(db, true, page, out paginationHtml);
+            ViewBag.Title = "Apps";
+            ViewBag.Meta = "Latest mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
+            ViewBag.Keywords = ViewBag.Meta;
+            ViewBag.Apps = archivedApps;
+            ViewBag.paginationHtml = paginationHtml;
+            return View("Index");
         }
 
         [OutputCache(CacheProfile = "Day")]
-        public ActionResult TopRated() {
-            ViewBag.Title = "Top Rated Apps";
-            var latest = _algorithms.GetTopRatedApps(db, 60);
-            return View("ListOfApps", latest);
+        public ActionResult Latest() {
+            var latest = _algorithms.GetLatestApps(db, 60);
+            ViewBag.Title = "Latest mobile apps";
+            ViewBag.Meta = "Latest mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
+            ViewBag.Keywords = ViewBag.Meta;
+            ViewBag.Apps = latest;
+            return View("Index");
         }
 
-        [OutputCache(CacheProfile = "Day", VaryByParam = "id")]
-        public ActionResult Category(string id) {
-            var cat = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.CategoryName == id);
-            if (cat != null) {
-                ViewBag.Title = "Category : " + id;
-                const int max = 60;
-                var categoryApps = db.Apps.Where(n => n.CategoryID == cat.CategoryID)
-                    .OrderByDescending(n => n.TotalViewed)
-                    .ThenByDescending(n => n.AppID)
-                    .Include(n => n.Platform)
-                    .Take(max)
-                    .ToList();
-
-                if (categoryApps != null) {
-                    _algorithms.GetEmbedImagesWithApp(categoryApps, db, max, GalleryCategoryIDs.HomePageIcon);
-                }
-                return View("ListOfApps", categoryApps);
-            }
-            return HttpNotFound();
+        [OutputCache(CacheProfile = "Day")]
+        public ActionResult Top() {
+            var top = _algorithms.GetTopRatedApps(db, 100);
+            ViewBag.Title = "Top 100 mobile apps";
+            ViewBag.Meta = "Latest mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
+            ViewBag.Keywords = ViewBag.Meta;
+            ViewBag.Apps = top;
+            return View("Index");
         }
-
         [Authorize]
         public ActionResult Reviewed() {
             ViewBag.Title = "App Reviewed By You";
             var userid = UserManager.GetLoggedUserId();
             var reviews = db.Reviews.Include(r => r.App).Include(r => r.User).Where(n => n.UserID == userid);
             return View(reviews.ToList());
-        }
-
-        [OutputCache(CacheProfile = "Day")]
-        public ActionResult IOs() {
-            ViewBag.Title = "Apple/Apple Apps";
-
-            return PlatformResult(PlatformIDs.Apple);
-        }
-
-        [OutputCache(CacheProfile = "Day")]
-        public ActionResult Windows() {
-            ViewBag.Title = "Windows Apps";
-            return PlatformResult(PlatformIDs.Windows);
-        }
-
-        [OutputCache(CacheProfile = "Day")]
-        public ActionResult Android() {
-            ViewBag.Title = "Android Apps";
-
-            return PlatformResult(PlatformIDs.Android);
-        }
-
-        public ActionResult PlatformResult(byte platformId) {
-            var max = 60;
-            var platformApps = db.Apps.Where(n => n.PlatformID == platformId)
-                .OrderByDescending(n => n.TotalViewed)
-                .OrderByDescending(n => n.AppID)
-                .Include(n => n.Platform)
-                .Take(max)
-                .ToList();
-
-            if (platformApps != null) {
-                _algorithms.GetEmbedImagesWithApp(platformApps, db, max, GalleryCategoryIDs.HomePageIcon);
-            }
-            return View("ListOfApps", platformApps);
         }
 
     }

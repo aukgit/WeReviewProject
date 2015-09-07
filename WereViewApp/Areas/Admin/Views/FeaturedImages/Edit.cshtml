@@ -12,10 +12,8 @@
 }
 
 
-<h1 class="h2 gap-from-top-small">
-	<span class="glyphicon glyphicon-edit"></span>  
-	@Html.SamePageLink(title, subtitle, false)
-</h1>
+@Html.SamePageLinkWithIcon(title, subtitle, "fa fa-edit")
+
 <hr />
 @using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) 
 {

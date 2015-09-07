@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Web;
+using DevMvcComponent.Pagination;
 using LinqKit;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
@@ -12,12 +12,26 @@ using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.WereViewAppCommon.Structs;
-using DevMVCComponent.Database;
 using DevTrends.MvcDonutCaching;
 using WereViewApp.Modules.Cache;
 
 namespace WereViewApp.WereViewAppCommon {
     public class Algorithms {
+
+        #region Viewable Apps : Apps which are published
+        /// <summary>
+        /// Get apps which can be viewable. 
+        /// Apps are not block and published.
+        /// </summary>
+        /// <param name="db"></param>
+        /// <returns>Returns IQueryable which are not block and published.</returns>
+        public IQueryable<App> GetViewableApps(WereViewAppEntities db = null) {
+            if (db == null) {
+                db = new WereViewAppEntities();
+            }
+            return db.Apps.Where(n => n.IsBlocked == false && n.IsPublished == true);
+        }
+        #endregion
 
         #region Platform Controller
 
@@ -111,13 +125,16 @@ namespace WereViewApp.WereViewAppCommon {
         /// <summary>
         /// Category page : specific apps
         /// </summary>
-        /// <returns></returns>
-        public Category GetCategoryPageApps(string categoryName, PaginationInfo pageInfo, string cacheName, WereViewAppEntities db = null) {
+        /// <param name="slug">Slug of the category</param>
+        /// <param name="pageInfo"></param>
+        /// <param name="cacheName"></param>
+        /// <param name="db"></param>
+        /// <returns>Returns category item with apps contained inside.</returns>
+        public Category GetCategoryPageApps(string slug, PaginationInfo pageInfo, string cacheName, WereViewAppEntities db = null) {
             if (db == null) {
                 db = new WereViewAppEntities();
             }
-
-            var category = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.CategoryName.Equals(categoryName, StringComparison.OrdinalIgnoreCase));
+            var category = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase));
             if (category != null) {
                 var appsConditions = db.Apps
                     .Include(n => n.User)
@@ -200,16 +217,40 @@ namespace WereViewApp.WereViewAppCommon {
 
         #region Latest Apps With Icons
         public List<App> GetLatestApps(WereViewAppEntities db, int max) {
-            var apps = db.Apps
+            var apps = GetViewableApps(db)
                 .Include(n => n.Platform)
                 .Include(n => n.User)
                 .OrderByDescending(n => n.AppID)
-                .Where(n => n.IsPublished && !n.IsBlocked)
-                .Take(max).ToList();
+                .Take(max)
+                .ToList();
             if (apps != null) {
                 GetEmbedImagesWithApp(apps, db, max, GalleryCategoryIDs.HomePageIcon);
             }
             return apps;
+        }
+
+        public List<App> GetLatestApps(WereViewAppEntities db, bool pagination, int page, out HtmlString paginationListItems) {
+            var apps = GetViewableApps(db)
+                .Include(n => n.Platform)
+                .Include(n => n.User)
+                .OrderByDescending(n => n.AppID);
+
+            var pageInfo = new PaginationInfo {
+                ItemsInPage = AppConfig.Setting.PageItems,
+                PageNumber = page,
+                PagesExists = -1
+            };
+
+            var pagedApps = apps.GetPageData(pageInfo, CacheNames.LastestAppsArchived, true)
+                                .ToList();
+            if (pagedApps != null && pagedApps.Count > 0) {
+                GetEmbedImagesWithApp(pagedApps, db, (int)AppConfig.Setting.PageItems, GalleryCategoryIDs.HomePageIcon);
+            }
+
+            var eachUrl = "/Apps?Page=@page";
+            paginationListItems = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
+                           maxNumbersOfPagesShow: 8));
+            return pagedApps;
         }
 
         #endregion
@@ -356,8 +397,8 @@ namespace WereViewApp.WereViewAppCommon {
 
         #region Get App From Cache
         public App GetAppFromStaticCache(long appId) {
-            if (CommonVars.AppsFoundForSingleDisplay != null) {
-                return CommonVars.AppsFoundForSingleDisplay.FirstOrDefault(n => n.AppID == appId);
+            if (CommonVars.StaticAppsList != null) {
+                return CommonVars.StaticAppsList.FirstOrDefault(n => n.AppID == appId);
             }
             return null;
         }
@@ -533,16 +574,13 @@ namespace WereViewApp.WereViewAppCommon {
         /// </summary>
         /// <param name="app"></param>
         public void SaveVirtualFields(App app) {
-            new Thread(() => {
-                var appSavingFields = new AppSavingTextFields();
-                appSavingFields.Developers = app.Developers;
-                appSavingFields.IdeaBy = app.IdeaBy;
-                appSavingFields.Publishers = app.Publishers;
-                appSavingFields.Tags = app.Tags;
-                appSavingFields.UploadGuid = app.UploadGuid;
-                WereViewStatics.SavingAppInDirectory(appSavingFields);
-
-            }).Start();
+            var appSavingFields = new AppSavingTextFields();
+            appSavingFields.Developers = app.Developers;
+            appSavingFields.IdeaBy = app.IdeaBy;
+            appSavingFields.Publishers = app.Publishers;
+            appSavingFields.Tags = app.Tags;
+            appSavingFields.UploadGuid = app.UploadGuid;
+            WereViewStatics.SavingAppInDirectory(appSavingFields);
         }
         #endregion
 
@@ -830,22 +868,22 @@ namespace WereViewApp.WereViewAppCommon {
         /// </summary>
         /// <param name="platform"></param>
         /// <param name="platformVersion"></param>
-        /// <param name="category"></param>
+        /// <param name="categorySlug"></param>
         /// <param name="url"></param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public App GetSingleAppForDisplay(string platform, float platformVersion, string category, string url, int maxReviewLoad, WereViewAppEntities db) {
-            if (platform != null && platformVersion != null && category != null && url != null) {
-                if (CommonVars.AppsFoundForSingleDisplay == null) {
-                    CommonVars.AppsFoundForSingleDisplay = new List<App>(800);
+        public App GetSingleAppForDisplay(string platform, float platformVersion, string categorySlug, string url, int maxReviewLoad, WereViewAppEntities db) {
+            if (platform != null && platformVersion != null && categorySlug != null && url != null) {
+                if (CommonVars.StaticAppsList == null) {
+                    CommonVars.StaticAppsList = new List<App>(800);
                 }
                 App app = null;
-                var platformO = WereViewStatics.AppPlatformsCache.FirstOrDefault(n => n.PlatformName.Equals(platform));
-                var categoryO = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.CategoryName.Equals(category));
+                var platformO = WereViewStatics.AppPlatformsCache.FirstOrDefault(n => n.PlatformName.Equals(platform, StringComparison.OrdinalIgnoreCase));
+                var categoryO = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.Slug.Equals(categorySlug, StringComparison.OrdinalIgnoreCase));
                 if (platformO != null && categoryO != null) {
                     var platformId = platformO.PlatformID;
                     var categoryId = categoryO.CategoryID;
-                    app = CommonVars.AppsFoundForSingleDisplay
+                    app = CommonVars.StaticAppsList
                                     .FirstOrDefault(n =>
                                         n.URL.Equals(url) &&
                                         n.PlatformID == platformId &&
@@ -878,10 +916,8 @@ namespace WereViewApp.WereViewAppCommon {
                     }
                     // app not found.
                     // search in db
-                    app = db.Apps
+                    app = GetViewableApps(db) //means not blocked and published
                             .Include(n => n.User)
-                        //if published and not block then only display it
-                            .Where(n => n.IsPublished && !n.IsBlocked)
                             .FirstOrDefault(n =>
                             n.URL.Equals(url) &&
                             n.PlatformID == platformId &&
@@ -915,16 +951,41 @@ namespace WereViewApp.WereViewAppCommon {
                         GetEmbedGalleryImagesWithCurrentApp(app, db);
 
                         // clear few old cache if close overflowing
-                        if (CommonVars.AppsFoundForSingleDisplay.Count > 795) {
-                            CommonVars.AppsFoundForSingleDisplay.RemoveRange(0, 200);
+                        if (CommonVars.StaticAppsList.Count > 795) {
+                            CommonVars.StaticAppsList.RemoveRange(0, 200);
                         }
                         // saving app into the static
-                        CommonVars.AppsFoundForSingleDisplay.Add(app);
+                        CommonVars.StaticAppsList.Add(app);
                         return app;
                     }
                 }
             }
             return null;
+        }
+
+        #endregion
+
+        #region Single app edit - retrieval
+        /// <summary>
+        /// Returns an app if it is created by this same user.
+        /// Try to use the cache if possible.
+        /// </summary>
+        /// <param name="appId"></param>
+        /// <returns></returns>
+        public App GetEditingApp(long appId, WereViewAppEntities db) {
+            var userId = UserManager.GetLoggedUserId();
+            var app = CommonVars.StaticAppsList.FirstOrDefault(n => n.AppID == appId && n.PostedByUserID == userId);
+            var cacheId = CacheNames.EditingApp + appId + "-" + userId;
+
+            if (app == null) {
+                app = (App)AppConfig.Caches[cacheId];
+                if (app == null) {
+                    app = db.Apps
+                        .FirstOrDefault(n => n.AppID == appId && n.PostedByUserID == userId);
+                    AppConfig.Caches[cacheId] = app;
+                }
+            }
+            return app;
         }
 
         #endregion
@@ -965,17 +1026,17 @@ namespace WereViewApp.WereViewAppCommon {
         #endregion
 
         #region Remove single app from cache of static
+
         /// <summary>
         /// Only call when an app is edited.
-        /// Remove the app from CommonVars.AppsFoundForSingleDisplay
+        /// Remove the app from CommonVars.StaticAppsList
         /// </summary>
-        /// <param name="app"></param>
-        /// <param name="db"></param>
-        public void RemoveSingleAppFromCacheOfStatic(App app, WereViewAppEntities db) {
-            if (CommonVars.AppsFoundForSingleDisplay != null) {
-                var find = CommonVars.AppsFoundForSingleDisplay.FirstOrDefault(n => n.AppID == app.AppID);
+        /// <param name="appId"></param>
+        public void RemoveSingleAppFromCacheOfStatic(long appId) {
+            if (CommonVars.StaticAppsList != null) {
+                var find = CommonVars.StaticAppsList.FirstOrDefault(n => n.AppID == appId);
                 if (find != null) {
-                    CommonVars.AppsFoundForSingleDisplay.Remove(find);
+                    CommonVars.StaticAppsList.Remove(find);
                 }
             }
         }
@@ -1550,6 +1611,18 @@ namespace WereViewApp.WereViewAppCommon {
         public void RemoveDonutCaching(string controllerName, string action, object routes) {
             var cacheManager = new OutputCacheManager();
             cacheManager.RemoveItems(controllerName, action, routes);
+        }
+        #endregion
+
+
+        #region Remove Cache
+
+        public void RemoveCachingApp(long appId) {
+            RemoveSingleAppFromCacheOfStatic(appId);
+            var userId = UserManager.GetLoggedUserId();
+            var cacheId = CacheNames.EditingApp + appId + "-" + userId;
+            AppConfig.Caches[cacheId] = null;
+
         }
         #endregion
     }

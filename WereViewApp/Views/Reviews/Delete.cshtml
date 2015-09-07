@@ -9,11 +9,11 @@
     string viewName = "Delete";
     var token = @Html.AntiForgeryToken();
 }
-<h1 class="h2 gap-from-top-small">
+<h1 class="top-margin-space h2">
     <span class="glyphicon glyphicon-trash"></span>
     @Html.SamePageLink(title, subtitle, false)
 </h1>
-<hr/>
+<hr />
 <h3 class="h4">@asking</h3>
 <div class="form-horizontal">
     @using (Html.BeginForm()) {
@@ -22,7 +22,7 @@
             <div class="col-md-11">
                 <div class="btn-group">
                     <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> No, back</a>
-                    <div class="input-group-btn inline">
+                    <div class="inline input-group-btn">
                         <button class="btn btn-danger" title="Remove this record permanently.."><i class="glyphicon glyphicon-remove"></i> Yes, delete permanently</button>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                 <a href="@Url.Action("Edit", new {id = Model.ReviewID})" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
             </div>
         </div>
-        <table class="table table-hover gap-from-top-small">
+        <table class="top-margin-space table table-hover">
             <thead>
             <tr>
                 <th>Properties</th>
@@ -160,7 +160,7 @@
             <div class="col-md-11">
                 <div class="btn-group">
                     <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                    <div class="input-group-btn inline">
+                    <div class="inline input-group-btn">
                         <button class="btn btn-danger" title="Remove this record permanently.."><i class="glyphicon glyphicon-remove"></i> Delete permanently</button>
                     </div>
                 </div>

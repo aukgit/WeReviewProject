@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="@AppConfig.Setting.GoogleMetaTag" />
@@ -23,21 +24,29 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
-    <div>
-        @{ Html.RenderAction("NavBar", "Partials"); }
-    </div>
-    <div id="wrap">
-        <div class="content">
-            <div class="container">
-                @RenderBody()
-            </div>
-            @Html.Partial("_Footer")
+<body class="@ViewBag.pageClass">
+<!--[if lt IE 9]>
+    <div class="browser-update container-fuild">
+        <div class="row">
+            <div class="col-md-12">Warning! Your browser is too old. Please update your browser to the <a href="http://browser-update.org/update.html#3">latest version</a>.</div>
         </div>
     </div>
-    @RenderSection("featured", false)
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", false)
+<![endif]-->
+@Html.Partial("_AdditionalFields")
+<div>
+    @{ Html.RenderAction("NavBar", "Partials"); }
+</div>
+<div id="wrap">
+    <div class="content">
+        <div class="container">
+            @RenderBody()
+        </div>
+        @Html.Partial("_Footer")
+    </div>
+</div>
+@RenderSection("featured", false)
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", false)
 </body>
 </html>

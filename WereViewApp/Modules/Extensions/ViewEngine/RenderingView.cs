@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web;
+﻿using System.IO;
 using System.Web.Mvc;
 
 namespace WereViewApp.Modules.Extensions.ViewEngine {
     public class RenderingView {
         /// <summary>
-        /// return view to string
+        ///     return view to string
         /// </summary>
         /// <param name="context"></param>
         /// <param name="viewPath"></param>
         /// <param name="model"></param>
         /// <param name="partial"></param>
         /// <returns></returns>
-        static string RenderViewToString(ControllerContext context,
-                                    string viewPath,
-                                    object model = null,
-                                    bool partial = false) {
+        private static string RenderViewToString(ControllerContext context, string viewPath, object model = null,
+            bool partial = false) {
             // first find the ViewEngine for this view
             ViewEngineResult viewEngineResult = null;
             if (partial)
@@ -36,10 +30,7 @@ namespace WereViewApp.Modules.Extensions.ViewEngine {
             string result = null;
 
             using (var sw = new StringWriter()) {
-                var ctx = new ViewContext(context, view,
-                                            context.Controller.ViewData,
-                                            context.Controller.TempData,
-                                            sw);
+                var ctx = new ViewContext(context, view, context.Controller.ViewData, context.Controller.TempData, sw);
                 view.Render(ctx, sw);
                 result = sw.ToString();
             }

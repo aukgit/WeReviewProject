@@ -1,17 +1,18 @@
 ﻿using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.IdentityCustomization;
-using WereViewApp.Modules.Cache;
-using WereViewApp.Modules.Cookie;
 using WereViewApp.Modules.Mail;
 using WereViewApp.Modules.Session;
 using WereViewApp.Modules.TimeZone;
-using WereViewApp.Modules.UserError;
 using System;
 using System.Configuration;
 using System.Linq;
-using System.Text;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using DevMvcComponent;
+using DevMvcComponent.Error;
+using DevMvcComponent.Mail;
+using DevMvcComponent.Processor;
 
 namespace WereViewApp {
     /// <summary>
@@ -21,8 +22,8 @@ namespace WereViewApp {
 
         #region Public declares
 
-        public static CookieProcessor Cookies = new CookieProcessor();
-        public static CacheProcessor Caches = new CacheProcessor();
+        public static CookieProcessor Cookies;
+        public static CacheProcessor Caches;
         public static ErrorCollector ErrorCollection = new ErrorCollector();
         public static readonly string[] Roles = new string[] {
             "Admin",
@@ -50,16 +51,17 @@ namespace WereViewApp {
             }
         }
 
-
-        private static void InitalizeDevelopersOrganismComponent(bool force = false) {
-            if (!_initalized || force) {
-                DevMVCComponent.Config.ApplicationName = AppVar.Name;
-                DevMVCComponent.Config.AdminEmail = Setting.AdminEmail;
-                DevMVCComponent.Config.DeveloperEmail = Setting.DeveloperEmail;
-                DevMVCComponent.Config.Assembly = System.Reflection.Assembly.GetExecutingAssembly();
-                Zone.LoadTimeZonesIntoMemory();
-                _initalized = true;
-            }
+        /// <summary>
+        /// Setup DevMvcComponent
+        /// </summary>
+        private static void SetupDevMvcComponent() {
+            // initialize DevMvcComponent
+            // Configure this with add a sender email.
+            var mailer = new GmailServer(Setting.SenderEmail, Setting.SenderEmailPassword);
+            Mvc.Setup(AppVar.Name, Setting.DeveloperEmail, Assembly.GetExecutingAssembly(), mailer);
+            //Mvc.Mailer.QuickSend("devorg.bd@gmail.com", "Hello", "Hello");
+            Cookies = Mvc.Cookies;
+            Caches = Mvc.Caches;
         }
 
         /// <summary>
@@ -124,7 +126,7 @@ namespace WereViewApp {
                         IsFacebookAuthentication = true,
                         NotifyDeveloperOnError = true,
                         IsConfirmMailRequired = true,
-                        IsSMTPSSL = true,
+                        IsSmtpssl = true,
                         IsFirstUserFound = false
                     };
                     db.CoreSettings.Add(_setting);
@@ -148,17 +150,18 @@ namespace WereViewApp {
                 if (_setting == null) {
                     throw new Exception("Couldn't create or get the core settings. Please check the creation.");
                 }
-                InitalizeDevelopersOrganismComponent(true);
-                AppVar.IsInTestEnvironment = Setting.IsInTestingEnvironment;
+                Zone.LoadTimeZonesIntoMemory();
 
+                AppVar.IsInTestEnvironment = Setting.IsInTestingEnvironment;
                 AppVar.Name = Setting.ApplicationName.ToString();
                 AppVar.Subtitle = Setting.ApplicationSubtitle.ToString();
                 AppVar.Setting = Setting;
+
                 AppVar.SetCommonMetaDescriptionToEmpty();
-                //Configure this with add a sender email.
-                DevMVCComponent.Starter.Mailer = new DevMVCComponent.Mailers.CustomMailConfig(Setting.SenderEmail, Setting.SenderEmailPassword, Setting.SmtpHost, Setting.SmtpMailPort, Setting.IsSMTPSSL);
+
+                SetupDevMvcComponent();
                 //if false then no email on error.
-                DevMVCComponent.Config.IsNotifyDeveloper = Setting.NotifyDeveloperOnError;
+                Config.IsNotifyDeveloper = Setting.NotifyDeveloperOnError;
 
             }
         }
@@ -267,9 +270,9 @@ namespace WereViewApp {
         static string GetCommonMetadescription() {
             string finalMeta = "";
             if (_productNameMeta == null) {
-                var nameList = AppVar.Name.Split(' ').ToList();
-                nameList.Add(AppVar.Name);
-                nameList.Add(AppVar.Subtitle);
+                var nameList = Name.Split(' ').ToList();
+                nameList.Add(Name);
+                nameList.Add(Subtitle);
                 foreach (var item in nameList) {
                     if (finalMeta.Equals("")) {
                         finalMeta += ",";

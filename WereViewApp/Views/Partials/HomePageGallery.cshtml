@@ -8,14 +8,14 @@
 
 <div id="tp-slider" class="slider-bg-static">
     <div class="tp-banner-container">
-        <div class="tp-banner gallery-home">
+        <div class="gallery-home tp-banner">
             <ul itemprop="itemListElement" itemscope itemtype="http://schema.org/Book">
                 <!-- SLIDE 1 -->
                 <!-- LAYER NR. 1 -->
                 @if (Model != null) {
                     foreach (var app in Model) {
                         string appName = @app.AppName;
-                        string absUrl = @app.GetAppUrl();
+                        string absUrl = @app.GetAbsoluteUrl();
                         string category = @app.GetCategoryString();
                         string platform = @app.GetPlatformString();
                         var platformO = @app.GetPlatform();
@@ -28,7 +28,7 @@
                             <!-- LAYER NR. 1 -->
                             <a href="@absUrl" title="@appName">
                                 <!-- LAYER NR. 2 -->
-                                <div class="tp-caption customin customout"
+                                <div class="customin customout tp-caption"
                                      data-x="462.916667"
                                      data-y="top"
                                      data-customin="x:50;y:150;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.5;scaleY:0.5;skewX:0;skewY:0;opacity:0;transformPerspective:0;transformOrigin:50% 50%;"
@@ -42,7 +42,7 @@
                                     <img itemprop="image" src="@app.HomeFeaturedBigImageLocation" alt="Mobile App : @appName">
                                 </div>
                                 <!-- LAYER NR. 3 -->
-                                <div class="tp-caption large_bold_grey skewfromrightshort customout app-title"
+                                <div class="app-title customout large_bold_grey skewfromrightshort tp-caption"
                                      data-x="68.752749"
                                      data-y="7.895833"
                                      data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
@@ -58,7 +58,7 @@
                                     </h1> <span class="app-category inline">@category</span>
                                 </div>
                                 <!-- LAYER NR. 7 -->
-                                <div class="tp-caption app-description small_thin_grey customin customout"
+                                <div class="app-description customin customout small_thin_grey tp-caption"
                                      data-x="36.333333"
                                      data-y="105"
                                      data-customin="x:0;y:100;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:1;scaleY:3;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:0% 0%;"
@@ -73,7 +73,7 @@
                                     @Html.Truncate(app.Description, 100)
                                 </div>
                                 <!-- LAYER NR. 9 -->
-                                <div class="tp-caption platform-icon skewfromleftshort customout"
+                                <div class="customout platform-icon skewfromleftshort tp-caption"
                                      data-x="38.87"
                                      data-y="10.588542"
                                      data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
@@ -87,7 +87,7 @@
                                     <i class="@platformO.Icon"></i>
                                 </div>
                                 <!-- LAYER NR. 14 -->
-                                <div class="rating-value-display tp-caption medium_bold_orange skewfromleftshort customout"
+                                <div class="customout medium_bold_orange rating-value-display skewfromleftshort tp-caption"
                                      data-x="148.10111"
                                      data-y="57.347557"
                                      data-customout="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0.75;scaleY:0.75;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
@@ -99,16 +99,16 @@
                                      data-captionhidden="on"
                                      style="z-index: 15">
                                     @app.AvgRating<span style="font-weight: 300;">/5 Stars</span>
-                                    <div class="seo-rating seo-hide" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                                    <div class="seo-hide seo-rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                                         <span itemprop="ratingValue">@app.AvgRating</span> stars based on
-                                        <meta itemprop="best" content="5"/>
+                                        <meta itemprop="best" content="5" />
                                         <span itemprop="reviewCount">@app.ReviewsCount</span> reviews
                                     </div>
                                 </div>
 
 
                                 <!-- LAYER NR. 19 -->
-                                <div class="tp-caption customin customout"
+                                <div class="customin customout tp-caption"
                                      data-x="36.434444"
                                      data-y="58.770833"
                                      data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:5;scaleY:5;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"

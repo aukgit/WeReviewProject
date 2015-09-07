@@ -1,7 +1,7 @@
 ﻿#region using block
 
 using System.Web.Mvc;
-using DevMVCComponent.Database;
+using DevMvcComponent.Pagination;
 using WereViewApp.Modules.Cache;
 using WereViewApp.WereViewAppCommon;
 

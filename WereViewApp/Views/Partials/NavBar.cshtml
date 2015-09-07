@@ -1,4 +1,5 @@
 ﻿@using WereViewApp.Models.EntityModel
+@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
 @using WereViewApp.WereViewAppCommon
 @{
     string appUrl = AppVar.Url;
@@ -10,7 +11,7 @@
     <header class="sticky">
         <div class="container">
             <a class="logo" href="@appUrl" title="wereviewapp.com: App Review websie">
-                <h1 title="wereviewapp.com" class="wereviewapp.com website-head-title">
+                <h1 title="wereviewapp.com" class="website-head-title wereviewapp.com">
                     <strong class="almost-black" title="App Review websie">we</strong><strong class="red" title="App Review websie">review</strong><strong class="orange-color" title="App Review websie">app.com</strong>
                 </h1>
             </a>
@@ -23,13 +24,13 @@
                     </li>
                     <li>
                         <a title="Mobile Apps">Apps</a>
-                        <ul class="dropdown animated fadeIn">
+                        <ul class="animated dropdown fadeIn">
                             <li>
                                 <a href="@appUrl/Apps" title="Mobile Apps">Archived Mobile Apps</a>
                             </li>
                             <li>
                                 <a title="Mobile Apps Category">Category</a>
-                                <ul class="dropdown animated fadeIn">
+                                <ul class="animated dropdown fadeIn">
                                     <li>
                                         <a href="@appUrl/Apps/Category" title="Mobile Apps Category">
                                             <h1>
@@ -39,7 +40,7 @@
                                     </li>
                                     @foreach (Category category in categories) {
                                         <li>
-                                            <a href="@appUrl/Apps/Category/@HttpUtility.UrlEncode(@category.CategoryName)">
+                                            <a href="@category.GetAbsoluteUrl()">
                                                 <h1 title="Mobile @category.CategoryName apps">
                                                     <strong title="Mobile @category.CategoryName apps">@category.CategoryName</strong>
                                                 </h1>
@@ -51,7 +52,7 @@
                             <li>
                                 <a title="All mobile platforms : Android, Apple, Windows, FireFox OS">Platforms <em class="seo-hide">Android, Apple, Windows, FireFox OS</em></a>
                                 <!--======= DROP MENU =========-->
-                                <ul class="dropdown animated fadeIn">
+                                <ul class="animated dropdown fadeIn">
                                     <li>
                                         <a href="@appUrl/Apps/Mobile/Platforms">
                                             <h1>
@@ -76,7 +77,7 @@
                     <li title="Contact review website's admin">
                         <a href="@appUrl/ContactUs" title="Contact review website's admin"> Contact</a>
                     </li>
-                    <li class="post-app-btn-wrapper btn-type" title="Post your mobile to app review website">
+                    <li class="btn-type post-app-btn-wrapper" title="Post your mobile to app review website">
                         <a title="Post your mobile to app review website" href="@appUrl/App/Post" class="btn btn-primary post-app-btn">
                             <strong title="Post your mobile to app review website">
                                 <em title="Post your mobile to app review website">Post App</em>
@@ -85,7 +86,7 @@
                         </a>
                     </li>
                     @Html.Partial("_LoginPartial")
-                    <li class="search-bar btn-type" title="Search in app review website">
+                    <li class="btn-type search-bar" title="Search in app review website">
                         @{ Html.RenderAction("SearchForm", "Partials"); }
                     </li>
                 </ul>

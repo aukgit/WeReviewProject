@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
-using DevMVCComponent;
+using DevMvcComponent;
 
 namespace WereViewApp.Modules.Cache {
     public class CacheDataInFile {
@@ -11,7 +11,7 @@ namespace WereViewApp.Modules.Cache {
         /// <summary>
         ///     Doesn't contain slash.
         /// </summary>
-        private static readonly string appPath = AppDomain.CurrentDomain.BaseDirectory;
+        private static readonly string AppPath = AppDomain.CurrentDomain.BaseDirectory;
 
         #endregion
 
@@ -55,7 +55,7 @@ namespace WereViewApp.Modules.Cache {
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public byte[] ObjectToByteArray(Object obj) {
+        public byte[] ObjectToByteArray(object obj) {
             if (obj == null)
                 return null;
             var bf = new BinaryFormatter();
@@ -69,7 +69,7 @@ namespace WereViewApp.Modules.Cache {
         /// </summary>
         /// <param name="arrBytes"></param>
         /// <returns></returns>
-        public Object ReadFromBinaryObject(byte[] arrBytes) {
+        public object ReadFromBinaryObject(byte[] arrBytes) {
             if (arrBytes == null || arrBytes.Length == 0) {
                 return null;
             }
@@ -85,11 +85,11 @@ namespace WereViewApp.Modules.Cache {
         ///     Save any object into file over the previous one.
         /// </summary>
         /// <param name="fileNamelocation">Should contain extension(ex. text.txt) .Relative file location  from root + additonroot</param>
-        /// <param name="SavingListOrItem">Saving item. Could be array or list or anything.</param>
-        public void SaveInBinary(string fileNamelocation, object SavingListOrItem) {
+        /// <param name="savingListOrItem">Saving item. Could be array or list or anything.</param>
+        public void SaveInBinary(string fileNamelocation, object savingListOrItem) {
             // Write data to Test.data.
             //new Thread(() => {
-            fileNamelocation = appPath + Root + AdditionalRoot + fileNamelocation;
+            fileNamelocation = AppPath + Root + AdditionalRoot + fileNamelocation;
 
             //
             if (File.Exists(fileNamelocation)) {
@@ -100,11 +100,11 @@ namespace WereViewApp.Modules.Cache {
                 var fs = new FileStream(fileNamelocation, FileMode.CreateNew);
                 // Create the writer for data.
                 var w = new BinaryWriter(fs);
-                var BinaryObj = ObjectToByteArray(SavingListOrItem);
-                w.Write(BinaryObj);
+                var binaryObj = ObjectToByteArray(savingListOrItem);
+                w.Write(binaryObj);
                 w.Close();
             } catch (Exception ex) {
-                Starter.HanldeError.HandleBy(ex);
+                Mvc.Error.HandleBy(ex);
             }
 
             //}).Start();
@@ -114,11 +114,11 @@ namespace WereViewApp.Modules.Cache {
         ///     Save any object into file over the previous one.
         /// </summary>
         /// <param name="fileNamelocation">Should contain extension(ex. text.txt) .Relative file location  from root + additonroot</param>
-        /// <param name="SavingListOrItem">Saving item. Could be array or list or anything.</param>
-        public void SaveInBinaryAsync(string fileNamelocation, object SavingListOrItem) {
+        /// <param name="savingListOrItem">Saving item. Could be array or list or anything.</param>
+        public void SaveInBinaryAsync(string fileNamelocation, object savingListOrItem) {
             // Write data to Test.data.
             new Thread(() => {
-                fileNamelocation = appPath + Root + AdditionalRoot + fileNamelocation;
+                fileNamelocation = AppPath + Root + AdditionalRoot + fileNamelocation;
 
                 //
                 if (File.Exists(fileNamelocation)) {
@@ -129,24 +129,24 @@ namespace WereViewApp.Modules.Cache {
                     var fs = new FileStream(fileNamelocation, FileMode.CreateNew);
                     // Create the writer for data.
                     var w = new BinaryWriter(fs);
-                    var BinaryObj = ObjectToByteArray(SavingListOrItem);
-                    w.Write(BinaryObj);
+                    var binaryObj = ObjectToByteArray(savingListOrItem);
+                    w.Write(binaryObj);
                     w.Close();
                 } catch (Exception ex) {
-                    Starter.HanldeError.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }).Start();
         }
 
 
         public object ReadObjectFromBinaryFile(string fileNamelocation) {
-            fileNamelocation = appPath + Root + AdditionalRoot + fileNamelocation;
+            fileNamelocation = AppPath + Root + AdditionalRoot + fileNamelocation;
             if (File.Exists(fileNamelocation)) {
                 try {
                     var fileBytes = File.ReadAllBytes(fileNamelocation);
                     return ReadFromBinaryObject(fileBytes);
                 } catch (Exception ex) {
-                    Starter.HanldeError.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                     return null;
                 }
             }
@@ -154,7 +154,7 @@ namespace WereViewApp.Modules.Cache {
         }
 
         public object ReadObjectFromBinaryFileAsCache(string fileNamelocation, float hoursToExpire) {
-            fileNamelocation = appPath + Root + AdditionalRoot + fileNamelocation;
+            fileNamelocation = AppPath + Root + AdditionalRoot + fileNamelocation;
             if (File.Exists(fileNamelocation)) {
                 try {
                     var info = new FileInfo(fileNamelocation);
@@ -172,7 +172,7 @@ namespace WereViewApp.Modules.Cache {
                     var fileBytes = File.ReadAllBytes(fileNamelocation);
                     return ReadFromBinaryObject(fileBytes);
                 } catch (Exception ex) {
-                    Starter.HanldeError.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                     return null;
                 }
             }
@@ -189,7 +189,7 @@ namespace WereViewApp.Modules.Cache {
         /// <param name="fileNamelocation">Should contain extension(ex. text.txt) .Relative file location  from root + additonroot</param>
         /// <param name="content">String to save.</param>
         public void SaveText(string fileNamelocation, string content) {
-            fileNamelocation = appPath + Root + AdditionalRoot + fileNamelocation;
+            fileNamelocation = AppPath + Root + AdditionalRoot + fileNamelocation;
 
             try {
                 if (File.Exists(fileNamelocation)) {
@@ -197,7 +197,7 @@ namespace WereViewApp.Modules.Cache {
                 }
                 File.WriteAllText(fileNamelocation, content);
             } catch (Exception ex) {
-                Starter.HanldeError.HandleBy(ex);
+                Mvc.Error.HandleBy(ex);
             }
         }
 
@@ -207,7 +207,7 @@ namespace WereViewApp.Modules.Cache {
         /// <param name="fileNamelocation">Should contain extension(ex. text.txt) .Relative file location  from root + additonroot</param>
         /// <param name="contents">String to save.</param>
         public void SaveText(string fileNamelocation, string[] contents) {
-            fileNamelocation = appPath + Root + AdditionalRoot + fileNamelocation;
+            fileNamelocation = AppPath + Root + AdditionalRoot + fileNamelocation;
 
             try {
                 if (File.Exists(fileNamelocation)) {
@@ -215,7 +215,7 @@ namespace WereViewApp.Modules.Cache {
                 }
                 File.WriteAllLines(fileNamelocation, contents);
             } catch (Exception ex) {
-                Starter.HanldeError.HandleBy(ex);
+                Mvc.Error.HandleBy(ex);
             }
         }
 
@@ -226,7 +226,7 @@ namespace WereViewApp.Modules.Cache {
         /// <param name="content">String to save.</param>
         public void SaveTextAsync(string fileNamelocation, string content) {
             new Thread(() => {
-                fileNamelocation = appPath + Root + AdditionalRoot + fileNamelocation;
+                fileNamelocation = AppPath + Root + AdditionalRoot + fileNamelocation;
 
                 try {
                     if (File.Exists(fileNamelocation)) {
@@ -234,7 +234,7 @@ namespace WereViewApp.Modules.Cache {
                     }
                     File.WriteAllText(fileNamelocation, content);
                 } catch (Exception ex) {
-                    Starter.HanldeError.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }).Start();
         }
@@ -246,7 +246,7 @@ namespace WereViewApp.Modules.Cache {
         /// <param name="contents">String to save.</param>
         public void SaveTextAsync(string fileNamelocation, string[] contents) {
             new Thread(() => {
-                fileNamelocation = appPath + Root + AdditionalRoot + fileNamelocation;
+                fileNamelocation = AppPath + Root + AdditionalRoot + fileNamelocation;
 
                 try {
                     if (File.Exists(fileNamelocation)) {
@@ -254,7 +254,7 @@ namespace WereViewApp.Modules.Cache {
                     }
                     File.WriteAllLines(fileNamelocation, contents);
                 } catch (Exception ex) {
-                    Starter.HanldeError.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }).Start();
         }
@@ -267,10 +267,10 @@ namespace WereViewApp.Modules.Cache {
         /// <returns>Returns null if not found</returns>
         public string ReadFile(string fileNamelocation) {
             try {
-                fileNamelocation = appPath + Root + AdditionalRoot + fileNamelocation;
+                fileNamelocation = AppPath + Root + AdditionalRoot + fileNamelocation;
                 return File.ReadAllText(fileNamelocation);
             } catch (Exception ex) {
-                Starter.HanldeError.HandleBy(ex);
+                Mvc.Error.HandleBy(ex);
                 return null;
             }
         }
@@ -283,10 +283,10 @@ namespace WereViewApp.Modules.Cache {
         /// <returns>Returns null if not found</returns>
         public string[] ReadFileLines(string fileNamelocation) {
             try {
-                fileNamelocation = appPath + Root + AdditionalRoot + fileNamelocation;
+                fileNamelocation = AppPath + Root + AdditionalRoot + fileNamelocation;
                 return File.ReadAllLines(fileNamelocation);
             } catch (Exception ex) {
-                Starter.HanldeError.HandleBy(ex);
+                Mvc.Error.HandleBy(ex);
                 return null;
             }
         }

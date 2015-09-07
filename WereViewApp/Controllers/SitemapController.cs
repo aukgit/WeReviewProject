@@ -37,15 +37,15 @@ namespace WereViewApp.Controllers {
                 var max = db.FeaturedImages.Count();
                 var homePageGalleryApps = algorithms.GetHomePageGalleryImages(db, max);
 
-                sitemapItems.AddRange(homePageGalleryApps.Select(app => new SitemapItem(app.GetAppUrl(), modifiedDate)));
+                sitemapItems.AddRange(homePageGalleryApps.Select(app => new SitemapItem(app.GetAbsoluteUrl(), modifiedDate)));
 
                 var latestApps = algorithms.GetLatestApps(db, 50);
-                sitemapItems.AddRange(latestApps.Select(app => new SitemapItem(app.GetAppUrl(), modifiedDate)));
+                sitemapItems.AddRange(latestApps.Select(app => new SitemapItem(app.GetAbsoluteUrl(), modifiedDate)));
 
                 var categories = WereViewStatics.AppCategoriesCache;
                 sitemapItems.AddRange(
                     categories.Select(
-                        category => new SitemapItem(appUrl + "/Apps/Category/" + category.CategoryName, modifiedDate)));
+                        category => new SitemapItem(appUrl + "/Apps/Category/" + category.Slug, modifiedDate)));
             }
 
             return new SitemapResult(sitemapItems);

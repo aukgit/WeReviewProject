@@ -11,10 +11,8 @@
 }
 
 
-<h1 class="h2 gap-from-top-small">
-	<span class="glyphicon glyphicon-plus-sign"></span>  
-	@Html.SamePageLink(title, subtitle, false)
-</h1>
+@Html.SamePageLinkWithIcon(title, title, "fa fa-plus")
+
 <hr />
 @using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) 
 {

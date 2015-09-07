@@ -1,7 +1,7 @@
 ﻿@using WereViewApp.Models.EntityModel
-@using WereViewApp.Modules.DevUser
 @using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
-@model WereViewApp.Models.EntityModel.App
+@using WereViewApp.Modules.DevUser
+@model App
 @{
     int sequenceOfReview = 0;
     long userId = UserManager.GetLoggedUserId();
@@ -11,7 +11,6 @@
 
     string appName = Model.AppName;
     string isRecommended, animateRightLeft;
-    
 }
 <div class="review-collection-box seo-optimize">
     <div class="review-wrapper">
@@ -79,7 +78,7 @@
                             <div class="more" data-ref="app-review" data-id="@sequenceOfReview">
                                 @review.Comment2
                                 <a>
-                                    <h1 title="pros of @Model.AppName" class="h5 green">Pros:</h1>
+                                    <h1 title="pros of @Model.AppName" class="green h5">Pros:</h1>
                                 </a>
                                 <blockquote title="pros of @Model.AppName">
                                     @review.Pros
@@ -95,14 +94,14 @@
                         </article>
                     </div>
 
-                    <div class="review-thumbs-up-wrappper col-sm-2 text-center" id="like-dislike-row-@sequenceOfReview">
-                        <div class="star-image start-box center-margin">
+                    <div class="col-sm-2 review-thumbs-up-wrappper text-center" id="like-dislike-row-@sequenceOfReview">
+                        <div class="center-margin star-image start-box">
                             @review.Rating
                         </div>
                         <a id="review-thumbs-up-click-@sequenceOfReview" class="postive" data-sequence="@sequenceOfReview" data-review-like-btn="true" data-review-id="@review.ReviewID">
                             <i class="fa fa-thumbs-up @likeActive"></i>
                         </a>
-                        <a id="spinner-@sequenceOfReview" data-toggle="tooltip" title="Requesting" data-original-title="Requesting" class="tooltip-show spinner-for-like">
+                        <a id="spinner-@sequenceOfReview" data-toggle="tooltip" title="Requesting" data-original-title="Requesting" class="spinner-for-like tooltip-show">
                             <span data-display="Requesting" class="glyphicon glyphicon-refresh glyphicon-spin" title="Requesting"></span>
                         </a>
                         <a id="review-thumbs-down-click-@sequenceOfReview" class="negative" data-sequence="@sequenceOfReview" data-review-dislike-btn="true" data-review-id="@review.ReviewID">
@@ -124,5 +123,5 @@
 </div>
 <form class="hide" id="review-like-dislike-form-submit">
     @Html.AntiForgeryToken()
-    <input type="hidden" name="appId" value="@Model.AppID"/>
+    <input type="hidden" name="appId" value="@Model.AppID" />
 </form>

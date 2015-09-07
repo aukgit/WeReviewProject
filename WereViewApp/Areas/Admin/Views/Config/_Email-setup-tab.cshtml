@@ -1,0 +1,15 @@
+﻿@model CoreSetting
+<div class="fade tab-pane" id="email-setup-tab">
+    <div class="col-md-10 col-md-offset-2 small-bottom-gap">
+        <h1 class="bold h5">Email &amp; Other Setup:</h1>
+    </div>
+    @ViewBag.backBtn
+    @ViewBag.stateMessage
+    @Html.EditorFor(model => model.SenderDisplay)
+    @Html.EditorFor(model => model.SenderEmail,  "Email")
+    @Html.EditorFor(model => model.SenderEmailPassword)
+    @Html.EditorFor(model => model.SmtpHost)
+    @Html.EditorFor(model => model.SmtpMailPort)
+    @Html.EditorFor(model => model.IsSmtpssl)
+    @ViewBag.backBtn
+</div>

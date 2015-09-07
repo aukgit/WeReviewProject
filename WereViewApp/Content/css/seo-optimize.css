@@ -56,4 +56,14 @@ header {
 .almost-black {
   color: #494646;
 }
+.seo-hide {
+  color: transparent;
+  background-color: transparent;
+}
+.seo-hide h1,
+.seo-hide em,
+.seo-hide strong {
+  color: transparent;
+  background-color: transparent;
+}
 /*# sourceMappingURL=seo-optimize.css.map */

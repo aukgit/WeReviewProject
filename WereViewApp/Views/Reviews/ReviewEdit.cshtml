@@ -7,7 +7,7 @@
     string viewName = "Edit";
     Layout = null;
 }
-<hr/>
+<hr />
 <h1 class="h4">@ViewBag.Title</h1>
 @using (Html.BeginForm(viewName, controller, FormMethod.Post, new {@class = "form-horizontal Create", role = "form"})) {
     <div class="form-horizontal">
@@ -16,7 +16,7 @@
         @Html.ValidationSummary(true, "", new {@class = "text-danger"})
         @Html.HiddenFor(model => model.ReviewID)
         @Html.HiddenFor(model => model.AppID)
-        @Html.EditorFor(model => model.Rating, "Rating-5-b", new { @step = 1 })
+        @Html.EditorFor(model => model.Rating, "Rating-5-b", new {@step = 1})
         @Html.EditorFor(model => model.Title)
         @Html.EditorFor(model => model.Pros, "Multiline")
         @Html.EditorFor(model => model.Cons, "Multiline")

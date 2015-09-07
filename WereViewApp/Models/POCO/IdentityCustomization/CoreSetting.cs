@@ -15,11 +15,11 @@ namespace WereViewApp.Models.POCO.IdentityCustomization {
         public string ApplicationName { get; set; }
         [StringLength(200)]
         [Required]
-        [DisplayName("Subtitle")]
+        [Display(Name = "Subtitle", Description = "Website's subtitle.")]
         public string ApplicationSubtitle { get; set; }
         [StringLength(300)]
         [Required]
-        [DisplayName("Description")]
+        [Display(Name = "Description", Description = "Website's description.")]
         public string ApplicationDescription { get; set; }
 
         [StringLength(400)]
@@ -61,15 +61,17 @@ namespace WereViewApp.Models.POCO.IdentityCustomization {
         [Required]
         [DisplayName("Company Name")]
         public string CompanyName { get; set; }
+        [StringLength(120)]
+        [Required]
+        [Display(Name = "Developer's Name", Description = "Developer or company name.")]
+        public string DeveloperName { get; set; }
         [Column(TypeName = "VARCHAR")]
         [Required]
         [StringLength(35)]
         public string Language { get; set; }
 
-        [StringLength(500)]
-        [Required]
-        [DisplayName("Live URL")]
-        public string LiveUrl { get; set; }
+     
+
         [StringLength(20)]
         [Required]
         [DisplayName("Admin Location")]
@@ -77,8 +79,21 @@ namespace WereViewApp.Models.POCO.IdentityCustomization {
 
         [StringLength(500)]
         [Required]
-        [DisplayName("Testing URL")]
+        [Display(Name = "Live Url", Description = "Your live site url (without slash).")]
+        public string LiveUrl { get; set; }
+
+        [StringLength(500)]
+        [Required]
+        [Display(Name = "Testing Url", Description = "Your testing environment url (without slash).")]
         public string TestingUrl { get; set; }
+        [StringLength(500)]
+        [Required]
+        [Display(Name="Service Url", Description="Common Service Controller url after host url.")]
+        public string ServicesControllerUrl { get; set; }
+        [StringLength(500)]
+        [Required]
+        [Display(Name = "Api Url", Description = "Common Api Controller url after host url.")]
+        public string ApiControllerUrl { get; set; }
         [StringLength(256)]
         [Required]
         [EmailAddress]
@@ -90,7 +105,7 @@ namespace WereViewApp.Models.POCO.IdentityCustomization {
         public string AdminName { get; set; }
         [StringLength(256)]
         [Required]
-        [DisplayName("Developer Email")]
+        [Display(Name = "Developer's Email", Description = "Developer's Email.")]
         [EmailAddress]
         public string DeveloperEmail { get; set; }
         [Required]
@@ -99,17 +114,19 @@ namespace WereViewApp.Models.POCO.IdentityCustomization {
 
         [StringLength(256)]
         [Required]
-        [DisplayName("Sender Email")]
+        [Display(Name = "Email", Description = "Email address where all the emails will be sent.")]
+
         [EmailAddress]
         public string SenderEmail { get; set; }
         [Column(TypeName = "VARCHAR")]
         [Required]
-        [StringLength(30)]
+        [StringLength(50)]
         [DataType(DataType.Password)]
+        [Display(Name = "Password", Description = "Email password.")]
         public string SenderEmailPassword { get; set; }
         [StringLength(256)]
         [Required]
-        [DisplayName("Sender Display")]
+        [Display(Name="Sender Display", Description="Email sender display name.")]
         public string SenderDisplay { get; set; }
         [StringLength(45)]
         [Display(Name = "Webmaster Meta", Description = "meta name='google-site-verification' content='val'")]
@@ -154,7 +171,7 @@ namespace WereViewApp.Models.POCO.IdentityCustomization {
         [DisplayName("Register Code required to register.")]
         public bool IsRegisterCodeRequiredToRegister { get; set; }
         [DisplayName("Is SSL Enabled for SMTP configuration.")]
-        public bool IsSMTPSSL { get; set; }
+        public bool IsSmtpssl { get; set; }
 
         [DisplayName("Is Confirmation mail required.")]
         public bool IsConfirmMailRequired { get; set; }

@@ -1,7 +1,8 @@
 ﻿#region using block
 
+using System.Web;
 using System.Web.Mvc;
-using DevMVCComponent.Database;
+using DevMvcComponent.Pagination;
 using WereViewApp.Modules.Cache;
 using WereViewApp.WereViewAppCommon;
 
@@ -10,7 +11,7 @@ using WereViewApp.WereViewAppCommon;
 namespace WereViewApp.Controllers {
     public class CategoryController : Controller {
         // GET: Category
-        private readonly int MaxNumbersOfPagesShow = 8;
+        private const int MaxNumbersOfPagesShow = 8;
 
         public ActionResult Index() {
             var alg = new Algorithms();
@@ -18,25 +19,25 @@ namespace WereViewApp.Controllers {
             return View(categories);
         }
 
-        public ActionResult Specific(string categoryName, int page = 1) {
+        public ActionResult Specific(string slug, int page = 1) {
             //categoryName= Url.de
-            if (!string.IsNullOrWhiteSpace(categoryName)) {
+            if (!string.IsNullOrWhiteSpace(slug)) {
                 var alg = new Algorithms();
                 var pageInfo = new PaginationInfo {
                     ItemsInPage = AppConfig.Setting.PageItems,
                     PageNumber = page
                 };
-                var category = alg.GetCategoryPageApps(categoryName,
+                var category = alg.GetCategoryPageApps(slug,
                     pageInfo,
-                    CacheNames.CategoryPageSpecificPagesCount + "-" + categoryName);
+                    CacheNames.CategoryPageSpecificPagesCount + "-" + slug);
                 if (category != null) {
                     ViewBag.Title = "Mobile apps category : " + category.CategoryName;
                     ViewBag.Meta = "Mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
                     ViewBag.Keywords = ViewBag.Meta;
 
                     var eachUrl = "/Apps/Category/" + category.CategoryName + "/@page";
-                    ViewBag.paginationHtml = Pagination.GetList(pageInfo, eachUrl, "",
-                        maxNumbersOfPagesShow: MaxNumbersOfPagesShow);
+                    ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
+                        maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
                     return View(category);
                 }
             }

@@ -1,0 +1,38 @@
+﻿@{
+    var appUrl = AppVar.Url;
+}
+<div class="header-2">
+    <header class="sticky">
+        <div class="container">
+            <a class="logo" href="@appUrl" title="wereviewapp.com: App Review websie">
+                <h1 title="wereviewapp.com" class="wereviewapp.com website-head-title">
+                    <strong class="almost-black" title="App Review websie">we</strong><strong class="red" title="App Review websie">review</strong><strong class="orange-color" title="App Review websie">app.com</strong>
+                </h1>
+            </a>
+            <nav>
+                <ul class="jetmenu menu seo-optimize">
+                    <li>
+                        <a href='@appUrl' title="App Review websie : Home"><strong title="App Review websie : Home">Home</strong></a>
+                    </li>
+                    <li>
+                        <a href="@AppVar.Url/Admin" title="@AppVar.Name - @AppVar.Subtitle">Admin</a>
+                    </li>
+                    <li>
+                        <a href="#">Developers Organsim <b class="caret"></b></a>
+                        <ul class="dropdown animated fadeIn">
+                            @Html.GetMenu("Admin")
+                            <li>@Html.ActionLink("Feedback", "Index", new { Controller = "Feedback" })</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">ViewWereApp <b class="caret"></b></a>
+                        <ul class="dropdown animated fadeIn">
+                            @Html.GetMenu("ViewWereApp")
+                        </ul>
+                    </li>
+                    @Html.Partial("_LoginPartial")
+                </ul>
+            </nav>
+        </div>
+    </header>
+</div>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Web;
-using DevMVCComponent;
+using DevMvcComponent;
 using ImageResizer;
 
 namespace WereViewApp.Modules.Uploads {
@@ -153,7 +153,7 @@ namespace WereViewApp.Modules.Uploads {
             try {
                 submittedFile.SaveAs(absLocation);
             } catch (Exception ex) {
-                Starter.HanldeError.HandleBy(ex);
+                Mvc.Error.HandleBy(ex);
                 return false;
             }
             return true;
@@ -167,8 +167,8 @@ namespace WereViewApp.Modules.Uploads {
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <param name="ext"></param>
-        public void ResizeImageAndProcessImage(string sourceLocation, string processedLocation, double width, double height,
-            string ext) {
+        public void ResizeImageAndProcessImage(string sourceLocation, string processedLocation, double width,
+            double height, string ext) {
             if (sourceLocation != null && processedLocation != null) {
                 var source = sourceLocation.Replace("~", AppPath).Replace('/', '\\');
                 var target = processedLocation.Replace("~", AppPath).Replace('/', '\\');
@@ -178,7 +178,7 @@ namespace WereViewApp.Modules.Uploads {
         }
 
         /// <summary>
-        /// Resize the image
+        ///     Resize the image
         /// </summary>
         /// <param name="category"></param>
         /// <param name="sourceFileName">like "Justuploaded"</param>
@@ -190,9 +190,9 @@ namespace WereViewApp.Modules.Uploads {
         ///     Best way to set it in class constructor.
         /// </param>
         /// <param name="rootPath"></param>
-        public void ResizeImageAndProcessImage(IUploadableFile file, IImageCategory category, string sourceFileName = null,
-            string processedFileName = null, bool isSourceAddTemp = true, bool isPrivate = false,
-            string additionalRootPath = null, string rootPath = null) {
+        public void ResizeImageAndProcessImage(IUploadableFile file, IImageCategory category,
+            string sourceFileName = null, string processedFileName = null, bool isSourceAddTemp = true,
+            bool isPrivate = false, string additionalRootPath = null, string rootPath = null) {
             if (file != null && category != null) {
                 if (rootPath == null) {
                     rootPath = RootPath;
@@ -222,7 +222,7 @@ namespace WereViewApp.Modules.Uploads {
                 try {
                     ImageBuilder.Current.Build(source, target, new ResizeSettings(setting));
                 } catch (Exception ex) {
-                    Starter.HanldeError.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             } else {
                 throw new Exception("Data missing while upload.");
@@ -262,7 +262,7 @@ namespace WereViewApp.Modules.Uploads {
             try {
                 File.Delete(source);
             } catch (Exception ex) {
-                Starter.HanldeError.HandleBy(ex);
+                Mvc.Error.HandleBy(ex);
             }
         }
 

@@ -43,7 +43,14 @@ namespace WereViewApp.Controllers {
         #endregion
 
         #region Single App Display Page : site.com/Apps/Apple-8/Games/plant-vs-zombies
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="platform"></param>
+        /// <param name="platformVersion"></param>
+        /// <param name="category">Category slug</param>
+        /// <param name="url"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [OutputCache(CacheProfile = "Short", VaryByParam = "platform;platformVersion;category;url")]
         public ActionResult SingleAppDisplay(string platform, float platformVersion, string category, string url) {
@@ -497,6 +504,7 @@ namespace WereViewApp.Controllers {
         ///     returns draft if it is related to current user.
         /// </summary>
         /// <param name="draftId"></param>
+        /// <param name="appDraft">App draft</param>
         /// <returns></returns>
         private App GetAppfromDraft(AppDraft appDraft) {
             if (appDraft == null) {
@@ -549,7 +557,7 @@ namespace WereViewApp.Controllers {
 
         #region Manage Virtual Fields : In File (Idea, Tags, Developers..)
 
-        #region Saving asycnchronously
+        #region Saving 
 
         /// <summary>
         ///     Async saving into files as binary
@@ -622,7 +630,7 @@ namespace WereViewApp.Controllers {
         private void AddNecessaryWhenModified(App app) {
             // Set userid, last mod, save virtual fields, fix iframe, URL
             AddNecessaryBothOnPostingNEditing(app);
-            _algorithms.RemoveSingleAppFromCacheOfStatic(app, db);
+            _algorithms.RemoveSingleAppFromCacheOfStatic(app.AppID);
         }
 
         /// <summary>
@@ -1039,8 +1047,7 @@ namespace WereViewApp.Controllers {
         #region Edit or modify record
 
         public ActionResult Edit(Int64 id) {
-            var userId = UserManager.GetLoggedUserId();
-            var app = db.Apps.FirstOrDefault(n => n.AppID == id && n.PostedByUserID == userId);
+            var app = _algorithms.GetEditingApp(id, db);
 
             if (app == null) {
                 return HttpNotFound();
@@ -1057,15 +1064,20 @@ namespace WereViewApp.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Edit(App app) {
             var viewOf = ViewTapping(ViewStates.EditPost, app);
+            var oldApp = _algorithms.GetEditingApp(app.AppID, db);
+            app.CreatedDate = oldApp.CreatedDate;
+            app.URL = oldApp.URL;
+
             if (ModelState.IsValid) {
                 AddNecessaryWhenModified(app);
                 db.Entry(app).State = EntityState.Modified;
                 var state = SaveDatabase(ViewStates.Edit, app);
                 if (state) {
                     ManageTagsInDatabase(app.AppID, app.UploadGuid, app.Tags);
+                    _algorithms.RemoveCachingApp(app.AppID);
                     AppVar.SetSavedStatus(ViewBag, EditSuccessFully(app.AppName, app.IsPublished));
                         // Saved Successfully.
-                    return Redirect(app.GetAppUrl());
+                    return Redirect(app.GetAbsoluteUrl());
                 }
             }
 

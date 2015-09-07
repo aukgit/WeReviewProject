@@ -1,9 +1,9 @@
-﻿@import "lesshat.less";
-@import "variables.less";
+﻿@import "fonts-rimixens.less";
+/*
+  please don't modify styles from css file. Please modify in the respective.less file in the less folder.
+  FYI: This file (.less file) contains utilities styles, lets say general padding, margin, bold, hide, show etc..
+*/
 
-
-
-/*table related */
 /*h1, h2, h3, h4, h5 {
     display: inline;
 }*/
@@ -27,14 +27,10 @@ table td.dot {
     width: 4px;
 }
 
-.table-cell {
-    display: table-cell;
-}
+
 /*table related */
 
-.table {
-    display: table;
-}
+
 
 textarea {
     height: 45px;
@@ -52,6 +48,7 @@ textarea:hover,
 input[type="text"]:hover,
 input[type="number"]:hover,
 input[type="date"]:hover,
+input[type="password"]:hover,
 input[type="email"]:hover {
     border: 1px solid #ACDFEE;
 }
@@ -97,11 +94,9 @@ div.Error-List ul {
     display: block;
     margin-top: 6px;
     background-color: white;
-    height: 22px;
+    .height(22px);
     padding-left: 8px; /*rounded border*/
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -khbtml-border-radius: 3px;
+    .border-rounded(3px);
 }
 
 .plugin-a li a:hover, .plugin-a-white li a:hover {
@@ -112,21 +107,49 @@ div.Error-List ul {
 }
 
 .plugin-a-white li a {
+    .border-rounded(3px);
     display: block;
     padding-left: 8px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -khbtml-border-radius: 3px;
 }
 
-/*LI*/
+.Opacity-10 {
+    .opacity(.1); /* for all other browsers*/
+}
 
+.Opacity-20 {
+    .opacity(.2); /* for all other browsers*/
+}
+
+.Opacity-30 {
+    .opacity(.3); /* for all other browsers*/
+}
+
+.Opacity-40 {
+    .opacity(.4); /* for all other browsers*/
+}
+
+.Opacity-50 {
+    .opacity(.5); /* for all other browsers*/
+}
+
+.Opacity-60 {
+    .opacity(.6); /* for all other browsers*/
+}
+.Opacity-70 {
+    .opacity(.7); /* for all other browsers*/
+}
 .Opacity-80 {
-    opacity: .8; /* for all other browsers*/
-    filter: alpha(opacity=80); /*for Ie-7*/
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; /*for IE8*/
+    .opacity(.8); /* for all other browsers*/
+}
+.Opacity-90 {
+    .opacity(.9); /* for all other browsers*/
 }
 
+.Opacity-100 {
+    .opacity(1); /* for all other browsers*/
+}
+
+// display properties
 .inline {
     display: inline;
 }
@@ -139,28 +162,58 @@ div.Error-List ul {
     display: block;
 }
 
+.display-table {
+    display: table;
+}
+.display-table-cell {
+    display: table-cell;
+}
+.table-cell {
+    display: table-cell;
+}
 .fixed-width-294 {
-    min-width: 294px;
+    .min-width(294px);
     width: auto;
 }
 
+// rounded properties
+.rounded-1 {
+    .border-rounded(1px);
+}
+.rounded-2 {
+    .border-rounded(1px);
+}
 .rounded-3 {
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    -khbtml-border-radius: 3px;
+    .border-rounded(3px);
 }
 
+.rounded-4 {
+    .border-rounded(4px);
+}
+
+.rounded-5 {
+    .border-rounded(5px);
+}
+
+.rounded-6 {
+    .border-rounded(6px);
+}
+.rounded-7 {
+    .border-rounded(7px);
+}
+.rounded-8 {
+    .border-rounded(8px);
+}
 hr {
-    margin-top: 8px;
     margin-bottom: 8px;
+    margin-top: 8px;
 }
 
 .gap-from-top {
     .margin-top(55px);
 }
 
-.gap-from-top-small {
+.top-margin-space {
     .margin-top(25px);
 }
 
@@ -616,7 +669,92 @@ div.contactus {
     text-indent: 1.2em;
 }
 
-.width-100-percent {
+.width-100-percent, .full-width {
     width: 100%;
+}
+// centering utils
+.absolute-center {
+    width: 50%;
+    height: 50%;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    &.is-fixed {
+        position: fixed;
+        z-index: 999;
+    }
+    &.is-right {
+        left: auto;
+        right: 20px;
+        text-align: right;
+    }
+    &.is-Left {
+        right: auto;
+        left: 20px;
+        text-align: left;
+    }
+}
+//vertically - center
+.jumbotron.vertical-center {
+    margin-bottom: 0; /* Remove the default bottom margin of .jumbotron */
+}
+.vertical-center {
+    min-height: 100%; /* Fallback for vh unit */
+    min-height: 100vh; /* You might also want to use
+                        'height' property instead.
+                        Note that for percentage values of
+                        'height' or 'min-height' properties,
+                        the 'height' of the parent element
+                        should be specified explicitly.
+                        In this case the parent of '.vertical-center'
+                        is the <body> element */
+    /* Make it a flex container */
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    /* Align the bootstrap's container vertically */
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    /* In legacy web browsers such as Firefox 9
+     we need to specify the width of the flex container */
+    width: 100%;
+    /* Also 'margin: 0 auto' doesn't have any effect on flex items in such web browsers
+     hence the bootstrap's container won't be aligned to the center anymore.
+     Therefore, we should use the following declarations to get it centered again */
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+.controls-full-width {
+    input,
+    select,
+    textarea,
+    a.form-control,
+    div.input-group.date.datetimepicker {
+        .max-width(none);
+    }
+}
+.no-margin-controls {
+    .form-group {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+}
+.controls-readonly {
+    .form-control:not(a) {
+        background-color: white;
+        cursor:text;
+    }
 }
 @import "see-more-btn.less";

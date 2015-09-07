@@ -3,18 +3,17 @@ using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
+using DevMvcComponent;
 
 namespace WereViewApp.Modules.Extensions.Context {
     public abstract class DevDbContext : DbContext {
         public DevDbContext() {
         }
 
-        public DevDbContext(string connectionStringName)
-            : base(connectionStringName) {
+        public DevDbContext(string connectionStringName) : base(connectionStringName) {
         }
 
-        public DevDbContext(DbCompiledModel compiledModel)
-            : base(compiledModel) {
+        public DevDbContext(DbCompiledModel compiledModel) : base(compiledModel) {
         }
 
         public DevDbContext(string connectionStringName, DbCompiledModel compiledModel)

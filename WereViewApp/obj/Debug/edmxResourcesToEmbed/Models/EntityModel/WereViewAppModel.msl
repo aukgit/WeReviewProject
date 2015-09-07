@@ -58,6 +58,7 @@
     <EntitySetMapping Name="Categories">
       <EntityTypeMapping TypeName="WereViewAppModel.Category">
         <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="Slug" ColumnName="Slug" />
           <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
         </MappingFragment>
@@ -182,19 +183,6 @@
           <ScalarProperty Name="Icon" ColumnName="Icon" />
           <ScalarProperty Name="PlatformName" ColumnName="PlatformName" />
           <ScalarProperty Name="PlatformID" ColumnName="PlatformID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Reports">
-      <EntityTypeMapping TypeName="WereViewAppModel.Report">
-        <MappingFragment StoreEntitySet="Report">
-          <ScalarProperty Name="ActionTakenMessageToHolder" ColumnName="ActionTakenMessageToHolder" />
-          <ScalarProperty Name="ActionTakenMessageToSender" ColumnName="ActionTakenMessageToSender" />
-          <ScalarProperty Name="IsChecked" ColumnName="IsChecked" />
-          <ScalarProperty Name="IsFalseReport" ColumnName="IsFalseReport" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="AppID" ColumnName="AppID" />
-          <ScalarProperty Name="ReportID" ColumnName="ReportID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

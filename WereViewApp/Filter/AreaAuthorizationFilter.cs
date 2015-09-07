@@ -29,12 +29,12 @@ namespace WereViewApp.Filter {
                 var isInRole = RoleManager.IsInRole(currentArea);
                 if (!isInRole) {
                     //no access to the area... then add a error msg.
-                    filterContext.HttpContext.Session[SessionNames.AuthError] = "You have no right to access " + currentArea + " . Sorry for inconvenience.";
+                    filterContext.HttpContext.Session[SessionNames.AuthError] = "You don't have the permission to access " + currentArea + " . Sorry for inconvenience.";
                     filterContext.Result = new HttpUnauthorizedResult();
                 }
             } else {
                 // not logged in
-                filterContext.HttpContext.Session[SessionNames.AuthError] = "You have no right to access " + currentArea + " . Sorry for inconvenience.";
+                filterContext.HttpContext.Session[SessionNames.AuthError] = "You don't have the permission to access " + currentArea + " . Sorry for inconvenience.";
                 filterContext.Result = new HttpUnauthorizedResult();
             }
 

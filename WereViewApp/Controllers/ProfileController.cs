@@ -2,8 +2,9 @@
 
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using DevMVCComponent.Database;
+using DevMvcComponent.Pagination;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Modules.Cache;
@@ -37,14 +38,14 @@ namespace WereViewApp.Controllers {
             // add ordered by
             users = users.OrderByDescending(n => n.Id);
             var pageInfo = new PaginationInfo {
-                ItemsInPage = AppConfig.Setting.PageItems + 40,
+                ItemsInPage = AppConfig.Setting.PageItems,
                 PageNumber = page,
                 PagesExists = count
             };
             var usersForThisPage = users.GetPageData(pageInfo, CacheNames.ProfilePaginationDataCount, false).ToList();
             const string eachUrl = "/Profile?page=@page";
-            ViewBag.paginationHtml = Pagination.GetList(pageInfo, eachUrl, "",
-                maxNumbersOfPagesShow: MaxNumbersOfPagesShow);
+            ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
+                maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
             return View(usersForThisPage);
         }
 
@@ -60,7 +61,7 @@ namespace WereViewApp.Controllers {
                 var user = UserManager.GetUser(username);
                 if (user != null) {
                     using (var db = new WereViewAppEntities()) {
-                        var apps = db.Apps
+                        var apps = algorithms.GetViewableApps(db)
                             .Where(n => n.PostedByUserID == user.UserID)
                             .Include(n => n.User)
                             .OrderByDescending(n => n.AppID);
@@ -77,8 +78,8 @@ namespace WereViewApp.Controllers {
                             GalleryCategoryIDs.SearchIcon);
                         ViewBag.Apps = appsForThisPage;
                         var eachUrl = "/Profile/" + user.UserName + "/@page";
-                        ViewBag.paginationHtml = Pagination.GetList(pageInfo, eachUrl, "",
-                            maxNumbersOfPagesShow: MaxNumbersOfPagesShow);
+                        ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
+                            maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
                         return View(user);
                     }
                 }

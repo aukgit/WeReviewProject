@@ -1,14 +1,13 @@
-﻿@using WereViewApp.Models.EntityModel
-@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
-@model Platform
+﻿@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
+@model WereViewApp.Models.EntityModel.Platform
 @{
     ViewBag.Title = Model.PlatformName + " Mobile Apps";
     string currentPageStaticUrl = AppVar.Url + Html.GetCurrentUrlString();
     string titlesSubtitle = ViewBag.Title;
 }
-<div class="app-details-page category-page search-page category-listing-page">
+<div class="app-details-page category-listing-page category-page search-page">
     <div class="row">
-        <div class="col-md-12 app-detail app-title-wrapper" title="@titlesSubtitle">
+        <div class="app-detail app-title-wrapper col-md-12" title="@titlesSubtitle">
             <div class="app-title-row float-left" title="@titlesSubtitle">
                 <a href="@currentPageStaticUrl" class="app-title" title="@titlesSubtitle">
                     <h1 title="@titlesSubtitle">
@@ -28,10 +27,10 @@
             </div>
         </div>
     </div>
-    <div class="category-listing-displays-with-apps-container bottom-gap">
+    <div class="bottom-gap category-listing-displays-with-apps-container">
         @{ var appNonExistClass = Model.Apps == null || Model.Apps.Count == 0 ? "seo-hide" : ""; }
         <div class="row no-margin @appNonExistClass">
-            <div class="col-md-12 app-detail app-title-wrapper category-title" title="Mobile App Categories">
+            <div class="app-detail app-title-wrapper category-title col-md-12" title="Mobile App Categories">
                 <div class="app-title-row float-left">
                     <a href="@currentPageStaticUrl/@Model.PlatformName" title="@Model.PlatformName category mobile apps" class="app-title">
                         <h1 title="@Model.PlatformName">
@@ -50,11 +49,11 @@
         </div>
         <div class="row no-margin @appNonExistClass">
             <div class="archive-app-collection-wrapper">
-                <ul class="seo-optimize regular-color archive-app-collection-list category-listing-page-apps-list pagination-required">
+                <ul class="archive-app-collection-list category-listing-page-apps-list pagination-required regular-color seo-optimize">
                     @if (appNonExistClass == "") {
                         foreach (var app in Model.Apps) {
                             <li class="slim-app-view" data-app-type="@Model.Icon">
-                                <a class="app-url" href="@app.GetAppUrl()" title="App Review : @app.AppName">
+                                <a class="app-url" href="@app.GetAbsoluteUrl()" title="App Review : @app.AppName">
                                     <div class="app-icon">
                                         <img src="@app.SearchIconLocation" alt="app" />
                                     </div>

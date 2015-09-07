@@ -1,4 +1,5 @@
-﻿/// <reference path="jquery-1.10.2.js" />
+﻿/// <reference path="developers-organism.upload.js" />
+/// <reference path="jquery-1.10.2.js" />
 /// <reference path="jquery-1.10.2.intellisense.js" />
 /// <reference path="jquery.fileupload.js" />
 /// <reference path="jquery.iframe-transport.js" />
@@ -7,12 +8,15 @@
 /// <reference path="modernizr-2.6.2.js" />
 /// <reference path="bootstrap.js" />
 /// <reference path="bootstrap-progressbar.js" />
-/// <reference path="I:\WeReviewApp\WereViewProject\WeReviewApp\Scripts/underscore.js" />
+/// <reference path="developers-organism.upload.js" />
+/// <reference path="developers-organism.dynamicSelect.js" />
+/// <reference path="developers-organism.country-phone.js" />
+/// <reference path="developers-organism.component.js" />
+/// <reference path="../jquery-2.1.3.intellisense.js" />
+/// <reference path="dev-component-runner.js" />
 
 $(function () {
     'use strict';
-
-
 
     $.devOrgUP = {
 

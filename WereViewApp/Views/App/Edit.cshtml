@@ -6,42 +6,37 @@
     ViewBag.Title = "Editing " + appName;
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    var token = @Html.AntiForgeryToken();
-    string controller = (string) ViewBag.controller;
+    ViewBag.token = @Html.AntiForgeryToken();
+    string controller = (string)ViewBag.controller;
     string viewName = "Edit";
 }
-
-
-<h1 class="h2 gap-from-top-small">
-    <span class="glyphicon glyphicon-edit"></span>
-    @Html.SamePageLink(title, subtitle, false)
-</h1>
-<hr/>
-@using (Html.BeginForm(viewName, controller, FormMethod.Post, new {@class = "form-horizontal app-editing-page app-edit Edit-App", role = "form"})) {
-    <div class="form-horizontal">
-        @token
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-        @Html.HiddenFor(model => model.AppID)
-        @Html.HiddenFor(model => model.URL)
-        @Html.Partial("_CreateOrEdit")
-        @Html.Partial("_Uploaders")
-
-        @Html.EditorFor(model => model.IsPublished)
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <div class="btn-group">
-                    <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                    <a href="@Model.GetAppUrl()" title="View @appName" class="btn btn-warning"><span class="glyphicon glyphicon-chevron-left"></span> View</a>
-                    <a href="@Url.Action("Delete", new {id = Model.AppID})" title="Delete this record?" class="btn btn-danger" onclick=" return confirm('Are you sure?') "><span class="glyphicon glyphicon-remove"></span> Delete</a>
-                    <div class="input-group-btn inline">
-                        <button title="Save and create new one" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
+@Html.SamePageLinkWithIcon(title, title, "fa fa-edit")
+<hr />
+<div id="app-form" data-type="edit">
+    @using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal app-editing-page app-edit Edit-App", role = "form" })) {
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.AppID)
+            @Html.HiddenFor(model => model.URL)
+            @Html.HiddenFor(model => model.CreatedDate)
+            @Html.Partial("_CreateOrEdit")
+            @Html.Partial("_Uploaders")
+            @Html.EditorFor(model => model.IsPublished)
+            <div class="form-group">
+                <div class="col-md-10 col-md-offset-2">
+                    <div class="btn-group">
+                        <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+                        <a href="@Model.GetAbsoluteUrl()" title="View @appName" class="btn btn-warning"><span class="glyphicon glyphicon-chevron-left"></span> View</a>
+                        <a href="@Url.Action("Delete", new {id = Model.AppID})" title="Delete this record?" class="btn btn-danger" onclick=" return confirm('Are you sure?') "><span class="glyphicon glyphicon-remove"></span> Delete</a>
+                        <div class="inline input-group-btn">
+                            <button title="Save and create new one" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/upload")
 

@@ -3,7 +3,7 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using DevMVCComponent.Database;
+using DevMvcComponent.EntityConversion;
 using WereViewApp.Models.POCO.IdentityCustomization;
 
 #endregion
@@ -57,7 +57,7 @@ namespace WereViewApp.Controllers {
                 db.SaveChanges();
                 AppVar.SetSavedStatus(ViewBag);
                 //send a email.
-                var body = EntityToString.GetHTML(feedback);
+                var body = EntityToString.Get(feedback);
                 AppVar.Mailer.NotifyAdmin("A feedback has been added by " + feedback.Email,
                     "Please check your feedback inbox. Feedback :<br>" + feedback.Message + "<br>" + body);
 

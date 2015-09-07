@@ -17,6 +17,18 @@
 .bold-important {
   font-weight: bolder !important;
 }
+.orangred {
+  color: orangered;
+}
+.orangred-important {
+  color: orangered !important;
+}
+.game-pressure-organge {
+  color: #e64600;
+}
+.deep-orange {
+  color: #e45c21;
+}
 .green {
   color: #008000;
 }
@@ -87,6 +99,9 @@
 .font-size-22 {
   font-size: 22px;
   font-size: 1.375em;
+}
+.ubuntu-font {
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .bangla,
 .bangla li {

@@ -1,5 +1,4 @@
 @model object
-
 @{
     var isRequired = ViewData.ModelMetadata.IsRequired;
     var isRequiredStar = isRequired ? "*" : "";
@@ -33,8 +32,11 @@
         ViewBag.Style = "btn-success";
     }
 
-    if (ViewBag.Id != null) {
-        ViewBag.Id = " id='" + ViewBag.Id + "' ";
+    if (ViewBag.isPicker == null) {
+        ViewBag.isPicker = "true"; // true , false to make it selectpicker or not
+    }
+    if (ViewBag.Id == null) {
+        ViewBag.id = ViewData.ModelMetadata.PropertyName;
     }
 
     if (ViewBag.DynamicLoad == null) {
@@ -44,20 +46,34 @@
         ViewBag.IsDependable = "false";
     }
 
+    if (ViewBag.label == null) {
+        ViewBag.label = ViewData.ModelMetadata.DisplayName;
+    }
+
+    if (ViewBag.labelColumn == null) {
+        ViewBag.labelColumn = "col-md-2";
+    }
+    if (ViewBag.textColumn == null) {
+        ViewBag.textColumn = "col-md-10";
+    }
     if (ViewBag.IsHtmlRequest == null) {
         ViewBag.IsHtmlRequest = "false";
     }
-    if (ViewBag.IsStyled == null) {
-        ViewBag.IsStyled = "false";
-    }
 }
-<div class="form-group form-row-@ViewData.ModelMetadata.PropertyName dynamic-select-container" data-dynamic-select-container="true">
-    <div class="controls">
-        <label class="col-md-2 control-label" for="@ViewData.ModelMetadata.PropertyName">
-            @ViewData.ModelMetadata.DisplayName
+<div data-json-combo-plugin="true" class="form-group form-row-@ViewData.ModelMetadata.PropertyName dynamic-select-container" data-dynamic-select-container="true">
+    @*<div class="controls">*@
+    <label data-progress-bar="true" data-prop="@ViewData.ModelMetadata.PropertyName">
+        <a data-toggle="tooltip" title="Loading request..." data-original-title="Loading request..." class="tooltip-show CustomValidation @ViewData.ModelMetadata.PropertyName no-hover">
+            <span data-display="@ViewData.ModelMetadata.DisplayName" class="@ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-spin" title="Loading request..."></span>
+        </a>
+        Loading request...
+    </label>
+    <div data-hidable="true" data-prop="@ViewData.ModelMetadata.PropertyName">
+        <label data-prop="@ViewData.ModelMetadata.PropertyName" class="@ViewBag.labelColumn control-label" for="@ViewData.ModelMetadata.PropertyName">
+            @ViewBag.label
             <span class="red">@isRequiredStar</span>
         </label>
-        <div class="col-md-10 select-holding-div select-dynamic-holding-div">
+        <div class="@ViewBag.textColumn select-holding-div select-dynamic-holding-div">
             <div class="d-select-ip-@ViewData.ModelMetadata.PropertyName dynamic-select-load"
                  data-prop="@ViewData.ModelMetadata.PropertyName"
                  data-dev-dynamic-select="@ViewBag.DynamicLoad"
@@ -67,16 +83,16 @@
                  data-live-search="@ViewBag.LiveSearch"
                  data-dependable="@ViewBag.IsDependable"
                  data-dependable-prop-name="@ViewBag.DependablePropertyName"
-                 dev-ishtml="@ViewBag.IsHtmlRequest"
-                 dev-isStyled="@ViewBag.IsStyled"
-                 @ViewBag.Id>
+                 data-id="@ViewBag.Id"
+                 data-is-selectpicker="@ViewBag.isPicker">
 
             </div>
             @if (@ViewData.ModelMetadata.Description != null) {
-                <a data-toggle="tooltip" data-original-title="@ViewData.ModelMetadata.Description" title="@ViewData.ModelMetadata.Description" class="tooltip-show"><span class="question-mark-for-description"></span></a>
+                <a data-toggle="tooltip" data-original-title="@ViewData.ModelMetadata.Description" title="@ViewData.ModelMetadata.Description" class="tooltip-show">
+                    <span class="description-icon"></span></a>
             }
             <a data-toggle="tooltip" title="Validating" data-original-title="Validating" class="tooltip-show CustomValidation @ViewData.ModelMetadata.PropertyName no-hover">
-                <span data-display="@ViewData.ModelMetadata.DisplayName" class="CustomValidation @ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-refresh-animate hide" title="Validating"></span>
+                <span data-display="@ViewData.ModelMetadata.DisplayName" class="CustomValidation @ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-refresh-spin hide" title="Validating"></span>
             </a>
         </div>
     </div>
