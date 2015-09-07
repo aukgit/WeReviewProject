@@ -118,7 +118,7 @@
                 };
                 addFields.push(pushingElement);
             }
-         
+
         }
         return addFields;
     }
@@ -278,53 +278,64 @@
             }
             return returnStatement;
         },
+        hideAllIcons: function ($div) {
+            var self = this,
+                $input = self.getInput();
+            $div.removeAttr("data-icon-added");
+            self.hideInvalidIcon($input);
+            self.hideSpinner($input);
+            self.hideErrorIcon($input);
+            self.hideErrorIcon($input);
+            self.hideValidIcon($input);
+        },
         inputProcessWithBlurEvent: function ($div, $input, url) {
             var self = this,
-                settings = this.getSettings(),
+                //settings = this.getSettings(),
                 isIconsVisible = true;
+
+            var hideIcons = function () {
+                if (isIconsVisible === true) {
+                    self.hideAllIcons($div);
+                    isIconsVisible = false;
+                }
+            }
+            var blurEvent = function (event, url) {
+                var isRequstValid = !self.isInProcessingMode($div) || self.isMultipleRequestAllowed();
+                // if we are allowing to send multiple request while one is already being processing in the server.
+                if (isRequstValid) {
+                    var isDuplicateRequestAllowed = self.dontSendSameRequestTwice() && !self.isPreviousRequestIsSame($div, $input, url);
+                    isRequstValid = isDuplicateRequestAllowed || !self.dontSendSameRequestTwice();
+                    // check if same request is allowed to send twice.
+                    if (isRequstValid) {
+
+                        // if validation request before sending request.
+                        var validationRequires = self.isInputValidationRequirestoSendRequest();
+
+                        // is input needed to be valid before send the request.
+                        isRequstValid = (validationRequires && $input.valid()) || !validationRequires;
+
+                        if (isRequstValid) {
+                            var fields = self.concatAdditionalFields($input);
+
+                            self.sendRequest($div, $input, url, fields);
+                        }
+                        if (self.getSettings().focusPersistIfNotValid) {
+                            self.focusIfnotValid($input);
+                        }
+                    }
+                }
+            };
+
             $input.on("blur", function (evt) {
-                self.blurEvent(evt, $div, self, $input, url);
+                hideIcons();
+                blurEvent(evt, url);
                 isIconsVisible = true;
             });
             $input.on("keypress", function () {
-                if (isIconsVisible === true) {
-                    $div.removeAttr("data-icon-added");
-                    self.hideInvalidIcon($input);
-                    self.hideSpinner($input);
-                    self.hideErrorIcon($input);
-                    self.hideErrorIcon($input);
-                    self.hideValidIcon($input);
-                    isIconsVisible = false;
-                }
+                hideIcons();
             });
         },
-        blurEvent: function (event, $div, self, $input, url) {
-            var isRequstValid = !self.isInProcessingMode($div) || self.isMultipleRequestAllowed();
-            // if we are allowing to send multiple request while one is already being processing in the server.
-            if (isRequstValid) {
-                var $inputNew = $input;///$(this);
-                var isDuplicateRequestAllowed = self.dontSendSameRequestTwice() && !self.isPreviousRequestIsSame($div, $inputNew, url);
-                isRequstValid = isDuplicateRequestAllowed || !self.dontSendSameRequestTwice();
-                // check if same request is allowed to send twice.
-                if (isRequstValid) {
 
-                    // if validation request before sending request.
-                    var validationRequires = self.isInputValidationRequirestoSendRequest();
-
-                    // is input needed to be valid before send the request.
-                    isRequstValid = (validationRequires && $inputNew.valid()) || !validationRequires;
-
-                    if (isRequstValid) {
-                        var fields = self.concatAdditionalFields($inputNew);
-
-                        self.sendRequest($div, $inputNew, url, fields);
-                    }
-                    if (self.getSettings().focusPersistIfNotValid) {
-                        self.focusIfnotValid($inputNew);
-                    }
-                }
-            }
-        },
         focusIfnotValid: function ($input, force) {
             /// <summary>
             /// Focus on the input if not valid.
@@ -388,6 +399,8 @@
 
             self.markAsProcessing($div, true);
             self.setCurrentTextForNexttimeChecking($input);
+            self.hideAllIcons($div); // hide all the icons
+
             this.ajaxRequest = jQuery.ajax({
                 method: method, // by default "GET"
                 url: url,
@@ -398,11 +411,13 @@
                 if (isInTestingMode) {
                     console.log(response);
                 }
+                self.hideAllIcons($div); // hide all the icons
                 self.markAsProcessing($div, false);
                 self.processResponse($input, response);
                 //icons show/hide
                 self.hideSpinner($input);
             }).fail(function (jqXHR, textStatus, exceptionMessage) {
+                self.hideAllIcons($div); // hide all the icons
                 self.hideSpinner($input);
                 self.errorProcess($div, $input, jqXHR, textStatus, exceptionMessage, url);
                 console.log("Request failed: " + exceptionMessage + ". Url : " + url);
@@ -625,7 +640,7 @@
         },
         hideSpinner: function ($input) {
             var $spinner = this.getSpinner($input);
-            this.animateOff($spinner);
+            $spinner.hide();
         },
         animateOn: function ($object) {
             $object.fadeIn("slow");
