@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace WereViewApp.Models.EntityModel{
     [Serializable]
@@ -27,6 +24,6 @@ namespace WereViewApp.Models.EntityModel{
         #endregion
 
         [Required]
-        public System.Guid UploadGuid { get; set; }
+        public Guid UploadGuid { get; set; }
     }
 }

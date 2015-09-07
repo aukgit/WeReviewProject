@@ -18,6 +18,9 @@ body #wrap .app-details-page {
   padding: 0.7rem 1.2rem 0.7rem 1.2rem;
   border: none;
 }
+.btn-xs {
+  padding: 1px 5px;
+}
 .btn-default {
   color: white;
 }

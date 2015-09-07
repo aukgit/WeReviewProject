@@ -66,9 +66,7 @@
                     <i class="@icon"></i>
                     @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
                 </span>
-                <div class="validator-container">
-                    <div class="validator"></div>
-                </div>
+                <div class="validator-container"><div class="validator"></div></div>
             </div>
             @if (description != null) {
                 <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">

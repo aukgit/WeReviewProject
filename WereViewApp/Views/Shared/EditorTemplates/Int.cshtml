@@ -8,14 +8,14 @@
         displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
         description = ViewData.ModelMetadata.Description,
         templateName = "int";
-        
+
     int i;
     if (!Model.HasValue) {
         i = 0;
     } else {
         i = Model.Value;
     }
-    
+
 
     var htmlAttributes = new RouteValueDictionary();
     if (displayName == null) {
@@ -70,13 +70,7 @@
         <div class="@ViewBag.textColumn form-input @styleProperty" data-prop="@styleProperty">
             <div class="input-validator-container">
                 @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
-                <div class="validator-container">
-                    <div class="validator">
-                        <a>
-                            <i class=""></i>
-                        </a>
-                    </div>
-                </div>
+                <div class="validator-container"><div class="validator"></div></div>
             </div>
             @if (description != null) {
                 <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">

@@ -3,7 +3,6 @@ using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Mail;
 using WereViewApp.Modules.Session;
 using WereViewApp.Modules.TimeZone;
-using WereViewApp.Modules.UserError;
 using System;
 using System.Configuration;
 using System.Linq;
@@ -11,6 +10,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent;
+using DevMvcComponent.Error;
 using DevMvcComponent.Mail;
 using DevMvcComponent.Processor;
 
@@ -126,7 +126,7 @@ namespace WereViewApp {
                         IsFacebookAuthentication = true,
                         NotifyDeveloperOnError = true,
                         IsConfirmMailRequired = true,
-                        IsSMTPSSL = true,
+                        IsSmtpssl = true,
                         IsFirstUserFound = false
                     };
                     db.CoreSettings.Add(_setting);
@@ -153,10 +153,10 @@ namespace WereViewApp {
                 Zone.LoadTimeZonesIntoMemory();
 
                 AppVar.IsInTestEnvironment = Setting.IsInTestingEnvironment;
-
                 AppVar.Name = Setting.ApplicationName.ToString();
                 AppVar.Subtitle = Setting.ApplicationSubtitle.ToString();
                 AppVar.Setting = Setting;
+
                 AppVar.SetCommonMetaDescriptionToEmpty();
 
                 SetupDevMvcComponent();

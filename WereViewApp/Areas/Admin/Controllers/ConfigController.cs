@@ -12,7 +12,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         public ActionResult Index() {
             byte id = (byte)1;
 
-            CoreSetting coreSetting = db.CoreSettings.Find(id);
+            var coreSetting = db.CoreSettings.Find(id);
             if (coreSetting == null) {
                 return HttpNotFound();
             }
@@ -21,7 +21,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         public ActionResult SendEmail(string tab) {
             ViewBag.tab = "#email-setup";
-            Mvc.Mailer.QuickSend(AppVar.Setting.DeveloperEmail, "Test Email", "Test Email at " + DateTime.Now.ToString());
+            Mvc.Mailer.QuickSend(AppVar.Setting.DeveloperEmail, "Test Email", "Test Email at " + DateTime.Now);
             try {
                 throw new Exception("Testing error mail.");
             } catch (Exception ex) {
@@ -37,11 +37,13 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
             if (ModelState.IsValid) {
                 db.Entry(coreSetting).State = EntityState.Modified;
-                db.SaveChanges();
-                AppConfig.RefreshSetting();
-                ViewBag.Success = "Saved Successfully.";
+                if (db.SaveChanges() > -1) {
+                    AppConfig.RefreshSetting();
+                    AppVar.SetSavedStatus(this.ViewBag);
+                    return View(coreSetting);
+                }
             }
-
+            AppVar.SetErrorStatus(this.ViewBag);
             return View(coreSetting);
         }
 

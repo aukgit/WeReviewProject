@@ -482,7 +482,7 @@ $.devOrg = {
         }
     },
 
-    validateInputFromServer: function (jQuerytextBoxSelector, validationUrl, internalValidatorSpanClassName, isAlwaysFocusUntilValid, isDisable, minChars, isSubmitTheWholeForm, onInvalidStringStatementInCrossMark, onValidStringStatementInCheckMark, $formGiven, maxTryLimit) {
+    validateInputFromServer: function (jQuerytextBoxSelector, validationUrl, internalValidatorSpanClassName, isAlwaysFocusUntilValid, isDisable, minChars, isSubmitTheWholeForm, onInvalidStringStatementInCrossMark, onValidStringStatementInCheckMark, $formGiven, maxTryLimit, onCompleteFunction) {
         /// <summary>
         ///     Made validation easy on the fly with a server response.
         /// </summary>
@@ -563,7 +563,7 @@ $.devOrg = {
                 //console.log(formData);
 
                 var validatorName = "span.CustomValidation." + internalValidatorSpanClassName;
-                var token = $("input[name=__RequestVerificationToken]").val();
+                //var token = $("input[name=__RequestVerificationToken]").val();
                 var processingState1 = "glyphicon-refresh";
                 var processingState2 = "glyphicon-spin";
                 var isHideClass = "hide";
@@ -642,6 +642,9 @@ $.devOrg = {
                                 .focus();
 
                             $userTextbox.removeAttr(invalidAttrName);
+                            if (typeof onCompleteFunction === "function") {
+                                onCompleteFunction.apply();
+                            }
                         } else {
                             if ($validatorBox.hasClass(colorGreen)) {
                                 $validatorBox.removeClass(colorGreen);

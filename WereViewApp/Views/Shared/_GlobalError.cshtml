@@ -1,12 +1,12 @@
-﻿@using WereViewApp.Modules.Session
-@using WereViewApp.Modules.UserError
+﻿@using DevMvcComponent.Error
+@using WereViewApp.Modules.Session
 @{
     var errors = AppConfig.GetGlobalError();
     var auth = Session[SessionNames.AuthError];
 }
 @if (auth != null) {
     <h1 class="h3">
-        <label class="label label-danger"></label>auth
+        <label class="label label-danger"></label>
     </h1>
     Session[SessionNames.AuthError] = null;
 }
@@ -19,13 +19,13 @@
             <ul class="display-numbers global-error-ul">
                 @foreach (var error in errorList) {
                     <li>
-                        <span class="@errors.GetCSSForError(error)">@error.ErrorMessage</span>
+                        <span class="@errors.GetCssClassForError(error)">@error.ErrorMessage</span>
                         @if (@error.Solution != null) {
-                            <span class="@ErrorCollector.SOLUTION_STATE_CLASS">@error.Solution</span>
+                            <span class="@ErrorCollector.SolutionStateCssClass">@error.Solution</span>
                         }
-                        @if (@error.Link != null) {
-                            <a href="@error.Link" class="error-solution-link" title="@error.LinkTitle">
-                                <span class="@ErrorCollector.SOLUTION_STATE_LINK_CLASS" title="@error.LinkTitle">@error.LinkTitle</span>
+                        @if (@error.SolutionDisplayMessage != null) {
+                            <a href="@error.SolutionLink" class="error-solution-link" title="@error.SolutionDisplayMessage">
+                                <span class="@ErrorCollector.SolutionStateLinkCssClass" title="@error.SolutionDisplayMessage">@error.SolutionDisplayMessage</span>
                             </a>
                         }
                     </li>

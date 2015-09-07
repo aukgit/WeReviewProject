@@ -250,6 +250,9 @@
     <Compile Include="Modules\Sitemaps\SitemapItem.cs" />
     <Compile Include="Modules\Sitemaps\SitemapResult.cs" />
     <Compile Include="Modules\TimeZone\TimeZoneSet.cs" />
+    <Compile Include="Modules\Validations\DevUserValidator.cs" />
+    <Compile Include="Modules\Validations\ValidationMessage.cs" />
+    <Compile Include="Modules\Validations\Validator.cs" />
     <Compile Include="Scheduler\WeReviewDownloadScheduler.cs" />
     <Compile Include="Scheduler\WeReviewScheduler.cs" />
     <Compile Include="Scheduler\SchedulerRunner.cs" />
@@ -408,7 +411,6 @@
     <Compile Include="Modules\Uploads\IImageCategory.cs" />
     <Compile Include="Modules\Uploads\IUploadableFile.cs" />
     <Compile Include="Modules\Uploads\UploadProcessor.cs" />
-    <Compile Include="Modules\UserError\ErrorCollector.cs" />
     <Compile Include="Modules\UserError\MessageConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -427,6 +429,21 @@
     <Content Include="App_Data\WereViewApp_log.ldf">
       <DependentUpon>WereViewApp.mdf</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Config\_Basic-tab.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Views\Config\_Developers-tab.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Views\Config\_Email-setup-tab.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Views\Config\_External-logins-tab.cshtml" />
+    <Content Include="Areas\Admin\Views\Config\_Office-tab.cshtml" />
+    <Content Include="Areas\Admin\Views\Config\_Urls-tab.cshtml" />
+    <Content Include="Areas\Admin\Views\Config\_WeReview-tab.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Content\css\animate-refresh.css" />
     <Content Include="Content\css\animate-refresh.css.map">
       <DependentUpon>animate-refresh.css</DependentUpon>
@@ -439,6 +456,9 @@
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
     </Content>
     <Content Include="Content\css\bootstrap-select.css" />
+    <Content Include="Content\css\bootstrap-select.min.css">
+      <DependentUpon>bootstrap-select.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\bootstrap-table.css" />
     <Content Include="Content\css\bootstrap-tag.css" />
     <Content Include="Content\css\bootstrap.css" />
@@ -481,6 +501,9 @@
     <Content Include="Content\css\miscellaneous.css" />
     <Content Include="Content\css\override-mvc.css" />
     <Content Include="Content\css\override-mvc.css.map">
+      <DependentUpon>override-mvc.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\override-mvc.min.css">
       <DependentUpon>override-mvc.css</DependentUpon>
     </Content>
     <Content Include="Content\css\owl.carousel.css" />
@@ -613,10 +636,11 @@
     <Content Include="Content\Scripts\DevOrgPlugins\ComboOptions.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.country-phone.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.dynamicSelect.js" />
-    <Content Include="Content\Scripts\DevOrgPlugins\every-page.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\app.run.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\dev-component-runner.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.component.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\byId.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\jquery.server-validate.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\WeReviewApps.js" />
     <Content Include="Content\Published.Scripts\front-end.min.js.map">
       <DependentUpon>front-end.min.js</DependentUpon>
@@ -735,9 +759,6 @@
     <Content Include="Areas\Admin\Views\Roles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Countries\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Countries\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Countries\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Edit.cshtml" />

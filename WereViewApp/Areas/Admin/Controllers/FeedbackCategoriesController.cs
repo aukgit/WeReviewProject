@@ -52,7 +52,6 @@ namespace WereViewApp.Areas.Admin.Controllers {
             if (ModelState.IsValid) {
                 db.FeedbackCategories.Add(feedbackCategory);
                 db.SaveChanges();
-
                 AppVar.SetSavedStatus(ViewBag);
                 return View(feedbackCategory);
             }

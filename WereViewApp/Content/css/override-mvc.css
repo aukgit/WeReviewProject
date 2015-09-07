@@ -123,7 +123,7 @@ div.bs-searchbox input.input-block-level.form-control {
   text-decoration: none;
   width: 98.015625px;
 }
-p.create-btn-p,
+p.left-button-wrapper,
 .left-button-stacks {
   margin: 0 0 -51px;
 }
@@ -340,5 +340,4 @@ input.form-control {
 .description-icon:before {
   content: "\f059";
 }
-/*# sourceMappingURL=override-mvc-css.css.map */
 /*# sourceMappingURL=override-mvc.css.map */

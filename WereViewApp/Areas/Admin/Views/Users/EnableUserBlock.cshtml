@@ -7,10 +7,9 @@
     string controller = (string)ViewBag.controller;
     string viewName = "EnableUserBlock";
 }
-<h1 class="h2 top-margin-space">
-    <span class="glyphicon glyphicon-edit"></span>
-    @Html.SamePageLink(title, subtitle, false)
-</h1>
+
+@Html.SamePageLinkWithIcon(title, subtitle, "fa  fa-edit")
+
 <hr />
 <h4 class="h4">Do you want to enable this @Model.UserName?</h4>
 @using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {

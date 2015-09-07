@@ -8,9 +8,8 @@
     string viewName = "Index";
     string editLinkName = "";
 }
-@Html.SamePageLinkWithIcon(title, title, "glyphicon glyphicon-th-list")
-<div class="small-bottom-gap"></div>
-<p class="create-btn-p">
+@Html.SamePageLinkWithIcon(title, subtitle, "glyphicon glyphicon-th-list")
+<p class="left-button-wrapper">
     <a href="@Url.Action("Index")/Index" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Apps</a>
     <a href="@Url.Action("Post")" title="Create a new item." class="btn btn-warning create-save"><span class="glyphicon glyphicon-plus"></span> Create</a>
 </p>

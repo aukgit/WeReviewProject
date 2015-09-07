@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<WereViewApp.Models.POCO.Identity.ApplicationUser>
 
-<h1 class="h3 top-margin-space">
-    Roles
-</h1>
+@Html.SamePageLinkWithIcon("Roles", "Roles", "fa fa-trash")
 <h2 class="h5">Do you want to detach "" role from all of these users? <label class="label label-danger">[It's permanent]</label></h2>
 <a href="@Url.Action("Index", "Roles", null)" title="Cancel"  class="btn btn-info "><span class="glyphicon glyphicon-chevron-left"></span> Cancel</a>
 <a href="@Url.Action("DeleteConfirmed", "Roles", new { id = ViewBag.RoleID })" title="Detach all the users from the role and remove it" onclick="return confirm('Are you sure? [Can\'t be undone.]')" class="btn btn-danger "><span class="glyphicon glyphicon-remove"></span> Delete</a>

@@ -1,26 +1,4 @@
-﻿/// <reference path="CustomJS.js" />
-/// <reference path="CommonJsEveryPage.js" />
-/// <reference path="../bootstrap.js" />
-/// <reference path="../jquery-2.1.1.js" />
-/// <reference path="../jquery-2.1.1.intellisense.js" />
-/// <reference path="../jquery.validate.js" />
-/// <reference path="../moment.js" />
-/// <reference path="../validation.js" />
-/// <reference path="../respond.js" />
-/// <reference path="../bootstrap-datepicker.js" />
-/// <reference path="../bootstrap-datetimepicker.js" />
-/// <reference path="../bootstrap-select.js" />
-/// <reference path="../bootstrap-timepicker.js" />
-/// <reference path="DevOrgComponent.js" />
-/// <reference path="../underscore.js" />
-/// <reference path="../../Content/Scripts/star-rating.js" />
-/// <reference path="../../Content/Scripts/bootstrap-table-filter.js" />
-/// <reference path="../../Content/Scripts/Scripts/jquery.elastic.source.js" />
-/// <reference path="I:\WeReviewApp\WereViewProject\WeReviewApp\Content/Scripts/Upload/devOrgUploadConfig.js" />
-/// <reference path="faster-jQuery.js" />
-
-
-/**
+﻿/**
  * Written by Alim Ul Karim
  * Developers Organism
  * Written  : 14 Nov 2014
@@ -390,6 +368,30 @@ $.WeReviewApp = {
         // fix square brackets to html brackets
         self.invertAllInputIframeDataOrSquareToHtml();
     },
+
+    appNameOnBlur : function() {
+        /// <summary>
+        /// What happens when appname field is blured
+        /// </summary>
+        /// <returns type=""></returns>
+        var $appNameInput = $.byId("AppName"),
+            $tagsInput = $.byId("Tags");
+        //var $formInputs = self.$appForm.find("select,input[name!=YoutubeEmbedLink]");
+
+        $appNameInput.blur(function() {
+            var value = $appNameInput.val(),
+                tagsArray = value.split(' '),
+                tagsExistingText = $tagsInput.val();
+            tagsArray.push(value);
+            if (tagsExistingText) {
+                tagsArray.push(tagsExistingText);
+            }
+            var uniqueArray = _.uniq(tagsArray);
+            var tags = uniqueArray.join(",");
+            $tagsInput.val(tags);
+        });
+    },
+
     /*
      * This method is related to display contents 
      * when **only** app-posting page is ready (not submitting)
@@ -398,9 +400,10 @@ $.WeReviewApp = {
     appPostingPageOnReady: function () {
         var self = $.WeReviewApp;
         $.devOrg.uxFriendlySlide("form.app-post", true, true);
-        var $formInputs = self.$appForm.find("select,input[name!=YoutubeEmbedLink]");
-        //console.log($formInputs);
-        $.devOrg.validateInputFromServer("#AppName", "/Validator/GetValidUrl", "AppName", false, false, 3, true, " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.", null, $formInputs, self.maxTryInputSubmit);
+     
+
+        //bind with blur event of AppName
+        self.appNameOnBlur();
 
         ///hiding the uploader on the app loader page for every time before posting a new app.
         self.$appForm.find(self.selectorForUploaderRows).hide();
@@ -434,7 +437,10 @@ $.WeReviewApp = {
             // .app-editing-page class represent both editing and posting
 
             // Validate app-name
-            $.devOrg.validateTextInputBasedOnRegEx("#AppName", "^([A-zZ.]+\\s*)+(\\d*)\\s*([aA-zZ.]+\\s*)+(\\d*)", "Sorry your app name is not valid. Valid name example eg. Plant Vs. Zombies v2.");
+            //$.devOrg.validateTextInputBasedOnRegEx(
+            //    "#AppName",
+            //    "^([A-zZ.]+\\s*)+(\\d*)\\s*([aA-zZ.]+\\s*)+(\\d*)",
+            //    "Sorry your app name is not valid. Valid name example eg. Plant Vs. Zombies v2.",);
 
             $.devOrg.reSetupjQueryValidate("form");
 
@@ -473,8 +479,8 @@ $.WeReviewApp = {
         //console.log("ase");
         var $submittingSpinner = null;
         var $inputs, currformData = 0;
-        $submittingSpinner = $form.find("#submitting-review-spinner");
-        var $failedIcon = $form.find("#submitting-review-failed-icon");
+        $submittingSpinner = $("#submitting-review-spinner");
+        var $failedIcon = $("#submitting-review-failed-icon");
         // indicates if it is in the review posting page or in editing page\
         // $lastDiv.length == 0 indicates it's in review edit mode
         var $lastDiv = $form.find("div[data-last-slide=true]:visible");
@@ -545,7 +551,7 @@ $.WeReviewApp = {
                         success: function (response) {
                             var selectForm = self.reviewFormContainerSelectorInAppPage + " form";
                             var $submittingSpinner = null;
-                            var $response = $(response);
+                            //var $response = $(response);
                             $container.html(response);
 
                             var $failedIcon = $("#submitting-review-failed-icon");
@@ -610,7 +616,7 @@ $.WeReviewApp = {
         // ajax request send
         var $spinners = null;
 
-        function btnClicked($button, e, url, serializedInputs) {
+        var btnClicked = function ($button, e, url, serializedInputs) {
             e.preventDefault();
             var reviewId = $button.attr("data-review-id");
             var data = serializedInputs + "&reviewId=" + reviewId;
@@ -797,7 +803,7 @@ $.WeReviewApp = {
             }
         }
     },
-    initializeAppForms : function() {
+    initializeAppForms: function () {
         var self = $.WeReviewApp;
         self.$appFormWrapper = $.byId("app-form");
         var $fromWrapper = self.$appFormWrapper;
