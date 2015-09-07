@@ -468,6 +468,9 @@
       <DependentUpon>category-page.css</DependentUpon>
     </Content>
     <Content Include="Content\css\color-fonts.css" />
+    <Content Include="Content\css\color-fonts.min.css">
+      <DependentUpon>color-fonts.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\dataTables.bootstrap.css" />
     <Content Include="Content\css\editor-templates.css" />
     <Content Include="Content\css\editor-templates.min.css">
@@ -490,6 +493,9 @@
       <DependentUpon>front-developer.css</DependentUpon>
     </Content>
     <Content Include="Content\css\header.css" />
+    <Content Include="Content\css\header.min.css">
+      <DependentUpon>header.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\less-imports.css" />
     <Content Include="Content\css\less-imports.css.map">
       <DependentUpon>less-imports.css</DependentUpon>

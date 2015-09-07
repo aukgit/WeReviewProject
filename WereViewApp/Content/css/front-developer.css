@@ -1,11 +1,4 @@
-﻿body {
-  font-family: Ubuntu, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: subpixel-antialiased;
-}
-body #wrap .app-details-page {
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-.regular-color {
+﻿.regular-color {
   color: #647383;
 }
 .primary-color {
