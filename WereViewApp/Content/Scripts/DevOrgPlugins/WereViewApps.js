@@ -381,7 +381,7 @@ $.WeReviewApp = {
         //var $formInputs = self.$appForm.find("select,input[name!=YoutubeEmbedLink]");
 
         $appNameInput.blur(function () {
-            setTimeout(function () {
+           var currentMethod = setTimeout(function () {
                 var value = $appNameInput.val(),
                     tagsArray = value.split(" "),
                     tagsExistingText = $tagsInput.val(),
@@ -406,8 +406,8 @@ $.WeReviewApp = {
                     var tags = uniqueArray.join(",");
                     $tagsInput.val(tags);
                 }
-               
-            }, 0);
+               clearTimeout(currentMethod);
+           }, 500);
 
         });
     },
