@@ -474,18 +474,19 @@ $.WeReviewApp = {
             // enter to go next
             $.devOrg.enterToNextTextBox("form.app-editing-page", true); // means both editing and posting
 
-
+            var triggerAppNameValidateTimeOut,
+                appTitleValidate = function () {
+                    triggerAppNameValidateTimeOut = setTimeout(function () {
+                        $("#AppName").trigger("blur");
+                        clearTimeout(triggerAppNameValidateTimeOut);
+                    }, 300);
+                };
             // triggering appname blur when change any of these.
             // Because all are related to URL generate.
-            $(".selectpicker,select").change(function () {
-                $("#AppName").trigger("blur");
-
-            });
+            $(".selectpicker,select").change(appTitleValidate);
             // to validate the app-name, triggering blur on app-name field
-            $("#PlatformVersion").blur(function () {
-                $("#AppName").trigger("blur");
-                //console.log("dev");
-            });
+            $("#PlatformVersion").blur(appTitleValidate);
+            
         }
     },
 

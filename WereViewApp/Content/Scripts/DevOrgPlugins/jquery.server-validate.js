@@ -325,11 +325,14 @@
                     }
                 }
             };
-
+            var timeOutMethod;
             $input.on("blur", function (evt) {
-                hideIcons();
-                blurEvent(evt, url);
-                isIconsVisible = true;
+                timeOutMethod = setTimeout(function() {
+                    hideIcons();
+                    blurEvent(evt, url);
+                    isIconsVisible = true;
+                    clearTimeout(timeOutMethod);
+                }, 500);
             });
             $input.on("keypress", function () {
                 hideIcons();
