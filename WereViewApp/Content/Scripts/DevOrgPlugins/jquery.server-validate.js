@@ -374,13 +374,10 @@
             /// Abort previous ajax request and hide all the icons
             /// </summary>
             /// <returns type=""></returns>
-            this.showSpinner($input);
-            this.hideInvalidIcon($input);
-            this.hideErrorIcon($input);
-            this.hideErrorIcon($input);
-            this.hideValidIcon($input);
             if (!this.isEmpty(this.ajaxRequest)) {
                 this.ajaxRequest.abort();
+                this.hideAllIcons(this.$element);
+                this.showSpinner($input);
             }
         },
         sendRequest: function ($div, $input, url, sendingFields) {
@@ -401,7 +398,7 @@
             self.setCurrentTextForNexttimeChecking($input);
             self.hideAllIcons($div); // hide all the icons
 
-            this.ajaxRequest = jQuery.ajax({
+            this.ajaxRequest = $.ajax({
                 method: method, // by default "GET"
                 url: url,
                 data: sendingFields, // PlainObject or String or Array

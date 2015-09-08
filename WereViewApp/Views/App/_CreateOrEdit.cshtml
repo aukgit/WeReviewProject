@@ -48,10 +48,5 @@
     @Html.EditorFor(model => model.StoreURL)
 </div>
 
-<div data-dev-slide="2" data-dev-visited="@ViewBag.ShowAllDivs">
-    @Html.EditorFor(model => model.Developers, "Multiline")
-    @Html.EditorFor(model => model.IdeaBy, "Multiline")
-    @Html.EditorFor(model => model.Publishers, "Multiline")
-</div>
 @Html.HiddenFor(model => model.UploadGuid)
 <label id="notify-global-info-second" class="col-md-offset-2 notify-global-info label label-danger"></label>
