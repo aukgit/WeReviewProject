@@ -376,7 +376,8 @@ $.WeReviewApp = {
         /// </summary>
         /// <returns type=""></returns>
         var $appNameInput = $.byId("AppName"),
-            $tagsInput = $.byId("Tags");
+            $tagsInput = $.byId("Tags"),
+            previousText = null;
         //var $formInputs = self.$appForm.find("select,input[name!=YoutubeEmbedLink]");
 
         $appNameInput.blur(function () {
@@ -385,22 +386,27 @@ $.WeReviewApp = {
                     tagsArray = value.split(" "),
                     tagsExistingText = $tagsInput.val(),
                     existingTagsArray = tagsExistingText.split(",");
-                if (!_.isEmpty(value)) {
-                    tagsArray.push(value.trim());
-                }
-                if (existingTagsArray.length > 0) {
-                    for (var i = 0; i < existingTagsArray.length; i++) {
-                        var element = existingTagsArray[i];
-                        if (!_.isEmpty(element)) {
-                            tagsArray.push(element.trim());
+
+                if (previousText !== value) {
+                    previousText = value;
+                    if (!_.isEmpty(value)) {
+                        tagsArray.push(value.trim());
+                    }
+                    if (existingTagsArray.length > 0) {
+                        for (var i = 0; i < existingTagsArray.length; i++) {
+                            var element = existingTagsArray[i];
+                            if (!_.isEmpty(element)) {
+                                tagsArray.push(element.trim());
+                            }
                         }
                     }
+                    var uniqueArray = _.without(_.uniq(tagsArray), "");
+                    console.log(tagsArray);
+                    console.log(uniqueArray);
+                    var tags = uniqueArray.join(",");
+                    $tagsInput.val(tags);
                 }
-                var uniqueArray = _.without(_.uniq(tagsArray), "");
-                console.log(tagsArray);
-                console.log(uniqueArray);
-                var tags = uniqueArray.join(",");
-                $tagsInput.val(tags);
+               
             }, 0);
 
         });
