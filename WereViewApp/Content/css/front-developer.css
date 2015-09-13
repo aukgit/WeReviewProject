@@ -4,6 +4,18 @@
 .primary-color {
   color: #ff7200;
 }
+.login-btn-wrapper {
+  max-width: 294px;
+  max-width: 29.4rem;
+}
+.login-btn-wrapper .checkbox {
+  max-width: 150px;
+  max-width: 15rem;
+  float: left;
+}
+.login-btn-wrapper .btn {
+  float: right;
+}
 .btn {
   font-weight: normal;
   text-transform: none;
