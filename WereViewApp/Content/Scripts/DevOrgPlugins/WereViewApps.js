@@ -401,8 +401,8 @@ $.WeReviewApp = {
                         }
                     }
                     var uniqueArray = _.without(_.uniq(tagsArray), "");
-                    console.log(tagsArray);
-                    console.log(uniqueArray);
+                    //console.log(tagsArray);
+                    //console.log(uniqueArray);
                     var tags = uniqueArray.join(",");
                     $tagsInput.val(tags);
                 }

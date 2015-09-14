@@ -378,9 +378,11 @@
             /// </summary>
             /// <returns type=""></returns>
             if (!this.isEmpty(this.ajaxRequest)) {
+                var $div = this.$element;
                 this.ajaxRequest.abort();
-                this.hideAllIcons(this.$element);
+                this.hideAllIcons($div);
                 this.showSpinner($input);
+                $div.attr("data-icon-added", "true");
             }
         },
         sendRequest: function ($div, $input, url, sendingFields) {
@@ -393,7 +395,6 @@
                 events.beforeSendingRequest($div, $input, url, sendingFields);
             }
             //icons show/hide
-            $div.attr("data-icon-added", "true");
             // Abort previous ajax request and hide all the icons
             this.abortPreviousAjaxRequest($input);
 
@@ -414,6 +415,7 @@
                 self.hideAllIcons($div); // hide all the icons
                 self.markAsProcessing($div, false);
                 self.processResponse($input, response);
+                $div.attr("data-icon-added", "true");
                 //icons show/hide
                 self.hideSpinner($input);
             }).fail(function (jqXHR, textStatus, exceptionMessage) {

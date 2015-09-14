@@ -724,6 +724,7 @@
     <Content Include="Content\Scripts\modernizr-2.8.3.js" />
     <Content Include="Content\Scripts\moment.js" />
     <Content Include="Content\Scripts\star-rating.js" />
+    <Content Include="Content\Scripts\Tagit\bootstrap-tagsinput.min.js" />
     <Content Include="Content\Scripts\Tagit\jquery-ui-1.9.2.custom.min.js" />
     <Content Include="Content\Scripts\Tagit\jquery.autoGrowInput.js" />
     <Content Include="Content\Scripts\Tagit\jquery.tagedit.js" />
@@ -1073,6 +1074,7 @@
     <Content Include="Views\App\_SeoExtraPart.cshtml" />
     <Content Include="Views\Category\_SeoHide.cshtml" />
     <Content Include="Views\Apps\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Tag.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />

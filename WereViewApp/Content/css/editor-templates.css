@@ -95,11 +95,17 @@
 .relative {
   position: relative;
 }
+.form-group[data-is-validate="true"] {
+  margin-bottom: 12.3px;
+  margin-bottom: 1.2rem;
+}
 .form-group[data-icon-added] {
   /*margin-bottom: 14px;
         margin-top: 15px;*/
   margin-top: 8.5px;
-  margin-bottom: 14px;
+  margin-top: 0.8rem;
+  margin-bottom: 19px;
+  margin-bottom: 1.9rem;
 }
 /*
   Warning(.css file): Please don't modify styles from css file. Please modify the styles in the respective.less file in the less folder. CSS files will be replaced with new .less file styles.
