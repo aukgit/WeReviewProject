@@ -364,7 +364,7 @@ namespace WereViewApp.Controllers {
                                 // creating tag
                                 // if tag not exist in the database then create one.
                                 tagFromDatabase = new Tag {
-                                    TagDisplay = tag
+                                    TagDisplay = tag.Trim()
                                 };
                                 db2.Tags.Add(tagFromDatabase);
                             }

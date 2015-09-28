@@ -35,13 +35,14 @@ namespace WereViewApp {
                     bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                                     "~/Content/Scripts/jquery.validate.js",
                                     "~/Content/Scripts/jquery.validate.unobtrusive.js",
-
                                     "~/Content/Scripts/moment.js",
                                     "~/Content/Scripts/bootstrap-datetimepicker.js",
                                     "~/Content/Scripts/bootstrap-select.js",
                                     "~/Content/Scripts/bootstrap-table.js",
                                     "~/Content/Scripts/bootstrap-table-filter.js",
                                     "~/Content/Scripts/bootstrap-table-export.js",
+                                    "~/Content/Scripts/Tag-it/bootstrap3-typeahead.min.js",
+                                    "~/Content/Scripts/Tag-it/bootstrap-tagsinput.js",
                                     "~/Content/Scripts/jquery.elastic.source.js",
                                     "~/Content/Scripts/DevOrgPlugins/developers-organism.dynamicSelect.js",
                                     "~/Content/Scripts/DevOrgPlugins/developers-organism.country-phone.js",
@@ -110,6 +111,7 @@ namespace WereViewApp {
                                         "~/Content/css/bootstrap-datetimepicker.css",
                                         "~/Content/css/bootstrap-table.css",
                                         "~/Content/css/bootstrap-select.css",
+                                        "~/Content/css/bootstrap-tagsinput.css",
 
                                         "~/Content/css/color-fonts.css",
                                         "~/Content/css/star-rating.css",

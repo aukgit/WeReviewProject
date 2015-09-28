@@ -167,6 +167,23 @@ $.devOrg.runner = function() {
 
 
     serverValidationActivate();
+
+
+    var makeTagLive =  function () {
+        var $createdTags = $(".tag-inputs").tagsinput({
+            typeahead: {
+                source: function (query) {
+                    return $.get('/Partials/GetTags/' + query).done(function (response) {
+                        console.log("tags:");
+                        console.log("response:");
+                        console.log(response);
+                    });
+                }
+            }
+        });
+    }
+
+    makeTagLive.apply();
 }
 
 $(function () {

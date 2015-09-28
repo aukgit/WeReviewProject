@@ -974,7 +974,11 @@ namespace WereViewApp.WereViewAppCommon {
         /// <returns></returns>
         public App GetEditingApp(long appId, WereViewAppEntities db) {
             var userId = UserManager.GetLoggedUserId();
-            var app = CommonVars.StaticAppsList.FirstOrDefault(n => n.AppID == appId && n.PostedByUserID == userId);
+            App app = null;
+            if (CommonVars.StaticAppsList != null) {
+                app = CommonVars.StaticAppsList.FirstOrDefault(n => n.AppID == appId && n.PostedByUserID == userId);
+            }
+
             var cacheId = CacheNames.EditingApp + appId + "-" + userId;
 
             if (app == null) {

@@ -12,43 +12,6 @@ div.input-group.date.datetimepicker {
   max-width: 294px;
   max-width: 29.4rem;
 }
-/*@media (max-width:@screen-xs){
-    input,
-    select,
-    textarea,
-    div.input-group.date.datetimepicker {
-        .max-width(@inputs-max-width-at-mobile);
-    }
-
-    .control-label{
-        .min-width(@label-max-width-at-mobile);
-    }
-}
-@media (max-width:@less-than-mobile-screen){
-    input,
-    select,
-    textarea,
-    div.input-group.date.datetimepicker {
-        .max-width(@inputs-max-width-at-l-mobile);
-    }
-
-    .control-label{
-        .min-width(@label-max-width-at-l-mobile);
-    }
-}
-
-@media (max-width:370px){
-    input,
-    select,
-    textarea,
-    div.input-group.date.datetimepicker {
-        .max-width(160px);
-    }
-
-    .control-label{
-        .min-width(70px);
-    }
-}*/
 input.form-control,
 select.form-control,
 textarea.form-control {
@@ -78,9 +41,11 @@ textarea.form-control {
 .form-group.check-boxes label {
   padding-top: 6px;
 }
-.btn-group.bootstrap-select.form-control {
-  width: 294px;
-  width: 29.4rem;
+@media only screen and (min-width: 294px) {
+  .btn-group.bootstrap-select.form-control {
+    width: 294px;
+    width: 29.4rem;
+  }
 }
 div.bs-searchbox input.input-block-level.form-control {
   height: 30px;
@@ -96,6 +61,7 @@ div.bs-searchbox input.input-block-level.form-control {
   -webkit-background-size: auto;
   background-attachment: scroll;
   -ms-background-clip: border-box;
+  -moz-background-clip: border-box;
   background-clip: border-box;
   background-color: rgba(0, 0, 0, 0);
   background-image: none;
@@ -106,7 +72,7 @@ div.bs-searchbox input.input-block-level.form-control {
   cursor: auto;
   display: block;
   float: left;
-  font-family: Ubuntu, Tahoma, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 18px;
   height: 50px;
   line-height: 20px;
@@ -170,22 +136,6 @@ table caption {
 #myCarousel img.home-page-gallery-image {
   width: 1900px;
   height: 450px;
-}
-.description-icon {
-  top: 5px;
-  color: #bdbdbd;
-  font-size: 1.375em;
-  position: relative;
-  display: inline-block;
-  font-family: 'Glyphicons Halflings';
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.description-icon:before {
-  content: "\e085";
 }
 .bs-callout {
   padding: 10px 20px 5px 20px;
@@ -306,25 +256,29 @@ input.form-control {
 /* add padding  */
 .left-addon input {
   padding-left: 30px;
+  padding-left: 3rem;
 }
 .right-addon input {
   padding-right: 30px;
+  padding-right: 3rem;
 }
 .description-icon {
   cursor: pointer;
   position: relative;
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -moz-transform: translate(0, 0);
-  -ms-transform: translate(0, 0);
-  -o-transform: translate(0, 0);
   -webkit-transform: translate(0, 0);
+  -moz-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
   transform: translate(0, 0);
-  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   color: #bdbdbd;
   font-size: 26px;
@@ -340,4 +294,11 @@ input.form-control {
 .description-icon:before {
   content: "\f059";
 }
+@media (max-width: 992px) and (min-width: 768px) {
+  .description-icon {
+    top: 2px;
+    top: 0.2rem;
+  }
+}
+/*# sourceMappingURL=override-mvc-css.css.map */
 /*# sourceMappingURL=override-mvc.css.map */

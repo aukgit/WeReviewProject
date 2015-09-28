@@ -472,7 +472,7 @@ $.WeReviewApp = {
             self.$appForm.find("select").selectpicker();
 
             // enter to go next
-            $.devOrg.enterToNextTextBox("form.app-editing-page", true); // means both editing and posting
+            $.devOrg.enterToNextTextBoxWithoutTags(self.$appForm, true, false); // means both editing and posting
 
             var triggerAppNameValidateTimeOut,
                 appTitleValidate = function () {
