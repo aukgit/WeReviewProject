@@ -95,10 +95,16 @@
 .relative {
   position: relative;
 }
+.form-group[data-is-validate="true"] {
+  margin-bottom: 12.3px;
+  margin-bottom: 1.2rem;
+}
 .form-group[data-icon-added] {
   /*margin-bottom: 14px;
         margin-top: 15px;*/
   margin-top: 8.5px;
-  margin-bottom: 14px;
+  margin-top: 0.8rem;
+  margin-bottom: 19px;
+  margin-bottom: 1.9rem;
 }
 /*# sourceMappingURL=validator.css.map */

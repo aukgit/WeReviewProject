@@ -12,9 +12,9 @@ namespace WereViewApp {
         public static void RegisterBundles(BundleCollection bundles) {
 
             #region CDN Constants
-            const string jQueryCdn = @"//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js";
-            //const string jQueryCDN = "http://code.jquery.com/jquery-latest.min.js";
-            const string mordernizerCdn = "http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js";
+
+            const string jQueryVersion = "2.1.4";
+            const string jQueryCdn = @"//code.jquery.com/jquery-" + jQueryVersion + ".min.js";
             //const string respondJsCDN = "http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"
             #endregion
 
@@ -22,7 +22,7 @@ namespace WereViewApp {
 
             #region jQuery
             bundles.Add(new ScriptBundle("~/bundles/jquery", jQueryCdn)
-                        .Include("~/Content/Scripts/jquery-2.1.3.min.js") //if no CDN
+                        .Include("~/Content/Scripts/jQuery/jquery-" + jQueryVersion + ".js") //if no CDN
             );
             #endregion
 
@@ -35,13 +35,14 @@ namespace WereViewApp {
                     bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                                     "~/Content/Scripts/jquery.validate.js",
                                     "~/Content/Scripts/jquery.validate.unobtrusive.js",
-
                                     "~/Content/Scripts/moment.js",
                                     "~/Content/Scripts/bootstrap-datetimepicker.js",
                                     "~/Content/Scripts/bootstrap-select.js",
                                     "~/Content/Scripts/bootstrap-table.js",
                                     "~/Content/Scripts/bootstrap-table-filter.js",
                                     "~/Content/Scripts/bootstrap-table-export.js",
+                                    "~/Content/Scripts/Tag-it/bootstrap3-typeahead.min.js",
+                                    "~/Content/Scripts/Tag-it/bootstrap-tagsinput.js",
                                     "~/Content/Scripts/jquery.elastic.source.js",
                                     "~/Content/Scripts/DevOrgPlugins/developers-organism.dynamicSelect.js",
                                     "~/Content/Scripts/DevOrgPlugins/developers-organism.country-phone.js",
@@ -110,6 +111,7 @@ namespace WereViewApp {
                                         "~/Content/css/bootstrap-datetimepicker.css",
                                         "~/Content/css/bootstrap-table.css",
                                         "~/Content/css/bootstrap-select.css",
+                                        "~/Content/css/bootstrap-tagsinput.css",
 
                                         "~/Content/css/color-fonts.css",
                                         "~/Content/css/star-rating.css",

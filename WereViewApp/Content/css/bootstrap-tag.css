@@ -1,4 +1,5 @@
-﻿.tags {
+﻿/*https://github.com/fdeschenes/bootstrap-tag*/
+.tags {
   display: inline-block;
   padding: 4px 6px;
   color: #555555;
@@ -19,8 +20,6 @@
   -moz-transition: border linear .2s, -moz-box-shadow linear .2s;
   -o-transition: border linear .2s, box-shadow linear .2s;
   transition: border linear .2s, box-shadow linear .2s;
-  width: 294px;
-  width: 29.4rem;
 }
 .tags-hover {
   border-color: rgba(82, 168, 236, 0.8);

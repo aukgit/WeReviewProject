@@ -52,7 +52,7 @@ $.WeReviewApp = {
         if (_.isEmpty(str) === false) {
             var regexString = $.WeReviewApp.friendlyUrlRegularExpression;
             str = str.trim();
-            var regExp = new RegExp(regexString, 'gi');
+            var regExp = new RegExp(regexString, "gi");
             return str.replace(regExp, "-");
         } else {
             return "";
@@ -65,9 +65,9 @@ $.WeReviewApp = {
         //<iframe width="560" height="315" src="//www.youtube.com/embed/ob-P2a6Mrjs" frameborder="0" allowfullscreen></iframe>
         var currentText = $jQueryInputText.val();
         //currentText = currentText.toLowerCase();
-        var reg = new RegExp("<iframe", 'gi');
+        var reg = new RegExp("<iframe", "gi");
         currentText = currentText.replace(reg, "[iframe");
-        reg = new RegExp("</iframe>", 'gi');
+        reg = new RegExp("</iframe>", "gi");
         currentText = currentText.replace(reg, "[/iframe]");
         currentText = currentText.replace(">", "]");
         $jQueryInputText.val(currentText);
@@ -79,9 +79,9 @@ $.WeReviewApp = {
         //[iframe width="560" height="315" src="//www.youtube.com/embed/ob-P2a6Mrjs" frameborder="0" allowfullscreen></iframe]
         var currentText = $jQueryInputText.val();
         //currentText = currentText.toLowerCase();
-        var reg = new RegExp("\\[iframe", 'gi');
+        var reg = new RegExp("\\[iframe", "gi");
         currentText = currentText.replace(reg, "<iframe");
-        reg = new RegExp("\\[/iframe\\]", 'gi');
+        reg = new RegExp("\\[/iframe\\]", "gi");
         currentText = currentText.replace(reg, "</iframe>");
         currentText = currentText.replace("]", ">");
         $jQueryInputText.val(currentText);
@@ -269,9 +269,9 @@ $.WeReviewApp = {
         var heightRegEx = self.getAttributeRemoveRegularExpressionFor("Height");
         var widthRegEx = self.getAttributeRemoveRegularExpressionFor("Width");
 
-        var reg = new RegExp(heightRegEx, 'gi');
+        var reg = new RegExp(heightRegEx, "gi");
         currentText = currentText.replace(reg, "");
-        reg = new RegExp(widthRegEx, 'gi');
+        reg = new RegExp(widthRegEx, "gi");
         currentText = currentText.replace(reg, "");
         $jQueryInputText.val(currentText);
     },
@@ -369,26 +369,46 @@ $.WeReviewApp = {
         self.invertAllInputIframeDataOrSquareToHtml();
     },
 
-    appNameOnBlur : function() {
+    appNameOnBlur: function () {
         /// <summary>
         /// What happens when appname field is blured
+        /// Getting tags from app title
         /// </summary>
         /// <returns type=""></returns>
         var $appNameInput = $.byId("AppName"),
-            $tagsInput = $.byId("Tags");
+            $tagsInput = $.byId("Tags"),
+            previousText = null;
         //var $formInputs = self.$appForm.find("select,input[name!=YoutubeEmbedLink]");
 
-        $appNameInput.blur(function() {
-            var value = $appNameInput.val(),
-                tagsArray = value.split(' '),
-                tagsExistingText = $tagsInput.val();
-            tagsArray.push(value);
-            if (tagsExistingText) {
-                tagsArray.push(tagsExistingText);
-            }
-            var uniqueArray = _.uniq(tagsArray);
-            var tags = uniqueArray.join(",");
-            $tagsInput.val(tags);
+        $appNameInput.blur(function () {
+           var currentMethod = setTimeout(function () {
+                var value = $appNameInput.val(),
+                    tagsArray = value.split(" "),
+                    tagsExistingText = $tagsInput.val(),
+                    existingTagsArray = tagsExistingText.split(",");
+
+                if (previousText !== value) {
+                    previousText = value;
+                    if (!_.isEmpty(value)) {
+                        tagsArray.push(value.trim());
+                    }
+                    if (existingTagsArray.length > 0) {
+                        for (var i = 0; i < existingTagsArray.length; i++) {
+                            var element = existingTagsArray[i];
+                            if (!_.isEmpty(element)) {
+                                tagsArray.push(element.trim());
+                            }
+                        }
+                    }
+                    var uniqueArray = _.without(_.uniq(tagsArray), "");
+                    //console.log(tagsArray);
+                    //console.log(uniqueArray);
+                    var tags = uniqueArray.join(",");
+                    $tagsInput.val(tags);
+                }
+               clearTimeout(currentMethod);
+           }, 500);
+
         });
     },
 
@@ -400,7 +420,7 @@ $.WeReviewApp = {
     appPostingPageOnReady: function () {
         var self = $.WeReviewApp;
         $.devOrg.uxFriendlySlide("form.app-post", true, true);
-     
+
 
         //bind with blur event of AppName
         self.appNameOnBlur();
@@ -428,7 +448,7 @@ $.WeReviewApp = {
                 self.appPostingPageOnReady();
 
                 // Only sends to draft if in the app posting page.
-                $(window).bind('beforeunload', self.beforeUnloadEvent);
+                $(window).bind("beforeunload", self.beforeUnloadEvent);
             } else if (self.$appFormEdit.length > 0) {
                 // app editing
                 self.appEditingPageOnReady();
@@ -452,20 +472,21 @@ $.WeReviewApp = {
             self.$appForm.find("select").selectpicker();
 
             // enter to go next
-            $.devOrg.enterToNextTextBox("form.app-editing-page", true); // means both editing and posting
+            $.devOrg.enterToNextTextBoxWithoutTags(self.$appForm, true, false); // means both editing and posting
 
-
+            var triggerAppNameValidateTimeOut,
+                appTitleValidate = function () {
+                    triggerAppNameValidateTimeOut = setTimeout(function () {
+                        $("#AppName").trigger("blur");
+                        clearTimeout(triggerAppNameValidateTimeOut);
+                    }, 300);
+                };
             // triggering appname blur when change any of these.
             // Because all are related to URL generate.
-            $(".selectpicker,select").change(function () {
-                $("#AppName").trigger("blur");
-
-            });
+            $(".selectpicker,select").change(appTitleValidate);
             // to validate the app-name, triggering blur on app-name field
-            $("#PlatformVersion").blur(function () {
-                $("#AppName").trigger("blur");
-                //console.log("dev");
-            });
+            $("#PlatformVersion").blur(appTitleValidate);
+            
         }
     },
 

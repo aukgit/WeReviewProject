@@ -461,6 +461,9 @@
     </Content>
     <Content Include="Content\css\bootstrap-table.css" />
     <Content Include="Content\css\bootstrap-tag.css" />
+    <Content Include="Content\css\bootstrap-tag.min.css">
+      <DependentUpon>bootstrap-tag.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\category-page.css" />
@@ -468,10 +471,17 @@
       <DependentUpon>category-page.css</DependentUpon>
     </Content>
     <Content Include="Content\css\color-fonts.css" />
+    <Content Include="Content\css\color-fonts.min.css">
+      <DependentUpon>color-fonts.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\dataTables.bootstrap.css" />
     <Content Include="Content\css\editor-templates.css" />
     <Content Include="Content\css\editor-templates.min.css">
       <DependentUpon>editor-templates.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\editor-templates.variables.css" />
+    <Content Include="Content\css\editor-templates.variables.min.css">
+      <DependentUpon>editor-templates.variables.css</DependentUpon>
     </Content>
     <Content Include="Content\css\flags32-combo.css" />
     <Content Include="Content\css\flags32.css" />
@@ -490,6 +500,9 @@
       <DependentUpon>front-developer.css</DependentUpon>
     </Content>
     <Content Include="Content\css\header.css" />
+    <Content Include="Content\css\header.min.css">
+      <DependentUpon>header.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\less-imports.css" />
     <Content Include="Content\css\less-imports.css.map">
       <DependentUpon>less-imports.css</DependentUpon>
@@ -545,6 +558,9 @@
     <Content Include="Content\css\Upload\jquery.fileupload.css" />
     <Content Include="Content\css\utilities.css" />
     <Content Include="Content\css\utilities.css.map">
+      <DependentUpon>utilities.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\utilities.min.css">
       <DependentUpon>utilities.css</DependentUpon>
     </Content>
     <Content Include="Content\css\validator.css" />
@@ -653,7 +669,6 @@
     </Content>
     <Content Include="Content\Less\bootstrap-select.less" />
     <Content Include="Content\Less\bootstrap-select.variables.less" />
-    <Content Include="Content\Less\bootstrap-tag.less" />
     <Content Include="Content\Less\editor-templates.less" />
     <Content Include="Content\Less\editor-templates.variables.less" />
     <Content Include="Content\Less\fonts-rimixens.less" />
@@ -690,6 +705,10 @@
     <Content Include="Content\css\editor-templates.css.map">
       <DependentUpon>editor-templates.css</DependentUpon>
     </Content>
+    <Content Include="Content\Less\bootstrap-tagsinput.less" />
+    <Content Include="Content\css\editor-templates.variables.css.map">
+      <DependentUpon>editor-templates.variables.css</DependentUpon>
+    </Content>
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <None Include="Content\Scripts\jquery-2.1.3.intellisense.js" />
@@ -718,9 +737,9 @@
     <Content Include="Content\Scripts\modernizr-2.8.3.js" />
     <Content Include="Content\Scripts\moment.js" />
     <Content Include="Content\Scripts\star-rating.js" />
-    <Content Include="Content\Scripts\Tagit\jquery-ui-1.9.2.custom.min.js" />
-    <Content Include="Content\Scripts\Tagit\jquery.autoGrowInput.js" />
-    <Content Include="Content\Scripts\Tagit\jquery.tagedit.js" />
+    <Content Include="Content\Scripts\Tag-it\bootstrap-tagsinput.js" />
+    <Content Include="Content\Scripts\Tag-it\bootstrap3-typeahead.min.js" />
+    <Content Include="Content\Scripts\Tag-it\jquery.autoGrowInput.js" />
     <Content Include="Content\Scripts\underscore.js" />
     <Content Include="Content\Scripts\Upload\bootstrap-progressbar.js" />
     <Content Include="Content\Scripts\Upload\canvas-to-blob.min.js" />
@@ -1067,6 +1086,20 @@
     <Content Include="Views\App\_SeoExtraPart.cshtml" />
     <Content Include="Views\Category\_SeoHide.cshtml" />
     <Content Include="Views\Apps\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Tag.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AnyType.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AnyTypeIcon.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DropDown-Dynamic.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DropDown.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Email-v.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Enum.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Password-v.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RememberMe-v.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RememberMe.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Sender-Email.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String-Label-Off.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Upload-Multiple.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Username-v.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />

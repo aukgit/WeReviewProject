@@ -1,15 +1,20 @@
-﻿body {
-  font-family: Ubuntu, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: subpixel-antialiased;
-}
-body #wrap .app-details-page {
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-.regular-color {
+﻿.regular-color {
   color: #647383;
 }
 .primary-color {
   color: #ff7200;
+}
+.login-btn-wrapper {
+  max-width: 294px;
+  max-width: 29.4rem;
+}
+.login-btn-wrapper .checkbox {
+  max-width: 150px;
+  max-width: 15rem;
+  float: left;
+}
+.login-btn-wrapper .btn {
+  float: right;
 }
 .btn {
   font-weight: normal;
@@ -1541,6 +1546,10 @@ q:after {
   .app-detail.app-title-wrapper .single-app-edit-btn {
     bottom: 9px;
   }
+}
+.app-url-display {
+  margin-left: 4px;
+  margin-left: 0.4rem;
 }
 .blog-page-private .white-wrapper-background .seo-app-name:hover {
   color: deepskyblue;

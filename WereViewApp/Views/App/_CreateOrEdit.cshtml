@@ -7,12 +7,15 @@
 <div data-dev-slide="0" data-dev-visited="@ViewBag.ShowAllDivs">
     <div id="server-validation-form">
         @ViewBag.token
-        @Html.EditorFor(model => model.AppName, "String", new {url = "/Validator/GetValidUrl", isValidate = "true", data_submit_method = "post"})
+        @Html.EditorFor(model => model.AppName, "String", new { url = "/Validator/GetValidUrl", isValidate = "true", data_submit_method = "post" })
+    </div>
+    <div id="app-url-link-wrapper" class="col-md-offset-2 app-url-display-wrapper">
+        <a href="#" id="app-url-link" class="app-url-display"><i class="fa fa-link"></i> app/apps/link</a>
     </div>
     <div class="form-group PlatformID-main">
         <div class="controls">
             <label class="col-md-2 control-label">
-                @Html.DisplayNameFor(m => m.PlatformID)<span class="red ">*</span>
+                @Html.DisplayNameFor(m => m.PlatformID)<span class="red">*</span>
             </label>
             <div class="col-md-10 PlatformID-combo-div">
                 @Html.DropDownList("PlatformID", null, new { @class = "form-control", data_style = "btn-success", data_live_search = true })
@@ -36,8 +39,7 @@
             </div>
         </div>
     </div>
-
-    @Html.EditorFor(model => model.Tags, "Multiline")
+    @Html.EditorFor(model => model.Tags, "tag")
     @Html.EditorFor(model => model.Description, "Multiline", new { @class = "big-multiline" })
 </div>
 
@@ -46,12 +48,6 @@
     @Html.EditorFor(model => model.YoutubeEmbedLink, new { @class = "url-input" })
     @Html.EditorFor(model => model.WebSiteURL)
     @Html.EditorFor(model => model.StoreURL)
-</div>
-
-<div data-dev-slide="2" data-dev-visited="@ViewBag.ShowAllDivs">
-    @Html.EditorFor(model => model.Developers, "Multiline")
-    @Html.EditorFor(model => model.IdeaBy, "Multiline")
-    @Html.EditorFor(model => model.Publishers, "Multiline")
 </div>
 @Html.HiddenFor(model => model.UploadGuid)
 <label id="notify-global-info-second" class="col-md-offset-2 notify-global-info label label-danger"></label>

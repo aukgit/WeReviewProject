@@ -1,15 +1,5 @@
 ﻿@import "fonts-rimixens.less";
 
-body {
-    font-family: Ubuntu,"Helvetica Neue", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: subpixel-antialiased;
-}
-
-body #wrap .app-details-page {
-    .ubuntu-font;
-}
-
-
 .regular-color {
     color: @regular-font-color;
 }
@@ -17,6 +7,21 @@ body #wrap .app-details-page {
 .primary-color {
     color: @primary-color;
 }
+
+
+.login-btn-wrapper {
+    .max-width(294px);
+
+    .checkbox {
+        .max-width(150px);
+        float: left;
+    }
+
+    .btn {
+        float: right;
+    }
+}
+
 // other imports
 //@import "seo-optimize.less";
 //bootstrap overrides
@@ -1283,6 +1288,11 @@ q:after {
     @media (min-width:@screen-sm) {
         bottom: 9px;
     }
+}
+
+// app editing page
+.app-url-display {
+    .margin-left(4px);
 }
 
 @import "blog-page.less";

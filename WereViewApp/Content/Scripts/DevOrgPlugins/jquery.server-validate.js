@@ -118,7 +118,7 @@
                 };
                 addFields.push(pushingElement);
             }
-         
+
         }
         return addFields;
     }
@@ -278,53 +278,67 @@
             }
             return returnStatement;
         },
+        hideAllIcons: function ($div) {
+            var self = this,
+                $input = self.getInput();
+            $div.removeAttr("data-icon-added");
+            self.hideInvalidIcon($input);
+            self.hideSpinner($input);
+            self.hideErrorIcon($input);
+            self.hideErrorIcon($input);
+            self.hideValidIcon($input);
+        },
         inputProcessWithBlurEvent: function ($div, $input, url) {
             var self = this,
-                settings = this.getSettings(),
+                //settings = this.getSettings(),
                 isIconsVisible = true;
-            $input.on("blur", function (evt) {
-                self.blurEvent(evt, $div, self, $input, url);
-                isIconsVisible = true;
-            });
-            $input.on("keypress", function () {
+
+            var hideIcons = function () {
                 if (isIconsVisible === true) {
-                    $div.removeAttr("data-icon-added");
-                    self.hideInvalidIcon($input);
-                    self.hideSpinner($input);
-                    self.hideErrorIcon($input);
-                    self.hideErrorIcon($input);
-                    self.hideValidIcon($input);
+                    self.hideAllIcons($div);
                     isIconsVisible = false;
                 }
-            });
-        },
-        blurEvent: function (event, $div, self, $input, url) {
-            var isRequstValid = !self.isInProcessingMode($div) || self.isMultipleRequestAllowed();
-            // if we are allowing to send multiple request while one is already being processing in the server.
-            if (isRequstValid) {
-                var $inputNew = $input;///$(this);
-                var isDuplicateRequestAllowed = self.dontSendSameRequestTwice() && !self.isPreviousRequestIsSame($div, $inputNew, url);
-                isRequstValid = isDuplicateRequestAllowed || !self.dontSendSameRequestTwice();
-                // check if same request is allowed to send twice.
+            }
+            var blurEvent = function (event, url) {
+                var isRequstValid = !self.isInProcessingMode($div) || self.isMultipleRequestAllowed();
+                // if we are allowing to send multiple request while one is already being processing in the server.
                 if (isRequstValid) {
-
-                    // if validation request before sending request.
-                    var validationRequires = self.isInputValidationRequirestoSendRequest();
-
-                    // is input needed to be valid before send the request.
-                    isRequstValid = (validationRequires && $inputNew.valid()) || !validationRequires;
-
+                    var isDuplicateRequestAllowed = self.dontSendSameRequestTwice() && !self.isPreviousRequestIsSame($div, $input, url);
+                    isRequstValid = isDuplicateRequestAllowed || !self.dontSendSameRequestTwice();
+                    // check if same request is allowed to send twice.
                     if (isRequstValid) {
-                        var fields = self.concatAdditionalFields($inputNew);
 
-                        self.sendRequest($div, $inputNew, url, fields);
-                    }
-                    if (self.getSettings().focusPersistIfNotValid) {
-                        self.focusIfnotValid($inputNew);
+                        // if validation request before sending request.
+                        var validationRequires = self.isInputValidationRequirestoSendRequest();
+
+                        // is input needed to be valid before send the request.
+                        isRequstValid = (validationRequires && $input.valid()) || !validationRequires;
+
+                        if (isRequstValid) {
+                            var fields = self.concatAdditionalFields($input);
+
+                            self.sendRequest($div, $input, url, fields);
+                        }
+                        if (self.getSettings().focusPersistIfNotValid) {
+                            self.focusIfnotValid($input);
+                        }
                     }
                 }
-            }
+            };
+            var timeOutMethod;
+            $input.on("blur", function (evt) {
+                timeOutMethod = setTimeout(function() {
+                    hideIcons();
+                    blurEvent(evt, url);
+                    isIconsVisible = true;
+                    clearTimeout(timeOutMethod);
+                }, 500);
+            });
+            $input.on("keypress", function () {
+                hideIcons();
+            });
         },
+
         focusIfnotValid: function ($input, force) {
             /// <summary>
             /// Focus on the input if not valid.
@@ -363,13 +377,12 @@
             /// Abort previous ajax request and hide all the icons
             /// </summary>
             /// <returns type=""></returns>
-            this.showSpinner($input);
-            this.hideInvalidIcon($input);
-            this.hideErrorIcon($input);
-            this.hideErrorIcon($input);
-            this.hideValidIcon($input);
             if (!this.isEmpty(this.ajaxRequest)) {
+                var $div = this.$element;
                 this.ajaxRequest.abort();
+                this.hideAllIcons($div);
+                this.showSpinner($input);
+                $div.attr("data-icon-added", "true");
             }
         },
         sendRequest: function ($div, $input, url, sendingFields) {
@@ -382,13 +395,14 @@
                 events.beforeSendingRequest($div, $input, url, sendingFields);
             }
             //icons show/hide
-            $div.attr("data-icon-added", "true");
             // Abort previous ajax request and hide all the icons
             this.abortPreviousAjaxRequest($input);
 
             self.markAsProcessing($div, true);
             self.setCurrentTextForNexttimeChecking($input);
-            this.ajaxRequest = jQuery.ajax({
+            self.hideAllIcons($div); // hide all the icons
+
+            this.ajaxRequest = $.ajax({
                 method: method, // by default "GET"
                 url: url,
                 data: sendingFields, // PlainObject or String or Array
@@ -398,11 +412,14 @@
                 if (isInTestingMode) {
                     console.log(response);
                 }
+                self.hideAllIcons($div); // hide all the icons
                 self.markAsProcessing($div, false);
                 self.processResponse($input, response);
+                $div.attr("data-icon-added", "true");
                 //icons show/hide
                 self.hideSpinner($input);
             }).fail(function (jqXHR, textStatus, exceptionMessage) {
+                self.hideAllIcons($div); // hide all the icons
                 self.hideSpinner($input);
                 self.errorProcess($div, $input, jqXHR, textStatus, exceptionMessage, url);
                 console.log("Request failed: " + exceptionMessage + ". Url : " + url);
@@ -625,7 +642,7 @@
         },
         hideSpinner: function ($input) {
             var $spinner = this.getSpinner($input);
-            this.animateOff($spinner);
+            $spinner.hide();
         },
         animateOn: function ($object) {
             $object.fadeIn("slow");

@@ -1,8 +1,8 @@
-@import "fonts-rimixens.less";
- 
+@import "override-mvc.variables.less";
+/*https://github.com/fdeschenes/bootstrap-tag*/
 .tags {
     display: inline-block;
-    padding: 4px 6px;    
+    padding: 4px 6px;
     color: #555555;
     vertical-align: middle;
     -webkit-border-radius: 4px;
@@ -14,7 +14,6 @@
     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     .transition(~'border linear .2s, box-shadow linear .2s');
-    .width(294px);
 }
 
 .tags-hover {
@@ -55,7 +54,7 @@
     padding-left: 9px;
     padding-right: 9px;
     .border-rounded(3px);
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
     margin-right: 5px;
     .transition(~'all 0.2s');
     background-color: rgb(94, 101, 105);
@@ -93,6 +92,7 @@
     color: #FFFFFF;
     text-shadow: none;
 }
-.tag-input-container input{
+
+.tag-input-container input {
     .height(25px);
 }
