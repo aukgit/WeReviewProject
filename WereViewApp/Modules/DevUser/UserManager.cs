@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using DevMvcComponent.Error;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using WereViewApp.Models.Context;

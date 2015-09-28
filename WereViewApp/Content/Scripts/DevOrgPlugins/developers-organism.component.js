@@ -152,7 +152,7 @@ $.devOrg = {
         }
         return null;
     },
-    
+
     getComboString: function (comboName, comboClass, comboId, stringOptionItems, additionalAttributes) {
         /// <summary>
         /// returns a select/combo making string
@@ -334,7 +334,7 @@ $.devOrg = {
         });
     },
 
-    
+
     bootstrapComboSelectbyFindingValue: function (comboSelector, searchForvalue) {
         $(comboSelector).selectpicker("val", searchForvalue).trigger("change");
     },
@@ -406,13 +406,57 @@ $.devOrg = {
                 } else {
                     $(binders)[nextIndex - 1].blur();
                     if (submitAtLast === true) {
-                        $(formSelector).submit();
+                        $form.submit();
                     }
                 }
             }
         });
     },
+    enterToNextTextBoxWithoutTags: function ($form, submitAtLast, isDynamicSelector) {
 
+        $form.find("input:text:first-child").focus();
+
+        //var binders = formSelector + " input[type='text']:visible," +
+        //    formSelector + " input[type='password']:visible," +
+        //    formSelector + " input[type='numeric']:visible," +
+        //    formSelector + " input[type='email']:visible," +
+        //    //formSelector + " textarea:visible," +
+        //    formSelector + " button.selectpicker[type='button']:visible," +
+        //    formSelector + " select:visible";
+        var binders = "input[type='text']:visible," +
+                     "input[type='password']:visible," +
+                     "input[type='numeric']:visible," +
+                     "input[type='email']:visible," +
+                     ":not(.bootstrap-tagsinput input)," +
+                    //formSelector + " textarea:visible," +
+                     "button.selectpicker[type='button']:visible," +
+                     "select:visible";
+        var keyPressEvent = function (e) {
+            // var codeAbove = d.keyCode || d.which;
+            // console.log("above code :" + codeAbove);
+            var code = e.keyCode || e.which;
+            // console.log("inside code :" + code);
+            if (code === 13) { // Enter key
+                e.preventDefault(); // Skip default behavior of the enter key
+                var n = $(binders).length;
+                var nextIndex = $(binders).index(this) + 1;
+                if (nextIndex < n) {
+                    $(binders)[nextIndex].focus();
+                } else {
+                    $(binders)[nextIndex - 1].blur();
+                    if (submitAtLast === true) {
+                        $form.submit();
+                    }
+                }
+            }
+        };
+        if (isDynamicSelector) {
+            $form.on("keypress", binders, keyPressEvent);
+        } else {
+            var $inputs = $form.find(binders);
+            $inputs.on('keypress', keyPressEvent);
+        }
+    },
     validateTextInputBasedOnRegEx: function (jQuerySelectorforTextBox, stringRegEx, msgOnInvalidPattern) {
         "use strict";
         /// <summary>
@@ -563,7 +607,7 @@ $.devOrg = {
                 //console.log(formData);
 
                 var validatorName = "span.CustomValidation." + internalValidatorSpanClassName;
-                var token = $("input[name=__RequestVerificationToken]").val();
+                //var token = $("input[name=__RequestVerificationToken]").val();
                 var processingState1 = "glyphicon-refresh";
                 var processingState2 = "glyphicon-spin";
                 var isHideClass = "hide";
@@ -840,7 +884,7 @@ $.devOrg = {
         /// <param name="keepOthersVisible">Should add new hide ones or previous ones hides and load new ones(divs)</param>
         /// <param name="dontSubmit">When none left , do we submit? True: don't submit</param>
         "use strict";
-        
+
         var slideObjects = $(jQueryformSelector + " [data-dev-slide][data-dev-visited='false']");
         var executedOnce = false;
         var binders = "input[type='text']:visible," +
