@@ -1,8 +1,11 @@
-﻿/**
+﻿/// <reference path="developers-organism.component.js" />
+/// <reference path="byId.js" />
+/// <reference path="../jquery-2.1.4.intellisense.js" />
+/**
  * Written by Alim Ul Karim
  * Developers Organism
  * Written  : 14 Nov 2014
- * Modified : 28 Apr 2015
+ * Modified : 28 Sep 2015
  */
 
 /// <summary>
@@ -863,7 +866,7 @@ $.WeReviewApp = {
         self.suggestedOrReviewLoadmoreBtnLeft();
 
         self.reviewLikeDisLikeClicked();
-        $("#developers-organism").addClass("hide");
+        $.byId("developers-organism").addClass("hide");
         // fix date inputs
         self.fixDateInputs();
 
