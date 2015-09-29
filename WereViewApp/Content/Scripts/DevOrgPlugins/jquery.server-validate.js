@@ -40,6 +40,7 @@
             hideOnValidation: false,
             clientSideValidationRegxPattern: "",
             submitMethod: "post",
+            $directContainer: [],
             url: "",
             messages: {
                 requesting: "Requesting data..."
@@ -327,7 +328,7 @@
             };
             var timeOutMethod;
             $input.on("blur", function (evt) {
-                timeOutMethod = setTimeout(function() {
+                timeOutMethod = setTimeout(function () {
                     hideIcons();
                     blurEvent(evt, url);
                     isIconsVisible = true;
@@ -777,11 +778,19 @@
            additionalFieldsSelectorArray = selectors.additionalFields;
         var additionalFields;
         if ($elementContainer.isValidationInit !== true) {
-            $divContainers = $elementContainer.find(selectors.divContainer);
-            $elementContainer.isValidationInit = true;
+            if (settingsTemporary.$directContainer.length === 0) {
+                $divContainers = $elementContainer.find(selectors.divContainer);
+                $elementContainer.isValidationInit = true;
+            }
         }
 
-        var $containers = $divContainers;
+        var $containers = null;
+        if (settingsTemporary.$directContainer.length === 0) {
+            $containers = $divContainers;
+        } else {
+            //direct container element selected
+            $containers = settingsTemporary.$directContainer;
+        }
 
         for (var i = 0; i < $containers.length; i++) {
             var $divElement = $($containers[i]),

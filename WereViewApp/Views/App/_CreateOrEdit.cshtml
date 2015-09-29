@@ -1,16 +1,18 @@
 ﻿@model WereViewApp.Models.EntityModel.App
-
-
+@{
+    string validatingUrl = "/Validator/GetValidUrl";
+    if (ViewBag.isEditingPage == true) {
+        validatingUrl = "/Validator/GetValidUrlEditing";
+    }
+}
 <label id="notify-global-info-top" class="col-md-offset-2 label label-danger"></label>
-
-
 <div data-dev-slide="0" data-dev-visited="@ViewBag.ShowAllDivs">
     <div id="server-validation-form">
         @ViewBag.token
-        @Html.EditorFor(model => model.AppName, "String", new { url = "/Validator/GetValidUrl", isValidate = "true", data_submit_method = "post" })
+        @Html.EditorFor(model => model.AppName, "String", new { url = @validatingUrl, isValidate = "true", data_submit_method = "post" })
     </div>
-    <div id="app-url-link-wrapper" class="col-md-offset-2 app-url-display-wrapper">
-        <a href="#" id="app-url-link" class="app-url-display"><i class="fa fa-link"></i> app/apps/link</a>
+    <div id="app-url-link-wrapper" class="col-md-offset-2 app-url-display-wrapper hide">
+        <a id="app-url-link" class="app-url-display"><i class="fa fa-link"></i> <span id="app-url-content">app/apps/link</span></a>
     </div>
     <div class="form-group PlatformID-main">
         <div class="controls">

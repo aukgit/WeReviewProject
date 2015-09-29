@@ -462,6 +462,7 @@ $.devOrg = {
         /// <summary>
         ///     Validate text input while typing with ASP.NET jquery validation.
         ///     Only the attributes with the text. No event is bound.
+        /// Call reSetupjQueryValidate() to reSetup validation.
         /// </summary>
         /// <param name="jQuerySelectorforTextBox">string:jQuery Selector</param>
         /// <param name="stringRegEx">string: Regular expression to validate the textinput</param>
@@ -472,15 +473,21 @@ $.devOrg = {
 
     },
 
-    reSetupjQueryValidate: function (jQueryFormSelector) {
+    reSetupjQueryValidate: function (jQueryFormSelectorOrElement) {
         "use strict";
         /// <summary>
         ///     call after setting new reg ex via validateTextInputBasedOnRegEx
         /// </summary>
-        /// <param name="jQueryFormSelector"></param>
-        var $form = $(jQueryFormSelector)
-            .removeData("validator") /* added by the raw jquery.validate plugin */
-            .removeData("unobtrusiveValidation");
+        /// <param name="jQueryFormSelectorOrElement">If jquery element pass then it will work with jQuery element, if element is pass then it will search in the DOM.</param>
+        var $form = [];
+        if (typeof jQueryFormSelectorOrElement === "string") {
+            $form = $(jQueryFormSelectorOrElement);
+
+        } else {
+            $form = jQueryFormSelectorOrElement;
+        }
+        $form.removeData("validator") /* added by the raw jquery.validate plugin */
+             .removeData("unobtrusiveValidation");
         /* added by the jquery unobtrusive plugin */
         $.validator.unobtrusive.parse($form);
     },

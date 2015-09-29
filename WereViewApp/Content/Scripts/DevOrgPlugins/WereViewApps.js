@@ -41,8 +41,8 @@ $.WeReviewApp = {
     reviewSpinnerSelector: "#review-requesting-spinner",
     reviewFormContainerSelectorInAppPage: "div#write-review-form-container",
     reviewFormSubmitUrl: "/Reviews/Write",
-    ///consist of # : "#app-deails-page"
-    appDetailsPageParentId: "#app-deails-page",
+    ///consist of # : "#app-details-page"
+    appDetailsPageParentId: "#app-details-page",
     friendlyUrlRegularExpression: "[^A-Za-z0-9_\.~]+",
 
     getFriendlyUrlSlug: function (str) {
@@ -363,7 +363,7 @@ $.WeReviewApp = {
         var $formInputs = self.$appForm.find("select,input[name!=YoutubeEmbedLink]");
         //console.log($formInputs);
 
-        $.devOrg.validateInputFromServer("#AppName", "/Validator/GetValidUrlEditing", "AppName", false, false, 3, true, " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.", null, $formInputs, self.maxTryInputSubmit);
+        //$.devOrg.validateInputFromServer("#AppName", "/Validator/GetValidUrlEditing", "AppName", false, false, 3, true, " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.", null, $formInputs, self.maxTryInputSubmit);
 
         //stop form submitting the form if any file upload is not done.
         // before app editing submit method
@@ -425,8 +425,6 @@ $.WeReviewApp = {
         $.devOrg.uxFriendlySlide("form.app-post", true, true);
 
 
-        //bind with blur event of AppName
-        self.appNameOnBlur();
 
         ///hiding the uploader on the app loader page for every time before posting a new app.
         self.$appForm.find(self.selectorForUploaderRows).hide();
@@ -441,10 +439,18 @@ $.WeReviewApp = {
      * App edit or post before action.
      * Determination point of app edit or post.
      */
-    generalAppFormEditingOrPostingPageOnReady: function (e) {
+    routeAppEditingFormAndInitialize: function (e) {
+        /// <summary>
+        /// Route app editing form and initialize all other methods.
+        /// </summary>
+        /// <param name="e"></param>
         var self = $.WeReviewApp;
+        // routing
         if (self.$appForm.length > 0) {
             self.$howtoUseUploaderInfoLabel.hide(); //hide uploader info label.
+
+            //bind with blur event of AppName
+            self.appNameOnBlur();
 
             if (self.$appFormPost.length > 0) {
                 // app posting
@@ -460,19 +466,20 @@ $.WeReviewApp = {
             // .app-editing-page class represent both editing and posting
 
             // Validate app-name
-            //$.devOrg.validateTextInputBasedOnRegEx(
-            //    "#AppName",
-            //    "^([A-zZ.]+\\s*)+(\\d*)\\s*([aA-zZ.]+\\s*)+(\\d*)",
-            //    "Sorry your app name is not valid. Valid name example eg. Plant Vs. Zombies v2.",);
+            $.devOrg.validateTextInputBasedOnRegEx(
+                "#AppName",
+                "^([A-zZ.]+\\s*)+(\\d*)\\s*([aA-zZ.]+\\s*)+(\\d*)",
+                "Sorry your app name is not valid. Valid name example eg. Plant Vs. Zombies v2.");
 
-            $.devOrg.reSetupjQueryValidate("form");
+            $.devOrg.reSetupjQueryValidate(self.$appForm);
 
 
             self.$appForm.find("input,textarea").change(function () {
+                /// app anything change marked as edited
                 self.appInputChangesExist = true;
             });
 
-            self.$appForm.find("select").selectpicker();
+            self.$appForm.find("select").selectpicker(); // make selectpicker
 
             // enter to go next
             $.devOrg.enterToNextTextBoxWithoutTags(self.$appForm, true, false); // means both editing and posting
@@ -503,8 +510,8 @@ $.WeReviewApp = {
         //console.log("ase");
         var $submittingSpinner = null;
         var $inputs, currformData = 0;
-        $submittingSpinner = $("#submitting-review-spinner");
-        var $failedIcon = $("#submitting-review-failed-icon");
+        $submittingSpinner = $.byId("submitting-review-spinner");
+        var $failedIcon = $.byId("submitting-review-failed-icon");
         // indicates if it is in the review posting page or in editing page\
         // $lastDiv.length == 0 indicates it's in review edit mode
         var $lastDiv = $form.find("div[data-last-slide=true]:visible");
@@ -632,7 +639,7 @@ $.WeReviewApp = {
      * App review : like-dislike functionality
      */
     reviewLikeDisLikeClicked: function () {
-        var $likeBtns = $("#app-deails-page a[data-review-like-btn=true]");
+        var $likeBtns = $.byId("app-details-page").find("a[data-review-like-btn=true]");
         // Views/Reviews/ReviewsDisplay.cshtml contains that id
         var likeUrl = "/Reviews/Like";
         var dislikeUrl = "/Reviews/DisLike";
@@ -698,7 +705,7 @@ $.WeReviewApp = {
             }); // ajax end
         }
         if ($likeBtns.length > 0) {
-            var $disLikeBtns = $("#app-deails-page a[data-review-dislike-btn=true]");
+            var $disLikeBtns = $.byId("app-details-page").find("a[data-review-dislike-btn=true]");
             var serializedData = $.byId("review-like-dislike-form-submit").serialize();
             $spinners = $(".spinner-for-like").hide(); //like btns
             $likeBtns.click(function (evt) {
@@ -856,7 +863,7 @@ $.WeReviewApp = {
         /// </summary>
         var self = $.WeReviewApp;
         self.initializeAppForms();
-        self.generalAppFormEditingOrPostingPageOnReady();
+        self.routeAppEditingFormAndInitialize();
         //don't require anymore , it has been called from the fron-end.js script
         //self.frontEndJavaScript();
 
