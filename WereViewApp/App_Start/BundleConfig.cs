@@ -22,7 +22,7 @@ namespace WereViewApp {
 
             #region jQuery
             bundles.Add(new ScriptBundle("~/bundles/jquery", jQueryCdn)
-                        .Include("~/Content/Scripts/jQuery/jquery-" + jQueryVersion + ".js") //if no CDN
+                        .Include("~/Content/Scripts/jquery-" + jQueryVersion + ".js") //if no CDN
             );
             #endregion
 
