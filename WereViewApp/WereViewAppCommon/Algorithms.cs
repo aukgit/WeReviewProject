@@ -1072,10 +1072,12 @@ namespace WereViewApp.WereViewAppCommon {
             return null;
         }
         /// <summary>
-        /// 
+        /// Returns url without the number and escape sequence (it is for version matching and suggestions)
+        /// [Example : title-tile-2 => title-tile]
+        /// Plant vs Zombines v2 should have a suggestion of Plant Vs. Zombines v1, v3 and so on.
         /// </summary>
         /// <param name="url">title-tile-2</param>
-        /// <returns></returns>
+        /// <returns>title-title</returns>
         public string GetUrlStringExceptEscapeSequence(string url) {
             if (url != null) {
                 List<string> validUrl = GetUrlListExceptEscapeSequence(url);

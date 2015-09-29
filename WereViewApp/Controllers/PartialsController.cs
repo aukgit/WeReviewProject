@@ -128,6 +128,26 @@ namespace WereViewApp.Controllers {
             };
         }
 
+
+        [OutputCache(CacheProfile = "VeryShort", VaryByParam = "id")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GetAppUrl(App app) {
+            if (SessionNames.IsValidationExceed("GetAppUrl", 500) || app == null) {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+            using (var db = new WereViewAppEntities()) {
+                var algorithms = new Algorithms();
+                var generatedUrl = algorithms.GenerateURLValid(app.PlatformVersion, app.CategoryID, app.AppName, app.PlatformID,
+                    db, app.AppID);
+
+                var sender = new {
+                    url = generatedUrl
+                };
+                return Json(sender, JsonRequestBehavior.AllowGet);
+            };
+        }
+
         #region Declarations
 
         private readonly Algorithms algorithms = new Algorithms();

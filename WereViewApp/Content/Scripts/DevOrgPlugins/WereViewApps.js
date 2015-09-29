@@ -33,11 +33,12 @@ $.WeReviewApp = {
     isTesting: false,
     draftSavingFailedErrorMsg: "Sorry couldn't save the draft , possible reason maybe connection lost or your draft buffer is exceeded.",
     numberOfDraftPossible: 10,
-    invalidAttrName: "data-invalid",
+    invalidAttrName: "data-is-validate",
     galleryImageUploaderId: 0,
     maxTryInputSubmit: 250,
     sendingDraftNumber: 0,
     writeReviewFormUrl: "/Reviews/GetReviewForm",
+    appUrlRetrievalUrl: "/Partials/GetAppUrl",
     reviewSpinnerSelector: "#review-requesting-spinner",
     reviewFormContainerSelectorInAppPage: "div#write-review-form-container",
     reviewFormSubmitUrl: "/Reviews/Write",
@@ -202,16 +203,22 @@ $.WeReviewApp = {
         //}
     },
 
-    isAppTitleValid: function () {
-        var $appName = $("#AppName");
-        var hasInvalidAttr = $appName.attr($.WeReviewApp.invalidAttrName);
+    isAppTitleValid: function ($appNamejQuery) {
+        var $appName = null;
+        if (_.isEmpty($appNamejQuery)) {
+            $appName = $("#AppName");
+        }
+        if ($appName.length > 0) {
+            var hasValidAttr = $appName.attr($.WeReviewApp.invalidAttrName);
 
-        if (hasInvalidAttr) {
-            return false;
-        } else {
-            return true;
+            if (hasValidAttr && $appName.valid()) {
+                return true;
+            } else {
+                return false;
+            }
         }
     },
+
     // before app editing submit
     appEditingSubmitEvent: function (e) {
         e.preventDefault();
@@ -378,13 +385,21 @@ $.WeReviewApp = {
         /// Getting tags from app title
         /// </summary>
         /// <returns type=""></returns>
-        var $appNameInput = $.byId("AppName"),
+        var self = $.WeReviewApp,
+            $anchor = $.byId("app-url-link"),
+            $anchorContent = $.byId("app-url-content"),
+            $serverWrapper = $.byId("server-validation-form"),
+            $tokenField = $serverWrapper.find("[name=__RequestVerificationToken]"),
+            token = $tokenField.val(),
+            url = self.appUrlRetrievalUrl,
+            generateUrl = self.generateAppUrlDisplay,
+            $appNameInput = $.byId("AppName"),
             $tagsInput = $.byId("Tags"),
             previousText = null;
         //var $formInputs = self.$appForm.find("select,input[name!=YoutubeEmbedLink]");
 
         $appNameInput.blur(function () {
-           var currentMethod = setTimeout(function () {
+            var currentMethod = setTimeout(function () {
                 var value = $appNameInput.val(),
                     tagsArray = value.split(" "),
                     tagsExistingText = $tagsInput.val(),
@@ -409,12 +424,36 @@ $.WeReviewApp = {
                     var tags = uniqueArray.join(",");
                     $tagsInput.val(tags);
                 }
-               clearTimeout(currentMethod);
-           }, 500);
+                if (self.isAppTitleValid($appNameInput)) {
+                    generateUrl(self, url, value, token, $anchor, $anchorContent);
+                }
+                clearTimeout(currentMethod);
+            }, 500);
 
         });
     },
-
+    generateAppUrlDisplay: function (self, url, appTitle, token, $anchor, $anchorContent) {
+        /// <summary>
+        /// Display app url from server, called from appNameOnBlur()
+        /// </summary>
+        /// <param name="self">$.WereViewApp</param>
+        /// <param name="url">url to get the app titl valid url.</param>
+        /// <param name="appTitle">Typed app title from user.</param>
+        /// <param name="token">Token</param>
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: url,
+            data: { id: appTitle, __RequestVerificationToken: token }
+        }).done(function (response) {
+            var appUrl = response.url;
+            $anchorContent.text(appUrl);
+            $anchor.attr("href", appUrl);
+        }).error(function () {
+            $anchorContent.text("Error ! Please be in touch with admin via contact us page.");
+            $anchor.attr("href", "");
+        }); // ajax end
+    },
     /*
      * This method is related to display contents 
      * when **only** app-posting page is ready (not submitting)
@@ -454,13 +493,13 @@ $.WeReviewApp = {
 
             if (self.$appFormPost.length > 0) {
                 // app posting
-                self.appPostingPageOnReady();
+                self.appPostingPageOnReady(); // app creating
 
                 // Only sends to draft if in the app posting page.
                 $(window).bind("beforeunload", self.beforeUnloadEvent);
             } else if (self.$appFormEdit.length > 0) {
                 // app editing
-                self.appEditingPageOnReady();
+                self.appEditingPageOnReady(); // app editing
             }
 
             // .app-editing-page class represent both editing and posting
@@ -496,7 +535,7 @@ $.WeReviewApp = {
             $(".selectpicker,select").change(appTitleValidate);
             // to validate the app-name, triggering blur on app-name field
             $("#PlatformVersion").blur(appTitleValidate);
-            
+
         }
     },
 
