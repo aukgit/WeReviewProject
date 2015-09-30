@@ -1,20 +1,15 @@
 ﻿#region using block
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Helpers;
 using System.Web.Mvc;
 using WereViewApp.Models.EntityModel.Structs;
+using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WereViewApp.WereViewAppCommon;
 using DevTrends.MvcDonutCaching;
-using WereViewApp.Helpers;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Cache;
-using WereViewApp.Modules.InternetProtocolRelations;
 using WereViewApp.Modules.Session;
 
 #endregion
@@ -104,6 +99,8 @@ namespace WereViewApp.Controllers {
         #endregion
 
         [OutputCache(CacheProfile = "TenMins", VaryByParam = "id")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult GetTags(string id) {
             if (SessionNames.IsValidationExceed("GetTags", 500) || string.IsNullOrWhiteSpace(id)) {
                 return Json(null, JsonRequestBehavior.AllowGet);
@@ -138,11 +135,11 @@ namespace WereViewApp.Controllers {
             }
             using (var db = new WereViewAppEntities()) {
                 var algorithms = new Algorithms();
-                var generatedUrl = algorithms.GenerateURLValid(app.PlatformVersion, app.CategoryID, app.AppName, app.PlatformID,
-                    db, app.AppID);
+
+                app.URL = algorithms.GenerateUrlValid(app, db);
 
                 var sender = new {
-                    url = generatedUrl
+                    url = app.GetAppUrlWithoutHostName()
                 };
                 return Json(sender, JsonRequestBehavior.AllowGet);
             };

@@ -446,7 +446,7 @@ namespace WereViewApp.WereViewAppCommon {
             IQueryable<App> appsSimilarNameAnd = null;
             bool isSearchable = false;
 
-            var url = GenerateURLValid(searchText);
+            var url = GenerateUrlValid(searchText);
             var validUrlList = GetUrlListExceptEscapeSequence(url);
             byte? platformId = null;
             if (platform != null) {
@@ -1092,6 +1092,7 @@ namespace WereViewApp.WereViewAppCommon {
         #region Generate URL
 
         #region Generate Valid
+
         /// <summary>
         /// Create url but also check if existing one is there.
         /// and add 2 if same one exist.
@@ -1100,8 +1101,10 @@ namespace WereViewApp.WereViewAppCommon {
         /// <param name="categoryId"></param>
         /// <param name="title"></param>
         /// <param name="platformId"></param>
-        /// <returns></returns>
-        public string GenerateURLValid(double platformVersion, short categoryId, string title, byte platformId, WereViewAppEntities db, long currentAppId) {
+        /// <param name="db">Must pass a db, otherwise it will throw an exception.</param>
+        /// <param name="currentAppId">Put -1 if the app is not created. If created then give the app id.</param>
+        /// <returns>Returns url using hyphen(-). E.g. title app name => title-app-name. Note: Must get a valid url.</returns>
+        public string GenerateUrlValid(double platformVersion, short categoryId, string title, byte platformId, WereViewAppEntities db, long currentAppId) {
             if (!string.IsNullOrEmpty(title)) {
                 title = title.Trim();
                 title = Regex.Replace(title, CommonVars.FriendlyUrlRegex, "-").ToLower();
@@ -1111,7 +1114,6 @@ namespace WereViewApp.WereViewAppCommon {
                     exist = db.Apps.Any(n => n.PlatformVersion == platformVersion && n.CategoryID == categoryId && n.URL == title && n.PlatformID == platformId);
                 } else {
                     exist = db.Apps.Any(n => n.AppID != currentAppId && n.PlatformVersion == platformVersion && n.CategoryID == categoryId && n.URL == title && n.PlatformID == platformId);
-
                 }
 
                 if (exist) {
@@ -1123,19 +1125,27 @@ namespace WereViewApp.WereViewAppCommon {
             }
             return title;
         }
+        /// <summary>
+        /// Create url but also check if existing one is there.
+        /// and add 2 if same one exist.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="db">Must pass a db, otherwise it will throw an exception.</param>
+        /// <returns>Returns url using hyphen(-). E.g. title app name => title-app-name. Note: Must get a valid url.</returns>
+        public string GenerateUrlValid(App app, WereViewAppEntities db) {
+            return GenerateUrlValid(app.PlatformVersion, app.CategoryID, app.AppName, app.PlatformID, db, app.AppID);
+        }
 
         #endregion
 
         #region Generate URL not valid one
         /// <summary>
-        /// Create url , don't check if exist one
+        /// Create url , don't check if exist one.
+        /// It is used for searching. Whatever search phrase is given , it converts it to url and look exact match at the database level.
         /// </summary>
-        /// <param name="platformVersion"></param>
-        /// <param name="categoryId"></param>
-        /// <param name="title"></param>
-        /// <param name="platformId"></param>
-        /// <returns></returns>
-        public string GenerateURLValid(string title) {
+        /// <param name="title">Give the search string.</param>
+        /// <returns>Returns url using hyphen(-). E.g. title app name => title-app-name</returns>
+        public string GenerateUrlValid(string title) {
             if (!string.IsNullOrEmpty(title)) {
                 title = title.Trim();
                 title = Regex.Replace(title, CommonVars.FriendlyUrlRegex, "-").ToLower();

@@ -33,7 +33,7 @@ $.WeReviewApp = {
     isTesting: false,
     draftSavingFailedErrorMsg: "Sorry couldn't save the draft , possible reason maybe connection lost or your draft buffer is exceeded.",
     numberOfDraftPossible: 10,
-    invalidAttrName: "data-is-validate",
+    appTitleValidAttrName: "data-server-validated",
     galleryImageUploaderId: 0,
     maxTryInputSubmit: 250,
     sendingDraftNumber: 0,
@@ -203,20 +203,23 @@ $.WeReviewApp = {
         //}
     },
 
-    isAppTitleValid: function ($appNamejQuery) {
-        var $appName = null;
-        if (_.isEmpty($appNamejQuery)) {
+    isAppTitleValid: function ($appNameInputTextbox) {
+        /// <summary>
+        /// Check if the app name or title is valid or not.
+        /// </summary>
+        /// <param name="$appNameInputTextbox"></param>
+        var $appName = $appNameInputTextbox;
+        if (_.isEmpty($appNameInputTextbox)) {
             $appName = $("#AppName");
         }
         if ($appName.length > 0) {
-            var hasValidAttr = $appName.attr($.WeReviewApp.invalidAttrName);
+            var hasValidAttr = $appName.attr($.WeReviewApp.appTitleValidAttrName);
 
             if (hasValidAttr && $appName.valid()) {
                 return true;
-            } else {
-                return false;
             }
         }
+        return false;
     },
 
     // before app editing submit
@@ -388,24 +391,31 @@ $.WeReviewApp = {
         var self = $.WeReviewApp,
             $anchor = $.byId("app-url-link"),
             $anchorContent = $.byId("app-url-content"),
-            $serverWrapper = $.byId("server-validation-form"),
-            $tokenField = $serverWrapper.find("[name=__RequestVerificationToken]"),
-            token = $tokenField.val(),
+            //$serverWrapper = $.byId("server-validation-form"),
+            //$tokenField = $serverWrapper.find("[name=__RequestVerificationToken]"),
+            //token = $tokenField.val(),
             url = self.appUrlRetrievalUrl,
             generateUrl = self.generateAppUrlDisplay,
             $appNameInput = $.byId("AppName"),
             $tagsInput = $.byId("Tags"),
-            previousText = null;
+            previousText = null,
+            $appUrlSpinner = $.byId("app-url-spinner-icon");
         //var $formInputs = self.$appForm.find("select,input[name!=YoutubeEmbedLink]");
 
         $appNameInput.blur(function () {
+            $appUrlSpinner.removeClass("hide");
             var currentMethod = setTimeout(function () {
                 var value = $appNameInput.val(),
                     tagsArray = value.split(" "),
                     tagsExistingText = $tagsInput.val(),
                     existingTagsArray = tagsExistingText.split(",");
-
+                // generate app url in the display.
+                if (self.isAppTitleValid($appNameInput)) {
+                    generateUrl(self, url, value, $anchor, $anchorContent);
+                    $appUrlSpinner.addClass("hide");
+                }
                 if (previousText !== value) {
+                    
                     previousText = value;
                     if (!_.isEmpty(value)) {
                         tagsArray.push(value.trim());
@@ -424,15 +434,13 @@ $.WeReviewApp = {
                     var tags = uniqueArray.join(",");
                     $tagsInput.val(tags);
                 }
-                if (self.isAppTitleValid($appNameInput)) {
-                    generateUrl(self, url, value, token, $anchor, $anchorContent);
-                }
+                
                 clearTimeout(currentMethod);
-            }, 500);
+            }, 600);
 
         });
     },
-    generateAppUrlDisplay: function (self, url, appTitle, token, $anchor, $anchorContent) {
+    generateAppUrlDisplay: function (self, url, appTitle, $anchor, $anchorContent) {
         /// <summary>
         /// Display app url from server, called from appNameOnBlur()
         /// </summary>
@@ -440,11 +448,13 @@ $.WeReviewApp = {
         /// <param name="url">url to get the app titl valid url.</param>
         /// <param name="appTitle">Typed app title from user.</param>
         /// <param name="token">Token</param>
+        var data = self.$appForm.serializeArray();
+        console.log(data);
         $.ajax({
             type: "POST",
             dataType: "JSON",
             url: url,
-            data: { id: appTitle, __RequestVerificationToken: token }
+            data: data
         }).done(function (response) {
             var appUrl = response.url;
             $anchorContent.text(appUrl);
@@ -528,13 +538,14 @@ $.WeReviewApp = {
                     triggerAppNameValidateTimeOut = setTimeout(function () {
                         $("#AppName").trigger("blur");
                         clearTimeout(triggerAppNameValidateTimeOut);
-                    }, 300);
+                    }, 500);
                 };
             // triggering appname blur when change any of these.
             // Because all are related to URL generate.
             $(".selectpicker,select").change(appTitleValidate);
             // to validate the app-name, triggering blur on app-name field
-            $("#PlatformVersion").blur(appTitleValidate);
+            $.byId("PlatformVersion").blur(appTitleValidate);
+            $.byId("PlatformID").blur(appTitleValidate);
 
         }
     },

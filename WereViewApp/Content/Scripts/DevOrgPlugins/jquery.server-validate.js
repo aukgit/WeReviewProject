@@ -89,6 +89,17 @@
             }
         };
 
+
+    var customEvent = new CustomEvent("SpecialMessage",
+      {
+          plugin:
+          {
+              $divContainer : [],
+              $input: [],
+          },
+          bubbles: true,
+          cancelable: true
+      });
     // The actual plugin constructor
     var plugin = function ($divElement, $input, settings, additionalFields) {
         /// <summary>

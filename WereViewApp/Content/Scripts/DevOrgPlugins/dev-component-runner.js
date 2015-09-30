@@ -170,17 +170,23 @@ $.devOrg.runner = function() {
 
 
     var makeTagLive =  function () {
-        var $createdTags = $(".tag-inputs").tagsinput({
-            typeahead: {
-                source: function (query) {
-                    return $.get('/Partials/GetTags/' + query).done(function (response) {
-                        console.log("tags:");
-                        console.log("response:");
-                        console.log(response);
-                    });
+        var $createdTags = $(".tag-inputs");
+        if ($createdTags.length > 0) {
+            var $tokenField = $("[name='__RequestVerificationToken']"),
+                token = $tokenField.val();
+            $createdTags.tagsinput({
+                typeahead: {
+                    source: function (query) {
+                        return $.post('/Partials/GetTags/', { id: query, __RequestVerificationToken: token }).done(function (response) {
+                            //console.log("tags:");
+                            //console.log("response:");
+                            //console.log(response);
+                        });
+                    }
                 }
-            }
-        });
+            });    
+        }
+        
     }
 
     makeTagLive.apply();
