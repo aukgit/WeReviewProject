@@ -40,6 +40,7 @@
             hideOnValidation: false,
             clientSideValidationRegxPattern: "",
             submitMethod: "post",
+            eventsNameSpace: "jq.validate.",
             $directContainer: [],
             url: "",
             messages: {
@@ -90,16 +91,7 @@
         };
 
 
-    var customEvent = new CustomEvent("SpecialMessage",
-      {
-          plugin:
-          {
-              $divContainer : [],
-              $input: [],
-          },
-          bubbles: true,
-          cancelable: true
-      });
+
     // The actual plugin constructor
     var plugin = function ($divElement, $input, settings, additionalFields) {
         /// <summary>
@@ -196,7 +188,15 @@
         },
         init: function ($divElement) {
             if (this.isValidForProcessing($divElement)) {
+                this.events.plugin = self;
+                this.events.names.plugin = self;
+
+
+                this.events.bindAllEvents();
+    
+
                 this.processDiv($divElement);
+            
             }
         },
         getSettings: function () {
@@ -214,6 +214,122 @@
         dontSendSameRequestTwice: function () {
             return this.getSettings().dontSendSameRequestTwice;
         },
+
+        events: {
+            plugin: null,
+            names : {
+                plugin: null,
+                serverProcessStart: "serverProcessStart",
+                serverProcessSucceeded: "serverProcessSucceeded",
+                serverProcessFailed: "serverProcessFailed",
+                serverProcessRunning: "serverProcessRunning",
+                serverProcessReturnedAlways: "serverProcessReturnedAlways",
+                hideIcons: "hideIcons",
+                createIcon: "createIcon",
+                showingSpinnerIcon: "showingSpinnerIcon",
+                typingStart: "typingStart",
+                getName: function(nameOfEvent) {
+                    var plugin = this.plugin,
+                        settings = plugin.getSettings(),
+                        nameSpace = settings.eventsNameSpace,
+                        inputId = plugin.getInputNameOrId();
+                     return nameSpace + inputId + "." + nameOfEvent;
+                }
+            },
+            createCustomEvent: function (nameOfEvent) {
+                var plugin = this.plugin,
+                    $div = plugin.$element,
+                    $input = plugin.$input,
+                    settings = plugin.getSettings(),
+                    nameSpace = settings.eventsNameSpace,
+                    inputId = plugin.getInputNameOrId(),
+                    finalEventName = nameSpace + inputId + "." + nameOfEvent;
+
+                var event = this[finalEventName];
+                if (plugin.isEmpty(event)) {
+                    console.log("Event Created: " + finalEventName);
+                    event = new CustomEvent(finalEventName,
+                    {
+                        attr: {
+                            id: inputId,
+                            $input: $input,
+                            $divContainer: $div,
+                            eventName: nameOfEvent,
+                            finalEventName: finalEventName,
+                            plugin: plugin,
+                            settings: settings
+                        },
+                        bubbles: true,
+                        cancelable: true
+                    });
+                    this[finalEventName] = event;
+                }
+
+                return event;
+
+            },
+            createServerProcessStart: function () {
+                return this.createCustomEvent("sendRequstToServer");
+            },
+
+            createServerProcessSucceeded: function () {
+                return this.createCustomEvent("serverProcessSucceeded");
+            },
+
+            createServerProcessFailed: function () {
+                return this.createCustomEvent("serverProcessFailed");
+            },
+
+            createServerProcessRunning: function () {
+                return this.createCustomEvent("serverProcessRunning");
+            },
+            createServerProcessReturnedAlways: function () {
+                return this.createCustomEvent("serverProcessReturnedAlways");
+            },
+            
+            createHideIcons: function () {
+                return this.createCustomEvent("hideIcons");
+            },
+            bindAllEvents: function() {
+                /// <summary>
+                /// Bind all events
+                /// </summary>
+
+
+                var plugin = this.plugin,
+                    evtNames = this.names,
+                    getEventName = evtNames.getName,
+                    createIconEvtName = getEventName(evtNames.createIcon),
+                    hideIconEvtName = getEventName(evtNames.hideIcons),
+                    serverStartEvtName = getEventName(evtNames.serverProcessStart),
+                    serverSuccessEvtName = getEventName(evtNames.serverProcessSucceeded),
+                    serverFailEvtName = getEventName(evtNames.serverProcessFailed),
+                    serverAlwaysEvtName = getEventName(evtNames.serverProcessReturnedAlways);
+
+
+                // create the events
+                this.createServerProcessStart();
+                this.createServerProcessRunning();
+                this.createServerProcessSucceeded();
+                this.createServerProcessFailed();
+                this.createServerProcessReturnedAlways();
+                this.createHideIcons();
+                this.createCustomEvent(evtNames.createIcon);
+                this.createCustomEvent(evtNames.showingSpinnerIcon);
+                this.createCustomEvent(evtNames.typingStart);
+
+
+                //bind events
+                var $div = plugin.$element,
+                    $input = plugin.$input;
+                $input.on(createIconEvtName, function() {
+
+                });
+
+
+            }
+        },
+
         getAttributes: function () {
             return this.getSettings().attributes;
         },
@@ -300,10 +416,13 @@
             self.hideErrorIcon($input);
             self.hideValidIcon($input);
         },
+
+        // processing
         inputProcessWithBlurEvent: function ($div, $input, url) {
             var self = this,
                 //settings = this.getSettings(),
-                isIconsVisible = true;
+                isIconsVisible = true,
+                eventsNames = self.events.names;
 
             var hideIcons = function () {
                 if (isIconsVisible === true) {
@@ -328,8 +447,10 @@
 
                         if (isRequstValid) {
                             var fields = self.concatAdditionalFields($input);
-
+                            hideIcons();
                             self.sendRequest($div, $input, url, fields);
+                            isIconsVisible = true;
+
                         }
                         if (self.getSettings().focusPersistIfNotValid) {
                             self.focusIfnotValid($input);
@@ -337,17 +458,17 @@
                     }
                 }
             };
+   
+
             var timeOutMethod;
             $input.on("blur", function (evt) {
-                timeOutMethod = setTimeout(function () {
-                    hideIcons();
-                    blurEvent(evt, url);
-                    isIconsVisible = true;
-                    clearTimeout(timeOutMethod);
-                }, 500);
+               
             });
-            $input.on("keypress", function () {
-                hideIcons();
+            $input.on("keypress", function (evt) {
+                timeOutMethod = setTimeout(function () {
+                    blurEvent(evt, url);
+                    clearTimeout(timeOutMethod);
+                }, 600);
             });
         },
 
@@ -437,7 +558,6 @@
                 console.log("Request failed: " + exceptionMessage + ". Url : " + url);
             });
 
-
         },
         errorProcess: function ($div, $input, jqXHR, textStatus, exceptionMessage, url) {
             var code = jqXHR.status,
@@ -477,7 +597,8 @@
             }
             return attr === "true";
         },
-        getInputNameOrId: function ($input) {
+        getInputNameOrId: function () {
+            var $input = this.$input;
             var id = $input.attr('id');
             if (this.isEmpty(id)) {
                 id = $input.attr('name');
