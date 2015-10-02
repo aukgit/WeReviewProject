@@ -236,60 +236,42 @@
                      return nameSpace + inputId + "." + nameOfEvent;
                 }
             },
-            createCustomEvent: function (nameOfEvent) {
+            getEventsCommonAttributes: function (nameOfEvent, additionalAttributes) {
+                /// <summary>
+                /// Returns a json with a combination of additional json attributes.
+                /// </summary>
+                /// <param name="nameOfEvent">Name of the event, eg. serverProcessStart</param>
+                /// <param name="additionalAttributes">Json object</param>
                 var plugin = this.plugin,
                     $div = plugin.$element,
                     $input = plugin.$input,
                     settings = plugin.getSettings(),
-                    nameSpace = settings.eventsNameSpace,
                     inputId = plugin.getInputNameOrId(),
-                    finalEventName = nameSpace + inputId + "." + nameOfEvent;
+                    finalEventName = this.names.getName(nameOfEvent);
 
                 var event = this[finalEventName];
                 if (plugin.isEmpty(event)) {
                     console.log("Event Created: " + finalEventName);
-                    event = new CustomEvent(finalEventName,
-                    {
-                        attr: {
-                            id: inputId,
-                            $input: $input,
-                            $divContainer: $div,
-                            eventName: nameOfEvent,
-                            finalEventName: finalEventName,
-                            plugin: plugin,
-                            settings: settings
-                        },
-                        bubbles: true,
-                        cancelable: true
-                    });
+                    event = {
+                        id: inputId,
+                        name: $input.attr("name"),
+                        $input: $input,
+                        $divContainer: $div,
+                        eventName: nameOfEvent,
+                        finalEventName: finalEventName,
+                        plugin: plugin,
+                        settings: settings
+                    };
+
+                    event = $.extend({}, event, additionalAttributes);
+
                     this[finalEventName] = event;
                 }
 
                 return event;
 
             },
-            createServerProcessStart: function () {
-                return this.createCustomEvent("sendRequstToServer");
-            },
-
-            createServerProcessSucceeded: function () {
-                return this.createCustomEvent("serverProcessSucceeded");
-            },
-
-            createServerProcessFailed: function () {
-                return this.createCustomEvent("serverProcessFailed");
-            },
-
-            createServerProcessRunning: function () {
-                return this.createCustomEvent("serverProcessRunning");
-            },
-            createServerProcessReturnedAlways: function () {
-                return this.createCustomEvent("serverProcessReturnedAlways");
-            },
-            
-            createHideIcons: function () {
-                return this.createCustomEvent("hideIcons");
-            },
+       
             bindAllEvents: function() {
                 /// <summary>
                 /// Bind all events
@@ -307,26 +289,37 @@
                     serverAlwaysEvtName = getEventName(evtNames.serverProcessReturnedAlways);
 
 
-                // create the events
-                this.createServerProcessStart();
-                this.createServerProcessRunning();
-                this.createServerProcessSucceeded();
-                this.createServerProcessFailed();
-                this.createServerProcessReturnedAlways();
-                this.createHideIcons();
-                this.createCustomEvent(evtNames.createIcon);
-                this.createCustomEvent(evtNames.showingSpinnerIcon);
-                this.createCustomEvent(evtNames.typingStart);
-
 
                 //bind events
                 var $div = plugin.$element,
-                    $input = plugin.$input;
-                $input.on(createIconEvtName, function() {
+                    $input = plugin.$input,
+                    url = this.getUrl(),
+                    sendRequest = plugin.sendRequest,
+                    getAdditionalFields = plugin.concatAdditionalFields;
 
+                // server events
+
+                // start
+                $input.on(serverStartEvtName, function () {
+                    var fields = getAdditionalFields($input);
+                    sendRequest($div, $input, url, fields);
+                });
+
+                $div.on(serverStartEvtName, function () {
+                    $input.trigger(serverStartEvtName);
                 });
 
 
+                // success
+                $input.on(serverSuccessEvtName, function () {
+                    var fields = getAdditionalFields($input);
+                    sendRequest($div, $input, url, fields);
+                });
+
+                $div.on(serverSuccessEvtName, function () {
+                    $input.trigger(serverSuccessEvtName);
+                });
+    
             }
         },
 
@@ -446,9 +439,7 @@
                         isRequstValid = (validationRequires && $input.valid()) || !validationRequires;
 
                         if (isRequstValid) {
-                            var fields = self.concatAdditionalFields($input);
                             hideIcons();
-                            self.sendRequest($div, $input, url, fields);
                             isIconsVisible = true;
 
                         }
@@ -519,7 +510,13 @@
             }
         },
         sendRequest: function ($div, $input, url, sendingFields) {
-
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="$div"></param>
+            /// <param name="$input"></param>
+            /// <param name="url"></param>
+            /// <param name="sendingFields"></param>
             var method = this.getSubmitMethod($input),
                 self = this,
                 isInTestingMode = self.isDebugging,
