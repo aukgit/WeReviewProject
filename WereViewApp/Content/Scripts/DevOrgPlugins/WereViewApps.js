@@ -400,11 +400,15 @@ $.WeReviewApp = {
             $tagsInput = $.byId("Tags"),
             previousText = null,
             $appUrlSpinner = $.byId("app-url-spinner-icon");
+        var currentMethod = null;
         //var $formInputs = self.$appForm.find("select,input[name!=YoutubeEmbedLink]");
 
         $appNameInput.blur(function () {
             $appUrlSpinner.removeClass("hide");
-            var currentMethod = setTimeout(function () {
+            if (currentMethod !== null) {
+                clearTimeout(currentMethod);
+            }
+            currentMethod = setTimeout(function () {
                 var value = $appNameInput.val(),
                     tagsArray = value.split(" "),
                     tagsExistingText = $tagsInput.val(),
@@ -415,7 +419,7 @@ $.WeReviewApp = {
                     $appUrlSpinner.addClass("hide");
                 }
                 if (previousText !== value) {
-                    
+
                     previousText = value;
                     if (!_.isEmpty(value)) {
                         tagsArray.push(value.trim());
@@ -434,8 +438,7 @@ $.WeReviewApp = {
                     var tags = uniqueArray.join(",");
                     $tagsInput.val(tags);
                 }
-                
-                clearTimeout(currentMethod);
+
             }, 600);
 
         });
@@ -533,13 +536,27 @@ $.WeReviewApp = {
             // enter to go next
             $.devOrg.enterToNextTextBoxWithoutTags(self.$appForm, true, false); // means both editing and posting
 
+
+            var $appNameInput = $.byId("AppName");
+
             var triggerAppNameValidateTimeOut,
                 appTitleValidate = function () {
+                    clearTimeout(triggerAppNameValidateTimeOut);
                     triggerAppNameValidateTimeOut = setTimeout(function () {
-                        $("#AppName").trigger("blur");
-                        clearTimeout(triggerAppNameValidateTimeOut);
+                        $appNameInput.trigger("blur");
                     }, 500);
                 };
+
+            $appNameInput.on("jq.validate.AppName.serverProcessReturnedAlways", function (evt) {
+                console.log(evt);
+                console.log(evt.data);
+            });
+
+            var events = $._data($appNameInput[0], "events").jq;
+            for (var i = 0; i < events.length; i++) {
+                console.log(events[i].data);
+            }
+
             // triggering appname blur when change any of these.
             // Because all are related to URL generate.
             $(".selectpicker,select").change(appTitleValidate);

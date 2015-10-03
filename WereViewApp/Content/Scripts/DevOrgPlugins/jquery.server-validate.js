@@ -187,16 +187,11 @@
             return variable === null || variable === undefined || variable.length === 0;
         },
         init: function ($divElement) {
+            this.events.plugin = this;
+            this.events.names.plugin = this;
             if (this.isValidForProcessing($divElement)) {
-                this.events.plugin = self;
-                this.events.names.plugin = self;
-
-
                 this.events.bindAllEvents();
-    
-
                 this.processDiv($divElement);
-            
             }
         },
         getSettings: function () {
@@ -217,7 +212,7 @@
 
         events: {
             plugin: null,
-            names : {
+            names: {
                 plugin: null,
                 serverProcessStart: "serverProcessStart",
                 serverProcessSucceeded: "serverProcessSucceeded",
@@ -228,12 +223,14 @@
                 createIcon: "createIcon",
                 showingSpinnerIcon: "showingSpinnerIcon",
                 typingStart: "typingStart",
-                getName: function(nameOfEvent) {
+                getName: function (nameOfEvent) {
                     var plugin = this.plugin,
                         settings = plugin.getSettings(),
                         nameSpace = settings.eventsNameSpace,
-                        inputId = plugin.getInputNameOrId();
-                     return nameSpace + inputId + "." + nameOfEvent;
+                        inputId = plugin.getInputNameOrId(),
+                        finalName = nameSpace + inputId + "." + nameOfEvent;
+                    //console.log(finalName);
+                    return finalName;
                 }
             },
             getEventsCommonAttributes: function (nameOfEvent, additionalAttributes) {
@@ -251,7 +248,7 @@
 
                 var event = this[finalEventName];
                 if (plugin.isEmpty(event)) {
-                    console.log("Event Created: " + finalEventName);
+                    //console.log("Event Created: " + finalEventName);
                     event = {
                         id: inputId,
                         name: $input.attr("name"),
@@ -271,55 +268,109 @@
                 return event;
 
             },
-       
-            bindAllEvents: function() {
+
+            bindAllEvents: function () {
                 /// <summary>
                 /// Bind all events
                 /// </summary>
 
 
                 var plugin = this.plugin,
+                    isInTestingMode = plugin.isDebugging,
                     evtNames = this.names,
-                    getEventName = evtNames.getName,
-                    createIconEvtName = getEventName(evtNames.createIcon),
-                    hideIconEvtName = getEventName(evtNames.hideIcons),
-                    serverStartEvtName = getEventName(evtNames.serverProcessStart),
-                    serverSuccessEvtName = getEventName(evtNames.serverProcessSucceeded),
-                    serverFailEvtName = getEventName(evtNames.serverProcessFailed),
-                    serverAlwaysEvtName = getEventName(evtNames.serverProcessReturnedAlways);
+                    //createIconEvtName = evtNames.getName(evtNames.createIcon),
+                    //hideIconEvtName = evtNames.getName(evtNames.hideIcons),
+                    serverStartEvtName = evtNames.getName(evtNames.serverProcessStart),
+                    serverSuccessEvtName = evtNames.getName(evtNames.serverProcessSucceeded),
+                    serverFailEvtName = evtNames.getName(evtNames.serverProcessFailed),
+                    serverAlwaysEvtName = evtNames.getName(evtNames.serverProcessReturnedAlways);
 
 
 
                 //bind events
                 var $div = plugin.$element,
                     $input = plugin.$input,
-                    url = this.getUrl(),
+                    url = plugin.getUrl(),
                     sendRequest = plugin.sendRequest,
-                    getAdditionalFields = plugin.concatAdditionalFields;
+                    cachedResponse;
 
                 // server events
 
                 // start
-                $input.on(serverStartEvtName, function () {
-                    var fields = getAdditionalFields($input);
-                    sendRequest($div, $input, url, fields);
+
+                var serverStartEventData = this.getEventsCommonAttributes(evtNames.serverProcessStart, {
+                    url: url
+                });
+                $input.on(serverStartEvtName, serverStartEventData, function (evt) {
+                    console.log(evt.data.finalEventName);
+                    var fields = plugin.concatAdditionalFields($input);
+                    sendRequest(plugin, $div, $input, url, fields);
                 });
 
-                $div.on(serverStartEvtName, function () {
-                    $input.trigger(serverStartEvtName);
+                $div.on(serverStartEvtName, serverStartEventData, function (evt) {
+                    console.log("div: " + evt.data.finalEventName);
+                    //$input.trigger(serverStartEvtName);
                 });
 
 
                 // success
-                $input.on(serverSuccessEvtName, function () {
-                    var fields = getAdditionalFields($input);
-                    sendRequest($div, $input, url, fields);
+                var serverSuccessEventData = this.getEventsCommonAttributes(evtNames.serverProcessSucceeded, {
+                    url: url
+                });
+                $input.on(serverSuccessEvtName, serverSuccessEventData, function (evt, response) {
+                    console.log(evt.data.finalEventName);
+                    cachedResponse = response;
+                    if (isInTestingMode) {
+                        console.log(response);
+                    }
+                    evt.data.response = response;
+                    plugin.hideAllIcons($div); // hide all the icons
+                    plugin.markAsProcessing($div, false);
+                    plugin.processResponse($input, response);
+                    $div.attr("data-icon-added", "true");
+                    //icons show/hide
+                    plugin.hideSpinner($input);
                 });
 
-                $div.on(serverSuccessEvtName, function () {
-                    $input.trigger(serverSuccessEvtName);
+                $div.on(serverSuccessEvtName, serverSuccessEventData, function (evt, response) {
+                    evt.data.response = cachedResponse;
+                    console.log("div: " + evt.data.finalEventName);
+                    //$input.trigger(serverSuccessEvtName, [response]);
                 });
-    
+
+                // failed
+                var serverFailEventData = this.getEventsCommonAttributes(evtNames.serverProcessFailed, {
+                    url: url
+                });
+                $input.on(serverFailEvtName, serverFailEventData, function (evt, jqXHR, textStatus, exceptionMessage) {
+                    console.log(evt.data.finalEventName);
+                    plugin.hideAllIcons($div); // hide all the icons
+                    plugin.hideSpinner($input);
+                    plugin.errorProcess($div, $input, jqXHR, textStatus, exceptionMessage, url);
+                    console.log("Request failed: " + exceptionMessage + ". Url : " + url);
+                });
+
+                $div.on(serverFailEvtName, serverFailEventData, function (evt, jqXHR, textStatus, exceptionMessage) {
+                    console.log("div: " + evt.data.finalEventName);
+                    //$input.trigger(serverFailEvtName, [jqXHR, textStatus, exceptionMessage]);
+                });
+
+                // always
+                var serverAlwaysEventData = this.getEventsCommonAttributes(evtNames.serverProcessReturnedAlways, {
+                    url: url
+                });
+                $input.on(serverAlwaysEvtName, serverAlwaysEventData, function (evt) {
+                    evt.data.response = cachedResponse;
+                    console.log(evt.data.finalEventName);
+                    console.log(evt.data);
+                });
+
+                $div.on(serverAlwaysEvtName, serverAlwaysEventData, function (evt) {
+                    evt.data.response = cachedResponse;
+                    console.log("div: " + evt.data.finalEventName);
+                    //$input.trigger(serverAlwaysEvtName);
+                });
+
             }
         },
 
@@ -415,7 +466,8 @@
             var self = this,
                 //settings = this.getSettings(),
                 isIconsVisible = true,
-                eventsNames = self.events.names;
+                eventsNames = self.events.names,
+                serverProcessStartEvent = eventsNames.getName(eventsNames.serverProcessStart);
 
             var hideIcons = function () {
                 if (isIconsVisible === true) {
@@ -441,7 +493,7 @@
                         if (isRequstValid) {
                             hideIcons();
                             isIconsVisible = true;
-
+                            $input.trigger(serverProcessStartEvent);
                         }
                         if (self.getSettings().focusPersistIfNotValid) {
                             self.focusIfnotValid($input);
@@ -449,16 +501,18 @@
                     }
                 }
             };
-   
+
 
             var timeOutMethod;
-            $input.on("blur", function (evt) {
-               
-            });
+            //$input.on("blur", function (evt) {
+
+            //});
             $input.on("keypress", function (evt) {
+                if (!self.isEmpty(timeOutMethod)) {
+                    clearTimeout(timeOutMethod);
+                }
                 timeOutMethod = setTimeout(function () {
                     blurEvent(evt, url);
-                    clearTimeout(timeOutMethod);
                 }, 600);
             });
         },
@@ -509,7 +563,7 @@
                 $div.attr("data-icon-added", "true");
             }
         },
-        sendRequest: function ($div, $input, url, sendingFields) {
+        sendRequest: function (self, $div, $input, url, sendingFields) {
             /// <summary>
             /// 
             /// </summary>
@@ -517,42 +571,36 @@
             /// <param name="$input"></param>
             /// <param name="url"></param>
             /// <param name="sendingFields"></param>
-            var method = this.getSubmitMethod($input),
-                self = this,
-                isInTestingMode = self.isDebugging,
+            var method = self.getSubmitMethod($input),
                 events = self.getSettings().events;
-            if (!this.isEmpty(events.beforeSendingRequest)) {
+            if (!self.isEmpty(events.beforeSendingRequest)) {
                 events.beforeSendingRequest($div, $input, url, sendingFields);
             }
             //icons show/hide
             // Abort previous ajax request and hide all the icons
-            this.abortPreviousAjaxRequest($input);
+            self.abortPreviousAjaxRequest($input);
 
             self.markAsProcessing($div, true);
             self.setCurrentTextForNexttimeChecking($input);
             self.hideAllIcons($div); // hide all the icons
 
-            this.ajaxRequest = $.ajax({
+            var evtNames = self.events.names,
+                successEventName = evtNames.getName(evtNames.serverProcessSucceeded),
+                failedEventName = evtNames.getName(evtNames.serverProcessFailed),
+                alwaysEventName = evtNames.getName(evtNames.serverProcessReturnedAlways);
+
+            self.ajaxRequest = $.ajax({
                 method: method, // by default "GET"
                 url: url,
                 data: sendingFields, // PlainObject or String or Array
                 crossDomain: true,
                 dataType: "JSON" //, // "Text" , "HTML", "xml", "script" 
             }).done(function (response) {
-                if (isInTestingMode) {
-                    console.log(response);
-                }
-                self.hideAllIcons($div); // hide all the icons
-                self.markAsProcessing($div, false);
-                self.processResponse($input, response);
-                $div.attr("data-icon-added", "true");
-                //icons show/hide
-                self.hideSpinner($input);
+                $input.trigger(successEventName, [response]);
             }).fail(function (jqXHR, textStatus, exceptionMessage) {
-                self.hideAllIcons($div); // hide all the icons
-                self.hideSpinner($input);
-                self.errorProcess($div, $input, jqXHR, textStatus, exceptionMessage, url);
-                console.log("Request failed: " + exceptionMessage + ". Url : " + url);
+                $input.trigger(failedEventName, [jqXHR, textStatus, exceptionMessage]);
+            }).always(function () {
+                $input.trigger(alwaysEventName);
             });
 
         },
@@ -876,7 +924,7 @@
                 events.invalidBefore($div, $input, response);
             }
 
-            this.showInvalidIcon($input, response.errorCode + " : " + response.errorMessage);
+            this.showInvalidIcon($input, response.errorMessage);
             $div.attr("data-server-validated", validation)
                 .attr("data-message", msg);
             $input.attr("data-server-validated", validation)
