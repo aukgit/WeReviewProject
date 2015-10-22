@@ -126,7 +126,7 @@ namespace WereViewApp.Controllers {
         }
 
 
-        [OutputCache(CacheProfile = "VeryShort", VaryByParam = "id")]
+        [OutputCache(NoStore = true, Duration = 0)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GetAppUrl(App app) {

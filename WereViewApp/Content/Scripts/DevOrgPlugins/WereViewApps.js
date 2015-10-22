@@ -402,8 +402,7 @@ $.WeReviewApp = {
             $appUrlSpinner = $.byId("app-url-spinner-icon");
         var currentMethod = null;
         //var $formInputs = self.$appForm.find("select,input[name!=YoutubeEmbedLink]");
-
-        $appNameInput.blur(function () {
+        $appNameInput.on("jq.validate.AppName.serverProcessSucceeded", function () {
             $appUrlSpinner.removeClass("hide");
             if (currentMethod !== null) {
                 clearTimeout(currentMethod);
@@ -451,8 +450,13 @@ $.WeReviewApp = {
         /// <param name="url">url to get the app titl valid url.</param>
         /// <param name="appTitle">Typed app title from user.</param>
         /// <param name="token">Token</param>
-        var data = self.$appForm.serializeArray();
-        console.log(data);
+        var data = self.$appForm.serializeArray(),
+            combined = [];
+        for (var i = 1; i < 5; i++) {
+            var row = data[i];
+            combined.push(row.name + "=" + row.value);
+        }
+        console.log(combined.join("\n"));
         $.ajax({
             type: "POST",
             dataType: "JSON",
@@ -462,6 +466,7 @@ $.WeReviewApp = {
             var appUrl = response.url;
             $anchorContent.text(appUrl);
             $anchor.attr("href", appUrl);
+            console.log(response);
         }).error(function () {
             $anchorContent.text("Error ! Please be in touch with admin via contact us page.");
             $anchor.attr("href", "");
@@ -543,7 +548,7 @@ $.WeReviewApp = {
                 appTitleValidate = function () {
                     clearTimeout(triggerAppNameValidateTimeOut);
                     triggerAppNameValidateTimeOut = setTimeout(function () {
-                        $appNameInput.trigger("blur"); 
+                        $appNameInput.trigger("jq.validate.AppName.serverProcessStart");
                     }, 500);
                 };
 
