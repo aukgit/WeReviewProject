@@ -543,27 +543,25 @@ $.WeReviewApp = {
                 appTitleValidate = function () {
                     clearTimeout(triggerAppNameValidateTimeOut);
                     triggerAppNameValidateTimeOut = setTimeout(function () {
-                        $appNameInput.trigger("blur");
+                        $appNameInput.trigger("blur"); 
                     }, 500);
                 };
 
-            $appNameInput.on("jq.validate.AppName.serverProcessReturnedAlways", function (evt) {
-                console.log(evt);
-                console.log(evt.data);
-            });
-
-            var events = $._data($appNameInput[0], "events").jq;
-            for (var i = 0; i < events.length; i++) {
-                console.log(events[i].data);
-            }
-
+            //var events = $appNameInput[0].eventListenerList;
+            //console.log($appNameInput);
+            //console.log(events);
+            //for (var i = 0; i < events.length; i++) {
+            //    console.log(events[i].data);
+            //}
+            //$appNameInput.bind("jq.validate.AppName.serverProcessReturnedAlways", function (evt) {
+            //    console.log(evt);
+            //});
             // triggering appname blur when change any of these.
             // Because all are related to URL generate.
             $(".selectpicker,select").change(appTitleValidate);
             // to validate the app-name, triggering blur on app-name field
             $.byId("PlatformVersion").blur(appTitleValidate);
             $.byId("PlatformID").blur(appTitleValidate);
-
         }
     },
 

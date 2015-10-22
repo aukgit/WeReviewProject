@@ -247,28 +247,28 @@
                     finalEventName = this.names.getName(nameOfEvent);
 
                 var event = this[finalEventName];
-                if (plugin.isEmpty(event)) {
-                    //console.log("Event Created: " + finalEventName);
-                    var eventData = {
-                        data: {
-                            id: inputId,
-                            name: $input.attr("name"),
-                            $input: $input,
-                            $divContainer: $div,
-                            eventName: nameOfEvent,
-                            finalEventName: finalEventName,
-                            plugin: plugin,
-                            settings: settings
-                        },
-                        bubbles: true,
-                        cancelable: true
-                    };
+                //if (plugin.isEmpty(event)) {
+                //console.log("Event Created: " + finalEventName);
+                var eventData = {
+                    detail: {
+                        id: inputId,
+                        name: $input.attr("name"),
+                        $input: $input,
+                        $divContainer: $div,
+                        eventName: nameOfEvent,
+                        finalEventName: finalEventName,
+                        plugin: plugin,
+                        settings: settings
+                    },
+                    bubbles: true,
+                    cancelable: true
+                };
 
-                    eventData = $.extend({}, eventData.data, additionalAttributes);
-                    event = new CustomEvent(finalEventName, eventData);
-
-                    this[finalEventName] = event;
-                }
+                eventData.detail = $.extend({}, eventData.detail, additionalAttributes);
+                event = new CustomEvent(finalEventName, eventData);
+                console.log("Event Created : " + finalEventName);
+                //this[finalEventName] = event;
+                // }
 
                 return event;
 
@@ -279,10 +279,10 @@
                 /// Please make sure that the event is already created.
                 /// </summary>
                 /// <param name="$element"></param>
-                /// <param name="eventName"></param>
+                /// <param name="eventName">Give the final name of the event.</param>
                 /// <param name="executableFunction"></param>
-                /// <param name="bubbling"></param>
-                /// <returns type=""></returns>
+                /// <param name="bubbling">When bubbling empty it is false by default.</param>
+                /// <returns type="">returns </returns>
                 var plugin = this.plugin;
                 if (!plugin.isEmpty($element)) {
                     var elem = $element[0];
@@ -292,16 +292,22 @@
                         bubbling = !bubbling;
                     }
                     if (elem.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-                        x.addEventListener(eventName, executableFunction, bubbling);
-                    } else if (x.attachEvent) {                  // For IE 8 and earlier versions
-                        x.attachEvent(eventName, executableFunction);
+                        elem.addEventListener(eventName, executableFunction, bubbling);
+                    } else if (elem.attachEvent) {                  // For IE 8 and earlier versions
+                        elem.attachEvent(eventName, executableFunction);
                     }
                 }
             },
-            triggerEvent : function($element, additionalData ,nameOfEvent) {
-                var event = this.createOrGetCachedCustomEvent(nameOfEvent),
+            triggerEvent: function ($element, nameOfEvent, additionalData) {
+                /// <summary>
+                /// Trigger a particular event.
+                /// </summary>
+                /// <param name="$element">jQuery element which will be converted to DOM element. Please make sure element is passed.</param>
+                /// <param name="nameOfEvent">Name of the event: Eg. serverProcessStart (not the final name)</param>
+                /// <param name="additionalData"></param>
+                var event = this.createOrGetCachedCustomEvent(nameOfEvent, additionalData),
                     element = $element[0];
-                element.dispatch(event);
+                element.dispatchEvent(event);
             },
             bindAllEvents: function () {
                 /// <summary>
@@ -325,52 +331,52 @@
                 var $div = plugin.$element,
                     $input = plugin.$input,
                     url = plugin.getUrl(),
-                    sendRequest = plugin.sendRequest,
-                    cachedResponse;
+                    sendRequest = plugin.sendRequest;
 
                 // server events
 
-                // start
+                // creating start event
 
                 var serverStartEventData = this.createOrGetCachedCustomEvent(evtNames.serverProcessStart, {
                     url: url
                 });
                 this.addEventListener($input, serverStartEvtName, function (evt) {
-                    console.log(evt.data.finalEventName);
+                    console.log(evt.detail.finalEventName);
                     var fields = plugin.concatAdditionalFields($input);
                     sendRequest(plugin, $div, $input, url, fields);
                 });
 
 
-                // success
+                // creating success event
                 var serverSuccessEventData = this.createOrGetCachedCustomEvent(evtNames.serverProcessSucceeded, {
                     url: url
                 });
-                this.addEventListener($input, serverStartEvtName, function (evt) {
-                    console.log(evt.data.finalEventName);
-                    cachedResponse = response;
+                this.addEventListener($input, serverSuccessEvtName, function (evt) {
+                    console.log(evt.detail.finalEventName);
+                    var data = evt.detail;
                     if (isInTestingMode) {
-                        console.log(response);
+                        console.log(data.response);
                     }
-                    evt.data.response = response;
                     plugin.hideAllIcons($div); // hide all the icons
                     plugin.markAsProcessing($div, false);
-                    plugin.processResponse($input, response);
+                    plugin.processResponse($input, data.response);
                     $div.attr("data-icon-added", "true");
                     //icons show/hide
                     plugin.hideSpinner($input);
                 });
 
 
-                // failed
+                // creating failed event
                 var serverFailEventData = this.createOrGetCachedCustomEvent(evtNames.serverProcessFailed, {
                     url: url
                 });
-                $input.bind(serverFailEvtName, function (evt, jqXHR, textStatus, exceptionMessage) {
-                    console.log(evt.data.finalEventName);
+                this.addEventListener($input, serverFailEvtName, function (evt) {
+                    //, jqXHR, textStatus, exceptionMessage
+                    var data = evt.detail;
+                    console.log(evt.detail.finalEventName);
                     plugin.hideAllIcons($div); // hide all the icons
                     plugin.hideSpinner($input);
-                    plugin.errorProcess($div, $input, jqXHR, textStatus, exceptionMessage, url);
+                    plugin.errorProcess($div, $input, data.jqXHR, data.textStatus, data.exceptionMessage, data.url);
                     console.log("Request failed: " + exceptionMessage + ". Url : " + url);
                 });
 
@@ -380,12 +386,11 @@
                 var serverAlwaysEventData = this.createOrGetCachedCustomEvent(evtNames.serverProcessReturnedAlways, {
                     url: url
                 });
-                $input.bind(serverAlwaysEvtName, function (evt) {
-                    evt.data.response = cachedResponse;
-                    console.log(evt.data.finalEventName);
-                    console.log(evt.data);
+                this.addEventListener($input, serverAlwaysEvtName, function (evt) {
+                    console.log(evt.detail.finalEventName); 
+                    console.log(evt.detail);
                 });
-
+                
 
             }
         },
@@ -483,7 +488,8 @@
                 //settings = this.getSettings(),
                 isIconsVisible = true,
                 eventsNames = self.events.names,
-                serverProcessStartEvent = eventsNames.getName(eventsNames.serverProcessStart);
+                events = self.events,
+                serverProcessStartEvent = eventsNames.serverProcessStart;
 
             var hideIcons = function () {
                 if (isIconsVisible === true) {
@@ -509,7 +515,7 @@
                         if (isRequstValid) {
                             hideIcons();
                             isIconsVisible = true;
-                            $input.trigger(serverProcessStartEvent);
+                            events.triggerEvent($input, serverProcessStartEvent);
                         }
                         if (self.getSettings().focusPersistIfNotValid) {
                             self.focusIfnotValid($input);
@@ -588,6 +594,7 @@
             /// <param name="url"></param>
             /// <param name="sendingFields"></param>
             var method = self.getSubmitMethod($input),
+                eventsModule = self.events,
                 events = self.getSettings().events;
             if (!self.isEmpty(events.beforeSendingRequest)) {
                 events.beforeSendingRequest($div, $input, url, sendingFields);
@@ -601,9 +608,9 @@
             self.hideAllIcons($div); // hide all the icons
 
             var evtNames = self.events.names,
-                successEventName = evtNames.getName(evtNames.serverProcessSucceeded),
-                failedEventName = evtNames.getName(evtNames.serverProcessFailed),
-                alwaysEventName = evtNames.getName(evtNames.serverProcessReturnedAlways);
+                successEventName = evtNames.serverProcessSucceeded,
+                failedEventName = evtNames.serverProcessFailed,
+                alwaysEventName = evtNames.serverProcessReturnedAlways;
 
             self.ajaxRequest = $.ajax({
                 method: method, // by default "GET"
@@ -612,11 +619,11 @@
                 crossDomain: true,
                 dataType: "JSON" //, // "Text" , "HTML", "xml", "script" 
             }).done(function (response) {
-                $input.trigger(successEventName, [response]);
+                eventsModule.triggerEvent($input, successEventName, { response: response });
             }).fail(function (jqXHR, textStatus, exceptionMessage) {
-                $input.trigger(failedEventName, [jqXHR, textStatus, exceptionMessage]);
+                eventsModule.triggerEvent($input, failedEventName, { jqXHR: jqXHR, textStatus: textStatus, exceptionMessage: exceptionMessage });
             }).always(function () {
-                $input.trigger(alwaysEventName);
+                eventsModule.triggerEvent($input, alwaysEventName);
             });
 
         },
