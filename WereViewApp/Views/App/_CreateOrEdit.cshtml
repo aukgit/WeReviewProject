@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    @Html.EditorFor(model => model.Tags, "tag")
+    @Html.EditorFor(model => model.Tags, "tag", new { url = "/Partials/GetTags/" })
     @Html.EditorFor(model => model.Description, "Multiline", new { @class = "big-multiline" })
 </div>
 

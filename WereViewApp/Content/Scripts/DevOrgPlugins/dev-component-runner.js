@@ -174,22 +174,28 @@ $.devOrg.runner = function () {
         if ($createdTags.length > 0) {
             var $tokenField = $("[name='__RequestVerificationToken']"),
                 token = $tokenField.val();
-            $createdTags.tagsinput({
-                freeInput: true,
-                trimValue: true,
-                typeahead: {
-                    source: function (query) {
-                        return $.post('/Partials/GetTags/', { id: query, __RequestVerificationToken: token }).done(function (response) {
-                            //console.log("tags:");
-                            //console.log("response:");
-                            //console.log(response);
-                        });
+            for (var i = 0; i < $createdTags.length; i++) {
+                var $tagsInput = $($createdTags[0]),
+                    urlToPost = $tagsInput.attr("data-url");
+                //
+                $tagsInput.tagsinput({
+                    freeInput: true,
+                    trimValue: true,
+                    typeahead: {
+                        source: function (query) {
+                            return $.post(urlToPost, { id: query, __RequestVerificationToken: token }).done(function (response) {
+                                //console.log("tags:");
+                                //console.log("response:");
+                                //console.log(response);
+                            });
+                        }
+                    },
+                    onTagExists: function (item, $tag) {
+                        $tag.hide.fadeIn();
                     }
-                },
-                onTagExists: function (item, $tag) {
-                    $tag.hide.fadeIn();
-                }
-            });
+                });
+            }
+            
         }
 
     }
