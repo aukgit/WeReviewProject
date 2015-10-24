@@ -318,7 +318,7 @@
                     url: url
                 });
                 $input.on(serverSuccessEvtName, serverSuccessEventData, function (evt, response) {
-                    console.log(evt.data.finalEventName);
+                    //console.log(evt.data.finalEventName);
                     cachedResponse = response;
                     if (isInTestingMode) {
                         console.log(response);
@@ -343,15 +343,15 @@
                     url: url
                 });
                 $input.on(serverFailEvtName, serverFailEventData, function (evt, jqXHR, textStatus, exceptionMessage) {
-                    console.log(evt.data.finalEventName);
+                    //console.log(evt.data.finalEventName);
                     plugin.hideAllIcons($div); // hide all the icons
                     plugin.hideSpinner($input);
                     plugin.errorProcess($div, $input, jqXHR, textStatus, exceptionMessage, url);
-                    console.log("Request failed: " + exceptionMessage + ". Url : " + url);
+                    //console.log("Request failed: " + exceptionMessage + ". Url : " + url);
                 });
 
                 $div.on(serverFailEvtName, serverFailEventData, function (evt, jqXHR, textStatus, exceptionMessage) {
-                    console.log("div: " + evt.data.finalEventName);
+                    //console.log("div: " + evt.data.finalEventName);
                     //$input.trigger(serverFailEvtName, [jqXHR, textStatus, exceptionMessage]);
                 });
 
@@ -361,13 +361,13 @@
                 });
                 $input.on(serverAlwaysEvtName, serverAlwaysEventData, function (evt) {
                     evt.data.response = cachedResponse;
-                    console.log(evt.data.finalEventName);
-                    console.log(evt.data);
+                    //console.log(evt.data.finalEventName);
+                    //console.log(evt.data);
                 });
 
                 $div.on(serverAlwaysEvtName, serverAlwaysEventData, function (evt) {
-                    evt.data.response = cachedResponse;
-                    console.log("div: " + evt.data.finalEventName);
+                    //evt.data.response = cachedResponse;
+                    //console.log("div: " + evt.data.finalEventName);
                     //$input.trigger(serverAlwaysEvtName);
                 });
 

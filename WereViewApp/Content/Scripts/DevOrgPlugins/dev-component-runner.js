@@ -19,7 +19,7 @@
 
 $.devOrg = $.devOrg || {};
 
-$.devOrg.runner = function() {
+$.devOrg.runner = function () {
     $.devOrg.Constants = {
         registerForm: $("form.register-form"),
         userName: "UserName",
@@ -169,12 +169,14 @@ $.devOrg.runner = function() {
     serverValidationActivate();
 
 
-    var makeTagLive =  function () {
+    var makeTagLive = function () {
         var $createdTags = $(".tag-inputs");
         if ($createdTags.length > 0) {
             var $tokenField = $("[name='__RequestVerificationToken']"),
                 token = $tokenField.val();
             $createdTags.tagsinput({
+                freeInput: true,
+                trimValue: true,
                 typeahead: {
                     source: function (query) {
                         return $.post('/Partials/GetTags/', { id: query, __RequestVerificationToken: token }).done(function (response) {
@@ -183,10 +185,13 @@ $.devOrg.runner = function() {
                             //console.log(response);
                         });
                     }
+                },
+                onTagExists: function (item, $tag) {
+                    $tag.hide.fadeIn();
                 }
-            });    
+            });
         }
-        
+
     }
 
     makeTagLive.apply();

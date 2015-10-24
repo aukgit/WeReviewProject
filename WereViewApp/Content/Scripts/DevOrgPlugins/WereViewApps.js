@@ -95,14 +95,15 @@ $.WeReviewApp = {
     appformPostEvent: function (e) {
         /// <summary>
         /// posting a new app event
+        /// validation for app posting.
         /// </summary>
         /// <param name="e">
-        /// 
+        /// Event delegate
         /// </param>
         var ifAnyUploadfails = false;
         var self = $.WeReviewApp;
 
-        function raiseUploaderInvalidMessage(failedBoolean) {
+        var raiseUploaderInvalidMessage = function (failedBoolean) {
             if (failedBoolean) {
                 self.$appPageUploaderNotifier.text("Please upload all necessary files to proceed next.");
             } else {
@@ -110,7 +111,7 @@ $.WeReviewApp = {
             }
         }
 
-        function isInvalidateUploader($uploaderx) {
+        var isInvalidateUploader = function ($uploaderx) {
             var idAttr = $uploaderx.attr("data-id"); //always use jquery to get attr
             var loadedValues = $.devOrgUP.getCountOfHowManyFilesUploaded(idAttr);
 
@@ -272,6 +273,12 @@ $.WeReviewApp = {
      * get a string regular expression based on parameter
      */
     getAttributeRemoveRegularExpressionFor: function (attributeName) {
+        /// <summary>
+        /// Returns a string of regular expression to remove attribute from html tag.
+        /// Use for removing height and width.
+        /// </summary>
+        /// <param name="attributeName">Give an html attribute to remove it from the string.</param>
+        /// <returns type=""></returns>
         return "(" + attributeName + ".*=.*[\"\"'])([a-zA-Z0-9:;\.\s\(\)\-\,]*)([\"\"'])";
     },
 
@@ -370,7 +377,7 @@ $.WeReviewApp = {
      */
     appEditingPageOnReady: function () {
         var self = $.WeReviewApp;
-        var $formInputs = self.$appForm.find("select,input[name!=YoutubeEmbedLink]");
+        //var $formInputs = self.$appForm.find("select,input[name!=YoutubeEmbedLink]");
         //console.log($formInputs);
 
         //$.devOrg.validateInputFromServer("#AppName", "/Validator/GetValidUrlEditing", "AppName", false, false, 3, true, " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.", null, $formInputs, self.maxTryInputSubmit);
@@ -434,8 +441,11 @@ $.WeReviewApp = {
                     var uniqueArray = _.without(_.uniq(tagsArray), "");
                     //console.log(tagsArray);
                     //console.log(uniqueArray);
-                    var tags = uniqueArray.join(",");
-                    $tagsInput.val(tags);
+                    //var tags = uniqueArray.join(",");
+                    $tagsInput.tagsinput('removeAll');
+                    for (var j = 0; j < uniqueArray.length; j++) {
+                        $tagsInput.tagsinput('add', uniqueArray[j]);
+                    }
                 }
 
             }, 600);
@@ -451,12 +461,15 @@ $.WeReviewApp = {
         /// <param name="appTitle">Typed app title from user.</param>
         /// <param name="token">Token</param>
         var data = self.$appForm.serializeArray(),
-            combined = [];
-        for (var i = 1; i < 5; i++) {
-            var row = data[i];
-            combined.push(row.name + "=" + row.value);
+            combined = [],
+            isTesting = 0;
+        if (isTesting === 1) {
+            for (var i = 1; i < 5; i++) {
+                var row = data[i];
+                combined.push(row.name + "=" + row.value);
+            }
+            console.log(combined.join("\n"));
         }
-        console.log(combined.join("\n"));
         $.ajax({
             type: "POST",
             dataType: "JSON",
@@ -479,7 +492,7 @@ $.WeReviewApp = {
      */
     appPostingPageOnReady: function () {
         var self = $.WeReviewApp;
-        $.devOrg.uxFriendlySlide("form.app-post", true, true);
+        $.devOrg.uxFriendlySlide(self.$appForm, true, true);
 
 
 
@@ -913,7 +926,7 @@ $.WeReviewApp = {
             self.$appForm = $fromWrapper.find(".app-editing-page");
             if (dataType === "post") {
                 self.$appFormPost = self.$appForm;
-                self.$allInputs = self.$appForm.find("input");
+                self.$allInputs = self.$appForm.find("input,textarea");
             } else if (dataType === "edit") {
                 self.$appFormEdit = self.$appForm;
             }
