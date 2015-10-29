@@ -1095,6 +1095,7 @@
     <Content Include="Views\Shared\EditorTemplates\String-Label-Off.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Upload-Multiple.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Username-v.cshtml" />
+    <Content Include="Views\Report\AlreadyReported.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />
