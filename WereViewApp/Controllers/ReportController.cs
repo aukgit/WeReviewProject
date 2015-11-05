@@ -1,5 +1,6 @@
 ﻿#region using block
 
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using WereViewApp.Models.Context;
@@ -52,10 +53,6 @@ namespace WereViewApp.Controllers {
         }
 
 
-        public void SetDefaults() {
-
-        }
-
         //public ActionResult Done() {
         //    return View();
         //}
@@ -63,9 +60,9 @@ namespace WereViewApp.Controllers {
         //    return View();
         //}
 
-        //public ActionResult AlreadyReported() {
-        //    return View();
-        //}
+        public ActionResult AlreadyReported() {
+            return View();
+        }
         private bool IsAppAlreadyReported(long appId, out App app) {
             string sessionAlreadyReported = "Report/AppIsAlreadyReported-" + appId;
             string sessionApp = "Report/ReportingApp-" + appId;
@@ -73,10 +70,8 @@ namespace WereViewApp.Controllers {
             if (Session[sessionAlreadyReported] == null) {
                 app = db.Apps.Find(appId);
                 var username = UserManager.GetCurrentUserName();
-                var alreadyReported = db2.Feedbacks
-                                             .Include(n => n.FeedbackAppReviewRelations)
-                                             .Any(n => n.Username == username &&
-                                                       n.IsInProcess &&
+                var alreadyReported = db2.Feedbacks.Any(n => n.Username == username &&
+                                                       !n.IsViewed &&
                                                        n.FeedbackAppReviewRelations
                                                         .Any(rel => rel.HasAppId && rel.AppID == appId));
                 Session[sessionAlreadyReported] = alreadyReported;
@@ -86,24 +81,41 @@ namespace WereViewApp.Controllers {
             return (bool)Session[sessionAlreadyReported];
         }
 
-        private bool IsReviewAlreadyReported(long reviewId, out Review review) {
+        private bool IsReviewAlreadyReported(long reviewId, out Review review, out App app) {
             string sessionAlreadyReported = "Report/ReviewIsAlreadyReported-" + reviewId;
             string sessionReview = "Report/ReportingReview-" + reviewId;
+            string sessionReviewApp = "Report/ReportingReviewApp-" + reviewId;
 
             if (Session[sessionAlreadyReported] == null) {
                 review = db.Reviews.Find(reviewId);
+                app = db.Apps.Find(review.AppID);
                 var username = UserManager.GetCurrentUserName();
                 var alreadyReported = db2.Feedbacks
-                                             .Include(n => n.FeedbackAppReviewRelations)
                                              .Any(n => n.Username == username &&
-                                                       n.IsInProcess &&
+                                                       !n.IsViewed &&
                                                        n.FeedbackAppReviewRelations
                                                         .Any(rel => !rel.HasAppId && rel.ReviewID == reviewId));
                 Session[sessionAlreadyReported] = alreadyReported;
                 Session[sessionReview] = review;
+                Session[sessionReviewApp] = app;
             }
             review = (Review)Session[sessionReview];
+            app = (App)Session[sessionReviewApp];
             return (bool)Session[sessionAlreadyReported];
+        }
+        /// <summary>
+        /// Remove the session cache for either review or app.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="isApp">If false remove review cahce.</param>
+        private void RemoveSessionCache(long id, bool isApp) {
+            if (isApp) {
+                string sessionName = "Report/AppIsAlreadyReported-" + id;
+                Session[sessionName] = null;
+            } else {
+                string sessionName = "Report/ReviewIsAlreadyReported-" + id;
+                Session[sessionName] = null;
+            }
         }
         /// <summary>
         /// 
@@ -134,7 +146,11 @@ namespace WereViewApp.Controllers {
         }
 
         private void SetCommonFields(Feedback feedback) {
-            feedback.Email = UserManager.GetCurrentUser().Email;
+            var user = UserManager.GetCurrentUser();
+            feedback.Email = user.Email;
+            feedback.Username = user.UserName;
+            feedback.Name = user.DisplayName;
+            feedback.PostedDate = DateTime.Now;
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
@@ -143,13 +159,13 @@ namespace WereViewApp.Controllers {
                 return View("Later");
             }
             if (RoleManager.IsInRole(RoleNames.Rookie) == false) {
+                // at least has a role.
+                // since lowest priority role, it will be added while registering a user.
                 return AppVar.GetAuthenticationError("Unauthorized", "");
             }
             App app;
             var isAlreadyReported = IsAppAlreadyReported(appOrReviewId, out app);
             if (isAlreadyReported == false && app != null) {
-                SetCommonFields(feedback);
-               
                 if (!ModelState.IsValid) {
                     // non valid message.
                     ViewBag.errorMessage = Const.JunkMessageResult;
@@ -159,16 +175,15 @@ namespace WereViewApp.Controllers {
                 }
                 // app is not reported before by this user.
                 // now post the report.
-                feedback.FeedbackCategoryID = FeedbackCategoryIDs.MobileAppReport;
                 db2.Feedbacks.Add(feedback);
                 // add the relationship.
-                var relation = AttachNewRelationship(feedback, appOrReviewId, isApp: true);
-                feedback.FeedbackAppReviewRelations.Add(relation);
+                AttachNewRelationship(feedback, appOrReviewId, isApp: true);
                 if (db2.SaveChanges() > -1) {
                     // successfully saved.
                     // send an email to the admin.
+                    RemoveSessionCache(appOrReviewId, isApp: true);
                     AppVar.Mailer.NotifyAdmin("User reported an app.",
-                        "Please login and check at the admin panel , an app has been reported.");
+                        "Hi , <br>Please login and check at the admin panel , an app has been reported.");
                     return View("Done");
                 }
             }
@@ -176,18 +191,51 @@ namespace WereViewApp.Controllers {
             return View("AlreadyReported");
         }
 
+        /// <summary>
+        /// Attach relationship , category and common fields
+        /// </summary>
+        /// <param name="feedback"></param>
+        /// <param name="id"></param>
+        /// <param name="isApp">True means app reporting or else reporting a review.</param>
+        /// <returns></returns>
+        private FeedbackAppReviewRelation AttachNewRelationship(Feedback feedback, long id, bool isApp) {
+            var relation = new FeedbackAppReviewRelation() {
+                HasAppId = isApp,
+            };
+            if (feedback != null) {
+                if (isApp) {
+                    relation.AppID = id;
+                    relation.ReviewID = -1;
+                    feedback.FeedbackCategoryID = FeedbackCategoryIDs.MobileAppReport;
+                } else {
+                    // report review
+                    relation.AppID = -1;
+                    relation.ReviewID = id;
+                    feedback.FeedbackCategoryID = FeedbackCategoryIDs.ReviewReport;
+                }
+                SetCommonFields(feedback);
+                if (feedback.FeedbackAppReviewRelations == null) {
+                    feedback.FeedbackAppReviewRelations = new List<FeedbackAppReviewRelation>(2);
+                }
+                feedback.FeedbackAppReviewRelations.Add(relation);
+            }
+            return relation;
+        }
+
         public ActionResult Review(long id) {
             if (SessionNames.IsValidationExceed("Review-Report")) {
                 return View("Later");
             }
             if (RoleManager.IsInRole(RoleNames.Rookie) == false) {
+                // at least has a role.
+                // since lowest priority role, it will be added while registering a user.
                 return AppVar.GetAuthenticationError("Unauthorized", "");
             }
 
             Review review;
-            var isReportedAlready = IsReviewAlreadyReported(id, out review);
+            App app;
+            var isReportedAlready = IsReviewAlreadyReported(id, out review, out app);
             if (isReportedAlready == false && review != null) {
-                var app = db.Apps.Find(id);
                 ViewBag.app = app;
                 ViewBag.review = review;
                 ViewBag.id = id;
@@ -197,54 +245,40 @@ namespace WereViewApp.Controllers {
             }
             return View("_404");
         }
-
-        private FeedbackAppReviewRelation AttachNewRelationship(Feedback feedback, long  id, bool isApp) {
-            var relation = new FeedbackAppReviewRelation() {
-                HasAppId = isApp,
-            };
-            if (isApp) {
-                relation.AppID = id;
-                relation.ReviewID = -1;
-            } else {
-                relation.AppID = -1;
-                relation.ReviewID = id;
-            }
-            if (feedback != null) {
-                if (feedback.FeedbackAppReviewRelations == null) {
-                    feedback.FeedbackAppReviewRelations = new List<FeedbackAppReviewRelation>(2);
-                }
-                feedback.FeedbackAppReviewRelations.Add(relation);
-            }
-            return relation;
-        }
-
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Review(Feedback feedback, long appOrReviewId, bool hasAppId) {
+        public async Task<ActionResult> Review(Feedback feedback, long appOrReviewId, bool hasAppId) {
             if (SessionNames.IsValidationExceed("Review-Report")) {
                 return View("Later");
             }
             if (RoleManager.IsInRole(RoleNames.Rookie) == false) {
+                // at least has a role.
+                // since lowest priority role, it will be added while registering a user.
                 return AppVar.GetAuthenticationError("Unauthorized", "");
             }
             Review review;
-            var isReportedAlready = IsReviewAlreadyReported(appOrReviewId, out review);
+            App app;
+            var isReportedAlready = IsReviewAlreadyReported(appOrReviewId, out review, out app);
             if (isReportedAlready == false && review != null) {
                 // review is not reported before by this user.
+                if (!ModelState.IsValid) {
+                    // non valid message.
+                    ViewBag.errorMessage = Const.JunkMessageResult;
+                    ViewBag.id = appOrReviewId;
+                    ViewBag.review = review;
+                    ViewBag.app = app;
+                    return View(feedback);
+                }
                 // now post the report.
-                SetCommonFields(feedback);
-
-                feedback.FeedbackCategoryID = FeedbackCategoryIDs.ReviewReport;
-
                 db2.Feedbacks.Add(feedback);
-                // add the relationship.
-                var relation = AttachNewRelationship(feedback, appOrReviewId, isApp: false);
-                feedback.FeedbackAppReviewRelations.Add(relation);
+                // add the relationship and category.
+                AttachNewRelationship(feedback, appOrReviewId, isApp: false);
                 if (db2.SaveChanges() > -1) {
                     // successfully saved.
-                    // send an email to the admin.
+                    // async send an email to the admin.
+                    RemoveSessionCache(appOrReviewId, isApp: false);
                     AppVar.Mailer.NotifyAdmin("A user has reported a review.",
-                        "Please login and check at the admin panel , a review has been reported.");
+                        "Hi , <br>Please login and check at the admin panel , a review has been reported.");
                     return View("Done");
                 }
                 return View();

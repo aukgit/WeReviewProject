@@ -1,33 +1,11 @@
-﻿@using WereViewApp.Models.POCO.Structs
-@using WereViewApp.Models.EntityModel
-@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
-@{
-    ViewBag.Title = "Reporting";
-    ViewBag.Subtitle = "App ";
-    ViewBag.isAppReport = true;
-    ViewBag.appOrReviewId = ViewBag.id;
-    ViewBag.CategoryId = FeedbackCategoryIDs.MobileAppReport;
-    bool isAppReport = ViewBag.isAppReport != null && ViewBag.isAppReport;
-    string postingAction = isAppReport ? "Reported App" : "Reported Review";
-    App app = null;
-    Review review = null;
-    if (isAppReport) {
-        app = ViewBag.app;
-    } else {
-        app = ViewBag.app;
-        review = ViewBag.review;
-    }
+﻿@{
+    ViewBag.title = "Already reported!";
 }
-@Html.SamePageLinkWithIcon(postingAction, postingAction, "fa fa-flag red")
-@if (isAppReport) {
-    <h2 class="f-em-14 h3 red">
-        You have already reported on "<a href="@app.GetAbsoluteUrl()">@app.AppName</a>" app. 
-    </h2>
-} else {
-    <h2 class="f-em-14 h3 red">
-        You have already reported on "<a href="@app.GetAbsoluteUrl()">@review.Title</a>" review.
-    </h2>
-}
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<div class="top-gap-2x"></div>
+<div class="f-em-23 orange-color">
+    <i class="fa fa-flag-checkered"></i>  Already Reported
+</div>
+<div class="sky-blue f-em-15">
+    You have already reported this app. Admin will get back to you soon. Please check your email and spam box time to time.
+</div>
+<div class="top-gap-2x"></div>

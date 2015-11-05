@@ -56,7 +56,7 @@
         @Html.Hidden("hasAppId", isAppReport)
         @Html.EditorFor(model => model.RateUrgency, "Rating-10")
         @Html.EditorFor(model => model.Subject)
-        @Html.Hidden("Email", UserManager.GetCurrentUser().Email)
+        @Html.Hidden("Email", "Dynamic Email")
         @Html.EditorFor(model => model.Message, "Multiline")
     </div>
     <div class="form-group">
