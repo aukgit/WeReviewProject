@@ -7,7 +7,7 @@
 @{
     string title = ViewBag.Title;
 
-    MvcHtmlString token = @Html.AntiForgeryToken();
+    var token = Html.AntiForgeryToken();
     string controller = (string)ViewBag.controller;
     bool dropDownDynamic = (bool)ViewBag.dropDownDynamic;
     string partialController = ViewBag.dynamicLoadPartialController;
@@ -20,13 +20,16 @@
     string subtitle = ViewBag.subtitle;
     App app = null;
     Review review = null;
-    if (isAppReport) {
-        app = ViewBag.app;
-    } else {
-        app = ViewBag.app;
-        review = ViewBag.review;
-    }
+
 }
+
+@if (isAppReport) {
+    app = ViewBag.app;
+} else {
+    app = ViewBag.app;
+    review = ViewBag.review;
+}
+
 @Html.SamePageLinkWithIcon(@title, @title, "fa fa-flag red")
 <hr />
 <!--ViewContext.RouteData.Values["Controller"].ToString()-->
@@ -46,18 +49,14 @@
                         You are reporting on "<a href="@app.GetAbsoluteUrl()">@review.Title</a>" review. Please make sure that you are not spamming.
                     </h2>
                 }
+                <div class="message red bold">@ViewBag.errorMessage</div>
             </div>
         </div>
         @Html.Hidden("appOrReviewId", appOrReviewId)
         @Html.Hidden("hasAppId", isAppReport)
         @Html.EditorFor(model => model.RateUrgency, "Rating-10")
         @Html.EditorFor(model => model.Subject)
-        @Html.HiddenFor(model => model.FeedbackCategoryID, new { @Value = ViewBag.CategoryId })
-        @*@if (dropDownDynamic) {
-                @Html.EditorFor(model => model.FeedbackCategoryID, "DropDownDynamic", new {@Url = @partialController + "GetFeedbackCategoryID" /* ,@IsDependable = "false",@LiveSearch = "true",@Style = "class",@Id = "id", @DynamicLoad = "true"*/})
-            } else {
-                @Html.EditorFor(model => model.FeedbackCategoryID, "DropDown", new {@SelectData = ViewBag.CustomerID})
-            }*@
+        @Html.Hidden("Email", UserManager.GetCurrentUser().Email)
         @Html.EditorFor(model => model.Message, "Multiline")
     </div>
     <div class="form-group">
@@ -70,8 +69,4 @@
         </div>
     </div>
 }
-<div class="row">
-    <div class="col-md-10 col-md-offset-2">
 
-    </div>
-</div>

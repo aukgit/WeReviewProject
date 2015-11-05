@@ -1,5 +1,6 @@
 ﻿#region using block
 
+using System.Collections.Generic;
 using System.Web.Mvc;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.IdentityCustomization;
@@ -7,8 +8,10 @@ using WereViewApp.Modules.Role;
 using System.Linq;
 using WereViewApp.Modules.DevUser;
 using System.Data.Entity;
+using System.Threading.Tasks;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.POCO.Structs;
+using WereViewApp.Modules.Message;
 using WereViewApp.Modules.Session;
 
 #endregion
@@ -52,6 +55,17 @@ namespace WereViewApp.Controllers {
         public void SetDefaults() {
 
         }
+
+        //public ActionResult Done() {
+        //    return View();
+        //}
+        //public ActionResult Later() {
+        //    return View();
+        //}
+
+        //public ActionResult AlreadyReported() {
+        //    return View();
+        //}
         private bool IsAppAlreadyReported(long appId, out App app) {
             string sessionAlreadyReported = "Report/AppIsAlreadyReported-" + appId;
             string sessionApp = "Report/ReportingApp-" + appId;
@@ -97,7 +111,7 @@ namespace WereViewApp.Controllers {
         /// <param name="id">AppId</param>
         /// <returns></returns>
         public ActionResult App(long id) {
-            if (SessionNames.IsValidationExceed("App-Review")) {
+            if (SessionNames.IsValidationExceed("App-Report")) {
                 return View("Later");
             }
             if (RoleManager.IsInRole(RoleNames.Rookie) == false) {
@@ -119,11 +133,13 @@ namespace WereViewApp.Controllers {
             return View("_404");
         }
 
-
+        private void SetCommonFields(Feedback feedback) {
+            feedback.Email = UserManager.GetCurrentUser().Email;
+        }
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult App(Feedback feedback, long appOrReviewId, bool hasAppId) {
-            if (SessionNames.IsValidationExceed("App-Review")) {
+        public async Task<ActionResult> App(Feedback feedback, long appOrReviewId, bool hasAppId) {
+            if (SessionNames.IsValidationExceed("App-Report")) {
                 return View("Later");
             }
             if (RoleManager.IsInRole(RoleNames.Rookie) == false) {
@@ -132,18 +148,26 @@ namespace WereViewApp.Controllers {
             App app;
             var isAlreadyReported = IsAppAlreadyReported(appOrReviewId, out app);
             if (isAlreadyReported == false && app != null) {
+                SetCommonFields(feedback);
+               
+                if (!ModelState.IsValid) {
+                    // non valid message.
+                    ViewBag.errorMessage = Const.JunkMessageResult;
+                    ViewBag.id = appOrReviewId;
+                    ViewBag.app = app;
+                    return View();
+                }
                 // app is not reported before by this user.
                 // now post the report.
-
                 feedback.FeedbackCategoryID = FeedbackCategoryIDs.MobileAppReport;
                 db2.Feedbacks.Add(feedback);
                 // add the relationship.
-                var relation = GetNewRelationship(appOrReviewId, true);
+                var relation = AttachNewRelationship(feedback, appOrReviewId, isApp: true);
                 feedback.FeedbackAppReviewRelations.Add(relation);
                 if (db2.SaveChanges() > -1) {
                     // successfully saved.
                     // send an email to the admin.
-                    AppVar.Mailer.Send(AppVar.Setting.AdminEmail, "User reported an app.",
+                    AppVar.Mailer.NotifyAdmin("User reported an app.",
                         "Please login and check at the admin panel , an app has been reported.");
                     return View("Done");
                 }
@@ -153,7 +177,7 @@ namespace WereViewApp.Controllers {
         }
 
         public ActionResult Review(long id) {
-            if (SessionNames.IsValidationExceed("Report-Review")) {
+            if (SessionNames.IsValidationExceed("Review-Report")) {
                 return View("Later");
             }
             if (RoleManager.IsInRole(RoleNames.Rookie) == false) {
@@ -174,7 +198,7 @@ namespace WereViewApp.Controllers {
             return View("_404");
         }
 
-        private FeedbackAppReviewRelation GetNewRelationship(long id, bool isApp) {
+        private FeedbackAppReviewRelation AttachNewRelationship(Feedback feedback, long  id, bool isApp) {
             var relation = new FeedbackAppReviewRelation() {
                 HasAppId = isApp,
             };
@@ -185,13 +209,19 @@ namespace WereViewApp.Controllers {
                 relation.AppID = -1;
                 relation.ReviewID = id;
             }
+            if (feedback != null) {
+                if (feedback.FeedbackAppReviewRelations == null) {
+                    feedback.FeedbackAppReviewRelations = new List<FeedbackAppReviewRelation>(2);
+                }
+                feedback.FeedbackAppReviewRelations.Add(relation);
+            }
             return relation;
         }
 
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Review(Feedback feedback, long appOrReviewId, bool hasAppId) {
-            if (SessionNames.IsValidationExceed("Report-Review")) {
+            if (SessionNames.IsValidationExceed("Review-Report")) {
                 return View("Later");
             }
             if (RoleManager.IsInRole(RoleNames.Rookie) == false) {
@@ -202,16 +232,18 @@ namespace WereViewApp.Controllers {
             if (isReportedAlready == false && review != null) {
                 // review is not reported before by this user.
                 // now post the report.
+                SetCommonFields(feedback);
+
                 feedback.FeedbackCategoryID = FeedbackCategoryIDs.ReviewReport;
 
                 db2.Feedbacks.Add(feedback);
                 // add the relationship.
-                var relation = GetNewRelationship(appOrReviewId, false);
+                var relation = AttachNewRelationship(feedback, appOrReviewId, isApp: false);
                 feedback.FeedbackAppReviewRelations.Add(relation);
                 if (db2.SaveChanges() > -1) {
                     // successfully saved.
                     // send an email to the admin.
-                    AppVar.Mailer.Send(AppVar.Setting.AdminEmail, "A user has reported a review.",
+                    AppVar.Mailer.NotifyAdmin("A user has reported a review.",
                         "Please login and check at the admin panel , a review has been reported.");
                     return View("Done");
                 }
