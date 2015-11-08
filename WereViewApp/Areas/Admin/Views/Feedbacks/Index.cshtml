@@ -1,4 +1,6 @@
 ﻿@using WereViewApp.Models.POCO.IdentityCustomization
+@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
+
 @model IEnumerable<Feedback>
 
 @{
@@ -29,20 +31,11 @@
 	<!--<caption>@viewName</caption>-->
 	<thead>
 		<tr>		
-			<th data-field="Username">
-				@Html.DisplayNameFor(model => model.Username)
-			</th>
-			<th data-field="Name">
-				@Html.DisplayNameFor(model => model.Name)
+			<th data-field="Email">
+				@Html.DisplayNameFor(model => model.Email)
 			</th>
 			<th data-field="Subject">
 				@Html.DisplayNameFor(model => model.Subject)
-			</th>
-			<th data-field="Message">
-				@Html.DisplayNameFor(model => model.Message)
-			</th>
-			<th data-field="Email">
-				@Html.DisplayNameFor(model => model.Email)
 			</th>
 			<th data-field="RateUrgency">
 				@Html.DisplayNameFor(model => model.RateUrgency)
@@ -50,34 +43,7 @@
 			<th data-field="Response">
 				@Html.DisplayNameFor(model => model.Response)
 			</th>
-			<th data-field="IsViewed">
-				@Html.DisplayNameFor(model => model.IsViewed)
-			</th>
-			<th data-field="IsInProcess">
-				@Html.DisplayNameFor(model => model.IsInProcess)
-			</th>
-			<th data-field="IsSolved">
-				@Html.DisplayNameFor(model => model.IsSolved)
-			</th>
-			<th data-field="IsUnSolved">
-				@Html.DisplayNameFor(model => model.IsUnSolved)
-			</th>
-			<th data-field="HasMarkedToFollowUpDate">
-				@Html.DisplayNameFor(model => model.HasMarkedToFollowUpDate)
-			</th>
-			<th data-field="PostedDate">
-				@Html.DisplayNameFor(model => model.PostedDate)
-			</th>
-			<th data-field="FollowUpdateDate">
-				@Html.DisplayNameFor(model => model.FollowUpdateDate)
-			</th>
-			<th data-field="HasAppOrReviewReport">
-				@Html.DisplayNameFor(model => model.HasAppOrReviewReport)
-			</th>
-			<th data-field="FeedbackCategoryID">
-				@Html.DisplayNameFor(model => model.FeedbackCategoryID)
-			</th>
-			<th></th>
+	        <th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -86,58 +52,23 @@
 		
 				<td>
 					@{
-                        editLinkName = Html.DisplayFor(model => item.Username).ToString();
+                        editLinkName = Html.DisplayFor(model => item.Email).ToString();
                         var idValue = item.FeedbackID;
                      }
 					<a href="@Url.Action("Edit", new { id= idValue })" title="@editLinkName edit..."><span class="@editIcon"></span> @editLinkName</a>
 				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Name)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Subject)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Message)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Email)
-				</td>
+                <td title="@Html.Truncate(item.Message, AppConfig.TruncateLength)">
+                    @Html.Truncate(item.Subject, AppConfig.TruncateLength)
+                </td>
+				
 				<td>
 					@Html.DisplayFor(modelItem => item.RateUrgency)
 				</td>
 				<td>
 					@Html.DisplayFor(modelItem => item.Response)
 				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.IsViewed)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.IsInProcess)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.IsSolved)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.IsUnSolved)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.HasMarkedToFollowUpDate)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.PostedDate)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.FollowUpdateDate)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.HasAppOrReviewReport)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.FeedbackCategoryID)
-				</td>
 				<td>			
-					<a href="@Url.Action("Edit", new { id = idValue })" title="Edit @editLinkName" class="btn btn-info btn-xs"><span class="@editIcon"></span> Edit</a>
+					<a href="@Url.Action("Reply", new { id = idValue })" title="Edit @editLinkName" class="btn btn-info btn-xs"><span class="@editIcon"></span> Edit</a>
 					<a href="@Url.Action("Details", new { id = idValue })" title="Details of @editLinkName." class="btn btn-warning btn-xs"><span class="@detailsIcon"></span> Details</a>
 					<a href="@Url.Action("Delete", new { id =idValue })" title="Delete @editLinkName" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?')"><span class="@removeIcon"></span> Delete</a>            
 				</td>

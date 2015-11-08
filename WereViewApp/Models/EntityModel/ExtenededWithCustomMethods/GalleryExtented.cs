@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using WereViewApp.Models.EntityModel.Structs;
+﻿using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Modules.Uploads;
 using WereViewApp.WereViewAppCommon;
 

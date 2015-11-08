@@ -57,7 +57,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(navigationItem);
         }
 
-        public ActionResult Edit(System.Int32 id, int NavigationID) {
+        public ActionResult Edit(Int32 id, int NavigationID) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
