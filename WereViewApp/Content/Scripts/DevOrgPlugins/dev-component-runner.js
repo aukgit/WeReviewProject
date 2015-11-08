@@ -19,7 +19,7 @@
 
 $.devOrg = $.devOrg || {};
 
-$.devOrg.runner = function() {
+$.devOrg.runner = function () {
     $.devOrg.Constants = {
         registerForm: $("form.register-form"),
         userName: "UserName",
@@ -169,18 +169,35 @@ $.devOrg.runner = function() {
     serverValidationActivate();
 
 
-    var makeTagLive =  function () {
-        var $createdTags = $(".tag-inputs").tagsinput({
-            typeahead: {
-                source: function (query) {
-                    return $.get('/Partials/GetTags/' + query).done(function (response) {
-                        console.log("tags:");
-                        console.log("response:");
-                        console.log(response);
-                    });
-                }
+    var makeTagLive = function () {
+        var $createdTags = $(".tag-inputs");
+        if ($createdTags.length > 0) {
+            var $tokenField = $("[name='__RequestVerificationToken']"),
+                token = $tokenField.val();
+            for (var i = 0; i < $createdTags.length; i++) {
+                var $tagsInput = $($createdTags[0]),
+                    urlToPost = $tagsInput.attr("data-url");
+                //
+                $tagsInput.tagsinput({
+                    freeInput: true,
+                    trimValue: true,
+                    typeahead: {
+                        source: function (query) {
+                            return $.post(urlToPost, { id: query, __RequestVerificationToken: token }).done(function (response) {
+                                //console.log("tags:");
+                                //console.log("response:");
+                                //console.log(response);
+                            });
+                        }
+                    },
+                    onTagExists: function (item, $tag) {
+                        $tag.hide.fadeIn();
+                    }
+                });
             }
-        });
+            
+        }
+
     }
 
     makeTagLive.apply();

@@ -22,7 +22,7 @@ namespace WereViewApp {
 
             #region jQuery
             bundles.Add(new ScriptBundle("~/bundles/jquery", jQueryCdn)
-                        .Include("~/Content/Scripts/jQuery/jquery-" + jQueryVersion + ".js") //if no CDN
+                        .Include("~/Content/Scripts/jquery-" + jQueryVersion + ".js") //if no CDN
             );
             #endregion
 
@@ -47,7 +47,9 @@ namespace WereViewApp {
                                     "~/Content/Scripts/DevOrgPlugins/developers-organism.dynamicSelect.js",
                                     "~/Content/Scripts/DevOrgPlugins/developers-organism.country-phone.js",
                                     "~/Content/Scripts/DevOrgPlugins/jquery.server-validate.js",
-                                    "~/Content/Scripts/DevOrgPlugins/dev-component-runner.js"
+                                    "~/Content/Scripts/DevOrgPlugins/dev-component-runner.js",
+                                  "~/Content/Scripts/DevOrgPlugins/WeReviewApps.js"
+
                                    ));
                     #endregion
 
@@ -70,7 +72,7 @@ namespace WereViewApp {
 
                     #region Bootstrap
                     bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                                  "~/Content/Scripts/DevOrgPlugins/byId.js", 
+                                  "~/Content/Scripts/DevOrgPlugins/byId.js",
                                   "~/Content/Scripts/bootstrap.js", // 3.1.2
                                   "~/Content/Scripts/DevOrgPlugins/app.run.js",
                                   "~/Content/Scripts/star-rating.js",
@@ -87,8 +89,7 @@ namespace WereViewApp {
                                   "~/Content/revolution-slider/js/jquery.themepunch.revolution.min.js",
                                   "~/Content/Scripts/DevOrgPlugins/developers-organism.component.js",
 
-                                  "~/Content/Scripts/FrontEnd/front-developer.js",
-                                  "~/Content/Scripts/DevOrgPlugins/WeReviewApps.js"
+                                  "~/Content/Scripts/FrontEnd/front-developer.js"
 
                                   ));
                     #endregion

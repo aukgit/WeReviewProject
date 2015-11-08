@@ -1550,6 +1550,8 @@ q:after {
 .app-url-display {
   margin-left: 4px;
   margin-left: 0.4rem;
+  margin-bottom: 11px;
+  margin-bottom: 1.1rem;
 }
 .blog-page-private .white-wrapper-background .seo-app-name:hover {
   color: deepskyblue;

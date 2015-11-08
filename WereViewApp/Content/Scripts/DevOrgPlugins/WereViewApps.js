@@ -1,8 +1,11 @@
-﻿/**
+﻿/// <reference path="developers-organism.component.js" />
+/// <reference path="byId.js" />
+/// <reference path="../jquery-2.1.4.intellisense.js" />
+/**
  * Written by Alim Ul Karim
  * Developers Organism
  * Written  : 14 Nov 2014
- * Modified : 28 Apr 2015
+ * Modified : 28 Sep 2015
  */
 
 /// <summary>
@@ -30,16 +33,17 @@ $.WeReviewApp = {
     isTesting: false,
     draftSavingFailedErrorMsg: "Sorry couldn't save the draft , possible reason maybe connection lost or your draft buffer is exceeded.",
     numberOfDraftPossible: 10,
-    invalidAttrName: "data-invalid",
+    appTitleValidAttrName: "data-server-validated",
     galleryImageUploaderId: 0,
     maxTryInputSubmit: 250,
     sendingDraftNumber: 0,
     writeReviewFormUrl: "/Reviews/GetReviewForm",
+    appUrlRetrievalUrl: "/Partials/GetAppUrl",
     reviewSpinnerSelector: "#review-requesting-spinner",
     reviewFormContainerSelectorInAppPage: "div#write-review-form-container",
     reviewFormSubmitUrl: "/Reviews/Write",
-    ///consist of # : "#app-deails-page"
-    appDetailsPageParentId: "#app-deails-page",
+    ///consist of # : "#app-details-page"
+    appDetailsPageParentId: "#app-details-page",
     friendlyUrlRegularExpression: "[^A-Za-z0-9_\.~]+",
 
     getFriendlyUrlSlug: function (str) {
@@ -91,14 +95,15 @@ $.WeReviewApp = {
     appformPostEvent: function (e) {
         /// <summary>
         /// posting a new app event
+        /// validation for app posting.
         /// </summary>
         /// <param name="e">
-        /// 
+        /// Event delegate
         /// </param>
         var ifAnyUploadfails = false;
         var self = $.WeReviewApp;
 
-        function raiseUploaderInvalidMessage(failedBoolean) {
+        var raiseUploaderInvalidMessage = function (failedBoolean) {
             if (failedBoolean) {
                 self.$appPageUploaderNotifier.text("Please upload all necessary files to proceed next.");
             } else {
@@ -106,7 +111,7 @@ $.WeReviewApp = {
             }
         }
 
-        function isInvalidateUploader($uploaderx) {
+        var isInvalidateUploader = function ($uploaderx) {
             var idAttr = $uploaderx.attr("data-id"); //always use jquery to get attr
             var loadedValues = $.devOrgUP.getCountOfHowManyFilesUploaded(idAttr);
 
@@ -199,16 +204,25 @@ $.WeReviewApp = {
         //}
     },
 
-    isAppTitleValid: function () {
-        var $appName = $("#AppName");
-        var hasInvalidAttr = $appName.attr($.WeReviewApp.invalidAttrName);
-
-        if (hasInvalidAttr) {
-            return false;
-        } else {
-            return true;
+    isAppTitleValid: function ($appNameInputTextbox) {
+        /// <summary>
+        /// Check if the app name or title is valid or not.
+        /// </summary>
+        /// <param name="$appNameInputTextbox"></param>
+        var $appName = $appNameInputTextbox;
+        if (_.isEmpty($appNameInputTextbox)) {
+            $appName = $("#AppName");
         }
+        if ($appName.length > 0) {
+            var hasValidAttr = $appName.attr($.WeReviewApp.appTitleValidAttrName);
+
+            if (hasValidAttr && $appName.valid()) {
+                return true;
+            }
+        }
+        return false;
     },
+
     // before app editing submit
     appEditingSubmitEvent: function (e) {
         e.preventDefault();
@@ -259,6 +273,12 @@ $.WeReviewApp = {
      * get a string regular expression based on parameter
      */
     getAttributeRemoveRegularExpressionFor: function (attributeName) {
+        /// <summary>
+        /// Returns a string of regular expression to remove attribute from html tag.
+        /// Use for removing height and width.
+        /// </summary>
+        /// <param name="attributeName">Give an html attribute to remove it from the string.</param>
+        /// <returns type=""></returns>
         return "(" + attributeName + ".*=.*[\"\"'])([a-zA-Z0-9:;\.\s\(\)\-\,]*)([\"\"'])";
     },
 
@@ -357,10 +377,10 @@ $.WeReviewApp = {
      */
     appEditingPageOnReady: function () {
         var self = $.WeReviewApp;
-        var $formInputs = self.$appForm.find("select,input[name!=YoutubeEmbedLink]");
+        //var $formInputs = self.$appForm.find("select,input[name!=YoutubeEmbedLink]");
         //console.log($formInputs);
 
-        $.devOrg.validateInputFromServer("#AppName", "/Validator/GetValidUrlEditing", "AppName", false, false, 3, true, " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.", null, $formInputs, self.maxTryInputSubmit);
+        //$.devOrg.validateInputFromServer("#AppName", "/Validator/GetValidUrlEditing", "AppName", false, false, 3, true, " is invalid means that one app is already exist within this exact platform or category. You may change those to get a valid title and url.", null, $formInputs, self.maxTryInputSubmit);
 
         //stop form submitting the form if any file upload is not done.
         // before app editing submit method
@@ -375,19 +395,37 @@ $.WeReviewApp = {
         /// Getting tags from app title
         /// </summary>
         /// <returns type=""></returns>
-        var $appNameInput = $.byId("AppName"),
+        var self = $.WeReviewApp,
+            $anchor = $.byId("app-url-link"),
+            $anchorContent = $.byId("app-url-content"),
+            //$serverWrapper = $.byId("server-validation-form"),
+            //$tokenField = $serverWrapper.find("[name=__RequestVerificationToken]"),
+            //token = $tokenField.val(),
+            url = self.appUrlRetrievalUrl,
+            generateUrl = self.generateAppUrlDisplay,
+            $appNameInput = $.byId("AppName"),
             $tagsInput = $.byId("Tags"),
-            previousText = null;
+            previousText = null,
+            $appUrlSpinner = $.byId("app-url-spinner-icon");
+        var currentMethod = null;
         //var $formInputs = self.$appForm.find("select,input[name!=YoutubeEmbedLink]");
-
-        $appNameInput.blur(function () {
-           var currentMethod = setTimeout(function () {
+        $appNameInput.on("jq.validate.AppName.serverProcessSucceeded", function () {
+            $appUrlSpinner.removeClass("hide");
+            if (currentMethod !== null) {
+                clearTimeout(currentMethod);
+            }
+            currentMethod = setTimeout(function () {
                 var value = $appNameInput.val(),
                     tagsArray = value.split(" "),
                     tagsExistingText = $tagsInput.val(),
                     existingTagsArray = tagsExistingText.split(",");
-
+                // generate app url in the display.
+                if (self.isAppTitleValid($appNameInput)) {
+                    generateUrl(self, url, value, $anchor, $anchorContent);
+                    $appUrlSpinner.addClass("hide");
+                }
                 if (previousText !== value) {
+
                     previousText = value;
                     if (!_.isEmpty(value)) {
                         tagsArray.push(value.trim());
@@ -403,15 +441,50 @@ $.WeReviewApp = {
                     var uniqueArray = _.without(_.uniq(tagsArray), "");
                     //console.log(tagsArray);
                     //console.log(uniqueArray);
-                    var tags = uniqueArray.join(",");
-                    $tagsInput.val(tags);
+                    //var tags = uniqueArray.join(",");
+                    $tagsInput.tagsinput('removeAll');
+                    for (var j = 0; j < uniqueArray.length; j++) {
+                        $tagsInput.tagsinput('add', uniqueArray[j]);
+                    }
                 }
-               clearTimeout(currentMethod);
-           }, 500);
+
+            }, 600);
 
         });
     },
-
+    generateAppUrlDisplay: function (self, url, appTitle, $anchor, $anchorContent) {
+        /// <summary>
+        /// Display app url from server, called from appNameOnBlur()
+        /// </summary>
+        /// <param name="self">$.WereViewApp</param>
+        /// <param name="url">url to get the app titl valid url.</param>
+        /// <param name="appTitle">Typed app title from user.</param>
+        /// <param name="token">Token</param>
+        var data = self.$appForm.serializeArray(),
+            combined = [],
+            isTesting = 0;
+        if (isTesting === 1) {
+            for (var i = 1; i < 5; i++) {
+                var row = data[i];
+                combined.push(row.name + "=" + row.value);
+            }
+            console.log(combined.join("\n"));
+        }
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: url,
+            data: data
+        }).done(function (response) {
+            var appUrl = response.url;
+            $anchorContent.text(appUrl);
+            $anchor.attr("href", appUrl);
+            console.log(response);
+        }).error(function () {
+            $anchorContent.text("Error ! Please be in touch with admin via contact us page.");
+            $anchor.attr("href", "");
+        }); // ajax end
+    },
     /*
      * This method is related to display contents 
      * when **only** app-posting page is ready (not submitting)
@@ -419,11 +492,9 @@ $.WeReviewApp = {
      */
     appPostingPageOnReady: function () {
         var self = $.WeReviewApp;
-        $.devOrg.uxFriendlySlide("form.app-post", true, true);
+        $.devOrg.uxFriendlySlide(self.$appForm, true, true);
 
 
-        //bind with blur event of AppName
-        self.appNameOnBlur();
 
         ///hiding the uploader on the app loader page for every time before posting a new app.
         self.$appForm.find(self.selectorForUploaderRows).hide();
@@ -438,55 +509,77 @@ $.WeReviewApp = {
      * App edit or post before action.
      * Determination point of app edit or post.
      */
-    generalAppFormEditingOrPostingPageOnReady: function (e) {
+    routeAppEditingFormAndInitialize: function (e) {
+        /// <summary>
+        /// Route app editing form and initialize all other methods.
+        /// </summary>
+        /// <param name="e"></param>
         var self = $.WeReviewApp;
+        // routing
         if (self.$appForm.length > 0) {
             self.$howtoUseUploaderInfoLabel.hide(); //hide uploader info label.
 
+            //bind with blur event of AppName
+            self.appNameOnBlur();
+
             if (self.$appFormPost.length > 0) {
                 // app posting
-                self.appPostingPageOnReady();
+                self.appPostingPageOnReady(); // app creating
 
                 // Only sends to draft if in the app posting page.
                 $(window).bind("beforeunload", self.beforeUnloadEvent);
             } else if (self.$appFormEdit.length > 0) {
                 // app editing
-                self.appEditingPageOnReady();
+                self.appEditingPageOnReady(); // app editing
             }
 
             // .app-editing-page class represent both editing and posting
 
             // Validate app-name
-            //$.devOrg.validateTextInputBasedOnRegEx(
-            //    "#AppName",
-            //    "^([A-zZ.]+\\s*)+(\\d*)\\s*([aA-zZ.]+\\s*)+(\\d*)",
-            //    "Sorry your app name is not valid. Valid name example eg. Plant Vs. Zombies v2.",);
+            $.devOrg.validateTextInputBasedOnRegEx(
+                "#AppName",
+                "^([A-zZ.]+\\s*)+(\\d*)\\s*([aA-zZ.]+\\s*)+(\\d*)",
+                "Sorry your app name is not valid. Valid name example eg. Plant Vs. Zombies v2.");
 
-            $.devOrg.reSetupjQueryValidate("form");
+            $.devOrg.reSetupjQueryValidate(self.$appForm);
 
 
             self.$appForm.find("input,textarea").change(function () {
+                /// app anything change marked as edited
                 self.appInputChangesExist = true;
             });
 
-            self.$appForm.find("select").selectpicker();
+            self.$appForm.find("select").selectpicker(); // make selectpicker
 
             // enter to go next
             $.devOrg.enterToNextTextBoxWithoutTags(self.$appForm, true, false); // means both editing and posting
 
+
+            var $appNameInput = $.byId("AppName");
+
             var triggerAppNameValidateTimeOut,
                 appTitleValidate = function () {
+                    clearTimeout(triggerAppNameValidateTimeOut);
                     triggerAppNameValidateTimeOut = setTimeout(function () {
-                        $("#AppName").trigger("blur");
-                        clearTimeout(triggerAppNameValidateTimeOut);
-                    }, 300);
+                        $appNameInput.trigger("jq.validate.AppName.serverProcessStart");
+                    }, 500);
                 };
+
+            //var events = $appNameInput[0].eventListenerList;
+            //console.log($appNameInput);
+            //console.log(events);
+            //for (var i = 0; i < events.length; i++) {
+            //    console.log(events[i].data);
+            //}
+            //$appNameInput.bind("jq.validate.AppName.serverProcessReturnedAlways", function (evt) {
+            //    console.log(evt);
+            //});
             // triggering appname blur when change any of these.
             // Because all are related to URL generate.
             $(".selectpicker,select").change(appTitleValidate);
             // to validate the app-name, triggering blur on app-name field
-            $("#PlatformVersion").blur(appTitleValidate);
-            
+            $.byId("PlatformVersion").blur(appTitleValidate);
+            $.byId("PlatformID").blur(appTitleValidate);
         }
     },
 
@@ -500,8 +593,8 @@ $.WeReviewApp = {
         //console.log("ase");
         var $submittingSpinner = null;
         var $inputs, currformData = 0;
-        $submittingSpinner = $("#submitting-review-spinner");
-        var $failedIcon = $("#submitting-review-failed-icon");
+        $submittingSpinner = $.byId("submitting-review-spinner");
+        var $failedIcon = $.byId("submitting-review-failed-icon");
         // indicates if it is in the review posting page or in editing page\
         // $lastDiv.length == 0 indicates it's in review edit mode
         var $lastDiv = $form.find("div[data-last-slide=true]:visible");
@@ -629,7 +722,7 @@ $.WeReviewApp = {
      * App review : like-dislike functionality
      */
     reviewLikeDisLikeClicked: function () {
-        var $likeBtns = $("#app-deails-page a[data-review-like-btn=true]");
+        var $likeBtns = $.byId("app-details-page").find("a[data-review-like-btn=true]");
         // Views/Reviews/ReviewsDisplay.cshtml contains that id
         var likeUrl = "/Reviews/Like";
         var dislikeUrl = "/Reviews/DisLike";
@@ -695,7 +788,7 @@ $.WeReviewApp = {
             }); // ajax end
         }
         if ($likeBtns.length > 0) {
-            var $disLikeBtns = $("#app-deails-page a[data-review-dislike-btn=true]");
+            var $disLikeBtns = $.byId("app-details-page").find("a[data-review-dislike-btn=true]");
             var serializedData = $.byId("review-like-dislike-form-submit").serialize();
             $spinners = $(".spinner-for-like").hide(); //like btns
             $likeBtns.click(function (evt) {
@@ -833,7 +926,7 @@ $.WeReviewApp = {
             self.$appForm = $fromWrapper.find(".app-editing-page");
             if (dataType === "post") {
                 self.$appFormPost = self.$appForm;
-                self.$allInputs = self.$appForm.find("input");
+                self.$allInputs = self.$appForm.find("input,textarea");
             } else if (dataType === "edit") {
                 self.$appFormEdit = self.$appForm;
             }
@@ -853,7 +946,7 @@ $.WeReviewApp = {
         /// </summary>
         var self = $.WeReviewApp;
         self.initializeAppForms();
-        self.generalAppFormEditingOrPostingPageOnReady();
+        self.routeAppEditingFormAndInitialize();
         //don't require anymore , it has been called from the fron-end.js script
         //self.frontEndJavaScript();
 
@@ -863,7 +956,7 @@ $.WeReviewApp = {
         self.suggestedOrReviewLoadmoreBtnLeft();
 
         self.reviewLikeDisLikeClicked();
-        $("#developers-organism").addClass("hide");
+        $.byId("developers-organism").addClass("hide");
         // fix date inputs
         self.fixDateInputs();
 

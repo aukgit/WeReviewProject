@@ -9,6 +9,7 @@
     ViewBag.token = @Html.AntiForgeryToken();
     string controller = (string)ViewBag.controller;
     string viewName = "Edit";
+    ViewBag.isEditingPage = true; // make sure the url is from "/Validator/GetValidUrlEditing" or else "/Validator/GetValidUrl"
 }
 @Html.SamePageLinkWithIcon(title, title, "fa fa-edit")
 <hr />
@@ -39,8 +40,5 @@
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/upload")
-
-
     @Scripts.Render("~/bundles/jqueryval")
-
 }

@@ -54,7 +54,10 @@ a.tooltip-show:hover {
   max-width: 29.4rem;
 }
 .tag-input-container .bootstrap-tagsinput input,
+.tag-input-container .bootstrap-tagsinput input:hover,
 .tag-input-container .bootstrap-tagsinput input:focus {
+  outline: none;
+  outline: 0;
   border: none;
 }
 /*# sourceMappingURL=editor-templates.css.map */
