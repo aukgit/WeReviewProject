@@ -39,11 +39,11 @@ namespace WereViewApp.Areas.Admin.Controllers {
                 db.Entry(coreSetting).State = EntityState.Modified;
                 if (db.SaveChanges() > -1) {
                     AppConfig.RefreshSetting();
-                    AppVar.SetSavedStatus(this.ViewBag);
+                    AppVar.SetSavedStatus(ViewBag);
                     return View(coreSetting);
                 }
             }
-            AppVar.SetErrorStatus(this.ViewBag);
+            AppVar.SetErrorStatus(ViewBag);
             return View(coreSetting);
         }
 

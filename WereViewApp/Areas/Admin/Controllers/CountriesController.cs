@@ -18,7 +18,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(CachedQueriedData.GetCountries().ToList());
         }
 
-        public ActionResult Edit(System.Int32 id) {
+        public ActionResult Edit(Int32 id) {
             var zones = CachedQueriedData.GetTimezones(id);
             ViewBag.Timezone = new SelectList(db.UserTimeZones.ToList(), "UserTimeZoneID", "Display");
             ViewBag.CountryID = id;
@@ -26,7 +26,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(zones);
         }
 
-        public ActionResult Delete(System.Int32 id) {
+        public ActionResult Delete(Int32 id) {
             var timezone = db.UserTimeZones.Find(id);
             db.UserTimeZones.Remove(timezone);
             db.SaveChanges();

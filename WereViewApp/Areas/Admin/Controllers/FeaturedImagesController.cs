@@ -170,7 +170,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         #endregion
 
         #region Details
-        public ActionResult Details(System.Int64 id) {
+        public ActionResult Details(Int64 id) {
 
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -226,7 +226,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         #endregion
 
         #region Edit or modify record
-        public ActionResult Edit(System.Int64 id) {
+        public ActionResult Edit(Int64 id) {
 
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

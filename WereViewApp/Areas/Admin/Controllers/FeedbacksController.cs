@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using DevTrends.MvcDonutCaching;
 using WereViewApp.Controllers;
 //using DevTrends.MvcDonutCaching;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.IdentityCustomization;
-
+using DevMvcComponent.Pagination;
 namespace WereViewApp.Areas.Admin.Controllers
 {
-    public class FeedbacksController : GenericController<ApplicationDbContext> {
+    public class FeedbacksController : IndentityController<ApplicationDbContext> {
 
 		#region Developer Comments - Alim Ul karim
         /*
@@ -36,7 +38,7 @@ namespace WereViewApp.Areas.Admin.Controllers
 		const string CreatedSaved = "Transaction is successfully added to the database.";
 		const string ControllerName = "Feedbacks";
 		///Constant value for where the controller is actually visible.
-		const string ControllerVisibleUrl = "/Feedbacks/";
+		const string ControllerVisibleUrl = "/Admin/Feedbacks/";
         const string CurrentControllerRemoveOutputCacheUrl = "/Partials/GetFeedbackID";
         const string DynamicLoadPartialController = "/Partials/";
         bool DropDownDynamic = true;
@@ -145,23 +147,55 @@ namespace WereViewApp.Areas.Admin.Controllers
 			
 		}
 
-		public void GetDropDowns(System.Int64 id){			
+		public void GetDropDowns(long id){			
 		}
 		#endregion
 
+        private ActionResult GetPagedFeedbacks(Expression<Func<Feedback, bool>> condition, string actionName, int? page = 1) {
+            var paginationInfo = new PaginationInfo() {
+                ItemsInPage = AppVar.Setting.PageItems,
+                PageNumber = page,
+                PagesExists = null
+            };
+            string cacheName = "admin.feedback." + actionName;
+            var feedbacks = db.Feedbacks.Where(condition);
+            var pagedData = Pagination.GetPageData(feedbacks, paginationInfo, cacheName: cacheName);
+                            
+            var url = ControllerVisibleUrl + actionName + "/@page";
+            ViewBag.paginationHtml = Pagination.GetList(paginationInfo, url, cacheName: cacheName + ".nav.html");
+            return View("Index", pagedData);
+        }
+
 		#region Index
         [OutputCache(CacheProfile = "Year")]
-        public ActionResult Index() { 
-        
-			bool viewOf = ViewTapping(ViewStates.Index);
-            return View(db.Feedbacks.ToList());
+        public ActionResult Index(int? page) {
+            bool viewOf = ViewTapping(ViewStates.Index);
+            var action = System.Reflection.MethodBase.GetCurrentMethod().Name.ToString();
+
+            return GetPagedFeedbacks(n => !n.IsViewed, action, page);
         }
+
+        public ActionResult UnSolved(int? page) {
+            var action = System.Reflection.MethodBase.GetCurrentMethod().Name.ToString();
+            return GetPagedFeedbacks(n => n.IsUnSolved, action, page);
+        }
+
+        public ActionResult IsInProcess(int? page) {
+            var action = System.Reflection.MethodBase.GetCurrentMethod().Name.ToString();
+            return GetPagedFeedbacks(n => n.IsInProcess, action, page);
+        }
+
+        public ActionResult Solved(int? page) {
+            var action = System.Reflection.MethodBase.GetCurrentMethod().Name.ToString();
+            return GetPagedFeedbacks(n => n.IsSolved, action, page);
+        }
+    
 		#endregion
 
 		#region Index Find - Commented
 		/*
         [OutputCache(CacheProfile = "Year")]
-        public ActionResult Index(System.Int64 id) {
+        public ActionResult Index(System.long id) {
 			bool viewOf = ViewTapping(ViewStates.Index);
             return View(db.Feedbacks.Where(n=> n. == id).ToList());
         }
@@ -169,7 +203,7 @@ namespace WereViewApp.Areas.Admin.Controllers
 		#endregion
 
 		#region Details
-        public ActionResult Details(System.Int64 id) {
+        public ActionResult Details(long id) {
         
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -184,52 +218,10 @@ namespace WereViewApp.Areas.Admin.Controllers
         }
 		#endregion
 
-		#region Create or Add
-        public ActionResult Create() {        
-			if(DropDownDynamic == false){
-                GetDropDowns();
-            }
-			bool viewOf = ViewTapping(ViewStates.Create);
-            return View();
-        }
-
-		/*
-		public ActionResult Create(System.Int64 id) {        
-			if(DropDownDynamic == false){
-                GetDropDowns(id);// Generate hidden.
-            }
-			bool viewOf = ViewTapping(ViewStates.Create);
-            return View();
-        }
-		*/
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Feedback feedback) {
-			bool viewOf = ViewTapping(ViewStates.CreatePostBefore, feedback);
-			if(DropDownDynamic == false){
-                GetDropDowns(feedback);
-            }
-            if (ModelState.IsValid) {            
-                db.Feedbacks.Add(feedback);
-                bool state = SaveDatabase(ViewStates.Create, feedback);
-				if (state) {			
-					AppVar.SetSavedStatus(ViewBag, CreatedSaved); // Saved Successfully.
-				} else {					
-					AppVar.SetErrorStatus(ViewBag, CreatedError); // Failed to save
-				}
-				
-                viewOf = ViewTapping(ViewStates.CreatePostAfter, feedback,state);
-                return View(feedback);
-            }
-            viewOf = ViewTapping(ViewStates.CreatePostAfter, feedback, false);			
-			AppVar.SetErrorStatus(ViewBag, CreatedError); // record is not valid for creation
-            return View(feedback);
-        }
-		#endregion
+	
 
         #region Edit or modify record
-        public ActionResult Edit(System.Int64 id) {
+        public ActionResult Reply(long id) {
         
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -250,7 +242,7 @@ namespace WereViewApp.Areas.Admin.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Feedback feedback) {
+        public ActionResult Reply(Feedback feedback) {
 			bool viewOf = ViewTapping(ViewStates.EditPostBefore, feedback);
             if (ModelState.IsValid)
             {
@@ -274,31 +266,6 @@ namespace WereViewApp.Areas.Admin.Controllers
         }
 		#endregion
 
-		#region Delete or remove record
-
-		
-        public ActionResult Delete(long id) {
-        
-            var feedback = db.Feedbacks.Find(id);
-            bool viewOf = ViewTapping(ViewStates.Delete, feedback);
-			return View(feedback);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]		
-        public ActionResult DeleteConfirmed(long id) {
-            var feedback = db.Feedbacks.Find(id);
-			bool viewOf = ViewTapping(ViewStates.DeletePost, feedback);
-            db.Feedbacks.Remove(feedback);
-            bool state = SaveDatabase(ViewStates.Delete, feedback);
-			if (!state) {			
-				AppVar.SetErrorStatus(ViewBag, DeletedError); // Failed to Save				
-                return View(feedback);
-			}
-			
-            return RedirectToAction("Index");
-        }
-		#endregion
 
 		#region Removing output cache
 		public void RemoveOutputCache(string url) {
@@ -309,6 +276,8 @@ namespace WereViewApp.Areas.Admin.Controllers
             var cacheManager = new OutputCacheManager();
             cacheManager.RemoveItems(ControllerName, "Index");
             cacheManager.RemoveItems(ControllerName, "List");
+            RemoveOutputCache(ControllerVisibleUrl);
+            RemoveOutputCache(ControllerVisibleUrl + "Index");
             cacheManager = null;
             GC.Collect();
         }

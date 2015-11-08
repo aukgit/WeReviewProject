@@ -128,7 +128,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         }
 
-        public void GetDropDowns(System.Int16 id) {
+        public void GetDropDowns(Int16 id) {
         }
         #endregion
 
@@ -150,7 +150,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         #endregion
 
         #region Details
-        public ActionResult Details(System.Int16 id) {
+        public ActionResult Details(Int16 id) {
 
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -201,7 +201,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         #endregion
 
         #region Edit or modify record
-        public ActionResult Edit(System.Int16 id) {
+        public ActionResult Edit(Int16 id) {
 
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
