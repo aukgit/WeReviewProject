@@ -1,144 +1,217 @@
-﻿@model WereViewApp.Models.POCO.IdentityCustomization.Feedback
+﻿@using WereViewApp.Models.POCO.IdentityCustomization
+@model Feedback
 
 @{
-    ViewBag.Title = "Details";
-    string title = ViewBag.Title;
+	string nameOftheRecord = Html.DisplayFor(model => model.Username).ToString();
+
+    ViewBag.Title = "Details of " + nameOftheRecord;
+	string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
+	string controller = (string)ViewBag.controller;
+	string viewName = "Details";
+
 }
-
-<h2>Details</h2>
-
-<div>
-    <h4>Feedback</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Username)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Username)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Subject)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Subject)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Message)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Message)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RateUrgency)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RateUrgency)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Response)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Response)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsViewed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsViewed)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsInProcess)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsInProcess)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsSolved)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsSolved)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsUnSolved)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsUnSolved)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HasMarkedToFollowUpDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HasMarkedToFollowUpDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PostedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PostedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FollowUpdateDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FollowUpdateDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FeedbackCategoryID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FeedbackCategoryID)
-        </dd>
-
-    </dl>
-</div>
-<p>
-		<div class="form-group">
-			<div class="col-md-offset-2 col-md-10">
-				<a href="@Html.Action("Edit")" title="Edit - @ViewBag.Title" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-				<a href="@Html.Action("Index")" title="Back" class="btn btn-info"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>				
+<h1 class="h2 gap-from-top-small">
+	<span class="glyphicon glyphicon-print"></span>
+	@Html.SamePageLink(title, subtitle, false)
+</h1>
+<hr />
+<h3 class="h4">To edit the details please click on the edit button.</h3>   
+<div class="form-horizontal">		
+	<div class="form-group">
+		<div class="col-md-10">
+			<div class="btn-group">
+				<a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+				<a href="@Url.Action("Edit", new { id = Model.FeedbackID })" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
 			</div>
-        </div>
-</p>
+		</div>	
+		<div class="col-md-2">
+			<a href="@Url.Action("Delete", new { id = Model.FeedbackID })" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>			
+		</div>	
+	</div>
+	<table class="table table-hover gap-from-top-small">
+		<thead>
+            <tr>
+                <th>Properties</th>
+                <th></th>
+                <th>Values</th>
+            </tr>
+        </thead>
+		<tbody>			
+	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.Username)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.Username)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.Name)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.Name)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.Subject)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.Subject)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.Message)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.Message)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.Email)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.Email)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.RateUrgency)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.RateUrgency)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.Response)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.Response)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.IsViewed)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.IsViewed)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.IsInProcess)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.IsInProcess)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.IsSolved)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.IsSolved)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.IsUnSolved)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.IsUnSolved)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.HasMarkedToFollowUpDate)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.HasMarkedToFollowUpDate)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.PostedDate)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.PostedDate)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.FollowUpdateDate)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.FollowUpdateDate)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.HasAppOrReviewReport)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.HasAppOrReviewReport)
+					</td>
+				</tr>	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.FeedbackCategoryID)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.FeedbackCategoryID)
+					</td>
+				</tr>	
+		
+			
+		</tbody>
+    </table> 
+	<div class="form-group">
+		<div class="col-md-10">
+			<div class="btn-group">
+				<a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+				<a href="@Url.Action("Edit", new { id = Model.FeedbackID })" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+			</div>
+		</div>	
+		<div class="col-md-2">
+			<a href="@Url.Action("Delete", new { id = Model.FeedbackID })" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>			
+		</div>	
+	</div>
+</div>
