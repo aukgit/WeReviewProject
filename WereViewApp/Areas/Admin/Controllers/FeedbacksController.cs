@@ -158,8 +158,11 @@ namespace WereViewApp.Areas.Admin.Controllers
                 PagesExists = null
             };
             string cacheName = "admin.feedback." + actionName;
-            var feedbacks = db.Feedbacks.Where(condition);
-            var pagedData = Pagination.GetPageData(feedbacks, paginationInfo, cacheName: cacheName);
+            var feedbacks = db.Feedbacks
+                               .Where(condition)
+                               .OrderByDescending(n=> n.FeedbackID); // pagnation only work with order by
+
+            var pagedData = feedbacks.GetPageData(paginationInfo, cacheName: cacheName);
                             
             var url = ControllerVisibleUrl + actionName + "/@page";
             ViewBag.paginationHtml = Pagination.GetList(paginationInfo, url, cacheName: cacheName + ".nav.html");

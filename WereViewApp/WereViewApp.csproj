@@ -1131,6 +1131,12 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DevMVCComponent\DevMVCComponent\DevMVCComponent\DevMVCComponent.csproj">
+      <Project>{9302C6E3-FBE2-4A99-9BE3-81E80724CEC6}</Project>
+      <Name>DevMVCComponent</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
