@@ -139,16 +139,6 @@ namespace WereViewApp.Areas.Admin.Controllers
 
 		#region DropDowns Generate
 
-        #region FeedbacksController : DropDowns to paste into the partial
-            
-        #endregion
-
-		public void GetDropDowns(Feedback feedback = null){
-			
-		}
-
-		public void GetDropDowns(long id){			
-		}
 		#endregion
 
         private ActionResult GetPagedFeedbacks(Expression<Func<Feedback, bool>> condition, string actionName, int? page = 1) {
@@ -159,8 +149,9 @@ namespace WereViewApp.Areas.Admin.Controllers
             };
             string cacheName = "admin.feedback." + actionName;
             var feedbacks = db.Feedbacks
-                               .Where(condition)
-                               .OrderByDescending(n=> n.FeedbackID); // pagnation only work with order by
+                              .Include(n=> n.FeedbackCategoryID)
+                              .Where(condition)
+                              .OrderByDescending(n=> n.FeedbackID); // pagnation only work with order by
 
             var pagedData = feedbacks.GetPageData(paginationInfo, cacheName: cacheName);
                             
