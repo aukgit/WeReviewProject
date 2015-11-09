@@ -1,6 +1,7 @@
 ﻿using WereViewApp.Models.POCO.Enum;
 using WereViewApp.Models.POCO.IdentityCustomization;
-
+using WereViewApp.WereViewAppCommon;
+using System.Linq;
 namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
     public static class FeedbackExtend {
         public static FeedbackState GetStatus(this Feedback feedback) {
@@ -31,11 +32,21 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
                 };
             } else {
                 return new FeedbackState() {
-                    Status = "Unknown",
+                    Status = "Viewed but not replied.",
                     StyleClass = "warning"
                 };
             }
         }
+
+        public static string GetCategory(this Feedback feedback) {
+            var feedbackCategory =
+                WereViewStatics.FeedbackCategories.FirstOrDefault(n => n.FeedbackCategoryID == feedback.FeedbackCategoryID);
+            if (feedbackCategory != null) {
+                return feedbackCategory.Category;
+            }
+            return "";
+        }
+
         /// <summary>
         /// Please check the condition.
         /// </summary>

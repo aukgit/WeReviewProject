@@ -12,6 +12,7 @@ using WereViewApp.Controllers;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using DevMvcComponent.Pagination;
+using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 namespace WereViewApp.Areas.Admin.Controllers
 {
     public class FeedbacksController : IndentityController<ApplicationDbContext> {
@@ -131,7 +132,7 @@ namespace WereViewApp.Areas.Admin.Controllers
 					return true;
 				}
 			} catch (Exception ex){
-				 throw new Exception("Message : " + ex.Message.ToString() + " Inner Message : " + ex.InnerException.Message.ToString());
+				 throw new Exception("Message : " + ex.Message + " Inner Message : " + ex.InnerException.Message);
 			}
 			return false;
 		}
@@ -149,7 +150,6 @@ namespace WereViewApp.Areas.Admin.Controllers
             };
             string cacheName = "admin.feedback." + actionName;
             var feedbacks = db.Feedbacks
-                              .Include(n=> n.FeedbackCategoryID)
                               .Where(condition)
                               .OrderByDescending(n=> n.FeedbackID); // pagnation only work with order by
 
@@ -164,23 +164,27 @@ namespace WereViewApp.Areas.Admin.Controllers
         [OutputCache(CacheProfile = "Year")]
         public ActionResult Index(int? page) {
             bool viewOf = ViewTapping(ViewStates.Index);
-            var action = System.Reflection.MethodBase.GetCurrentMethod().Name.ToString();
+            var action = System.Reflection.MethodBase.GetCurrentMethod().Name;
 
             return GetPagedFeedbacks(n => !n.IsViewed, action, page);
         }
+        public ActionResult IsViewed(int? page) {
+            var action = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            return GetPagedFeedbacks(n => n.IsViewed && !n.IsInProcess && !n.IsUnSolved && !n.IsSolved, action, page);
+        }
 
         public ActionResult UnSolved(int? page) {
-            var action = System.Reflection.MethodBase.GetCurrentMethod().Name.ToString();
+            var action = System.Reflection.MethodBase.GetCurrentMethod().Name;
             return GetPagedFeedbacks(n => n.IsUnSolved, action, page);
         }
 
         public ActionResult IsInProcess(int? page) {
-            var action = System.Reflection.MethodBase.GetCurrentMethod().Name.ToString();
+            var action = System.Reflection.MethodBase.GetCurrentMethod().Name;
             return GetPagedFeedbacks(n => n.IsInProcess, action, page);
         }
 
         public ActionResult Solved(int? page) {
-            var action = System.Reflection.MethodBase.GetCurrentMethod().Name.ToString();
+            var action = System.Reflection.MethodBase.GetCurrentMethod().Name;
             return GetPagedFeedbacks(n => n.IsSolved, action, page);
         }
     
@@ -225,13 +229,18 @@ namespace WereViewApp.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            feedback = MarkAsViewed(feedback);
 			bool viewOf = ViewTapping(ViewStates.Edit, feedback);
-			if(DropDownDynamic == false){
-                GetDropDowns(feedback); // Generating drop downs
-            }
+		
             return View(feedback);
         }
 
+        public Feedback MarkAsViewed(Feedback feedback) {
+            feedback.SetStatus(Models.POCO.Enum.FeedbackStatusTypes.IsViewed);
+            db.Entry(feedback).State = EntityState.Modified;
+            SaveDatabase(ViewStates.Edit, feedback);
+            return feedback;
+        }
         
         
         [HttpPost]
@@ -252,9 +261,6 @@ namespace WereViewApp.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             viewOf = ViewTapping(ViewStates.EditPostAfter, feedback , false);
-        	if(DropDownDynamic == false){
-                GetDropDowns(feedback); // Generating drop downs
-            }
             AppVar.SetErrorStatus(ViewBag, EditedError); // record not valid for save
             return View(feedback);
         }

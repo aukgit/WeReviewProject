@@ -56,7 +56,5 @@ namespace WereViewApp.Models.POCO.IdentityCustomization {
         [ForeignKey("FeedbackID")]
         public ICollection<FeedbackAppReviewRelation> FeedbackAppReviewRelations { get; set; }
 
-
-
     }
 }

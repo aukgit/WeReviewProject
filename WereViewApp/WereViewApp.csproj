@@ -799,7 +799,7 @@
     <Content Include="Areas\Admin\Views\Feedbacks\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Feedbacks\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Feedbacks\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Feedbacks\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Feedbacks\Reply.cshtml" />
     <Content Include="Areas\Admin\Views\Feedbacks\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
