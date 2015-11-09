@@ -1,16 +1,4 @@
-﻿@import "lesshat.less";
-@import "variables.less";
-
-
-body {
-    font-family: Ubuntu,"Helvetica Neue", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: subpixel-antialiased;
-}
-
-body #wrap .app-details-page {
-    .ubuntu-font;
-}
-
+﻿@import "fonts-rimixens.less";
 
 .regular-color {
     color: @regular-font-color;
@@ -19,14 +7,34 @@ body #wrap .app-details-page {
 .primary-color {
     color: @primary-color;
 }
+
+
+.login-btn-wrapper {
+    .max-width(294px);
+
+    .checkbox {
+        .max-width(150px);
+        float: left;
+    }
+
+    .btn {
+        float: right;
+    }
+}
+
 // other imports
 //@import "seo-optimize.less";
 //bootstrap overrides
 .btn {
     font-weight: normal;
     text-transform: none;
+    .padding(7px, 12px, 7px,12px);
+    border: none;
 }
 
+.btn-xs {
+    padding: 1px 5px;
+}
 
 
 .btn-default {
@@ -159,9 +167,7 @@ label.control-label {
     }
 }
 
-.btn {
-    border: none;
-}
+
 
 .paragraph-end {
     height: 19px;
@@ -376,11 +382,19 @@ label.control-label {
         color: @app-description-color;
         .width(385px);
         text-align: left;
+        -ms-text-overflow: ellipsis !important;
+        -o-text-overflow: ellipsis !important;
+        text-overflow: ellipsis !important;
+        white-space: normal;
 
         p {
             text-align: justify;
             -ms-word-wrap: break-word;
             word-wrap: break-word;
+            -ms-text-overflow: inherit;
+            -o-text-overflow: inherit;
+            text-overflow: inherit;
+            white-space: inherit;
         }
     }
 
@@ -1274,6 +1288,12 @@ q:after {
     @media (min-width:@screen-sm) {
         bottom: 9px;
     }
+}
+
+// app editing page
+.app-url-display {
+    .margin-left(4px);
+    .margin-bottom(11px);
 }
 
 @import "blog-page.less";

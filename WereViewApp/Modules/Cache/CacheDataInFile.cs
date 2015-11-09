@@ -104,7 +104,7 @@ namespace WereViewApp.Modules.Cache {
                 w.Write(binaryObj);
                 w.Close();
             } catch (Exception ex) {
-                Starter.Error.HandleBy(ex);
+                Mvc.Error.HandleBy(ex);
             }
 
             //}).Start();
@@ -133,7 +133,7 @@ namespace WereViewApp.Modules.Cache {
                     w.Write(binaryObj);
                     w.Close();
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }).Start();
         }
@@ -146,7 +146,7 @@ namespace WereViewApp.Modules.Cache {
                     var fileBytes = File.ReadAllBytes(fileNamelocation);
                     return ReadFromBinaryObject(fileBytes);
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                     return null;
                 }
             }
@@ -172,7 +172,7 @@ namespace WereViewApp.Modules.Cache {
                     var fileBytes = File.ReadAllBytes(fileNamelocation);
                     return ReadFromBinaryObject(fileBytes);
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                     return null;
                 }
             }
@@ -197,7 +197,7 @@ namespace WereViewApp.Modules.Cache {
                 }
                 File.WriteAllText(fileNamelocation, content);
             } catch (Exception ex) {
-                Starter.Error.HandleBy(ex);
+                Mvc.Error.HandleBy(ex);
             }
         }
 
@@ -215,7 +215,7 @@ namespace WereViewApp.Modules.Cache {
                 }
                 File.WriteAllLines(fileNamelocation, contents);
             } catch (Exception ex) {
-                Starter.Error.HandleBy(ex);
+                Mvc.Error.HandleBy(ex);
             }
         }
 
@@ -234,7 +234,7 @@ namespace WereViewApp.Modules.Cache {
                     }
                     File.WriteAllText(fileNamelocation, content);
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }).Start();
         }
@@ -254,7 +254,7 @@ namespace WereViewApp.Modules.Cache {
                     }
                     File.WriteAllLines(fileNamelocation, contents);
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }).Start();
         }
@@ -270,7 +270,7 @@ namespace WereViewApp.Modules.Cache {
                 fileNamelocation = AppPath + Root + AdditionalRoot + fileNamelocation;
                 return File.ReadAllText(fileNamelocation);
             } catch (Exception ex) {
-                Starter.Error.HandleBy(ex);
+                Mvc.Error.HandleBy(ex);
                 return null;
             }
         }
@@ -286,7 +286,7 @@ namespace WereViewApp.Modules.Cache {
                 fileNamelocation = AppPath + Root + AdditionalRoot + fileNamelocation;
                 return File.ReadAllLines(fileNamelocation);
             } catch (Exception ex) {
-                Starter.Error.HandleBy(ex);
+                Mvc.Error.HandleBy(ex);
                 return null;
             }
         }

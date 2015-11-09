@@ -60,8 +60,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="DevMvcComponent, Version=1.0.20.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DevMVCComponent.1.0.20\lib\DevMvcComponent.dll</HintPath>
+    <Reference Include="DevMvcComponent, Version=2.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevMVCComponent.2.0.5\lib\DevMvcComponent.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DevTrends.MvcDonutCaching">
@@ -235,11 +235,16 @@
   <ItemGroup>
     <Compile Include="Areas\Admin\Controllers\ServicesController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
+    <Compile Include="Controllers\GenericController.cs" />
+    <Compile Include="Controllers\IndentityController.cs" />
     <Compile Include="Controllers\PlatformsController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
+    <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\CategoryExtend.cs" />
+    <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackState.cs" />
+    <Compile Include="Models\POCO\Enum\FeedbackStatusTypes.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
     <Compile Include="Models\POCO\Structs\FeedbackCategoryIDs.cs" />
     <Compile Include="Modules\Extensions\ViewEngine\RenderingView.cs" />
@@ -249,6 +254,10 @@
     <Compile Include="Modules\Sitemaps\SitemapGenerator.cs" />
     <Compile Include="Modules\Sitemaps\SitemapItem.cs" />
     <Compile Include="Modules\Sitemaps\SitemapResult.cs" />
+    <Compile Include="Modules\TimeZone\TimeZoneSet.cs" />
+    <Compile Include="Modules\Validations\DevUserValidator.cs" />
+    <Compile Include="Modules\Validations\ValidationMessage.cs" />
+    <Compile Include="Modules\Validations\Validator.cs" />
     <Compile Include="Scheduler\WeReviewDownloadScheduler.cs" />
     <Compile Include="Scheduler\WeReviewScheduler.cs" />
     <Compile Include="Scheduler\SchedulerRunner.cs" />
@@ -407,7 +416,6 @@
     <Compile Include="Modules\Uploads\IImageCategory.cs" />
     <Compile Include="Modules\Uploads\IUploadableFile.cs" />
     <Compile Include="Modules\Uploads\UploadProcessor.cs" />
-    <Compile Include="Modules\UserError\ErrorCollector.cs" />
     <Compile Include="Modules\UserError\MessageConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -426,17 +434,41 @@
     <Content Include="App_Data\WereViewApp_log.ldf">
       <DependentUpon>WereViewApp.mdf</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Config\_Basic-tab.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Views\Config\_Developers-tab.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Views\Config\_Email-setup-tab.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Views\Config\_External-logins-tab.cshtml" />
+    <Content Include="Areas\Admin\Views\Config\_Office-tab.cshtml" />
+    <Content Include="Areas\Admin\Views\Config\_Urls-tab.cshtml" />
+    <Content Include="Areas\Admin\Views\Config\_WeReview-tab.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Content\css\animate-refresh.css" />
     <Content Include="Content\css\animate-refresh.css.map">
       <DependentUpon>animate-refresh.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\animate.min.css" />
     <Content Include="Content\css\base-theme-styles.css" />
+    <Content Include="Content\css\blog-page.css" />
     <Content Include="Content\css\bootstrap-datetimepicker.css" />
     <Content Include="Content\css\bootstrap-datetimepicker.css.map">
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
     </Content>
     <Content Include="Content\css\bootstrap-select.css" />
+    <Content Include="Content\css\bootstrap-select.min.css">
+      <DependentUpon>bootstrap-select.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\bootstrap-table.css" />
+    <Content Include="Content\css\bootstrap-tag.css" />
+    <Content Include="Content\css\bootstrap-tag.min.css">
+      <DependentUpon>bootstrap-tag.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\category-page.css" />
@@ -444,7 +476,18 @@
       <DependentUpon>category-page.css</DependentUpon>
     </Content>
     <Content Include="Content\css\color-fonts.css" />
+    <Content Include="Content\css\color-fonts.min.css">
+      <DependentUpon>color-fonts.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\dataTables.bootstrap.css" />
+    <Content Include="Content\css\editor-templates.css" />
+    <Content Include="Content\css\editor-templates.min.css">
+      <DependentUpon>editor-templates.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\editor-templates.variables.css" />
+    <Content Include="Content\css\editor-templates.variables.min.css">
+      <DependentUpon>editor-templates.variables.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\flags32-combo.css" />
     <Content Include="Content\css\flags32.css" />
     <Content Include="Content\css\flags32.png" />
@@ -457,6 +500,13 @@
     <Content Include="Content\css\front-developer.css" />
     <Content Include="Content\css\front-developer.css.map">
       <DependentUpon>front-developer.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\front-developer.min.css">
+      <DependentUpon>front-developer.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\header.css" />
+    <Content Include="Content\css\header.min.css">
+      <DependentUpon>header.css</DependentUpon>
     </Content>
     <Content Include="Content\css\less-imports.css" />
     <Content Include="Content\css\less-imports.css.map">
@@ -471,6 +521,9 @@
     <Content Include="Content\css\override-mvc.css.map">
       <DependentUpon>override-mvc.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\override-mvc.min.css">
+      <DependentUpon>override-mvc.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\owl.carousel.css" />
     <Content Include="Content\css\owl.custom.finalize.css" />
     <Content Include="Content\css\owl.custom.finalize.min.css" />
@@ -483,6 +536,7 @@
     <Content Include="Content\css\search-page.css.map">
       <DependentUpon>search-page.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\see-more-btn.css" />
     <Content Include="Content\css\seo-optimize.css" />
     <Content Include="Content\css\seo-optimize.css.map">
       <DependentUpon>seo-optimize.css</DependentUpon>
@@ -511,21 +565,40 @@
     <Content Include="Content\css\utilities.css.map">
       <DependentUpon>utilities.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\utilities.min.css">
+      <DependentUpon>utilities.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\validator.css" />
+    <Content Include="Content\css\validator.min.css">
+      <DependentUpon>validator.css</DependentUpon>
+    </Content>
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\Less\less-imports.less" />
     <Content Include="Content\fonts\fontawesome-webfont78ce.eot" />
     <Content Include="Content\fonts\fontawesome-webfont78ce.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont78ce.woff" />
     <Content Include="Content\fonts\fontawesome-webfontd41d.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Content\Less\animate-refresh.less" />
     <Content Include="Areas\Admin\Views\AppCategories\_CreateOrEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_NavBar.cshtml" />
     <Content Include="Content\css\color-fonts.css.map" />
     <Content Include="Content\css\owl.custom.finalize.css.map" />
-    <None Include="Content\Less\override-mvc.less" />
+    <Content Include="Content\Less\animate-refresh.less" />
+    <Content Include="Content\Less\blog-page.less" />
+    <Content Include="Content\Less\bootstrap-datetimepicker.less" />
+    <Content Include="Content\Less\category-page.less" />
+    <Content Include="Content\Less\color-fonts.less" />
+    <Content Include="Content\Less\footer-fixing.less" />
+    <Content Include="Content\Less\front-developer.less" />
+    <Content Include="Content\Less\less-imports.less" />
+    <Content Include="Content\Less\menu-fix.less" />
+    <Content Include="Content\Less\owl.custom.finalize.less" />
+    <Content Include="Content\Less\responsive.less" />
+    <Content Include="Content\Less\search-page.less" />
+    <Content Include="Content\Less\see-more-btn.less" />
+    <Content Include="Content\Less\seo-optimize.less" />
+    <Content Include="Content\Less\utilities.less" />
     <Content Include="Content\Published.Scripts\front-end.js" />
     <Content Include="Content\Published.Scripts\front-end.min.js">
       <DependentUpon>front-end.js</DependentUpon>
@@ -584,13 +657,12 @@
     <Content Include="Content\Scripts\DevOrgPlugins\ComboOptions.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.country-phone.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.dynamicSelect.js" />
-    <Content Include="Content\Scripts\DevOrgPlugins\every-page.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\app.run.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\dev-component-runner.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.component.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\byId.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\jquery.server-validate.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\WeReviewApps.js" />
-    <Content Include="Content\Less\bootstrap-datetimepicker.less" />
-    <Content Include="Content\Less\responsive.less" />
     <Content Include="Content\Published.Scripts\front-end.min.js.map">
       <DependentUpon>front-end.min.js</DependentUpon>
     </Content>
@@ -600,9 +672,50 @@
     <Content Include="Content\Published.Scripts\upload.min.js.map">
       <DependentUpon>upload.min.js</DependentUpon>
     </Content>
+    <Content Include="Content\Less\bootstrap-select.less" />
+    <Content Include="Content\Less\bootstrap-select.variables.less" />
+    <Content Include="Content\Less\editor-templates.less" />
+    <Content Include="Content\Less\editor-templates.variables.less" />
+    <Content Include="Content\Less\fonts-rimixens.less" />
+    <Content Include="Content\Less\footer.variables.less" />
+    <Content Include="Content\Less\front-developer.variables.less" />
+    <Content Include="Content\Less\header.less" />
+    <Content Include="Content\Less\override-mvc.less" />
+    <Content Include="Content\Less\remixens\elements.less" />
+    <Content Include="Content\Less\remixens\extra-remixens.less" />
+    <Content Include="Content\Less\remixens\global.less" />
+    <Content Include="Content\Less\remixens\lesshat.less" />
+    <Content Include="Content\Less\remixens\variables.less" />
+    <Content Include="Content\Less\validator.less" />
+    <Content Include="Content\css\bootstrap-select.css.map">
+      <DependentUpon>bootstrap-select.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\header.variables.less" />
+    <Content Include="Content\css\see-more-btn.css.map">
+      <DependentUpon>see-more-btn.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\validator.css.map">
+      <DependentUpon>validator.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\bootstrap-tag.css.map">
+      <DependentUpon>bootstrap-tag.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\blog-page.css.map">
+      <DependentUpon>blog-page.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\header.css.map">
+      <DependentUpon>header.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\override-mvc.variables.less" />
+    <Content Include="Content\css\editor-templates.css.map">
+      <DependentUpon>editor-templates.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\bootstrap-tagsinput.less" />
+    <Content Include="Content\css\editor-templates.variables.css.map">
+      <DependentUpon>editor-templates.variables.css</DependentUpon>
+    </Content>
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
-    <None Include="Content\Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />
     <Content Include="Content\Scripts\FrontEnd\front-developer.js" />
     <Content Include="Content\Scripts\FrontEnd\jquery.isotope.min.js" />
@@ -612,8 +725,8 @@
     <Content Include="Content\Scripts\FrontEnd\main.js" />
     <Content Include="Content\Scripts\FrontEnd\owl.carousel.min.js" />
     <Content Include="Content\Scripts\FrontEnd\wow.min.js" />
-    <Content Include="Content\Scripts\jquery-2.1.3.js" />
-    <Content Include="Content\Scripts\jquery-2.1.3.min.js" />
+    <None Include="Content\Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Content\Scripts\jquery-2.1.4.js" />
     <Content Include="Content\Scripts\jquery-ui.min.js" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\Scripts\bootstrap-table-filter.js" />
@@ -628,9 +741,9 @@
     <Content Include="Content\Scripts\modernizr-2.8.3.js" />
     <Content Include="Content\Scripts\moment.js" />
     <Content Include="Content\Scripts\star-rating.js" />
-    <Content Include="Content\Scripts\Tagit\jquery-ui-1.9.2.custom.min.js" />
-    <Content Include="Content\Scripts\Tagit\jquery.autoGrowInput.js" />
-    <Content Include="Content\Scripts\Tagit\jquery.tagedit.js" />
+    <Content Include="Content\Scripts\Tag-it\bootstrap-tagsinput.js" />
+    <Content Include="Content\Scripts\Tag-it\bootstrap3-typeahead.min.js" />
+    <Content Include="Content\Scripts\Tag-it\jquery.autoGrowInput.js" />
     <Content Include="Content\Scripts\underscore.js" />
     <Content Include="Content\Scripts\Upload\bootstrap-progressbar.js" />
     <Content Include="Content\Scripts\Upload\canvas-to-blob.min.js" />
@@ -669,9 +782,6 @@
     <Content Include="Areas\Admin\Views\Roles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Countries\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Countries\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Countries\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Edit.cshtml" />
@@ -853,30 +963,10 @@
     <Content Include="Views\Shared\EditorTemplates\Username.cshtml" />
     <Content Include="App_Data\DataCached\Suggested\1" />
     <Content Include="App_Data\DataCached\Suggested\2" />
-    <Content Include="Content\Less\blog-page.less" />
-    <Content Include="Content\Less\category-page.less" />
-    <Content Include="Content\Less\color-fonts.less" />
-    <Content Include="Content\Less\elements.less" />
-    <Content Include="Content\Less\extra-remixens.less" />
-    <Content Include="Content\Less\footer-fixing.less" />
-    <Content Include="Content\Less\front-developer.less" />
-    <Content Include="Content\Less\global.less" />
-    <Content Include="Content\Less\lesshat.less" />
-    <Content Include="Content\Less\menu-fix.less" />
-    <Content Include="Content\Less\owl.custom.finalize.less" />
-    <Content Include="Content\Less\search-page.less" />
-    <Content Include="Content\Less\see-more-btn.less" />
-    <Content Include="Content\Less\seo-optimize.less" />
-    <Content Include="Content\Less\utilities.less" />
-    <Content Include="Content\Less\variables.less" />
     <Content Include="Content\revolution-slider\font\revicons90c6.eot" />
     <Content Include="Content\revolution-slider\font\revicons90c6.ttf" />
     <Content Include="Content\revolution-slider\font\revicons90c6.woff" />
     <Content Include="Content\Scripts\bootstrap.min.js.map" />
-    <Content Include="Content\Scripts\jquery-2.1.3.min.map" />
-    <Content Include="Content\Scripts\jquery-2.1.3.min.js.map">
-      <DependentUpon>jquery-2.1.3.min.js</DependentUpon>
-    </Content>
     <Content Include="Content\Scripts\jquery.unobtrusive-ajax.min.js.map">
       <DependentUpon>jquery.unobtrusive-ajax.min.js</DependentUpon>
     </Content>
@@ -961,8 +1051,6 @@
     <Content Include="Views\App\_AppEditButton.cshtml" />
     <Content Include="Views\Reviews\AlreadyReviewed.cshtml" />
     <Content Include="Views\Reviews\ReviewEdit.cshtml" />
-    <Content Include="Views\Apps\ListOfApps.cshtml" />
-    <Content Include="Views\Apps\_ListItemsOfApps.cshtml" />
     <Content Include="Views\Shared\_ListOfApps.cshtml" />
     <Content Include="Views\Shared\_AppNotFound.cshtml" />
     <Content Include="Views\Shared\_LoginUrlPage.cshtml" />
@@ -993,6 +1081,28 @@
     <Content Include="Views\Report\App.cshtml" />
     <Content Include="Views\Report\Review.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <Content Include="Views\Shared\EditorTemplates\Double.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
+    <Content Include="Views\App\_SeoExtraPart.cshtml" />
+    <Content Include="Views\Category\_SeoHide.cshtml" />
+    <Content Include="Views\Apps\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Tag.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AnyType.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AnyTypeIcon.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DropDown-Dynamic.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DropDown.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Email-v.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Enum.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Password-v.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RememberMe-v.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RememberMe.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Sender-Email.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String-Label-Off.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Upload-Multiple.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Username-v.cshtml" />
+    <Content Include="Views\Report\AlreadyReported.cshtml" />
+    <Content Include="Views\Report\Done.cshtml" />
+    <Content Include="Views\Report\Later.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />

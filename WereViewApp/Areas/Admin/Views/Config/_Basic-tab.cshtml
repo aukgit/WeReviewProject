@@ -1,0 +1,24 @@
+﻿@model CoreSetting
+@{
+    string tab = ViewBag.tab;
+}
+<div class="active fade in tab-pane" id="basic-tab">
+    @ViewBag.backBtn
+    @ViewBag.stateMessage
+    @Html.Hidden("tab", tab)
+    @Html.HiddenFor(model => model.CoreSettingID)
+    @Html.EditorFor(model => model.ApplicationName)
+    @Html.EditorFor(model => model.ApplicationSubtitle)
+    @Html.EditorFor(model => model.ApplicationDescription)
+    @Html.EditorFor(model => model.CompanyName)
+    @Html.EditorFor(model => model.Address)
+    @Html.EditorFor(model => model.Language)
+    @Html.EditorFor(model => model.AdminLocation)
+    @Html.EditorFor(model => model.GoogleMetaTag)
+    @Html.EditorFor(model => model.DoesRegisterCodeNeverExpires)
+    @Html.EditorFor(model => model.ShouldRegistrationCodeBeLinkedWithUser)
+    @Html.EditorFor(model => model.IsRegisterCodeRequiredToRegister)
+    @Html.EditorFor(model => model.IsAuthenticationEnabled)
+    @Html.EditorFor(model => model.IsConfirmMailRequired)
+    @ViewBag.backBtn
+</div>

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure.Annotations;
 using WereViewApp.Models.POCO.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using WereViewApp.Models.ViewModels;
 namespace WereViewApp.Models.Context {
 
     #region Application DbContext

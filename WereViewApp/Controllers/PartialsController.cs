@@ -1,19 +1,15 @@
 ﻿#region using block
 
-using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Helpers;
 using System.Web.Mvc;
 using WereViewApp.Models.EntityModel.Structs;
+using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WereViewApp.WereViewAppCommon;
 using DevTrends.MvcDonutCaching;
-using WereViewApp.Helpers;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Cache;
-using WereViewApp.Modules.InternetProtocolRelations;
 using WereViewApp.Modules.Session;
 
 #endregion
@@ -51,28 +47,28 @@ namespace WereViewApp.Controllers {
         //    return Json(countries, JsonRequestBehavior.AllowGet);
         //}
 
-        public string GetCountryId(string id) {
-            //var countries = CachedQueriedData.GetCountries();
-            //var countryId = IpConfigRelations.GetCountryId(id);
-            Country country = null;
+        //public string GetCountryId(string id) {
+        //    //var countries = CachedQueriedData.GetCountries();
+        //    //var countryId = IpConfigRelations.GetCountryId(id);
+        //    Country country = null;
 
-            var value = IpConfigRelations.IpToValue(id);
-            using (var db = new ApplicationDbContext()) {
-                //SELECT * FROM [ip-to-country] WHERE (([BeginingIP] <= ?) AND ([EndingIP] >= ?))
-                var countryIp = db.CountryDetectByIPs.FirstOrDefault(n => n.BeginingIP <= value && n.EndingIP >= value);
-                if (countryIp != null) {
-                    country = CachedQueriedData.GetCountries().FirstOrDefault(n =>
-                       n.CountryID == countryIp.CountryID
-                   );
-                    if (country != null) {
-                        return country.DisplayCountryName + " : val : " + value + ", ip :" + id;
-                    }
-                }
-            }
-            return "-1 : " + id + " : " + value;
+        //    var value = IpConfigRelations.IpToValue(id);
+        //    using (var db = new ApplicationDbContext()) {
+        //        //SELECT * FROM [ip-to-country] WHERE (([BeginingIP] <= ?) AND ([EndingIP] >= ?))
+        //        var countryIp = db.CountryDetectByIPs.FirstOrDefault(n => n.BeginingIP <= value && n.EndingIP >= value);
+        //        if (countryIp != null) {
+        //            country = CachedQueriedData.GetCountries().FirstOrDefault(n =>
+        //               n.CountryID == countryIp.CountryID
+        //           );
+        //            if (country != null) {
+        //                return country.DisplayCountryName + " : val : " + value + ", ip :" + id;
+        //            }
+        //        }
+        //    }
+        //    return "-1 : " + id + " : " + value;
 
-            //return HtmlHelpers.DropDownCountry(countries);
-        }
+        //    //return HtmlHelpers.DropDownCountry(countries);
+        //}
 
         [OutputCache(CacheProfile = "Year", VaryByParam = "id")]
         public ActionResult GetTimeZone(int id) {
@@ -101,6 +97,53 @@ namespace WereViewApp.Controllers {
             return Json(null, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        [OutputCache(CacheProfile = "TenMins", VaryByParam = "id")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GetTags(string id) {
+            if (SessionNames.IsValidationExceed("GetTags", 500) || string.IsNullOrWhiteSpace(id)) {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+      
+            using (var db = new WereViewAppEntities()) {
+                var tags = db.Tags.Where(n => n.TagDisplay.StartsWith(id))
+                                  .Select(n => n.TagDisplay).Take(10).ToArray();
+               
+                var list = new List<string>(25);
+                foreach (var tag in tags) {
+                    list.Add(tag);
+                }
+                if (id.Length > 3) {
+                    var tags2 = db.Tags.Where(n => n.TagDisplay.Contains(id) && tags.All(found => found != n.TagDisplay))
+                                      .Select(n => n.TagDisplay).Take(10).ToArray();
+                    foreach (var tag in tags2) {
+                        list.Add(tag);
+                    }
+                }
+                return Json(list, JsonRequestBehavior.AllowGet);
+            };
+        }
+
+
+        [OutputCache(NoStore = true, Duration = 0)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GetAppUrl(App app) {
+            if (SessionNames.IsValidationExceed("GetAppUrl", 500) || app == null) {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+            using (var db = new WereViewAppEntities()) {
+                var algorithms = new Algorithms();
+
+                app.URL = algorithms.GenerateUrlValid(app, db);
+
+                var sender = new {
+                    url = app.GetAppUrlWithoutHostName()
+                };
+                return Json(sender, JsonRequestBehavior.AllowGet);
+            };
+        }
 
         #region Declarations
 

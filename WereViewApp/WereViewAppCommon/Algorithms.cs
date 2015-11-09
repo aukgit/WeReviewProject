@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Web;
 using DevMvcComponent.Pagination;
 using LinqKit;
@@ -14,6 +13,7 @@ using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.WereViewAppCommon.Structs;
 using DevTrends.MvcDonutCaching;
+using WereViewApp.Modules.Cache;
 
 namespace WereViewApp.WereViewAppCommon {
     public class Algorithms {
@@ -217,16 +217,40 @@ namespace WereViewApp.WereViewAppCommon {
 
         #region Latest Apps With Icons
         public List<App> GetLatestApps(WereViewAppEntities db, int max) {
-            var apps = db.Apps
+            var apps = GetViewableApps(db)
                 .Include(n => n.Platform)
                 .Include(n => n.User)
                 .OrderByDescending(n => n.AppID)
-                .Where(n => n.IsPublished && !n.IsBlocked)
-                .Take(max).ToList();
+                .Take(max)
+                .ToList();
             if (apps != null) {
                 GetEmbedImagesWithApp(apps, db, max, GalleryCategoryIDs.HomePageIcon);
             }
             return apps;
+        }
+
+        public List<App> GetLatestApps(WereViewAppEntities db, bool pagination, int page, out HtmlString paginationListItems) {
+            var apps = GetViewableApps(db)
+                .Include(n => n.Platform)
+                .Include(n => n.User)
+                .OrderByDescending(n => n.AppID);
+
+            var pageInfo = new PaginationInfo {
+                ItemsInPage = AppConfig.Setting.PageItems,
+                PageNumber = page,
+                PagesExists = -1
+            };
+
+            var pagedApps = apps.GetPageData(pageInfo, CacheNames.LastestAppsArchived, true)
+                                .ToList();
+            if (pagedApps != null && pagedApps.Count > 0) {
+                GetEmbedImagesWithApp(pagedApps, db, (int)AppConfig.Setting.PageItems, GalleryCategoryIDs.HomePageIcon);
+            }
+
+            var eachUrl = "/Apps?Page=@page";
+            paginationListItems = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
+                           maxNumbersOfPagesShow: 8));
+            return pagedApps;
         }
 
         #endregion
@@ -373,8 +397,8 @@ namespace WereViewApp.WereViewAppCommon {
 
         #region Get App From Cache
         public App GetAppFromStaticCache(long appId) {
-            if (CommonVars.AppsFoundForSingleDisplay != null) {
-                return CommonVars.AppsFoundForSingleDisplay.FirstOrDefault(n => n.AppID == appId);
+            if (CommonVars.StaticAppsList != null) {
+                return CommonVars.StaticAppsList.FirstOrDefault(n => n.AppID == appId);
             }
             return null;
         }
@@ -422,7 +446,7 @@ namespace WereViewApp.WereViewAppCommon {
             IQueryable<App> appsSimilarNameAnd = null;
             bool isSearchable = false;
 
-            var url = GenerateURLValid(searchText);
+            var url = GenerateUrlValid(searchText);
             var validUrlList = GetUrlListExceptEscapeSequence(url);
             byte? platformId = null;
             if (platform != null) {
@@ -550,16 +574,13 @@ namespace WereViewApp.WereViewAppCommon {
         /// </summary>
         /// <param name="app"></param>
         public void SaveVirtualFields(App app) {
-            new Thread(() => {
-                var appSavingFields = new AppSavingTextFields();
-                appSavingFields.Developers = app.Developers;
-                appSavingFields.IdeaBy = app.IdeaBy;
-                appSavingFields.Publishers = app.Publishers;
-                appSavingFields.Tags = app.Tags;
-                appSavingFields.UploadGuid = app.UploadGuid;
-                WereViewStatics.SavingAppInDirectory(appSavingFields);
-
-            }).Start();
+            var appSavingFields = new AppSavingTextFields();
+            appSavingFields.Developers = app.Developers;
+            appSavingFields.IdeaBy = app.IdeaBy;
+            appSavingFields.Publishers = app.Publishers;
+            appSavingFields.Tags = app.Tags;
+            appSavingFields.UploadGuid = app.UploadGuid;
+            WereViewStatics.SavingAppInDirectory(appSavingFields);
         }
         #endregion
 
@@ -853,16 +874,16 @@ namespace WereViewApp.WereViewAppCommon {
         /// <returns></returns>
         public App GetSingleAppForDisplay(string platform, float platformVersion, string categorySlug, string url, int maxReviewLoad, WereViewAppEntities db) {
             if (platform != null && platformVersion != null && categorySlug != null && url != null) {
-                if (CommonVars.AppsFoundForSingleDisplay == null) {
-                    CommonVars.AppsFoundForSingleDisplay = new List<App>(800);
+                if (CommonVars.StaticAppsList == null) {
+                    CommonVars.StaticAppsList = new List<App>(800);
                 }
                 App app = null;
                 var platformO = WereViewStatics.AppPlatformsCache.FirstOrDefault(n => n.PlatformName.Equals(platform, StringComparison.OrdinalIgnoreCase));
-                var categoryO = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.Slug.Equals(categorySlug,StringComparison.OrdinalIgnoreCase));
+                var categoryO = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.Slug.Equals(categorySlug, StringComparison.OrdinalIgnoreCase));
                 if (platformO != null && categoryO != null) {
                     var platformId = platformO.PlatformID;
                     var categoryId = categoryO.CategoryID;
-                    app = CommonVars.AppsFoundForSingleDisplay
+                    app = CommonVars.StaticAppsList
                                     .FirstOrDefault(n =>
                                         n.URL.Equals(url) &&
                                         n.PlatformID == platformId &&
@@ -930,16 +951,45 @@ namespace WereViewApp.WereViewAppCommon {
                         GetEmbedGalleryImagesWithCurrentApp(app, db);
 
                         // clear few old cache if close overflowing
-                        if (CommonVars.AppsFoundForSingleDisplay.Count > 795) {
-                            CommonVars.AppsFoundForSingleDisplay.RemoveRange(0, 200);
+                        if (CommonVars.StaticAppsList.Count > 795) {
+                            CommonVars.StaticAppsList.RemoveRange(0, 200);
                         }
                         // saving app into the static
-                        CommonVars.AppsFoundForSingleDisplay.Add(app);
+                        CommonVars.StaticAppsList.Add(app);
                         return app;
                     }
                 }
             }
             return null;
+        }
+
+        #endregion
+
+        #region Single app edit - retrieval
+        /// <summary>
+        /// Returns an app if it is created by this same user.
+        /// Try to use the cache if possible.
+        /// </summary>
+        /// <param name="appId"></param>
+        /// <returns></returns>
+        public App GetEditingApp(long appId, WereViewAppEntities db) {
+            var userId = UserManager.GetLoggedUserId();
+            App app = null;
+            if (CommonVars.StaticAppsList != null) {
+                app = CommonVars.StaticAppsList.FirstOrDefault(n => n.AppID == appId && n.PostedByUserID == userId);
+            }
+
+            var cacheId = CacheNames.EditingApp + appId + "-" + userId;
+
+            if (app == null) {
+                app = (App)AppConfig.Caches[cacheId];
+                if (app == null) {
+                    app = db.Apps
+                        .FirstOrDefault(n => n.AppID == appId && n.PostedByUserID == userId);
+                    AppConfig.Caches[cacheId] = app;
+                }
+            }
+            return app;
         }
 
         #endregion
@@ -980,17 +1030,17 @@ namespace WereViewApp.WereViewAppCommon {
         #endregion
 
         #region Remove single app from cache of static
+
         /// <summary>
         /// Only call when an app is edited.
-        /// Remove the app from CommonVars.AppsFoundForSingleDisplay
+        /// Remove the app from CommonVars.StaticAppsList
         /// </summary>
-        /// <param name="app"></param>
-        /// <param name="db"></param>
-        public void RemoveSingleAppFromCacheOfStatic(App app, WereViewAppEntities db) {
-            if (CommonVars.AppsFoundForSingleDisplay != null) {
-                var find = CommonVars.AppsFoundForSingleDisplay.FirstOrDefault(n => n.AppID == app.AppID);
+        /// <param name="appId"></param>
+        public void RemoveSingleAppFromCacheOfStatic(long appId) {
+            if (CommonVars.StaticAppsList != null) {
+                var find = CommonVars.StaticAppsList.FirstOrDefault(n => n.AppID == appId);
                 if (find != null) {
-                    CommonVars.AppsFoundForSingleDisplay.Remove(find);
+                    CommonVars.StaticAppsList.Remove(find);
                 }
             }
         }
@@ -1022,10 +1072,12 @@ namespace WereViewApp.WereViewAppCommon {
             return null;
         }
         /// <summary>
-        /// 
+        /// Returns url without the number and escape sequence (it is for version matching and suggestions)
+        /// [Example : title-tile-2 => title-tile]
+        /// Plant vs Zombines v2 should have a suggestion of Plant Vs. Zombines v1, v3 and so on.
         /// </summary>
         /// <param name="url">title-tile-2</param>
-        /// <returns></returns>
+        /// <returns>title-title</returns>
         public string GetUrlStringExceptEscapeSequence(string url) {
             if (url != null) {
                 List<string> validUrl = GetUrlListExceptEscapeSequence(url);
@@ -1040,6 +1092,7 @@ namespace WereViewApp.WereViewAppCommon {
         #region Generate URL
 
         #region Generate Valid
+
         /// <summary>
         /// Create url but also check if existing one is there.
         /// and add 2 if same one exist.
@@ -1048,8 +1101,10 @@ namespace WereViewApp.WereViewAppCommon {
         /// <param name="categoryId"></param>
         /// <param name="title"></param>
         /// <param name="platformId"></param>
-        /// <returns></returns>
-        public string GenerateURLValid(double platformVersion, short categoryId, string title, byte platformId, WereViewAppEntities db, long currentAppId) {
+        /// <param name="db">Must pass a db, otherwise it will throw an exception.</param>
+        /// <param name="currentAppId">Put -1 if the app is not created. If created then give the app id.</param>
+        /// <returns>Returns url using hyphen(-). E.g. title app name => title-app-name. Note: Must get a valid url.</returns>
+        public string GenerateUrlValid(double platformVersion, short categoryId, string title, byte platformId, WereViewAppEntities db, long currentAppId) {
             if (!string.IsNullOrEmpty(title)) {
                 title = title.Trim();
                 title = Regex.Replace(title, CommonVars.FriendlyUrlRegex, "-").ToLower();
@@ -1059,7 +1114,6 @@ namespace WereViewApp.WereViewAppCommon {
                     exist = db.Apps.Any(n => n.PlatformVersion == platformVersion && n.CategoryID == categoryId && n.URL == title && n.PlatformID == platformId);
                 } else {
                     exist = db.Apps.Any(n => n.AppID != currentAppId && n.PlatformVersion == platformVersion && n.CategoryID == categoryId && n.URL == title && n.PlatformID == platformId);
-
                 }
 
                 if (exist) {
@@ -1071,19 +1125,27 @@ namespace WereViewApp.WereViewAppCommon {
             }
             return title;
         }
+        /// <summary>
+        /// Create url but also check if existing one is there.
+        /// and add 2 if same one exist.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="db">Must pass a db, otherwise it will throw an exception.</param>
+        /// <returns>Returns url using hyphen(-). E.g. title app name => title-app-name. Note: Must get a valid url.</returns>
+        public string GenerateUrlValid(App app, WereViewAppEntities db) {
+            return GenerateUrlValid(app.PlatformVersion, app.CategoryID, app.AppName, app.PlatformID, db, app.AppID);
+        }
 
         #endregion
 
         #region Generate URL not valid one
         /// <summary>
-        /// Create url , don't check if exist one
+        /// Create url , don't check if exist one.
+        /// It is used for searching. Whatever search phrase is given , it converts it to url and look exact match at the database level.
         /// </summary>
-        /// <param name="platformVersion"></param>
-        /// <param name="categoryId"></param>
-        /// <param name="title"></param>
-        /// <param name="platformId"></param>
-        /// <returns></returns>
-        public string GenerateURLValid(string title) {
+        /// <param name="title">Give the search string.</param>
+        /// <returns>Returns url using hyphen(-). E.g. title app name => title-app-name</returns>
+        public string GenerateUrlValid(string title) {
             if (!string.IsNullOrEmpty(title)) {
                 title = title.Trim();
                 title = Regex.Replace(title, CommonVars.FriendlyUrlRegex, "-").ToLower();
@@ -1565,6 +1627,18 @@ namespace WereViewApp.WereViewAppCommon {
         public void RemoveDonutCaching(string controllerName, string action, object routes) {
             var cacheManager = new OutputCacheManager();
             cacheManager.RemoveItems(controllerName, action, routes);
+        }
+        #endregion
+
+
+        #region Remove Cache
+
+        public void RemoveCachingApp(long appId) {
+            RemoveSingleAppFromCacheOfStatic(appId);
+            var userId = UserManager.GetLoggedUserId();
+            var cacheId = CacheNames.EditingApp + appId + "-" + userId;
+            AppConfig.Caches[cacheId] = null;
+
         }
         #endregion
     }

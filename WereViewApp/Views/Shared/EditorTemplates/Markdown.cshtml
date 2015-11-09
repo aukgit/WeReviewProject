@@ -1,5 +1,5 @@
 @model object
-<link rel="stylesheet" type="text/css" href="/Scripts/mdd_styles.css"/>
+<link rel="stylesheet" type="text/css" href="/Scripts/mdd_styles.css" />
 <div class="form-group">
     @Html.LabelFor(m => m, new {@class = "control-label"})
     <div class="mdd_toolbar"></div>
@@ -8,9 +8,9 @@
         8, 15,
         ViewBag.ClearTextField == true ? new {@class = "form-control mdd_editor clear-text-field"} : new {@class = "form-control mdd_editor"})
     @Html.ValidationMessageFor(m => m, null, new {@class = "help-block"})
-    <br/>
+    <br />
     <label>Preview</label>
-    <hr/>
+    <hr />
     <div class="mdd_preview"></div>
-    <hr/>
+    <hr />
 </div>

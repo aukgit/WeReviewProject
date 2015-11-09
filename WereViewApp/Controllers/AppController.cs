@@ -364,7 +364,7 @@ namespace WereViewApp.Controllers {
                                 // creating tag
                                 // if tag not exist in the database then create one.
                                 tagFromDatabase = new Tag {
-                                    TagDisplay = tag
+                                    TagDisplay = tag.Trim()
                                 };
                                 db2.Tags.Add(tagFromDatabase);
                             }
@@ -504,6 +504,7 @@ namespace WereViewApp.Controllers {
         ///     returns draft if it is related to current user.
         /// </summary>
         /// <param name="draftId"></param>
+        /// <param name="appDraft">App draft</param>
         /// <returns></returns>
         private App GetAppfromDraft(AppDraft appDraft) {
             if (appDraft == null) {
@@ -556,7 +557,7 @@ namespace WereViewApp.Controllers {
 
         #region Manage Virtual Fields : In File (Idea, Tags, Developers..)
 
-        #region Saving asycnchronously
+        #region Saving 
 
         /// <summary>
         ///     Async saving into files as binary
@@ -629,7 +630,7 @@ namespace WereViewApp.Controllers {
         private void AddNecessaryWhenModified(App app) {
             // Set userid, last mod, save virtual fields, fix iframe, URL
             AddNecessaryBothOnPostingNEditing(app);
-            _algorithms.RemoveSingleAppFromCacheOfStatic(app, db);
+            _algorithms.RemoveSingleAppFromCacheOfStatic(app.AppID);
         }
 
         /// <summary>
@@ -641,7 +642,7 @@ namespace WereViewApp.Controllers {
         /// </summary>
         /// <param name="app"></param>
         private void AddNecessaryBothOnPostingNEditing(App app) {
-            app.URL = _algorithms.GenerateURLValid(app.PlatformVersion, app.CategoryID, app.AppName, app.PlatformID, db,
+            app.URL = _algorithms.GenerateUrlValid(app.PlatformVersion, app.CategoryID, app.AppName, app.PlatformID, db,
                 app.AppID);
             app.UrlWithoutEscapseSequence = _algorithms.GetUrlStringExceptEscapeSequence(app.URL);
             app.PostedByUserID = UserManager.GetLoggedUserId();
@@ -1046,8 +1047,7 @@ namespace WereViewApp.Controllers {
         #region Edit or modify record
 
         public ActionResult Edit(Int64 id) {
-            var userId = UserManager.GetLoggedUserId();
-            var app = db.Apps.FirstOrDefault(n => n.AppID == id && n.PostedByUserID == userId);
+            var app = _algorithms.GetEditingApp(id, db);
 
             if (app == null) {
                 return HttpNotFound();
@@ -1064,12 +1064,17 @@ namespace WereViewApp.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Edit(App app) {
             var viewOf = ViewTapping(ViewStates.EditPost, app);
+            var oldApp = _algorithms.GetEditingApp(app.AppID, db);
+            app.CreatedDate = oldApp.CreatedDate;
+            app.URL = oldApp.URL;
+
             if (ModelState.IsValid) {
                 AddNecessaryWhenModified(app);
                 db.Entry(app).State = EntityState.Modified;
                 var state = SaveDatabase(ViewStates.Edit, app);
                 if (state) {
                     ManageTagsInDatabase(app.AppID, app.UploadGuid, app.Tags);
+                    _algorithms.RemoveCachingApp(app.AppID);
                     AppVar.SetSavedStatus(ViewBag, EditSuccessFully(app.AppName, app.IsPublished));
                         // Saved Successfully.
                     return Redirect(app.GetAbsoluteUrl());

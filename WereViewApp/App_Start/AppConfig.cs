@@ -3,7 +3,6 @@ using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Mail;
 using WereViewApp.Modules.Session;
 using WereViewApp.Modules.TimeZone;
-using WereViewApp.Modules.UserError;
 using System;
 using System.Configuration;
 using System.Linq;
@@ -11,7 +10,8 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent;
-using DevMvcComponent.Mailer;
+using DevMvcComponent.Error;
+using DevMvcComponent.Mail;
 using DevMvcComponent.Processor;
 
 namespace WereViewApp {
@@ -57,11 +57,11 @@ namespace WereViewApp {
         private static void SetupDevMvcComponent() {
             // initialize DevMvcComponent
             // Configure this with add a sender email.
-            var mailer = new GmailConfig(Setting.SenderEmail, Setting.SenderEmailPassword);
-            Starter.Setup(AppVar.Name, Setting.DeveloperEmail, Assembly.GetExecutingAssembly(), mailer);
-            //Starter.Mailer.QuickSend("devorg.bd@gmail.com", "Hello", "Hello");
-            Cookies = Starter.Cookies;
-            Caches = Starter.Caches;
+            var mailer = new GmailServer(Setting.SenderEmail, Setting.SenderEmailPassword);
+            Mvc.Setup(AppVar.Name, Setting.DeveloperEmail, Assembly.GetExecutingAssembly(), mailer);
+            //Mvc.Mailer.QuickSend("devorg.bd@gmail.com", "Hello", "Hello");
+            Cookies = Mvc.Cookies;
+            Caches = Mvc.Caches;
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace WereViewApp {
                         IsFacebookAuthentication = true,
                         NotifyDeveloperOnError = true,
                         IsConfirmMailRequired = true,
-                        IsSMTPSSL = true,
+                        IsSmtpssl = true,
                         IsFirstUserFound = false
                     };
                     db.CoreSettings.Add(_setting);
@@ -153,10 +153,10 @@ namespace WereViewApp {
                 Zone.LoadTimeZonesIntoMemory();
 
                 AppVar.IsInTestEnvironment = Setting.IsInTestingEnvironment;
-
                 AppVar.Name = Setting.ApplicationName.ToString();
                 AppVar.Subtitle = Setting.ApplicationSubtitle.ToString();
                 AppVar.Setting = Setting;
+
                 AppVar.SetCommonMetaDescriptionToEmpty();
 
                 SetupDevMvcComponent();

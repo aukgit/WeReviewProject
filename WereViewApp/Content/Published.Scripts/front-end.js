@@ -5267,7 +5267,7 @@ $(function () {
         isTesting: false,
         draftSavingFailedErrorMsg: "Sorry couldn't save the draft , possible reason maybe connection lost or your draft buffer is exceeded.",
         numberOfDraftPossible: 10,
-        invalidAttrName: "data-invalid",
+        appTitleValidAttrName: "data-invalid",
         galleryImageUploaderId: 0,
         maxTryInputSubmit: 250,
         sendingDraftNumber: 0,
@@ -5419,7 +5419,7 @@ $(function () {
 
         isAppTitleValid: function () {
             var $appName = $("#AppName");
-            var hasInvalidAttr = $appName.attr($.WeReviewApp.invalidAttrName);
+            var hasInvalidAttr = $appName.attr($.WeReviewApp.appTitleValidAttrName);
 
             if (hasInvalidAttr) {
                 return false;

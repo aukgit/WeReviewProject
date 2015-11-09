@@ -12,9 +12,9 @@ namespace WereViewApp {
         public static void RegisterBundles(BundleCollection bundles) {
 
             #region CDN Constants
-            const string jQueryCdn = @"//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js";
-            //const string jQueryCDN = "http://code.jquery.com/jquery-latest.min.js";
-            const string mordernizerCdn = "http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js";
+
+            const string jQueryVersion = "2.1.4";
+            const string jQueryCdn = @"//code.jquery.com/jquery-" + jQueryVersion + ".min.js";
             //const string respondJsCDN = "http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"
             #endregion
 
@@ -22,7 +22,7 @@ namespace WereViewApp {
 
             #region jQuery
             bundles.Add(new ScriptBundle("~/bundles/jquery", jQueryCdn)
-                        .Include("~/Content/Scripts/jquery-2.1.3.min.js") //if no CDN
+                        .Include("~/Content/Scripts/jquery-" + jQueryVersion + ".js") //if no CDN
             );
             #endregion
 
@@ -35,17 +35,21 @@ namespace WereViewApp {
                     bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                                     "~/Content/Scripts/jquery.validate.js",
                                     "~/Content/Scripts/jquery.validate.unobtrusive.js",
-
                                     "~/Content/Scripts/moment.js",
                                     "~/Content/Scripts/bootstrap-datetimepicker.js",
                                     "~/Content/Scripts/bootstrap-select.js",
                                     "~/Content/Scripts/bootstrap-table.js",
                                     "~/Content/Scripts/bootstrap-table-filter.js",
                                     "~/Content/Scripts/bootstrap-table-export.js",
+                                    "~/Content/Scripts/Tag-it/bootstrap3-typeahead.min.js",
+                                    "~/Content/Scripts/Tag-it/bootstrap-tagsinput.js",
                                     "~/Content/Scripts/jquery.elastic.source.js",
                                     "~/Content/Scripts/DevOrgPlugins/developers-organism.dynamicSelect.js",
                                     "~/Content/Scripts/DevOrgPlugins/developers-organism.country-phone.js",
-                                    "~/Content/Scripts/DevOrgPlugins/dev-component-runner.js"
+                                    "~/Content/Scripts/DevOrgPlugins/jquery.server-validate.js",
+                                    "~/Content/Scripts/DevOrgPlugins/dev-component-runner.js",
+                                  "~/Content/Scripts/DevOrgPlugins/WeReviewApps.js"
+
                                    ));
                     #endregion
 
@@ -68,11 +72,11 @@ namespace WereViewApp {
 
                     #region Bootstrap
                     bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                                  "~/Content/Scripts/DevOrgPlugins/byId.js", 
+                                  "~/Content/Scripts/DevOrgPlugins/byId.js",
                                   "~/Content/Scripts/bootstrap.js", // 3.1.2
+                                  "~/Content/Scripts/DevOrgPlugins/app.run.js",
                                   "~/Content/Scripts/star-rating.js",
                                   "~/Content/Scripts/underscore.js",
-                                  "~/Content/Scripts/DevOrgPlugins/every-page.js",
                                   "~/Content/Scripts/FrontEnd/wow.min.js",
                                   "~/Content/Scripts/FrontEnd/jquery.sticky.js",
                                   "~/Content/Scripts/FrontEnd/jquery.stellar.js",
@@ -85,8 +89,7 @@ namespace WereViewApp {
                                   "~/Content/revolution-slider/js/jquery.themepunch.revolution.min.js",
                                   "~/Content/Scripts/DevOrgPlugins/developers-organism.component.js",
 
-                                  "~/Content/Scripts/FrontEnd/front-developer.js",
-                                  "~/Content/Scripts/DevOrgPlugins/WeReviewApps.js"
+                                  "~/Content/Scripts/FrontEnd/front-developer.js"
 
                                   ));
                     #endregion
@@ -109,10 +112,13 @@ namespace WereViewApp {
                                         "~/Content/css/bootstrap-datetimepicker.css",
                                         "~/Content/css/bootstrap-table.css",
                                         "~/Content/css/bootstrap-select.css",
+                                        "~/Content/css/bootstrap-tagsinput.css",
 
                                         "~/Content/css/color-fonts.css",
                                         "~/Content/css/star-rating.css",
                                         "~/Content/css/override-mvc.css",
+                                        "~/Content/css/validator.css",
+                                        "~/Content/css/editor-templates.css",
 
                                         "~/Content/css/base-theme-styles.css",
                                         "~/Content/css/style.css",

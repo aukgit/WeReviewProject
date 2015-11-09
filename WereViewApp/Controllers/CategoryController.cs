@@ -1,5 +1,6 @@
 ﻿#region using block
 
+using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Pagination;
 using WereViewApp.Modules.Cache;
@@ -10,7 +11,7 @@ using WereViewApp.WereViewAppCommon;
 namespace WereViewApp.Controllers {
     public class CategoryController : Controller {
         // GET: Category
-        private readonly int MaxNumbersOfPagesShow = 8;
+        private const int MaxNumbersOfPagesShow = 8;
 
         public ActionResult Index() {
             var alg = new Algorithms();
@@ -35,8 +36,8 @@ namespace WereViewApp.Controllers {
                     ViewBag.Keywords = ViewBag.Meta;
 
                     var eachUrl = "/Apps/Category/" + category.CategoryName + "/@page";
-                    ViewBag.paginationHtml = Pagination.GetList(pageInfo, eachUrl, "",
-                        maxNumbersOfPagesShow: MaxNumbersOfPagesShow);
+                    ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
+                        maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
                     return View(category);
                 }
             }

@@ -3,7 +3,7 @@
 
 @{
     Layout = null;
-    string moreLink = @Url.Action("Latest", "Apps");
+    string moreLink = @Url.Action("Index", "Apps");
 }
 @if (Model != null) {
     <div class="apps-list-header-row">
@@ -12,12 +12,12 @@
                 <strong title="Latest mobiles apps review of @AppVar.Name">Latest Apps</strong>
             </h1>
         </a>
-        <a class="float-right btn btn-primary btn-more" href="@moreLink">
+        <a class="btn btn-more btn-primary float-right" href="@moreLink">
             More
         </a>
         <div class="clear"></div>
     </div>
-    <div class="owl-carousel owl-theme owl-list" itemprop="itemListElement" itemscope itemtype="http://schema.org/Book">
+    <div class="owl-carousel owl-list owl-theme" itemprop="itemListElement" itemscope itemtype="http://schema.org/Book">
         @foreach (var app in Model) {
             string appName = @app.AppName;
             string absUrl = @app.GetAbsoluteUrl();
@@ -26,7 +26,7 @@
             string subtitleOfApp = @app.GetPlatformString() + " mobile app : " + @appName + " (" + @category + ")";
             string postedUserName = @app.User.UserName;
             <a class="app-box" itemtype="@absUrl" href="@absUrl" title="@appName">
-                <img class="app-icon" itemprop="image" src="@app.HomePageIconLocation" alt="@subtitleOfApp"/>
+                <img class="app-icon" itemprop="image" src="@app.HomePageIconLocation" alt="@subtitleOfApp" />
                 <div class="app-description-wrapper" title="@subtitleOfApp">
                     <div class="app-title-container" title="@subtitleOfApp">
                         <div class="app-title-row" title="@subtitleOfApp">
@@ -44,9 +44,9 @@
                             <span itemprop="name">@postedUserName</span>
                             <span class="paragraph-end"></span>
                         </div>
-                        <div title="rating of @appName" class="seo-rating seo-hide" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                        <div title="rating of @appName" class="seo-hide seo-rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                             <span itemprop="ratingValue">@app.AvgRating</span> stars based on
-                            <meta itemprop="best" content="5"/>
+                            <meta itemprop="best" content="5" />
                             <span itemprop="reviewCount">@app.ReviewsCount</span> reviews
                         </div>
                         <input title="rating of @appName" class="rating-5-front" value="@app.AvgRating" min="0" max="5" step="0.5" data-readonly="true" data-size="xs">

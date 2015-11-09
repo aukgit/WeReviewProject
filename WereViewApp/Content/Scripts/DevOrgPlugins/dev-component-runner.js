@@ -17,10 +17,9 @@
  * mailto:info@developers-organism.com
 */
 
-$(function () {
-    //tooltip trigger
+$.devOrg = $.devOrg || {};
 
-
+$.devOrg.runner = function () {
     $.devOrg.Constants = {
         registerForm: $("form.register-form"),
         userName: "UserName",
@@ -61,10 +60,10 @@ $(function () {
                                           false,
                                           false,
                                           4);
-        
+
         $.devOrg.enterToNextTextBox(".register-form", false);
         //$.devOrg.uxFriendlySlide("form.register-form", true);
-        
+
         $("button.fillit").click(function () {
             $.devOrg.fillRegisterFieldsOnDemo();
         });
@@ -86,7 +85,7 @@ $(function () {
 
 
 
-    
+
     $("select.selectpicker").selectpicker();
     $.devOrg.bootstrapComboSelectIndex("select.selectpicker", 0);
 
@@ -123,7 +122,7 @@ $(function () {
     //making textarea's elastic
     $("textarea").elastic().trigger('update');
 
-    $(".datetimepicker").datetimepicker({
+    $(".datetimepicker-start").datetimepicker({
         pickDate: true,                 //en/disables the date picker
         pickTime: true,                 //en/disables the time picker
         useMinutes: true,               //en/disables the minutes picker
@@ -137,7 +136,7 @@ $(function () {
 
     });
 
-    $(".datepicker").datetimepicker({
+    $(".datepicker-start").datetimepicker({
         pickDate: true,                 //en/disables the date picker
         pickTime: false,                 //en/disables the time picker
         useMinutes: false,               //en/disables the minutes picker
@@ -153,5 +152,57 @@ $(function () {
     });
 
 
+    var serverValidationActivate = function () {
+        var $processForm = $.byId("server-validation-form");
+        $processForm.serverValidate({
+            crossDomain: false,
+            multipleRequests: true,
+            checkValidationBeforeSendingRequest: true,
+            dontSendSameRequestTwice: false,
+            disableInputOnValidation: false,
+            focusPersistIfNotValid: false,
+            hideOnValidation: false
+        });
+    }
 
+
+    serverValidationActivate();
+
+
+    var makeTagLive = function () {
+        var $createdTags = $(".tag-inputs");
+        if ($createdTags.length > 0) {
+            var $tokenField = $("[name='__RequestVerificationToken']"),
+                token = $tokenField.val();
+            for (var i = 0; i < $createdTags.length; i++) {
+                var $tagsInput = $($createdTags[0]),
+                    urlToPost = $tagsInput.attr("data-url");
+                //
+                $tagsInput.tagsinput({
+                    freeInput: true,
+                    trimValue: true,
+                    typeahead: {
+                        source: function (query) {
+                            return $.post(urlToPost, { id: query, __RequestVerificationToken: token }).done(function (response) {
+                                //console.log("tags:");
+                                //console.log("response:");
+                                //console.log(response);
+                            });
+                        }
+                    },
+                    onTagExists: function (item, $tag) {
+                        $tag.hide.fadeIn();
+                    }
+                });
+            }
+            
+        }
+
+    }
+
+    makeTagLive.apply();
+}
+
+$(function () {
+    $.devOrg.runner();
 });

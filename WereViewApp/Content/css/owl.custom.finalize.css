@@ -61,11 +61,6 @@
   -o-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-transform: translateZ(0px);
-  -moz-transform: translateZ(0px);
-  -o-transform: translateZ(0px);
-  -ms-transform: translateZ(0px);
-  transform: translateZ(0px);
 }
 #top-nav.navbar {
   margin-bottom: 0;
@@ -308,7 +303,7 @@ pre.pre-show {
   width: 33.3333333%;
 }
 .demo-lazy .demo-slide .bg {
-  background: url(../img/AjaxLoader.gif) no-repeat center center #aebab6;
+  background: url('../img/AjaxLoader.gif') no-repeat center center #aebab6;
 }
 /* Auto Height */
 .demo-height .demo-slide {

@@ -5,7 +5,7 @@
  * Licensed under MIT (https://github.com/silviomoreto/bootstrap-select/blob/master/LICENSE)
  */
 .bootstrap-select {
-  width: 220px \0;
+  width: 220px;
   /*IE9 and below*/
 }
 .bootstrap-select > .dropdown-toggle {

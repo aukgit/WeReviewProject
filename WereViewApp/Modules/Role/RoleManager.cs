@@ -143,7 +143,7 @@ namespace WereViewApp.Modules.Role {
                 try {
                     Manager.Create(role);
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
         }
@@ -158,7 +158,7 @@ namespace WereViewApp.Modules.Role {
                 try {
                     Manager.Create(role);
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
         }
@@ -564,7 +564,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.AddToRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -581,7 +581,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.AddToRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -620,7 +620,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.AddToRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -673,7 +673,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.RemoveFromRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -692,7 +692,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.RemoveFromRole(userId, role.Name);
                     return true;
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -707,7 +707,7 @@ namespace WereViewApp.Modules.Role {
             try {
                 UserManager.Manager.RemoveFromRole(userId, roleName);
             } catch (Exception ex) {
-                Starter.Error.HandleBy(ex);
+                Mvc.Error.HandleBy(ex);
             }
         }
 
@@ -721,7 +721,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.RemoveFromRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -738,7 +738,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.RemoveFromRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
             return false;

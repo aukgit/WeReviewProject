@@ -1,15 +1,15 @@
-@model IEnumerable<HttpPostedFileBase>?
+@model IEnumerable<HttpPostedFileBase>
 @{
     bool isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
+        prop = ViewData.ModelMetadata.PropertyName,
         propLower = prop.ToLower(),
         styleProperty = propLower,
         displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
         description = ViewData.ModelMetadata.Description;
 
 
-    var htmlAttributes = new RouteValueDictionary();   
+    var htmlAttributes = new RouteValueDictionary();
     if (ViewBag.data_id != null) {
         ViewBag.data_id_val = ViewBag.data_id;
         ViewBag.data_id = "data-id=" + ViewBag.data_id;
@@ -56,7 +56,7 @@
     if (ViewBag.hasEditBtn == null) {
         ViewBag.hasEditBtn = "false";
     }
-    
+
     if (ViewBag.label == null) {
         ViewBag.label = displayName;
     }
@@ -69,7 +69,7 @@
     htmlAttributes.Add("title", htmlAttributes["placeholder"]);
 }
 
-<div data-id="@ViewBag.data_id_val" data-uploader-div-row="true" class="form-group form-row @styleProperty form-row-uploader"  data-prop="@styleProperty">
+<div data-id="@ViewBag.data_id_val" data-uploader-div-row="true" class="form-group form-row @styleProperty form-row-uploader" data-prop="@styleProperty">
     <div class="controls dev-plugin plugin-container uploader-multiple">
         <label class="@ViewBag.labelColumn control-label form-label @styleProperty" for="@styleProperty" data-prop="@styleProperty">
             @if (description != null) {

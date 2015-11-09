@@ -66,10 +66,8 @@ if (!String.IsNullOrEmpty(LayoutPageFile)) {
     PushIndent("    ");
 }
 #>
-<h1 class="h2 gap-from-top-small">
-	<span class="glyphicon glyphicon-trash"></span>
-	@Html.SamePageLink(title, subtitle, false)
-</h1>
+@Html.SamePageLinkWithIcon(title, subtitle, "glyphicon glyphicon-trash")
+<div class="top-gap-2x"></div>
 <hr />
 <h3 class="h4">@asking</h3>   
     <div class="form-horizontal">

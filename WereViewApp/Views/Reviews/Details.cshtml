@@ -9,11 +9,11 @@
     string controller = (string) ViewBag.controller;
     string viewName = "Details";
 }
-<h1 class="h2 gap-from-top-small">
+<h1 class="top-margin-space h2">
     <span class="glyphicon glyphicon-print"></span>
     @Html.SamePageLink(title, subtitle, false)
 </h1>
-<hr/>
+<hr />
 <h3 class="h4">To edit the details please click on the edit button.</h3>
 <div class="form-horizontal">
     <div class="form-group">
@@ -27,7 +27,7 @@
             <a href="@Url.Action("Delete", new {id = Model.ReviewID})" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>
         </div>
     </div>
-    <table class="table table-hover gap-from-top-small">
+    <table class="top-margin-space table table-hover">
         <thead>
         <tr>
             <th>Properties</th>

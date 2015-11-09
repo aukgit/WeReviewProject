@@ -98,7 +98,7 @@ namespace <#= Namespace #>
 		const string CreatedSaved = "Transaction is successfully added to the database.";
 		const string ControllerName = "<#= ControllerRootName #>";
 		///Constant value for where the controller is actually visible.
-		const string ControllerVisibleUrl = "/<#= ControllerRootName #>/";
+		const string ControllerVisibleUrl = "/<#= ControllerRootName #>/"; //Please change as per your area changing.
         const string CurrentControllerRemoveOutputCacheUrl = "/Partials/Get<#= ModelTypeName #>ID";
         const string DynamicLoadPartialController = "/Partials/";
         bool DropDownDynamic = true;
@@ -486,6 +486,8 @@ namespace <#= Namespace #>
             var cacheManager = new OutputCacheManager();
             cacheManager.RemoveItems(ControllerName, "Index");
             cacheManager.RemoveItems(ControllerName, "List");
+            RemoveOutputCache(ControllerVisibleUrl);
+            RemoveOutputCache(ControllerVisibleUrl + "Index");
             cacheManager = null;
             GC.Collect();
         }

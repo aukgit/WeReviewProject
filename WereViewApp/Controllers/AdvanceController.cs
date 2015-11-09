@@ -1,6 +1,7 @@
 ﻿#region using block
 
 using System.Web.Mvc;
+using DevMvcComponent.Error;
 using WereViewApp.Filter;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Modules.UserError;
