@@ -1,4 +1,5 @@
 ﻿@using WereViewApp.Models.POCO.IdentityCustomization
+@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
 @model Feedback
 
 @{
@@ -10,49 +11,61 @@
     string viewName = "Edit";
     bool dropDownDynamic = (bool)ViewBag.dropDownDynamic;
     string partialController = ViewBag.dynamicLoadPartialController;
+    var status = @Model.GetStatus();
 }
 
+<div class="feedback-page">
+    @Html.SamePageLinkWithIcon(title, subtitle, "sky-blue fa fa-reply")
+    <div class="top-gap-2x"></div>
+    <hr />
+    @using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {
+        <div class="form-horizontal">
+            @token
+            @Html.Partial("_SuccessMessage")
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-@Html.SamePageLinkWithIcon(title, subtitle, "glyphicon glyphicon-edit")
-<div class="top-gap-2x"></div>
-<hr />
-@using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {
-    <div class="form-horizontal">
-        @token
-        @Html.Partial("_SuccessMessage")
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+            <div class="controls-left-aligned margin-l-20">
+                <div class="form-group">
+                    <div class="control-label">
+                        <i class="fa fa-mail-reply red"></i>
+                        Replying to @@"@Model.Name" &lt;<i class="fa fa-envelope deepskyblue"></i>@Model.Email&gt;
+                    </div>
+                    <div class="control-label">
+                        <span>Subject :</span> <u class="bold">@Model.Subject</u>
+                    </div>
+                    <div class="control-label">
+                        <span>Status :</span> <span class="label label-@status.StyleClass">@status.Status</span>
+                    </div>
+                    <div class="control-label">
+                        <span>Category :</span> <span class="label label-info">@Model.GetCategory()</span>
+                    </div>
+                    <div class="control-label message">
+                        @Model.Message
+                    </div>
+                    <div class="control-label message">
+                        @Html.EditorFor(n => n.Response, "Multiline", new { @class = "big-multiline", @labelColumn = "col-md-12", @textColumn = "col-md-12" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+               @Html.RadioButtonFor(n => n.IsInProcess)
+               @Html.RadioButtonFor(n=> n.IsUnSolved)
+            </div>
 
-        @Html.HiddenFor(model => model.FeedbackID)
-        @Html.EditorFor(model => model.Username)
-        @Html.EditorFor(model => model.Name)
-        @Html.EditorFor(model => model.Subject)
-        @Html.EditorFor(model => model.Message)
-        @Html.EditorFor(model => model.Email)
-        @Html.EditorFor(model => model.RateUrgency)
-        @Html.EditorFor(model => model.Response)
-        @Html.EditorFor(model => model.IsViewed)
-        @Html.EditorFor(model => model.IsInProcess)
-        @Html.EditorFor(model => model.IsSolved)
-        @Html.EditorFor(model => model.IsUnSolved)
-        @Html.EditorFor(model => model.HasAppOrReviewReport)
-        @Html.EditorFor(model => model.HasMarkedToFollowUpDate)
-        @Html.EditorFor(model => model.PostedDate)
-        @Html.EditorFor(model => model.FollowUpdateDate)
-        @Html.EditorFor(model => model.FeedbackCategoryID)
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <div class="btn-group">
-                    <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                    <div class="input-group-btn inline">
-                        <button title="Save and create new one" class="btn btn-success"><i class="fa fa-reply"></i> Reply</button>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="btn-group">
+                        <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+                        <div class="input-group-btn inline">
+                            <button title="Save and create new one" class="btn btn-success"><i class="fa fa-reply"></i> Reply</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
+</div>
 
 @Html.Partial("_ValidatorCommonForm", new ViewDataDictionary {
     {"token",token}
