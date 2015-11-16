@@ -2,21 +2,19 @@
 @model WereViewApp.Models.POCO.IdentityCustomization.Feedback
 @{
     string title = ViewBag.Title;
-    var categories = (SelectList) ViewBag.FeedbackCateoryID;
-    string controller = (string) ViewBag.controller;
-    bool dropDownDynamic = (bool) ViewBag.dropDownDynamic;
-    string partialController = ViewBag.dynamicLoadPartialController;
+    var categories = (IEnumerable<SelectListItem>)ViewBag.FeedbackCateoryID;
+    string controller = (string)ViewBag.controller;
+    
 }
-<h1 class="h2" title="@title">
-    <i class="fa fa-weixin"></i>
-    @Html.SamePageLink(@title, @title, false, "")
-</h1>
+
+@Html.SamePageLinkWithIcon(title, title, "fa fa-weixin")
+<h3 class="label label-info f-em-d-95 bg-deepskyblue">In case, if you want to report an app or review, please visit the specific and click on report.</h3>
 <hr />
 <!--ViewContext.RouteData.Values["Controller"].ToString()-->
-@using (Html.BeginForm("ContactUs", "", FormMethod.Post, new {@class = "form-horizontal Create-@ViewBag.Title", role = "form"})) {
+@using (Html.BeginForm("ContactUs", "", FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {
     <div class="form-horizontal">
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.Partial("_SuccessMessage")
         @if (!Request.IsAuthenticated) {
             @Html.EditorFor(model => model.Name)
@@ -30,16 +28,16 @@
         @Html.EditorFor(model => model.RateUrgency, "Rating-10")
         @Html.EditorFor(model => model.Subject)
         @*<div class="form-group">
-            <div class="controls">
-                <label class="col-md-2 control-label">Category<span class="red ">*</span></label>
-                <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.FeedbackCategoryID, categories, new {@class = "form-control selectpicker"})
-                    <a href="#" data-toggle="tooltip" data-original-title="Please select your category." title="Please select your category." class="tooltip-show">
-                        <span class="description-icon"></span></a>
+                <div class="controls">
+                    <label class="col-md-2 control-label">Category<span class="red ">*</span></label>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.FeedbackCategoryID, categories, new {@class = "form-control selectpicker"})
+                        <a href="#" data-toggle="tooltip" data-original-title="Please select your category." title="Please select your category." class="tooltip-show">
+                            <span class="description-icon"></span></a>
+                    </div>
                 </div>
-            </div>
-        </div>*@
-        @Html.EditorFor(model => model.FeedbackCategoryID, "DropDownDynamic", new {@Url = @partialController + "GetFeedbackCategoryID" /* ,@IsDependable = "false",@LiveSearch = "true",@Style = "class",@Id = "id", @DynamicLoad = "true"*/})
+            </div>*@
+        @Html.EditorFor(model => model.FeedbackCategoryID, "DropDown", new { selectData = categories })
 
 
         @Html.EditorFor(model => model.Message, "Multiline")

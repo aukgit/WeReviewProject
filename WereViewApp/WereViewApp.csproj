@@ -337,7 +337,7 @@
     <Compile Include="Models\CustomQuery\CommonQueriesWereViewApp.cs" />
     <Compile Include="Models\DesignPattern\Interfaces\IDevUserRole.cs" />
     <Compile Include="Models\DesignPattern\Interfaces\IDevUser.cs" />
-    <Compile Include="Models\EntityModel\Context\WereViewAppEntities.cs" />
+    <Compile Include="Models\Context\WereViewAppEntities.cs" />
     <Compile Include="Models\EntityModel\POCO\App.cs" />
     <Compile Include="Models\EntityModel\POCO\AppDraft.cs" />
     <Compile Include="Models\EntityModel\POCO\Category.cs" />
@@ -449,6 +449,7 @@
     <Content Include="Areas\Admin\Views\Config\_WeReview-tab.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="CodeNotes.txt" />
     <Content Include="Content\css\animate-refresh.css" />
     <Content Include="Content\css\animate-refresh.css.map">
       <DependentUpon>animate-refresh.css</DependentUpon>
@@ -1112,6 +1113,8 @@
     <Content Include="Views\Report\Done.cshtml" />
     <Content Include="Views\Report\Later.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Reply.cshtml" />
+    <Content Include="Views\Home\Done.cshtml" />
+    <Content Include="Views\Home\Later.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />

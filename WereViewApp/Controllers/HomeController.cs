@@ -1,10 +1,14 @@
 ﻿#region using block
 
+using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using DevMvcComponent.EntityConversion;
 using WereViewApp.Models.POCO.IdentityCustomization;
+using WereViewApp.Models.POCO.Structs;
+using WereViewApp.Modules.DevUser;
 
 #endregion
 
@@ -39,31 +43,40 @@ namespace WereViewApp.Controllers {
 
         //[OutputCache(Duration=84731)]
         [OutputCache(CacheProfile = "Hour", VaryByCustom = "byuser")]
+        [Authorize]
         public ActionResult ContactUs() {
+            ViewBag.FeedbackCateoryID = new SelectList(db.FeedbackCategories.Where(n => n.FeedbackCategoryID != FeedbackCategoryIDs.MobileAppReport && n.FeedbackCategoryID != FeedbackCategoryIDs.MobileAppReport).ToList(), "FeedbackCategoryID", "Category");
             AppVar.GetTitlePageMeta(ViewBag, "Contact Us", null, "Contact Us - " + AppVar.Name,
                 "Contact Us, Feedback about " + AppVar.Name);
             return View();
         }
 
         [HttpPost]
-        public ActionResult ContactUs(Feedback feedback) {
-            ViewBag.FeedbackCateoryID = new SelectList(db.FeedbackCategories.ToList(), "FeedbackCategoryID", "Category");
+        public async Task<ViewResult> ContactUs(Feedback feedback) {
             AppVar.GetTitlePageMeta(ViewBag, "Contact Us", null, "Contact Us - " + AppVar.Name,
                 "Contact Us, Feedback about " + AppVar.Name);
-
-
+                var user = UserManager.GetCurrentUser();
+            var oneHourBefore = DateTime.Now.AddHours(-1);
+            var isReportedBefore = db.Feedbacks.Any(n => n.Username == user.UserName && n.PostedDate >= oneHourBefore);
+            if (isReportedBefore) {
+                return View("Later");
+            }
             if (ModelState.IsValid) {
+                feedback.PostedDate = DateTime.Now;
+                feedback.Username = user.UserName;
+                feedback.Name = user.DisplayName;
                 db.Entry(feedback).State = EntityState.Added;
                 db.SaveChanges();
                 AppVar.SetSavedStatus(ViewBag);
                 //send a email.
                 var body = EntityToString.Get(feedback);
                 AppVar.Mailer.NotifyAdmin("A feedback has been added by " + feedback.Email,
-                    "Please check your feedback inbox. Feedback :<br>" + feedback.Message + "<br>" + body);
+                    "Please check your feedback inbox.<br><br> Feedback :<br><q>" + feedback.Message + "</q><br>" + body);
 
-                return View(feedback);
+                return View("Done");
             }
 
+            ViewBag.FeedbackCateoryID = new SelectList(db.FeedbackCategories.Where(n => n.FeedbackCategoryID != FeedbackCategoryIDs.MobileAppReport && n.FeedbackCategoryID != FeedbackCategoryIDs.MobileAppReport).ToList(), "FeedbackCategoryID", "Category");
             AppVar.SetErrorStatus(ViewBag);
             return View(feedback);
         }

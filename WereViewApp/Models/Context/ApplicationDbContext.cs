@@ -102,6 +102,7 @@ namespace WereViewApp.Models.Context {
 
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<FeedbackCategory> FeedbackCategories { get; set; }
+        public DbSet<FeedbackAppReviewRelation> FeedbackAppReviewRelations { get; set; }
         public DbSet<TempUserRoleRelation> TempUserRoleRelations { get; set; }
 
 

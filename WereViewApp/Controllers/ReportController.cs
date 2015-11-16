@@ -148,6 +148,7 @@ namespace WereViewApp.Controllers {
         private void SetCommonFields(Feedback feedback) {
             var user = UserManager.GetCurrentUser();
             feedback.Email = user.Email;
+            feedback.HasAppOrReviewReport = true;
             feedback.Username = user.UserName;
             feedback.Name = user.DisplayName;
             feedback.PostedDate = DateTime.Now;

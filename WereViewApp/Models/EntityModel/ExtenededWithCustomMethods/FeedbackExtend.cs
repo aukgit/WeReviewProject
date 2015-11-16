@@ -89,6 +89,13 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
                     feedback.IsInProcess = false;
                     feedback.IsUnSolved = true;
                     break;
+                case FeedbackStatusTypes.IsNonViewed:
+                    feedback.IsViewed = false;
+                    feedback.IsSolved = false;
+                    feedback.HasMarkedToFollowUpDate = false;
+                    feedback.IsInProcess = false;
+                    feedback.IsUnSolved = false;
+                    break;
                 default:
                     feedback.IsViewed = true;
                     feedback.IsSolved = false;

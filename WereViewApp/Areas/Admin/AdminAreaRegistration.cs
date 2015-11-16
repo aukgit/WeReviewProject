@@ -9,6 +9,11 @@ namespace WereViewApp.Areas.Admin {
         }
 
         public override void RegisterArea(AreaRegistrationContext context) {
+            context.MapRoute(
+            "Admin_default_page",
+            "Admin/{controller}/{action}/{page}",
+            new { action = "Index", Controller = "Home", page = UrlParameter.Optional }
+        );
 
             context.MapRoute(
                 "Admin_default",
