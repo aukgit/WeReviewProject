@@ -74,3 +74,5 @@ _[Ss]cripts
 *.ncrunchsolution
 *.dot[Cc]over
 WereViewApp/App_Data/elmah/*.xml
+ignored-password.txt
+WereViewApp/Properties/PublishProfiles/*.pubxml
