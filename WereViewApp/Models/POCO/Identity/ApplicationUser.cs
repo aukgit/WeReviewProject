@@ -52,12 +52,13 @@ namespace WereViewApp.Models.POCO.Identity {
         public bool IsRegistrationComplete { get; set; }
 
         [Display(Name = "Country")]
-        public int CountryID { get; set; }
+        public int? CountryID { get; set; }
         [Display(Name = "Country Language")]
-        public int CountryLanguageID { get; set; }
+        public int? CountryLanguageID { get; set; }
 
         [Display(Name = "Timezone")]
-        public int UserTimeZoneID { get; set; }
+
+        public int? UserTimeZoneID { get; set; }
 
 
         [ForeignKey("UserID")]

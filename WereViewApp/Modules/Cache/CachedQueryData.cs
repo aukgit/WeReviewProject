@@ -222,7 +222,7 @@ namespace WereViewApp.Modules.Cache {
         ///     return from cache
         /// </summary>
         /// <returns></returns>
-        public static UserTimeZone GetTimezone(int userTimeZoneId) {
+        public static UserTimeZone GetTimezone(int? userTimeZoneId) {
             return GetTimezones().FirstOrDefault(n => n.UserTimeZoneID == userTimeZoneId);
         }
 
@@ -238,7 +238,7 @@ namespace WereViewApp.Modules.Cache {
         ///     return from cache
         /// </summary>
         /// <returns></returns>
-        public static Country GetCountry(int countryId) {
+        public static Country GetCountry(int? countryId) {
             return GetCountries().FirstOrDefault(n => n.CountryID == countryId);
         }
 
@@ -250,7 +250,7 @@ namespace WereViewApp.Modules.Cache {
         /// </summary>
         /// <param name="countryId"></param>
         /// <returns></returns>
-        public static List<UserTimeZone> GetTimezones(int countryId, int countCheckAbove = 1) {
+        public static List<UserTimeZone> GetTimezones(int? countryId, int countCheckAbove = 1) {
             var tableName = CacheNames.UsertimezoneTableName;
             var cacheTableName = tableName + "-Country-" + countryId;
             var searchingColumn = "UserTimeZoneID";
