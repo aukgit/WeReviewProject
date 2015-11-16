@@ -105,6 +105,10 @@
         this.$input = $input;
         this.settings = settings;
         this.additionalFields = additionalFields;
+
+        this.events.plugin = this;
+        this.events.names.plugin = this;
+
         this.init($divElement);
     }
 
@@ -187,11 +191,10 @@
             return variable === null || variable === undefined || variable.length === 0;
         },
         init: function ($divElement) {
-            this.events.plugin = this;
-            this.events.names.plugin = this;
+           
             if (this.isValidForProcessing($divElement)) {
                 this.events.bindAllEvents();
-                this.processDiv($divElement);
+                this.processDiv(this, $divElement);
             }
         },
         getSettings: function () {
@@ -227,7 +230,7 @@
                     var plugin = this.plugin,
                         settings = plugin.getSettings(),
                         nameSpace = settings.eventsNameSpace,
-                        inputId = plugin.getInputNameOrId(),
+                        inputId = plugin.getInputNameOrId(plugin.$input),
                         finalName = nameSpace + inputId + "." + nameOfEvent;
                     //console.log(finalName);
                     return finalName;
@@ -243,7 +246,7 @@
                     $div = plugin.$element,
                     $input = plugin.$input,
                     settings = plugin.getSettings(),
-                    inputId = plugin.getInputNameOrId(),
+                    inputId = plugin.getInputNameOrId(plugin.$input),
                     finalEventName = this.names.getName(nameOfEvent);
 
                 var event = this[finalEventName];
@@ -414,12 +417,12 @@
                 $input = this.getInput();
             return $input.attr(attrs.url);
         },
-        processDiv: function ($div) {
+        processDiv: function (plugin, $div) {
             //var $self = $selfContainer;
             var $input = this.getInput($div),
                 url = this.getUrl();
             //this.test();
-            this.inputProcessWithBlurEvent($div, $input, url);
+            this.inputProcessWithBlurEvent(plugin,$div, $input, url);
 
         },
         test: function () {
@@ -462,9 +465,8 @@
         },
 
         // processing
-        inputProcessWithBlurEvent: function ($div, $input, url) {
-            var self = this,
-                //settings = this.getSettings(),
+        inputProcessWithBlurEvent: function (self, $div, $input, url) {
+            var //settings = this.getSettings(),
                 isIconsVisible = true,
                 eventsNames = self.events.names,
                 serverProcessStartEvent = eventsNames.getName(eventsNames.serverProcessStart);
@@ -642,8 +644,7 @@
             }
             return attr === "true";
         },
-        getInputNameOrId: function () {
-            var $input = this.$input;
+        getInputNameOrId: function ($input) {
             var id = $input.attr('id');
             if (this.isEmpty(id)) {
                 id = $input.attr('name');

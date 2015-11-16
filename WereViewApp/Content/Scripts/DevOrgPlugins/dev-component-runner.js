@@ -40,33 +40,31 @@ $.devOrg.runner = function () {
 
     if ($.devOrg.Constants.registerForm.length > 0) {
         // country , timezone, and phone initialize
-        $.devOrg
-            .countryTimezonePhoneComponent
-            .initialize($.devOrg.Constants.countryJsonUrl,
-                $.devOrg.Constants.timeZoneJsonUrl,
-                $.devOrg.Constants.languageJsonUrl,
-                true // retrieve as html, to have the processed version  , make it false and change the url.
-                );
+        //$.devOrg
+        //    .countryTimezonePhoneComponent
+        //    .initialize($.devOrg.Constants.countryJsonUrl,
+        //        $.devOrg.Constants.timeZoneJsonUrl,
+        //        $.devOrg.Constants.languageJsonUrl,
+        //        true // retrieve as html, to have the processed version  , make it false and change the url.
+        //        );
 
-        $.devOrg.validateInputFromServer("#" + $.devOrg.Constants.userName,
-                                          $.devOrg.Constants.usernameValidationUrl,
-                                          $.devOrg.Constants.userName,
-                                          true,
-                                          false,
-                                          3);
-        $.devOrg.validateInputFromServer("#" + $.devOrg.Constants.email,
-                                          $.devOrg.Constants.emailAddressValidationUrl,
-                                          $.devOrg.Constants.email,
-                                          false,
-                                          false,
-                                          4);
+        //$.devOrg.validateInputFromServer("#" + $.devOrg.Constants.userName,
+        //                                  $.devOrg.Constants.usernameValidationUrl,
+        //                                  $.devOrg.Constants.userName,
+        //                                  true,
+        //                                  false,
+        //                                  3);
+        //$.devOrg.validateInputFromServer("#" + $.devOrg.Constants.email,
+        //                                  $.devOrg.Constants.emailAddressValidationUrl,
+        //                                  $.devOrg.Constants.email,
+        //                                  false,
+        //                                  false,
+        //                                  4);
 
         $.devOrg.enterToNextTextBox(".register-form", false);
         //$.devOrg.uxFriendlySlide("form.register-form", true);
 
-        $("button.fillit").click(function () {
-            $.devOrg.fillRegisterFieldsOnDemo();
-        });
+    
         $.devOrg.bootstrapComboSelectbyFindingValue("select.country-combo", '1');
 
     }

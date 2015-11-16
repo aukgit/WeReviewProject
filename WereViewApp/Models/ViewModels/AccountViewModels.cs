@@ -74,7 +74,7 @@ namespace WereViewApp.Models.ViewModels {
 
         public Guid RegistraterCode { get; set; }
 
-        [Required(ErrorMessage = "Phone number is a required field.")]
+        //[Required(ErrorMessage = "Phone number is a required field.")]
         [Display(Name = "Phone", Description = "A valid phone number is required.")]
         [RegularExpression("^\\d+$", ErrorMessage = "Phone number should be only number digits(0-9).")]
         [StringLength(30)]
