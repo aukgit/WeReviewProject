@@ -16,7 +16,6 @@ using DevMvcComponent.Pagination;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WereViewApp.Models.POCO.Enum;
-using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Mail;
 
@@ -282,9 +281,11 @@ namespace WereViewApp.Areas.Admin.Controllers {
                         if (relation.HasAppId) {
                             ViewBag.app = db2.Apps.Find(relation.AppID);
                         } else {
-                            var review = db2.Reviews.Find(relation.AppID);
-                            ViewBag.app = db2.Apps.Find(review.AppID);
-                            ViewBag.review = review;
+                            var review = db2.Reviews.Find(relation.ReviewID);
+                            if (review != null) {
+                                ViewBag.app = db2.Apps.Find(review.AppID);
+                                ViewBag.review = review;
+                            }
                         }
                     }
                 }
@@ -328,6 +329,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         }
         #endregion
 
+        #region Set Status
         private void SetStatus(ref Feedback feedback, string status) {
             switch (status) {
                 case "in-process":
@@ -343,6 +345,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
             }
         }
+        #endregion
 
         #region Mailing
 
@@ -391,6 +394,60 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         #region Blocking
 
+        public async Task<ActionResult> BlockApp(Int64 id) {
+            using (var db2 = new WereViewAppEntities()) {
+                var app = db2.Apps.Find(id);
+                app.IsBlocked = true;
+                app.Tags = "none";
+                if (db2.SaveChanges() > -1) {
+                    var user = UserManager.GetUser(app.PostedByUserID);
+                    var mailer = new MailSender();
+                    mailer.Send(user.Email, "Your app has been blocked.",
+                        "Sorry! Your app <a href='" + app.GetAbsoluteUrl() + "'>" + app.AppName + "</a> is inappropriate thus blocked.");
+                    ViewBag.info = "block the app.";
+                    return View("Done");
+                }
+            }
+            return HttpNotFound();
+        }
+        public async Task<ActionResult> UnBlockApp(Int64 id) {
+            using (var db2 = new WereViewAppEntities()) {
+                var app = db2.Apps.Find(id);
+                app.IsBlocked = false;
+                app.Tags = "none";
+                if (db2.SaveChanges() > -1) {
+                    var user = UserManager.GetUser(app.PostedByUserID);
+                    var mailer = new MailSender();
+                    mailer.Send(user.Email, "Your app has been unblocked.",
+                        "Congratulations! Your app <a href='" + app.GetAbsoluteUrl() + "'>" + app.AppName + "</a> is now unblocked.");
+                    ViewBag.info = "unblock the app.";
+                    return View("Done");
+                }
+            }
+            return HttpNotFound();
+        }
+
+        public async Task<ActionResult> BlockReview(Int64 id) {
+            using (var db2 = new WereViewAppEntities()) {
+                var review = db2.Reviews.Find(id);
+                var likeDislikes = db2.ReviewLikeDislikes.Where(n => n.ReviewID == id);
+                foreach (var likeDislike in likeDislikes) {
+                    db2.ReviewLikeDislikes.Remove(likeDislike);
+                }
+                ViewBag.info = "deleted review ( " + review.Comments + " ).";
+                db2.Reviews.Remove(review);
+                if (db2.SaveChanges() > -1) {
+                    var user = UserManager.GetUser(review.UserID);
+                    var mailer = new MailSender();
+                    mailer.Send(user.Email, "Your review has been removed.",
+                        "Sorry! Your review <q>" + review.Comments + "</q> is inappropriate thus removed.");
+
+                    return View("Done");
+                }
+            }
+
+            return HttpNotFound();
+        }
         #endregion
 
 

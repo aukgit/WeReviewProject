@@ -723,6 +723,7 @@
     <Content Include="Content\css\backend-developer.css.map">
       <DependentUpon>backend-developer.css</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Feedbacks\Done.cshtml" />
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />

@@ -27,7 +27,7 @@
 <div class="right">
     <ul class="list-inline">
         <li><i class="fa-em-13 fa fa-filter"></i></li>
-        <li class="btn btn-info">@Html.ActionLink("Latest", "Index", new{page=1})</li>
+        <li class="btn btn-info">@Html.ActionLink("Latest", "Index", new { page = 1 })</li>
         <li class="btn btn-info">@Html.ActionLink("Is Viewed", "IsViewed", new { page = 1 })</li>
         <li class="btn btn-info">@Html.ActionLink("Is in Process", "IsInProcess", new { page = 1 })</li>
         <li class="btn btn-info">@Html.ActionLink("Solved", "Solved", new { page = 1 })</li>
@@ -57,7 +57,6 @@
             <th data-field="Category">
                 Category | Status
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -65,41 +64,33 @@
             <tr title="@Html.Truncate(item.Message, AppConfig.TruncateLength)">
                 <td>
                     @{
-                        editLinkName = Html.Truncate(item.Email, AppConfig.TruncateLength);
-                        var idValue = item.FeedbackID;
-                        var status = @item.GetStatus();
+            editLinkName = Html.Truncate(item.Email, AppConfig.TruncateLength);
+            var idValue = item.FeedbackID;
+            var status = @item.GetStatus();
                     }
-                    <a href="@Url.Action("Edit", new {id = idValue})" title="@editLinkName edit..."><span class="@editIcon"></span> @editLinkName</a>
+                    <a href="@Url.Action("Reply", new {id = idValue})" title="@editLinkName edit..."><span class="@editIcon"></span> @editLinkName</a>
                 </td>
                 <td>
-                    @Html.Truncate(item.Subject, AppConfig.TruncateLength + 20)
+                    <span title="@Html.Truncate(item.Message, AppConfig.TruncateLength + 20)">@Html.Truncate(item.Subject, AppConfig.TruncateLength + 20)</span>
                 </td>
 
                 <td>
                     @Html.DisplayFor(modelItem => item.RateUrgency)
                 </td>
                 <td>
-                    <a href="@Url.Action("Reply", new {id = idValue})" t title="Reply to @editLinkName." class="btn btn-warning btn-xs">
+                    <a href="@Url.Action("Reply", new {id = idValue})" t title="Reply to @editLinkName." class="btn btn-info btn-xs">
                         @if (string.IsNullOrEmpty(item.Response)) {
                             <span class="@editIcon"></span>
                             <text>Write</text>
                         } else {
                             <span class="@detailsIcon"></span>
-                            @Html.Truncate(item.Response, AppConfig.TruncateLength - 12)
+                            <span title="@item.Response">@Html.Truncate(item.Response, AppConfig.TruncateLength - 12)</span>
                         }
                     </a>
                 </td>
                 <td>
                     <label class="btn btn-xs btn-info">@item.GetCategory()</label> | <label class="btn btn-xs btn-@status.StyleClass">@status.Status</label>
                 </td>
-                @*<td>
-                    <a href="@Url.Action("Reply", new {id = idValue})" title="Reply to @editLinkName" class="btn btn-success btn-xs"><span class="@editIcon"></span> Reply</a>
-                    @if (item.IsViewed) {
-                        <a href="@Url.Action("MarkAsNonViewed", new { id = idValue })" title="Marked as @editLinkName non-viewed." class="btn btn-default btn-xs"><i class="fa fa-eye-slash"></i> Non-Viewed</a>
-                    } else {
-                        <a href="@Url.Action("Viewed", new {id = idValue})" title="Marked as @editLinkName viewed." class="btn btn-info btn-xs"><span class="@removeIcon"></span> Marked as Viewed</a>
-                    }
-                </td>*@
             </tr>
         }
     </tbody>

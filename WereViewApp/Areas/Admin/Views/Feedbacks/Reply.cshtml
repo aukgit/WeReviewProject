@@ -73,22 +73,29 @@
                     </div>
                 </div>
             </div>
-        
+
             <div class="form-group">
                 <div class=" margin-l-20">
                     @if (Model.HasAppOrReviewReport) {
                         var app = (App)ViewBag.app;
 
-                        if (feedbackAppReviewRelation.HasAppId) {
+                        if (feedbackAppReviewRelation.HasAppId && app != null) {
                             <div>Reported App : <q>@app.AppName</q></div>
                             <a class="btn btn-info" href="@app.GetAbsoluteUrl()">View App</a>
                             <a class="btn btn-danger" onclick=" return confirm('Are you sure you want to block this user?') " href="@Url.Action("UserBlock", "Users", new { area = "Admin", id = app.PostedByUserID })">Block User</a>
-                            <a class="btn btn-danger" onclick=" return confirm('Are you sure you want to block this app(cannot be undone)?') " href="BlockApp/@app.AppID">Block app</a>
+                            <a class="btn btn-success" onclick=" return confirm('Are you sure ?') " href="/admin/@controller/UnBlockApp/@app.AppID">Unblock App</a>
+                            <a class="btn btn-danger" onclick=" return confirm('Are you sure you want to block this app(cannot be undone)?') " href="/admin/@controller/BlockApp/@app.AppID">Block app</a>
                         } else {
                             var review = (Review)ViewBag.review;
-                            <div>Reported Review : <q>@review.Comments</q></div>
-                            <a class="btn btn-danger" onclick=" return confirm('Are you sure?') " href="@Url.Action("UserBlock", "Users", new { area = "Admin", id = review.UserID })">Block User</a>
-                            <a class="btn btn-danger" onclick=" return confirm('Are you sure?') " href="BlockReview/@review.ReviewID">Block review</a>
+                            if (review != null) {
+                                <div>Reported Review : <q>@review.Comments</q>
+                                </div>
+                                <a class="btn btn-danger" onclick=" return confirm('Are you sure?') " href="@Url.Action("UserBlock", "Users", new {area = "Admin", id = review.UserID})">Block User</a>
+                                <a class="btn btn-info" href="@app.GetAbsoluteUrl()">View App</a>
+                                <a class="btn btn-danger" onclick=" return confirm('Are you sure?') " href="/admin/@controller/BlockReview/@review.ReviewID">Delete review</a>
+                            } else {
+                                <label class="label label-info f-em-12">This review is already removed and taken care of.</label>
+                            }
                         }
                     }
                 </div>
