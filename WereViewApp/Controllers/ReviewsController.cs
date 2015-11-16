@@ -282,8 +282,11 @@ namespace WereViewApp.Controllers {
             if (!User.Identity.IsAuthenticated) {
                 return PartialView("_LoginUrlPage");
             }
-
             var userId = UserManager.GetLoggedUserId();
+            var isSameUser = db.Apps.Any(n => n.AppID == AppID && n.PostedByUserID == userId);
+            if (isSameUser) {
+                return View("ReviewOwnApp");
+            }
             var review = algorithms.GetUserReviewedApp(AppID, db);
             if (review == null) {
                 // not ever reviewed.

@@ -9,6 +9,7 @@
 
 @Html.SamePageLinkWithIcon(title, title, "fa fa-weixin")
 <h3 class="label label-info f-em-d-95 bg-deepskyblue">In case, if you want to report an app or review, please visit the specific and click on report.</h3>
+<h5>If you have any questions about this Privacy Policy, the practices of this site, or your dealings with this site, please contact us.</h5>
 <hr />
 <!--ViewContext.RouteData.Values["Controller"].ToString()-->
 @using (Html.BeginForm("ContactUs", "", FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {
@@ -53,19 +54,10 @@
 }
 <div class="row">
     <div class="col-md-10 col-md-offset-2">
-        <address>
-            <strong title="@AppVar.Name">@AppVar.Name</strong><br />
-            <strong title="Company - @AppVar.Setting.CompanyName">@AppVar.Setting.CompanyName</strong><br />
-            @AppVar.Setting.ApplicationSubtitle<br />
-            @AppVar.Setting.Address<br />
-            @Html.PhoneNumberLink(AppVar.Setting.OfficePhone, AppVar.Name + " - Official Phone")<br />
-            @Html.EmailLink(AppVar.Setting.OfficeEmail, AppVar.Name + " - Official Email Address")
-        </address>
-
-        <address>
-            <strong>Support:</strong> @Html.EmailLink(AppVar.Setting.SupportEmail, @AppVar.Name + " - Official Support Email") , @Html.PhoneNumberLink(AppVar.Setting.SupportPhone, @AppVar.Name + " - Support Phone") <br />
-            <strong>Marketing:</strong> @Html.EmailLink(AppVar.Setting.MarketingEmail, @AppVar.Name + " - Official Marking Email") , @Html.PhoneNumberLink(AppVar.Setting.MarketingPhone, @AppVar.Name + " - Marketing Phone")
-        </address>
+        We love to hear from you. Shoot an email to <a href="mailto:info@wereviewapp.com">info@wereviewapp.com</a> or knock as any time to our
+        skype name Wereviewapp. Get social with us in Facebook, Twitter & Gplus
+        <div class="label label-info"> Facebook Link: <a href="//fb.com/wereviewapp">fb.com/wereviewapp</a></div>
+        <div class="label label-default">Twitter Link: <a href="//twitter.com/wereviewapp">twitter.com/wereviewapp</a></div>
     </div>
 </div>
 @section Scripts {

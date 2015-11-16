@@ -36,8 +36,6 @@ namespace WereViewApp.Modules.Mail {
             sb.AppendLine(string.Format(DivTag, "", "", "Login(username) : " + user.UserName));
             sb.AppendLine(string.Format(DivTag, "", "", "Email : " + user.Email));
             sb.AppendLine(string.Format(DivTag, "", "", "Phone : " + user.PhoneNumber));
-            sb.AppendLine(string.Format(DivTag, "", "", "Timezone : " + CachedQueriedData.GetTimezone(user).UTCName));
-            sb.AppendLine(string.Format(DivTag, "", "", "Country : " + CachedQueriedData.GetCountry(user).CountryName));
             sb.AppendLine(LineBreak);
             AddThanksFooterOnStringBuilder(AppVar.Setting.AdminName, department, sb);
             return sb.ToString();

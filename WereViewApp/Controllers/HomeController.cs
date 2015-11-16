@@ -41,11 +41,21 @@ namespace WereViewApp.Controllers {
             return View();
         }
 
+        [OutputCache(CacheProfile = "Year", VaryByCustom = "none")]
+        public ActionResult About() {
+            return View();
+        }
+
+        [OutputCache(CacheProfile = "Year", VaryByCustom = "none")]
+        public ActionResult Policy() {
+            return View();
+        }
+
         //[OutputCache(Duration=84731)]
         [OutputCache(CacheProfile = "Hour", VaryByCustom = "byuser")]
         [Authorize]
         public ActionResult ContactUs() {
-            ViewBag.FeedbackCateoryID = new SelectList(db.FeedbackCategories.Where(n => n.FeedbackCategoryID != FeedbackCategoryIDs.MobileAppReport && n.FeedbackCategoryID != FeedbackCategoryIDs.MobileAppReport).ToList(), "FeedbackCategoryID", "Category");
+            ViewBag.FeedbackCateoryID = new SelectList(db.FeedbackCategories.Where(n => !(n.FeedbackCategoryID == FeedbackCategoryIDs.MobileAppReport || n.FeedbackCategoryID == FeedbackCategoryIDs.ReviewReport)).ToList(), "FeedbackCategoryID", "Category");
             AppVar.GetTitlePageMeta(ViewBag, "Contact Us", null, "Contact Us - " + AppVar.Name,
                 "Contact Us, Feedback about " + AppVar.Name);
             return View();
@@ -76,7 +86,7 @@ namespace WereViewApp.Controllers {
                 return View("Done");
             }
 
-            ViewBag.FeedbackCateoryID = new SelectList(db.FeedbackCategories.Where(n => n.FeedbackCategoryID != FeedbackCategoryIDs.MobileAppReport && n.FeedbackCategoryID != FeedbackCategoryIDs.MobileAppReport).ToList(), "FeedbackCategoryID", "Category");
+            ViewBag.FeedbackCateoryID = new SelectList(db.FeedbackCategories.Where(n => !(n.FeedbackCategoryID == FeedbackCategoryIDs.MobileAppReport || n.FeedbackCategoryID == FeedbackCategoryIDs.ReviewReport)).ToList(), "FeedbackCategoryID", "Category");
             AppVar.SetErrorStatus(ViewBag);
             return View(feedback);
         }

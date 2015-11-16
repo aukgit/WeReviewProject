@@ -39,7 +39,7 @@ $.WeReviewApp = {
     sendingDraftNumber: 0,
     writeReviewFormUrl: "/Reviews/GetReviewForm",
     appUrlRetrievalUrl: "/Partials/GetAppUrl",
-    reviewSpinnerSelector: "#review-requesting-spinner",
+    reviewSpinnerSelector: "review-requesting-spinner",
     reviewFormContainerSelectorInAppPage: "div#write-review-form-container",
     reviewFormSubmitUrl: "/Reviews/Write",
     ///consist of # : "#app-details-page"
@@ -239,6 +239,9 @@ $.WeReviewApp = {
             } else {
                 $.WeReviewApp.$appPageUploaderNotifier.text("Please upload all necessary files to proceed next.");
             }
+        } else {
+            $.WeReviewApp.$appPageUploaderNotifier.text("Please validate title to proceed next.");
+
         }
     },
 
@@ -365,7 +368,7 @@ $.WeReviewApp = {
                 // if successful then move to redirect page.
                 window.location.href = self.afterDraftPostRedirectPageUrl;
             })
-            .fail(function (jqXHR, textStatus) {
+            .fail(function (jqXhr, textStatus) {
                 self.$globalTopErrorLabel.text(self.draftSavingFailedErrorMsg);
             });
         });
@@ -479,7 +482,7 @@ $.WeReviewApp = {
             var appUrl = response.url;
             $anchorContent.text(appUrl);
             $anchor.attr("href", appUrl);
-            console.log(response);
+            //console.log(response);
         }).error(function () {
             $anchorContent.text("Error ! Please be in touch with admin via contact us page.");
             $anchor.attr("href", "");
@@ -521,7 +524,8 @@ $.WeReviewApp = {
 
             //bind with blur event of AppName
             self.appNameOnBlur();
-
+            var appNameInputServerValidateEventname = "jq.validate.AppName.serverProcessStart";
+            var $appNameInput = $.byId("AppName");
             if (self.$appFormPost.length > 0) {
                 // app posting
                 self.appPostingPageOnReady(); // app creating
@@ -531,6 +535,7 @@ $.WeReviewApp = {
             } else if (self.$appFormEdit.length > 0) {
                 // app editing
                 self.appEditingPageOnReady(); // app editing
+                $appNameInput.trigger(appNameInputServerValidateEventname);
             }
 
             // .app-editing-page class represent both editing and posting
@@ -555,13 +560,12 @@ $.WeReviewApp = {
             $.devOrg.enterToNextTextBoxWithoutTags(self.$appForm, true, false); // means both editing and posting
 
 
-            var $appNameInput = $.byId("AppName");
 
             var triggerAppNameValidateTimeOut,
                 appTitleValidate = function () {
                     clearTimeout(triggerAppNameValidateTimeOut);
                     triggerAppNameValidateTimeOut = setTimeout(function () {
-                        $appNameInput.trigger("jq.validate.AppName.serverProcessStart");
+                        $appNameInput.trigger(appNameInputServerValidateEventname);
                     }, 500);
                 };
 
@@ -645,7 +649,7 @@ $.WeReviewApp = {
      */
     askForReviewForm: function () {
         var self = $.WeReviewApp;
-        var $reviewSpinner = $(self.reviewSpinnerSelector).hide();
+        var $reviewSpinner = $.byId(self.reviewSpinnerSelector).hide();
 
         if ($reviewSpinner.length > 0) {
             $("#WriteReviewButton").click(function () {
@@ -751,7 +755,7 @@ $.WeReviewApp = {
             $spinnerForthisLike.show(); // show spinner until load
             console.log($spinnerForthisLike);
 
-            function errorExecute(jqXHR, textStatus, errorThrown) {
+            function errorExecute(jqXhr, textStatus, errorThrown) {
                 $spinnerForthisLike.hide();
                 var $clone = $spinnerForthisLike.clone();
                 var $span = $clone.find("span");
@@ -782,8 +786,8 @@ $.WeReviewApp = {
                         //errorExecute(null, "Can't get the right response.", null);
                     }
                 },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    errorExecute(jqXHR, textStatus, errorThrown);
+                error: function (jqXhr, textStatus, errorThrown) {
+                    errorExecute(jqXhr, textStatus, errorThrown);
                 }
             }); // ajax end
         }

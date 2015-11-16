@@ -239,7 +239,7 @@
           <Property Name="UserID" Type="bigint" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="Phone" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="18" />
           <Property Name="UserName" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="TotalEarnedPoints" Type="bigint" Nullable="false" />
         </EntityType>
@@ -1015,7 +1015,7 @@
           <Property Name="UserID" Type="Int64" Nullable="false" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="TotalEarnedPoints" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Apps" Relationship="WereViewAppModel.FK_App_User" FromRole="User" ToRole="App" />

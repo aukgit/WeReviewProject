@@ -1115,6 +1115,10 @@
     <Content Include="Views\Shared\EditorTemplates\Reply.cshtml" />
     <Content Include="Views\Home\Done.cshtml" />
     <Content Include="Views\Home\Later.cshtml" />
+    <Content Include="Views\Account\InboxCheck.cshtml" />
+    <Content Include="Views\Reviews\ReviewOwnApp.cshtml" />
+    <Content Include="Views\Home\Policy.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\publish.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />

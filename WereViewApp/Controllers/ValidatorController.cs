@@ -88,7 +88,7 @@ namespace WereViewApp.Controllers {
 
                 if ((id.Length >= min && id.Length <= max)) {
                     var url = GetFriendlyURLFromString(id);
-                    if (app.URL.Equals(url)) {
+                    if (app.URL != null && app.URL.Equals(url)) {
                         goto ReturnValid;
                     }
                     using (var db = new WereViewAppEntities()) {
@@ -165,7 +165,7 @@ namespace WereViewApp.Controllers {
         [HttpPost]
         [OutputCache(CacheProfile = "Long", VaryByParam = "id", VaryByCustom = "byuser")]
         [ValidateAntiForgeryToken]
-        public ActionResult Email(string Email) {
+        public ActionResult GetEmail(string Email) {
             const string errorMessage = "Email already exist or not valid.";
             if (!AppVar.Setting.IsInTestingEnvironment) {
                 if (SessionNames.IsValidationExceed("Email")) {
@@ -181,7 +181,7 @@ namespace WereViewApp.Controllers {
                 var emailPattern = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
                 if (Regex.IsMatch(email, emailPattern)) {
                     if (!UserManager.IsEmailExist(email)) {
-                        return Json(Validator.GetErrorMessage(errorMessage), JsonRequestBehavior.AllowGet);
+                        return Json(Validator.GetSuccessMessage("Valid email."), JsonRequestBehavior.AllowGet);
                     }
                 }
             } catch (Exception ex) {

@@ -40,10 +40,10 @@ namespace WereViewApp.Models.POCO.Identity {
             }
         }
 
-        [Required]
-        [Display(Name = "Date of Birth")]
-        [Column(TypeName = "date")]
-        public DateTime DateOfBirth { get; set; }
+        //[Required]
+        //[Display(Name = "Date of Birth")]
+        //[Column(TypeName = "date")]
+        //public DateTime DateOfBirth { get; set; }
         [Column(TypeName = "smalldatetime")]
         [Display(Name = "Created Date")]
         public DateTime CreatedDate { get; set; }
@@ -65,6 +65,7 @@ namespace WereViewApp.Models.POCO.Identity {
         public virtual ICollection<RegisterCodeUserRelation> RegisterCodeUserRelations { get; set; }
 
         public Guid? GeneratedGuid { get; set; }
+
 
         #endregion
 

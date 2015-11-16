@@ -58,7 +58,7 @@
 
 .validator-container {
     display: block;
-    position: relative;
+    position: absolute;
     z-index: 1000;
 
     [id*='wrapper-invalid-mark-'], [id*='wrapper-validation-error-'] {
@@ -81,6 +81,7 @@
 }*/
 .validator {
     display: inherit;
+        width: 1px;
 }
 
 .validation-icon-wrapper {
@@ -109,8 +110,8 @@
     &[data-icon-added] {
         /*margin-bottom: 14px;
         margin-top: 15px;*/
-        .margin-top(8.5px);
-        .margin-bottom(19px);
+        /*.margin-top(8.5px);
+        .margin-bottom(19px);*/
     }
 }
 

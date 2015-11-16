@@ -193,7 +193,7 @@
         init: function ($divElement) {
            
             if (this.isValidForProcessing($divElement)) {
-                this.events.bindAllEvents();
+                this.events.bindAllEvents(this);
                 this.processDiv(this, $divElement);
             }
         },
@@ -214,9 +214,7 @@
         },
 
         events: {
-            plugin: null,
             names: {
-                plugin: null,
                 serverProcessStart: "serverProcessStart",
                 serverProcessSucceeded: "serverProcessSucceeded",
                 serverProcessFailed: "serverProcessFailed",
@@ -226,9 +224,8 @@
                 createIcon: "createIcon",
                 showingSpinnerIcon: "showingSpinnerIcon",
                 typingStart: "typingStart",
-                getName: function (nameOfEvent) {
-                    var plugin = this.plugin,
-                        settings = plugin.getSettings(),
+                getName: function (plugin, nameOfEvent) {
+                    var settings = plugin.getSettings(),
                         nameSpace = settings.eventsNameSpace,
                         inputId = plugin.getInputNameOrId(plugin.$input),
                         finalName = nameSpace + inputId + "." + nameOfEvent;
@@ -236,18 +233,17 @@
                     return finalName;
                 }
             },
-            getEventsCommonAttributes: function (nameOfEvent, additionalAttributes) {
+            getEventsCommonAttributes: function (plugin, nameOfEvent, additionalAttributes) {
                 /// <summary>
                 /// Returns a json with a combination of additional json attributes.
                 /// </summary>
                 /// <param name="nameOfEvent">Name of the event, eg. serverProcessStart</param>
                 /// <param name="additionalAttributes">Json object</param>
-                var plugin = this.plugin,
-                    $div = plugin.$element,
+                var $div = plugin.$element,
                     $input = plugin.$input,
                     settings = plugin.getSettings(),
                     inputId = plugin.getInputNameOrId(plugin.$input),
-                    finalEventName = this.names.getName(nameOfEvent);
+                    finalEventName = this.names.getName(plugin, nameOfEvent);
 
                 var event = this[finalEventName];
                 if (plugin.isEmpty(event)) {
@@ -272,21 +268,20 @@
 
             },
 
-            bindAllEvents: function () {
+            bindAllEvents: function (plugin) {
                 /// <summary>
                 /// Bind all events
                 /// </summary>
 
 
-                var plugin = this.plugin,
-                    isInTestingMode = plugin.isDebugging,
+                var isInTestingMode = plugin.isDebugging,
                     evtNames = this.names,
                     //createIconEvtName = evtNames.getName(evtNames.createIcon),
                     //hideIconEvtName = evtNames.getName(evtNames.hideIcons),
-                    serverStartEvtName = evtNames.getName(evtNames.serverProcessStart),
-                    serverSuccessEvtName = evtNames.getName(evtNames.serverProcessSucceeded),
-                    serverFailEvtName = evtNames.getName(evtNames.serverProcessFailed),
-                    serverAlwaysEvtName = evtNames.getName(evtNames.serverProcessReturnedAlways);
+                    serverStartEvtName = evtNames.getName(plugin,evtNames.serverProcessStart),
+                    serverSuccessEvtName = evtNames.getName(plugin, evtNames.serverProcessSucceeded),
+                    serverFailEvtName = evtNames.getName(plugin, evtNames.serverProcessFailed),
+                    serverAlwaysEvtName = evtNames.getName(plugin, evtNames.serverProcessReturnedAlways);
 
 
 
@@ -301,23 +296,23 @@
 
                 // start
 
-                var serverStartEventData = this.getEventsCommonAttributes(evtNames.serverProcessStart, {
+                var serverStartEventData = this.getEventsCommonAttributes(plugin, evtNames.serverProcessStart, {
                     url: url
                 });
                 $input.on(serverStartEvtName, serverStartEventData, function (evt) {
-                    console.log(evt.data.finalEventName);
+                    //console.log(evt.data.finalEventName);
                     var fields = plugin.concatAdditionalFields($input);
                     sendRequest(plugin, $div, $input, url, fields);
                 });
 
                 $div.on(serverStartEvtName, serverStartEventData, function (evt) {
-                    console.log("div: " + evt.data.finalEventName);
+                    //console.log("div: " + evt.data.finalEventName);
                     //$input.trigger(serverStartEvtName);
                 });
 
 
                 // success
-                var serverSuccessEventData = this.getEventsCommonAttributes(evtNames.serverProcessSucceeded, {
+                var serverSuccessEventData = this.getEventsCommonAttributes(plugin, evtNames.serverProcessSucceeded, {
                     url: url
                 });
                 $input.on(serverSuccessEvtName, serverSuccessEventData, function (evt, response) {
@@ -337,12 +332,12 @@
 
                 $div.on(serverSuccessEvtName, serverSuccessEventData, function (evt, response) {
                     evt.data.response = cachedResponse;
-                    console.log("div: " + evt.data.finalEventName);
+                    //console.log("div: " + evt.data.finalEventName);
                     //$input.trigger(serverSuccessEvtName, [response]);
                 });
 
                 // failed
-                var serverFailEventData = this.getEventsCommonAttributes(evtNames.serverProcessFailed, {
+                var serverFailEventData = this.getEventsCommonAttributes(plugin, evtNames.serverProcessFailed, {
                     url: url
                 });
                 $input.on(serverFailEvtName, serverFailEventData, function (evt, jqXHR, textStatus, exceptionMessage) {
@@ -359,7 +354,7 @@
                 });
 
                 // always
-                var serverAlwaysEventData = this.getEventsCommonAttributes(evtNames.serverProcessReturnedAlways, {
+                var serverAlwaysEventData = this.getEventsCommonAttributes(plugin, evtNames.serverProcessReturnedAlways, {
                     url: url
                 });
                 $input.on(serverAlwaysEvtName, serverAlwaysEventData, function (evt) {
@@ -469,7 +464,7 @@
             var //settings = this.getSettings(),
                 isIconsVisible = true,
                 eventsNames = self.events.names,
-                serverProcessStartEvent = eventsNames.getName(eventsNames.serverProcessStart);
+                serverProcessStartEvent = eventsNames.getName(self, eventsNames.serverProcessStart);
 
             var hideIcons = function () {
                 if (isIconsVisible === true) {
@@ -587,9 +582,9 @@
             self.hideAllIcons($div); // hide all the icons
 
             var evtNames = self.events.names,
-                successEventName = evtNames.getName(evtNames.serverProcessSucceeded),
-                failedEventName = evtNames.getName(evtNames.serverProcessFailed),
-                alwaysEventName = evtNames.getName(evtNames.serverProcessReturnedAlways);
+                successEventName = evtNames.getName(self, evtNames.serverProcessSucceeded),
+                failedEventName = evtNames.getName(self, evtNames.serverProcessFailed),
+                alwaysEventName = evtNames.getName(self, evtNames.serverProcessReturnedAlways);
 
             self.ajaxRequest = $.ajax({
                 method: method, // by default "GET"
@@ -686,8 +681,6 @@
             $validator.append(html);
             var $created = $.byId(wrapperName + finalId); // get the whole container
             $.byId(finalId).tooltip();
-
-
             if (!this.isEmpty(events.iconCreated)) {
                 events.iconCreated($div, $input, $created);
             }

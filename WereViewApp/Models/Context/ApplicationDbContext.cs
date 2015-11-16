@@ -68,6 +68,7 @@ namespace WereViewApp.Models.Context {
             modelBuilder.Entity<ApplicationUser>()
                 .Property(n => n.PhoneNumber)
                 .IsUnicode(false)
+                .IsOptional()
                 .HasMaxLength(30);
 
             modelBuilder.Entity<ApplicationUser>()

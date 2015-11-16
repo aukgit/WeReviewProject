@@ -158,6 +158,20 @@ namespace WereViewApp {
                    defaults: new { controller = "Home", action = "ContactUs", id = UrlParameter.Optional },
                    namespaces: new string[] { wereviewappControllers }
             );
+
+            routes.MapRoute(
+                  name: "AboutUs",
+                  url: "About",
+                  defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional },
+                  namespaces: new string[] { wereviewappControllers }
+           );
+
+            routes.MapRoute(
+                name: "Policy",
+                url: "Policy",
+                defaults: new { controller = "Home", action = "Policy", id = UrlParameter.Optional },
+                namespaces: new string[] { wereviewappControllers }
+         );
             routes.MapRoute(
                    name: "Default",
                    url: "{controller}/{action}/{id}",

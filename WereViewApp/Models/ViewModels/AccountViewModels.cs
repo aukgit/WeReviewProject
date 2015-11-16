@@ -99,17 +99,17 @@ namespace WereViewApp.Models.ViewModels {
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = "Please select your verified age.")]
-        [Display(Name = "Date of Birth", Description = "If you do not use verified date, our lawsuit could ban you.")]
-        public DateTime DateOfBirth { get; set; }
-        [Required(ErrorMessage = "Please select your country, it's not valid.")]
-        [Display(Name = "Country", Description = "Please select your exact country, it's going to verify against your IP.")]
-        public int CountryID { get; set; }
+        //[Required(ErrorMessage = "Please select your verified age.")]
+        //[Display(Name = "Date of Birth", Description = "If you do not use verified date, our lawsuit could ban you.")]
+        //public DateTime DateOfBirth { get; set; }
+        //[Required(ErrorMessage = "Please select your country, it's not valid.")]
+        //[Display(Name = "Country", Description = "Please select your exact country, it's going to verify against your IP.")]
+        //public int? CountryID { get; set; }
 
-        //[Required(ErrorMessage = "Please select your language.")]
-        //[Display(Name = "Language", Description = "Please select your language.")]
-        public int CountryLanguageID { get; set; }
-        public int UserTimeZoneID { get; set; }
+        ////[Required(ErrorMessage = "Please select your language.")]
+        ////[Display(Name = "Language", Description = "Please select your language.")]
+        //public int? CountryLanguageID { get; set; }
+        //public int? UserTimeZoneID { get; set; }
 
     }
 
