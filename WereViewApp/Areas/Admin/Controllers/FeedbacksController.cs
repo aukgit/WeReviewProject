@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using DevTrends.MvcDonutCaching;
 using WereViewApp.Controllers;
 //using DevTrends.MvcDonutCaching;
@@ -177,37 +178,37 @@ namespace WereViewApp.Areas.Admin.Controllers {
         #endregion
 
         #region Filters and Index
-        [OutputCache(NoStore = true)]
+        [OutputCache(Duration=0,Location= OutputCacheLocation.None)]
         public ActionResult Index(int? page) {
             bool viewOf = ViewTapping(ViewStates.Index);
             var action = System.Reflection.MethodBase.GetCurrentMethod().Name;
 
             return GetPagedFeedbacks(n => !n.IsViewed, action, page);
         }
-        [OutputCache(NoStore = true)]
+        [OutputCache(Duration = 0, Location = OutputCacheLocation.None)]
         public ActionResult IsViewed(int? page) {
             var action = System.Reflection.MethodBase.GetCurrentMethod().Name;
             return GetPagedFeedbacks(n => n.IsViewed && !n.IsInProcess && !n.IsUnSolved && !n.IsSolved, action, page);
         }
 
-        [OutputCache(NoStore = true)]
+        [OutputCache(Duration = 0, Location = OutputCacheLocation.None)]
         public ActionResult UnSolved(int? page) {
             var action = System.Reflection.MethodBase.GetCurrentMethod().Name;
             return GetPagedFeedbacks(n => n.IsUnSolved, action, page);
         }
 
-        [OutputCache(NoStore = true)]
+        [OutputCache(Duration = 0, Location = OutputCacheLocation.None)]
         public ActionResult IsInProcess(int? page) {
             var action = System.Reflection.MethodBase.GetCurrentMethod().Name;
             return GetPagedFeedbacks(n => n.IsInProcess, action, page);
         }
 
-        [OutputCache(NoStore = true)]
+        [OutputCache(Duration = 0, Location = OutputCacheLocation.None)]
         public ActionResult Solved(int? page) {
             var action = System.Reflection.MethodBase.GetCurrentMethod().Name;
             return GetPagedFeedbacks(n => n.IsSolved, action, page);
         }
-        [OutputCache(NoStore = true)]
+        [OutputCache(Duration = 0, Location = OutputCacheLocation.None)]
         public ActionResult AllFeedbacks(int? page) {
             var action = System.Reflection.MethodBase.GetCurrentMethod().Name;
             return GetPagedFeedbacks(null, action, page);

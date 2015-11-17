@@ -214,7 +214,7 @@ namespace WereViewApp {
             #region Configs
 
             bundles.UseCdn = true;
-            BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = true;
 
             #endregion
 

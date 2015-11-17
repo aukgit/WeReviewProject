@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
