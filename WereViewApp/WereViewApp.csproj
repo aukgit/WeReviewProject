@@ -45,7 +45,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
-    <IncludeIisSettings>true</IncludeIisSettings>
+    <IncludeIisSettings>false</IncludeIisSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -1181,7 +1181,7 @@
     <Content Include="Views\Account\InboxCheck.cshtml" />
     <Content Include="Views\Reviews\ReviewOwnApp.cshtml" />
     <Content Include="Views\Home\Policy.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\publish.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Publish.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Boolean-Button.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />

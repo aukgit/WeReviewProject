@@ -50,7 +50,7 @@ namespace WereViewApp.Controllers {
         }
 
         // GET: Profile/username
-        [OutputCache(CacheProfile = "Day", VaryByParam = "username,page")]
+        [OutputCache(CacheProfile = "Day", VaryByParam = "*")]
         public ActionResult GetProfile(string username, int page = 1) {
             if (!string.IsNullOrWhiteSpace(username)) {
                 var algorithms = new Algorithms();

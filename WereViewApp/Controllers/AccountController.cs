@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using DevMvcComponent.Error;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -21,6 +22,7 @@ using WereViewApp.Modules.UserError;
 
 namespace WereViewApp.Controllers {
     [Authorize]
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class AccountController : Controller {
         #region Constants and Variable
         const string ControllerName = "Account";
@@ -226,7 +228,7 @@ namespace WereViewApp.Controllers {
             AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = isPersistent }, identity);
         }
 
-
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         [AllowAnonymous]
         public ActionResult Login(string returnUrl) {
             if (UserManager.IsAuthenticated()) {
@@ -240,6 +242,7 @@ namespace WereViewApp.Controllers {
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl) {
             if (ModelState.IsValid) {
                 var user = await UserManager.GetUserByEmailAsync(model.Email, model.Password);
@@ -264,7 +267,7 @@ namespace WereViewApp.Controllers {
         #region LogOff
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult SignOut() {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

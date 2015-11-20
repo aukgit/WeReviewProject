@@ -220,7 +220,7 @@ namespace WereViewApp.Controllers {
 
         #region Header : Navigaion
 
-        [OutputCache(Duration = 800, VaryByCustom = "byuser")]
+        [DonutOutputCache(Duration = 100, VaryByCustom = "byuser")]
         public ActionResult NavBar() {
             //if (User.Identity.IsAuthenticated) {
             //    var userid = UserManager.GetLoggedUserId();

@@ -131,7 +131,7 @@ namespace WereViewApp.Controllers {
         #region Base Validators
 
         [HttpPost]
-        [OutputCache(CacheProfile = "Long", VaryByParam = "id", VaryByCustom = "byuser")]
+        [OutputCache(CacheProfile = "Long", VaryByParam = "UserName", VaryByCustom = "byuser")]
         [ValidateAntiForgeryToken]
         public ActionResult GetUsername(string UserName) {
             const int max = 30;
@@ -163,7 +163,7 @@ namespace WereViewApp.Controllers {
 
 
         [HttpPost]
-        [OutputCache(CacheProfile = "Long", VaryByParam = "id", VaryByCustom = "byuser")]
+        [OutputCache(CacheProfile = "Long", VaryByParam = "Email", VaryByCustom = "byuser")]
         [ValidateAntiForgeryToken]
         public ActionResult GetEmail(string Email) {
             const string errorMessage = "Email already exist or not valid.";

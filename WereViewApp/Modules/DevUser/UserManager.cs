@@ -322,7 +322,7 @@ namespace WereViewApp.Modules.DevUser {
             if (user != null && user.Email != null && email != null && user.Email.ToLower() == email.ToLower()) {
                 return user;
             }
-            return user;
+            return null; //user will give invalid result, because it might the previous user which credentials doesn;t match.
         }
 
         public static ApplicationUser GetUserFromSession(string username) {
