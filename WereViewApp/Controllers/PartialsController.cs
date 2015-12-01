@@ -3,14 +3,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using WereViewApp.Models.EntityModel.Structs;
-using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
-using WereViewApp.WereViewAppCommon;
 using DevTrends.MvcDonutCaching;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.EntityModel;
-using WereViewApp.Modules.Cache;
+using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Modules.Session;
+using WereViewApp.WereViewAppCommon;
 
 #endregion
 
@@ -22,15 +21,15 @@ namespace WereViewApp.Controllers {
         public ActionResult GetFeedbackCategoryID() {
             if (SessionNames.IsValidationExceed("GetFeedbackCategoryID", 100)) {
                 return Json(null, JsonRequestBehavior.AllowGet);
-            } else {
-                using (var db = new ApplicationDbContext()) {
-                    var categories = db.FeedbackCategories
-                                       .Select(n => new { display = n.Category, id = n.FeedbackCategoryID })
-                                       .ToList();
-                    return Json(categories, JsonRequestBehavior.AllowGet);
-                }
+            }
+            using (var db = new ApplicationDbContext()) {
+                var categories = db.FeedbackCategories
+                    .Select(n => new { display = n.Category, id = n.FeedbackCategoryID })
+                    .ToList();
+                return Json(categories, JsonRequestBehavior.AllowGet);
             }
         }
+
         #endregion
 
         //#region Drop down : Country, timezone, language
@@ -98,7 +97,7 @@ namespace WereViewApp.Controllers {
         //}
         //#endregion
 
-        [OutputCache(CacheProfile = "TenMins", VaryByParam = "id")]
+        [OutputCache(CacheProfile = "TenMins", VaryByParam = "*")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GetTags(string id) {
@@ -239,7 +238,7 @@ namespace WereViewApp.Controllers {
 
         #endregion
 
-        #region Suggested & Featured Apps
+        #region Suggested + Featured Apps + Developer's App
 
         //[OutputCache(Duration = 86400, VaryByParam = "appID")]
         public ActionResult FeaturedApps(long? appID) {
@@ -252,7 +251,7 @@ namespace WereViewApp.Controllers {
         }
 
 
-        //[OutputCache(Duration = 86400, VaryByParam = "appID")]
+        [OutputCache(Duration = 86400, VaryByParam = "appID")]
         public ActionResult SuggestedApps(long? appID) {
             if (appID != null) {
                 var app = algorithms.GetAppFromStaticCache((long)appID);
@@ -261,6 +260,18 @@ namespace WereViewApp.Controllers {
             }
             return PartialView();
         }
+
+        [OutputCache(Duration = 86400, VaryByParam = "appID")]
+        public ActionResult DevelopersApps(long? appID) {
+            if (appID != null) {
+                var app = algorithms.GetAppFromStaticCache((long)appID);
+                var suggestedApps = algorithms.GetDevelopersAppsByApp(app, db); // logic needs to be written
+
+                return PartialView(suggestedApps);
+            }
+            return PartialView();
+        }
+
 
         #endregion
     }

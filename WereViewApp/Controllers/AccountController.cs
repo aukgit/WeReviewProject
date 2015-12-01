@@ -11,12 +11,10 @@ using Microsoft.Owin.Security;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Extensions.IdentityExtension;
 using WereViewApp.Modules.Mail;
 using WereViewApp.Modules.Role;
-using WereViewApp.Modules.UserError;
 
 #endregion
 

@@ -6,7 +6,6 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Enums;
-using DevMvcComponent.Extensions;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.DevUser;
@@ -148,7 +147,7 @@ namespace WereViewApp.Helpers {
         /// <returns></returns>
         public static HtmlString DropDownCountry(this HtmlHelper helper, List<Country> countries, string classes = "",
             string otherAttributes = "", string contentAddedString = "") {
-            string strHtml = DropDownCountry(countries, classes, otherAttributes, contentAddedString);
+            var strHtml = DropDownCountry(countries, classes, otherAttributes, contentAddedString);
             return new HtmlString(strHtml);
         }
 
@@ -302,7 +301,7 @@ namespace WereViewApp.Helpers {
             var uri = HttpContext.Current.Request.RawUrl;
             uri = AppVar.Url + uri;
 
-            string icon = "";
+            var icon = "";
             if (!string.IsNullOrEmpty(iconClass)) {
                 icon = string.Format("<i class='{0}'></i>", iconClass);
             }

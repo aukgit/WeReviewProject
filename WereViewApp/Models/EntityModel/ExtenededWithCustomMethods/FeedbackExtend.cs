@@ -1,41 +1,45 @@
-﻿using WereViewApp.Models.POCO.Enum;
+﻿using System.Linq;
+using WereViewApp.Models.POCO.Enum;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.WereViewAppCommon;
-using System.Linq;
+
 namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
     public static class FeedbackExtend {
         public static FeedbackState GetStatus(this Feedback feedback) {
             if (!feedback.IsViewed) {
-                return new FeedbackState() {
+                return new FeedbackState {
                     Status = "Not viewed yet.",
                     StyleClass = "warning"
                 };
-            } else if (feedback.IsInProcess) {
-                return new FeedbackState() {
+            }
+            if (feedback.IsInProcess) {
+                return new FeedbackState {
                     Status = "Is in process!",
                     StyleClass = "warning"
                 };
-            } else if (feedback.HasMarkedToFollowUpDate) {
-                return new FeedbackState() {
+            }
+            if (feedback.HasMarkedToFollowUpDate) {
+                return new FeedbackState {
                     Status = "Has a follow up.",
                     StyleClass = "info"
                 };
-            } else if (feedback.IsUnSolved) {
-                return new FeedbackState() {
+            }
+            if (feedback.IsUnSolved) {
+                return new FeedbackState {
                     Status = "Unsolved feedback.",
                     StyleClass = "danger"
                 };
-            } else if (feedback.IsSolved) {
-                return new FeedbackState() {
+            }
+            if (feedback.IsSolved) {
+                return new FeedbackState {
                     Status = "Solved",
                     StyleClass = "success"
                 };
-            } else {
-                return new FeedbackState() {
-                    Status = "Viewed but not replied.",
-                    StyleClass = "warning"
-                };
             }
+            return new FeedbackState {
+                Status = "Viewed but not replied.",
+                StyleClass = "warning"
+            };
         }
 
         public static string GetCategory(this Feedback feedback) {

@@ -3,11 +3,9 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Web.Mvc;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.Message;
 using WereViewApp.Modules.Session;
 using WereViewApp.Modules.Validations;
 using WereViewApp.WereViewAppCommon.Structs;
@@ -74,7 +72,7 @@ namespace WereViewApp.Controllers {
             var max = 60;
             var min = 3;
             var id = app.AppName;
-            string message = "Username is valid for registration.";
+            var message = "Username is valid for registration.";
 
             try {
                 if (id == null || id.Length < 5) {
@@ -136,7 +134,7 @@ namespace WereViewApp.Controllers {
         public ActionResult GetUsername(string UserName) {
             const int max = 30;
             const int min = 3;
-            string message = "Username is valid for registration.";
+            var message = "Username is valid for registration.";
             try {
                 if (UserName == null || UserName.Length < 3) {
                     goto ReturnInvalid;

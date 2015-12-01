@@ -50,7 +50,7 @@ namespace WereViewApp.Modules.Validations {
         /// </summary>
         /// <returns>Returns true if no error exist</returns>
         public bool FinalizeValidation() {
-            bool anyValidationErrorExist = false;
+            var anyValidationErrorExist = false;
             foreach (var action in ValidationCollection) {
                 if (!anyValidationErrorExist) {
                     anyValidationErrorExist = !action();
@@ -66,7 +66,7 @@ namespace WereViewApp.Modules.Validations {
             if (string.IsNullOrEmpty(message)) {
                 message = SuccessValidationMessage;
             }
-            return new ValidationMessage() {
+            return new ValidationMessage {
                 message = message,
                 isValid = true,
                 isError = false
@@ -77,7 +77,7 @@ namespace WereViewApp.Modules.Validations {
             if (string.IsNullOrEmpty(message)) {
                 message = FailedValidationMessage;
             }
-            return new ValidationMessage() {
+            return new ValidationMessage {
                 errorMessage = message,
                 isValid = false,
                 isError = true

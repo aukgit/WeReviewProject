@@ -1,13 +1,13 @@
-﻿using WereViewApp.Models.DesignPattern.Interfaces;
-using WereViewApp.Models.POCO.IdentityCustomization;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using WereViewApp.Models.DesignPattern.Interfaces;
+using WereViewApp.Models.POCO.IdentityCustomization;
 
 namespace WereViewApp.Models.POCO.Identity {
     public class ApplicationUser : IdentityUser<long, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>, IDevUser {
@@ -85,7 +85,7 @@ namespace WereViewApp.Models.POCO.Identity {
 
         //returns user Id
         public long UserID {
-            get { return base.Id; }
+            get { return Id; }
         }
     }
 }

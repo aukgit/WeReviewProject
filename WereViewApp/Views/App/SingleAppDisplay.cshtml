@@ -169,7 +169,7 @@
                 </div>
                 <div class="col-md-3">
                     @{ Html.RenderAction("FeaturedApps", "Partials", new { appID = Model.AppID }); }
-                    @*@{Html.RenderAction("DevelopersApps", "Partials", new { appID = Model.AppID }); }*@
+                    @{Html.RenderAction("DevelopersApps", "Partials", new { appID = Model.AppID }); }
                     @{ Html.RenderAction("SuggestedApps", "Partials", new { appID = Model.AppID }); }
                 </div>
             </div>

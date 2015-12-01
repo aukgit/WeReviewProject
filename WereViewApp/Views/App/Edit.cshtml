@@ -22,7 +22,7 @@
             @Html.HiddenFor(model => model.CreatedDate)
             @Html.Partial("_CreateOrEdit")
             @Html.Partial("_Uploaders")
-            @Html.EditorFor(model => model.IsPublished)
+            @Html.EditorFor(model => model.IsPublished, "publish") 
             <div id="execute-title-validate"></div>
             <div class="form-group">
                 <div class="col-md-10 col-md-offset-2">

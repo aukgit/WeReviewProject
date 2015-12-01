@@ -16,7 +16,7 @@
             </li>
             @Html.GetMenu("AppPost")
             <li title="Sign out">
-                @using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new {@id = "logoutForm"})) {
+                @using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new {@id = "logoutForm", area=""})) {
                     @Html.AntiForgeryToken()
                     <a href="javascript:document.getElementById('logoutForm').submit()">Sign out</a>
                 }

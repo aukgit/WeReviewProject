@@ -16,7 +16,7 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
         /// </param>
         /// <returns></returns>
         public static string GetHtppUrl(this Gallery gallery, int? categoryId = null) {
-            string location = "";
+            var location = "";
             if (gallery != null && categoryId == null) {
                 if (gallery.GalleryCategoryID == GalleryCategoryIDs.AppPageGallery) {
                     location = WereViewStatics.UProcessorGallery.GetCombinationOfRootAndAdditionalRoot();

@@ -11,7 +11,6 @@ using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.Role;
 using WereViewApp.Modules.Session;
 using WereViewApp.Modules.UserError;
@@ -331,7 +330,7 @@ namespace WereViewApp.Modules.DevUser {
                 user.UserName.ToLower().Equals(username.ToLower())) {
                 return user;
             }
-            return user;
+            return null;
         }
 
         public static ApplicationUser GetUserFromSession(long userId) {

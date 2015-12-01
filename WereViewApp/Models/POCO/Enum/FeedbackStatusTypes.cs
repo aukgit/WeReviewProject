@@ -5,6 +5,6 @@
         HasFollowupDate = 3,
         IsUnsolved = 4,
         IsSolved = 5,
-        IsNonViewed = 6,
+        IsNonViewed = 6
     }
 }

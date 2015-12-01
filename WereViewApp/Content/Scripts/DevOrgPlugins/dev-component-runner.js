@@ -64,7 +64,7 @@ $.devOrg.runner = function () {
         $.devOrg.enterToNextTextBox(".register-form", false);
         //$.devOrg.uxFriendlySlide("form.register-form", true);
 
-    
+
         $.devOrg.bootstrapComboSelectbyFindingValue("select.country-combo", '1');
 
     }
@@ -168,32 +168,35 @@ $.devOrg.runner = function () {
 
 
     var makeTagLive = function () {
-        var $createdTags = $(".tag-inputs");
-        if ($createdTags.length > 0) {
-            var $tokenField = $("[name='__RequestVerificationToken']"),
-                token = $tokenField.val();
-            for (var i = 0; i < $createdTags.length; i++) {
-                var $tagsInput = $($createdTags[0]),
-                    urlToPost = $tagsInput.attr("data-url");
-                //
-                $tagsInput.tagsinput({
-                    freeInput: true,
-                    trimValue: true,
-                    typeahead: {
-                        source: function (query) {
-                            return $.post(urlToPost, { id: query, __RequestVerificationToken: token }).done(function (response) {
-                                //console.log("tags:");
-                                //console.log("response:");
-                                //console.log(response);
-                            });
+        var $processForm = $.byId("server-validation-form");
+        if ($processForm.length > 0) {
+            var $createdTags = $(".tag-inputs");
+            if ($createdTags.length > 0) {
+                var $tokenField = $processForm.find("[name='__RequestVerificationToken']"),
+                    token = $tokenField.val();
+                for (var i = 0; i < $createdTags.length; i++) {
+                    var $tagsInput = $($createdTags[0]),
+                        urlToPost = $tagsInput.attr("data-url");
+                    //
+                    $tagsInput.tagsinput({
+                        freeInput: true,
+                        trimValue: true,
+                        typeahead: {
+                            source: function (query) {
+                                return $.post(urlToPost, { id: query, __RequestVerificationToken: token }).done(function (response) {
+                                    //console.log("tags:");
+                                    //console.log("response:");
+                                    //console.log(response);
+                                });
+                            }
+                        },
+                        onTagExists: function (item, $tag) {
+                            $tag.hide.fadeIn();
                         }
-                    },
-                    onTagExists: function (item, $tag) {
-                        $tag.hide.fadeIn();
-                    }
-                });
+                    });
+                }
             }
-            
+
         }
 
     }

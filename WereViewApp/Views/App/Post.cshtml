@@ -5,7 +5,7 @@
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
     string controller = (string)ViewBag.controller;
-    ViewBag.token = @Html.AntiForgeryToken();
+    ViewBag.token = Html.AntiForgeryToken();
     string viewName = "Post";
 }
 

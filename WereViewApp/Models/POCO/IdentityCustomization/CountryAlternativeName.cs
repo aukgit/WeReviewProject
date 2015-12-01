@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+
 namespace WereViewApp.Models.POCO.IdentityCustomization {
     public class CountryAlternativeName {
         [Key]

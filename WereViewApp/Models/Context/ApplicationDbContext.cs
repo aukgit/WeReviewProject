@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Data.Entity;
-using WereViewApp.Models.POCO.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using WereViewApp.Models.POCO.IdentityCustomization;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using Microsoft.AspNet.Identity.EntityFramework;
+using WereViewApp.Models.POCO.Identity;
+using WereViewApp.Models.POCO.IdentityCustomization;
+
 namespace WereViewApp.Models.Context {
 
     #region Application DbContext
@@ -13,7 +14,7 @@ namespace WereViewApp.Models.Context {
         #region Required Part
         public ApplicationDbContext()
             : base("DefaultConnection") {
-            this.Configuration.LazyLoadingEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {

@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Modules.Cache;
 
 namespace WereViewApp.Modules.Mail {
     public class MailHtml {

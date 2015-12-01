@@ -3,7 +3,6 @@ using System.Linq;
 using DevMvcComponent.Error;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.UserError;
 
 namespace WereViewApp.Modules.Validations {
@@ -12,7 +11,7 @@ namespace WereViewApp.Modules.Validations {
         private readonly ApplicationDbContext db;
 
         public DevUserValidator(RegisterViewModel viewMdoel, ErrorCollector errorCollector, ApplicationDbContext dbContext)
-            : base(errorCollector: errorCollector) {
+            : base(errorCollector) {
             _viewMdoel = viewMdoel;
             db = dbContext;
         }

@@ -178,37 +178,37 @@ namespace WereViewApp.Areas.Admin.Controllers {
         #endregion
 
         #region Filters and Index
-        [OutputCache(Duration=0,Location= OutputCacheLocation.None)]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult Index(int? page) {
             bool viewOf = ViewTapping(ViewStates.Index);
             var action = System.Reflection.MethodBase.GetCurrentMethod().Name;
 
             return GetPagedFeedbacks(n => !n.IsViewed, action, page);
         }
-        [OutputCache(Duration = 0, Location = OutputCacheLocation.None)]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult IsViewed(int? page) {
             var action = System.Reflection.MethodBase.GetCurrentMethod().Name;
             return GetPagedFeedbacks(n => n.IsViewed && !n.IsInProcess && !n.IsUnSolved && !n.IsSolved, action, page);
         }
 
-        [OutputCache(Duration = 0, Location = OutputCacheLocation.None)]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult UnSolved(int? page) {
             var action = System.Reflection.MethodBase.GetCurrentMethod().Name;
             return GetPagedFeedbacks(n => n.IsUnSolved, action, page);
         }
 
-        [OutputCache(Duration = 0, Location = OutputCacheLocation.None)]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult IsInProcess(int? page) {
             var action = System.Reflection.MethodBase.GetCurrentMethod().Name;
             return GetPagedFeedbacks(n => n.IsInProcess, action, page);
         }
 
-        [OutputCache(Duration = 0, Location = OutputCacheLocation.None)]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult Solved(int? page) {
             var action = System.Reflection.MethodBase.GetCurrentMethod().Name;
             return GetPagedFeedbacks(n => n.IsSolved, action, page);
         }
-        [OutputCache(Duration = 0, Location = OutputCacheLocation.None)]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult AllFeedbacks(int? page) {
             var action = System.Reflection.MethodBase.GetCurrentMethod().Name;
             return GetPagedFeedbacks(null, action, page);
@@ -258,7 +258,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         #endregion
 
         #region Replying
-        [OutputCache(NoStore = true)]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult Reply(long id) {
 
             if (id == null) {
@@ -302,6 +302,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public async Task<ActionResult> Reply(Feedback feedback, string Status) {
             bool viewOf = ViewTapping(ViewStates.EditPostBefore, feedback);
             if (ModelState.IsValid) {

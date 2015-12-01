@@ -3,6 +3,7 @@
 using System;
 using System.Web;
 using System.Web.Mvc;
+
 namespace WereViewApp.Filter {
 
     public class CacheFilterAttribute : ActionFilterAttribute {
@@ -22,8 +23,8 @@ namespace WereViewApp.Filter {
         public override void OnActionExecuting(ActionExecutingContext filterContext) {
             if (Duration <= 0) return;
 
-            HttpCachePolicyBase cache = filterContext.HttpContext.Response.Cache;
-            TimeSpan cacheDuration = TimeSpan.FromSeconds(Duration);
+            var cache = filterContext.HttpContext.Response.Cache;
+            var cacheDuration = TimeSpan.FromSeconds(Duration);
 
             cache.SetCacheability(HttpCacheability.Public);
             cache.SetExpires(DateTime.Now.Add(cacheDuration));

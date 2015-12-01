@@ -116,7 +116,7 @@ namespace WereViewApp.Controllers {
         public JsonResult Like(long reviewId, long appId) {
             var userId = UserManager.GetLoggedUserId();
             var likeDislike = db.ReviewLikeDislikes.FirstOrDefault(n => n.ReviewID == reviewId && n.UserID == userId);
-            bool result = true;
+            var result = true;
             if (likeDislike == null) {
                 var like = new ReviewLikeDislike();
                 like.IsLiked = true;
@@ -153,7 +153,7 @@ namespace WereViewApp.Controllers {
         public JsonResult DisLike(long reviewId, long appId) {
             var userId = UserManager.GetLoggedUserId();
             var likeDislike = db.ReviewLikeDislikes.FirstOrDefault(n => n.ReviewID == reviewId && n.UserID == userId);
-            bool result = true;
+            var result = true;
 
             if (likeDislike == null) {
                 var like = new ReviewLikeDislike();
