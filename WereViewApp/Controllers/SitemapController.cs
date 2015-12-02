@@ -12,7 +12,7 @@ using WereViewApp.WereViewAppCommon;
 #endregion
 
 namespace WereViewApp.Controllers {
-    [OutputCache(CacheProfile = "Hour", VaryByCustom="none")]
+    [OutputCache(CacheProfile = "Hour", VaryByCustom = "none")]
     public class SitemapController : Controller {
         // GET: Sitemap
         public ActionResult Index() {
@@ -55,6 +55,12 @@ namespace WereViewApp.Controllers {
                 sitemapItems.AddRange(
                     categories.Select(
                         category => new SitemapItem(appUrl + "/apps/category/" + category.Slug, modifiedDate)));
+
+                var top30Developers = algorithms.GetTopDevelopers(db);
+                sitemapItems.AddRange(
+                    top30Developers.Select(
+                        developer => new SitemapItem(appUrl + "/profiles/" + developer, modifiedDate)));
+
             }
 
             return new SitemapResult(sitemapItems);

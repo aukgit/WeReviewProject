@@ -155,6 +155,30 @@ namespace WereViewApp.WereViewAppCommon {
 
         #endregion
 
+
+        #region Get top users
+
+        public List<string> GetTopDevelopers(WereViewAppEntities db, int topDevelopersLimit = 30) {
+            if (db == null) {
+                db = new WereViewAppEntities();
+            }
+            var topDeveloperNames = GetViewableApps(db)
+                            .Include(n=> n.User)
+                            .Select(n => new {
+                                username = n.User.UserName
+                            })
+                            .GroupBy(n => n.username)
+                            .Select(app => new { Username = app.Key, Count = app.Count() })
+                            .OrderByDescending(n=> n.Count)
+                            .Take(topDevelopersLimit)
+                            .Select(n=> n.Username)
+                            .ToList();
+
+            return topDeveloperNames;
+        }
+
+        #endregion
+
         #region Lame Gallery Queries
 
 
