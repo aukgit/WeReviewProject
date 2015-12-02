@@ -1131,7 +1131,7 @@
     </Content>
     <Content Include="Views\Partials\DevelopersApps.cshtml" />
     <Content Include="Views\Partials\SuggestedApps.cshtml" />
-    <Content Include="Views\Profiles\User.cshtml" />
+    <Content Include="Views\Profiles\Profile.cshtml" />
     <Content Include="Views\Shared\_500.cshtml" />
     <Content Include="Views\Profiles\Index.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />

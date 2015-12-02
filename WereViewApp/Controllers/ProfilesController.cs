@@ -3,6 +3,7 @@
 using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -24,7 +25,8 @@ namespace WereViewApp.Controllers {
         }
         private const int MaxNumbersOfPagesShow = 8;
 
-        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        //[OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [OutputCache(CacheProfile = "Hour", VaryByParam = "*")]
         public ActionResult Index(int page = 1) {
             //var db2 = new ApplicationDbContext();
             ViewBag.Title = "Developers apps list with reviews";
@@ -59,41 +61,50 @@ namespace WereViewApp.Controllers {
         }
 
         /// <summary>
-        /// GET: Profiles/user?username=username
+        /// GET: Profiles/username?page=1
         /// </summary>
         /// <param name="username">Username</param>
         /// <param name="page"></param>
         /// <returns></returns>
-        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-        public ActionResult User(string username, int page = 1) {
+        //[OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+        [OutputCache(CacheProfile = "Hour", VaryByParam = "*")]
+        public ActionResult Profile(string username, int page = 1) {
+            const int max = 30;
+            const int min = 3;
+            const string userPattern = "^([A-Za-z]|[A-Za-z0-9_.]+)$";
+       
             if (!string.IsNullOrWhiteSpace(username)) {
-                var algorithms = new Algorithms();
-                ViewBag.Title = username + "'s apps collection";
-                ViewBag.Meta = "Mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
-                ViewBag.Keywords = ViewBag.Meta;
+                var regularExpressionValidation = Regex.IsMatch(username, userPattern, RegexOptions.Compiled) &&
+                                         (username.Length >= min && username.Length <= max);
+                if (regularExpressionValidation && UserManager.IsUserNameExist(username)) {
+                    var algorithms = new Algorithms();
+                    ViewBag.Title = username + "'s apps collection";
+                    ViewBag.Meta = "Mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
+                    ViewBag.Keywords = ViewBag.Meta;
 
-                var user = UserManager.GetUser(username);
-                if (user != null) {
-                    var apps = algorithms.GetViewableApps(db)
-                        .Where(n => n.PostedByUserID == user.UserID)
-                        .Include(n => n.User)
-                        .OrderByDescending(n => n.AppID);
+                    var user = UserManager.GetUser(username);
+                    if (user != null) {
+                        var apps = algorithms.GetViewableApps(db)
+                            .Where(n => n.PostedByUserID == user.UserID)
+                            .Include(n => n.User)
+                            .OrderByDescending(n => n.AppID);
 
-                    var pageInfo = new PaginationInfo {
-                        ItemsInPage = AppConfig.Setting.PageItems,
-                        PageNumber = page,
-                        PagesExists = -1
-                    };
-                    var appsForThisPage =
-                        apps.GetPageData(pageInfo, CacheNames.ProfilePaginationDataForSpecificProfile, true)
-                            .ToList();
-                    algorithms.GetEmbedImagesWithApp(appsForThisPage, db, (int)pageInfo.ItemsInPage,
-                        GalleryCategoryIDs.SearchIcon);
-                    ViewBag.Apps = appsForThisPage;
-                    var eachUrl = "/profiles/user?username=" + user.UserName + "&page=@page";
-                    ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
-                        maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
-                    return View(user);
+                        var pageInfo = new PaginationInfo {
+                            ItemsInPage = AppConfig.Setting.PageItems,
+                            PageNumber = page,
+                            PagesExists = -1
+                        };
+                        var appsForThisPage =
+                            apps.GetPageData(pageInfo, CacheNames.ProfilePaginationDataForSpecificProfile, true)
+                                .ToList();
+                        algorithms.GetEmbedImagesWithApp(appsForThisPage, db, (int)pageInfo.ItemsInPage,
+                            GalleryCategoryIDs.SearchIcon);
+                        ViewBag.Apps = appsForThisPage;
+                        var eachUrl = "/profiles/" + user.UserName + "?page=@page";
+                        ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
+                            maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
+                        return View(user);
+                    }
                 }
             }
             ViewBag.Reason = "User not found.";
