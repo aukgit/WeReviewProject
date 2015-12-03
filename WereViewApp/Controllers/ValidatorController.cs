@@ -43,7 +43,7 @@ namespace WereViewApp.Controllers {
                         var exist =
                             db.Apps.Any(
                                 n =>
-                                    n.PlatformID == app.PlatformID && n.CategoryID == app.CategoryID && n.URL == url &&
+                                    n.PlatformID == app.PlatformID && n.CategoryID == app.CategoryID && n.Url == url &&
                                     n.PlatformVersion == app.PlatformVersion);
                         if (!exist) {
                             goto ReturnValid;
@@ -86,7 +86,7 @@ namespace WereViewApp.Controllers {
 
                 if ((id.Length >= min && id.Length <= max)) {
                     var url = GetFriendlyURLFromString(id);
-                    if (app.URL != null && app.URL.Equals(url)) {
+                    if (app.Url != null && app.Url.Equals(url)) {
                         goto ReturnValid;
                     }
                     using (var db = new WereViewAppEntities()) {
@@ -94,7 +94,7 @@ namespace WereViewApp.Controllers {
                             db.Apps.Any(
                                 n =>
                                     n.AppID != app.AppID && n.PlatformID == app.PlatformID &&
-                                    n.CategoryID == app.CategoryID && n.URL == url &&
+                                    n.CategoryID == app.CategoryID && n.Url == url &&
                                     n.PlatformVersion == app.PlatformVersion);
                         if (!exist) {
                             goto ReturnValid;

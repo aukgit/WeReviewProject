@@ -18,7 +18,7 @@
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.AppID)
-            @Html.HiddenFor(model => model.URL)
+            @Html.HiddenFor(model => model.Url)
             @Html.HiddenFor(model => model.CreatedDate)
             @Html.Partial("_CreateOrEdit")
             @Html.Partial("_Uploaders")

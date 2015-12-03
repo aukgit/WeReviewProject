@@ -239,14 +239,12 @@ namespace WereViewApp.Controllers {
                 case ViewStates.Delete:
                     break;
             }
-
-            try {
-                var changes = db.SaveChanges(app);
-                if (changes > 0) {
-                    return true;
-                }
-            } catch (Exception ex) {
-                throw new Exception("Message : " + ex.Message + " Inner Message : " + ex.InnerException.Message);
+            if (app != null) {
+                app.AppName = Algorithms.GetAllUpperCaseTitle(app.AppName);
+            }
+            var changes = db.SaveChanges(app);
+            if (changes > 0) {
+                return true;
             }
             return false;
         }
@@ -515,17 +513,17 @@ namespace WereViewApp.Controllers {
             rApp.AppName = appDraft.AppName;
             rApp.CategoryID = appDraft.CategoryID;
             rApp.PlatformID = appDraft.PlatformID;
-            rApp.PlatformVersion = (double) appDraft.PlatformVersion;
+            rApp.PlatformVersion = (double)appDraft.PlatformVersion;
             rApp.Description = appDraft.Description;
             rApp.PostedByUserID = appDraft.PostedByUserID;
-            rApp.IsVideoExist = (bool) appDraft.IsVideoExist;
+            rApp.IsVideoExist = (bool)appDraft.IsVideoExist;
             rApp.YoutubeEmbedLink = appDraft.YoutubeEmbedLink;
-            rApp.WebSiteURL = appDraft.WebSiteURL;
-            rApp.StoreURL = appDraft.StoreURL;
-            rApp.IsBlocked = (bool) appDraft.IsBlocked;
-            rApp.IsPublished = (bool) appDraft.IsPublished;
+            rApp.WebsiteUrl = appDraft.WebsiteUrl;
+            rApp.StoreUrl = appDraft.StoreUrl;
+            rApp.IsBlocked = (bool)appDraft.IsBlocked;
+            rApp.IsPublished = (bool)appDraft.IsPublished;
             rApp.UploadGuid = appDraft.UploadGuid;
-            rApp.URL = appDraft.URL;
+            rApp.Url = appDraft.Url;
             rApp.ReleaseDate = appDraft.ReleaseDate;
 
             return rApp;
@@ -543,12 +541,12 @@ namespace WereViewApp.Controllers {
             appDraft.PostedByUserID = app.PostedByUserID;
             appDraft.IsVideoExist = app.IsVideoExist;
             appDraft.YoutubeEmbedLink = app.YoutubeEmbedLink;
-            appDraft.WebSiteURL = app.WebSiteURL;
-            appDraft.StoreURL = app.StoreURL;
+            appDraft.WebsiteUrl = app.WebsiteUrl;
+            appDraft.StoreUrl = app.StoreUrl;
             appDraft.IsBlocked = app.IsBlocked;
             appDraft.IsPublished = app.IsPublished;
             appDraft.UploadGuid = app.UploadGuid;
-            appDraft.URL = app.URL;
+            appDraft.Url = app.Url;
             appDraft.ReleaseDate = app.ReleaseDate;
             return appDraft;
         }
@@ -557,7 +555,7 @@ namespace WereViewApp.Controllers {
 
         #region Manage Virtual Fields : In File (Idea, Tags, Developers..)
 
-        #region Saving 
+        #region Saving
 
         /// <summary>
         ///     Async saving into files as binary
@@ -642,9 +640,9 @@ namespace WereViewApp.Controllers {
         /// </summary>
         /// <param name="app"></param>
         private void AddNecessaryBothOnPostingNEditing(App app) {
-            app.URL = _algorithms.GenerateUrlValid(app.PlatformVersion, app.CategoryID, app.AppName, app.PlatformID, db,
+            app.Url = _algorithms.GenerateUrlValid(app.PlatformVersion, app.CategoryID, app.AppName, app.PlatformID, db,
                 app.AppID);
-            app.UrlWithoutEscapseSequence = _algorithms.GetUrlStringExceptEscapeSequence(app.URL);
+            app.UrlWithoutEscapseSequence = _algorithms.GetUrlStringExceptEscapeSequence(app.Url);
             app.PostedByUserID = UserManager.GetLoggedUserId();
             SaveVirtualFields(app);
             app.LastModifiedDate = DateTime.Now;
@@ -737,7 +735,7 @@ namespace WereViewApp.Controllers {
                     ManageTagsInDatabase(app.AppID, app.UploadGuid, app.Tags);
                     RemoveTempUploadAndDraftFromRelatedApp(app.UploadGuid);
                     AppVar.SetSavedStatus(ViewBag, PostedSuccessFully(app.AppName, app.IsPublished));
-                        // Saved Successfully.
+                    // Saved Successfully.
                     app.UploadGuid = Guid.NewGuid(); // new post can be made
                     //app.AppName = app.AppName + " 2";
                     ModelState.Clear();
@@ -786,7 +784,7 @@ namespace WereViewApp.Controllers {
             max += 2;
             Session[uploadGuid.ToString()] = max;
             max -= 1;
-            return (byte) max;
+            return (byte)max;
         }
 
         private int GetHowManyGalleryImageExist(Guid uploadGuid) {
@@ -831,7 +829,7 @@ namespace WereViewApp.Controllers {
 
                 if (nextCount > AppVar.Setting.GalleryMaxPictures) {
                     ResetSessionForUploadSequence(app.UploadGuid);
-                    return Json(new {isUploaded = false, uploadedFiles = 0, message = "You are out of your limit."},
+                    return Json(new { isUploaded = false, uploadedFiles = 0, message = "You are out of your limit." },
                         "text/html");
                 }
                 var fileName = app.UploadGuid.ToString();
@@ -899,8 +897,8 @@ namespace WereViewApp.Controllers {
 
                         // resize
                         //new Thread(() => {
-                        
-                       
+
+
                         // resize app-details page gallery image
 
                         WereViewStatics.UProcessorGallery.ResizeImageAndProcessImage(gallery, galleryCategory);
@@ -908,12 +906,12 @@ namespace WereViewApp.Controllers {
                         //             UploadProcessor.GetOrganizeNameStatic(gallery, true, true);
                         //var target = "~/Uploads/Images/" + CommonVars.ADDITIONAL_ROOT_GALLERY_ICON_LOCATION +
                         //             UploadProcessor.GetOrganizeNameStatic(gallery, true);
-                        
+
                         // #apps detail page gallery thumbs generate
                         //WereViewStatics.uProcessorGallery.ResizeImageAndProcessImage(source, target, thumbsCategory.Width,
                         //    thumbsCategory.Height, gallery.Extension);
-                        
-                        
+
+
                         var source = "~/Uploads/Images/" + CommonVars.AdditionalRootGalleryLocation +
                                      UploadProcessor.GetOrganizeNameStatic(gallery, true, true);
                         //removing temp image what was exact uploaded after resizing it.
@@ -934,7 +932,7 @@ namespace WereViewApp.Controllers {
                             message = "+" + countUploaded + " files successfully done."
                         }, "text/html");
             }
-            return Json(new {isUploaded = false, uploadedFiles = 0, message = "No file send."}, "text/html");
+            return Json(new { isUploaded = false, uploadedFiles = 0, message = "No file send." }, "text/html");
         }
 
         #region Process Similar Uploads
@@ -980,9 +978,9 @@ namespace WereViewApp.Controllers {
                     uploadProcessorSepecific.RemoveTempImage(gallery);
                     //}).Start();
                 }
-                return Json(new {isUploaded = true, message = "successfully done"}, "text/html");
+                return Json(new { isUploaded = true, message = "successfully done" }, "text/html");
             }
-            return Json(new {isUploaded = false, message = "No file send."}, "text/html");
+            return Json(new { isUploaded = false, message = "No file send." }, "text/html");
         }
 
         #endregion
@@ -1066,7 +1064,7 @@ namespace WereViewApp.Controllers {
             var viewOf = ViewTapping(ViewStates.EditPost, app);
             var oldApp = _algorithms.GetEditingApp(app.AppID, db);
             app.CreatedDate = oldApp.CreatedDate;
-            app.URL = oldApp.URL;
+            app.Url = oldApp.Url;
 
             if (ModelState.IsValid) {
                 AddNecessaryWhenModified(app);
@@ -1076,7 +1074,7 @@ namespace WereViewApp.Controllers {
                     ManageTagsInDatabase(app.AppID, app.UploadGuid, app.Tags);
                     _algorithms.RemoveCachingApp(app.AppID);
                     AppVar.SetSavedStatus(ViewBag, EditSuccessFully(app.AppName, app.IsPublished));
-                        // Saved Successfully.
+                    // Saved Successfully.
                     return Redirect(app.GetAbsoluteUrl());
                 }
             }

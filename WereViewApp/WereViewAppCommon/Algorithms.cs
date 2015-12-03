@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using DevMvcComponent.Pagination;
@@ -16,6 +17,8 @@ using WereViewApp.Modules.Cache;
 
 namespace WereViewApp.WereViewAppCommon {
     public class Algorithms {
+
+
 
         #region Viewable Apps : Apps which are published
         /// <summary>
@@ -154,7 +157,6 @@ namespace WereViewApp.WereViewAppCommon {
         #endregion
 
         #endregion
-
 
         #region Get top users
 
@@ -909,7 +911,7 @@ namespace WereViewApp.WereViewAppCommon {
                     var categoryId = categoryO.CategoryID;
                     app = CommonVars.StaticAppsList
                                     .FirstOrDefault(n =>
-                                        n.URL.Equals(url) &&
+                                        n.Url.Equals(url) &&
                                         n.PlatformID == platformId &&
                                         n.CategoryID == categoryId);
 
@@ -943,7 +945,7 @@ namespace WereViewApp.WereViewAppCommon {
                     app = GetViewableApps(db) //means not blocked and published
                             .Include(n => n.User)
                             .FirstOrDefault(n =>
-                            n.URL.Equals(url) &&
+                            n.Url.Equals(url) &&
                             n.PlatformID == platformId &&
                             n.CategoryID == categoryId);
                     if (app != null) {
@@ -1070,7 +1072,7 @@ namespace WereViewApp.WereViewAppCommon {
         }
         #endregion
 
-        #region Get  URL Without Escapse Sequence.
+        #region Get Url Without Escape Sequence.
         /// <summary>
         /// 
         /// </summary>
@@ -1113,7 +1115,54 @@ namespace WereViewApp.WereViewAppCommon {
         }
         #endregion
 
-        #region Generate URL
+        #region AppTitle + Generate URL
+
+        public static char ToLower(ref char c) {
+            // if upper case
+            if (c <= 'Z' && c >= 'A') {
+                c = (char)(c - 'A' + 'a');// lowercase
+            }
+            return c;
+        }
+        public static char ToUpper(ref char c) {
+            // if lower case
+            if (c <= 'z' && c >= 'a') {
+                c = (char)(c - 'a' + 'A');// uppercase
+            }
+            return c;
+        }
+        public static string GetAllUpperCaseTitle(string title) {
+            if (!string.IsNullOrEmpty(title)) {
+                var list = title.Split(" ".ToCharArray());
+                var finalizedArray = new string[list.Length];
+                int finalIndex = 0;
+                foreach (var str in list) {
+                    var strArray = str.ToCharArray();
+                    int mid = strArray.Length / 2,
+                        lastIndex = strArray.Length - 1;
+                    ToUpper(ref strArray[0]); // uppercase
+                    for (int i = 0; i < mid; i++) {
+                        if (i == 0) {
+                            ToLower(ref strArray[lastIndex]); // lowercase
+                            ToLower(ref strArray[mid]); // lowercase
+                        } else {
+                            lastIndex--;
+                            ToLower(ref strArray[i]); // lowercase
+                            ToLower(ref strArray[lastIndex]); // lowercase
+                        }
+                    }
+                    finalizedArray[finalIndex++] = new string(strArray);
+
+                }
+                var output = string.Join(" ", finalizedArray);
+                finalizedArray = null;
+                list = null;
+                GC.Collect();
+                return output;
+
+            }
+            return title;
+        }
         
         #region Generate Valid
 
@@ -1135,9 +1184,9 @@ namespace WereViewApp.WereViewAppCommon {
             checkAgain:
                 bool exist = false;
                 if (currentAppId < 1) {
-                    exist = db.Apps.Any(n => n.PlatformVersion == platformVersion && n.CategoryID == categoryId && n.URL == title && n.PlatformID == platformId);
+                    exist = db.Apps.Any(n => n.PlatformVersion == platformVersion && n.CategoryID == categoryId && n.Url == title && n.PlatformID == platformId);
                 } else {
-                    exist = db.Apps.Any(n => n.AppID != currentAppId && n.PlatformVersion == platformVersion && n.CategoryID == categoryId && n.URL == title && n.PlatformID == platformId);
+                    exist = db.Apps.Any(n => n.AppID != currentAppId && n.PlatformVersion == platformVersion && n.CategoryID == categoryId && n.Url == title && n.PlatformID == platformId);
                 }
 
                 if (exist) {
@@ -1677,7 +1726,6 @@ namespace WereViewApp.WereViewAppCommon {
             cacheManager.RemoveItems(controllerName, action, routes);
         }
         #endregion
-
 
         #region Remove Cache
 

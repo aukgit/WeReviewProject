@@ -14,6 +14,7 @@ using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.Role;
 using WereViewApp.Modules.Session;
 using WereViewApp.Modules.UserError;
+using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Modules.DevUser {
     public class UserManager {
@@ -343,9 +344,9 @@ namespace WereViewApp.Modules.DevUser {
 
         public static ApplicationUser GetUserFromViewModel(RegisterViewModel model) {
             var user = new ApplicationUser {
-                UserName = model.UserName,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
+                UserName = Algorithms.GetAllUpperCaseTitle(model.UserName),
+                FirstName = Algorithms.GetAllUpperCaseTitle(model.FirstName),
+                LastName = Algorithms.GetAllUpperCaseTitle(model.LastName),
                 Email = model.Email,
                 //DateOfBirth = model.DateOfBirth,
                 CreatedDate = DateTime.Now,
