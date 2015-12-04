@@ -37,6 +37,8 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
                 } else if (gallery.GalleryCategoryID == GalleryCategoryIDs.Advertise) {
                     location = WereViewStatics.UProcessorAdvertiseImages.GetCombinationOfRootAndAdditionalRoot();
 
+                } else if (gallery.GalleryCategoryID == GalleryCategoryIDs.YoutubeCoverImage) {
+                    location = WereViewStatics.UProcessorYoutubeCover.GetCombinationOfRootAndAdditionalRoot();
                 }
 
 
@@ -60,6 +62,8 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
                 } else if (categoryId == GalleryCategoryIDs.Advertise) {
                     location = WereViewStatics.UProcessorAdvertiseImages.GetCombinationOfRootAndAdditionalRoot();
 
+                } else if (categoryId == GalleryCategoryIDs.YoutubeCoverImage) {
+                    location = WereViewStatics.UProcessorYoutubeCover.GetCombinationOfRootAndAdditionalRoot();
                 }
             }
 

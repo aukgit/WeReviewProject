@@ -979,10 +979,10 @@ namespace WereViewApp.WereViewAppCommon {
                         ReadVirtualFields(app);
                         
                         
-                        // adding gallery images with app
+                        // injecting gallery images location inside the app
                         GetEmbedGalleryImagesWithCurrentApp(app, db);
-                        // add youtube cover.
-                        GetEmbedImagesWithApp()
+                        // add youtube cover image location inject.
+                        GetEmbedImagesWithApp(ref app, db, 1, GalleryCategoryIDs.YoutubeCoverImage);
 
                         // clear few old cache if close overflowing
                         if (CommonVars.StaticAppsList.Count > 795) {
@@ -1391,7 +1391,38 @@ namespace WereViewApp.WereViewAppCommon {
         #endregion
 
         #region Any Image Embed.
+        /// <summary>
+        /// Don't work for App Gallery, Gallery Thumb.
+        /// GalleryCategoryIDs.HomePageFeatured
+        /// GalleryCategoryIDs.HomePageIcon
+        /// GalleryCategoryIDs.SearchIcon
+        /// GalleryCategoryIDs.SuggestionIcon
+        /// GalleryCategoryIDs.YoutubeCoverImage
+        /// </summary>
+        /// <param name="apps"></param>
+        /// <param name="db"></param>
+        /// <param name="totalTakeCount"></param>
+        /// <param name="categoryId">
+        /// if (tempApp != null) {
+        ///    if (categoryId == GalleryCategoryIDs.HomePageFeatured) {
+        ///        tempApp.HomeFeaturedBigImageLocation = location;
+        ///    } else if (categoryId == GalleryCategoryIDs.HomePageIcon) {
+        ///        tempApp.HomePageIconLocation = location;
+        ///    } else if (categoryId == GalleryCategoryIDs.SearchIcon) {
+        ///        tempApp.SearchIconLocation = location;
+        ///    } else if (categoryId == GalleryCategoryIDs.SuggestionIcon) {
+        ///        tempApp.SuggestionIconLocation = location;
+        ///    } else if (categoryId == GalleryCategoryIDs.YoutubeCoverImage) {
+        ///        tempApp.YoutubeCoverImageLocation = location;
+        ///    }
+        /// }    
+        /// </param>
 
+        public void GetEmbedImagesWithApp(ref App app, WereViewAppEntities db, int totalTakeCount, int categoryId) {
+            var list = new List<App>(1);
+            list.Add(app);
+            GetEmbedImagesWithApp(list, db, totalTakeCount, categoryId);
+        }
         /// <summary>
         /// Don't work for App Gallery, Gallery Thumb.
         /// GalleryCategoryIDs.HomePageFeatured
