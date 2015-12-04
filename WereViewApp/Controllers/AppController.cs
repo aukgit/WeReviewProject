@@ -53,7 +53,7 @@ namespace WereViewApp.Controllers {
         /// <returns></returns>
         [AllowAnonymous]
         [OutputCache(CacheProfile = "Short", VaryByParam = "platform;platformVersion;category;url")]
-        public ActionResult SingleAppDisplay(string platform, float platformVersion, string category, string url) {
+        public async Task<ActionResult> SingleAppDisplay(string platform, float platformVersion, string category, string url) {
             var app = _algorithms.GetSingleAppForDisplay(platform, platformVersion, category, url, 30, db);
             if (app != null) {
                 _algorithms.IncreaseViewCount(app, db);
@@ -346,32 +346,31 @@ namespace WereViewApp.Controllers {
         /// </summary>
         /// <param name="appId"></param>
         /// <param name="uploadGuid"></param>
-        /// <param name="tagString"></param>
+        /// <param name="tagString">Given tag list as comma separated value.</param>
         private void ManageTagsInDatabase(long appId, Guid uploadGuid, string tagString) {
             new Thread(() => {
                 if (!string.IsNullOrWhiteSpace(tagString)) {
                     using (var db2 = new WereViewAppEntities()) {
-                        var tags = tagString.Split(";,".ToCharArray());
-                        foreach (var tag in tags) {
-                            // remove any previous tag relation with this app.
-                            // removing
-                            db2.Database.ExecuteSqlCommand("DELETE FROM  TagAppRelation WHERE AppID=@p0", appId);
-
+                        // remove any previous tag relation with this app.
+                        // remove all previous tag relation-ship with this app.
+                        db2.Database.ExecuteSqlCommand("DELETE FROM TagAppRelation WHERE AppID=@p0", appId);
+                        var tagsList = tagString.Split(";,".ToCharArray());
+                        foreach (var tag in tagsList) {
                             var tagFromDatabase = db2.Tags.FirstOrDefault(n => n.TagDisplay == tag);
                             if (tagFromDatabase == null) {
                                 // creating tag
                                 // if tag not exist in the database then create one.
                                 tagFromDatabase = new Tag {
-                                    TagDisplay = tag.Trim()
+                                    TagDisplay = Algorithms.GetAllUpperCaseTitle(tag.Trim()),
                                 };
                                 db2.Tags.Add(tagFromDatabase);
                             }
 
-                            db2.SaveChanges();
+                            //db2.SaveChanges(); //remove this for testing if works
 
                             // add tag relation with this app
                             var newTagRel = new TagAppRelation();
-                            newTagRel.TagID = tagFromDatabase.TagID;
+                            //newTagRel.TagID = tagFromDatabase.TagID; // may not need to bind the tags id because it will be done by EF
                             newTagRel.AppID = appId;
                             tagFromDatabase.TagAppRelations.Add(newTagRel);
                             db2.SaveChanges();

@@ -4,6 +4,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using DevMvcComponent.Pagination;
 using WereViewApp.Models.EntityModel;
@@ -165,15 +167,15 @@ namespace WereViewApp.WereViewAppCommon {
                 db = new WereViewAppEntities();
             }
             var topDeveloperNames = GetViewableApps(db)
-                            .Include(n=> n.User)
+                            .Include(n => n.User)
                             .Select(n => new {
                                 username = n.User.UserName
                             })
                             .GroupBy(n => n.username)
                             .Select(app => new { Username = app.Key, Count = app.Count() })
-                            .OrderByDescending(n=> n.Count)
+                            .OrderByDescending(n => n.Count)
                             .Take(topDevelopersLimit)
-                            .Select(n=> n.Username)
+                            .Select(n => n.Username)
                             .ToList();
 
             return topDeveloperNames;
@@ -915,12 +917,13 @@ namespace WereViewApp.WereViewAppCommon {
                                         n.PlatformID == platformId &&
                                         n.CategoryID == categoryId);
 
-                    // found in  the static cache.
                     if (app != null) {
+                        // app found in  the static cache.
                         var appId = app.AppID;
                         app.Category = categoryO;
                         app.Platform = platformO;
                         if (UserManager.IsAuthenticated()) {
+                            // if current user is rated this app , then put the rating in the CurrentUserRatedAppValue 
                             var userId = UserManager.GetLoggedUserId();
 
                             var currentUserRated =
@@ -940,8 +943,7 @@ namespace WereViewApp.WereViewAppCommon {
                         LoadReviewAndThenReviewLikeDislikesIntoApp(app, 0, maxReviewLoad, db);
                         return app;
                     }
-                    // app not found.
-                    // search in db
+                    // app not found in cache so search in db:
                     app = GetViewableApps(db) //means not blocked and published
                             .Include(n => n.User)
                             .FirstOrDefault(n =>
@@ -949,6 +951,7 @@ namespace WereViewApp.WereViewAppCommon {
                             n.PlatformID == platformId &&
                             n.CategoryID == categoryId);
                     if (app != null) {
+                        // app  found in db.
                         app.Category = categoryO;
                         app.Platform = platformO;
                         app.YoutubeEmbedLink = GetRawIframeString(app.YoutubeEmbedLink);
@@ -972,9 +975,14 @@ namespace WereViewApp.WereViewAppCommon {
                                 app.CurrentUserRatedAppValue = null;
                             }
                         }
+                        // read app virtual fields, like tags as string and so on
                         ReadVirtualFields(app);
+                        
+                        
                         // adding gallery images with app
                         GetEmbedGalleryImagesWithCurrentApp(app, db);
+                        // add youtube cover.
+                        GetEmbedImagesWithApp()
 
                         // clear few old cache if close overflowing
                         if (CommonVars.StaticAppsList.Count > 795) {
@@ -1022,14 +1030,19 @@ namespace WereViewApp.WereViewAppCommon {
 
         #region Increase App View Count
 
-        public bool IncreaseViewCount(App app, WereViewAppEntities db) {
+        /// <summary>
+        /// Increases the app view count.
+        /// Threaded method, make sure running from async Action
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public void IncreaseViewCount(App app, WereViewAppEntities db) {
             var appid = app.AppID;
-            int i = db.Database.ExecuteSqlCommand("UPDATE APP SET TotalViewed = TotalViewed+1 WHERE AppID = @p0", appid);
-            if (i > 0) {
-                app.TotalViewed += 1;
-                return true;
-            }
-            return false;
+            new Thread(() => {
+                db.Database.ExecuteSqlCommand("UPDATE APP SET TotalViewed = TotalViewed+1 WHERE AppID = @p0", appid);
+            }).Start();
+            app.TotalViewed += 1;
         }
 
         #endregion
@@ -1163,7 +1176,7 @@ namespace WereViewApp.WereViewAppCommon {
             }
             return title;
         }
-        
+
         #region Generate Valid
 
         /// <summary>
@@ -1381,6 +1394,11 @@ namespace WereViewApp.WereViewAppCommon {
 
         /// <summary>
         /// Don't work for App Gallery, Gallery Thumb.
+        /// GalleryCategoryIDs.HomePageFeatured
+        /// GalleryCategoryIDs.HomePageIcon
+        /// GalleryCategoryIDs.SearchIcon
+        /// GalleryCategoryIDs.SuggestionIcon
+        /// GalleryCategoryIDs.YoutubeCoverImage
         /// </summary>
         /// <param name="apps"></param>
         /// <param name="db"></param>
@@ -1395,6 +1413,8 @@ namespace WereViewApp.WereViewAppCommon {
         ///        tempApp.SearchIconLocation = location;
         ///    } else if (categoryId == GalleryCategoryIDs.SuggestionIcon) {
         ///        tempApp.SuggestionIconLocation = location;
+        ///    } else if (categoryId == GalleryCategoryIDs.YoutubeCoverImage) {
+        ///        tempApp.YoutubeCoverImageLocation = location;
         ///    }
         /// }    
         /// </param>
@@ -1405,7 +1425,7 @@ namespace WereViewApp.WereViewAppCommon {
                 if (guidsStringList == "") {
                     return;
                 }
-                string sql = string.Format("SELECT * FROM Gallery WHERE UploadGuid IN ({0}) AND GalleryCategoryID ={1}", guidsStringList, categoryId);
+                string sql = string.Format("SELECT TOP " + totalTakeCount + " * FROM Gallery WHERE UploadGuid IN ({0}) AND GalleryCategoryID ={1}", guidsStringList, categoryId);
                 if (string.IsNullOrEmpty(guidsStringList)) {
                     return;
                 }
@@ -1425,6 +1445,8 @@ namespace WereViewApp.WereViewAppCommon {
                             tempApp.SearchIconLocation = location;
                         } else if (categoryId == GalleryCategoryIDs.SuggestionIcon) {
                             tempApp.SuggestionIconLocation = location;
+                        } else if (categoryId == GalleryCategoryIDs.YoutubeCoverImage) {
+                            tempApp.YoutubeCoverImageLocation = location;
                         }
                     }
                 }
