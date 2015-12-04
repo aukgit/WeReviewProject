@@ -15,15 +15,15 @@
                     <i class="fa fa-play-circle-o"></i>
                     <img class="img-responsive" src="@Model.YoutubeCoverImageLocation" alt="@Model.AppName Youtube video cover">
                 </a>
-                @Html.Raw(Model.YoutubeEmbedLink)
-                <!--<iframe src="https://www.youtube.com/embed/zyk4jAiffRk" frameborder="0" allowfullscreen></iframe>-->
+                @*@Html.Raw(Model.YoutubeEmbedLink)*@
+                <iframe src="https://www.youtube.com/embed/zyk4jAiffRk" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
     }
     @for (i = 0; i < length; i++) {
         var imageDisplay = Model.AppDetailsGalleryImages[i];
         <div>
-            <img itemprop="image" class="img-responsive" src="@imageDisplay.GalleryImageLocation" alt="@imageDisplay.Title">
+            <img itemprop="image" class="img-responsive" src="@imageDisplay.GalleryImageLocation" alt="@imageDisplay.Title - app @Model.AppName">
         </div>
     }
 </div>
