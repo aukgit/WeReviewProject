@@ -1,0 +1,2 @@
+﻿Update-Database -Force -ConfigurationTypeName WereViewApp.Models.Migrations.DevIdentity.Configuration
+Update-Database -Force -ConfigurationTypeName WereViewApp.Models.Migrations.Indentity.Configuration

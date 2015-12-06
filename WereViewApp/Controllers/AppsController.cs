@@ -7,7 +7,6 @@ using System.Web.Mvc;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.WereViewAppCommon;
 
-
 #endregion
 
 namespace WereViewApp.Controllers {

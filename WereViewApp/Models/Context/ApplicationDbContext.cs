@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Data.Entity;
-using WereViewApp.Models.POCO.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using WereViewApp.Models.POCO.IdentityCustomization;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using Microsoft.AspNet.Identity.EntityFramework;
+using WereViewApp.Models.POCO.Identity;
+using WereViewApp.Models.POCO.IdentityCustomization;
+
 namespace WereViewApp.Models.Context {
 
     #region Application DbContext
@@ -13,7 +14,7 @@ namespace WereViewApp.Models.Context {
         #region Required Part
         public ApplicationDbContext()
             : base("DefaultConnection") {
-            this.Configuration.LazyLoadingEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
@@ -68,6 +69,7 @@ namespace WereViewApp.Models.Context {
             modelBuilder.Entity<ApplicationUser>()
                 .Property(n => n.PhoneNumber)
                 .IsUnicode(false)
+                .IsOptional()
                 .HasMaxLength(30);
 
             modelBuilder.Entity<ApplicationUser>()
@@ -102,6 +104,7 @@ namespace WereViewApp.Models.Context {
 
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<FeedbackCategory> FeedbackCategories { get; set; }
+        public DbSet<FeedbackAppReviewRelation> FeedbackAppReviewRelations { get; set; }
         public DbSet<TempUserRoleRelation> TempUserRoleRelations { get; set; }
 
 

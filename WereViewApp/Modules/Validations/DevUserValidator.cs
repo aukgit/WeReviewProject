@@ -3,7 +3,6 @@ using System.Linq;
 using DevMvcComponent.Error;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.UserError;
 
 namespace WereViewApp.Modules.Validations {
@@ -12,7 +11,7 @@ namespace WereViewApp.Modules.Validations {
         private readonly ApplicationDbContext db;
 
         public DevUserValidator(RegisterViewModel viewMdoel, ErrorCollector errorCollector, ApplicationDbContext dbContext)
-            : base(errorCollector: errorCollector) {
+            : base(errorCollector) {
             _viewMdoel = viewMdoel;
             db = dbContext;
         }
@@ -48,38 +47,38 @@ namespace WereViewApp.Modules.Validations {
         /// Validate Language
         /// </summary>
         /// <returns></returns>
-        public bool LanguageValidate() {
-            var languages = CachedQueriedData.GetLanguages(_viewMdoel.CountryID, 0);
-            if (languages == null) {
-                //select English as default.
-                _viewMdoel.CountryLanguageID = CachedQueriedData.GetDefaultLanguage().CountryLanguageID;
-            } else if (languages.Count > 1) {
-                //it should be selected inside the register panel.
-                ErrorCollector.AddMedium("You forgot you set your language.");
-                return false;
-            } else if (languages.Count == 1) {
-                _viewMdoel.CountryLanguageID = languages[0].CountryLanguageID;
-            }
+        //public bool LanguageValidate() {
+        //    var languages = CachedQueriedData.GetLanguages(_viewMdoel.CountryID, 0);
+        //    if (languages == null) {
+        //        //select English as default.
+        //        _viewMdoel.CountryLanguageID = CachedQueriedData.GetDefaultLanguage().CountryLanguageID;
+        //    } else if (languages.Count > 1) {
+        //        //it should be selected inside the register panel.
+        //        ErrorCollector.AddMedium("You forgot you set your language.");
+        //        return false;
+        //    } else if (languages.Count == 1) {
+        //        _viewMdoel.CountryLanguageID = languages[0].CountryLanguageID;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
 
-        public bool TimezoneValidate() {
-            var timezones = CachedQueriedData.GetTimezones(_viewMdoel.CountryID, 0);
-            if (timezones != null && timezones.Count > 1) {
-                //it should be selected inside the register panel.
-                ErrorCollector.AddMedium("You forgot you set your time zone.");
-                return false;
-            } else if (timezones != null && timezones.Count == 1) {
-                _viewMdoel.UserTimeZoneID = timezones[0].UserTimeZoneID;
-                return true;
-            } else {
-                ErrorCollector.AddMedium(
-                    "You time zone not found. Please contact with admin and notify him/her about the issue to notify developer.");
-            }
-            return false;
-        }
+        //public bool TimezoneValidate() {
+        //    var timezones = CachedQueriedData.GetTimezones(_viewMdoel.CountryID, 0);
+        //    if (timezones != null && timezones.Count > 1) {
+        //        //it should be selected inside the register panel.
+        //        ErrorCollector.AddMedium("You forgot you set your time zone.");
+        //        return false;
+        //    } else if (timezones != null && timezones.Count == 1) {
+        //        _viewMdoel.UserTimeZoneID = timezones[0].UserTimeZoneID;
+        //        return true;
+        //    } else {
+        //        ErrorCollector.AddMedium(
+        //            "You time zone not found. Please contact with admin and notify him/her about the issue to notify developer.");
+        //    }
+        //    return false;
+        //}
         #region Overrides of Validator
 
         /// <summary>
@@ -89,8 +88,8 @@ namespace WereViewApp.Modules.Validations {
         /// </summary>
         public override void CollectValidation() {
             AddValidation(RegisterCodeValidate);
-            AddValidation(LanguageValidate);
-            AddValidation(TimezoneValidate);
+            //AddValidation(LanguageValidate);
+            //AddValidation(TimezoneValidate);
         }
 
         #endregion

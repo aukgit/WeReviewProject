@@ -45,7 +45,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
-    <IncludeIisSettings>true</IncludeIisSettings>
+    <IncludeIisSettings>false</IncludeIisSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -71,8 +71,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
     </Reference>
-    <Reference Include="Elmah.Mvc">
-      <HintPath>..\packages\Elmah.MVC.2.1.1\lib\net40\Elmah.Mvc.dll</HintPath>
+    <Reference Include="Elmah.Mvc, Version=2.1.2.1389, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elmah.Mvc.2.1.2\lib\net40\Elmah.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -233,6 +234,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AppVar.cs" />
     <Compile Include="Areas\Admin\Controllers\ServicesController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\GenericController.cs" />
@@ -287,7 +289,7 @@
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\AppsController.cs" />
     <Compile Include="Controllers\PartialsController.cs" />
-    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Models\EntityModel\Derivables\IApp.cs">
@@ -311,7 +313,6 @@
     <Compile Include="Models\ViewModels\SearchViewModel.cs" />
     <Compile Include="Modules\Reponse\RemoveETagModule.cs" />
     <Compile Include="Modules\StringExtension.cs" />
-    <Compile Include="Controllers\ViewTestController.cs" />
     <Compile Include="WereViewAppCommon\Structs\CommonVars.cs" />
     <Compile Include="WereViewAppCommon\WereViewStatics.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -337,7 +338,7 @@
     <Compile Include="Models\CustomQuery\CommonQueriesWereViewApp.cs" />
     <Compile Include="Models\DesignPattern\Interfaces\IDevUserRole.cs" />
     <Compile Include="Models\DesignPattern\Interfaces\IDevUser.cs" />
-    <Compile Include="Models\EntityModel\Context\WereViewAppEntities.cs" />
+    <Compile Include="Models\Context\WereViewAppEntities.cs" />
     <Compile Include="Models\EntityModel\POCO\App.cs" />
     <Compile Include="Models\EntityModel\POCO\AppDraft.cs" />
     <Compile Include="Models\EntityModel\POCO\Category.cs" />
@@ -449,17 +450,25 @@
     <Content Include="Areas\Admin\Views\Config\_WeReview-tab.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="CodeNotes.txt" />
     <Content Include="Content\css\animate-refresh.css" />
     <Content Include="Content\css\animate-refresh.css.map">
       <DependentUpon>animate-refresh.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\animate-refresh.min.css" />
     <Content Include="Content\css\animate.min.css" />
+    <Content Include="Content\css\backend-developer.css" />
+    <Content Include="Content\css\backend-developer.min.css">
+      <DependentUpon>backend-developer.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\base-theme-styles.css" />
     <Content Include="Content\css\blog-page.css" />
+    <Content Include="Content\css\blog-page.min.css" />
     <Content Include="Content\css\bootstrap-datetimepicker.css" />
     <Content Include="Content\css\bootstrap-datetimepicker.css.map">
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\css\bootstrap-select.css" />
     <Content Include="Content\css\bootstrap-select.min.css">
       <DependentUpon>bootstrap-select.css</DependentUpon>
@@ -475,6 +484,7 @@
     <Content Include="Content\css\category-page.css.map">
       <DependentUpon>category-page.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\category-page.min.css" />
     <Content Include="Content\css\color-fonts.css" />
     <Content Include="Content\css\color-fonts.min.css">
       <DependentUpon>color-fonts.css</DependentUpon>
@@ -483,10 +493,6 @@
     <Content Include="Content\css\editor-templates.css" />
     <Content Include="Content\css\editor-templates.min.css">
       <DependentUpon>editor-templates.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\editor-templates.variables.css" />
-    <Content Include="Content\css\editor-templates.variables.min.css">
-      <DependentUpon>editor-templates.variables.css</DependentUpon>
     </Content>
     <Content Include="Content\css\flags32-combo.css" />
     <Content Include="Content\css\flags32.css" />
@@ -497,6 +503,7 @@
     <Content Include="Content\css\footer-fixing.css.map">
       <DependentUpon>footer-fixing.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\footer-fixing.min.css" />
     <Content Include="Content\css\front-developer.css" />
     <Content Include="Content\css\front-developer.css.map">
       <DependentUpon>front-developer.css</DependentUpon>
@@ -512,10 +519,12 @@
     <Content Include="Content\css\less-imports.css.map">
       <DependentUpon>less-imports.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\less-imports.min.css" />
     <Content Include="Content\css\menu-fix.css" />
     <Content Include="Content\css\menu-fix.css.map">
       <DependentUpon>menu-fix.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\menu-fix.min.css" />
     <Content Include="Content\css\miscellaneous.css" />
     <Content Include="Content\css\override-mvc.css" />
     <Content Include="Content\css\override-mvc.css.map">
@@ -532,15 +541,19 @@
     <Content Include="Content\css\responsive.css.map">
       <DependentUpon>responsive.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\responsive.min.css" />
     <Content Include="Content\css\search-page.css" />
     <Content Include="Content\css\search-page.css.map">
       <DependentUpon>search-page.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\search-page.min.css" />
     <Content Include="Content\css\see-more-btn.css" />
+    <Content Include="Content\css\see-more-btn.min.css" />
     <Content Include="Content\css\seo-optimize.css" />
     <Content Include="Content\css\seo-optimize.css.map">
       <DependentUpon>seo-optimize.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\seo-optimize.min.css" />
     <Content Include="Content\css\Site.css" />
     <Content Include="Content\css\star-rating.css" />
     <Content Include="Content\css\style.css" />
@@ -711,9 +724,159 @@
       <DependentUpon>editor-templates.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\bootstrap-tagsinput.less" />
-    <Content Include="Content\css\editor-templates.variables.css.map">
-      <DependentUpon>editor-templates.variables.css</DependentUpon>
+    <Content Include="Content\Less\backend-developer.less" />
+    <Content Include="Content\css\backend-developer.css.map">
+      <DependentUpon>backend-developer.css</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Feedbacks\Done.cshtml" />
+    <Content Include="Uploads\Images\Advertise\5e324a00-977d-4436-8a15-3ce9e1c424f1-0.jpg" />
+    <Content Include="Uploads\Images\Advertise\7fcf1b26-c1e0-4327-ba7f-29d5fd55bd25-0.jpg" />
+    <Content Include="Uploads\Images\Advertise\be78fe90-0932-44c6-8cd1-816b35d6d232-0.jpg" />
+    <Content Include="Uploads\Images\avatar.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-1.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-2.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-3.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-4.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-5.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-1.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-2.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-3.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-4.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-5.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-6.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-7.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-1.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-2.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-3.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-4.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-5.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-6.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-7.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-8.jpg" />
+    <Content Include="Uploads\Images\Gallery\0598bc1d-9b8e-4634-8bb6-31942a7ad68a-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-2.jpg" />
+    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-3.jpg" />
+    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-4.jpg" />
+    <Content Include="Uploads\Images\Gallery\0f759dc0-b939-480e-82a5-6133aa3bcc3d-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-2.jpg" />
+    <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-3.jpg" />
+    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-2.jpg" />
+    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-3.jpg" />
+    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-4.jpg" />
+    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-5.jpg" />
+    <Content Include="Uploads\Images\Gallery\53be2a3e-8cff-49c7-88b4-158b252969b2-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\55d3b71c-cafe-4f68-a2e8-32a8df8f922c-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\5dc57933-5c3d-4b94-9d30-0a311418037e-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\61dd3da2-07e9-4863-ac61-50930156905e-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\6f363a57-2094-4d3a-9252-ae2e2a76a97b-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\807eeca9-35fe-4899-89e0-079449e1b6db-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-2.jpg" />
+    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-3.jpg" />
+    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-4.jpg" />
+    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-5.jpg" />
+    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-6.jpg" />
+    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-7.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-2.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-3.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-4.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-5.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-6.jpg" />
+    <Content Include="Uploads\Images\Gallery\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-2.jpg" />
+    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-3.jpg" />
+    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-4.jpg" />
+    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-5.jpg" />
+    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-6.jpg" />
+    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-7.jpg" />
+    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-8.jpg" />
+    <Content Include="Uploads\Images\Gallery\e94520fd-50d7-43e2-95f4-699e2e156806-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\fa1595d4-da44-4205-b3dd-6b6e524866d0-1.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\0598bc1d-9b8e-4634-8bb6-31942a7ad68a-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\0f759dc0-b939-480e-82a5-6133aa3bcc3d-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\53be2a3e-8cff-49c7-88b4-158b252969b2-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\55d3b71c-cafe-4f68-a2e8-32a8df8f922c-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\61dd3da2-07e9-4863-ac61-50930156905e-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\6f363a57-2094-4d3a-9252-ae2e2a76a97b-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\807eeca9-35fe-4899-89e0-079449e1b6db-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\fa1595d4-da44-4205-b3dd-6b6e524866d0-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\0598bc1d-9b8e-4634-8bb6-31942a7ad68a-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\0f759dc0-b939-480e-82a5-6133aa3bcc3d-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\53be2a3e-8cff-49c7-88b4-158b252969b2-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\55d3b71c-cafe-4f68-a2e8-32a8df8f922c-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\6f363a57-2094-4d3a-9252-ae2e2a76a97b-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\807eeca9-35fe-4899-89e0-079449e1b6db-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\fa1595d4-da44-4205-b3dd-6b6e524866d0-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\0598bc1d-9b8e-4634-8bb6-31942a7ad68a-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\0f759dc0-b939-480e-82a5-6133aa3bcc3d-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\53be2a3e-8cff-49c7-88b4-158b252969b2-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\55d3b71c-cafe-4f68-a2e8-32a8df8f922c-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\6f363a57-2094-4d3a-9252-ae2e2a76a97b-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\807eeca9-35fe-4899-89e0-079449e1b6db-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\fa1595d4-da44-4205-b3dd-6b6e524866d0-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\0598bc1d-9b8e-4634-8bb6-31942a7ad68a-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\0f759dc0-b939-480e-82a5-6133aa3bcc3d-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\53be2a3e-8cff-49c7-88b4-158b252969b2-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\55d3b71c-cafe-4f68-a2e8-32a8df8f922c-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\6f363a57-2094-4d3a-9252-ae2e2a76a97b-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\807eeca9-35fe-4899-89e0-079449e1b6db-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\fa1595d4-da44-4205-b3dd-6b6e524866d0-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\0598bc1d-9b8e-4634-8bb6-31942a7ad68a-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\0f759dc0-b939-480e-82a5-6133aa3bcc3d-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\53be2a3e-8cff-49c7-88b4-158b252969b2-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\55d3b71c-cafe-4f68-a2e8-32a8df8f922c-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\6f363a57-2094-4d3a-9252-ae2e2a76a97b-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\807eeca9-35fe-4899-89e0-079449e1b6db-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.png" />
+    <Content Include="Uploads\Images\YoutubeCovers\98648fe8-8672-43d4-9767-2869c12e14da-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\fa1595d4-da44-4205-b3dd-6b6e524866d0-0.jpg" />
+    <Content Include="WereViewApp.publish.xml" />
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />
@@ -799,7 +962,7 @@
     <Content Include="Areas\Admin\Views\Feedbacks\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Feedbacks\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Feedbacks\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Feedbacks\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Feedbacks\Reply.cshtml" />
     <Content Include="Areas\Admin\Views\Feedbacks\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
@@ -843,96 +1006,6 @@
     <Content Include="Styles\CompactCSS.min.css">
       <DependentUpon>CompactCSS.css</DependentUpon>
     </Content>
-    <Content Include="Uploads\Images\Advertise\5e324a00-977d-4436-8a15-3ce9e1c424f1-0.jpg" />
-    <Content Include="Uploads\Images\Advertise\7fcf1b26-c1e0-4327-ba7f-29d5fd55bd25-0.jpg" />
-    <Content Include="Uploads\Images\Advertise\be78fe90-0932-44c6-8cd1-816b35d6d232-0.jpg" />
-    <Content Include="Uploads\Images\avatar.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-1.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-2.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-3.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-4.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-5.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-1.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-2.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-3.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-4.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-5.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-6.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-7.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-1.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-2.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-3.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-4.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-5.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-6.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-7.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-8.jpg" />
-    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-1.jpg" />
-    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-2.jpg" />
-    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-3.jpg" />
-    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-4.jpg" />
-    <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-1.jpg" />
-    <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-2.jpg" />
-    <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-3.jpg" />
-    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-1.jpg" />
-    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-2.jpg" />
-    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-3.jpg" />
-    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-4.jpg" />
-    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-5.jpg" />
-    <Content Include="Uploads\Images\Gallery\5dc57933-5c3d-4b94-9d30-0a311418037e-1.jpg" />
-    <Content Include="Uploads\Images\Gallery\61dd3da2-07e9-4863-ac61-50930156905e-1.jpg" />
-    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-1.jpg" />
-    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-2.jpg" />
-    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-3.jpg" />
-    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-4.jpg" />
-    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-5.jpg" />
-    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-6.jpg" />
-    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-7.jpg" />
-    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-1.jpg" />
-    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-2.jpg" />
-    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-3.jpg" />
-    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-4.jpg" />
-    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-5.jpg" />
-    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-6.jpg" />
-    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-1.jpg" />
-    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-2.jpg" />
-    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-3.jpg" />
-    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-4.jpg" />
-    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-5.jpg" />
-    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-6.jpg" />
-    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-7.jpg" />
-    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-8.jpg" />
-    <Content Include="Uploads\Images\HomePageFeatured\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
-    <Content Include="Uploads\Images\HomePageFeatured\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
-    <Content Include="Uploads\Images\HomePageFeatured\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
-    <Content Include="Uploads\Images\HomePageFeatured\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
-    <Content Include="Uploads\Images\HomePageFeatured\61dd3da2-07e9-4863-ac61-50930156905e-0.jpg" />
-    <Content Include="Uploads\Images\HomePageFeatured\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
-    <Content Include="Uploads\Images\HomePageFeatured\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
-    <Content Include="Uploads\Images\HomePageFeatured\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
-    <Content Include="Uploads\Images\HomePageThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
-    <Content Include="Uploads\Images\HomePageThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
-    <Content Include="Uploads\Images\HomePageThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
-    <Content Include="Uploads\Images\HomePageThumbs\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
-    <Content Include="Uploads\Images\HomePageThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
-    <Content Include="Uploads\Images\HomePageThumbs\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
-    <Content Include="Uploads\Images\HomePageThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
-    <Content Include="Uploads\Images\SearchThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
-    <Content Include="Uploads\Images\SearchThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
-    <Content Include="Uploads\Images\SearchThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
-    <Content Include="Uploads\Images\SearchThumbs\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
-    <Content Include="Uploads\Images\SearchThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
-    <Content Include="Uploads\Images\SearchThumbs\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
-    <Content Include="Uploads\Images\SearchThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
-    <Content Include="Uploads\Images\SuggestionThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
-    <Content Include="Uploads\Images\SuggestionThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
-    <Content Include="Uploads\Images\SuggestionThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
-    <Content Include="Uploads\Images\SuggestionThumbs\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
-    <Content Include="Uploads\Images\SuggestionThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
-    <Content Include="Uploads\Images\SuggestionThumbs\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
-    <Content Include="Uploads\Images\SuggestionThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
-    <Content Include="Uploads\Images\YoutubeCovers\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
-    <Content Include="Uploads\Images\YoutubeCovers\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.png" />
     <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Byte.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
@@ -1051,7 +1124,6 @@
     <Content Include="Views\App\_AppEditButton.cshtml" />
     <Content Include="Views\Reviews\AlreadyReviewed.cshtml" />
     <Content Include="Views\Reviews\ReviewEdit.cshtml" />
-    <Content Include="Views\Shared\_ListOfApps.cshtml" />
     <Content Include="Views\Shared\_AppNotFound.cshtml" />
     <Content Include="Views\Shared\_LoginUrlPage.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\FileMulti.cshtml">
@@ -1059,9 +1131,9 @@
     </Content>
     <Content Include="Views\Partials\DevelopersApps.cshtml" />
     <Content Include="Views\Partials\SuggestedApps.cshtml" />
-    <Content Include="Views\Profile\GetProfile.cshtml" />
+    <Content Include="Views\Profiles\Profile.cshtml" />
     <Content Include="Views\Shared\_500.cshtml" />
-    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profiles\Index.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Category\Specific.cshtml" />
     <Content Include="Views\Shared\_403.cshtml" />
@@ -1103,11 +1175,24 @@
     <Content Include="Views\Report\AlreadyReported.cshtml" />
     <Content Include="Views\Report\Done.cshtml" />
     <Content Include="Views\Report\Later.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Reply.cshtml" />
+    <Content Include="Views\Home\Done.cshtml" />
+    <Content Include="Views\Home\Later.cshtml" />
+    <Content Include="Views\Account\InboxCheck.cshtml" />
+    <Content Include="Views\Reviews\ReviewOwnApp.cshtml" />
+    <Content Include="Views\Home\Policy.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Publish.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean-Button.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />
     <Content Include="Views\Shared\_431.cshtml" />
     <Content Include="Views\Shared\_414.cshtml" />
+    <Content Include="Views\Shared\_AdditionalFields.cshtml" />
+    <Content Include="Views\Shared\_BackSave.cshtml" />
+    <Content Include="Views\Shared\_BackSaveDelete.cshtml" />
+    <Content Include="Views\Shared\_BrowserUpdate.cshtml" />
+    <Content Include="Views\Shared\_Header-1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataCached\SearchResult\" />
@@ -1149,7 +1234,18 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:14809/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:14809/</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

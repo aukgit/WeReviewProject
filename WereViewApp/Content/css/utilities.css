@@ -725,6 +725,9 @@ div.contactus {
   background-color: white;
   cursor: text;
 }
+.controls-left-aligned .control-label {
+  text-align: left;
+}
 .regular-show-more-btn {
   clear: both;
 }

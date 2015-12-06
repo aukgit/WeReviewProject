@@ -116,7 +116,7 @@ namespace WereViewApp.Controllers {
         public JsonResult Like(long reviewId, long appId) {
             var userId = UserManager.GetLoggedUserId();
             var likeDislike = db.ReviewLikeDislikes.FirstOrDefault(n => n.ReviewID == reviewId && n.UserID == userId);
-            bool result = true;
+            var result = true;
             if (likeDislike == null) {
                 var like = new ReviewLikeDislike();
                 like.IsLiked = true;
@@ -153,7 +153,7 @@ namespace WereViewApp.Controllers {
         public JsonResult DisLike(long reviewId, long appId) {
             var userId = UserManager.GetLoggedUserId();
             var likeDislike = db.ReviewLikeDislikes.FirstOrDefault(n => n.ReviewID == reviewId && n.UserID == userId);
-            bool result = true;
+            var result = true;
 
             if (likeDislike == null) {
                 var like = new ReviewLikeDislike();
@@ -282,8 +282,11 @@ namespace WereViewApp.Controllers {
             if (!User.Identity.IsAuthenticated) {
                 return PartialView("_LoginUrlPage");
             }
-
             var userId = UserManager.GetLoggedUserId();
+            var isSameUser = db.Apps.Any(n => n.AppID == AppID && n.PostedByUserID == userId);
+            if (isSameUser) {
+                return View("ReviewOwnApp");
+            }
             var review = algorithms.GetUserReviewedApp(AppID, db);
             if (review == null) {
                 // not ever reviewed.

@@ -6,50 +6,51 @@
     }
 }
 <label id="notify-global-info-top" class="col-md-offset-2 label label-danger"></label>
-<div data-dev-slide="0" data-dev-visited="@ViewBag.ShowAllDivs">
-    <div id="server-validation-form">
+<div id="server-validation-form">
+    <div data-dev-slide="0" data-dev-visited="@ViewBag.ShowAllDivs">
         @ViewBag.token
         @Html.EditorFor(model => model.AppName, "String", new { url = @validatingUrl, isValidate = "true", data_submit_method = "post" })
-    </div>
-    <div id="app-url-link-wrapper" class="col-md-offset-2 app-url-display-wrapper">
-        <a id="app-url-link" class="app-url-display"><i class="fa fa-link"></i> <i id="app-url-spinner-icon" class="fa fa-refresh fa-spin-custom hide"></i> <span id="app-url-content">New url will be generated as soon as the title is entered.</span></a>
-    </div>
-    <div class="form-group PlatformID-main">
-        <div class="controls">
-            <label class="col-md-2 control-label">
-                @Html.DisplayNameFor(m => m.PlatformID)<span class="red">*</span>
-            </label>
-            <div class="col-md-10 PlatformID-combo-div">
-                @Html.DropDownList("PlatformID", null, new { @class = "form-control", data_style = "btn-success", data_live_search = true })
-                <a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m => m.PlatformID)." title="Please select @Html.DisplayNameFor(m => m.PlatformID)." class="tooltip-show">
-                    <span class="description-icon"></span>
-                </a>
+        <div id="app-url-link-wrapper" class="col-md-offset-2 app-url-display-wrapper">
+            <a id="app-url-link" class="app-url-display"><i class="fa fa-link"></i> <i id="app-url-spinner-icon" class="fa fa-refresh fa-spin-custom hide"></i> <span id="app-url-content">New url will be generated as soon as the title is entered.</span></a>
+        </div>
+        <div class="form-group PlatformID-main">
+            <div class="controls">
+                <label class="col-md-2 control-label">
+                    @Html.DisplayNameFor(m => m.PlatformID)<span class="red">*</span>
+                </label>
+                <div class="col-md-10 PlatformID-combo-div">
+                    @Html.DropDownList("PlatformID", null, new { @class = "form-control", data_style = "btn-success", data_live_search = true })
+                    <a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m => m.PlatformID)." title="Please select @Html.DisplayNameFor(m => m.PlatformID)." class="tooltip-show">
+                        <span class="description-icon"></span>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-    @Html.EditorFor(model => model.PlatformVersion, "Double")
-    <div class="CategoryID-main form-group">
-        <div class="controls">
-            <label class="col-md-2 control-label">
-                @Html.DisplayNameFor(m => m.CategoryID)<span class="red ">*</span>
-            </label>
-            <div class="CategoryID-combo-div col-md-10">
-                @Html.DropDownList("CategoryID", null, new { @class = "form-control", data_style = "btn-success", data_live_search = true })
-                <a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m => m.CategoryID)." title="Please select @Html.DisplayNameFor(m => m.CategoryID)." class="tooltip-show">
-                    <span class="description-icon"></span>
-                </a>
+        @Html.EditorFor(model => model.PlatformVersion, "Double")
+        <div class="CategoryID-main form-group">
+            <div class="controls">
+                <label class="col-md-2 control-label">
+                    @Html.DisplayNameFor(m => m.CategoryID)<span class="red ">*</span>
+                </label>
+                <div class="CategoryID-combo-div col-md-10">
+                    @Html.DropDownList("CategoryID", null, new { @class = "form-control", data_style = "btn-success", data_live_search = true })
+                    <a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m => m.CategoryID)." title="Please select @Html.DisplayNameFor(m => m.CategoryID)." class="tooltip-show">
+                        <span class="description-icon"></span>
+                    </a>
+                </div>
             </div>
         </div>
+        @Html.EditorFor(model => model.Tags, "tag", new { url = "/Partials/GetTags/" })
     </div>
-    @Html.EditorFor(model => model.Tags, "tag", new { url = "/Partials/GetTags/" })
+
     @Html.EditorFor(model => model.Description, "Multiline", new { @class = "big-multiline" })
 </div>
 
 <div data-dev-slide="1" data-dev-visited="@ViewBag.ShowAllDivs">
     @Html.EditorFor(model => model.ReleaseDate, "Date")
     @Html.EditorFor(model => model.YoutubeEmbedLink, new { @class = "url-input" })
-    @Html.EditorFor(model => model.WebSiteURL)
-    @Html.EditorFor(model => model.StoreURL)
+    @Html.EditorFor(model => model.WebsiteUrl)
+    @Html.EditorFor(model => model.StoreUrl)
 </div>
 @Html.HiddenFor(model => model.UploadGuid)
 <label id="notify-global-info-second" class="right-side-label col-md-offset-2 notify-global-info label label-danger"></label>

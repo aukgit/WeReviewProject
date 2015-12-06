@@ -11,10 +11,10 @@ using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.Role;
 using WereViewApp.Modules.Session;
 using WereViewApp.Modules.UserError;
+using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Modules.DevUser {
     public class UserManager {
@@ -65,31 +65,31 @@ namespace WereViewApp.Modules.DevUser {
             }
 
             //validation for country language
-            var languages = CachedQueriedData.GetLanguages(model.CountryID, 0);
-            if (languages == null) {
-                //select english as default.
-                model.CountryLanguageID = CachedQueriedData.GetDefaultLanguage().CountryLanguageID;
-            } else if (languages.Count > 1) {
-                //it should be selected inside the register panel.
-                ValidOtherConditions = !(model.CountryLanguageID == 0); //if zero then false.
-                errors.AddMedium("You forgot you set your language.");
-            } else if (languages.Count == 1) {
-                model.CountryLanguageID = languages[0].CountryLanguageID;
-            }
+            //var languages = CachedQueriedData.GetLanguages(model.CountryID, 0);
+            //if (languages == null) {
+            //    //select english as default.
+            //    model.CountryLanguageID = CachedQueriedData.GetDefaultLanguage().CountryLanguageID;
+            //} else if (languages.Count > 1) {
+            //    //it should be selected inside the register panel.
+            //    ValidOtherConditions = !(model.CountryLanguageID == 0); //if zero then false.
+            //    errors.AddMedium("You forgot you set your language.");
+            //} else if (languages.Count == 1) {
+            //    model.CountryLanguageID = languages[0].CountryLanguageID;
+            //}
 
-            //validation for country timzone
-            var timezones = CachedQueriedData.GetTimezones(model.CountryID, 0);
-            if (timezones != null && timezones.Count > 1) {
-                //it should be selected inside the register panel.
-                ValidOtherConditions = !(model.UserTimeZoneID == 0); //if zero then false.
-                errors.AddMedium("You forgot you set your time zone.");
-            } else if (timezones.Count == 1) {
-                model.UserTimeZoneID = timezones[0].UserTimeZoneID;
-            } else {
-                ValidOtherConditions = false;
-                errors.AddMedium(
-                    "You time zone not found. Please contact with admin and notify him/her about the issue to notify developer.");
-            }
+            ////validation for country timzone
+            //var timezones = CachedQueriedData.GetTimezones(model.CountryID, 0);
+            //if (timezones != null && timezones.Count > 1) {
+            //    //it should be selected inside the register panel.
+            //    ValidOtherConditions = !(model.UserTimeZoneID == 0); //if zero then false.
+            //    errors.AddMedium("You forgot you set your time zone.");
+            //} else if (timezones.Count == 1) {
+            //    model.UserTimeZoneID = timezones[0].UserTimeZoneID;
+            //} else {
+            //    ValidOtherConditions = false;
+            //    errors.AddMedium(
+            //        "You time zone not found. Please contact with admin and notify him/her about the issue to notify developer.");
+            //}
 
 
             if (!ValidOtherConditions) {
@@ -322,7 +322,7 @@ namespace WereViewApp.Modules.DevUser {
             if (user != null && user.Email != null && email != null && user.Email.ToLower() == email.ToLower()) {
                 return user;
             }
-            return user;
+            return null; //user will give invalid result, because it might the previous user which credentials doesn;t match.
         }
 
         public static ApplicationUser GetUserFromSession(string username) {
@@ -331,7 +331,7 @@ namespace WereViewApp.Modules.DevUser {
                 user.UserName.ToLower().Equals(username.ToLower())) {
                 return user;
             }
-            return user;
+            return null;
         }
 
         public static ApplicationUser GetUserFromSession(long userId) {
@@ -344,17 +344,17 @@ namespace WereViewApp.Modules.DevUser {
 
         public static ApplicationUser GetUserFromViewModel(RegisterViewModel model) {
             var user = new ApplicationUser {
-                UserName = model.UserName,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
+                UserName = Algorithms.GetAllUpperCaseTitle(model.UserName),
+                FirstName = Algorithms.GetAllUpperCaseTitle(model.FirstName),
+                LastName = Algorithms.GetAllUpperCaseTitle(model.LastName),
                 Email = model.Email,
-                DateOfBirth = model.DateOfBirth,
+                //DateOfBirth = model.DateOfBirth,
                 CreatedDate = DateTime.Now,
                 EmailConfirmed = false,
                 PhoneNumber = model.Phone,
-                CountryID = model.CountryID,
-                CountryLanguageID = model.CountryLanguageID,
-                UserTimeZoneID = model.UserTimeZoneID,
+                //CountryID = model.CountryID,
+                //CountryLanguageID = model.CountryLanguageID,
+                //UserTimeZoneID = model.UserTimeZoneID,
                 IsRegistrationComplete = false,
                 GeneratedGuid = Guid.NewGuid()
             };

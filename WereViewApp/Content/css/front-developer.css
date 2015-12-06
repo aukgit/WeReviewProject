@@ -1562,4 +1562,13 @@ q:after {
 .blog-page-private .white-wrapper-background .seo-app-name em {
   text-decoration: inherit;
 }
+.page-header h1,
+.page-header small {
+  color: black;
+  display: inline-block;
+}
+.page-header h1 {
+  font-size: 2.2em;
+  padding-right: 5px;
+}
 /*# sourceMappingURL=front-developer.css.map */

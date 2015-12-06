@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WereViewApp.Models.POCO.IdentityCustomization {
     public class Navigation {
         [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
         public int NavigationID { get; set; }
         /// <summary>
