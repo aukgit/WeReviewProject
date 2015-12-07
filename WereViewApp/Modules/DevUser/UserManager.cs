@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using DevMvcComponent.Error;
@@ -104,7 +105,7 @@ namespace WereViewApp.Modules.DevUser {
 
         public void LinkUserWithRegistrationCode(ApplicationUser user, Guid code) {
             if (user != null) {
-                var relation = new RegisterCodeUserRelation {UserID = user.Id, RegisterCodeUserRelationID = code};
+                var relation = new RegisterCodeUserRelation { UserID = user.Id, RegisterCodeUserRelationID = code };
                 using (var db = new ApplicationDbContext()) {
                     db.RegisterCodeUserRelations.Add(relation);
                     db.SaveChanges();
@@ -228,10 +229,8 @@ namespace WereViewApp.Modules.DevUser {
 
         private static ApplicationUserManager _userManager;
 
-        public static ApplicationUserManager Manager
-        {
-            get
-            {
+        public static ApplicationUserManager Manager {
+            get {
                 return _userManager ?? HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
             private set { _userManager = value; }
@@ -308,11 +307,11 @@ namespace WereViewApp.Modules.DevUser {
         public static ApplicationUser GetUserFromSession() {
             var userSession = HttpContext.Current.Session[SessionNames.User];
             if (userSession != null) {
-                return (ApplicationUser) userSession;
+                return (ApplicationUser)userSession;
             }
             userSession = HttpContext.Current.Session[SessionNames.LastUser];
             if (userSession != null) {
-                return (ApplicationUser) userSession;
+                return (ApplicationUser)userSession;
             }
             return null;
         }
@@ -388,9 +387,9 @@ namespace WereViewApp.Modules.DevUser {
         public static long GetLoggedUserId() {
             if (HttpContext.Current.User.Identity.IsAuthenticated) {
                 //ApplicationUser user = null;
-                var userid = (long?) HttpContext.Current.Session[SessionNames.UserID];
+                var userid = (long?)HttpContext.Current.Session[SessionNames.UserID];
                 if (userid != null) {
-                    return (long) userid;
+                    return (long)userid;
                 }
                 return GetCurrentUser().UserID;
             }
@@ -403,6 +402,28 @@ namespace WereViewApp.Modules.DevUser {
 
         public static bool IsUserNameExist(string username) {
             return Manager.Users.Any(n => n.UserName == username);
+        }
+
+        /// <summary>
+        /// Checks if is empty()
+        /// then valid using regular expression then try searching in the db.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public static bool IsUserNameExistWithValidation(string username, out ApplicationUser user) {
+            user = null;
+            if (!string.IsNullOrWhiteSpace(username)) {
+                const int max = 30;
+                const int min = 3;
+                const string userPattern = "^([A-Za-z]|[A-Za-z0-9_.]+)$";
+                var regularExpressionValidation = Regex.IsMatch(username, userPattern, RegexOptions.Compiled) &&
+                                                  (username.Length >= min && username.Length <= max);
+                if (regularExpressionValidation) {
+                    user = GetUser(username);
+                    return user != null;
+                }
+            }
+            return false;
         }
 
         public static bool IsEmailExist(string email) {

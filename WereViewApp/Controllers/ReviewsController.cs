@@ -7,7 +7,9 @@ using System.Net;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using DevMvcComponent.Pagination;
 using WereViewApp.Models.EntityModel;
+using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Modules;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.WereViewAppCommon;
@@ -366,6 +368,34 @@ namespace WereViewApp.Controllers {
             return RedirectToAction("Index");
         }
 
+        #endregion
+
+        #region Display Review: user/reviews/id
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id">Username</param>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public ActionResult User(string id, int page = 1 ) {
+            ApplicationUser user;
+            if (UserManager.IsUserNameExistWithValidation(id, out user)) {
+                var reviews = db.Reviews.Where(n => n.UserID == user.UserID).OrderByDescending(n => n.ReviewID);
+
+                var pageInfo = new PaginationInfo {
+                    ItemsInPage = AppConfig.Setting.PageItems,
+                    PageNumber = page,
+                    PagesExists = -1
+                };
+                var pagedReviews = reviews.GetPageData(pageInfo, "user.review." + user.UserID).ToList();
+                var eachUrl = "/user/reviews/" + user.UserName + "?page=@page";
+                ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
+                    maxNumbersOfPagesShow: 8));
+                ViewBag.user = user;
+                return View(pagedReviews);
+            }
+        }
         #endregion
     }
 }

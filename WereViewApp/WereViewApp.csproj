@@ -1183,6 +1183,7 @@
     <Content Include="Views\Home\Policy.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Publish.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Boolean-Button.cshtml" />
+    <None Include="Views\Reviews\User.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />

@@ -84,24 +84,28 @@
                                 </h1>
                             </a> <span> . </span>
                         </li>
-                        <li>
-                            <a href="@Model.WebsiteUrl" title="Official Website for @Model.AppName">
-                                <h1 title="Official Website for @Model.AppName">
-                                    <strong title="Official Website for @Model.AppName">
-                                        <em title="Official Website for @Model.AppName">Website</em>
-                                    </strong>
-                                </h1>
-                            </a> <span> . </span>
-                        </li>
-                        <li>
-                            <a href="@Model.StoreUrl" title="@Model.AppName download">
-                                <h1 title="@Model.AppName download">
-                                    <strong title="@Model.AppName download">
-                                        <em title="@Model.AppName download">Store</em> <em title="@Model.AppName download" class="seo-hide">@Model.AppName download</em>
-                                    </strong>
-                                </h1>
-                            </a>
-                        </li>
+                        @if (!string.IsNullOrEmpty(Model.WebsiteUrl)) {
+                            <li>
+                                <a href="@Model.WebsiteUrl" title="Official Website for @Model.AppName">
+                                    <h1 title="Official Website for @Model.AppName">
+                                        <strong title="Official Website for @Model.AppName">
+                                            <em title="Official Website for @Model.AppName">Website</em>
+                                        </strong>
+                                    </h1>
+                                </a> <span> . </span>
+                            </li>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.StoreUrl)) {
+                            <li>
+                                <a href="@Model.StoreUrl" title="@Model.AppName download">
+                                    <h1 title="@Model.AppName download">
+                                        <strong title="@Model.AppName download">
+                                            <em title="@Model.AppName download">Store</em> <em title="@Model.AppName download" class="seo-hide">@Model.AppName download</em>
+                                        </strong>
+                                    </h1>
+                                </a>
+                            </li>
+                        }
                         <li class="share-btn white write-review-btn">
                             <a id="review-requesting-spinner" data-toggle="tooltip" title="Requesting" data-original-title="Requesting" class="tooltip-show">
                                 <span data-display="Requesting for review" class="glyphicon glyphicon-refresh glyphicon-spin" title="Requesting"></span>
