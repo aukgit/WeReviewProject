@@ -1,6 +1,4 @@
-﻿using System;
-using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace WereViewApp {
     public static class BundleConfig {
@@ -88,7 +86,6 @@ namespace WereViewApp {
                                   "~/Content/revolution-slider/js/jquery.themepunch.tools.min.js",
                                   "~/Content/revolution-slider/js/jquery.themepunch.revolution.min.js",
                                   "~/Content/Scripts/DevOrgPlugins/developers-organism.component.js",
-
                                   "~/Content/Scripts/FrontEnd/front-developer.js"
 
                                   ));

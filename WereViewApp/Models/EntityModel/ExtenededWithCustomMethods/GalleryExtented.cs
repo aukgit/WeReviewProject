@@ -16,7 +16,7 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
         /// </param>
         /// <returns></returns>
         public static string GetHtppUrl(this Gallery gallery, int? categoryId = null) {
-            string location = "";
+            var location = "";
             if (gallery != null && categoryId == null) {
                 if (gallery.GalleryCategoryID == GalleryCategoryIDs.AppPageGallery) {
                     location = WereViewStatics.UProcessorGallery.GetCombinationOfRootAndAdditionalRoot();
@@ -37,6 +37,8 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
                 } else if (gallery.GalleryCategoryID == GalleryCategoryIDs.Advertise) {
                     location = WereViewStatics.UProcessorAdvertiseImages.GetCombinationOfRootAndAdditionalRoot();
 
+                } else if (gallery.GalleryCategoryID == GalleryCategoryIDs.YoutubeCoverImage) {
+                    location = WereViewStatics.UProcessorYoutubeCover.GetCombinationOfRootAndAdditionalRoot();
                 }
 
 
@@ -60,6 +62,8 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
                 } else if (categoryId == GalleryCategoryIDs.Advertise) {
                     location = WereViewStatics.UProcessorAdvertiseImages.GetCombinationOfRootAndAdditionalRoot();
 
+                } else if (categoryId == GalleryCategoryIDs.YoutubeCoverImage) {
+                    location = WereViewStatics.UProcessorYoutubeCover.GetCombinationOfRootAndAdditionalRoot();
                 }
             }
 

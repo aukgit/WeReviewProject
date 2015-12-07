@@ -4,23 +4,23 @@ using System;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using DevMvcComponent.Error;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Extensions.IdentityExtension;
 using WereViewApp.Modules.Mail;
 using WereViewApp.Modules.Role;
-using WereViewApp.Modules.UserError;
 
 #endregion
 
 namespace WereViewApp.Controllers {
     [Authorize]
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class AccountController : Controller {
         #region Constants and Variable
         const string ControllerName = "Account";
@@ -39,8 +39,8 @@ namespace WereViewApp.Controllers {
 
         #region Call Complete Registration
 
-        public void CallCompleteRegistration(long userId) {
-            UserManager.CompleteRegistration(userId, true);
+        public void CallCompleteRegistration(long userId, string primaryRole = "Rookie") {
+            UserManager.CompleteRegistration(userId, true, primaryRole);
         }
 
         #endregion
@@ -57,7 +57,7 @@ namespace WereViewApp.Controllers {
             var result = await Manager.ConfirmEmailAsync(userId, code);
             var user = UserManager.GetUser(userId);
             if (user != null) {
-                foundInUser = (Guid) user.GeneratedGuid;
+                foundInUser = (Guid)user.GeneratedGuid;
             }
             if (result.Succeeded && foundInUser.Equals(codeHashed)) {
                 CallCompleteRegistration(userId);
@@ -85,13 +85,13 @@ namespace WereViewApp.Controllers {
         public async Task<ActionResult> LinkLoginCallback() {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
             if (loginInfo == null) {
-                return RedirectToAction("Manage", new {Message = ManageMessageId.Error});
+                return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
             }
             var result = await Manager.AddLoginAsync(User.Identity.GetUserID(), loginInfo.Login);
             if (result.Succeeded) {
                 return RedirectToAction("Manage");
             }
-            return RedirectToAction("Manage", new {Message = ManageMessageId.Error});
+            return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
         }
 
         #endregion
@@ -112,7 +112,7 @@ namespace WereViewApp.Controllers {
                 if (info == null) {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await Manager.CreateAsync(user);
                 if (result.Succeeded) {
                     result = await Manager.AddLoginAsync(user.Id, info.Login);
@@ -152,7 +152,7 @@ namespace WereViewApp.Controllers {
             } else {
                 message = ManageMessageId.Error;
             }
-            return RedirectToAction("Manage", new {Message = message});
+            return RedirectToAction("Manage", new { Message = message });
         }
 
         #endregion
@@ -183,15 +183,15 @@ namespace WereViewApp.Controllers {
 
                 Manager = null;
             }
-            db.Dispose();
+            _db.Dispose();
             base.Dispose(disposing);
         }
 
         #region Declaration
 
-        private readonly ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
-        private PasswordHasher passwordHasher = new PasswordHasher();
+        private PasswordHasher _passwordHasher = new PasswordHasher();
         public ApplicationUserManager Manager { get; private set; }
 
         #endregion
@@ -216,17 +216,17 @@ namespace WereViewApp.Controllers {
 
         private async Task SignInAsync(ApplicationUser user, bool isPersistent) {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties {IsPersistent = isPersistent},
+            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = isPersistent },
                 await user.GenerateUserIdentityAsync(Manager));
         }
 
         private void SignInProgrammatically(ApplicationUser user, bool isPersistent) {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             var identity = UserManager.Manager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties {IsPersistent = isPersistent}, identity);
+            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = isPersistent }, identity);
         }
 
-
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         [AllowAnonymous]
         public ActionResult Login(string returnUrl) {
             if (UserManager.IsAuthenticated()) {
@@ -240,6 +240,7 @@ namespace WereViewApp.Controllers {
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl) {
             if (ModelState.IsValid) {
                 var user = await UserManager.GetUserByEmailAsync(model.Email, model.Password);
@@ -264,17 +265,15 @@ namespace WereViewApp.Controllers {
         #region LogOff
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult SignOut() {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        private ActionResult SignOutProgrammatically() {
+        [AllowAnonymous]
+        public ActionResult SignOutProgrammatically() {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignOut();
@@ -312,9 +311,9 @@ namespace WereViewApp.Controllers {
         public async Task<ActionResult> Register(RegisterViewModel model) {
             var errors = new ErrorCollector();
             //External Validation.
-            var ValidOtherConditions = await UserManager.ExternalUserValidation(model, db, errors);
+            var validOtherConditions = await UserManager.ExternalUserValidation(model, _db, errors);
 
-            if (ModelState.IsValid && ValidOtherConditions) {
+            if (ModelState.IsValid && validOtherConditions) {
                 var user = UserManager.GetUserFromViewModel(model); // get user from view model.
                 var result = await Manager.CreateAsync(user, model.Password);
                 if (result.Succeeded) {
@@ -328,7 +327,7 @@ namespace WereViewApp.Controllers {
 
                         var code = Manager.GenerateEmailConfirmationToken(user.Id);
                         var callbackUrl = Url.Action("ConfirmEmail", "Account",
-                            new {userId = user.Id, code, codeHashed = user.GeneratedGuid}, Request.Url.Scheme);
+                            new { userId = user.Id, code, codeHashed = user.GeneratedGuid }, Request.Url.Scheme);
                         var mailString = MailHtml.EmailConfirmHtml(user, callbackUrl);
                         AppVar.Mailer.Send(user.Email, "Email Confirmation", mailString);
 
@@ -354,14 +353,14 @@ namespace WereViewApp.Controllers {
 
                         #endregion
                     }
-                    CallCompleteRegistration(user.UserID);
-                    return RedirectToAction("Index", "Home");
+                    CallCompleteRegistration(user.UserID, "Rookie");
+                    return View("InboxCheck");
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
-            ViewBag.Roles = new SelectList(RoleManager.GetRoles(), "Id", "Name");
+            //ViewBag.Roles = new SelectList(RoleManager.GetRoles(), "Id", "Name");
             return View(model);
         }
 
@@ -375,7 +374,7 @@ namespace WereViewApp.Controllers {
         public ActionResult ExternalLogin(string provider, string returnUrl) {
             // Request a redirect to the external login provider
             return new ChallengeResult(provider,
-                Url.Action("ExternalLoginCallback", "Account", new {ReturnUrl = returnUrl}));
+                Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
         //
@@ -395,7 +394,7 @@ namespace WereViewApp.Controllers {
             // If the user does not have an account, then prompt the user to create an account
             ViewBag.ReturnUrl = returnUrl;
             ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-            return View("ExternalLoginConfirmation", new RegisterViewModel {Email = loginInfo.Email});
+            return View("ExternalLoginConfirmation", new RegisterViewModel { Email = loginInfo.Email });
         }
 
         #endregion
@@ -517,7 +516,7 @@ namespace WereViewApp.Controllers {
                     if (result.Succeeded) {
                         var user = await Manager.FindByIdAsync(User.Identity.GetUserID());
                         await SignInAsync(user, false);
-                        return RedirectToAction("Manage", new {Message = ManageMessageId.ChangePasswordSuccess});
+                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
                     }
                     AddErrors(result);
                 }
@@ -531,7 +530,7 @@ namespace WereViewApp.Controllers {
                 if (ModelState.IsValid) {
                     var result = await Manager.AddPasswordAsync(User.Identity.GetUserID(), model.NewPassword);
                     if (result.Succeeded) {
-                        return RedirectToAction("Manage", new {Message = ManageMessageId.SetPasswordSuccess});
+                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
                     }
                     AddErrors(result);
                 }
@@ -601,7 +600,7 @@ namespace WereViewApp.Controllers {
             public string UserId { get; set; }
 
             public override void ExecuteResult(ControllerContext context) {
-                var properties = new AuthenticationProperties {RedirectUri = RedirectUri};
+                var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
                 if (UserId != null) {
                     properties.Dictionary[XsrfKey] = UserId;
                 }

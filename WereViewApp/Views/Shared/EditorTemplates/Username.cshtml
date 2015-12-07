@@ -1,5 +1,4 @@
-@model object
-
+@model string
 @{
     var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
@@ -8,11 +7,12 @@
         styleProperty = propLower,
         displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
         description = ViewData.ModelMetadata.Description,
-        templateName = "username",
         isValidate = ViewBag.isValidate ?? "false",
-        icon = ViewBag.icon ?? "fa fa-user"; 
+        templateName = "username",
+        icon = ViewBag.icon ?? "fa fa-user";
+
     var htmlAttributes = new RouteValueDictionary();
-   
+
     if (ViewBag.@class != null) {
         htmlAttributes.Add("class", "form-control " + ViewBag.@class);
     } else {
@@ -35,6 +35,7 @@
     if (ViewBag.Value != null) {
         htmlAttributes.Add("Value", ViewBag.Value);
     }
+
     if (ViewBag.label != null) {
         displayName = ViewBag.label;
     }
@@ -45,16 +46,15 @@
     if (ViewBag.textColumn == null) {
         ViewBag.textColumn = "col-md-10";
     }
-
     if (ViewBag.url != null) {
         htmlAttributes.Add("data-url", ViewBag.url);
+
     }
     htmlAttributes.Add("title", htmlAttributes["placeholder"]);
     htmlAttributes.Add("data-prop", styleProperty);
     htmlAttributes.Add("data-template", templateName);
 }
-
-<div class="form-group form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty" data-is-validate="@isValidate">
+<div class="form-group form-row @styleProperty @templateName-type" data-prop="@styleProperty" data-is-validate="@isValidate">
     <div class="controls dev-plugin">
         <label class="@ViewBag.labelColumn control-label form-label @styleProperty" for="@styleProperty" data-prop="@styleProperty">
             @displayName
@@ -66,7 +66,9 @@
                     <i class="@icon"></i>
                     @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
                 </span>
-                <div class="validator-container"><div class="validator"></div></div>
+                <div class="validator-container">
+                    <div class="validator"></div>
+                </div>
             </div>
             @if (description != null) {
                 <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">

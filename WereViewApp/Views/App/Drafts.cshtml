@@ -45,7 +45,7 @@
                 <span class="Hide">@item.Description</span>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.WebSiteURL)
+                @Html.DisplayFor(modelItem => item.WebsiteUrl)
             </td>
             <td>
                 <a href="@Url.Action("Draft", new {id = item.UploadGuid})" title="@editLinkName edit..." class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</a>

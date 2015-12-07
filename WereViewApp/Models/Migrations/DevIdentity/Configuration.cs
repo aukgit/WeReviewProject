@@ -1,16 +1,13 @@
-namespace WereViewApp.Models.Migrations.DevIdentity {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<WereViewApp.Models.Context.DevIdentityDbContext> {
+namespace WereViewApp.Models.Migrations.DevIdentity {
+    internal sealed class Configuration : DbMigrationsConfiguration<Context.DevIdentityDbContext> {
         public Configuration() {
             AutomaticMigrationsEnabled = true;
             MigrationsDirectory = @"Models\Migrations\DevIdentity";
         }
 
-        protected override void Seed(WereViewApp.Models.Context.DevIdentityDbContext context) {
+        protected override void Seed(Context.DevIdentityDbContext context) {
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

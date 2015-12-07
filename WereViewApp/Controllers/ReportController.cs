@@ -2,17 +2,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.IdentityCustomization;
-using WereViewApp.Modules.Role;
-using System.Linq;
-using WereViewApp.Modules.DevUser;
-using System.Data.Entity;
-using System.Threading.Tasks;
 using WereViewApp.Models.EntityModel;
+using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Models.POCO.Structs;
+using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Message;
+using WereViewApp.Modules.Role;
 using WereViewApp.Modules.Session;
 
 #endregion
@@ -64,8 +63,8 @@ namespace WereViewApp.Controllers {
             return View();
         }
         private bool IsAppAlreadyReported(long appId, out App app) {
-            string sessionAlreadyReported = "Report/AppIsAlreadyReported-" + appId;
-            string sessionApp = "Report/ReportingApp-" + appId;
+            var sessionAlreadyReported = "Report/AppIsAlreadyReported-" + appId;
+            var sessionApp = "Report/ReportingApp-" + appId;
 
             if (Session[sessionAlreadyReported] == null) {
                 app = db.Apps.Find(appId);
@@ -82,9 +81,9 @@ namespace WereViewApp.Controllers {
         }
 
         private bool IsReviewAlreadyReported(long reviewId, out Review review, out App app) {
-            string sessionAlreadyReported = "Report/ReviewIsAlreadyReported-" + reviewId;
-            string sessionReview = "Report/ReportingReview-" + reviewId;
-            string sessionReviewApp = "Report/ReportingReviewApp-" + reviewId;
+            var sessionAlreadyReported = "Report/ReviewIsAlreadyReported-" + reviewId;
+            var sessionReview = "Report/ReportingReview-" + reviewId;
+            var sessionReviewApp = "Report/ReportingReviewApp-" + reviewId;
 
             if (Session[sessionAlreadyReported] == null) {
                 review = db.Reviews.Find(reviewId);
@@ -110,10 +109,10 @@ namespace WereViewApp.Controllers {
         /// <param name="isApp">If false remove review cahce.</param>
         private void RemoveSessionCache(long id, bool isApp) {
             if (isApp) {
-                string sessionName = "Report/AppIsAlreadyReported-" + id;
+                var sessionName = "Report/AppIsAlreadyReported-" + id;
                 Session[sessionName] = null;
             } else {
-                string sessionName = "Report/ReviewIsAlreadyReported-" + id;
+                var sessionName = "Report/ReviewIsAlreadyReported-" + id;
                 Session[sessionName] = null;
             }
         }
@@ -136,11 +135,10 @@ namespace WereViewApp.Controllers {
                 if (isAlreadyReported) {
                     ViewBag.isAppReport = true; // if the app is already reported
                     return View("AlreadyReported");
-                } else {
-                    ViewBag.id = id;
-                    ViewBag.app = app;
-                    return View();
                 }
+                ViewBag.id = id;
+                ViewBag.app = app;
+                return View();
             }
             return View("_404");
         }
@@ -148,6 +146,7 @@ namespace WereViewApp.Controllers {
         private void SetCommonFields(Feedback feedback) {
             var user = UserManager.GetCurrentUser();
             feedback.Email = user.Email;
+            feedback.HasAppOrReviewReport = true;
             feedback.Username = user.UserName;
             feedback.Name = user.DisplayName;
             feedback.PostedDate = DateTime.Now;
@@ -177,11 +176,11 @@ namespace WereViewApp.Controllers {
                 // now post the report.
                 db2.Feedbacks.Add(feedback);
                 // add the relationship.
-                AttachNewRelationship(feedback, appOrReviewId, isApp: true);
+                AttachNewRelationship(feedback, appOrReviewId, true);
                 if (db2.SaveChanges() > -1) {
                     // successfully saved.
                     // send an email to the admin.
-                    RemoveSessionCache(appOrReviewId, isApp: true);
+                    RemoveSessionCache(appOrReviewId, true);
                     AppVar.Mailer.NotifyAdmin("User reported an app.",
                         "Hi , <br>Please login and check at the admin panel , an app has been reported.");
                     return View("Done");
@@ -199,8 +198,8 @@ namespace WereViewApp.Controllers {
         /// <param name="isApp">True means app reporting or else reporting a review.</param>
         /// <returns></returns>
         private FeedbackAppReviewRelation AttachNewRelationship(Feedback feedback, long id, bool isApp) {
-            var relation = new FeedbackAppReviewRelation() {
-                HasAppId = isApp,
+            var relation = new FeedbackAppReviewRelation {
+                HasAppId = isApp
             };
             if (feedback != null) {
                 if (isApp) {
@@ -240,7 +239,8 @@ namespace WereViewApp.Controllers {
                 ViewBag.review = review;
                 ViewBag.id = id;
                 return View();
-            } else if (isReportedAlready && review != null) {
+            }
+            if (isReportedAlready && review != null) {
                 return View("AlreadyReported");
             }
             return View("_404");
@@ -272,11 +272,11 @@ namespace WereViewApp.Controllers {
                 // now post the report.
                 db2.Feedbacks.Add(feedback);
                 // add the relationship and category.
-                AttachNewRelationship(feedback, appOrReviewId, isApp: false);
+                AttachNewRelationship(feedback, appOrReviewId, false);
                 if (db2.SaveChanges() > -1) {
                     // successfully saved.
                     // async send an email to the admin.
-                    RemoveSessionCache(appOrReviewId, isApp: false);
+                    RemoveSessionCache(appOrReviewId, false);
                     AppVar.Mailer.NotifyAdmin("A user has reported a review.",
                         "Hi , <br>Please login and check at the admin panel , a review has been reported.");
                     return View("Done");

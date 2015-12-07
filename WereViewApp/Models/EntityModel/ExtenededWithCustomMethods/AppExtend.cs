@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
@@ -17,7 +16,7 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
             if (app != null) {
                 if (app.AbsUrl == null) {
                     var returnUrl = "/" + ControllerNameForapp + "/" + app.GetPlatformString() + "-" +
-                                    app.PlatformVersion + "/" + app.GetCategorySlugString() + "/" + app.URL;
+                                    app.PlatformVersion + "/" + app.GetCategorySlugString() + "/" + app.Url;
                     app.AbsUrl = AppVar.Url + returnUrl;
                 }
                 return app.AbsUrl;
@@ -44,7 +43,7 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
         public static string GetAppUrlWithoutHostName(this App app) {
             if (app != null) {
                 var returnUrl = app.GetPlatformString() + "-" +
-                                app.PlatformVersion + "/" + app.GetCategorySlugString() + "/" + app.URL;
+                                app.PlatformVersion + "/" + app.GetCategorySlugString() + "/" + app.Url;
                 return returnUrl;
             }
             return null;

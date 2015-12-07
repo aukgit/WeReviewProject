@@ -3,14 +3,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using WereViewApp.Models.EntityModel.Structs;
-using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
-using WereViewApp.WereViewAppCommon;
 using DevTrends.MvcDonutCaching;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.EntityModel;
-using WereViewApp.Modules.Cache;
+using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Modules.Session;
+using WereViewApp.WereViewAppCommon;
 
 #endregion
 
@@ -22,83 +21,83 @@ namespace WereViewApp.Controllers {
         public ActionResult GetFeedbackCategoryID() {
             if (SessionNames.IsValidationExceed("GetFeedbackCategoryID", 100)) {
                 return Json(null, JsonRequestBehavior.AllowGet);
-            } else {
-                using (var db = new ApplicationDbContext()) {
-                    var categories = db.FeedbackCategories
-                                       .Select(n => new { display = n.Category, id = n.FeedbackCategoryID })
-                                       .ToList();
-                    return Json(categories, JsonRequestBehavior.AllowGet);
-                }
+            }
+            using (var db = new ApplicationDbContext()) {
+                var categories = db.FeedbackCategories
+                    .Select(n => new { display = n.Category, id = n.FeedbackCategoryID })
+                    .ToList();
+                return Json(categories, JsonRequestBehavior.AllowGet);
             }
         }
+
         #endregion
 
-        #region Drop down : Country, timezone, language
-        //[OutputCache(CacheProfile = "YearNoParam")]
-        //public JsonResult GetCountryId() {
-        //    //var countries = CachedQueriedData.GetCountries();
+        //#region Drop down : Country, timezone, language
+        ////[OutputCache(CacheProfile = "YearNoParam")]
+        ////public JsonResult GetCountryId() {
+        ////    //var countries = CachedQueriedData.GetCountries();
 
-        //    var countries = CachedQueriedData.GetCountries().Select(n => new {
-        //        display = n.DisplayCountryName,
-        //        id = n.CountryID,
-        //        countryCode = n.Alpha2Code.ToLower()
-        //    }).ToList();
-        //    //return HtmlHelpers.DropDownCountry(countries);
-        //    return Json(countries, JsonRequestBehavior.AllowGet);
-        //}
+        ////    var countries = CachedQueriedData.GetCountries().Select(n => new {
+        ////        display = n.DisplayCountryName,
+        ////        id = n.CountryID,
+        ////        countryCode = n.Alpha2Code.ToLower()
+        ////    }).ToList();
+        ////    //return HtmlHelpers.DropDownCountry(countries);
+        ////    return Json(countries, JsonRequestBehavior.AllowGet);
+        ////}
 
-        //public string GetCountryId(string id) {
-        //    //var countries = CachedQueriedData.GetCountries();
-        //    //var countryId = IpConfigRelations.GetCountryId(id);
-        //    Country country = null;
+        ////public string GetCountryId(string id) {
+        ////    //var countries = CachedQueriedData.GetCountries();
+        ////    //var countryId = IpConfigRelations.GetCountryId(id);
+        ////    Country country = null;
 
-        //    var value = IpConfigRelations.IpToValue(id);
-        //    using (var db = new ApplicationDbContext()) {
-        //        //SELECT * FROM [ip-to-country] WHERE (([BeginingIP] <= ?) AND ([EndingIP] >= ?))
-        //        var countryIp = db.CountryDetectByIPs.FirstOrDefault(n => n.BeginingIP <= value && n.EndingIP >= value);
-        //        if (countryIp != null) {
-        //            country = CachedQueriedData.GetCountries().FirstOrDefault(n =>
-        //               n.CountryID == countryIp.CountryID
-        //           );
-        //            if (country != null) {
-        //                return country.DisplayCountryName + " : val : " + value + ", ip :" + id;
-        //            }
-        //        }
+        ////    var value = IpConfigRelations.IpToValue(id);
+        ////    using (var db = new ApplicationDbContext()) {
+        ////        //SELECT * FROM [ip-to-country] WHERE (([BeginingIP] <= ?) AND ([EndingIP] >= ?))
+        ////        var countryIp = db.CountryDetectByIPs.FirstOrDefault(n => n.BeginingIP <= value && n.EndingIP >= value);
+        ////        if (countryIp != null) {
+        ////            country = CachedQueriedData.GetCountries().FirstOrDefault(n =>
+        ////               n.CountryID == countryIp.CountryID
+        ////           );
+        ////            if (country != null) {
+        ////                return country.DisplayCountryName + " : val : " + value + ", ip :" + id;
+        ////            }
+        ////        }
+        ////    }
+        ////    return "-1 : " + id + " : " + value;
+
+        ////    //return HtmlHelpers.DropDownCountry(countries);
+        ////}
+
+        //[OutputCache(CacheProfile = "Year", VaryByParam = "id")]
+        //public ActionResult GetTimeZone(int id) {
+        //    if (SessionNames.IsValidationExceed("GetTimeZone", 100)) {
+        //        return Json(null, JsonRequestBehavior.AllowGet);
         //    }
-        //    return "-1 : " + id + " : " + value;
-
-        //    //return HtmlHelpers.DropDownCountry(countries);
+        //    var getZones = CachedQueriedData.GetTimezones(id);
+        //    if (getZones != null) {
+        //        var represent = getZones.Select(n => new { display = n.Display, id = n.UserTimeZoneID });
+        //        return Json(represent.ToList(), JsonRequestBehavior.AllowGet);
+        //    }
+        //    return Json(null, JsonRequestBehavior.AllowGet);
         //}
 
-        [OutputCache(CacheProfile = "Year", VaryByParam = "id")]
-        public ActionResult GetTimeZone(int id) {
-            if (SessionNames.IsValidationExceed("GetTimeZone", 100)) {
-                return Json(null, JsonRequestBehavior.AllowGet);
-            }
-            var getZones = CachedQueriedData.GetTimezones(id);
-            if (getZones != null) {
-                var represent = getZones.Select(n => new { display = n.Display, id = n.UserTimeZoneID });
-                return Json(represent.ToList(), JsonRequestBehavior.AllowGet);
-            }
-            return Json(null, JsonRequestBehavior.AllowGet);
-        }
+        ////[OutputCache(CacheProfile = "Day", VaryByParam = "id")]
+        //public ActionResult GetLanguage(int id) {
+        //    if (SessionNames.IsValidationExceed("GetLanguage", 100)) {
+        //        return Json(null, JsonRequestBehavior.AllowGet);
+        //    }
+        //    var languges = CachedQueriedData.GetLanguages(id);
+        //    if (languges != null) {
+        //        var represent =
+        //            languges.Select(n => new { display = n.Language + " - " + n.NativeName, id = n.CountryLanguageID });
+        //        return Json(represent.ToList(), JsonRequestBehavior.AllowGet);
+        //    }
+        //    return Json(null, JsonRequestBehavior.AllowGet);
+        //}
+        //#endregion
 
-        //[OutputCache(CacheProfile = "Day", VaryByParam = "id")]
-        public ActionResult GetLanguage(int id) {
-            if (SessionNames.IsValidationExceed("GetLanguage", 100)) {
-                return Json(null, JsonRequestBehavior.AllowGet);
-            }
-            var languges = CachedQueriedData.GetLanguages(id);
-            if (languges != null) {
-                var represent =
-                    languges.Select(n => new { display = n.Language + " - " + n.NativeName, id = n.CountryLanguageID });
-                return Json(represent.ToList(), JsonRequestBehavior.AllowGet);
-            }
-            return Json(null, JsonRequestBehavior.AllowGet);
-        }
-        #endregion
-
-        [OutputCache(CacheProfile = "TenMins", VaryByParam = "id")]
+        [OutputCache(CacheProfile = "TenMins", VaryByParam = "*")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GetTags(string id) {
@@ -136,10 +135,10 @@ namespace WereViewApp.Controllers {
             using (var db = new WereViewAppEntities()) {
                 var algorithms = new Algorithms();
 
-                app.URL = algorithms.GenerateUrlValid(app, db);
+                app.Url = algorithms.GenerateUrlValid(app, db);
 
                 var sender = new {
-                    url = app.GetAppUrlWithoutHostName()
+                    url = app.GetAbsoluteUrl()
                 };
                 return Json(sender, JsonRequestBehavior.AllowGet);
             };
@@ -220,7 +219,7 @@ namespace WereViewApp.Controllers {
 
         #region Header : Navigaion
 
-        [OutputCache(Duration = 800, VaryByCustom = "byuser")]
+        [DonutOutputCache(Duration = 100, VaryByCustom = "byuser")]
         public ActionResult NavBar() {
             //if (User.Identity.IsAuthenticated) {
             //    var userid = UserManager.GetLoggedUserId();
@@ -239,7 +238,7 @@ namespace WereViewApp.Controllers {
 
         #endregion
 
-        #region Suggested & Featured Apps
+        #region Suggested + Featured Apps + Developer's App
 
         //[OutputCache(Duration = 86400, VaryByParam = "appID")]
         public ActionResult FeaturedApps(long? appID) {
@@ -252,7 +251,7 @@ namespace WereViewApp.Controllers {
         }
 
 
-        //[OutputCache(Duration = 86400, VaryByParam = "appID")]
+        [OutputCache(Duration = 86400, VaryByParam = "appID")]
         public ActionResult SuggestedApps(long? appID) {
             if (appID != null) {
                 var app = algorithms.GetAppFromStaticCache((long)appID);
@@ -261,6 +260,18 @@ namespace WereViewApp.Controllers {
             }
             return PartialView();
         }
+
+        [OutputCache(Duration = 86400, VaryByParam = "appID")]
+        public ActionResult DevelopersApps(long? appID) {
+            if (appID != null) {
+                var app = algorithms.GetAppFromStaticCache((long)appID);
+                var suggestedApps = algorithms.GetDevelopersAppsByApp(app, db); // logic needs to be written
+
+                return PartialView(suggestedApps);
+            }
+            return PartialView();
+        }
+
 
         #endregion
     }

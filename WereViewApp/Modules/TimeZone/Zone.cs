@@ -439,7 +439,7 @@ namespace WereViewApp.Modules.TimeZone {
             var currentZone = timeZone.TimeZoneInfo;
             //time zone found.
             var newDate = TimeZoneInfo.ConvertTime(dt2, currentZone);
-            string additionalString = "";
+            var additionalString = "";
             if (addTimeZoneString) {
                 var userZone = timeZone.UserTimezone;
                 additionalString = "(" + GmtConst  + userZone.TimePartOnly + ")";

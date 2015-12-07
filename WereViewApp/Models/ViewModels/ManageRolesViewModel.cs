@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using WereViewApp.Models.POCO.Identity;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using WereViewApp.Models.POCO.Identity;
 
 namespace WereViewApp.Models.ViewModels {
     public class ManageRolesViewModel {

@@ -86,14 +86,14 @@ namespace WereViewApp.Models.EntityModel {
 
         [Display(Name = "App Website", Description = "If you don't have any website then you can keep it blank.")]
         [StringLength(255)]
-        public string WebSiteURL { get; set; }
+        public string WebsiteUrl { get; set; }
 
         [Display(Name = "App Store",Description ="Please be relevant with your store URL because it help you get up to speed in sales and get in touch with more audenices..")]
         [StringLength(255)]
-        public string StoreURL { get; set; }
+        public string StoreUrl { get; set; }
 
         [StringLength(70)]
-        public string URL { get; set; }
+        public string Url { get; set; }
 
         #region Virtual Propertise
 
