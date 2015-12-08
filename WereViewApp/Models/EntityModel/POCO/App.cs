@@ -172,7 +172,7 @@ namespace WereViewApp.Models.EntityModel {
         /// if false then load review by force.
         /// Or else it will load from cache.
         /// </summary>
-        public bool IsReviewLoaded { get; set; }
+        public bool IsReviewAlreadyLoaded { get; set; }
         /// <summary>
         /// Virtual Field 
         /// </summary>

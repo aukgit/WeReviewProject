@@ -381,7 +381,8 @@ namespace WereViewApp.Modules.DevUser {
         }
 
         /// <summary>
-        ///     Return current user in optimized fashion.
+        /// Return current user in optimized fashion.
+        /// Returns -1 if not logged in.
         /// </summary>
         /// <returns>Returns -1 if not logged in.</returns>
         public static long GetLoggedUserId() {
@@ -406,7 +407,7 @@ namespace WereViewApp.Modules.DevUser {
 
         /// <summary>
         /// Checks if is empty()
-        /// then valid using regular expression then try searching in the db.
+        /// then validate using regular expression then try searching in the db.
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>

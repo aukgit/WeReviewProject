@@ -53,7 +53,14 @@ namespace WereViewApp {
            );
             #endregion
 
-
+            #region reviews
+            routes.MapRoute(
+              name: "reviews_user",
+              url: "user/reviews/{username}/{page}",
+              defaults: new { controller = "Reviews", action = "User", page = UrlParameter.Optional },
+              namespaces: new string[] { wereviewappControllers }
+            );
+            #endregion
             #region profile
             routes.MapRoute(
               name: "profiles",
