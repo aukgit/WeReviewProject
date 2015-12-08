@@ -109,7 +109,10 @@ namespace WereViewApp.Controllers {
         public ActionResult User(string username, int page = 1) {
             ApplicationUser user;
             if (UserManager.IsUserNameExistWithValidation(username, out user)) {
-                var reviews = db.Reviews.Where(n => n.UserID == user.UserID).OrderByDescending(n => n.ReviewID);
+                var reviews = db.Reviews
+                                .Include(n=> n.User)
+                                .Where(n => n.UserID == user.UserID)
+                                .OrderByDescending(n => n.ReviewID);
 
                 var pageInfo = new PaginationInfo {
                     ItemsInPage = AppConfig.Setting.PageItems,
