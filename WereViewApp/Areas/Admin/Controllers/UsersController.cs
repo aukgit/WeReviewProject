@@ -263,7 +263,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
                 return View(user);
             }
             AppVar.SetErrorStatus(ViewBag, EditedError);
-            return View(user);
+            return View("_404");
         }
 
         public ActionResult EnableUserBlock(long id) {

@@ -35,6 +35,11 @@
         <td class="indent-1 red">:</td>
         <td class="indent-1"> @Html.DisplayDate(true, Model.CreatedDate)</td>
     </tr>
+        <tr>
+            <td class="bold">Profile Url</td>
+            <td class="indent-1 red">:</td>
+            <td class="indent-1"> <a href="@Model.GetProfileUrl()">@Model.GetProfileUrl()</a></td>
+        </tr>
     </tbody>
 </table>
 <div class="app-date-seperation row seo-optimize">
