@@ -292,17 +292,16 @@ namespace WereViewApp.WereViewAppCommon {
         /// <param name="max"></param>
         /// <returns></returns>
         public List<App> GetTopRatedApps(WereViewAppEntities db, int max) {
-            var apps = db.Apps
-                         .Include(n => n.Platform)
-                         .Include(n => n.User)
-                         .Where(n => n.IsPublished && !n.IsBlocked);
-
-            AddOrderingForSuggestions(ref apps, isMosRecent: false);
-            var list = apps.Take(max).ToList();
-            if (list != null) {
-                GetEmbedImagesWithApp(list, db, max, GalleryCategoryIDs.HomePageIcon);
+            var apps = GetViewableApps(db)
+                        .Include(n => n.Platform)
+                        .Include(n => n.User);
+            //isMosRecentOrBasedOnPopularity : false means based on popularity
+            AddOrderingForSuggestions(ref apps, isMosRecentOrBasedOnPopularity: false);
+            var topRatedApps = apps.Take(max).ToList();
+            if (topRatedApps != null) {
+                GetEmbedImagesWithApp(topRatedApps, db, max, GalleryCategoryIDs.HomePageIcon);
             }
-            return list;
+            return topRatedApps;
         }
         #endregion
 
@@ -507,14 +506,14 @@ namespace WereViewApp.WereViewAppCommon {
                     appsSameName = viewableApps;
                 }
                 AddConditionsForSearch(ref appsSameName, tagIds, rating, platformId);
-                AddOrderingForSuggestions(ref appsSameName, isMosRecent: true);
+                AddOrderingForSuggestions(ref appsSameName, isMosRecentOrBasedOnPopularity: true);
                 executeAppsWithSameName = appsSameName.Include(n => n.User).ToList();
 
                 var sameIds = executeAppsWithSameName.Select(n => n.AppID).ToArray();
 
 
                 AddConditionsForSearch(ref appsSimilarNameAnd, tagIds, rating, platformId);
-                AddOrderingForSuggestions(ref appsSimilarNameAnd, isMosRecent: true);
+                AddOrderingForSuggestions(ref appsSimilarNameAnd, isMosRecentOrBasedOnPopularity: true);
                 AddConditionOfRemovingPreviousFoundIDs(ref appsSimilarNameAnd, sameIds, null);
 
                 int getSimilarMax = maxCount / 2;
@@ -1573,7 +1572,7 @@ namespace WereViewApp.WereViewAppCommon {
             // add tag conditions
             AddTagFindingCondition(ref appsNameSimilariesWithAnd, tagIds);
             // add ordering
-            AddOrderingForSuggestions(ref appsNameSimilariesWithAnd, isMosRecent: true);
+            AddOrderingForSuggestions(ref appsNameSimilariesWithAnd, isMosRecentOrBasedOnPopularity: true);
 
             var executeSimilarNamesAppsAnd = appsNameSimilariesWithAnd
                 // exclude blocked or not published
@@ -1595,7 +1594,7 @@ namespace WereViewApp.WereViewAppCommon {
                 // add tag conditions
                 AddTagFindingCondition(ref appsNameSimilariesWithAnd, tagIds);
                 // add ordering
-                AddOrderingForSuggestions(ref appsNameSimilariesWithAnd, isMosRecent: false);
+                AddOrderingForSuggestions(ref appsNameSimilariesWithAnd, isMosRecentOrBasedOnPopularity: false);
 
 
                 executeSimilarAppsPostedByCurrentUser = appsNameSimilariesWithAnd
@@ -1622,7 +1621,7 @@ namespace WereViewApp.WereViewAppCommon {
             //        // add tag conditions
             //        addTagFindingCondition(appsNameSimilariesWithOr, tagIds);
             //        // add ordering
-            //        addOrderingForSuggestions(appsNameSimilariesWithOr, isMosRecent: false);
+            //        addOrderingForSuggestions(appsNameSimilariesWithOr, isMosRecentOrBasedOnPopularity: false);
             //    } else {
             //        // user exist
             //        // all other is already added in the user section
@@ -1678,9 +1677,9 @@ namespace WereViewApp.WereViewAppCommon {
         /// 
         /// </summary>
         /// <param name="apps"></param>
-        /// <param name="isMosRecent">True: Find records which is most recent + most viewed. False : means most viewed the most rated and new</param>
-        void AddOrderingForSuggestions(ref IQueryable<App> apps, bool isMosRecent) {
-            if (isMosRecent) {
+        /// <param name="isMosRecentOrBasedOnPopularity">True: Find records which is most recent + most viewed. False : means most viewed the most rated and new</param>
+        void AddOrderingForSuggestions(ref IQueryable<App> apps, bool isMosRecentOrBasedOnPopularity) {
+            if (isMosRecentOrBasedOnPopularity) {
                 apps = apps.OrderByDescending(n => n.AppID)
                            .ThenByDescending(n => n.TotalViewed)
                            .ThenByDescending(n => n.AvgRating)
