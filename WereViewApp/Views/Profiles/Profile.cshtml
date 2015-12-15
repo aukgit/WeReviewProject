@@ -3,40 +3,15 @@
 @model WereViewApp.Models.POCO.Identity.ApplicationUser
 @{
     string username = Model.UserName;
-    List<App> apps = (List<App>) ViewBag.Apps;
-    string urlToFirstpage = AppVar.Url + "/Profile/" + username;
+    List<App> apps = (List<App>)ViewBag.Apps;
+    string urlToFirstpage = Model.GetProfileUrl();
 }
 <a title="Apps of @Model.DisplayName" href="@urlToFirstpage">
     <h2 class="h2" title="profile of @username">@Model.DisplayName</h2>
 </a>
-<table class="top-gap-2x ">
-    <tbody>
-    <tr>
-        <td class="bold">Name</td>
-        <td class="indent-1 red">:</td>
-        <td class="indent-1">
-            <a title="Apps of @Model.DisplayName" href="@urlToFirstpage">@Model.DisplayName</a>
-        </td>
-    </tr>
-    <tr>
-        <td class="bold">
-            User name
-        </td>
-        <td class="indent-1 red">:</td>
-        <td class="indent-1"> @username</td>
-    </tr>
-    <tr>
-        <td class="bold">Email</td>
-        <td class="indent-1 red">:</td>
-        <td class="indent-1"> @Model.Email.Replace("@", " {at} ")</td>
-    </tr>
-    <tr>
-        <td class="bold">Member since</td>
-        <td class="indent-1 red">:</td>
-        <td class="indent-1"> @Html.DisplayDate(true, Model.CreatedDate)</td>
-    </tr>
-    </tbody>
-</table>
+@Html.Partial("_UserProfileDetails", new ViewDataDictionary() {
+    {"user", Model }
+})
 <div class="app-date-seperation row seo-optimize">
     <div class="col-md-10"></div>
     <div class="col-md-2  text-right">
@@ -45,7 +20,6 @@
         </a>
     </div>
 </div>
-
 <div class="row">
     <div class="archive-app-collection-wrapper">
         <ul class="archive-app-collection-list pagination-required regular-color search-page-apps-list seo-optimize">
@@ -78,7 +52,6 @@
                     </a>
                 </li>
             }
-
         </ul>
         <div class="clear"></div>
         <div class="pagination-wrapper text-center">
@@ -87,5 +60,4 @@
             </ul>
         </div>
     </div>
-
 </div>

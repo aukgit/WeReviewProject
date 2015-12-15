@@ -57,16 +57,6 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(navigation);
         }
 
-        public ActionResult Delete(Int32 id) {
-            if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var navigation = db.Navigations.Find(id);
-            if (navigation == null) {
-                return HttpNotFound();
-            }
-            return View(navigation);
-        }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

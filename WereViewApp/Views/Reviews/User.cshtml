@@ -8,7 +8,6 @@
     var user = (ApplicationUser)ViewBag.user;
     int sequenceOfReview = 0;
     long userId = UserManager.GetLoggedUserId();
-    Layout = null;
     var likeDislikes = (List<ReviewLikeDislike>)ViewBag.currentUserlikeDislikes;
     string isRecommended, animateRightLeft;
 }
@@ -22,7 +21,7 @@
                     string disLikeActive = "", likeActive = "";
                     // if this review is liked or disliked by
                     // this current user [checking]
-                    if (userId > -1) {
+                    if (userId > -1 && likeDislikes != null) {
                         // user logged in
                         ReviewLikeDislike reviewDislike = likeDislikes.FirstOrDefault(m => m.ReviewID == review.ReviewID);
                         if (reviewDislike != null) {
@@ -37,11 +36,11 @@
                     <section class="single-review row @isRecommended wow @animateRightLeft" data-wow-offset="1" data-wow-duration=".4s" data-sequence="@sequenceOfReview" itemprop="review" itemscope itemtype="http://schema.org/Review">
                         <div class="col-sm-10">
                             <header class="review-writer-wrapper" title="review">
-                            
+
                                 <a class="review-title-anchor" href="#">
                                     <h1 itemprop="name" class="review-title">
                                         <i class="fa fa-check-circle"></i>
-                                        @review.Title
+                                         @review.Title
                                     </h1>
                                 </a>
                                 <ul class="reviewed-by-wrapper">

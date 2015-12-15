@@ -42,6 +42,10 @@ namespace WereViewApp.Models.EntityModel {
 
         public long WebsiteClicked { get; set; }
         public long StoreClicked { get; set; }
+        /// <summary>
+        /// This will be updated by Algorithms.FixRatingInApp() method
+        /// When any user rated this app. Static value field.
+        /// </summary>
         public double AvgRating { get; set; }
 
         [DataType(DataType.Date)]

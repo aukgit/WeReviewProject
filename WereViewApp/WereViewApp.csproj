@@ -235,7 +235,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AppVar.cs" />
-    <Compile Include="Areas\Admin\Controllers\ServicesController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\GenericController.cs" />
     <Compile Include="Controllers\IndentityController.cs" />
@@ -247,6 +246,7 @@
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\CategoryExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackState.cs" />
+    <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\UserExtend.cs" />
     <Compile Include="Models\POCO\Enum\FeedbackStatusTypes.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
     <Compile Include="Models\POCO\Structs\FeedbackCategoryIDs.cs" />
@@ -275,7 +275,6 @@
     <Compile Include="Areas\Admin\Controllers\AdvertiseController.cs" />
     <Compile Include="Areas\Admin\Controllers\AppCategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ConfigController.cs" />
-    <Compile Include="Areas\Admin\Controllers\CountriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\FeaturedImagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\FeedbackCategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\FeedbacksController.cs" />
@@ -760,6 +759,7 @@
     <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-3.jpg" />
     <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-4.jpg" />
     <Content Include="Uploads\Images\Gallery\0f759dc0-b939-480e-82a5-6133aa3bcc3d-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\1e86ed90-0bb1-46b5-9524-a8a9815daabc-1.jpg" />
     <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-1.jpg" />
     <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-2.jpg" />
     <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-3.jpg" />
@@ -801,6 +801,7 @@
     <Content Include="Uploads\Images\HomePageFeatured\0598bc1d-9b8e-4634-8bb6-31942a7ad68a-0.jpg" />
     <Content Include="Uploads\Images\HomePageFeatured\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
     <Content Include="Uploads\Images\HomePageFeatured\0f759dc0-b939-480e-82a5-6133aa3bcc3d-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\1e86ed90-0bb1-46b5-9524-a8a9815daabc-0.jpg" />
     <Content Include="Uploads\Images\HomePageFeatured\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
     <Content Include="Uploads\Images\HomePageFeatured\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
     <Content Include="Uploads\Images\HomePageFeatured\53be2a3e-8cff-49c7-88b4-158b252969b2-0.jpg" />
@@ -818,6 +819,7 @@
     <Content Include="Uploads\Images\HomePageThumbs\0598bc1d-9b8e-4634-8bb6-31942a7ad68a-0.jpg" />
     <Content Include="Uploads\Images\HomePageThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
     <Content Include="Uploads\Images\HomePageThumbs\0f759dc0-b939-480e-82a5-6133aa3bcc3d-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\1e86ed90-0bb1-46b5-9524-a8a9815daabc-0.jpg" />
     <Content Include="Uploads\Images\HomePageThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
     <Content Include="Uploads\Images\HomePageThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
     <Content Include="Uploads\Images\HomePageThumbs\53be2a3e-8cff-49c7-88b4-158b252969b2-0.jpg" />
@@ -834,6 +836,7 @@
     <Content Include="Uploads\Images\SearchThumbs\0598bc1d-9b8e-4634-8bb6-31942a7ad68a-0.jpg" />
     <Content Include="Uploads\Images\SearchThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
     <Content Include="Uploads\Images\SearchThumbs\0f759dc0-b939-480e-82a5-6133aa3bcc3d-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\1e86ed90-0bb1-46b5-9524-a8a9815daabc-0.jpg" />
     <Content Include="Uploads\Images\SearchThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
     <Content Include="Uploads\Images\SearchThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
     <Content Include="Uploads\Images\SearchThumbs\53be2a3e-8cff-49c7-88b4-158b252969b2-0.jpg" />
@@ -850,6 +853,7 @@
     <Content Include="Uploads\Images\SuggestionThumbs\0598bc1d-9b8e-4634-8bb6-31942a7ad68a-0.jpg" />
     <Content Include="Uploads\Images\SuggestionThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
     <Content Include="Uploads\Images\SuggestionThumbs\0f759dc0-b939-480e-82a5-6133aa3bcc3d-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\1e86ed90-0bb1-46b5-9524-a8a9815daabc-0.jpg" />
     <Content Include="Uploads\Images\SuggestionThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
     <Content Include="Uploads\Images\SuggestionThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
     <Content Include="Uploads\Images\SuggestionThumbs\53be2a3e-8cff-49c7-88b4-158b252969b2-0.jpg" />
@@ -866,6 +870,7 @@
     <Content Include="Uploads\Images\YoutubeCovers\0598bc1d-9b8e-4634-8bb6-31942a7ad68a-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\0f759dc0-b939-480e-82a5-6133aa3bcc3d-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\1e86ed90-0bb1-46b5-9524-a8a9815daabc-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\53be2a3e-8cff-49c7-88b4-158b252969b2-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\55d3b71c-cafe-4f68-a2e8-32a8df8f922c-0.jpg" />
@@ -961,8 +966,6 @@
     <Content Include="Areas\Admin\Views\FeedbackCategories\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\FeedbackCategories\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Feedbacks\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Feedbacks\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Feedbacks\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Feedbacks\Reply.cshtml" />
     <Content Include="Areas\Admin\Views\Feedbacks\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
@@ -1183,6 +1186,7 @@
     <Content Include="Views\Home\Policy.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Publish.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Boolean-Button.cshtml" />
+    <Content Include="Views\Profiles\_UserProfileDetails.cshtml" />
     <None Include="Views\Reviews\User.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />

@@ -67,7 +67,7 @@
                     </div>
                     <ul class="post-info seo-optimize">
                         <li>
-                            By <a href="@softwareUrl/Profile/@Model.User.UserName">
+                            By <a href="@Model.User.GetProfileUrl()">
                                 <h1>
                                     <strong>
                                         <em title="@Model.User.FirstName @Model.User.LastName developer apps">@Html.Truncate(@Model.User.UserName, 10, false)</em>
@@ -76,7 +76,7 @@
                             </a> <span> . </span>
                         </li>
                         <li>
-                            <a href="@softwareUrl/Report/App/@Model.AppID" class="report-app">
+                            <a href="@Model.GetReportingUrl()" class="report-app">
                                 <h1 title="Report @appName">
                                     <strong title="Report @appName">
                                         <em title="Report @appName">Report</em>
@@ -173,7 +173,7 @@
                 </div>
                 <div class="col-md-3">
                     @{ Html.RenderAction("FeaturedApps", "Partials", new { appID = Model.AppID }); }
-                    @{Html.RenderAction("DevelopersApps", "Partials", new { appID = Model.AppID }); }
+                    @{ Html.RenderAction("DevelopersApps", "Partials", new { appID = Model.AppID }); }
                     @{ Html.RenderAction("SuggestedApps", "Partials", new { appID = Model.AppID }); }
                 </div>
             </div>
