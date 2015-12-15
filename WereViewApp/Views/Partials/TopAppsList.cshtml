@@ -40,7 +40,7 @@
                             </h1>
                             <span class="paragraph-end"></span>
                         </div>
-                        <div class="published-by" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                        <div class="published-by" itemprop="author" itemscope itemtype="http://schema.org/Organization">
                             <span itemprop="name">@postedUserName</span>
                             <span class="paragraph-end"></span>
                         </div>
@@ -48,6 +48,7 @@
                             <span itemprop="ratingValue">@app.AvgRating</span> stars based on
                             <span itemprop="bestRating" class="hide">5</span>
                             <span itemprop="reviewCount">@app.ReviewsCount</span> reviews
+                            <meta itemprop="worstRating" content="0">
                         </div>
                         <input title="rating of @appName" class="rating-5-front" value="@app.AvgRating" min="0" max="5" step="0.5" data-readonly="true" data-size="xs">
                     </div>

@@ -28,9 +28,9 @@
                             <img src="@app.HomePageIconLocation" alt="@app.AppName" />
                         </div>
                         <div class="app-content">
-                            <h1 itemprop="name" class="app-title" title="App Review : @app.AppName">
+                            <h1  class="app-title" title="App Review : @app.AppName">
                                 <i class="fa @platform.Icon"></i>
-                                @app.AppName
+                                <strong itemprop="name">@app.AppName</strong>
                                 <span class="paragraph-end"></span>
                             </h1>
                             <h3>
@@ -45,6 +45,7 @@
                                 <span itemprop="ratingValue">@app.AvgRating</span>
                                 <span itemprop="ratingCount">@app.ReviewsCount</span>
                                 <span itemprop="bestRating" class="hide">5</span>
+                                <meta itemprop="worstRating" content="0">
                             </div>
                         </div>
                         <div class="seo-hide">
