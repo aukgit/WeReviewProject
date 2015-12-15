@@ -246,6 +246,7 @@
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\CategoryExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackState.cs" />
+    <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\TagExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\UserExtend.cs" />
     <Compile Include="Models\POCO\Enum\FeedbackStatusTypes.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
@@ -1199,6 +1200,7 @@
     <Content Include="Views\Shared\_BrowserUpdate.cshtml" />
     <Content Include="Views\Shared\_Header-1.cshtml" />
     <Content Include="Views\Tags\Index.cshtml" />
+    <Content Include="Views\Tags\GetTagDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataCached\SearchResult\" />

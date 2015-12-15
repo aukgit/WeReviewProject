@@ -8,7 +8,7 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
         /// </summary>
         /// <returns>Returns current user's profile url.</returns>
         public static string GetProfileUrl(this ApplicationUser user) {
-            return AppVar.Url + "/Profiles/" + user.UserName;
+            return AppVar.Url + "/profiles/" + user.UserName;
         }
 
 
@@ -17,7 +17,7 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
         /// </summary>
         /// <returns>Returns current user's profile url.</returns>
         public static string GetProfileUrl(this User user) {
-            return AppVar.Url + "/Profiles/" + user.UserName;
+            return AppVar.Url + "/profiles/" + user.UserName;
         }
     }
 }

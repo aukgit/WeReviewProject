@@ -1231,6 +1231,26 @@ q:after {
   display: block;
   font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.slim-app-view.tag {
+  border: 1.5px solid #505454;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  height: 32px;
+  height: 3.2rem;
+}
+.slim-app-view.tag .app-content {
+  width: 200px;
+  width: 20rem;
+}
+.slim-app-view.tag .app-title {
+  padding: 8px;
+  font-size: 20px;
+  font-size: 1.25em;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
 .slim-app-view .app-url:hover {
   color: #647383;
 }
