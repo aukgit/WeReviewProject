@@ -7,13 +7,13 @@
         length = Model.AppDetailsGalleryImages.Count;
     }
 }
-<div id="apps-preview" itemprop="itemListElement" itemscope itemtype="http://schema.org/Book">
+<div id="apps-preview">
     @if (Model.YoutubeEmbedLink != null) {
         <div class="youtube-video">
             <div class="embed-responsive embed-responsive-16by9">
                 <a class="playable-btn" href="#playvideo">
                     <i class="fa fa-play-circle-o"></i>
-                    <img class="img-responsive" src="@Model.YoutubeCoverImageLocation" alt="@Model.AppName Youtube video cover">
+                    <img itemprop="image" class="img-responsive" src="@Model.YoutubeCoverImageLocation" alt="@Model.AppName Youtube video cover">
                 </a>
                 @Html.Raw(Model.YoutubeEmbedLink)
                 @*<iframe src="https://www.youtube.com/embed/zyk4jAiffRk" frameborder="0" allowfullscreen></iframe>*@

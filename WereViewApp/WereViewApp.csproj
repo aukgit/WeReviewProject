@@ -1188,6 +1188,7 @@
     <Content Include="Views\Shared\EditorTemplates\Publish.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Boolean-Button.cshtml" />
     <Content Include="Views\Profiles\_UserProfileDetails.cshtml" />
+    <Content Include="Views\App\_AppDescription.cshtml" />
     <None Include="Views\Reviews\User.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />

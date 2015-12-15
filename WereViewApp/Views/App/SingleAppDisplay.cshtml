@@ -3,18 +3,18 @@
 @{
     //Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
     string appName = Model.AppName;
-    string currentUrl = @Html.GetCurrentUrlString(); // Apps/Apple-7/Games/plant-vs-zombies
-    bool isFrist = true;
+    string currentUrl = Html.GetCurrentUrlString(); // Apps/Apple-7/Games/plant-vs-zombies
     string appSubtitle = ViewBag.Title;
     ViewBag.Title = Model.Platform.PlatformName + " App : " + appName;
-    ViewBag.Meta = appName + "," + @Model.Tags + "," + Model.Description;
-    ViewBag.Keywords = appName + "," + @Model.Tags;
-    string[] tagsList = @Model.Tags != null ? @Model.Tags.Split(',') : null;
-    string publishDate = Html.DisplayDateTime(Model.PostedByUserID, Model.CreatedDate, DateTimeFormatType.Date, addTimeZoneString: true).ToString();
+    ViewBag.Meta = appName + "," + Model.Tags + "," + Model.Description;
+    ViewBag.Keywords = appName + "," + Model.Tags;
 
     string platformSubtitle = Model.Platform.PlatformName + " mobile apps";
     string categorySubtitle = Model.GetCategoryString() + " category mobile apps";
     string softwareUrl = AppVar.Url; //we review app
+    bool isWebsiteUrlExist = !string.IsNullOrEmpty(Model.WebsiteUrl);
+    bool isStoreUrlExist = !string.IsNullOrEmpty(Model.StoreUrl);
+    bool isDotRequired = isWebsiteUrlExist && isStoreUrlExist;
     //string currentAppUrlNameOnly = Model.URL; //plant-vs-zombies
 }
 <div class="app-details-page" id="app-details-page">
@@ -29,152 +29,124 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, "script", "facebook-jssdk"));
     </script>
-    <div class="row" itemscope itemtype="http://schema.org/Product">
-        <div class="app-detail app-title-wrapper col-md-12">
-            <div class="app-title-row float-left">
-                <a href="@softwareUrl/Apps/@Model.Platform.PlatformName" class="app-platform" title="@platformSubtitle">
-                    <i class="@Model.Platform.Icon" title="@platformSubtitle">
-                        <em title="@platformSubtitle" class="seo-hide">@platformSubtitle</em>
-                    </i>
-                </a>
-                @Html.Partial("_AppEditButton")
-                <a href="@currentUrl" class="app-title" title="@appSubtitle">
-                    <h1 title="@appSubtitle">
-                        <strong title="@appSubtitle">
-                            <em itemprop="name" title="@appSubtitle">
-                                @appName
-                            </em>
-                        </strong>
-                    </h1>
+    <div itemscope itemtype='http://schema.org/SoftwareApplication'>
+        <div class="row">
+            <div class="app-detail app-title-wrapper col-md-12">
+                <div class="app-title-row float-left">
+                    <a href="@softwareUrl/Apps/@Model.Platform.PlatformName" class="app-platform" title="@platformSubtitle">
+                        <i class="@Model.Platform.Icon" title="@platformSubtitle">
+                            <em title="@platformSubtitle" class="seo-hide">@platformSubtitle</em>
+                        </i>
+                    </a>
+                    @Html.Partial("_AppEditButton")
+                    <a href="@currentUrl" class="app-title" title="@appSubtitle">
+                        <h1 title="@appSubtitle">
+                            <strong title="@appSubtitle">
+                                <em itemprop='name' title="@appSubtitle">
+                                    @appName
+                                </em>
+                            </strong>
+                        </h1>
+                        <span class="paragraph-end"></span>
+                    </a>
+                    <a href="@softwareUrl/Apps/Category/@Model.Category.CategoryName" class="app-category" title="@categorySubtitle">
+                        <h2 class="category" title="@categorySubtitle">
+                            <strong title="@categorySubtitle">@Model.Category.CategoryName</strong>
+                        </h2>
+                    </a>
                     <span class="paragraph-end"></span>
-                </a>
-                <a href="@softwareUrl/Apps/Category/@Model.Category.CategoryName" class="app-category" title="@categorySubtitle">
-                    <h2 class="category" title="@categorySubtitle">
-                        <strong title="@categorySubtitle">@Model.Category.CategoryName</strong>
-                    </h2>
-                </a>
-                <span class="paragraph-end"></span>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="blog" class="blog-pages">
-        <div class="b-post">
-            @Html.Partial("_Gallery")
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="row">
-                        @Html.Partial("_RatingAndViewed")
-                    </div>
-                    <ul class="post-info seo-optimize">
-                        <li>
-                            By <a href="@Model.User.GetProfileUrl()">
-                                <h1>
-                                    <strong>
-                                        <em title="@Model.User.FirstName @Model.User.LastName developer apps">@Html.Truncate(@Model.User.UserName, 10, false)</em>
-                                    </strong>
-                                </h1>
-                            </a> <span> . </span>
-                        </li>
-                        <li>
-                            <a href="@Model.GetReportingUrl()" class="report-app">
-                                <h1 title="Report @appName">
-                                    <strong title="Report @appName">
-                                        <em title="Report @appName">Report</em>
-                                    </strong>
-                                </h1>
-                            </a> <span> . </span>
-                        </li>
-                        @if (!string.IsNullOrEmpty(Model.WebsiteUrl)) {
+        <div id="blog" class="blog-pages">
+            <div class="b-post">
+                @Html.Partial("_Gallery")
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="row">
+                            @Html.Partial("_RatingAndViewed")
+                        </div>
+                        <ul class="post-info seo-optimize">
                             <li>
-                                <a href="@Model.WebsiteUrl" title="Official Website for @Model.AppName">
-                                    <h1 title="Official Website for @Model.AppName">
-                                        <strong title="Official Website for @Model.AppName">
-                                            <em title="Official Website for @Model.AppName">Website</em>
+                                By
+                                <a href="@Model.User.GetProfileUrl()">
+                                    <h1 itemprop="author" itemscope itemtype="http://schema.org/Person">
+                                        <strong>
+                                            <em itemprop="name" title="@Model.User.FirstName @Model.User.LastName developer apps">
+                                                @Html.Truncate(@Model.User.UserName, 10, false)
+                                            </em>
                                         </strong>
                                     </h1>
-                                </a> <span> . </span>
+                                </a>
+                                <span> . </span>
                             </li>
-                        }
-                        @if (!string.IsNullOrEmpty(Model.StoreUrl)) {
                             <li>
-                                <a href="@Model.StoreUrl" title="@Model.AppName download">
-                                    <h1 title="@Model.AppName download">
-                                        <strong title="@Model.AppName download">
-                                            <em title="@Model.AppName download">Store</em> <em title="@Model.AppName download" class="seo-hide">@Model.AppName download</em>
+                                <a href="@Model.GetReportingUrl()" class="report-app">
+                                    <h1 title="Report @appName">
+                                        <strong title="Report @appName">
+                                            <em title="Report @appName">Report</em>
+                                        </strong>
+                                    </h1>
+                                </a>
+                                <span> . </span>
+                            </li>
+                            @if (isWebsiteUrlExist) {
+                                <li>
+                                    <a href="@Model.WebsiteUrl" title="Official Website for @Model.AppName">
+                                        <h1 title="Official Website for @Model.AppName">
+                                            <strong title="Official Website for @Model.AppName">
+                                                <em title="Official Website for @Model.AppName">Website</em>
+                                            </strong>
+                                        </h1>
+                                    </a>
+                                </li>
+                            }
+                            @if (isDotRequired) {
+                                <li><span> . </span></li>
+                            }
+                            @if (isStoreUrlExist) {
+                                <li>
+                                    <a href="@Model.StoreUrl" title="@Model.AppName download">
+                                        <h1 title="@Model.AppName download">
+                                            <strong title="@Model.AppName download">
+                                                <em title="@Model.AppName download">Store</em> <em title="@Model.AppName download" class="seo-hide">@Model.AppName download</em>
+                                            </strong>
+                                        </h1>
+                                    </a>
+                                </li>
+                            }
+                            <li class="share-btn white write-review-btn">
+                                <a id="review-requesting-spinner" data-toggle="tooltip" title="Requesting" data-original-title="Requesting" class="tooltip-show">
+                                    <span data-display="Requesting for review" class="glyphicon glyphicon-refresh glyphicon-spin" title="Requesting"></span>
+                                </a>
+                                <a title="Write Review for @appName" id="WriteReviewButton">
+                                    <h1 title="Write Review for @appName">
+                                        <strong title="Write Review for @appName">
+                                            <em title="Write Review for @appName">Write Review</em>
                                         </strong>
                                     </h1>
                                 </a>
                             </li>
-                        }
-                        <li class="share-btn white write-review-btn">
-                            <a id="review-requesting-spinner" data-toggle="tooltip" title="Requesting" data-original-title="Requesting" class="tooltip-show">
-                                <span data-display="Requesting for review" class="glyphicon glyphicon-refresh glyphicon-spin" title="Requesting"></span>
-                            </a>
-                            <a title="Write Review for @appName" id="WriteReviewButton">
-                                <h1 title="Write Review for @appName">
-                                    <strong title="Write Review for @appName">
-                                        <em title="Write Review for @appName">Write Review</em>
-                                    </strong>
-                                </h1>
-                            </a>
-                        </li>
-
-                        <li class="facebook share-btn">
-                            <div class="fb-like" data-href="@currentUrl" data-width="110px" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-                        </li>
-                    </ul>
-                    @Html.Partial("_SeoExtraPart")
-                    <div class="app-description seo-optimize" title="@appName description">
-                        @Html.Truncate(Model.Description, 200, false)
-                        <span class="show-more-btns-container" data-ref="app-description">
-                            <span class="elipse-dot">...</span>
-                            <a class="see-more-btn" data-ref="app-description">see more</a>
-                        </span>
-                        <div class="more" data-ref="app-description" title="@appName description">
-                            @Html.Truncate(Model.Description, 200, -1)
-                            <a class="less-btn" data-ref="app-description">less</a>
-                            <div class="top-gap-small">
-                                @if (tagsList != null) {
-                                    <div class="inline tagbox">
-                                        <i class="fa fa-tag"></i> Tags:
-                                        @foreach (var tag in tagsList) {
-                                            if (!isFrist) {
-                                                <text>,</text>
-                                            }
-                                            <a class="Plant tag-item" href="@softwareUrl/Tags/" title="@platformSubtitle : @Model.AppName is a type of @tag">
-                                                <h1 title="@platformSubtitle : @Model.AppName is a type of @tag">
-                                                    <em title="@Model.AppName" class="seo-hide">@Model.AppName</em>
-                                                    @tag
-                                                </h1>
-                                            </a>
-                                            {
-                                                isFrist = false;
-                                            }
-                                        }
-                                    </div>
-                                }
-                                <div class="indent-1 inline punlished-date">
-                                    <i class="fa fa-calendar-o"></i>
-                                    Published date:
-                                    <a href="@publishDate" title="Mobiles apps review on @publishDate">@publishDate</a>
-                                </div>
-                            </div>
+                            <li class="facebook share-btn">
+                                <div class="fb-like" data-href="@currentUrl" data-width="110px" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+                            </li>
+                        </ul>
+                        @Html.Partial("_SeoExtraPart")
+                        @Html.Partial("_AppDescription")
+                        <div id="write-review-form-container">
                         </div>
-                        <div class="clear"></div>
+                        @{ Html.RenderAction("ReviewsDisplay", "Partials", new { id = Model.AppID }, true); }
+                        <div id="review-request-fields">
+                            <!-- request fields to get review-form -->
+                            @Html.HiddenFor(n => n.AppID)
+                            @Html.AntiForgeryToken()
+                        </div>
                     </div>
-                    <div id="write-review-form-container">
+                    <div class="col-md-3">
+                        @{ Html.RenderAction("FeaturedApps", "Partials", new { appID = Model.AppID }); }
+                        @{ Html.RenderAction("DevelopersApps", "Partials", new { appID = Model.AppID }); }
+                        @{ Html.RenderAction("SuggestedApps", "Partials", new { appID = Model.AppID }); }
                     </div>
-                    @{ Html.RenderAction("ReviewsDisplay", "Partials", new { id = Model.AppID }, true); }
-                    <div id="review-request-fields">
-                        <!-- request fields to get review-form -->
-                        @Html.HiddenFor(n => n.AppID)
-                        @Html.AntiForgeryToken()
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    @{ Html.RenderAction("FeaturedApps", "Partials", new { appID = Model.AppID }); }
-                    @{ Html.RenderAction("DevelopersApps", "Partials", new { appID = Model.AppID }); }
-                    @{ Html.RenderAction("SuggestedApps", "Partials", new { appID = Model.AppID }); }
                 </div>
             </div>
         </div>
