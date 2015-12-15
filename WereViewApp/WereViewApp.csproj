@@ -243,6 +243,7 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
+    <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\CategoryExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackState.cs" />
@@ -1087,7 +1088,6 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_GlobalError.cshtml" />
     <Content Include="Views\Shared\_ValidatorCommonForm.cshtml" />
-    <Content Include="Views\Account\_RegisterFields.cshtml" />
     <Content Include="Views\Shared\_FriendlyError.cshtml" />
     <Content Include="Views\Shared\_AuthenticationError.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
@@ -1194,6 +1194,7 @@
     <Content Include="Views\Shared\_BackSaveDelete.cshtml" />
     <Content Include="Views\Shared\_BrowserUpdate.cshtml" />
     <Content Include="Views\Shared\_Header-1.cshtml" />
+    <Content Include="Views\Tags\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DataCached\SearchResult\" />

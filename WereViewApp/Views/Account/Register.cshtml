@@ -2,14 +2,9 @@
 @{
     ViewBag.Title = "Register";
     SelectList roles = null;
-
     var token = Html.AntiForgeryToken();
-    if (AppVar.Setting.IsRegisterCodeRequiredToRegister) {
-        roles = (SelectList)ViewBag.Roles;
-    }
     string usernameValidatingUrl = "/Validator/GetUsername";
     string emailValidatingUrl = "/Validator/GetEmail";
-
 }
 
 <h1 class="h3" title="Registration page of @AppVar.Name">@ViewBag.Title</h1>
@@ -36,18 +31,12 @@
         @Html.EditorFor(m => m.LastName)
         @Html.EditorFor(m => m.Phone, "Phone")
     </div>
-
-
     <div class="form-group">
         <div class="col-md-10 col-md-offset-2">
             <button type="submit" class="btn btn-success">
                 <i class="fa fa-user"></i>
                 Register
             </button>
-            @*<button type="button" class="btn btn-success fillit">
-                    <i class="glyphicon glyphicon-user"></i>
-                    Fill
-                </button>*@
         </div>
     </div>
 }

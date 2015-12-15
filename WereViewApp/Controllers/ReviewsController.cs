@@ -24,8 +24,6 @@ namespace WereViewApp.Controllers {
 
         #endregion
 
-
-
         #region Constructors
 
         public ReviewsController()
@@ -127,8 +125,6 @@ namespace WereViewApp.Controllers {
             return View("_404");
         }
         #endregion
-
-      
 
         #region Like
         [Authorize]
@@ -366,33 +362,6 @@ namespace WereViewApp.Controllers {
         }
 
         #endregion
-
-        //#region Delete or remove record
-
-        //[Authorize]
-        //public ActionResult Delete(long id) {
-        //    var review = db.Reviews.Find(id);
-        //    var viewOf = ViewTapping(ViewStates.Delete, review);
-        //    return View(review);
-        //}
-
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //[Authorize]
-        //public ActionResult DeleteConfirmed(long id) {
-        //    var review = db.Reviews.Find(id);
-        //    var viewOf = ViewTapping(ViewStates.DeletePost, review);
-        //    db.Reviews.Remove(review);
-        //    var state = SaveDatabase(ViewStates.Delete, review);
-        //    if (!state) {
-        //        AppVar.SetErrorStatus(ViewBag, _deletedError); // Failed to Save
-        //        return View(review);
-        //    }
-
-        //    return RedirectToAction("Index");
-        //}
-
-        //#endregion
 
       
     }
