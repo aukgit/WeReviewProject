@@ -12,14 +12,14 @@ using WereViewApp.WereViewAppCommon;
 #endregion
 
 namespace WereViewApp.Controllers {
-    [OutputCache(CacheProfile = "Hour", VaryByCustom = "none")]
+    [OutputCache(CacheProfile = "Day", VaryByCustom = "none")]
     public class SitemapController : Controller {
         // GET: Sitemap
         public ActionResult Index() {
             var modifiedDate = DateTime.Now;
             var appUrl = AppVar.Url;
 
-            var sitemapItems = new List<SitemapItem>(800) {
+            var sitemapItems = new List<SitemapItem>(900) {
                 new SitemapItem(appUrl, modifiedDate, SitemapChangeFrequency.Daily, 1),
                 new SitemapItem(appUrl + "/profiles", modifiedDate, SitemapChangeFrequency.Daily),
                 new SitemapItem(appUrl + "/apps", modifiedDate, SitemapChangeFrequency.Daily),

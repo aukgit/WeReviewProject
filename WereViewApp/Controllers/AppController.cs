@@ -53,7 +53,7 @@ namespace WereViewApp.Controllers {
         /// <returns></returns>
         [AllowAnonymous]
         [OutputCache(CacheProfile = "Short", VaryByParam = "platform;platformVersion;category;url")]
-        public async Task<ActionResult> SingleAppDisplay(string platform, float platformVersion, string category, string url) {
+        public async Task<ActionResult> SingleAppDisplay(string platform, float? platformVersion, string category, string url) {
             var app = _algorithms.GetSingleAppForDisplay(platform, platformVersion, category, url, 30, db);
             if (app != null) {
                 _algorithms.IncreaseViewCount(app, db);

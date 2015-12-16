@@ -78,7 +78,7 @@ namespace WereViewApp {
             //   defaults: new { controller = "SearchPage", action = "Index", url = UrlParameter.Optional },
             //   namespaces: new string[] { wereviewappControllers }
             //);
-            
+
             //routes.MapRoute(
             //   name: "searchXS",
             //   url: "SearchX",
@@ -101,6 +101,7 @@ namespace WereViewApp {
                defaults: new { controller = "Platforms", action = "Index" },
                namespaces: new string[] { wereviewappControllers }
             );
+
             routes.MapRoute(
               name: "category_specific",
               url: "Apps/Category/{slug}/{page}",
@@ -113,7 +114,7 @@ namespace WereViewApp {
                defaults: new { controller = "Category", action = "Index" },
                namespaces: new string[] { wereviewappControllers }
             );
-     
+
             routes.MapRoute(
               name: "apps-index",
               url: "Apps",
@@ -144,13 +145,25 @@ namespace WereViewApp {
             );
 
             routes.MapRoute(
+               name: "SingleApp-Category",
+               url: "Apps/{platform}-{platformVersion}/{category}",
+               defaults: new { controller = "Apps", action = "GetByPlatformAndCategory", name = UrlParameter.Optional },
+               namespaces: new string[] { wereviewappControllers }
+            );
+            routes.MapRoute(
+                 name: "SingleApp-Platform",
+                 url: "Apps/{platform}-{platformVersion}",
+                 defaults: new { controller = "Apps", action = "GetByPlatformAndCategory", name = UrlParameter.Optional },
+                 namespaces: new string[] { wereviewappControllers }
+            );
+            routes.MapRoute(
                name: "platformSearched",
                url: "Apps/{platformName}",
                defaults: new { controller = "Apps", action = "Platform" },
                namespaces: new string[] { wereviewappControllers }
             );
 
-          
+
             #endregion
 
             #region Default Route
