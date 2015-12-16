@@ -1113,13 +1113,13 @@ namespace WereViewApp.WereViewAppCommon {
         /// <param name="page">Current displaying list page</param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public List<App> GetAppsFilteredByPlatformAndCategory(string platform, float? platformVersion, string categorySlug, int page, dynamic ViewBag, WereViewAppEntities db) {
+        public List<App> GetAppsFilteredByPlatformAndCategory(string platform, double? platformVersion, string categorySlug, int page, dynamic ViewBag, WereViewAppEntities db) {
             IQueryable<App> apps = null;
             Category categoryO;
             short categoryId = -1, platformId = -1;
 
-            if (platform != null && platformVersion != null) {
-                var cacheName = "GetAppsFilteredByPlatformAndCategory.names." + page + platform;
+            if (platform != null) {
+                //var cacheName = "GetAppsFilteredByPlatformAndCategory.names." + page + platform;
                 var platformO = WereViewStatics.AppPlatformsCache.FirstOrDefault(n => n.PlatformName.Equals(platform, StringComparison.OrdinalIgnoreCase));
                 if (platformO != null) {
                     platformId = platformO.PlatformID;
@@ -1143,7 +1143,7 @@ namespace WereViewApp.WereViewAppCommon {
                     };
                     apps = apps.Include(n => n.User)
                                 .OrderByDescending(n=> n.AppID);
-                    var paged = apps.GetPageData(pageInfo, cacheName).ToList();
+                    var paged = apps.GetPageData(pageInfo).ToList();
                     GetEmbedImagesWithApp(paged, db, (int)AppConfig.Setting.PageItems, GalleryCategoryIDs.SearchIcon);
                     string eachUrl = GetCurrentUrlwithHostName() + "?page=@page";
                     ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",

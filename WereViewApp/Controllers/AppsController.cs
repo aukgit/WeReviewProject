@@ -79,7 +79,7 @@ namespace WereViewApp.Controllers {
         /// <param name="page"></param>
         /// <returns></returns>
         //[OutputCache(CacheProfile = "Day", VaryByParam = "platform;platformVersion;category;page")]
-        public ActionResult GetByPlatformAndCategory(string platform, float platformVersion, string category, int page = 1) {
+        public ActionResult GetByPlatformAndCategory(string platform, double? platformVersion, string category, int page = 1) {
             var apps = _algorithms.GetAppsFilteredByPlatformAndCategory(platform, platformVersion, category,page, this.ViewBag, db);
             if (apps != null) {
                 ViewBag.Title = "Apps : " + System.Web.HttpContext.Current.Request.RawUrl.ToString().Remove(0,1);

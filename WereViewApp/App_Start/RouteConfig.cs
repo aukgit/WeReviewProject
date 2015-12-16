@@ -140,29 +140,28 @@ namespace WereViewApp {
             routes.MapRoute(
                name: "SingleApp",
                url: "Apps/{platform}-{platformVersion}/{category}/{url}",
-               defaults: new { controller = "App", action = "SingleAppDisplay", name = UrlParameter.Optional },
+               defaults: new { controller = "App", action = "SingleAppDisplay" },
                namespaces: new string[] { wereviewappControllers }
             );
 
             routes.MapRoute(
                name: "SingleApp-Category",
                url: "Apps/{platform}-{platformVersion}/{category}",
-               defaults: new { controller = "Apps", action = "GetByPlatformAndCategory", name = UrlParameter.Optional },
+               defaults: new { controller = "Apps", action = "GetByPlatformAndCategory" },
                namespaces: new string[] { wereviewappControllers }
             );
             routes.MapRoute(
-                 name: "SingleApp-Platform",
-                 url: "Apps/{platform}-{platformVersion}",
-                 defaults: new { controller = "Apps", action = "GetByPlatformAndCategory", name = UrlParameter.Optional },
-                 namespaces: new string[] { wereviewappControllers }
-            );
+                  name: "SingleApp-Platform-Version",
+                  url: "Apps/{platform}-{platformVersion}",
+                  defaults: new { controller = "Apps", action = "GetByPlatformAndCategory", platformVersion = UrlParameter.Optional, platform = UrlParameter.Optional },
+                  namespaces: new string[] { wereviewappControllers }
+           );
             routes.MapRoute(
-               name: "platformSearched",
-               url: "Apps/{platformName}",
-               defaults: new { controller = "Apps", action = "Platform" },
-               namespaces: new string[] { wereviewappControllers }
+                   name: "SingleApp-Platform",
+                   url: "Apps/{platform}",
+                   defaults: new { controller = "Apps", action = "GetByPlatformAndCategory", platform = UrlParameter.Optional },
+                   namespaces: new string[] { wereviewappControllers }
             );
-
 
             #endregion
 
