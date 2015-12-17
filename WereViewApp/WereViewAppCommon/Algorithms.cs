@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
+using System.Web.Mvc;
 using DevMvcComponent.Pagination;
 using DevMvcComponent.Extensions;
 using WereViewApp.Models.EntityModel;
@@ -284,10 +286,10 @@ namespace WereViewApp.WereViewAppCommon {
             List<App> executeAppsWithSimilarNameAnd = null;
 
             var tagIds = GetTagIds(db, tags);
-            int minSearchChars = 3;
+            var minSearchChars = 3;
             IQueryable<App> appsSameName = null;
             IQueryable<App> appsSimilarNameAnd = null;
-            bool isSearchable = false;
+            var isSearchable = false;
             var viewableApps = GetViewableApps(db);
 
             var url = GenerateUrlValid(searchText);
@@ -331,7 +333,7 @@ namespace WereViewApp.WereViewAppCommon {
                 AddOrderingForSuggestions(ref appsSimilarNameAnd, isMosRecentOrBasedOnPopularity: true);
                 AddConditionOfRemovingPreviousFoundIDs(ref appsSimilarNameAnd, sameIds, null);
 
-                int getSimilarMax = maxCount / 2;
+                var getSimilarMax = maxCount / 2;
 
                 executeAppsWithSimilarNameAnd = appsSimilarNameAnd
                     .Include(n => n.User)
@@ -435,7 +437,7 @@ namespace WereViewApp.WereViewAppCommon {
             var reviewExist = db.Reviews.FirstOrDefault();
             if (reviewExist != null) {
                 var avg = db.Reviews.Where(n => n.AppID == appId).Average(n => n.Rating);
-                int i = db.Database.ExecuteSqlCommand("UPDATE APP SET AvgRating = @p0 WHERE AppID = @p1", avg, appId);
+                var i = db.Database.ExecuteSqlCommand("UPDATE APP SET AvgRating = @p0 WHERE AppID = @p1", avg, appId);
                 if (i > 0) {
                     if (app != null) {
                         app.AvgRating = avg;
@@ -596,7 +598,7 @@ namespace WereViewApp.WereViewAppCommon {
             userPoint.UserPointSettingID = point.UserPointSettingID;
             db.UserPoints.Add(userPoint);
             if (db.SaveChanges() > 0) {
-                int i = db.Database
+                var i = db.Database
                     .ExecuteSqlCommand(
                     "UPDATE User SET TotalEarnedPoints = TotalEarnedPoints + @p0 WHERE UserId = @p1",
                     point.Point,
@@ -842,7 +844,7 @@ namespace WereViewApp.WereViewAppCommon {
                     var reviewIdsCsv = reviews.GetAsCommaSeperatedValues(n => n.ReviewID);  // all review ids
                     // getting the like dislike based on reviews those are loaded 
                     // and if and only if current user has done any.
-                    string sql = string.Format("SELECT * FROM ReviewLikeDislike WHERE ReviewID IN ({0}) AND UserID = {1}", reviewIdsCsv, currentUserId);
+                    var sql = string.Format("SELECT * FROM ReviewLikeDislike WHERE ReviewID IN ({0}) AND UserID = {1}", reviewIdsCsv, currentUserId);
                     //var reviewLikeDislikes = db.Database.SqlQuery<ReviewLikeDislike>(sql);
                     var likeDislikes = db.Database.SqlQuery<ReviewLikeDislike>(sql).ToList();
                     return likeDislikes;
@@ -894,7 +896,7 @@ namespace WereViewApp.WereViewAppCommon {
             if (reviewCount > 32000) {
                 return true;
             }
-            int i = db.Database.ExecuteSqlCommand("UPDATE APP SET ReviewsCount = @p0 WHERE AppID = @p1", reviewCount, appid);
+            var i = db.Database.ExecuteSqlCommand("UPDATE APP SET ReviewsCount = @p0 WHERE AppID = @p1", reviewCount, appid);
             if (i > 0) {
                 if (app != null) {
                     app.ReviewsCount += 1;
@@ -934,11 +936,11 @@ namespace WereViewApp.WereViewAppCommon {
             if (url != null) {
                 var urlList = url.Split('-');
 
-                List<string> validUrl = new List<string>(urlList.Length);
+                var validUrl = new List<string>(urlList.Length);
 
                 foreach (var valid in urlList) {
                     if (!CommonVars.SearchingEscapeSequence.Any(escapse => escapse.Equals(valid))) {
-                        bool isNumber = Regex.IsMatch(valid, @"^\d+$");
+                        var isNumber = Regex.IsMatch(valid, @"^\d+$");
                         if (!isNumber) {
                             validUrl.Add(valid);
                         }
@@ -958,7 +960,7 @@ namespace WereViewApp.WereViewAppCommon {
         /// <returns>title-title</returns>
         public string GetUrlStringExceptEscapeSequence(string url) {
             if (url != null) {
-                List<string> validUrl = GetUrlListExceptEscapeSequence(url);
+                var validUrl = GetUrlListExceptEscapeSequence(url);
                 string returnStr = null;
                 returnStr = string.Join("-", validUrl);
                 return returnStr;
@@ -987,13 +989,13 @@ namespace WereViewApp.WereViewAppCommon {
             if (!string.IsNullOrEmpty(title)) {
                 var list = title.Split(" ".ToCharArray());
                 var finalizedArray = new string[list.Length];
-                int finalIndex = 0;
+                var finalIndex = 0;
                 foreach (var str in list) {
                     var strArray = str.ToCharArray();
                     int mid = strArray.Length / 2,
                         lastIndex = strArray.Length - 1;
                     ToUpper(ref strArray[0]); // uppercase
-                    for (int i = 0; i < mid; i++) {
+                    for (var i = 0; i < mid; i++) {
                         if (i == 0) {
                             ToLower(ref strArray[lastIndex]); // lowercase
                             ToLower(ref strArray[mid]); // lowercase
@@ -1034,7 +1036,7 @@ namespace WereViewApp.WereViewAppCommon {
                 title = title.Trim();
                 title = Regex.Replace(title, CommonVars.FriendlyUrlRegex, "-").ToLower();
             checkAgain:
-                bool exist = false;
+                var exist = false;
                 if (currentAppId < 1) {
                     exist = db.Apps.Any(n => n.PlatformVersion == platformVersion && n.CategoryID == categoryId && n.Url == title && n.PlatformID == platformId);
                 } else {
@@ -1093,10 +1095,82 @@ namespace WereViewApp.WereViewAppCommon {
         }
         #endregion
 
-        #region Get current url
+        #region UI : Bredcrum
+        /// <summary>
+        /// Get Breadcrumb from current url.
+        /// </summary>
+        /// <returns></returns>
+        public MvcHtmlString GetBredcrumbsBasedOnCurrentUrl(string styleClass = "") {
+            var url = GetCurrentUrlWithoutHostNameWithoutSlash();
+            //<ol class="breadcrumb" style="margin-bottom: 5px;">
+            //    <li><a href="#">Home</a></li>
+            //    <li><a href="#">Library</a></li>
+            //    <li class="active">Data</li>
+            //</ol>
+            var hostUrl = AppVar.Url + "/";
 
-        public string GetCurrentUrlwithHostName() {
+            var builder = new StringBuilder(20 + 20);
+            builder.Append("<ol class=\"breadcrumb " + styleClass + "\">");
+            var length = url.Length;
+            for (int i = 0; i < length; i++) {
+                if (url[i] == '/') {
+                    // hello/world/new
+                    var urlUpto = url.Substring(0, i); // hello/world/
+                    var currentDirectory = GetCurrentWebDirectory(urlUpto);
+                    var pointingUrl = hostUrl + urlUpto;
+                    builder.Append("<li><a href=\"" + pointingUrl + "\">" + currentDirectory + "</a></li>");
+                }
+            }
+            builder.Append("</ol>");
+            var bredcrumHtml = new MvcHtmlString(builder.ToString());
+            builder = null;
+            GC.Collect();
+            return bredcrumHtml;
+        }
+        /// <summary>
+        /// site.com/hello/world
+        /// returns world
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns>site.com/hello/world, returns world</returns>
+        private string GetCurrentWebDirectory(string url) {
+            var found = url.LastIndexOf('/');
+            if (found == -1) {
+                return url; // in current directory.
+            }
+            return url.Substring(found + 1);
+        }
+        #endregion
+
+        #region Get current url
+        /// <summary>
+        /// Get the current url.
+        /// </summary>
+        /// <returns></returns>
+        public string GetCurrentUrlWithHostName() {
             return AppVar.Url + HttpContext.Current.Request.RawUrl;
+        }
+        /// <summary>
+        /// Get the extract part of what is exist after site.com
+        /// </summary>
+        /// <returns></returns>
+        public string GetCurrentUrlWithoutHostName() {
+            return HttpContext.Current.Request.RawUrl;
+        }
+
+        /// <summary>
+        /// Get the extract part of what is exist after site.com
+        /// </summary>
+        /// <returns></returns>
+        public string GetCurrentUrlWithoutHostNameWithoutSlash() {
+            var url = GetCurrentUrlWithoutHostName();
+            if (url != null) {
+                if (url[url.Length - 1] == '/') {
+                    url = url.Remove(url.Length - 1, 1);
+                }
+                return url.Remove(0, 1);
+            }
+            return "";
         }
         #endregion
 
@@ -1142,10 +1216,10 @@ namespace WereViewApp.WereViewAppCommon {
                         ItemsInPage = AppConfig.Setting.PageItems,
                     };
                     apps = apps.Include(n => n.User)
-                                .OrderByDescending(n=> n.AppID);
+                                .OrderByDescending(n => n.AppID);
                     var paged = apps.GetPageData(pageInfo).ToList();
                     GetEmbedImagesWithApp(paged, db, (int)AppConfig.Setting.PageItems, GalleryCategoryIDs.SearchIcon);
-                    string eachUrl = GetCurrentUrlwithHostName() + "?page=@page";
+                    var eachUrl = GetCurrentUrlWithHostName() + "?page=@page";
                     ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
                     maxNumbersOfPagesShow: 8));
                     return paged;
@@ -1222,7 +1296,7 @@ namespace WereViewApp.WereViewAppCommon {
         /// <param name="max"></param>
         /// <param name="isFromHomePage">If true then attaches HomeIcon or else attach search icon</param>
         /// <returns></returns>
-        public List<App> GetTopRatedApps(WereViewAppEntities db,  int max,bool isFromHomePage = true) {
+        public List<App> GetTopRatedApps(WereViewAppEntities db, int max, bool isFromHomePage = true) {
             var apps = GetViewableApps(db)
                         .Include(n => n.Platform)
                         .Include(n => n.User);
@@ -1438,7 +1512,7 @@ namespace WereViewApp.WereViewAppCommon {
             var validUrlList = url.Split('-');
 
 
-            long userId = app.PostedByUserID;
+            var userId = app.PostedByUserID;
 
             // same user same platform and category apps with 
             var appsCollectionNotAsSameId = GetViewableApps(db)
@@ -1451,7 +1525,7 @@ namespace WereViewApp.WereViewAppCommon {
                                         .Where(n => n.UrlWithoutEscapseSequence.StartsWith(url));
 
 
-            IQueryable<App> appsNameSimilariesWithAnd = appsCollectionNotAsSameId;
+            var appsNameSimilariesWithAnd = appsCollectionNotAsSameId;
             foreach (var singleValidUrl in validUrlList) {
 
                 appsNameSimilariesWithAnd = appsNameSimilariesWithAnd
@@ -1611,25 +1685,25 @@ namespace WereViewApp.WereViewAppCommon {
         }
 
         public List<App> FormalizeAppsListFromSeveralLogics(List<App> similarName, List<App> postedByUser, List<App> almostSimilarNameWithAnd, List<App> almostSimilarNameWithOr) {
-            List<App> apps = new List<App>(CommonVars.SuggestHighestDisplayNumberSuggestions + 10);
+            var apps = new List<App>(CommonVars.SuggestHighestDisplayNumberSuggestions + 10);
 
             if (similarName != null) {
-                int conditionNumber = CommonVars.SuggestHighestSameAppName;
-                int length = similarName.Count > conditionNumber ?
+                var conditionNumber = CommonVars.SuggestHighestSameAppName;
+                var length = similarName.Count > conditionNumber ?
                             conditionNumber : similarName.Count;
 
-                for (int i = 0; i < length; i++) {
+                for (var i = 0; i < length; i++) {
                     var current = similarName[i];
                     apps.Add(current);
                 }
             }
 
             if (postedByUser != null && apps.Count < CommonVars.SuggestHighestDisplayNumberSuggestions) {
-                int conditionNumber = CommonVars.SuggestHighestFromSameUser;
-                int length = postedByUser.Count > conditionNumber ?
+                var conditionNumber = CommonVars.SuggestHighestFromSameUser;
+                var length = postedByUser.Count > conditionNumber ?
                             conditionNumber : postedByUser.Count;
 
-                for (int i = 0; i < length; i++) {
+                for (var i = 0; i < length; i++) {
                     var current = postedByUser[i];
                     if (!apps.Any(n => n.AppID == current.AppID)) {
                         apps.Add(current);
@@ -1638,11 +1712,11 @@ namespace WereViewApp.WereViewAppCommon {
             }
 
             if (almostSimilarNameWithAnd != null && apps.Count < CommonVars.SuggestHighestDisplayNumberSuggestions) {
-                int conditionNumber = CommonVars.SuggestHighestAndSimilarQuery;
-                int length = almostSimilarNameWithAnd.Count > conditionNumber ?
+                var conditionNumber = CommonVars.SuggestHighestAndSimilarQuery;
+                var length = almostSimilarNameWithAnd.Count > conditionNumber ?
                             conditionNumber : almostSimilarNameWithAnd.Count;
 
-                for (int i = 0; i < length; i++) {
+                for (var i = 0; i < length; i++) {
                     var current = almostSimilarNameWithAnd[i];
                     if (!apps.Any(n => n.AppID == current.AppID)) {
                         apps.Add(current);
@@ -1651,11 +1725,11 @@ namespace WereViewApp.WereViewAppCommon {
             }
 
             if (almostSimilarNameWithOr != null && apps.Count < CommonVars.SuggestHighestDisplayNumberSuggestions) {
-                int conditionNumber = CommonVars.SuggestHighestOrSimilarQuery;
-                int length = almostSimilarNameWithOr.Count > conditionNumber ?
+                var conditionNumber = CommonVars.SuggestHighestOrSimilarQuery;
+                var length = almostSimilarNameWithOr.Count > conditionNumber ?
                             conditionNumber : almostSimilarNameWithOr.Count;
 
-                for (int i = 0; i < length; i++) {
+                for (var i = 0; i < length; i++) {
                     var current = almostSimilarNameWithOr[i];
                     if (!apps.Any(n => n.AppID == current.AppID)) {
                         apps.Add(current);
@@ -1685,7 +1759,7 @@ namespace WereViewApp.WereViewAppCommon {
                 if (guidsStringList == "") {
                     return;
                 }
-                string sql = string.Format("SELECT * FROM Gallery WHERE UploadGuid IN ({0}) AND GalleryCategoryID ={1}", guidsStringList, GalleryCategoryIDs.SuggestionIcon);
+                var sql = string.Format("SELECT * FROM Gallery WHERE UploadGuid IN ({0}) AND GalleryCategoryID ={1}", guidsStringList, GalleryCategoryIDs.SuggestionIcon);
                 if (string.IsNullOrEmpty(guidsStringList)) {
                     return;
                 }
@@ -1697,7 +1771,7 @@ namespace WereViewApp.WereViewAppCommon {
                 foreach (var gallery in galleries) {
 
                     var tempApp = apps.FirstOrDefault(n => n.UploadGuid == gallery.UploadGuid);
-                    string location = gallery.GetHtppUrl();
+                    var location = gallery.GetHtppUrl();
 
                     if (tempApp != null) {
                         tempApp.SuggestionIconLocation = location;
@@ -1810,7 +1884,7 @@ namespace WereViewApp.WereViewAppCommon {
                 if (guidsStringList == "") {
                     return;
                 }
-                string sql = string.Format("SELECT TOP " + totalTakeCount + " * FROM Gallery WHERE UploadGuid IN ({0}) AND GalleryCategoryID ={1}", guidsStringList, categoryId);
+                var sql = string.Format("SELECT TOP " + totalTakeCount + " * FROM Gallery WHERE UploadGuid IN ({0}) AND GalleryCategoryID ={1}", guidsStringList, categoryId);
                 if (string.IsNullOrEmpty(guidsStringList)) {
                     return;
                 }
@@ -1820,7 +1894,7 @@ namespace WereViewApp.WereViewAppCommon {
 
                 foreach (var gallery in galleries) {
                     var tempApp = apps.FirstOrDefault(n => n.UploadGuid == gallery.UploadGuid);
-                    string location = gallery.GetHtppUrl();
+                    var location = gallery.GetHtppUrl();
                     if (tempApp != null) {
                         if (categoryId == GalleryCategoryIDs.HomePageFeatured) {
                             tempApp.HomeFeaturedBigImageLocation = location;

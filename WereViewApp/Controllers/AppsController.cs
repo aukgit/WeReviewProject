@@ -82,10 +82,11 @@ namespace WereViewApp.Controllers {
         public ActionResult GetByPlatformAndCategory(string platform, double? platformVersion, string category, int page = 1) {
             var apps = _algorithms.GetAppsFilteredByPlatformAndCategory(platform, platformVersion, category,page, this.ViewBag, db);
             if (apps != null) {
-                ViewBag.Title = "Apps : " + System.Web.HttpContext.Current.Request.RawUrl.ToString().Remove(0,1);
+                ViewBag.Title = "Apps : " + _algorithms.GetCurrentUrlWithoutHostNameWithoutSlash();
                 ViewBag.Meta = ViewBag.Title;
                 ViewBag.Keywords = ViewBag.Meta;
                 ViewBag.Apps = apps;
+                ViewBag.breadcrumbs = _algorithms.GetBredcrumbsBasedOnCurrentUrl();
                 return View("Index");
             }
             return View("_AppNotFound");
