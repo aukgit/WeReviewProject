@@ -307,10 +307,10 @@ namespace WereViewApp.Helpers {
             }
             if (isLeft) {
                 //left icon
-                markup = string.Format("<div class='top-margin-space'><a href='{0}' class='{1}' title='{2}'>{4} {3}</a></div>", uri, addClass, title, linkName, icon);
+                markup = string.Format("<div class='header-margin-space-type-1'><a href='{0}' class='{1}' title='{2}'>{4} {3}</a></div>", uri, addClass, title, linkName, icon);
             } else {
                 //right icon
-                markup = string.Format("<div class='top-margin-space'><a href='{0}' class='{1}' title='{2}'>{3} {4}</a></div>", uri, addClass, title, linkName, icon);
+                markup = string.Format("<div class='header-margin-space-type-1'><a href='{0}' class='{1}' title='{2}'>{3} {4}</a></div>", uri, addClass, title, linkName, icon);
             }
             if (h1) {
                 markup = string.Format("<h1 title='{0}' class='h3'>{1}</h1>", title, markup);

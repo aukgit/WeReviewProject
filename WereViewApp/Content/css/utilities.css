@@ -277,6 +277,10 @@ hr {
   margin-top: 25px;
   margin-top: 2.5rem;
 }
+.header-margin-space-type-1 {
+  margin-top: 13px;
+  margin-top: 1.3rem;
+}
 a.no-hover {
   text-decoration: none;
 }

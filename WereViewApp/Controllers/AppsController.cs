@@ -34,6 +34,7 @@ namespace WereViewApp.Controllers {
             ViewBag.Keywords = ViewBag.Meta;
             ViewBag.Apps = archivedApps;
             ViewBag.paginationHtml = paginationHtml;
+            ViewBag.breadcrumbs = _algorithms.GetBredcrumbsBasedOnCurrentUrl();
             return View("Index");
         }
 
@@ -44,6 +45,7 @@ namespace WereViewApp.Controllers {
             ViewBag.Meta = "Latest mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
             ViewBag.Keywords = ViewBag.Meta;
             ViewBag.Apps = latest;
+            ViewBag.breadcrumbs = _algorithms.GetBredcrumbsBasedOnCurrentUrl();
             return View("Index");
         }
 
@@ -56,6 +58,7 @@ namespace WereViewApp.Controllers {
             ViewBag.Apps = top;
             // the reason displaying HomeIcon instead of SearchIcon is that GetTopRatedApps() is common for home page and here
             // and it attaches HomeIcon instead of SearchIcon
+            ViewBag.breadcrumbs = _algorithms.GetBredcrumbsBasedOnCurrentUrl();
             return View("Index");
         }
         [Authorize]

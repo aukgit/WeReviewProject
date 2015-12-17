@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DevMvcComponent.Extensions;
+using DevMvcComponent.Pagination;
+using DevTrends.MvcDonutCaching;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -7,17 +10,13 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
-using DevMvcComponent.Pagination;
-using DevMvcComponent.Extensions;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Models.ViewModels;
+using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.WereViewAppCommon.Structs;
-using DevTrends.MvcDonutCaching;
-using WereViewApp.Helpers;
-using WereViewApp.Modules.Cache;
 
 namespace WereViewApp.WereViewAppCommon {
     public class Algorithms {
@@ -1109,18 +1108,29 @@ namespace WereViewApp.WereViewAppCommon {
             //</ol>
             var hostUrl = AppVar.Url + "/";
 
-            var builder = new StringBuilder(20 + 20);
+            var builder = new StringBuilder(40);
+         
             builder.Append("<ol class=\"breadcrumb " + styleClass + "\">");
             var length = url.Length;
-            for (int i = 0; i < length; i++) {
+            builder.Append("<li><a href=\"" + hostUrl + "\" title=\"" + AppVar.Name + "\"><i class=\"fa fa-home\"></i></a></li>");
+            string urlUpto,
+                    currentDirectory,
+                    pointingUrl;
+            var i = 0;
+            for (i = 0; i < length; i++) {
                 if (url[i] == '/') {
                     // hello/world/new
-                    var urlUpto = url.Substring(0, i); // hello/world/
-                    var currentDirectory = GetCurrentWebDirectory(urlUpto);
-                    var pointingUrl = hostUrl + urlUpto;
+                    urlUpto = url.Substring(0, i);
+                    currentDirectory = GetCurrentWebDirectory(urlUpto);
+                    pointingUrl = hostUrl + urlUpto;
                     builder.Append("<li><a href=\"" + pointingUrl + "\">" + currentDirectory + "</a></li>");
-                }
+                } 
             }
+            //last index
+            urlUpto = url.Substring(0, i);
+            currentDirectory = GetCurrentWebDirectory(urlUpto);
+            pointingUrl = hostUrl + urlUpto;
+            builder.Append("<li><a href=\"" + pointingUrl + "\">" + currentDirectory + "</a></li>");
             builder.Append("</ol>");
             var bredcrumHtml = new MvcHtmlString(builder.ToString());
             builder = null;

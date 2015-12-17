@@ -57,6 +57,7 @@ namespace WereViewApp.Controllers {
             var app = _algorithms.GetSingleAppForDisplay(platform, platformVersion, category, url, 30, db);
             if (app != null) {
                 _algorithms.IncreaseViewCount(app, db);
+                ViewBag.breadcrumbs = _algorithms.GetBredcrumbsBasedOnCurrentUrl("single-app");
                 return View(app);
             }
             return View("_AppNotFound");

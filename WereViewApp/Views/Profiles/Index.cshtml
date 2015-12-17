@@ -1,6 +1,7 @@
 ﻿@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
 @model List<WereViewApp.Models.POCO.Identity.ApplicationUser>
-<h2 class="h2" title="Developers Profile">Developers Profile</h2>
+@Html.SamePageLinkWithIcon("Developers Profile", "Developers Profile", "fa fa-user")
+@ViewBag.breadcrumbs
 <div class="app-date-seperation row seo-optimize">
     <div class="col-md-10"></div>
     <div class="col-md-2  text-right">

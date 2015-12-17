@@ -1298,16 +1298,72 @@ q:after {
 
 @import "blog-page.less";
 
-.page-header{
-    h1,small{
-        color:black;
-        display:inline-block;
+.page-header {
+    h1, small {
+        color: black;
+        display: inline-block;
     }
-    h1{
-        font-size:2.2em;
-        padding-right:5px;
+
+    h1 {
+        font-size: 2.2em;
+        padding-right: 5px;
     }
-    
+}
+
+.breadcrumb {
+    background-color: #E0ECF1;
+    margin: 5px 0 -8px 0;
+    padding: 6px 16px;
+    border: none;
+    color: white;
+    border-radius: 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+
+
+    &.single-app {
+        margin: 5px 0 6px 0;
+
+        @media only screen and (max-width: @screen-xs) {
+            display: none;
+        }
+    }
+
+
+
+    a {
+        color: #ff7200;
+        cursor: pointer;
+        font-weight: bold;
+
+        &:hover {
+            color: rgb(255, 77, 0);
+        }
+    }
+
+    li:last-child {
+        a {
+            color: grey;
+            cursor: default;
+            font-weight: normal;
+
+            &:hover {
+                color: grey;
+            }
+        }
+    }
+
+    > li + li:before {
+        .fa();
+        //content: "\f18e";
+        content: "\f061";
+        padding: 0 9px;
+        .font-size(.9em);
+        /*color: dodgerblue;*/
+        //color: #47484C;
+        //color: #63452B;
+        color: #FF7200;
+    }
 }
 //last imports
 //@import "Utilities.less";

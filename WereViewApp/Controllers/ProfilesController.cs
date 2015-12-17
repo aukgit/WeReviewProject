@@ -100,6 +100,7 @@ namespace WereViewApp.Controllers {
                     var eachUrl = "/profiles/" + user.UserName + "?page=@page";
                     ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
                         maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
+                    ViewBag.breadcrumbs = algorithms.GetBredcrumbsBasedOnCurrentUrl();
                     return View(user);
                 }
             }

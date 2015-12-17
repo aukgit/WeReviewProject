@@ -423,11 +423,24 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\DatabaseTables\Country.table" />
-    <Content Include="App_Data\DatabaseTables\CountryLanguage-Country-1.table" />
-    <Content Include="App_Data\DatabaseTables\CountryLanguage-Country-20.table" />
-    <Content Include="App_Data\DatabaseTables\UserTimeZone-Country-20.table" />
-    <Content Include="App_Data\DatabaseTables\UserTimeZone-Country-239.table" />
+    <Content Include="App_Data\DataCached\Database\01b72017-2869-47a8-9980-f04a5870fcff-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\0aa37ed0-3594-4129-81d5-44739dd21dff-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\1e86ed90-0bb1-46b5-9524-a8a9815daabc-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\289bdd3e-b146-4614-b3ee-9df0562e2273-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\367dea9a-dd31-434a-8b13-506f0ba36b5f-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\45040001-5666-4427-aee6-8ad3b566db51-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\5dc57933-5c3d-4b94-9d30-0a311418037e-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\61dd3da2-07e9-4863-ac61-50930156905e-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\6f363a57-2094-4d3a-9252-ae2e2a76a97b-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\7324f4fb-bda6-4faf-b0b2-dbfa472cf013-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\807eeca9-35fe-4899-89e0-079449e1b6db-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\8435a280-7ead-418b-9b63-f29a0816ec7a-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\8d6d1103-2304-4f92-8af5-7ff649d7b557-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\a8d1a725-ec09-4c22-b483-153160780214-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\abf10899-367e-4dda-b685-d3a475d64570-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-appInfo.mdb" />
     <Content Include="App_Data\WereViewApp-Accounts.mdf" />
     <Content Include="App_Data\WereViewApp-Accounts_log.ldf">
       <DependentUpon>WereViewApp-Accounts.mdf</DependentUpon>
@@ -603,6 +616,10 @@
     <Content Include="Content\Less\bootstrap-datetimepicker.less" />
     <Content Include="Content\Less\category-page.less" />
     <Content Include="Content\Less\color-fonts.less" />
+    <Content Include="Content\Less\Css\extra-remixens.css" />
+    <Content Include="Content\Less\Css\extra-remixens.min.css">
+      <DependentUpon>extra-remixens.css</DependentUpon>
+    </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
     <Content Include="Content\Less\less-imports.less" />
@@ -883,7 +900,9 @@
     <Content Include="Uploads\Images\YoutubeCovers\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\fa1595d4-da44-4205-b3dd-6b6e524866d0-0.jpg" />
-    <Content Include="WereViewApp.publish.xml" />
+    <Content Include="Content\Less\Css\extra-remixens.css.map">
+      <DependentUpon>extra-remixens.css</DependentUpon>
+    </Content>
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />
@@ -1204,6 +1223,7 @@
     <Content Include="Views\Tags\GetTagDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\DatabaseTables\" />
     <Folder Include="App_Data\DataCached\SearchResult\" />
     <Folder Include="App_Data\elmah\" />
     <Folder Include="Areas\Admin\Models\" />

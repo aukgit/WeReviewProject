@@ -1591,4 +1591,51 @@ q:after {
   font-size: 2.2em;
   padding-right: 5px;
 }
+.breadcrumb {
+  background-color: #E0ECF1;
+  margin: 5px 0 -8px 0;
+  padding: 6px 16px;
+  border: none;
+  color: white;
+  border-radius: 0;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.breadcrumb.single-app {
+  margin: 5px 0 6px 0;
+}
+@media only screen and (max-width: 480px) {
+  .breadcrumb.single-app {
+    display: none;
+  }
+}
+.breadcrumb a {
+  color: #ff7200;
+  cursor: pointer;
+  font-weight: bold;
+}
+.breadcrumb a:hover {
+  color: #ff4d00;
+}
+.breadcrumb li:last-child a {
+  color: grey;
+  cursor: default;
+  font-weight: normal;
+}
+.breadcrumb li:last-child a:hover {
+  color: grey;
+}
+.breadcrumb > li + li:before {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f061";
+  padding: 0 9px;
+  font-size: 0.9em;
+  /*color: dodgerblue;*/
+  color: #FF7200;
+}
 /*# sourceMappingURL=front-developer.css.map */
