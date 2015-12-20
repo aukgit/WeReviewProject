@@ -1638,4 +1638,22 @@ q:after {
   /*color: dodgerblue;*/
   color: #FF7200;
 }
+.btn-facebook {
+  background-color: #47639E;
+  font-size: 1em;
+}
+.btn-facebook:before {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f082 ";
+  padding-right: 7px;
+}
+.btn-facebook:hover {
+  background-color: #3356A0;
+  color: white;
+}
 /*# sourceMappingURL=front-developer.css.map */

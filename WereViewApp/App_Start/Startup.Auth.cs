@@ -79,31 +79,9 @@ namespace WereViewApp {
                         }
                     }
                 };
-
                 facebookAuthenticationOptions.Scope.Add("user_birthday");
                 facebookAuthenticationOptions.Scope.Add("public_profile");
                 facebookAuthenticationOptions.Scope.Add("user_friends");
-                //facebookAuthenticationOptions.Scope.Add("publish_stream");
-                //facebookAuthenticationOptions.Scope.Add("friends_likes");
-                //facebookAuthenticationOptions.Scope.Add("user_actions.news");
-                //facebookAuthenticationOptions.Scope.Add("user_actions.video");
-                //facebookAuthenticationOptions.Scope.Add("user_education_history");
-                //facebookAuthenticationOptions.Scope.Add("manage_pages");
-                facebookAuthenticationOptions.Scope.Add("user_about_me");
-                //facebookAuthenticationOptions.Scope.Add("user_likes");
-                //facebookAuthenticationOptions.Scope.Add("user_friends");
-                //facebookAuthenticationOptions.Scope.Add("user_interests");
-                facebookAuthenticationOptions.Scope.Add("user_location");
-                //facebookAuthenticationOptions.Scope.Add("user_photos");
-                //facebookAuthenticationOptions.Scope.Add("user_relationships");
-                //facebookAuthenticationOptions.Scope.Add("user_relationship_details");
-                //facebookAuthenticationOptions.Scope.Add("user_status");
-                //facebookAuthenticationOptions.Scope.Add("user_tagged_places");
-                //facebookAuthenticationOptions.Scope.Add("user_videos");
-                facebookAuthenticationOptions.Scope.Add("user_website");
-                //facebookAuthenticationOptions.Scope.Add("read_friendlists");
-                //facebookAuthenticationOptions.Scope.Add("user_mobile_phone");
-                //facebookAuthenticationOptions.Scope.Add("read_stream");
                 facebookAuthenticationOptions.Scope.Add("email");
                 app.UseFacebookAuthentication(facebookAuthenticationOptions);
 
