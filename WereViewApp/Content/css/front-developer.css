@@ -1652,7 +1652,9 @@ q:after {
   content: "\f082 ";
   padding-right: 7px;
 }
-.btn-facebook:hover {
+.btn-facebook:hover,
+.btn-facebook:active,
+.btn-facebook:focus {
   background-color: #3356A0;
   color: white;
 }
