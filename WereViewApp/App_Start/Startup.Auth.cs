@@ -1,7 +1,4 @@
-﻿using WereViewApp.Modules.Claims;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.Identity;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
@@ -9,10 +6,10 @@ using Microsoft.Owin.Security.Facebook;
 using Owin;
 using System;
 using System.Security.Claims;
+using WereViewApp.Models.Context;
+using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Modules;
-using System.Collections.Specialized;
-using System.Web;
-using System.Web.Mvc;
+using WereViewApp.Modules.Claims;
 //using WereViewApp.Modules.Garbage;
 
 
@@ -79,7 +76,6 @@ namespace WereViewApp {
                         }
                     }
                 };
-                facebookAuthenticationOptions.Scope.Add("user_birthday");
                 facebookAuthenticationOptions.Scope.Add("public_profile");
                 facebookAuthenticationOptions.Scope.Add("user_friends");
                 facebookAuthenticationOptions.Scope.Add("email");
