@@ -19,7 +19,6 @@ namespace WereViewApp.Helpers {
     public static class HtmlHelpers {
         private const string Selected = "selected='selected'";
         public static int TruncateLength = AppConfig.TruncateLength;
-
         #region Icons generate : badge
 
         public static HtmlString GetBadge(this HtmlHelper helper, long number) {
@@ -104,9 +103,10 @@ namespace WereViewApp.Helpers {
         public static HtmlString SubmitButton(this HtmlHelper helper, string buttonName = "Submit",
             string iconClass = "fa fa-floppy-o",
             string tooltip = "",
-            string btnType = "Submit",
+            string additionalClasses = "btn btn-success",
             bool placeIconLeft = true,
-            string additionalClasses = "btn btn-success") {
+            string btnType = "Submit"
+            ) {
             const string iconFormt = "<i class=\"{0}\"></i>";
             string leftIcon = "",
                    rightIcon = "";
@@ -116,7 +116,7 @@ namespace WereViewApp.Helpers {
                 rightIcon = string.Format(iconFormt, iconClass);
             }
             var buttonHtml = String.Format(
-                "<button type=\"{0}\"  title=\"{1}\" class=\"{2}\">{3}{4}{5}</button>",
+                "<button type=\"{0}\"  title=\"{1}\" class=\"{2}\">{3} {4} {5}</button>",
                 btnType, tooltip, additionalClasses, leftIcon, buttonName, rightIcon);
             return new HtmlString(buttonHtml);
         }
@@ -367,28 +367,41 @@ namespace WereViewApp.Helpers {
             }
             return new HtmlString(markup);
         }
+
         /// <summary>
         /// Generates same page url anchor with an icon left or right
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="linkDisplayName">Link display name</param>
+        /// <param name="routeValues"></param>
         /// <param name="title">Link tooltip title</param>
         /// <param name="iconClass">Icon classes: Font-awesome icons or bootstrap icon classes</param>
         /// <param name="h1">Is nested inside a H1 element (W3c valid).</param>
         /// <param name="addClass">Anchor class</param>
         /// <param name="isLeft"></param>
+        /// <param name="actionName"></param>
+        /// <param name="controllerName"></param>
         /// <returns></returns>
         public static HtmlString ActionLinkWithIcon(this HtmlHelper helper,
             string linkDisplayName,
             string actionName,
-            string controllerName = "",
+            string controllerName,
+            object routeValues,
             string title,
             string iconClass,
-            bool h1 = false,
             string addClass = "",
+            bool h1 = false,
             bool isLeft = true) {
             var markup = "";
-            var uri = UrlHelper.GenerateUrl((string)null, actionName, controllerName, protocol, (string)null, (string)null, TypeHelper.ObjectToDictionary(routeValues), this.RouteCollection, this.RequestContext, true);
+            string uri = "";
+            var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
+            if (!string.IsNullOrWhiteSpace(controllerName)) {
+                uri = urlHelper.Action(actionName, controllerName, routeValues);
+            } else if (routeValues != null) {
+                uri = urlHelper.Action(actionName, routeValues);
+            } else {
+                uri = urlHelper.Action(actionName);
+            }
             uri = AppVar.Url + uri;
 
             var icon = "";
@@ -397,10 +410,10 @@ namespace WereViewApp.Helpers {
             }
             if (isLeft) {
                 //left icon
-                markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{4} {3}</a>", uri, addClass, title, linkName, icon);
+                markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{4} {3}</a>", uri, addClass, title, linkDisplayName, icon);
             } else {
                 //right icon
-                markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{3} {4}</a>", uri, addClass, title, linkName, icon);
+                markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{3} {4}</a>", uri, addClass, title, linkDisplayName, icon);
             }
             if (h1) {
                 markup = string.Format("<h1 title='{0}' class='h3'>{1}</h1>", title, markup);

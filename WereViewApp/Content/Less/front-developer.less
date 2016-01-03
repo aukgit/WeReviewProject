@@ -23,7 +23,7 @@
 }
 
 // other imports
-//@import "seo-optimize.less";
+//@import "seo-optimize.less"; 
 //bootstrap overrides
 .btn {
     font-weight: normal;
@@ -55,10 +55,19 @@
 
 .btn-primary, .btn-default {
     background-color: #ff7200;
-}
+} 
 
 .btn-success {
     background-color: #19c234;
+
+    &:hover {
+        background-color: darken( green, 20%); 
+    }
+}
+
+.btn-lg, .btn-group-lg > .btn {
+    padding: 15px 16px 13px;
+    line-height: 15px;
 }
 
 .input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child), .input-group .form-control:not(:first-child):not(:last-child) {
@@ -1376,7 +1385,7 @@ q:after {
         padding-right: 7px;
     }
 
-    &:hover,&:active,&:focus {
+    &:hover, &:active, &:focus {
         background-color: #3356A0;
         color: white;
     }

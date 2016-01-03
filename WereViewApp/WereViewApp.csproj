@@ -601,13 +601,10 @@
     <Content Include="Content\css\validator.min.css">
       <DependentUpon>validator.css</DependentUpon>
     </Content>
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\fonts\fontawesome-webfont78ce.eot" />
-    <Content Include="Content\fonts\fontawesome-webfont78ce.ttf" />
-    <Content Include="Content\fonts\fontawesome-webfont78ce.woff" />
-    <Content Include="Content\fonts\fontawesome-webfontd41d.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Areas\Admin\Views\AppCategories\_CreateOrEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_NavBar.cshtml" />
@@ -618,10 +615,6 @@
     <Content Include="Content\Less\bootstrap-datetimepicker.less" />
     <Content Include="Content\Less\category-page.less" />
     <Content Include="Content\Less\color-fonts.less" />
-    <Content Include="Content\Less\Css\extra-remixens.css" />
-    <Content Include="Content\Less\Css\extra-remixens.min.css">
-      <DependentUpon>extra-remixens.css</DependentUpon>
-    </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
     <Content Include="Content\Less\less-imports.less" />
@@ -902,9 +895,11 @@
     <Content Include="Uploads\Images\YoutubeCovers\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\fa1595d4-da44-4205-b3dd-6b6e524866d0-0.jpg" />
-    <Content Include="Content\Less\Css\extra-remixens.css.map">
-      <DependentUpon>extra-remixens.css</DependentUpon>
-    </Content>
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />

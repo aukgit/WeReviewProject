@@ -10,12 +10,13 @@
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
                 @Html.AntiForgeryToken()
-                <span>Use a local account to log in. If you don't have any account please </span> @Url.Action("sign up", "Register", null, new { @class = "btn btn-info" })
+                <span>
+                    Use a local account to log in.
+                    If you don't have any account please
+                </span> @Html.ActionLinkWithIcon("sign up", "Register", null, null, "", "fa fa-user-plus", "btn btn-success btn-lg")
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
                 @Html.EditorFor(m => m.Email, new { @class = "form-control" })
-
                 @Html.EditorFor(m => m.Password, new { @class = "form-control" })
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
@@ -24,6 +25,7 @@
                                 @Html.CheckBoxFor(m => m.RememberMe)
                                 @Html.LabelFor(m => m.RememberMe)
                             </div>
+                            @Html.SubmitButton("Signin", "fa fa-sign-in", "Signin to " + AppVar.Name)
                             <input type="submit" value="Log in" class="btn btn-primary" />
                         </div>
                     </div>
@@ -36,6 +38,7 @@
                 </div>
             }
         </section>
+
     </div>
     <div class="col-md-4">
         <section id="socialLoginForm">
