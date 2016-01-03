@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Linq;
 using DevMvcComponent.Error;
+using Microsoft.AspNet.Identity;
 using WereViewApp.Models.Context;
+using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Models.ViewModels;
+using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.UserError;
 
 namespace WereViewApp.Modules.Validations {
@@ -39,7 +42,38 @@ namespace WereViewApp.Modules.Validations {
                     return false;
                 }
             }
+            return true;
+        }
 
+        /// <summary>
+        /// Is user already exist.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsUserDoesntExist() {
+            if (AppVar.Setting.IsFirstUserFound) {
+                // first user is already registered.
+                ApplicationUser user;
+                if (UserManager.IsUserNameExistWithValidation(_viewMdoel.UserName, out user)) {
+                    ErrorCollector.AddHigh(MessageConstants.UserNameExist, "", "", "", MessageConstants.SolutionContactAdmin);
+                    return false; // not valid
+                }
+            } 
+            return true;
+        }
+
+        /// <summary>
+        /// Is email already exist.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsEmailDoesntExist() {
+            if (AppVar.Setting.IsFirstUserFound) {
+                // first user is already registered.
+                ApplicationUser user;
+                if (UserManager.IsEmailExist(_viewMdoel.Email)) {
+                    ErrorCollector.AddHigh(MessageConstants.UserNameExist, "", "", "", MessageConstants.SolutionContactAdmin);
+                    return false; // not valid
+                }
+            }
             return true;
         }
 
@@ -88,6 +122,8 @@ namespace WereViewApp.Modules.Validations {
         /// </summary>
         public override void CollectValidation() {
             AddValidation(RegisterCodeValidate);
+            AddValidation(IsUserDoesntExist);
+            AddValidation(IsEmailDoesntExist);
             //AddValidation(LanguageValidate);
             //AddValidation(TimezoneValidate);
         }

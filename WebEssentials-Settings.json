@@ -21,7 +21,7 @@
     "MinifyInPlace": false,
     "OutputDirectory": null,
     "ProcessSourceMapsForEditorEnhancements": true,
-    "ShowPreviewPane": true,
+    "ShowPreviewPane": true,+
     "WrapClosure": true
   },
   "Css": {
@@ -110,7 +110,7 @@
   },
   "Less": {
     "AdjustRelativePaths": true,
-    "CompileOnBuild": false,
+    "CompileOnBuild": true,
     "CompileOnSave": true,
     "EnableChainCompilation": true,
     "GenerateSourceMaps": true,

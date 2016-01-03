@@ -921,6 +921,10 @@ $.WeReviewApp = {
             }
         }
     },
+
+    registerPage : function() {
+        
+    },
     initializeAppForms: function () {
         var self = $.WeReviewApp;
         self.$appFormWrapper = $.byId("app-form");

@@ -29,77 +29,6 @@ namespace WereViewApp.Modules.DevUser {
 
         #endregion
 
-        #region External Validations
-
-        /// <summary>
-        ///     External Validations
-        ///     Register Code Validation
-        /// </summary>
-        /// <param name="model"></param>
-        public static async Task<bool> ExternalUserValidation(RegisterViewModel model, ApplicationDbContext db,
-            ErrorCollector errors = null) {
-            var ValidOtherConditions = true;
-            if (errors == null) {
-                errors = new ErrorCollector();
-            }
-            if (!AppVar.Setting.IsRegisterCodeRequiredToRegister) {
-                model.RegistraterCode = Guid.NewGuid();
-                model.Role = -1;
-            } else {
-                var regCode =
-                    db.RegisterCodes.FirstOrDefault(
-                        n =>
-                            n.IsUsed == false && n.RoleID == model.Role && n.RegisterCodeID == model.RegistraterCode &&
-                            !n.IsExpired);
-                if (regCode != null) {
-                    if (regCode.ValidityTill <= DateTime.Now) {
-                        // not valid
-                        regCode.IsExpired = true;
-                        errors.AddMedium(MessageConstants.RegistercCodeExpired, MessageConstants.SolutionContactAdmin);
-                        await db.SaveChangesAsync();
-                        ValidOtherConditions = false;
-                    }
-                } else {
-                    errors.AddMedium(MessageConstants.RegistercCodeNotValid, MessageConstants.SolutionContactAdmin);
-                    ValidOtherConditions = false;
-                }
-            }
-
-            //validation for country language
-            //var languages = CachedQueriedData.GetLanguages(model.CountryID, 0);
-            //if (languages == null) {
-            //    //select english as default.
-            //    model.CountryLanguageID = CachedQueriedData.GetDefaultLanguage().CountryLanguageID;
-            //} else if (languages.Count > 1) {
-            //    //it should be selected inside the register panel.
-            //    ValidOtherConditions = !(model.CountryLanguageID == 0); //if zero then false.
-            //    errors.AddMedium("You forgot you set your language.");
-            //} else if (languages.Count == 1) {
-            //    model.CountryLanguageID = languages[0].CountryLanguageID;
-            //}
-
-            ////validation for country timzone
-            //var timezones = CachedQueriedData.GetTimezones(model.CountryID, 0);
-            //if (timezones != null && timezones.Count > 1) {
-            //    //it should be selected inside the register panel.
-            //    ValidOtherConditions = !(model.UserTimeZoneID == 0); //if zero then false.
-            //    errors.AddMedium("You forgot you set your time zone.");
-            //} else if (timezones.Count == 1) {
-            //    model.UserTimeZoneID = timezones[0].UserTimeZoneID;
-            //} else {
-            //    ValidOtherConditions = false;
-            //    errors.AddMedium(
-            //        "You time zone not found. Please contact with admin and notify him/her about the issue to notify developer.");
-            //}
-
-
-            if (!ValidOtherConditions) {
-                AppConfig.SetGlobalError(errors);
-            }
-            return ValidOtherConditions;
-        }
-
-        #endregion
 
         #region Registration Code
 
@@ -429,6 +358,21 @@ namespace WereViewApp.Modules.DevUser {
 
         public static bool IsEmailExist(string email) {
             return Manager.Users.Any(n => n.Email == email);
+        }
+        public static bool IsEmailExistWithValidation(string email, out ApplicationUser user) {
+            user = null;
+            if (!string.IsNullOrWhiteSpace(email)) {
+                const int max = 30;
+                const int min = 3;
+                const string emailPattern = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
+                var regularExpressionValidation = Regex.IsMatch(email, emailPattern, RegexOptions.Compiled) &&
+                                                  (email.Length >= min && email.Length <= max);
+                if (regularExpressionValidation) {
+                    user = Manager.Users.FirstOrDefault(n => n.Email == email);
+                    return user != null;
+                }
+            }
+            return false;
         }
 
         #endregion

@@ -10,13 +10,13 @@
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
                 @Html.AntiForgeryToken()
-                <h4>Use a local account to log in. If you don't have any account please @Html.ActionLink("sign up", "Register").</h4>
+                <span>Use a local account to log in. If you don't have any account please </span> @Url.Action("sign up", "Register", null, new { @class = "btn btn-info" })
                 <hr />
-                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                @Html.EditorFor(m => m.Email, new {@class = "form-control"})
+                @Html.EditorFor(m => m.Email, new { @class = "form-control" })
 
-                @Html.EditorFor(m => m.Password, new {@class = "form-control"})
+                @Html.EditorFor(m => m.Password, new { @class = "form-control" })
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <div class="login-btn-wrapper">
@@ -28,16 +28,18 @@
                         </div>
                     </div>
                 </div>
-                @* Enable this once you have account confirmation enabled for password reset functionality
+                <div>
+                    Enable this once you have account confirmation enabled for password reset functionality
                     <p>
                         @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
+                    </p>
+                </div>
             }
         </section>
     </div>
     <div class="col-md-4">
         <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel {Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl})
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
         </section>
     </div>
 </div>

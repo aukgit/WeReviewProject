@@ -37,7 +37,7 @@ $(function () {
         $showLessBtns: $(".less-btn"),
         $moreExcert: $(".more"),
         execute: function () {
-            $("div.app-suggested-list-items-mobile:first-child,div.featured-apps-list-items").owlCarousel({
+            $("div.app-suggested-list-items-mobile:first,div.featured-apps-list-items").owlCarousel({
                 navigation: true,
                 navigationText: [
                   "<i class='fa fa-chevron-circle-left'></i>",

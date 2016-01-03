@@ -1,0 +1,19 @@
+﻿@model WereViewApp.Models.ViewModels.EmailResendViewModel
+@{
+    ViewBag.title = "Confirmation Email Resend Successfully!";
+}
+<div class="top-gap-2x"></div>
+<div class="f-em-23 green">
+    <i class="fa fa-paper-plane "></i> @ViewBag.title
+</div>
+<div class="sky-blue f-em-15">
+    A confirmation email is again sent. You have already registered and your account is created successfully. However, it is not activated yet, please login to your email account to activate the account. Please check spam or junk folder.
+</div>
+<div class="sky-blue f-em-15">
+    You can also resend your activation code.
+</div>
+@using (Html.BeginForm("ConfirmationEmailResend", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" })) {
+    @Html.EditorFor(n=> n.Email)
+    @Html.SubmitButton("Resend", "fa fa-envelope-o")
+}
+<div class="top-gap-2x"></div>

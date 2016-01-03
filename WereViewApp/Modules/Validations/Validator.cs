@@ -45,11 +45,11 @@ namespace WereViewApp.Modules.Validations {
         /// </summary>
         public abstract void CollectValidation();
         /// <summary>
-        /// Run all the validation methods and then 
+        /// Run all the validation methods in order and then 
         /// set the ErrorCollector for the session.
         /// </summary>
         /// <returns>Returns true if no error exist</returns>
-        public bool FinalizeValidation() {
+        public bool ValidateEveryValidations() {
             var anyValidationErrorExist = false;
             foreach (var action in ValidationCollection) {
                 if (!anyValidationErrorExist) {

@@ -252,6 +252,7 @@
     <Compile Include="Models\POCO\Enum\FeedbackStatusTypes.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
     <Compile Include="Models\POCO\Structs\FeedbackCategoryIDs.cs" />
+    <Compile Include="Models\ViewModels\EmailResendViewModel.cs" />
     <Compile Include="Modules\Extensions\ViewEngine\RenderingView.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapGenerator.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapItem.cs" />
@@ -1209,6 +1210,7 @@
     <Content Include="Views\Shared\EditorTemplates\Boolean-Button.cshtml" />
     <Content Include="Views\Profiles\_UserProfileDetails.cshtml" />
     <Content Include="Views\App\_AppDescription.cshtml" />
+    <Content Include="Views\Account\ConfirmationEmailResend.cshtml" />
     <None Include="Views\Reviews\User.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />

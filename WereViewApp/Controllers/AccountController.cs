@@ -15,6 +15,7 @@ using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Extensions.IdentityExtension;
 using WereViewApp.Modules.Mail;
 using WereViewApp.Modules.Role;
+using WereViewApp.Modules.Validations;
 
 #endregion
 
@@ -46,6 +47,14 @@ namespace WereViewApp.Controllers {
         #endregion
 
         #region Confirm Email
+
+        private async void SendConfirmationEmail(ApplicationUser user) {
+            var code = Manager.GenerateEmailConfirmationToken(user.Id);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account",
+                new { userId = user.Id, code, codeHashed = user.GeneratedGuid }, Request.Url.Scheme);
+            var mailString = MailHtml.EmailConfirmHtml(user, callbackUrl);
+            AppVar.Mailer.Send(user.Email, "Email Confirmation", mailString);
+        }
 
         //[CompressFilter(Order = 1)]
         [AllowAnonymous]
@@ -284,15 +293,7 @@ namespace WereViewApp.Controllers {
 
         #region Register
 
-        [AllowAnonymous]
-        [ChildActionOnly]
-        //[OutputCache(Duration = 86400)]
-        public ActionResult RegisterFields() {
-            SetRolesInViewBag();
-            SetThingsInViewBag();
-            //ViewBag.time = DateTime.Now;
-            return PartialView("_RegisterFields");
-        }
+
 
 
         [AllowAnonymous]
@@ -311,7 +312,14 @@ namespace WereViewApp.Controllers {
         public async Task<ActionResult> Register(RegisterViewModel model) {
             var errors = new ErrorCollector();
             //External Validation.
-            var validOtherConditions = await UserManager.ExternalUserValidation(model, _db, errors);
+            var validator = new DevUserValidator(model, errors, _db);
+            var validOtherConditions = validator.ValidateEveryValidations();
+            var emailResender = EmailResendViewModel.GetEmailResendViewModelFromSession();
+
+            if (emailResender != null) {
+                // that means user is already created successfully.
+                return View("InboxCheck");
+            }
 
             if (ModelState.IsValid && validOtherConditions) {
                 var user = UserManager.GetUserFromViewModel(model); // get user from view model.
@@ -325,18 +333,17 @@ namespace WereViewApp.Controllers {
 
                         #region Send an email to the user about mail confirmation
 
-                        var code = Manager.GenerateEmailConfirmationToken(user.Id);
-                        var callbackUrl = Url.Action("ConfirmEmail", "Account",
-                            new { userId = user.Id, code, codeHashed = user.GeneratedGuid }, Request.Url.Scheme);
-                        var mailString = MailHtml.EmailConfirmHtml(user, callbackUrl);
-                        AppVar.Mailer.Send(user.Email, "Email Confirmation", mailString);
+                        SendConfirmationEmail(user);
 
                         #endregion
 
                         #region Sign out because registration is not complete
 
-                        return SignOutProgrammatically();
-
+                        SignOutProgrammatically();
+                        EmailResendViewModel.SessionStore(new EmailResendViewModel() {
+                            Email = user.Email
+                        });
+                        return View("InboxCheck");
                         #endregion
                     }
                     // first user not found or email doesn't need to be checked.
@@ -609,5 +616,14 @@ namespace WereViewApp.Controllers {
         }
 
         #endregion
+        [HttpPost]
+        public ActionResult ConfirmationEmailResend(EmailResendViewModel email) {
+            ApplicationUser user;
+            if (email.IsValid() && UserManager.IsEmailExistWithValidation(email.Email, out user)) {
+                // email exist so send a confirmation mail again
+                SendConfirmationEmail(user);
+            }
+            return View();
+        }
     }
 }
