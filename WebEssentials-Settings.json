@@ -13,7 +13,7 @@
   },
   "CoffeeScript": {
     "CompileOnBuild": false,
-    "CompileOnSave": true,
+    "CompileOnSave": true, 
     "GenerateSourceMaps": true,
     "LintOnBuild": false,
     "LintOnSave": true,
@@ -114,8 +114,8 @@
     "CompileOnSave": true,
     "EnableChainCompilation": true,
     "GenerateSourceMaps": true,
-    "MinifyInPlace": false,
-    "OutputDirectory": "../Css",
+    "MinifyInPlace": true,
+    "OutputDirectory": "../Css/SS",
     "ProcessSourceMapsForEditorEnhancements": true,
     "ShowPreviewPane": true,
     "StrictMath": false
