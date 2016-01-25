@@ -401,7 +401,7 @@ namespace WereViewApp.Controllers {
             // If the user does not have an account, then prompt the user to create an account
             ViewBag.ReturnUrl = returnUrl;
             ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-            return View("ExternalLoginConfirmation", new RegisterViewModel { Email = loginInfo.Email });
+            return View("ExternalLoginConfirmation", new RegisterViewModel { Email = loginInfo.Email, FirstName = loginInfo. });
         }
 
         #endregion

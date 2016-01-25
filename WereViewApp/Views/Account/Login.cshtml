@@ -28,10 +28,8 @@
                                 @Html.CheckBoxFor(m => m.RememberMe)
                                 @Html.LabelFor(m => m.RememberMe)
                             </div>
-                            <div class="btn-group inline-block">
-                                @Html.ActionLinkWithIcon("Forgot", "ForgotPassword", null, null, "Forget password?", "fa fa-retweet", "btn btn-primary")
-                                @Html.SubmitButton("Signin", "fa fa-sign-in", "Signin to " + AppVar.Name)
-                            </div>
+                            @Html.SubmitButton("Signin", "fa fa-sign-in", "Signin to " + AppVar.Name)
+                            @Html.ActionLinkWithIcon("Forgot", "ForgotPassword", null, null, "Forget password?", "fa fa-retweet", "btn btn-primary")
                         </div>
                     </div>
                 </div>

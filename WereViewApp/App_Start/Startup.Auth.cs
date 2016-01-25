@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Facebook;
 using Owin;
 using System;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Modules;
@@ -51,40 +52,25 @@ namespace WereViewApp {
             #region Facebook External Authentication
 
             if (AppConfig.Setting.IsFacebookAuthentication) {
-                var facebookAuthenticationOptions = new FacebookAuthenticationOptions() {
-                    AppId = AppConfig.Setting.FacebookClientID.ToString(),
-                    AppSecret = AppConfig.Setting.FacebookSecret,
-                    AuthenticationType = "FB",
-                    SignInAsAuthenticationType = "ExternalCookie",
-                    Provider = new FacebookAuthenticationProvider {
-                        OnAuthenticated = async ctx => {
-                            ctx.Identity.AddClaim(new Claim(ProprietaryClaims.BIRTHDAY, ctx.User["birthday"].ToString()));
-                            ctx.Identity.AddClaim(new Claim(ProprietaryClaims.COUNTRY, ctx.User["location"].ToString()));
-                            ctx.Identity.AddClaim(new Claim(ProprietaryClaims.GENDER, ctx.User["gender"].ToString()));
-                            ctx.Identity.AddClaim(new Claim(ProprietaryClaims.STATE_OR_PROVINCE, ctx.User["location"].ToString()));
-                            ctx.Identity.AddClaim(new Claim(ProprietaryClaims.EMAIL, ctx.User["email"].ToString()));
-                            ctx.Identity.AddClaim(new Claim(ProprietaryClaims.FIRST_NAME, ctx.User["first_name"].ToString()));
-                            ctx.Identity.AddClaim(new Claim(ProprietaryClaims.LAST_NAME, ctx.User["last_name"].ToString()));
-                            ctx.Identity.AddClaim(new Claim(ProprietaryClaims.DISPLAY_NAME, ctx.User["name"].ToString()));
-                            // ctx.Identity.AddClaim(new Claim(ProprietaryClaims.RELATIONSHIP_STATUS, ctx.User["relationship_status"].ToString()));
-                            // ctx.Identity.AddClaim(new Claim(ProprietaryClaims.INSPIREATIONAL_PEOPLE, ctx.User["inspirational_people"].ToString()));
-                            ctx.Identity.AddClaim(new Claim(ProprietaryClaims.TIME_ZONE, ctx.User["timezone"].ToString()));
-                            ctx.Identity.AddClaim(new Claim(ProprietaryClaims.WEBSITE, ctx.User["website"].ToString()));
-                            //  ctx.Identity.AddClaim(new Claim(ProprietaryClaims.PHONE, ctx.User["inspirational_people"].ToString()));
-                            //  ctx.Identity.AddClaim(new Claim(ProprietaryClaims.ABOUT, ctx.User["inspirational_people"].ToString()));
-                            ctx.Identity.AddClaim(new Claim(ProprietaryClaims.USER_STRING, ctx.User.ToString()));
-                        }
-                    }
-                };
-                facebookAuthenticationOptions.Scope.Add("public_profile");
-                facebookAuthenticationOptions.Scope.Add("user_friends");
-                facebookAuthenticationOptions.Scope.Add("email");
-                app.UseFacebookAuthentication(facebookAuthenticationOptions);
+                var facebookOptions = new FacebookAuthenticationOptions {
+                      AppId = AppConfig.Setting.FacebookClientID.ToString(),
+                      AppSecret = AppConfig.Setting.FacebookSecret,
+                      Provider = new FacebookAuthenticationProvider() {
+                          OnAuthenticated = (context) => {
+                              context.Identity.AddClaim(new Claim("FacebookAccessToken", context.AccessToken));
+                              return Task.FromResult(0);
 
+                          }
+                      },
+                      SignInAsAuthenticationType = DefaultAuthenticationTypes.ExternalCookie,
+                      SendAppSecretProof = true
+                };
+                facebookOptions.Scope.Add("email user_photos");
+                app.UseFacebookAuthentication(facebookOptions);
             }
             #endregion
 
-            #region Commentout logins: Google, Twiter, Microsoft
+            #region Commented out logins: Google, Twiter, Microsoft
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",
