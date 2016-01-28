@@ -19,6 +19,14 @@ namespace WereViewApp.Helpers {
     public static class HtmlHelpers {
         private const string Selected = "selected='selected'";
         public static int TruncateLength = AppConfig.TruncateLength;
+        
+        public static string GetBaseUrl(this HttpRequestBase request)
+        {
+          if (request.Url == (Uri) null)
+            return string.Empty;
+          else
+            return request.Url.Scheme + "://" + request.Url.Authority + VirtualPathUtility.ToAbsolute("~/");
+        }
         #region Icons generate : badge
 
         public static HtmlString GetBadge(this HtmlHelper helper, long number) {
