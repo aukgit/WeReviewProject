@@ -13,19 +13,33 @@ using WereViewApp.Modules.Mail;
 using WereViewApp.Modules.Menu;
 using WereViewApp.Modules.TimeZone;
 using WereViewApp.Modules.Uploads;
-using Zone = WereViewApp.Modules.TimeZone.Zone;
 
 namespace WereViewApp.Helpers {
     public static class HtmlHelpers {
         private const string Selected = "selected='selected'";
         public static int TruncateLength = AppConfig.TruncateLength;
-        
-        public static string GetBaseUrl(this HttpRequestBase request)
-        {
-          if (request.Url == (Uri) null)
-            return string.Empty;
-          else
+        /// <summary>
+        /// Returns BaseUrl and slash.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static string GetBaseUrl(this HttpRequestBase request) {
+            if (request.Url == null) {
+                return "";
+            }
             return request.Url.Scheme + "://" + request.Url.Authority + VirtualPathUtility.ToAbsolute("~/");
+        }
+        /// <summary>
+        /// Returns BaseUrl and slash.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static string GetBaseUrl(this HttpContext context) {
+            if (context != null) {
+                var request = context.Request;
+                return request.Url.Scheme + "://" + request.Url.Authority + VirtualPathUtility.ToAbsolute("~/");
+            }
+            return "";
         }
         #region Icons generate : badge
 
