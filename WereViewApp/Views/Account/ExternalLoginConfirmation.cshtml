@@ -1,25 +1,26 @@
 ﻿@model WereViewApp.Models.ViewModels.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    string title = "Register with @" + ViewBag.LoginProvider + " account";
+    ViewBag.Title = title;
 }
-<h2>@ViewBag.Title.</h2>
-<h3>Associate your @ViewBag.LoginProvider account.</h3>
-
-@using (Html.BeginForm("ExternalLoginConfirmation", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", role = "form"})) {
+@Html.SamePageLinkWithIcon(title, title, "fa fa-user-plus")
+<hr />
+@using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
     @Html.AntiForgeryToken()
-    <h4>Association Form</h4>
-    <hr />
     @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-    <p class="text-info label label-success">
+    <label class="label label-success">
         You've successfully authenticated with <strong>@ViewBag.LoginProvider</strong>.
         Please enter a user name for this site below and click the Register button to finish
         logging in.
-    </p>
+    </label>
     @Html.EditorFor(n => n.UserName, "UserName")
     @Html.EditorFor(n => n.Phone, "Phone")
     @Html.EditorFor(n => n.FirstName)
     @Html.EditorFor(n => n.LastName)
-    @Html.EditorFor(n=> n.Email, "Email")
+    @Html.EditorFor(n => n.Email, "Email")
+    @Html.HiddenFor(n => n.AccessToken)
+    @Html.HiddenFor(n => n.Password)
+    @Html.HiddenFor(n=> n.ConfirmPassword)
     <div class="form-group">
         <div class="col-md-10 col-md-offset-2">
             <button type="submit" class="btn btn-success">

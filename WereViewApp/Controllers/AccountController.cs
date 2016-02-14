@@ -1,6 +1,7 @@
 ﻿#region using block
 
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -105,46 +106,7 @@ namespace WereViewApp.Controllers {
 
         #endregion
 
-        #region ExternalLoginConfirm
 
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExternalLoginConfirmation(RegisterViewModel model, string returnUrl) {
-            if (User.Identity.IsAuthenticated) {
-                return RedirectToAction("Manage");
-            }
-
-            if (ModelState.IsValid) {
-                // Get the information about the user from the external login provider
-                var info = await AuthenticationManager.GetExternalLoginInfoAsync();
-                if (info == null) {
-                    return View("ExternalLoginFailure");
-                }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await Manager.CreateAsync(user);
-                if (result.Succeeded) {
-                    result = await Manager.AddLoginAsync(user.Id, info.Login);
-                    if (result.Succeeded) {
-                        await SignInAsync(user, false);
-
-                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                        // Send an email with this link
-                        // string code = await Manager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        // SendEmail(user.Email, callbackUrl, "Confirm your account", "Please confirm your account by clicking this link");
-
-                        return RedirectToLocal(returnUrl);
-                    }
-                }
-                AddErrors(result);
-            }
-
-            ViewBag.ReturnUrl = returnUrl;
-            return View(model);
-        }
-
-        #endregion
 
         #region Disassociate
 
@@ -291,11 +253,19 @@ namespace WereViewApp.Controllers {
 
         #endregion
 
+
+        #region Check Inbox / InboxCheck
+        public ActionResult Verify() {
+            var emailResender = EmailResendViewModel.GetEmailResendViewModelFromSession();
+            if (emailResender != null) {
+                return View("InboxCheck");
+            } else {
+                return AppVar.GetAuthenticationError("Not Authorized", "You have not logged in yet.");
+            }
+        }
+        #endregion
+
         #region Register
-
-
-
-
         [AllowAnonymous]
         public ActionResult Register() {
             if (UserManager.IsAuthenticated()) {
@@ -318,7 +288,7 @@ namespace WereViewApp.Controllers {
 
             if (emailResender != null) {
                 // that means user is already created successfully.
-                return View("InboxCheck");
+                return RedirectToActionPermanent("Verify");
             }
 
             if (ModelState.IsValid && validOtherConditions) {
@@ -329,6 +299,7 @@ namespace WereViewApp.Controllers {
                     RoleManager.AddTempRoleInfo(user, model.Role);
 
                     if (AppVar.Setting.IsConfirmMailRequired && AppVar.Setting.IsFirstUserFound) {
+                        // First user already found.
                         // mail needs to be confirmed and first user found.
 
                         #region Send an email to the user about mail confirmation
@@ -338,36 +309,77 @@ namespace WereViewApp.Controllers {
                         #endregion
 
                         #region Sign out because registration is not complete
-
                         SignOutProgrammatically();
-                        EmailResendViewModel.SessionStore(new EmailResendViewModel() {
-                            Email = user.Email
-                        });
-                        return View("InboxCheck");
+                        return RedirectToActionPermanent("Verify");
                         #endregion
+
                     }
                     // first user not found or email doesn't need to be checked.
                     if (!AppVar.Setting.IsFirstUserFound) {
                         // first haven't found
                         // This is for first user.
-
                         #region Send an email to the user about mail confirmation
-
-                        var code = Manager.GenerateEmailConfirmationToken(user.Id);
-                        var callbackUrl = AppVar.Url;
-                        var mailString = MailHtml.EmailConfirmHtml(user, callbackUrl);
-                        AppVar.Mailer.Send(user.Email, "Email Confirmation", mailString);
-
+                        SendConfirmationEmail(user);
                         #endregion
                     }
-                    CallCompleteRegistration(user.UserID, "Rookie");
-                    return View("InboxCheck");
+                    CallCompleteRegistration(user.UserID, "Rookie"); // only will be called for first user.
+                    return RedirectToActionPermanent("Verify");
+                }
+                AddErrors(result);
+            }
+            return View("Register", model);
+        }
+
+        #endregion
+
+        #region Send Confirmation Email
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ResendConfirmationMail(EmailResendViewModel resendModel) {
+            ApplicationUser user;
+            if (resendModel != null && !string.IsNullOrWhiteSpace(resendModel.Email) &&
+                UserManager.IsEmailExistWithValidation(resendModel.Email, out user)) {
+                // email exist so send a confirmation mail again
+                SendConfirmationEmail(user);
+                ViewBag.message =
+                    "A verification email has been sent to your email address. Please check the spam folder if necessary.";
+            } else {
+                ViewBag.message = "Sorry! your given information is not valid.";
+            }
+            return View("InboxCheck");
+        }
+        #endregion
+
+        #region ExternalLoginConfirm
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ExternalLoginConfirmation(RegisterViewModel model, string returnUrl) {
+            if (User.Identity.IsAuthenticated) {
+                return RedirectToAction("Manage");
+            }
+
+            if (ModelState.IsValid) {
+                // Get the information about the user from the external login provider
+                var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+                if (info == null) {
+                    return View("ExternalLoginFailure");
+                }
+                var user = UserManager.GetUserFromViewModel(model);
+                var result = await Manager.CreateAsync(user);
+                if (result.Succeeded) {
+                    result = await Manager.AddLoginAsync(user.Id, info.Login);
+                    if (result.Succeeded) {
+                        await SignInAsync(user, false);
+                        return RedirectToLocal(returnUrl);
+                    }
                 }
                 AddErrors(result);
             }
 
-            // If we got this far, something failed, redisplay form
-            //ViewBag.Roles = new SelectList(RoleManager.GetRoles(), "Id", "Name");
+            ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
 
@@ -401,7 +413,24 @@ namespace WereViewApp.Controllers {
             // If the user does not have an account, then prompt the user to create an account
             ViewBag.ReturnUrl = returnUrl;
             ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-            return View("ExternalLoginConfirmation", new RegisterViewModel { Email = loginInfo.Email, FirstName = loginInfo. });
+            var fullName = loginInfo.ExternalIdentity.Claims.FirstOrDefault(c => c.Type == "urn:facebook:name").Value;
+            var fullNameArray = fullName.Split(' ').ToList();
+            var lastName = fullNameArray.Last();
+            fullNameArray.RemoveAt(fullNameArray.Count - 1);
+            var firstName = string.Join(" ", fullNameArray);
+            var username = fullName.Replace(" ", ".").ToLower();
+            var accessToken = loginInfo.ExternalIdentity.Claims.FirstOrDefault(c => c.Type == "FacebookAccessToken").Value;
+            var registerModel = new RegisterViewModel {
+                Email = loginInfo.Email,
+                FirstName = firstName,
+                UserName = username,
+                LastName = lastName,
+                AccessToken = accessToken,
+                Password = "HiddenPassword#!123--=",
+                ConfirmPassword = "HiddenPassword#!123--="
+            };
+
+            return View("ExternalLoginConfirmation", registerModel);
         }
 
         #endregion
@@ -616,14 +645,7 @@ namespace WereViewApp.Controllers {
         }
 
         #endregion
-        [HttpPost]
-        public ActionResult ConfirmationEmailResend(EmailResendViewModel email) {
-            ApplicationUser user;
-            if (email.IsValid() && UserManager.IsEmailExistWithValidation(email.Email, out user)) {
-                // email exist so send a confirmation mail again
-                SendConfirmationEmail(user);
-            }
-            return View();
-        }
+
+
     }
 }

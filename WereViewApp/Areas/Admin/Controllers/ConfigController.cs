@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using DevMvcComponent;
 using WereViewApp.Models.Context;
@@ -19,9 +20,9 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(coreSetting);
         }
 
-        public ActionResult SendEmail(string tab) {
+        public async Task<ActionResult> SendEmail(string tab) {
             ViewBag.tab = "#email-setup";
-            Mvc.Mailer.QuickSend(AppVar.Setting.DeveloperEmail, "Test Email", "Test Email at " + DateTime.Now);
+            AppVar.Mailer.NotifyAdmin(AppVar.Setting.DeveloperEmail, "Test Email", "Test Email at " + DateTime.Now);
             try {
                 throw new Exception("Testing error mail.");
             } catch (Exception ex) {

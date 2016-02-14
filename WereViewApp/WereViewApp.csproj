@@ -244,6 +244,7 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
+    <Compile Include="Filter\FacebookAccessTokenAttribute.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\CategoryExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackState.cs" />
@@ -253,6 +254,12 @@
     <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
     <Compile Include="Models\POCO\Structs\FeedbackCategoryIDs.cs" />
     <Compile Include="Models\ViewModels\EmailResendViewModel.cs" />
+    <Compile Include="Models\ViewModels\ForgotPasswordViewModel.cs" />
+    <Compile Include="Models\ViewModels\LoginViewModel.cs" />
+    <Compile Include="Models\ViewModels\ManageUserViewModel.cs" />
+    <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
+    <Compile Include="Models\ViewModels\ResetPasswordViewModel.cs" />
+    <Compile Include="Modules\Extensions\GraphApiExtension.cs" />
     <Compile Include="Modules\Extensions\ViewEngine\RenderingView.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapGenerator.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapItem.cs" />
@@ -384,7 +391,7 @@
     <Compile Include="Models\Migrations\Indentity\Configuration.cs" />
     <Compile Include="Models\POCO\Identity\ApplicationRole.cs" />
     <Compile Include="Models\POCO\Identity\ApplicationUser.cs" />
-    <Compile Include="Models\ViewModels\AccountViewModels.cs" />
+    <Compile Include="Models\ViewModels\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\Context\ApplicationDbContext.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\CoreSetting.cs" />
     <Compile Include="Models\ViewModels\ManageRolesViewModel.cs" />
@@ -1132,7 +1139,6 @@
     <Content Include="Views\Partials\AdvertiseGallery.cshtml" />
     <Content Include="Views\Partials\TopAppsList.cshtml" />
     <Content Include="Views\Partials\LatestAppsList.cshtml" />
-    <Content Include="Views\Partials\SearchForm.cshtml" />
     <Content Include="Views\Partials\NavBar.cshtml" />
     <Content Include="Views\Partials\ReviewsDisplay.cshtml" />
     <Content Include="Views\Partials\FeaturedApps.cshtml" />
