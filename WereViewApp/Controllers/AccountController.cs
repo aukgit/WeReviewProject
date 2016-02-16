@@ -106,8 +106,6 @@ namespace WereViewApp.Controllers {
 
         #endregion
 
-
-
         #region Disassociate
 
         [HttpPost]
@@ -253,7 +251,6 @@ namespace WereViewApp.Controllers {
 
         #endregion
 
-
         #region Check Inbox / InboxCheck
         public ActionResult Verify() {
             var emailResender = EmailResendViewModel.GetEmailResendViewModelFromSession();
@@ -295,8 +292,8 @@ namespace WereViewApp.Controllers {
                 var user = UserManager.GetUserFromViewModel(model); // get user from view model.
                 var result = await Manager.CreateAsync(user, model.Password);
                 if (result.Succeeded) {
-                    SignInProgrammatically(user, false);
-                    RoleManager.AddTempRoleInfo(user, model.Role);
+                    // SignInProgrammatically(user, false);
+                    // RoleManager.AddTempRoleInfo(user, model.Role);
 
                     if (AppVar.Setting.IsConfirmMailRequired && AppVar.Setting.IsFirstUserFound) {
                         // First user already found.
@@ -332,7 +329,7 @@ namespace WereViewApp.Controllers {
 
         #endregion
 
-        #region Send Confirmation Email
+        #region Re-send Confirmation Email
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -351,10 +348,10 @@ namespace WereViewApp.Controllers {
         }
         #endregion
 
-        #region ExternalLoginConfirm
+        #region ExternalLoginConfirm : External Register
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(RegisterViewModel model, string returnUrl) {
             if (User.Identity.IsAuthenticated) {
@@ -367,16 +364,35 @@ namespace WereViewApp.Controllers {
                 if (info == null) {
                     return View("ExternalLoginFailure");
                 }
-                var user = UserManager.GetUserFromViewModel(model);
-                var result = await Manager.CreateAsync(user);
-                if (result.Succeeded) {
-                    result = await Manager.AddLoginAsync(user.Id, info.Login);
-                    if (result.Succeeded) {
-                        await SignInAsync(user, false);
-                        return RedirectToLocal(returnUrl);
-                    }
+                var emailResender = EmailResendViewModel.GetEmailResendViewModelFromSession();
+
+                if (emailResender != null) {
+                    // that means user is already created successfully.
+                    return RedirectToActionPermanent("Verify");
                 }
-                AddErrors(result);
+                var user = UserManager.GetUserFromViewModel(model);
+                var isUserExist = Manager.Users.Any(n => n.UserName == user.UserName);
+                if (isUserExist == false) {
+                    var result = await Manager.CreateAsync(user);
+                    if (result.Succeeded) {
+                        result = await Manager.AddLoginAsync(user.Id, info.Login);
+                        if (result.Succeeded) {
+                            if (AppVar.Setting.IsConfirmMailRequired) {
+                                #region Send an email to the user about mail confirmation
+                                SendConfirmationEmail(user);
+                                #endregion
+                                return RedirectToActionPermanent("Verify");
+                            } else {
+                                await SignInAsync(user, false);
+                                return RedirectToLocal(returnUrl);
+                            }
+                        }
+                    }
+                    AddErrors(result);
+                } else {
+                    // user already exist
+                    return RedirectToActionPermanent("Verify");
+                }
             }
 
             ViewBag.ReturnUrl = returnUrl;

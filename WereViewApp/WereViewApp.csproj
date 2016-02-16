@@ -244,6 +244,7 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
+    <Compile Include="Filter\HasMinimumRoleAttribute.cs" />
     <Compile Include="Filter\FacebookAccessTokenAttribute.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\CategoryExtend.cs" />

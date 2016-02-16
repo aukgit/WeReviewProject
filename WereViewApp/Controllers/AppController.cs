@@ -17,6 +17,7 @@ using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.DevUser;
+using WereViewApp.Modules.Role;
 using WereViewApp.Modules.Uploads;
 using WereViewApp.WereViewAppCommon;
 using WereViewApp.WereViewAppCommon.Structs;
@@ -38,6 +39,9 @@ namespace WereViewApp.Controllers {
         public AppController()
             : base(true) {
             ViewBag.controller = ControllerName;
+            if (!RoleManager.HasMiniumRole(RoleNames.Rookie)) {
+                re
+            }
         }
 
         #endregion

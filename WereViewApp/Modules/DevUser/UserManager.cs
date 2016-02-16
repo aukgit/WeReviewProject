@@ -98,7 +98,7 @@ namespace WereViewApp.Modules.DevUser {
                     user.EmailConfirmed = true;
                     db2.SaveChanges(); // saved registration complete
 
-                    RegistrationCustomCode.CompletionAfter(user, getRoleFromRegistration, role);
+                    RegistrationCustomCode.CompletionAfter(user, getRoleFromRegistration, role); //wereviewdb user created with same id
                     RegistrationCustomCode.CompletionAfter(userId, getRoleFromRegistration, role);
                 }
             }
@@ -192,7 +192,11 @@ namespace WereViewApp.Modules.DevUser {
         #endregion
 
         #region Get User
-
+        /// <summary>
+        /// Username and id is same in both databases.
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
         public static ApplicationUser GetUser(long userid) {
             var user = GetUserFromSession(userid);
             if (user == null) {
@@ -202,7 +206,12 @@ namespace WereViewApp.Modules.DevUser {
             return user;
         }
 
-
+        /// <summary>
+        /// Username and id is same in both databases.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public static ApplicationUser GetUser(string userName, string password) {
             var user = GetUserFromSession(userName);
             if (user == null) {
@@ -211,7 +220,12 @@ namespace WereViewApp.Modules.DevUser {
             }
             return user;
         }
-
+        /// <summary>
+        /// Username and id is same in both databases.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public static ApplicationUser GetUserByEmail(string email, string password) {
             var user = Manager.FindByEmail(email);
             return Manager.Find(user.UserName, password);
@@ -223,7 +237,11 @@ namespace WereViewApp.Modules.DevUser {
             }
             return null;
         }
-
+        /// <summary>
+        /// Username and id is same in both databases.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public static ApplicationUser GetUser(string username) {
             var user = GetUserFromSession(username);
             if (user == null) {
@@ -293,6 +311,7 @@ namespace WereViewApp.Modules.DevUser {
 
         /// <summary>
         ///     Return current user in optimized fashion.
+        ///     Username and id is same in both databases.
         /// </summary>
         /// <returns></returns>
         public static ApplicationUser GetCurrentUser() {
@@ -312,6 +331,7 @@ namespace WereViewApp.Modules.DevUser {
         /// <summary>
         /// Return current user in optimized fashion.
         /// Returns -1 if not logged in.
+        /// Username and id is same in both databases.
         /// </summary>
         /// <returns>Returns -1 if not logged in.</returns>
         public static long GetLoggedUserId() {
