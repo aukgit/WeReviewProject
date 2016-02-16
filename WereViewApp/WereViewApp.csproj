@@ -60,8 +60,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="DevMvcComponent, Version=2.0.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DevMVCComponent.2.0.6\lib\DevMvcComponent.dll</HintPath>
+    <Reference Include="DevMvcComponent, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevMVCComponent.2.1.0\lib\DevMvcComponent.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DevTrends.MvcDonutCaching">
