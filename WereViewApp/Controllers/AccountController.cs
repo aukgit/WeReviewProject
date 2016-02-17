@@ -69,12 +69,18 @@ namespace WereViewApp.Controllers {
             if (user != null) {
                 foundInUser = (Guid)user.GeneratedGuid;
             }
-            if (result.Succeeded && foundInUser.Equals(codeHashed)) {
-                CallCompleteRegistration(userId);
-                return View("ConfirmEmail");
+            if (!user.IsRegistrationComplete) {
+                if (result.Succeeded && foundInUser.Equals(codeHashed)) {
+                    CallCompleteRegistration(userId);
+                    return View("ConfirmEmail");
+                }
+            } else {
+                // already registered
+                ViewBag.message = "You have already registered and confirmed your email successfully.";
+                return View("InboxCheck");
             }
             AddErrors(result);
-            return View();
+            return AppVar.GetFriendlyError("Confirmation is not valid.", "Sorry your confirmation is not valid. Please try again from /account/verify.");
         }
 
         #endregion
@@ -253,12 +259,13 @@ namespace WereViewApp.Controllers {
 
         #region Check Inbox / InboxCheck
         public ActionResult Verify() {
-            var emailResender = EmailResendViewModel.GetEmailResendViewModelFromSession();
-            if (emailResender != null) {
-                return View("InboxCheck");
-            } else {
-                return AppVar.GetAuthenticationError("Not Authorized", "You have not logged in yet.");
-            }
+            //var emailResender = EmailResendViewModel.GetEmailResendViewModelFromSession();
+            //if (emailResender != null) {
+            //    return View("InboxCheck");
+            //} else {
+            //    return AppVar.GetAuthenticationError("Not Authorized", "You have not logged in yet.");
+            //}
+            return View("InboxCheck");
         }
         #endregion
 
@@ -331,19 +338,25 @@ namespace WereViewApp.Controllers {
 
         #region Re-send Confirmation Email
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResendConfirmationMail(EmailResendViewModel resendModel) {
-            ApplicationUser user;
-            if (resendModel != null && !string.IsNullOrWhiteSpace(resendModel.Email) &&
-                UserManager.IsEmailExistWithValidation(resendModel.Email, out user)) {
-                // email exist so send a confirmation mail again
-                SendConfirmationEmail(user);
-                ViewBag.message =
-                    "A verification email has been sent to your email address. Please check the spam folder if necessary.";
+        [Authorize]
+        public async Task<ActionResult> ResendConfirmationMail() {
+            var lastSend = Session["last-send"] as DateTime?;
+            if (lastSend == null) {
+                ApplicationUser user = UserManager.GetCurrentUser();
+                if (!user.IsRegistrationComplete) {
+                    SendConfirmationEmail(user);
+                    ViewBag.message =
+                        "A verification email has been sent to your email address. Please check the spam folder if necessary.";
+                } else {
+                    ViewBag.message =
+                        "Your registration is already complete! You have confirmed your account verification successfully.";
+                }
             } else {
-                ViewBag.message = "Sorry! your given information is not valid.";
+                ViewBag.message =
+                       "You have already sent a verification code recently or your registration is complete.";
             }
+            Session["last-send"] = DateTime.Now;
             return View("InboxCheck");
         }
         #endregion

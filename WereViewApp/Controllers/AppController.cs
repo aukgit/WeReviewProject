@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using WereViewApp.Filter;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.Derivables;
 using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
@@ -27,6 +28,8 @@ using FileSys = System.IO.File;
 
 namespace WereViewApp.Controllers {
     [Authorize]
+    [CheckRegistrationCompleteAttribute]
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class AppController : AdvanceController {
         #region Declaration
 
@@ -39,9 +42,7 @@ namespace WereViewApp.Controllers {
         public AppController()
             : base(true) {
             ViewBag.controller = ControllerName;
-            if (!RoleManager.HasMiniumRole(RoleNames.Rookie)) {
-                re
-            }
+  
         }
 
         #endregion
@@ -706,6 +707,7 @@ namespace WereViewApp.Controllers {
 
         #region Post new app
 
+        [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
         public ActionResult Post() {
             GetDropDowns();
             var app = new App {

@@ -1,26 +1,38 @@
 ﻿@model WereViewApp.Models.ViewModels.EmailResendViewModel
 @{
-    ViewBag.title = "Registered Successfully!";
+    ViewBag.title = "You have already registered!";
 }
 <div class="top-gap-2x"></div>
 <div class="f-em-23 green">
     <i class="fa fa-paper-plane "></i> @ViewBag.title
 </div>
-<div class="sky-blue f-em-15">
+@if (ViewBag.message == null) {
+    <div class="top-gap"></div>
+    <label class=" f-em-1 label label-warning">
+        <i class="fa fa-flag"></i>
+        You need to verify your email address
+    </label>
+}
+<div class="top-gap"></div>
+<div class="sky-blue f-em-13">
     @if (ViewBag.message == null) {
-        <text>You have already registered and your account is created successfully. However, it is not activated yet, please login to your email account to activate the account. Please check spam or junk folder.</text>
+        <text>You have already registered and your account is created successfully.
+            However, it is <strong class="red">not activated yet</strong>,
+            please login to your email account to activate the account. Please check <strong class="red">spam or junk</strong> folder.</text>
     } else {
         <text>@ViewBag.message</text>
     }
 </div>
 @if (ViewBag.message == null) {
-    <div class="sky-blue f-em-15">
+    <div class="top-gap"></div>
+    <div class="sky-blue f-em-11">
         You can also resend your activation code.
     </div>
+    <div class="top-gap"></div>
     using (Html.BeginForm("ResendConfirmationMail", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" })) {
-        @Html.EditorFor(n => n.Email)
+        @*@Html.EditorFor(n => n.Email)*@
         @Html.AntiForgeryToken()
-        @Html.SubmitButton("Resend", "fa fa-envelope-o")
+       <div class="right"> @Html.SubmitButton("Resend", "fa fa-envelope-o","","btn btn-success", false)</div>
     }
 }
 <div class="top-gap-2x"></div>

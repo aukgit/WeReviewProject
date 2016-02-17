@@ -418,6 +418,12 @@ namespace WereViewApp.Modules.DevUser {
             HttpContext.Current.Session[SessionNames.LastUser] = user;
         }
 
+        public static void ClearUserFromSession() {
+            HttpContext.Current.Session[SessionNames.UserID] = null;
+            HttpContext.Current.Session[SessionNames.LastUser] = null;
+            GC.Collect();
+        }
+
         #endregion
     }
 }
