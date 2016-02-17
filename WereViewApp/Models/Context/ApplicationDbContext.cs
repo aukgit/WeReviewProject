@@ -63,6 +63,7 @@ namespace WereViewApp.Models.Context {
 
             modelBuilder.Entity<ApplicationUser>()
                 .Property(n => n.PasswordHash)
+                .IsOptional()
                 .IsUnicode(false)
                 .HasMaxLength(70);
 

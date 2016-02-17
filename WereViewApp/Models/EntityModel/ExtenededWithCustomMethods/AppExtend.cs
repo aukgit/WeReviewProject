@@ -24,6 +24,17 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
             return null;
         }
 
+        /// <summary>
+        ///     returns a url like "http://url/Apps/iOs-7/Games/Plant-Vs-Zombies"
+        ///     and then put it in the "app.AbsUrl"
+        ///     /App/Platform-PlatformVersion/Category/Url
+        /// </summary>
+        /// <param name="app"></param>
+        /// <returns>Returns absolute url including website's address</returns>
+        public static string GetReportingUrl(this App app) {
+            return AppVar.Url + "/Report/App/" + app.AppID;
+        }
+
 
         public static ReviewLikeDislike GetCurrentUserReviewLikeDislike(this App app, Review review, long userId) {
             if (app.ReviewLikeDislikesCollection != null && review != null) {

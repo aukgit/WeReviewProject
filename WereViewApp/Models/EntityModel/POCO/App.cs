@@ -42,6 +42,10 @@ namespace WereViewApp.Models.EntityModel {
 
         public long WebsiteClicked { get; set; }
         public long StoreClicked { get; set; }
+        /// <summary>
+        /// This will be updated by Algorithms.FixRatingInApp() method
+        /// When any user rated this app. Static value field.
+        /// </summary>
         public double AvgRating { get; set; }
 
         [DataType(DataType.Date)]
@@ -172,7 +176,7 @@ namespace WereViewApp.Models.EntityModel {
         /// if false then load review by force.
         /// Or else it will load from cache.
         /// </summary>
-        public bool IsReviewLoaded { get; set; }
+        public bool IsReviewAlreadyLoaded { get; set; }
         /// <summary>
         /// Virtual Field 
         /// </summary>

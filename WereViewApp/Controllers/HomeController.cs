@@ -52,7 +52,7 @@ namespace WereViewApp.Controllers {
         }
 
         //[OutputCache(Duration=84731)]
-        [OutputCache(CacheProfile = "Hour", VaryByCustom = "byuser")]
+        //[OutputCache(CacheProfile = "Hour", VaryByCustom = "byuser")]
         [Authorize]
         public ActionResult ContactUs() {
             ViewBag.FeedbackCateoryID = new SelectList(db.FeedbackCategories.Where(n => !(n.FeedbackCategoryID == FeedbackCategoryIDs.MobileAppReport || n.FeedbackCategoryID == FeedbackCategoryIDs.ReviewReport)).ToList(), "FeedbackCategoryID", "Category");
@@ -62,6 +62,7 @@ namespace WereViewApp.Controllers {
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ViewResult> ContactUs(Feedback feedback) {
             AppVar.GetTitlePageMeta(ViewBag, "Contact Us", null, "Contact Us - " + AppVar.Name,
                 "Contact Us, Feedback about " + AppVar.Name);

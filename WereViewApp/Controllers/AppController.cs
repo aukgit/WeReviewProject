@@ -11,12 +11,14 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using WereViewApp.Filter;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.Derivables;
 using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.DevUser;
+using WereViewApp.Modules.Role;
 using WereViewApp.Modules.Uploads;
 using WereViewApp.WereViewAppCommon;
 using WereViewApp.WereViewAppCommon.Structs;
@@ -26,6 +28,8 @@ using FileSys = System.IO.File;
 
 namespace WereViewApp.Controllers {
     [Authorize]
+    [CheckRegistrationCompleteAttribute]
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class AppController : AdvanceController {
         #region Declaration
 
@@ -38,6 +42,7 @@ namespace WereViewApp.Controllers {
         public AppController()
             : base(true) {
             ViewBag.controller = ControllerName;
+  
         }
 
         #endregion
@@ -53,10 +58,11 @@ namespace WereViewApp.Controllers {
         /// <returns></returns>
         [AllowAnonymous]
         [OutputCache(CacheProfile = "Short", VaryByParam = "platform;platformVersion;category;url")]
-        public async Task<ActionResult> SingleAppDisplay(string platform, float platformVersion, string category, string url) {
+        public async Task<ActionResult> SingleAppDisplay(string platform, float? platformVersion, string category, string url) {
             var app = _algorithms.GetSingleAppForDisplay(platform, platformVersion, category, url, 30, db);
             if (app != null) {
                 _algorithms.IncreaseViewCount(app, db);
+                ViewBag.breadcrumbs = _algorithms.GetBredcrumbsBasedOnCurrentUrl("single-app");
                 return View(app);
             }
             return View("_AppNotFound");
@@ -701,6 +707,7 @@ namespace WereViewApp.Controllers {
 
         #region Post new app
 
+        [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
         public ActionResult Post() {
             GetDropDowns();
             var app = new App {

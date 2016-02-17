@@ -17,7 +17,6 @@ using WereViewApp.WereViewAppCommon;
 #endregion
 
 namespace WereViewApp.Controllers {
-    [Authorize]
     public class ReviewsController : AdvanceController {
         #region Declarations
 
@@ -96,23 +95,42 @@ namespace WereViewApp.Controllers {
 
         #endregion
 
-        #region Details
+        #region Display Review: user/reviews/id
 
-        public ActionResult Details(Int64 id) {
-            if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username">Username</param>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        public ActionResult User(string username, int page = 1) {
+            ApplicationUser user;
+            if (UserManager.IsUserNameExistWithValidation(username, out user)) {
+                var reviews = db.Reviews
+                                .Include(n=> n.User)
+                                .Where(n => n.UserID == user.UserID)
+                                .OrderByDescending(n => n.ReviewID);
+
+                var pageInfo = new PaginationInfo {
+                    ItemsInPage = AppConfig.Setting.PageItems,
+                    PageNumber = page,
+                    PagesExists = -1
+                };
+                var pagedReviews = reviews.GetPageData(pageInfo, "user.review." + user.UserID).ToList();
+                var eachUrl = "/user/reviews/" + user.UserName + "?page=@page";
+                ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
+                    maxNumbersOfPagesShow: 8));
+                ViewBag.user = user;
+                ViewBag.currentUserlikeDislikes = algorithms.GetReviewsLikeDislikeBasedOnUser(pagedReviews, db);
+                return View("User", pagedReviews);
             }
-            var review = db.Reviews.Find(id);
-            if (review == null) {
-                return HttpNotFound();
-            }
-            var viewOf = ViewTapping(ViewStates.Details, review);
-            return View(review);
+            return View("_404");
         }
-
         #endregion
 
         #region Like
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult Like(long reviewId, long appId) {
@@ -150,6 +168,7 @@ namespace WereViewApp.Controllers {
         #endregion
 
         #region Dilsike
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult DisLike(long reviewId, long appId) {
@@ -187,6 +206,7 @@ namespace WereViewApp.Controllers {
 
         #region Edit or modify record
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Review review) {
@@ -281,7 +301,7 @@ namespace WereViewApp.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GetReviewForm(long AppID) {
-            if (!User.Identity.IsAuthenticated) {
+            if (!UserManager.IsAuthenticated()) {
                 return PartialView("_LoginUrlPage");
             }
             var userId = UserManager.GetLoggedUserId();
@@ -310,6 +330,7 @@ namespace WereViewApp.Controllers {
         }
         */
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Write(Review review) {
@@ -345,57 +366,6 @@ namespace WereViewApp.Controllers {
 
         #endregion
 
-        #region Delete or remove record
-
-        public ActionResult Delete(long id) {
-            var review = db.Reviews.Find(id);
-            var viewOf = ViewTapping(ViewStates.Delete, review);
-            return View(review);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id) {
-            var review = db.Reviews.Find(id);
-            var viewOf = ViewTapping(ViewStates.DeletePost, review);
-            db.Reviews.Remove(review);
-            var state = SaveDatabase(ViewStates.Delete, review);
-            if (!state) {
-                AppVar.SetErrorStatus(ViewBag, _deletedError); // Failed to Save
-                return View(review);
-            }
-
-            return RedirectToAction("Index");
-        }
-
-        #endregion
-
-        #region Display Review: user/reviews/id
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id">Username</param>
-        /// <param name="page"></param>
-        /// <returns></returns>
-        public ActionResult User(string id, int page = 1 ) {
-            ApplicationUser user;
-            if (UserManager.IsUserNameExistWithValidation(id, out user)) {
-                var reviews = db.Reviews.Where(n => n.UserID == user.UserID).OrderByDescending(n => n.ReviewID);
-
-                var pageInfo = new PaginationInfo {
-                    ItemsInPage = AppConfig.Setting.PageItems,
-                    PageNumber = page,
-                    PagesExists = -1
-                };
-                var pagedReviews = reviews.GetPageData(pageInfo, "user.review." + user.UserID).ToList();
-                var eachUrl = "/user/reviews/" + user.UserName + "?page=@page";
-                ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
-                    maxNumbersOfPagesShow: 8));
-                ViewBag.user = user;
-                return View(pagedReviews);
-            }
-        }
-        #endregion
+      
     }
 }

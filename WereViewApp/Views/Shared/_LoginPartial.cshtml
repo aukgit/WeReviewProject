@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 @{
-    string username = @User.Identity.GetUserName();
+    string username = User.Identity.GetUserName();
 }
 @if (Request.IsAuthenticated) {
     <li>
@@ -12,7 +12,7 @@
                 <a href="@AppVar.Url/Account/Manage" title="Manage your account">Manage</a>
             </li>
             <li>
-                <a href="@AppVar.Url/Profile/@username" title="Public profile  of @username">Public Profile</a>
+                <a href="@AppVar.Url/Profiles/@username" title="Public profile  of @username">Public Profile</a>
             </li>
             @Html.GetMenu("AppPost")
             <li title="Sign out">
@@ -27,6 +27,7 @@
     <li title="Login in WeReviewApp.com">
         <a href="/Login" title="Login in WeReviewApp.com">
             <h1 title="Login in WeReviewApp.com">
+                <i class="fa fa-sign-in"></i>
                 <strong title="Login in WeReviewApp.com">
                     <em title="Login in WeReviewApp.com">
                         Login
@@ -38,6 +39,7 @@
             <li>
                 <a href="/Login" title="Login in WeReviewApp.com">
                     <h1 title="Login in WeReviewApp.com">
+                        <i class="fa fa-sign-in"></i>
                         <strong title="Login in WeReviewApp.com">
                             <em title="Login in WeReviewApp.com">
                                 Login
@@ -59,8 +61,4 @@
             </li>
         </ul>
     </li>
-    @*<ul class="nav navbar-nav navbar-right">
-            <li>@Url.Action("Register", "Account", routeValues: new { area="" })</li>
-            <li>@Url.Action("Login", "Account", routeValues: new { Area = "" })</li>
-        </ul>*@
 }

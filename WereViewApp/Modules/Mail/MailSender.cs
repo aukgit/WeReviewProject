@@ -50,7 +50,9 @@ namespace WereViewApp.Modules.Mail {
                 if (generateDecentSubject) {
                     subject = GetSubject(subject, type);
                 }
-                Mvc.Mailer.QuickSend(AppVar.Setting.DeveloperEmail, subject, htmlMessage);
+                new Thread(() => {
+                    Mvc.Mailer.QuickSend(AppVar.Setting.DeveloperEmail, subject, htmlMessage);
+                }).Start();
             }
         }
 

@@ -217,24 +217,12 @@ namespace WereViewApp.Controllers {
 
         #endregion
 
-        #region Header : Navigaion
+        #region Header : Navigation
 
-        [DonutOutputCache(Duration = 100, VaryByCustom = "byuser")]
+        [DonutOutputCache(Duration = 35, VaryByCustom = "byuser")]
         public ActionResult NavBar() {
-            //if (User.Identity.IsAuthenticated) {
-            //    var userid = UserManager.GetLoggedUserId();
-            //    ViewBag.Role = RoleManager.GetHighestRole(userid);
-            //}
             return PartialView();
         }
-
-        #region Search Form
-        //[DonutOutputCache(CacheProfile="TwoSec")]
-        public ActionResult SearchForm() {
-            return PartialView();
-        }
-
-        #endregion
 
         #endregion
 
