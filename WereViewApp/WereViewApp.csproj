@@ -475,7 +475,6 @@
     <Content Include="Areas\Admin\Views\Config\_WeReview-tab.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="CodeNotes.txt" />
     <Content Include="Content\css\animate-refresh.css" />
     <Content Include="Content\css\animate-refresh.css.map">
       <DependentUpon>animate-refresh.css</DependentUpon>
@@ -751,6 +750,7 @@
       <DependentUpon>backend-developer.css</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\Feedbacks\Done.cshtml" />
+    <Content Include="Sitemap.xml" />
     <Content Include="Uploads\Images\Advertise\5e324a00-977d-4436-8a15-3ce9e1c424f1-0.jpg" />
     <Content Include="Uploads\Images\Advertise\7fcf1b26-c1e0-4327-ba7f-29d5fd55bd25-0.jpg" />
     <Content Include="Uploads\Images\Advertise\be78fe90-0932-44c6-8cd1-816b35d6d232-0.jpg" />
@@ -954,7 +954,6 @@
     <Content Include="Content\Scripts\Upload\jquery.ui.widget.js" />
     <Content Include="Content\Scripts\Upload\load-image.all.min.js" />
     <Content Include="Content\Scripts\validation.js" />
-    <Content Include="DevTrends.MvcDonutCaching.README.txt" />
     <Content Include="ExternalDll\LinqKit.dll" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
