@@ -63,3 +63,4 @@ WereViewApp/Content/css/*.map
 
 WereViewApp/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 *.user
+*.suo
