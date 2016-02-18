@@ -8,6 +8,7 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Pagination;
+using WereViewApp.Filter;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Modules;
@@ -131,6 +132,7 @@ namespace WereViewApp.Controllers {
 
         #region Like
         [Authorize]
+        [CheckRegistrationComplete]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult Like(long reviewId, long appId) {
@@ -169,6 +171,7 @@ namespace WereViewApp.Controllers {
 
         #region Dilsike
         [Authorize]
+        [CheckRegistrationComplete]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult DisLike(long reviewId, long appId) {
@@ -207,6 +210,7 @@ namespace WereViewApp.Controllers {
         #region Edit or modify record
 
         [Authorize]
+        [CheckRegistrationComplete]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Review review) {

@@ -310,7 +310,6 @@
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\AppExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\GalleryExtented.cs" />
     <Compile Include="Models\EntityModel\POCO\AppSavingTextFields.cs" />
-    <Compile Include="Models\EntityModel\POCO\CellPhone.cs" />
     <Compile Include="Models\EntityModel\POCO\FeaturedImage.cs" />
     <Compile Include="Models\EntityModel\POCO\ReviewLikeDislike.cs" />
     <Compile Include="Models\EntityModel\Structs\NotificationTypeIDs.cs" />
@@ -909,6 +908,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Admin\Views\Config\CleanSystem.cshtml" />
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />
