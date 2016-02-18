@@ -1,9 +1,10 @@
-﻿using WereViewApp.Models.Context;
+﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using System.ComponentModel.DataAnnotations;
+using WereViewApp.Models.Context;
+
 namespace WereViewApp.Models.POCO.Identity {
 
 

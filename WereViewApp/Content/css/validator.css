@@ -41,6 +41,8 @@
 }*/
 .validator-container {
   display: block;
+  position: absolute;
+  z-index: 1000;
 }
 .validator-container [id*='wrapper-invalid-mark-'] .tooltip-inner,
 .validator-container [id*='wrapper-validation-error-'] .tooltip-inner {
@@ -79,6 +81,7 @@
 }*/
 .validator {
   display: inherit;
+  width: 1px;
 }
 .validation-icon-wrapper {
   position: static;
@@ -95,10 +98,17 @@
 .relative {
   position: relative;
 }
+.form-group[data-is-validate="true"] {
+  margin-bottom: 12.3px;
+  margin-bottom: 1.2rem;
+}
 .form-group[data-icon-added] {
   /*margin-bottom: 14px;
         margin-top: 15px;*/
-  margin-top: 8.5px;
-  margin-bottom: 14px;
+  /*.margin-top(8.5px);
+        .margin-bottom(19px);*/
 }
+/*.inner-addon {
+    z-index: -1 !important;
+}*/
 /*# sourceMappingURL=validator.css.map */

@@ -13,9 +13,9 @@
     var htmlAttributes = new RouteValueDictionary();
     
     if (ViewBag.@class != null) {
-        htmlAttributes.Add("class", "form-control " + ViewBag.@class);
+        htmlAttributes.Add("class", "form-control tag-inputs " + ViewBag.@class);
     } else {
-        htmlAttributes.Add("class", "form-control");
+        htmlAttributes.Add("class", "form-control tag-inputs");
     }
 
     if (ViewBag.type != null) {
@@ -34,9 +34,7 @@
     if (ViewBag.Value != null) {
         htmlAttributes.Add("Value", ViewBag.Value);
     }
-    htmlAttributes.Add("title", htmlAttributes["placeholder"]);
 
-    htmlAttributes.Add("data-provide", "tags");
 
     if (ViewBag.CaseInsensitive == null) {
         ViewBag.CaseInsensitive = "true"; // non case sensitive
@@ -61,8 +59,10 @@
     if (ViewBag.url != null) {
         htmlAttributes.Add("data-url", ViewBag.url);
     }
+    htmlAttributes.Add("title", htmlAttributes["placeholder"]);
     htmlAttributes.Add("data-prop", styleProperty);
     htmlAttributes.Add("data-template", templateName);
+    htmlAttributes.Add("data-provide", "tag");
 }
 
 <div class="form-group form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty" data-is-validate="@isValidate">
@@ -76,8 +76,11 @@
             }
             <span class="red">@isRequiredStar</span>
         </label>
-        <div class="@ViewBag.textColumn form-input tag-input-container">
-            @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
+        <div class="@ViewBag.textColumn form-input">
+            <div class="form-control tag-input-container">
+                @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
+                <div class="clear"></div>
+            </div>
             @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
         </div>
     </div>

@@ -152,7 +152,7 @@ $.devOrg = {
         }
         return null;
     },
-    
+
     getComboString: function (comboName, comboClass, comboId, stringOptionItems, additionalAttributes) {
         /// <summary>
         /// returns a select/combo making string
@@ -320,7 +320,7 @@ $.devOrg = {
                         hideDiv();
                         return;
                     }
-                    $innerDiv = $(mainDivContainerSelector + " " + innerDivSelectorForPlacingCombo);
+                    $innerDiv = $(mainDivContainerSelector).find(innerDivSelectorForPlacingCombo);
                     // items exist.
                     // $innerDiv is used to check if select exist or not.
                     removeSelectIfExist(); //remove inner options if exist any
@@ -334,7 +334,7 @@ $.devOrg = {
         });
     },
 
-    
+
     bootstrapComboSelectbyFindingValue: function (comboSelector, searchForvalue) {
         $(comboSelector).selectpicker("val", searchForvalue).trigger("change");
     },
@@ -406,81 +406,97 @@ $.devOrg = {
                 } else {
                     $(binders)[nextIndex - 1].blur();
                     if (submitAtLast === true) {
-                        $(formSelector).submit();
+                        $form.submit();
                     }
                 }
             }
         });
     },
+    enterToNextTextBoxWithoutTags: function ($form, submitAtLast, isDynamicSelector) {
 
-    validateTextInputBasedOnRegEx: function (jQuerySelectorforTextBox, stringRegEx, msgOnInvalidPattern) {
+        $form.find("input:text:first-child").focus();
+
+        //var binders = formSelector + " input[type='text']:visible," +
+        //    formSelector + " input[type='password']:visible," +
+        //    formSelector + " input[type='numeric']:visible," +
+        //    formSelector + " input[type='email']:visible," +
+        //    //formSelector + " textarea:visible," +
+        //    formSelector + " button.selectpicker[type='button']:visible," +
+        //    formSelector + " select:visible";
+        var binders = "input[type='text']:visible," +
+                     "input[type='password']:visible," +
+                     "input[type='numeric']:visible," +
+                     "input[type='email']:visible," +
+                     ":not(.bootstrap-tagsinput input)," +
+                    //formSelector + " textarea:visible," +
+                     "button.selectpicker[type='button']:visible," +
+                     "select:visible";
+        var keyPressEvent = function (e) {
+            // var codeAbove = d.keyCode || d.which;
+            // console.log("above code :" + codeAbove);
+            var code = e.keyCode || e.which;
+            // console.log("inside code :" + code);
+            if (code === 13) { // Enter key
+                e.preventDefault(); // Skip default behavior of the enter key
+                var n = $(binders).length;
+                var nextIndex = $(binders).index(this) + 1;
+                if (nextIndex < n) {
+                    $(binders)[nextIndex].focus();
+                } else {
+                    $(binders)[nextIndex - 1].blur();
+                    if (submitAtLast === true) {
+                        $form.submit();
+                    }
+                }
+            }
+        };
+        if (isDynamicSelector) {
+            $form.on("keypress", binders, keyPressEvent);
+        } else {
+            var $inputs = $form.find(binders);
+            $inputs.on('keypress', keyPressEvent);
+        }
+    },
+    validateTextInputBasedOnRegEx: function (jQuerySelectorforTextBoxOrElement, stringRegEx, msgOnInvalidPattern) {
         "use strict";
         /// <summary>
         ///     Validate text input while typing with ASP.NET jquery validation.
         ///     Only the attributes with the text. No event is bound.
+        /// Call reSetupjQueryValidate() to reSetup validation.
         /// </summary>
         /// <param name="jQuerySelectorforTextBox">string:jQuery Selector</param>
         /// <param name="stringRegEx">string: Regular expression to validate the textinput</param>
-        $(jQuerySelectorforTextBox).attr("data-val-regex-pattern", stringRegEx);
-        if (!_.isEmpty(msgOnInvalidPattern)) {
-            $(jQuerySelectorforTextBox).attr("data-val-regex", msgOnInvalidPattern);
+        var $elem = [];
+        if (typeof jQuerySelectorforTextBoxOrElement === "string") {
+            $elem = $(jQuerySelectorforTextBoxOrElement);
+        } else {
+            $elem = jQuerySelectorforTextBoxOrElement;
         }
-
+        $elem.attr("data-val-regex-pattern", stringRegEx);
+        if (!_.isEmpty(msgOnInvalidPattern)) {
+            $elem.attr("data-val-regex", msgOnInvalidPattern);
+        }
     },
 
-    reSetupjQueryValidate: function (jQueryFormSelector) {
+    reSetupjQueryValidate: function (jQueryFormSelectorOrElement) {
         "use strict";
         /// <summary>
         ///     call after setting new reg ex via validateTextInputBasedOnRegEx
         /// </summary>
-        /// <param name="jQueryFormSelector"></param>
-        var $form = $(jQueryFormSelector)
-            .removeData("validator") /* added by the raw jquery.validate plugin */
-            .removeData("unobtrusiveValidation");
+        /// <param name="jQueryFormSelectorOrElement">If jquery element pass then it will work with jQuery element, if element is pass then it will search in the DOM.</param>
+        var $form = [];
+        if (typeof jQueryFormSelectorOrElement === "string") {
+            $form = $(jQueryFormSelectorOrElement);
+
+        } else {
+            $form = jQueryFormSelectorOrElement;
+        }
+        $form.removeData("validator") /* added by the raw jquery.validate plugin */
+             .removeData("unobtrusiveValidation");
         /* added by the jquery unobtrusive plugin */
         $.validator.unobtrusive.parse($form);
     },
 
-    validateTextInputsBasedOnHiddenSpansGiven: function (formSelector) {
-        "use strict";
-        /// <summary>
-        ///     inComplete
-        ///     There should be span for each of inputs that needs to be modified or changed.
-        ///     hidden span with data-name="same as input"
-        ///     data-display, data-reg, data-reg-fail-msg, data-min,data-max,data-range-failed-msg
-        ///     data-placeholder, data-class
-        /// </summary>
-        /// <param name="formSelector">jQuery form selector</param>
-        var $form = $(formSelector);
-        var dataRegSpanAttr = "data-reg";
-        var dataRegMsgSpanAttr = "data-reg-fail-msg";
-        var dataMinSpanAttr = "data-min";
-        var dataMaxSpanAttr = "data-max";
-        var dataRangeMsgSpanAttr = "data-min";
-        var dataDisplaySpanAttr = "data-range-failed-msg";
-        var dataMinSpanAttr = "data-min";
-
-        if ($form.length > 0) {
-            var binders = "input[type='text']," +
-                "input[type='password']," +
-                "input[type='email']," +
-                "input[type='numeric']," +
-                "select:visible";
-            var $inputs = $form.find(binders);
-            for (var i = 0; i < $inputs.length; i++) {
-                var $input = $($inputs[i]);
-                var $nameOftheInput = $input.attr("name");
-                // now find the span based on the name
-                var $span = $form.find("span[data-name='" + $nameOftheInput + "']:hidden");
-                if ($span.length > 0) {
-                    // set the attr to the input.
-
-                    // setting reg ex
-
-                }
-            }
-        }
-    },
 
     validateInputFromServer: function (jQuerytextBoxSelector, validationUrl, internalValidatorSpanClassName, isAlwaysFocusUntilValid, isDisable, minChars, isSubmitTheWholeForm, onInvalidStringStatementInCrossMark, onValidStringStatementInCheckMark, $formGiven, maxTryLimit, onCompleteFunction) {
         /// <summary>
@@ -827,7 +843,7 @@ $.devOrg = {
         }
     },
 
-    uxFriendlySlide: function (jQueryformSelector, keepOthersVisible, dontSubmit) {
+    uxFriendlySlide: function (jQuerySelectorOrElement, keepOthersVisible, dontSubmit) {
         /// <summary>
         ///     hides except for the first div with value 0. Add attributes to divs
         ///     [data-dev-slide='number-zero-based'][data-dev-visited='false'] and
@@ -836,18 +852,23 @@ $.devOrg = {
         ///     Always use lower case false
         ///     [data-dev-slide='number-zero-based'][data-dev-visited='false']
         /// </summary>
-        /// <param name="jQueryformSelector">jQuery selector for the form</param>
+        /// <param name="jQuerySelectorOrElement">jQuery selector for the form</param>
         /// <param name="keepOthersVisible">Should add new hide ones or previous ones hides and load new ones(divs)</param>
         /// <param name="dontSubmit">When none left , do we submit? True: don't submit</param>
         "use strict";
-        
-        var slideObjects = $(jQueryformSelector + " [data-dev-slide][data-dev-visited='false']");
-        var executedOnce = false;
-        var binders = "input[type='text']:visible," +
-            "input[type='password']:visible," +
-            "input[type='email']:visible," +
-            "input[type='numeric']:visible," +
-            "select:visible";
+
+        var slideObjects = [];
+        if (typeof jQuerySelectorOrElement === "string") {
+            slideObjects = $(jQuerySelectorOrElement + " [data-dev-slide][data-dev-visited='false']");
+        } else if (jQuerySelectorOrElement !== null && jQuerySelectorOrElement!== undefined && jQuerySelectorOrElement.length > 0) {
+            slideObjects = jQuerySelectorOrElement.find("[data-dev-slide][data-dev-visited='false']");
+        }
+        //var executedOnce = false;
+        //var binders = "input[type='text']:visible," +
+        //    "input[type='password']:visible," +
+        //    "input[type='email']:visible," +
+        //    "input[type='numeric']:visible," +
+        //    "select:visible";
         var order = 0;
         var totalSliderLength = slideObjects.length;
         var previousSlideNumber = 0;
@@ -856,7 +877,7 @@ $.devOrg = {
             slideObjects.hide();
             previousSlideNumber = order;
             slideObjects.filter("[data-dev-slide='" + (order++) + "'][data-dev-visited='false']").show();
-            $(jQueryformSelector).submit(function (e) {
+            $(jQuerySelectorOrElement).submit(function (e) {
                 e.preventDefault();
 
                 var nextOne = slideObjects.filter("[data-dev-slide='" + order + "'][data-dev-visited='false']");

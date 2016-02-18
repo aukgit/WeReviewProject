@@ -9,8 +9,8 @@ using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Controllers {
     public class PlatformsController : Controller {
-        // GET: Category
         private readonly int MaxNumbersOfPagesShow = 8;
+        // GET: 
 
         public ActionResult Index() {
             var alg = new Algorithms();

@@ -8,6 +8,10 @@ body {
   padding-top: 5rem;
   padding-bottom: 20px;
   padding-bottom: 2rem;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+body #wrap .app-details-page {
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 /* Set padding to keep content from hitting the edges */
 .body-content {

@@ -1,5 +1,4 @@
 ﻿using System.IO.Compression;
-using System.Web;
 using System.Web.Mvc;
 
 namespace WereViewApp.Filter {
@@ -10,15 +9,15 @@ namespace WereViewApp.Filter {
 
     public class CompressFilter : ActionFilterAttribute {
         public override void OnActionExecuting(ActionExecutingContext filterContext) {
-            HttpRequestBase request = filterContext.HttpContext.Request;
+            var request = filterContext.HttpContext.Request;
 
-            string acceptEncoding = request.Headers["Accept-Encoding"];
+            var acceptEncoding = request.Headers["Accept-Encoding"];
 
             if (string.IsNullOrEmpty(acceptEncoding)) return;
 
             acceptEncoding = acceptEncoding.ToUpperInvariant();
 
-            HttpResponseBase response = filterContext.HttpContext.Response;
+            var response = filterContext.HttpContext.Response;
 
             if (acceptEncoding.Contains("GZIP")) {
                 response.AppendHeader("Content-encoding", "gzip");

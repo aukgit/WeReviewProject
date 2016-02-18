@@ -180,7 +180,10 @@ namespace WereViewApp.Modules.Cache {
         ///     Returns from cached data if exist
         /// </summary>
         /// <returns>Don't return if only one</returns>
-        public static List<CountryLanguage> GetLanguages(int countryId, int countCheckAbove = 1) {
+        public static List<CountryLanguage> GetLanguages(int? countryId, int countCheckAbove = 1) {
+            if (countryId == null) {
+                return null;
+            }
             var tableName = CacheNames.LanguageTableName;
             var cacheTableName = tableName + "-Country-" + countryId;
             var cache = GetTableContentsFromCache(cacheTableName);
@@ -222,7 +225,10 @@ namespace WereViewApp.Modules.Cache {
         ///     return from cache
         /// </summary>
         /// <returns></returns>
-        public static UserTimeZone GetTimezone(int userTimeZoneId) {
+        public static UserTimeZone GetTimezone(int? userTimeZoneId) {
+            if (userTimeZoneId == null) {
+                return null;
+            }
             return GetTimezones().FirstOrDefault(n => n.UserTimeZoneID == userTimeZoneId);
         }
 
@@ -238,7 +244,10 @@ namespace WereViewApp.Modules.Cache {
         ///     return from cache
         /// </summary>
         /// <returns></returns>
-        public static Country GetCountry(int countryId) {
+        public static Country GetCountry(int? countryId) {
+            if (countryId == null) {
+                return null;
+            }
             return GetCountries().FirstOrDefault(n => n.CountryID == countryId);
         }
 
@@ -250,7 +259,10 @@ namespace WereViewApp.Modules.Cache {
         /// </summary>
         /// <param name="countryId"></param>
         /// <returns></returns>
-        public static List<UserTimeZone> GetTimezones(int countryId, int countCheckAbove = 1) {
+        public static List<UserTimeZone> GetTimezones(int? countryId, int countCheckAbove = 1) {
+            if (countryId == null) {
+                return null;
+            }
             var tableName = CacheNames.UsertimezoneTableName;
             var cacheTableName = tableName + "-Country-" + countryId;
             var searchingColumn = "UserTimeZoneID";

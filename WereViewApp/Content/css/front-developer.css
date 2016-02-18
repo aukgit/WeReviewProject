@@ -1,15 +1,20 @@
-﻿body {
-  font-family: Ubuntu, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: subpixel-antialiased;
-}
-body #wrap .app-details-page {
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-.regular-color {
+﻿.regular-color {
   color: #647383;
 }
 .primary-color {
   color: #ff7200;
+}
+.login-btn-wrapper {
+  max-width: 294px;
+  max-width: 29.4rem;
+}
+.login-btn-wrapper .checkbox {
+  max-width: 150px;
+  max-width: 15rem;
+  float: left;
+}
+.login-btn-wrapper .btn {
+  float: right;
 }
 .btn {
   font-weight: normal;
@@ -39,6 +44,14 @@ body #wrap .app-details-page {
 }
 .btn-success {
   background-color: #19c234;
+}
+.btn-success:hover {
+  background-color: green;
+}
+.btn-lg,
+.btn-group-lg > .btn {
+  padding: 15px 16px 13px;
+  line-height: 15px;
 }
 .input-group-addon:not(:first-child):not(:last-child),
 .input-group-btn:not(:first-child):not(:last-child),
@@ -1226,6 +1239,26 @@ q:after {
   display: block;
   font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.slim-app-view.tag {
+  border: 1.5px solid #505454;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  height: 32px;
+  height: 3.2rem;
+}
+.slim-app-view.tag .app-content {
+  width: 200px;
+  width: 20rem;
+}
+.slim-app-view.tag .app-title {
+  padding: 8px;
+  font-size: 20px;
+  font-size: 1.25em;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
 .slim-app-view .app-url:hover {
   color: #647383;
 }
@@ -1542,6 +1575,12 @@ q:after {
     bottom: 9px;
   }
 }
+.app-url-display {
+  margin-left: 4px;
+  margin-left: 0.4rem;
+  margin-bottom: 11px;
+  margin-bottom: 1.1rem;
+}
 .blog-page-private .white-wrapper-background .seo-app-name:hover {
   color: deepskyblue;
   text-decoration: underline;
@@ -1550,5 +1589,81 @@ q:after {
 .blog-page-private .white-wrapper-background .seo-app-name strong,
 .blog-page-private .white-wrapper-background .seo-app-name em {
   text-decoration: inherit;
+}
+.page-header h1,
+.page-header small {
+  color: black;
+  display: inline-block;
+}
+.page-header h1 {
+  font-size: 2.2em;
+  padding-right: 5px;
+}
+.breadcrumb {
+  background-color: #E0ECF1;
+  margin: 5px 0 -8px 0;
+  padding: 6px 16px;
+  border: none;
+  color: white;
+  border-radius: 0;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.breadcrumb.single-app {
+  margin: 5px 0 6px 0;
+}
+@media only screen and (max-width: 480px) {
+  .breadcrumb.single-app {
+    display: none;
+  }
+}
+.breadcrumb a {
+  color: #ff7200;
+  cursor: pointer;
+  font-weight: bold;
+}
+.breadcrumb a:hover {
+  color: #ff4d00;
+}
+.breadcrumb li:last-child a {
+  color: grey;
+  cursor: default;
+  font-weight: normal;
+}
+.breadcrumb li:last-child a:hover {
+  color: grey;
+}
+.breadcrumb > li + li:before {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f061";
+  padding: 0 9px;
+  font-size: 0.9em;
+  /*color: dodgerblue;*/
+  color: #FF7200;
+}
+.btn-facebook {
+  background-color: #47639E;
+  font-size: 1em;
+}
+.btn-facebook:before {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f082 ";
+  padding-right: 7px;
+}
+.btn-facebook:hover,
+.btn-facebook:active,
+.btn-facebook:focus {
+  background-color: #3356A0;
+  color: white;
 }
 /*# sourceMappingURL=front-developer.css.map */

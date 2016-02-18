@@ -1,117 +1,108 @@
-﻿@model IEnumerable<WereViewApp.Models.POCO.IdentityCustomization.Feedback>
+﻿@using WereViewApp.Models.POCO.IdentityCustomization
+@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
+
+@model IEnumerable<Feedback>
 
 @{
     ViewBag.Title = "Feedback";
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-}
+    string controller = (string)ViewBag.controller;
+    string viewName = "Index";
+    string editLinkName = "";
+    string editIcon = "fa fa-reply",
+           createButtonIcon = "fa fa-plus",
+           detailsIcon = "fa fa-info-circle",
+           removeIcon = "fa fa-eye";
 
+    var paginationHtml = new MvcHtmlString(ViewBag.paginationHtml);
+    /*
+    bool noItemsExist = Model == null;
+    if (!noItemsExist) {
+        noItemsExist = Model.Count() == 0;
+    }
+    */
+}
 @Html.SamePageLinkWithIcon(title, subtitle, "glyphicon glyphicon-th-list")
-<p class = "right">
-    <a href="@Url.Action("Create")" title="Create a new item." class="btn btn-warning create-save">Create <span class="glyphicon glyphicon-plus"></span></a>
-</p>
-<table class="table table-hover">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Username)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Subject)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Message)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RateUrgency)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Response)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsViewed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsInProcess)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsSolved)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsUnSolved)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HasMarkedToFollowUpDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PostedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FollowUpdateDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FeedbackCategoryID)
-        </th>
-        <th></th>
-    </tr>
+<div class="right">
+    <ul class="list-inline">
+        <li><i class="fa-em-13 fa fa-filter"></i></li>
+        <li class="btn btn-info">@Html.ActionLink("Latest", "Index", new { page = 1 })</li>
+        <li class="btn btn-info">@Html.ActionLink("Is Viewed", "IsViewed", new { page = 1 })</li>
+        <li class="btn btn-info">@Html.ActionLink("Is in Process", "IsInProcess", new { page = 1 })</li>
+        <li class="btn btn-info">@Html.ActionLink("Solved", "Solved", new { page = 1 })</li>
+        <li class="btn btn-info">@Html.ActionLink("Unsolved", "UnSolved", new { page = 1 })</li>
+        <li class="btn btn-info">@Html.ActionLink("All", "AllFeedbacks", new { page = 1 })</li>
+    </ul>
+</div>
+<div class="top-gap-2x"></div>
+<div class="top-gap-2x"></div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Subject)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Message)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RateUrgency)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Response)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsViewed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsInProcess)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsSolved)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsUnSolved)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HasMarkedToFollowUpDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FollowUpdateDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FeedbackCategoryID)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.FeedbackID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.FeedbackID }, new {  onclick="return confirm('Are you sure?')" })
-        </td>
-    </tr>
-}
+<table class="table table-hover bootstrap-table-do">
+    <!--<caption>@viewName</caption>-->
+    <thead>
+        <tr>
+            <th data-field="Email">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th data-field="Subject">
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+            <th data-field="RateUrgency">
+                @Html.DisplayNameFor(model => model.RateUrgency)
+            </th>
+            <th data-field="Response">
+                @Html.DisplayNameFor(model => model.Response)
+            </th>
+            <th data-field="Category">
+                Category | Status
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr title="@Html.Truncate(item.Message, AppConfig.TruncateLength)">
+                <td>
+                    @{
+            editLinkName = Html.Truncate(item.Email, AppConfig.TruncateLength);
+            var idValue = item.FeedbackID;
+            var status = @item.GetStatus();
+                    }
+                    <a href="@Url.Action("Reply", new {id = idValue})" title="@editLinkName edit..."><span class="@editIcon"></span> @editLinkName</a>
+                </td>
+                <td>
+                    <span title="@Html.Truncate(item.Message, AppConfig.TruncateLength + 20)">@Html.Truncate(item.Subject, AppConfig.TruncateLength + 20)</span>
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.RateUrgency)
+                </td>
+                <td>
+                    <a href="@Url.Action("Reply", new {id = idValue})" t title="Reply to @editLinkName." class="btn btn-info btn-xs">
+                        @if (string.IsNullOrEmpty(item.Response)) {
+                            <span class="@editIcon"></span>
+                            <text>Write</text>
+                        } else {
+                            <span class="@detailsIcon"></span>
+                            <span title="@item.Response">@Html.Truncate(item.Response, AppConfig.TruncateLength - 12)</span>
+                        }
+                    </a>
+                </td>
+                <td>
+                    <label class="btn btn-xs btn-info">@item.GetCategory()</label> | <label class="btn btn-xs btn-@status.StyleClass">@status.Status</label>
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
+<div>
+    <div class="center">
+        <ul class="pagination">
+            @paginationHtml
+        </ul>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -42,6 +42,10 @@ namespace WereViewApp.Models.EntityModel {
 
         public long WebsiteClicked { get; set; }
         public long StoreClicked { get; set; }
+        /// <summary>
+        /// This will be updated by Algorithms.FixRatingInApp() method
+        /// When any user rated this app. Static value field.
+        /// </summary>
         public double AvgRating { get; set; }
 
         [DataType(DataType.Date)]
@@ -86,14 +90,14 @@ namespace WereViewApp.Models.EntityModel {
 
         [Display(Name = "App Website", Description = "If you don't have any website then you can keep it blank.")]
         [StringLength(255)]
-        public string WebSiteURL { get; set; }
+        public string WebsiteUrl { get; set; }
 
         [Display(Name = "App Store",Description ="Please be relevant with your store URL because it help you get up to speed in sales and get in touch with more audenices..")]
         [StringLength(255)]
-        public string StoreURL { get; set; }
+        public string StoreUrl { get; set; }
 
         [StringLength(70)]
-        public string URL { get; set; }
+        public string Url { get; set; }
 
         #region Virtual Propertise
 
@@ -172,7 +176,7 @@ namespace WereViewApp.Models.EntityModel {
         /// if false then load review by force.
         /// Or else it will load from cache.
         /// </summary>
-        public bool IsReviewLoaded { get; set; }
+        public bool IsReviewAlreadyLoaded { get; set; }
         /// <summary>
         /// Virtual Field 
         /// </summary>

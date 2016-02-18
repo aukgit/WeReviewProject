@@ -58,6 +58,8 @@
 
 .validator-container {
     display: block;
+    position: absolute;
+    z-index: 1000;
 
     [id*='wrapper-invalid-mark-'], [id*='wrapper-validation-error-'] {
         .tooltipColorApply(@tooltip-invalid-bg-color);
@@ -79,6 +81,7 @@
 }*/
 .validator {
     display: inherit;
+        width: 1px;
 }
 
 .validation-icon-wrapper {
@@ -100,10 +103,19 @@
 }
 
 .form-group {
+    &[data-is-validate="true"] {
+        .margin-bottom(12.3px);
+    }
+
     &[data-icon-added] {
         /*margin-bottom: 14px;
         margin-top: 15px;*/
-        margin-top: 8.5px;
-        margin-bottom: 14px;
+        /*.margin-top(8.5px);
+        .margin-bottom(19px);*/
     }
 }
+
+
+/*.inner-addon {
+    z-index: -1 !important;
+}*/

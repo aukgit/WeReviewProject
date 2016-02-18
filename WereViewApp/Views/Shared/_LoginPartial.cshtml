@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 @{
-    string username = @User.Identity.GetUserName();
+    string username = User.Identity.GetUserName();
 }
 @if (Request.IsAuthenticated) {
     <li>
@@ -12,11 +12,11 @@
                 <a href="@AppVar.Url/Account/Manage" title="Manage your account">Manage</a>
             </li>
             <li>
-                <a href="@AppVar.Url/Profile/@username" title="Public profile  of @username">Public Profile</a>
+                <a href="@AppVar.Url/Profiles/@username" title="Public profile  of @username">Public Profile</a>
             </li>
             @Html.GetMenu("AppPost")
             <li title="Sign out">
-                @using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new {@id = "logoutForm"})) {
+                @using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new {@id = "logoutForm", area=""})) {
                     @Html.AntiForgeryToken()
                     <a href="javascript:document.getElementById('logoutForm').submit()">Sign out</a>
                 }
@@ -25,8 +25,9 @@
     </li>
 } else {
     <li title="Login in WeReviewApp.com">
-        <a href="#" title="Login in WeReviewApp.com">
+        <a href="/Login" title="Login in WeReviewApp.com">
             <h1 title="Login in WeReviewApp.com">
+                <i class="fa fa-sign-in"></i>
                 <strong title="Login in WeReviewApp.com">
                     <em title="Login in WeReviewApp.com">
                         Login
@@ -36,8 +37,9 @@
         </a>
         <ul class="animated dropdown fadeIn">
             <li>
-                <a href="@AppVar.Url/Login" title="Login in WeReviewApp.com">
+                <a href="/Login" title="Login in WeReviewApp.com">
                     <h1 title="Login in WeReviewApp.com">
+                        <i class="fa fa-sign-in"></i>
                         <strong title="Login in WeReviewApp.com">
                             <em title="Login in WeReviewApp.com">
                                 Login
@@ -47,7 +49,7 @@
                 </a>
             </li>
             <li>
-                <a href="@AppVar.Url/Register" title="Register in WeReviewApp.com">
+                <a href="/Register" title="Register in WeReviewApp.com">
                     <h1 title="Register in WeReviewApp.com">
                         <strong title="Register in WeReviewApp.com">
                             <em title="Register in WeReviewApp.com">
@@ -59,8 +61,4 @@
             </li>
         </ul>
     </li>
-    @*<ul class="nav navbar-nav navbar-right">
-            <li>@Url.Action("Register", "Account", routeValues: new { area="" })</li>
-            <li>@Url.Action("Login", "Account", routeValues: new { Area = "" })</li>
-        </ul>*@
 }

@@ -6,7 +6,6 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Enums;
-using DevMvcComponent.Extensions;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.DevUser;
@@ -19,7 +18,29 @@ namespace WereViewApp.Helpers {
     public static class HtmlHelpers {
         private const string Selected = "selected='selected'";
         public static int TruncateLength = AppConfig.TruncateLength;
-
+        /// <summary>
+        /// Returns BaseUrl and slash.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static string GetBaseUrl(this HttpRequestBase request) {
+            if (request.Url == null) {
+                return "";
+            }
+            return request.Url.Scheme + "://" + request.Url.Authority + VirtualPathUtility.ToAbsolute("~/");
+        }
+        /// <summary>
+        /// Returns BaseUrl and slash.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static string GetBaseUrl(this HttpContext context) {
+            if (context != null) {
+                var request = context.Request;
+                return request.Url.Scheme + "://" + request.Url.Authority + VirtualPathUtility.ToAbsolute("~/");
+            }
+            return "";
+        }
         #region Icons generate : badge
 
         public static HtmlString GetBadge(this HtmlHelper helper, long number) {
@@ -90,6 +111,56 @@ namespace WereViewApp.Helpers {
             return new HtmlString(sendbtn);
         }
 
+        /// <summary>
+        /// Renders a submit button with icon.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="buttonName"></param>
+        /// <param name="alertMessage"></param>
+        /// <param name="iconClass"></param>
+        /// <param name="btnType"></param>
+        /// <param name="placeIconLeft"></param>
+        /// <param name="additionalClasses"></param>
+        /// <returns></returns>
+        public static HtmlString SubmitButton(this HtmlHelper helper, string buttonName = "Submit",
+            string iconClass = "fa fa-floppy-o",
+            string tooltip = "",
+            string additionalClasses = "btn btn-success",
+            bool placeIconLeft = true,
+            string btnType = "Submit"
+            ) {
+            const string iconFormt = "<i class=\"{0}\"></i>";
+            string leftIcon = "",
+                   rightIcon = "";
+            if (placeIconLeft) {
+                leftIcon = string.Format(iconFormt, iconClass);
+            } else {
+                rightIcon = string.Format(iconFormt, iconClass);
+            }
+            var buttonHtml = String.Format(
+                "<button type=\"{0}\"  title=\"{1}\" class=\"{2}\">{3} {4} {5}</button>",
+                btnType, tooltip, additionalClasses, leftIcon, buttonName, rightIcon);
+            return new HtmlString(buttonHtml);
+        }
+        /// <summary>
+        /// Renders a remove button with icon.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="buttonName"></param>
+        /// <param name="alertMessage"></param>
+        /// <param name="iconClass"></param>
+        /// <param name="btnType"></param>
+        /// <param name="placeIconLeft"></param>
+        /// <param name="additionalClasses"></param>
+        /// <returns></returns>
+        public static HtmlString RemoveButton(this HtmlHelper helper, string buttonName = "Delete",
+            string iconClass = "fa fa-times",
+            string tooltip = "",
+            string btnType = "Submit",
+            bool placeIconLeft = true,
+            string additionalClasses = "btn btn-danger") {
+            return SubmitButton(helper, buttonName, iconClass, tooltip, btnType, placeIconLeft, additionalClasses);
+        }
         #endregion
 
         #region jQueryMobile Options
@@ -148,7 +219,7 @@ namespace WereViewApp.Helpers {
         /// <returns></returns>
         public static HtmlString DropDownCountry(this HtmlHelper helper, List<Country> countries, string classes = "",
             string otherAttributes = "", string contentAddedString = "") {
-            string strHtml = DropDownCountry(countries, classes, otherAttributes, contentAddedString);
+            var strHtml = DropDownCountry(countries, classes, otherAttributes, contentAddedString);
             return new HtmlString(strHtml);
         }
 
@@ -268,7 +339,7 @@ namespace WereViewApp.Helpers {
 
         public static HtmlString ContactFormActionLink(this HtmlHelper helper, string linkName, string title,
             string addClass = "") {
-            var markup = string.Format(MailHtml.CONTACT_US_LINK, title, linkName, addClass, AppVar.Url);
+            var markup = string.Format(MailHtml.ContactUsLink, title, linkName, addClass, AppVar.Url);
             return new HtmlString(markup);
         }
 
@@ -302,16 +373,16 @@ namespace WereViewApp.Helpers {
             var uri = HttpContext.Current.Request.RawUrl;
             uri = AppVar.Url + uri;
 
-            string icon = "";
+            var icon = "";
             if (!string.IsNullOrEmpty(iconClass)) {
                 icon = string.Format("<i class='{0}'></i>", iconClass);
             }
             if (isLeft) {
                 //left icon
-                markup = string.Format("<div class='top-margin-space'><a href='{0}' class='{1}' title='{2}'>{4} {3}</a></div>", uri, addClass, title, linkName, icon);
+                markup = string.Format("<div class='header-margin-space-type-1'><a href='{0}' class='{1}' title='{2}'>{4} {3}</a></div>", uri, addClass, title, linkName, icon);
             } else {
                 //right icon
-                markup = string.Format("<div class='top-margin-space'><a href='{0}' class='{1}' title='{2}'>{3} {4}</a></div>", uri, addClass, title, linkName, icon);
+                markup = string.Format("<div class='header-margin-space-type-1'><a href='{0}' class='{1}' title='{2}'>{3} {4}</a></div>", uri, addClass, title, linkName, icon);
             }
             if (h1) {
                 markup = string.Format("<h1 title='{0}' class='h3'>{1}</h1>", title, markup);
@@ -319,6 +390,58 @@ namespace WereViewApp.Helpers {
             return new HtmlString(markup);
         }
 
+        /// <summary>
+        /// Generates same page url anchor with an icon left or right
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="linkDisplayName">Link display name</param>
+        /// <param name="routeValues"></param>
+        /// <param name="title">Link tooltip title</param>
+        /// <param name="iconClass">Icon classes: Font-awesome icons or bootstrap icon classes</param>
+        /// <param name="h1">Is nested inside a H1 element (W3c valid).</param>
+        /// <param name="addClass">Anchor class</param>
+        /// <param name="isLeft"></param>
+        /// <param name="actionName"></param>
+        /// <param name="controllerName"></param>
+        /// <returns></returns>
+        public static HtmlString ActionLinkWithIcon(this HtmlHelper helper,
+            string linkDisplayName,
+            string actionName,
+            string controllerName,
+            object routeValues,
+            string title,
+            string iconClass,
+            string addClass = "",
+            bool h1 = false,
+            bool isLeft = true) {
+            var markup = "";
+            string uri = "";
+            var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
+            if (!string.IsNullOrWhiteSpace(controllerName)) {
+                uri = urlHelper.Action(actionName, controllerName, routeValues);
+            } else if (routeValues != null) {
+                uri = urlHelper.Action(actionName, routeValues);
+            } else {
+                uri = urlHelper.Action(actionName);
+            }
+            uri = AppVar.Url + uri;
+
+            var icon = "";
+            if (!string.IsNullOrEmpty(iconClass)) {
+                icon = string.Format("<i class='{0}'></i>", iconClass);
+            }
+            if (isLeft) {
+                //left icon
+                markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{4} {3}</a>", uri, addClass, title, linkDisplayName, icon);
+            } else {
+                //right icon
+                markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{3} {4}</a>", uri, addClass, title, linkDisplayName, icon);
+            }
+            if (h1) {
+                markup = string.Format("<h1 title='{0}' class='h3'>{1}</h1>", title, markup);
+            }
+            return new HtmlString(markup);
+        }
         /// <summary>
         /// Returns url without the host name. 
         /// Slash is included

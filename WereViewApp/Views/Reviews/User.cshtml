@@ -1,0 +1,117 @@
+﻿@using WereViewApp.Models.EntityModel
+@using WereViewApp.Models.POCO.Identity
+@using WereViewApp.Modules.DevUser
+@using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods
+@model IEnumerable<Review>
+
+@{
+    var user = (ApplicationUser)ViewBag.user;
+    int sequenceOfReview = 0;
+    long userId = UserManager.GetLoggedUserId();
+    var likeDislikes = (List<ReviewLikeDislike>)ViewBag.currentUserlikeDislikes;
+    string isRecommended, animateRightLeft;
+}
+<div class="app-details-page" id="app-details-page">
+    <div class="review-collection-box seo-optimize">
+        <div class="review-wrapper">
+            @if (Model != null) {
+                foreach (Review review in Model) {
+                    isRecommended = review.IsSuggest ? "is-recommended" : "";
+                    animateRightLeft = sequenceOfReview % 2 == 0 ? "slideInLeft" : "slideInRight";
+                    string disLikeActive = "", likeActive = "";
+                    // if this review is liked or disliked by
+                    // this current user [checking]
+                    if (userId > -1 && likeDislikes != null) {
+                        // user logged in
+                        ReviewLikeDislike reviewDislike = likeDislikes.FirstOrDefault(m => m.ReviewID == review.ReviewID);
+                        if (reviewDislike != null) {
+                            // like-dislike exist
+                            if (reviewDislike.IsLiked) {
+                                likeActive = "active";
+                            } else if (reviewDislike.IsDisliked) {
+                                disLikeActive = "active";
+                            }
+                        }
+                    }
+                    <section class="single-review row @isRecommended wow @animateRightLeft" data-wow-offset="1" data-wow-duration=".4s" data-sequence="@sequenceOfReview" itemprop="review" itemscope itemtype="http://schema.org/Review">
+                        <div class="col-sm-10">
+                            <header class="review-writer-wrapper" title="review">
+
+                                <a class="review-title-anchor" href="#">
+                                    <h1 itemprop="name" class="review-title">
+                                        <i class="fa fa-check-circle"></i>
+                                         @review.Title
+                                    </h1>
+                                </a>
+                                <ul class="reviewed-by-wrapper">
+                                    <li class="posted-by-wrapper">
+                                        Posted by
+                                        <a href="@AppVar.Url/User/Reviews/@review.User.UserName">
+                                            <h1 itemprop="author">@review.User.UserName</h1>
+                                        </a> |
+                                    </li>
+                                    <li class="date">
+                                        @Html.DisplayDate(@review.CreatedDate) |
+                                        <meta itemprop="datePublished" content="2011-04-01">
+                                    </li>
+                                    <li class="report">
+                                        <a href="@AppVar.Url/Report/Review/@review.ReviewID">
+                                            Report
+                                        </a>
+                                    </li>
+                                </ul>
+                            </header>
+                            <article title="reiview contents" class="review-contents">
+                                @review.Comment1
+                                <span class="show-more-btns-container" data-ref="app-review" data-id="@sequenceOfReview">
+                                    <span class="elipse-dot">...</span>
+                                    <a class="see-more-btn" data-ref="app-review" data-id="@sequenceOfReview">see more</a>
+                                </span>
+                                <div class="more" data-ref="app-review" data-id="@sequenceOfReview">
+                                    @review.Comment2
+                                    <a>
+                                        <h1 title="pros" class="green h5">Pros:</h1>
+                                    </a>
+                                    <blockquote title="pros">
+                                        @review.Pros
+                                    </blockquote>
+                                    <a>
+                                        <h1 class="h5 red">Cons:</h1>
+                                    </a>
+                                    <blockquote title="cons">
+                                        @review.Cons
+                                    </blockquote>
+                                    <a class="less-btn" data-ref="app-review" data-id="@sequenceOfReview">less</a>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div class="col-sm-2 review-thumbs-up-wrappper text-center" id="like-dislike-row-@sequenceOfReview">
+                            <div class="center-margin star-image start-box">
+                                @review.Rating
+                            </div>
+                            <a id="review-thumbs-up-click-@sequenceOfReview" class="postive" data-sequence="@sequenceOfReview" data-review-like-btn="true" data-review-id="@review.ReviewID">
+                                <i class="fa fa-thumbs-up @likeActive"></i>
+                            </a>
+                            <a id="spinner-@sequenceOfReview" data-toggle="tooltip" title="Requesting" data-original-title="Requesting" class="spinner-for-like tooltip-show">
+                                <span data-display="Requesting" class="glyphicon glyphicon-refresh glyphicon-spin" title="Requesting"></span>
+                            </a>
+                            <a id="review-thumbs-down-click-@sequenceOfReview" class="negative" data-sequence="@sequenceOfReview" data-review-dislike-btn="true" data-review-id="@review.ReviewID">
+                                <i class="fa fa-thumbs-down @disLikeActive"></i>
+                            </a>
+                            <div class="seo-hide seo-rating" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+                                <meta itemprop="worstRating" content="1">
+                                <span itemprop="ratingValue">@review.Rating</span>/
+                                <span itemprop="bestRating">5</span>stars
+                            </div>
+                        </div>
+                    </section>
+                    {
+                        sequenceOfReview++;
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>
+

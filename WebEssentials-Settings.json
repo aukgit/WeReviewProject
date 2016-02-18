@@ -2,7 +2,7 @@
   "BrowserLink": {
     "CssIgnorePatterns": "bootstrap*; reset.css; normalize.css; jquery*; toastr*; foundation*; animate*; inuit*; elements*; ratchet*; hint*; flat-ui*; 960*; skeleton*",
     "EnableMenu": true,
-    "EnablePixelPushing": true,
+    "EnablePixelPushing": false,
     "ShowMenu": false
   },
   "CodeGen": {
@@ -13,7 +13,7 @@
   },
   "CoffeeScript": {
     "CompileOnBuild": false,
-    "CompileOnSave": true,
+    "CompileOnSave": true, 
     "GenerateSourceMaps": true,
     "LintOnBuild": false,
     "LintOnSave": true,
@@ -21,7 +21,7 @@
     "MinifyInPlace": false,
     "OutputDirectory": null,
     "ProcessSourceMapsForEditorEnhancements": true,
-    "ShowPreviewPane": true,
+    "ShowPreviewPane": true,+
     "WrapClosure": true
   },
   "Css": {
@@ -110,12 +110,12 @@
   },
   "Less": {
     "AdjustRelativePaths": true,
-    "CompileOnBuild": false,
+    "CompileOnBuild": true,
     "CompileOnSave": true,
     "EnableChainCompilation": true,
     "GenerateSourceMaps": true,
-    "MinifyInPlace": false,
-    "OutputDirectory": "../Css",
+    "MinifyInPlace": true,
+    "OutputDirectory": "../Css/SS",
     "ProcessSourceMapsForEditorEnhancements": true,
     "ShowPreviewPane": true,
     "StrictMath": false

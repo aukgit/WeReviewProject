@@ -53,15 +53,23 @@ namespace WereViewApp {
            );
             #endregion
 
-
-            #region profile
+            #region reviews
             routes.MapRoute(
-              name: "profile",
-              url: "Profile/{username}/{page}",
-              defaults: new { controller = "Profile", action = "GetProfile", page = UrlParameter.Optional },
+              name: "reviews_user",
+              url: "user/reviews/{username}/{page}",
+              defaults: new { controller = "Reviews", action = "User", page = UrlParameter.Optional },
               namespaces: new string[] { wereviewappControllers }
             );
             #endregion
+            #region profile
+            routes.MapRoute(
+              name: "profiles",
+              url: "Profiles/{username}/{page}",
+              defaults: new { controller = "Profiles", action = "Profile", page = UrlParameter.Optional },
+              namespaces: new string[] { wereviewappControllers }
+            );
+            #endregion
+
 
             #region Search
             //routes.MapRoute(
@@ -70,7 +78,7 @@ namespace WereViewApp {
             //   defaults: new { controller = "SearchPage", action = "Index", url = UrlParameter.Optional },
             //   namespaces: new string[] { wereviewappControllers }
             //);
-            
+
             //routes.MapRoute(
             //   name: "searchXS",
             //   url: "SearchX",
@@ -93,6 +101,7 @@ namespace WereViewApp {
                defaults: new { controller = "Platforms", action = "Index" },
                namespaces: new string[] { wereviewappControllers }
             );
+
             routes.MapRoute(
               name: "category_specific",
               url: "Apps/Category/{slug}/{page}",
@@ -105,7 +114,7 @@ namespace WereViewApp {
                defaults: new { controller = "Category", action = "Index" },
                namespaces: new string[] { wereviewappControllers }
             );
-     
+
             routes.MapRoute(
               name: "apps-index",
               url: "Apps",
@@ -131,18 +140,29 @@ namespace WereViewApp {
             routes.MapRoute(
                name: "SingleApp",
                url: "Apps/{platform}-{platformVersion}/{category}/{url}",
-               defaults: new { controller = "App", action = "SingleAppDisplay", name = UrlParameter.Optional },
+               defaults: new { controller = "App", action = "SingleAppDisplay" },
                namespaces: new string[] { wereviewappControllers }
             );
 
             routes.MapRoute(
-               name: "platformSearched",
-               url: "Apps/{platformName}",
-               defaults: new { controller = "Apps", action = "Platform" },
+               name: "SingleApp-Category",
+               url: "Apps/{platform}-{platformVersion}/{category}",
+               defaults: new { controller = "Apps", action = "GetByPlatformAndCategory" },
                namespaces: new string[] { wereviewappControllers }
             );
+            routes.MapRoute(
+                  name: "SingleApp-Platform-Version",
+                  url: "Apps/{platform}-{platformVersion}",
+                  defaults: new { controller = "Apps", action = "GetByPlatformAndCategory", platformVersion = UrlParameter.Optional, platform = UrlParameter.Optional },
+                  namespaces: new string[] { wereviewappControllers }
+           );
+            routes.MapRoute(
+                   name: "SingleApp-Platform",
+                   url: "Apps/{platform}",
+                   defaults: new { controller = "Apps", action = "GetByPlatformAndCategory", platform = UrlParameter.Optional },
+                   namespaces: new string[] { wereviewappControllers }
+            );
 
-          
             #endregion
 
             #region Default Route
@@ -158,6 +178,20 @@ namespace WereViewApp {
                    defaults: new { controller = "Home", action = "ContactUs", id = UrlParameter.Optional },
                    namespaces: new string[] { wereviewappControllers }
             );
+
+            routes.MapRoute(
+                  name: "AboutUs",
+                  url: "About",
+                  defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional },
+                  namespaces: new string[] { wereviewappControllers }
+           );
+
+            routes.MapRoute(
+                name: "Policy",
+                url: "Policy",
+                defaults: new { controller = "Home", action = "Policy", id = UrlParameter.Optional },
+                namespaces: new string[] { wereviewappControllers }
+         );
             routes.MapRoute(
                    name: "Default",
                    url: "{controller}/{action}/{id}",

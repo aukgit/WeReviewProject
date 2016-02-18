@@ -39,14 +39,14 @@
                             <div class="seo-hide">
                                 <a href="@softwareUrl@currentUrl" title="@appName review">
                                     <h1 class="h1" title="@appName review">
-                                        <strong title="@appName review">
-                                            <em title="@appName review">@appName review</em>
+                                        <strong itemprop="itemReviewed"  title="@appName review" itemscope itemtype="http://schema.org/Thing">
+                                            <em title="@appName review" itemprop="name">@appName review</em>
                                         </strong>
                                     </h1>
                                 </a>
                             </div>
-                            <a class="review-title-anchor" href="#">
-                                <h1 itemprop="name" class="review-title" title="Plant VS Zombies , Review : Take a Look">
+                            <a class="review-title-anchor">
+                                <h1 itemprop="name" class="review-title" title="@review.Title">
                                     <i class="fa fa-check-circle"></i>
                                     @review.Title
                                 </h1>
@@ -54,23 +54,23 @@
                             <ul class="reviewed-by-wrapper">
                                 <li class="posted-by-wrapper">
                                     Posted by
-                                    <a href="@AppVar.Url/User/Reviews/@review.User.UserName" title="@App.">
-                                        <h1 itemprop="author">@review.User.UserName</h1>
+                                    <a href="@AppVar.Url/User/Reviews/@review.User.UserName" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                                        <h1 itemprop="name">@review.User.UserName</h1>
                                     </a> |
                                 </li>
                                 <li class="date">
                                     @Html.DisplayDate(@review.CreatedDate) |
-                                    <meta itemprop="datePublished" content="2011-04-01">
+                                    <meta itemprop="datePublished" content="@Html.DisplayDate(@review.CreatedDate)">
                                 </li>
                                 <li class="report">
-                                    <a href="@AppVar.Url/Report/Reviews/@review.ReviewID">
+                                    <a href="@AppVar.Url/Report/Review/@review.ReviewID">
                                         Report
                                     </a>
                                 </li>
                             </ul>
                         </header>
                         <article title="reiview contents" class="review-contents">
-                            @review.Comment1
+                            <span itemprop="reviewBody">@review.Comment1</span>
                             <span class="show-more-btns-container" data-ref="app-review" data-id="@sequenceOfReview">
                                 <span class="elipse-dot">...</span>
                                 <a class="see-more-btn" data-ref="app-review" data-id="@sequenceOfReview">see more</a>

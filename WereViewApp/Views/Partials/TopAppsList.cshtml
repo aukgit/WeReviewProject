@@ -17,7 +17,7 @@
         </a>
         <div class="clear"></div>
     </div>
-    <div class="owl-carousel owl-list owl-theme" itemprop="itemListElement" itemscope itemtype="http://schema.org/Book">
+    <div class="owl-carousel owl-list owl-theme" itemscope itemtype="http://schema.org/SoftwareApplication">
         @foreach (var app in Model) {
             string appName = @app.AppName;
             string absUrl = @app.GetAbsoluteUrl();
@@ -40,14 +40,15 @@
                             </h1>
                             <span class="paragraph-end"></span>
                         </div>
-                        <div class="published-by" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                        <div class="published-by" itemprop="author" itemscope itemtype="http://schema.org/Organization">
                             <span itemprop="name">@postedUserName</span>
                             <span class="paragraph-end"></span>
                         </div>
                         <div title="rating of @appName" class="seo-hide seo-rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                             <span itemprop="ratingValue">@app.AvgRating</span> stars based on
-                            <meta itemprop="best" content="5" />
+                            <span itemprop="bestRating" class="hide">5</span>
                             <span itemprop="reviewCount">@app.ReviewsCount</span> reviews
+                            <meta itemprop="worstRating" content="0">
                         </div>
                         <input title="rating of @appName" class="rating-5-front" value="@app.AvgRating" min="0" max="5" step="0.5" data-readonly="true" data-size="xs">
                     </div>
