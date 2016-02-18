@@ -19,7 +19,6 @@ namespace WereViewApp.Models.EntityModel
         public Platform()
         {
             this.Apps = new HashSet<App>();
-            this.CellPhones = new HashSet<CellPhone>();
         }
     
         public byte PlatformID { get; set; }
@@ -28,6 +27,5 @@ namespace WereViewApp.Models.EntityModel
         public string Icon { get; set; }
     
         public virtual ICollection<App> Apps { get; set; }
-        public virtual ICollection<CellPhone> CellPhones { get; set; }
     }
 }
