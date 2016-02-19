@@ -28,7 +28,7 @@ namespace WereViewApp.Controllers {
         [OutputCache(CacheProfile = "Day")]
         public ActionResult Index(int page = 1) {
             HtmlString paginationHtml;
-            var archivedApps = _algorithms.GetLatestApps(db, true, page, out paginationHtml, isFromHomePage: false);
+            var archivedApps = _algorithms.GetLatestApps(db, true, page, out paginationHtml, false);
             ViewBag.Title = "Apps";
             ViewBag.Meta = "Latest mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
             ViewBag.Keywords = ViewBag.Meta;
@@ -40,7 +40,7 @@ namespace WereViewApp.Controllers {
 
         [OutputCache(CacheProfile = "Day")]
         public ActionResult Latest() {
-            var latest = _algorithms.GetLatestApps(db, 60, isFromHomePage: false);
+            var latest = _algorithms.GetLatestApps(db, 60, false);
             ViewBag.Title = "Latest mobile apps";
             ViewBag.Meta = "Latest mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
             ViewBag.Keywords = ViewBag.Meta;
@@ -51,7 +51,7 @@ namespace WereViewApp.Controllers {
 
         [OutputCache(CacheProfile = "Day")]
         public ActionResult Top() {
-            var top = _algorithms.GetTopRatedApps(db, 100,  isFromHomePage: false);
+            var top = _algorithms.GetTopRatedApps(db, 100, false);
             ViewBag.Title = "Top 100 mobile apps";
             ViewBag.Meta = "Latest mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
             ViewBag.Keywords = ViewBag.Meta;
@@ -83,7 +83,7 @@ namespace WereViewApp.Controllers {
         /// <returns></returns>
         //[OutputCache(CacheProfile = "Day", VaryByParam = "platform;platformVersion;category;page")]
         public ActionResult GetByPlatformAndCategory(string platform, double? platformVersion, string category, int page = 1) {
-            var apps = _algorithms.GetAppsFilteredByPlatformAndCategory(platform, platformVersion, category,page, this.ViewBag, db);
+            var apps = _algorithms.GetAppsFilteredByPlatformAndCategory(platform, platformVersion, category,page, ViewBag, db);
             if (apps != null) {
                 ViewBag.Title = "Apps : " + _algorithms.GetCurrentUrlWithoutHostNameWithoutSlash();
                 ViewBag.Meta = ViewBag.Title;

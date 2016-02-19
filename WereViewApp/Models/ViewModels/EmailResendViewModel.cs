@@ -1,6 +1,7 @@
 ﻿using System.Web;
 using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Modules.Session;
+
 namespace WereViewApp.Models.ViewModels {
     public class EmailResendViewModel {
 

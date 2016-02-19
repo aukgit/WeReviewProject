@@ -20,20 +20,20 @@ namespace WereViewApp.Modules.Extensions {
             }
         }
 
-        public static string GraphAPICall(this string baseGraphApiCall, params object[] args) {
+        public static string GraphApiCall(this string baseGraphApiCall, params object[] args) {
             //returns a formatted Graph Api Call with a version prefix and appends a query string parameter containing the appsecret_proof value
             if (!string.IsNullOrEmpty(baseGraphApiCall)) {
                 if (args != null &&
                     args.Count() > 0) {
                     //Determine if we need to concatenate appsecret_proof query string parameter or inject it as a single query string paramter
-                    string _graphApiCall = string.Empty;
+                    string graphApiCall = string.Empty;
                     if (baseGraphApiCall.Contains("?"))
-                        _graphApiCall = string.Format(baseGraphApiCall + "&appsecret_proof={" + (args.Count() - 1) + "}", args);
+                        graphApiCall = string.Format(baseGraphApiCall + "&appsecret_proof={" + (args.Count() - 1) + "}", args);
                     else
-                        _graphApiCall = string.Format(baseGraphApiCall + "?appsecret_proof={" + (args.Count() - 1) + "}", args);
+                        graphApiCall = string.Format(baseGraphApiCall + "?appsecret_proof={" + (args.Count() - 1) + "}", args);
 
                     //prefix with Graph API Version
-                    return string.Format("v2.1/{0}", _graphApiCall);
+                    return string.Format("v2.1/{0}", graphApiCall);
                 } else
                     throw new Exception("GraphAPICall requires at least one string parameter that contains the appsecret_proof value.");
             } else

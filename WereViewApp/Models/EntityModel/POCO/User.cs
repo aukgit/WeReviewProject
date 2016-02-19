@@ -15,7 +15,6 @@ namespace WereViewApp.Models.EntityModel {
     public partial class User:IDevUser {
         public User() {
             this.Apps = new HashSet<App>();
-            this.CellPhones = new HashSet<CellPhone>();
             this.FeaturedImages = new HashSet<FeaturedImage>();
             this.LatestSeenNotifications = new HashSet<LatestSeenNotification>();
             this.Messages = new HashSet<Message>();
@@ -36,7 +35,6 @@ namespace WereViewApp.Models.EntityModel {
 
         public long TotalEarnedPoints { get; set; }
         public virtual ICollection<App> Apps { get; set; }
-        public virtual ICollection<CellPhone> CellPhones { get; set; }
         public virtual ICollection<FeaturedImage> FeaturedImages { get; set; }
         public virtual ICollection<LatestSeenNotification> LatestSeenNotifications { get; set; }
         public virtual ICollection<Message> Messages { get; set; }

@@ -8,7 +8,7 @@ using WereViewApp.Modules.Extensions.Context;
 #endregion
 
 namespace WereViewApp.Controllers {
-    public abstract class GenericController<TContext> : Controller where TContext : DevDbContext, new(){
+    internal abstract class GenericController<TContext> : Controller where TContext : DevDbContext, new(){
         internal readonly TContext db;
         internal ErrorCollector ErrorCollector;
 

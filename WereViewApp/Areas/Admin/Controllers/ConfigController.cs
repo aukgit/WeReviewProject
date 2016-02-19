@@ -3,8 +3,10 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using DevMvcComponent;
+using WereViewApp.Filter;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.IdentityCustomization;
+using WereViewApp.Modules.Role;
 
 namespace WereViewApp.Areas.Admin.Controllers {
     public class ConfigController : Controller {
@@ -18,6 +20,24 @@ namespace WereViewApp.Areas.Admin.Controllers {
                 return HttpNotFound();
             }
             return View(coreSetting);
+        }
+        [Authorize]
+        [CheckRegistrationComplete]
+        public ActionResult CleanSystem() {
+        
+            return View();
+        }
+
+        [Authorize]
+        [HasMinimumRole(MinimumRole=RoleNames.Admin)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CleanSystem(string clean) {
+            if (!string.IsNullOrEmpty(clean) && clean.Equals("Clean")) {
+
+                ViewBag.message = "Every thing is removed successfully.";
+            }
+            return View();
         }
 
         public async Task<ActionResult> SendEmail(string tab) {

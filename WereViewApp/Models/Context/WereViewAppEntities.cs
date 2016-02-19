@@ -27,7 +27,6 @@ namespace WereViewApp.Models.EntityModel {
         public virtual DbSet<AppDraft> AppDrafts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
 
-        public DbSet<CellPhone> CellPhones { get; set; }
         public DbSet<FeaturedImage> FeaturedImages { get; set; }
 
         public virtual DbSet<Gallery> Galleries { get; set; }

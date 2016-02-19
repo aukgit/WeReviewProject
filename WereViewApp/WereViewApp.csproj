@@ -236,6 +236,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AppVar.cs" />
+    <Compile Include="Areas\Admin\Controllers\AppModerateController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\GenericController.cs" />
     <Compile Include="Controllers\IndentityController.cs" />
@@ -255,6 +256,7 @@
     <Compile Include="Models\POCO\Enum\FeedbackStatusTypes.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
     <Compile Include="Models\POCO\Structs\FeedbackCategoryIDs.cs" />
+    <Compile Include="Models\ViewModels\AppModerateViewModel.cs" />
     <Compile Include="Models\ViewModels\EmailResendViewModel.cs" />
     <Compile Include="Models\ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
@@ -263,6 +265,8 @@
     <Compile Include="Models\ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="Modules\Extensions\GraphApiExtension.cs" />
     <Compile Include="Modules\Extensions\ViewEngine\RenderingView.cs" />
+    <Compile Include="Modules\DevUser\UserCache.cs" />
+    <Compile Include="Modules\Constants\Icons.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapGenerator.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapItem.cs" />
     <Compile Include="Modules\Sitemaps\SitemapChangeFrequency.cs" />
@@ -310,7 +314,6 @@
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\AppExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\GalleryExtented.cs" />
     <Compile Include="Models\EntityModel\POCO\AppSavingTextFields.cs" />
-    <Compile Include="Models\EntityModel\POCO\CellPhone.cs" />
     <Compile Include="Models\EntityModel\POCO\FeaturedImage.cs" />
     <Compile Include="Models\EntityModel\POCO\ReviewLikeDislike.cs" />
     <Compile Include="Models\EntityModel\Structs\NotificationTypeIDs.cs" />
@@ -909,6 +912,8 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Admin\Views\Config\CleanSystem.cshtml" />
+    <Content Include="Areas\Admin\Views\AppModerate\Index.cshtml" />
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />
