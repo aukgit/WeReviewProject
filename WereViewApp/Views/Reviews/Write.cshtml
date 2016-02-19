@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Write Review";
-    var token = @Html.AntiForgeryToken();
+    var token = Html.AntiForgeryToken();
     string controller = (string) ViewBag.controller;
     string viewName = "Write";
     Layout = null;

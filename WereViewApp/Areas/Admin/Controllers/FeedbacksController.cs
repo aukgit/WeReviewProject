@@ -19,6 +19,7 @@ using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WereViewApp.Models.POCO.Enum;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Mail;
+using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Areas.Admin.Controllers {
     [OutputCache(NoStore = true)]
@@ -51,6 +52,8 @@ namespace WereViewApp.Areas.Admin.Controllers {
         const string CurrentControllerRemoveOutputCacheUrl = "/Partials/GetFeedbackID";
         const string DynamicLoadPartialController = "/Partials/";
         bool DropDownDynamic = true;
+
+
         #endregion
 
         #region Enums
@@ -398,15 +401,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         public async Task<ActionResult> BlockApp(Int64 id) {
             using (var db2 = new WereViewAppEntities()) {
-                var app = db2.Apps.Find(id);
-                app.IsBlocked = true;
-                app.Tags = "none";
-                if (db2.SaveChanges() > -1) {
-                    var user = UserManager.GetUser(app.PostedByUserID);
-                    var mailer = new MailSender();
-                    mailer.Send(user.Email, "Your app has been blocked.",
-                        "Sorry! Your app <a href='" + app.GetAbsoluteUrl() + "'>" + app.AppName + "</a> is inappropriate thus blocked.");
-                    ViewBag.info = "block the app.";
+                if (ModerationAlgorithms.BlockApp(id, true, db2)) {
                     return View("Done");
                 }
             }
@@ -414,15 +409,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         }
         public async Task<ActionResult> UnBlockApp(Int64 id) {
             using (var db2 = new WereViewAppEntities()) {
-                var app = db2.Apps.Find(id);
-                app.IsBlocked = false;
-                app.Tags = "none";
-                if (db2.SaveChanges() > -1) {
-                    var user = UserManager.GetUser(app.PostedByUserID);
-                    var mailer = new MailSender();
-                    mailer.Send(user.Email, "Your app has been unblocked.",
-                        "Congratulations! Your app <a href='" + app.GetAbsoluteUrl() + "'>" + app.AppName + "</a> is now unblocked.");
-                    ViewBag.info = "unblock the app.";
+                if (ModerationAlgorithms.UnBlockApp(id, true, db2)) {
                     return View("Done");
                 }
             }
@@ -431,23 +418,12 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         public async Task<ActionResult> BlockReview(Int64 id) {
             using (var db2 = new WereViewAppEntities()) {
-                var review = db2.Reviews.Find(id);
-                var likeDislikes = db2.ReviewLikeDislikes.Where(n => n.ReviewID == id);
-                foreach (var likeDislike in likeDislikes) {
-                    db2.ReviewLikeDislikes.Remove(likeDislike);
-                }
-                ViewBag.info = "deleted review ( " + review.Comments + " ).";
-                db2.Reviews.Remove(review);
-                if (db2.SaveChanges() > -1) {
-                    var user = UserManager.GetUser(review.UserID);
-                    var mailer = new MailSender();
-                    mailer.Send(user.Email, "Your review has been removed.",
-                        "Sorry! Your review <q>" + review.Comments + "</q> is inappropriate thus removed.");
-
+                Review review;
+                if (ModerationAlgorithms.BlockReview(id, true, db2, out review)) {
+                    ViewBag.info = "deleted review ( " + review.Comments + " ).";
                     return View("Done");
                 }
             }
-
             return HttpNotFound();
         }
         #endregion

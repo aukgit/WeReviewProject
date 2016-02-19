@@ -39,6 +39,8 @@ namespace WereViewApp.Modules.Role {
         public static ApplicationRoleManager ResetManager() {
             _roleStore = new RoleStore<ApplicationRole, long, ApplicationUserRole>(new ApplicationDbContext());
             _roleManager = new ApplicationRoleManager(_roleStore);
+            UserCache.ClearSession();
+            GC.Collect();
             return _roleManager;
         }
 

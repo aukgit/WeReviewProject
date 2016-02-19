@@ -6,11 +6,11 @@ using System.Web.Mvc;
 using System.Linq;
 namespace WereViewApp.Areas.Admin.Controllers {
     public class RolesController : Controller {
-        private readonly ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         public ActionResult Index() {
-            var Roles = RoleManager.GetRoles();
-            return View(Roles);
+            var roles = RoleManager.GetRoles();
+            return View(roles);
         }
 
 
@@ -28,8 +28,8 @@ namespace WereViewApp.Areas.Admin.Controllers {
         [HttpPost]
         public ActionResult Create(ApplicationRole role) {
             if (ModelState.IsValid) {
-                db.Entry(role).State = System.Data.Entity.EntityState.Added;
-                if (db.SaveChanges() > -1) {
+                _db.Entry(role).State = System.Data.Entity.EntityState.Added;
+                if (_db.SaveChanges() > -1) {
                     RoleManager.ResetManager();
                     return RedirectToAction("Index");
                 }
@@ -49,10 +49,9 @@ namespace WereViewApp.Areas.Admin.Controllers {
         [HttpPost]
         public ActionResult Edit(ApplicationRole role) {
             if (ModelState.IsValid) {
-                db.Entry(role).State = System.Data.Entity.EntityState.Modified;
-                if (db.SaveChanges() > -1) {
+                _db.Entry(role).State = System.Data.Entity.EntityState.Modified;
+                if (_db.SaveChanges() > -1) {
                     RoleManager.ResetManager();
-
                     return RedirectToAction("Index");
                 }
             }
@@ -65,7 +64,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         public ActionResult Delete(long id) {
             var relatedUsers = RoleManager.GetUsersInRole(id);
-            if (relatedUsers != null && relatedUsers.Count() > 0) {
+            if (relatedUsers != null && relatedUsers.Count > 0) {
                 ViewBag.RoleID = id;
                 RoleManager.ResetManager();
 
