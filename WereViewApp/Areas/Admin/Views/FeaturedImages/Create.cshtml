@@ -7,7 +7,7 @@
     string controller = (string)ViewBag.controller;
     string viewName = "Create";
 }
-@Html.SamePageLinkWithIcon(title, subtitle, "fa fa-plus")
+@Html.SamePageLinkWithIcon(title, subtitle, Icons.Plus)
 <hr />
 @using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {
     <div class="form-horizontal">
