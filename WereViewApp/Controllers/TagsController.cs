@@ -1,11 +1,8 @@
-﻿using System.Web.Mvc;
-using WereViewApp.WereViewAppCommon;
-using System.Linq;
-using System.Data.Entity;
+﻿using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using DevMvcComponent.Pagination;
-using WereViewApp.Models.EntityModel.Structs;
-using WereViewApp.Modules.Cache;
+using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Controllers {
     public class TagsController : AdvanceController {
@@ -38,7 +35,7 @@ namespace WereViewApp.Controllers {
 
             // add ordered by
             var pageInfo = new PaginationInfo {
-                ItemsInPage = AppConfig.Setting.PageItems,
+                ItemsInPage = AppConfig.Setting.PageItems
             };
             var tagsforThisPage = tags.GetPageData(pageInfo, cacheName).ToList();
             const string eachUrl = "/tags?page=@page";

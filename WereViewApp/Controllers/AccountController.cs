@@ -343,7 +343,7 @@ namespace WereViewApp.Controllers {
         public async Task<ActionResult> ResendConfirmationMail() {
             var lastSend = Session["last-send"] as DateTime?;
             if (lastSend == null) {
-                ApplicationUser user = UserManager.GetCurrentUser();
+                var user = UserManager.GetCurrentUser();
                 if (!user.IsRegistrationComplete) {
                     SendConfirmationEmail(user);
                     ViewBag.message =
@@ -395,10 +395,9 @@ namespace WereViewApp.Controllers {
                                 SendConfirmationEmail(user);
                                 #endregion
                                 return RedirectToActionPermanent("Verify");
-                            } else {
-                                await SignInAsync(user, false);
-                                return RedirectToLocal(returnUrl);
                             }
+                            await SignInAsync(user, false);
+                            return RedirectToLocal(returnUrl);
                         }
                     }
                     AddErrors(result);

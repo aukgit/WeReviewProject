@@ -2,7 +2,6 @@
 
 using System.Web.Mvc;
 using DevMvcComponent.Error;
-using WereViewApp.Filter;
 using WereViewApp.Models.EntityModel;
 
 #endregion
