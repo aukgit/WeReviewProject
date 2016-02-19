@@ -33,7 +33,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         public ActionResult Index(AppModerateViewModel model) {
             var app = ViewBag.app as App ;
             if (app != null) {
-                
+                if(app.is)
             }
         
         }

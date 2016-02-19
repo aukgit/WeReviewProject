@@ -266,6 +266,7 @@
     <Compile Include="Modules\Extensions\GraphApiExtension.cs" />
     <Compile Include="Modules\Extensions\ViewEngine\RenderingView.cs" />
     <Compile Include="Modules\DevUser\UserCache.cs" />
+    <Compile Include="Modules\Constants\Icons.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapGenerator.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapItem.cs" />
     <Compile Include="Modules\Sitemaps\SitemapChangeFrequency.cs" />
