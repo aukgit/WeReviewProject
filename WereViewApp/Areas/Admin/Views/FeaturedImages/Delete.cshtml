@@ -9,7 +9,7 @@
     string asking = "Are you sure you want to delete this?";
     string controller = (string)ViewBag.controller;
     string viewName = "Delete";
-    var token = (MvcHtmlString)@Html.AntiForgeryToken();
+    var token = Html.AntiForgeryToken();
 }
 @Html.SamePageLinkWithIcon(title, subtitle, "fa fa-trash")
 <hr />

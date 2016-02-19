@@ -4,7 +4,7 @@
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
 }
-@Html.SamePageLinkWithIcon(title, subtitle, "fa fa-plus")
+@Html.SamePageLinkWithIcon(title, subtitle, Icons.Plus)
 <hr />
 @using (Html.BeginForm("Create", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) 
 {
