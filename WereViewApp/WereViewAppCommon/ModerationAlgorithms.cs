@@ -3,6 +3,7 @@ using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Mail;
+using WereViewApp.Modules.Extensions.IdentityExtension;
 
 namespace WereViewApp.WereViewAppCommon {
     public static class ModerationAlgorithms {
@@ -58,17 +59,32 @@ namespace WereViewApp.WereViewAppCommon {
         #endregion
 
         #region Featured App
-
-        public static bool AppFeatured(long appId, bool isFeatured, WereViewAppEntities db) {
-            var featured = db.FeaturedImages.FirstOrDefault(n => n.AppID == appId);
-
-            if (featured == null) {
-                featured = new FeaturedImage() {
-                    AppID = appId,
-                    IsFeatured = isFeatured,
-                    UserID
+        /// <summary>
+        /// Returns true when saving is successful.
+        /// </summary>
+        /// <param name="appId"></param>
+        /// <param name="isFeatured"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        internal static bool AppFeatured(long appId, bool isFeatured, WereViewAppEntities db) {
+            if (UserManager.IsAuthenticated()) {
+                var featured = db.FeaturedImages.FirstOrDefault(n => n.AppID == appId);
+                var user = UserManager.GetCurrentUser();
+                if (featured == null) {
+                    featured = new FeaturedImage() {
+                        AppID = appId,
+                        IsFeatured = isFeatured,
+                        UserID = user.UserID
+                    };
+                    db.FeaturedImages.Add(featured);
+                } else {
+                    featured.IsFeatured = isFeatured;
+                    featured.UserID = user.UserID;
+                    db.Entry(featured).State = System.Data.Entity.EntityState.Modified;
                 }
+                return db.SaveChanges() != -1;
             }
+            return false;
         }
 
         #endregion
@@ -78,7 +94,7 @@ namespace WereViewApp.WereViewAppCommon {
             var user = UserManager.GetUser(userId);
             var mailer = new MailSender();
             mailer.Send(user.Email, subject, mailBody);
-        } 
+        }
         #endregion
     }
 }

@@ -23,7 +23,7 @@
         public const string Times = "fa fa-times";
         public const string Delete = "fa fa-times";
         public const string Remove = "fa fa-times";
-        public const string Plus = Icons.Plus;
+        public const string Plus = "fa fa-plus";
         public const string ExclamationTriangle = "fa fa-exclamation-triangle";
         public const string Exclamation = "fa fa-exclamation";
         public const string ExclamationCircle = "fa fa-exclamation-circle";

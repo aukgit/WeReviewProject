@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using WereViewApp.Controllers;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.ViewModels;
+using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Areas.Admin.Controllers {
     public class AppModerateController : AdvanceController {
@@ -37,15 +38,22 @@ namespace WereViewApp.Areas.Admin.Controllers {
         }
         [HttpPost]
         public ActionResult Index(AppModerateViewModel model) {
-              var app =         TempData[TempAppKey]  as App;
+            var app = TempData[TempAppKey] as App;
             var isFeaturedPreviously = (bool)TempData[TempAppFeaturedKey];
+            model.App = app;
 
             if (app != null) {
                 if (app.IsBlocked != model.IsBlocked) {
                     // needs to update
+                    if (model.IsBlocked) {
+                        ModerationAlgorithms.BlockApp(model.AppId, model.IsFeatured, db);
+                    } else {
+                        ModerationAlgorithms.UnBlockApp(model.AppId, model.IsFeatured, db);
+                    }
                 }
                 if (isFeaturedPreviously != model.IsFeatured) {
                     // needs to update
+                    ModerationAlgorithms.AppFeatured(model.AppId, model.IsFeatured, db);
                 }
             }
             AppVar.SetSavedStatus(this.ViewBag, "You have successfully moderated this app.");
