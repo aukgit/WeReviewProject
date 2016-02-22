@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using DevMvcComponent.Enums;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Cache;
+using WereViewApp.Modules.Constants;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Mail;
 using WereViewApp.Modules.Menu;
@@ -141,6 +142,36 @@ namespace WereViewApp.Helpers {
                 "<button type=\"{0}\"  title=\"{1}\" class=\"{2}\">{3} {4} {5}</button>",
                 btnType, tooltip, additionalClasses, leftIcon, buttonName, rightIcon);
             return new HtmlString(buttonHtml);
+        }
+
+        public static HtmlString SubmitButtonIconRight(this HtmlHelper helper, string buttonName = "Submit",
+           string iconClass = "fa fa-floppy-o",
+           string tooltip = "",
+           string additionalClasses = "btn btn-success",
+           bool placeIconLeft = false,
+           string btnType = "Submit"
+           ) {
+            return SubmitButton(helper, buttonName,
+                iconClass,
+                tooltip,
+                additionalClasses,
+                placeIconLeft,
+                btnType);
+        }
+
+        public static HtmlString EmailButtonIconRight(this HtmlHelper helper, string buttonName = "Send",
+          string iconClass = Icons.EmailO,
+          string tooltip = "",
+          string additionalClasses = "btn btn-success",
+          bool placeIconLeft = false,
+          string btnType = "Submit"
+          ) {
+            return SubmitButton(helper, buttonName,
+                iconClass,
+                tooltip,
+                additionalClasses,
+                placeIconLeft,
+                btnType);
         }
         /// <summary>
         /// Renders a remove button with icon.

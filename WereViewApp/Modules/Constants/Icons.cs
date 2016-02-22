@@ -5,6 +5,10 @@
         public const string CheckMark = "fa fa-check";
         public const string CheckMarkCircleO = "fa fa-check-circle-o";
         public const string CheckMarkCircle = "fa fa-check-circle";
+        public const string EmailO = "fa fa-envelope-o";
+        public const string Email = "fa fa-envelope";
+        public const string Envelope = "fa fa-envelope";
+        public const string EnvelopeO = "fa fa-envelope-o";
         public const string CheckMarkSquareO = "fa fa-check-square-o";
         public const string CheckMarkSquare = "fa fa-check-square";
         public const string CalenderCheckO = "fa fa-calendar-check-o";
@@ -23,7 +27,7 @@
         public const string Times = "fa fa-times";
         public const string Delete = "fa fa-times";
         public const string Remove = "fa fa-times";
-        public const string Plus = Icons.Plus;
+        public const string Plus = "fa fa-plus";
         public const string ExclamationTriangle = "fa fa-exclamation-triangle";
         public const string Exclamation = "fa fa-exclamation";
         public const string ExclamationCircle = "fa fa-exclamation-circle";
@@ -95,6 +99,21 @@
         public const string StopCircleO = "fa fa-stop-circle-o";
         public const string Stop = "fa fa-stop";
         public const string YoutubePlay = "fa fa-youtube-play";
-
+        public const string Questions = "fa fa-question-circle";
+        public const string QuestionsO = "fa fa-question-circle-o";
+        public const string Mobile = "fa fa-mobile";
+        public const string Phone = "fa fa-phone";
+        public const string PhoneSquare = "fa fa-phone-square";
+        public const string Home = "fa fa-home";
+        public const string Bed = "fa fa-bed";
+        public const string Hostpital = "fa fa-h-square";
+        public const string Signin = "fa fa-sign-in";
+        public const string Login = Signin;
+        public const string Signout = "fa fa-sign-out";
+        public const string Logout = Signout;
+        public const string Register = UserPlus;
+        public const string Registered = "fa fa-registered";
+        
+        
     }
 }
