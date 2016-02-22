@@ -1668,4 +1668,19 @@ q:after {
   background-color: #3356A0;
   color: white;
 }
+.text-danger.validation-summary-errors[data-valmsg-summary="true"] {
+  background-color: #E22013;
+  border-radius: 4px;
+  color: white;
+  padding: 5px 32px;
+  font-size: 13px;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  font-weight: bold;
+}
+.text-danger ul {
+  margin: 0;
+  list-style: decimal;
+}
 /*# sourceMappingURL=front-developer.css.map */

@@ -102,6 +102,7 @@ namespace WereViewApp {
                                         "~/Content/css/font-awesome.min.css",
                                         "~/Content/css/animate-refresh.css",
                                         "~/Content/css/site.css",
+                                        "~/Content/css/header.css",
                                         "~/Content/css/flags32.css",
                                         "~/Content/css/flags32-combo.css",
                                         "~/Content/css/Upload/jquery.fileupload.css",
