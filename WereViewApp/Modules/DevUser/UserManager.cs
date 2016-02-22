@@ -16,7 +16,7 @@ using WereViewApp.Modules.Session;
 using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Modules.DevUser {
-    internal static class UserManager {
+    public static class UserManager {
         public static long user { get; set; }
 
         #region Authentication

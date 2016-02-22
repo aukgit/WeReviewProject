@@ -115,7 +115,6 @@
     "EnableChainCompilation": true,
     "GenerateSourceMaps": true,
     "MinifyInPlace": true,
-    "OutputDirectory": "../Css/SS",
     "ProcessSourceMapsForEditorEnhancements": true,
     "ShowPreviewPane": true,
     "StrictMath": false

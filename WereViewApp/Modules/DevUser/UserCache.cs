@@ -9,6 +9,7 @@ namespace WereViewApp.Modules.DevUser {
     public class UserCache {
         /// <summary>
         /// On creation get all the user roles to the cache.
+        /// GenerateRoles() has been called on creation.
         /// </summary>
         public UserCache() {
             GenerateRoles();

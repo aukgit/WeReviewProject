@@ -253,6 +253,7 @@
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackState.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\TagExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\UserExtend.cs" />
+    <Compile Include="Models\EntityModel\POCO\CellPhone.cs" />
     <Compile Include="Models\POCO\Enum\FeedbackStatusTypes.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
     <Compile Include="Models\POCO\Structs\FeedbackCategoryIDs.cs" />
@@ -533,9 +534,6 @@
     </Content>
     <Content Include="Content\css\footer-fixing.min.css" />
     <Content Include="Content\css\front-developer.css" />
-    <Content Include="Content\css\front-developer.css.map">
-      <DependentUpon>front-developer.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\front-developer.min.css">
       <DependentUpon>front-developer.css</DependentUpon>
     </Content>
@@ -915,6 +913,9 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Views\Config\CleanSystem.cshtml" />
     <Content Include="Areas\Admin\Views\AppModerate\Index.cshtml" />
+    <Content Include="Content\css\front-developer.css.map">
+      <DependentUpon>front-developer.css</DependentUpon>
+    </Content>
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />
@@ -1220,6 +1221,7 @@
     <Content Include="Views\App\_AppDescription.cshtml" />
     <Content Include="Views\Account\ConfirmationEmailResend.cshtml" />
     <None Include="Views\Reviews\User.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AnyTypeIconWithHtml.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />
