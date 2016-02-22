@@ -535,6 +535,20 @@ label.control-label {
     position: relative;
   }
 }
+@media (min-width: 768px) {
+  .header-2 header.sticky {
+    height: 52px;
+    height: 5.2rem;
+  }
+}
+@media (max-width: 992px) {
+  .header-2 header.sticky nav .fa {
+    display: none;
+  }
+  .header-2 header.sticky nav .fa.fa-bars {
+    display: inline-block;
+  }
+}
 .tp-leftarrow.preview2:after,
 .tp-rightarrow.preview2:after {
   top: 23px;
