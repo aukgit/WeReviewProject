@@ -9,7 +9,7 @@
         description = ViewData.ModelMetadata.Description,
         isValidate = ViewBag.isValidate ?? "false",
         templateName = "email",
-        icon = ViewBag.icon ?? "fa fa-envelope-o";
+        icon = ViewBag.icon ?? Icons.EmailO;
 
 
     var htmlAttributes = new RouteValueDictionary();
@@ -48,8 +48,10 @@
     if (ViewBag.Value != null) {
         htmlAttributes.Add("Value", ViewBag.Value);
     }
+    if (ViewBag.url != null) {
+        htmlAttributes.Add("data-url", ViewBag.url);
+    }
     htmlAttributes.Add("title", htmlAttributes["placeholder"]);
-
     htmlAttributes.Add("data-prop", styleProperty);
     htmlAttributes.Add("data-template", templateName);
 }

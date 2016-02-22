@@ -16,18 +16,17 @@
 $(function () {
 
 
-    var selectForYoutubeVideoOnDetailsPage = "body.app-details-page:first-child .youtube-video:first-child";
+    var selectForYoutubeVideoOnDetailsPage = "#apps-preview";
     var $youtubeVideoContainer = $(selectForYoutubeVideoOnDetailsPage);
     if ($youtubeVideoContainer.length === 1) {
-        $youtubeVideoContainer.find(".playable-btn:first-child").click(function () {
-            var $iframe = $youtubeVideoContainer.find("iframe:first-child");
+        $youtubeVideoContainer.find(".playable-btn").click(function () {
+            var $iframe = $youtubeVideoContainer.find("iframe");
             var $this = $(this);
             if ($iframe.length === 1) {
                 $iframe[0].src += "?rel=0&controls=1&autoplay=1";
                 $this.hide("slow");
                 $this.unbind("click");//or some other way to make sure that this only happens once
             }
-
         });
     }
 
@@ -38,7 +37,7 @@ $(function () {
         $showLessBtns: $(".less-btn"),
         $moreExcert: $(".more"),
         execute: function () {
-            $("div.app-suggested-list-items-mobile:first-child,div.featured-apps-list-items").owlCarousel({
+            $("div.app-suggested-list-items-mobile:first,div.featured-apps-list-items").owlCarousel({
                 navigation: true,
                 navigationText: [
                   "<i class='fa fa-chevron-circle-left'></i>",
@@ -167,7 +166,7 @@ $(function () {
                 var $filterIsotopItems = $('.filter li a');
                 if ($filterIsotopItems.length > 0) {
                     $filterIsotopItems.click(function () {
-                        $('.filter li a').removeClass('active');
+                        $('.filter').find("li a").removeClass('active');
                         $(this).addClass('active');
                         var selector = $(this).attr('data-filter');
 

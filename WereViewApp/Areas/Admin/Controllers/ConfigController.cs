@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using DevMvcComponent;
+using WereViewApp.Filter;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.IdentityCustomization;
+using WereViewApp.Modules.Role;
 
 namespace WereViewApp.Areas.Admin.Controllers {
     public class ConfigController : Controller {
@@ -18,10 +21,28 @@ namespace WereViewApp.Areas.Admin.Controllers {
             }
             return View(coreSetting);
         }
+        [Authorize]
+        [CheckRegistrationComplete]
+        public ActionResult CleanSystem() {
+        
+            return View();
+        }
 
-        public ActionResult SendEmail(string tab) {
+        [Authorize]
+        [HasMinimumRole(MinimumRole=RoleNames.Admin)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CleanSystem(string clean) {
+            if (!string.IsNullOrEmpty(clean) && clean.Equals("Clean")) {
+
+                ViewBag.message = "Every thing is removed successfully.";
+            }
+            return View();
+        }
+
+        public async Task<ActionResult> SendEmail(string tab) {
             ViewBag.tab = "#email-setup";
-            Mvc.Mailer.QuickSend(AppVar.Setting.DeveloperEmail, "Test Email", "Test Email at " + DateTime.Now);
+            AppVar.Mailer.NotifyAdmin(AppVar.Setting.DeveloperEmail, "Test Email", "Test Email at " + DateTime.Now);
             try {
                 throw new Exception("Testing error mail.");
             } catch (Exception ex) {
@@ -39,11 +60,11 @@ namespace WereViewApp.Areas.Admin.Controllers {
                 db.Entry(coreSetting).State = EntityState.Modified;
                 if (db.SaveChanges() > -1) {
                     AppConfig.RefreshSetting();
-                    AppVar.SetSavedStatus(this.ViewBag);
+                    AppVar.SetSavedStatus(ViewBag);
                     return View(coreSetting);
                 }
             }
-            AppVar.SetErrorStatus(this.ViewBag);
+            AppVar.SetErrorStatus(ViewBag);
             return View(coreSetting);
         }
 

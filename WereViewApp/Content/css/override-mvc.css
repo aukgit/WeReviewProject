@@ -300,5 +300,10 @@ input.form-control {
     top: 0.2rem;
   }
 }
+@media (min-width: 768px) {
+  .right-side-label {
+    margin-left: 18.66em;
+  }
+}
 /*# sourceMappingURL=override-mvc-css.css.map */
 /*# sourceMappingURL=override-mvc.css.map */

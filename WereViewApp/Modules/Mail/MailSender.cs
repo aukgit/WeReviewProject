@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Threading;
 using DevMvcComponent;
 
 namespace WereViewApp.Modules.Mail {
     public class MailSender {
-        private readonly bool isCompanyNameOnEmailSubject = false;
+        private readonly bool _isCompanyNameOnEmailSubject = false;
 
         public string GetSubject(string sub, string type = "") {
-            if (isCompanyNameOnEmailSubject) {
+            if (_isCompanyNameOnEmailSubject) {
                 if (string.IsNullOrEmpty(type))
                     return "[" + AppVar.Name + "][" + AppVar.Setting.CompanyName + "] " + sub;
                 return "[" + AppVar.Name + "][" + AppVar.Setting.CompanyName + "][" + type + "] " + sub;
@@ -16,11 +17,13 @@ namespace WereViewApp.Modules.Mail {
             return "[" + AppVar.Name + "][" + type + "] " + sub;
         }
 
-        public void NotifyAdmin(string subject, string HTMLMessage, string type = "", bool GenerateDecentSubject = true) {
-            if (GenerateDecentSubject) {
+        public async void NotifyAdmin(string subject, string htmlMessage, string type = "", bool generateDecentSubject = true) {
+            if (generateDecentSubject) {
                 subject = GetSubject(subject, type);
             }
-            Mvc.Mailer.QuickSend(AppVar.Setting.AdminEmail, subject, HTMLMessage);
+            new Thread(() => {
+                Mvc.Mailer.QuickSend(AppVar.Setting.AdminEmail, subject, htmlMessage);
+            }).Start();
         }
 
         /// <summary>
@@ -28,39 +31,43 @@ namespace WereViewApp.Modules.Mail {
         /// </summary>
         /// <param name="to"></param>
         /// <param name="subject"></param>
-        /// <param name="HTMLMessage"></param>
+        /// <param name="htmlMessage"></param>
         /// <param name="type"></param>
-        /// <param name="GenerateDecentSubject"></param>
-        public void Send(string to, string subject, string HTMLMessage, string type = "",
-            bool GenerateDecentSubject = true) {
-            if (GenerateDecentSubject) {
+        /// <param name="generateDecentSubject"></param>
+        public void Send(string to, string subject, string htmlMessage, string type = "",
+            bool generateDecentSubject = true) {
+            if (generateDecentSubject) {
                 subject = GetSubject(subject, type);
             }
-            Mvc.Mailer.QuickSend(to, subject, HTMLMessage);
+            new Thread(() => {
+                Mvc.Mailer.QuickSend(to, subject, htmlMessage);
+            }).Start();
         }
 
-        public void NotifyDeveloper(string subject, string HTMLMessage, string type = "",
-            bool GenerateDecentSubject = true) {
+        public void NotifyDeveloper(string subject, string htmlMessage, string type = "",
+            bool generateDecentSubject = true) {
             if (AppVar.Setting.NotifyDeveloperOnError) {
-                if (GenerateDecentSubject) {
+                if (generateDecentSubject) {
                     subject = GetSubject(subject, type);
                 }
-                Mvc.Mailer.QuickSend(AppVar.Setting.DeveloperEmail, subject, HTMLMessage);
+                new Thread(() => {
+                    Mvc.Mailer.QuickSend(AppVar.Setting.DeveloperEmail, subject, htmlMessage);
+                }).Start();
             }
         }
 
-    
+
 
         public void HandleError(Exception exception, string method, string subject = "", object entity = null,
-            string type = "", bool GenerateDecentSubject = true) {
-                {
-                    if (GenerateDecentSubject) {
-                        subject = GetSubject(subject, type);
-                    }
-                    subject += " on method [" + method + "()]";
-
-                    Mvc.Error.HandleBy(exception, method, subject, entity);
+            string type = "", bool generateDecentSubject = true) {
+            {
+                if (generateDecentSubject) {
+                    subject = GetSubject(subject, type);
                 }
+                subject += " on method [" + method + "()]";
+
+                Mvc.Error.HandleBy(exception, method, subject, entity);
+            }
         }
     }
 }

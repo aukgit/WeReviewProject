@@ -4,6 +4,7 @@
     ViewBag.Title = Model.PlatformName + " Mobile Apps";
     string currentPageStaticUrl = AppVar.Url + Html.GetCurrentUrlString();
     string titlesSubtitle = ViewBag.Title;
+    var paginationHtml = new MvcHtmlString(ViewBag.paginationHtml);
 }
 <div class="app-details-page category-listing-page category-page search-page">
     <div class="row">
@@ -86,7 +87,7 @@
         <div class="clear"></div>
         <div class="pagination-wrapper text-center">
             <ul class="pagination">
-                @ViewBag.paginationHtml
+                @paginationHtml
             </ul>
         </div>
     </div>

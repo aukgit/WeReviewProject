@@ -6,9 +6,10 @@
     ViewBag.Title = "Editing " + appName;
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    ViewBag.token = @Html.AntiForgeryToken();
+    ViewBag.token = Html.AntiForgeryToken();
     string controller = (string)ViewBag.controller;
     string viewName = "Edit";
+    ViewBag.isEditingPage = true; // make sure the url is from "/Validator/GetValidUrlEditing" or else "/Validator/GetValidUrl"
 }
 @Html.SamePageLinkWithIcon(title, title, "fa fa-edit")
 <hr />
@@ -17,11 +18,12 @@
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.AppID)
-            @Html.HiddenFor(model => model.URL)
+            @Html.HiddenFor(model => model.Url)
             @Html.HiddenFor(model => model.CreatedDate)
             @Html.Partial("_CreateOrEdit")
             @Html.Partial("_Uploaders")
-            @Html.EditorFor(model => model.IsPublished)
+            @Html.EditorFor(model => model.IsPublished, "publish") 
+            <div id="execute-title-validate"></div>
             <div class="form-group">
                 <div class="col-md-10 col-md-offset-2">
                     <div class="btn-group">
@@ -39,8 +41,5 @@
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/upload")
-
-
     @Scripts.Render("~/bundles/jqueryval")
-
 }

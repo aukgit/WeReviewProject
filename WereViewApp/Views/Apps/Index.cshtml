@@ -4,9 +4,8 @@
     string title = ViewBag.title;
     List<App> apps = (List<App>)ViewBag.Apps;
 }
-<a href="@Html.GetCurrentUrlWithHostName()">
-    <h2 class="h2" title="@title">@title</h2>
-</a>
+@Html.SamePageLinkWithIcon(title, title,"fa fa-mobile")
+@ViewBag.breadcrumbs
 <div class="app-date-seperation row seo-optimize">
     <div class="col-md-10"></div>
     <div class="col-md-2  text-right">
@@ -15,21 +14,21 @@
         </a>
     </div>
 </div>
-
 <div class="row">
     <div class="archive-app-collection-wrapper">
         <ul class="archive-app-collection-list pagination-required regular-color search-page-apps-list seo-optimize">
             @foreach (App app in apps) {
                 Platform platform = app.GetPlatform();
-                <li class="slim-app-view" data-app-type="@platform.Icon">
+                <li class="slim-app-view" data-app-type="@platform.Icon" itemscope itemtype="http://schema.org/SoftwareApplication">
                     <a class="app-url" href="@app.GetAbsoluteUrl()" title="App Review : @app.AppName">
+                        <span itemprop="operatingSystem" class="hide">@platform.PlatformName - @app.PlatformVersion</span>
                         <div class="app-icon">
-                            <img src="@app.HomePageIconLocation" alt="@app.AppName" />
+                            <img itemscope src="@app.SearchIconLocation" alt="@app.AppName" />
                         </div>
                         <div class="app-content">
-                            <h1 class="app-title" title="App Review : @app.AppName">
+                            <h1  class="app-title" title="App Review : @app.AppName">
                                 <i class="fa @platform.Icon"></i>
-                                @app.AppName
+                                <strong itemprop="name">@app.AppName</strong>
                                 <span class="paragraph-end"></span>
                             </h1>
                             <h3>
@@ -40,6 +39,12 @@
                                 <i class="fa fa-star"></i>
                                 @app.AvgRating/5 from @app.ReviewsCount users
                             </span>
+                            <div itemprop="aggregateRating" class="hide" itemscope itemtype="http://schema.org/AggregateRating">
+                                <span itemprop="ratingValue">@app.AvgRating</span>
+                                <span itemprop="ratingCount">@app.ReviewsCount</span>
+                                <span itemprop="bestRating" class="hide">5</span>
+                                <meta itemprop="worstRating" content="0">
+                            </div>
                         </div>
                         <div class="seo-hide">
                             <em title="@platform.PlatformName Mobiles App">@platform.PlatformName</em>

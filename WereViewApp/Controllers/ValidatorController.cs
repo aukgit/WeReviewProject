@@ -3,11 +3,9 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Web.Mvc;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.Message;
 using WereViewApp.Modules.Session;
 using WereViewApp.Modules.Validations;
 using WereViewApp.WereViewAppCommon.Structs;
@@ -45,7 +43,7 @@ namespace WereViewApp.Controllers {
                         var exist =
                             db.Apps.Any(
                                 n =>
-                                    n.PlatformID == app.PlatformID && n.CategoryID == app.CategoryID && n.URL == url &&
+                                    n.PlatformID == app.PlatformID && n.CategoryID == app.CategoryID && n.Url == url &&
                                     n.PlatformVersion == app.PlatformVersion);
                         if (!exist) {
                             goto ReturnValid;
@@ -74,7 +72,7 @@ namespace WereViewApp.Controllers {
             var max = 60;
             var min = 3;
             var id = app.AppName;
-            string message = "Username is valid for registration.";
+            var message = "Username is valid for registration.";
 
             try {
                 if (id == null || id.Length < 5) {
@@ -88,7 +86,7 @@ namespace WereViewApp.Controllers {
 
                 if ((id.Length >= min && id.Length <= max)) {
                     var url = GetFriendlyURLFromString(id);
-                    if (app.URL.Equals(url)) {
+                    if (app.Url != null && app.Url.Equals(url)) {
                         goto ReturnValid;
                     }
                     using (var db = new WereViewAppEntities()) {
@@ -96,7 +94,7 @@ namespace WereViewApp.Controllers {
                             db.Apps.Any(
                                 n =>
                                     n.AppID != app.AppID && n.PlatformID == app.PlatformID &&
-                                    n.CategoryID == app.CategoryID && n.URL == url &&
+                                    n.CategoryID == app.CategoryID && n.Url == url &&
                                     n.PlatformVersion == app.PlatformVersion);
                         if (!exist) {
                             goto ReturnValid;
@@ -131,14 +129,14 @@ namespace WereViewApp.Controllers {
         #region Base Validators
 
         [HttpPost]
-        [OutputCache(CacheProfile = "Long", VaryByParam = "id", VaryByCustom = "byuser")]
+        [OutputCache(CacheProfile = "Long", VaryByParam = "UserName", VaryByCustom = "byuser")]
         [ValidateAntiForgeryToken]
-        public ActionResult GetUsername(string id) {
+        public ActionResult GetUsername(string UserName) {
             const int max = 30;
             const int min = 3;
-            string message = "Username is valid for registration.";
+            var message = "Username is valid for registration.";
             try {
-                if (id == null || id.Length < 3) {
+                if (UserName == null || UserName.Length < 3) {
                     goto ReturnInvalid;
                 }
                 if (!AppVar.Setting.IsInTestingEnvironment) {
@@ -147,8 +145,8 @@ namespace WereViewApp.Controllers {
                     }
                 }
                 const string userPattern = "^([A-Za-z]|[A-Za-z0-9_.]+)$";
-                if (Regex.IsMatch(id, userPattern, RegexOptions.Compiled) && (id.Length >= min && id.Length <= max)) {
-                    if (!UserManager.IsUserNameExist(id)) {
+                if (Regex.IsMatch(UserName, userPattern, RegexOptions.Compiled) && (UserName.Length >= min && UserName.Length <= max)) {
+                    if (!UserManager.IsUserNameExist(UserName)) {
                         return Json(Validator.GetSuccessMessage(message), JsonRequestBehavior.AllowGet);
                     }
                 }
@@ -163,9 +161,9 @@ namespace WereViewApp.Controllers {
 
 
         [HttpPost]
-        [OutputCache(CacheProfile = "Long", VaryByParam = "id", VaryByCustom = "byuser")]
+        [OutputCache(CacheProfile = "Long", VaryByParam = "Email", VaryByCustom = "byuser")]
         [ValidateAntiForgeryToken]
-        public ActionResult Email(string id) {
+        public ActionResult GetEmail(string Email) {
             const string errorMessage = "Email already exist or not valid.";
             if (!AppVar.Setting.IsInTestingEnvironment) {
                 if (SessionNames.IsValidationExceed("Email")) {
@@ -173,15 +171,15 @@ namespace WereViewApp.Controllers {
                 }
             }
             try {
-                if (id == null || id.Length < 5) {
+                if (Email == null || Email.Length < 5) {
                     goto ReturnInvalid;
                 }
-                var email = id;
+                var email = Email;
 
                 var emailPattern = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
                 if (Regex.IsMatch(email, emailPattern)) {
                     if (!UserManager.IsEmailExist(email)) {
-                        return Json(Validator.GetErrorMessage(errorMessage), JsonRequestBehavior.AllowGet);
+                        return Json(Validator.GetSuccessMessage("Valid email."), JsonRequestBehavior.AllowGet);
                     }
                 }
             } catch (Exception ex) {

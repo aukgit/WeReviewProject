@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WereViewApp.Models.POCO.IdentityCustomization {
     public class FeedbackCategory {
         [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
         public byte FeedbackCategoryID { get; set; }
         [Column(TypeName = "VARCHAR")]

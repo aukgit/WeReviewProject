@@ -1,23 +1,22 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
-using DevMvcComponent.Error;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.Role;
 using WereViewApp.Modules.Session;
-using WereViewApp.Modules.UserError;
+using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Modules.DevUser {
-    public class UserManager {
+    public static class UserManager {
         public static long user { get; set; }
 
         #region Authentication
@@ -28,83 +27,12 @@ namespace WereViewApp.Modules.DevUser {
 
         #endregion
 
-        #region External Validations
-
-        /// <summary>
-        ///     External Validations
-        ///     Register Code Validation
-        /// </summary>
-        /// <param name="model"></param>
-        public static async Task<bool> ExternalUserValidation(RegisterViewModel model, ApplicationDbContext db,
-            ErrorCollector errors = null) {
-            var ValidOtherConditions = true;
-            if (errors == null) {
-                errors = new ErrorCollector();
-            }
-            if (!AppVar.Setting.IsRegisterCodeRequiredToRegister) {
-                model.RegistraterCode = Guid.NewGuid();
-                model.Role = -1;
-            } else {
-                var regCode =
-                    db.RegisterCodes.FirstOrDefault(
-                        n =>
-                            n.IsUsed == false && n.RoleID == model.Role && n.RegisterCodeID == model.RegistraterCode &&
-                            !n.IsExpired);
-                if (regCode != null) {
-                    if (regCode.ValidityTill <= DateTime.Now) {
-                        // not valid
-                        regCode.IsExpired = true;
-                        errors.AddMedium(MessageConstants.RegistercCodeExpired, MessageConstants.SolutionContactAdmin);
-                        await db.SaveChangesAsync();
-                        ValidOtherConditions = false;
-                    }
-                } else {
-                    errors.AddMedium(MessageConstants.RegistercCodeNotValid, MessageConstants.SolutionContactAdmin);
-                    ValidOtherConditions = false;
-                }
-            }
-
-            //validation for country language
-            var languages = CachedQueriedData.GetLanguages(model.CountryID, 0);
-            if (languages == null) {
-                //select english as default.
-                model.CountryLanguageID = CachedQueriedData.GetDefaultLanguage().CountryLanguageID;
-            } else if (languages.Count > 1) {
-                //it should be selected inside the register panel.
-                ValidOtherConditions = !(model.CountryLanguageID == 0); //if zero then false.
-                errors.AddMedium("You forgot you set your language.");
-            } else if (languages.Count == 1) {
-                model.CountryLanguageID = languages[0].CountryLanguageID;
-            }
-
-            //validation for country timzone
-            var timezones = CachedQueriedData.GetTimezones(model.CountryID, 0);
-            if (timezones != null && timezones.Count > 1) {
-                //it should be selected inside the register panel.
-                ValidOtherConditions = !(model.UserTimeZoneID == 0); //if zero then false.
-                errors.AddMedium("You forgot you set your time zone.");
-            } else if (timezones.Count == 1) {
-                model.UserTimeZoneID = timezones[0].UserTimeZoneID;
-            } else {
-                ValidOtherConditions = false;
-                errors.AddMedium(
-                    "You time zone not found. Please contact with admin and notify him/her about the issue to notify developer.");
-            }
-
-
-            if (!ValidOtherConditions) {
-                AppConfig.SetGlobalError(errors);
-            }
-            return ValidOtherConditions;
-        }
-
-        #endregion
 
         #region Registration Code
 
-        public void LinkUserWithRegistrationCode(ApplicationUser user, Guid code) {
+        public static void LinkUserWithRegistrationCode(ApplicationUser user, Guid code) {
             if (user != null) {
-                var relation = new RegisterCodeUserRelation {UserID = user.Id, RegisterCodeUserRelationID = code};
+                var relation = new RegisterCodeUserRelation { UserID = user.Id, RegisterCodeUserRelationID = code };
                 using (var db = new ApplicationDbContext()) {
                     db.RegisterCodeUserRelations.Add(relation);
                     db.SaveChanges();
@@ -168,7 +96,7 @@ namespace WereViewApp.Modules.DevUser {
                     user.EmailConfirmed = true;
                     db2.SaveChanges(); // saved registration complete
 
-                    RegistrationCustomCode.CompletionAfter(user, getRoleFromRegistration, role);
+                    RegistrationCustomCode.CompletionAfter(user, getRoleFromRegistration, role); //wereviewdb user created with same id
                     RegistrationCustomCode.CompletionAfter(userId, getRoleFromRegistration, role);
                 }
             }
@@ -228,10 +156,8 @@ namespace WereViewApp.Modules.DevUser {
 
         private static ApplicationUserManager _userManager;
 
-        public static ApplicationUserManager Manager
-        {
-            get
-            {
+        public static ApplicationUserManager Manager {
+            get {
                 return _userManager ?? HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
             private set { _userManager = value; }
@@ -264,7 +190,11 @@ namespace WereViewApp.Modules.DevUser {
         #endregion
 
         #region Get User
-
+        /// <summary>
+        /// Username and id is same in both databases.
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
         public static ApplicationUser GetUser(long userid) {
             var user = GetUserFromSession(userid);
             if (user == null) {
@@ -274,7 +204,12 @@ namespace WereViewApp.Modules.DevUser {
             return user;
         }
 
-
+        /// <summary>
+        /// Username and id is same in both databases.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public static ApplicationUser GetUser(string userName, string password) {
             var user = GetUserFromSession(userName);
             if (user == null) {
@@ -283,7 +218,12 @@ namespace WereViewApp.Modules.DevUser {
             }
             return user;
         }
-
+        /// <summary>
+        /// Username and id is same in both databases.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public static ApplicationUser GetUserByEmail(string email, string password) {
             var user = Manager.FindByEmail(email);
             return Manager.Find(user.UserName, password);
@@ -295,7 +235,11 @@ namespace WereViewApp.Modules.DevUser {
             }
             return null;
         }
-
+        /// <summary>
+        /// Username and id is same in both databases.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public static ApplicationUser GetUser(string username) {
             var user = GetUserFromSession(username);
             if (user == null) {
@@ -308,11 +252,11 @@ namespace WereViewApp.Modules.DevUser {
         public static ApplicationUser GetUserFromSession() {
             var userSession = HttpContext.Current.Session[SessionNames.User];
             if (userSession != null) {
-                return (ApplicationUser) userSession;
+                return (ApplicationUser)userSession;
             }
             userSession = HttpContext.Current.Session[SessionNames.LastUser];
             if (userSession != null) {
-                return (ApplicationUser) userSession;
+                return (ApplicationUser)userSession;
             }
             return null;
         }
@@ -322,7 +266,7 @@ namespace WereViewApp.Modules.DevUser {
             if (user != null && user.Email != null && email != null && user.Email.ToLower() == email.ToLower()) {
                 return user;
             }
-            return user;
+            return null; //user will give invalid result, because it might the previous user which credentials doesn;t match.
         }
 
         public static ApplicationUser GetUserFromSession(string username) {
@@ -331,7 +275,7 @@ namespace WereViewApp.Modules.DevUser {
                 user.UserName.ToLower().Equals(username.ToLower())) {
                 return user;
             }
-            return user;
+            return null;
         }
 
         public static ApplicationUser GetUserFromSession(long userId) {
@@ -344,17 +288,17 @@ namespace WereViewApp.Modules.DevUser {
 
         public static ApplicationUser GetUserFromViewModel(RegisterViewModel model) {
             var user = new ApplicationUser {
-                UserName = model.UserName,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
+                UserName = Algorithms.GetAllUpperCaseTitle(model.UserName),
+                FirstName = Algorithms.GetAllUpperCaseTitle(model.FirstName),
+                LastName = Algorithms.GetAllUpperCaseTitle(model.LastName),
                 Email = model.Email,
-                DateOfBirth = model.DateOfBirth,
+                //DateOfBirth = model.DateOfBirth,
                 CreatedDate = DateTime.Now,
                 EmailConfirmed = false,
                 PhoneNumber = model.Phone,
-                CountryID = model.CountryID,
-                CountryLanguageID = model.CountryLanguageID,
-                UserTimeZoneID = model.UserTimeZoneID,
+                //CountryID = model.CountryID,
+                //CountryLanguageID = model.CountryLanguageID,
+                //UserTimeZoneID = model.UserTimeZoneID,
                 IsRegistrationComplete = false,
                 GeneratedGuid = Guid.NewGuid()
             };
@@ -365,6 +309,7 @@ namespace WereViewApp.Modules.DevUser {
 
         /// <summary>
         ///     Return current user in optimized fashion.
+        ///     Username and id is same in both databases.
         /// </summary>
         /// <returns></returns>
         public static ApplicationUser GetCurrentUser() {
@@ -382,15 +327,17 @@ namespace WereViewApp.Modules.DevUser {
         }
 
         /// <summary>
-        ///     Return current user in optimized fashion.
+        /// Return current user in optimized fashion.
+        /// Returns -1 if not logged in.
+        /// Username and id is same in both databases.
         /// </summary>
         /// <returns>Returns -1 if not logged in.</returns>
         public static long GetLoggedUserId() {
             if (HttpContext.Current.User.Identity.IsAuthenticated) {
                 //ApplicationUser user = null;
-                var userid = (long?) HttpContext.Current.Session[SessionNames.UserID];
+                var userid = (long?)HttpContext.Current.Session[SessionNames.UserID];
                 if (userid != null) {
-                    return (long) userid;
+                    return (long)userid;
                 }
                 return GetCurrentUser().UserID;
             }
@@ -405,8 +352,45 @@ namespace WereViewApp.Modules.DevUser {
             return Manager.Users.Any(n => n.UserName == username);
         }
 
+        /// <summary>
+        /// Checks if is empty()
+        /// then validate using regular expression then try searching in the db.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public static bool IsUserNameExistWithValidation(string username, out ApplicationUser user) {
+            user = null;
+            if (!string.IsNullOrWhiteSpace(username)) {
+                const int max = 30;
+                const int min = 3;
+                const string userPattern = "^([A-Za-z]|[A-Za-z0-9_.]+)$";
+                var regularExpressionValidation = Regex.IsMatch(username, userPattern, RegexOptions.Compiled) &&
+                                                  (username.Length >= min && username.Length <= max);
+                if (regularExpressionValidation) {
+                    user = GetUser(username);
+                    return user != null;
+                }
+            }
+            return false;
+        }
+
         public static bool IsEmailExist(string email) {
             return Manager.Users.Any(n => n.Email == email);
+        }
+        public static bool IsEmailExistWithValidation(string email, out ApplicationUser user) {
+            user = null;
+            if (!string.IsNullOrWhiteSpace(email)) {
+                const int max = 30;
+                const int min = 3;
+                const string emailPattern = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
+                var regularExpressionValidation = Regex.IsMatch(email, emailPattern, RegexOptions.Compiled) &&
+                                                  (email.Length >= min && email.Length <= max);
+                if (regularExpressionValidation) {
+                    user = Manager.Users.FirstOrDefault(n => n.Email == email);
+                    return user != null;
+                }
+            }
+            return false;
         }
 
         #endregion
@@ -430,6 +414,12 @@ namespace WereViewApp.Modules.DevUser {
         /// <param name="user"></param>
         public static void SaveUserInSession(ApplicationUser user) {
             HttpContext.Current.Session[SessionNames.LastUser] = user;
+        }
+
+        public static void ClearUserFromSession() {
+            HttpContext.Current.Session[SessionNames.UserID] = null;
+            HttpContext.Current.Session[SessionNames.LastUser] = null;
+            GC.Collect();
         }
 
         #endregion

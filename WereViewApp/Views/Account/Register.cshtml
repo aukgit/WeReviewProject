@@ -2,74 +2,46 @@
 @{
     ViewBag.Title = "Register";
     SelectList roles = null;
-
     var token = Html.AntiForgeryToken();
-    if (AppVar.Setting.IsRegisterCodeRequiredToRegister) {
-        roles = (SelectList) ViewBag.Roles;
-    }
+    string usernameValidatingUrl = "/Validator/GetUsername";
+    string emailValidatingUrl = "/Validator/GetEmail";
 }
 
 <h1 class="h3" title="Registration page of @AppVar.Name">@ViewBag.Title</h1>
 <h1 class="h5">
-	Create a new account for <strong class="@AppVar.Name">@AppVar.Name</strong>
+    Create a new account for <strong class="@AppVar.Name">@AppVar.Name</strong>.
+    Developers use this form to register their accounts as an app developer. If you not wish to register now
+    alternatively you can easily add your application by submitting app url link.
 </h1>
 <hr />
 @Html.Partial("_GlobalError")
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new {@class = "form-horizontal register-form", role = "form", enctype = "multipart/form-data"})) {
-    @token
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal register-form", role = "form", enctype = "multipart/form-data" })) {
     <!--uxSlide by developers-organism and Alim Ul Karim hides everything except for first item=0, we can have more than one zeros-->
-    <div data-dev-slide="0" data-dev-visited='false'>
-        @Html.EditorFor(m => m.UserName, "Username")
-    </div>
-    <div data-dev-slide="2" data-dev-visited='false'>
-        @Html.EditorFor(m => m.FirstName)
-        @Html.EditorFor(m => m.LastName)
-    </div>
-    if (AppVar.Setting.IsRegisterCodeRequiredToRegister) {
-        <div data-dev-slide="5" data-dev-visited='false'>
-            @Html.EditorFor(m => m.RegistraterCode, "RegCode")
-            <div class="form-group">
-                <div class="controls">
-                    <label class="col-md-2 control-label">Role<span class="red ">*</span></label>
-                    <div class="col-md-10">
-                        @Html.DropDownList("Roles", roles, new {@class = "form-control selectpicker", title = "Roles"})
-                        <a href="#" data-toggle="tooltip" data-original-title="Please select your role." title="Please select your role." class="tooltip-show">
-                            <span class="description-icon"></span></a>
-                    </div>
-                </div>
+    <div id="register-form">
+        <div id="server-validation-form">
+            <div data-dev-slide="0" data-dev-visited='false'>
+                @token
+                @Html.EditorFor(m => m.UserName, "Username", new { url = usernameValidatingUrl, isValidate = "true", data_submit_method = "post" })
+                @Html.EditorFor(m => m.FirstName)
+                @Html.EditorFor(m => m.LastName)
+                @Html.EditorFor(m => m.Email, "Email", new { url = emailValidatingUrl, isValidate = "true", data_submit_method = "post" })
+                @Html.EditorFor(m => m.Password)
+                @Html.EditorFor(m => m.ConfirmPassword)
             </div>
         </div>
-    }
-    <div data-dev-slide="1" data-dev-visited='false'>
-        @Html.EditorFor(m => m.Email)
-        @Html.EditorFor(m => m.Password)
-        @Html.EditorFor(m => m.ConfirmPassword)
-    </div>
-    <div data-dev-slide="3" data-dev-visited='false'>
-        @{ Html.RenderAction("RegisterFields", "Account"); }
-        @Html.EditorFor(m => m.Phone, "Phone")
-    </div>
-    <div data-dev-slide="4" data-dev-visited='false'>
-        @Html.EditorFor(m => m.DateOfBirth, "date")
-    </div>
-    <div class="form-group">
-        <div class="col-md-10 col-md-offset-2">
-            <button type="submit" class="btn btn-success">
-                <i class="glyphicon glyphicon-user"></i>
-                Register
-            </button>
-            @*<button type="button" class="btn btn-success fillit">
-                <i class="glyphicon glyphicon-user"></i>
-                Fill
-            </button>*@
+        <div data-dev-slide="1" data-dev-visited='false'>
+            @Html.EditorFor(m => m.Phone, "Phone")
+        </div>
+        <div class="form-group">
+            <div class="col-md-10 col-md-offset-2">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-user"></i>
+                    Register
+                </button>
+            </div>
         </div>
     </div>
 }
-
-@Html.Partial("_ValidatorCommonForm", new ViewDataDictionary {
-    {"token", token}
-})
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

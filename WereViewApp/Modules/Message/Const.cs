@@ -7,6 +7,10 @@
         public const string ValidationExceeded =
             "Sorry! you have exceed the limit of validation. Please try some time later.";
 
+        public const string JunkMessageResult =
+            "Please make sure you have filled up the subject and message and it is valid. Junk messages will result your account to be blocked.";
+
+
         #endregion
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
@@ -17,12 +16,23 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
             if (app != null) {
                 if (app.AbsUrl == null) {
                     var returnUrl = "/" + ControllerNameForapp + "/" + app.GetPlatformString() + "-" +
-                                    app.PlatformVersion + "/" + app.GetCategorySlugString() + "/" + app.URL;
+                                    app.PlatformVersion + "/" + app.GetCategorySlugString() + "/" + app.Url;
                     app.AbsUrl = AppVar.Url + returnUrl;
                 }
                 return app.AbsUrl;
             }
             return null;
+        }
+
+        /// <summary>
+        ///     returns a url like "http://url/Apps/iOs-7/Games/Plant-Vs-Zombies"
+        ///     and then put it in the "app.AbsUrl"
+        ///     /App/Platform-PlatformVersion/Category/Url
+        /// </summary>
+        /// <param name="app"></param>
+        /// <returns>Returns absolute url including website's address</returns>
+        public static string GetReportingUrl(this App app) {
+            return AppVar.Url + "/Report/App/" + app.AppID;
         }
 
 
@@ -44,7 +54,7 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
         public static string GetAppUrlWithoutHostName(this App app) {
             if (app != null) {
                 var returnUrl = app.GetPlatformString() + "-" +
-                                app.PlatformVersion + "/" + app.GetCategorySlugString() + "/" + app.URL;
+                                app.PlatformVersion + "/" + app.GetCategorySlugString() + "/" + app.Url;
                 return returnUrl;
             }
             return null;

@@ -3,7 +3,6 @@
 using System.Web.Mvc;
 using DevMvcComponent.Error;
 using WereViewApp.Models.Context;
-using WereViewApp.Modules.UserError;
 
 #endregion
 

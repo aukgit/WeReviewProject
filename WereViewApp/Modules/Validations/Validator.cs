@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Web.Helpers;
-using System.Web.Mvc;
 using DevMvcComponent.Error;
 using Newtonsoft.Json;
 using WereViewApp.Modules.Message;
@@ -47,12 +45,12 @@ namespace WereViewApp.Modules.Validations {
         /// </summary>
         public abstract void CollectValidation();
         /// <summary>
-        /// Run all the validation methods and then 
+        /// Run all the validation methods in order and then 
         /// set the ErrorCollector for the session.
         /// </summary>
         /// <returns>Returns true if no error exist</returns>
-        public bool FinalizeValidation() {
-            bool anyValidationErrorExist = false;
+        public bool ValidateEveryValidations() {
+            var anyValidationErrorExist = false;
             foreach (var action in ValidationCollection) {
                 if (!anyValidationErrorExist) {
                     anyValidationErrorExist = !action();
@@ -68,7 +66,7 @@ namespace WereViewApp.Modules.Validations {
             if (string.IsNullOrEmpty(message)) {
                 message = SuccessValidationMessage;
             }
-            return new ValidationMessage() {
+            return new ValidationMessage {
                 message = message,
                 isValid = true,
                 isError = false
@@ -79,7 +77,7 @@ namespace WereViewApp.Modules.Validations {
             if (string.IsNullOrEmpty(message)) {
                 message = FailedValidationMessage;
             }
-            return new ValidationMessage() {
+            return new ValidationMessage {
                 errorMessage = message,
                 isValid = false,
                 isError = true

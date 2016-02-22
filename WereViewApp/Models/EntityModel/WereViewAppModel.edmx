@@ -14,14 +14,14 @@
           <Property Name="PlatformID" Type="tinyint" Nullable="false" />
           <Property Name="PlatformVersion" Type="float" Nullable="false" />
           <Property Name="CategoryID" Type="smallint" Nullable="false" />
-          <Property Name="URL" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="Url" Type="varchar" MaxLength="70" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="2000" Nullable="false" />
           <Property Name="PostedByUserID" Type="bigint" Nullable="false" />
           <Property Name="ReviewsCount" Type="smallint" Nullable="false" />
           <Property Name="IsVideoExist" Type="bit" Nullable="false" />
           <Property Name="YoutubeEmbedLink" Type="varchar" MaxLength="255" />
-          <Property Name="WebSiteURL" Type="nvarchar" MaxLength="255" />
-          <Property Name="StoreURL" Type="nvarchar" MaxLength="255" />
+          <Property Name="WebsiteUrl" Type="nvarchar" MaxLength="255" />
+          <Property Name="StoreUrl" Type="nvarchar" MaxLength="255" />
           <Property Name="IsBlocked" Type="bit" Nullable="false" />
           <Property Name="IsPublished" Type="bit" Nullable="false" />
           <Property Name="UploadGuid" Type="uniqueidentifier" Nullable="false" />
@@ -47,14 +47,14 @@
           <Property Name="ReviewsCount" Type="smallint" />
           <Property Name="IsVideoExist" Type="bit" />
           <Property Name="YoutubeEmbedLink" Type="varchar" MaxLength="255" />
-          <Property Name="WebSiteURL" Type="nvarchar" MaxLength="255" />
-          <Property Name="StoreURL" Type="nvarchar" MaxLength="255" />
+          <Property Name="WebsiteUrl" Type="nvarchar" MaxLength="255" />
+          <Property Name="StoreUrl" Type="nvarchar" MaxLength="255" />
           <Property Name="IsBlocked" Type="bit" />
           <Property Name="IsPublished" Type="bit" />
           <Property Name="PlatformVersion" Type="float" />
           <Property Name="UploadGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TotalViewed" Type="bigint" />
-          <Property Name="URL" Type="varchar" MaxLength="65" />
+          <Property Name="Url" Type="varchar" MaxLength="65" />
           <Property Name="ReleaseDate" Type="date" />
         </EntityType>
         <EntityType Name="Category">
@@ -239,7 +239,7 @@
           <Property Name="UserID" Type="bigint" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="Phone" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="18" />
           <Property Name="UserName" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="TotalEarnedPoints" Type="bigint" Nullable="false" />
         </EntityType>
@@ -760,14 +760,14 @@
           <Property Name="PlatformID" Type="Byte" Nullable="false" />
           <Property Name="PlatformVersion" Type="Double" Nullable="false" />
           <Property Name="CategoryID" Type="Int16" Nullable="false" />
-          <Property Name="URL" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="PostedByUserID" Type="Int64" Nullable="false" />
           <Property Name="ReviewsCount" Type="Int16" Nullable="false" />
           <Property Name="IsVideoExist" Type="Boolean" Nullable="false" />
           <Property Name="YoutubeEmbedLink" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="WebSiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="StoreURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="WebsiteUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="StoreUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IsBlocked" Type="Boolean" Nullable="false" />
           <Property Name="IsPublished" Type="Boolean" Nullable="false" />
           <Property Name="UploadGuid" Type="Guid" Nullable="false" />
@@ -799,14 +799,14 @@
           <Property Name="ReviewsCount" Type="Int16" />
           <Property Name="IsVideoExist" Type="Boolean" />
           <Property Name="YoutubeEmbedLink" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="WebSiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="StoreURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="WebsiteUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="StoreUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IsBlocked" Type="Boolean" />
           <Property Name="IsPublished" Type="Boolean" />
           <Property Name="PlatformVersion" Type="Double" />
           <Property Name="UploadGuid" Type="Guid" Nullable="false" />
           <Property Name="TotalViewed" Type="Int64" />
-          <Property Name="URL" Type="String" MaxLength="65" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="65" FixedLength="false" Unicode="false" />
           <Property Name="ReleaseDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Category">
@@ -1015,7 +1015,7 @@
           <Property Name="UserID" Type="Int64" Nullable="false" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="TotalEarnedPoints" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Apps" Relationship="WereViewAppModel.FK_App_User" FromRole="User" ToRole="App" />
@@ -1335,14 +1335,14 @@
                 <ScalarProperty Name="UploadGuid" ColumnName="UploadGuid" />
                 <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
                 <ScalarProperty Name="IsBlocked" ColumnName="IsBlocked" />
-                <ScalarProperty Name="StoreURL" ColumnName="StoreURL" />
-                <ScalarProperty Name="WebSiteURL" ColumnName="WebSiteURL" />
+                <ScalarProperty Name="StoreUrl" ColumnName="StoreUrl" />
+                <ScalarProperty Name="WebsiteUrl" ColumnName="WebsiteUrl" />
                 <ScalarProperty Name="YoutubeEmbedLink" ColumnName="YoutubeEmbedLink" />
                 <ScalarProperty Name="IsVideoExist" ColumnName="IsVideoExist" />
                 <ScalarProperty Name="ReviewsCount" ColumnName="ReviewsCount" />
                 <ScalarProperty Name="PostedByUserID" ColumnName="PostedByUserID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="PlatformVersion" ColumnName="PlatformVersion" />
                 <ScalarProperty Name="PlatformID" ColumnName="PlatformID" />
@@ -1355,14 +1355,14 @@
             <EntityTypeMapping TypeName="WereViewAppModel.AppDraft">
               <MappingFragment StoreEntitySet="AppDraft">
                 <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
-                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="TotalViewed" ColumnName="TotalViewed" />
                 <ScalarProperty Name="UploadGuid" ColumnName="UploadGuid" />
                 <ScalarProperty Name="PlatformVersion" ColumnName="PlatformVersion" />
                 <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
                 <ScalarProperty Name="IsBlocked" ColumnName="IsBlocked" />
-                <ScalarProperty Name="StoreURL" ColumnName="StoreURL" />
-                <ScalarProperty Name="WebSiteURL" ColumnName="WebSiteURL" />
+                <ScalarProperty Name="StoreUrl" ColumnName="StoreUrl" />
+                <ScalarProperty Name="WebsiteUrl" ColumnName="WebsiteUrl" />
                 <ScalarProperty Name="YoutubeEmbedLink" ColumnName="YoutubeEmbedLink" />
                 <ScalarProperty Name="IsVideoExist" ColumnName="IsVideoExist" />
                 <ScalarProperty Name="ReviewsCount" ColumnName="ReviewsCount" />

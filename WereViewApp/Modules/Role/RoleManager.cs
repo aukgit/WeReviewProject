@@ -21,15 +21,7 @@ namespace WereViewApp.Modules.Role {
 
         private static ApplicationRoleManager _roleManager;
         private static List<ApplicationRole> _cachesOfUsers = new List<ApplicationRole>(1200);
-        //public class UserRoleCache {
-        //    public long UserID { get; set; }
-        //    public long RoleID { get; set; }
-        //    public long RoleName { get; set; }
-        //    public long RolePriority { get; set; }
 
-        //    public long PointsRequired { get; set; }
-        //}
-        public int MyProperty { get; set; }
 
         public static ApplicationRoleManager Manager
         {
@@ -47,6 +39,8 @@ namespace WereViewApp.Modules.Role {
         public static ApplicationRoleManager ResetManager() {
             _roleStore = new RoleStore<ApplicationRole, long, ApplicationUserRole>(new ApplicationDbContext());
             _roleManager = new ApplicationRoleManager(_roleStore);
+            UserCache.ClearSession();
+            GC.Collect();
             return _roleManager;
         }
 
@@ -264,6 +258,7 @@ namespace WereViewApp.Modules.Role {
             }
             return null;
         }
+
 
         /// <summary>
         ///     Give all related roles to this user.

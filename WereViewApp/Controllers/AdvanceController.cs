@@ -2,15 +2,13 @@
 
 using System.Web.Mvc;
 using DevMvcComponent.Error;
-using WereViewApp.Filter;
 using WereViewApp.Models.EntityModel;
-using WereViewApp.Modules.UserError;
 
 #endregion
 
 namespace WereViewApp.Controllers {
     //[CompressFilter]
-    //[CacheFilter(Duration = 8)]
+    //[CacheFilter(Duration = 3600)]
     public abstract class AdvanceController : Controller {
         internal ErrorCollector ErrorCollector;
         internal readonly WereViewAppEntities db;

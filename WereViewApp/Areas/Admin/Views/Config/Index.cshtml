@@ -45,7 +45,7 @@
                 <a href="#WeReview-tab" role="tab" data-toggle="tab">Were View App</a>
             </li>
         </ul>
-
+        @Html.HiddenFor(n=> n.IsFirstUserFound)
         <div class="tab-content">
             @Html.Partial("_Basic-tab")
             @Html.Partial("_urls-tab")

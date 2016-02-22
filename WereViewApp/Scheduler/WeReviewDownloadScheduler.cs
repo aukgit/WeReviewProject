@@ -9,6 +9,7 @@ namespace WereViewApp.Scheduler {
         public void Execute() {
             // keep the app running
             var contents = new System.Net.WebClient().DownloadString(AppVar.Url);
+            var contentsSitemap = new System.Net.WebClient().DownloadString(AppVar.Url + "/Sitemap");
         }
 
         #endregion

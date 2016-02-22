@@ -11,6 +11,7 @@ namespace WereViewApp.Modules.Session {
         public const string Validator = "Validator";
         public const string ZoneInfo = "ZoneInfo";
         public const string AuthError = "AuthError";
+        public const string EmailResendViewModel = "EmailResendViewModel";
 
         public static bool IsValidationExceed(string methodName, int maxTry = -1) {
             var isSessionExist = HttpContext.Current.Session != null;

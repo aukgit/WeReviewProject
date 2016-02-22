@@ -3,13 +3,12 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Extensions.Context;
 
-
 namespace WereViewApp.Models.Context {
 
     public class DevIdentityDbContext : DevDbContext {
         public DevIdentityDbContext()
             : base("name=DefaultConnection") {
-            this.Configuration.LazyLoadingEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {

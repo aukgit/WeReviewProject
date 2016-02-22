@@ -4,7 +4,7 @@
     ViewBag.Title = "Editing for menu '" + ViewBag.MenuName + "'";
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    var token = (MvcHtmlString)@Html.AntiForgeryToken();
+    var token = Html.AntiForgeryToken();
 }
 @Html.SamePageLinkWithIcon(title, subtitle, "fa fa-edit")
 
