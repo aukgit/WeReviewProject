@@ -264,6 +264,7 @@
     <Compile Include="Models\ViewModels\ManageUserViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Models\ViewModels\ResetPasswordViewModel.cs" />
+    <Compile Include="Modules\Constants\TokenPurpose.cs" />
     <Compile Include="Modules\Extensions\GraphApiExtension.cs" />
     <Compile Include="Modules\Extensions\ViewEngine\RenderingView.cs" />
     <Compile Include="Modules\DevUser\UserCache.cs" />
@@ -739,9 +740,6 @@
     <Content Include="Content\css\blog-page.css.map">
       <DependentUpon>blog-page.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\header.css.map">
-      <DependentUpon>header.css</DependentUpon>
-    </Content>
     <Content Include="Content\Less\override-mvc.variables.less" />
     <Content Include="Content\css\editor-templates.css.map">
       <DependentUpon>editor-templates.css</DependentUpon>
@@ -915,6 +913,9 @@
     <Content Include="Areas\Admin\Views\AppModerate\Index.cshtml" />
     <Content Include="Content\css\front-developer.css.map">
       <DependentUpon>front-developer.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\header.css.map">
+      <DependentUpon>header.css</DependentUpon>
     </Content>
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />

@@ -12,10 +12,12 @@ using Microsoft.Owin.Security;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Models.ViewModels;
+using WereViewApp.Modules.Constants;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Extensions.IdentityExtension;
 using WereViewApp.Modules.Mail;
 using WereViewApp.Modules.Role;
+using WereViewApp.Modules.Session;
 using WereViewApp.Modules.Validations;
 
 #endregion
@@ -477,29 +479,27 @@ namespace WereViewApp.Controllers {
         [ValidateAntiForgeryToken]
         //[CompressFilter(Order = 1)]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model) {
-            if (ModelState.IsValid) {
-                var user = await Manager.FindByNameAsync(model.Email);
-                if (user == null || !(await Manager.IsEmailConfirmedAsync(user.Id))) {
-                    ModelState.AddModelError("", "The user either does not exist or is not confirmed.");
-                    return View();
+            var isAlreadySent = !AppVar.IsInTestEnvironment && Session["forget-pass"] != null;
+            if (!isAlreadySent) {
+                if (ModelState.IsValid) {
+                    var user = await Manager.FindByEmailAsync(model.Email);
+                    if (user != null && await Manager.IsEmailConfirmedAsync(user.Id)) {
+                        // valid user
+                        SendResetPasswordLinkToUser(user);
+                    }
                 }
-
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await Manager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await Manager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+            } else {
+                ViewBag.message = "You have had already sent a request just few seconds ago. Try again later.";
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            Session["forget-pass"] = "set";
+            return View("ForgotPasswordConfirmation");
         }
 
-
-        [AllowAnonymous]
-        public ActionResult ForgotPasswordConfirmation() {
-            return View();
+        private async void SendResetPasswordLinkToUser(ApplicationUser user) {
+            string code = Manager.GenerateUserToken(TokenPurpose.ResetPassword, user.Id);
+            var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, email = user.Email, code = code, guid = user.GeneratedGuid }, protocol: Request.Url.Scheme);
+            var mailString = MailHtml.PasswordResetHtml(user, callbackUrl);
+            AppVar.Mailer.Send(user.Email, "Reset Password", mailString);
         }
 
         #endregion
@@ -507,11 +507,29 @@ namespace WereViewApp.Controllers {
         #region Password Reset
 
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code) {
-            if (code == null) {
-                return View("Error");
+        public ActionResult ResetPassword(long userId, string email, string code, Guid guid) {
+            var isAlreadySent = !AppVar.IsInTestEnvironment && Session["reset-pass"] != null;
+            if (!isAlreadySent) {
+                if (code == null || !Manager.VerifyUserToken(userId, TokenPurpose.ResetPassword, code)) {
+                    return View("Error");
+                }
+                var user = User.GetUser(userId);
+                if (user != null) {
+                    if (String.Compare(email, user.Email, StringComparison.OrdinalIgnoreCase) == 0 &&
+                        user.GeneratedGuid.HasValue &&
+                        user.GeneratedGuid.Value == guid) {
+                        User.SaveUserInSession(user, SessionNames.EmailResetExecute);
+                        var model = new ResetPasswordViewModel() {
+                            Code = code,
+                            Email = email
+                        };
+                        Session["reset-pass"] = "set";
+                        return View(model);
+                    }
+                }
             }
-            return View();
+            ViewBag.message = "You have already sent a request few minutes ago!";
+            return View("ResetPasswordConfirmation");
         }
 
 
@@ -519,24 +537,29 @@ namespace WereViewApp.Controllers {
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model) {
-            if (ModelState.IsValid) {
-                var user = await Manager.FindByNameAsync(model.Email);
-                if (user == null) {
-                    ModelState.AddModelError("", "No user found.");
-                    return View();
+            if (Session["user-reset-" + model.Email] == null) {
+                ApplicationUser user;
+                if (User.IsUserExistInSessionByEmail(model.Email, out user, SessionNames.EmailResetExecute)) {
+                    if (ModelState.IsValid) {
+                        if (user == null) {
+                            ModelState.AddModelError("", "No user found.");
+                            return View();
+                        }
+                        var token = Manager.GeneratePasswordResetToken(user.Id);
+                        var result = await Manager.ResetPasswordAsync(user.Id, token, model.Password);
+                        if (result.Succeeded) {
+                            Session["user-reset-" + model.Email] = "reset";
+                            ViewBag.message = "Your account password has been reset successfully!";
+                            return View("ResetPasswordConfirmation");
+                        }
+                        AddErrors(result);
+                        return View(model);
+                    }
                 }
-                var result = await Manager.ResetPasswordAsync(user.Id, model.Code, model.Password);
-                if (result.Succeeded) {
-                    return RedirectToAction("ResetPasswordConfirmation", "Account");
-                }
-                AddErrors(result);
-                return View();
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            ViewBag.message = "Your had already reset your password just few minutes ago! Try again later.";
+            return View("ResetPasswordConfirmation");
         }
-
 
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation() {

@@ -113,6 +113,9 @@
         public const string Logout = Signout;
         public const string Register = UserPlus;
         public const string Registered = "fa fa-registered";
+        public const string Plane = "fa fa-paper-plane";
+        public const string Send = Plane;
+        public const string Submit = Plane;
         
         
     }

@@ -261,4 +261,35 @@
         }
     }
 }
+
+@media (min-width: @screen-sm) {
+    .header-2 {
+        header {
+            &.sticky {
+                .height(52px);
+            }
+        }
+    }
+}
+
+
+@media (max-width: @screen-md) {
+    .header-2 {
+        header {
+            &.sticky {
+                nav {
+                    .fa {
+                        display: none;
+
+                        &.fa-bars {
+                            display: inline-block;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 //menu end

@@ -22,8 +22,8 @@
   padding: 7px 12px 7px 12px;
   padding: 0.7rem 1.2rem 0.7rem 1.2rem;
   border: none;
-  font-size: 14px;
-  font-size: 0.875em;
+  font-size: 1em;
+  vertical-align: top;
 }
 .btn-xs {
   padding: 1px 5px;
@@ -533,6 +533,20 @@ label.control-label {
     bottom: 4px;
     bottom: 0.4rem;
     position: relative;
+  }
+}
+@media (min-width: 768px) {
+  .header-2 header.sticky {
+    height: 52px;
+    height: 5.2rem;
+  }
+}
+@media (max-width: 992px) {
+  .header-2 header.sticky nav .fa {
+    display: none;
+  }
+  .header-2 header.sticky nav .fa.fa-bars {
+    display: inline-block;
   }
 }
 .tp-leftarrow.preview2:after,
