@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -26,7 +27,6 @@ namespace WereViewApp.Modules.DevUser {
         }
 
         #endregion
-
 
         #region Registration Code
 
@@ -227,6 +227,16 @@ namespace WereViewApp.Modules.DevUser {
         public static ApplicationUser GetUserByEmail(string email, string password) {
             var user = Manager.FindByEmail(email);
             return Manager.Find(user.UserName, password);
+        }
+
+        /// <summary>
+        /// Username and id is same in both databases.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static ApplicationUser GetUserByEmail(string email) {
+            return Manager.FindByEmail(email);
         }
 
         public static string GetCurrentUserName() {
