@@ -479,10 +479,10 @@ namespace WereViewApp.Controllers {
         [ValidateAntiForgeryToken]
         //[CompressFilter(Order = 1)]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model) {
-            if (!User.IsAnyUserExistInSession(SessionNames.ForgetPasswordView)) {
+            var isAlreadySent = !AppVar.IsInTestEnvironment && Session["forget-pass"] != null;
+            if (!isAlreadySent) {
                 if (ModelState.IsValid) {
                     var user = await Manager.FindByEmailAsync(model.Email);
-                    User.SaveUserInSession(user, SessionNames.ForgetPasswordView);
                     if (user != null && await Manager.IsEmailConfirmedAsync(user.Id)) {
                         // valid user
                         SendResetPasswordLinkToUser(user);
@@ -491,6 +491,7 @@ namespace WereViewApp.Controllers {
             } else {
                 ViewBag.message = "You have had already sent a request just few seconds ago. Try again later.";
             }
+            Session["forget-pass"] = "set";
             return View("ForgotPasswordConfirmation");
         }
 
@@ -507,23 +508,28 @@ namespace WereViewApp.Controllers {
 
         [AllowAnonymous]
         public ActionResult ResetPassword(long userId, string email, string code, Guid guid) {
-            if (code == null || !Manager.VerifyUserToken(userId, TokenPurpose.ResetPassword, code)) {
-                return View("Error");
-            }
-            var user = User.GetUser(userId);
-            if (user != null) {
-                if (String.Compare(email, user.Email, StringComparison.OrdinalIgnoreCase) == 0 &&
-                    user.GeneratedGuid.HasValue &&
-                    user.GeneratedGuid.Value == guid) {
-                    User.SaveUserInSession(user, SessionNames.EmailResetExecute);
-                    var model = new ResetPasswordViewModel() {
-                        Code = code,
-                        Email = email
-                    };
-                    return View(model);
+            var isAlreadySent = !AppVar.IsInTestEnvironment && Session["reset-pass"] != null;
+            if (!isAlreadySent) {
+                if (code == null || !Manager.VerifyUserToken(userId, TokenPurpose.ResetPassword, code)) {
+                    return View("Error");
+                }
+                var user = User.GetUser(userId);
+                if (user != null) {
+                    if (String.Compare(email, user.Email, StringComparison.OrdinalIgnoreCase) == 0 &&
+                        user.GeneratedGuid.HasValue &&
+                        user.GeneratedGuid.Value == guid) {
+                        User.SaveUserInSession(user, SessionNames.EmailResetExecute);
+                        var model = new ResetPasswordViewModel() {
+                            Code = code,
+                            Email = email
+                        };
+                        Session["reset-pass"] = "set";
+                        return View(model);
+                    }
                 }
             }
-            return View("Error");
+            ViewBag.message = "You have already sent a request few minutes ago!";
+            return View("ResetPasswordConfirmation");
         }
 
 
