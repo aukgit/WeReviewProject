@@ -44,12 +44,15 @@ namespace WereViewApp.Modules.Mail {
        string department = "Administration", string body = null) {
             var sb = new StringBuilder(100);
             if (body == null) {
-                body = string.Format(DefaultMailConfirmBody, AppVar.Url, AppVar.Name, callBackUrl, callBackUrl);
+                body = string.Format(DefaultResetAccountBody, "this reset form", callBackUrl);
             }
             AddGreetingsToStringBuilder(user, sb);
             sb.AppendLine(body);
             sb.AppendLine(LineBreak);
-            AddThanksFooterOnStringBuilder(AppVar.Setting.AdminName, department, sb);
+            if (footerSenderName == "") {
+                footerSenderName = AppVar.Setting.AdminName;
+            }
+            AddThanksFooterOnStringBuilder(footerSenderName, department, sb);
             return sb.ToString();
         }
 
@@ -132,9 +135,11 @@ namespace WereViewApp.Modules.Mail {
         private const string DefaultMailConfirmBody =
             "We are very delighted to have you in <a href='{0}' title='{1}'>{1}</a>. <a href='{2}' title='{3}'>Here</a> is the <a href='{2}' title='{3}'>link</a> to active your account. Or you can also copy paste the raw version below to your browser's address bar.<br><br> Raw : {3} <br><br>";
 
-
+        /// <summary>
+        /// You can reset your password from <a href='{0}' title='{1}'>{1}</a>. Or you can also copy paste the raw version below to your browser's address bar to reset your account. Raw URL: {0}
+        /// </summary>
         private const string DefaultResetAccountBody =
-            "You can reset your password from <a href='{0}' title='{1}'>{1}</a>. <a href='{2}' title='{3}'>Here</a> is the <a href='{2}' title='{3}'>link</a> to active your account. Or you can also copy paste the raw version below to your browser's address bar.<br><br> Raw : {3} <br><br>";
+            "You can reset your password from <a href='{0}' title='{1}'>{1}</a>. Or you can also copy paste the raw version below to your browser's address bar to reset your account.<br><br> Raw URL: {0} <br><br>";
 
         #endregion
 

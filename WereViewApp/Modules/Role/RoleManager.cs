@@ -262,13 +262,14 @@ namespace WereViewApp.Modules.Role {
 
         /// <summary>
         ///     Give all related roles to this user.
+        ///     Only get the roles if the Registration is complete.
         ///     Slower
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
         public static List<ApplicationRole> GetUserRolesAsApplicationRole(string username) {
             var user = UserManager.GetUser(username);
-            if (user != null) {
+            if (user != null && user.IsRegistrationComplete) {
                 return GetUserRolesAsApplicationRole(user.UserID);
             }
             return null;

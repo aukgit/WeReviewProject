@@ -479,27 +479,22 @@ namespace WereViewApp.Controllers {
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model) {
             if (ModelState.IsValid) {
                 var user = await Manager.FindByEmailAsync(model.Email);
-                if (user != null && await Manager.IsEmailConfirmedAsync(user.Id)) {
-
-                    ModelState.AddModelError("", "The user either does not exist or is not confirmed.");
-                    return View();
+                UserCache = new UserCache()
+                if (user != null &&  await Manager.IsEmailConfirmedAsync(user.Id)) {
+                    // valid user
+                    SendGeneratedPasswordToUser(user);
                 }
-
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                // goto confirm doesn't matter if it is valid or not.
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
-        private async Task<ActionResult> SendGeneratedPasswordToUser(ApplicationUser user) {
+        private async void SendGeneratedPasswordToUser(ApplicationUser user) {
             string code = await Manager.GeneratePasswordResetTokenAsync(user.Id);
             var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-            await Manager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-            return RedirectToAction("ForgotPasswordConfirmation", "Account");
+            var mailString = MailHtml.PasswordResetHtml(user, callbackUrl);
+            AppVar.Mailer.Send(user.Email, "Email Confirmation", mailString);
         }
 
         [AllowAnonymous]
