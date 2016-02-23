@@ -5,8 +5,8 @@
   min-width: 294px;
   min-width: 29.4rem;
   display: inline;
-  font-size: 11px;
-  font-size: 0.6875em;
+  font-size: 13px;
+  font-size: 0.8125em;
   font-weight: bold;
   line-height: 1;
   color: #ffffff;
@@ -35,6 +35,16 @@
   margin: -4px 0px 0px 1px;
   margin: -0.4rem 0 0 0.1rem;
   border-radius: 4px;
+}
+.invalid-input span::before {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f06a";
+  padding: 0 5px;
 }
 /*.validator-container {
     position: relative;
@@ -111,4 +121,33 @@
 /*.inner-addon {
     z-index: -1 !important;
 }*/
+.text-danger.validation-summary-errors[data-valmsg-summary="true"] {
+  background-color: #FF0000;
+  border-radius: 4px;
+  color: white;
+  padding: 5px 32px;
+  font-size: 14px;
+  font-size: 0.875em;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  font-weight: bold;
+}
+.text-danger ul {
+  margin: 0;
+}
+.text-danger ul li {
+  list-style: decimal;
+  list-style-type: decimal;
+}
+.text-danger ul li::before {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f06a";
+  padding: 0 5px;
+}
 /*# sourceMappingURL=validator.css.map */

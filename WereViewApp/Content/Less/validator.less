@@ -6,7 +6,7 @@
     .min-width(@inputs-max-width);
     //width: auto;
     display: inline;
-    .font-size(11px);
+    .font-size(13px);
     font-weight: bold;
     line-height: 1;
     color: #ffffff;
@@ -33,6 +33,12 @@
         .padding(4px, 15px);
         .margin(-4px, 0px, 0px, 1px);
         border-radius: 4px;
+    }
+
+    span {
+        &::before {
+            .error-icon-attach();
+        }
     }
 }
 
@@ -81,7 +87,7 @@
 }*/
 .validator {
     display: inherit;
-        width: 1px;
+    width: 1px;
 }
 
 .validation-icon-wrapper {
@@ -119,3 +125,38 @@
 /*.inner-addon {
     z-index: -1 !important;
 }*/
+
+.error-icon-attach() {
+    .fa();
+    content: "\f06a";
+    padding: 0 5px;
+}
+
+.text-danger {
+    &.validation-summary-errors {
+        &[data-valmsg-summary="true"] {
+            background-color: #FF0000;
+            border-radius: 4px;
+            color: white;
+            padding: 5px 32px;
+            .font-size(14px);
+            -ms-text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            font-weight: bold;
+        }
+    }
+
+    ul {
+        margin: 0;
+
+        li {
+            list-style: decimal;
+            list-style-type: decimal;
+
+            &::before {
+                .error-icon-attach();
+            }
+        }
+    }
+}

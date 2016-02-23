@@ -478,17 +478,16 @@ namespace WereViewApp.Controllers {
         //[CompressFilter(Order = 1)]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model) {
             if (ModelState.IsValid) {
-                var user = await Manager.FindByNameAsync(model.Email);
-                if (user == null || !(await Manager.IsEmailConfirmedAsync(user.Id))) {
+                var user = await Manager.FindByEmailAsync(model.Email);
+                if (user != null && await Manager.IsEmailConfirmedAsync(user.Id)) {
+
                     ModelState.AddModelError("", "The user either does not exist or is not confirmed.");
                     return View();
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await Manager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await Manager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
                 // return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
@@ -496,6 +495,12 @@ namespace WereViewApp.Controllers {
             return View(model);
         }
 
+        private async Task<ActionResult> SendGeneratedPasswordToUser(ApplicationUser user) {
+            string code = await Manager.GeneratePasswordResetTokenAsync(user.Id);
+            var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+            await Manager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+            return RedirectToAction("ForgotPasswordConfirmation", "Account");
+        }
 
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation() {

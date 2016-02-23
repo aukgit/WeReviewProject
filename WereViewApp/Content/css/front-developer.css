@@ -23,6 +23,7 @@
   padding: 0.7rem 1.2rem 0.7rem 1.2rem;
   border: none;
   font-size: 1em;
+  vertical-align: top;
 }
 .btn-xs {
   padding: 1px 5px;
@@ -1680,20 +1681,5 @@ q:after {
 .btn-facebook:focus {
   background-color: #3356A0;
   color: white;
-}
-.text-danger.validation-summary-errors[data-valmsg-summary="true"] {
-  background-color: #E22013;
-  border-radius: 4px;
-  color: white;
-  padding: 5px 32px;
-  font-size: 13px;
-  -ms-text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  font-weight: bold;
-}
-.text-danger ul {
-  margin: 0;
-  list-style: decimal;
 }
 /*# sourceMappingURL=front-developer.css.map */
