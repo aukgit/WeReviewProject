@@ -168,6 +168,14 @@ namespace WereViewApp.Modules.Extensions.IdentityExtension {
             return IsUserExistInSession(user, userName, out appUser, sessionName);
 
         }
+        /// <summary>
+        /// if the user exist in the current given named session.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="userName"></param>
+        /// <param name="appUser"></param>
+        /// <param name="sessionName"></param>
+        /// <returns></returns>
         public static bool IsUserExistInSession(this IPrincipal user, string userName,  out ApplicationUser appUser, string sessionName = SessionNames.UserPrincipalUserSession) {
             appUser = GetUserFromSession(user, sessionName);
             if (!string.IsNullOrEmpty(userName) && appUser != null) {
