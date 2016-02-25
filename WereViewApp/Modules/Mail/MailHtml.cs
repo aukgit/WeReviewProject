@@ -15,10 +15,10 @@ namespace WereViewApp.Modules.Mail {
         /// <param name="sb"></param>
         public static void AddThanksFooterOnStringBuilder(string footerSenderName, string department, StringBuilder sb) {
             sb.Append(string.Format(DivTag, "", "Thank you", "Thank  you,"));
-            sb.Append( string.Format(DivTag, "font-size:14px;font-weight:bold;", "", footerSenderName));
-            sb.Append( string.Format(DivTag, "", "Department", department));
-            sb.Append( string.Format(DivTag, "", AppVar.Name, AppVar.Name));
-            sb.Append( string.Format(DivTag, "", AppVar.Subtitle, AppVar.Subtitle));
+            sb.Append(string.Format(DivTag, "font-size:14px;font-weight:bold;", "", footerSenderName));
+            sb.Append(string.Format(DivTag, "", "Department", department));
+            sb.Append(string.Format(DivTag, "", AppVar.Name, AppVar.Name));
+            sb.Append(string.Format(DivTag, "", AppVar.Subtitle, AppVar.Subtitle));
         }
 
         public static string EmailConfirmHtml(ApplicationUser user, string callBackUrl, string footerSenderName = "",
@@ -44,8 +44,9 @@ namespace WereViewApp.Modules.Mail {
        string department = "Administration", string body = null) {
             var sb = new StringBuilder(100);
             if (body == null) {
-                body = string.Format(DefaultResetAccountBody, "this reset form", callBackUrl);
+                body = string.Format(DefaultResetAccountBody, callBackUrl, "this reset form");
             }
+
             AddGreetingsToStringBuilder(user, sb);
             sb.AppendLine(body);
             sb.AppendLine(LineBreak);
@@ -62,7 +63,7 @@ namespace WereViewApp.Modules.Mail {
         /// <param name="user"></param>
         /// <param name="sb"></param>
         /// <param name="showFullName">Full name gives First+ ' ' + LastName</param>
-        public static void AddGreetingsToStringBuilder(ApplicationUser user,  StringBuilder sb, bool showFullName = false) {
+        public static void AddGreetingsToStringBuilder(ApplicationUser user, StringBuilder sb, bool showFullName = false) {
             if (showFullName) {
                 sb.AppendLine("Hello " + user.LastName + ", <br>");
             } else {
@@ -90,7 +91,7 @@ namespace WereViewApp.Modules.Mail {
             return string.Format(ContactUsLink, title, linkName, addClass, AppVar.Url);
         }
 
-        public static string BlockEmailHtml(ApplicationUser user, string reasonForBlocking,  string footerSenderName = "",
+        public static string BlockEmailHtml(ApplicationUser user, string reasonForBlocking, string footerSenderName = "",
             string department = "Administration", string body = null) {
             var sb = new StringBuilder(100);
 
@@ -102,7 +103,7 @@ namespace WereViewApp.Modules.Mail {
 
             AddContactUsToStringBuilder(sb); //contact us
 
-           AddThanksFooterOnStringBuilder(footerSenderName, department, sb);
+            AddThanksFooterOnStringBuilder(footerSenderName, department, sb);
             return sb.ToString();
         }
 
@@ -120,7 +121,7 @@ namespace WereViewApp.Modules.Mail {
             sb.AppendLine(LineBreak);
             AddContactUsToStringBuilder(sb); //contact us
             sb.AppendLine(LineBreak);
-            AddThanksFooterOnStringBuilder(footerSenderName, department,sb);
+            AddThanksFooterOnStringBuilder(footerSenderName, department, sb);
             return sb.ToString();
         }
 
