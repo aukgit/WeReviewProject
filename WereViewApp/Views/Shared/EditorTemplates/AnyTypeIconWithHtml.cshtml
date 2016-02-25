@@ -14,46 +14,8 @@
 
     var htmlAttributes = new RouteValueDictionary();
 
-    if (ViewBag.@class != null) {
-        htmlAttributes.Add("class", "form-control " + ViewBag.@class);
-    } else {
-        htmlAttributes.Add("class", "form-control");
-    }
-
-    if (ViewBag.type != null) {
-        htmlAttributes.Add("type", ViewBag.type);
-    } else {
-        htmlAttributes.Add("type", "email");
-    }
-
-    if (ViewBag.placeholder != null) {
-        htmlAttributes.Add("placeholder", ViewBag.placeholder);
-    } else {
-        if (isRequired) {
-            htmlAttributes.Add("placeholder", displayName + isRequiredStar);
-        } else {
-            htmlAttributes.Add("placeholder", "[" + displayName + "]");
-        }
-    }
-    if (ViewBag.label != null) {
-        displayName = ViewBag.label;
-    }
-
-    if (ViewBag.labelColumn == null) {
-        ViewBag.labelColumn = "col-md-2";
-    }
-    if (ViewBag.textColumn == null) {
-        ViewBag.textColumn = "col-md-10";
-    }
-    if (ViewBag.Value != null) {
-        htmlAttributes.Add("Value", ViewBag.Value);
-    }
-    if (ViewBag.url != null) {
-        htmlAttributes.Add("data-url", ViewBag.url);
-    }
-    htmlAttributes.Add("title", htmlAttributes["placeholder"]);
-    htmlAttributes.Add("data-prop", styleProperty);
-    htmlAttributes.Add("data-template", templateName);
+    EditorTemplate.CommonTemplateAssignments(templateName, "any-type-icon-with-html", ViewBag, ref htmlAttributes);
+    
     var html = ViewBag.displayHtml;
 }
 

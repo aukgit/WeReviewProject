@@ -15,10 +15,6 @@ namespace WereViewApp {
         #endregion
 
         #region Constants
-
-
-
-
         #endregion
 
         #region Connection Strings and Constants

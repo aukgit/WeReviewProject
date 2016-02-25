@@ -1,4 +1,4 @@
-@model object
+@model string
 @{
     var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
@@ -7,34 +7,24 @@
         styleProperty = propLower,
         displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
         description = ViewData.ModelMetadata.Description,
-        templateName = ViewBag.type ?? "any-icon",
-        icon = ViewBag.icon ?? Icons.Questions; 
-
+        templateName = "ckeditor";
     var htmlAttributes = new RouteValueDictionary();
-    EditorTemplate.CommonTemplateAssignments(templateName, "any-type-icon", ViewBag, ref htmlAttributes,);
+    EditorTemplate.CommonTemplateAssignments(templateName, "ckeditor-template", ViewBag, ref htmlAttributes);
 }
 <div class="form-group form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty">
     <div class="controls dev-plugin">
         <label class="@ViewBag.labelColumn control-label form-label @styleProperty" for="@styleProperty" data-prop="@styleProperty">
             @displayName
-            <span class="red">@isRequiredStar</span>
-        </label>
-        <div class="@ViewBag.textColumn form-input @styleProperty" data-prop="@styleProperty">
-            <div class="input-validator-container">
-                <span class="inner-addon left-addon">
-                    <i class="@icon"></i>
-                    @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
-                </span>
-                <div class="validator-container">
-                    <div class="validator"></div>
-                </div>
-            </div>
             @if (description != null) {
                 <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">
                     <span class="description-icon"></span>
                 </a>
             }
-            @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
+            <span class="red"> @isRequiredStar</span>
+        </label>
+        <div class="@ViewBag.textColumn form-input @styleProperty" data-prop="@styleProperty">
+            @Html.TextArea("", htmlAttributes)
+            @Html.ValidationMessageFor(m => m, null, new { @class = "table invalid-input" })
         </div>
     </div>
 </div>
