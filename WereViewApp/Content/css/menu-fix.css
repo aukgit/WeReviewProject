@@ -213,4 +213,13 @@
     display: inline-block;
   }
 }
+.nav-username {
+  max-width: 114px;
+  max-width: 11.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
 /*# sourceMappingURL=menu-fix.css.map */

@@ -339,8 +339,6 @@ namespace WereViewApp.Controllers {
         #endregion
 
         #region Re-send Confirmation Email
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         [Authorize]
         public async Task<ActionResult> ResendConfirmationMail() {
             var lastSend = Session["last-send"] as DateTime?;

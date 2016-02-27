@@ -22,7 +22,7 @@
   padding: 7px 12px 7px 12px;
   padding: 0.7rem 1.2rem 0.7rem 1.2rem;
   border: none;
-  font-size: 1em;
+  font-size: 14px;
   vertical-align: top;
 }
 .btn-xs {
@@ -548,6 +548,15 @@ label.control-label {
   .header-2 header.sticky nav .fa.fa-bars {
     display: inline-block;
   }
+}
+.nav-username {
+  max-width: 114px;
+  max-width: 11.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 .tp-leftarrow.preview2:after,
 .tp-rightarrow.preview2:after {
