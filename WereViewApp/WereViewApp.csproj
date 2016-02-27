@@ -279,7 +279,6 @@
     <Compile Include="Modules\Validations\DevUserValidator.cs" />
     <Compile Include="Modules\Validations\ValidationMessage.cs" />
     <Compile Include="Modules\Validations\Validator.cs" />
-    <Compile Include="Modules\ViewEngine\EditorTemplate.cs" />
     <Compile Include="Scheduler\WeReviewDownloadScheduler.cs" />
     <Compile Include="Scheduler\WeReviewScheduler.cs" />
     <Compile Include="Scheduler\SchedulerRunner.cs" />
@@ -1258,6 +1257,7 @@
     <Folder Include="Models\POCO\AdditionalDatabase\" />
     <Folder Include="Models\POCO\Plugable\" />
     <Folder Include="Modules\Filters\" />
+    <Folder Include="Modules\ViewEngine\" />
     <Folder Include="Uploads\Files\Private\" />
     <Folder Include="Uploads\Images\Private\" />
     <Folder Include="Views\Basic\" />
