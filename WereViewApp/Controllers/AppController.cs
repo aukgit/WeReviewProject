@@ -41,7 +41,7 @@ namespace WereViewApp.Controllers {
         public AppController()
             : base(true) {
             ViewBag.controller = ControllerName;
-  
+
         }
 
         #endregion
@@ -520,16 +520,17 @@ namespace WereViewApp.Controllers {
             rApp.PlatformVersion = (double)appDraft.PlatformVersion;
             rApp.Description = appDraft.Description;
             rApp.PostedByUserID = appDraft.PostedByUserID;
-            rApp.IsVideoExist = (bool)appDraft.IsVideoExist;
+            rApp.IsVideoExist = appDraft.IsVideoExist == true;
             rApp.YoutubeEmbedLink = appDraft.YoutubeEmbedLink;
             rApp.WebsiteUrl = appDraft.WebsiteUrl;
             rApp.StoreUrl = appDraft.StoreUrl;
-            rApp.IsBlocked = (bool)appDraft.IsBlocked;
-            rApp.IsPublished = (bool)appDraft.IsPublished;
+            rApp.IsBlocked = appDraft.IsBlocked == true;
+            rApp.IsPublished = appDraft.IsPublished == true;
             rApp.UploadGuid = appDraft.UploadGuid;
             rApp.Url = appDraft.Url;
-            rApp.ReleaseDate = appDraft.ReleaseDate;
-
+            if (appDraft.ReleaseDate.HasValue) {
+                rApp.ReleaseDate = appDraft.ReleaseDate.Value;
+            }
             return rApp;
         }
 

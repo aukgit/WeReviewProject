@@ -12,7 +12,14 @@
     <![endif]-->
 
 </head>
-<body>
+<body class="@ViewBag.pageClass">
+    <!--[if lt IE 9]>
+        <div class="browser-update container-fuild">
+            <div class="row">
+                <div class="col-md-12">Warning! Your browser is too old. Please update your browser to the <a href="http://browser-update.org/update.html#3">latest version</a>.</div>
+            </div>
+        </div>
+    <![endif]-->
     @Html.Partial("_NavBar")
     <div id="wrap" class="home-page">
         <div class="content">

@@ -525,6 +525,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AppsSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SearchText" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ResetAppDrafts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ResetApps" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ResetAppsAndUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ResetReviews" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ResetWholeSystem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="WereViewAppModelStoreContainer">
           <EntitySet Name="App" EntityType="Self.App" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppDraft" EntityType="Self.AppDraft" Schema="dbo" store:Type="Tables" />
@@ -641,6 +649,14 @@
     <edmx:ConceptualModels>
       <Schema Namespace="WereViewAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="WereViewAppEntities" annotation:LazyLoadingEnabled="false">
+          <FunctionImport Name="AppsSearch" ReturnType="Collection(WereViewAppModel.AppsSearch_Result)">
+          <Parameter Name="SearchText" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ResetAppDrafts" />
+          <FunctionImport Name="ResetApps" />
+          <FunctionImport Name="ResetAppsAndUsers" />
+          <FunctionImport Name="ResetReviews" />
+          <FunctionImport Name="ResetWholeSystem" />
           <EntitySet Name="Apps" EntityType="WereViewAppModel.App" />
           <EntitySet Name="AppDrafts" EntityType="WereViewAppModel.AppDraft" />
           <EntitySet Name="Categories" EntityType="WereViewAppModel.Category" />
@@ -751,6 +767,10 @@
             <End Role="UserPoint" EntitySet="UserPoints" />
           </AssociationSet>
         </EntityContainer>
+        <ComplexType Name="AppsSearch_Result">
+          <Property Type="Int32" Name="ID" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="500" />
+        </ComplexType>
         <EntityType Name="App">
           <Key>
             <PropertyRef Name="AppID" />
@@ -1321,6 +1341,19 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="WereViewAppModelStoreContainer" CdmEntityContainer="WereViewAppEntities">
+          <FunctionImportMapping FunctionImportName="AppsSearch" FunctionName="WereViewAppModel.Store.AppsSearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WereViewAppModel.AppsSearch_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ResetAppDrafts" FunctionName="WereViewAppModel.Store.ResetAppDrafts" />
+          <FunctionImportMapping FunctionImportName="ResetApps" FunctionName="WereViewAppModel.Store.ResetApps" />
+          <FunctionImportMapping FunctionImportName="ResetAppsAndUsers" FunctionName="WereViewAppModel.Store.ResetAppsAndUsers" />
+          <FunctionImportMapping FunctionImportName="ResetReviews" FunctionName="WereViewAppModel.Store.ResetReviews" />
+          <FunctionImportMapping FunctionImportName="ResetWholeSystem" FunctionName="WereViewAppModel.Store.ResetWholeSystem" />
           <EntitySetMapping Name="Apps">
             <EntityTypeMapping TypeName="WereViewAppModel.App">
               <MappingFragment StoreEntitySet="App">

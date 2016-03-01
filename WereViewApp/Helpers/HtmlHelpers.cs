@@ -6,6 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Enums;
+using FontAwesomeIcons;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.Constants;

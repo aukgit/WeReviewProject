@@ -1,16 +1,14 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 namespace WereViewApp.Models.EntityModel
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-    
-    public partial class Platform
+    public class Platform
     {
         public Platform()
         {
-            this.Apps = new HashSet<App>();
-            this.CellPhones = new HashSet<CellPhone>();
+            Apps = new HashSet<App>();
+            CellPhones = new HashSet<CellPhone>();
         }
     
         public byte PlatformID { get; set; }

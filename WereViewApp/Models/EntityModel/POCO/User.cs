@@ -1,22 +1,21 @@
-namespace WereViewApp.Models.EntityModel {
-    using System;
-    using System.Collections.Generic;
-    using WereViewApp.Models.DesignPattern.Interfaces;
+using System.Collections.Generic;
+using WereViewApp.Models.DesignPattern.Interfaces;
 
-    public partial class User:IDevUser {
+namespace WereViewApp.Models.EntityModel {
+    public class User:IDevUser {
         public User() {
-            this.Apps = new HashSet<App>();
-            this.CellPhones = new HashSet<CellPhone>();
-            this.FeaturedImages = new HashSet<FeaturedImage>();
-            this.LatestSeenNotifications = new HashSet<LatestSeenNotification>();
-            this.Messages = new HashSet<Message>();
-            this.Messages1 = new HashSet<Message>();
-            this.MessageSeens = new HashSet<MessageSeen>();
-            this.MessageSeens1 = new HashSet<MessageSeen>();
-            this.Reports = new HashSet<Report>();
-            this.Reviews = new HashSet<Review>();
-            this.ReviewLikeDislikes = new HashSet<ReviewLikeDislike>();
-            this.UserPoints = new HashSet<UserPoint>();
+            Apps = new HashSet<App>();
+            CellPhones = new HashSet<CellPhone>();
+            FeaturedImages = new HashSet<FeaturedImage>();
+            LatestSeenNotifications = new HashSet<LatestSeenNotification>();
+            Messages = new HashSet<Message>();
+            Messages1 = new HashSet<Message>();
+            MessageSeens = new HashSet<MessageSeen>();
+            MessageSeens1 = new HashSet<MessageSeen>();
+            Reports = new HashSet<Report>();
+            Reviews = new HashSet<Review>();
+            ReviewLikeDislikes = new HashSet<ReviewLikeDislike>();
+            UserPoints = new HashSet<UserPoint>();
         }
 
         public long UserID { get; set; }
