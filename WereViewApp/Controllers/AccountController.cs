@@ -339,8 +339,6 @@ namespace WereViewApp.Controllers {
         #endregion
 
         #region Re-send Confirmation Email
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         [Authorize]
         public async Task<ActionResult> ResendConfirmationMail() {
             var lastSend = Session["last-send"] as DateTime?;
@@ -567,7 +565,6 @@ namespace WereViewApp.Controllers {
         }
 
         #endregion
-
         #region Account Manage
 
         public ActionResult Manage(ManageMessageId? message) {
@@ -628,7 +625,6 @@ namespace WereViewApp.Controllers {
         }
 
         #endregion
-
         #region Helpers
 
         // Used for XSRF protection when adding external logins
@@ -696,7 +692,5 @@ namespace WereViewApp.Controllers {
         }
 
         #endregion
-
-
     }
 }

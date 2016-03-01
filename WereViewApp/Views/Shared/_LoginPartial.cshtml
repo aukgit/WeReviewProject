@@ -2,10 +2,11 @@
 @{
     string username = User.Identity.GetUserName();
 }
-@if (Request.IsAuthenticated) {
+@if (Request.IsAuthenticated && User.IsRegistrationComplete()) {
     <li>
-        <a href="@AppVar.Url/Account/Manage" title="Manage your account">
-            @User.Identity.GetUserName() !
+        <a href="@AppVar.Url/Account/Manage" title="Manage '@username' account" class="nav-username">
+            <i class="@Icons.User"></i>
+            @username!
         </a>
         <ul class="animated dropdown fadeIn">
             <li>
@@ -25,6 +26,13 @@
                 }
             </li>
         </ul>
+    </li>
+} else if (Request.IsAuthenticated && !User.IsRegistrationComplete()) {
+    <li>
+        <a href="@AppVar.Url/Account/ResendConfirmationMail" title="Resend confirmation" class="nav-username">
+            <i class="@Icons.Send"></i>
+            Resend Validation
+        </a>
     </li>
 } else {
     <li title="Login in WeReviewApp.com">

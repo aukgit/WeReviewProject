@@ -421,6 +421,31 @@ namespace WereViewApp.Helpers {
             return new HtmlString(markup);
         }
 
+        public static HtmlString HeaderWithIcon(this HtmlHelper helper,
+           string linkName,
+           string title,
+           string iconClass,
+           bool h1 = true,
+           string addClass = "",
+           bool isLeft = true) {
+            var markup = "";
+            var icon = "";
+            if (!string.IsNullOrEmpty(iconClass)) {
+                icon = string.Format("<i class='{0}'></i>", iconClass);
+            }
+            if (isLeft) {
+                //left icon
+                markup = string.Format("<div class='header-margin-space-type-1'><a class='{1}' title='{2}'>{4} {3}</a></div>", "", addClass, title, linkName, icon);
+            } else {
+                //right icon
+                markup = string.Format("<div class='header-margin-space-type-1'><a class='{1}' title='{2}'>{3} {4}</a></div>", "", addClass, title, linkName, icon);
+            }
+            if (h1) {
+                markup = string.Format("<h1 title='{0}' class='h3'>{1}</h1>", title, markup);
+            }
+            return new HtmlString(markup);
+        }
+
         /// <summary>
         /// Generates same page url anchor with an icon left or right
         /// </summary>

@@ -34,8 +34,8 @@
   }
 }
 .header-2 header nav li a {
-  padding: 16px 10px 10px 10px;
-  padding: 1.6rem 1rem 1rem 1rem;
+  padding: 19px 10px 10px 10px;
+  padding: 1.9rem 1rem 1rem 1rem;
 }
 @media (max-width: 768px) {
   .header-2 header nav li {
@@ -65,8 +65,8 @@
 }
 .header-2 .jetmenu > li > .megamenu,
 .jetmenu ul.dropdown {
-  top: 42px;
-  top: 4.2rem;
+  top: 52px;
+  top: 5.2rem;
 }
 .jetmenu h1 {
   color: #647383;
@@ -212,5 +212,14 @@
   .header-2 header.sticky nav .fa.fa-bars {
     display: inline-block;
   }
+}
+.nav-username {
+  max-width: 114px;
+  max-width: 11.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 /*# sourceMappingURL=menu-fix.css.map */

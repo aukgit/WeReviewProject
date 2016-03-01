@@ -41,7 +41,7 @@ namespace WereViewApp {
                      (
                           validateInterval: TimeSpan.FromMinutes(30),
                           regenerateIdentityCallback: (manager, user) => user.GenerateUserIdentityAsync(manager),
-                          getUserIdCallback: (id) => (Int32.Parse(id.GetUserId()))
+                          getUserIdCallback: (id) => (long.Parse(id.GetUserId()))
                      )
                 }
             });

@@ -424,7 +424,6 @@
     <Compile Include="Modules\Mail\MailSender.cs" />
     <Compile Include="Modules\Menu\GenerateMenu.cs" />
     <Compile Include="Modules\Message\Const.cs" />
-    <Compile Include="Modules\ObjectToArray\ObjectToArrary.cs" />
     <Compile Include="Modules\Role\RoleManager.cs" />
     <Compile Include="Modules\Role\RoleNames.cs" />
     <Compile Include="Modules\Session\SessionNames.cs" />
@@ -515,6 +514,10 @@
       <DependentUpon>category-page.css</DependentUpon>
     </Content>
     <Content Include="Content\css\category-page.min.css" />
+    <Content Include="Content\css\ckedit-skin-bootstrap.css" />
+    <Content Include="Content\css\ckedit-skin-bootstrap.min.css">
+      <DependentUpon>ckedit-skin-bootstrap.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\color-fonts.css" />
     <Content Include="Content\css\color-fonts.min.css">
       <DependentUpon>color-fonts.css</DependentUpon>
@@ -625,6 +628,10 @@
     <Content Include="Content\Less\blog-page.less" />
     <Content Include="Content\Less\bootstrap-datetimepicker.less" />
     <Content Include="Content\Less\category-page.less" />
+    <Content Include="Content\css\ckedit-skin-bootstrap.css.map">
+      <DependentUpon>ckedit-skin-bootstrap.css</DependentUpon>
+    </Content>
+    <None Include="Content\Less\ckedit-skin-bootstrap.less" />
     <Content Include="Content\Less\color-fonts.less" />
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
@@ -691,6 +698,7 @@
     <Content Include="Content\Scripts\bootstrap-select.js" />
     <Content Include="Content\Scripts\bootstrap-table.js" />
     <Content Include="Content\Scripts\bootstrap.min.js" />
+    <Content Include="Content\Scripts\ckeditor.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\ComboOptions.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.country-phone.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.dynamicSelect.js" />
@@ -1223,6 +1231,8 @@
     <Content Include="Views\Account\ConfirmationEmailResend.cshtml" />
     <None Include="Views\Reviews\User.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AnyTypeIconWithHtml.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TextArea.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CkEditor.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />
@@ -1247,6 +1257,7 @@
     <Folder Include="Models\POCO\AdditionalDatabase\" />
     <Folder Include="Models\POCO\Plugable\" />
     <Folder Include="Modules\Filters\" />
+    <Folder Include="Modules\ViewEngine\" />
     <Folder Include="Uploads\Files\Private\" />
     <Folder Include="Uploads\Images\Private\" />
     <Folder Include="Views\Basic\" />
