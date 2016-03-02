@@ -31,7 +31,7 @@ $.app.run = function () {
         for (var i = 0; i < keys.length; i++) {
             var methodName = keys[i],
                 method = this[methodName];
-            console.log(methodName);
+            //console.log(methodName);
             if ((methodName === 'initialize' || methodName === 'run') === false && typeof method === "function") {
                 // execute all other functions.
                 method.apply();
