@@ -20,6 +20,7 @@ $.app.run = function () {
     this.init = function () {
         this.toolTipShow();
         this.seoHide();
+        this.transactionStatusHide();
     }
     this.toolTipShow = function () {
         var $tooltipItems = $('.tooltip-show');
@@ -33,6 +34,15 @@ $.app.run = function () {
         if ($seoHideItems.length > 0) {
             $seoHideItems.hide();
         }
+    }
+
+    this.transactionStatusHide = function () {
+        var $transaction = $(".transaction-status");
+
+        setTimeout(function () {
+            $transaction.attr("data-shown", "true");
+            $transaction.hide();
+        }, 3500);
     }
     this.init();
 }

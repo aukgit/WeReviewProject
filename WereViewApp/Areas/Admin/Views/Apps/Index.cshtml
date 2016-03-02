@@ -45,6 +45,12 @@
             <th data-field="user">
                 Username
             </th>
+            <th data-field="featured">
+                Featured
+            </th>
+            <th data-field="blocked">
+                Blocked
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -53,7 +59,9 @@
             <tr>
                 <td>
                     @{
-            var editLinkName = Html.DisplayFor(model => item.AppName).ToString();
+                        var editLinkName = item.AppName;
+                        var featured = item.User.FeaturedImages.FirstOrDefault();
+                        var isFeatured = featured != null ? featured.IsFeatured : false;
                     }
                     <a href="@Url.Action("Edit", new { id = item.AppID, Controller = "App", Area = "" })" title="@editLinkName edit...">
                         <span class="glyphicon glyphicon-pencil"></span> @editLinkName
@@ -72,7 +80,14 @@
                     @Html.DisplayFor(modelItem => item.User.UserName)
                 </td>
                 <td>
+                    @Html.CheckBox("IsFeatured", isFeatured, new {disabled = "disabled"})
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => item.IsBlocked, new { disabled = "disabled" })
+                </td>
+                <td>
                     <a href="@Url.Action("Edit", new {id = item.AppID, Controller="App" ,Area=""})" title="@editLinkName edit..." class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                    <a href="@Url.Action("Moderate", new {id = item.AppID, Controller="Apps" ,Area="Admin"})" title="@editLinkName moderate..." class="btn btn-info btn-xs"><span class="@Icons.Cogs"></span> Moderate</a>
                     <a href="@item.GetAbsoluteUrl()" title="View App @editLinkName." class="btn btn-warning btn-xs"> View</a>
                 </td>
             </tr>
