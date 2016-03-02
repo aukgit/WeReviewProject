@@ -87,7 +87,7 @@
                 </td>
                 <td>
                     <a href="@Url.Action("Edit", new {id = item.AppID, Controller="App" ,Area=""})" title="@editLinkName edit..." class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-                    <a href="@Url.Action("Moderate", new {id = item.AppID, Controller="Apps" ,Area="Admin"})" title="@editLinkName moderate..." class="btn btn-info btn-xs"><span class="@Icons.Cogs"></span> Moderate</a>
+                    <a href="@Url.Action("Moderate", new {id = item.AppID, Controller="Apps" ,Area="Admin"})" title="@editLinkName moderate..." class="btn btn-info btn-xs"><span class="@Icons.Cog"></span> Moderate</a>
                     <a href="@item.GetAbsoluteUrl()" title="View App @editLinkName." class="btn btn-warning btn-xs"> View</a>
                 </td>
             </tr>

@@ -17,10 +17,26 @@ $.app = $.app || {};
 
 $.app.run = function () {
 
-    this.init = function () {
-        this.toolTipShow();
-        this.seoHide();
-        this.transactionStatusHide();
+    this.initialize = function () {
+        //var keys = Object.keys(this);
+        //console.log(keys);
+        //console.log(this.constructor);
+        //console.log(this);
+        //console.log(this.name);
+        //this.toolTipShow();
+        //this.seoHide();
+        //this.transactionStatusEnable();
+        var keys = Object.keys(this);
+        //console.log(keys);
+        for (var i = 0; i < keys.length; i++) {
+            var methodName = keys[i],
+                method = this[methodName];
+            console.log(methodName);
+            if ((methodName === 'initialize' || methodName === 'run') === false && typeof method === "function") {
+                // execute all other functions.
+                method.apply();
+            }
+        }
     }
     this.toolTipShow = function () {
         var $tooltipItems = $('.tooltip-show');
@@ -36,15 +52,26 @@ $.app.run = function () {
         }
     }
 
-    this.transactionStatusHide = function () {
-        var $transaction = $(".transaction-status");
+    this.transactionStatusEnable = function () {
+        var $transaction = $.byId("transaction-container"),
+            hideTimeOut = parseInt($transaction.attr("data-hide-duration"));
 
-        setTimeout(function () {
+        var hideStatus = function () {
             $transaction.attr("data-shown", "true");
-            $transaction.hide();
-        }, 3500);
+            $transaction.hide(500);
+        };
+        var timer = setTimeout(hideStatus, hideTimeOut);
+
+        var stopTimer = function () {
+            clearTimeout(timer);
+        }
+
+        $transaction.click(function () {
+            stopTimer();
+            hideStatus();
+        });
     }
-    this.init();
+    this.initialize();
 }
 
 $(function () {

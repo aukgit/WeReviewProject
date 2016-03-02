@@ -211,8 +211,6 @@ namespace WereViewApp.Areas.Admin.Controllers {
         }
         #endregion
 
-  
-
         #region Edit or modify record
         public ActionResult Edit(Guid id) {
 
