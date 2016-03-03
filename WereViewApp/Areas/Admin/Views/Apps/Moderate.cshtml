@@ -29,7 +29,6 @@
         @Html.EditorFor(model => model.Message, "Multiline", new { @class="grow" ,placeholder = "This message will email to the app developer @" + user.Email +" email address."})
         @Html.EditorFor(model => model.IsBlocked)
         @Html.EditorFor(model => model.IsFeatured)
-        @Html.EditorFor(model => model.IsMessageNeededToSent)
         @Html.EditorFor(model => model.LikeToHearFromYou)
         <div class="col-md-10 col-md-offset-2">
             <div class="form-group">

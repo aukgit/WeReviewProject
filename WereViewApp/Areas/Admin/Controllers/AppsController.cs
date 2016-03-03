@@ -7,9 +7,11 @@ using System.Text;
 using System.Web.Mvc;
 using WereViewApp.Controllers;
 using WereViewApp.Models.EntityModel;
+using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Models.ViewModels;
 using WereViewApp.WereViewAppCommon;
 using WereViewApp.WereViewAppCommon.Structs;
+using WereViewApp.Modules.Extensions;
 using WereViewApp.Modules.Extensions.IdentityExtension;
 using WereViewApp.Modules.Mail;
 
@@ -21,8 +23,38 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         }
 
+        #region TempData : Get and set from TempData dictionary to perform temporary operations.
+
         private const string TempAppKey = "app-moderate";
         private const string TempAppFeaturedKey = "app-moderate-is-featured";
+        private const string TempAppUserKey = "app-moderate-user";
+
+        private void SetTempData(App app, ApplicationUser developerUser, bool isFeaturedPreviously) {
+            TempData[TempAppKey] = app;
+            TempData[TempAppUserKey] = developerUser;
+            TempData[TempAppFeaturedKey] = isFeaturedPreviously;
+        }
+        /// <summary>
+        /// Returns true if app is valid.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="developerUser"></param>
+        /// <param name="isFeaturedPreviously"></param>
+        /// <returns>Returns true if app is valid.</returns>
+        private bool GetTempData(out App app, out ApplicationUser developerUser, out bool isFeaturedPreviously) {
+            app = TempData[TempAppKey] as App;
+            if (app != null) {
+                developerUser = TempData[TempAppUserKey] as ApplicationUser;
+                isFeaturedPreviously = TempData[TempAppFeaturedKey] != null && (bool)TempData[TempAppFeaturedKey];
+                return true;
+            }
+            developerUser = null;
+            isFeaturedPreviously = false;
+            return false;
+        }
+        #endregion
+
+        #region Pagination
         /// <summary>
         /// 
         /// </summary>
@@ -63,6 +95,8 @@ namespace WereViewApp.Areas.Admin.Controllers {
             ViewBag.paginationHtml = new MvcHtmlString(Pagination.GetList(paginationInfo, paginationUrl, "Apps of Page : @page"));
             return pagedApps;
         }
+        #endregion
+
         // GET: Admin/AppModerate
         public ActionResult Index(int? page = 1, string search = "") {
             if (!page.HasValue) {
@@ -70,7 +104,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             }
             List<App> apps;
 
-            string url = AppVar.Url + "/Admin/Apps?page=@page";
+            string url = HttpContext.GetBaseUrl() + "Admin/Apps?page=@page";
             if (!string.IsNullOrWhiteSpace(search)) {
                 url += "&search=" + Server.UrlEncode(search);
                 var algorithms = new Algorithms();
@@ -79,12 +113,12 @@ namespace WereViewApp.Areas.Admin.Controllers {
                 ViewBag.Search = search;
             } else {
                 apps = GetPagedApps(db.Apps.Include(n => n.User), url, page);
-
             }
             return View(apps);
         }
 
 
+        #region Moderate
         // GET: Admin/AppModerate
         public ActionResult Moderate(long id) {
             var appModerateModel = new AppModerateViewModel() {
@@ -92,35 +126,33 @@ namespace WereViewApp.Areas.Admin.Controllers {
             };
 
             var app = db.Apps.Find(id);
-            ViewBag.user = User.GetUser(app.PostedByUserID);
+            var developerUser = User.GetUser(app.PostedByUserID);
+            ViewBag.user = developerUser;
+
             if (app == null) {
                 return HttpNotFound();
             }
-            TempData[TempAppKey] = app;
             appModerateModel.App = app;
             appModerateModel.IsBlocked = app.IsBlocked;
             appModerateModel.IsFeatured = db.FeaturedImages.Any(n => n.IsFeatured && n.AppID == id);
-            TempData[TempAppFeaturedKey] = appModerateModel.IsFeatured;
+            // set temp data
+            SetTempData(app, developerUser, appModerateModel.IsFeatured);
             return View(appModerateModel);
         }
         [HttpPost]
         public ActionResult Moderate(AppModerateViewModel model) {
-            var app = TempData[TempAppKey] as App;
-            if (app == null) {
+            App app;
+            ApplicationUser developerUser;
+            bool isFeaturedPreviously;
+            if (!GetTempData(out app, out developerUser, out isFeaturedPreviously)) {
+                // if app not found
                 return RedirectToAction("Index");
             }
-            var isFeaturedPreviously = (bool)TempData[TempAppFeaturedKey];
+
+            SetTempData(app, developerUser, isFeaturedPreviously);
             model.App = app;
-
             if (app != null) {
-                TempData[TempAppKey] = app;
-                TempData[TempAppFeaturedKey] = isFeaturedPreviously;
-
-                var user = User.GetUser(app.PostedByUserID);
-                var loggedUser = User.GetUser();
-
-                var loggedUsername = loggedUser.FirstName + " " + loggedUser.LastName ;
-                ViewBag.user = user;
+                ViewBag.user = developerUser;
                 if (app.IsBlocked != model.IsBlocked) {
                     // needs to update
                     if (model.IsBlocked) {
@@ -136,34 +168,40 @@ namespace WereViewApp.Areas.Admin.Controllers {
                 string statusMessage = "You have successfully moderated '" + app.AppName + "' app.";
 
                 if (!string.IsNullOrWhiteSpace(model.Message)) {
-                    var sb = new StringBuilder(50);
-                    MailHtml.AddGreetingsToStringBuilder(user, sb);
-                    sb.AppendLine(MailHtml.LineBreak);
-                    sb.AppendLine(model.Message);
-                    sb.AppendLine(MailHtml.LineBreak);
-                    if (model.LikeToHearFromYou) {
-                        sb.AppendLine(MailHtml.LineBreak);
-                        sb.AppendLine("** We surely like to hear back from you. **");
-                        sb.AppendLine(MailHtml.LineBreak);
-                    }
-                    sb.AppendLine(MailHtml.LineBreak);
-                    sb.AppendLine();
-                    MailHtml.AddThanksFooterOnStringBuilder(loggedUsername, "Administrator", sb);
-                    var message = sb.ToString();
-                    sb = null;
-                    GC.Collect();
-                    AppVar.Mailer.Send(user.Email, "A message from admin : " + loggedUsername, message);
+                    SendEmailToAppDeveloper(developerUser, model);
                     statusMessage += " An email is also sent!";
-                    AppVar.Mailer.Send(loggedUser.Email, "An email sent to : " + user.Email + " [this mail contains the sample]", message);
                 }
                 AppVar.SetSavedStatus(ViewBag, statusMessage);
                 return View(model);
             }
-
-
-
             AppVar.SetErrorStatus(ViewBag, "Sorry last transaction has been failed.");
             return View(model);
         }
+        #endregion
+
+        #region Send email
+        private void SendEmailToAppDeveloper(ApplicationUser developerUser, AppModerateViewModel model) {
+            var loggedUser = User.GetUser();
+            var loggedUsername = loggedUser.DisplayName;
+            var sb = new StringBuilder(50);
+            MailHtml.AddGreetingsToStringBuilder(developerUser, sb);
+            sb.AppendLine(MailHtml.LineBreak);
+            sb.AppendLine(model.Message);
+            sb.AppendLine(MailHtml.LineBreak);
+            if (model.LikeToHearFromYou) {
+                sb.AppendLine(MailHtml.LineBreak);
+                sb.AppendLine(MailHtml.GetStrongTag("** We surely like to hear back from you. **"));
+                sb.AppendLine(MailHtml.LineBreak);
+            }
+            sb.AppendLine(MailHtml.LineBreak);
+            sb.AppendLine();
+            MailHtml.AddThanksFooterOnStringBuilder(loggedUser.DisplayName, "Administrator", sb);
+            var message = sb.ToString();
+            sb = null;
+            GC.Collect();
+            AppVar.Mailer.Send(developerUser.Email, "A message from admin : " + loggedUsername, message);
+            AppVar.Mailer.Send(loggedUser.Email, "An email sent to : " + developerUser.Email + " [this mail contains the sample]", message);
+        }
+        #endregion
     }
 }

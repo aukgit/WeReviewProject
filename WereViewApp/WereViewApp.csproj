@@ -273,6 +273,7 @@
     <Compile Include="Models\ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="Modules\Constants\TokenPurpose.cs" />
     <Compile Include="Modules\Extensions\GraphApiExtension.cs" />
+    <Compile Include="Modules\Extensions\UrlExtension.cs" />
     <Compile Include="Modules\Extensions\ViewEngine\RenderingView.cs" />
     <Compile Include="Modules\DevUser\UserCache.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapGenerator.cs" />

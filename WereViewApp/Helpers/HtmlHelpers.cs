@@ -20,29 +20,7 @@ namespace WereViewApp.Helpers {
     public static class HtmlHelpers {
         private const string Selected = "selected='selected'";
         public static int TruncateLength = AppConfig.TruncateLength;
-        /// <summary>
-        /// Returns BaseUrl and slash.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public static string GetBaseUrl(this HttpRequestBase request) {
-            if (request.Url == null) {
-                return "";
-            }
-            return request.Url.Scheme + "://" + request.Url.Authority + VirtualPathUtility.ToAbsolute("~/");
-        }
-        /// <summary>
-        /// Returns BaseUrl and slash.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public static string GetBaseUrl(this HttpContext context) {
-            if (context != null) {
-                var request = context.Request;
-                return request.Url.Scheme + "://" + request.Url.Authority + VirtualPathUtility.ToAbsolute("~/");
-            }
-            return "";
-        }
+
         #region Icons generate : badge
 
         public static HtmlString GetBadge(this HtmlHelper helper, long number) {
@@ -174,13 +152,14 @@ namespace WereViewApp.Helpers {
                 placeIconLeft,
                 btnType);
         }
+
         /// <summary>
         /// Renders a remove button with icon.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="buttonName"></param>
-        /// <param name="alertMessage"></param>
         /// <param name="iconClass"></param>
+        /// <param name="tooltip"></param>
         /// <param name="btnType"></param>
         /// <param name="placeIconLeft"></param>
         /// <param name="additionalClasses"></param>
