@@ -195,6 +195,34 @@ namespace WereViewApp.Helpers {
         }
         #endregion
 
+        #region Null checker
+        /// <summary>
+        /// Returns true if all of the given parameter objects are null.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="objs"></param>
+        /// <returns></returns>
+        public static bool IsAllNull(this HtmlHelper helper, params object[] objs) {
+            if (objs == null) {
+                return true;
+            }
+            return objs.All(n => n == null);
+        }
+        /// <summary>
+        /// Returns true if any of the given object is not null.
+        /// Does follow given parameter order.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="objs"></param>
+        /// <returns></returns>
+        public static bool IsAnyNotNull(this HtmlHelper helper, params object[] objs) {
+            if (objs != null) {
+                return objs.Any(n => n != null);
+            }
+            return false;
+        }
+        #endregion
+
         #region jQueryMobile Options
 
         /// <summary>

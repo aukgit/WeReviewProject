@@ -3,6 +3,7 @@ namespace WereViewApp.Models.ViewModels {
     public class AppModerateViewModel {
         private long? _appId;
         private bool _isBlocked;
+        private App _app;
 
         public long AppId
         {
@@ -17,7 +18,15 @@ namespace WereViewApp.Models.ViewModels {
             set { _appId = value; }
         }
 
-        public App App { get; set; }
+        public App App
+        {
+            get { return _app; }
+            set
+            {
+                _app = value;
+                AppId = _app.AppID;
+            }
+        }
 
         public bool IsBlocked
         {
@@ -27,6 +36,7 @@ namespace WereViewApp.Models.ViewModels {
 
         public bool IsFeatured { get; set; }
         public bool IsMessageNeededToSent { get; set; }
+        public bool LikeToHearFromYou { get; set; }
         public string Message { get; set; }
     }
 }

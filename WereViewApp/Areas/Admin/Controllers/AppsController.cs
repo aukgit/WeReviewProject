@@ -1,13 +1,18 @@
-﻿using DevMvcComponent.Pagination;
+﻿using System;
+using DevMvcComponent.Pagination;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 using WereViewApp.Controllers;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.ViewModels;
 using WereViewApp.WereViewAppCommon;
 using WereViewApp.WereViewAppCommon.Structs;
+using WereViewApp.Modules.Extensions.IdentityExtension;
+using WereViewApp.Modules.Mail;
+
 namespace WereViewApp.Areas.Admin.Controllers {
     public class AppsController : AdvanceController {
 
@@ -73,8 +78,8 @@ namespace WereViewApp.Areas.Admin.Controllers {
                 apps = GetPagedApps(query, url, page);
                 ViewBag.Search = search;
             } else {
-                apps = GetPagedApps(db.Apps.Include(n=> n.User), url, page);
-                
+                apps = GetPagedApps(db.Apps.Include(n => n.User), url, page);
+
             }
             return View(apps);
         }
@@ -87,6 +92,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             };
 
             var app = db.Apps.Find(id);
+            ViewBag.user = User.GetUser(app.PostedByUserID);
             if (app == null) {
                 return HttpNotFound();
             }
@@ -100,10 +106,21 @@ namespace WereViewApp.Areas.Admin.Controllers {
         [HttpPost]
         public ActionResult Moderate(AppModerateViewModel model) {
             var app = TempData[TempAppKey] as App;
+            if (app == null) {
+                return RedirectToAction("Index");
+            }
             var isFeaturedPreviously = (bool)TempData[TempAppFeaturedKey];
             model.App = app;
 
             if (app != null) {
+                TempData[TempAppKey] = app;
+                TempData[TempAppFeaturedKey] = isFeaturedPreviously;
+
+                var user = User.GetUser(app.PostedByUserID);
+                var loggedUser = User.GetUser();
+
+                var loggedUsername = loggedUser.FirstName + " " + loggedUser.LastName ;
+                ViewBag.user = user;
                 if (app.IsBlocked != model.IsBlocked) {
                     // needs to update
                     if (model.IsBlocked) {
@@ -116,9 +133,35 @@ namespace WereViewApp.Areas.Admin.Controllers {
                     // needs to update
                     ModerationAlgorithms.AppFeatured(model.AppId, model.IsFeatured, db);
                 }
-                AppVar.SetSavedStatus(ViewBag, "You have successfully moderated " + app.AppName + " app.");
+                string statusMessage = "You have successfully moderated '" + app.AppName + "' app.";
+
+                if (!string.IsNullOrWhiteSpace(model.Message)) {
+                    var sb = new StringBuilder(50);
+                    MailHtml.AddGreetingsToStringBuilder(user, sb);
+                    sb.AppendLine(MailHtml.LineBreak);
+                    sb.AppendLine(model.Message);
+                    sb.AppendLine(MailHtml.LineBreak);
+                    if (model.LikeToHearFromYou) {
+                        sb.AppendLine(MailHtml.LineBreak);
+                        sb.AppendLine("** We surely like to hear back from you. **");
+                        sb.AppendLine(MailHtml.LineBreak);
+                    }
+                    sb.AppendLine(MailHtml.LineBreak);
+                    sb.AppendLine();
+                    MailHtml.AddThanksFooterOnStringBuilder(loggedUsername, "Administrator", sb);
+                    var message = sb.ToString();
+                    sb = null;
+                    GC.Collect();
+                    AppVar.Mailer.Send(user.Email, "A message from admin : " + loggedUsername, message);
+                    statusMessage += " An email is also sent!";
+                    AppVar.Mailer.Send(loggedUser.Email, "An email sent to : " + user.Email + " [this mail contains the sample]", message);
+                }
+                AppVar.SetSavedStatus(ViewBag, statusMessage);
                 return View(model);
             }
+
+
+
             AppVar.SetErrorStatus(ViewBag, "Sorry last transaction has been failed.");
             return View(model);
         }
