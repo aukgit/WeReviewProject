@@ -39,7 +39,7 @@ namespace WereViewApp.Models.ViewModels {
         public bool IsFeatured { get; set; }
         [Display(Name = "Like to hear from that developer.", Description = "Add an email footer note that admin is like to hear from them.")]
         public bool LikeToHearFromYou { get; set; }
-        [Display(Name = "Message", Description = "Add an email footer note that admin is like to hear from them.")]
+        [Display(Name = "Message", Description = "Message will not be sent if the message text is empty. If anything is written then it will be sent to the developer's email address.")]
         public string Message { get; set; }
     }
 }

@@ -26,7 +26,7 @@
         @token
         @Html.Partial("_SuccessMessage")
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.EditorFor(model => model.Message, "Multiline", new { @class="grow" ,placeholder = "This message will email to the app developer @" + user.Email +" email address."})
+        @Html.EditorFor(model => model.Message, "Multiline", new { @class="grow" ,placeholder = "Written message will be sent to '" + user.Email +"' email address. If there is no message then it will not send anything."})
         @Html.EditorFor(model => model.IsBlocked)
         @Html.EditorFor(model => model.IsFeatured)
         @Html.EditorFor(model => model.LikeToHearFromYou)

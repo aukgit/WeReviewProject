@@ -96,7 +96,6 @@ namespace WereViewApp.Helpers {
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="buttonName"></param>
-        /// <param name="alertMessage"></param>
         /// <param name="iconClass"></param>
         /// <param name="btnType"></param>
         /// <param name="placeIconLeft"></param>

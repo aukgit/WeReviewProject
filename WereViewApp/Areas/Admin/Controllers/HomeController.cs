@@ -9,8 +9,8 @@ namespace WereViewApp.Areas.Admin.Controllers {
         public ActionResult Index() {
             return View();
         }
-
-
-      
+        public ActionResult Elmah() {
+            return View();
+        }
     }
 }

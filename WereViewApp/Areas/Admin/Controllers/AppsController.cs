@@ -104,15 +104,19 @@ namespace WereViewApp.Areas.Admin.Controllers {
             }
             List<App> apps;
 
-            string url = HttpContext.GetBaseUrl() + "Admin/Apps?page=@page";
+            string url = this.CurrentControlerAbsoluteUrl() + "?page=@page";
+            var query = db.Apps.Include(n => n.User).Include(n => n.FeaturedImages);
+
             if (!string.IsNullOrWhiteSpace(search)) {
                 url += "&search=" + Server.UrlEncode(search);
                 var algorithms = new Algorithms();
-                var query = algorithms.GetSearchResults(search, null, null, null, CommonVars.SearchResultsMaxResultReturn);
+                query = algorithms.GetSimpleAppSearchResults(query, search);
+                query = query.OrderByDescending(n => n.AppID);
                 apps = GetPagedApps(query, url, page);
                 ViewBag.Search = search;
             } else {
-                apps = GetPagedApps(db.Apps.Include(n => n.User), url, page);
+                query = query.OrderByDescending(n => n.AppID);
+                apps = GetPagedApps(query, url, page);
             }
             return View(apps);
         }
@@ -156,14 +160,14 @@ namespace WereViewApp.Areas.Admin.Controllers {
                 if (app.IsBlocked != model.IsBlocked) {
                     // needs to update
                     if (model.IsBlocked) {
-                        ModerationAlgorithms.BlockApp(model.AppId, model.IsFeatured, db);
+                        ModerationAlgorithms.BlockApp(model.AppId, true, db);
                     } else {
-                        ModerationAlgorithms.UnBlockApp(model.AppId, model.IsFeatured, db);
+                        ModerationAlgorithms.UnBlockApp(model.AppId, true, db);
                     }
                 }
                 if (isFeaturedPreviously != model.IsFeatured) {
                     // needs to update
-                    ModerationAlgorithms.AppFeatured(model.AppId, model.IsFeatured, db);
+                    ModerationAlgorithms.AppFeatured(model.AppId, model.IsFeatured, true, db);
                 }
                 string statusMessage = "You have successfully moderated '" + app.AppName + "' app.";
 
@@ -179,7 +183,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         }
         #endregion
 
-        #region Send email
+        #region Send email/ message to Developer
         private void SendEmailToAppDeveloper(ApplicationUser developerUser, AppModerateViewModel model) {
             var loggedUser = User.GetUser();
             var loggedUsername = loggedUser.DisplayName;
@@ -190,7 +194,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             sb.AppendLine(MailHtml.LineBreak);
             if (model.LikeToHearFromYou) {
                 sb.AppendLine(MailHtml.LineBreak);
-                sb.AppendLine(MailHtml.GetStrongTag("** We surely like to hear back from you. **"));
+                sb.AppendLine(MailHtml.GetStrongTag("Note: ** We would like to hear back from you. Please send your replies to '" + AppVar.Setting.OfficeEmail + "' **"));
                 sb.AppendLine(MailHtml.LineBreak);
             }
             sb.AppendLine(MailHtml.LineBreak);
@@ -199,8 +203,11 @@ namespace WereViewApp.Areas.Admin.Controllers {
             var message = sb.ToString();
             sb = null;
             GC.Collect();
-            AppVar.Mailer.Send(developerUser.Email, "A message from admin : " + loggedUsername, message);
-            AppVar.Mailer.Send(loggedUser.Email, "An email sent to : " + developerUser.Email + " [this mail contains the sample]", message);
+            string subjectToDeveloper = "A message from admin : " + loggedUsername;
+            string subjectToAdmin = "An email sent to : " + developerUser.Email + " [this mail contains the sample]";
+
+            AppVar.Mailer.Send(developerUser.Email, subjectToDeveloper, message);
+            AppVar.Mailer.Send(loggedUser.Email, subjectToAdmin, message);
         }
         #endregion
     }

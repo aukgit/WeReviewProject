@@ -251,6 +251,40 @@ namespace WereViewApp.WereViewAppCommon {
         #region Search Algorithm
 
         /// <summary>
+        /// Returns  IQueryable of Tag where urlStringExceptEscapeSequence=> words matches with the display string of Tag.
+        /// Example : given parameter urlStringExceptEscapeSequence "Hello-World"
+        /// Will return tags which are (equal to 'Hello' or 'World')
+        /// </summary>
+        /// <param name="urlStringExceptEscapeSequence"></param>
+        /// <param name="?"></param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public IQueryable<Tag> GetTagIds(string urlStringExceptEscapeSequence,  WereViewAppEntities db) {
+            var listWords = GetUrlListExceptEscapeSequence(urlStringExceptEscapeSequence);
+            var tags = db.Tags.Where(n => listWords.Any(word => word == n.TagDisplay));
+            return tags;
+        }
+        /// <summary>
+        /// Search apps based on UrlEscapseString based on given searchString.
+        /// </summary>
+        /// <param name="searchString">Give a string "Hello World v2" , it will search for 'Hello' and 'World'</param>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public IQueryable<App> GetSimpleAppSearchResults(IQueryable<App> apps,string searchString) {
+            // convert any given "Hello World v2" =>  "Hello-World"
+            var appHyphenUrl = GenerateHyphenUrlString(searchString);
+            var appUrlEscapseString = GetUrlStringExceptEscapeSequence(appHyphenUrl); // "Hello World v2" =>  "Hello-World"
+            var urlListOfEscapseString = GetUrlListExceptEscapeSequence(appUrlEscapseString); // list of words from split '-'
+
+            var query = apps.Where(app => 
+                                        urlListOfEscapseString.All(
+                                        searchWord=> 
+                                            app.UrlWithoutEscapseSequence.Contains(searchWord)));
+            return query;
+        }
+
+
+        /// <summary>
         /// Returns the search no caching
         /// </summary>
         /// <param name="searchText">Plant Vs. Zombies</param>
@@ -291,7 +325,7 @@ namespace WereViewApp.WereViewAppCommon {
             var isSearchable = false;
             var viewableApps = GetViewableApps(db);
 
-            var url = GenerateUrlValid(searchText);
+            var url = GenerateHyphenUrlString(searchText);
             var validUrlList = GetUrlListExceptEscapeSequence(url);
             byte? platformId = null;
             if (platform != null) {
@@ -927,7 +961,7 @@ namespace WereViewApp.WereViewAppCommon {
 
         #region Get Url Without Escape Sequence.
         /// <summary>
-        /// 
+        /// title-tile-2 will return 2 list items [title,tile] numbers will be gone.
         /// </summary>
         /// <param name="url">title-tile-2</param>
         /// <returns></returns>
@@ -951,6 +985,8 @@ namespace WereViewApp.WereViewAppCommon {
             return null;
         }
         /// <summary>
+        /// "title-tile-2" => "title-tile"
+        /// Use GenerateHyphenUrlString() to get the hyphen string.
         /// Returns url without the number and escape sequence (it is for version matching and suggestions)
         /// [Example : title-tile-2 => title-tile]
         /// Plant vs Zombines v2 should have a suggestion of Plant Vs. Zombines v1, v3 and so on.
@@ -959,6 +995,7 @@ namespace WereViewApp.WereViewAppCommon {
         /// <returns>title-title</returns>
         public string GetUrlStringExceptEscapeSequence(string url) {
             if (url != null) {
+                
                 var validUrl = GetUrlListExceptEscapeSequence(url);
                 string returnStr = null;
                 returnStr = string.Join("-", validUrl);
@@ -984,6 +1021,11 @@ namespace WereViewApp.WereViewAppCommon {
             }
             return c;
         }
+        /// <summary>
+        /// Get each word's first character upper case.
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
         public static string GetAllUpperCaseTitle(string title) {
             if (!string.IsNullOrEmpty(title)) {
                 var list = title.Split(" ".ToCharArray());
@@ -1017,7 +1059,7 @@ namespace WereViewApp.WereViewAppCommon {
             return title;
         }
 
-        #region Generate Valid
+        #region Generate Url + Hyphen Urls
 
         /// <summary>
         /// Create url but also check if existing one is there.
@@ -1030,7 +1072,7 @@ namespace WereViewApp.WereViewAppCommon {
         /// <param name="db">Must pass a db, otherwise it will throw an exception.</param>
         /// <param name="currentAppId">Put -1 if the app is not created. If created then give the app id.</param>
         /// <returns>Returns url using hyphen(-). E.g. title app name => title-app-name. Note: Must get a valid url.</returns>
-        public string GenerateUrlValid(double platformVersion, short categoryId, string title, byte platformId, WereViewAppEntities db, long currentAppId) {
+        public string GenerateHyphenUrlStringValid(double platformVersion, short categoryId, string title, byte platformId, WereViewAppEntities db, long currentAppId) {
             if (!string.IsNullOrEmpty(title)) {
                 title = title.Trim();
                 title = Regex.Replace(title, CommonVars.FriendlyUrlRegex, "-").ToLower();
@@ -1058,20 +1100,21 @@ namespace WereViewApp.WereViewAppCommon {
         /// <param name="app"></param>
         /// <param name="db">Must pass a db, otherwise it will throw an exception.</param>
         /// <returns>Returns url using hyphen(-). E.g. title app name => title-app-name. Note: Must get a valid url.</returns>
-        public string GenerateUrlValid(App app, WereViewAppEntities db) {
-            return GenerateUrlValid(app.PlatformVersion, app.CategoryID, app.AppName, app.PlatformID, db, app.AppID);
+        public string GenerateHyphenUrlStringValid(App app, WereViewAppEntities db) {
+            return GenerateHyphenUrlStringValid(app.PlatformVersion, app.CategoryID, app.AppName, app.PlatformID, db, app.AppID);
         }
 
         #endregion
 
         #region Generate URL not valid one
         /// <summary>
+        /// "Hello World v2" => "Hello-World-v2"
         /// Create url , don't check if exist one.
         /// It is used for searching. Whatever search phrase is given , it converts it to url and look exact match at the database level.
         /// </summary>
         /// <param name="title">Give the search string.</param>
-        /// <returns>Returns url using hyphen(-). E.g. title app name => title-app-name</returns>
-        public string GenerateUrlValid(string title) {
+        /// <returns>Returns url using hyphen(-). E.g. "title app name" => "title-app-name"</returns>
+        public string GenerateHyphenUrlString(string title) {
             if (!string.IsNullOrEmpty(title)) {
                 title = title.Trim();
                 title = Regex.Replace(title, CommonVars.FriendlyUrlRegex, "-").ToLower();
@@ -1109,7 +1152,7 @@ namespace WereViewApp.WereViewAppCommon {
             var hostUrl = AppVar.Url + "/";
 
             var builder = new StringBuilder(40);
-         
+
             builder.Append("<ol class=\"breadcrumb " + styleClass + "\">");
             var length = url.Length;
             builder.Append("<li><a href=\"" + hostUrl + "\" title=\"" + AppVar.Name + "\"><i class=\"fa fa-home\"></i></a></li>");
@@ -1124,7 +1167,7 @@ namespace WereViewApp.WereViewAppCommon {
                     currentDirectory = GetCurrentWebDirectory(urlUpto);
                     pointingUrl = hostUrl + urlUpto;
                     builder.Append("<li><a href=\"" + pointingUrl + "\">" + currentDirectory + "</a></li>");
-                } 
+                }
             }
             //last index
             urlUpto = url.Substring(0, i);
