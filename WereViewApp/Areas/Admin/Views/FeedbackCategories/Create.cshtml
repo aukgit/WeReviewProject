@@ -2,14 +2,13 @@
 
 @{
     ViewBag.Title = "Creating FeedbackCategory";
-	var token = (MvcHtmlString)@Html.AntiForgeryToken();
+    string title = ViewBag.Title;
+    
+	var token = Html.AntiForgeryToken();
 }
 
 
-<h1 class="h2 gap-from-top-small">
-	<span class="glyphicon glyphicon-plus"></span>  
-	@ViewBag.Title
-</h1>
+@Html.SamePageLinkWithIcon(title, title, Icons.Plus)
 <hr />
 @using (Html.BeginForm("Create", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) 
 {

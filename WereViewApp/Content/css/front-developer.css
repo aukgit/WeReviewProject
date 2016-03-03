@@ -1,19 +1,32 @@
-﻿body {
-  font-family: Ubuntu, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: subpixel-antialiased;
-}
-body #wrap .app-details-page {
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-}
-.regular-color {
+﻿.regular-color {
   color: #647383;
 }
 .primary-color {
   color: #ff7200;
 }
+.login-btn-wrapper {
+  max-width: 294px;
+  max-width: 29.4rem;
+}
+.login-btn-wrapper .checkbox {
+  max-width: 150px;
+  max-width: 15rem;
+  float: left;
+}
+.login-btn-wrapper .btn {
+  float: right;
+}
 .btn {
   font-weight: normal;
   text-transform: none;
+  padding: 7px 12px 7px 12px;
+  padding: 0.7rem 1.2rem 0.7rem 1.2rem;
+  border: none;
+  font-size: 14px;
+  vertical-align: top;
+}
+.btn-xs {
+  padding: 1px 5px;
 }
 .btn-default {
   color: white;
@@ -33,6 +46,14 @@ body #wrap .app-details-page {
 }
 .btn-success {
   background-color: #19c234;
+}
+.btn-success:hover {
+  background-color: green;
+}
+.btn-lg,
+.btn-group-lg > .btn {
+  padding: 15px 16px 13px;
+  line-height: 15px;
 }
 .input-group-addon:not(:first-child):not(:last-child),
 .input-group-btn:not(:first-child):not(:last-child),
@@ -55,7 +76,7 @@ body #wrap .app-details-page {
   margin-left: 0;
 }
 label.control-label {
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-size: 0.875em;
 }
@@ -93,7 +114,7 @@ label.control-label {
   margin-top: 1rem;
 }
 .apps-list-header-row {
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .apps-list-header-row .title h1 {
   margin: 0px 0px 10px 5px;
@@ -108,9 +129,6 @@ label.control-label {
 .apps-list-header-row .float-right.btn {
   margin: 0px 5px 0px 0px;
   margin: 0 0.5rem 0 0;
-}
-.btn {
-  border: none;
 }
 .paragraph-end {
   height: 19px;
@@ -248,7 +266,7 @@ label.control-label {
   left: 38.333333px;
   top: 5px;
   font-size: 26px;
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .gallery-home .app-title h1 {
   display: inline;
@@ -287,18 +305,26 @@ label.control-label {
 }
 .gallery-home .rating-value-display,
 .gallery-home .app-description {
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .gallery-home .app-description {
   color: #626262;
   width: 385px;
   width: 38.5rem;
   text-align: left;
+  -ms-text-overflow: ellipsis !important;
+  -o-text-overflow: ellipsis !important;
+  text-overflow: ellipsis !important;
+  white-space: normal;
 }
 .gallery-home .app-description p {
   text-align: justify;
   -ms-word-wrap: break-word;
   word-wrap: break-word;
+  -ms-text-overflow: inherit;
+  -o-text-overflow: inherit;
+  text-overflow: inherit;
+  white-space: inherit;
 }
 .gallery-home .app-description-wrapper {
   width: 400px;
@@ -327,7 +353,7 @@ label.control-label {
   color: black;
   margin: 8px 0px 0px 0px;
   margin: 0.8rem 0 0 0;
-  font-family: UbuntuLight, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: UbuntuLight, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .website-head-title strong {
   font-weight: normal;
@@ -344,8 +370,8 @@ label.control-label {
   }
 }
 .header-2 header nav li a {
-  padding: 16px 10px 10px 10px;
-  padding: 1.6rem 1rem 1rem 1rem;
+  padding: 19px 10px 10px 10px;
+  padding: 1.9rem 1rem 1rem 1rem;
 }
 @media (max-width: 768px) {
   .header-2 header nav li {
@@ -375,8 +401,8 @@ label.control-label {
 }
 .header-2 .jetmenu > li > .megamenu,
 .jetmenu ul.dropdown {
-  top: 42px;
-  top: 4.2rem;
+  top: 52px;
+  top: 5.2rem;
 }
 .jetmenu h1 {
   color: #647383;
@@ -509,6 +535,29 @@ label.control-label {
     position: relative;
   }
 }
+@media (min-width: 768px) {
+  .header-2 header.sticky {
+    height: 52px;
+    height: 5.2rem;
+  }
+}
+@media (max-width: 992px) {
+  .header-2 header.sticky nav .fa {
+    display: none;
+  }
+  .header-2 header.sticky nav .fa.fa-bars {
+    display: inline-block;
+  }
+}
+.nav-username {
+  max-width: 114px;
+  max-width: 11.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
 .tp-leftarrow.preview2:after,
 .tp-rightarrow.preview2:after {
   top: 23px;
@@ -535,7 +584,7 @@ label.control-label {
   display: inline-block;
   font-size: 1.5em;
   color: #ff4d00;
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: left;
   white-space: nowrap;
   overflow: hidden;
@@ -697,7 +746,7 @@ label.control-label {
   font-weight: bold;
 }
 #blog {
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #blog .owl-theme .owl-controls {
   margin-top: 0;
@@ -1082,7 +1131,7 @@ q:after {
   }
 }
 #blog.blog-pages .b-tittle {
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #blog.blog-pages p {
   font-size: 1em;
@@ -1134,7 +1183,7 @@ q:after {
   margin-top: 6px;
   margin-top: 0.6rem;
   height: auto;
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
   width: 161px;
   width: 16.1rem;
 }
@@ -1213,7 +1262,27 @@ q:after {
   margin-bottom: 5px;
   margin-bottom: 0.5rem;
   display: block;
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.slim-app-view.tag {
+  border: 1.5px solid #505454;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  height: 32px;
+  height: 3.2rem;
+}
+.slim-app-view.tag .app-content {
+  width: 200px;
+  width: 20rem;
+}
+.slim-app-view.tag .app-title {
+  padding: 8px;
+  font-size: 20px;
+  font-size: 1.25em;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 .slim-app-view .app-url:hover {
   color: #647383;
@@ -1531,6 +1600,12 @@ q:after {
     bottom: 9px;
   }
 }
+.app-url-display {
+  margin-left: 4px;
+  margin-left: 0.4rem;
+  margin-bottom: 11px;
+  margin-bottom: 1.1rem;
+}
 .blog-page-private .white-wrapper-background .seo-app-name:hover {
   color: deepskyblue;
   text-decoration: underline;
@@ -1539,5 +1614,90 @@ q:after {
 .blog-page-private .white-wrapper-background .seo-app-name strong,
 .blog-page-private .white-wrapper-background .seo-app-name em {
   text-decoration: inherit;
+}
+.page-header h1,
+.page-header small {
+  color: black;
+  display: inline-block;
+}
+.page-header h1 {
+  font-size: 2.2em;
+  padding-right: 5px;
+}
+.breadcrumb {
+  background-color: #E0ECF1;
+  margin: 5px 0 -8px 0;
+  padding: 6px 16px;
+  border: none;
+  color: white;
+  border-radius: 0;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.breadcrumb.single-app {
+  margin: 5px 0 6px 0;
+}
+@media only screen and (max-width: 480px) {
+  .breadcrumb.single-app {
+    display: none;
+  }
+}
+.breadcrumb a {
+  color: #ff7200;
+  cursor: pointer;
+  font-weight: bold;
+}
+.breadcrumb a:hover {
+  color: #ff4d00;
+}
+.breadcrumb li:last-child a {
+  color: grey;
+  cursor: default;
+  font-weight: normal;
+}
+.breadcrumb li:last-child a:hover {
+  color: grey;
+}
+.breadcrumb > li + li:before {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f061";
+  padding: 0 9px;
+  font-size: 0.9em;
+  /*color: dodgerblue;*/
+  color: #FF7200;
+}
+.btn-facebook {
+  background-color: #47639E;
+  font-size: 1em;
+}
+.btn-facebook:before {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f082 ";
+  padding-right: 7px;
+}
+.btn-facebook:hover,
+.btn-facebook:active,
+.btn-facebook:focus {
+  background-color: #3356A0;
+  color: white;
+}
+a.link {
+  background-color: #03A9F4;
+  color: white;
+  padding: 5px 14px;
+  border-radius: 5px;
+}
+a.link:hover {
+  background-color: #0275a8;
 }
 /*# sourceMappingURL=front-developer.css.map */

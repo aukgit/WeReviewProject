@@ -1,5 +1,4 @@
-﻿@import "lesshat.less";
-@import "variables.less";
+﻿@import "fonts-rimixens.less";
 //category page
 .category-page {
 }
@@ -44,6 +43,22 @@
     display: block;
     .ubuntu-font;
 
+    &.tag {
+        border: 1.5px solid #505454;
+        .border-rounded(4px);
+        .height(32px);
+
+        .app-content {
+            .width(200px);
+        }
+
+        .app-title {
+            padding: 8px;
+            .font-size(20px );
+            .ellipsis();
+        }
+    }
+
     .app-url:hover {
         color: @regular-font-color;
     }
@@ -74,7 +89,6 @@
 
     h3 {
         .margin(5px,0);
-
     }
 
     .app-title {

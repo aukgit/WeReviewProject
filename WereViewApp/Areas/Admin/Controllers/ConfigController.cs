@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using DevMvcComponent;
+using WereViewApp.Filter;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.IdentityCustomization;
+using WereViewApp.Modules.Role;
 
 namespace WereViewApp.Areas.Admin.Controllers {
     public class ConfigController : Controller {
@@ -12,16 +15,34 @@ namespace WereViewApp.Areas.Admin.Controllers {
         public ActionResult Index() {
             byte id = (byte)1;
 
-            CoreSetting coreSetting = db.CoreSettings.Find(id);
+            var coreSetting = db.CoreSettings.Find(id);
             if (coreSetting == null) {
                 return HttpNotFound();
             }
             return View(coreSetting);
         }
+        [Authorize]
+        [CheckRegistrationComplete]
+        public ActionResult CleanSystem() {
+        
+            return View();
+        }
 
-        public ActionResult SendEmail(string tab) {
+        [Authorize]
+        [HasMinimumRole(MinimumRole=RoleNames.Admin)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CleanSystem(string clean) {
+            if (!string.IsNullOrEmpty(clean) && clean.Equals("Clean")) {
+
+                ViewBag.message = "Every thing is removed successfully.";
+            }
+            return View();
+        }
+
+        public async Task<ActionResult> SendEmail(string tab) {
             ViewBag.tab = "#email-setup";
-            Starter.Mailer.QuickSend(AppVar.Setting.DeveloperEmail, "Test Email", "Test Email at " + DateTime.Now.ToString());
+            AppVar.Mailer.NotifyAdmin(AppVar.Setting.DeveloperEmail, "Test Email", "Test Email at " + DateTime.Now);
             try {
                 throw new Exception("Testing error mail.");
             } catch (Exception ex) {
@@ -37,11 +58,13 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
             if (ModelState.IsValid) {
                 db.Entry(coreSetting).State = EntityState.Modified;
-                db.SaveChanges();
-                AppConfig.RefreshSetting();
-                ViewBag.Success = "Saved Successfully.";
+                if (db.SaveChanges() > -1) {
+                    AppConfig.RefreshSetting();
+                    AppVar.SetSavedStatus(ViewBag);
+                    return View(coreSetting);
+                }
             }
-
+            AppVar.SetErrorStatus(ViewBag);
             return View(coreSetting);
         }
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.Session;
 using WereViewApp.WereViewAppCommon;
@@ -22,7 +18,7 @@ namespace WereViewApp.Controllers {
         public ActionResult Index(string SearchQuery) {
             var max = 60;
 
-            SearchViewModel search = new SearchViewModel();
+            var search = new SearchViewModel();
             var algorithms = new Algorithms();
             //ViewBag.isPostBack = true;
             if (!string.IsNullOrWhiteSpace(SearchQuery)) {
@@ -34,7 +30,7 @@ namespace WereViewApp.Controllers {
                     }
                 }
                 search.SearchQuery = SearchQuery;
-                var urlGet = algorithms.GenerateURLValid(SearchQuery);
+                var urlGet = algorithms.GenerateHyphenUrlString(SearchQuery);
                 var displayList = urlGet.Split('-');
                 var displayStr = string.Join(" ", displayList);
                 var results = algorithms.GetSearchResults(SearchQuery, null, null, null,

@@ -2,14 +2,14 @@
 
 @{
     ViewBag.Title = "Creating ImageResizeSetting";
-	var token = (MvcHtmlString)@Html.AntiForgeryToken();
+    string title = ViewBag.Title;
+    string subtitle = ViewBag.Title;
+	var token = Html.AntiForgeryToken();
 }
 
 
-<h1 class="h3">
-	<span class="glyphicon glyphicon-plus"></span>  
-	@ViewBag.Title
-</h1>
+@Html.SamePageLinkWithIcon(title, subtitle, Icons.Plus)
+
 <hr />
 @using (Html.BeginForm("Create", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) 
 {

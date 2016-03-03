@@ -45,7 +45,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
-    <IncludeIisSettings>true</IncludeIisSettings>
+    <IncludeIisSettings>false</IncludeIisSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -60,8 +60,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="DevMvcComponent, Version=1.0.20.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DevMVCComponent.1.0.20\lib\DevMvcComponent.dll</HintPath>
+    <Reference Include="DevMvcComponent, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevMVCComponent.2.1.0\lib\DevMvcComponent.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DevTrends.MvcDonutCaching">
@@ -71,17 +71,25 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
     </Reference>
-    <Reference Include="Elmah.Mvc">
-      <HintPath>..\packages\Elmah.MVC.2.1.1\lib\net40\Elmah.Mvc.dll</HintPath>
+    <Reference Include="Elmah.Mvc, Version=2.1.2.1389, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elmah.Mvc.2.1.2\lib\net40\Elmah.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFramework">
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="FluentScheduler">
-      <HintPath>..\packages\FluentScheduler.3.1.45\lib\net40\FluentScheduler.dll</HintPath>
+    <Reference Include="FluentScheduler, Version=3.1.46.0, Culture=neutral, PublicKeyToken=b76503528a14ebd1, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentScheduler.3.1.46\lib\net40\FluentScheduler.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FontAwesomeIcons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesomeIcons.1.0.2\lib\FontAwesomeIcons.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="ImageResizer">
       <HintPath>ExternalDll\ImageResizer.dll</HintPath>
@@ -110,9 +118,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -130,21 +138,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Twitter, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.Twitter, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="RouteDebugger">
       <HintPath>..\packages\routedebugger.2.1.4.0\lib\net40\RouteDebugger.dll</HintPath>
@@ -233,22 +241,51 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Areas\Admin\Controllers\ServicesController.cs" />
+    <Compile Include="App_Start\AppVar.cs" />
+    <Compile Include="Areas\Admin\Controllers\AppsController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
+    <Compile Include="Controllers\GenericController.cs" />
+    <Compile Include="Controllers\IndentityController.cs" />
     <Compile Include="Controllers\PlatformsController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
+    <Compile Include="Controllers\TagsController.cs" />
+    <Compile Include="Filter\CheckRegistrationCompleteAttribute.cs" />
+    <Compile Include="Filter\HasMinimumRoleAttribute.cs" />
+    <Compile Include="Filter\FacebookAccessTokenAttribute.cs" />
+    <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\CategoryExtend.cs" />
+    <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackState.cs" />
+    <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\TagExtend.cs" />
+    <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\UserExtend.cs" />
+    <Compile Include="Models\EntityModel\POCO\AppsSearchResult.cs" />
+    <Compile Include="Models\EntityModel\POCO\CellPhone.cs" />
+    <Compile Include="Models\POCO\Enum\FeedbackStatusTypes.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
     <Compile Include="Models\POCO\Structs\FeedbackCategoryIDs.cs" />
+    <Compile Include="Models\ViewModels\AppModerateViewModel.cs" />
+    <Compile Include="Models\ViewModels\EmailResendViewModel.cs" />
+    <Compile Include="Models\ViewModels\ForgotPasswordViewModel.cs" />
+    <Compile Include="Models\ViewModels\LoginViewModel.cs" />
+    <Compile Include="Models\ViewModels\ManageUserViewModel.cs" />
+    <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
+    <Compile Include="Models\ViewModels\ResetPasswordViewModel.cs" />
+    <Compile Include="Modules\Constants\TokenPurpose.cs" />
+    <Compile Include="Modules\Extensions\GraphApiExtension.cs" />
+    <Compile Include="Modules\Extensions\UrlExtension.cs" />
     <Compile Include="Modules\Extensions\ViewEngine\RenderingView.cs" />
+    <Compile Include="Modules\DevUser\UserCache.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapGenerator.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapItem.cs" />
     <Compile Include="Modules\Sitemaps\SitemapChangeFrequency.cs" />
     <Compile Include="Modules\Sitemaps\SitemapGenerator.cs" />
     <Compile Include="Modules\Sitemaps\SitemapItem.cs" />
     <Compile Include="Modules\Sitemaps\SitemapResult.cs" />
+    <Compile Include="Modules\TimeZone\TimeZoneSet.cs" />
+    <Compile Include="Modules\Validations\DevUserValidator.cs" />
+    <Compile Include="Modules\Validations\ValidationMessage.cs" />
+    <Compile Include="Modules\Validations\Validator.cs" />
     <Compile Include="Scheduler\WeReviewDownloadScheduler.cs" />
     <Compile Include="Scheduler\WeReviewScheduler.cs" />
     <Compile Include="Scheduler\SchedulerRunner.cs" />
@@ -263,7 +300,6 @@
     <Compile Include="Areas\Admin\Controllers\AdvertiseController.cs" />
     <Compile Include="Areas\Admin\Controllers\AppCategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ConfigController.cs" />
-    <Compile Include="Areas\Admin\Controllers\CountriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\FeaturedImagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\FeedbackCategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\FeedbacksController.cs" />
@@ -278,7 +314,7 @@
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\AppsController.cs" />
     <Compile Include="Controllers\PartialsController.cs" />
-    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Models\EntityModel\Derivables\IApp.cs">
@@ -287,7 +323,6 @@
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\AppExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\GalleryExtented.cs" />
     <Compile Include="Models\EntityModel\POCO\AppSavingTextFields.cs" />
-    <Compile Include="Models\EntityModel\POCO\CellPhone.cs" />
     <Compile Include="Models\EntityModel\POCO\FeaturedImage.cs" />
     <Compile Include="Models\EntityModel\POCO\ReviewLikeDislike.cs" />
     <Compile Include="Models\EntityModel\Structs\NotificationTypeIDs.cs" />
@@ -302,7 +337,7 @@
     <Compile Include="Models\ViewModels\SearchViewModel.cs" />
     <Compile Include="Modules\Reponse\RemoveETagModule.cs" />
     <Compile Include="Modules\StringExtension.cs" />
-    <Compile Include="Controllers\ViewTestController.cs" />
+    <Compile Include="WereViewAppCommon\ModerationAlgorithms.cs" />
     <Compile Include="WereViewAppCommon\Structs\CommonVars.cs" />
     <Compile Include="WereViewAppCommon\WereViewStatics.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -328,7 +363,7 @@
     <Compile Include="Models\CustomQuery\CommonQueriesWereViewApp.cs" />
     <Compile Include="Models\DesignPattern\Interfaces\IDevUserRole.cs" />
     <Compile Include="Models\DesignPattern\Interfaces\IDevUser.cs" />
-    <Compile Include="Models\EntityModel\Context\WereViewAppEntities.cs" />
+    <Compile Include="Models\Context\WereViewAppEntities.cs" />
     <Compile Include="Models\EntityModel\POCO\App.cs" />
     <Compile Include="Models\EntityModel\POCO\AppDraft.cs" />
     <Compile Include="Models\EntityModel\POCO\Category.cs" />
@@ -371,7 +406,7 @@
     <Compile Include="Models\Migrations\Indentity\Configuration.cs" />
     <Compile Include="Models\POCO\Identity\ApplicationRole.cs" />
     <Compile Include="Models\POCO\Identity\ApplicationUser.cs" />
-    <Compile Include="Models\ViewModels\AccountViewModels.cs" />
+    <Compile Include="Models\ViewModels\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\Context\ApplicationDbContext.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\CoreSetting.cs" />
     <Compile Include="Models\ViewModels\ManageRolesViewModel.cs" />
@@ -396,7 +431,6 @@
     <Compile Include="Modules\Mail\MailSender.cs" />
     <Compile Include="Modules\Menu\GenerateMenu.cs" />
     <Compile Include="Modules\Message\Const.cs" />
-    <Compile Include="Modules\ObjectToArray\ObjectToArrary.cs" />
     <Compile Include="Modules\Role\RoleManager.cs" />
     <Compile Include="Modules\Role\RoleNames.cs" />
     <Compile Include="Modules\Session\SessionNames.cs" />
@@ -407,17 +441,29 @@
     <Compile Include="Modules\Uploads\IImageCategory.cs" />
     <Compile Include="Modules\Uploads\IUploadableFile.cs" />
     <Compile Include="Modules\Uploads\UploadProcessor.cs" />
-    <Compile Include="Modules\UserError\ErrorCollector.cs" />
     <Compile Include="Modules\UserError\MessageConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\DatabaseTables\Country.table" />
-    <Content Include="App_Data\DatabaseTables\CountryLanguage-Country-1.table" />
-    <Content Include="App_Data\DatabaseTables\CountryLanguage-Country-20.table" />
-    <Content Include="App_Data\DatabaseTables\UserTimeZone-Country-20.table" />
-    <Content Include="App_Data\DatabaseTables\UserTimeZone-Country-239.table" />
+    <Content Include="App_Data\DataCached\Database\01b72017-2869-47a8-9980-f04a5870fcff-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\0aa37ed0-3594-4129-81d5-44739dd21dff-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\1e86ed90-0bb1-46b5-9524-a8a9815daabc-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\289bdd3e-b146-4614-b3ee-9df0562e2273-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\367dea9a-dd31-434a-8b13-506f0ba36b5f-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\45040001-5666-4427-aee6-8ad3b566db51-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\5dc57933-5c3d-4b94-9d30-0a311418037e-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\61dd3da2-07e9-4863-ac61-50930156905e-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\6f363a57-2094-4d3a-9252-ae2e2a76a97b-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\7324f4fb-bda6-4faf-b0b2-dbfa472cf013-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\807eeca9-35fe-4899-89e0-079449e1b6db-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\8435a280-7ead-418b-9b63-f29a0816ec7a-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\8d6d1103-2304-4f92-8af5-7ff649d7b557-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\a8d1a725-ec09-4c22-b483-153160780214-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\abf10899-367e-4dda-b685-d3a475d64570-appInfo.mdb" />
+    <Content Include="App_Data\DataCached\Database\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-appInfo.mdb" />
     <Content Include="App_Data\WereViewApp-Accounts.mdf" />
     <Content Include="App_Data\WereViewApp-Accounts_log.ldf">
       <DependentUpon>WereViewApp-Accounts.mdf</DependentUpon>
@@ -426,25 +472,68 @@
     <Content Include="App_Data\WereViewApp_log.ldf">
       <DependentUpon>WereViewApp.mdf</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Config\_Basic-tab.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Views\Config\_Developers-tab.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Views\Config\_Email-setup-tab.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Views\Config\_External-logins-tab.cshtml" />
+    <Content Include="Areas\Admin\Views\Config\_Office-tab.cshtml" />
+    <Content Include="Areas\Admin\Views\Config\_Urls-tab.cshtml" />
+    <Content Include="Areas\Admin\Views\Config\_WeReview-tab.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Content\css\animate-refresh.css" />
     <Content Include="Content\css\animate-refresh.css.map">
       <DependentUpon>animate-refresh.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\animate-refresh.min.css" />
+    <Content Include="Content\css\animate.min.css" />
+    <Content Include="Content\css\backend-developer.css" />
+    <Content Include="Content\css\backend-developer.min.css">
+      <DependentUpon>backend-developer.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\base-theme-styles.css" />
+    <Content Include="Content\css\blog-page.css" />
+    <Content Include="Content\css\blog-page.min.css" />
     <Content Include="Content\css\bootstrap-datetimepicker.css" />
     <Content Include="Content\css\bootstrap-datetimepicker.css.map">
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\css\bootstrap-select.css" />
+    <Content Include="Content\css\bootstrap-select.min.css">
+      <DependentUpon>bootstrap-select.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\bootstrap-table.css" />
+    <Content Include="Content\css\bootstrap-tag.css" />
+    <Content Include="Content\css\bootstrap-tag.min.css">
+      <DependentUpon>bootstrap-tag.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\category-page.css" />
     <Content Include="Content\css\category-page.css.map">
       <DependentUpon>category-page.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\category-page.min.css" />
+    <Content Include="Content\css\ckedit-skin-bootstrap.css" />
+    <Content Include="Content\css\ckedit-skin-bootstrap.min.css">
+      <DependentUpon>ckedit-skin-bootstrap.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\color-fonts.css" />
+    <Content Include="Content\css\color-fonts.min.css">
+      <DependentUpon>color-fonts.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\dataTables.bootstrap.css" />
+    <Content Include="Content\css\editor-templates.css" />
+    <Content Include="Content\css\editor-templates.min.css">
+      <DependentUpon>editor-templates.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\flags32-combo.css" />
     <Content Include="Content\css\flags32.css" />
     <Content Include="Content\css\flags32.png" />
@@ -454,21 +543,31 @@
     <Content Include="Content\css\footer-fixing.css.map">
       <DependentUpon>footer-fixing.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\footer-fixing.min.css" />
     <Content Include="Content\css\front-developer.css" />
-    <Content Include="Content\css\front-developer.css.map">
+    <Content Include="Content\css\front-developer.min.css">
       <DependentUpon>front-developer.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\header.css" />
+    <Content Include="Content\css\header.min.css">
+      <DependentUpon>header.css</DependentUpon>
     </Content>
     <Content Include="Content\css\less-imports.css" />
     <Content Include="Content\css\less-imports.css.map">
       <DependentUpon>less-imports.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\less-imports.min.css" />
     <Content Include="Content\css\menu-fix.css" />
     <Content Include="Content\css\menu-fix.css.map">
       <DependentUpon>menu-fix.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\menu-fix.min.css" />
     <Content Include="Content\css\miscellaneous.css" />
     <Content Include="Content\css\override-mvc.css" />
     <Content Include="Content\css\override-mvc.css.map">
+      <DependentUpon>override-mvc.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\override-mvc.min.css">
       <DependentUpon>override-mvc.css</DependentUpon>
     </Content>
     <Content Include="Content\css\owl.carousel.css" />
@@ -479,14 +578,19 @@
     <Content Include="Content\css\responsive.css.map">
       <DependentUpon>responsive.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\responsive.min.css" />
     <Content Include="Content\css\search-page.css" />
     <Content Include="Content\css\search-page.css.map">
       <DependentUpon>search-page.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\search-page.min.css" />
+    <Content Include="Content\css\see-more-btn.css" />
+    <Content Include="Content\css\see-more-btn.min.css" />
     <Content Include="Content\css\seo-optimize.css" />
     <Content Include="Content\css\seo-optimize.css.map">
       <DependentUpon>seo-optimize.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\seo-optimize.min.css" />
     <Content Include="Content\css\Site.css" />
     <Content Include="Content\css\star-rating.css" />
     <Content Include="Content\css\style.css" />
@@ -508,24 +612,56 @@
     <Content Include="Content\css\Tagit\ui-lightness\jquery-ui-1.9.2.custom.min.css" />
     <Content Include="Content\css\Upload\jquery.fileupload.css" />
     <Content Include="Content\css\utilities.css" />
-    <Content Include="Content\css\utilities.css.map">
+    <Content Include="Content\css\utilities.min.css">
       <DependentUpon>utilities.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\validator.css" />
+    <Content Include="Content\css\validator.min.css">
+      <DependentUpon>validator.css</DependentUpon>
+    </Content>
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\Less\less-imports.less" />
-    <Content Include="Content\fonts\fontawesome-webfont78ce.eot" />
-    <Content Include="Content\fonts\fontawesome-webfont78ce.ttf" />
-    <Content Include="Content\fonts\fontawesome-webfont78ce.woff" />
-    <Content Include="Content\fonts\fontawesome-webfontd41d.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Content\Less\animate-refresh.less" />
     <Content Include="Areas\Admin\Views\AppCategories\_CreateOrEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_NavBar.cshtml" />
     <Content Include="Content\css\color-fonts.css.map" />
     <Content Include="Content\css\owl.custom.finalize.css.map" />
-    <None Include="Content\Less\override-mvc.less" />
+    <Content Include="Content\Less\animate-refresh.less" />
+    <Content Include="Content\Less\blog-page.less" />
+    <Content Include="Content\Less\bootstrap-datetimepicker.less" />
+    <Content Include="Content\Less\category-page.less" />
+    <Content Include="Content\css\ckedit-skin-bootstrap.css.map">
+      <DependentUpon>ckedit-skin-bootstrap.css</DependentUpon>
+    </Content>
+    <Content Include="CodeTemplates\MvcControllerWithContext\Controller.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Create.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Delete.cs - Copy.t4" />
+    <Content Include="CodeTemplates\MvcView\Delete.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Details.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\DetailsNoTable.t4" />
+    <Content Include="CodeTemplates\MvcView\Edit.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Empty.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
+    <Content Include="CodeTemplates\MvcView\List.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
+    <Content Include="Areas\Admin\Views\Apps\Index.cshtml" />
+    <Content Include="Content\css\utilities.css.map">
+      <DependentUpon>utilities.css</DependentUpon>
+    </Content>
+    <None Include="Content\Less\ckedit-skin-bootstrap.less" />
+    <Content Include="Content\Less\color-fonts.less" />
+    <Content Include="Content\Less\footer-fixing.less" />
+    <Content Include="Content\Less\front-developer.less" />
+    <Content Include="Content\Less\less-imports.less" />
+    <Content Include="Content\Less\menu-fix.less" />
+    <Content Include="Content\Less\owl.custom.finalize.less" />
+    <Content Include="Content\Less\responsive.less" />
+    <Content Include="Content\Less\search-page.less" />
+    <Content Include="Content\Less\see-more-btn.less" />
+    <Content Include="Content\Less\seo-optimize.less" />
+    <Content Include="Content\Less\utilities.less" />
     <Content Include="Content\Published.Scripts\front-end.js" />
     <Content Include="Content\Published.Scripts\front-end.min.js">
       <DependentUpon>front-end.js</DependentUpon>
@@ -581,16 +717,17 @@
     <Content Include="Content\Scripts\bootstrap-select.js" />
     <Content Include="Content\Scripts\bootstrap-table.js" />
     <Content Include="Content\Scripts\bootstrap.min.js" />
+    <Content Include="Content\Scripts\ckeditor-jquery-adapter.js" />
+    <Content Include="Content\Scripts\ckeditor.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\ComboOptions.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.country-phone.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.dynamicSelect.js" />
-    <Content Include="Content\Scripts\DevOrgPlugins\every-page.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\app.run.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\dev-component-runner.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.component.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\byId.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\jquery.server-validate.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\WeReviewApps.js" />
-    <Content Include="Content\Less\bootstrap-datetimepicker.less" />
-    <Content Include="Content\Less\responsive.less" />
     <Content Include="Content\Published.Scripts\front-end.min.js.map">
       <DependentUpon>front-end.min.js</DependentUpon>
     </Content>
@@ -600,9 +737,256 @@
     <Content Include="Content\Published.Scripts\upload.min.js.map">
       <DependentUpon>upload.min.js</DependentUpon>
     </Content>
+    <Content Include="Content\Less\bootstrap-select.less" />
+    <Content Include="Content\Less\bootstrap-select.variables.less" />
+    <Content Include="Content\Less\editor-templates.less" />
+    <Content Include="Content\Less\editor-templates.variables.less" />
+    <Content Include="Content\Less\fonts-rimixens.less" />
+    <Content Include="Content\Less\footer.variables.less" />
+    <Content Include="Content\Less\front-developer.variables.less" />
+    <Content Include="Content\Less\header.less" />
+    <Content Include="Content\Less\override-mvc.less" />
+    <Content Include="Content\Less\remixens\elements.less" />
+    <Content Include="Content\Less\remixens\extra-remixens.less" />
+    <Content Include="Content\Less\remixens\global.less" />
+    <Content Include="Content\Less\remixens\lesshat.less" />
+    <Content Include="Content\Less\remixens\variables.less" />
+    <Content Include="Content\Less\validator.less" />
+    <Content Include="Content\css\bootstrap-select.css.map">
+      <DependentUpon>bootstrap-select.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\header.variables.less" />
+    <Content Include="Content\css\see-more-btn.css.map">
+      <DependentUpon>see-more-btn.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\validator.css.map">
+      <DependentUpon>validator.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\bootstrap-tag.css.map">
+      <DependentUpon>bootstrap-tag.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\blog-page.css.map">
+      <DependentUpon>blog-page.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\override-mvc.variables.less" />
+    <Content Include="Content\css\editor-templates.css.map">
+      <DependentUpon>editor-templates.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\bootstrap-tagsinput.less" />
+    <Content Include="Content\Less\backend-developer.less" />
+    <Content Include="Content\css\backend-developer.css.map">
+      <DependentUpon>backend-developer.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Views\Feedbacks\Done.cshtml" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog_ie.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog_ie7.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog_ie8.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog_iequirks.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog_opera.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\editor.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\editor_gecko.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\editor_ie.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\editor_ie7.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\editor_ie8.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\editor_iequirks.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\dialog.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\dialog_ie.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\dialog_ie7.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\dialog_ie8.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\dialog_iequirks.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\dialog_opera.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\editor.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\editor_gecko.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\editor_ie.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\editor_ie7.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\editor_ie8.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\editor_iequirks.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\icons.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\icons_hidpi.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\arrow.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\close.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\hidpi\close.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\hidpi\lock-open.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\hidpi\lock.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\hidpi\refresh.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\lock-open.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\lock.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\refresh.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\sample\bootstrapck-sample.html" />
+    <Content Include="Content\Scripts\skins\bootstrapck\sample\css\bootstrapck-sample.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\sample\js\analytics.js" />
+    <Content Include="Content\Scripts\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
+    <Content Include="Fonts\fontawesome-webfont.svg" />
+    <Content Include="Sitemap.xml" />
+    <Content Include="Uploads\Images\Advertise\5e324a00-977d-4436-8a15-3ce9e1c424f1-0.jpg" />
+    <Content Include="Uploads\Images\Advertise\7fcf1b26-c1e0-4327-ba7f-29d5fd55bd25-0.jpg" />
+    <Content Include="Uploads\Images\Advertise\be78fe90-0932-44c6-8cd1-816b35d6d232-0.jpg" />
+    <Content Include="Uploads\Images\avatar.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-1.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-2.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-3.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-4.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-5.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-1.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-2.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-3.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-4.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-5.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-6.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-7.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-1.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-2.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-3.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-4.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-5.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-6.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-7.jpg" />
+    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-8.jpg" />
+    <Content Include="Uploads\Images\Gallery\0598bc1d-9b8e-4634-8bb6-31942a7ad68a-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-2.jpg" />
+    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-3.jpg" />
+    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-4.jpg" />
+    <Content Include="Uploads\Images\Gallery\0f759dc0-b939-480e-82a5-6133aa3bcc3d-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\1e86ed90-0bb1-46b5-9524-a8a9815daabc-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-2.jpg" />
+    <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-3.jpg" />
+    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-2.jpg" />
+    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-3.jpg" />
+    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-4.jpg" />
+    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-5.jpg" />
+    <Content Include="Uploads\Images\Gallery\53be2a3e-8cff-49c7-88b4-158b252969b2-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\55d3b71c-cafe-4f68-a2e8-32a8df8f922c-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\5dc57933-5c3d-4b94-9d30-0a311418037e-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\61dd3da2-07e9-4863-ac61-50930156905e-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\6f363a57-2094-4d3a-9252-ae2e2a76a97b-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\807eeca9-35fe-4899-89e0-079449e1b6db-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-2.jpg" />
+    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-3.jpg" />
+    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-4.jpg" />
+    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-5.jpg" />
+    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-6.jpg" />
+    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-7.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-2.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-3.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-4.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-5.jpg" />
+    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-6.jpg" />
+    <Content Include="Uploads\Images\Gallery\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-2.jpg" />
+    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-3.jpg" />
+    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-4.jpg" />
+    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-5.jpg" />
+    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-6.jpg" />
+    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-7.jpg" />
+    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-8.jpg" />
+    <Content Include="Uploads\Images\Gallery\e94520fd-50d7-43e2-95f4-699e2e156806-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\fa1595d4-da44-4205-b3dd-6b6e524866d0-1.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\0598bc1d-9b8e-4634-8bb6-31942a7ad68a-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\0f759dc0-b939-480e-82a5-6133aa3bcc3d-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\1e86ed90-0bb1-46b5-9524-a8a9815daabc-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\53be2a3e-8cff-49c7-88b4-158b252969b2-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\55d3b71c-cafe-4f68-a2e8-32a8df8f922c-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\61dd3da2-07e9-4863-ac61-50930156905e-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\6f363a57-2094-4d3a-9252-ae2e2a76a97b-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\807eeca9-35fe-4899-89e0-079449e1b6db-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\fa1595d4-da44-4205-b3dd-6b6e524866d0-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\0598bc1d-9b8e-4634-8bb6-31942a7ad68a-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\0f759dc0-b939-480e-82a5-6133aa3bcc3d-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\1e86ed90-0bb1-46b5-9524-a8a9815daabc-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\53be2a3e-8cff-49c7-88b4-158b252969b2-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\55d3b71c-cafe-4f68-a2e8-32a8df8f922c-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\6f363a57-2094-4d3a-9252-ae2e2a76a97b-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\807eeca9-35fe-4899-89e0-079449e1b6db-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\fa1595d4-da44-4205-b3dd-6b6e524866d0-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\0598bc1d-9b8e-4634-8bb6-31942a7ad68a-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\0f759dc0-b939-480e-82a5-6133aa3bcc3d-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\1e86ed90-0bb1-46b5-9524-a8a9815daabc-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\53be2a3e-8cff-49c7-88b4-158b252969b2-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\55d3b71c-cafe-4f68-a2e8-32a8df8f922c-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\6f363a57-2094-4d3a-9252-ae2e2a76a97b-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\807eeca9-35fe-4899-89e0-079449e1b6db-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\fa1595d4-da44-4205-b3dd-6b6e524866d0-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\0598bc1d-9b8e-4634-8bb6-31942a7ad68a-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\0f759dc0-b939-480e-82a5-6133aa3bcc3d-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\1e86ed90-0bb1-46b5-9524-a8a9815daabc-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\53be2a3e-8cff-49c7-88b4-158b252969b2-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\55d3b71c-cafe-4f68-a2e8-32a8df8f922c-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\6f363a57-2094-4d3a-9252-ae2e2a76a97b-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\807eeca9-35fe-4899-89e0-079449e1b6db-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\fa1595d4-da44-4205-b3dd-6b6e524866d0-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\0598bc1d-9b8e-4634-8bb6-31942a7ad68a-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\0f759dc0-b939-480e-82a5-6133aa3bcc3d-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\1e86ed90-0bb1-46b5-9524-a8a9815daabc-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\53be2a3e-8cff-49c7-88b4-158b252969b2-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\55d3b71c-cafe-4f68-a2e8-32a8df8f922c-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\6f363a57-2094-4d3a-9252-ae2e2a76a97b-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\807eeca9-35fe-4899-89e0-079449e1b6db-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.png" />
+    <Content Include="Uploads\Images\YoutubeCovers\98648fe8-8672-43d4-9767-2869c12e14da-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\fa1595d4-da44-4205-b3dd-6b6e524866d0-0.jpg" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Admin\Views\Config\CleanSystem.cshtml" />
+    <Content Include="Areas\Admin\Views\Apps\Moderate.cshtml" />
+    <Content Include="Content\css\front-developer.css.map">
+      <DependentUpon>front-developer.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\header.css.map">
+      <DependentUpon>header.css</DependentUpon>
+    </Content>
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
-    <None Include="Content\Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />
     <Content Include="Content\Scripts\FrontEnd\front-developer.js" />
     <Content Include="Content\Scripts\FrontEnd\jquery.isotope.min.js" />
@@ -612,8 +996,8 @@
     <Content Include="Content\Scripts\FrontEnd\main.js" />
     <Content Include="Content\Scripts\FrontEnd\owl.carousel.min.js" />
     <Content Include="Content\Scripts\FrontEnd\wow.min.js" />
-    <Content Include="Content\Scripts\jquery-2.1.3.js" />
-    <Content Include="Content\Scripts\jquery-2.1.3.min.js" />
+    <None Include="Content\Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Content\Scripts\jquery-2.1.4.js" />
     <Content Include="Content\Scripts\jquery-ui.min.js" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\Scripts\bootstrap-table-filter.js" />
@@ -628,9 +1012,9 @@
     <Content Include="Content\Scripts\modernizr-2.8.3.js" />
     <Content Include="Content\Scripts\moment.js" />
     <Content Include="Content\Scripts\star-rating.js" />
-    <Content Include="Content\Scripts\Tagit\jquery-ui-1.9.2.custom.min.js" />
-    <Content Include="Content\Scripts\Tagit\jquery.autoGrowInput.js" />
-    <Content Include="Content\Scripts\Tagit\jquery.tagedit.js" />
+    <Content Include="Content\Scripts\Tag-it\bootstrap-tagsinput.js" />
+    <Content Include="Content\Scripts\Tag-it\bootstrap3-typeahead.min.js" />
+    <Content Include="Content\Scripts\Tag-it\jquery.autoGrowInput.js" />
     <Content Include="Content\Scripts\underscore.js" />
     <Content Include="Content\Scripts\Upload\bootstrap-progressbar.js" />
     <Content Include="Content\Scripts\Upload\canvas-to-blob.min.js" />
@@ -646,10 +1030,9 @@
     <Content Include="Content\Scripts\Upload\jquery.ui.widget.js" />
     <Content Include="Content\Scripts\Upload\load-image.all.min.js" />
     <Content Include="Content\Scripts\validation.js" />
-    <Content Include="DevTrends.MvcDonutCaching.README.txt" />
     <Content Include="ExternalDll\LinqKit.dll" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
@@ -669,9 +1052,6 @@
     <Content Include="Areas\Admin\Views\Roles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Countries\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Countries\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Countries\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\Edit.cshtml" />
@@ -687,9 +1067,7 @@
     <Content Include="Areas\Admin\Views\FeedbackCategories\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\FeedbackCategories\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Feedbacks\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Feedbacks\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Feedbacks\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Feedbacks\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Feedbacks\Reply.cshtml" />
     <Content Include="Areas\Admin\Views\Feedbacks\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
@@ -725,104 +1103,14 @@
     <Content Include="Areas\Admin\Views\FeaturedImages\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\FeaturedImages\Index.cshtml" />
     <Content Include="Areas\Admin\Views\FeaturedImages\_CreateOrEdit.cshtml" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Styles\CompactCSS.css" />
     <Content Include="Styles\CompactCSS.min.css">
       <DependentUpon>CompactCSS.css</DependentUpon>
     </Content>
-    <Content Include="Uploads\Images\Advertise\5e324a00-977d-4436-8a15-3ce9e1c424f1-0.jpg" />
-    <Content Include="Uploads\Images\Advertise\7fcf1b26-c1e0-4327-ba7f-29d5fd55bd25-0.jpg" />
-    <Content Include="Uploads\Images\Advertise\be78fe90-0932-44c6-8cd1-816b35d6d232-0.jpg" />
-    <Content Include="Uploads\Images\avatar.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-1.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-2.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-3.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-4.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\45040001-5666-4427-aee6-8ad3b566db51-5.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-1.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-2.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-3.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-4.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-5.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-6.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-7.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-1.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-2.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-3.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-4.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-5.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-6.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-7.jpg" />
-    <Content Include="Uploads\Images\GalleryThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-8.jpg" />
-    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-1.jpg" />
-    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-2.jpg" />
-    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-3.jpg" />
-    <Content Include="Uploads\Images\Gallery\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-4.jpg" />
-    <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-1.jpg" />
-    <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-2.jpg" />
-    <Content Include="Uploads\Images\Gallery\289bdd3e-b146-4614-b3ee-9df0562e2273-3.jpg" />
-    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-1.jpg" />
-    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-2.jpg" />
-    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-3.jpg" />
-    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-4.jpg" />
-    <Content Include="Uploads\Images\Gallery\45040001-5666-4427-aee6-8ad3b566db51-5.jpg" />
-    <Content Include="Uploads\Images\Gallery\5dc57933-5c3d-4b94-9d30-0a311418037e-1.jpg" />
-    <Content Include="Uploads\Images\Gallery\61dd3da2-07e9-4863-ac61-50930156905e-1.jpg" />
-    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-1.jpg" />
-    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-2.jpg" />
-    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-3.jpg" />
-    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-4.jpg" />
-    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-5.jpg" />
-    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-6.jpg" />
-    <Content Include="Uploads\Images\Gallery\8435a280-7ead-418b-9b63-f29a0816ec7a-7.jpg" />
-    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-1.jpg" />
-    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-2.jpg" />
-    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-3.jpg" />
-    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-4.jpg" />
-    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-5.jpg" />
-    <Content Include="Uploads\Images\Gallery\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-6.jpg" />
-    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-1.jpg" />
-    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-2.jpg" />
-    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-3.jpg" />
-    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-4.jpg" />
-    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-5.jpg" />
-    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-6.jpg" />
-    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-7.jpg" />
-    <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-8.jpg" />
-    <Content Include="Uploads\Images\HomePageFeatured\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
-    <Content Include="Uploads\Images\HomePageFeatured\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
-    <Content Include="Uploads\Images\HomePageFeatured\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
-    <Content Include="Uploads\Images\HomePageFeatured\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
-    <Content Include="Uploads\Images\HomePageFeatured\61dd3da2-07e9-4863-ac61-50930156905e-0.jpg" />
-    <Content Include="Uploads\Images\HomePageFeatured\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
-    <Content Include="Uploads\Images\HomePageFeatured\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
-    <Content Include="Uploads\Images\HomePageFeatured\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
-    <Content Include="Uploads\Images\HomePageThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
-    <Content Include="Uploads\Images\HomePageThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
-    <Content Include="Uploads\Images\HomePageThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
-    <Content Include="Uploads\Images\HomePageThumbs\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
-    <Content Include="Uploads\Images\HomePageThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
-    <Content Include="Uploads\Images\HomePageThumbs\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
-    <Content Include="Uploads\Images\HomePageThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
-    <Content Include="Uploads\Images\SearchThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
-    <Content Include="Uploads\Images\SearchThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
-    <Content Include="Uploads\Images\SearchThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
-    <Content Include="Uploads\Images\SearchThumbs\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
-    <Content Include="Uploads\Images\SearchThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
-    <Content Include="Uploads\Images\SearchThumbs\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
-    <Content Include="Uploads\Images\SearchThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
-    <Content Include="Uploads\Images\SuggestionThumbs\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-0.jpg" />
-    <Content Include="Uploads\Images\SuggestionThumbs\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
-    <Content Include="Uploads\Images\SuggestionThumbs\45040001-5666-4427-aee6-8ad3b566db51-0.jpg" />
-    <Content Include="Uploads\Images\SuggestionThumbs\5dc57933-5c3d-4b94-9d30-0a311418037e-0.jpg" />
-    <Content Include="Uploads\Images\SuggestionThumbs\8435a280-7ead-418b-9b63-f29a0816ec7a-0.jpg" />
-    <Content Include="Uploads\Images\SuggestionThumbs\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.jpg" />
-    <Content Include="Uploads\Images\SuggestionThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
-    <Content Include="Uploads\Images\YoutubeCovers\289bdd3e-b146-4614-b3ee-9df0562e2273-0.jpg" />
-    <Content Include="Uploads\Images\YoutubeCovers\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-0.png" />
     <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Byte.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
@@ -853,30 +1141,10 @@
     <Content Include="Views\Shared\EditorTemplates\Username.cshtml" />
     <Content Include="App_Data\DataCached\Suggested\1" />
     <Content Include="App_Data\DataCached\Suggested\2" />
-    <Content Include="Content\Less\blog-page.less" />
-    <Content Include="Content\Less\category-page.less" />
-    <Content Include="Content\Less\color-fonts.less" />
-    <Content Include="Content\Less\elements.less" />
-    <Content Include="Content\Less\extra-remixens.less" />
-    <Content Include="Content\Less\footer-fixing.less" />
-    <Content Include="Content\Less\front-developer.less" />
-    <Content Include="Content\Less\global.less" />
-    <Content Include="Content\Less\lesshat.less" />
-    <Content Include="Content\Less\menu-fix.less" />
-    <Content Include="Content\Less\owl.custom.finalize.less" />
-    <Content Include="Content\Less\search-page.less" />
-    <Content Include="Content\Less\see-more-btn.less" />
-    <Content Include="Content\Less\seo-optimize.less" />
-    <Content Include="Content\Less\utilities.less" />
-    <Content Include="Content\Less\variables.less" />
     <Content Include="Content\revolution-slider\font\revicons90c6.eot" />
     <Content Include="Content\revolution-slider\font\revicons90c6.ttf" />
     <Content Include="Content\revolution-slider\font\revicons90c6.woff" />
     <Content Include="Content\Scripts\bootstrap.min.js.map" />
-    <Content Include="Content\Scripts\jquery-2.1.3.min.map" />
-    <Content Include="Content\Scripts\jquery-2.1.3.min.js.map">
-      <DependentUpon>jquery-2.1.3.min.js</DependentUpon>
-    </Content>
     <Content Include="Content\Scripts\jquery.unobtrusive-ajax.min.js.map">
       <DependentUpon>jquery.unobtrusive-ajax.min.js</DependentUpon>
     </Content>
@@ -924,7 +1192,6 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_GlobalError.cshtml" />
     <Content Include="Views\Shared\_ValidatorCommonForm.cshtml" />
-    <Content Include="Views\Account\_RegisterFields.cshtml" />
     <Content Include="Views\Shared\_FriendlyError.cshtml" />
     <Content Include="Views\Shared\_AuthenticationError.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
@@ -949,7 +1216,6 @@
     <Content Include="Views\Partials\AdvertiseGallery.cshtml" />
     <Content Include="Views\Partials\TopAppsList.cshtml" />
     <Content Include="Views\Partials\LatestAppsList.cshtml" />
-    <Content Include="Views\Partials\SearchForm.cshtml" />
     <Content Include="Views\Partials\NavBar.cshtml" />
     <Content Include="Views\Partials\ReviewsDisplay.cshtml" />
     <Content Include="Views\Partials\FeaturedApps.cshtml" />
@@ -961,9 +1227,6 @@
     <Content Include="Views\App\_AppEditButton.cshtml" />
     <Content Include="Views\Reviews\AlreadyReviewed.cshtml" />
     <Content Include="Views\Reviews\ReviewEdit.cshtml" />
-    <Content Include="Views\Apps\ListOfApps.cshtml" />
-    <Content Include="Views\Apps\_ListItemsOfApps.cshtml" />
-    <Content Include="Views\Shared\_ListOfApps.cshtml" />
     <Content Include="Views\Shared\_AppNotFound.cshtml" />
     <Content Include="Views\Shared\_LoginUrlPage.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\FileMulti.cshtml">
@@ -971,9 +1234,9 @@
     </Content>
     <Content Include="Views\Partials\DevelopersApps.cshtml" />
     <Content Include="Views\Partials\SuggestedApps.cshtml" />
-    <Content Include="Views\Profile\GetProfile.cshtml" />
+    <Content Include="Views\Profiles\Profile.cshtml" />
     <Content Include="Views\Shared\_500.cshtml" />
-    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profiles\Index.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Category\Specific.cshtml" />
     <Content Include="Views\Shared\_403.cshtml" />
@@ -992,23 +1255,101 @@
     <Content Include="Views\Shared\_401.cshtml" />
     <Content Include="Views\Report\App.cshtml" />
     <Content Include="Views\Report\Review.cshtml" />
+    <Content Include="Fonts\fontawesome-webfont.woff2" />
+    <Content Include="Fonts\fontawesome-webfont.eot" />
+    <Content Include="Fonts\fontawesome-webfont.ttf" />
+    <Content Include="Fonts\fontawesome-webfont.woff" />
+    <Content Include="Fonts\FontAwesome.otf" />
+    <Content Include="Content\Scripts\skins\bootstrapck\readme.md" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\gecko\editor_gecko.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\ie7\dialog_ie7.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\ie7\editor_ie7.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\ie8\dialog_ie8.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\ie8\editor_ie8.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\iequirks\dialog_iequirks.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\iequirks\editor_iequirks.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\ie\dialog_ie.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\ie\editor_ie.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\opera\dialog_opera.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\editor.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_colorpanel.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_elementspath.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_mainui.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_menu.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_panel.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_presets.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_reset.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_richcombo.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_toolbar.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\config\_colors.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\config\_config.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\config\_defaults.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\dialog\dialog.scss" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <Content Include="Views\Shared\EditorTemplates\Double.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
+    <Content Include="Views\App\_SeoExtraPart.cshtml" />
+    <Content Include="Views\Category\_SeoHide.cshtml" />
+    <Content Include="Views\Apps\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Tag.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AnyType.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AnyTypeIcon.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DropDown-Dynamic.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DropDown.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Email-v.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Enum.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Password-v.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RememberMe-v.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RememberMe.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Sender-Email.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String-Label-Off.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Upload-Multiple.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Username-v.cshtml" />
+    <Content Include="Views\Report\AlreadyReported.cshtml" />
+    <Content Include="Views\Report\Done.cshtml" />
+    <Content Include="Views\Report\Later.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Reply.cshtml" />
+    <Content Include="Views\Home\Done.cshtml" />
+    <Content Include="Views\Home\Later.cshtml" />
+    <Content Include="Views\Account\InboxCheck.cshtml" />
+    <Content Include="Views\Reviews\ReviewOwnApp.cshtml" />
+    <Content Include="Views\Home\Policy.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Publish.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean-Button.cshtml" />
+    <Content Include="Views\Profiles\_UserProfileDetails.cshtml" />
+    <Content Include="Views\App\_AppDescription.cshtml" />
+    <Content Include="Views\Account\ConfirmationEmailResend.cshtml" />
+    <None Include="Views\Reviews\User.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AnyTypeIconWithHtml.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TextArea.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CkEditor.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean-Left.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />
     <Content Include="Views\Shared\_431.cshtml" />
     <Content Include="Views\Shared\_414.cshtml" />
+    <Content Include="Views\Shared\_AdditionalFields.cshtml" />
+    <Content Include="Views\Shared\_BackSave.cshtml" />
+    <Content Include="Views\Shared\_BackSaveDelete.cshtml" />
+    <Content Include="Views\Shared\_BrowserUpdate.cshtml" />
+    <Content Include="Views\Shared\_Header-1.cshtml" />
+    <Content Include="Views\Tags\Index.cshtml" />
+    <Content Include="Views\Tags\GetTagDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\DatabaseTables\" />
     <Folder Include="App_Data\DataCached\SearchResult\" />
     <Folder Include="App_Data\elmah\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Services\" />
     <Folder Include="Content\Bundles\" />
     <Folder Include="Models\DesignPattern\Abstracts\" />
+    <Folder Include="Models\EntityModel\GarbageCodes\" />
     <Folder Include="Models\POCO\AdditionalDatabase\" />
     <Folder Include="Models\POCO\Plugable\" />
     <Folder Include="Modules\Filters\" />
+    <Folder Include="Modules\ViewEngine\" />
     <Folder Include="Uploads\Files\Private\" />
     <Folder Include="Uploads\Images\Private\" />
     <Folder Include="Views\Basic\" />
@@ -1021,9 +1362,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -1039,7 +1377,18 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:14809/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:14809/</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

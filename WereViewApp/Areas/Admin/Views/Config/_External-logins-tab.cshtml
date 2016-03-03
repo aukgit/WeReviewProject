@@ -1,0 +1,9 @@
+﻿@model CoreSetting
+<div class="fade tab-pane" id="external-logins-tab">
+    @ViewBag.backBtn
+    @ViewBag.stateMessage
+    @Html.EditorFor(model => model.FacebookClientID, "long")
+    @Html.EditorFor(model => model.FacebookSecret)
+    @Html.EditorFor(model => model.IsFacebookAuthentication)
+    @ViewBag.backBtn
+</div>

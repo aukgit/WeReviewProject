@@ -33,12 +33,12 @@
         <label>Release Date :</label> <span class="date"><a>@Html.DisplayDate(Model.ReleaseDate)</a></span>
     </div>
     <div class="buttonWrap">
-        @if (Model.StoreURL != null) {
-            <a class="btn btn-success" href="@Model.StoreURL" title="App Store URL for @Model.AppName"> Store</a>
+        @if (Model.StoreUrl != null) {
+            <a class="btn btn-success" href="@Model.StoreUrl" title="App Store URL for @Model.AppName"> Store</a>
         }
 
-        @if (Model.WebSiteURL != null) {
-            <a class="btn btn-primary" href="@Model.WebSiteURL" title="Official Website for @Model.AppName">WebSite</a>
+        @if (Model.WebsiteUrl != null) {
+            <a class="btn btn-primary" href="@Model.WebsiteUrl" title="Official Website for @Model.AppName">WebSite</a>
         }
 
     </div>

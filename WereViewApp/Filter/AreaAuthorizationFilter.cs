@@ -1,15 +1,14 @@
-﻿using WereViewApp.Modules.Session;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
-using System.Web.Routing;
 using WereViewApp.Modules.Role;
+using WereViewApp.Modules.Session;
 
 namespace WereViewApp.Filter {
     public class AreaAuthorizeAttribute : ActionFilterAttribute {
         private readonly string[] _RestrictedAreas = { "Admin" }; // area names to protect
 
         public override void OnActionExecuting(ActionExecutingContext filterContext) {
-            RouteData routeData = filterContext.RouteData;
+            var routeData = filterContext.RouteData;
             // check if user is allowed on this page
             var currentArea = (string)routeData.DataTokens["area"];
 

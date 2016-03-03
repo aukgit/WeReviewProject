@@ -7,12 +7,9 @@
     string asking = "Are you sure you want to delete this?";
     string controller = (string) ViewBag.controller;
     string viewName = "Delete";
-    var token = @Html.AntiForgeryToken();
+    var token = Html.AntiForgeryToken();
 }
-<h1 class="gap-from-top-small h2">
-    <span class="glyphicon glyphicon-trash"></span>
-    @Html.SamePageLink(title, subtitle, false)
-</h1>
+@Html.SamePageLinkWithIcon(title, title, "glyphicon glyphicon-trash")
 <hr />
 <h3 class="h4">@asking</h3>
 <div class="form-horizontal">
@@ -31,7 +28,7 @@
                 <a href="@Url.Action("Edit", new {id = Model.AppID})" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
             </div>
         </div>
-        <table class="gap-from-top-small table table-hover">
+        <table class="top-margin-space table table-hover">
             <thead>
             <tr>
                 <th>Properties</th>
@@ -95,21 +92,21 @@
 
             <tr>
                 <td class="dev-label-property">
-                    @Html.DisplayNameFor(model => model.WebSiteURL)
+                    @Html.DisplayNameFor(model => model.WebsiteUrl)
                 </td>
                 <td>:</td>
                 <td class="dev-label-value">
-                    @Html.DisplayFor(model => model.WebSiteURL)
+                    @Html.DisplayFor(model => model.WebsiteUrl)
                 </td>
             </tr>
 
             <tr>
                 <td class="dev-label-property">
-                    @Html.DisplayNameFor(model => model.StoreURL)
+                    @Html.DisplayNameFor(model => model.StoreUrl)
                 </td>
                 <td>:</td>
                 <td class="dev-label-value">
-                    @Html.DisplayFor(model => model.StoreURL)
+                    @Html.DisplayFor(model => model.StoreUrl)
                 </td>
             </tr>
 

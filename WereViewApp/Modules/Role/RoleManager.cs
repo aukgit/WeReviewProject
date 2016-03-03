@@ -21,15 +21,7 @@ namespace WereViewApp.Modules.Role {
 
         private static ApplicationRoleManager _roleManager;
         private static List<ApplicationRole> _cachesOfUsers = new List<ApplicationRole>(1200);
-        //public class UserRoleCache {
-        //    public long UserID { get; set; }
-        //    public long RoleID { get; set; }
-        //    public long RoleName { get; set; }
-        //    public long RolePriority { get; set; }
 
-        //    public long PointsRequired { get; set; }
-        //}
-        public int MyProperty { get; set; }
 
         public static ApplicationRoleManager Manager
         {
@@ -47,6 +39,8 @@ namespace WereViewApp.Modules.Role {
         public static ApplicationRoleManager ResetManager() {
             _roleStore = new RoleStore<ApplicationRole, long, ApplicationUserRole>(new ApplicationDbContext());
             _roleManager = new ApplicationRoleManager(_roleStore);
+            UserCache.ClearSession();
+            GC.Collect();
             return _roleManager;
         }
 
@@ -143,7 +137,7 @@ namespace WereViewApp.Modules.Role {
                 try {
                     Manager.Create(role);
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
         }
@@ -158,7 +152,7 @@ namespace WereViewApp.Modules.Role {
                 try {
                     Manager.Create(role);
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
         }
@@ -265,15 +259,17 @@ namespace WereViewApp.Modules.Role {
             return null;
         }
 
+
         /// <summary>
         ///     Give all related roles to this user.
+        ///     Only get the roles if the Registration is complete.
         ///     Slower
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
         public static List<ApplicationRole> GetUserRolesAsApplicationRole(string username) {
             var user = UserManager.GetUser(username);
-            if (user != null) {
+            if (user != null && user.IsRegistrationComplete) {
                 return GetUserRolesAsApplicationRole(user.UserID);
             }
             return null;
@@ -564,7 +560,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.AddToRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -581,7 +577,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.AddToRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -620,7 +616,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.AddToRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -673,7 +669,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.RemoveFromRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -692,7 +688,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.RemoveFromRole(userId, role.Name);
                     return true;
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -707,7 +703,7 @@ namespace WereViewApp.Modules.Role {
             try {
                 UserManager.Manager.RemoveFromRole(userId, roleName);
             } catch (Exception ex) {
-                Starter.Error.HandleBy(ex);
+                Mvc.Error.HandleBy(ex);
             }
         }
 
@@ -721,7 +717,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.RemoveFromRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
             return false;
@@ -738,7 +734,7 @@ namespace WereViewApp.Modules.Role {
                     UserManager.Manager.RemoveFromRole(user.Id, role);
                     return true;
                 } catch (Exception ex) {
-                    Starter.Error.HandleBy(ex);
+                    Mvc.Error.HandleBy(ex);
                 }
             }
             return false;

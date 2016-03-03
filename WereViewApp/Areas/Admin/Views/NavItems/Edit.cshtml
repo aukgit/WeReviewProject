@@ -2,14 +2,12 @@
 
 @{
     ViewBag.Title = "Editing for menu '" + ViewBag.MenuName + "'";
-    var token = (MvcHtmlString)@Html.AntiForgeryToken();
+    string title = ViewBag.Title;
+    string subtitle = ViewBag.Title;
+    var token = Html.AntiForgeryToken();
 }
+@Html.SamePageLinkWithIcon(title, subtitle, "fa fa-edit")
 
-
-<h1 class="h2">
-    <span class="glyphicon glyphicon-plus"></span>
-    @ViewBag.Title
-</h1>
 <hr />
 @using (Html.BeginForm("Edit", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {
     <div class="form-horizontal">

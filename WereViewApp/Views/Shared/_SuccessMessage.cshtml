@@ -1,16 +1,36 @@
-﻿@if (@ViewBag.Success != null) {
-    <div class="row transaction-status">
-        <div class="col-md-10 col-md-offset-2">
-            <h3 class="h4">
-                <span class="label label-success"><span class="glyphicon glyphicon-ok"></span> @ViewBag.Success</span></h3>
-        </div>
-    </div>
-} else if (@ViewBag.ErrorSave != null) {
-    <div class="row transaction-status">
-        <div class="col-md-10 col-md-offset-2">
-            <h3 class="h4">
-                <span class="label label-danger"><span class="glyphicon glyphicon-remove"></span> @ViewBag.ErrorSave</span></h3>
-            <div class="error-warning-label-1 error-warning-labels">Feel free to @Html.ContactFormActionLink("contact us", "contact us") any moment.</div>
+﻿@{
+    bool isAnyExist = ViewBag.Success != null || ViewBag.ErrorSave != null;
+    int hideTime = ViewBag.TransactionAnimationTimeOut ?? 5100;
+}
+@if (isAnyExist) {
+    <div id="transaction-container" data-hide-duration="@hideTime">
+        <div data-wow-duration=".3s" class="wow bounceIn">
+            <div data-wow-duration=".5s" class="wow fadeIn">
+                <div data-wow-duration=".5s" data-wow-delay="4.5s" class="wow fadeOutleft">
+                    <div @*data-wow-duration=".3s" data-wow-delay="4.3s" class="wow bounceOutLeft"*@>
+                        <div class="row transaction-status">
+                            <div class="col-md-10 col-md-offset-2">
+                                @if (ViewBag.Success != null) {
+                                    <h3 class="h4">
+                                        <span class="label label-success">
+                                            <span class="@Icons.CheckMark"></span> @ViewBag.Success
+                                        </span>
+                                    </h3>
+                                } else if (ViewBag.ErrorSave != null) {
+                                    <div data-wow-duration=".5s" data-wow-iteration="2" data-wow-delay=".7s" class="wow pulse">
+                                        <h3 class="h4">
+                                            <span class="label label-danger">
+                                                <span class="@Icons.Times"></span> @ViewBag.ErrorSave
+                                            </span>
+                                        </h3>
+                                    </div>
+                                    <div class="error-warning-label-1 error-warning-labels">Feel free to @Html.ContactFormActionLink("contact us", "contact us") any moment.</div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 }

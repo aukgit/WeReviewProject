@@ -1,13 +1,13 @@
-﻿using WereViewApp.Models.DesignPattern.Interfaces;
-using WereViewApp.Models.POCO.IdentityCustomization;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using WereViewApp.Models.DesignPattern.Interfaces;
+using WereViewApp.Models.POCO.IdentityCustomization;
 
 namespace WereViewApp.Models.POCO.Identity {
     public class ApplicationUser : IdentityUser<long, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>, IDevUser {
@@ -40,10 +40,10 @@ namespace WereViewApp.Models.POCO.Identity {
             }
         }
 
-        [Required]
-        [Display(Name = "Date of Birth")]
-        [Column(TypeName = "date")]
-        public DateTime DateOfBirth { get; set; }
+        //[Required]
+        //[Display(Name = "Date of Birth")]
+        //[Column(TypeName = "date")]
+        //public DateTime DateOfBirth { get; set; }
         [Column(TypeName = "smalldatetime")]
         [Display(Name = "Created Date")]
         public DateTime CreatedDate { get; set; }
@@ -52,18 +52,20 @@ namespace WereViewApp.Models.POCO.Identity {
         public bool IsRegistrationComplete { get; set; }
 
         [Display(Name = "Country")]
-        public int CountryID { get; set; }
+        public int? CountryID { get; set; }
         [Display(Name = "Country Language")]
-        public int CountryLanguageID { get; set; }
+        public int? CountryLanguageID { get; set; }
 
         [Display(Name = "Timezone")]
-        public int UserTimeZoneID { get; set; }
+
+        public int? UserTimeZoneID { get; set; }
 
 
         [ForeignKey("UserID")]
         public virtual ICollection<RegisterCodeUserRelation> RegisterCodeUserRelations { get; set; }
 
         public Guid? GeneratedGuid { get; set; }
+
 
         #endregion
 
@@ -83,7 +85,7 @@ namespace WereViewApp.Models.POCO.Identity {
 
         //returns user Id
         public long UserID {
-            get { return base.Id; }
+            get { return Id; }
         }
     }
 }

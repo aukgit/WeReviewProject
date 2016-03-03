@@ -5,15 +5,14 @@
     ViewBag.Title = "Manage Roles for '" + Html.DisplayFor(model => model.UserDisplayName) + "'";
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    var token = (MvcHtmlString)@Html.AntiForgeryToken();
+    var token = Html.AntiForgeryToken();
     string controller = (string)ViewBag.controller;
     string viewName = "ManageRoles";
 }
 
 
-<h1 class="h2 gap-from-top-small">
-    @Html.SamePageLink(title, subtitle, false)
-</h1>
+@Html.SamePageLinkWithIcon(title, subtitle, "fa fa-cogs")
+
 <hr />
 <div class="left-button-stacks gap-from-top">
     <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>

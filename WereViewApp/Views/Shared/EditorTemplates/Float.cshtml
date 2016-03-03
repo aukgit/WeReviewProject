@@ -1,13 +1,13 @@
 @model float?
-
 @{
     var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName,
+        prop = ViewData.ModelMetadata.PropertyName.ToString(),
         propLower = prop.ToLower(),
         styleProperty = propLower,
         displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        description = ViewData.ModelMetadata.Description;
+        description = ViewData.ModelMetadata.Description,
+        templateName = "float";
     float i;
     if (!Model.HasValue) {
         i = 0;
@@ -16,7 +16,7 @@
     }
     var htmlAttributes = new RouteValueDictionary();
     if (displayName == null) {
-        ViewData.ModelMetadata.DisplayName = ViewData.ModelMetadata.PropertyName;
+        displayName = ViewData.ModelMetadata.PropertyName;
     }
     if (ViewBag.@class != null) {
         htmlAttributes.Add("class", "form-control " + ViewBag.@class);
@@ -42,9 +42,11 @@
     if (ViewBag.Value != null) {
         htmlAttributes.Add("Value", ViewBag.Value);
     }
+
     if (ViewBag.label != null) {
         displayName = ViewBag.label;
     }
+
     if (ViewBag.labelColumn == null) {
         ViewBag.labelColumn = "col-md-2";
     }
@@ -55,11 +57,13 @@
         htmlAttributes.Add("data-url", ViewBag.url);
     }
     htmlAttributes.Add("title", htmlAttributes["placeholder"]);
+    htmlAttributes.Add("data-prop", styleProperty);
+    htmlAttributes.Add("data-template", templateName);
 }
 
-<div class="form-group form-row @styleProperty" data-prop="@styleProperty">
-    <div class="controls dev-plugin float plugin-container">
-        <label class="@ViewBag.textColumn control-label form-label @styleProperty" for="@styleProperty" data-prop="@styleProperty">
+<div class="form-group form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty">
+    <div class="controls dev-plugin">
+        <label class="@ViewBag.labelColumn control-label form-label @styleProperty" for="@styleProperty" data-prop="@styleProperty">
             @displayName <span class="red">@isRequiredStar</span>
         </label>
         <div class="@ViewBag.textColumn form-input @styleProperty" data-prop="@styleProperty">
@@ -67,9 +71,6 @@
                 @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
                 <div class="validator-container">
                     <div class="validator">
-                        <a>
-                            <i class=""></i>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -78,7 +79,7 @@
                     <span class="description-icon"></span>
                 </a>
             }
-            @Html.ValidationMessageFor(m => m, null, new {@class = "rounded-3 label label-danger fixed-width-294 validation-box"})
+            @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
         </div>
     </div>
 </div>

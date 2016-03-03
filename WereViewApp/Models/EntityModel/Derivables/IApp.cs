@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WereViewApp.Models.EntityModel.Derivables {
     public interface IApp {
@@ -11,9 +7,9 @@ namespace WereViewApp.Models.EntityModel.Derivables {
         short CategoryID { get; set; }
         string Description { get; set; }
         string YoutubeEmbedLink { get; set; }
-        string WebSiteURL { get; set; }
-        string StoreURL { get; set; }
+        string WebsiteUrl { get; set; }
+        string StoreUrl { get; set; }
         Guid UploadGuid { get; set; }       
-        string URL { get; set; }
+        string Url { get; set; }
     }
 }

@@ -3,11 +3,11 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Web.Mvc;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Session;
+using WereViewApp.Modules.Validations;
 using WereViewApp.WereViewAppCommon.Structs;
 
 #endregion
@@ -23,17 +23,17 @@ namespace WereViewApp.Controllers {
         public ActionResult GetValidUrl(App app) {
             var max = 60;
             var min = 3;
-            var maxTry = 250;
+            var maxTry = 3;
 
             var id = app.AppName;
 
             try {
                 if (id == null || id.Length < 5) {
-                    return Json(false, JsonRequestBehavior.AllowGet);
+                    goto ReturnInvalid;
                 }
                 if (!AppVar.Setting.IsInTestingEnvironment) {
                     if (SessionNames.IsValidationExceed("GetValidUrl", maxTry)) {
-                        throw new Exception("Exceed the limit of try");
+                        return Json(Validator.GetErrorValidationExceedMessage(), JsonRequestBehavior.AllowGet); // return true;
                     }
                 }
 
@@ -43,16 +43,23 @@ namespace WereViewApp.Controllers {
                         var exist =
                             db.Apps.Any(
                                 n =>
-                                    n.PlatformID == app.PlatformID && n.CategoryID == app.CategoryID && n.URL == url &&
+                                    n.PlatformID == app.PlatformID && n.CategoryID == app.CategoryID && n.Url == url &&
                                     n.PlatformVersion == app.PlatformVersion);
-                        return Json(!exist, JsonRequestBehavior.AllowGet); // return true;
+                        if (!exist) {
+                            goto ReturnValid;
+                        }
+                        goto ReturnInvalid;
                     }
                 }
             } catch (Exception ex) {
                 AppVar.Mailer.HandleError(ex, "Validate GetValidUrl App Posting");
             }
-            //found e false
-            return Json(false, JsonRequestBehavior.AllowGet);
+        //found e false
+        ReturnValid:
+            return Json(Validator.GetSuccessMessage("App name is valid."), JsonRequestBehavior.AllowGet); // return true;
+
+        ReturnInvalid:
+            return Json(Validator.GetErrorMessage("App name is already exist or not valid."), JsonRequestBehavior.AllowGet);
         }
 
         #endregion
@@ -65,37 +72,45 @@ namespace WereViewApp.Controllers {
             var max = 60;
             var min = 3;
             var id = app.AppName;
+            var message = "Username is valid for registration.";
 
             try {
                 if (id == null || id.Length < 5) {
-                    return Json(false, JsonRequestBehavior.AllowGet);
+                    goto ReturnInvalid;
                 }
                 if (!AppVar.Setting.IsInTestingEnvironment) {
                     if (SessionNames.IsValidationExceed("GetValidUrl")) {
-                        throw new Exception("Exceed the limit of try");
+                        return Json(Validator.GetErrorValidationExceedMessage(), JsonRequestBehavior.AllowGet); // return true;
                     }
                 }
 
                 if ((id.Length >= min && id.Length <= max)) {
                     var url = GetFriendlyURLFromString(id);
-                    if (app.URL.Equals(url)) {
-                        return Json(true, JsonRequestBehavior.AllowGet); // return true;
+                    if (app.Url != null && app.Url.Equals(url)) {
+                        goto ReturnValid;
                     }
                     using (var db = new WereViewAppEntities()) {
                         var exist =
                             db.Apps.Any(
                                 n =>
                                     n.AppID != app.AppID && n.PlatformID == app.PlatformID &&
-                                    n.CategoryID == app.CategoryID && n.URL == url &&
+                                    n.CategoryID == app.CategoryID && n.Url == url &&
                                     n.PlatformVersion == app.PlatformVersion);
-                        return Json(!exist, JsonRequestBehavior.AllowGet); // return true;
+                        if (!exist) {
+                            goto ReturnValid;
+                        }
+                        goto ReturnInvalid;
                     }
                 }
             } catch (Exception ex) {
                 AppVar.Mailer.HandleError(ex, "Validate GetValidUrl App-Editing");
             }
-            //found e false
-            return Json(false, JsonRequestBehavior.AllowGet);
+        //found e false
+        ReturnValid:
+            return Json(Validator.GetSuccessMessage("App name is already exist or not valid."), JsonRequestBehavior.AllowGet); // return true;
+
+        ReturnInvalid:
+            return Json(Validator.GetErrorMessage("App name is not valid."), JsonRequestBehavior.AllowGet);
         }
 
         #endregion
@@ -114,92 +129,65 @@ namespace WereViewApp.Controllers {
         #region Base Validators
 
         [HttpPost]
-        [OutputCache(CacheProfile = "Long", VaryByParam = "id", VaryByCustom = "byuser")]
+        [OutputCache(CacheProfile = "Long", VaryByParam = "UserName", VaryByCustom = "byuser")]
         [ValidateAntiForgeryToken]
-        public ActionResult GetUsername(string id, string __RequestVerificationToken) {
-            var returnParam = true;
-            var max = 30;
-            var min = 3;
+        public ActionResult GetUsername(string UserName) {
+            const int max = 30;
+            const int min = 3;
+            var message = "Username is valid for registration.";
             try {
-                if (id == null || id.Length < 3) {
-                    return Json(!returnParam, JsonRequestBehavior.AllowGet);
+                if (UserName == null || UserName.Length < 3) {
+                    goto ReturnInvalid;
                 }
                 if (!AppVar.Setting.IsInTestingEnvironment) {
                     if (SessionNames.IsValidationExceed("username")) {
-                        throw new Exception("Exceed the limit of try");
+                        return Json(Validator.GetErrorValidationExceedMessage(), JsonRequestBehavior.AllowGet);
                     }
                 }
-                var userPattern = "^([A-Za-z]|[A-Za-z0-9_.]+)$";
-                if (Regex.IsMatch(id, userPattern, RegexOptions.Compiled) && (id.Length >= min && id.Length <= max)) {
-                    if (UserManager.IsUserNameExist(id)) {
-                        return Json(returnParam, JsonRequestBehavior.AllowGet);
+                const string userPattern = "^([A-Za-z]|[A-Za-z0-9_.]+)$";
+                if (Regex.IsMatch(UserName, userPattern, RegexOptions.Compiled) && (UserName.Length >= min && UserName.Length <= max)) {
+                    if (!UserManager.IsUserNameExist(UserName)) {
+                        return Json(Validator.GetSuccessMessage(message), JsonRequestBehavior.AllowGet);
                     }
-                    return Json(!returnParam, JsonRequestBehavior.AllowGet); // only true
                 }
             } catch (Exception ex) {
                 AppVar.Mailer.HandleError(ex, "Validate Username");
             }
-            //found e false
-            return Json(!returnParam, JsonRequestBehavior.AllowGet);
+        ReturnInvalid:
+            message = "Username already exist or not valid.";
+            return Json(Validator.GetErrorMessage(message), JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        [OutputCache(CacheProfile = "Long", VaryByParam = "id", VaryByCustom = "byuser")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Username(string id, string __RequestVerificationToken) {
-            var returnParam = true;
-            var max = 30;
-            var min = 3;
-            try {
-                if (id == null || id.Length < 3) {
-                    return Json(!returnParam, JsonRequestBehavior.AllowGet);
-                }
-                if (!AppVar.Setting.IsInTestingEnvironment) {
-                    if (SessionNames.IsValidationExceed("username")) {
-                        throw new Exception("Exceed the limit of try");
-                    }
-                }
-                var userPattern = "^([A-Za-z]|[A-Za-z0-9_.]+)$";
-                if (Regex.IsMatch(id, userPattern, RegexOptions.Compiled) && (id.Length >= min && id.Length <= max)) {
-                    if (UserManager.IsUserNameExist(id)) {
-                        return Json(!returnParam, JsonRequestBehavior.AllowGet);
-                    }
-                    return Json(returnParam, JsonRequestBehavior.AllowGet); // only true
-                }
-            } catch (Exception ex) {
-                AppVar.Mailer.HandleError(ex, "Validate Username");
-            }
-            //found e false
-            return Json(!returnParam, JsonRequestBehavior.AllowGet);
-        }
+
 
         [HttpPost]
-        [OutputCache(CacheProfile = "Long", VaryByParam = "id", VaryByCustom = "byuser")]
+        [OutputCache(CacheProfile = "Long", VaryByParam = "Email", VaryByCustom = "byuser")]
         [ValidateAntiForgeryToken]
-        public ActionResult Email(string id, string __RequestVerificationToken) {
+        public ActionResult GetEmail(string Email) {
+            const string errorMessage = "Email already exist or not valid.";
             if (!AppVar.Setting.IsInTestingEnvironment) {
                 if (SessionNames.IsValidationExceed("Email")) {
-                    return Json(false, JsonRequestBehavior.AllowGet);
+                    return Json(Validator.GetErrorValidationExceedMessage(), JsonRequestBehavior.AllowGet);
                 }
             }
             try {
-                if (id == null || id.Length < 5)
-                    return Json(false, JsonRequestBehavior.AllowGet);
-
-                var email = id;
+                if (Email == null || Email.Length < 5) {
+                    goto ReturnInvalid;
+                }
+                var email = Email;
 
                 var emailPattern = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
                 if (Regex.IsMatch(email, emailPattern)) {
                     if (!UserManager.IsEmailExist(email)) {
-                        return Json(true, JsonRequestBehavior.AllowGet);
+                        return Json(Validator.GetSuccessMessage("Valid email."), JsonRequestBehavior.AllowGet);
                     }
                 }
-                return Json(false, JsonRequestBehavior.AllowGet);
             } catch (Exception ex) {
                 AppVar.Mailer.HandleError(ex, "Validate Email");
 
-                return Json(false);
             }
+        ReturnInvalid:
+            return Json(Validator.GetErrorMessage(errorMessage), JsonRequestBehavior.AllowGet);
         }
 
         #endregion

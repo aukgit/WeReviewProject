@@ -9,6 +9,7 @@ using WereViewApp.Controllers;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WereViewApp.Modules.Extensions.IdentityExtension;
 
 namespace WereViewApp.Areas.Admin.Controllers {
     public class FeaturedImagesController : AdvanceController {
@@ -170,7 +171,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         #endregion
 
         #region Details
-        public ActionResult Details(System.Int64 id) {
+        public ActionResult Details(Int64 id) {
 
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -208,7 +209,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
                 AppVar.SetErrorStatus(ViewBag, "This app is already exist. Can't save."); // Saved Successfully.
                 return View(featuredImage);
             }
-
+            featuredImage.UserID = User.GetUserID();
             if (ModelState.IsValid) {
                 db.FeaturedImages.Add(featuredImage);
                 bool state = SaveDatabase(ViewStates.Create, featuredImage);
@@ -226,7 +227,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         #endregion
 
         #region Edit or modify record
-        public ActionResult Edit(System.Int64 id) {
+        public ActionResult Edit(Int64 id) {
 
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -247,6 +248,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         public ActionResult Edit(FeaturedImage featuredImage) {
             bool viewOf = ViewTapping(ViewStates.EditPost, featuredImage);
             if (ModelState.IsValid) {
+                featuredImage.UserID = User.GetUserID();
                 db.Entry(featuredImage).State = EntityState.Modified;
                 bool state = SaveDatabase(ViewStates.Edit, featuredImage);
                 if (state) {

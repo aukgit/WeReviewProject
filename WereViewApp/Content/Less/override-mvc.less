@@ -1,76 +1,30 @@
-﻿@import "lesshat.less";
-@import "variables.less";
-
-@call-out-color						: @primary-header-color;
-@call-out-color                     : @primary-header-color;
-@form-control-height                : 34.4px;
-@input-control-height               : 34.4px;
-@label-font-size                    : 14px;
-@input-font-size                    : 16px;
-@inputs-max-width                   : 294px;
-@inputs-max-width-at-mobile         : 218px;
-@label-max-width-at-mobile          : 100px;
-@inputs-max-width-at-l-mobile       : 190px;
-@label-max-width-at-l-mobile        : 80px;
-@less-than-mobile-screen            : 400px;
-@datepicker-btn-hover-bg-color		: brown;
-
-div.checkbox > label {
-    padding-left: 0;
-}
+﻿@import "override-mvc.variables.less";
 
 div.checkbox {
-    padding-left: 20px;
+    .padding-left(20px);
+
+    > label {
+        padding-left: 0;
+    }
 }
 
 input,
 select,
 textarea,
 div.input-group.date.datetimepicker {
-    max-width: 294px;
+    .max-width(@inputs-max-width);
 }
 
-label.control-label {
-    font-weight: normal;
-}
-
-input.form-control,
-select.form-control,
-textarea.form-control {
-    display: inline;
+.form-control {
+    input&, select&, textarea& {
+        display: inline;
+    }
 }
 
 .glyphicon-top-fix {
     top: 5px;
 }
-/* enable absolute positioning */
-.inner-addon {
-    position: relative;
 
-    .glyphicon, .fa {
-        position: absolute;
-        /*padding: 10px;*/
-        padding: 10px 11px 2px 9px;
-        pointer-events: none;
-    }
-}
-
-/* align icon */
-.left-addon .glyphicon, .left-addon .fa {
-    left: 0;
-}
-
-.right-addon .glyphicon, .right-addon .fa {
-    right: 0;
-}
-/* add padding  */
-.left-addon input {
-    padding-left: 30px;
-}
-
-.right-addon input {
-    padding-right: 30px;
-}
 
 .global-error h2 {
     display: block;
@@ -84,78 +38,29 @@ textarea.form-control {
     text-align: left;
 }
 
-.glyphicon-refresh-animate {
-    -animation: spin .7s infinite linear;
-    -webkit-animation: spin2 .7s infinite linear;
-}
-
-@-webkit-keyframes spin2 {
-    from {
-        -webkit-transform: rotate(0deg);
-    }
-
-    to {
-        -webkit-transform: rotate(360deg);
-    }
-}
-
-@keyframes spin {
-    from {
-        transform: scale(1) rotate(0deg);
-    }
-
-    to {
-        transform: scale(1) rotate(360deg);
-    }
-}
 
 .form-group {
     margin-bottom: 9px;
     margin-top: 9px;
+
+    &.check-boxes {
+        margin-bottom: 0;
+        margin-top: 0;
+
+        label {
+            padding-top: 6px;
+        }
+    }
 }
 
-.form-group.check-boxes {
-    margin-bottom: 0;
-    margin-top: 0;
+// select control width
+@media only screen and (min-width: 294px) {
+    .btn-group.bootstrap-select.form-control {
+        .width(294px);
+    }
 }
 
-.form-group.check-boxes label {
-    padding-top: 6px;
-}
 
-span.input-group-addon {
-    .width(38px);
-    .height(38px);
-    display: inline-block;
-}
-
-input.form-control.datetime-input,
-input.form-control.date-input {
-    width: 256px;
-}
-
-.btn-group.bootstrap-select.form-control {
-    width: 294px;
-}
-
-button.btn.flag-combo.selectpicker {
-    font-size: 12px;
-}
-
-.dropdown-menu > .active > a.flag-country-combo,
-.dropdown-menu > .active > a.flag-country-combo:hover,
-.dropdown-menu > .active > a.flag-country-combo:focus {
-    background-color: #28971A;
-}
-
-.dropdown-menu > li > a.flag-country-combo:hover,
-.dropdown-menu > li > a.flag-country-combo:focus {
-    background-color: #2AB817;
-}
-
-.dropdown-menu > li > a.flag-country-combo {
-    font-size: 13px;
-}
 
 div.bs-searchbox input.input-block-level.form-control {
     height: 30px;
@@ -172,6 +77,8 @@ div.bs-searchbox input.input-block-level.form-control {
     -webkit-background-origin: padding-box;
     -webkit-background-size: auto;
     background-attachment: scroll;
+    -ms-background-clip: border-box;
+    -moz-background-clip: border-box;
     background-clip: border-box;
     background-color: rgba(0, 0, 0, 0);
     background-image: none;
@@ -182,7 +89,7 @@ div.bs-searchbox input.input-block-level.form-control {
     cursor: auto;
     display: block;
     float: left;
-    font-family: Ubuntu, Tahoma, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    .ubuntu-font();
     font-size: 18px;
     height: 50px;
     line-height: 20px;
@@ -200,9 +107,19 @@ div.bs-searchbox input.input-block-level.form-control {
     width: 98.015625px;
 }
 
-p.create-btn-p,
+p.left-button-wrapper,
 .left-button-stacks {
     margin: 0 0 -51px;
+}
+
+
+// bootstrap table colors.
+
+table caption {
+    background-color: #D0DEC2;
+    font-weight: bold;
+    padding: 5px;
+    text-align: center;
 }
 
 .bootstrap-table-do,
@@ -236,97 +153,200 @@ p.create-btn-p,
     padding-bottom: 5px;
 }
 
-.modal-body [class|='col-md']:nth-child(2) {
+/*.modal-body [class|='col-md']:nth-child(2) {
     padding-left: 64px;
     padding-top: 7px;
-}
+}*/
 
 .uploader-progress-info {
     display: inline;
 }
 
-.dropdown-menu > li > a:hover,
-.dropdown-menu > li > a:focus {
-    background-color: #cae1fc;
-}
-
-body div.container.body-content h1.gap-from-top-small > .glyphicon {
-    top: 5px;
-    font-size: 1em;
-}
 
 #myCarousel img.home-page-gallery-image {
     width: 1900px;
     height: 450px;
 }
 
-.home-page-image-icon {
-    border: 1px solid #000000;
-    -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.72);
-    -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.72);
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.72);
+
+
+.bs-callout {
+    padding: 10px 20px 5px 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
 }
 
-.third-list-home-page {
-    margin-top: 39px;
+.bs-callout-info {
+    border-left-color: @call-out-color;
 }
 
-.appsmenu a strong {
-    text-transform: capitalize;
+.bs-callout-info h4 {
+    color: @call-out-color;
+}
+//bootstrap overrides
+.btn {
+    font-weight: normal;
+    text-transform: none;
 }
 
-.appsmenu a strong:focus,
-.appsmenu a strong:hover {
-    color: #d72727;
-}
 
-.featured-appsbox .appsbox:focus,
-.featured-appsbox .appsbox h1:focus .featured-appsbox .appsbox:hover,
-.featured-appsbox .appsbox h1:hover {
-    color: #d72727;
-    font-weight: 600;
-}
 
-.small-font-size {
-    font-size: .4em !important;
-}
-/* modify bootstrap */
-/*.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
-    color: rgb(202, 225, 252);
-
-}
-.navbar-default .navbar-nav > li > a {
+/*.btn-default {
     color: white;
-}*/
-/*.navbar-default .navbar-nav > li > a:focus,.navbar-default .navbar-nav > li a:hover, .navbar-default .navbar-nav > li:focus, .navbar-default .navbar-nav > li:hover {
-    color: rgb(202, 225, 252);
+}
 
-}*/
-/*.navbar-inverse {
-    background-color: #4B4B4B;
-    border-color: #0F0F0F;
-}*/
-.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
-.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+.btn-default:hover {
     color: #333;
-    background-color: #9dd1ec;
+}
+
+.btn-warning:hover {
+    background-color: #E7711C;
+}
+
+.btn-info:hover {
+    background-color: rgb(75, 112, 126);
+}
+
+.btn-primary, .btn-default {
+    background-color: @primary-color;
+}
+
+.btn-success {
+    background-color: #19c234;
+}*/
+
+// addon button
+span.input-group-addon {
+    .width(38px);
+    .height(@form-control-height);
+    display: inline-block;
+}
+
+
+.form-control {
+    .height(@form-control-height);
+    // date time
+    &.datetime-input, &.date-input {
+        .width(256px);
+    }
+}
+
+
+// date time fix
+.datepicker-start, .datetimepicker-start {
+    .input-group-addon {
+        .height(@form-control-height);
+        //.margin(-3px ,-1px, 2px, 0px);
+        background-color: inherit;
+        color: inherit;
+
+        &:hover {
+            //.height(@datepicker-btn-hover-height);
+            background-color: @datepicker-btn-hover-bg-color;
+            border-color: @datepicker-btn-hover-bg-color;
+            cursor: pointer;
+            color: white;
+        }
+    }
+}
+
+.input-group {
+    input {
+        .height(@input-control-height);
+    }
+}
+
+.input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child), .input-group .form-control:not(:first-child):not(:last-child) {
+    border-radius: 5px;
+}
+
+.input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group {
+    margin-left: 0;
+}
+
+.input-group-btn {
+    .btn {
+        margin-left: 0;
+    }
+}
+
+// labels and inputs
+label.control-label {
+    font-weight: normal;
+}
+
+.controls {
+    .font-size(@input-font-size);
+}
+//font over-ride
+label.control-label, input.form-control {
+    .form-input-font();
+}
+
+.controls-vertical {
+}
+
+
+
+// addons started
+.inner-addon {
+    position: relative;
+
+    .glyphicon, .fa {
+        position: absolute;
+        /*padding: 10px;*/
+        padding: 10px 11px 2px 9px;
+        pointer-events: none;
+    }
+}
+
+/* align icon */
+.left-addon .glyphicon, .left-addon .fa {
+    left: 0;
+}
+
+.right-addon .glyphicon, .right-addon .fa {
+    right: 0;
+}
+/* add padding  */
+.left-addon input {
+    .padding-left(30px);
+}
+
+.right-addon input {
+    .padding-right(30px);
 }
 
 .description-icon {
-    top: 5px;
-    color: #bdbdbd;
-    font-size: 1.375em;
+    cursor: pointer;
     position: relative;
-    display: inline-block;
-    font-family: 'Glyphicons Halflings';
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    .fa();
+    .transform(~'translate(0, 0)');
+    .box-sizing(~'border-box');
+    color: @description-icon-color;
+
+    &:hover {
+        color: brown;
+    }
 
     &:before {
-        content: "\e085";
+        content: "\f059";
+    }
+
+    .font-size(26px);
+    .top(5px);
+    .width(22px);
+
+    @media (max-width: @screen-md) and (min-width: @screen-sm) {
+        .top(2px);
+    }
+}
+
+@media  (min-width: @screen-sm) {
+    .right-side-label {
+        .margin-left(18.66em);
     }
 }
 /*# sourceMappingURL=override-mvc-css.css.map */

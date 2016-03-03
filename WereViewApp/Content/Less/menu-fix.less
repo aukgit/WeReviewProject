@@ -1,5 +1,4 @@
-﻿@import "lesshat.less";
-@import "variables.less";
+﻿@import "fonts-rimixens.less";
 
 
 .header-2 .logo {
@@ -50,7 +49,7 @@
 .header-2 header nav li {
     a {
         //.padding(16px,10px,10px,10px);
-        .padding(16px,10px,10px,10px);
+        .padding(19px,10px,10px,10px);
     }
 
     @media (max-width:@screen-sm) {
@@ -83,7 +82,7 @@
 }
 
 .header-2 .jetmenu > li > .megamenu, .jetmenu ul.dropdown {
-    .top(42px);
+    .top(52px);
 }
 
 .jetmenu {
@@ -261,5 +260,43 @@
             position: relative;
         }
     }
+}
+
+@media (min-width: @screen-sm) {
+    .header-2 {
+        header {
+            &.sticky {
+                .height(52px);
+            }
+        }
+    }
+}
+
+
+@media (max-width: @screen-md) {
+    .header-2 {
+        header {
+            &.sticky {
+                nav {
+                    .fa {
+                        display: none;
+
+                        &.fa-bars {
+                            display: inline-block;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.nav-username {
+    .max-width(114px);
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
 }
 //menu end

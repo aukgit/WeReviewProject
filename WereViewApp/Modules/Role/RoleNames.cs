@@ -4,54 +4,54 @@
         ///     Lower priority means higher power.
         ///     Priority level : 0
         /// </summary>
-        public static readonly string Developer = "Developer"; // 0
+        public const string Developer = "Developer"; // 0
 
         /// <summary>
         ///     Lower priority means higher power.
         ///     Priority level : 1
         /// </summary>
-        public static readonly string Founder = "Founder";
+        public const string Founder = "Founder";
 
         /// <summary>
         ///     Lower priority means higher power.
         ///     Priority level : 2
         /// </summary>
-        public static readonly string Admin = "Admin";
+        public const string Admin = "Admin";
 
         /// <summary>
         ///     Lower priority means higher power.
         ///     Priority level : 3
         /// </summary>
-        public static readonly string Editor = "Editor";
+        public const string Editor = "Editor";
 
         /// <summary>
         ///     Lower priority means higher power.
         ///     Priority level : 4
         /// </summary>
-        public static readonly string Manager = "Manager";
+        public const string Manager = "Manager";
 
         /// <summary>
         ///     Lower priority means higher power.
         ///     Priority level : 20
         /// </summary>
-        public static readonly string Rookie = "Rookie";
+        public const string Rookie = "Rookie";
 
         /// <summary>
         ///     Lower priority means higher power.
         ///     Priority level : 19
         /// </summary>
-        public static readonly string Adult = "Adult";
+        public const string Adult = "Adult";
 
         /// <summary>
         ///     Lower priority means higher power.
         ///     Priority level : 18
         /// </summary>
-        public static readonly string Pro = "Pro";
+        public const string Pro = "Pro";
 
         /// <summary>
         ///     Lower priority means higher power.
         ///     Priority level : 17
         /// </summary>
-        public static readonly string Critic = "Critic";
+        public const string Critic = "Critic";
     }
 }

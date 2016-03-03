@@ -5,13 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Administration</title>
     @Styles.Render("~/Content/css/styles")
+    <link href="~/Content/css/backend-developer.css" rel="stylesheet" />
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 </head>
-<body>
+<body class="@ViewBag.pageClass">
+    <!--[if lt IE 9]>
+        <div class="browser-update container-fuild">
+            <div class="row">
+                <div class="col-md-12">Warning! Your browser is too old. Please update your browser to the <a href="http://browser-update.org/update.html#3">latest version</a>.</div>
+            </div>
+        </div>
+    <![endif]-->
     @Html.Partial("_NavBar")
     <div id="wrap" class="home-page">
         <div class="content">

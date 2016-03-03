@@ -25,6 +25,8 @@ namespace WereViewApp.Modules.DevUser {
                     AppVar.Mailer.NotifyDeveloper(
                         "Can't save user in the WereViewApp Database. Id maybe already present.",
                         "Can't save user in the WereViewApp Database. Id maybe already present.", "Fatal Error");
+                } else {
+                    UserManager.ClearUserFromSession();
                 }
             }
         }

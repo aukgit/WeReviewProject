@@ -1,9 +1,9 @@
-﻿@import "lesshat.less";
-@import "variables.less";
+﻿@import "fonts-rimixens.less";
+/*
+  please don't modify styles from css file. Please modify in the respective.less file in the less folder.
+  FYI: This file (.less file) contains utilities styles, lets say general padding, margin, bold, hide, show etc..
+*/
 
-
-
-/*table related */
 /*h1, h2, h3, h4, h5 {
     display: inline;
 }*/
@@ -27,14 +27,10 @@ table td.dot {
     width: 4px;
 }
 
-.table-cell {
-    display: table-cell;
-}
+
 /*table related */
 
-.table {
-    display: table;
-}
+
 
 textarea {
     height: 45px;
@@ -100,9 +96,7 @@ div.Error-List ul {
     background-color: white;
     .height(22px);
     padding-left: 8px; /*rounded border*/
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -khbtml-border-radius: 3px;
+    .border-rounded(3px);
 }
 
 .plugin-a li a:hover, .plugin-a-white li a:hover {
@@ -113,10 +107,7 @@ div.Error-List ul {
 }
 
 .plugin-a-white li a {
-    -khbtml-border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+    .border-rounded(3px);
     display: block;
     padding-left: 8px;
 }
@@ -144,12 +135,15 @@ div.Error-List ul {
 .Opacity-60 {
     .opacity(.6); /* for all other browsers*/
 }
+
 .Opacity-70 {
     .opacity(.7); /* for all other browsers*/
 }
+
 .Opacity-80 {
     .opacity(.8); /* for all other browsers*/
 }
+
 .Opacity-90 {
     .opacity(.9); /* for all other browsers*/
 }
@@ -174,12 +168,15 @@ div.Error-List ul {
 .display-table {
     display: table;
 }
+
 .display-table-cell {
     display: table-cell;
 }
+
 .table-cell {
     display: table-cell;
 }
+
 .fixed-width-294 {
     .min-width(294px);
     width: auto;
@@ -189,9 +186,11 @@ div.Error-List ul {
 .rounded-1 {
     .border-rounded(1px);
 }
+
 .rounded-2 {
     .border-rounded(1px);
 }
+
 .rounded-3 {
     .border-rounded(3px);
 }
@@ -207,12 +206,15 @@ div.Error-List ul {
 .rounded-6 {
     .border-rounded(6px);
 }
+
 .rounded-7 {
     .border-rounded(7px);
 }
+
 .rounded-8 {
     .border-rounded(8px);
 }
+
 hr {
     margin-bottom: 8px;
     margin-top: 8px;
@@ -222,8 +224,12 @@ hr {
     .margin-top(55px);
 }
 
-.gap-from-top-small {
+.top-margin-space {
     .margin-top(25px);
+}
+
+.header-margin-space-type-1 {
+    .margin-top(13px);
 }
 
 a.no-hover {
@@ -291,7 +297,72 @@ div.contactus {
     .margin-top(5px);
 }
 
-// margins
+// margins - 0
+.margin-t-0 {
+    margin-top: 0;
+}
+
+.margin-r-0 {
+    margin-right: 0;
+}
+
+.margin-b-0 {
+    margin-bottom: 0;
+}
+
+.margin-l-0 {
+    margin-left: 0;
+}
+// margins - 2
+.margin-t-2 {
+    margin-top: 2px;
+}
+
+.margin-r-2 {
+    margin-right: 2px;
+}
+
+.margin-b-2 {
+    margin-bottom: 2px;
+}
+
+.margin-l-2 {
+    margin-left: 2px;
+}
+// margins - 5
+.margin-t-5 {
+    margin-top: 5px;
+}
+
+.margin-r-5 {
+    margin-right: 5px;
+}
+
+.margin-b-5 {
+    margin-bottom: 5px;
+}
+
+.margin-l-5 {
+    margin-left: 5px;
+}
+// margins - 10
+.margin-t-10 {
+    margin-top: 10px;
+}
+
+.margin-r-10 {
+    margin-right: 10px;
+}
+
+.margin-b-10 {
+    margin-bottom: 10px;
+}
+
+.margin-l-10 {
+    margin-left: 10px;
+}
+
+// margins - 20
 .margin-r-20 {
     margin-right: 20px;
 }
@@ -360,34 +431,43 @@ div.contactus {
 // margin end
 
 //indenting
-.indent-d-5{
+.indent-d-5 {
     text-indent: .5em;
 }
-.indent-d-6{
+
+.indent-d-6 {
     text-indent: .6em;
 }
-.indent-d-7{
+
+.indent-d-7 {
     text-indent: .7em;
 }
-.indent-d-8{
+
+.indent-d-8 {
     text-indent: .8em;
 }
-.indent-d-9{
+
+.indent-d-9 {
     text-indent: .9em;
 }
-.indent-1{
+
+.indent-1 {
     text-indent: 1em;
 }
-.indent-15{
+
+.indent-15 {
     text-indent: 1.5em;
 }
-.indent-2{
+
+.indent-2 {
     text-indent: 2em;
 }
-.indent-25{
+
+.indent-25 {
     text-indent: 2.5em;
 }
-.indent-3{
+
+.indent-3 {
     text-indent: 3em;
 }
 
@@ -678,7 +758,107 @@ div.contactus {
     text-indent: 1.2em;
 }
 
-.width-100-percent {
+.width-100-percent, .full-width {
     width: 100%;
 }
+// centering utils
+.absolute-center {
+    width: 50%;
+    height: 50%;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    &.is-fixed {
+        position: fixed;
+        z-index: 999;
+    }
+
+    &.is-right {
+        left: auto;
+        right: 20px;
+        text-align: right;
+    }
+
+    &.is-Left {
+        right: auto;
+        left: 20px;
+        text-align: left;
+    }
+}
+//vertically - center
+.jumbotron.vertical-center {
+    margin-bottom: 0; /* Remove the default bottom margin of .jumbotron */
+}
+
+.vertical-center {
+    min-height: 100%; /* Fallback for vh unit */
+    min-height: 100vh; /* You might also want to use
+                        'height' property instead.
+                        Note that for percentage values of
+                        'height' or 'min-height' properties,
+                        the 'height' of the parent element
+                        should be specified explicitly.
+                        In this case the parent of '.vertical-center'
+                        is the <body> element */
+    /* Make it a flex container */
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    /* Align the bootstrap's container vertically */
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    /* In legacy web browsers such as Firefox 9
+     we need to specify the width of the flex container */
+    width: 100%;
+    /* Also 'margin: 0 auto' doesn't have any effect on flex items in such web browsers
+     hence the bootstrap's container won't be aligned to the center anymore.
+     Therefore, we should use the following declarations to get it centered again */
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.controls-full-width {
+    input,
+    select,
+    textarea,
+    a.form-control,
+    div.input-group.date.datetimepicker {
+        .max-width(none);
+    }
+}
+
+.no-margin-controls {
+    .form-group {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+}
+
+.controls-readonly {
+    .form-control:not(a) {
+        background-color: white;
+        cursor: text;
+    }
+}
+
+.controls-left-aligned {
+    .control-label {
+        text-align: left;
+    }
+}
+
+ 
 @import "see-more-btn.less";

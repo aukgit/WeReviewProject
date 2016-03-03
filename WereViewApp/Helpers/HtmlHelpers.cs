@@ -6,8 +6,10 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Enums;
+using FontAwesomeIcons;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Cache;
+using WereViewApp.Modules.Constants;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Mail;
 using WereViewApp.Modules.Menu;
@@ -36,7 +38,7 @@ namespace WereViewApp.Helpers {
             if (isDependOnUserLogState && UserManager.IsAuthenticated()) {
                 cacheName += UserManager.GetCurrentUserName();
             }
-            var cache = (string) AppConfig.Caches.Get(cacheName);
+            var cache = (string)AppConfig.Caches.Get(cacheName);
 
             if (cache != null && !string.IsNullOrWhiteSpace(cache)) {
                 return new HtmlString(cache);
@@ -89,6 +91,114 @@ namespace WereViewApp.Helpers {
             return new HtmlString(sendbtn);
         }
 
+        /// <summary>
+        /// Renders a submit button with icon.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="buttonName"></param>
+        /// <param name="iconClass"></param>
+        /// <param name="btnType"></param>
+        /// <param name="placeIconLeft"></param>
+        /// <param name="additionalClasses"></param>
+        /// <returns></returns>
+        public static HtmlString SubmitButton(this HtmlHelper helper, string buttonName = "Submit",
+            string iconClass = "fa fa-floppy-o",
+            string tooltip = "",
+            string additionalClasses = "btn btn-success",
+            bool placeIconLeft = true,
+            string btnType = "Submit"
+            ) {
+            const string iconFormt = "<i class=\"{0}\"></i>";
+            string leftIcon = "",
+                   rightIcon = "";
+            if (placeIconLeft) {
+                leftIcon = string.Format(iconFormt, iconClass);
+            } else {
+                rightIcon = string.Format(iconFormt, iconClass);
+            }
+            var buttonHtml = String.Format(
+                "<button type=\"{0}\"  title=\"{1}\" class=\"{2}\">{3} {4} {5}</button>",
+                btnType, tooltip, additionalClasses, leftIcon, buttonName, rightIcon);
+            return new HtmlString(buttonHtml);
+        }
+
+        public static HtmlString SubmitButtonIconRight(this HtmlHelper helper, string buttonName = "Submit",
+           string iconClass = "fa fa-floppy-o",
+           string tooltip = "",
+           string additionalClasses = "btn btn-success",
+           bool placeIconLeft = false,
+           string btnType = "Submit"
+           ) {
+            return SubmitButton(helper, buttonName,
+                iconClass,
+                tooltip,
+                additionalClasses,
+                placeIconLeft,
+                btnType);
+        }
+
+        public static HtmlString EmailButtonIconRight(this HtmlHelper helper, string buttonName = "Send",
+          string iconClass = Icons.EmailO,
+          string tooltip = "",
+          string additionalClasses = "btn btn-success",
+          bool placeIconLeft = false,
+          string btnType = "Submit"
+          ) {
+            return SubmitButton(helper, buttonName,
+                iconClass,
+                tooltip,
+                additionalClasses,
+                placeIconLeft,
+                btnType);
+        }
+
+        /// <summary>
+        /// Renders a remove button with icon.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="buttonName"></param>
+        /// <param name="iconClass"></param>
+        /// <param name="tooltip"></param>
+        /// <param name="btnType"></param>
+        /// <param name="placeIconLeft"></param>
+        /// <param name="additionalClasses"></param>
+        /// <returns></returns>
+        public static HtmlString RemoveButton(this HtmlHelper helper, string buttonName = "Delete",
+            string iconClass = "fa fa-times",
+            string tooltip = "",
+            string btnType = "Submit",
+            bool placeIconLeft = true,
+            string additionalClasses = "btn btn-danger") {
+            return SubmitButton(helper, buttonName, iconClass, tooltip, btnType, placeIconLeft, additionalClasses);
+        }
+        #endregion
+
+        #region Null checker
+        /// <summary>
+        /// Returns true if all of the given parameter objects are null.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="objs"></param>
+        /// <returns></returns>
+        public static bool IsAllNull(this HtmlHelper helper, params object[] objs) {
+            if (objs == null) {
+                return true;
+            }
+            return objs.All(n => n == null);
+        }
+        /// <summary>
+        /// Returns true if any of the given object is not null.
+        /// Does follow given parameter order.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="objs"></param>
+        /// <returns></returns>
+        public static bool IsAnyNotNull(this HtmlHelper helper, params object[] objs) {
+            if (objs != null) {
+                return objs.Any(n => n != null);
+            }
+            return false;
+        }
         #endregion
 
         #region jQueryMobile Options
@@ -147,7 +257,7 @@ namespace WereViewApp.Helpers {
         /// <returns></returns>
         public static HtmlString DropDownCountry(this HtmlHelper helper, List<Country> countries, string classes = "",
             string otherAttributes = "", string contentAddedString = "") {
-            string strHtml = DropDownCountry(countries, classes, otherAttributes, contentAddedString);
+            var strHtml = DropDownCountry(countries, classes, otherAttributes, contentAddedString);
             return new HtmlString(strHtml);
         }
 
@@ -195,7 +305,7 @@ namespace WereViewApp.Helpers {
             var countryOptionsGenerate = "<select class='form-control selectpicker " + classes +
                                          "' data-live-search='true' name='" + htmlName + "' " + otherAttributes +
                                          " title='Choose...' data-style='" + classes + "'>";
-            var dt = CachedQueriedData.GetTable(tableName, connectionType, new[] {valueField, textField});
+            var dt = CachedQueriedData.GetTable(tableName, connectionType, new[] { valueField, textField });
             if (dt != null && dt.Rows.Count > 0) {
                 var sb = new StringBuilder(countryOptionsGenerate, dt.Rows.Count + 10);
                 DataRow row;
@@ -231,9 +341,9 @@ namespace WereViewApp.Helpers {
                 return input;
             }
             if (isShowElipseDot) {
-                return input.Substring(0, (int) length) + "...";
+                return input.Substring(0, (int)length) + "...";
             }
-            return input.Substring(0, (int) length);
+            return input.Substring(0, (int)length);
         }
 
         public static string Truncate(this HtmlHelper helper, string input, int starting, int length) {
@@ -267,7 +377,7 @@ namespace WereViewApp.Helpers {
 
         public static HtmlString ContactFormActionLink(this HtmlHelper helper, string linkName, string title,
             string addClass = "") {
-            var markup = string.Format(MailHtml.CONTACT_US_LINK, title, linkName, addClass, AppVar.Url);
+            var markup = string.Format(MailHtml.ContactUsLink, title, linkName, addClass, AppVar.Url);
             return new HtmlString(markup);
         }
 
@@ -276,24 +386,125 @@ namespace WereViewApp.Helpers {
             //var area = HttpContext.Current.Request.RequestContext.RouteData.DataTokens["area"];
             //var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"];
             //var action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"];
+            return SamePageLinkWithIcon(helper, linkName, title, null, h1, addClass);
+        }
 
+        /// <summary>
+        /// Generates same page url anchor with an icon left or right
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="linkName">Link display name</param>
+        /// <param name="title">Link tooltip title</param>
+        /// <param name="iconClass">Icon classes: Font-awesome icons or bootstrap icon classes</param>
+        /// <param name="h1">Is nested inside a H1 element (W3c valid).</param>
+        /// <param name="addClass">Anchor class</param>
+        /// <param name="isLeft"></param>
+        /// <returns></returns>
+        public static HtmlString SamePageLinkWithIcon(this HtmlHelper helper,
+            string linkName,
+            string title,
+            string iconClass,
+            bool h1 = true,
+            string addClass = "",
+            bool isLeft = true) {
             var markup = "";
-
-
-            //if (area != null) {
-            //    markup = string.Format("<a href='/{0}/{1}/{2}' class='{3}' title='{4}'>{5}</a>", area, controller, action, addClass, title, linkName);
-            //} else {
-            //    markup = string.Format("<a href='/{0}/{1}' class='{2}' title='{3}'>{4}</a>", controller, action, addClass, title, linkName);
-            //}
             var uri = HttpContext.Current.Request.RawUrl;
             uri = AppVar.Url + uri;
-            markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{3}</a>", uri, addClass, title, linkName);
+
+            var icon = "";
+            if (!string.IsNullOrEmpty(iconClass)) {
+                icon = string.Format("<i class='{0}'></i>", iconClass);
+            }
+            if (isLeft) {
+                //left icon
+                markup = string.Format("<div class='header-margin-space-type-1'><a href='{0}' class='{1}' title='{2}'>{4} {3}</a></div>", uri, addClass, title, linkName, icon);
+            } else {
+                //right icon
+                markup = string.Format("<div class='header-margin-space-type-1'><a href='{0}' class='{1}' title='{2}'>{3} {4}</a></div>", uri, addClass, title, linkName, icon);
+            }
             if (h1) {
-                markup = string.Format("<h1 title='{0}'>{1}</h1>", title, markup);
+                markup = string.Format("<h1 title='{0}' class='h3'>{1}</h1>", title, markup);
             }
             return new HtmlString(markup);
         }
 
+        public static HtmlString HeaderWithIcon(this HtmlHelper helper,
+           string linkName,
+           string title,
+           string iconClass,
+           bool h1 = true,
+           string addClass = "",
+           bool isLeft = true) {
+            var markup = "";
+            var icon = "";
+            if (!string.IsNullOrEmpty(iconClass)) {
+                icon = string.Format("<i class='{0}'></i>", iconClass);
+            }
+            if (isLeft) {
+                //left icon
+                markup = string.Format("<div class='header-margin-space-type-1'><a class='{1}' title='{2}'>{4} {3}</a></div>", "", addClass, title, linkName, icon);
+            } else {
+                //right icon
+                markup = string.Format("<div class='header-margin-space-type-1'><a class='{1}' title='{2}'>{3} {4}</a></div>", "", addClass, title, linkName, icon);
+            }
+            if (h1) {
+                markup = string.Format("<h1 title='{0}' class='h3'>{1}</h1>", title, markup);
+            }
+            return new HtmlString(markup);
+        }
+
+        /// <summary>
+        /// Generates same page url anchor with an icon left or right
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="linkDisplayName">Link display name</param>
+        /// <param name="routeValues"></param>
+        /// <param name="title">Link tooltip title</param>
+        /// <param name="iconClass">Icon classes: Font-awesome icons or bootstrap icon classes</param>
+        /// <param name="h1">Is nested inside a H1 element (W3c valid).</param>
+        /// <param name="addClass">Anchor class</param>
+        /// <param name="isLeft"></param>
+        /// <param name="actionName"></param>
+        /// <param name="controllerName"></param>
+        /// <returns></returns>
+        public static HtmlString ActionLinkWithIcon(this HtmlHelper helper,
+            string linkDisplayName,
+            string actionName,
+            string controllerName,
+            object routeValues,
+            string title,
+            string iconClass,
+            string addClass = "",
+            bool h1 = false,
+            bool isLeft = true) {
+            var markup = "";
+            string uri = "";
+            var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
+            if (!string.IsNullOrWhiteSpace(controllerName)) {
+                uri = urlHelper.Action(actionName, controllerName, routeValues);
+            } else if (routeValues != null) {
+                uri = urlHelper.Action(actionName, routeValues);
+            } else {
+                uri = urlHelper.Action(actionName);
+            }
+            uri = AppVar.Url + uri;
+
+            var icon = "";
+            if (!string.IsNullOrEmpty(iconClass)) {
+                icon = string.Format("<i class='{0}'></i>", iconClass);
+            }
+            if (isLeft) {
+                //left icon
+                markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{4} {3}</a>", uri, addClass, title, linkDisplayName, icon);
+            } else {
+                //right icon
+                markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{3} {4}</a>", uri, addClass, title, linkDisplayName, icon);
+            }
+            if (h1) {
+                markup = string.Format("<h1 title='{0}' class='h3'>{1}</h1>", title, markup);
+            }
+            return new HtmlString(markup);
+        }
         /// <summary>
         /// Returns url without the host name. 
         /// Slash is included
@@ -457,80 +668,240 @@ namespace WereViewApp.Helpers {
 
         #region Date and Time Display
 
-        public static HtmlString DisplayTimeFormat(this HtmlHelper helper, TimeZoneInfo timeZone, DateTime? dt = null,
-            DateTimeFormatType type = DateTimeFormatType.Date, string format = "") {
-            //dt = DateTime.SpecifyKind(dt, DateTimeKind.Utc);
-            if (dt == null || timeZone == null) {
-                return new HtmlString("");
+
+        private static string GetDefaultTimeZoneFormat(DateTimeFormatType type = DateTimeFormatType.Date, string customFormat = null) {
+            string format;
+            if (!string.IsNullOrEmpty(customFormat)) {
+                return customFormat;
             }
-            if (format == "") {
-                switch (type) {
-                    case DateTimeFormatType.Date:
-                        format = "dd-MMM-yyyy";
-                        break;
-                    case DateTimeFormatType.DateTimeSimple:
-                        format = "dd-MMM-yyyy hh:mm:ss tt";
-                        break;
-                    case DateTimeFormatType.DateTimeFull:
-                        format = "MMMM dd, yyyy hh:mm:ss tt";
-                        break;
-                    case DateTimeFormatType.DateTimeShort:
-                        format = "d-MMM-yy hh:mm:ss tt";
-                        break;
-                    case DateTimeFormatType.Time:
-                        format = "hh:mm:ss tt";
-                        break;
-                    default:
-                        break;
-                }
+            switch (type) {
+                case DateTimeFormatType.Date:
+                    format = "dd-MMM-yy";
+                    break;
+                case DateTimeFormatType.DateTimeSimple:
+                    format = "dd-MMM-yy hh:mm:ss tt";
+                    break;
+                case DateTimeFormatType.DateTimeFull:
+                    format = "MMMM dd, yyyy hh:mm:ss tt";
+                    break;
+                case DateTimeFormatType.DateTimeShort:
+                    format = "d-MMM-yy hh:mm:ss tt";
+                    break;
+                case DateTimeFormatType.Time:
+                    format = "hh:mm:ss tt";
+                    break;
+                default:
+                    format = "dd-MMM-yy";
+                    break;
             }
-            return new HtmlString(Zone.GetTime(timeZone, dt, format));
+
+            return format;
         }
 
         /// <summary>
-        ///     Returns empty string is no logged user and
+        /// Returns a date-time using time-zone via TimeZoneSet
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="timeZone">Timezone set</param>
+        /// <param name="dt"></param>
+        /// <param name="formatType">
+        /// switch (type) {
+        ///     case DateTimeFormatType.Date:
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeSimple:
+        ///         format = "dd-MMM-yyyy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeFull:
+        ///         format = "MMMM dd, yyyy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeShort:
+        ///         format = "d-MMM-yy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.Time:
+        ///         format = "hh:mm:ss tt";
+        ///         break;
+        ///     default:
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
+        /// }
+        /// </param>
+        /// <param name="customFormat">If anything passed then this format will be used.</param>
+        /// <param name="addTimeZoneString">Add timezone string with Date. Eg. 26-Aug-2015 (GMT -07:00)</param>
+        /// <returns>Returns a data-time using given format and timezone</returns>
+        public static string DisplayDateTime(
+            this HtmlHelper helper,
+            TimeZoneSet timeZone,
+            DateTime? dt = null,
+            DateTimeFormatType formatType = DateTimeFormatType.Date,
+            string customFormat = null,
+            bool addTimeZoneString = false) {
+            var format = GetDefaultTimeZoneFormat(formatType, customFormat);
+            return Zone.GetDateTime(timeZone, dt, format, addTimeZoneString);
+        }
+
+        /// <summary>
+        /// Returns a date-time using time-zone via UserId
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="userId">User id</param>
+        /// <param name="dt"></param>
+        /// <param name="formatType">
+        /// switch (type) {
+        ///     case DateTimeFormatType.Date:
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeSimple:
+        ///         format = "dd-MMM-yyyy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeFull:
+        ///         format = "MMMM dd, yyyy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeShort:
+        ///         format = "d-MMM-yy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.Time:
+        ///         format = "hh:mm:ss tt";
+        ///         break;
+        ///     default:
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
+        /// }
+        /// </param>
+        /// <param name="customFormat">If anything passed then this format will be used.</param>
+        /// <param name="addTimeZoneString">Add timezone string with Date. Eg. 26-Aug-2015 (GMT -07:00)</param>
+        /// <returns>Returns a data-time using given format and timezone</returns>
+        public static string DisplayDateTime(
+            this HtmlHelper helper,
+            long userId,
+            DateTime? dt = null,
+            DateTimeFormatType formatType = DateTimeFormatType.Date,
+            string customFormat = null,
+            bool addTimeZoneString = false) {
+            var format = GetDefaultTimeZoneFormat(formatType, customFormat);
+            return Zone.GetDateTime(userId, dt, format, addTimeZoneString);
+        }
+
+        /// <summary>
+        /// Returns a date-time using current user.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="dt"></param>
-        /// <param name="timeZoneRequried"></param>
-        /// <returns></returns>
-        public static HtmlString DisplayDateTime(this HtmlHelper helper, DateTime? dt, bool timeZoneRequried = true) {
-            if (dt == null) {
-                return new HtmlString("");
-            }
-            if (timeZoneRequried) {
-                return new HtmlString(Zone.GetDateTime(dt));
-            }
-            return new HtmlString(Zone.GetDateTimeDefault(dt));
+        /// <param name="formatType">
+        /// switch (type) {
+        ///     case DateTimeFormatType.Date:
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeSimple:
+        ///         format = "dd-MMM-yyyy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeFull:
+        ///         format = "MMMM dd, yyyy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeShort:
+        ///         format = "d-MMM-yy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.Time:
+        ///         format = "hh:mm:ss tt";
+        ///         break;
+        ///     default:
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
+        /// }
+        /// </param>
+        /// <param name="customFormat">If anything passed then this format will be used.</param>
+        /// <param name="addTimeZoneString">Add timezone string with Date. Eg. 26-Aug-2015 (GMT -07:00)</param>
+        /// <returns>Returns a data-time using given format and timezone</returns>
+        public static string DisplayDateTime(
+            this HtmlHelper helper,
+            DateTime? dt = null,
+            DateTimeFormatType formatType = DateTimeFormatType.Date,
+            string customFormat = null,
+            bool addTimeZoneString = false) {
+            var timezoneSet = Zone.Get();
+            var format = GetDefaultTimeZoneFormat(formatType, customFormat);
+            return Zone.GetDateTime(timezoneSet, dt, format, addTimeZoneString);
         }
 
-        public static HtmlString DisplayDate(this HtmlHelper helper, DateTime? dt = null) {
-            if (dt == null) {
-                return new HtmlString("");
-            }
-            return new HtmlString(Zone.GetDate(dt));
+        /// <summary>
+        /// Returns a date-time using current user.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="dt"></param>
+        /// <param name="formatType">
+        /// switch (type) {
+        ///     case DateTimeFormatType.Date:
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeSimple:
+        ///         format = "dd-MMM-yyyy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeFull:
+        ///         format = "MMMM dd, yyyy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeShort:
+        ///         format = "d-MMM-yy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.Time:
+        ///         format = "hh:mm:ss tt";
+        ///         break;
+        ///     default:
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
+        /// }
+        /// </param>
+        /// <param name="customFormat">If anything passed then this format will be used.</param>
+        /// <param name="addTimeZoneString">Add timezone string with Date. Eg. 26-Aug-2015 (GMT -07:00)</param>
+        /// <returns>Returns a data-time using given format and timezone</returns>
+        public static string DisplayDate(
+            this HtmlHelper helper,
+            DateTime? dt = null,
+            DateTimeFormatType formatType = DateTimeFormatType.Date,
+            string customFormat = null,
+            bool addTimeZoneString = false) {
+            return DisplayDateTime(helper, dt, DateTimeFormatType.Date, customFormat, addTimeZoneString);
         }
 
-        public static HtmlString DisplayDate(this HtmlHelper helper, string format, DateTime? dt = null) {
-            if (dt == null) {
-                return new HtmlString("");
-            }
-            return new HtmlString(Zone.GetDate(dt, format));
+        /// <summary>
+        /// Returns a date-time without using any timezone.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="withoutTimezone"></param>
+        /// <param name="dt"></param>
+        /// <param name="formatType">
+        /// switch (type) {
+        ///     case DateTimeFormatType.Date:
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeSimple:
+        ///         format = "dd-MMM-yyyy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeFull:
+        ///         format = "MMMM dd, yyyy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.DateTimeShort:
+        ///         format = "d-MMM-yy hh:mm:ss tt";
+        ///         break;
+        ///     case DateTimeFormatType.Time:
+        ///         format = "hh:mm:ss tt";
+        ///         break;
+        ///     default:
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
+        /// }
+        /// </param>
+        /// <param name="customFormat">If anything passed then this format will be used.</param>
+        /// <returns>Returns a data-time without using timezone</returns>
+        public static string DisplayDate(
+            this HtmlHelper helper,
+            bool withoutTimezone = true,
+            DateTime? dt = null,
+            DateTimeFormatType formatType = DateTimeFormatType.Date,
+            string customFormat = null) {
+            var format = GetDefaultTimeZoneFormat(formatType, customFormat);
+            return dt.HasValue ? dt.Value.ToString(format) : "";
         }
 
-        public static HtmlString DisplayTime(this HtmlHelper helper, TimeZoneInfo timeZone, DateTime? dt = null) {
-            if (dt == null || timeZone == null) {
-                return new HtmlString("");
-            }
-            return new HtmlString(Zone.GetTime(timeZone, dt));
-        }
-
-        public static HtmlString DisplayDateTime(this HtmlHelper helper, TimeZoneInfo timeZone, DateTime? dt = null) {
-            if (dt == null || timeZone == null) {
-                return new HtmlString("");
-            }
-            return new HtmlString(Zone.GetTime(timeZone, dt));
-        }
 
         #endregion
     }

@@ -1,11 +1,17 @@
 ﻿@import "header.variables.less";
-@import "fonts-rimixens.less";
-
+/*
+  Warning(.css file): Please don't modify styles from css file. Please modify the styles in the respective.less file in the less folder. CSS files will be replaced with new .less file styles.
+  FYI: This file (.less file) contains styles for general heading or header elements.
+*/
 body {
     .body-font();
-
     .padding-top(50px);
     .padding-bottom(20px);
+    -webkit-font-smoothing: subpixel-antialiased;
+
+    #wrap .app-details-page {
+        .ubuntu-font;
+    }
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -26,7 +32,7 @@ body {
     margin-top: 39px;
 }
 
-body div.container.body-content h1.gap-from-top-small > .glyphicon {
+body div.container.body-content h1.top-margin-space > .glyphicon {
     top: 5px;
     font-size: 1em;
 }
@@ -36,7 +42,7 @@ body div.container.body-content h1.gap-from-top-small > .glyphicon {
     font-size: 1.2em;
     background-color: rgb(245, 242, 8);
     position: relative;
-    top: -49px;
+    /*top: -49px;*/
     z-index: 999;
     width: 100%;
     text-align: center;
@@ -61,5 +67,19 @@ body div.container.body-content h1.gap-from-top-small > .glyphicon {
     a {
         color: white;
         text-decoration: underline;
+    }
+}
+
+
+ 
+.header-margin-space-type-1 {
+    @header-link-color: #FF7200;
+
+    a {
+        color: @header-link-color; 
+
+        &:hover {
+            color: darken(@header-link-color, 10%);
+        }
     }
 }

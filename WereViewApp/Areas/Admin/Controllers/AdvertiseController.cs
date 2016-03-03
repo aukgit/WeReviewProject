@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -35,8 +33,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         const string _controllerVisibleUrl = "";
 
         #endregion
-
-
+        
         #region Enums
 
         internal enum ViewStates {
@@ -131,7 +128,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         }
 
-        public void GetDropDowns(System.Guid id) {
+        public void GetDropDowns(Guid id) {
             ViewBag.GalleryCategoryID = new SelectList(db.GalleryCategories, "GalleryCategoryID", "CategoryName");
         }
         #endregion
@@ -155,7 +152,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         #endregion
 
         #region Details
-        public ActionResult Details(System.Guid id) {
+        public ActionResult Details(Guid id) {
 
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -211,10 +208,8 @@ namespace WereViewApp.Areas.Admin.Controllers {
         }
         #endregion
 
-  
-
         #region Edit or modify record
-        public ActionResult Edit(System.Guid id) {
+        public ActionResult Edit(Guid id) {
 
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

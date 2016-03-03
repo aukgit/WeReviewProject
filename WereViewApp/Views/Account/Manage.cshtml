@@ -1,11 +1,12 @@
 ﻿@using WereViewApp.Models.ViewModels
 @{
-    ViewBag.Title = "Manage Account";
+    string title = "Manage Account";
+    ViewBag.Title = title;
 }
 
-<h2 class="h3">@ViewBag.Title.</h2>
-
+@Html.SamePageLinkWithIcon(title, title, Icons.Cog)
 <p class="text-success">@ViewBag.StatusMessage</p>
+<hr />
 <div class="row">
     <div class="col-md-12">
         @if (ViewBag.HasLocalPassword) {

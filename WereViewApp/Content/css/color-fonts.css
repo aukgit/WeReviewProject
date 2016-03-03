@@ -5,6 +5,9 @@
 .red {
   color: red;
 }
+.red .header-margin-space-type-1 a {
+  color: red;
+}
 .red-important {
   color: red !important;
 }
@@ -29,8 +32,17 @@
 .deep-orange {
   color: #e45c21;
 }
+.deep-orange .header-margin-space-type-1 a {
+  color: #e45c21;
+}
 .green {
   color: #008000;
+}
+.green .header-margin-space-type-1 a {
+  color: #008000;
+}
+.green-important {
+  color: #008000 !important;
 }
 .brown {
   color: #5E1F1F;
@@ -99,6 +111,9 @@
 .font-size-22 {
   font-size: 22px;
   font-size: 1.375em;
+}
+.ubuntu-font {
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .bangla,
 .bangla li {

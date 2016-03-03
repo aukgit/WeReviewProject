@@ -1,14 +1,26 @@
-﻿@import "lesshat.less";
-@import "variables.less";
+﻿@import "header.variables.less";
+@import "fonts-rimixens.less";
 /* Colors and Fonts */
 
+@deep-organge: #e45c21;
+@green: #008000;
 
 .blackish-red {
     color: #330707;
 }
 
+.header-color(@color) {
+    .header-margin-space-type-1 {
+        a {
+            color: @color;
+        }
+    }
+}
+
+
 .red {
     color: red;
+    .header-color(red);
 }
 
 .red-important {
@@ -26,20 +38,34 @@
 .bold-important {
     font-weight: bolder !important;
 }
+
 .orangred {
-  color: orangered;
+    color: orangered;
 }
+
 .orangred-important {
-  color: orangered !important;
+    color: orangered !important;
 }
+
 .game-pressure-organge {
-  color: #e64600;
+    color: #e64600;
 }
+
+
+
 .deep-orange {
-  color: #e45c21;
+    color: @deep-organge;
+    .header-color(@deep-organge);
 }
+
 .green {
-    color: #008000;
+    color: @green;
+    .header-color(@green);
+}
+
+
+.green-important {
+    color: @green !important;
 }
 
 .brown {
@@ -130,8 +156,12 @@
     .font-size(22px);
 }
 
+.ubuntu-font {
+    .ubuntu-font();
+}
 
-.bangla, .bangla li {
+.bangla,
+.bangla li {
     font-family: Bangla,Kalpurush;
     .regular-font;
     font-weight: normal;

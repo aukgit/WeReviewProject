@@ -1,0 +1,13 @@
+﻿@model CoreSetting
+@{
+    string tab = ViewBag.tab;
+}
+<div class="fade in tab-pane" id="developers-tab">
+    @ViewBag.backBtn
+    @ViewBag.stateMessage
+    @Html.Hidden("tab", tab)
+    @Html.EditorFor(model => model.DeveloperName, "Username")
+    @Html.EditorFor(model => model.DeveloperEmail, "Email")
+    @Html.EditorFor(model => model.NotifyDeveloperOnError)
+    @ViewBag.backBtn
+</div>

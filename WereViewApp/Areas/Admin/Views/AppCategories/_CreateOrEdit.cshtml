@@ -3,7 +3,6 @@
 
     <!-- js is written in wereviewapp.js file-->
     <div id="app-category-editing-page" data-ajax-url="@Url.Action()">
-        @Html.HiddenFor(model => model.CategoryID)
         @Html.EditorFor(model => model.CategoryName)
         @Html.EditorFor(model => model.Slug)
     </div>

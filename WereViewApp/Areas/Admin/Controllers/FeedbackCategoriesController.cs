@@ -19,7 +19,6 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         public FeedbackCategoriesController()
             : base(true) {
-
         }
 
         public void GetDropDowns() {
@@ -29,7 +28,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(db.FeedbackCategories.ToList());
         }
 
-        public ActionResult Details(System.Byte id) {
+        public ActionResult Details(Byte id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -52,7 +51,6 @@ namespace WereViewApp.Areas.Admin.Controllers {
             if (ModelState.IsValid) {
                 db.FeedbackCategories.Add(feedbackCategory);
                 db.SaveChanges();
-
                 AppVar.SetSavedStatus(ViewBag);
                 return View(feedbackCategory);
             }
@@ -61,7 +59,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(feedbackCategory);
         }
 
-        public ActionResult Edit(System.Byte id) {
+        public ActionResult Edit(Byte id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

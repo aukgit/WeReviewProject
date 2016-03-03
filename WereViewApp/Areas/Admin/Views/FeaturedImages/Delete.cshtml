@@ -9,12 +9,9 @@
     string asking = "Are you sure you want to delete this?";
     string controller = (string)ViewBag.controller;
     string viewName = "Delete";
-    var token = (MvcHtmlString)@Html.AntiForgeryToken();
+    var token = Html.AntiForgeryToken();
 }
-<h1 class="h2 gap-from-top-small">
-    <span class="glyphicon glyphicon-trash"></span>
-    @Html.SamePageLink(title, subtitle, false)
-</h1>
+@Html.SamePageLinkWithIcon(title, subtitle, "fa fa-trash")
 <hr />
 <h3 class="h4">@asking</h3>
 <div class="form-horizontal">
@@ -33,7 +30,7 @@
                 <a href="@Url.Action("Edit", new { id = Model.FeaturedImageID })" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
             </div>
         </div>
-        <table class="table table-hover gap-from-top-small">
+        <table class="table table-hover top-margin-space">
             <thead>
                 <tr>
                     <th>Properties</th>

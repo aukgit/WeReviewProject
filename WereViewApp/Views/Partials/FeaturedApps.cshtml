@@ -19,22 +19,23 @@
                     string url = app.GetAbsoluteUrl();
                     Platform platform = @app.GetPlatform();
                     string platformSubtitle = platform.PlatformName + " mobile apps";
-                    <a class="app-box" href="@url" title="@app.AppName">
+                    <a class="app-box" href="@url" title="@app.AppName" itemscope itemtype="http://schema.org/SoftwareApplication">
                         <img class="app-icon" itemprop="image" src="@app.SuggestionIconLocation" alt="@app.AppName" />
                         <div class="app-description-wrapper">
                             <div class="app-title-container">
                                 <div class="app-title-row">
-                                    <h1 itemprop="name" class="app-title ubuntu-font">
+                                    <h1 class="app-title ubuntu-font">
                                         <i class="@platform.Icon">
                                             <em title="@platformSubtitle" class="seo-hide">@platformSubtitle</em>
                                         </i>
-                                        <strong title="@app.AppName">
+                                        <strong title="@app.AppName" itemprop="name">
                                             @app.AppName
                                         </strong>
                                     </h1>
+                                    <span itemprop="operatingSystem" class="hide">@platform.PlatformName</span>
                                     <span class="paragraph-end"></span>
                                 </div>
-                                <div class="published-by" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                                <div class="published-by" itemprop="author" itemscope itemtype="http://schema.org/Person">
                                     <span itemprop="name">
                                         @app.User.UserName
                                     </span>
@@ -42,8 +43,9 @@
                                 </div>
                                 <div class="seo-hide seo-rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                                     <span itemprop="ratingValue">@app.AvgRating</span> stars based on
-                                    <meta itemprop="best" content="5" />
+                                    <span itemprop="bestRating" class="hide">5</span>
                                     <span itemprop="reviewCount">@app.ReviewsCount</span> reviews
+                                    <meta itemprop="worstRating" content="0">
                                 </div>
                                 <input class="rating-5-front" value="@app.AvgRating" min="0" max="5" step="0.5" data-readonly="true" data-size="xs">
                             </div>
