@@ -22,6 +22,22 @@ namespace WereViewApp.Modules.Extensions.IdentityExtension {
             }
             return null;
         }
+
+        /// <summary>
+        /// Get logged Application user's full name. 
+        /// If no user is logged in then empty quoted string will be send.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="defaultFullName">Send a name when user is not logged in or there is no user object.</param>
+        /// <returns>Returns logged Application user's full name. </returns>
+        public static string GetUserFullName(this IPrincipal user, string defaultFullName = "") {
+            string returnName = defaultFullName;
+            var appUser = GetUser(user);
+            if (appUser != null) {
+                returnName = appUser.DisplayName;
+            }
+            return returnName;
+        }
         /// <summary>
         /// Get Application user by UserId.
         /// </summary>
@@ -176,7 +192,7 @@ namespace WereViewApp.Modules.Extensions.IdentityExtension {
         /// <param name="appUser"></param>
         /// <param name="sessionName"></param>
         /// <returns></returns>
-        public static bool IsUserExistInSession(this IPrincipal user, string userName,  out ApplicationUser appUser, string sessionName = SessionNames.UserPrincipalUserSession) {
+        public static bool IsUserExistInSession(this IPrincipal user, string userName, out ApplicationUser appUser, string sessionName = SessionNames.UserPrincipalUserSession) {
             appUser = GetUserFromSession(user, sessionName);
             if (!string.IsNullOrEmpty(userName) && appUser != null) {
                 return appUser.UserName.Equals(userName, StringComparison.OrdinalIgnoreCase);

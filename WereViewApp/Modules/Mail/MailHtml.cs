@@ -125,6 +125,14 @@ namespace WereViewApp.Modules.Mail {
             return sb.ToString();
         }
 
+        public static string GetStrongTag(string text, string title = "", string style = "") {
+            //<strong style='{0}' title='{1}'>{2}</strong>
+            if (string.IsNullOrEmpty(title)) {
+                title = text;
+            }
+            return string.Format(StrongTag, style, title, text);
+        }
+
         #region Declaration
 
 
