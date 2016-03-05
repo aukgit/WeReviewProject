@@ -16,6 +16,13 @@ namespace WereViewApp {
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            #region Developers Organism Additional Settings in our Component
+
+            AppConfig.RefreshSetting();
+
+            #endregion
+
             MvcHandler.DisableMvcResponseHeader = true;
             TaskManager.Initialize(registry: new SchedulerRunner());
         }

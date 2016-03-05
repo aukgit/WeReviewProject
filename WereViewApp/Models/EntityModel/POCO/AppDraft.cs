@@ -23,7 +23,7 @@ namespace WereViewApp.Models.EntityModel
         public long? TotalViewed { get; set; }
         public string Url { get; set; }
 
-        public DateTime ReleaseDate { get; set; }
+        public DateTime? ReleaseDate { get; set; }
 
 
 

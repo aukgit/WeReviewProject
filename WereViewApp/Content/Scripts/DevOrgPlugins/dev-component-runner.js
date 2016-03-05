@@ -7,6 +7,7 @@
 /// <reference path="../validation.js" />
 /// <reference path="../underscore.js" />
 /// <reference path="developers-organism.country-phone.js" />
+/// <reference path="../ckeditor.js" />
 
 /*!
  * Written by Alim Ul Karim
@@ -111,6 +112,10 @@ $.devOrg.runner = function () {
     workWithMenuPage();
 
 
+    var $ckEditorTextAreas = $(".ckeditor-enabled");
+    if ($ckEditorTextAreas.length > 0) {
+        $ckEditorTextAreas.ckeditor();
+    }
 
     $("textarea.big-multiline").focus(function () {
         $(this).animate({ 'height': '300px', 'width': '630px', 'max-width': '630px' }, 400);

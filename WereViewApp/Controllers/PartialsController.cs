@@ -135,7 +135,7 @@ namespace WereViewApp.Controllers {
             using (var db = new WereViewAppEntities()) {
                 var algorithms = new Algorithms();
 
-                app.Url = algorithms.GenerateUrlValid(app, db);
+                app.Url = algorithms.GenerateHyphenUrlStringValid(app, db);
 
                 var sender = new {
                     url = app.GetAbsoluteUrl()

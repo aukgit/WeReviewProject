@@ -30,7 +30,7 @@ namespace WereViewApp.Controllers {
                     }
                 }
                 search.SearchQuery = SearchQuery;
-                var urlGet = algorithms.GenerateUrlValid(SearchQuery);
+                var urlGet = algorithms.GenerateHyphenUrlString(SearchQuery);
                 var displayList = urlGet.Split('-');
                 var displayStr = string.Join(" ", displayList);
                 var results = algorithms.GetSearchResults(SearchQuery, null, null, null,

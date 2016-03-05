@@ -11,12 +11,10 @@
     var htmlAttributes = new RouteValueDictionary();
 
 
-    var htmlAttributes = new RouteValueDictionary();
-
     if (ViewBag.@class != null) {
-        htmlAttributes.Add("class", "form-control " + ViewBag.@class);
+        htmlAttributes.Add("class", "form-control ckeditor-enabled " + ViewBag.@class);
     } else {
-        htmlAttributes.Add("class", "form-control");
+        htmlAttributes.Add("class", "form-control ckeditor-enabled");
     }
 
     if (ViewBag.type != null) {

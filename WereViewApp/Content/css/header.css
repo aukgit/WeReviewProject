@@ -37,7 +37,7 @@ body div.container.body-content h1.top-margin-space > .glyphicon {
   font-size: 1.2em;
   background-color: #f5f208;
   position: relative;
-  top: -49px;
+  /*top: -49px;*/
   z-index: 999;
   width: 100%;
   text-align: center;

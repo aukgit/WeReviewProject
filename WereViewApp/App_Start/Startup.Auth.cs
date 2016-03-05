@@ -23,11 +23,7 @@ namespace WereViewApp {
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
-            #region Developers Organism Additional Settings in our Component
-
-            AppConfig.RefreshSetting();
-
-            #endregion
+        
 
             #region Cookie Authentication
             // Enable the application to use a cookie to store information for the signed in user

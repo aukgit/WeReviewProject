@@ -6,6 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Enums;
+using FontAwesomeIcons;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.Constants;
@@ -19,29 +20,7 @@ namespace WereViewApp.Helpers {
     public static class HtmlHelpers {
         private const string Selected = "selected='selected'";
         public static int TruncateLength = AppConfig.TruncateLength;
-        /// <summary>
-        /// Returns BaseUrl and slash.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public static string GetBaseUrl(this HttpRequestBase request) {
-            if (request.Url == null) {
-                return "";
-            }
-            return request.Url.Scheme + "://" + request.Url.Authority + VirtualPathUtility.ToAbsolute("~/");
-        }
-        /// <summary>
-        /// Returns BaseUrl and slash.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public static string GetBaseUrl(this HttpContext context) {
-            if (context != null) {
-                var request = context.Request;
-                return request.Url.Scheme + "://" + request.Url.Authority + VirtualPathUtility.ToAbsolute("~/");
-            }
-            return "";
-        }
+
         #region Icons generate : badge
 
         public static HtmlString GetBadge(this HtmlHelper helper, long number) {
@@ -117,7 +96,6 @@ namespace WereViewApp.Helpers {
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="buttonName"></param>
-        /// <param name="alertMessage"></param>
         /// <param name="iconClass"></param>
         /// <param name="btnType"></param>
         /// <param name="placeIconLeft"></param>
@@ -173,13 +151,14 @@ namespace WereViewApp.Helpers {
                 placeIconLeft,
                 btnType);
         }
+
         /// <summary>
         /// Renders a remove button with icon.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="buttonName"></param>
-        /// <param name="alertMessage"></param>
         /// <param name="iconClass"></param>
+        /// <param name="tooltip"></param>
         /// <param name="btnType"></param>
         /// <param name="placeIconLeft"></param>
         /// <param name="additionalClasses"></param>
@@ -191,6 +170,34 @@ namespace WereViewApp.Helpers {
             bool placeIconLeft = true,
             string additionalClasses = "btn btn-danger") {
             return SubmitButton(helper, buttonName, iconClass, tooltip, btnType, placeIconLeft, additionalClasses);
+        }
+        #endregion
+
+        #region Null checker
+        /// <summary>
+        /// Returns true if all of the given parameter objects are null.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="objs"></param>
+        /// <returns></returns>
+        public static bool IsAllNull(this HtmlHelper helper, params object[] objs) {
+            if (objs == null) {
+                return true;
+            }
+            return objs.All(n => n == null);
+        }
+        /// <summary>
+        /// Returns true if any of the given object is not null.
+        /// Does follow given parameter order.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="objs"></param>
+        /// <returns></returns>
+        public static bool IsAnyNotNull(this HtmlHelper helper, params object[] objs) {
+            if (objs != null) {
+                return objs.Any(n => n != null);
+            }
+            return false;
         }
         #endregion
 

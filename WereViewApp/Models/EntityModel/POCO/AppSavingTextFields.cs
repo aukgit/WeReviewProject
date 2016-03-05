@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace WereViewApp.Models.EntityModel{
+namespace WereViewApp.Models.EntityModel {
     [Serializable]
     public class AppSavingTextFields {
         #region Virtual
@@ -20,7 +20,7 @@ namespace WereViewApp.Models.EntityModel{
         [Display(Name = "Tags", Description = "(Use comma separated values to save your tags. Highest 10 tags are accepted. Please be relevant with details and it make the app more SEO friendly.")]
         [StringLength(250)]
         [Required]
-        public string Tags { get; set; } 
+        public string Tags { get; set; }
         #endregion
 
         [Required]

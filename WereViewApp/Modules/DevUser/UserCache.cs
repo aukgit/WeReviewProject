@@ -140,7 +140,7 @@ namespace WereViewApp.Modules.DevUser {
         /// <param name="rolesGenerate">True : Generates cache roles for the current user.</param>
         /// <param name="saveUserInCache">True : Saves current cache in the session.</param>
         public static UserCache GetNewOrExistingUserCache(ApplicationUser user, bool rolesGenerate = true, bool saveUserInCache = true) {
-            var userCahe = UserCache.GetUserCacheSession();
+            var userCahe = GetUserCacheSession();
             if (userCahe == null || userCahe.IsValidUserCache(user) == false) {
                 userCahe = new UserCache(user, rolesGenerate, saveUserInCache);
             }

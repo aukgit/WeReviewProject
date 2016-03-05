@@ -13,7 +13,6 @@ namespace WereViewApp.Scheduler {
     internal class WeReviewScheduler : ITask {
         #region ITask Members
 
-        private bool _test = AppVar.IsInTestEnvironment;
 
         public void Execute() {
             // keep the app running
