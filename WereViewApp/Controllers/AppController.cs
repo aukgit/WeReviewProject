@@ -645,7 +645,7 @@ namespace WereViewApp.Controllers {
         /// </summary>
         /// <param name="app"></param>
         private void AddNecessaryBothOnPostingNEditing(App app) {
-            app.Url = _algorithms.GenerateUrlValid(app.PlatformVersion, app.CategoryID, app.AppName, app.PlatformID, db,
+            app.Url = _algorithms.GenerateHyphenUrlStringValid(app.PlatformVersion, app.CategoryID, app.AppName, app.PlatformID, db,
                 app.AppID);
             app.UrlWithoutEscapseSequence = _algorithms.GetUrlStringExceptEscapeSequence(app.Url);
             app.PostedByUserID = UserManager.GetLoggedUserId();

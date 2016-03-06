@@ -59,14 +59,16 @@ namespace WereViewApp.WereViewAppCommon {
         #endregion
 
         #region Featured App
+
         /// <summary>
         /// Returns true when saving is successful.
         /// </summary>
         /// <param name="appId"></param>
         /// <param name="isFeatured"></param>
+        /// <param name="isSendEmailWhenOperationIsSuccessful"></param>
         /// <param name="db"></param>
         /// <returns></returns>
-        internal static bool AppFeatured(long appId, bool isFeatured, WereViewAppEntities db) {
+        internal static bool AppFeatured(long appId, bool isFeatured, bool isSendEmailWhenOperationIsSuccessful, WereViewAppEntities db) {
             if (UserManager.IsAuthenticated()) {
                 var featured = db.FeaturedImages.FirstOrDefault(n => n.AppID == appId);
                 var user = UserManager.GetCurrentUser();
@@ -82,7 +84,28 @@ namespace WereViewApp.WereViewAppCommon {
                     featured.UserID = user.UserID;
                     db.Entry(featured).State = System.Data.Entity.EntityState.Modified;
                 }
-                return db.SaveChanges() != -1;
+                var saved = db.SaveChanges() != -1;
+                if (saved && isSendEmailWhenOperationIsSuccessful) {
+                    var app = db.Apps.Find(appId);
+                    if (app != null) {
+                        string subject, body, appDisplayName;
+                        appDisplayName = "Your app '" + app.AppName + "'";
+                        if (featured.IsFeatured) {
+                            subject = "Congrats! " + appDisplayName +
+                                      " has been selected as featured app and will be display at our front page.";
+                            body = "Hi , <br><br>" + appDisplayName +
+                                   "has been selected as featured app and will be displayed at our front page. Your app url : " +
+                                   app.GetAbsoluteUrl();
+                        } else {
+                            subject = "Sorry ! " + appDisplayName +
+                                 " has been removed from featured app.";
+                            body = "Hi , <br><br>" + appDisplayName +
+                                   "has been removed from our front page featured apps list. Your app url : " +
+                                   app.GetAbsoluteUrl();
+                        }
+                        SendAsyncEmailToUser(app.PostedByUserID, subject, body);
+                    }
+                }
             }
             return false;
         }
