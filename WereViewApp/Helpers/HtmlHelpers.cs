@@ -6,8 +6,10 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Enums;
+using FontAwesomeIcons;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Cache;
+using WereViewApp.Modules.Constants;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Mail;
 using WereViewApp.Modules.Menu;
@@ -18,29 +20,7 @@ namespace WereViewApp.Helpers {
     public static class HtmlHelpers {
         private const string Selected = "selected='selected'";
         public static int TruncateLength = AppConfig.TruncateLength;
-        /// <summary>
-        /// Returns BaseUrl and slash.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public static string GetBaseUrl(this HttpRequestBase request) {
-            if (request.Url == null) {
-                return "";
-            }
-            return request.Url.Scheme + "://" + request.Url.Authority + VirtualPathUtility.ToAbsolute("~/");
-        }
-        /// <summary>
-        /// Returns BaseUrl and slash.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public static string GetBaseUrl(this HttpContext context) {
-            if (context != null) {
-                var request = context.Request;
-                return request.Url.Scheme + "://" + request.Url.Authority + VirtualPathUtility.ToAbsolute("~/");
-            }
-            return "";
-        }
+
         #region Icons generate : badge
 
         public static HtmlString GetBadge(this HtmlHelper helper, long number) {
@@ -116,7 +96,6 @@ namespace WereViewApp.Helpers {
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="buttonName"></param>
-        /// <param name="alertMessage"></param>
         /// <param name="iconClass"></param>
         /// <param name="btnType"></param>
         /// <param name="placeIconLeft"></param>
@@ -142,13 +121,44 @@ namespace WereViewApp.Helpers {
                 btnType, tooltip, additionalClasses, leftIcon, buttonName, rightIcon);
             return new HtmlString(buttonHtml);
         }
+
+        public static HtmlString SubmitButtonIconRight(this HtmlHelper helper, string buttonName = "Submit",
+           string iconClass = "fa fa-floppy-o",
+           string tooltip = "",
+           string additionalClasses = "btn btn-success",
+           bool placeIconLeft = false,
+           string btnType = "Submit"
+           ) {
+            return SubmitButton(helper, buttonName,
+                iconClass,
+                tooltip,
+                additionalClasses,
+                placeIconLeft,
+                btnType);
+        }
+
+        public static HtmlString EmailButtonIconRight(this HtmlHelper helper, string buttonName = "Send",
+          string iconClass = Icons.EmailO,
+          string tooltip = "",
+          string additionalClasses = "btn btn-success",
+          bool placeIconLeft = false,
+          string btnType = "Submit"
+          ) {
+            return SubmitButton(helper, buttonName,
+                iconClass,
+                tooltip,
+                additionalClasses,
+                placeIconLeft,
+                btnType);
+        }
+
         /// <summary>
         /// Renders a remove button with icon.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="buttonName"></param>
-        /// <param name="alertMessage"></param>
         /// <param name="iconClass"></param>
+        /// <param name="tooltip"></param>
         /// <param name="btnType"></param>
         /// <param name="placeIconLeft"></param>
         /// <param name="additionalClasses"></param>
@@ -160,6 +170,34 @@ namespace WereViewApp.Helpers {
             bool placeIconLeft = true,
             string additionalClasses = "btn btn-danger") {
             return SubmitButton(helper, buttonName, iconClass, tooltip, btnType, placeIconLeft, additionalClasses);
+        }
+        #endregion
+
+        #region Null checker
+        /// <summary>
+        /// Returns true if all of the given parameter objects are null.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="objs"></param>
+        /// <returns></returns>
+        public static bool IsAllNull(this HtmlHelper helper, params object[] objs) {
+            if (objs == null) {
+                return true;
+            }
+            return objs.All(n => n == null);
+        }
+        /// <summary>
+        /// Returns true if any of the given object is not null.
+        /// Does follow given parameter order.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="objs"></param>
+        /// <returns></returns>
+        public static bool IsAnyNotNull(this HtmlHelper helper, params object[] objs) {
+            if (objs != null) {
+                return objs.Any(n => n != null);
+            }
+            return false;
         }
         #endregion
 
@@ -383,6 +421,31 @@ namespace WereViewApp.Helpers {
             } else {
                 //right icon
                 markup = string.Format("<div class='header-margin-space-type-1'><a href='{0}' class='{1}' title='{2}'>{3} {4}</a></div>", uri, addClass, title, linkName, icon);
+            }
+            if (h1) {
+                markup = string.Format("<h1 title='{0}' class='h3'>{1}</h1>", title, markup);
+            }
+            return new HtmlString(markup);
+        }
+
+        public static HtmlString HeaderWithIcon(this HtmlHelper helper,
+           string linkName,
+           string title,
+           string iconClass,
+           bool h1 = true,
+           string addClass = "",
+           bool isLeft = true) {
+            var markup = "";
+            var icon = "";
+            if (!string.IsNullOrEmpty(iconClass)) {
+                icon = string.Format("<i class='{0}'></i>", iconClass);
+            }
+            if (isLeft) {
+                //left icon
+                markup = string.Format("<div class='header-margin-space-type-1'><a class='{1}' title='{2}'>{4} {3}</a></div>", "", addClass, title, linkName, icon);
+            } else {
+                //right icon
+                markup = string.Format("<div class='header-margin-space-type-1'><a class='{1}' title='{2}'>{3} {4}</a></div>", "", addClass, title, linkName, icon);
             }
             if (h1) {
                 markup = string.Format("<h1 title='{0}' class='h3'>{1}</h1>", title, markup);

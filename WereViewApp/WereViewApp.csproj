@@ -75,14 +75,20 @@
       <HintPath>..\packages\Elmah.Mvc.2.1.2\lib\net40\Elmah.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFramework">
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="FluentScheduler, Version=3.1.46.0, Culture=neutral, PublicKeyToken=b76503528a14ebd1, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentScheduler.3.1.46\lib\net40\FluentScheduler.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FontAwesomeIcons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesomeIcons.1.0.2\lib\FontAwesomeIcons.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ImageResizer">
@@ -236,6 +242,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AppVar.cs" />
+    <Compile Include="Areas\Admin\Controllers\AppsController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\GenericController.cs" />
     <Compile Include="Controllers\IndentityController.cs" />
@@ -252,17 +259,23 @@
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackState.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\TagExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\UserExtend.cs" />
+    <Compile Include="Models\EntityModel\POCO\AppsSearchResult.cs" />
+    <Compile Include="Models\EntityModel\POCO\CellPhone.cs" />
     <Compile Include="Models\POCO\Enum\FeedbackStatusTypes.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
     <Compile Include="Models\POCO\Structs\FeedbackCategoryIDs.cs" />
+    <Compile Include="Models\ViewModels\AppModerateViewModel.cs" />
     <Compile Include="Models\ViewModels\EmailResendViewModel.cs" />
     <Compile Include="Models\ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\ManageUserViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Models\ViewModels\ResetPasswordViewModel.cs" />
+    <Compile Include="Modules\Constants\TokenPurpose.cs" />
     <Compile Include="Modules\Extensions\GraphApiExtension.cs" />
+    <Compile Include="Modules\Extensions\UrlExtension.cs" />
     <Compile Include="Modules\Extensions\ViewEngine\RenderingView.cs" />
+    <Compile Include="Modules\DevUser\UserCache.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapGenerator.cs" />
     <Compile Include="Modules\Sitemaps\ISitemapItem.cs" />
     <Compile Include="Modules\Sitemaps\SitemapChangeFrequency.cs" />
@@ -324,6 +337,7 @@
     <Compile Include="Models\ViewModels\SearchViewModel.cs" />
     <Compile Include="Modules\Reponse\RemoveETagModule.cs" />
     <Compile Include="Modules\StringExtension.cs" />
+    <Compile Include="WereViewAppCommon\ModerationAlgorithms.cs" />
     <Compile Include="WereViewAppCommon\Structs\CommonVars.cs" />
     <Compile Include="WereViewAppCommon\WereViewStatics.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -417,7 +431,6 @@
     <Compile Include="Modules\Mail\MailSender.cs" />
     <Compile Include="Modules\Menu\GenerateMenu.cs" />
     <Compile Include="Modules\Message\Const.cs" />
-    <Compile Include="Modules\ObjectToArray\ObjectToArrary.cs" />
     <Compile Include="Modules\Role\RoleManager.cs" />
     <Compile Include="Modules\Role\RoleNames.cs" />
     <Compile Include="Modules\Session\SessionNames.cs" />
@@ -508,6 +521,10 @@
       <DependentUpon>category-page.css</DependentUpon>
     </Content>
     <Content Include="Content\css\category-page.min.css" />
+    <Content Include="Content\css\ckedit-skin-bootstrap.css" />
+    <Content Include="Content\css\ckedit-skin-bootstrap.min.css">
+      <DependentUpon>ckedit-skin-bootstrap.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\color-fonts.css" />
     <Content Include="Content\css\color-fonts.min.css">
       <DependentUpon>color-fonts.css</DependentUpon>
@@ -528,9 +545,6 @@
     </Content>
     <Content Include="Content\css\footer-fixing.min.css" />
     <Content Include="Content\css\front-developer.css" />
-    <Content Include="Content\css\front-developer.css.map">
-      <DependentUpon>front-developer.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\front-developer.min.css">
       <DependentUpon>front-developer.css</DependentUpon>
     </Content>
@@ -598,9 +612,6 @@
     <Content Include="Content\css\Tagit\ui-lightness\jquery-ui-1.9.2.custom.min.css" />
     <Content Include="Content\css\Upload\jquery.fileupload.css" />
     <Content Include="Content\css\utilities.css" />
-    <Content Include="Content\css\utilities.css.map">
-      <DependentUpon>utilities.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\utilities.min.css">
       <DependentUpon>utilities.css</DependentUpon>
     </Content>
@@ -621,6 +632,25 @@
     <Content Include="Content\Less\blog-page.less" />
     <Content Include="Content\Less\bootstrap-datetimepicker.less" />
     <Content Include="Content\Less\category-page.less" />
+    <Content Include="Content\css\ckedit-skin-bootstrap.css.map">
+      <DependentUpon>ckedit-skin-bootstrap.css</DependentUpon>
+    </Content>
+    <Content Include="CodeTemplates\MvcControllerWithContext\Controller.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Create.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Delete.cs - Copy.t4" />
+    <Content Include="CodeTemplates\MvcView\Delete.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Details.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\DetailsNoTable.t4" />
+    <Content Include="CodeTemplates\MvcView\Edit.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Empty.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
+    <Content Include="CodeTemplates\MvcView\List.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
+    <Content Include="Areas\Admin\Views\Apps\Index.cshtml" />
+    <Content Include="Content\css\utilities.css.map">
+      <DependentUpon>utilities.css</DependentUpon>
+    </Content>
+    <None Include="Content\Less\ckedit-skin-bootstrap.less" />
     <Content Include="Content\Less\color-fonts.less" />
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
@@ -687,6 +717,8 @@
     <Content Include="Content\Scripts\bootstrap-select.js" />
     <Content Include="Content\Scripts\bootstrap-table.js" />
     <Content Include="Content\Scripts\bootstrap.min.js" />
+    <Content Include="Content\Scripts\ckeditor-jquery-adapter.js" />
+    <Content Include="Content\Scripts\ckeditor.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\ComboOptions.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.country-phone.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.dynamicSelect.js" />
@@ -736,9 +768,6 @@
     <Content Include="Content\css\blog-page.css.map">
       <DependentUpon>blog-page.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\header.css.map">
-      <DependentUpon>header.css</DependentUpon>
-    </Content>
     <Content Include="Content\Less\override-mvc.variables.less" />
     <Content Include="Content\css\editor-templates.css.map">
       <DependentUpon>editor-templates.css</DependentUpon>
@@ -749,6 +778,46 @@
       <DependentUpon>backend-developer.css</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\Feedbacks\Done.cshtml" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog_ie.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog_ie7.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog_ie8.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog_iequirks.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog_opera.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\editor.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\editor_gecko.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\editor_ie.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\editor_ie7.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\editor_ie8.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\editor_iequirks.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\dialog.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\dialog_ie.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\dialog_ie7.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\dialog_ie8.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\dialog_iequirks.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\dialog_opera.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\editor.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\editor_gecko.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\editor_ie.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\editor_ie7.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\editor_ie8.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\editor_iequirks.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\icons.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\icons_hidpi.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\arrow.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\close.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\hidpi\close.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\hidpi\lock-open.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\hidpi\lock.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\hidpi\refresh.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\lock-open.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\lock.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\images\refresh.png" />
+    <Content Include="Content\Scripts\skins\bootstrapck\sample\bootstrapck-sample.html" />
+    <Content Include="Content\Scripts\skins\bootstrapck\sample\css\bootstrapck-sample.css" />
+    <Content Include="Content\Scripts\skins\bootstrapck\sample\js\analytics.js" />
+    <Content Include="Content\Scripts\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
+    <Content Include="Fonts\fontawesome-webfont.svg" />
     <Content Include="Sitemap.xml" />
     <Content Include="Uploads\Images\Advertise\5e324a00-977d-4436-8a15-3ce9e1c424f1-0.jpg" />
     <Content Include="Uploads\Images\Advertise\7fcf1b26-c1e0-4327-ba7f-29d5fd55bd25-0.jpg" />
@@ -909,6 +978,13 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Views\Config\CleanSystem.cshtml" />
+    <Content Include="Areas\Admin\Views\Apps\Moderate.cshtml" />
+    <Content Include="Content\css\front-developer.css.map">
+      <DependentUpon>front-developer.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\header.css.map">
+      <DependentUpon>header.css</DependentUpon>
+    </Content>
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />
@@ -956,7 +1032,7 @@
     <Content Include="Content\Scripts\validation.js" />
     <Content Include="ExternalDll\LinqKit.dll" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
@@ -1027,10 +1103,10 @@
     <Content Include="Areas\Admin\Views\FeaturedImages\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\FeaturedImages\Index.cshtml" />
     <Content Include="Areas\Admin\Views\FeaturedImages\_CreateOrEdit.cshtml" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Styles\CompactCSS.css" />
     <Content Include="Styles\CompactCSS.min.css">
       <DependentUpon>CompactCSS.css</DependentUpon>
@@ -1179,6 +1255,36 @@
     <Content Include="Views\Shared\_401.cshtml" />
     <Content Include="Views\Report\App.cshtml" />
     <Content Include="Views\Report\Review.cshtml" />
+    <Content Include="Fonts\fontawesome-webfont.woff2" />
+    <Content Include="Fonts\fontawesome-webfont.eot" />
+    <Content Include="Fonts\fontawesome-webfont.ttf" />
+    <Content Include="Fonts\fontawesome-webfont.woff" />
+    <Content Include="Fonts\FontAwesome.otf" />
+    <Content Include="Content\Scripts\skins\bootstrapck\readme.md" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\gecko\editor_gecko.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\ie7\dialog_ie7.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\ie7\editor_ie7.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\ie8\dialog_ie8.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\ie8\editor_ie8.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\iequirks\dialog_iequirks.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\iequirks\editor_iequirks.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\ie\dialog_ie.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\ie\editor_ie.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\opera\dialog_opera.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\editor.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_colorpanel.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_elementspath.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_mainui.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_menu.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_panel.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_presets.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_reset.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_richcombo.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\components\_toolbar.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\config\_colors.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\config\_config.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\config\_defaults.scss" />
+    <Content Include="Content\Scripts\skins\bootstrapck\scss\dialog\dialog.scss" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <Content Include="Views\Shared\EditorTemplates\Double.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
@@ -1214,6 +1320,10 @@
     <Content Include="Views\App\_AppDescription.cshtml" />
     <Content Include="Views\Account\ConfirmationEmailResend.cshtml" />
     <None Include="Views\Reviews\User.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AnyTypeIconWithHtml.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TextArea.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CkEditor.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean-Left.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />
@@ -1235,9 +1345,11 @@
     <Folder Include="Areas\Admin\Views\Services\" />
     <Folder Include="Content\Bundles\" />
     <Folder Include="Models\DesignPattern\Abstracts\" />
+    <Folder Include="Models\EntityModel\GarbageCodes\" />
     <Folder Include="Models\POCO\AdditionalDatabase\" />
     <Folder Include="Models\POCO\Plugable\" />
     <Folder Include="Modules\Filters\" />
+    <Folder Include="Modules\ViewEngine\" />
     <Folder Include="Uploads\Files\Private\" />
     <Folder Include="Uploads\Images\Private\" />
     <Folder Include="Views\Basic\" />

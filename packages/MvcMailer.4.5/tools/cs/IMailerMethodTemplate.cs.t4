@@ -1,4 +1,0 @@
-<#@ Template Language="C#" HostSpecific="True" Inherits="DynamicTransform" #>
-<#@ Output Extension="cs" #>
-
-MvcMailMessage <#= Model.MethodName #>();

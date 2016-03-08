@@ -7,7 +7,7 @@
     ViewBag.Title = "Replying to " + Html.DisplayFor(model => model.Email);
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    var token = (MvcHtmlString)@Html.AntiForgeryToken();
+    var token = Html.AntiForgeryToken();
     string controller = (string)ViewBag.controller;
     string viewName = "Reply";
     bool dropDownDynamic = (bool)ViewBag.dropDownDynamic;

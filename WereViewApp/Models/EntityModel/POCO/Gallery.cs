@@ -27,18 +27,5 @@ namespace WereViewApp.Models.EntityModel
         public string Extension { get; set; }
 
         public virtual GalleryCategory GalleryCategory { get; set; }
-
-
-       
-       
-
-        //public IImageCategory Category {
-        //    get {
-        //        return this.GalleryCategory;
-        //    }             
-        //}
-
-
-        
     }
 }

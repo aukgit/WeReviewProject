@@ -12,24 +12,26 @@
 .login-btn-wrapper {
     .max-width(294px);
 
-    .checkbox { 
-        .max-width(150px); 
-        float: left; 
+    .checkbox {
+        .max-width(150px);
+        float: left;
     }
-     
+
     .btn {
-        float: right;  
+        float: right;
     }
-} 
+}
 
 // other imports
-//@import "seo-optimize.less"; 
+//@import "seo-optimize.less";
 //bootstrap overrides
 .btn {
     font-weight: normal;
     text-transform: none;
     .padding(7px, 12px, 7px,12px);
     border: none;
+    font-size: 14px;
+    vertical-align: top;
 }
 
 .btn-xs {
@@ -55,7 +57,7 @@
 
 .btn-primary, .btn-default {
     background-color: #ff7200;
-} 
+}
 
 .btn-success {
     background-color: #19c234;
@@ -1390,5 +1392,18 @@ q:after {
         color: white;
     }
 }
+
+a {
+    &.link {
+        background-color: #03A9F4;
+        color: white;
+        padding: 5px 14px;
+        border-radius: 5px;
+        &:hover {
+            background-color: darken(#03A9F4,15%);
+        }
+    }
+}
+
 //last imports
 //@import "Utilities.less";

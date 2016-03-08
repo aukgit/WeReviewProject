@@ -18,7 +18,6 @@ using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.Role;
 using WereViewApp.Modules.Uploads;
 using WereViewApp.WereViewAppCommon;
 using WereViewApp.WereViewAppCommon.Structs;
@@ -28,7 +27,7 @@ using FileSys = System.IO.File;
 
 namespace WereViewApp.Controllers {
     [Authorize]
-    [CheckRegistrationCompleteAttribute]
+    [CheckRegistrationComplete]
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class AppController : AdvanceController {
         #region Declaration
@@ -42,7 +41,7 @@ namespace WereViewApp.Controllers {
         public AppController()
             : base(true) {
             ViewBag.controller = ControllerName;
-  
+
         }
 
         #endregion
@@ -367,7 +366,7 @@ namespace WereViewApp.Controllers {
                                 // creating tag
                                 // if tag not exist in the database then create one.
                                 tagFromDatabase = new Tag {
-                                    TagDisplay = Algorithms.GetAllUpperCaseTitle(tag.Trim()),
+                                    TagDisplay = Algorithms.GetAllUpperCaseTitle(tag.Trim())
                                 };
                                 db2.Tags.Add(tagFromDatabase);
                             }
@@ -521,16 +520,17 @@ namespace WereViewApp.Controllers {
             rApp.PlatformVersion = (double)appDraft.PlatformVersion;
             rApp.Description = appDraft.Description;
             rApp.PostedByUserID = appDraft.PostedByUserID;
-            rApp.IsVideoExist = (bool)appDraft.IsVideoExist;
+            rApp.IsVideoExist = appDraft.IsVideoExist == true;
             rApp.YoutubeEmbedLink = appDraft.YoutubeEmbedLink;
             rApp.WebsiteUrl = appDraft.WebsiteUrl;
             rApp.StoreUrl = appDraft.StoreUrl;
-            rApp.IsBlocked = (bool)appDraft.IsBlocked;
-            rApp.IsPublished = (bool)appDraft.IsPublished;
+            rApp.IsBlocked = appDraft.IsBlocked == true;
+            rApp.IsPublished = appDraft.IsPublished == true;
             rApp.UploadGuid = appDraft.UploadGuid;
             rApp.Url = appDraft.Url;
-            rApp.ReleaseDate = appDraft.ReleaseDate;
-
+            if (appDraft.ReleaseDate.HasValue) {
+                rApp.ReleaseDate = appDraft.ReleaseDate.Value;
+            }
             return rApp;
         }
 
@@ -645,7 +645,7 @@ namespace WereViewApp.Controllers {
         /// </summary>
         /// <param name="app"></param>
         private void AddNecessaryBothOnPostingNEditing(App app) {
-            app.Url = _algorithms.GenerateUrlValid(app.PlatformVersion, app.CategoryID, app.AppName, app.PlatformID, db,
+            app.Url = _algorithms.GenerateHyphenUrlStringValid(app.PlatformVersion, app.CategoryID, app.AppName, app.PlatformID, db,
                 app.AppID);
             app.UrlWithoutEscapseSequence = _algorithms.GetUrlStringExceptEscapeSequence(app.Url);
             app.PostedByUserID = UserManager.GetLoggedUserId();

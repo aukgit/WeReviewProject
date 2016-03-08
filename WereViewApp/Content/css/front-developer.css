@@ -22,6 +22,8 @@
   padding: 7px 12px 7px 12px;
   padding: 0.7rem 1.2rem 0.7rem 1.2rem;
   border: none;
+  font-size: 14px;
+  vertical-align: top;
 }
 .btn-xs {
   padding: 1px 5px;
@@ -368,8 +370,8 @@ label.control-label {
   }
 }
 .header-2 header nav li a {
-  padding: 16px 10px 10px 10px;
-  padding: 1.6rem 1rem 1rem 1rem;
+  padding: 19px 10px 10px 10px;
+  padding: 1.9rem 1rem 1rem 1rem;
 }
 @media (max-width: 768px) {
   .header-2 header nav li {
@@ -399,8 +401,8 @@ label.control-label {
 }
 .header-2 .jetmenu > li > .megamenu,
 .jetmenu ul.dropdown {
-  top: 42px;
-  top: 4.2rem;
+  top: 52px;
+  top: 5.2rem;
 }
 .jetmenu h1 {
   color: #647383;
@@ -532,6 +534,29 @@ label.control-label {
     bottom: 0.4rem;
     position: relative;
   }
+}
+@media (min-width: 768px) {
+  .header-2 header.sticky {
+    height: 52px;
+    height: 5.2rem;
+  }
+}
+@media (max-width: 992px) {
+  .header-2 header.sticky nav .fa {
+    display: none;
+  }
+  .header-2 header.sticky nav .fa.fa-bars {
+    display: inline-block;
+  }
+}
+.nav-username {
+  max-width: 114px;
+  max-width: 11.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 .tp-leftarrow.preview2:after,
 .tp-rightarrow.preview2:after {
@@ -1665,5 +1690,14 @@ q:after {
 .btn-facebook:focus {
   background-color: #3356A0;
   color: white;
+}
+a.link {
+  background-color: #03A9F4;
+  color: white;
+  padding: 5px 14px;
+  border-radius: 5px;
+}
+a.link:hover {
+  background-color: #0275a8;
 }
 /*# sourceMappingURL=front-developer.css.map */

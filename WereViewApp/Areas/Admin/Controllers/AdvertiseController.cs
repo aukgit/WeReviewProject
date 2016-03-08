@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -35,8 +33,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         const string _controllerVisibleUrl = "";
 
         #endregion
-
-
+        
         #region Enums
 
         internal enum ViewStates {
@@ -210,8 +207,6 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(gallery);
         }
         #endregion
-
-  
 
         #region Edit or modify record
         public ActionResult Edit(Guid id) {

@@ -3,7 +3,7 @@ using System.Linq;
 using WereViewApp.Models.EntityModel;
 
 namespace WereViewApp.WereViewAppCommon.Structs {
-    public struct CommonVars {
+    public static class CommonVars {
 
         #region User Points
         static List<UserPointSetting> _userPointSettings;
@@ -140,7 +140,7 @@ namespace WereViewApp.WereViewAppCommon.Structs {
         public const int SuggestHighestSameAppName = 3;
         public const int SuggestHighestAndSimilarQuery = 10;
         public const int SuggestHighestOrSimilarQuery = 10;
-        public const int SearchResultsMaxResultReturn = 80;
+        public const int SearchResultsMaxResultReturn = 200;
         #endregion
 
         #region Truncate Len

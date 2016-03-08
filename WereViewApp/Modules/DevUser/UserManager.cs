@@ -1,24 +1,23 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
-using DevMvcComponent.Error;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.Role;
 using WereViewApp.Modules.Session;
-using WereViewApp.Modules.UserError;
 using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Modules.DevUser {
-    public class UserManager {
+    public static class UserManager {
         public static long user { get; set; }
 
         #region Authentication
@@ -29,10 +28,9 @@ namespace WereViewApp.Modules.DevUser {
 
         #endregion
 
-
         #region Registration Code
 
-        public void LinkUserWithRegistrationCode(ApplicationUser user, Guid code) {
+        public static void LinkUserWithRegistrationCode(ApplicationUser user, Guid code) {
             if (user != null) {
                 var relation = new RegisterCodeUserRelation { UserID = user.Id, RegisterCodeUserRelationID = code };
                 using (var db = new ApplicationDbContext()) {
@@ -229,6 +227,16 @@ namespace WereViewApp.Modules.DevUser {
         public static ApplicationUser GetUserByEmail(string email, string password) {
             var user = Manager.FindByEmail(email);
             return Manager.Find(user.UserName, password);
+        }
+
+        /// <summary>
+        /// Username and id is same in both databases.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static ApplicationUser GetUserByEmail(string email) {
+            return Manager.FindByEmail(email);
         }
 
         public static string GetCurrentUserName() {

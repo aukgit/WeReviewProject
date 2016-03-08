@@ -1,11 +1,8 @@
-﻿using System.Web.Mvc;
-using WereViewApp.WereViewAppCommon;
-using System.Linq;
-using System.Data.Entity;
+﻿using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using DevMvcComponent.Pagination;
-using WereViewApp.Models.EntityModel.Structs;
-using WereViewApp.Modules.Cache;
+using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Controllers {
     public class TagsController : AdvanceController {
@@ -28,7 +25,7 @@ namespace WereViewApp.Controllers {
         //[OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         //[OutputCache(CacheProfile = "Hour", VaryByParam = "*")]
         public ActionResult Index(int page = 1) {
-     
+
             ViewBag.Title = "Mobile Applications Tags";
             ViewBag.Meta = "Tags , Mobile apps, apps review, apple apps, android apps,reviews, app review site, " +
                            ViewBag.Title;
@@ -38,7 +35,7 @@ namespace WereViewApp.Controllers {
 
             // add ordered by
             var pageInfo = new PaginationInfo {
-                ItemsInPage = AppConfig.Setting.PageItems,
+                ItemsInPage = AppConfig.Setting.PageItems
             };
             var tagsforThisPage = tags.GetPageData(pageInfo, cacheName).ToList();
             const string eachUrl = "/tags?page=@page";
@@ -48,32 +45,32 @@ namespace WereViewApp.Controllers {
         }
 
         //public ActionResult GetTagDetail(string id, int page = 1) {
-        //    //ViewBag.Title = "Mobile Applications Tags";
-        //    //ViewBag.Meta = "Tags , Mobile apps, apps review, apple apps, android apps,reviews, app review site, " +
-        //    //               ViewBag.Title;
-        //    //ViewBag.Keywords = ViewBag.Meta;
-        //    //var cacheName = "Tags.GetTagDetail." + id;
-        //    //var tags = db.Tags.OrderByDescending(n => n.TagID);
-        //    //var apps = _algorithms.GetViewableApps(db)
-        //    //                        .Where(n => n.TagAppRelations. == user.UserID)
-        //    //                        .Include(n => n.User)
-        //    //                        .OrderByDescending(n => n.AppID);
+        //ViewBag.Title = "Mobile Applications Tags";
+        //ViewBag.Meta = "Tags , Mobile apps, apps review, apple apps, android apps,reviews, app review site, " +
+        //               ViewBag.Title;
+        //ViewBag.Keywords = ViewBag.Meta;
+        //var cacheName = "Tags.GetTagDetail." + id;
+        //var tags = db.Tags.OrderByDescending(n => n.TagID);
+        //var apps = _algorithms.GetViewableApps(db)
+        //                        .Where(n => n.TagAppRelations. == user.UserID)
+        //                        .Include(n => n.User)
+        //                        .OrderByDescending(n => n.AppID);
 
-        //    //var pageInfo = new PaginationInfo {
-        //    //    ItemsInPage = AppConfig.Setting.PageItems,
-        //    //    PageNumber = page,
-        //    //    PagesExists = -1
-        //    //};
-        //    //var appsForThisPage =
-        //    //    apps.GetPageData(pageInfo, CacheNames.ProfilePaginationDataForSpecificProfile, true)
-        //    //        .ToList();
-        //    //_algorithms.GetEmbedImagesWithApp(appsForThisPage, db, (int)pageInfo.ItemsInPage,
-        //    //    GalleryCategoryIDs.SearchIcon);
-        //    //ViewBag.Apps = appsForThisPage;
-        //    //var eachUrl = "/profiles/" + user.UserName + "?page=@page";
-        //    //ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
-        //    //    maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
-        //    //return System.Web.UI.WebControls.View(user);
+        //var pageInfo = new PaginationInfo {
+        //    ItemsInPage = AppConfig.Setting.PageItems,
+        //    PageNumber = page,
+        //    PagesExists = -1
+        //};
+        //var appsForThisPage =
+        //    apps.GetPageData(pageInfo, CacheNames.ProfilePaginationDataForSpecificProfile, true)
+        //        .ToList();
+        //_algorithms.GetEmbedImagesWithApp(appsForThisPage, db, (int)pageInfo.ItemsInPage,
+        //    GalleryCategoryIDs.SearchIcon);
+        //ViewBag.Apps = appsForThisPage;
+        //var eachUrl = "/profiles/" + user.UserName + "?page=@page";
+        //ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
+        //    maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
+        //return View(user);
         //}
     }
 }

@@ -2,7 +2,7 @@
   "BrowserLink": {
     "CssIgnorePatterns": "bootstrap*; reset.css; normalize.css; jquery*; toastr*; foundation*; animate*; inuit*; elements*; ratchet*; hint*; flat-ui*; 960*; skeleton*",
     "EnableMenu": true,
-    "EnablePixelPushing": false,
+    "EnablePixelPushing": true,
     "ShowMenu": false
   },
   "CodeGen": {
@@ -13,7 +13,7 @@
   },
   "CoffeeScript": {
     "CompileOnBuild": false,
-    "CompileOnSave": true, 
+    "CompileOnSave": true,
     "GenerateSourceMaps": true,
     "LintOnBuild": false,
     "LintOnSave": true,
@@ -21,7 +21,7 @@
     "MinifyInPlace": false,
     "OutputDirectory": null,
     "ProcessSourceMapsForEditorEnhancements": true,
-    "ShowPreviewPane": true,+
+    "ShowPreviewPane": true,
     "WrapClosure": true
   },
   "Css": {
@@ -48,7 +48,7 @@
   },
   "General": {
     "AllMessagesToOutputWindow": false,
-    "KeepImportantComments": true,
+    "KeepImportantComments": false,
     "ShowWEIgnoreLogs": true,
     "SvgPreviewPane": true
   },
@@ -114,8 +114,8 @@
     "CompileOnSave": true,
     "EnableChainCompilation": true,
     "GenerateSourceMaps": true,
-    "MinifyInPlace": true,
-    "OutputDirectory": "../Css/SS",
+    "MinifyInPlace": false,
+    "OutputDirectory": "../CSS",
     "ProcessSourceMapsForEditorEnhancements": true,
     "ShowPreviewPane": true,
     "StrictMath": false
@@ -136,13 +136,7 @@
     "GlobalPreviewCSSFile": null,
     "MinifyInPlace": false,
     "OutputDirectory": null,
-    "ShowPreviewPane": true,
-    "AutoHyperlink": false,
-    "AutoNewLines": false,
-    "EncodeProblemUrlCharacters": false,
-    "GenerateXHTML": true,
-    "LinkEmails": false,
-    "StrictBoldItalic": false
+    "ShowPreviewPane": true
   },
   "Scss": {
     "CompileOnBuild": false,

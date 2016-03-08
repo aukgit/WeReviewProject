@@ -2,32 +2,43 @@
 @{
     string username = User.Identity.GetUserName();
 }
-@if (Request.IsAuthenticated) {
+@if (Request.IsAuthenticated && User.IsRegistrationComplete()) {
     <li>
-        <a href="@AppVar.Url/Account/Manage" title="Manage your account">
-            @User.Identity.GetUserName() !
+        <a href="@AppVar.Url/Account/Manage" title="Manage '@username' account" class="nav-username">
+            <i class="@Icons.User"></i>
+            @username!
         </a>
         <ul class="animated dropdown fadeIn">
             <li>
-                <a href="@AppVar.Url/Account/Manage" title="Manage your account">Manage</a>
+                <a href="@AppVar.Url/Account/Manage" title="Manage your account">
+                    <i class="@Icons.Cog"></i>
+                    Manage
+                </a>
             </li>
             <li>
                 <a href="@AppVar.Url/Profiles/@username" title="Public profile  of @username">Public Profile</a>
             </li>
             @Html.GetMenu("AppPost")
             <li title="Sign out">
-                @using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new {@id = "logoutForm", area=""})) {
+                @using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new { @id = "logoutForm", area = "" })) {
                     @Html.AntiForgeryToken()
                     <a href="javascript:document.getElementById('logoutForm').submit()">Sign out</a>
                 }
             </li>
         </ul>
     </li>
+} else if (Request.IsAuthenticated && !User.IsRegistrationComplete()) {
+    <li>
+        <a href="@AppVar.Url/Account/ResendConfirmationMail" title="Resend confirmation" class="nav-username">
+            <i class="@Icons.Send"></i>
+            Resend Validation
+        </a>
+    </li>
 } else {
     <li title="Login in WeReviewApp.com">
         <a href="/Login" title="Login in WeReviewApp.com">
             <h1 title="Login in WeReviewApp.com">
-                <i class="fa fa-sign-in"></i>
+                <i class="@Icons.Login"></i>
                 <strong title="Login in WeReviewApp.com">
                     <em title="Login in WeReviewApp.com">
                         Login
@@ -39,7 +50,7 @@
             <li>
                 <a href="/Login" title="Login in WeReviewApp.com">
                     <h1 title="Login in WeReviewApp.com">
-                        <i class="fa fa-sign-in"></i>
+                        <i class="@Icons.Login"></i>
                         <strong title="Login in WeReviewApp.com">
                             <em title="Login in WeReviewApp.com">
                                 Login
@@ -51,6 +62,7 @@
             <li>
                 <a href="/Register" title="Register in WeReviewApp.com">
                     <h1 title="Register in WeReviewApp.com">
+                        <i class="@Icons.Register"></i>
                         <strong title="Register in WeReviewApp.com">
                             <em title="Register in WeReviewApp.com">
                                 Register
