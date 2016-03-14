@@ -32,5 +32,8 @@ namespace WereViewApp.Models.EntityModel
         public Nullable<long> TotalViewed { get; set; }
         public string Url { get; set; }
         public Nullable<System.DateTime> ReleaseDate { get; set; }
+        public bool IsMultipleVersion { get; set; }
+        public string TagsDisplay { get; set; }
+        public string SupportedOSVersions { get; set; }
     }
 }

@@ -30,6 +30,10 @@ namespace WereViewApp.Models.EntityModel {
         [Range(0, 3000, ErrorMessage = "Sorry you have to been the range of 0-3000")]
         [Required]
         public byte PlatformID { get; set; }
+		
+		[Display(Name = "Platform Version", Description = "Important for users for better understanding of your app.")]
+        [Required]
+        public double PlatformVersion { get; set; }
 
         [Display(Name = "Category", Description = "Please choose the right category for your app.")]
         [Required]
@@ -39,6 +43,13 @@ namespace WereViewApp.Models.EntityModel {
         [StringLength(2000)]
         [Required]
         public string Description { get; set; }
+		
+		/// <summary>
+        /// Virtual Field : 
+        /// This property is loaded from 
+        /// Algorithms.cs->LoadReviewIntoApp() method
+        /// </summary>
+        public short ReviewsCount { get; set; }
 
         [Display(Name = "Embed Video Link", Description = "Embed video link from youtube or anywhere. An embed video can boost your audiences. Even-though it's optional however we recommend to add a video.")]
         [StringLength(255)]
@@ -58,11 +69,7 @@ namespace WereViewApp.Models.EntityModel {
 
         [Display(Name = "I agree to the terms and condition and publish my app.")]
         [Required]
-        public bool IsPublished { get; set; }
-
-        [Display(Name = "Platform Version", Description = "Important for users for better understanding of your app.")]
-        [Required]
-        public double PlatformVersion { get; set; }
+        public bool IsPublished { get; set; }        
         // this field is required to upload gallery images and identify this app.
         //public Guid UploadGuid { get; set; }  coming from Super class
 
@@ -85,7 +92,10 @@ namespace WereViewApp.Models.EntityModel {
 
         [StringLength(70)]
         public string UrlWithoutEscapseSequence { get; set; }
-
+        public bool IsMultipleVersion { get; set; }
+        [Required]
+        public string TagsDisplay { get; set; }
+        public string SupportedOSVersions { get; set; }
         public virtual Category Category { get; set; }
         public virtual ICollection<FeaturedImage> FeaturedImages { get; set; }
         public virtual Platform Platform { get; set; }
@@ -189,12 +199,7 @@ namespace WereViewApp.Models.EntityModel {
 
 
 
-        /// <summary>
-        /// Virtual Field : 
-        /// This property is loaded from 
-        /// Algorithms.cs->LoadReviewIntoApp() method
-        /// </summary>
-        public short ReviewsCount { get; set; }
+
 
 
         /// <summary>

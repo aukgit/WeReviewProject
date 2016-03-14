@@ -46,12 +46,18 @@ namespace WereViewApp.Models.EntityModel
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public string UrlWithoutEscapseSequence { get; set; }
+        public bool IsMultipleVersion { get; set; }
+        public string TagsDisplay { get; set; }
+        public string SupportedOSVersions { get; set; }
     
         public virtual Category Category { get; set; }
-		public virtual ICollection<FeaturedImage> FeaturedImages { get; set; }        
         public virtual Platform Platform { get; set; }
-        public virtual User User { get; set; }       
-        public virtual ICollection<Review> Reviews { get; set; }        
+        public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FeaturedImage> FeaturedImages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Review> Reviews { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TagAppRelation> TagAppRelations { get; set; }
     }
 }

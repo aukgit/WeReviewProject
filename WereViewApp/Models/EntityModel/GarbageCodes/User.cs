@@ -20,13 +20,16 @@ namespace WereViewApp.Models.EntityModel
             this.Apps = new HashSet<App>();
             this.CellPhones = new HashSet<CellPhone>();
             this.FeaturedImages = new HashSet<FeaturedImage>();
-            this.LatestSeenNotifications = new HashSet<LatestSeenNotification>();
             this.Messages = new HashSet<Message>();
             this.Messages1 = new HashSet<Message>();
             this.MessageSeens = new HashSet<MessageSeen>();
             this.MessageSeens1 = new HashSet<MessageSeen>();
+            this.Notifications = new HashSet<Notification>();
+            this.NotificationSeens = new HashSet<NotificationSeen>();
             this.Reviews = new HashSet<Review>();
             this.ReviewLikeDislikes = new HashSet<ReviewLikeDislike>();
+            this.Subscribes = new HashSet<Subscribe>();
+            this.Subscribes1 = new HashSet<Subscribe>();
             this.UserPoints = new HashSet<UserPoint>();
         }
     
@@ -36,28 +39,39 @@ namespace WereViewApp.Models.EntityModel
         public string Phone { get; set; }
         public string UserName { get; set; }
         public long TotalEarnedPoints { get; set; }
+        public Nullable<long> DefaultCellPhoneID { get; set; }
+        public long SubscriberCount { get; set; }
+        public System.Guid UploadGuid { get; set; }
+        public bool HasPicture { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<App> Apps { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<CellPhone> CellPhones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual CellPhone CellPhone { get; set; }
+        
         public virtual ICollection<FeaturedImage> FeaturedImages { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LatestSeenNotification> LatestSeenNotifications { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<Message> Messages { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<Message> Messages1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<MessageSeen> MessageSeens { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<MessageSeen> MessageSeens1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
+        public virtual ICollection<Notification> Notifications { get; set; }
+        
+        public virtual ICollection<NotificationSeen> NotificationSeens { get; set; }
+        
         public virtual ICollection<Review> Reviews { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<ReviewLikeDislike> ReviewLikeDislikes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
+        public virtual ICollection<Subscribe> Subscribes { get; set; }
+        
+        public virtual ICollection<Subscribe> Subscribes1 { get; set; }
+        
         public virtual ICollection<UserPoint> UserPoints { get; set; }
     }
 }

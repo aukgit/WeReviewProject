@@ -24,9 +24,9 @@ namespace WereViewApp.Models.EntityModel
         public string Url { get; set; }
 
         public DateTime? ReleaseDate { get; set; }
-
-
-
+        public bool IsMultipleVersion { get; set; }
+        public string TagsDisplay { get; set; }
+        public string SupportedOSVersions { get; set; }
 
 
 

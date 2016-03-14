@@ -259,8 +259,11 @@
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackState.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\TagExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\UserExtend.cs" />
-    <Compile Include="Models\EntityModel\POCO\AppsSearchResult.cs" />
+    <Compile Include="Models\EntityModel\POCO\AppsSearch_Result.cs" />
     <Compile Include="Models\EntityModel\POCO\CellPhone.cs" />
+    <Compile Include="Models\EntityModel\POCO\Subscribe.cs" />
+    <Compile Include="Models\EntityModel\POCO\SubscribeCategory.cs" />
+    <Compile Include="Models\EntityModel\POCO\SubscribeNotifiedHistory.cs" />
     <Compile Include="Models\POCO\Enum\FeedbackStatusTypes.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
     <Compile Include="Models\POCO\Structs\FeedbackCategoryIDs.cs" />
@@ -369,13 +372,11 @@
     <Compile Include="Models\EntityModel\POCO\Category.cs" />
     <Compile Include="Models\EntityModel\POCO\Gallery.cs" />
     <Compile Include="Models\EntityModel\POCO\GalleryCategory.cs" />
-    <Compile Include="Models\EntityModel\POCO\LatestSeenNotification.cs" />
     <Compile Include="Models\EntityModel\POCO\Message.cs" />
     <Compile Include="Models\EntityModel\POCO\MessageSeen.cs" />
     <Compile Include="Models\EntityModel\POCO\Notification.cs" />
     <Compile Include="Models\EntityModel\POCO\NotificationType.cs" />
     <Compile Include="Models\EntityModel\POCO\Platform.cs" />
-    <Compile Include="Models\EntityModel\POCO\Report.cs" />
     <Compile Include="Models\EntityModel\POCO\Review.cs" />
     <Compile Include="Models\EntityModel\POCO\Tag.cs" />
     <Compile Include="Models\EntityModel\POCO\TagAppRelation.cs" />
@@ -1345,7 +1346,6 @@
     <Folder Include="Areas\Admin\Views\Services\" />
     <Folder Include="Content\Bundles\" />
     <Folder Include="Models\DesignPattern\Abstracts\" />
-    <Folder Include="Models\EntityModel\GarbageCodes\" />
     <Folder Include="Models\POCO\AdditionalDatabase\" />
     <Folder Include="Models\POCO\Plugable\" />
     <Folder Include="Modules\Filters\" />
