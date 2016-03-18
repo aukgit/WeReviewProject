@@ -42,10 +42,11 @@
     </PublishDatabaseSettings>
     <PublishDatabases>false</PublishDatabases>
     <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
     <IncludeIisSettings>false</IncludeIisSettings>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -259,8 +260,10 @@
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackState.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\TagExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\UserExtend.cs" />
+    <Compile Include="Models\EntityModel\POCO\AppOfferType.cs" />
     <Compile Include="Models\EntityModel\POCO\AppsSearch_Result.cs" />
     <Compile Include="Models\EntityModel\POCO\CellPhone.cs" />
+    <Compile Include="Models\EntityModel\POCO\NotificationSeen.cs" />
     <Compile Include="Models\EntityModel\POCO\Subscribe.cs" />
     <Compile Include="Models\EntityModel\POCO\SubscribeCategory.cs" />
     <Compile Include="Models\EntityModel\POCO\SubscribeNotifiedHistory.cs" />

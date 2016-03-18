@@ -64,6 +64,8 @@
           <Property Name="IsMultipleVersion" Type="bit" Nullable="false" />
           <Property Name="TagsDisplay" Type="varchar" MaxLength="450" Nullable="false" />
           <Property Name="SupportedOSVersions" Type="varchar" MaxLength="80" />
+          <Property Name="AppOfferTypeID" Type="tinyint" />
+          <Property Name="Price" Type="float" />
         </EntityType>
         <EntityType Name="AppOfferType">
           <Key>
@@ -1063,6 +1065,8 @@
           <Property Name="IsMultipleVersion" Type="Boolean" Nullable="false" />
           <Property Name="TagsDisplay" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="false" />
           <Property Name="SupportedOSVersions" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="AppOfferTypeID" Type="Byte" />
+          <Property Name="Price" Type="Double" />
         </EntityType>
         <EntityType Name="AppOfferType">
           <Key>
@@ -1787,6 +1791,8 @@
           <EntitySetMapping Name="AppDrafts">
             <EntityTypeMapping TypeName="WereViewAppModel.AppDraft">
               <MappingFragment StoreEntitySet="AppDraft">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="AppOfferTypeID" ColumnName="AppOfferTypeID" />
                 <ScalarProperty Name="SupportedOSVersions" ColumnName="SupportedOSVersions" />
                 <ScalarProperty Name="TagsDisplay" ColumnName="TagsDisplay" />
                 <ScalarProperty Name="IsMultipleVersion" ColumnName="IsMultipleVersion" />

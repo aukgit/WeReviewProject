@@ -15,8 +15,10 @@ namespace WereViewApp.Models.EntityModel {
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             throw new UnintentionalCodeFirstException();
         }
+    
         public virtual DbSet<App> Apps { get; set; }
         public virtual DbSet<AppDraft> AppDrafts { get; set; }
+        public virtual DbSet<AppOfferType> AppOfferTypes { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CellPhone> CellPhones { get; set; }
         public virtual DbSet<FeaturedImage> FeaturedImages { get; set; }

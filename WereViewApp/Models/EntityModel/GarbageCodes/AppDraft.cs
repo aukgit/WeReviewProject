@@ -35,5 +35,7 @@ namespace WereViewApp.Models.EntityModel
         public bool IsMultipleVersion { get; set; }
         public string TagsDisplay { get; set; }
         public string SupportedOSVersions { get; set; }
+        public Nullable<byte> AppOfferTypeID { get; set; }
+        public Nullable<double> Price { get; set; }
     }
 }

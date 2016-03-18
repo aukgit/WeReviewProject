@@ -601,12 +601,12 @@ namespace WereViewApp.WereViewAppCommon {
         public void SeenNotificationTransfer(long notifyId, WereViewAppEntities db) {
             var notify = db.Notifications.FirstOrDefault(n => n.NotificationID == notifyId);
             if (notify != null) {
-                var seen = new LatestSeenNotification();
+                var seen = new NotificationSeen();
                 seen.Dated = notify.Dated;
                 seen.Message = notify.Message;
                 seen.UserID = notify.UserID;
                 seen.NotificationTypeID = notify.NotificationTypeID;
-                db.LatestSeenNotifications.Add(seen);
+                db.NotificationSeens.Add(seen);
                 db.Notifications.Remove(notify);
                 db.SaveChanges();
             }
