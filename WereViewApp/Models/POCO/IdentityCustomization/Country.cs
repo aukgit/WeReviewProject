@@ -5,21 +5,24 @@ using WereViewApp.Models.POCO.Identity;
 
 namespace WereViewApp.Models.POCO.IdentityCustomization {
     public class Country {
-
-
         #region Columns
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CountryID { get; set; }
+
         [StringLength(50)]
         [Required]
         public string CountryName { get; set; }
+
         [StringLength(25)]
         public string Capital { get; set; }
+
         [Column(TypeName = "CHAR")]
         [MaxLength(2)]
         [Required]
         public string Alpha2Code { get; set; }
+
         [Column(TypeName = "CHAR")]
         [MaxLength(3)]
         [Required]
@@ -30,19 +33,19 @@ namespace WereViewApp.Models.POCO.IdentityCustomization {
         [Column(TypeName = "VARCHAR")]
         [StringLength(50)]
         public string NationalityName { get; set; }
+
         /// <summary>
-        /// Like Asia
+        ///     Like Asia
         /// </summary>
         [Column(TypeName = "VARCHAR")]
         [StringLength(20)]
         public string Region { get; set; }
 
         /// <summary>
-        /// Like Southern Asia
+        ///     Like Southern Asia
         /// </summary>
         [Column(TypeName = "VARCHAR")]
         [StringLength(25)]
-
         public string SubRegion { get; set; }
 
         public long Population { get; set; }
@@ -53,38 +56,41 @@ namespace WereViewApp.Models.POCO.IdentityCustomization {
         public string Culture { get; set; }
 
         /// <summary>
-        /// https://en.wikipedia.org/wiki/Gini_coefficient
-        /// measure of statistical dispersion intended to represent the income distribution of a nation's residents
+        ///     https://en.wikipedia.org/wiki/Gini_coefficient
+        ///     measure of statistical dispersion intended to represent the income distribution of a nation's residents
         /// </summary>
         public float GiniCoefficient { get; set; }
+
         /// <summary>
-        /// Ordering Relevance
+        ///     Ordering Relevance
         /// </summary>
         public float Relevance { get; set; }
 
         /// <summary>
-        /// Represent in map like this LatitudeStartingPoint,LatitudeEndingPoint
+        ///     Represent in map like this LatitudeStartingPoint,LatitudeEndingPoint
         /// </summary>
         public float LatitudeStartingPoint { get; set; }
+
         /// <summary>
-        /// Represent in map like this LatitudeStartingPoint,LatitudeEndingPoint
+        ///     Represent in map like this LatitudeStartingPoint,LatitudeEndingPoint
         /// </summary>
         public float LatitudeEndingPoint { get; set; }
-
 
         //public short? PagesAvailableOnGeolocationSite { get; set; }
 
         /// <summary>
-        /// TimezoneID non-relating from UserTimeZoneTable
-        /// Only those which doesn't have multiple timezones will be here.
+        ///     TimezoneID non-relating from UserTimeZoneTable
+        ///     Only those which doesn't have multiple timezones will be here.
         /// </summary>
         public int? RelatedTimeZoneID { get; set; }
 
         public bool IsSingleTimeZone { get; set; }
+
         [Column(TypeName = "VARCHAR")]
         [StringLength(60)]
         [Required]
         public string DisplayCountryName { get; set; }
+
         #endregion
 
         //[ForeignKey("CountryID")]
@@ -100,15 +106,16 @@ namespace WereViewApp.Models.POCO.IdentityCustomization {
 
         [ForeignKey("CountryID")]
         public ICollection<CountryDetectByIP> CountryDetectByIPs { get; set; }
+
         [ForeignKey("CountryID")]
         public ICollection<CountryTimezoneRelation> CountryTimezoneRelations { get; set; }
 
         [ForeignKey("CountryID")]
         public ICollection<CountryTranslation> CountryTranslations { get; set; }
 
-
         [ForeignKey("CountryID")]
         public ICollection<CountryLanguageRelation> CountryLanguageRelations { get; set; }
+
         [ForeignKey("CountryID")]
         public ICollection<CountryDomain> CountryDomains { get; set; }
 
@@ -116,7 +123,5 @@ namespace WereViewApp.Models.POCO.IdentityCustomization {
         public ICollection<ApplicationUser> ApplicationUsers { get; set; }
 
         #endregion
-
-
     }
 }

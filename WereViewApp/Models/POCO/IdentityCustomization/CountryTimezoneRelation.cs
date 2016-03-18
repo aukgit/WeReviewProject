@@ -5,6 +5,5 @@
         public int UserTimeZoneID { get; set; }
 
         public int CountryID { get; set; }
-
     }
 }

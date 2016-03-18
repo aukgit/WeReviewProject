@@ -2,12 +2,13 @@
 using WereViewApp.Models.EntityModel;
 
 namespace WereViewApp.Models.CustomQuery {
-    public class CommonQueriesWereViewApp :IDisposable {
+    public class CommonQueriesWereViewApp : IDisposable {
         private readonly WereViewAppEntities db = new WereViewAppEntities();
 
         public GalleryCategory GetGallery(Gallery gallery) {
             return db.GalleryCategories.Find(gallery.GalleryCategoryID);
         }
+
         public GalleryCategory GetGallery(int id) {
             return db.GalleryCategories.Find(id);
         }

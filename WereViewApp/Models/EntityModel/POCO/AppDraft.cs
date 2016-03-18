@@ -1,10 +1,8 @@
 using System;
 using WereViewApp.Models.EntityModel.Derivables;
 
-namespace WereViewApp.Models.EntityModel
-{
-    public class AppDraft : IApp
-    {
+namespace WereViewApp.Models.EntityModel {
+    public class AppDraft : IApp {
         public long AppDraftID { get; set; }
         public string AppName { get; set; }
         public byte PlatformID { get; set; }
@@ -29,6 +27,5 @@ namespace WereViewApp.Models.EntityModel
         public string SupportedOSVersions { get; set; }
         public byte? AppOfferTypeID { get; set; }
         public double? Price { get; set; }
-
     }
 }

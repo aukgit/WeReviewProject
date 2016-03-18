@@ -44,7 +44,8 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
 
         public static string GetCategory(this Feedback feedback) {
             var feedbackCategory =
-                WereViewStatics.FeedbackCategories.FirstOrDefault(n => n.FeedbackCategoryID == feedback.FeedbackCategoryID);
+                WereViewStatics.FeedbackCategories.FirstOrDefault(
+                    n => n.FeedbackCategoryID == feedback.FeedbackCategoryID);
             if (feedbackCategory != null) {
                 return feedbackCategory.Category;
             }
@@ -52,7 +53,7 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
         }
 
         /// <summary>
-        /// Please check the condition.
+        ///     Please check the condition.
         /// </summary>
         /// <param name="feedback"></param>
         /// <param name="statusType"></param>
@@ -107,7 +108,6 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
                     feedback.IsInProcess = false;
                     feedback.IsUnSolved = false;
                     break;
-
             }
         }
     }

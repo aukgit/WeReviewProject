@@ -1,11 +1,9 @@
-﻿using System.Data.Entity.Core.Objects;
+﻿using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
+using WereViewApp.Modules.Extensions.Context;
 
 namespace WereViewApp.Models.EntityModel {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
-    using WereViewApp.Modules.Extensions.Context;
-
     public partial class WereViewAppEntities : DevDbContext {
         public WereViewAppEntities()
             : base("name=WereViewAppEntities") {
@@ -15,7 +13,7 @@ namespace WereViewApp.Models.EntityModel {
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<App> Apps { get; set; }
         public virtual DbSet<AppDraft> AppDrafts { get; set; }
         public virtual DbSet<AppOfferType> AppOfferTypes { get; set; }
@@ -37,48 +35,42 @@ namespace WereViewApp.Models.EntityModel {
         public virtual DbSet<SubscribeNotifiedHistory> SubscribeNotifiedHistories { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<TagAppRelation> TagAppRelations { get; set; }
-		public virtual DbSet<TempUpload> TempUploads { get; set; }
+        public virtual DbSet<TempUpload> TempUploads { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserPoint> UserPoints { get; set; }
         public virtual DbSet<UserPointSetting> UserPointSettings { get; set; }
-        
-        public virtual ObjectResult<AppsSearch_Result> AppsSearch(string searchText)
-        {
-            var searchTextParameter = searchText != null ?
-                new ObjectParameter("SearchText", searchText) :
-                new ObjectParameter("SearchText", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AppsSearch_Result>("AppsSearch", searchTextParameter);
+
+        public virtual ObjectResult<AppsSearch_Result> AppsSearch(string searchText) {
+            var searchTextParameter = searchText != null
+                ? new ObjectParameter("SearchText", searchText)
+                : new ObjectParameter("SearchText", typeof (string));
+
+            return ((IObjectContextAdapter) this).ObjectContext.ExecuteFunction<AppsSearch_Result>("AppsSearch",
+                searchTextParameter);
         }
-    
-        public virtual int ResetAppDrafts()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ResetAppDrafts");
+
+        public virtual int ResetAppDrafts() {
+            return ((IObjectContextAdapter) this).ObjectContext.ExecuteFunction("ResetAppDrafts");
         }
-    
-        public virtual int ResetApps()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ResetApps");
+
+        public virtual int ResetApps() {
+            return ((IObjectContextAdapter) this).ObjectContext.ExecuteFunction("ResetApps");
         }
-    
-        public virtual int ResetAppsAndUsers()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ResetAppsAndUsers");
+
+        public virtual int ResetAppsAndUsers() {
+            return ((IObjectContextAdapter) this).ObjectContext.ExecuteFunction("ResetAppsAndUsers");
         }
-    
-        public virtual int ResetReviews()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ResetReviews");
+
+        public virtual int ResetReviews() {
+            return ((IObjectContextAdapter) this).ObjectContext.ExecuteFunction("ResetReviews");
         }
-    
-        public virtual int ResetWholeSystem()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ResetWholeSystem");
+
+        public virtual int ResetWholeSystem() {
+            return ((IObjectContextAdapter) this).ObjectContext.ExecuteFunction("ResetWholeSystem");
         }
-    
-        public virtual int GetAllTablesSpaceUsedInformation()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetAllTablesSpaceUsedInformation");
+
+        public virtual int GetAllTablesSpaceUsedInformation() {
+            return ((IObjectContextAdapter) this).ObjectContext.ExecuteFunction("GetAllTablesSpaceUsedInformation");
         }
     }
 }
