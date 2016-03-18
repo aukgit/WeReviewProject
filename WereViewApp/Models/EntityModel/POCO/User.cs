@@ -5,20 +5,20 @@ using WereViewApp.Models.DesignPattern.Interfaces;
 namespace WereViewApp.Models.EntityModel {
     public class User : IDevUser {
         public User() {
-            this.Apps = new HashSet<App>();
-            this.CellPhones = new HashSet<CellPhone>();
-            this.FeaturedImages = new HashSet<FeaturedImage>();
-            this.Messages = new HashSet<Message>();
-            this.Messages1 = new HashSet<Message>();
-            this.MessageSeens = new HashSet<MessageSeen>();
-            this.MessageSeens1 = new HashSet<MessageSeen>();
-            this.Notifications = new HashSet<Notification>();
-            this.NotificationSeens = new HashSet<NotificationSeen>();
-            this.Reviews = new HashSet<Review>();
-            this.ReviewLikeDislikes = new HashSet<ReviewLikeDislike>();
-            this.Subscribes = new HashSet<Subscribe>();
-            this.Subscribes1 = new HashSet<Subscribe>();
-            this.UserPoints = new HashSet<UserPoint>();
+            Apps = new HashSet<App>();
+            CellPhones = new HashSet<CellPhone>();
+            FeaturedImages = new HashSet<FeaturedImage>();
+            Messages = new HashSet<Message>();
+            Messages1 = new HashSet<Message>();
+            MessageSeens = new HashSet<MessageSeen>();
+            MessageSeens1 = new HashSet<MessageSeen>();
+            Notifications = new HashSet<Notification>();
+            NotificationSeens = new HashSet<NotificationSeen>();
+            Reviews = new HashSet<Review>();
+            ReviewLikeDislikes = new HashSet<ReviewLikeDislike>();
+            Subscribes = new HashSet<Subscribe>();
+            Subscribes1 = new HashSet<Subscribe>();
+            UserPoints = new HashSet<UserPoint>();
         }
 
         public long UserID { get; set; }

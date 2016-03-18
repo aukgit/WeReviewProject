@@ -20,7 +20,7 @@ namespace WereViewApp.Models.EntityModel
         public string Message { get; set; }
         public System.DateTime Dated { get; set; }
         public bool IsSeen { get; set; }
-        public Nullable<System.DateTime> SeenDate { get; set; }
+        public System.DateTime? SeenDate { get; set; }
         public bool IsUseDefaultMessage { get; set; }
         public bool HasClicked { get; set; }
     
