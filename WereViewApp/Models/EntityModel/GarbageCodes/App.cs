@@ -14,7 +14,7 @@ namespace WereViewApp.Models.EntityModel
     
     public partial class App
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        
         public App()
         {
             this.FeaturedImages = new HashSet<FeaturedImage>();
@@ -49,15 +49,18 @@ namespace WereViewApp.Models.EntityModel
         public bool IsMultipleVersion { get; set; }
         public string TagsDisplay { get; set; }
         public string SupportedOSVersions { get; set; }
+        public Nullable<byte> AppOfferTypeID { get; set; }
+        public Nullable<double> Price { get; set; }
     
+        public virtual AppOfferType AppOfferType { get; set; }
         public virtual Category Category { get; set; }
         public virtual Platform Platform { get; set; }
         public virtual User User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<FeaturedImage> FeaturedImages { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<Review> Reviews { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<TagAppRelation> TagAppRelations { get; set; }
     }
 }

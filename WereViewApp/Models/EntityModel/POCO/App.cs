@@ -96,10 +96,15 @@ namespace WereViewApp.Models.EntityModel {
         [Required]
         public string TagsDisplay { get; set; }
         public string SupportedOSVersions { get; set; }
+        public byte? AppOfferTypeID { get; set; }
+        public double? Price { get; set; }
+    
+        public virtual AppOfferType AppOfferType { get; set; }
         public virtual Category Category { get; set; }
-        public virtual ICollection<FeaturedImage> FeaturedImages { get; set; }
+        
         public virtual Platform Platform { get; set; }
         public virtual User User { get; set; }
+		public virtual ICollection<FeaturedImage> FeaturedImages { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }
         public virtual ICollection<TagAppRelation> TagAppRelations { get; set; }
 

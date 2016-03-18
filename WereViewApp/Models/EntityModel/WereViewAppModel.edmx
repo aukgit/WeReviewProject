@@ -36,6 +36,8 @@
           <Property Name="IsMultipleVersion" Type="bit" Nullable="false" />
           <Property Name="TagsDisplay" Type="varchar" MaxLength="450" Nullable="false" />
           <Property Name="SupportedOSVersions" Type="varchar" MaxLength="120" />
+          <Property Name="AppOfferTypeID" Type="tinyint" />
+          <Property Name="Price" Type="float" />
         </EntityType>
         <EntityType Name="AppDraft">
           <Key>
@@ -62,6 +64,13 @@
           <Property Name="IsMultipleVersion" Type="bit" Nullable="false" />
           <Property Name="TagsDisplay" Type="varchar" MaxLength="450" Nullable="false" />
           <Property Name="SupportedOSVersions" Type="varchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="AppOfferType">
+          <Key>
+            <PropertyRef Name="AppOfferTypeID" />
+          </Key>
+          <Property Name="AppOfferTypeID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OfferType" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -308,6 +317,18 @@
           <Property Name="TaskName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Point" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_App_AppOfferType">
+          <End Role="AppOfferType" Type="Self.AppOfferType" Multiplicity="0..1" />
+          <End Role="App" Type="Self.App" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppOfferType">
+              <PropertyRef Name="AppOfferTypeID" />
+            </Principal>
+            <Dependent Role="App">
+              <PropertyRef Name="AppOfferTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_App_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="App" Type="Self.App" Multiplicity="*" />
@@ -668,6 +689,7 @@
         <EntityContainer Name="WereViewAppModelStoreContainer">
           <EntitySet Name="App" EntityType="Self.App" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppDraft" EntityType="Self.AppDraft" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppOfferType" EntityType="Self.AppOfferType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CellPhone" EntityType="Self.CellPhone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FeaturedImage" EntityType="Self.FeaturedImage" Schema="dbo" store:Type="Tables" />
@@ -690,6 +712,10 @@
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserPoint" EntityType="Self.UserPoint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserPointSetting" EntityType="Self.UserPointSetting" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_App_AppOfferType" Association="Self.FK_App_AppOfferType">
+            <End Role="AppOfferType" EntitySet="AppOfferType" />
+            <End Role="App" EntitySet="App" />
+          </AssociationSet>
           <AssociationSet Name="FK_App_Category" Association="Self.FK_App_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="App" EntitySet="App" />
@@ -823,6 +849,7 @@
           <FunctionImport Name="GetAllTablesSpaceUsedInformation" />
           <EntitySet Name="Apps" EntityType="WereViewAppModel.App" />
           <EntitySet Name="AppDrafts" EntityType="WereViewAppModel.AppDraft" />
+          <EntitySet Name="AppOfferTypes" EntityType="WereViewAppModel.AppOfferType" />
           <EntitySet Name="Categories" EntityType="WereViewAppModel.Category" />
           <EntitySet Name="CellPhones" EntityType="WereViewAppModel.CellPhone" />
           <EntitySet Name="FeaturedImages" EntityType="WereViewAppModel.FeaturedImage" />
@@ -845,6 +872,10 @@
           <EntitySet Name="Users" EntityType="WereViewAppModel.User" />
           <EntitySet Name="UserPoints" EntityType="WereViewAppModel.UserPoint" />
           <EntitySet Name="UserPointSettings" EntityType="WereViewAppModel.UserPointSetting" />
+          <AssociationSet Name="FK_App_AppOfferType" Association="WereViewAppModel.FK_App_AppOfferType">
+            <End Role="AppOfferType" EntitySet="AppOfferTypes" />
+            <End Role="App" EntitySet="Apps" />
+          </AssociationSet>
           <AssociationSet Name="FK_App_Category" Association="WereViewAppModel.FK_App_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="App" EntitySet="Apps" />
@@ -997,6 +1028,9 @@
           <Property Name="IsMultipleVersion" Type="Boolean" Nullable="false" />
           <Property Name="TagsDisplay" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="false" />
           <Property Name="SupportedOSVersions" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="AppOfferTypeID" Type="Byte" />
+          <Property Name="Price" Type="Double" />
+          <NavigationProperty Name="AppOfferType" Relationship="WereViewAppModel.FK_App_AppOfferType" FromRole="App" ToRole="AppOfferType" />
           <NavigationProperty Name="Category" Relationship="WereViewAppModel.FK_App_Category" FromRole="App" ToRole="Category" />
           <NavigationProperty Name="Platform" Relationship="WereViewAppModel.FK_App_Platform" FromRole="App" ToRole="Platform" />
           <NavigationProperty Name="User" Relationship="WereViewAppModel.FK_App_User" FromRole="App" ToRole="User" />
@@ -1029,6 +1063,14 @@
           <Property Name="IsMultipleVersion" Type="Boolean" Nullable="false" />
           <Property Name="TagsDisplay" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="false" />
           <Property Name="SupportedOSVersions" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="AppOfferType">
+          <Key>
+            <PropertyRef Name="AppOfferTypeID" />
+          </Key>
+          <Property Name="AppOfferTypeID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OfferType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Apps" Relationship="WereViewAppModel.FK_App_AppOfferType" FromRole="AppOfferType" ToRole="App" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -1327,6 +1369,18 @@
           <Property Name="Point" Type="Int32" Nullable="false" />
           <NavigationProperty Name="UserPoints" Relationship="WereViewAppModel.FK_UserPoint_UserPointSetting" FromRole="UserPointSetting" ToRole="UserPoint" />
         </EntityType>
+        <Association Name="FK_App_AppOfferType">
+          <End Type="WereViewAppModel.AppOfferType" Role="AppOfferType" Multiplicity="0..1" />
+          <End Type="WereViewAppModel.App" Role="App" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppOfferType">
+              <PropertyRef Name="AppOfferTypeID" />
+            </Principal>
+            <Dependent Role="App">
+              <PropertyRef Name="AppOfferTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_App_Category">
           <End Type="WereViewAppModel.Category" Role="Category" Multiplicity="1" />
           <End Type="WereViewAppModel.App" Role="App" Multiplicity="*" />
@@ -1698,6 +1752,8 @@
           <EntitySetMapping Name="Apps">
             <EntityTypeMapping TypeName="WereViewAppModel.App">
               <MappingFragment StoreEntitySet="App">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="AppOfferTypeID" ColumnName="AppOfferTypeID" />
                 <ScalarProperty Name="SupportedOSVersions" ColumnName="SupportedOSVersions" />
                 <ScalarProperty Name="TagsDisplay" ColumnName="TagsDisplay" />
                 <ScalarProperty Name="IsMultipleVersion" ColumnName="IsMultipleVersion" />
@@ -1752,6 +1808,14 @@
                 <ScalarProperty Name="PlatformID" ColumnName="PlatformID" />
                 <ScalarProperty Name="AppName" ColumnName="AppName" />
                 <ScalarProperty Name="AppDraftID" ColumnName="AppDraftID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppOfferTypes">
+            <EntityTypeMapping TypeName="WereViewAppModel.AppOfferType">
+              <MappingFragment StoreEntitySet="AppOfferType">
+                <ScalarProperty Name="OfferType" ColumnName="OfferType" />
+                <ScalarProperty Name="AppOfferTypeID" ColumnName="AppOfferTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
