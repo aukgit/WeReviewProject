@@ -9,7 +9,8 @@ namespace WereViewApp.Filter {
 
         public override void OnActionExecuting(ActionExecutingContext filterContext) {
             if (!string.IsNullOrEmpty(MinimumRole)) {
-                if (!RoleManager.HasMiniumRole(MinimumRole)) {
+                var userCache = UserCache.GetNewOrExistingUserCache();
+                if (!userCache.HasMinimumRole(MinimumRole)) {
                     filterContext.Result = new RedirectToRouteResult(
                          new RouteValueDictionary(new { controller = "Account", action = "Verify", area="" })
                      );
