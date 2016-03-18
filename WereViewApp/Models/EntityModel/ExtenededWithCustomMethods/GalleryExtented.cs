@@ -17,39 +17,39 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
             var location = "";
             if (gallery != null && categoryId == null) {
                 if (gallery.GalleryCategoryID == GalleryCategoryIDs.AppPageGallery) {
-                    location = WereViewStatics.UProcessorGallery.GetCombinationOfRootAndAdditionalRoot();
+                    location = WereViewStatics.UProcessorGallery.GetCombinePathWithAdditionalRoots();
                 } else if (gallery.GalleryCategoryID == GalleryCategoryIDs.GalleryIcon) {
-                    location = WereViewStatics.UProcessorGalleryIcons.GetCombinationOfRootAndAdditionalRoot();
+                    location = WereViewStatics.UProcessorGalleryIcons.GetCombinePathWithAdditionalRoots();
                 } else if (gallery.GalleryCategoryID == GalleryCategoryIDs.HomePageFeatured) {
-                    location = WereViewStatics.UProcessorHomeFeatured.GetCombinationOfRootAndAdditionalRoot();
+                    location = WereViewStatics.UProcessorHomeFeatured.GetCombinePathWithAdditionalRoots();
                 } else if (gallery.GalleryCategoryID == GalleryCategoryIDs.HomePageIcon) {
-                    location = WereViewStatics.UProcessorHomeIcons.GetCombinationOfRootAndAdditionalRoot();
+                    location = WereViewStatics.UProcessorHomeIcons.GetCombinePathWithAdditionalRoots();
                 } else if (gallery.GalleryCategoryID == GalleryCategoryIDs.SearchIcon) {
-                    location = WereViewStatics.UProcessorSearchIcons.GetCombinationOfRootAndAdditionalRoot();
+                    location = WereViewStatics.UProcessorSearchIcons.GetCombinePathWithAdditionalRoots();
                 } else if (gallery.GalleryCategoryID == GalleryCategoryIDs.SuggestionIcon) {
-                    location = WereViewStatics.UProcessorSuggestionIcons.GetCombinationOfRootAndAdditionalRoot();
+                    location = WereViewStatics.UProcessorSuggestionIcons.GetCombinePathWithAdditionalRoots();
                 } else if (gallery.GalleryCategoryID == GalleryCategoryIDs.Advertise) {
-                    location = WereViewStatics.UProcessorAdvertiseImages.GetCombinationOfRootAndAdditionalRoot();
+                    location = WereViewStatics.UProcessorAdvertiseImages.GetCombinePathWithAdditionalRoots();
                 } else if (gallery.GalleryCategoryID == GalleryCategoryIDs.YoutubeCoverImage) {
-                    location = WereViewStatics.UProcessorYoutubeCover.GetCombinationOfRootAndAdditionalRoot();
+                    location = WereViewStatics.UProcessorYoutubeCover.GetCombinePathWithAdditionalRoots();
                 }
             } else if (gallery != null && categoryId != null) {
                 if (categoryId == GalleryCategoryIDs.AppPageGallery) {
-                    location = WereViewStatics.UProcessorGallery.GetCombinationOfRootAndAdditionalRoot();
+                    location = WereViewStatics.UProcessorGallery.GetCombinePathWithAdditionalRoots();
                 } else if (categoryId == GalleryCategoryIDs.GalleryIcon) {
-                    location = WereViewStatics.UProcessorGalleryIcons.GetCombinationOfRootAndAdditionalRoot();
+                    location = WereViewStatics.UProcessorGalleryIcons.GetCombinePathWithAdditionalRoots();
                 } else if (categoryId == GalleryCategoryIDs.HomePageFeatured) {
-                    location = WereViewStatics.UProcessorHomeFeatured.GetCombinationOfRootAndAdditionalRoot();
+                    location = WereViewStatics.UProcessorHomeFeatured.GetCombinePathWithAdditionalRoots();
                 } else if (categoryId == GalleryCategoryIDs.HomePageIcon) {
-                    location = WereViewStatics.UProcessorHomeIcons.GetCombinationOfRootAndAdditionalRoot();
+                    location = WereViewStatics.UProcessorHomeIcons.GetCombinePathWithAdditionalRoots();
                 } else if (categoryId == GalleryCategoryIDs.SearchIcon) {
-                    location = WereViewStatics.UProcessorSearchIcons.GetCombinationOfRootAndAdditionalRoot();
+                    location = WereViewStatics.UProcessorSearchIcons.GetCombinePathWithAdditionalRoots();
                 } else if (categoryId == GalleryCategoryIDs.SuggestionIcon) {
-                    location = WereViewStatics.UProcessorSuggestionIcons.GetCombinationOfRootAndAdditionalRoot();
+                    location = WereViewStatics.UProcessorSuggestionIcons.GetCombinePathWithAdditionalRoots();
                 } else if (categoryId == GalleryCategoryIDs.Advertise) {
-                    location = WereViewStatics.UProcessorAdvertiseImages.GetCombinationOfRootAndAdditionalRoot();
+                    location = WereViewStatics.UProcessorAdvertiseImages.GetCombinePathWithAdditionalRoots();
                 } else if (categoryId == GalleryCategoryIDs.YoutubeCoverImage) {
-                    location = WereViewStatics.UProcessorYoutubeCover.GetCombinationOfRootAndAdditionalRoot();
+                    location = WereViewStatics.UProcessorYoutubeCover.GetCombinePathWithAdditionalRoots();
                 }
             }
 

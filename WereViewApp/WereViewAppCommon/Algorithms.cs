@@ -4,18 +4,21 @@ using DevTrends.MvcDonutCaching;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using DevMvcComponent;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.DevUser;
+using WereViewApp.Modules.Uploads;
 using WereViewApp.WereViewAppCommon.Structs;
 
 namespace WereViewApp.WereViewAppCommon {
@@ -259,7 +262,7 @@ namespace WereViewApp.WereViewAppCommon {
         /// <param name="?"></param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public IQueryable<Tag> GetTagIds(string urlStringExceptEscapeSequence,  WereViewAppEntities db) {
+        public IQueryable<Tag> GetTagIds(string urlStringExceptEscapeSequence, WereViewAppEntities db) {
             var listWords = GetUrlListExceptEscapeSequence(urlStringExceptEscapeSequence);
             var tags = db.Tags.Where(n => listWords.Any(word => word == n.TagDisplay));
             return tags;
@@ -270,15 +273,15 @@ namespace WereViewApp.WereViewAppCommon {
         /// <param name="searchString">Give a string "Hello World v2" , it will search for 'Hello' and 'World'</param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public IQueryable<App> GetSimpleAppSearchResults(IQueryable<App> apps,string searchString) {
+        public IQueryable<App> GetSimpleAppSearchResults(IQueryable<App> apps, string searchString) {
             // convert any given "Hello World v2" =>  "Hello-World"
             var appHyphenUrl = GenerateHyphenUrlString(searchString);
             var appUrlEscapseString = GetUrlStringExceptEscapeSequence(appHyphenUrl); // "Hello World v2" =>  "Hello-World"
             var urlListOfEscapseString = GetUrlListExceptEscapeSequence(appUrlEscapseString); // list of words from split '-'
 
-            var query = apps.Where(app => 
+            var query = apps.Where(app =>
                                         urlListOfEscapseString.All(
-                                        searchWord=> 
+                                        searchWord =>
                                             app.UrlWithoutEscapseSequence.Contains(searchWord)));
             return query;
         }
@@ -995,7 +998,7 @@ namespace WereViewApp.WereViewAppCommon {
         /// <returns>title-title</returns>
         public string GetUrlStringExceptEscapeSequence(string url) {
             if (url != null) {
-                
+
                 var validUrl = GetUrlListExceptEscapeSequence(url);
                 string returnStr = null;
                 returnStr = string.Join("-", validUrl);
@@ -1966,6 +1969,51 @@ namespace WereViewApp.WereViewAppCommon {
         }
         #endregion
 
+        #endregion
+
+        #region Clean System : Remove Everything from the system.
+
+        private static bool RemoveUploadFolderImages(UploadProcessor uploadProcessor) {
+            var folderAbsolutePath = WereViewStatics.UProcessorAdvertiseImages.GetCombinePathWithAdditionalRoots();
+            var allFileNames = Directory.GetFiles(folderAbsolutePath);
+            bool isAllFilesRemoved = true;
+            foreach (var fileName in allFileNames) {
+                try {
+                    var absoluteFileName = Path.Combine(folderAbsolutePath, fileName);
+                    File.Delete(absoluteFileName);
+                } catch (Exception ex) {
+                    isAllFilesRemoved = false;
+                    Mvc.Error.ByEmail(ex, "RemoveUploadFolderImages()", "Path remove failed : " + folderAbsolutePath, null);
+                }
+                File.Delete(fileName);
+            }
+            return isAllFilesRemoved;
+        }
+
+        /// <summary>
+        /// Clean whole system, remove every uploads
+        /// </summary>
+        /// <returns></returns>
+        public static bool CleanWholeSystem() {
+            int executed = 0;
+            using (var db2 = new WereViewAppEntities()) {
+                executed = db2.ResetWholeSystem();
+            }
+            if (executed > 0) {
+                using (var db2 = new WereViewAppEntities()) {
+                    executed = db2.Database.ExecuteSqlCommand("CleanWholeSystem");
+                }
+            }
+            if (executed > 0) {
+                var allUploaders = WereViewStatics.GetAllUploaderProcessor();
+                foreach (var uploader in allUploaders) {
+                    if (uploader != null) {
+                        executed = RemoveUploadFolderImages(uploader) ? 1 : 0;
+                    }
+                }
+            }
+            return executed > 0;
+        }
         #endregion
 
         #region Remove Output Cahces

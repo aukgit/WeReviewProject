@@ -15,6 +15,7 @@ namespace WereViewApp.WereViewAppCommon {
         static List<Category> _appCategoriesCache = null;
         static List<Platform> _appPlatformsCache = null;
         static List<FeedbackCategory> _feedbackCategories = null;
+        static UploadProcessor[] _uploaderProcessors = new UploadProcessor[8];
         #region Declaration
 
         /// <summary>
@@ -29,6 +30,7 @@ namespace WereViewApp.WereViewAppCommon {
         /// Icons means thumbs , "SearchThumbs/"
         /// </summary>
         public static UploadProcessor UProcessorSearchIcons = new UploadProcessor(CommonVars.AdditionalRootSearchIconLocation);
+ 
         /// <summary>
         /// Icons means thumbs , "HomePageThumbs/"
         /// </summary>
@@ -175,5 +177,25 @@ namespace WereViewApp.WereViewAppCommon {
             var location = getAppLocation(uploadGuid);
             return (AppSavingTextFields)textCache.ReadObjectFromBinaryFile(location);
         }
+
+        #region Get all upload processors method
+        /// <summary>
+        /// Return all the upload processors
+        /// </summary>
+        /// <returns></returns>
+        public static UploadProcessor[] GetAllUploaderProcessor() {
+            if (_uploaderProcessors[0] == null) {
+                _uploaderProcessors[0] = UProcessorGallery;
+                _uploaderProcessors[1] = UProcessorGalleryIcons;
+                _uploaderProcessors[2] = UProcessorSearchIcons;
+                _uploaderProcessors[3] = UProcessorHomeIcons;
+                _uploaderProcessors[4] = UProcessorHomeFeatured;
+                _uploaderProcessors[5] = UProcessorSuggestionIcons;
+                _uploaderProcessors[6] = UProcessorYoutubeCover;
+                _uploaderProcessors[7] = UProcessorAdvertiseImages;
+            }
+            return _uploaderProcessors;
+        } 
+        #endregion
     }
 }
