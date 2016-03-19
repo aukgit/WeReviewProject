@@ -4,7 +4,6 @@ using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Extensions.Context;
 
 namespace WereViewApp.Models.Context {
-
     public class DevIdentityDbContext : DevDbContext {
         public DevIdentityDbContext()
             : base("name=DefaultConnection") {
@@ -14,9 +13,9 @@ namespace WereViewApp.Models.Context {
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
         public DbSet<CoreSetting> CoreSettings { get; set; }
 
         public DbSet<ImageResizeSetting> ImageResizeSettings { get; set; }
     }
-
 }

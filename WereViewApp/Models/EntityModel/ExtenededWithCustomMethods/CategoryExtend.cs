@@ -18,6 +18,7 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
             }
             return "";
         }
+
         /// <summary>
         ///     returns a url like "http://url/Apps/Category/@category.Slug"
         ///     and then put it in the "app.AbsUrl"
@@ -30,8 +31,6 @@ namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
             }
             return "";
         }
-
-
 
         /// <summary>
         /// </summary>

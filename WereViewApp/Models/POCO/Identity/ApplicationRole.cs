@@ -13,10 +13,11 @@ namespace WereViewApp.Models.POCO.Identity {
         //public float PointRequired { get; set; }
 
         /// <summary>
-        /// Lower priority means more power.
+        ///     Lower priority means more power.
         /// </summary>
         [Display(Name = "Priority Level", Description = "Less is more.")]
         public byte PriorityLevel { get; set; }
+
         [Display(Name = "Can be achieved by points")]
         public bool CanBeAcheivedByPoint { get; set; }
 
@@ -25,6 +26,5 @@ namespace WereViewApp.Models.POCO.Identity {
 
         [ForeignKey("RoleID")]
         public virtual ICollection<RegisterCode> RegisterCodes { get; set; }
-
     }
 }

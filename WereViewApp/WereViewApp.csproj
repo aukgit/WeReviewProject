@@ -42,10 +42,11 @@
     </PublishDatabaseSettings>
     <PublishDatabases>false</PublishDatabases>
     <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
     <IncludeIisSettings>false</IncludeIisSettings>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -259,8 +260,13 @@
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackState.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\TagExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\UserExtend.cs" />
-    <Compile Include="Models\EntityModel\POCO\AppsSearchResult.cs" />
+    <Compile Include="Models\EntityModel\POCO\AppOfferType.cs" />
+    <Compile Include="Models\EntityModel\POCO\AppsSearch_Result.cs" />
     <Compile Include="Models\EntityModel\POCO\CellPhone.cs" />
+    <Compile Include="Models\EntityModel\POCO\NotificationSeen.cs" />
+    <Compile Include="Models\EntityModel\POCO\Subscribe.cs" />
+    <Compile Include="Models\EntityModel\POCO\SubscribeCategory.cs" />
+    <Compile Include="Models\EntityModel\POCO\SubscribeNotifiedHistory.cs" />
     <Compile Include="Models\POCO\Enum\FeedbackStatusTypes.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
     <Compile Include="Models\POCO\Structs\FeedbackCategoryIDs.cs" />
@@ -369,13 +375,11 @@
     <Compile Include="Models\EntityModel\POCO\Category.cs" />
     <Compile Include="Models\EntityModel\POCO\Gallery.cs" />
     <Compile Include="Models\EntityModel\POCO\GalleryCategory.cs" />
-    <Compile Include="Models\EntityModel\POCO\LatestSeenNotification.cs" />
     <Compile Include="Models\EntityModel\POCO\Message.cs" />
     <Compile Include="Models\EntityModel\POCO\MessageSeen.cs" />
     <Compile Include="Models\EntityModel\POCO\Notification.cs" />
     <Compile Include="Models\EntityModel\POCO\NotificationType.cs" />
     <Compile Include="Models\EntityModel\POCO\Platform.cs" />
-    <Compile Include="Models\EntityModel\POCO\Report.cs" />
     <Compile Include="Models\EntityModel\POCO\Review.cs" />
     <Compile Include="Models\EntityModel\POCO\Tag.cs" />
     <Compile Include="Models\EntityModel\POCO\TagAppRelation.cs" />
@@ -650,8 +654,15 @@
     <Content Include="Content\css\utilities.css.map">
       <DependentUpon>utilities.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\front-developer.css.map">
+      <DependentUpon>front-developer.css</DependentUpon>
+    </Content>
     <None Include="Content\Less\ckedit-skin-bootstrap.less" />
     <Content Include="Content\Less\color-fonts.less" />
+    <Content Include="Content\css\elements.css" />
+    <Content Include="Content\css\elements.min.css">
+      <DependentUpon>elements.css</DependentUpon>
+    </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
     <Content Include="Content\Less\less-imports.less" />
@@ -979,11 +990,11 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Views\Config\CleanSystem.cshtml" />
     <Content Include="Areas\Admin\Views\Apps\Moderate.cshtml" />
-    <Content Include="Content\css\front-developer.css.map">
-      <DependentUpon>front-developer.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\header.css.map">
       <DependentUpon>header.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\elements.css.map">
+      <DependentUpon>elements.css</DependentUpon>
     </Content>
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
@@ -1345,7 +1356,6 @@
     <Folder Include="Areas\Admin\Views\Services\" />
     <Folder Include="Content\Bundles\" />
     <Folder Include="Models\DesignPattern\Abstracts\" />
-    <Folder Include="Models\EntityModel\GarbageCodes\" />
     <Folder Include="Models\POCO\AdditionalDatabase\" />
     <Folder Include="Models\POCO\Plugable\" />
     <Folder Include="Modules\Filters\" />

@@ -9,9 +9,11 @@ namespace WereViewApp.Models.Context {
 
     #region Application DbContext
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, long, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim> {
-
+    public class ApplicationDbContext :
+        IdentityDbContext
+            <ApplicationUser, ApplicationRole, long, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim> {
         #region Required Part
+
         public ApplicationDbContext()
             : base("DefaultConnection") {
             Configuration.LazyLoadingEnabled = false;
@@ -32,12 +34,11 @@ namespace WereViewApp.Models.Context {
             //       .HasForeignKey(i => i.ParentNavigationID);
 
             modelBuilder.Properties<string>()
-            .Where(x => x.Name == "Name")
-            .Configure(c => c.HasMaxLength(25));
-      
+                .Where(x => x.Name == "Name")
+                .Configure(c => c.HasMaxLength(25));
 
             modelBuilder.Properties<DateTime>()
-            .Configure(c => c.HasColumnType("date"));
+                .Configure(c => c.HasColumnType("date"));
 
             modelBuilder.Entity<ApplicationRole>()
                 .Property(n => n.Name)
@@ -51,7 +52,7 @@ namespace WereViewApp.Models.Context {
             modelBuilder.Entity<ApplicationUser>()
                 .Property(n => n.Id)
                 .HasColumnName("UserID");
-                //.HasColumnAnnotation("Index",new IndexAnnotation(new IndexAttribute("ix_primary_key_index_of_users") { IsClustered = true}));
+            //.HasColumnAnnotation("Index",new IndexAnnotation(new IndexAttribute("ix_primary_key_index_of_users") { IsClustered = true}));
 
             modelBuilder.Entity<ApplicationUser>()
                 .Ignore(n => n.UserID);
@@ -77,15 +78,16 @@ namespace WereViewApp.Models.Context {
                 .Property(n => n.SecurityStamp)
                 .IsUnicode(false)
                 .HasMaxLength(38);
-
         }
 
         public static ApplicationDbContext Create() {
             return new ApplicationDbContext();
         }
+
         #endregion
 
         #region Additional tables
+
         public DbSet<Country> Countries { get; set; }
         public DbSet<CountryAlternativeName> CountryAlternativeNames { get; set; }
         public DbSet<CountryCurrency> CountryCurrencies { get; set; }
@@ -108,44 +110,40 @@ namespace WereViewApp.Models.Context {
         public DbSet<FeedbackAppReviewRelation> FeedbackAppReviewRelations { get; set; }
         public DbSet<TempUserRoleRelation> TempUserRoleRelations { get; set; }
 
-
         #endregion
 
         #region Save Override Methods
+
         /// <summary>
-        /// Save changes and sends an email to the developer if any error occurred.
+        ///     Save changes and sends an email to the developer if any error occurred.
         /// </summary>
         /// <returns>>=0 :executed correctly. -1: error occurred.</returns>
         public override int SaveChanges() {
             try {
                 return base.SaveChanges();
-
             } catch (Exception ex) {
                 //async email
                 AppVar.Mailer.HandleError(ex, "SaveChanges", "Error SaveChanges()");
                 return -1;
             }
-
         }
 
         /// <summary>
-        /// Save changes and sends an email to the developer if any error occurred.
+        ///     Save changes and sends an email to the developer if any error occurred.
         /// </summary>
         /// <returns>>=0 :executed correctly. -1: error occurred.</returns>
         public int SaveChanges(string methodName) {
             try {
                 return base.SaveChanges();
-
             } catch (Exception ex) {
                 //async email
                 AppVar.Mailer.HandleError(ex, "SaveChanges - " + methodName, "Error SaveChanges()");
                 return -1;
             }
-
         }
 
         /// <summary>
-        /// Save changes and sends an email to the developer if any error occurred.
+        ///     Save changes and sends an email to the developer if any error occurred.
         /// </summary>
         /// <param name="entity">A single entity while saving if any error occurred send the info to the developer as well.</param>
         /// <returns>>=0 :executed correctly. -1: error occurred.</returns>
@@ -160,7 +158,7 @@ namespace WereViewApp.Models.Context {
         }
 
         /// <summary>
-        /// Save changes and sends an email to the developer if any error occurred.
+        ///     Save changes and sends an email to the developer if any error occurred.
         /// </summary>
         /// <param name="entity">A single entity while saving if any error occurred send the info to the developer as well.</param>
         /// <returns>>=0 :executed correctly. -1: error occurred.</returns>
@@ -173,11 +171,9 @@ namespace WereViewApp.Models.Context {
                 return -1;
             }
         }
+
         #endregion
-
-
     }
 
     #endregion
-
 }

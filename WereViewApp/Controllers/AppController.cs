@@ -87,14 +87,14 @@ namespace WereViewApp.Controllers {
                 var fileName = WereViewStatics.UProcessorGallery.GetOrganizeName(gallery, true);
                 var absPath =
                     WereViewStatics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(
-                        WereViewStatics.UProcessorGallery.GetCombinationOfRootAndAdditionalRoot() + fileName);
+                        WereViewStatics.UProcessorGallery.GetCombinePathWithAdditionalRoots() + fileName);
                 if (System.IO.File.Exists(absPath)) {
                     System.IO.File.Delete(absPath);
                 }
 
                 absPath =
                     WereViewStatics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(
-                        WereViewStatics.UProcessorGallery.GetCombinationOfRootAndAdditionalRoot() + fileName);
+                        WereViewStatics.UProcessorGallery.GetCombinePathWithAdditionalRoots() + fileName);
                 if (System.IO.File.Exists(absPath)) {
                     System.IO.File.Delete(absPath);
                 }

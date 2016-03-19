@@ -1,5 +1,4 @@
-﻿
-namespace WereViewApp.Models.POCO.IdentityCustomization {
+﻿namespace WereViewApp.Models.POCO.IdentityCustomization {
     public class CountryLanguageRelation {
         public int CountryLanguageRelationID { get; set; }
         public int CountryID { get; set; }
