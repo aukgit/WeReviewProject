@@ -1,5 +1,6 @@
 ﻿.header-2 .logo {
-  margin-top: 0;
+  margin-top: 8px;
+  margin-top: 0.8rem;
 }
 .h1-no-gap {
   margin: 0;
@@ -201,8 +202,8 @@
 }
 @media (min-width: 768px) {
   .header-2 header.sticky {
-    height: 52px;
-    height: 5.2rem;
+    height: 58px;
+    height: 5.8rem;
   }
 }
 @media (max-width: 992px) {

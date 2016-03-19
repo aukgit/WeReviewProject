@@ -1,8 +1,11 @@
 ﻿@import "fonts-rimixens.less";
 
+@header-sm-height : 58px;
+@inital-logo-gap : 8px;
+
 
 .header-2 .logo {
-    margin-top: 0;
+    .margin-top(@inital-logo-gap);
 }
 
 
@@ -266,7 +269,7 @@
     .header-2 {
         header {
             &.sticky {
-                .height(52px);
+                .height(@header-sm-height);
             }
         }
     }
