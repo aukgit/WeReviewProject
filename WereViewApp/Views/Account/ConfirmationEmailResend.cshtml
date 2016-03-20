@@ -14,6 +14,6 @@
 </div>
 @using (Html.BeginForm("ConfirmationEmailResend", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" })) {
     @Html.EditorFor(n=> n.Email)
-    @Html.SubmitButton("Resend", Icons.EmailO)
+    @Html.SubmitButton("Resend", FaIcons.EmailO)
 }
 <div class="top-gap-2x"></div>
