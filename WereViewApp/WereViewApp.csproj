@@ -88,10 +88,6 @@
       <HintPath>..\packages\FluentScheduler.3.1.46\lib\net40\FluentScheduler.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FontAwesomeIcons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FontAwesomeIcons.1.0.2\lib\FontAwesomeIcons.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="ImageResizer">
       <HintPath>ExternalDll\ImageResizer.dll</HintPath>
     </Reference>
@@ -541,8 +537,6 @@
     <Content Include="Content\css\flags32-combo.css" />
     <Content Include="Content\css\flags32.css" />
     <Content Include="Content\css\flags32.png" />
-    <Content Include="Content\css\font-awesome.css" />
-    <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\footer-fixing.css" />
     <Content Include="Content\css\footer-fixing.css.map">
       <DependentUpon>footer-fixing.css</DependentUpon>
@@ -623,7 +617,6 @@
     <Content Include="Content\css\validator.min.css">
       <DependentUpon>validator.css</DependentUpon>
     </Content>
-    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
@@ -979,11 +972,6 @@
     <Content Include="Uploads\Images\YoutubeCovers\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\fa1595d4-da44-4205-b3dd-6b6e524866d0-0.jpg" />
-    <Content Include="Content\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Views\Config\CleanSystem.cshtml" />
     <Content Include="Areas\Admin\Views\Apps\Moderate.cshtml" />
     <Content Include="Content\css\header.css.map">
