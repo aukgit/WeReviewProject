@@ -733,7 +733,6 @@
     <Content Include="Content\Scripts\DevOrgPlugins\ComboOptions.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.country-phone.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.dynamicSelect.js" />
-    <Content Include="Content\Scripts\DevOrgPlugins\app.run.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\dev-component-runner.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.component.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\byId.js" />
@@ -789,6 +788,8 @@
       <DependentUpon>backend-developer.css</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\Feedbacks\Done.cshtml" />
+    <Content Include="Content\Scripts\FrontEnd\wow.js" />
+    <Content Include="Content\Scripts\jquery.blockUI.js" />
     <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog.css" />
     <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog_ie.css" />
     <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog_ie7.css" />
@@ -828,7 +829,32 @@
     <Content Include="Content\Scripts\skins\bootstrapck\sample\css\bootstrapck-sample.css" />
     <Content Include="Content\Scripts\skins\bootstrapck\sample\js\analytics.js" />
     <Content Include="Content\Scripts\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
+    <None Include="Content\Scripts\_references.js" />
     <Content Include="Fonts\fontawesome-webfont.svg" />
+    <Content Include="JavaScript-Mvc-framework\app.config.js" />
+    <Content Include="JavaScript-Mvc-framework\app.global.js" />
+    <Content Include="JavaScript-Mvc-framework\app.initializeMethods.js" />
+    <Content Include="JavaScript-Mvc-framework\app.js" />
+    <Content Include="JavaScript-Mvc-framework\app.run.js" />
+    <Content Include="JavaScript-Mvc-framework\Areas\Admin\Controllers\NavItemsController.js" />
+    <Content Include="JavaScript-Mvc-framework\byId.js" />
+    <Content Include="JavaScript-Mvc-framework\controllers\controllers.js" />
+    <Content Include="JavaScript-Mvc-framework\controllers\homeController.js" />
+    <Content Include="JavaScript-Mvc-framework\controllers\initialize.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\clone.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\ajax.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\spinner.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\constants.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\initialize.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\modal.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\pagination.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\regularExp.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\selectors.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\urls.js" />
+    <Content Include="JavaScript-Mvc-framework\jQueryExtend.fn.js" />
+    <Content Include="JavaScript-Mvc-framework\jQueryExtend.js" />
+    <Content Include="JavaScript-Mvc-framework\schema\url.js" />
+    <Content Include="JavaScript-Mvc-framework\schema\schema.js" />
     <Content Include="Sitemap.xml" />
     <Content Include="Uploads\Images\Advertise\5e324a00-977d-4436-8a15-3ce9e1c424f1-0.jpg" />
     <Content Include="Uploads\Images\Advertise\7fcf1b26-c1e0-4327-ba7f-29d5fd55bd25-0.jpg" />
@@ -998,7 +1024,6 @@
     <Content Include="Content\Scripts\FrontEnd\jquery.sticky.js" />
     <Content Include="Content\Scripts\FrontEnd\main.js" />
     <Content Include="Content\Scripts\FrontEnd\owl.carousel.min.js" />
-    <Content Include="Content\Scripts\FrontEnd\wow.min.js" />
     <None Include="Content\Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Content\Scripts\jquery-2.1.4.js" />
     <Content Include="Content\Scripts\jquery-ui.min.js" />
@@ -1147,7 +1172,6 @@
     <Content Include="Content\revolution-slider\font\revicons90c6.eot" />
     <Content Include="Content\revolution-slider\font\revicons90c6.ttf" />
     <Content Include="Content\revolution-slider\font\revicons90c6.woff" />
-    <Content Include="Content\Scripts\bootstrap.min.js.map" />
     <Content Include="Content\Scripts\jquery.unobtrusive-ajax.min.js.map">
       <DependentUpon>jquery.unobtrusive-ajax.min.js</DependentUpon>
     </Content>
@@ -1339,6 +1363,7 @@
     <Content Include="Views\Shared\_Header-1.cshtml" />
     <Content Include="Views\Tags\Index.cshtml" />
     <Content Include="Views\Tags\GetTagDetail.cshtml" />
+    <Content Include="Views\Shared\_LoadingBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DatabaseTables\" />
