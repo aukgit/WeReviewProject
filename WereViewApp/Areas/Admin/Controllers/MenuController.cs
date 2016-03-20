@@ -15,7 +15,7 @@ using WereViewApp.Models.POCO.IdentityCustomization;
 namespace WereViewApp.Areas.Admin.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
 
-    public class MenuController : IndentityController<ApplicationDbContext> {
+    public class MenuController : IdentityController<ApplicationDbContext> {
         public MenuController() : base(true){
                 
         }

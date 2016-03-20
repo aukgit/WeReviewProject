@@ -9,7 +9,7 @@ using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.IdentityCustomization;
 
 namespace WereViewApp.Areas.Admin.Controllers {
-    public class NavItemsController : IndentityController<ApplicationDbContext> {
+    public class NavItemsController : IdentityController<ApplicationDbContext> {
         public NavItemsController():base(true) {
             
         }

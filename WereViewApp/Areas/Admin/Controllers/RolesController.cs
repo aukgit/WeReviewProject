@@ -7,7 +7,7 @@ using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Modules.Role;
 
 namespace WereViewApp.Areas.Admin.Controllers {
-    public class RolesController : IndentityController<ApplicationDbContext> {
+    public class RolesController : IdentityController<ApplicationDbContext> {
 
         public ActionResult Index() {
             var roles = RoleManager.GetRoles();

@@ -24,7 +24,7 @@ using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Areas.Admin.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-    public class FeedbacksController : IndentityController<ApplicationDbContext> {
+    public class FeedbacksController : IdentityController<ApplicationDbContext> {
         #region Developer Comments - Alim Ul karim
 
         /*

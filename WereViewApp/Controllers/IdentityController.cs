@@ -10,20 +10,20 @@ using WereViewApp.Models.Context;
 
 namespace WereViewApp.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-    public abstract class IndentityController<TContext> : Controller where TContext : ApplicationDbContext, new(){
+    public abstract class IdentityController<TContext> : Controller where TContext : ApplicationDbContext, new(){
         internal readonly TContext db;
         internal ErrorCollector ErrorCollector;
 
-        protected IndentityController() {
+        protected IdentityController() {
         }
 
-        protected IndentityController(bool applicationDbContextRequried) {
+        protected IdentityController(bool applicationDbContextRequried) {
             if (applicationDbContextRequried) {
                 db = new TContext();
             }
         }
 
-        protected IndentityController(bool applicationDbContextRequried, bool errorCollectorRequried) {
+        protected IdentityController(bool applicationDbContextRequried, bool errorCollectorRequried) {
             if (errorCollectorRequried) {
                 ErrorCollector = new ErrorCollector();
             }
