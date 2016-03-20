@@ -1,19 +1,18 @@
-﻿using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.Role;
-using System.Web.Mvc;
+﻿using System.Data.Entity;
 using System.Linq;
+using System.Web.Mvc;
+using WereViewApp.Controllers;
+using WereViewApp.Models.Context;
+using WereViewApp.Models.POCO.Identity;
+using WereViewApp.Modules.Role;
+
 namespace WereViewApp.Areas.Admin.Controllers {
-    public class RolesController : Controller {
-        private readonly ApplicationDbContext _db = new ApplicationDbContext();
+    public class RolesController : IndentityController<ApplicationDbContext> {
 
         public ActionResult Index() {
             var roles = RoleManager.GetRoles();
             return View(roles);
         }
-
-
 
         public ActionResult Create() {
             var roles = RoleManager.GetRoles();
@@ -28,8 +27,8 @@ namespace WereViewApp.Areas.Admin.Controllers {
         [HttpPost]
         public ActionResult Create(ApplicationRole role) {
             if (ModelState.IsValid) {
-                _db.Entry(role).State = System.Data.Entity.EntityState.Added;
-                if (_db.SaveChanges() > -1) {
+                db.Entry(role).State = EntityState.Added;
+                if (db.SaveChanges() > -1) {
                     RoleManager.ResetManager();
                     return RedirectToAction("Index");
                 }
@@ -49,8 +48,8 @@ namespace WereViewApp.Areas.Admin.Controllers {
         [HttpPost]
         public ActionResult Edit(ApplicationRole role) {
             if (ModelState.IsValid) {
-                _db.Entry(role).State = System.Data.Entity.EntityState.Modified;
-                if (_db.SaveChanges() > -1) {
+                db.Entry(role).State = EntityState.Modified;
+                if (db.SaveChanges() > -1) {
                     RoleManager.ResetManager();
                     return RedirectToAction("Index");
                 }
@@ -90,11 +89,8 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
                 RoleManager.RemoveRole(id);
                 RoleManager.ResetManager();
-
             }
             return RedirectToActionPermanent("Index");
         }
-
-
     }
 }

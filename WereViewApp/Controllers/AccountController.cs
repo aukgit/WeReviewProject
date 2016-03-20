@@ -160,13 +160,13 @@ namespace WereViewApp.Controllers {
 
                 Manager = null;
             }
-            _db.Dispose();
+            db.Dispose();
             base.Dispose(disposing);
         }
 
         #region Declaration
 
-        private readonly ApplicationDbContext _db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
 
         private PasswordHasher _passwordHasher = new PasswordHasher();
         public ApplicationUserManager Manager { get; private set; }
@@ -288,7 +288,7 @@ namespace WereViewApp.Controllers {
         public async Task<ActionResult> Register(RegisterViewModel model) {
             var errors = new ErrorCollector();
             //External Validation.
-            var validator = new DevUserValidator(model, errors, _db);
+            var validator = new DevUserValidator(model, errors, db);
             var validOtherConditions = validator.ValidateEveryValidations();
             var emailResender = EmailResendViewModel.GetEmailResendViewModelFromSession();
 

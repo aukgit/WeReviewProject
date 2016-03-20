@@ -184,8 +184,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
                     "CountryLanguageID", "Language", applicationUser.CountryLanguageID);
         }
 
-        public void GetDropDowns(long id) {
-        }
+        public void GetDropDowns(long id) {}
 
         #endregion
 
@@ -241,8 +240,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View("Error");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult UserBlock(UserBlockViewModel model) {
             var user = db.Users.Find(model.UserId);
             if (user != null) {
@@ -278,9 +276,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View("Error");
         }
 
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult EnableUserBlock(UserBlockViewModel model) {
             var user = db.Users.Find(model.UserId);
             if (user != null) {

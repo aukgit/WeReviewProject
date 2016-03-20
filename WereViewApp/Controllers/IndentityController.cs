@@ -2,12 +2,14 @@
 
 using System;
 using System.Web.Mvc;
+using System.Web.UI;
 using DevMvcComponent.Error;
 using WereViewApp.Models.Context;
 
 #endregion
 
 namespace WereViewApp.Controllers {
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public abstract class IndentityController<TContext> : Controller where TContext : ApplicationDbContext, new(){
         internal readonly TContext db;
         internal ErrorCollector ErrorCollector;
