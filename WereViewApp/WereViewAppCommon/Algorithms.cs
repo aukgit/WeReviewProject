@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -1973,7 +1974,7 @@ namespace WereViewApp.WereViewAppCommon {
 
         #region Clean System : Remove Everything from the system.
 
-        private static bool RemoveUploadFolderImages(UploadProcessor uploadProcessor) {
+        private bool RemoveUploadFolderImages(UploadProcessor uploadProcessor) {
             var folderAbsolutePath = WereViewStatics.UProcessorAdvertiseImages.GetCombinePathWithAdditionalRoots();
             var allFileNames = Directory.GetFiles(folderAbsolutePath);
             bool isAllFilesRemoved = true;
@@ -1994,7 +1995,7 @@ namespace WereViewApp.WereViewAppCommon {
         /// Clean whole system, remove every uploads
         /// </summary>
         /// <returns></returns>
-        public static bool CleanWholeSystem() {
+        public bool CleanWholeSystem() {
             int executed = 0;
             using (var db2 = new WereViewAppEntities()) {
                 executed = db2.ResetWholeSystem();
@@ -2013,6 +2014,29 @@ namespace WereViewApp.WereViewAppCommon {
                 }
             }
             return executed > 0;
+        }
+        #endregion
+
+        #region Apps Summary
+        /// <summary>
+        /// Clean whole system, remove every uploads
+        /// </summary>
+        /// <returns></returns>
+        public AppSummaryViewModel GetAppsSummary() {
+            var model = new AppSummaryViewModel();
+            using (var db2 = new WereViewAppEntities()) {
+                var weekStart = DateTime.Now.AddDays(-7);
+                var weekEnd = DateTime.Now;
+                var monthStart = DateTime.Now.AddDays(-30);
+                var monthEnd = DateTime.Now;
+                Expression<Func<App, bool>> weekExpression = app => app.CreatedDate >= weekStart && app.CreatedDate <= weekEnd;
+                Expression<Func<App, bool>> monthExpression = app => app.CreatedDate >= monthStart && app.CreatedDate <= monthEnd;
+                model.TotalApps = db2.Apps.Count();
+                model.LastWeeksApps = db2.Apps.Count(weekExpression);
+                model.LastMonthsApps = db2.Apps.Count(monthExpression);
+                model.TotalDeveloper = db2.Users.Count();
+            }
+            return model;
         }
         #endregion
 

@@ -13,14 +13,14 @@
                                 @if (ViewBag.Success != null) {
                                     <h3 class="h4">
                                         <span class="label label-success">
-                                            <span class="@Icons.CheckMark"></span> @ViewBag.Success
+                                            <span class="@FaIcons.CheckMark"></span> @ViewBag.Success
                                         </span>
                                     </h3>
                                 } else if (ViewBag.ErrorSave != null) {
                                     <div data-wow-duration=".5s" data-wow-iteration="2" data-wow-delay=".7s" class="wow pulse">
                                         <h3 class="h4">
                                             <span class="label label-danger">
-                                                <span class="@Icons.Times"></span> @ViewBag.ErrorSave
+                                                <span class="@FaIcons.Times"></span> @ViewBag.ErrorSave
                                             </span>
                                         </h3>
                                     </div>

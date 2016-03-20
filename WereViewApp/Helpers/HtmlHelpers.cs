@@ -9,7 +9,6 @@ using DevMvcComponent.Enums;
 using FontAwesomeIcons;
 using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Modules.Cache;
-using WereViewApp.Modules.Constants;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Mail;
 using WereViewApp.Modules.Menu;
@@ -38,7 +37,7 @@ namespace WereViewApp.Helpers {
             if (isDependOnUserLogState && UserManager.IsAuthenticated()) {
                 cacheName += UserManager.GetCurrentUserName();
             }
-            var cache = (string)AppConfig.Caches.Get(cacheName);
+            var cache = (string) AppConfig.Caches.Get(cacheName);
 
             if (cache != null && !string.IsNullOrWhiteSpace(cache)) {
                 return new HtmlString(cache);
@@ -65,8 +64,9 @@ namespace WereViewApp.Helpers {
         public static HtmlString RouteListItemGenerate(this HtmlHelper helper, string area, string display,
             string controller, string currentController) {
             var addClass = " class='active' ";
-            if (controller != currentController)
+            if (controller != currentController) {
                 addClass = "";
+            }
             var markup = string.Format("<li{0}><a href='{1}'>{2}</a></li>", addClass, "/" + area + "/" + controller,
                 display);
             //return  new HtmlString(markup);
@@ -75,9 +75,31 @@ namespace WereViewApp.Helpers {
 
         #endregion
 
-        #region Confirming Buttons
+        #region jQueryMobile Options
+
         /// <summary>
-        /// Confirms before submit.
+        ///     JqueryMobile BackButton
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="buttonName"></param>
+        /// <param name="icon"></param>
+        /// <returns></returns>
+        public static HtmlString BackButton(this HtmlHelper helper, string buttonName = "Back", bool isMini = false,
+            string icon = "arrow-l") {
+            var mini = isMini
+                ? "data-mini='true'"
+                : "";
+            var backbtn = "<a href='#' data-role='button' class = 'back-button' data-rel='back' data_icon='" + icon +
+                          "' " + mini + " >" + buttonName + "</a>";
+            return new HtmlString(backbtn);
+        }
+
+        #endregion
+
+        #region Confirming Buttons
+
+        /// <summary>
+        ///     Confirms before submit.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="buttonName"></param>
@@ -85,14 +107,14 @@ namespace WereViewApp.Helpers {
         /// <returns></returns>
         public static HtmlString ConfirmingSubmitButton(this HtmlHelper helper, string buttonName = "Save",
             string alertMessage = "Are you sure about this action?") {
-            var sendbtn = String.Format(
+            var sendbtn = string.Format(
                 "<input type=\"submit\" value=\"{0}\" onClick=\"return confirm('{1}');\" />",
                 buttonName, alertMessage);
             return new HtmlString(sendbtn);
         }
 
         /// <summary>
-        /// Renders a submit button with icon.
+        ///     Renders a submit button with icon.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="buttonName"></param>
@@ -116,19 +138,19 @@ namespace WereViewApp.Helpers {
             } else {
                 rightIcon = string.Format(iconFormt, iconClass);
             }
-            var buttonHtml = String.Format(
+            var buttonHtml = string.Format(
                 "<button type=\"{0}\"  title=\"{1}\" class=\"{2}\">{3} {4} {5}</button>",
                 btnType, tooltip, additionalClasses, leftIcon, buttonName, rightIcon);
             return new HtmlString(buttonHtml);
         }
 
         public static HtmlString SubmitButtonIconRight(this HtmlHelper helper, string buttonName = "Submit",
-           string iconClass = "fa fa-floppy-o",
-           string tooltip = "",
-           string additionalClasses = "btn btn-success",
-           bool placeIconLeft = false,
-           string btnType = "Submit"
-           ) {
+            string iconClass = "fa fa-floppy-o",
+            string tooltip = "",
+            string additionalClasses = "btn btn-success",
+            bool placeIconLeft = false,
+            string btnType = "Submit"
+            ) {
             return SubmitButton(helper, buttonName,
                 iconClass,
                 tooltip,
@@ -138,12 +160,12 @@ namespace WereViewApp.Helpers {
         }
 
         public static HtmlString EmailButtonIconRight(this HtmlHelper helper, string buttonName = "Send",
-          string iconClass = Icons.EmailO,
-          string tooltip = "",
-          string additionalClasses = "btn btn-success",
-          bool placeIconLeft = false,
-          string btnType = "Submit"
-          ) {
+            string iconClass = FaIcons.EmailO,
+            string tooltip = "",
+            string additionalClasses = "btn btn-success",
+            bool placeIconLeft = false,
+            string btnType = "Submit"
+            ) {
             return SubmitButton(helper, buttonName,
                 iconClass,
                 tooltip,
@@ -153,7 +175,7 @@ namespace WereViewApp.Helpers {
         }
 
         /// <summary>
-        /// Renders a remove button with icon.
+        ///     Renders a remove button with icon.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="buttonName"></param>
@@ -171,11 +193,13 @@ namespace WereViewApp.Helpers {
             string additionalClasses = "btn btn-danger") {
             return SubmitButton(helper, buttonName, iconClass, tooltip, btnType, placeIconLeft, additionalClasses);
         }
+
         #endregion
 
         #region Null checker
+
         /// <summary>
-        /// Returns true if all of the given parameter objects are null.
+        ///     Returns true if all of the given parameter objects are null.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="objs"></param>
@@ -186,9 +210,10 @@ namespace WereViewApp.Helpers {
             }
             return objs.All(n => n == null);
         }
+
         /// <summary>
-        /// Returns true if any of the given object is not null.
-        /// Does follow given parameter order.
+        ///     Returns true if any of the given object is not null.
+        ///     Does follow given parameter order.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="objs"></param>
@@ -199,32 +224,13 @@ namespace WereViewApp.Helpers {
             }
             return false;
         }
-        #endregion
-
-        #region jQueryMobile Options
-
-        /// <summary>
-        ///     JqueryMobile BackButton
-        /// </summary>
-        /// <param name="helper"></param>
-        /// <param name="buttonName"></param>
-        /// <param name="icon"></param>
-        /// <returns></returns>
-        public static HtmlString BackButton(this HtmlHelper helper, string buttonName = "Back", bool isMini = false,
-            string icon = "arrow-l") {
-            var mini = (isMini)
-                ? "data-mini='true'"
-                : "";
-            var backbtn = "<a href='#' data-role='button' class = 'back-button' data-rel='back' data_icon='" + icon +
-                          "' " + mini + " >" + buttonName + "</a>";
-            return new HtmlString(backbtn);
-        }
 
         #endregion
 
         #region Drop Downs:  General, Country
 
         #region Country
+
         /// <summary>
         /// </summary>
         /// <param name="countries"></param>
@@ -236,7 +242,7 @@ namespace WereViewApp.Helpers {
             var countryOptionsGenerate = "<select class='form-control selectpicker " + classes +
                                          " country-combo' data-live-search='true' name='CountryID' " + otherAttributes +
                                          " title='Country' data-style='btn-success flag-combo fc-af'>";
-            var sb = new StringBuilder(countryOptionsGenerate, countries.Count * 7);
+            var sb = new StringBuilder(countryOptionsGenerate, countries.Count*7);
             foreach (var country in countries) {
                 sb.Append(string.Format("<option class='flag-country-combo flag {0}' title='| {1}' value='{2}'>",
                     country.Alpha2Code.ToLower(), country.DisplayCountryName, country.CountryID));
@@ -248,6 +254,7 @@ namespace WereViewApp.Helpers {
             sb.AppendLine("</select>");
             return sb.ToString();
         }
+
         /// <summary>
         /// </summary>
         /// <param name="helper"></param>
@@ -305,7 +312,7 @@ namespace WereViewApp.Helpers {
             var countryOptionsGenerate = "<select class='form-control selectpicker " + classes +
                                          "' data-live-search='true' name='" + htmlName + "' " + otherAttributes +
                                          " title='Choose...' data-style='" + classes + "'>";
-            var dt = CachedQueriedData.GetTable(tableName, connectionType, new[] { valueField, textField });
+            var dt = CachedQueriedData.GetTable(tableName, connectionType, new[] {valueField, textField});
             if (dt != null && dt.Rows.Count > 0) {
                 var sb = new StringBuilder(countryOptionsGenerate, dt.Rows.Count + 10);
                 DataRow row;
@@ -332,8 +339,9 @@ namespace WereViewApp.Helpers {
         #region Truncates
 
         public static string Truncate(this HtmlHelper helper, string input, int? length, bool isShowElipseDot = true) {
-            if (string.IsNullOrEmpty(input))
+            if (string.IsNullOrEmpty(input)) {
                 return "";
+            }
             if (length == null) {
                 length = TruncateLength;
             }
@@ -341,14 +349,15 @@ namespace WereViewApp.Helpers {
                 return input;
             }
             if (isShowElipseDot) {
-                return input.Substring(0, (int)length) + "...";
+                return input.Substring(0, (int) length) + "...";
             }
-            return input.Substring(0, (int)length);
+            return input.Substring(0, (int) length);
         }
 
         public static string Truncate(this HtmlHelper helper, string input, int starting, int length) {
-            if (string.IsNullOrEmpty(input))
+            if (string.IsNullOrEmpty(input)) {
                 return "";
+            }
             if (length == -1) {
                 length = input.Length;
             }
@@ -363,8 +372,9 @@ namespace WereViewApp.Helpers {
         }
 
         public static bool IsTruncateNeeded(this HtmlHelper helper, string input, int mid) {
-            if (string.IsNullOrEmpty(input))
+            if (string.IsNullOrEmpty(input)) {
                 return false;
+            }
             if (input.Length > mid) {
                 return false;
             }
@@ -390,7 +400,7 @@ namespace WereViewApp.Helpers {
         }
 
         /// <summary>
-        /// Generates same page url anchor with an icon left or right
+        ///     Generates same page url anchor with an icon left or right
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="linkName">Link display name</param>
@@ -417,10 +427,16 @@ namespace WereViewApp.Helpers {
             }
             if (isLeft) {
                 //left icon
-                markup = string.Format("<div class='header-margin-space-type-1'><a href='{0}' class='{1}' title='{2}'>{4} {3}</a></div>", uri, addClass, title, linkName, icon);
+                markup =
+                    string.Format(
+                        "<div class='header-margin-space-type-1'><a href='{0}' class='{1}' title='{2}'>{4} {3}</a></div>",
+                        uri, addClass, title, linkName, icon);
             } else {
                 //right icon
-                markup = string.Format("<div class='header-margin-space-type-1'><a href='{0}' class='{1}' title='{2}'>{3} {4}</a></div>", uri, addClass, title, linkName, icon);
+                markup =
+                    string.Format(
+                        "<div class='header-margin-space-type-1'><a href='{0}' class='{1}' title='{2}'>{3} {4}</a></div>",
+                        uri, addClass, title, linkName, icon);
             }
             if (h1) {
                 markup = string.Format("<h1 title='{0}' class='h3'>{1}</h1>", title, markup);
@@ -429,12 +445,12 @@ namespace WereViewApp.Helpers {
         }
 
         public static HtmlString HeaderWithIcon(this HtmlHelper helper,
-           string linkName,
-           string title,
-           string iconClass,
-           bool h1 = true,
-           string addClass = "",
-           bool isLeft = true) {
+            string linkName,
+            string title,
+            string iconClass,
+            bool h1 = true,
+            string addClass = "",
+            bool isLeft = true) {
             var markup = "";
             var icon = "";
             if (!string.IsNullOrEmpty(iconClass)) {
@@ -442,10 +458,16 @@ namespace WereViewApp.Helpers {
             }
             if (isLeft) {
                 //left icon
-                markup = string.Format("<div class='header-margin-space-type-1'><a class='{1}' title='{2}'>{4} {3}</a></div>", "", addClass, title, linkName, icon);
+                markup =
+                    string.Format(
+                        "<div class='header-margin-space-type-1'><a class='{1}' title='{2}'>{4} {3}</a></div>", "",
+                        addClass, title, linkName, icon);
             } else {
                 //right icon
-                markup = string.Format("<div class='header-margin-space-type-1'><a class='{1}' title='{2}'>{3} {4}</a></div>", "", addClass, title, linkName, icon);
+                markup =
+                    string.Format(
+                        "<div class='header-margin-space-type-1'><a class='{1}' title='{2}'>{3} {4}</a></div>", "",
+                        addClass, title, linkName, icon);
             }
             if (h1) {
                 markup = string.Format("<h1 title='{0}' class='h3'>{1}</h1>", title, markup);
@@ -454,7 +476,7 @@ namespace WereViewApp.Helpers {
         }
 
         /// <summary>
-        /// Generates same page url anchor with an icon left or right
+        ///     Generates same page url anchor with an icon left or right
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="linkDisplayName">Link display name</param>
@@ -478,7 +500,7 @@ namespace WereViewApp.Helpers {
             bool h1 = false,
             bool isLeft = true) {
             var markup = "";
-            string uri = "";
+            var uri = "";
             var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
             if (!string.IsNullOrWhiteSpace(controllerName)) {
                 uri = urlHelper.Action(actionName, controllerName, routeValues);
@@ -495,27 +517,31 @@ namespace WereViewApp.Helpers {
             }
             if (isLeft) {
                 //left icon
-                markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{4} {3}</a>", uri, addClass, title, linkDisplayName, icon);
+                markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{4} {3}</a>", uri, addClass, title,
+                    linkDisplayName, icon);
             } else {
                 //right icon
-                markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{3} {4}</a>", uri, addClass, title, linkDisplayName, icon);
+                markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{3} {4}</a>", uri, addClass, title,
+                    linkDisplayName, icon);
             }
             if (h1) {
                 markup = string.Format("<h1 title='{0}' class='h3'>{1}</h1>", title, markup);
             }
             return new HtmlString(markup);
         }
+
         /// <summary>
-        /// Returns url without the host name. 
-        /// Slash is included
+        ///     Returns url without the host name.
+        ///     Slash is included
         /// </summary>
         /// <param name="helper"></param>
         /// <returns>Returns url without the host name.</returns>
         public static string GetCurrentUrlString(this HtmlHelper helper) {
             return HttpContext.Current.Request.RawUrl;
         }
+
         /// <summary>
-        /// Returns url whole page url with the host name. 
+        ///     Returns url whole page url with the host name.
         /// </summary>
         /// <param name="helper"></param>
         /// <returns>Returns url whole page url with the host name. </returns>
@@ -668,8 +694,8 @@ namespace WereViewApp.Helpers {
 
         #region Date and Time Display
 
-
-        private static string GetDefaultTimeZoneFormat(DateTimeFormatType type = DateTimeFormatType.Date, string customFormat = null) {
+        private static string GetDefaultTimeZoneFormat(DateTimeFormatType type = DateTimeFormatType.Date,
+            string customFormat = null) {
             string format;
             if (!string.IsNullOrEmpty(customFormat)) {
                 return customFormat;
@@ -699,32 +725,32 @@ namespace WereViewApp.Helpers {
         }
 
         /// <summary>
-        /// Returns a date-time using time-zone via TimeZoneSet
+        ///     Returns a date-time using time-zone via TimeZoneSet
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="timeZone">Timezone set</param>
         /// <param name="dt"></param>
         /// <param name="formatType">
-        /// switch (type) {
+        ///     switch (type) {
         ///     case DateTimeFormatType.Date:
-        ///         format = "dd-MMM-yyyy";
-        ///         break;
+        ///     format = "dd-MMM-yyyy";
+        ///     break;
         ///     case DateTimeFormatType.DateTimeSimple:
-        ///         format = "dd-MMM-yyyy hh:mm:ss tt";
-        ///         break;
+        ///     format = "dd-MMM-yyyy hh:mm:ss tt";
+        ///     break;
         ///     case DateTimeFormatType.DateTimeFull:
-        ///         format = "MMMM dd, yyyy hh:mm:ss tt";
-        ///         break;
+        ///     format = "MMMM dd, yyyy hh:mm:ss tt";
+        ///     break;
         ///     case DateTimeFormatType.DateTimeShort:
-        ///         format = "d-MMM-yy hh:mm:ss tt";
-        ///         break;
+        ///     format = "d-MMM-yy hh:mm:ss tt";
+        ///     break;
         ///     case DateTimeFormatType.Time:
-        ///         format = "hh:mm:ss tt";
-        ///         break;
+        ///     format = "hh:mm:ss tt";
+        ///     break;
         ///     default:
-        ///         format = "dd-MMM-yyyy";
-        ///         break;
-        /// }
+        ///     format = "dd-MMM-yyyy";
+        ///     break;
+        ///     }
         /// </param>
         /// <param name="customFormat">If anything passed then this format will be used.</param>
         /// <param name="addTimeZoneString">Add timezone string with Date. Eg. 26-Aug-2015 (GMT -07:00)</param>
@@ -741,32 +767,32 @@ namespace WereViewApp.Helpers {
         }
 
         /// <summary>
-        /// Returns a date-time using time-zone via UserId
+        ///     Returns a date-time using time-zone via UserId
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="userId">User id</param>
         /// <param name="dt"></param>
         /// <param name="formatType">
-        /// switch (type) {
+        ///     switch (type) {
         ///     case DateTimeFormatType.Date:
-        ///         format = "dd-MMM-yyyy";
-        ///         break;
+        ///     format = "dd-MMM-yyyy";
+        ///     break;
         ///     case DateTimeFormatType.DateTimeSimple:
-        ///         format = "dd-MMM-yyyy hh:mm:ss tt";
-        ///         break;
+        ///     format = "dd-MMM-yyyy hh:mm:ss tt";
+        ///     break;
         ///     case DateTimeFormatType.DateTimeFull:
-        ///         format = "MMMM dd, yyyy hh:mm:ss tt";
-        ///         break;
+        ///     format = "MMMM dd, yyyy hh:mm:ss tt";
+        ///     break;
         ///     case DateTimeFormatType.DateTimeShort:
-        ///         format = "d-MMM-yy hh:mm:ss tt";
-        ///         break;
+        ///     format = "d-MMM-yy hh:mm:ss tt";
+        ///     break;
         ///     case DateTimeFormatType.Time:
-        ///         format = "hh:mm:ss tt";
-        ///         break;
+        ///     format = "hh:mm:ss tt";
+        ///     break;
         ///     default:
-        ///         format = "dd-MMM-yyyy";
-        ///         break;
-        /// }
+        ///     format = "dd-MMM-yyyy";
+        ///     break;
+        ///     }
         /// </param>
         /// <param name="customFormat">If anything passed then this format will be used.</param>
         /// <param name="addTimeZoneString">Add timezone string with Date. Eg. 26-Aug-2015 (GMT -07:00)</param>
@@ -783,31 +809,31 @@ namespace WereViewApp.Helpers {
         }
 
         /// <summary>
-        /// Returns a date-time using current user.
+        ///     Returns a date-time using current user.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="dt"></param>
         /// <param name="formatType">
-        /// switch (type) {
+        ///     switch (type) {
         ///     case DateTimeFormatType.Date:
-        ///         format = "dd-MMM-yyyy";
-        ///         break;
+        ///     format = "dd-MMM-yyyy";
+        ///     break;
         ///     case DateTimeFormatType.DateTimeSimple:
-        ///         format = "dd-MMM-yyyy hh:mm:ss tt";
-        ///         break;
+        ///     format = "dd-MMM-yyyy hh:mm:ss tt";
+        ///     break;
         ///     case DateTimeFormatType.DateTimeFull:
-        ///         format = "MMMM dd, yyyy hh:mm:ss tt";
-        ///         break;
+        ///     format = "MMMM dd, yyyy hh:mm:ss tt";
+        ///     break;
         ///     case DateTimeFormatType.DateTimeShort:
-        ///         format = "d-MMM-yy hh:mm:ss tt";
-        ///         break;
+        ///     format = "d-MMM-yy hh:mm:ss tt";
+        ///     break;
         ///     case DateTimeFormatType.Time:
-        ///         format = "hh:mm:ss tt";
-        ///         break;
+        ///     format = "hh:mm:ss tt";
+        ///     break;
         ///     default:
-        ///         format = "dd-MMM-yyyy";
-        ///         break;
-        /// }
+        ///     format = "dd-MMM-yyyy";
+        ///     break;
+        ///     }
         /// </param>
         /// <param name="customFormat">If anything passed then this format will be used.</param>
         /// <param name="addTimeZoneString">Add timezone string with Date. Eg. 26-Aug-2015 (GMT -07:00)</param>
@@ -824,31 +850,31 @@ namespace WereViewApp.Helpers {
         }
 
         /// <summary>
-        /// Returns a date-time using current user.
+        ///     Returns a date-time using current user.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="dt"></param>
         /// <param name="formatType">
-        /// switch (type) {
+        ///     switch (type) {
         ///     case DateTimeFormatType.Date:
-        ///         format = "dd-MMM-yyyy";
-        ///         break;
+        ///     format = "dd-MMM-yyyy";
+        ///     break;
         ///     case DateTimeFormatType.DateTimeSimple:
-        ///         format = "dd-MMM-yyyy hh:mm:ss tt";
-        ///         break;
+        ///     format = "dd-MMM-yyyy hh:mm:ss tt";
+        ///     break;
         ///     case DateTimeFormatType.DateTimeFull:
-        ///         format = "MMMM dd, yyyy hh:mm:ss tt";
-        ///         break;
+        ///     format = "MMMM dd, yyyy hh:mm:ss tt";
+        ///     break;
         ///     case DateTimeFormatType.DateTimeShort:
-        ///         format = "d-MMM-yy hh:mm:ss tt";
-        ///         break;
+        ///     format = "d-MMM-yy hh:mm:ss tt";
+        ///     break;
         ///     case DateTimeFormatType.Time:
-        ///         format = "hh:mm:ss tt";
-        ///         break;
+        ///     format = "hh:mm:ss tt";
+        ///     break;
         ///     default:
-        ///         format = "dd-MMM-yyyy";
-        ///         break;
-        /// }
+        ///     format = "dd-MMM-yyyy";
+        ///     break;
+        ///     }
         /// </param>
         /// <param name="customFormat">If anything passed then this format will be used.</param>
         /// <param name="addTimeZoneString">Add timezone string with Date. Eg. 26-Aug-2015 (GMT -07:00)</param>
@@ -863,32 +889,32 @@ namespace WereViewApp.Helpers {
         }
 
         /// <summary>
-        /// Returns a date-time without using any timezone.
+        ///     Returns a date-time without using any timezone.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="withoutTimezone"></param>
         /// <param name="dt"></param>
         /// <param name="formatType">
-        /// switch (type) {
+        ///     switch (type) {
         ///     case DateTimeFormatType.Date:
-        ///         format = "dd-MMM-yyyy";
-        ///         break;
+        ///     format = "dd-MMM-yyyy";
+        ///     break;
         ///     case DateTimeFormatType.DateTimeSimple:
-        ///         format = "dd-MMM-yyyy hh:mm:ss tt";
-        ///         break;
+        ///     format = "dd-MMM-yyyy hh:mm:ss tt";
+        ///     break;
         ///     case DateTimeFormatType.DateTimeFull:
-        ///         format = "MMMM dd, yyyy hh:mm:ss tt";
-        ///         break;
+        ///     format = "MMMM dd, yyyy hh:mm:ss tt";
+        ///     break;
         ///     case DateTimeFormatType.DateTimeShort:
-        ///         format = "d-MMM-yy hh:mm:ss tt";
-        ///         break;
+        ///     format = "d-MMM-yy hh:mm:ss tt";
+        ///     break;
         ///     case DateTimeFormatType.Time:
-        ///         format = "hh:mm:ss tt";
-        ///         break;
+        ///     format = "hh:mm:ss tt";
+        ///     break;
         ///     default:
-        ///         format = "dd-MMM-yyyy";
-        ///         break;
-        /// }
+        ///     format = "dd-MMM-yyyy";
+        ///     break;
+        ///     }
         /// </param>
         /// <param name="customFormat">If anything passed then this format will be used.</param>
         /// <returns>Returns a data-time without using timezone</returns>
@@ -901,7 +927,6 @@ namespace WereViewApp.Helpers {
             var format = GetDefaultTimeZoneFormat(formatType, customFormat);
             return dt.HasValue ? dt.Value.ToString(format) : "";
         }
-
 
         #endregion
     }

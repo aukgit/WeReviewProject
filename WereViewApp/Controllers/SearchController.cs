@@ -1,15 +1,16 @@
 ﻿using System.Web.Mvc;
+using System.Web.UI;
 using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.Session;
 using WereViewApp.WereViewAppCommon;
 using WereViewApp.WereViewAppCommon.Structs;
 
 namespace WereViewApp.Controllers {
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class SearchController : Controller {
         // GET: Search
         public ActionResult Index() {
             return View();
-
         }
 
         [HttpPost]
@@ -34,7 +35,7 @@ namespace WereViewApp.Controllers {
                 var displayList = urlGet.Split('-');
                 var displayStr = string.Join(" ", displayList);
                 var results = algorithms.GetSearchResults(SearchQuery, null, null, null,
-                                         CommonVars.SearchResultsMaxResultReturn);
+                    CommonVars.SearchResultsMaxResultReturn);
                 search.DisplayStringToUser = displayStr;
                 search.FoundApps = results;
                 return View(search);

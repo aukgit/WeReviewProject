@@ -10,11 +10,10 @@ namespace WereViewApp.Controllers {
     //[CompressFilter(Order = 1)]
 
     public abstract class BasicController : Controller {
-        internal ErrorCollector ErrorCollector;
         internal readonly ApplicationDbContext db;
+        internal ErrorCollector ErrorCollector;
 
-        protected BasicController() {
-        }
+        protected BasicController() {}
 
         protected BasicController(bool applicationDbContextRequried) {
             if (applicationDbContextRequried) {
