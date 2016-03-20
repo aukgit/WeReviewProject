@@ -20,8 +20,7 @@ namespace WereViewApp.Controllers {
         #region Constructors
 
         public AppsController()
-            : base(true) {
-        }
+            : base(true) {}
 
         #endregion
 
@@ -61,6 +60,7 @@ namespace WereViewApp.Controllers {
             ViewBag.breadcrumbs = _algorithms.GetBredcrumbsBasedOnCurrentUrl();
             return View("Index");
         }
+
         [Authorize]
         public ActionResult Reviewed() {
             ViewBag.Title = "App Reviewed By You";
@@ -70,11 +70,11 @@ namespace WereViewApp.Controllers {
         }
 
         /// <summary>
-        /// Get apps filtered by : 
-        /// site.com/Apps/Apple-8/Games or 
-        /// site.com/Apps/Apple-8 or 
-        /// site.com/Apps/Apple/Games or 
-        /// site.com/Apps/Apple
+        ///     Get apps filtered by :
+        ///     site.com/Apps/Apple-8/Games or
+        ///     site.com/Apps/Apple-8 or
+        ///     site.com/Apps/Apple/Games or
+        ///     site.com/Apps/Apple
         /// </summary>
         /// <param name="platform"></param>
         /// <param name="platformVersion"></param>
@@ -82,8 +82,10 @@ namespace WereViewApp.Controllers {
         /// <param name="page"></param>
         /// <returns></returns>
         //[OutputCache(CacheProfile = "Day", VaryByParam = "platform;platformVersion;category;page")]
-        public ActionResult GetByPlatformAndCategory(string platform, double? platformVersion, string category, int page = 1) {
-            var apps = _algorithms.GetAppsFilteredByPlatformAndCategory(platform, platformVersion, category,page, ViewBag, db);
+        public ActionResult GetByPlatformAndCategory(string platform, double? platformVersion, string category,
+            int page = 1) {
+            var apps = _algorithms.GetAppsFilteredByPlatformAndCategory(platform, platformVersion, category, page,
+                ViewBag, db);
             if (apps != null) {
                 ViewBag.Title = "Apps : " + _algorithms.GetCurrentUrlWithoutHostNameWithoutSlash();
                 ViewBag.Meta = ViewBag.Title;
@@ -94,6 +96,5 @@ namespace WereViewApp.Controllers {
             }
             return View("_AppNotFound");
         }
-
     }
 }

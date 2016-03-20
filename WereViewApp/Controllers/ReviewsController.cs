@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using DevMvcComponent.Pagination;
 using WereViewApp.Filter;
 using WereViewApp.Models.EntityModel;
@@ -17,7 +18,9 @@ using WereViewApp.WereViewAppCommon;
 #endregion
 
 namespace WereViewApp.Controllers {
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class ReviewsController : AdvanceController {
+
         #region Declarations
 
         private readonly Algorithms algorithms = new Algorithms();
@@ -98,7 +101,6 @@ namespace WereViewApp.Controllers {
         #region Display Review: user/reviews/id
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="username">Username</param>
         /// <param name="page"></param>
@@ -108,7 +110,7 @@ namespace WereViewApp.Controllers {
             ApplicationUser user;
             if (UserManager.IsUserNameExistWithValidation(username, out user)) {
                 var reviews = db.Reviews
-                                .Include(n=> n.User)
+                                .Include(n => n.User)
                                 .Where(n => n.UserID == user.UserID)
                                 .OrderByDescending(n => n.ReviewID);
 
@@ -127,9 +129,11 @@ namespace WereViewApp.Controllers {
             }
             return View("_404");
         }
+
         #endregion
 
         #region Like
+
         [Authorize]
         [CheckRegistrationComplete]
         [HttpPost]
@@ -162,13 +166,13 @@ namespace WereViewApp.Controllers {
             algorithms.ForceAppReviewToLoad(appId);
             Thread.Sleep(1000);
 
-            return Json(new { isDone = result }, "text/html");
-
+            return Json(new {isDone = result}, "text/html");
         }
 
         #endregion
 
         #region Dilsike
+
         [Authorize]
         [CheckRegistrationComplete]
         [HttpPost]
@@ -201,7 +205,7 @@ namespace WereViewApp.Controllers {
             db.SaveChanges();
             Thread.Sleep(1000);
             algorithms.ForceAppReviewToLoad(appId);
-            return Json(new { isDone = result }, "text/html");
+            return Json(new {isDone = result}, "text/html");
         }
 
         #endregion
@@ -221,10 +225,10 @@ namespace WereViewApp.Controllers {
                 if (state) {
                     algorithms.AfterReviewIsSavedFixRatingNReviewCountInApp(review, false, db);
                     algorithms.ForceAppReviewToLoad(review.AppID);
-                    return Json(new { isDone = true, msg = "Successful." }, JsonRequestBehavior.AllowGet); // return true;
+                    return Json(new {isDone = true, msg = "Successful."}, JsonRequestBehavior.AllowGet); // return true;
                 }
             }
-            return Json(new { isDone = false, msg = "failed." }, JsonRequestBehavior.AllowGet); // return true;
+            return Json(new {isDone = false, msg = "failed."}, JsonRequestBehavior.AllowGet); // return true;
         }
 
         #endregion
@@ -351,15 +355,14 @@ namespace WereViewApp.Controllers {
                     AppVar.SetSavedStatus(ViewBag, _createdSaved); // Saved Successfully.          
                 }
 
-                return Json(new { isDone = true, msg = "Successful." }, JsonRequestBehavior.AllowGet); // return true;
+                return Json(new {isDone = true, msg = "Successful."}, JsonRequestBehavior.AllowGet); // return true;
             }
 
-            return Json(new { isDone = false, msg = "failed." }, JsonRequestBehavior.AllowGet); // return true;
+            return Json(new {isDone = false, msg = "failed."}, JsonRequestBehavior.AllowGet); // return true;
         }
 
         private void AddNecessaryFields(Review review) {
             review.UserID = UserManager.GetLoggedUserId();
-
 
             if (review.Comments != null) {
                 review.Comment1 = review.Comments.GetStringCutOff(100);
@@ -368,7 +371,5 @@ namespace WereViewApp.Controllers {
         }
 
         #endregion
-
-      
     }
 }

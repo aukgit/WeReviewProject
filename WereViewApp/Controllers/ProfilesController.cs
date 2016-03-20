@@ -18,12 +18,10 @@ using WereViewApp.WereViewAppCommon;
 namespace WereViewApp.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class ProfilesController : AdvanceController {
+        private const int MaxNumbersOfPagesShow = 8;
 
         public ProfilesController()
-            : base(true) {
-
-        }
-        private const int MaxNumbersOfPagesShow = 8;
+            : base(true) {}
 
         //[OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         [OutputCache(CacheProfile = "Hour", VaryByParam = "*")]
@@ -35,19 +33,18 @@ namespace WereViewApp.Controllers {
             ViewBag.Keywords = ViewBag.Meta;
             var users = UserManager.GetAllUsersAsIQueryable();
 
-
             var cachePagesString = AppConfig.Caches.Get(CacheNames.ProfilePaginationDataCount);
             var count = -1;
             if (cachePagesString == null) {
                 count = users.Select(n => n.Id).Count();
             } else {
-                count = (int)cachePagesString;
+                count = (int) cachePagesString;
             }
             // add ordered by
             users = users.OrderByDescending(n => n.Id);
-            var pagesItems = (double)AppConfig.Setting.PageItems;
+            var pagesItems = (double) AppConfig.Setting.PageItems;
 
-            var pagesExist = (int)Math.Ceiling(count / pagesItems);
+            var pagesExist = (int) Math.Ceiling(count/pagesItems);
             var pageInfo = new PaginationInfo {
                 ItemsInPage = AppConfig.Setting.PageItems,
                 PageNumber = page,
@@ -61,7 +58,7 @@ namespace WereViewApp.Controllers {
         }
 
         /// <summary>
-        /// GET: Profiles/username?page=1
+        ///     GET: Profiles/username?page=1
         /// </summary>
         /// <param name="username">Username</param>
         /// <param name="page"></param>
@@ -69,11 +66,8 @@ namespace WereViewApp.Controllers {
         //[OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         [OutputCache(CacheProfile = "Hour", VaryByParam = "*")]
         public ActionResult Profile(string username, int page = 1) {
-
-
             ApplicationUser user;
             if (UserManager.IsUserNameExistWithValidation(username, out user)) {
-
                 var algorithms = new Algorithms();
                 ViewBag.Title = username + "'s apps collection";
                 ViewBag.Meta = "Mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
@@ -81,9 +75,9 @@ namespace WereViewApp.Controllers {
 
                 if (user != null) {
                     var apps = algorithms.GetViewableApps(db)
-                        .Where(n => n.PostedByUserID == user.UserID)
-                        .Include(n => n.User)
-                        .OrderByDescending(n => n.AppID);
+                                         .Where(n => n.PostedByUserID == user.UserID)
+                                         .Include(n => n.User)
+                                         .OrderByDescending(n => n.AppID);
 
                     var pageInfo = new PaginationInfo {
                         ItemsInPage = AppConfig.Setting.PageItems,
@@ -93,7 +87,7 @@ namespace WereViewApp.Controllers {
                     var appsForThisPage =
                         apps.GetPageData(pageInfo, CacheNames.ProfilePaginationDataForSpecificProfile, true)
                             .ToList();
-                    algorithms.GetEmbedImagesWithApp(appsForThisPage, db, (int)pageInfo.ItemsInPage,
+                    algorithms.GetEmbedImagesWithApp(appsForThisPage, db, (int) pageInfo.ItemsInPage,
                         GalleryCategoryIDs.SearchIcon);
                     ViewBag.Apps = appsForThisPage;
                     var eachUrl = "/profiles/" + user.UserName + "?page=@page";

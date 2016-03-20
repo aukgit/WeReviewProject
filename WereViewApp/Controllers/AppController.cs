@@ -41,14 +41,13 @@ namespace WereViewApp.Controllers {
         public AppController()
             : base(true) {
             ViewBag.controller = ControllerName;
-
         }
 
         #endregion
 
         #region Single App Display Page : site.com/Apps/Apple-8/Games/plant-vs-zombies
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="platform"></param>
         /// <param name="platformVersion"></param>
@@ -57,7 +56,8 @@ namespace WereViewApp.Controllers {
         /// <returns></returns>
         [AllowAnonymous]
         [OutputCache(CacheProfile = "Short", VaryByParam = "platform;platformVersion;category;url")]
-        public async Task<ActionResult> SingleAppDisplay(string platform, float? platformVersion, string category, string url) {
+        public async Task<ActionResult> SingleAppDisplay(string platform, float? platformVersion, string category,
+            string url) {
             var app = _algorithms.GetSingleAppForDisplay(platform, platformVersion, category, url, 30, db);
             if (app != null) {
                 _algorithms.IncreaseViewCount(app, db);
@@ -88,15 +88,15 @@ namespace WereViewApp.Controllers {
                 var absPath =
                     WereViewStatics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(
                         WereViewStatics.UProcessorGallery.GetCombinePathWithAdditionalRoots() + fileName);
-                if (System.IO.File.Exists(absPath)) {
-                    System.IO.File.Delete(absPath);
+                if (FileSys.Exists(absPath)) {
+                    FileSys.Delete(absPath);
                 }
 
                 absPath =
                     WereViewStatics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(
                         WereViewStatics.UProcessorGallery.GetCombinePathWithAdditionalRoots() + fileName);
-                if (System.IO.File.Exists(absPath)) {
-                    System.IO.File.Delete(absPath);
+                if (FileSys.Exists(absPath)) {
+                    FileSys.Delete(absPath);
                 }
 
                 ResetSessionForUploadSequence(uploadGuid);
@@ -126,26 +126,28 @@ namespace WereViewApp.Controllers {
                        WereViewStatics.UProcessorGallery.AdditionalRoots;
 
             var uploadedImages = db.Galleries
-                .Where(n => n.GalleryCategoryID == GalleryCategoryIDs.AppPageGallery && n.UploadGuid == app.UploadGuid)
-                .OrderBy(n => n.Sequence)
-                .AsEnumerable()
-                .Select(n => new UploadedGalleryImageEditViewModel {
-                    Tile = n.Title,
-                    Subtitle = n.Subtitle,
-                    Sequence = n.Sequence,
-                    UploadGuid = n.UploadGuid,
-                    Id = app.AppID,
-                    ImageURL = path + UploadProcessor.GetOrganizeNameStatic(n, true, false, ""),
-                    DeleteURL = "/" + ControllerName +
-                                "/DeleteGalleryImage?uploadGuid=" + n.UploadGuid +
-                                "&sequence=" + n.Sequence +
-                                "&__RequestVerificationToken=" + token
-                    //ReUploadURL = "/" + _controllerName +
-                    //"/ReuploadGalleryImage?uploadGuid=" + n.UploadGuid +
-                    //"&sequence=" + n.Sequence +
-                    //"&__RequestVerificationToken=" + token
-                }).ToList();
-
+                                   .Where(
+                                       n =>
+                                           n.GalleryCategoryID == GalleryCategoryIDs.AppPageGallery &&
+                                           n.UploadGuid == app.UploadGuid)
+                                   .OrderBy(n => n.Sequence)
+                                   .AsEnumerable()
+                                   .Select(n => new UploadedGalleryImageEditViewModel {
+                                       Tile = n.Title,
+                                       Subtitle = n.Subtitle,
+                                       Sequence = n.Sequence,
+                                       UploadGuid = n.UploadGuid,
+                                       Id = app.AppID,
+                                       ImageURL = path + UploadProcessor.GetOrganizeNameStatic(n, true, false, ""),
+                                       DeleteURL = "/" + ControllerName +
+                                                   "/DeleteGalleryImage?uploadGuid=" + n.UploadGuid +
+                                                   "&sequence=" + n.Sequence +
+                                                   "&__RequestVerificationToken=" + token
+                                       //ReUploadURL = "/" + _controllerName +
+                                       //"/ReuploadGalleryImage?uploadGuid=" + n.UploadGuid +
+                                       //"&sequence=" + n.Sequence +
+                                       //"&__RequestVerificationToken=" + token
+                                   }).ToList();
 
             return View(uploadedImages);
         }
@@ -401,7 +403,7 @@ namespace WereViewApp.Controllers {
 
         #region Details
 
-        public ActionResult Details(Int64 id) {
+        public ActionResult Details(long id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -517,7 +519,7 @@ namespace WereViewApp.Controllers {
             rApp.AppName = appDraft.AppName;
             rApp.CategoryID = appDraft.CategoryID;
             rApp.PlatformID = appDraft.PlatformID;
-            rApp.PlatformVersion = (double)appDraft.PlatformVersion;
+            rApp.PlatformVersion = (double) appDraft.PlatformVersion;
             rApp.Description = appDraft.Description;
             rApp.PostedByUserID = appDraft.PostedByUserID;
             rApp.IsVideoExist = appDraft.IsVideoExist == true;
@@ -600,7 +602,6 @@ namespace WereViewApp.Controllers {
             return str;
         }
 
-
         /// <summary>
         ///     Fix youtube link
         ///     add user
@@ -645,7 +646,8 @@ namespace WereViewApp.Controllers {
         /// </summary>
         /// <param name="app"></param>
         private void AddNecessaryBothOnPostingNEditing(App app) {
-            app.Url = _algorithms.GenerateHyphenUrlStringValid(app.PlatformVersion, app.CategoryID, app.AppName, app.PlatformID, db,
+            app.Url = _algorithms.GenerateHyphenUrlStringValid(app.PlatformVersion, app.CategoryID, app.AppName,
+                app.PlatformID, db,
                 app.AppID);
             app.UrlWithoutEscapseSequence = _algorithms.GetUrlStringExceptEscapeSequence(app.Url);
             app.PostedByUserID = UserManager.GetLoggedUserId();
@@ -668,7 +670,7 @@ namespace WereViewApp.Controllers {
             }
         }
 
-        public void GetDropDowns(Int64 id) {
+        public void GetDropDowns(long id) {
             ViewBag.CategoryID = new SelectList(db.Categories.ToList(), "CategoryID", "CategoryName");
             ViewBag.PlatformID = new SelectList(db.Platforms.ToList(), "PlatformID", "PlatformName");
         }
@@ -784,13 +786,13 @@ namespace WereViewApp.Controllers {
                 max =
                     db.Galleries.Where(
                         n => n.UploadGuid == uploadGuid && n.GalleryCategoryID == GalleryCategoryIDs.AppPageGallery)
-                        .Max(n => n.Sequence);
+                      .Max(n => n.Sequence);
             }
 
             max += 2;
             Session[uploadGuid.ToString()] = max;
             max -= 1;
-            return (byte)max;
+            return (byte) max;
         }
 
         private int GetHowManyGalleryImageExist(Guid uploadGuid) {
@@ -811,7 +813,6 @@ namespace WereViewApp.Controllers {
             max =
                 db.Galleries.Count(
                     n => n.UploadGuid == uploadGuid && n.GalleryCategoryID == GalleryCategoryIDs.AppPageGallery);
-
 
             max += 2;
             Session[sessionName] = max;
@@ -835,7 +836,7 @@ namespace WereViewApp.Controllers {
 
                 if (nextCount > AppVar.Setting.GalleryMaxPictures) {
                     ResetSessionForUploadSequence(app.UploadGuid);
-                    return Json(new { isUploaded = false, uploadedFiles = 0, message = "You are out of your limit." },
+                    return Json(new {isUploaded = false, uploadedFiles = 0, message = "You are out of your limit."},
                         "text/html");
                 }
                 var fileName = app.UploadGuid.ToString();
@@ -864,7 +865,6 @@ namespace WereViewApp.Controllers {
 
                         //upload app-details page gallery image
                         WereViewStatics.UProcessorGallery.UploadFile(file, fileName, nextSequence, true, true);
-
 
                         //successfully uploaded now save a gallery info
                         var galleryCategory = await db.GalleryCategories.FindAsync(GalleryCategoryIDs.AppPageGallery);
@@ -904,7 +904,6 @@ namespace WereViewApp.Controllers {
                         // resize
                         //new Thread(() => {
 
-
                         // resize app-details page gallery image
 
                         WereViewStatics.UProcessorGallery.ResizeImageAndProcessImage(gallery, galleryCategory);
@@ -916,7 +915,6 @@ namespace WereViewApp.Controllers {
                         // #apps detail page gallery thumbs generate
                         //WereViewStatics.uProcessorGallery.ResizeImageAndProcessImage(source, target, thumbsCategory.Width,
                         //    thumbsCategory.Height, gallery.Extension);
-
 
                         var source = "~/Uploads/Images/" + CommonVars.AdditionalRootGalleryLocation +
                                      UploadProcessor.GetOrganizeNameStatic(gallery, true, true);
@@ -938,7 +936,7 @@ namespace WereViewApp.Controllers {
                             message = "+" + countUploaded + " files successfully done."
                         }, "text/html");
             }
-            return Json(new { isUploaded = false, uploadedFiles = 0, message = "No file send." }, "text/html");
+            return Json(new {isUploaded = false, uploadedFiles = 0, message = "No file send."}, "text/html");
         }
 
         #region Process Similar Uploads
@@ -984,9 +982,9 @@ namespace WereViewApp.Controllers {
                     uploadProcessorSepecific.RemoveTempImage(gallery);
                     //}).Start();
                 }
-                return Json(new { isUploaded = true, message = "successfully done" }, "text/html");
+                return Json(new {isUploaded = true, message = "successfully done"}, "text/html");
             }
-            return Json(new { isUploaded = false, message = "No file send." }, "text/html");
+            return Json(new {isUploaded = false, message = "No file send."}, "text/html");
         }
 
         #endregion
@@ -1050,7 +1048,7 @@ namespace WereViewApp.Controllers {
 
         #region Edit or modify record
 
-        public ActionResult Edit(Int64 id) {
+        public ActionResult Edit(long id) {
             var app = _algorithms.GetEditingApp(id, db);
 
             if (app == null) {
@@ -1062,7 +1060,6 @@ namespace WereViewApp.Controllers {
             ReadVirtualFields(app);
             return View(app);
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]

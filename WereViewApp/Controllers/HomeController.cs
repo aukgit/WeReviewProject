@@ -14,21 +14,6 @@ using WereViewApp.Modules.DevUser;
 
 namespace WereViewApp.Controllers {
     public class HomeController : BasicController {
-        #region Constants and variables
-
-        //const string DeletedError = "Sorry for the inconvenience, last record is not removed. Please be in touch with admin.";
-        //const string DeletedSaved = "Removed successfully.";
-        //const string EditedSaved = "Modified successfully.";
-        //const string EditedError = "Sorry for the inconvenience, transaction is failed to save into the database. Please be in touch with admin.";
-        //const string CreatedError = "Sorry for the inconvenience, couldn't create the last transaction record.";
-        //const string CreatedSaved = "Transaction is successfully added to the database.";
-        const string ControllerName = "Home";
-        ///Constant value for where the controller is actually visible.
-        const string ControllerVisibleUrl = "/Report/";
-        //const string CurrentControllerRemoveOutputCacheUrl = "/Partials/ReportID";
-        const string DynamicLoadPartialController = "/Partials/";
-        bool DropDownDynamic = true;
-        #endregion
         public HomeController()
             : base(true) {
             ViewBag.visibleUrl = ControllerVisibleUrl;
@@ -55,7 +40,13 @@ namespace WereViewApp.Controllers {
         //[OutputCache(CacheProfile = "Hour", VaryByCustom = "byuser")]
         [Authorize]
         public ActionResult ContactUs() {
-            ViewBag.FeedbackCateoryID = new SelectList(db.FeedbackCategories.Where(n => !(n.FeedbackCategoryID == FeedbackCategoryIDs.MobileAppReport || n.FeedbackCategoryID == FeedbackCategoryIDs.ReviewReport)).ToList(), "FeedbackCategoryID", "Category");
+            ViewBag.FeedbackCateoryID =
+                new SelectList(
+                    db.FeedbackCategories.Where(
+                        n =>
+                            !(n.FeedbackCategoryID == FeedbackCategoryIDs.MobileAppReport ||
+                              n.FeedbackCategoryID == FeedbackCategoryIDs.ReviewReport)).ToList(), "FeedbackCategoryID",
+                    "Category");
             AppVar.GetTitlePageMeta(ViewBag, "Contact Us", null, "Contact Us - " + AppVar.Name,
                 "Contact Us, Feedback about " + AppVar.Name);
             return View();
@@ -66,7 +57,7 @@ namespace WereViewApp.Controllers {
         public async Task<ViewResult> ContactUs(Feedback feedback) {
             AppVar.GetTitlePageMeta(ViewBag, "Contact Us", null, "Contact Us - " + AppVar.Name,
                 "Contact Us, Feedback about " + AppVar.Name);
-                var user = UserManager.GetCurrentUser();
+            var user = UserManager.GetCurrentUser();
             var oneHourBefore = DateTime.Now.AddHours(-1);
             var isReportedBefore = db.Feedbacks.Any(n => n.Username == user.UserName && n.PostedDate >= oneHourBefore);
             if (isReportedBefore) {
@@ -87,9 +78,34 @@ namespace WereViewApp.Controllers {
                 return View("Done");
             }
 
-            ViewBag.FeedbackCateoryID = new SelectList(db.FeedbackCategories.Where(n => !(n.FeedbackCategoryID == FeedbackCategoryIDs.MobileAppReport || n.FeedbackCategoryID == FeedbackCategoryIDs.ReviewReport)).ToList(), "FeedbackCategoryID", "Category");
+            ViewBag.FeedbackCateoryID =
+                new SelectList(
+                    db.FeedbackCategories.Where(
+                        n =>
+                            !(n.FeedbackCategoryID == FeedbackCategoryIDs.MobileAppReport ||
+                              n.FeedbackCategoryID == FeedbackCategoryIDs.ReviewReport)).ToList(), "FeedbackCategoryID",
+                    "Category");
             AppVar.SetErrorStatus(ViewBag);
             return View(feedback);
         }
+
+        #region Constants and variables
+
+        //const string DeletedError = "Sorry for the inconvenience, last record is not removed. Please be in touch with admin.";
+        //const string DeletedSaved = "Removed successfully.";
+        //const string EditedSaved = "Modified successfully.";
+        //const string EditedError = "Sorry for the inconvenience, transaction is failed to save into the database. Please be in touch with admin.";
+        //const string CreatedError = "Sorry for the inconvenience, couldn't create the last transaction record.";
+        //const string CreatedSaved = "Transaction is successfully added to the database.";
+        private const string ControllerName = "Home";
+
+        /// Constant value for where the controller is actually visible.
+        private const string ControllerVisibleUrl = "/Report/";
+
+        //const string CurrentControllerRemoveOutputCacheUrl = "/Partials/ReportID";
+        private const string DynamicLoadPartialController = "/Partials/";
+        private readonly bool DropDownDynamic = true;
+
+        #endregion
     }
 }
