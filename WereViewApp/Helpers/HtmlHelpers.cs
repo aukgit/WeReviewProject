@@ -138,7 +138,7 @@ namespace WereViewApp.Helpers {
         }
 
         public static HtmlString EmailButtonIconRight(this HtmlHelper helper, string buttonName = "Send",
-          string iconClass = Icons.EmailO,
+          string iconClass = FaIcons.EmailO,
           string tooltip = "",
           string additionalClasses = "btn btn-success",
           bool placeIconLeft = false,
