@@ -9,8 +9,8 @@ $.app.initialize = function () {
     var app = $.app;
     app.initHiddenContainer();
     app.config.setup(); // runs all configuration before running all initialize methods.
+    app.initializeMethods.initialize(); // initialize and run everything in the initializeMethods file.
     // run controller module
     app.controllers.initialize(); // runs all controllers modules.
-    app.initializeMethods.initialize(); // initialize and run everything in the initializeMethods file.
 
 };

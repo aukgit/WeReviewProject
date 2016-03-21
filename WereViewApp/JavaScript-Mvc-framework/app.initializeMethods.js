@@ -30,6 +30,7 @@ $.app.initializeMethods = {
         }
     },
     menuEnable: function() {
+        $().jetmenu();
         var menuPage = $("#menu-item-edit-page");
         if (menuPage.length > 0) {
             var div = $("#hasDropdownDiv");
@@ -50,35 +51,34 @@ $.app.initializeMethods = {
         }
     },
     datePickerComponentEnable: function () {
+        if ($.isFunc($.datetimepicker)) {
+            $(".datetimepicker-start").datetimepicker({
+                pickDate: true,                 //en/disables the date picker
+                pickTime: true,                 //en/disables the time picker
+                useMinutes: true,               //en/disables the minutes picker
+                useSeconds: true,               //en/disables the seconds picker
+                useCurrent: true,               //when true, picker will set the value to the current date/time     
+                minuteStepping: 1,               //set the minute stepping
+                defaultDate: "",                 //sets a default date, accepts js dates, strings and moment objects
+                disabledDates: [],               //an array of dates that cannot be selected
+                enabledDates: [],                //an array of dates that can be selected
+                sideBySide: true              //show the date and time picker side by side
 
-        $(".datetimepicker-start").datetimepicker({
-            pickDate: true,                 //en/disables the date picker
-            pickTime: true,                 //en/disables the time picker
-            useMinutes: true,               //en/disables the minutes picker
-            useSeconds: true,               //en/disables the seconds picker
-            useCurrent: true,               //when true, picker will set the value to the current date/time     
-            minuteStepping: 1,               //set the minute stepping
-            defaultDate: "",                 //sets a default date, accepts js dates, strings and moment objects
-            disabledDates: [],               //an array of dates that cannot be selected
-            enabledDates: [],                //an array of dates that can be selected
-            sideBySide: true              //show the date and time picker side by side
+            });
 
-        });
-
-        $(".datepicker-start").datetimepicker({
-            pickDate: true,                 //en/disables the date picker
-            pickTime: false,                 //en/disables the time picker
-            useMinutes: false,               //en/disables the minutes picker
-            useSeconds: false,               //en/disables the seconds picker
-            useCurrent: true,               //when true, picker will set the value to the current date/time     
-            minuteStepping: 1,               //set the minute stepping
-            defaultDate: "",                 //sets a default date, accepts js dates, strings and moment objects
-            disabledDates: [],               //an array of dates that cannot be selected
-            enabledDates: [],                //an array of dates that can be selected
-
-            sideBySide: true              //show the date and time picker side by side
-
-        });
+            $(".datepicker-start").datetimepicker({
+                pickDate: true,                 //en/disables the date picker
+                pickTime: false,                 //en/disables the time picker
+                useMinutes: false,               //en/disables the minutes picker
+                useSeconds: false,               //en/disables the seconds picker
+                useCurrent: true,               //when true, picker will set the value to the current date/time     
+                minuteStepping: 1,               //set the minute stepping
+                defaultDate: "",                 //sets a default date, accepts js dates, strings and moment objects
+                disabledDates: [],               //an array of dates that cannot be selected
+                enabledDates: [],                //an array of dates that can be selected
+                sideBySide: true              //show the date and time picker side by side
+            });
+        }
     },
     tagComponentEnable: function () {
         var $processForm = $.byId("server-validation-form");
@@ -134,21 +134,15 @@ $.app.initializeMethods = {
         });
     },
     loadWow: function () {
-        var options = {
-            scaleColor: false,
-            trackColor: 'rgba(266,144,0,0.0)',
-            barColor: '#ff7200',
-            lineWidth: 2,
-            lineCap: 'butt',
-            size: 253
-        };
-        $().jetmenu();
-        window.addEventListener('DOMContentLoaded', function () {
-            var charts = [];
-            [].forEach.call(document.querySelectorAll('.chart'), function (el) {
-                charts.push(new EasyPieChart(el, options));
-            });
-        });
+        //var options = {
+        //    scaleColor: false,
+        //    trackColor: 'rgba(266,144,0,0.0)',
+        //    barColor: '#ff7200',
+        //    lineWidth: 2,
+        //    lineCap: 'butt',
+        //    size: 253
+        //};
+
 
         var wow = new WOW({
             boxClass: 'wow',      // animated element css class (default is wow)

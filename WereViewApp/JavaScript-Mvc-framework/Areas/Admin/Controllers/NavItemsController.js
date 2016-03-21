@@ -67,7 +67,7 @@ $.app.controllers.navItemsController = {
         },
         orderingTextBoxChange : function() {
             var $allInputs = $(".ordering-textbox");
-            var hash = $.app.schema.hashset.create();
+            var hash = $.app.schema.hashset.create(3);
             console.log(hash);
             console.log($allInputs);
             $allInputs.keypress(function (e) {
