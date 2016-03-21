@@ -14,6 +14,12 @@ namespace WereViewApp.Models.EntityModel
     
     public partial class CellPhone
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CellPhone()
+        {
+            this.Users = new HashSet<User>();
+        }
+    
         public long CellPhoneID { get; set; }
         public long UserID { get; set; }
         public byte PlatformID { get; set; }
@@ -21,5 +27,7 @@ namespace WereViewApp.Models.EntityModel
     
         public virtual Platform Platform { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

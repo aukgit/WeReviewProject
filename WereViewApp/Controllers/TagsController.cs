@@ -1,11 +1,16 @@
 ﻿using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using DevMvcComponent.Pagination;
 using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Controllers {
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class TagsController : AdvanceController {
+        // GET: Tags
+        private const int MaxNumbersOfPagesShow = 8;
+
         #region Declarations
 
         private readonly Algorithms _algorithms = new Algorithms();
@@ -15,17 +20,13 @@ namespace WereViewApp.Controllers {
         #region Constructors
 
         public TagsController()
-            : base(true) {
-        }
+            : base(true) {}
 
         #endregion
-        // GET: Tags
-        private const int MaxNumbersOfPagesShow = 8;
 
         //[OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         //[OutputCache(CacheProfile = "Hour", VaryByParam = "*")]
         public ActionResult Index(int page = 1) {
-
             ViewBag.Title = "Mobile Applications Tags";
             ViewBag.Meta = "Tags , Mobile apps, apps review, apple apps, android apps,reviews, app review site, " +
                            ViewBag.Title;
@@ -44,10 +45,11 @@ namespace WereViewApp.Controllers {
             return View(tagsforThisPage);
         }
 
-        //public ActionResult GetTagDetail(string id, int page = 1) {
-        //ViewBag.Title = "Mobile Applications Tags";
-        //ViewBag.Meta = "Tags , Mobile apps, apps review, apple apps, android apps,reviews, app review site, " +
         //               ViewBag.Title;
+        //ViewBag.Meta = "Tags , Mobile apps, apps review, apple apps, android apps,reviews, app review site, " +
+        //ViewBag.Title = "Mobile Applications Tags";
+
+        //public ActionResult GetTagDetail(string id, int page = 1) {
         //ViewBag.Keywords = ViewBag.Meta;
         //var cacheName = "Tags.GetTagDetail." + id;
         //var tags = db.Tags.OrderByDescending(n => n.TagID);

@@ -7,7 +7,7 @@
         styleProperty = propLower,
         displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
         description = ViewData.ModelMetadata.Description,
-        icon = ViewBag.icon ?? Icons.EmailO,
+        icon = ViewBag.icon ?? FaIcons.EmailO,
         templateName = "sender-email";
     var htmlAttributes = new RouteValueDictionary();
     if (displayName == null) {

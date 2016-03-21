@@ -8,6 +8,9 @@ using WereViewApp.Modules.Role;
 using WereViewApp.Modules.Session;
 
 namespace WereViewApp.Modules.DevUser {
+    /// <summary>
+    /// UserCache stores in session so user specific rather than application specific.
+    /// </summary>
     public class UserCache {
         /// <summary>
         /// Creates a user cache from current logged in user.
@@ -131,6 +134,23 @@ namespace WereViewApp.Modules.DevUser {
                 IsRoleGenerated = false;
             }
         }
+
+        /// <summary>
+        /// Get from cache or Creates a user cache from logged user.
+        /// If user not exist then User will be null.
+        /// Check null before evaluating.
+        /// </summary>
+        /// <param name="rolesGenerate">True : Generates cache roles for the current user.</param>
+        /// <param name="saveUserInCache">True : Saves current cache in the session.</param>
+        /// <returns>Returns null if the user is null or no user is currently logged in.</returns>
+        public static UserCache GetNewOrExistingUserCache(bool rolesGenerate = true, bool saveUserInCache = true) {
+            var user = UserManager.GetCurrentUser();
+            if (user != null) {
+                return GetNewOrExistingUserCache(user, rolesGenerate, saveUserInCache);
+            }
+            return null;
+        }
+
         /// <summary>
         /// Get from cache or Creates a user cache from given user.
         /// If not user exist then User will be null.
@@ -139,24 +159,20 @@ namespace WereViewApp.Modules.DevUser {
         /// <param name="user"></param>
         /// <param name="rolesGenerate">True : Generates cache roles for the current user.</param>
         /// <param name="saveUserInCache">True : Saves current cache in the session.</param>
+        /// <returns>Returns null if the given user is null.</returns>
         public static UserCache GetNewOrExistingUserCache(ApplicationUser user, bool rolesGenerate = true, bool saveUserInCache = true) {
+            if (user == null) {
+                return null;
+            }
             var userCahe = GetUserCacheSession();
             if (userCahe == null || userCahe.IsValidUserCache(user) == false) {
+                // if no user cache exist or if the user cache is not for the given user then create a new usercahe in session.
                 userCahe = new UserCache(user, rolesGenerate, saveUserInCache);
             }
             return userCahe;
         }
 
-        /// <summary>
-        /// Get from cache or Creates a user cache from logged user.
-        /// If not user exist then User will be null.
-        /// Check null before evaluating.
-        /// </summary>
-        /// <param name="rolesGenerate">True : Generates cache roles for the current user.</param>
-        /// <param name="saveUserInCache">True : Saves current cache in the session.</param>
-        public static UserCache GetNewOrExistingUserCache(bool rolesGenerate = true, bool saveUserInCache = true) {
-            return GetNewOrExistingUserCache(UserManager.GetCurrentUser(), rolesGenerate, saveUserInCache);
-        }
+
 
         private bool _isAdmin;
         private bool _isAdminRoleGenerated;

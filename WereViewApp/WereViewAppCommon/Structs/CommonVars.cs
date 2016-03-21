@@ -98,7 +98,7 @@ namespace WereViewApp.WereViewAppCommon.Structs {
 
         #endregion
 
-        #region Location of Images in Gallery Constants
+        #region Constants : Location of Images in Gallery
 
         public const string AdditionalRootAdvertiseLocation = "Advertise/";
 

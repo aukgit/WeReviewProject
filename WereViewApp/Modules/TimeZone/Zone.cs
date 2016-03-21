@@ -55,7 +55,7 @@ namespace WereViewApp.Modules.TimeZone {
 
 
         private static readonly ReadOnlyCollection<TimeZoneInfo> SystemTimeZones = TimeZoneInfo.GetSystemTimeZones();
-        private static List<UserTimeZone> _dbTimeZones;
+        private static List<UserTimeZone> dbTimeZones;
 
         #endregion
 
@@ -79,7 +79,7 @@ namespace WereViewApp.Modules.TimeZone {
         #region Application Startup function for database
 
         public static void LoadTimeZonesIntoMemory() {
-            _dbTimeZones = CachedQueriedData.GetTimezones();
+            dbTimeZones = CachedQueriedData.GetTimezones();
         }
 
         #endregion
@@ -121,7 +121,7 @@ namespace WereViewApp.Modules.TimeZone {
             var id = "timezone-id:" + zone.Id;
             var userTimeZone = (UserTimeZone)AppConfig.Caches.Get(id);
             if (userTimeZone == null) {
-                userTimeZone = _dbTimeZones.FirstOrDefault(n => n.InfoID == zone.Id);
+                userTimeZone = dbTimeZones.FirstOrDefault(n => n.InfoID == zone.Id);
                 AppConfig.Caches.Set(id, userTimeZone);
             }
             return userTimeZone;
@@ -142,7 +142,7 @@ namespace WereViewApp.Modules.TimeZone {
             //if cache time zone not exist.
             var user = UserManager.GetUser(userId);
             if (user != null) {
-                var timezoneDb = _dbTimeZones.FirstOrDefault(n => n.UserTimeZoneID == user.UserTimeZoneID);
+                var timezoneDb = dbTimeZones.FirstOrDefault(n => n.UserTimeZoneID == user.UserTimeZoneID);
                 if (timezoneDb != null) {
                     timeZoneInfo = new TimeZoneSet();
                     timeZoneInfo.UserTimezone = timezoneDb;
@@ -185,7 +185,7 @@ namespace WereViewApp.Modules.TimeZone {
             //if cache time zone not exist.
             var user = UserManager.GetUser(username);
             if (user != null) {
-                var timezoneDb = _dbTimeZones.FirstOrDefault(n => n.UserTimeZoneID == user.UserTimeZoneID);
+                var timezoneDb = dbTimeZones.FirstOrDefault(n => n.UserTimeZoneID == user.UserTimeZoneID);
                 if (timezoneDb != null) {
                     timeZoneInfo = new TimeZoneSet();
                     timeZoneInfo.UserTimezone = timezoneDb;

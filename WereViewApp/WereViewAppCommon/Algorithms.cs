@@ -4,18 +4,22 @@ using DevTrends.MvcDonutCaching;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using DevMvcComponent;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.DevUser;
+using WereViewApp.Modules.Uploads;
 using WereViewApp.WereViewAppCommon.Structs;
 
 namespace WereViewApp.WereViewAppCommon {
@@ -259,7 +263,7 @@ namespace WereViewApp.WereViewAppCommon {
         /// <param name="?"></param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public IQueryable<Tag> GetTagIds(string urlStringExceptEscapeSequence,  WereViewAppEntities db) {
+        public IQueryable<Tag> GetTagIds(string urlStringExceptEscapeSequence, WereViewAppEntities db) {
             var listWords = GetUrlListExceptEscapeSequence(urlStringExceptEscapeSequence);
             var tags = db.Tags.Where(n => listWords.Any(word => word == n.TagDisplay));
             return tags;
@@ -270,15 +274,15 @@ namespace WereViewApp.WereViewAppCommon {
         /// <param name="searchString">Give a string "Hello World v2" , it will search for 'Hello' and 'World'</param>
         /// <param name="db"></param>
         /// <returns></returns>
-        public IQueryable<App> GetSimpleAppSearchResults(IQueryable<App> apps,string searchString) {
+        public IQueryable<App> GetSimpleAppSearchResults(IQueryable<App> apps, string searchString) {
             // convert any given "Hello World v2" =>  "Hello-World"
             var appHyphenUrl = GenerateHyphenUrlString(searchString);
             var appUrlEscapseString = GetUrlStringExceptEscapeSequence(appHyphenUrl); // "Hello World v2" =>  "Hello-World"
             var urlListOfEscapseString = GetUrlListExceptEscapeSequence(appUrlEscapseString); // list of words from split '-'
 
-            var query = apps.Where(app => 
+            var query = apps.Where(app =>
                                         urlListOfEscapseString.All(
-                                        searchWord=> 
+                                        searchWord =>
                                             app.UrlWithoutEscapseSequence.Contains(searchWord)));
             return query;
         }
@@ -601,12 +605,12 @@ namespace WereViewApp.WereViewAppCommon {
         public void SeenNotificationTransfer(long notifyId, WereViewAppEntities db) {
             var notify = db.Notifications.FirstOrDefault(n => n.NotificationID == notifyId);
             if (notify != null) {
-                var seen = new LatestSeenNotification();
+                var seen = new NotificationSeen();
                 seen.Dated = notify.Dated;
                 seen.Message = notify.Message;
                 seen.UserID = notify.UserID;
                 seen.NotificationTypeID = notify.NotificationTypeID;
-                db.LatestSeenNotifications.Add(seen);
+                db.NotificationSeens.Add(seen);
                 db.Notifications.Remove(notify);
                 db.SaveChanges();
             }
@@ -995,7 +999,7 @@ namespace WereViewApp.WereViewAppCommon {
         /// <returns>title-title</returns>
         public string GetUrlStringExceptEscapeSequence(string url) {
             if (url != null) {
-                
+
                 var validUrl = GetUrlListExceptEscapeSequence(url);
                 string returnStr = null;
                 returnStr = string.Join("-", validUrl);
@@ -1966,6 +1970,74 @@ namespace WereViewApp.WereViewAppCommon {
         }
         #endregion
 
+        #endregion
+
+        #region Clean System : Remove Everything from the system.
+
+        private bool RemoveUploadFolderImages(UploadProcessor uploadProcessor) {
+            var folderAbsolutePath = WereViewStatics.UProcessorAdvertiseImages.GetCombinePathWithAdditionalRoots();
+            var allFileNames = Directory.GetFiles(folderAbsolutePath);
+            bool isAllFilesRemoved = true;
+            foreach (var fileName in allFileNames) {
+                try {
+                    var absoluteFileName = Path.Combine(folderAbsolutePath, fileName);
+                    File.Delete(absoluteFileName);
+                } catch (Exception ex) {
+                    isAllFilesRemoved = false;
+                    Mvc.Error.ByEmail(ex, "RemoveUploadFolderImages()", "Path remove failed : " + folderAbsolutePath, null);
+                }
+                File.Delete(fileName);
+            }
+            return isAllFilesRemoved;
+        }
+
+        /// <summary>
+        /// Clean whole system, remove every uploads
+        /// </summary>
+        /// <returns></returns>
+        public bool CleanWholeSystem() {
+            int executed = 0;
+            using (var db2 = new WereViewAppEntities()) {
+                executed = db2.ResetWholeSystem();
+            }
+            if (executed > 0) {
+                using (var db2 = new WereViewAppEntities()) {
+                    executed = db2.Database.ExecuteSqlCommand("CleanWholeSystem");
+                }
+            }
+            if (executed > 0) {
+                var allUploaders = WereViewStatics.GetAllUploaderProcessor();
+                foreach (var uploader in allUploaders) {
+                    if (uploader != null) {
+                        executed = RemoveUploadFolderImages(uploader) ? 1 : 0;
+                    }
+                }
+            }
+            return executed > 0;
+        }
+        #endregion
+
+        #region Apps Summary
+        /// <summary>
+        /// Clean whole system, remove every uploads
+        /// </summary>
+        /// <returns></returns>
+        public AppSummaryViewModel GetAppsSummary() {
+            var model = new AppSummaryViewModel();
+            using (var db2 = new WereViewAppEntities()) {
+                var weekStart = DateTime.Now.AddDays(-7);
+                var weekEnd = DateTime.Now;
+                var monthStart = DateTime.Now.AddDays(-30);
+                var monthEnd = DateTime.Now;
+                Expression<Func<App, bool>> weekExpression = app => app.CreatedDate >= weekStart && app.CreatedDate <= weekEnd;
+                Expression<Func<App, bool>> monthExpression = app => app.CreatedDate >= monthStart && app.CreatedDate <= monthEnd;
+                model.TotalApps = db2.Apps.Count();
+                model.LastWeeksApps = db2.Apps.Count(weekExpression);
+                model.LastMonthsApps = db2.Apps.Count(monthExpression);
+                model.TotalDeveloper = db2.Users.Count();
+            }
+            return model;
+        }
         #endregion
 
         #region Remove Output Cahces

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WereViewApp.Models.POCO.IdentityCustomization {
     public class CountryDomain {
         public int CountryDomainID { get; set; }
+
         [Required]
         [Column(TypeName = "VARCHAR")]
         [StringLength(6)]

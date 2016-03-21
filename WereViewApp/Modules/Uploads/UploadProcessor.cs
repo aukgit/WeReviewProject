@@ -10,8 +10,7 @@ namespace WereViewApp.Modules.Uploads {
 
         /// <summary>
         /// </summary>
-        /// <param name="AdditionalRoot">should contain slash. use : "~/Uploads/Images/" + AdditionalRoot</param>
-        /// <param name="additionalRoot"></param>
+        /// <param name="additionalRoot">should contain slash. use : "~/Uploads/Images/" + AdditionalRoot</param>
         public UploadProcessor(string additionalRoot) {
             AdditionalRoots = additionalRoot;
             RootPath = "~/Uploads/Images/";
@@ -49,7 +48,7 @@ namespace WereViewApp.Modules.Uploads {
         ///     no ~ telda is included.
         /// </summary>
         /// <returns></returns>
-        public string GetCombinationOfRootAndAdditionalRoot() {
+        public string GetCombinePathWithAdditionalRoots() {
             return RootPath.Remove(0, 1) + AdditionalRoots;
         }
 
@@ -130,7 +129,7 @@ namespace WereViewApp.Modules.Uploads {
             }
 
             rootPath += additinalPathWithRoot;
-            //root/private/additionpath
+            //root/private/addition path
             if (fileName == null) {
                 fileName = GetFilename(submittedFile);
             }
@@ -235,6 +234,15 @@ namespace WereViewApp.Modules.Uploads {
                 return abs.Replace("/", "\\");
             }
             return virtualPath;
+        }
+
+        /// <summary>
+        /// Path will have a slash at the end.
+        /// </summary>
+        /// <returns></returns>
+        public string GetAbsolutePath() {
+            var absolutePath = VirtualPathtoAbsoluteServerPath(GetCombinePathWithAdditionalRoots());
+            return absolutePath;
         }
 
         /// <summary>

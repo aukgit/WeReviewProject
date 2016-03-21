@@ -21,7 +21,7 @@ namespace WereViewApp.Models.EntityModel
         public byte Sequence { get; set; }
         public string Title { get; set; }
         public string Subtitle { get; set; }
-
+		//Virtual field
         public HttpPostedFileBase File { get; set; }
 
         public string Extension { get; set; }

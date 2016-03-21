@@ -38,7 +38,8 @@ namespace WereViewApp.Controllers {
                 var max = db.FeaturedImages.Count();
                 var homePageGalleryApps = algorithms.GetHomePageGalleryImages(db, max);
 
-                sitemapItems.AddRange(homePageGalleryApps.Select(app => new SitemapItem(app.GetAbsoluteUrl(), modifiedDate)));
+                sitemapItems.AddRange(
+                    homePageGalleryApps.Select(app => new SitemapItem(app.GetAbsoluteUrl(), modifiedDate)));
 
                 var latestApps = algorithms.GetLatestApps(db, 50);
                 if (latestApps != null) {
@@ -50,7 +51,6 @@ namespace WereViewApp.Controllers {
                     sitemapItems.AddRange(topApps.Select(app => new SitemapItem(app.GetAbsoluteUrl(), modifiedDate)));
                 }
 
-
                 var categories = WereViewStatics.AppCategoriesCache;
                 sitemapItems.AddRange(
                     categories.Select(
@@ -60,7 +60,6 @@ namespace WereViewApp.Controllers {
                 sitemapItems.AddRange(
                     top30Developers.Select(
                         developer => new SitemapItem(appUrl + "/profiles/" + developer, modifiedDate)));
-
             }
 
             return new SitemapResult(sitemapItems);

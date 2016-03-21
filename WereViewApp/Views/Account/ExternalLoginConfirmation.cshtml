@@ -3,7 +3,7 @@
     string title = "Register with @" + ViewBag.LoginProvider + " account";
     ViewBag.Title = title;
 }
-@Html.HeaderWithIcon(title, title, Icons.UserPlus)
+@Html.HeaderWithIcon(title, title, FaIcons.UserPlus)
 <hr />
 @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
     @Html.AntiForgeryToken()

@@ -15,8 +15,21 @@ using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Controllers {
     public class PartialsController : AdvanceController {
+        #region Declarations
+
+        private readonly Algorithms algorithms = new Algorithms();
+
+        #endregion
+
+        #region Constructors
+
+        public PartialsController()
+            : base(true) {}
+
+        #endregion
 
         #region Drop downs
+
         [OutputCache(CacheProfile = "Day")]
         public ActionResult GetFeedbackCategoryID() {
             if (SessionNames.IsValidationExceed("GetFeedbackCategoryID", 100)) {
@@ -24,8 +37,8 @@ namespace WereViewApp.Controllers {
             }
             using (var db = new ApplicationDbContext()) {
                 var categories = db.FeedbackCategories
-                    .Select(n => new { display = n.Category, id = n.FeedbackCategoryID })
-                    .ToList();
+                                   .Select(n => new {display = n.Category, id = n.FeedbackCategoryID})
+                                   .ToList();
                 return Json(categories, JsonRequestBehavior.AllowGet);
             }
         }
@@ -104,26 +117,27 @@ namespace WereViewApp.Controllers {
             if (SessionNames.IsValidationExceed("GetTags", 500) || string.IsNullOrWhiteSpace(id)) {
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
-      
+
             using (var db = new WereViewAppEntities()) {
                 var tags = db.Tags.Where(n => n.TagDisplay.StartsWith(id))
-                                  .Select(n => n.TagDisplay).Take(10).ToArray();
-               
+                             .Select(n => n.TagDisplay).Take(10).ToArray();
+
                 var list = new List<string>(25);
                 foreach (var tag in tags) {
                     list.Add(tag);
                 }
                 if (id.Length > 3) {
-                    var tags2 = db.Tags.Where(n => n.TagDisplay.Contains(id) && tags.All(found => found != n.TagDisplay))
-                                      .Select(n => n.TagDisplay).Take(10).ToArray();
+                    var tags2 =
+                        db.Tags.Where(n => n.TagDisplay.Contains(id) && tags.All(found => found != n.TagDisplay))
+                          .Select(n => n.TagDisplay).Take(10).ToArray();
                     foreach (var tag in tags2) {
                         list.Add(tag);
                     }
                 }
                 return Json(list, JsonRequestBehavior.AllowGet);
-            };
+            }
+            ;
         }
-
 
         [OutputCache(NoStore = true, Duration = 0)]
         [HttpPost]
@@ -141,23 +155,9 @@ namespace WereViewApp.Controllers {
                     url = app.GetAbsoluteUrl()
                 };
                 return Json(sender, JsonRequestBehavior.AllowGet);
-            };
+            }
+            ;
         }
-
-        #region Declarations
-
-        private readonly Algorithms algorithms = new Algorithms();
-
-        #endregion
-
-        #region Constructors
-
-        public PartialsController()
-            : base(true) {
-
-        }
-
-        #endregion
 
         #region Homepage Gallery
 
@@ -231,18 +231,17 @@ namespace WereViewApp.Controllers {
         //[OutputCache(Duration = 86400, VaryByParam = "appID")]
         public ActionResult FeaturedApps(long? appID) {
             if (appID != null) {
-                var app = algorithms.GetAppFromStaticCache((long)appID);
+                var app = algorithms.GetAppFromStaticCache((long) appID);
                 var featuredApps = algorithms.GetFeaturedAppsWithImages(app, db, 20);
                 return PartialView(featuredApps);
             }
             return PartialView();
         }
 
-
         [OutputCache(Duration = 86400, VaryByParam = "appID")]
         public ActionResult SuggestedApps(long? appID) {
             if (appID != null) {
-                var app = algorithms.GetAppFromStaticCache((long)appID);
+                var app = algorithms.GetAppFromStaticCache((long) appID);
                 var suggestedApps = algorithms.GetFinalSuggestedAppsCache(app, db);
                 return PartialView(suggestedApps);
             }
@@ -252,14 +251,13 @@ namespace WereViewApp.Controllers {
         [OutputCache(Duration = 86400, VaryByParam = "appID")]
         public ActionResult DevelopersApps(long? appID) {
             if (appID != null) {
-                var app = algorithms.GetAppFromStaticCache((long)appID);
+                var app = algorithms.GetAppFromStaticCache((long) appID);
                 var suggestedApps = algorithms.GetDevelopersAppsByApp(app, db); // logic needs to be written
 
                 return PartialView(suggestedApps);
             }
             return PartialView();
         }
-
 
         #endregion
     }

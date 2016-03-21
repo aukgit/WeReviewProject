@@ -30,20 +30,23 @@ namespace WereViewApp.Models.EntityModel
     
         public virtual DbSet<App> Apps { get; set; }
         public virtual DbSet<AppDraft> AppDrafts { get; set; }
+        public virtual DbSet<AppOfferType> AppOfferTypes { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CellPhone> CellPhones { get; set; }
         public virtual DbSet<FeaturedImage> FeaturedImages { get; set; }
         public virtual DbSet<Gallery> Galleries { get; set; }
         public virtual DbSet<GalleryCategory> GalleryCategories { get; set; }
-        public virtual DbSet<LatestSeenNotification> LatestSeenNotifications { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<MessageSeen> MessageSeens { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<NotificationSeen> NotificationSeens { get; set; }
         public virtual DbSet<NotificationType> NotificationTypes { get; set; }
         public virtual DbSet<Platform> Platforms { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
         public virtual DbSet<ReviewLikeDislike> ReviewLikeDislikes { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Subscribe> Subscribes { get; set; }
+        public virtual DbSet<SubscribeCategory> SubscribeCategories { get; set; }
+        public virtual DbSet<SubscribeNotifiedHistory> SubscribeNotifiedHistories { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<TagAppRelation> TagAppRelations { get; set; }
         public virtual DbSet<TempUpload> TempUploads { get; set; }
@@ -83,6 +86,11 @@ namespace WereViewApp.Models.EntityModel
         public virtual int ResetWholeSystem()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ResetWholeSystem");
+        }
+    
+        public virtual int GetAllTablesSpaceUsedInformation()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetAllTablesSpaceUsedInformation");
         }
     }
 }

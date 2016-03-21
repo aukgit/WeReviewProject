@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using System.Web.UI;
+using WereViewApp.Models.ViewModels;
+using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Areas.Admin.Controllers {
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class HomeController : Controller {
         public ActionResult Index() {
-            return View();
-        }
-        public ActionResult Elmah() {
-            return View();
+            var appSummaryModel = Session["admin-app-summary"] as AppSummaryViewModel;
+            if (appSummaryModel == null) {
+                var algorithms = new Algorithms();
+                appSummaryModel = algorithms.GetAppsSummary();
+                Session["admin-app-summary"] = appSummaryModel;
+            }
+            return View(appSummaryModel);
         }
     }
 }
