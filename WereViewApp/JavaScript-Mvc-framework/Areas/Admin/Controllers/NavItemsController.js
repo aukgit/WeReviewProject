@@ -19,6 +19,12 @@ $.app.controllers.navItemsController = {
     // any thing related to controllers.
     pageId: "navitems-controller",
     $pageElement: null,
+    prop: {
+        /// populated from bindEvents.orderingTextBoxChange
+        changedOrderingInputs: [],
+        changedOrderingForms : [],
+    },
+    isDebugging: true,
     initialize: function () {
         var controllers = $.app.controllers,
             current = controllers.navItemsController;
@@ -26,7 +32,6 @@ $.app.controllers.navItemsController = {
             controllers.execute(current);
         }
     },
-    isDebugging: true,
     getPage: function() {
         return $.app.controllers.navItemsController.$pageElement;
     },
@@ -34,7 +39,7 @@ $.app.controllers.navItemsController = {
         /// <summary>
         /// Represents the collection of actions exist inside a controller.
         /// </summary>
-        list: function () {
+        list: function() {
             /// <summary>
             /// Represents list action page.
             /// Refers to the data-action attribute.
@@ -42,10 +47,33 @@ $.app.controllers.navItemsController = {
             /// <returns type=""></returns>
             var self = $.app.controllers.navItemsController,
                 $page = self.getPage(),
-                urlSchema = $.app.urls.getGeneralUrlSchema(false, ["Add", "SaveOrder"]); // pass nothing will give add,edit,save,delete url
+                urlSchema = $.app.urls.getGeneralUrlSchema(false, ["Add", "SaveOrder"]); // pass nothing will give Create,Edit,Delete,Index url
             // urlSchema.edit  will give edit url.
-            // in the 
+            self.bindEvents.saveOrderButtonClick(urlSchema.SaveOrder);
+            self.bindEvents.orderingTextBoxChange();
             console.log(urlSchema);
+        }
+    },
+
+    bindEvents: {
+        saveOrderButtonClick: function(saveingUrl) {
+            var $saveBtn = $.byId("save-order-btn");
+            var self = $.app.controllers.navItemsController,
+                $page = self.getPage();
+            $saveBtn.click(function(e) {
+                e.preventDefault();
+
+            });
+        },
+        orderingTextBoxChange : function() {
+            var $allInputs = $(".ordering-textbox");
+            var hash = $.app.schema.hashset.create();
+            console.log(hash);
+            console.log($allInputs);
+            $allInputs.keypress(function (e) {
+                console.log(e);
+                hash.add(1, 2);
+            });
         }
     }
 

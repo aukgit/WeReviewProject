@@ -4,14 +4,16 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using DevMvcComponent;
 using WereViewApp.Controllers;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.IdentityCustomization;
 
 namespace WereViewApp.Areas.Admin.Controllers {
     public class NavItemsController : IdentityController<ApplicationDbContext> {
-        public NavItemsController():base(true) {
-            
+        public NavItemsController()
+            : base(true) {
+
         }
         private List<NavigationItem> GetItems(int? NavitionID = null) {
             if (NavitionID == null) {
@@ -78,11 +80,25 @@ namespace WereViewApp.Areas.Admin.Controllers {
             if (ModelState.IsValid) {
                 db.Entry(navigationItem).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("List", new {id = navigationItem.NavigationID});
+                return RedirectToAction("List", new { id = navigationItem.NavigationID });
             }
             AddMenuName(navigationItem.NavigationID);
             AppConfig.Caches.RemoveAllFromCache();
             return View(navigationItem);
+        }
+
+        public JsonResult SaveOrder(int NavigationID, int Ordering) {
+            NavigationItem navigationItem = null;
+            try {
+                navigationItem = db.NavigationItems.Find(NavigationID);
+                db.Entry(navigationItem).State = EntityState.Modified;
+                navigationItem.Ordering = Ordering;
+                db.SaveChanges();
+            } catch (Exception ex) {
+                Mvc.Error.ByEmail(ex, "SaveOrder()", "", navigationItem);
+                return Json( new {success = false, NavigationID = NavigationID}, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { success = true, NavigationID = NavigationID }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Delete(int id, int NavigationID) {
@@ -91,7 +107,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             db.SaveChanges();
             AddMenuName(NavigationID);
             AppConfig.Caches.RemoveAllFromCache();
-            return RedirectToAction("List", new {id = NavigationID});
+            return RedirectToAction("List", new { id = NavigationID });
         }
 
         protected override void Dispose(bool disposing) {

@@ -91,6 +91,7 @@ namespace WereViewApp {
 
                                   "~/JavaScript-Mvc-framework/app.js",
                                   "~/JavaScript-Mvc-framework/schema/schema.js",
+                                  "~/JavaScript-Mvc-framework/schema/hashset.js",
                                   "~/JavaScript-Mvc-framework/schema/url.js",
                                   "~/JavaScript-Mvc-framework/extensions/ajax.js",
                                   "~/JavaScript-Mvc-framework/extensions/clone.js",
