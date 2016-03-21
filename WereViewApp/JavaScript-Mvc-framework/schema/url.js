@@ -1,8 +1,8 @@
 ﻿; $.app = $.app || {};
 ; $.app.schema = $.app.schema || {};
 ;$.app.schema.url = {
-    add: null,
-    edit: null,
-    delete: null,
-    save:null
+    Create: null,
+    Edit: null,
+    Delete: null,
+    Index:null
 };

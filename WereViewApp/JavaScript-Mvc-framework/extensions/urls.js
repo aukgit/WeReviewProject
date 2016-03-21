@@ -11,7 +11,7 @@
 /// <reference path="D:\Working\GitHub\WereViewProject\WereViewApp\Content/Scripts/jquery-2.1.4.js" />
 /// <reference path="D:\Working\GitHub\WereViewProject\WereViewApp\Content/Scripts/jquery-2.1.4.intellisense.js" />
 /// <reference path="../schema/url.js" />
-;$.app = $.app || {};
+; $.app = $.app || {};
 $.app.urls = {
     /*
      * hostUrl will be retrieved from hidden field "#host-url"
@@ -24,7 +24,7 @@ $.app.urls = {
     emailValidation: "Email",
     timeZoneJson: "Services/GetTimeZone", // look like this /Partials/GetTimeZone/CountryID
     languageJson: "Services/GetLanguage", // look like this /Partials/GetTimeZone/CountryID
-    getHostUrl: function() {
+    getHostUrl: function () {
         /// <summary>
         /// Retrieve host url from host-url id hidden field
         /// Return host url with a slash at the bottom.
@@ -46,7 +46,7 @@ $.app.urls = {
         return self.hostUrl;
     },
 
-    getAbsUrl: function(givenUrl) {
+    getAbsUrl: function (givenUrl) {
         /// <summary>
         /// Given url shouldn't have any slash at the begining.
         /// </summary>
@@ -62,7 +62,7 @@ $.app.urls = {
     },
 
 
-    getAbsValidatorUrl: function(url) {
+    getAbsValidatorUrl: function (url) {
         /// <summary>
         /// Returns absolute url of a validation
         /// </summary>
@@ -75,11 +75,14 @@ $.app.urls = {
 
     },
 
-    getGeneralUrlSchema: function(otherUrlsList) {
+    getGeneralUrlSchema: function (shouldGetDefaultSchema, otherUrlsList) {
         /// <summary>
         /// Generate a general url schema , which contains
         /// It will look for hidden fields : edit-url, add-url, delete-url, save-url
         /// </summary>
+        /// <param name="shouldGetDefaultSchema" type="bool">
+        /// T/F , T/undefined : gets the default schmea.
+        /// </param>
         /// <param name="otherUrlsList" type="type">
         /// Array of list items containing new url names.
         /// If null then only return url schema with add,edit,save,remove urls.
@@ -88,14 +91,21 @@ $.app.urls = {
         /// <returns type="$.app.schema.url">
         /// Returns a url schema object from schema folder's url (schema).
         /// </returns>
-        var urlSchema = $.app.schema.create($.app.schema.url);
-        urlSchema.edit = $.getHiddenValue("edit-url");
-        urlSchema.add = $.getHiddenValue("add-url");
-        urlSchema.delete = $.getHiddenValue("delete-url");
-        urlSchema.save = $.getHiddenValue("save-url");
+        var urlSchema, i, urlName;
+        if ($.isEmpty(shouldGetDefaultSchema) || shouldGetDefaultSchema === true) {
+            urlSchema = $.app.schema.create($.app.schema.url);
+            var keys = Object.keys(urlSchema);
+            for (i = 0; i < keys.length; i++) {
+                urlName = keys[i];
+                urlSchema[urlName] = $.getHiddenValue(urlName + "-url");
+            }
+        } else {
+            urlSchema = {};
+        }
+
         if (!$.isEmpty(otherUrlsList)) {
-            for (var i = 0; i < otherUrlsList.length; i++) {
-                var urlName = otherUrlsList[i];
+            for (i = 0; i < otherUrlsList.length; i++) {
+                urlName = otherUrlsList[i];
                 urlSchema[urlName] = $.getHiddenValue(urlName + "-url");
             }
         }

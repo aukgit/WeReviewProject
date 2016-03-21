@@ -38,7 +38,7 @@ $.app.controllers.navItemsController = {
             /// </summary>
             /// <returns type=""></returns>
             var self = $.app.controllers.navItemsControllerr,
-                urlSchema = $.app.urls.getGeneralUrlSchema(); // pass nothing will give add,edit,save,delete url
+                urlSchema = $.app.urls.getGeneralUrlSchema(false, ["Add", "SaveOrder"]); // pass nothing will give add,edit,save,delete url
             // urlSchema.edit  will give edit url.
             // in the 
             console.log(urlSchema);
