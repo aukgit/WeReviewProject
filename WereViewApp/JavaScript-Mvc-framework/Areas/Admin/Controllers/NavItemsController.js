@@ -27,6 +27,9 @@ $.app.controllers.navItemsController = {
         }
     },
     isDebugging: true,
+    getPage: function() {
+        return $.app.controllers.navItemsController.$pageElement;
+    },
     actions: {
         /// <summary>
         /// Represents the collection of actions exist inside a controller.
@@ -37,7 +40,8 @@ $.app.controllers.navItemsController = {
             /// Refers to the data-action attribute.
             /// </summary>
             /// <returns type=""></returns>
-            var self = $.app.controllers.navItemsControllerr,
+            var self = $.app.controllers.navItemsController,
+                $page = self.getPage(),
                 urlSchema = $.app.urls.getGeneralUrlSchema(false, ["Add", "SaveOrder"]); // pass nothing will give add,edit,save,delete url
             // urlSchema.edit  will give edit url.
             // in the 
