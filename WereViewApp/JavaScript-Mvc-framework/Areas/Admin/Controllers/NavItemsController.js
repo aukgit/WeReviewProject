@@ -24,7 +24,8 @@ $.app.controllers.navItemsController = {
     $pageElement: null,
     prop: {
         /// populated from bindEvents.orderingTextBoxChange
-        tracker : null
+        tracker: null,
+        formId: "form-id-"
     },
     isDebugging: true,
     initialize: function () {
@@ -74,18 +75,41 @@ $.app.controllers.navItemsController = {
             var $saveBtn = $.byId("save-order-btn");
             var self = $.app.controllers.navItemsController,
                 $page = self.getPage(),
-                tracker = self.prop.tracker;
+                prop = self.prop,
+                tracker = prop.tracker,
+                formIdFormat = prop.formId;
+
+            var getFormsData = function (ids, formIdFormat) {
+                var formArray = new Array(ids.length);
+                for (var i = 0; i < ids.length; i++) {
+                    var id = ids[i],
+                        $form = $.byId(formIdFormat + id);
+                    formArray[i] = $form.serializeArray();
+                }
+                return formArray;
+            }
             $saveBtn.click(function(e) {
                 e.preventDefault();
                 // changed inputs ids array, only contains id values.
                 var idsArray = tracker.getChangedInputsAttrArray("data-id");
-                console.log(idsArray);
-                $.app.spinner.quickShow($page, $("table"), function() {
-                    setTimeout(function() {
-                        $.app.spinner.hide($page, $("table"));
-                    }, 5000);
+                var data = getFormsData(idsArray, formIdFormat);
+                var isInTestingMode = true;
+                jQuery.ajax({
+                    method: "POST", // by default "GET"
+                    url: saveingUrl,
+                    data: data, // PlainObject or String or Array
+                    dataType: "JSON" //, // "Text" , "HTML", "xml", "script" 
+                }).done(function (response) {
+                    if (isInTestingMode) {
+                        console.log(response);
+                    }
+                }).fail(function (jqXHR, textStatus, exceptionMessage) {
+                    console.log("Request failed: " + exceptionMessage);
+                }).always(function () {
+                    console.log("complete");
                 });
-
+                console.log(idsArray);
+                console.log(data);
             });
         }
     }

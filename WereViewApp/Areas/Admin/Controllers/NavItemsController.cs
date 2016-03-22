@@ -87,18 +87,30 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(navigationItem);
         }
 
-        public JsonResult SaveOrder(int NavigationID, int Ordering) {
-            NavigationItem navigationItem = null;
-            try {
-                navigationItem = db.NavigationItems.Find(NavigationID);
-                db.Entry(navigationItem).State = EntityState.Modified;
-                navigationItem.Ordering = Ordering;
-                db.SaveChanges();
-            } catch (Exception ex) {
-                Mvc.Error.ByEmail(ex, "SaveOrder()", "", navigationItem);
-                return Json( new {success = false, NavigationID = NavigationID}, JsonRequestBehavior.AllowGet);
+        public JsonResult SaveOrder(NavigationItem[] navigationItems) {
+            NavigationItem dbNavigationItem = null;
+            List<string> navigationItemsNames = new List<string>(navigationItems.Length),
+                         navigationItemsFailedNames = new List<string>(navigationItems.Length); ;
+            bool isFailed = false;
+            foreach (var navItem in navigationItems) {
+                try {
+                    dbNavigationItem = db.NavigationItems.Find(navItem.NavigationID);
+                    db.Entry(dbNavigationItem).State = EntityState.Modified;
+                    dbNavigationItem.Ordering = navItem.Ordering;
+                    if (db.SaveChanges() > -1) {
+                        navigationItemsNames.Add(dbNavigationItem.Title);
+                    }
+                } catch (Exception ex) {
+                    Mvc.Error.ByEmail(ex, "SaveOrder()", "", dbNavigationItem);
+                    isFailed = true;
+                    navigationItemsFailedNames.Add(dbNavigationItem.Title);
+                }
             }
-            return Json(new { success = true, NavigationID = NavigationID }, JsonRequestBehavior.AllowGet);
+            if (isFailed) {
+                return Json(new { success = !isFailed, titles = navigationItemsFailedNames }, JsonRequestBehavior.AllowGet);
+            } else {
+                return Json(new { success = !isFailed, titles = navigationItemsNames }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public ActionResult Delete(int id, int NavigationID) {
@@ -117,8 +129,6 @@ namespace WereViewApp.Areas.Admin.Controllers {
             base.Dispose(disposing);
         }
 
-        public ActionResult SaveOrder(object id) {
-            return null;
-        }
+
     }
 }

@@ -64,7 +64,7 @@ $.app.inputChangeTracker = {
         var $changedInputs = this.getChangedInputs();
         var attrArray = new Array($changedInputs.length);
         for (var i = 0; i < $changedInputs.length; i++) {
-            attrArray[i] = $changedInputs.attr(attr);
+            attrArray[i] = $changedInputs[i].getAttribute(attr);
         }
         return attrArray;
     },

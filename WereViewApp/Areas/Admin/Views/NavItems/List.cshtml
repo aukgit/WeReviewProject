@@ -1,12 +1,10 @@
 ﻿@model IEnumerable<WereViewApp.Models.POCO.IdentityCustomization.NavigationItem>
-
 @{
-    ViewBag.Title = "NavigationItem";
+    ViewBag.Title = "Navigation : " + ViewBag.MenuName;
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
 }
-
-@Html.SamePageLinkWithIcon(title, subtitle, "glyphicon glyphicon-th-list")
+@Html.SamePageLinkWithIcon(title, subtitle,  FaIcons.Sitemap)
 <div id="navitems-controller" data-action="list">
     @section hidden{
         @Html.GenerateUrlHiddenInputs(false, actionNames: new [] {"SaveOrder"})
@@ -56,9 +54,9 @@
                     @Html.DisplayFor(modelItem => item.RelativeURL)
                 </td>
                 <td>
-                    <form action="@Url.Action("SaveOrder", new {id = ViewBag.NavigationID})" id="form-id-@item.NavigationItemID" method="post" class="process-ordering-in-menu-items">
-                        @Html.HiddenFor(n => item.NavigationID)
-                        @Html.TextBoxFor(n => item.Ordering, new { @class = "form-control ordering-textbox", id = "navid-" + item.NavigationItemID, data_id = item.NavigationItemID })
+                    <form id="form-id-@item.NavigationItemID" method="post" class="process-ordering-in-menu-items">
+                        @Html.HiddenFor(n => item.NavigationItemID, new { @Name = "NavigationItemID" })
+                        @Html.TextBoxFor(n => item.Ordering, new { @Name = "Ordering", @class = "form-control ordering-textbox", id = "navid-" + item.NavigationItemID, data_id = item.NavigationItemID })
                     </form>
                 </td>
                 <td>
@@ -71,8 +69,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.HasDropDown)
                 </td>
-
-
                 <td>
                     @Html.ActionLink("Edit", "Edit", new {id = item.NavigationItemID, NavigationID = item.NavigationID}) |
                     @Html.ActionLink("Delete", "Delete", new {id = item.NavigationItemID, NavigationID = item.NavigationID}, new {onclick = "return confirm('Are you sure?')"})
