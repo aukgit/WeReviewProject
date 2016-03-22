@@ -11,6 +11,7 @@ $.app.initialize = function () {
     app.config.setup(); // runs all configuration before running all initialize methods.
     app.initializeMethods.initialize(); // initialize and run everything in the initializeMethods file.
     // run controller module
+    app.spinner.initialize(); // runs all controllers modules.
     app.controllers.initialize(); // runs all controllers modules.
 
 };

@@ -15,6 +15,7 @@
 /// <reference path="D:\Working\GitHub\WereViewProject\WereViewApp\Content/Scripts/jquery-2.1.4.js" />
 /// <reference path="../../../extensions/inputChangeTracker.js" />
 /// <reference path="../../../ProtoType/Array.js" />
+/// <reference path="../../../extensions/spinner.js" />
 
 ;$.app.controllers = $.app.controllers || {};
 $.app.controllers.navItemsController = {
@@ -23,8 +24,7 @@ $.app.controllers.navItemsController = {
     $pageElement: null,
     prop: {
         /// populated from bindEvents.orderingTextBoxChange
-        changedOrderingInputs: [],
-        changedOrderingForms : [],
+        tracker : null
     },
     isDebugging: true,
     initialize: function () {
@@ -36,6 +36,9 @@ $.app.controllers.navItemsController = {
     },
     getPage: function() {
         return $.app.controllers.navItemsController.$pageElement;
+    },
+    config :  function() {
+        
     },
     actions: {
         /// <summary>
@@ -49,10 +52,19 @@ $.app.controllers.navItemsController = {
             /// <returns type=""></returns>
             var self = $.app.controllers.navItemsController,
                 $page = self.getPage(),
-                urlSchema = $.app.urls.getGeneralUrlSchema(false, ["Add", "SaveOrder"]); // pass nothing will give Create,Edit,Delete,Index url
+                urlSchema = $.app.urls.getGeneralUrlSchema(false, ["SaveOrder"]); // pass nothing will give Create,Edit,Delete,Index url
             // urlSchema.edit  will give edit url.
+
+
+            // create tracker
+            var $allInputs = $(".ordering-textbox");
+            self.prop.tracker = $.app.inputChangeTracker.createTracker($allInputs);
+
+            // bind events
             self.bindEvents.saveOrderButtonClick(urlSchema.SaveOrder);
-            self.bindEvents.orderingTextBoxChange();
+
+
+
             console.log(urlSchema);
         }
     },
@@ -61,20 +73,19 @@ $.app.controllers.navItemsController = {
         saveOrderButtonClick: function(saveingUrl) {
             var $saveBtn = $.byId("save-order-btn");
             var self = $.app.controllers.navItemsController,
-                $page = self.getPage();
+                $page = self.getPage(),
+                tracker = self.prop.tracker;
             $saveBtn.click(function(e) {
                 e.preventDefault();
+                // changed inputs ids array, only contains id values.
+                var idsArray = tracker.getChangedInputsAttrArray("data-id");
+                console.log(idsArray);
+                $.app.spinner.quickShow($page, $("table"), function() {
+                    setTimeout(function() {
+                        $.app.spinner.hide($page, $("table"));
+                    }, 5000);
+                });
 
-            });
-        },
-        orderingTextBoxChange : function() {
-            var $allInputs = $(".ordering-textbox");
-            var tracker = $.app.inputChangeTracker.createTracker($allInputs);
-            console.log(tracker);
-            $allInputs.blur(function (e) {
-                var $changedInputs = tracker.getChangedInputs();
-                console.log($changedInputs);
-                console.log(tracker.list);
             });
         }
     }

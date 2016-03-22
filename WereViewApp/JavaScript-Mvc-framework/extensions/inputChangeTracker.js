@@ -19,9 +19,7 @@
 $.app.inputChangeTracker = {
     list: {
         $inputs: null, // array
-        initalTexts: null, // array
-        $changedInputs: null, // array
-        textAfterInital: null // array
+        initalTexts: null // array
     },
 
     createTracker: function ($inputs) {
@@ -42,15 +40,44 @@ $.app.inputChangeTracker = {
         /// Get all inputs array which are changed at moment of calling this method.
         /// </summary>
         /// <returns type=""></returns>
-        var list = this.list;
-        list.textAfterInital = list.$inputs.toArrayWithValues();
-        var differentIndexesList = list.initalTexts.getDifferentIndexes(list.textAfterInital);
-        list.$changedInputs = -1; // remove previous item
-        list.$changedInputs = new Array(differentIndexesList.length);
-        for (var i = 0; i < differentIndexesList.length; i++) {
-            var index = differentIndexesList[i];
-            list.$changedInputs[i] = list.$inputs[index];
+        var list = this.list,
+            $inputs = this.list.$inputs,
+            len = $inputs.length;
+        var changedInputsList = [];
+        for (var i = 0; i < len; i++) {
+            var input = $inputs[i],
+                currentText = input.value,
+                previousValue = list.initalTexts[i];
+            if (currentText !== previousValue) {
+                // different.
+                changedInputsList.push(input);
+            }
         }
-        return list.$changedInputs;
+        return $(changedInputsList);
+    },
+    getChangedInputsAttrArray: function (attr) {
+        /// <summary>
+        /// Get an array of the given attribute values for changed inputs.
+        /// </summary>
+        /// <param name="attr" type="type">Give a attr name.</param>
+        /// <returns type="">Get an array of the given attribute values for changed inputs.</returns>
+        var $changedInputs = this.getChangedInputs();
+        var attrArray = new Array($changedInputs.length);
+        for (var i = 0; i < $changedInputs.length; i++) {
+            attrArray[i] = $changedInputs.attr(attr);
+        }
+        return attrArray;
+    },
+    setChangedInputsAttr: function (attr, value) {
+        /// <summary>
+        /// Set common attribute value to all the changed input elements.
+        /// </summary>
+        /// <param name="attr" type="type"></param>
+        /// <param name="value" type="type"></param>
+        var $changedInputs = this.getChangedInputs();
+        for (var i = 0; i < $changedInputs.length; i++) {
+            var input = $changedInputs[i];
+            input.setAttribute(attr, value);
+        }
     }
 };

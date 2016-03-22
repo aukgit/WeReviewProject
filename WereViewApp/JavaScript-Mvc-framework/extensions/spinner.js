@@ -1,6 +1,6 @@
 ﻿; $.app = $.app || {};
 ; $.app.spinner = {
-    id: '',
+    id: 'loading-bar',
     $spinner: [],
     spinnerDisplayTypeId: 1,
     type: {
@@ -10,7 +10,7 @@
     initialize: function () {
         var self = $.app.spinner;
         self.$spinner = $.byId(self.id);
-        if (!$.isFunc($.block)) {
+        if (!$.isFunc($.blockUI)) {
             throw new Error("Spinner requires jQueryUI Block + Animate.css library. Please download and add those to your project.");
         }
     },
@@ -26,9 +26,15 @@
             $span = $anchor.find("span"),
             $content = $loadingbar.find(".spinner-content");
 
+        if ($.isEmpty(tooltipMessage)) {
+            tooltipMessage = "Please wait while processing! Any interruption may hamper the process.";
+        }
+        if ($.isEmpty(contentMessage)) {
+            contentMessage = "Please wait!";
+        }
+
         $anchor.attr("title", tooltipMessage)
                .attr("data-original-title", tooltipMessage);
-
         $span.attr("data-display", tooltipMessage)
              .attr("title", tooltipMessage);
         if ($.isEmpty(contentMessage) === false) {
@@ -39,7 +45,16 @@
                     .html("");
         }
     },
-
+    quickShow: function ($blockingElement, $elementToHide, onBlockExecuteMethod) {
+        /// <summary>
+        /// Show a spiner with default messages.
+        /// </summary>
+        /// <param name="$blockingElement" type="type">Element which to block.</param>
+        /// <param name="$elementToHide" type="type">Element which to hide during the display of the spinner.</param>
+        /// <param name="onBlockExecuteMethod" type="type">An event to execute when the element is blocked.</param>
+        var self = $.app.spinner;
+        self.show(null, null, $blockingElement, $elementToHide, onBlockExecuteMethod);
+    },
     show: function (tooltip, message, $blockingElement, $elementToHide, onBlockExecuteMethod) {
         /// <summary>
         /// show spinner and block UI

@@ -74,6 +74,7 @@ namespace WereViewApp {
                                   "~/Content/Scripts/DevOrgPlugins/byId.js",
                                   "~/Content/Scripts/bootstrap.js", // 3.1.2
                                   "~/Content/Scripts/star-rating.js",
+                                  "~/Content/Scripts/toastr.js",
                                   "~/Content/Scripts/underscore.js",
                                   "~/Content/Scripts/FrontEnd/wow.js",
                                   "~/Content/Scripts/FrontEnd/jquery.sticky.js",
@@ -140,7 +141,9 @@ namespace WereViewApp {
                                         //"~/Content/css/ckedit-skin-bootstrap.css",
 
                                         "~/Content/css/color-fonts.css",
+                                        "~/Content/css/Spinner.css",
                                         "~/Content/css/star-rating.css",
+                                        "~/Content/css/toastr.css",
                                         "~/Content/css/override-mvc.css",
                                         "~/Content/css/validator.css",
                                         "~/Content/css/editor-templates.css",

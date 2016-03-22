@@ -3,7 +3,7 @@ $.app.initializeMethods = {
     /**
      * runs all the methods after initialize method.
      */
-    initialize: function() {
+    initialize: function () {
         var self = $.app.initializeMethods;
 
         var keys = Object.keys(self);
@@ -16,26 +16,46 @@ $.app.initializeMethods = {
             }
         }
     },
-    toolTipShow: function() {
+    toasterComponentSetup: function () {
+        if (!$.isEmpty(toastr)) {
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-bottom-left",
+                "preventDuplicates": true,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+        }
+    },
+    toolTipShow: function () {
         var $tooltipItems = $('.tooltip-show');
         if ($tooltipItems.length > 0) {
             $tooltipItems.tooltip({ container: 'body' });
         }
 
     },
-    seoHide: function() {
+    seoHide: function () {
         var $seoHideItems = $(".seo-hide");
         if ($seoHideItems.length > 0) {
             $seoHideItems.hide();
         }
     },
-    menuEnable: function() {
+    menuEnable: function () {
         $().jetmenu();
         var menuPage = $("#menu-item-edit-page");
         if (menuPage.length > 0) {
             var div = $("#hasDropdownDiv");
             div.hide();
-            $("#HasDropDown").click(function() {
+            $("#HasDropDown").click(function () {
                 if (this.checked) {
                     div.show('slow');
                 } else {
