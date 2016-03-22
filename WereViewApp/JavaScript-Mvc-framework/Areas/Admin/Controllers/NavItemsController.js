@@ -84,10 +84,11 @@ $.app.controllers.navItemsController = {
                 for (var i = 0; i < ids.length; i++) {
                     var id = ids[i],
                         $form = $.byId(formIdFormat + id);
-                    formArray[i] = $form.serializeArray();
+                    formArray[i] = $.serializeToJson($form);
                 }
-                return formArray;
+                return JSON.stringify(formArray);
             }
+
             $saveBtn.click(function(e) {
                 e.preventDefault();
                 // changed inputs ids array, only contains id values.
@@ -98,7 +99,8 @@ $.app.controllers.navItemsController = {
                     method: "POST", // by default "GET"
                     url: saveingUrl,
                     data: data, // PlainObject or String or Array
-                    dataType: "JSON" //, // "Text" , "HTML", "xml", "script" 
+                    dataType: "JSON", //, // "Text" , "HTML", "xml", "script" 
+                    contentType: "application/json",
                 }).done(function (response) {
                     if (isInTestingMode) {
                         console.log(response);

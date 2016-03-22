@@ -44,5 +44,14 @@ $.fn.extend({
             array[i] = this[i].value;
         }
         return array;
+    },
+    multiformSerialize: function () {
+        var len = this.length,
+            array = [];
+        for (var i = 0; i < len; i++) {
+            var $from = $(this[i]);
+            array.push($.serializeToJson($from));
+        }
+        return array;
     }
 });

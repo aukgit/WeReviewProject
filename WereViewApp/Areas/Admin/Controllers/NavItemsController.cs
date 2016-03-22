@@ -87,14 +87,15 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(navigationItem);
         }
 
-        public JsonResult SaveOrder(NavigationItem[] navigationItems) {
+        public JsonResult SaveOrder(IEnumerable<NavigationItem> navigationItems) {
             NavigationItem dbNavigationItem = null;
-            List<string> navigationItemsNames = new List<string>(navigationItems.Length),
-                         navigationItemsFailedNames = new List<string>(navigationItems.Length); ;
+            var len = navigationItems.Count();
+            List<string> navigationItemsNames = new List<string>(len),
+                         navigationItemsFailedNames = new List<string>(len); ;
             bool isFailed = false;
             foreach (var navItem in navigationItems) {
                 try {
-                    dbNavigationItem = db.NavigationItems.Find(navItem.NavigationID);
+                    dbNavigationItem = db.NavigationItems.Find(navItem.NavigationItemID);
                     db.Entry(dbNavigationItem).State = EntityState.Modified;
                     dbNavigationItem.Ordering = navItem.Ordering;
                     if (db.SaveChanges() > -1) {
