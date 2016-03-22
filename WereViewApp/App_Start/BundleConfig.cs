@@ -89,6 +89,7 @@ namespace WereViewApp {
                                   "~/Content/Scripts/FrontEnd/front-developer.js",
                                   "~/Content/Scripts/jquery.blockUI.js",
 
+                                  "~/JavaScript-Mvc-framework/Prototype/Array.js",
                                   "~/JavaScript-Mvc-framework/app.js",
                                   "~/JavaScript-Mvc-framework/schema/schema.js",
                                   "~/JavaScript-Mvc-framework/schema/hashset.js",
@@ -97,6 +98,7 @@ namespace WereViewApp {
                                   "~/JavaScript-Mvc-framework/extensions/clone.js",
                                   "~/JavaScript-Mvc-framework/extensions/constants.js",
                                   "~/JavaScript-Mvc-framework/extensions/initialize.js",
+                                  "~/JavaScript-Mvc-framework/extensions/inputChangeTracker.js",
                                   "~/JavaScript-Mvc-framework/extensions/modal.js",
                                   "~/JavaScript-Mvc-framework/extensions/pagination.js",
                                   "~/JavaScript-Mvc-framework/extensions/regularExp.js",

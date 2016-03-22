@@ -13,6 +13,8 @@
 /// <reference path="../../../app.run.js" />
 /// <reference path="../../../byId.js" />
 /// <reference path="D:\Working\GitHub\WereViewProject\WereViewApp\Content/Scripts/jquery-2.1.4.js" />
+/// <reference path="../../../extensions/inputChangeTracker.js" />
+/// <reference path="../../../ProtoType/Array.js" />
 
 ;$.app.controllers = $.app.controllers || {};
 $.app.controllers.navItemsController = {
@@ -67,12 +69,12 @@ $.app.controllers.navItemsController = {
         },
         orderingTextBoxChange : function() {
             var $allInputs = $(".ordering-textbox");
-            var hash = $.app.schema.hashset.create(3);
-            console.log(hash);
-            console.log($allInputs);
-            $allInputs.keypress(function (e) {
-                console.log(e);
-                hash.add(1, 2);
+            var tracker = $.app.inputChangeTracker.createTracker($allInputs);
+            console.log(tracker);
+            $allInputs.blur(function (e) {
+                var $changedInputs = tracker.getChangedInputs();
+                console.log($changedInputs);
+                console.log(tracker.list);
             });
         }
     }

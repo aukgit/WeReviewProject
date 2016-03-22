@@ -11,15 +11,16 @@
 /// <reference path="byId.js" />
 /// <reference path="../jQuery/jquery-2.1.4.js" />
 /// <reference path="../jQuery/jquery-2.1.4-vsdoc.js" />
-;$.fn.extend({
-    getClassesList: function () {
+;
+$.fn.extend({
+    getClassesList: function() {
         /// <summary>
         /// jQuery element get all classes as an array.
         /// </summary>
         /// <returns type="array">array list of classes.</returns>
         return $.getClassesList(this);
     },
-    isEmpty: function () {
+    isEmpty: function() {
         /// <summary>
         /// Compare any object to null , unidentified or empty then returns true/false.
         /// </summary>
@@ -27,13 +28,21 @@
         /// <returns type="boolean">True/False</returns>
         return $.isEmpty(this);
     },
-    disableElement: function () {
+    disableElement: function() {
         this.attr("disabled", "disabled");
     },
-    enableElement: function () {
-        this.removeAttr("disabled"); 
+    enableElement: function() {
+        this.removeAttr("disabled");
     },
-    isDisabledElement: function () {
+    isDisabledElement: function() {
         return this.hasAttr("disabled");
+    },
+    toArrayWithValues: function() {
+        var len  = this.length,
+            array = new Array(len);
+        for (var i = 0; i < len; i++) {
+            array[i] = this[i].value;
+        }
+        return array;
     }
 });

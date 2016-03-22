@@ -843,6 +843,8 @@
     <Content Include="JavaScript-Mvc-framework\controllers\initialize.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\clone.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\ajax.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\inputChangeTracker.js" />
+    <Content Include="JavaScript-Mvc-framework\Prototype\Array.js" />
     <Content Include="JavaScript-Mvc-framework\schema\hashset.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\spinner.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\constants.js" />
