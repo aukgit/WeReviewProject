@@ -55,6 +55,26 @@ $.app.inputChangeTracker = {
         }
         return $(changedInputsList);
     },
+    getUnchangedInputs: function () {
+        /// <summary>
+        /// Get all inputs array which are changed at moment of calling this method.
+        /// </summary>
+        /// <returns type=""></returns>
+        var list = this.list,
+            $inputs = this.list.$inputs,
+            len = $inputs.length;
+        var changedInputsList = [];
+        for (var i = 0; i < len; i++) {
+            var input = $inputs[i],
+                currentText = input.value,
+                previousValue = list.initalTexts[i];
+            if (currentText === previousValue) {
+                // different.
+                changedInputsList.push(input);
+            }
+        }
+        return $(changedInputsList);
+    },
     getChangedInputsAttrArray: function (attr) {
         /// <summary>
         /// Get an array of the given attribute values for changed inputs.
@@ -62,6 +82,19 @@ $.app.inputChangeTracker = {
         /// <param name="attr" type="type">Give a attr name.</param>
         /// <returns type="">Get an array of the given attribute values for changed inputs.</returns>
         var $changedInputs = this.getChangedInputs();
+        var attrArray = new Array($changedInputs.length);
+        for (var i = 0; i < $changedInputs.length; i++) {
+            attrArray[i] = $changedInputs[i].getAttribute(attr);
+        }
+        return attrArray;
+    },
+    getUnchangedInputsAttrArray: function (attr) {
+        /// <summary>
+        /// Get an array of the given attribute values for changed inputs.
+        /// </summary>
+        /// <param name="attr" type="type">Give a attr name.</param>
+        /// <returns type="">Get an array of the given attribute values for changed inputs.</returns>
+        var $changedInputs = this.getUnchangedInputs();
         var attrArray = new Array($changedInputs.length);
         for (var i = 0; i < $changedInputs.length; i++) {
             attrArray[i] = $changedInputs[i].getAttribute(attr);
