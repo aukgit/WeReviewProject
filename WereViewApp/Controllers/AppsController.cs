@@ -13,7 +13,7 @@ namespace WereViewApp.Controllers {
     public class AppsController : AdvanceController {
         #region Declarations
 
-        private readonly Algorithms _algorithms = new Algorithms();
+        private readonly Algorithms.Algorithms _algorithms = new Algorithms.Algorithms();
 
         #endregion
 

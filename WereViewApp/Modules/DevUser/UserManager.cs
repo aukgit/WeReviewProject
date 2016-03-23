@@ -18,7 +18,6 @@ using WereViewApp.WereViewAppCommon;
 
 namespace WereViewApp.Modules.DevUser {
     public static class UserManager {
-        public static long user { get; set; }
 
         #region Authentication
 
@@ -298,9 +297,9 @@ namespace WereViewApp.Modules.DevUser {
 
         public static ApplicationUser GetUserFromViewModel(RegisterViewModel model) {
             var user = new ApplicationUser {
-                UserName = Algorithms.GetAllUpperCaseTitle(model.UserName),
-                FirstName = Algorithms.GetAllUpperCaseTitle(model.FirstName),
-                LastName = Algorithms.GetAllUpperCaseTitle(model.LastName),
+                UserName = Algorithms.Algorithms.GetAllUpperCaseTitle(model.UserName),
+                FirstName = Algorithms.Algorithms.GetAllUpperCaseTitle(model.FirstName),
+                LastName = Algorithms.Algorithms.GetAllUpperCaseTitle(model.LastName),
                 Email = model.Email,
                 //DateOfBirth = model.DateOfBirth,
                 CreatedDate = DateTime.Now,

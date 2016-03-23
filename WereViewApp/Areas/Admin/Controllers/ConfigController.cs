@@ -32,7 +32,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         [Authorize, HasMinimumRole(MinimumRole = RoleNames.Admin), HttpPost, ValidateAntiForgeryToken]
         public ActionResult CleanSystem(string clean) {
             if (!string.IsNullOrEmpty(clean) && clean.Equals("Clean")) {
-                var algorithm = new Algorithms();
+                var algorithm = new Algorithms.Algorithms();
                 ViewBag.message = "Every thing is removed successfully.";
                 AppVar.SetErrorStatus("Sorry ! Some went wrong in the server. Please get in touch with developer.");
             }

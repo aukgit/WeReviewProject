@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
 using DevTrends.MvcDonutCaching;
+using WereViewApp.Algorithms;
 using WereViewApp.Controllers;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.EntityModel;

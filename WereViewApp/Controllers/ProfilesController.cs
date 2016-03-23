@@ -68,7 +68,7 @@ namespace WereViewApp.Controllers {
         public ActionResult Profile(string username, int page = 1) {
             ApplicationUser user;
             if (UserManager.IsUserNameExistWithValidation(username, out user)) {
-                var algorithms = new Algorithms();
+                var algorithms = new Algorithms.Algorithms();
                 ViewBag.Title = username + "'s apps collection";
                 ViewBag.Meta = "Mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
                 ViewBag.Keywords = ViewBag.Meta;

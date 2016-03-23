@@ -9,7 +9,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         public ActionResult Index() {
             var appSummaryModel = Session["admin-app-summary"] as AppSummaryViewModel;
             if (appSummaryModel == null) {
-                var algorithms = new Algorithms();
+                var algorithms = new Algorithms.Algorithms();
                 appSummaryModel = algorithms.GetAppsSummary();
                 Session["admin-app-summary"] = appSummaryModel;
             }

@@ -20,9 +20,10 @@ using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Uploads;
+using WereViewApp.WereViewAppCommon;
 using WereViewApp.WereViewAppCommon.Structs;
 
-namespace WereViewApp.WereViewAppCommon {
+namespace WereViewApp.Algorithms {
     public class Algorithms {
         #region Viewable Apps : Apps which are published
 

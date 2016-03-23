@@ -33,7 +33,7 @@ namespace WereViewApp.Controllers {
                 new SitemapItem(appUrl + "/sitemap", modifiedDate, SitemapChangeFrequency.Daily)
                 //new SitemapItem(appUrl+"/Sitemap.xml",modifiedDate, SitemapChangeFrequency.Daily),
             };
-            var algorithms = new Algorithms();
+            var algorithms = new Algorithms.Algorithms();
             using (var db = new WereViewAppEntities()) {
                 var max = db.FeaturedImages.Count();
                 var homePageGalleryApps = algorithms.GetHomePageGalleryImages(db, max);
