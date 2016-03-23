@@ -2,12 +2,12 @@
 
 using System.Web.Mvc;
 using DevMvcComponent.Pagination;
-using WereViewApp.BusinessLogics;
-using WereViewApp.Modules.Cache;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.Modules.Cache;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     public class PlatformsController : Controller {
         private readonly int MaxNumbersOfPagesShow = 8;
         // GET: 

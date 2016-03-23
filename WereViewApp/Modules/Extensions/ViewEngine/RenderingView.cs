@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Web.Mvc;
 
-namespace WereViewApp.Modules.Extensions.ViewEngine {
+namespace WeReviewApp.Modules.Extensions.ViewEngine {
     public class RenderingView {
         /// <summary>
         ///     return view to string

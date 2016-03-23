@@ -1,11 +1,11 @@
 ﻿using System.Data.Entity;
 using System.Linq;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.Mail;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.Mail;
 
-namespace WereViewApp.BusinessLogics.Admin {
+namespace WeReviewApp.BusinessLogics.Admin {
     public static class ModerationLogics {
         #region Featured App
 

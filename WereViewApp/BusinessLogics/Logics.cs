@@ -13,17 +13,17 @@ using DevMvcComponent;
 using DevMvcComponent.Extensions;
 using DevMvcComponent.Pagination;
 using DevTrends.MvcDonutCaching;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
-using WereViewApp.Models.EntityModel.Structs;
-using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.Cache;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.Uploads;
-using WereViewApp.WereViewAppCommon;
-using WereViewApp.WereViewAppCommon.Structs;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WeReviewApp.Models.EntityModel.Structs;
+using WeReviewApp.Models.ViewModels;
+using WeReviewApp.Modules.Cache;
+using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.Uploads;
+using WeReviewApp.WereViewAppCommon;
+using WeReviewApp.WereViewAppCommon.Structs;
 
-namespace WereViewApp.BusinessLogics {
+namespace WeReviewApp.BusinessLogics {
     public class Logics {
         #region Viewable Apps : Apps which are published
 

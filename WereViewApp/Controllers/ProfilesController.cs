@@ -7,15 +7,15 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
-using WereViewApp.BusinessLogics;
-using WereViewApp.Models.EntityModel.Structs;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Modules.Cache;
-using WereViewApp.Modules.DevUser;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.Models.EntityModel.Structs;
+using WeReviewApp.Models.POCO.Identity;
+using WeReviewApp.Modules.Cache;
+using WeReviewApp.Modules.DevUser;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class ProfilesController : AdvanceController {
         private const int MaxNumbersOfPagesShow = 8;

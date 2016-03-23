@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WereViewApp.Modules.Extensions.IdentityExtension;
-namespace WereViewApp.Filter {
+using WeReviewApp.Modules.Extensions.IdentityExtension;
+namespace WeReviewApp.Filter {
     public class FacebookAccessTokenAttribute : ActionFilterAttribute {
 
         public override void OnActionExecuting(ActionExecutingContext filterContext) {

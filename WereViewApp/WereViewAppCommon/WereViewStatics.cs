@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.POCO.IdentityCustomization;
-using WereViewApp.Modules.Cache;
-using WereViewApp.Modules.Uploads;
-using WereViewApp.WereViewAppCommon.Structs;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Modules.Cache;
+using WeReviewApp.Modules.Uploads;
+using WeReviewApp.WereViewAppCommon.Structs;
 
-namespace WereViewApp.WereViewAppCommon {
+namespace WeReviewApp.WereViewAppCommon {
     public static class WereViewStatics {
         static List<Category> _appCategoriesCache = null;
         static List<Platform> _appPlatformsCache = null;

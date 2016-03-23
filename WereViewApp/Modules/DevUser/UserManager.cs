@@ -8,16 +8,16 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
-using WereViewApp.BusinessLogics;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Models.POCO.IdentityCustomization;
-using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.Role;
-using WereViewApp.Modules.Session;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.POCO.Identity;
+using WeReviewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Models.ViewModels;
+using WeReviewApp.Modules.Role;
+using WeReviewApp.Modules.Session;
+using WeReviewApp.WereViewAppCommon;
 
-namespace WereViewApp.Modules.DevUser {
+namespace WeReviewApp.Modules.DevUser {
     public static class UserManager {
 
         #region Authentication

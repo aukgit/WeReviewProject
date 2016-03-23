@@ -1,7 +1,7 @@
-﻿using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.IdentityCustomization;
-using WereViewApp.Modules.Session;
-using WereViewApp.Modules.TimeZone;
+﻿using WeReviewApp.Models.Context;
+using WeReviewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Modules.Session;
+using WeReviewApp.Modules.TimeZone;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -11,7 +11,7 @@ using DevMvcComponent.Error;
 using DevMvcComponent.Mail;
 using DevMvcComponent.Processor;
 
-namespace WereViewApp {
+namespace WeReviewApp {
     /// <summary>
     /// Application Configurations, also contains the list of roles.
     /// </summary>

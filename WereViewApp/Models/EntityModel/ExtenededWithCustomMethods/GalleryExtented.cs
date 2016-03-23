@@ -1,8 +1,8 @@
-﻿using WereViewApp.Models.EntityModel.Structs;
-using WereViewApp.Modules.Uploads;
-using WereViewApp.WereViewAppCommon;
+﻿using WeReviewApp.Models.EntityModel.Structs;
+using WeReviewApp.Modules.Uploads;
+using WeReviewApp.WereViewAppCommon;
 
-namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
+namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
     public static class GalleryExtented {
         /// <summary>
         ///     Returns image http url.

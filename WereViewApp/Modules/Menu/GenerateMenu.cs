@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.POCO.IdentityCustomization;
 
-namespace WereViewApp.Modules.Menu {
+namespace WeReviewApp.Modules.Menu {
     public class GenerateMenu : IDisposable {
         /// <summary>
         ///     0 - name

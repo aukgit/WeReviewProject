@@ -3,9 +3,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
-using WereViewApp.BusinessLogics;
+using WeReviewApp.BusinessLogics;
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class TagsController : AdvanceController {
         // GET: Tags

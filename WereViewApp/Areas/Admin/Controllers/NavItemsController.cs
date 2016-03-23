@@ -5,11 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using DevMvcComponent;
-using WereViewApp.Controllers;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Controllers;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.POCO.IdentityCustomization;
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     public class NavItemsController : IdentityController<ApplicationDbContext> {
         public NavItemsController()
             : base(true) {

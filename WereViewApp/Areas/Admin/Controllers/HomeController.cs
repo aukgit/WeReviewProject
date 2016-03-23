@@ -1,10 +1,10 @@
 ﻿using System.Web.Mvc;
 using System.Web.UI;
-using WereViewApp.BusinessLogics;
-using WereViewApp.Models.ViewModels;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.Models.ViewModels;
+using WeReviewApp.WereViewAppCommon;
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class HomeController : Controller {
         public ActionResult Index() {

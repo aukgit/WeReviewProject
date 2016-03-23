@@ -1,6 +1,6 @@
 using FluentScheduler;
 
-namespace WereViewApp.Scheduler {
+namespace WeReviewApp.Scheduler {
     internal class WeReviewDownloadScheduler : ITask {
         #region ITask Members
 

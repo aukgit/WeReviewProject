@@ -4,12 +4,12 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WereViewApp.BusinessLogics;
-using WereViewApp.Modules.DevUser;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.Modules.DevUser;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     public class AppsController : AdvanceController {
         #region Declarations
 

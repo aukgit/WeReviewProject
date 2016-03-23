@@ -1,4 +1,4 @@
-﻿namespace WereViewApp.Models.DesignPattern.Interfaces {
+﻿namespace WeReviewApp.Models.DesignPattern.Interfaces {
     internal interface IDevUserRole {
         long Id { get; set; }
 

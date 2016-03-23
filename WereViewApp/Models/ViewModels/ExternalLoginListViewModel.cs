@@ -1,4 +1,4 @@
-﻿namespace WereViewApp.Models.ViewModels {
+﻿namespace WeReviewApp.Models.ViewModels {
     public class ExternalLoginListViewModel {
         public string Action { get; set; }
         public string ReturnUrl { get; set; }

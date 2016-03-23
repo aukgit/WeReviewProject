@@ -11,19 +11,19 @@ using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
 using DevTrends.MvcDonutCaching;
-using WereViewApp.BusinessLogics.Admin;
-using WereViewApp.Controllers;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
-using WereViewApp.Models.POCO.Enum;
-using WereViewApp.Models.POCO.IdentityCustomization;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.Mail;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.BusinessLogics.Admin;
+using WeReviewApp.Controllers;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WeReviewApp.Models.POCO.Enum;
+using WeReviewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.Mail;
+using WeReviewApp.WereViewAppCommon;
 //using DevTrends.MvcDonutCaching;
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class FeedbacksController : IdentityController<ApplicationDbContext> {
         #region Developer Comments - Alim Ul karim

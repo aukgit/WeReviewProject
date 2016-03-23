@@ -42,7 +42,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using WereViewApp.Controllers;
+using WeReviewApp.Controllers;
 //using DevTrends.MvcDonutCaching;
 <# foreach (var namespaceName in RequiredNamespaces) { #>
 using <#= namespaceName #>;

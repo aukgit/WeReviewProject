@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WereViewApp.Models.ViewModels {
+namespace WeReviewApp.Models.ViewModels {
     public class DisplayGalleryImages {
         public Guid GalleryID { get; set; }
 

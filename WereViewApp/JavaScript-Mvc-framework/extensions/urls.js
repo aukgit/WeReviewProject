@@ -8,8 +8,8 @@
 /// <reference path="regularExp.js" />
 /// <reference path="selectors.js" />
 /// <reference path="upload.js" />
-/// <reference path="D:\Working\GitHub\WereViewProject\WereViewApp\Content/Scripts/jquery-2.1.4.js" />
-/// <reference path="D:\Working\GitHub\WereViewProject\WereViewApp\Content/Scripts/jquery-2.1.4.intellisense.js" />
+/// <reference path="D:\Working\GitHub\WereViewProject\WeReviewApp\Content/Scripts/jquery-2.1.4.js" />
+/// <reference path="D:\Working\GitHub\WereViewProject\WeReviewApp\Content/Scripts/jquery-2.1.4.intellisense.js" />
 /// <reference path="../schema/url.js" />
 ; $.app = $.app || {};
 $.app.urls = {

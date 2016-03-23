@@ -3,9 +3,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using WereViewApp.Models.Context;
+using WeReviewApp.Models.Context;
 
-namespace WereViewApp.Models.POCO.Identity {
+namespace WeReviewApp.Models.POCO.Identity {
 
     #region Login
 

@@ -1,7 +1,7 @@
 using System;
-using WereViewApp.Models.EntityModel.Derivables;
+using WeReviewApp.Models.EntityModel.Derivables;
 
-namespace WereViewApp.Models.EntityModel {
+namespace WeReviewApp.Models.EntityModel {
     public class AppDraft : IApp {
         public long AppDraftID { get; set; }
         public string AppName { get; set; }

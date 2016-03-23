@@ -6,12 +6,12 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
-using WereViewApp.Controllers;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Modules.Uploads;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.Controllers;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Modules.Uploads;
+using WeReviewApp.WereViewAppCommon;
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class AdvertiseController : AdvanceController {
         #region Developer Comments - Alim Ul karim

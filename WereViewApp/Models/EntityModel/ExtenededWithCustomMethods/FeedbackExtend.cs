@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using WereViewApp.Models.POCO.Enum;
-using WereViewApp.Models.POCO.IdentityCustomization;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.Models.POCO.Enum;
+using WeReviewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.WereViewAppCommon;
 
-namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
+namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
     public static class FeedbackExtend {
         public static FeedbackState GetStatus(this Feedback feedback) {
             if (!feedback.IsViewed) {

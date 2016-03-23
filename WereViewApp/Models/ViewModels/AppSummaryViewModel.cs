@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WereViewApp.Models.ViewModels {
+namespace WeReviewApp.Models.ViewModels {
     public class AppSummaryViewModel {
         public int TotalApps { get; set; }
         public int TotalDeveloper { get; set; }

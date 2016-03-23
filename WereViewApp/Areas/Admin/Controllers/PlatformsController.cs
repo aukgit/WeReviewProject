@@ -4,11 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using WereViewApp.Controllers;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.Controllers;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.WereViewAppCommon;
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     public class PlatformsController : AdvanceController {
         #region Developer Comments - Alim Ul karim
 

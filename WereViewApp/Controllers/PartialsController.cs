@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using DevTrends.MvcDonutCaching;
-using WereViewApp.BusinessLogics;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
-using WereViewApp.Models.EntityModel.Structs;
-using WereViewApp.Modules.Session;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WeReviewApp.Models.EntityModel.Structs;
+using WeReviewApp.Modules.Session;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     public class PartialsController : AdvanceController {
         #region Declarations
 

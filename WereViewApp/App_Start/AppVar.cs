@@ -1,10 +1,10 @@
 using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
-using WereViewApp.Models.POCO.IdentityCustomization;
-using WereViewApp.Modules.Mail;
+using WeReviewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Modules.Mail;
 
-namespace WereViewApp {
+namespace WeReviewApp {
     /// <summary>
     /// Application Global Variables
     /// </summary>
@@ -18,7 +18,7 @@ namespace WereViewApp {
         #endregion
 
         #region Connection Strings and Constants
-        //public const string DefaultConnection = @"Data Source=(LocalDb)\v11.0;AttachDbFilename=|DataDirectory|\WereViewApp-Accounts.mdf;Initial Catalog=WereViewApp-Accounts;Integrated Security=True";
+        //public const string DefaultConnection = @"Data Source=(LocalDb)\v11.0;AttachDbFilename=|DataDirectory|\WeReviewApp-Accounts.mdf;Initial Catalog=WeReviewApp-Accounts;Integrated Security=True";
         private static readonly string DefaultConnection = ConfigurationManager
             .ConnectionStrings["DefaultConnection"]
             .ConnectionString;

@@ -1,9 +1,9 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.Role;
+using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.Role;
 
-namespace WereViewApp.Filter {
+namespace WeReviewApp.Filter {
     public class HasMinimumRoleAttribute : ActionFilterAttribute {
         public string MinimumRole { get; set; }
 

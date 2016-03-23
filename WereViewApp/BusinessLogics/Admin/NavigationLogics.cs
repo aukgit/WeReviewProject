@@ -1,4 +1,4 @@
-﻿namespace WereViewApp.BusinessLogics.Admin {
+﻿namespace WeReviewApp.BusinessLogics.Admin {
     public class NavigationLogics {
     }
 }

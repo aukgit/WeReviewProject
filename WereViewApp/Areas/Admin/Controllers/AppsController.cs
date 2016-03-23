@@ -6,18 +6,18 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
-using WereViewApp.BusinessLogics;
-using WereViewApp.BusinessLogics.Admin;
-using WereViewApp.Controllers;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.Extensions;
-using WereViewApp.Modules.Extensions.IdentityExtension;
-using WereViewApp.Modules.Mail;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.BusinessLogics.Admin;
+using WeReviewApp.Controllers;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Models.POCO.Identity;
+using WeReviewApp.Models.ViewModels;
+using WeReviewApp.Modules.Extensions;
+using WeReviewApp.Modules.Extensions.IdentityExtension;
+using WeReviewApp.Modules.Mail;
+using WeReviewApp.WereViewAppCommon;
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class AppsController : AdvanceController {
         public AppsController()

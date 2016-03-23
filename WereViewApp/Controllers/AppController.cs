@@ -11,22 +11,22 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
-using WereViewApp.BusinessLogics;
-using WereViewApp.Filter;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.EntityModel.Derivables;
-using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
-using WereViewApp.Models.EntityModel.Structs;
-using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.Uploads;
-using WereViewApp.WereViewAppCommon;
-using WereViewApp.WereViewAppCommon.Structs;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.Filter;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Models.EntityModel.Derivables;
+using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WeReviewApp.Models.EntityModel.Structs;
+using WeReviewApp.Models.ViewModels;
+using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.Uploads;
+using WeReviewApp.WereViewAppCommon;
+using WeReviewApp.WereViewAppCommon.Structs;
 using FileSys = System.IO.File;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     [Authorize]
     [CheckRegistrationComplete]
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]

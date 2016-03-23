@@ -1,11 +1,11 @@
 ﻿using System.Web.Mvc;
 using System.Web.UI;
-using WereViewApp.BusinessLogics;
-using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.Session;
-using WereViewApp.WereViewAppCommon.Structs;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.Models.ViewModels;
+using WeReviewApp.Modules.Session;
+using WeReviewApp.WereViewAppCommon.Structs;
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class SearchController : Controller {
         // GET: Search

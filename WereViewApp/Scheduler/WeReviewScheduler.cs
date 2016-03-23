@@ -3,13 +3,13 @@
 using System;
 using System.IO;
 using FluentScheduler;
-using WereViewApp.Modules.Uploads;
-using WereViewApp.WereViewAppCommon;
-using WereViewApp.WereViewAppCommon.Structs;
+using WeReviewApp.Modules.Uploads;
+using WeReviewApp.WereViewAppCommon;
+using WeReviewApp.WereViewAppCommon.Structs;
 
 #endregion
 
-namespace WereViewApp.Scheduler {
+namespace WeReviewApp.Scheduler {
     internal class WeReviewScheduler : ITask {
         #region ITask Members
 

@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace WereViewApp {
+namespace WeReviewApp {
     public static class BundleConfig {
         private enum BundleSelector {
             ShowEveryScript,
