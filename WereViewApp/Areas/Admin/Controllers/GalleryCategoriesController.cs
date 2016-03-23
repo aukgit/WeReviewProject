@@ -5,10 +5,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
-using WereViewApp.Controllers;
-using WereViewApp.Models.EntityModel;
+using WeReviewApp.Controllers;
+using WeReviewApp.Models.EntityModel;
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class GalleryCategoriesController : AdvanceController {
         #region Developer Comments - Alim Ul karim

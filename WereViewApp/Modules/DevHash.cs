@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace WereViewApp.Modules {
+namespace WeReviewApp.Modules {
     public static class DevHash {
         private static readonly StringBuilder _sb = new StringBuilder(10);
 

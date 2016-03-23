@@ -3,9 +3,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.BusinessLogics;
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class TagsController : AdvanceController {
         // GET: Tags
@@ -13,7 +13,7 @@ namespace WereViewApp.Controllers {
 
         #region Declarations
 
-        private readonly Algorithms _algorithms = new Algorithms();
+        private readonly Logics _algorithms = new Logics();
 
         #endregion
 
@@ -45,11 +45,11 @@ namespace WereViewApp.Controllers {
             return View(tagsforThisPage);
         }
 
-        //               ViewBag.Title;
-        //ViewBag.Meta = "Tags , Mobile apps, apps review, apple apps, android apps,reviews, app review site, " +
-        //ViewBag.Title = "Mobile Applications Tags";
-
         //public ActionResult GetTagDetail(string id, int page = 1) {
+        //ViewBag.Title = "Mobile Applications Tags";
+        //ViewBag.Meta = "Tags , Mobile apps, apps review, apple apps, android apps,reviews, app review site, " +
+
+        //               ViewBag.Title;
         //ViewBag.Keywords = ViewBag.Meta;
         //var cacheName = "Tags.GetTagDetail." + id;
         //var tags = db.Tags.OrderByDescending(n => n.TagID);

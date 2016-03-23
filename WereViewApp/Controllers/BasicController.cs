@@ -2,11 +2,11 @@
 
 using System.Web.Mvc;
 using DevMvcComponent.Error;
-using WereViewApp.Models.Context;
+using WeReviewApp.Models.Context;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     //[CompressFilter(Order = 1)]
 
     public abstract class BasicController : Controller {

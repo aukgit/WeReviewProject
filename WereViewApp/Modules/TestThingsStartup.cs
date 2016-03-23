@@ -1,4 +1,4 @@
-﻿namespace WereViewApp.Modules {
+﻿namespace WeReviewApp.Modules {
     public static class TestThingsStartup {
         public static void BeforeLoadingMain() {
         }

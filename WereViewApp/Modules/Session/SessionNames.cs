@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace WereViewApp.Modules.Session {
+namespace WeReviewApp.Modules.Session {
     public static class SessionNames {
         public const string User = "User";
         public const string UserID = "UserID";

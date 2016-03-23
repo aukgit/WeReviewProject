@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WereViewApp.Models.EntityModel {
+namespace WeReviewApp.Models.EntityModel {
     public partial class Category {
         public Category() {
             this.Apps = new HashSet<App>();

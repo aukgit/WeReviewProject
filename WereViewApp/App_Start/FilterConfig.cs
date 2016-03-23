@@ -1,9 +1,9 @@
-﻿//using WereViewApp.Filter;
+﻿//using WeReviewApp.Filter;
 using System.Web;
 using System.Web.Mvc;
-using WereViewApp.Filter;
+using WeReviewApp.Filter;
 
-namespace WereViewApp {
+namespace WeReviewApp {
     public class FilterConfig {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters) {
             filters.Add(new HandleErrorAttribute());

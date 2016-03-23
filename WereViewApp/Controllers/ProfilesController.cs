@@ -7,15 +7,15 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
-using WereViewApp.Models.EntityModel.Structs;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Modules.Cache;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.Models.EntityModel.Structs;
+using WeReviewApp.Models.POCO.Identity;
+using WeReviewApp.Modules.Cache;
+using WeReviewApp.Modules.DevUser;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class ProfilesController : AdvanceController {
         private const int MaxNumbersOfPagesShow = 8;
@@ -68,7 +68,7 @@ namespace WereViewApp.Controllers {
         public ActionResult Profile(string username, int page = 1) {
             ApplicationUser user;
             if (UserManager.IsUserNameExistWithValidation(username, out user)) {
-                var algorithms = new Algorithms();
+                var algorithms = new Logics();
                 ViewBag.Title = username + "'s apps collection";
                 ViewBag.Meta = "Mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
                 ViewBag.Keywords = ViewBag.Meta;

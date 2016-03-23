@@ -1,4 +1,4 @@
-﻿namespace WereViewApp.Modules {
+﻿namespace WeReviewApp.Modules {
     public static class SQLGenerate {
         /// <summary>
         ///     Returns a simple SQL Query.

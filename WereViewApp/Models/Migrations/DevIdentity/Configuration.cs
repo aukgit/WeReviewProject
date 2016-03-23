@@ -1,7 +1,7 @@
 using System.Data.Entity.Migrations;
-using WereViewApp.Models.Context;
+using WeReviewApp.Models.Context;
 
-namespace WereViewApp.Models.Migrations.DevIdentity {
+namespace WeReviewApp.Models.Migrations.DevIdentity {
     internal sealed class Configuration : DbMigrationsConfiguration<DevIdentityDbContext> {
         public Configuration() {
             AutomaticMigrationsEnabled = true;

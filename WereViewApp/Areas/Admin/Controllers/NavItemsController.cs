@@ -4,14 +4,16 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using WereViewApp.Controllers;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.IdentityCustomization;
+using DevMvcComponent;
+using WeReviewApp.Controllers;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.POCO.IdentityCustomization;
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     public class NavItemsController : IdentityController<ApplicationDbContext> {
-        public NavItemsController():base(true) {
-            
+        public NavItemsController()
+            : base(true) {
+
         }
         private List<NavigationItem> GetItems(int? NavitionID = null) {
             if (NavitionID == null) {
@@ -78,11 +80,38 @@ namespace WereViewApp.Areas.Admin.Controllers {
             if (ModelState.IsValid) {
                 db.Entry(navigationItem).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("List", new {id = navigationItem.NavigationID});
+                return RedirectToAction("List", new { id = navigationItem.NavigationID });
             }
             AddMenuName(navigationItem.NavigationID);
             AppConfig.Caches.RemoveAllFromCache();
             return View(navigationItem);
+        }
+
+        public JsonResult SaveOrder(NavigationItem [] navigationItems) {
+            NavigationItem dbNavigationItem = null;
+            var len = navigationItems.Length;
+            List<string> navigationItemsNames = new List<string>(len),
+                         navigationItemsFailedNames = new List<string>(len); ;
+            bool isFailed = false;
+            foreach (var navItem in navigationItems) {
+                try {
+                    dbNavigationItem = db.NavigationItems.Find(navItem.NavigationItemID);
+                    db.Entry(dbNavigationItem).State = EntityState.Modified;
+                    dbNavigationItem.Ordering = navItem.Ordering;
+                    if (db.SaveChanges() > -1) {
+                        navigationItemsNames.Add(dbNavigationItem.Title);
+                    }
+                } catch (Exception ex) {
+                    Mvc.Error.ByEmail(ex, "SaveOrder()", "", dbNavigationItem);
+                    isFailed = true;
+                    navigationItemsFailedNames.Add(dbNavigationItem.Title);
+                }
+            }
+            if (isFailed) {
+                return Json(new { success = !isFailed, titles = navigationItemsFailedNames }, JsonRequestBehavior.AllowGet);
+            } else {
+                return Json(new { success = !isFailed, titles = navigationItemsNames }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public ActionResult Delete(int id, int NavigationID) {
@@ -91,7 +120,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             db.SaveChanges();
             AddMenuName(NavigationID);
             AppConfig.Caches.RemoveAllFromCache();
-            return RedirectToAction("List", new {id = NavigationID});
+            return RedirectToAction("List", new { id = NavigationID });
         }
 
         protected override void Dispose(bool disposing) {
@@ -101,8 +130,6 @@ namespace WereViewApp.Areas.Admin.Controllers {
             base.Dispose(disposing);
         }
 
-        public ActionResult SaveOrder(object id) {
-            return null;
-        }
+
     }
 }

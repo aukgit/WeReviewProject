@@ -3,11 +3,11 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.POCO.Identity;
+using WeReviewApp.Models.POCO.IdentityCustomization;
 
-namespace WereViewApp.Modules.Cache {
+namespace WeReviewApp.Modules.Cache {
     public class CachedQueriedData {
         #region Countries
 

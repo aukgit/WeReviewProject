@@ -6,13 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using System.Web.UI;
-using WereViewApp.Controllers;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Controllers;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.POCO.IdentityCustomization;
 
 #endregion
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
 
     public class MenuController : IdentityController<ApplicationDbContext> {

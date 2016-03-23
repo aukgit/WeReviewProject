@@ -3,13 +3,13 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.UI;
-using WereViewApp.Filter;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.IdentityCustomization;
-using WereViewApp.Modules.Role;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.Filter;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Modules.Role;
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class ConfigController : Controller {
         private readonly DevIdentityDbContext db = new DevIdentityDbContext();
@@ -32,7 +32,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         [Authorize, HasMinimumRole(MinimumRole = RoleNames.Admin), HttpPost, ValidateAntiForgeryToken]
         public ActionResult CleanSystem(string clean) {
             if (!string.IsNullOrEmpty(clean) && clean.Equals("Clean")) {
-                var algorithm = new Algorithms();
+                var algorithm = new Logics();
                 ViewBag.message = "Every thing is removed successfully.";
                 AppVar.SetErrorStatus("Sorry ! Some went wrong in the server. Please get in touch with developer.");
             }

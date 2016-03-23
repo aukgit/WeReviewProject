@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WereViewApp.Modules.Sitemaps {
+namespace WeReviewApp.Modules.Sitemaps {
     /// <summary>
     ///     Represents a sitemap item.
     /// </summary>

@@ -1,7 +1,7 @@
 ﻿using System.IO.Compression;
 using System.Web.Mvc;
 
-namespace WereViewApp.Filter {
+namespace WeReviewApp.Filter {
     /// <summary>
     /// Attribute that can be added to controller methods to force content
     /// to be GZip encoded if the client supports it

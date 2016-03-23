@@ -11,28 +11,28 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
-using WereViewApp.Filter;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.EntityModel.Derivables;
-using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
-using WereViewApp.Models.EntityModel.Structs;
-using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.Uploads;
-using WereViewApp.WereViewAppCommon;
-using WereViewApp.WereViewAppCommon.Structs;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.Common;
+using WeReviewApp.Filter;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Models.EntityModel.Derivables;
+using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WeReviewApp.Models.EntityModel.Structs;
+using WeReviewApp.Models.ViewModels;
+using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.Uploads;
 using FileSys = System.IO.File;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     [Authorize]
     [CheckRegistrationComplete]
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class AppController : AdvanceController {
         #region Declaration
 
-        private readonly Algorithms _algorithms = new Algorithms();
+        private readonly Logics _algorithms = new Logics();
 
         #endregion
 
@@ -247,7 +247,7 @@ namespace WereViewApp.Controllers {
                     break;
             }
             if (app != null) {
-                app.AppName = Algorithms.GetAllUpperCaseTitle(app.AppName);
+                app.AppName = Logics.GetAllUpperCaseTitle(app.AppName);
             }
             var changes = db.SaveChanges(app);
             if (changes > 0) {
@@ -368,7 +368,7 @@ namespace WereViewApp.Controllers {
                                 // creating tag
                                 // if tag not exist in the database then create one.
                                 tagFromDatabase = new Tag {
-                                    TagDisplay = Algorithms.GetAllUpperCaseTitle(tag.Trim())
+                                    TagDisplay = Logics.GetAllUpperCaseTitle(tag.Trim())
                                 };
                                 db2.Tags.Add(tagFromDatabase);
                             }
@@ -569,7 +569,7 @@ namespace WereViewApp.Controllers {
         /// </summary>
         /// <param name="app"></param>
         private void SaveVirtualFields(App app) {
-            var alg = new Algorithms();
+            var alg = new Logics();
             alg.SaveVirtualFields(app);
         }
 
@@ -583,7 +583,7 @@ namespace WereViewApp.Controllers {
         /// <param name="app"></param>
         /// <returns></returns>
         private App ReadVirtualFields(App app) {
-            var alg = new Algorithms();
+            var alg = new Logics();
             return alg.ReadVirtualFields(app);
         }
 

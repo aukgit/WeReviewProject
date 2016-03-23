@@ -1,4 +1,4 @@
-﻿namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
+﻿namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
     public static class TagExtented {
         /// <summary>
         ///     Gets current user's profile url.

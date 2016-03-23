@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace WereViewApp {
+namespace WeReviewApp {
     public static class BundleConfig {
         private enum BundleSelector {
             ShowEveryScript,
@@ -74,6 +74,7 @@ namespace WereViewApp {
                                   "~/Content/Scripts/DevOrgPlugins/byId.js",
                                   "~/Content/Scripts/bootstrap.js", // 3.1.2
                                   "~/Content/Scripts/star-rating.js",
+                                  "~/Content/Scripts/toastr.js",
                                   "~/Content/Scripts/underscore.js",
                                   "~/Content/Scripts/FrontEnd/wow.js",
                                   "~/Content/Scripts/FrontEnd/jquery.sticky.js",
@@ -89,13 +90,16 @@ namespace WereViewApp {
                                   "~/Content/Scripts/FrontEnd/front-developer.js",
                                   "~/Content/Scripts/jquery.blockUI.js",
 
+                                  "~/JavaScript-Mvc-framework/Prototype/Array.js",
                                   "~/JavaScript-Mvc-framework/app.js",
                                   "~/JavaScript-Mvc-framework/schema/schema.js",
+                                  "~/JavaScript-Mvc-framework/schema/hashset.js",
                                   "~/JavaScript-Mvc-framework/schema/url.js",
                                   "~/JavaScript-Mvc-framework/extensions/ajax.js",
                                   "~/JavaScript-Mvc-framework/extensions/clone.js",
                                   "~/JavaScript-Mvc-framework/extensions/constants.js",
                                   "~/JavaScript-Mvc-framework/extensions/initialize.js",
+                                  "~/JavaScript-Mvc-framework/extensions/inputChangeTracker.js",
                                   "~/JavaScript-Mvc-framework/extensions/modal.js",
                                   "~/JavaScript-Mvc-framework/extensions/pagination.js",
                                   "~/JavaScript-Mvc-framework/extensions/regularExp.js",
@@ -137,7 +141,9 @@ namespace WereViewApp {
                                         //"~/Content/css/ckedit-skin-bootstrap.css",
 
                                         "~/Content/css/color-fonts.css",
+                                        "~/Content/css/Spinner.css",
                                         "~/Content/css/star-rating.css",
+                                        "~/Content/css/toastr.css",
                                         "~/Content/css/override-mvc.css",
                                         "~/Content/css/validator.css",
                                         "~/Content/css/editor-templates.css",

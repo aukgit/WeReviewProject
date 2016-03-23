@@ -2,10 +2,10 @@
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Microsoft.AspNet.Identity.EntityFramework;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Models.POCO.Identity;
+using WeReviewApp.Models.POCO.IdentityCustomization;
 
-namespace WereViewApp.Models.Context {
+namespace WeReviewApp.Models.Context {
 
     #region Application DbContext
 

@@ -1,11 +1,11 @@
 ﻿using System.Web.Mvc;
 using System.Web.UI;
-using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.Session;
-using WereViewApp.WereViewAppCommon;
-using WereViewApp.WereViewAppCommon.Structs;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.Common;
+using WeReviewApp.Models.ViewModels;
+using WeReviewApp.Modules.Session;
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class SearchController : Controller {
         // GET: Search
@@ -20,7 +20,7 @@ namespace WereViewApp.Controllers {
             var max = 60;
 
             var search = new SearchViewModel();
-            var algorithms = new Algorithms();
+            var algorithms = new Logics();
             //ViewBag.isPostBack = true;
             if (!string.IsNullOrWhiteSpace(SearchQuery)) {
                 if (!AppVar.Setting.IsInTestingEnvironment) {

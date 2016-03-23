@@ -6,13 +6,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using DevMvcComponent.EntityConversion;
-using WereViewApp.Models.POCO.IdentityCustomization;
-using WereViewApp.Models.POCO.Structs;
-using WereViewApp.Modules.DevUser;
+using WeReviewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Models.POCO.Structs;
+using WeReviewApp.Modules.DevUser;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     public class HomeController : BasicController {
         public HomeController()
             : base(true) {

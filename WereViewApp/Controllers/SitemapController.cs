@@ -4,14 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
-using WereViewApp.Modules.Sitemaps;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.Common;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WeReviewApp.Modules.Sitemaps;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     [OutputCache(CacheProfile = "Day", VaryByCustom = "none")]
     public class SitemapController : Controller {
         // GET: Sitemap
@@ -33,7 +34,7 @@ namespace WereViewApp.Controllers {
                 new SitemapItem(appUrl + "/sitemap", modifiedDate, SitemapChangeFrequency.Daily)
                 //new SitemapItem(appUrl+"/Sitemap.xml",modifiedDate, SitemapChangeFrequency.Daily),
             };
-            var algorithms = new Algorithms();
+            var algorithms = new Logics();
             using (var db = new WereViewAppEntities()) {
                 var max = db.FeaturedImages.Count();
                 var homePageGalleryApps = algorithms.GetHomePageGalleryImages(db, max);

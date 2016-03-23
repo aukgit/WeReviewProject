@@ -1,9 +1,9 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
-using WereViewApp.Modules.Extensions.Context;
+using WeReviewApp.Modules.Extensions.Context;
 
-namespace WereViewApp.Models.EntityModel {
+namespace WeReviewApp.Models.EntityModel {
     public partial class WereViewAppEntities : DevDbContext {
         public WereViewAppEntities()
             : base("name=WereViewAppEntities") {

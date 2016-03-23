@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace WereViewApp.Models.EntityModel {
+namespace WeReviewApp.Models.EntityModel {
     public partial class AppOfferType {
         public AppOfferType() {
             this.Apps = new HashSet<App>();

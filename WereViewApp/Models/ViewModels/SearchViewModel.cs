@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using WereViewApp.Models.EntityModel;
+using WeReviewApp.Models.EntityModel;
 
-namespace WereViewApp.Models.ViewModels {
+namespace WeReviewApp.Models.ViewModels {
     public class SearchViewModel {
         public string DisplayStringToUser { get; set; }
         public string SearchQuery { get; set; }

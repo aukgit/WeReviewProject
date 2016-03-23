@@ -4,12 +4,12 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using WereViewApp.Scheduler;
+using WeReviewApp.Scheduler;
 using FluentScheduler;
 
 #endregion
 
-namespace WereViewApp {
+namespace WeReviewApp {
     public class MvcApplication : HttpApplication {
         protected void Application_Start() {
             AreaRegistration.RegisterAllAreas();

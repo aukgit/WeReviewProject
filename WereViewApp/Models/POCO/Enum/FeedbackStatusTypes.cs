@@ -1,4 +1,4 @@
-﻿namespace WereViewApp.Models.POCO.Enum {
+﻿namespace WeReviewApp.Models.POCO.Enum {
     public enum FeedbackStatusTypes {
         IsViewed = 1,
         IsInProcess = 2,

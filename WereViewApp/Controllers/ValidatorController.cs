@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.UI;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.Session;
-using WereViewApp.Modules.Validations;
-using WereViewApp.WereViewAppCommon.Structs;
+using WeReviewApp.Common;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.Session;
+using WeReviewApp.Modules.Validations;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class ValidatorController : Controller {
         #region WereView Validators
@@ -36,7 +36,7 @@ namespace WereViewApp.Controllers {
                 if (!AppVar.Setting.IsInTestingEnvironment) {
                     if (SessionNames.IsValidationExceed("GetValidUrl", maxTry)) {
                         return Json(Validator.GetErrorValidationExceedMessage(), JsonRequestBehavior.AllowGet);
-                            // return true;
+                        // return true;
                     }
                 }
 
@@ -60,7 +60,7 @@ namespace WereViewApp.Controllers {
             //found e false
             ReturnValid:
             return Json(Validator.GetSuccessMessage("App name is valid."), JsonRequestBehavior.AllowGet);
-                // return true;
+            // return true;
 
             ReturnInvalid:
             return Json(Validator.GetErrorMessage("App name is already exist or not valid."),
@@ -86,7 +86,7 @@ namespace WereViewApp.Controllers {
                 if (!AppVar.Setting.IsInTestingEnvironment) {
                     if (SessionNames.IsValidationExceed("GetValidUrl")) {
                         return Json(Validator.GetErrorValidationExceedMessage(), JsonRequestBehavior.AllowGet);
-                            // return true;
+                        // return true;
                     }
                 }
 

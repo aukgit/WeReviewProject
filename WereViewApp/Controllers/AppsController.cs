@@ -4,16 +4,16 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.Modules.DevUser;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     public class AppsController : AdvanceController {
         #region Declarations
 
-        private readonly Algorithms _algorithms = new Algorithms();
+        private readonly Logics _algorithms = new Logics();
 
         #endregion
 

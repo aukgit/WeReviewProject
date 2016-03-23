@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WereViewApp</RootNamespace>
-    <AssemblyName>WereViewApp</AssemblyName>
+    <RootNamespace>WeReviewApp</RootNamespace>
+    <AssemblyName>WeReviewApp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -241,6 +241,8 @@
   <ItemGroup>
     <Compile Include="App_Start\AppVar.cs" />
     <Compile Include="Areas\Admin\Controllers\AppsController.cs" />
+    <Compile Include="BusinessLogics\Admin\NavigationLogics.cs" />
+    <Compile Include="BusinessLogics\Component\BaseLogicComponent.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\GenericController.cs" />
     <Compile Include="Controllers\IdentityController.cs" />
@@ -293,7 +295,8 @@
     <Compile Include="Scheduler\WeReviewDownloadScheduler.cs" />
     <Compile Include="Scheduler\WeReviewScheduler.cs" />
     <Compile Include="Scheduler\SchedulerRunner.cs" />
-    <Compile Include="WereViewAppCommon\Algorithms.cs" />
+    <Compile Include="BusinessLogics\Admin\AdminLogics.cs" />
+    <Compile Include="BusinessLogics\Logics.cs" />
     <Compile Include="App_Start\AppConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -341,9 +344,9 @@
     <Compile Include="Models\ViewModels\SearchViewModel.cs" />
     <Compile Include="Modules\Reponse\RemoveETagModule.cs" />
     <Compile Include="Modules\StringExtension.cs" />
-    <Compile Include="WereViewAppCommon\ModerationAlgorithms.cs" />
-    <Compile Include="WereViewAppCommon\Structs\CommonVars.cs" />
-    <Compile Include="WereViewAppCommon\WereViewStatics.cs" />
+    <Compile Include="BusinessLogics\Admin\ModerationLogics.cs" />
+    <Compile Include="Common\Variables.cs" />
+    <Compile Include="Common\Statics.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdvanceController.cs" />
     <Compile Include="Controllers\AppController.cs" />
@@ -594,6 +597,10 @@
     </Content>
     <Content Include="Content\css\seo-optimize.min.css" />
     <Content Include="Content\css\Site.css" />
+    <Content Include="Content\css\Spinner.css" />
+    <Content Include="Content\css\Spinner.min.css">
+      <DependentUpon>Spinner.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\star-rating.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
@@ -612,6 +619,10 @@
     <Content Include="Content\css\Tagit\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\css\Tagit\jquery.tagedit.css" />
     <Content Include="Content\css\Tagit\ui-lightness\jquery-ui-1.9.2.custom.min.css" />
+    <Content Include="Content\css\toastr.css" />
+    <Content Include="Content\css\toastr.min.css">
+      <DependentUpon>toastr.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\Upload\jquery.fileupload.css" />
     <Content Include="Content\css\utilities.css" />
     <Content Include="Content\css\utilities.min.css">
@@ -661,6 +672,12 @@
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Views\Config\_Tabs-List.cshtml" />
+    <Content Include="Content\css\toastr.css.map">
+      <DependentUpon>toastr.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Spinner.css.map">
+      <DependentUpon>Spinner.css</DependentUpon>
+    </Content>
     <None Include="Content\Less\ckedit-skin-bootstrap.less" />
     <Content Include="Content\Less\color-fonts.less" />
     <Content Include="Content\Less\footer-fixing.less" />
@@ -829,7 +846,10 @@
     <Content Include="Content\Scripts\skins\bootstrapck\sample\css\bootstrapck-sample.css" />
     <Content Include="Content\Scripts\skins\bootstrapck\sample\js\analytics.js" />
     <Content Include="Content\Scripts\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
+    <Content Include="Content\Less\toastr.less" />
+    <Content Include="Content\Less\Spinner.less" />
     <None Include="Content\Scripts\_references.js" />
+    <Content Include="Content\Scripts\toastr.js" />
     <Content Include="Fonts\fontawesome-webfont.svg" />
     <Content Include="JavaScript-Mvc-framework\app.config.js" />
     <Content Include="JavaScript-Mvc-framework\app.global.js" />
@@ -843,6 +863,9 @@
     <Content Include="JavaScript-Mvc-framework\controllers\initialize.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\clone.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\ajax.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\inputChangeTracker.js" />
+    <Content Include="JavaScript-Mvc-framework\Prototype\Array.js" />
+    <Content Include="JavaScript-Mvc-framework\schema\hashset.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\spinner.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\constants.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\initialize.js" />

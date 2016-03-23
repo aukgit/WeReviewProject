@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using WereViewApp.Models.EntityModel;
+using WeReviewApp.Models.EntityModel;
 
-namespace WereViewApp.WereViewAppCommon.Structs {
+namespace WeReviewApp.Common {
     public static class CommonVars {
 
         #region User Points

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace WereViewApp.Models.EntityModel {
+namespace WeReviewApp.Models.EntityModel {
     public partial class FeaturedImage {
         public long FeaturedImageID { get; set; }
 

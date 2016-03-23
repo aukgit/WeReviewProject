@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using WereViewApp.Models.DesignPattern.Interfaces;
+using WeReviewApp.Models.DesignPattern.Interfaces;
 
-namespace WereViewApp.Models.EntityModel {
+namespace WeReviewApp.Models.EntityModel {
     public class User : IDevUser {
         public User() {
             Apps = new HashSet<App>();

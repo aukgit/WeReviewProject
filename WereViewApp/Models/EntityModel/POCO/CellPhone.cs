@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace WereViewApp.Models.EntityModel {
+namespace WeReviewApp.Models.EntityModel {
     public partial class CellPhone {
         public CellPhone() {
             Users = new HashSet<User>();

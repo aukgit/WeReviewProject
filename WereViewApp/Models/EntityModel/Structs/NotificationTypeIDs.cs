@@ -1,4 +1,4 @@
-﻿namespace WereViewApp.Models.EntityModel.Structs {
+﻿namespace WeReviewApp.Models.EntityModel.Structs {
     public struct NotificationTypeIDs {
         public const int MessageAdded = 1;
         public const int AppAdded = 2;

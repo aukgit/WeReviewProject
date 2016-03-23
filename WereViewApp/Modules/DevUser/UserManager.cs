@@ -8,17 +8,16 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Models.POCO.IdentityCustomization;
-using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.Role;
-using WereViewApp.Modules.Session;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.POCO.Identity;
+using WeReviewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Models.ViewModels;
+using WeReviewApp.Modules.Role;
+using WeReviewApp.Modules.Session;
 
-namespace WereViewApp.Modules.DevUser {
+namespace WeReviewApp.Modules.DevUser {
     public static class UserManager {
-        public static long user { get; set; }
 
         #region Authentication
 
@@ -298,9 +297,9 @@ namespace WereViewApp.Modules.DevUser {
 
         public static ApplicationUser GetUserFromViewModel(RegisterViewModel model) {
             var user = new ApplicationUser {
-                UserName = Algorithms.GetAllUpperCaseTitle(model.UserName),
-                FirstName = Algorithms.GetAllUpperCaseTitle(model.FirstName),
-                LastName = Algorithms.GetAllUpperCaseTitle(model.LastName),
+                UserName = Logics.GetAllUpperCaseTitle(model.UserName),
+                FirstName = Logics.GetAllUpperCaseTitle(model.FirstName),
+                LastName = Logics.GetAllUpperCaseTitle(model.LastName),
                 Email = model.Email,
                 //DateOfBirth = model.DateOfBirth,
                 CreatedDate = DateTime.Now,

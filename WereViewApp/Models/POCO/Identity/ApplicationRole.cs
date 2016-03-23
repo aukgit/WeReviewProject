@@ -2,10 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNet.Identity.EntityFramework;
-using WereViewApp.Models.DesignPattern.Interfaces;
-using WereViewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Models.DesignPattern.Interfaces;
+using WeReviewApp.Models.POCO.IdentityCustomization;
 
-namespace WereViewApp.Models.POCO.Identity {
+namespace WeReviewApp.Models.POCO.Identity {
     public class ApplicationRole : IdentityRole<long, ApplicationUserRole>, IDevUserRole {
         //[Display(Name="Can be achieive by points.")]
         //public bool CanAchieveByPoints { get; set; }

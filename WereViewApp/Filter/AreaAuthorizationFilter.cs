@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using WereViewApp.Modules.Role;
-using WereViewApp.Modules.Session;
+using WeReviewApp.Modules.Role;
+using WeReviewApp.Modules.Session;
 
-namespace WereViewApp.Filter {
+namespace WeReviewApp.Filter {
     public class AreaAuthorizeAttribute : ActionFilterAttribute {
         private readonly string[] _RestrictedAreas = { "Admin" }; // area names to protect
 

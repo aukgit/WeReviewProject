@@ -340,3 +340,41 @@ $.hideEmptyFields = function($container) {
         }
     }
 };
+
+/**
+ *  
+ * @param {} arrayOfSelectors  : Pass array of selectors
+ * @returns {} jquery elements
+ */
+$.getjQueryElementsByArrayOfSelectors = function (arrayOfSelectors) {
+    /// <summary>
+    /// Get jquery elements by passing array of selectors.
+    /// </summary>
+    /// <param name="arrayOfSelectors" type="type"></param>
+    /// <returns type=""></returns>
+    var results = [];
+    for (var i = 0; i < arrayOfSelectors.length; i++) {
+        var selector = arrayOfSelectors[i];
+        var $elems = $(selector);
+        for (var j = 0; j < $elems.length; j++) {
+            var elem = $elems[i];
+            results.push(elem);
+        }
+    }
+    return $(results);
+}
+
+/**
+ * Convert single form to json object.
+ * @param {} $singleForm 
+ * @returns {} 
+ */
+$.serializeToJson = function($singleForm) {
+    var result = {};
+    var formItemsArray = $singleForm.serializeArray();
+    for (var i = 0; i < formItemsArray.length; i++) {
+        var item = formItemsArray[i];
+        result[item.name] = item.value;
+    }
+    return result;
+}

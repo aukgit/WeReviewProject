@@ -11,18 +11,19 @@ using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
 using DevTrends.MvcDonutCaching;
-using WereViewApp.Controllers;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
-using WereViewApp.Models.POCO.Enum;
-using WereViewApp.Models.POCO.IdentityCustomization;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.Mail;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.BusinessLogics.Admin;
+using WeReviewApp.Controllers;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WeReviewApp.Models.POCO.Enum;
+using WeReviewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.Mail;
+
 //using DevTrends.MvcDonutCaching;
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class FeedbacksController : IdentityController<ApplicationDbContext> {
         #region Developer Comments - Alim Ul karim
@@ -416,7 +417,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         public async Task<ActionResult> BlockApp(Int64 id) {
             using (var db2 = new WereViewAppEntities()) {
-                if (ModerationAlgorithms.BlockApp(id, true, db2)) {
+                if (ModerationLogics.BlockApp(id, true, db2)) {
                     return View("Done");
                 }
             }
@@ -425,7 +426,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         public async Task<ActionResult> UnBlockApp(Int64 id) {
             using (var db2 = new WereViewAppEntities()) {
-                if (ModerationAlgorithms.UnBlockApp(id, true, db2)) {
+                if (ModerationLogics.UnBlockApp(id, true, db2)) {
                     return View("Done");
                 }
             }
@@ -435,7 +436,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         public async Task<ActionResult> BlockReview(Int64 id) {
             using (var db2 = new WereViewAppEntities()) {
                 Review review;
-                if (ModerationAlgorithms.BlockReview(id, true, db2, out review)) {
+                if (ModerationLogics.BlockReview(id, true, db2, out review)) {
                     ViewBag.info = "deleted review ( " + review.Comments + " ).";
                     return View("Done");
                 }

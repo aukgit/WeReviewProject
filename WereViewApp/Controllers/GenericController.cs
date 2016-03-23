@@ -4,11 +4,11 @@ using System;
 using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Error;
-using WereViewApp.Modules.Extensions.Context;
+using WeReviewApp.Modules.Extensions.Context;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     internal abstract class GenericController<TContext> : Controller where TContext : DevDbContext, new() {
         internal readonly TContext db;

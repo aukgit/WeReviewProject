@@ -5,18 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.POCO.IdentityCustomization;
-using WereViewApp.Models.POCO.Structs;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.Message;
-using WereViewApp.Modules.Role;
-using WereViewApp.Modules.Session;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Models.POCO.Structs;
+using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.Message;
+using WeReviewApp.Modules.Role;
+using WeReviewApp.Modules.Session;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     [Authorize]
     public class ReportController : AdvanceController {
         #region Application db
