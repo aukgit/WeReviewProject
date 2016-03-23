@@ -42,7 +42,12 @@ namespace WeReviewApp.BusinessLogics {
         #endregion
 
         #region Get top users
-
+        /// <summary>
+        /// Get top developers usernames
+        /// </summary>
+        /// <param name="db"></param>
+        /// <param name="topDevelopersLimit"></param>
+        /// <returns></returns>
         public List<string> GetTopDevelopers(WereViewAppEntities db, int topDevelopersLimit = 30) {
             if (db == null) {
                 db = new WereViewAppEntities();
