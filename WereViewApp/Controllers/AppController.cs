@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using WereViewApp.BusinessLogic;
 using WereViewApp.Filter;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.Derivables;
@@ -32,7 +33,7 @@ namespace WereViewApp.Controllers {
     public class AppController : AdvanceController {
         #region Declaration
 
-        private readonly Algorithms.Algorithms _algorithms = new Algorithms.Algorithms();
+        private readonly Algorithms _algorithms = new Algorithms();
 
         #endregion
 
@@ -247,7 +248,7 @@ namespace WereViewApp.Controllers {
                     break;
             }
             if (app != null) {
-                app.AppName = Algorithms.Algorithms.GetAllUpperCaseTitle(app.AppName);
+                app.AppName = Algorithms.GetAllUpperCaseTitle(app.AppName);
             }
             var changes = db.SaveChanges(app);
             if (changes > 0) {
@@ -368,7 +369,7 @@ namespace WereViewApp.Controllers {
                                 // creating tag
                                 // if tag not exist in the database then create one.
                                 tagFromDatabase = new Tag {
-                                    TagDisplay = Algorithms.Algorithms.GetAllUpperCaseTitle(tag.Trim())
+                                    TagDisplay = Algorithms.GetAllUpperCaseTitle(tag.Trim())
                                 };
                                 db2.Tags.Add(tagFromDatabase);
                             }
@@ -569,7 +570,7 @@ namespace WereViewApp.Controllers {
         /// </summary>
         /// <param name="app"></param>
         private void SaveVirtualFields(App app) {
-            var alg = new Algorithms.Algorithms();
+            var alg = new Algorithms();
             alg.SaveVirtualFields(app);
         }
 
@@ -583,7 +584,7 @@ namespace WereViewApp.Controllers {
         /// <param name="app"></param>
         /// <returns></returns>
         private App ReadVirtualFields(App app) {
-            var alg = new Algorithms.Algorithms();
+            var alg = new Algorithms();
             return alg.ReadVirtualFields(app);
         }
 

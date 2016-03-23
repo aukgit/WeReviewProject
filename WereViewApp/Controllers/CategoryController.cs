@@ -3,8 +3,8 @@
 using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Pagination;
+using WereViewApp.BusinessLogic;
 using WereViewApp.Modules.Cache;
-using WereViewApp.WereViewAppCommon;
 
 #endregion
 
@@ -14,7 +14,7 @@ namespace WereViewApp.Controllers {
         private const int MaxNumbersOfPagesShow = 8;
 
         public ActionResult Index() {
-            var alg = new Algorithms.Algorithms();
+            var alg = new Algorithms();
             var categories = alg.GetCategoryWiseAppsForCategoryPage();
             return View(categories);
         }
@@ -22,7 +22,7 @@ namespace WereViewApp.Controllers {
         public ActionResult Specific(string slug, int page = 1) {
             //categoryName= Url.de
             if (!string.IsNullOrWhiteSpace(slug)) {
-                var alg = new Algorithms.Algorithms();
+                var alg = new Algorithms();
                 var pageInfo = new PaginationInfo {
                     ItemsInPage = AppConfig.Setting.PageItems,
                     PageNumber = page

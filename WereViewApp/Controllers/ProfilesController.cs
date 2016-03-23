@@ -7,11 +7,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
+using WereViewApp.BusinessLogic;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Modules.Cache;
 using WereViewApp.Modules.DevUser;
-using WereViewApp.WereViewAppCommon;
 
 #endregion
 
@@ -68,7 +68,7 @@ namespace WereViewApp.Controllers {
         public ActionResult Profile(string username, int page = 1) {
             ApplicationUser user;
             if (UserManager.IsUserNameExistWithValidation(username, out user)) {
-                var algorithms = new Algorithms.Algorithms();
+                var algorithms = new Algorithms();
                 ViewBag.Title = username + "'s apps collection";
                 ViewBag.Meta = "Mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
                 ViewBag.Keywords = ViewBag.Meta;

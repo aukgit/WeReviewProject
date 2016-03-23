@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using DevTrends.MvcDonutCaching;
+using WereViewApp.BusinessLogic;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Modules.Session;
-using WereViewApp.WereViewAppCommon;
 
 #endregion
 
@@ -17,7 +17,7 @@ namespace WereViewApp.Controllers {
     public class PartialsController : AdvanceController {
         #region Declarations
 
-        private readonly Algorithms.Algorithms algorithms = new Algorithms.Algorithms();
+        private readonly Algorithms algorithms = new Algorithms();
 
         #endregion
 
@@ -147,7 +147,7 @@ namespace WereViewApp.Controllers {
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
             using (var db = new WereViewAppEntities()) {
-                var algorithms = new Algorithms.Algorithms();
+                var algorithms = new Algorithms();
 
                 app.Url = algorithms.GenerateHyphenUrlStringValid(app, db);
 

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
+using WereViewApp.BusinessLogic;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Models.POCO.IdentityCustomization;
@@ -297,9 +298,9 @@ namespace WereViewApp.Modules.DevUser {
 
         public static ApplicationUser GetUserFromViewModel(RegisterViewModel model) {
             var user = new ApplicationUser {
-                UserName = Algorithms.Algorithms.GetAllUpperCaseTitle(model.UserName),
-                FirstName = Algorithms.Algorithms.GetAllUpperCaseTitle(model.FirstName),
-                LastName = Algorithms.Algorithms.GetAllUpperCaseTitle(model.LastName),
+                UserName = Algorithms.GetAllUpperCaseTitle(model.UserName),
+                FirstName = Algorithms.GetAllUpperCaseTitle(model.FirstName),
+                LastName = Algorithms.GetAllUpperCaseTitle(model.LastName),
                 Email = model.Email,
                 //DateOfBirth = model.DateOfBirth,
                 CreatedDate = DateTime.Now,

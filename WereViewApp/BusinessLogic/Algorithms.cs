@@ -23,7 +23,7 @@ using WereViewApp.Modules.Uploads;
 using WereViewApp.WereViewAppCommon;
 using WereViewApp.WereViewAppCommon.Structs;
 
-namespace WereViewApp.Algorithms {
+namespace WereViewApp.BusinessLogic {
     public class Algorithms {
         #region Viewable Apps : Apps which are published
 

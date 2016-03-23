@@ -293,8 +293,8 @@
     <Compile Include="Scheduler\WeReviewDownloadScheduler.cs" />
     <Compile Include="Scheduler\WeReviewScheduler.cs" />
     <Compile Include="Scheduler\SchedulerRunner.cs" />
-    <Compile Include="Algorithms\AdminAlgorithm.cs" />
-    <Compile Include="Algorithms\Algorithms.cs" />
+    <Compile Include="BusinessLogic\AdminAlgorithm.cs" />
+    <Compile Include="BusinessLogic\Algorithms.cs" />
     <Compile Include="App_Start\AppConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -342,7 +342,7 @@
     <Compile Include="Models\ViewModels\SearchViewModel.cs" />
     <Compile Include="Modules\Reponse\RemoveETagModule.cs" />
     <Compile Include="Modules\StringExtension.cs" />
-    <Compile Include="Algorithms\ModerationAlgorithms.cs" />
+    <Compile Include="BusinessLogic\ModerationAlgorithms.cs" />
     <Compile Include="WereViewAppCommon\Structs\CommonVars.cs" />
     <Compile Include="WereViewAppCommon\WereViewStatics.cs" />
     <Compile Include="Controllers\AccountController.cs" />

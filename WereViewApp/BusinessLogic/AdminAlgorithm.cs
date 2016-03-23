@@ -1,4 +1,4 @@
-﻿namespace WereViewApp.Algorithms {
+﻿namespace WereViewApp.BusinessLogic {
     public class AdminAlgorithm {
         #region Navigation Controller
 

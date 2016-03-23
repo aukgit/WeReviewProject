@@ -6,7 +6,7 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
-using WereViewApp.Algorithms;
+using WereViewApp.BusinessLogic;
 using WereViewApp.Controllers;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.POCO.Identity;
@@ -113,7 +113,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
             if (!string.IsNullOrWhiteSpace(search)) {
                 url += "&search=" + Server.UrlEncode(search);
-                var algorithms = new Algorithms.Algorithms();
+                var algorithms = new Algorithms();
                 query = algorithms.GetSimpleAppSearchResults(query, search);
                 query = query.OrderByDescending(n => n.AppID);
                 apps = GetPagedApps(query, url, page);

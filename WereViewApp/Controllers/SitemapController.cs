@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using WereViewApp.BusinessLogic;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WereViewApp.Modules.Sitemaps;
@@ -33,7 +34,7 @@ namespace WereViewApp.Controllers {
                 new SitemapItem(appUrl + "/sitemap", modifiedDate, SitemapChangeFrequency.Daily)
                 //new SitemapItem(appUrl+"/Sitemap.xml",modifiedDate, SitemapChangeFrequency.Daily),
             };
-            var algorithms = new Algorithms.Algorithms();
+            var algorithms = new Algorithms();
             using (var db = new WereViewAppEntities()) {
                 var max = db.FeaturedImages.Count();
                 var homePageGalleryApps = algorithms.GetHomePageGalleryImages(db, max);

@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.UI;
+using WereViewApp.BusinessLogic;
 using WereViewApp.Models.ViewModels;
 using WereViewApp.WereViewAppCommon;
 
@@ -9,7 +10,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         public ActionResult Index() {
             var appSummaryModel = Session["admin-app-summary"] as AppSummaryViewModel;
             if (appSummaryModel == null) {
-                var algorithms = new Algorithms.Algorithms();
+                var algorithms = new Algorithms();
                 appSummaryModel = algorithms.GetAppsSummary();
                 Session["admin-app-summary"] = appSummaryModel;
             }

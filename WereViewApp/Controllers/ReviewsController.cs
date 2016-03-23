@@ -8,22 +8,21 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
+using WereViewApp.BusinessLogic;
 using WereViewApp.Filter;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Modules;
 using WereViewApp.Modules.DevUser;
-using WereViewApp.WereViewAppCommon;
 
 #endregion
 
 namespace WereViewApp.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class ReviewsController : AdvanceController {
-
         #region Declarations
 
-        private readonly Algorithms.Algorithms algorithms = new Algorithms.Algorithms();
+        private readonly Algorithms algorithms = new Algorithms();
 
         #endregion
 

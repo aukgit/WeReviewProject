@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
 using System.Web.UI;
+using WereViewApp.BusinessLogic;
 using WereViewApp.Models.ViewModels;
 using WereViewApp.Modules.Session;
-using WereViewApp.WereViewAppCommon;
 using WereViewApp.WereViewAppCommon.Structs;
 
 namespace WereViewApp.Controllers {
@@ -20,7 +20,7 @@ namespace WereViewApp.Controllers {
             var max = 60;
 
             var search = new SearchViewModel();
-            var algorithms = new Algorithms.Algorithms();
+            var algorithms = new Algorithms();
             //ViewBag.isPostBack = true;
             if (!string.IsNullOrWhiteSpace(SearchQuery)) {
                 if (!AppVar.Setting.IsInTestingEnvironment) {

@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.UI;
+using WereViewApp.BusinessLogic;
 using WereViewApp.Filter;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.IdentityCustomization;
@@ -32,7 +33,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         [Authorize, HasMinimumRole(MinimumRole = RoleNames.Admin), HttpPost, ValidateAntiForgeryToken]
         public ActionResult CleanSystem(string clean) {
             if (!string.IsNullOrEmpty(clean) && clean.Equals("Clean")) {
-                var algorithm = new Algorithms.Algorithms();
+                var algorithm = new Algorithms();
                 ViewBag.message = "Every thing is removed successfully.";
                 AppVar.SetErrorStatus("Sorry ! Some went wrong in the server. Please get in touch with developer.");
             }
