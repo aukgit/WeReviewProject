@@ -12,6 +12,7 @@ using System.Web.UI;
 using DevMvcComponent.Pagination;
 using DevTrends.MvcDonutCaching;
 using WereViewApp.BusinessLogic;
+using WereViewApp.BusinessLogic.Admin;
 using WereViewApp.Controllers;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.EntityModel;

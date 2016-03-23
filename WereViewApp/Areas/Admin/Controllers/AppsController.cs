@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
 using WereViewApp.BusinessLogic;
+using WereViewApp.BusinessLogic.Admin;
 using WereViewApp.Controllers;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.POCO.Identity;
