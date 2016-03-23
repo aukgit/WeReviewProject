@@ -15,7 +15,6 @@ using WeReviewApp.Models.POCO.IdentityCustomization;
 using WeReviewApp.Models.ViewModels;
 using WeReviewApp.Modules.Role;
 using WeReviewApp.Modules.Session;
-using WeReviewApp.WereViewAppCommon;
 
 namespace WeReviewApp.Modules.DevUser {
     public static class UserManager {

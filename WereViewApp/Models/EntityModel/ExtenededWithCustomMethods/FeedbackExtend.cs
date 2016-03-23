@@ -1,7 +1,7 @@
 ﻿using System.Linq;
+using WeReviewApp.Common;
 using WeReviewApp.Models.POCO.Enum;
 using WeReviewApp.Models.POCO.IdentityCustomization;
-using WeReviewApp.WereViewAppCommon;
 
 namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
     public static class FeedbackExtend {

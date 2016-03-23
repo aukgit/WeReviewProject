@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.UI;
+using WeReviewApp.Common;
 using WeReviewApp.Models.EntityModel;
 using WeReviewApp.Modules.DevUser;
 using WeReviewApp.Modules.Session;
 using WeReviewApp.Modules.Validations;
-using WeReviewApp.WereViewAppCommon.Structs;
 
 #endregion
 

@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using WeReviewApp.BusinessLogics;
+using WeReviewApp.Common;
 using WeReviewApp.Filter;
 using WeReviewApp.Models.EntityModel;
 using WeReviewApp.Models.EntityModel.Derivables;
@@ -20,8 +21,6 @@ using WeReviewApp.Models.EntityModel.Structs;
 using WeReviewApp.Models.ViewModels;
 using WeReviewApp.Modules.DevUser;
 using WeReviewApp.Modules.Uploads;
-using WeReviewApp.WereViewAppCommon;
-using WeReviewApp.WereViewAppCommon.Structs;
 using FileSys = System.IO.File;
 
 #endregion

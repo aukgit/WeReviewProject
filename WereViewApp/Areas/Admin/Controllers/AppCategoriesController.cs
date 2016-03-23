@@ -5,9 +5,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using WeReviewApp.Common;
 using WeReviewApp.Controllers;
 using WeReviewApp.Models.EntityModel;
-using WeReviewApp.WereViewAppCommon;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]

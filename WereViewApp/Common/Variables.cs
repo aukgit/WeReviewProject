@@ -2,7 +2,7 @@
 using System.Linq;
 using WeReviewApp.Models.EntityModel;
 
-namespace WeReviewApp.WereViewAppCommon.Structs {
+namespace WeReviewApp.Common {
     public static class CommonVars {
 
         #region User Points

@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using WeReviewApp.WereViewAppCommon;
+using WeReviewApp.Common;
 
 namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
     public static class CategoryExtend {

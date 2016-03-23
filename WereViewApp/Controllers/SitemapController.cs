@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using WeReviewApp.BusinessLogics;
+using WeReviewApp.Common;
 using WeReviewApp.Models.EntityModel;
 using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WeReviewApp.Modules.Sitemaps;
-using WeReviewApp.WereViewAppCommon;
 
 #endregion
 

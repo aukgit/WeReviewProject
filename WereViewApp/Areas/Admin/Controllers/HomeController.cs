@@ -2,7 +2,6 @@
 using System.Web.UI;
 using WeReviewApp.BusinessLogics;
 using WeReviewApp.Models.ViewModels;
-using WeReviewApp.WereViewAppCommon;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]

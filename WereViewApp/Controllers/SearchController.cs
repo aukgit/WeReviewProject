@@ -1,9 +1,9 @@
 ﻿using System.Web.Mvc;
 using System.Web.UI;
 using WeReviewApp.BusinessLogics;
+using WeReviewApp.Common;
 using WeReviewApp.Models.ViewModels;
 using WeReviewApp.Modules.Session;
-using WeReviewApp.WereViewAppCommon.Structs;
 
 namespace WeReviewApp.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]

@@ -8,7 +8,6 @@ using WeReviewApp.Filter;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.IdentityCustomization;
 using WeReviewApp.Modules.Role;
-using WeReviewApp.WereViewAppCommon;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]

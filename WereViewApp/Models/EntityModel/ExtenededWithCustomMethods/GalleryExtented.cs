@@ -1,6 +1,6 @@
-﻿using WeReviewApp.Models.EntityModel.Structs;
+﻿using WeReviewApp.Common;
+using WeReviewApp.Models.EntityModel.Structs;
 using WeReviewApp.Modules.Uploads;
-using WeReviewApp.WereViewAppCommon;
 
 namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
     public static class GalleryExtented {

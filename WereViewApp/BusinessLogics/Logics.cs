@@ -13,6 +13,7 @@ using DevMvcComponent;
 using DevMvcComponent.Extensions;
 using DevMvcComponent.Pagination;
 using DevTrends.MvcDonutCaching;
+using WeReviewApp.Common;
 using WeReviewApp.Models.EntityModel;
 using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WeReviewApp.Models.EntityModel.Structs;
@@ -20,8 +21,6 @@ using WeReviewApp.Models.ViewModels;
 using WeReviewApp.Modules.Cache;
 using WeReviewApp.Modules.DevUser;
 using WeReviewApp.Modules.Uploads;
-using WeReviewApp.WereViewAppCommon;
-using WeReviewApp.WereViewAppCommon.Structs;
 
 namespace WeReviewApp.BusinessLogics {
     public class Logics {

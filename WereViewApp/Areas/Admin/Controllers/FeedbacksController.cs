@@ -20,7 +20,7 @@ using WeReviewApp.Models.POCO.Enum;
 using WeReviewApp.Models.POCO.IdentityCustomization;
 using WeReviewApp.Modules.DevUser;
 using WeReviewApp.Modules.Mail;
-using WeReviewApp.WereViewAppCommon;
+
 //using DevTrends.MvcDonutCaching;
 
 namespace WeReviewApp.Areas.Admin.Controllers {

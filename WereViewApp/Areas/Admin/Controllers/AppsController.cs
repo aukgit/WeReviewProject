@@ -15,7 +15,6 @@ using WeReviewApp.Models.ViewModels;
 using WeReviewApp.Modules.Extensions;
 using WeReviewApp.Modules.Extensions.IdentityExtension;
 using WeReviewApp.Modules.Mail;
-using WeReviewApp.WereViewAppCommon;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]

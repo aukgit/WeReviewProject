@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Web;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.EntityModel;
 using WeReviewApp.Models.POCO.IdentityCustomization;
 using WeReviewApp.Modules.Cache;
 using WeReviewApp.Modules.Uploads;
-using WeReviewApp.WereViewAppCommon.Structs;
 
-namespace WeReviewApp.WereViewAppCommon {
+namespace WeReviewApp.Common {
     public static class WereViewStatics {
         static List<Category> _appCategoriesCache = null;
         static List<Platform> _appPlatformsCache = null;

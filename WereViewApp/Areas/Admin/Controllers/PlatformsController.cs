@@ -4,9 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WeReviewApp.Common;
 using WeReviewApp.Controllers;
 using WeReviewApp.Models.EntityModel;
-using WeReviewApp.WereViewAppCommon;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
     public class PlatformsController : AdvanceController {
