@@ -87,9 +87,9 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(navigationItem);
         }
 
-        public JsonResult SaveOrder(IEnumerable<NavigationItem> navigationItems) {
+        public JsonResult SaveOrder(NavigationItem [] navigationItems) {
             NavigationItem dbNavigationItem = null;
-            var len = navigationItems.Count();
+            var len = navigationItems.Length;
             List<string> navigationItemsNames = new List<string>(len),
                          navigationItemsFailedNames = new List<string>(len); ;
             bool isFailed = false;

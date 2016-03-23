@@ -100,7 +100,7 @@ $.app.controllers.navItemsController = {
                     url: saveingUrl,
                     data: data, // PlainObject or String or Array
                     dataType: "JSON", //, // "Text" , "HTML", "xml", "script" 
-                    contentType: "application/json",
+                    contentType: "application/json", // must add this line for server json submit
                 }).done(function (response) {
                     if (isInTestingMode) {
                         console.log(response);
