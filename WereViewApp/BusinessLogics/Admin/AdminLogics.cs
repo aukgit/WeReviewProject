@@ -1,4 +1,4 @@
-﻿namespace WereViewApp.BusinessLogic.Admin {
+﻿namespace WereViewApp.BusinessLogics.Admin {
     public class AdminLogics {
         #region Navigation Controller
 

@@ -3,7 +3,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
-using WereViewApp.BusinessLogic;
+using WereViewApp.BusinessLogics;
 
 namespace WereViewApp.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]

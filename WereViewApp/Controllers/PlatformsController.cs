@@ -2,7 +2,7 @@
 
 using System.Web.Mvc;
 using DevMvcComponent.Pagination;
-using WereViewApp.BusinessLogic;
+using WereViewApp.BusinessLogics;
 using WereViewApp.Modules.Cache;
 
 #endregion

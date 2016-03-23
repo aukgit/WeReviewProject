@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
-using WereViewApp.BusinessLogic;
+using WereViewApp.BusinessLogics;
 using WereViewApp.Models.EntityModel.Structs;
 using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Modules.Cache;

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using WereViewApp.BusinessLogic;
+using WereViewApp.BusinessLogics;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WereViewApp.Modules.Sitemaps;

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
-using WereViewApp.BusinessLogic;
+using WereViewApp.BusinessLogics;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Models.POCO.IdentityCustomization;

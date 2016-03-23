@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.UI;
-using WereViewApp.BusinessLogic;
+using WereViewApp.BusinessLogics;
 using WereViewApp.Models.ViewModels;
 using WereViewApp.WereViewAppCommon;
 

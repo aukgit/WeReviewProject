@@ -241,6 +241,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AppVar.cs" />
     <Compile Include="Areas\Admin\Controllers\AppsController.cs" />
+    <Compile Include="BusinessLogics\Admin\NavigationLogics.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\GenericController.cs" />
     <Compile Include="Controllers\IdentityController.cs" />
@@ -293,8 +294,8 @@
     <Compile Include="Scheduler\WeReviewDownloadScheduler.cs" />
     <Compile Include="Scheduler\WeReviewScheduler.cs" />
     <Compile Include="Scheduler\SchedulerRunner.cs" />
-    <Compile Include="BusinessLogic\Admin\AdminAlgorithm.cs" />
-    <Compile Include="BusinessLogic\Algorithms.cs" />
+    <Compile Include="BusinessLogics\Admin\AdminLogics.cs" />
+    <Compile Include="BusinessLogics\Logics.cs" />
     <Compile Include="App_Start\AppConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -342,7 +343,7 @@
     <Compile Include="Models\ViewModels\SearchViewModel.cs" />
     <Compile Include="Modules\Reponse\RemoveETagModule.cs" />
     <Compile Include="Modules\StringExtension.cs" />
-    <Compile Include="BusinessLogic\Admin\ModerationAlgorithms.cs" />
+    <Compile Include="BusinessLogics\Admin\ModerationLogics.cs" />
     <Compile Include="WereViewAppCommon\Structs\CommonVars.cs" />
     <Compile Include="WereViewAppCommon\WereViewStatics.cs" />
     <Compile Include="Controllers\AccountController.cs" />

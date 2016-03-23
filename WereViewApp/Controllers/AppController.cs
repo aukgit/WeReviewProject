@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
-using WereViewApp.BusinessLogic;
+using WereViewApp.BusinessLogics;
 using WereViewApp.Filter;
 using WereViewApp.Models.EntityModel;
 using WereViewApp.Models.EntityModel.Derivables;

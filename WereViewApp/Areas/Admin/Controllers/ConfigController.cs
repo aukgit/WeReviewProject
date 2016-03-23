@@ -3,7 +3,7 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.UI;
-using WereViewApp.BusinessLogic;
+using WereViewApp.BusinessLogics;
 using WereViewApp.Filter;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.IdentityCustomization;

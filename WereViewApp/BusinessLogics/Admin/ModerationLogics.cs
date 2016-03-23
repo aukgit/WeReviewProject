@@ -5,7 +5,7 @@ using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Mail;
 
-namespace WereViewApp.BusinessLogic.Admin {
+namespace WereViewApp.BusinessLogics.Admin {
     public static class ModerationLogics {
         #region Featured App
 
