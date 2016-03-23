@@ -14,7 +14,7 @@ namespace WereViewApp.Controllers {
         private const int MaxNumbersOfPagesShow = 8;
 
         public ActionResult Index() {
-            var alg = new Algorithms();
+            var alg = new Logics();
             var categories = alg.GetCategoryWiseAppsForCategoryPage();
             return View(categories);
         }
@@ -22,7 +22,7 @@ namespace WereViewApp.Controllers {
         public ActionResult Specific(string slug, int page = 1) {
             //categoryName= Url.de
             if (!string.IsNullOrWhiteSpace(slug)) {
-                var alg = new Algorithms();
+                var alg = new Logics();
                 var pageInfo = new PaginationInfo {
                     ItemsInPage = AppConfig.Setting.PageItems,
                     PageNumber = page

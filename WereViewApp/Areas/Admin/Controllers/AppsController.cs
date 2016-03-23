@@ -114,7 +114,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
             if (!string.IsNullOrWhiteSpace(search)) {
                 url += "&search=" + Server.UrlEncode(search);
-                var algorithms = new Algorithms();
+                var algorithms = new Logics();
                 query = algorithms.GetSimpleAppSearchResults(query, search);
                 query = query.OrderByDescending(n => n.AppID);
                 apps = GetPagedApps(query, url, page);
@@ -166,14 +166,14 @@ namespace WereViewApp.Areas.Admin.Controllers {
                 if (app.IsBlocked != model.IsBlocked) {
                     // needs to update
                     if (model.IsBlocked) {
-                        ModerationAlgorithms.BlockApp(model.AppId, true, db);
+                        ModerationLogics.BlockApp(model.AppId, true, db);
                     } else {
-                        ModerationAlgorithms.UnBlockApp(model.AppId, true, db);
+                        ModerationLogics.UnBlockApp(model.AppId, true, db);
                     }
                 }
                 if (isFeaturedPreviously != model.IsFeatured) {
                     // needs to update
-                    ModerationAlgorithms.AppFeatured(model.AppId, model.IsFeatured, true, db);
+                    ModerationLogics.AppFeatured(model.AppId, model.IsFeatured, true, db);
                 }
                 var statusMessage = "You have successfully moderated '" + app.AppName + "' app.";
 

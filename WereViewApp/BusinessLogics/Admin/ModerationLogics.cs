@@ -6,7 +6,7 @@ using WereViewApp.Modules.DevUser;
 using WereViewApp.Modules.Mail;
 
 namespace WereViewApp.BusinessLogic.Admin {
-    public static class ModerationAlgorithms {
+    public static class ModerationLogics {
         #region Featured App
 
         /// <summary>

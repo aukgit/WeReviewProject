@@ -418,7 +418,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         public async Task<ActionResult> BlockApp(Int64 id) {
             using (var db2 = new WereViewAppEntities()) {
-                if (ModerationAlgorithms.BlockApp(id, true, db2)) {
+                if (ModerationLogics.BlockApp(id, true, db2)) {
                     return View("Done");
                 }
             }
@@ -427,7 +427,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
 
         public async Task<ActionResult> UnBlockApp(Int64 id) {
             using (var db2 = new WereViewAppEntities()) {
-                if (ModerationAlgorithms.UnBlockApp(id, true, db2)) {
+                if (ModerationLogics.UnBlockApp(id, true, db2)) {
                     return View("Done");
                 }
             }
@@ -437,7 +437,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         public async Task<ActionResult> BlockReview(Int64 id) {
             using (var db2 = new WereViewAppEntities()) {
                 Review review;
-                if (ModerationAlgorithms.BlockReview(id, true, db2, out review)) {
+                if (ModerationLogics.BlockReview(id, true, db2, out review)) {
                     ViewBag.info = "deleted review ( " + review.Comments + " ).";
                     return View("Done");
                 }

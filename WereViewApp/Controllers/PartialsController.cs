@@ -17,7 +17,7 @@ namespace WereViewApp.Controllers {
     public class PartialsController : AdvanceController {
         #region Declarations
 
-        private readonly Algorithms algorithms = new Algorithms();
+        private readonly Logics algorithms = new Logics();
 
         #endregion
 
@@ -147,7 +147,7 @@ namespace WereViewApp.Controllers {
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
             using (var db = new WereViewAppEntities()) {
-                var algorithms = new Algorithms();
+                var algorithms = new Logics();
 
                 app.Url = algorithms.GenerateHyphenUrlStringValid(app, db);
 

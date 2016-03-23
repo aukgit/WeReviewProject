@@ -22,7 +22,7 @@ namespace WereViewApp.Controllers {
     public class ReviewsController : AdvanceController {
         #region Declarations
 
-        private readonly Algorithms algorithms = new Algorithms();
+        private readonly Logics algorithms = new Logics();
 
         #endregion
 

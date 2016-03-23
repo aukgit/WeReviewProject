@@ -33,7 +33,7 @@ namespace WereViewApp.Controllers {
     public class AppController : AdvanceController {
         #region Declaration
 
-        private readonly Algorithms _algorithms = new Algorithms();
+        private readonly Logics _algorithms = new Logics();
 
         #endregion
 
@@ -248,7 +248,7 @@ namespace WereViewApp.Controllers {
                     break;
             }
             if (app != null) {
-                app.AppName = Algorithms.GetAllUpperCaseTitle(app.AppName);
+                app.AppName = Logics.GetAllUpperCaseTitle(app.AppName);
             }
             var changes = db.SaveChanges(app);
             if (changes > 0) {
@@ -369,7 +369,7 @@ namespace WereViewApp.Controllers {
                                 // creating tag
                                 // if tag not exist in the database then create one.
                                 tagFromDatabase = new Tag {
-                                    TagDisplay = Algorithms.GetAllUpperCaseTitle(tag.Trim())
+                                    TagDisplay = Logics.GetAllUpperCaseTitle(tag.Trim())
                                 };
                                 db2.Tags.Add(tagFromDatabase);
                             }
@@ -570,7 +570,7 @@ namespace WereViewApp.Controllers {
         /// </summary>
         /// <param name="app"></param>
         private void SaveVirtualFields(App app) {
-            var alg = new Algorithms();
+            var alg = new Logics();
             alg.SaveVirtualFields(app);
         }
 
@@ -584,7 +584,7 @@ namespace WereViewApp.Controllers {
         /// <param name="app"></param>
         /// <returns></returns>
         private App ReadVirtualFields(App app) {
-            var alg = new Algorithms();
+            var alg = new Logics();
             return alg.ReadVirtualFields(app);
         }
 

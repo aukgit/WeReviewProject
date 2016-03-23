@@ -20,7 +20,7 @@ namespace WereViewApp.Controllers {
             var max = 60;
 
             var search = new SearchViewModel();
-            var algorithms = new Algorithms();
+            var algorithms = new Logics();
             //ViewBag.isPostBack = true;
             if (!string.IsNullOrWhiteSpace(SearchQuery)) {
                 if (!AppVar.Setting.IsInTestingEnvironment) {

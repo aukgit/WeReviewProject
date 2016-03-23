@@ -1,5 +1,5 @@
 ﻿namespace WereViewApp.BusinessLogic.Admin {
-    public class AdminAlgorithm {
+    public class AdminLogics {
         #region Navigation Controller
 
         #endregion

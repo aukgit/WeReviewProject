@@ -24,7 +24,7 @@ using WereViewApp.WereViewAppCommon;
 using WereViewApp.WereViewAppCommon.Structs;
 
 namespace WereViewApp.BusinessLogic {
-    public class Algorithms {
+    public class Logics {
         #region Viewable Apps : Apps which are published
 
         /// <summary>
