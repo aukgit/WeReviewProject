@@ -1,20 +1,68 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using DevMvcComponent.Error;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.EntityModel;
 
-namespace WeReviewApp.BusinessLogics {
+namespace WeReviewApp.BusinessLogics.Component {
     public class BaseLogicComponent {
-        protected ApplicationDbContext IdentityDb { get; set; }
-        protected WereViewAppEntities WeReviewDb { get; set; }
-        public Logics Logics { get; set; }
+        private bool _identityDbInitialize, _weReviewDbInitialize, _initializeErrorCollector;
         internal ErrorCollector ErrorCollector;
 
-        protected BaseLogicComponent(bool identityDbInitialize, bool weReviewDbInitialize, bool logicInitialize, bool initializeErrorCollector) {
-            
+        protected BaseLogicComponent(bool identityDbInitialize, bool weReviewDbInitialize, 
+            bool initializeErrorCollector) {
+            _identityDbInitialize = identityDbInitialize;
+            _weReviewDbInitialize = weReviewDbInitialize;
+            _initializeErrorCollector = initializeErrorCollector;
+
+            if (_identityDbInitialize) {
+                IdentityDb = new ApplicationDbContext();
+            }
+
+            if (_weReviewDbInitialize) {
+                WeReviewDb = new WereViewAppEntities();
+            }
+            if (_initializeErrorCollector) {
+                ErrorCollector = new ErrorCollector();
+            }
+        }
+
+        protected BaseLogicComponent() : this(false) {}
+        protected BaseLogicComponent(bool initializeErrorCollector) : this(null, initializeErrorCollector) {}
+
+        protected BaseLogicComponent(WereViewAppEntities weReviewDb,
+            bool initializeErrorCollector) : this(null, weReviewDb, initializeErrorCollector) {
+        }
+
+        protected BaseLogicComponent(ApplicationDbContext identityDb, WereViewAppEntities weReviewDb,
+            bool initializeErrorCollector) {
+            _initializeErrorCollector = initializeErrorCollector;
+
+            if (identityDb != null) {
+                IdentityDb = identityDb;
+            }
+
+            if (weReviewDb != null) {
+                WeReviewDb = new WereViewAppEntities();
+            }
+            if (_initializeErrorCollector) {
+                ErrorCollector = new ErrorCollector();
+            }
+        }
+
+        protected ApplicationDbContext IdentityDb { get; set; }
+        protected WereViewAppEntities WeReviewDb { get; set; }
+
+        ~BaseLogicComponent() {
+            if (_identityDbInitialize) {
+                IdentityDb.Dispose();
+            }
+
+            if (_weReviewDbInitialize) {
+                WeReviewDb.Dispose();
+            }
+            if (_initializeErrorCollector) {
+                ErrorCollector.Dispose();
+            }
         }
     }
 }

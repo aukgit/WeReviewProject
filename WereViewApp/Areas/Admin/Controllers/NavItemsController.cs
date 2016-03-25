@@ -87,32 +87,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View(navigationItem);
         }
 
-        public JsonResult SaveOrder(NavigationItem [] navigationItems) {
-            NavigationItem dbNavigationItem = null;
-            var len = navigationItems.Length;
-            List<string> navigationItemsNames = new List<string>(len),
-                         navigationItemsFailedNames = new List<string>(len); ;
-            bool isFailed = false;
-            foreach (var navItem in navigationItems) {
-                try {
-                    dbNavigationItem = db.NavigationItems.Find(navItem.NavigationItemID);
-                    db.Entry(dbNavigationItem).State = EntityState.Modified;
-                    dbNavigationItem.Ordering = navItem.Ordering;
-                    if (db.SaveChanges() > -1) {
-                        navigationItemsNames.Add(dbNavigationItem.Title);
-                    }
-                } catch (Exception ex) {
-                    Mvc.Error.ByEmail(ex, "SaveOrder()", "", dbNavigationItem);
-                    isFailed = true;
-                    navigationItemsFailedNames.Add(dbNavigationItem.Title);
-                }
-            }
-            if (isFailed) {
-                return Json(new { success = !isFailed, titles = navigationItemsFailedNames }, JsonRequestBehavior.AllowGet);
-            } else {
-                return Json(new { success = !isFailed, titles = navigationItemsNames }, JsonRequestBehavior.AllowGet);
-            }
-        }
+      
 
         public ActionResult Delete(int id, int NavigationID) {
             var navigationItem = db.NavigationItems.Find(id);

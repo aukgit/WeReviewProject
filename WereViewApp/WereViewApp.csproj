@@ -243,6 +243,7 @@
     <Compile Include="Areas\Admin\Controllers\AppsController.cs" />
     <Compile Include="BusinessLogics\Admin\NavigationLogics.cs" />
     <Compile Include="BusinessLogics\Component\BaseLogicComponent.cs" />
+    <Compile Include="Common\ResultsType\NavigationMessage.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\GenericController.cs" />
     <Compile Include="Controllers\IdentityController.cs" />
