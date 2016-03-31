@@ -1,41 +1,68 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using DevMvcComponent;
+using WeReviewApp.BusinessLogics.Component;
+using WeReviewApp.Common.ResultsType;
+using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.IdentityCustomization;
 
 namespace WeReviewApp.BusinessLogics.Admin {
-    public class NavigationLogics {
+    public class NavigationLogics : BaseLogicComponent<ApplicationDbContext> {
+        public NavigationLogics(ApplicationDbContext db)
+            : base(db) {
+            this.db = db;
+        }
 
- 
+
         #region Save Navigation Order
-        public T SaveOrder(NavigationItem[] navigationItems) {
+        /// <summary>
+        /// Finds the navigation and puts -1 to the existing ordering value.
+        /// Then finally marked the old and new one as changed.
+        /// </summary>
+        /// <param name="changed"></param>
+        /// <param name="cachedItems"></param>
+        /// <returns>Returns true if already same order exist.</returns>
+        private bool PlaceOrderToNegativeOnExistingOrderAndMarkAsChanged(NavigationItem changed, List<NavigationItem> cachedItems) {
+            var sameOrderItem = cachedItems.FirstOrDefault(n => n.Ordering == changed.Ordering);
+            if (sameOrderItem != null) {
+                sameOrderItem.Ordering = -1;
+                MarkpNavigationAsChanged(sameOrderItem);
+                return true;
+            }
+            return false;
+        }
+
+        private void MarkpNavigationAsChanged(NavigationItem changed) {
+            db.Entry(changed).State = EntityState.Modified;
+        }
+        private void MarkpNavigationAsAdded(NavigationItem add) {
+            db.Entry(add).State = EntityState.Added;
+        }
+
+        public NavigationMessage SaveOrder(NavigationItem[] navigationItems) {
               if (navigationItems == null ||  navigationItems.Length == 0) {
-                return Json(new { success = false, error = "Failed due to empty elements send to the server." }, JsonRequestBehavior.AllowGet);
+                return null;
               }
 
             NavigationItem dbNavigationItem = null;
             var len = navigationItems.Length;
-            List<string> navigationItemsNames = new List<string>(len),
-                         navigationItemsFailedNames = new List<string>(len); ;
+     
             bool isFailed = false;
+            var firstItem = navigationItems.FirstOrDefault();
+            var navigationItemsList = db.NavigationItems.Where(n => n.NavigationID == firstItem.NavigationID).OrderBy(n=> n.Ordering).ToList();
 
-            var navigation = 
-
-            foreach (var navItem in navigationItems) {
+            foreach (var changedNavItem in navigationItems) {
                 try {
-                    dbNavigationItem = db.NavigationItems.Find(navItem.NavigationItemID);
-                    db.Entry(dbNavigationItem).State = EntityState.Modified;
-                    dbNavigationItem.Ordering = navItem.Ordering;
-                    if (db.SaveChanges() > -1) {
-                        navigationItemsNames.Add(dbNavigationItem.Title);
-                    }
+                  var  navItem = navigationItemsList.FirstOrDefault(n=> n.NavigationItemID == changedNavItem.NavigationItemID);
+                    navItem.Ordering = changedNavItem.Ordering;
+                    PlaceOrderToNegativeOnExistingOrderAndMarkAsChanged(navItem, navigationItemsList);
                 } catch (Exception ex) {
                     Mvc.Error.ByEmail(ex, "SaveOrder()", "", dbNavigationItem);
                     isFailed = true;
-                    navigationItemsFailedNames.Add(dbNavigationItem.Title);
                 }
             }
             if (isFailed) {

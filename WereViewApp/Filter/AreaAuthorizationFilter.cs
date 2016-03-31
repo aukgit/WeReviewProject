@@ -5,7 +5,7 @@ using WeReviewApp.Modules.Session;
 
 namespace WeReviewApp.Filter {
     public class AreaAuthorizeAttribute : ActionFilterAttribute {
-        private readonly string[] _RestrictedAreas = { "Admin" }; // area names to protect
+        private readonly string[] _restrictedAreas = { "Admin" }; // area names to protect
 
         public override void OnActionExecuting(ActionExecutingContext filterContext) {
             var routeData = filterContext.RouteData;
@@ -18,7 +18,7 @@ namespace WeReviewApp.Filter {
                 return;
             }
 
-            if (_RestrictedAreas.All(m => m != currentArea)) {
+            if (_restrictedAreas.All(m => m != currentArea)) {
                 return;
             }
 
