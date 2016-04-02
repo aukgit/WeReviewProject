@@ -1,8 +1,8 @@
-﻿using DevMvcComponent;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using DevMvcComponent;
 using WeReviewApp.BusinessLogics.Component;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.IdentityCustomization;
@@ -14,16 +14,17 @@ namespace WeReviewApp.BusinessLogics.Admin {
             this.db = db;
         }
 
-
         #region Save Navigation Order
+
         /// <summary>
-        /// Finds the navigation and puts -1 to the existing ordering value.
-        /// Then finally marked the old and new one as changed.
+        ///     Finds the navigation and puts -1 to the existing ordering value.
+        ///     Then finally marked the old and new one as changed.
         /// </summary>
         /// <param name="changed"></param>
         /// <param name="cachedItems"></param>
         /// <returns>Returns true if already same order exist.</returns>
-        private bool PlaceOrderToNegativeOnExistingOrderAndMarkAsChanged(NavigationItem changed, List<NavigationItem> cachedItems) {
+        private bool PlaceOrderToNegativeOnExistingOrderAndMarkAsChanged(NavigationItem changed,
+            List<NavigationItem> cachedItems) {
             var sameOrderItem = cachedItems.FirstOrDefault(n => n.Ordering == changed.Ordering);
             if (sameOrderItem != null) {
                 sameOrderItem.Ordering = -1;
@@ -36,6 +37,7 @@ namespace WeReviewApp.BusinessLogics.Admin {
         private void MarkpNavigationAsChanged(NavigationItem changed) {
             db.Entry(changed).State = EntityState.Modified;
         }
+
         private void MarkpNavigationAsAdded(NavigationItem add) {
             db.Entry(add).State = EntityState.Added;
         }
@@ -48,13 +50,17 @@ namespace WeReviewApp.BusinessLogics.Admin {
             NavigationItem dbNavigationItem = null;
             var len = navigationItems.Length;
 
-            bool isFailed = false;
+            var isFailed = false;
             var firstItem = navigationItems.FirstOrDefault();
-            var navigationItemsList = db.NavigationItems.Where(n => n.NavigationID == firstItem.NavigationID).OrderBy(n => n.Ordering).ToList();
+            var navigationItemsList =
+                db.NavigationItems.Where(n => n.NavigationID == firstItem.NavigationID)
+                  .OrderBy(n => n.Ordering)
+                  .ToList();
 
             foreach (var changedNavItem in navigationItems) {
                 try {
-                    var navItem = navigationItemsList.FirstOrDefault(n => n.NavigationItemID == changedNavItem.NavigationItemID);
+                    var navItem =
+                        navigationItemsList.FirstOrDefault(n => n.NavigationItemID == changedNavItem.NavigationItemID);
                     navItem.Ordering = changedNavItem.Ordering;
                     PlaceOrderToNegativeOnExistingOrderAndMarkAsChanged(navItem, navigationItemsList);
                 } catch (Exception ex) {
@@ -64,6 +70,7 @@ namespace WeReviewApp.BusinessLogics.Admin {
             }
             return !isFailed;
         }
+
         #endregion
     }
 }
