@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-﻿namespace WeReviewApp.BusinessLogics.Admin {
-    public class NavigationLogics {
-
-=======
-﻿using System;
+﻿using DevMvcComponent;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web.Helpers;
-using System.Web.Mvc;
-using DevMvcComponent;
 using WeReviewApp.BusinessLogics.Component;
-using WeReviewApp.Common.ResultsType;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.IdentityCustomization;
 
@@ -48,21 +40,21 @@ namespace WeReviewApp.BusinessLogics.Admin {
             db.Entry(add).State = EntityState.Added;
         }
 
-        public NavigationMessage SaveOrder(NavigationItem[] navigationItems) {
-              if (navigationItems == null ||  navigationItems.Length == 0) {
-                return null;
-              }
+        public bool SaveOrder(NavigationItem[] navigationItems) {
+            if (navigationItems == null || navigationItems.Length == 0) {
+                return true;
+            }
 
             NavigationItem dbNavigationItem = null;
             var len = navigationItems.Length;
-     
+
             bool isFailed = false;
             var firstItem = navigationItems.FirstOrDefault();
-            var navigationItemsList = db.NavigationItems.Where(n => n.NavigationID == firstItem.NavigationID).OrderBy(n=> n.Ordering).ToList();
+            var navigationItemsList = db.NavigationItems.Where(n => n.NavigationID == firstItem.NavigationID).OrderBy(n => n.Ordering).ToList();
 
             foreach (var changedNavItem in navigationItems) {
                 try {
-                  var  navItem = navigationItemsList.FirstOrDefault(n=> n.NavigationItemID == changedNavItem.NavigationItemID);
+                    var navItem = navigationItemsList.FirstOrDefault(n => n.NavigationItemID == changedNavItem.NavigationItemID);
                     navItem.Ordering = changedNavItem.Ordering;
                     PlaceOrderToNegativeOnExistingOrderAndMarkAsChanged(navItem, navigationItemsList);
                 } catch (Exception ex) {
@@ -70,13 +62,8 @@ namespace WeReviewApp.BusinessLogics.Admin {
                     isFailed = true;
                 }
             }
-            if (isFailed) {
-                return Json(new { success = !isFailed, titles = navigationItemsFailedNames }, JsonRequestBehavior.AllowGet);
-            } else {
-                return Json(new { success = !isFailed, titles = navigationItemsNames }, JsonRequestBehavior.AllowGet);
-            }
+            return !isFailed;
         }
         #endregion
->>>>>>> 9100a12a5c57c668c4b01273ff40f68df67971e7
     }
 }
