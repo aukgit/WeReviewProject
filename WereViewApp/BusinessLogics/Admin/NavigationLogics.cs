@@ -25,7 +25,9 @@ namespace WeReviewApp.BusinessLogics.Admin {
         /// <returns>Returns true if already same order exist.</returns>
         private bool PlaceOrderToNegativeOnExistingOrderAndMarkAsChanged(NavigationItem changed,
             List<NavigationItem> cachedItems) {
-            var sameOrderItem = cachedItems.FirstOrDefault(n => n.Ordering == changed.Ordering);
+            var sameOrderItem = cachedItems.FirstOrDefault(n => 
+                n.Ordering == changed.Ordering && 
+                n.NavigationItemID != changed.NavigationItemID);
             if (sameOrderItem != null) {
                 sameOrderItem.Ordering = -1;
                 MarkpNavigationAsChanged(sameOrderItem);
@@ -48,9 +50,7 @@ namespace WeReviewApp.BusinessLogics.Admin {
             }
 
             NavigationItem dbNavigationItem = null;
-            var len = navigationItems.Length;
 
-            var isFailed = false;
             var firstItem = navigationItems.FirstOrDefault();
             var navigationItemsList =
                 db.NavigationItems.Where(n => n.NavigationID == firstItem.NavigationID)
@@ -65,10 +65,13 @@ namespace WeReviewApp.BusinessLogics.Admin {
                     PlaceOrderToNegativeOnExistingOrderAndMarkAsChanged(navItem, navigationItemsList);
                 } catch (Exception ex) {
                     Mvc.Error.ByEmail(ex, "SaveOrder()", "", dbNavigationItem);
-                    isFailed = true;
                 }
             }
-            return !isFailed;
+            var maxOrder = navigationItemsList.Max(n => n.Ordering);
+            foreach (var changedNavItem in navigationItemsList.Where(n=> n.Ordering <= 0).OrderByDescending(n=> n.NavigationItemID)) {
+                changedNavItem.Ordering = ++maxOrder;
+            }
+            return db.SaveChanges() > -1;
         }
 
         #endregion

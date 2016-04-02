@@ -55,6 +55,7 @@
                 </td>
                 <td>
                     <form id="form-id-@item.NavigationItemID" method="post" class="process-ordering-in-menu-items">
+                        @Html.HiddenFor(n => item.NavigationID, new { @Name = "NavigationID" })
                         @Html.HiddenFor(n => item.NavigationItemID, new { @Name = "NavigationItemID" })
                         @Html.TextBoxFor(n => item.Ordering, new { @Name = "Ordering", @class = "form-control ordering-textbox", id = "navid-" + item.NavigationItemID, data_id = item.NavigationItemID })
                     </form>

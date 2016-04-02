@@ -4,34 +4,47 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using DevMvcComponent;
+using WeReviewApp.BusinessLogics.Admin;
 using WeReviewApp.Controllers;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.IdentityCustomization;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
     public class NavItemsController : IdentityController<ApplicationDbContext> {
+        private NavigationLogics _navigationLogic;
         public NavItemsController()
             : base(true) {
-
+            _navigationLogic = new NavigationLogics(db);
         }
         private List<NavigationItem> GetItems(int? NavitionID = null) {
             if (NavitionID == null) {
                 return db.NavigationItems.ToList();
             } else {
-                return db.NavigationItems.Where(n => n.NavigationID == NavitionID).ToList();
+                return db.NavigationItems.Or.Where(n => n.NavigationID == NavitionID)(n=> n.) .ToList();
             }
         }
-
-        private void AddMenuName(int id) {
-            var nav = db.Navigations.Find(id);
+        /// <summary>
+        /// Parent Navigation Id 
+        /// </summary>
+        /// <param name="navigationId"></param>
+        private void AddMenuName(int navigationId) {
+            var nav = db.Navigations.Find(navigationId);
             ViewBag.MenuName = nav.Name;
-            ViewBag.NavigationID = id;
+            ViewBag.NavigationID = navigationId;
         }
 
+        private ActionResult GetList(int navigationId, bool getWholeView = true) {
+            AddMenuName(navigationId);
+            var list = GetItems(navigationId);
+
+            if (getWholeView) {
+                return View("List", list);
+            } else {
+                return PartialView("List", list);
+            }
+        }
         public ActionResult List(int id) {
-            AddMenuName(id);
-            return View(GetItems(id));
+           return GetList(id);
         }
 
         private void HasDropDownAttr(NavigationItem navigationItem) {
@@ -87,31 +100,12 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View(navigationItem);
         }
 
-        public JsonResult SaveOrder(NavigationItem [] navigationItems) {
-            NavigationItem dbNavigationItem = null;
-            var len = navigationItems.Length;
-            List<string> navigationItemsNames = new List<string>(len),
-                         navigationItemsFailedNames = new List<string>(len); ;
-            bool isFailed = false;
-            foreach (var navItem in navigationItems) {
-                try {
-                    dbNavigationItem = db.NavigationItems.Find(navItem.NavigationItemID);
-                    db.Entry(dbNavigationItem).State = EntityState.Modified;
-                    dbNavigationItem.Ordering = navItem.Ordering;
-                    if (db.SaveChanges() > -1) {
-                        navigationItemsNames.Add(dbNavigationItem.Title);
-                    }
-                } catch (Exception ex) {
-                    Mvc.Error.ByEmail(ex, "SaveOrder()", "", dbNavigationItem);
-                    isFailed = true;
-                    navigationItemsFailedNames.Add(dbNavigationItem.Title);
-                }
+        public ActionResult SaveOrder(NavigationItem[] navigationItems) {
+            if (_navigationLogic.SaveOrder(navigationItems)) {
+                AppConfig.Caches.RemoveAllFromCache();
+                return GetList(navigationItems[0].NavigationID, false);
             }
-            if (isFailed) {
-                return Json(new { success = !isFailed, titles = navigationItemsFailedNames }, JsonRequestBehavior.AllowGet);
-            } else {
-                return Json(new { success = !isFailed, titles = navigationItemsNames }, JsonRequestBehavior.AllowGet);
-            }
+            return HttpNotFound();
         }
 
         public ActionResult Delete(int id, int NavigationID) {
