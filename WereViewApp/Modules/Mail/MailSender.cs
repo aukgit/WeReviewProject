@@ -3,6 +3,9 @@ using System.Threading;
 using DevMvcComponent;
 
 namespace WeReviewApp.Modules.Mail {
+    /// <summary>
+    /// Sends mails through Mvc.Mailer with threads
+    /// </summary>
     public class MailSender {
         private readonly bool _isCompanyNameOnEmailSubject = false;
 
@@ -34,7 +37,7 @@ namespace WeReviewApp.Modules.Mail {
         /// <param name="htmlMessage"></param>
         /// <param name="type"></param>
         /// <param name="generateDecentSubject"></param>
-        public void Send(string to, string subject, string htmlMessage, string type = "",
+        public async void Send(string to, string subject, string htmlMessage, string type = "",
             bool generateDecentSubject = true) {
             if (generateDecentSubject) {
                 subject = GetSubject(subject, type);
@@ -44,7 +47,7 @@ namespace WeReviewApp.Modules.Mail {
             }).Start();
         }
 
-        public void NotifyDeveloper(string subject, string htmlMessage, string type = "",
+        public async void NotifyDeveloper(string subject, string htmlMessage, string type = "",
             bool generateDecentSubject = true) {
             if (AppVar.Setting.NotifyDeveloperOnError) {
                 if (generateDecentSubject) {
@@ -58,7 +61,7 @@ namespace WeReviewApp.Modules.Mail {
 
 
 
-        public void HandleError(Exception exception, string method, string subject = "", object entity = null,
+        public async void HandleError(Exception exception, string method, string subject = "", object entity = null,
             string type = "", bool generateDecentSubject = true) {
             {
                 if (generateDecentSubject) {
