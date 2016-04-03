@@ -687,6 +687,18 @@
     </Content>
     <None Include="Content\Less\ckedit-skin-bootstrap.less" />
     <Content Include="Content\Less\color-fonts.less" />
+    <Content Include="Content\Less\CSS\loading-bar.css" />
+    <Content Include="Content\Less\CSS\loading-bar.min.css">
+      <DependentUpon>loading-bar.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\CSS\Spinner-2.css" />
+    <Content Include="Content\Less\CSS\Spinner-2.min.css">
+      <DependentUpon>Spinner-2.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\CSS\spinner.css" />
+    <Content Include="Content\Less\CSS\spinner.min.css">
+      <DependentUpon>spinner.css</DependentUpon>
+    </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
     <Content Include="Content\Less\less-imports.less" />
@@ -864,6 +876,18 @@
     <Content Include="Content\Less\Spinner\load6.less" />
     <Content Include="Content\Less\Spinner\load7.less" />
     <Content Include="Content\Less\Spinner\load8.less" />
+    <Content Include="Content\Less\CSS\spinner.css.map">
+      <DependentUpon>spinner.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\Spinner\loading-bar.less" />
+    <Content Include="Content\Less\CSS\loading-bar.css.map">
+      <DependentUpon>loading-bar.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\Spinner\Spinner-2.less" />
+    <Content Include="Content\Less\CSS\Spinner-2.css.map">
+      <DependentUpon>Spinner-2.css</DependentUpon>
+    </Content>
+    <None Include="Content\Less\Spinner\spinner.less" />
     <None Include="Content\Scripts\_references.js" />
     <Content Include="Content\Scripts\toastr.js" />
     <Content Include="Fonts\fontawesome-webfont.svg" />
