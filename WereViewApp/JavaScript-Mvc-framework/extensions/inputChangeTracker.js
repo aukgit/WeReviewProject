@@ -19,7 +19,8 @@
 $.app.inputChangeTracker = {
     list: {
         $inputs: null, // array
-        initalTexts: null // array
+        initalTexts: null,  // array
+        idsOrNames: null // array
     },
 
     createTracker: function ($inputs) {
@@ -32,9 +33,53 @@ $.app.inputChangeTracker = {
         var list = tracker.list;
         list.$inputs = $inputs;
         list.initalTexts = $inputs.toArrayWithValues();
+        list.idsOrNames = tracker.getAllInputsIdsOrNameArray();
         return tracker;
     },
+    isChanged: function ($input) {
+        var item = this.getInputfromListWithInitialText($input);
+        if (item !== null) {
+            var currentText = item.$input.val();
+            if (item.initText !== currentText) {
+                return true;
+            }
+        }
+        return false;
+    },
+    getInputfromListWithInitialText: function ($input) {
+        var textArr = this.list.initalTexts,
+            findingId = this.getInputIdOrName($input);
+        for (var i = 0; i < textArr.length; i++) {
+            var currentInputId = this.list.idsOrNames[i];
+            if (findingId === currentInputId) {
+                return {
+                    $input: $input,
+                    initText: textArr[i]
+                }
+            }
+        }
+        return null;
+    },
 
+    getInputIdOrName: function ($input) {
+        var name;
+        if (!$.isEmpty($input.length)) {
+            name = $input.attr("id");
+            if ($.isEmpty(name)) {
+                name = $input.attr("name");
+            }
+            return name;
+        } else {
+            name = $input.id;
+            if ($.isEmpty(name)) {
+                name = $input.getAttribute("name");
+            }
+        }
+        return name;
+    },
+    getInputIdOrNameByIndex: function (index) {
+        return this.list.idsOrNames[index];
+    },
     getChangedInputs: function () {
         /// <summary>
         /// Get all inputs array which are changed at moment of calling this method.
@@ -49,7 +94,7 @@ $.app.inputChangeTracker = {
                 currentText = input.value,
                 previousValue = list.initalTexts[i];
             if (currentText !== previousValue) {
-                // different.
+                // different 
                 changedInputsList.push(input);
             }
         }
@@ -98,6 +143,24 @@ $.app.inputChangeTracker = {
         var attrArray = new Array($changedInputs.length);
         for (var i = 0; i < $changedInputs.length; i++) {
             attrArray[i] = $changedInputs[i].getAttribute(attr);
+        }
+        return attrArray;
+    },
+    getAllInputsIdsOrNameArray: function () {
+        /// <summary>
+        /// Get an array of the given attribute values for changed inputs.
+        /// </summary>
+        /// <param name="attr" type="type">Give a attr name.</param>
+        /// <returns type="">Get an array of the given attribute values for changed inputs.</returns>
+        var $inputs = this.list.$inputs;
+        var attrArray = new Array($inputs.length);
+        for (var i = 0; i < $inputs.length; i++) {
+            var input = $inputs[i];
+            var idOrName = input.id;
+            if ($.isEmpty(idOrName)) {
+                idOrName = input.getAttribute("name");
+            }
+            attrArray[i] = idOrName;
         }
         return attrArray;
     },

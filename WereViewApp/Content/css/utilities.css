@@ -814,6 +814,9 @@ div.contactus {
   padding-right: 30px;
   padding-right: 3rem;
 }
+.changed-row {
+  background-color: #ffedd3;
+}
 .regular-show-more-btn {
   clear: both;
 }

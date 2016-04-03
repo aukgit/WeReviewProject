@@ -562,6 +562,10 @@
       <DependentUpon>less-imports.css</DependentUpon>
     </Content>
     <Content Include="Content\css\less-imports.min.css" />
+    <Content Include="Content\css\loader-spinner.css" />
+    <Content Include="Content\css\loader-spinner.min.css">
+      <DependentUpon>loader-spinner.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\menu-fix.css" />
     <Content Include="Content\css\menu-fix.css.map">
       <DependentUpon>menu-fix.css</DependentUpon>
@@ -677,6 +681,9 @@
     </Content>
     <Content Include="Content\css\Spinner.css.map">
       <DependentUpon>Spinner.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\loader-spinner.css.map">
+      <DependentUpon>loader-spinner.css</DependentUpon>
     </Content>
     <None Include="Content\Less\ckedit-skin-bootstrap.less" />
     <Content Include="Content\Less\color-fonts.less" />
@@ -847,7 +854,16 @@
     <Content Include="Content\Scripts\skins\bootstrapck\sample\js\analytics.js" />
     <Content Include="Content\Scripts\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
     <Content Include="Content\Less\toastr.less" />
-    <Content Include="Content\Less\Spinner.less" />
+    <Content Include="Content\Less\loader-spinner.less" />
+    <Content Include="Content\Less\Spinner\fallback.less" />
+    <Content Include="Content\Less\Spinner\load1.less" />
+    <Content Include="Content\Less\Spinner\load2.less" />
+    <Content Include="Content\Less\Spinner\load3.less" />
+    <Content Include="Content\Less\Spinner\load4.less" />
+    <Content Include="Content\Less\Spinner\load5.less" />
+    <Content Include="Content\Less\Spinner\load6.less" />
+    <Content Include="Content\Less\Spinner\load7.less" />
+    <Content Include="Content\Less\Spinner\load8.less" />
     <None Include="Content\Scripts\_references.js" />
     <Content Include="Content\Scripts\toastr.js" />
     <Content Include="Fonts\fontawesome-webfont.svg" />

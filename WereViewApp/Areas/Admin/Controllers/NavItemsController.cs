@@ -17,10 +17,12 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             _navigationLogic = new NavigationLogics(db);
         }
         private List<NavigationItem> GetItems(int? NavitionID = null) {
+            var navs = db.NavigationItems.OrderBy(n => n.Ordering).ThenByDescending(n => n.NavigationItemID);
+
             if (NavitionID == null) {
-                return db.NavigationItems.ToList();
+                return navs.ToList();
             } else {
-                return db.NavigationItems.Or.Where(n => n.NavigationID == NavitionID)(n=> n.) .ToList();
+                return navs.Where(n => n.NavigationID == NavitionID).ToList();
             }
         }
         /// <summary>
@@ -32,8 +34,13 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             ViewBag.MenuName = nav.Name;
             ViewBag.NavigationID = navigationId;
         }
-
-        private ActionResult GetList(int navigationId, bool getWholeView = true) {
+        /// <summary>
+        /// Get navigation list items with view.
+        /// </summary>
+        /// <param name="navigationId"></param>
+        /// <param name="getWholeView"></param>
+        /// <returns></returns>
+        private ActionResult GetListView(int navigationId, bool getWholeView = true) {
             AddMenuName(navigationId);
             var list = GetItems(navigationId);
 
@@ -43,8 +50,13 @@ namespace WeReviewApp.Areas.Admin.Controllers {
                 return PartialView("List", list);
             }
         }
+        /// <summary>
+        /// Public call for MVC to get the list view for expected navigation item.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult List(int id) {
-           return GetList(id);
+           return GetListView(id);
         }
 
         private void HasDropDownAttr(NavigationItem navigationItem) {
@@ -103,7 +115,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
         public ActionResult SaveOrder(NavigationItem[] navigationItems) {
             if (_navigationLogic.SaveOrder(navigationItems)) {
                 AppConfig.Caches.RemoveAllFromCache();
-                return GetList(navigationItems[0].NavigationID, false);
+                return GetListView(navigationItems[0].NavigationID, false);
             }
             return HttpNotFound();
         }
@@ -123,7 +135,6 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             }
             base.Dispose(disposing);
         }
-
 
     }
 }
