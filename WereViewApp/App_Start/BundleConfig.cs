@@ -127,7 +127,6 @@ namespace WeReviewApp {
                                         "~/Content/css/less-imports.css",
                                         "~/Content/css/animate.min.css",
                                         "~/Content/css/font-awesome.min.css",
-                                        "~/Content/css/animate-refresh.css",
                                         "~/Content/css/site.css",
                                         "~/Content/css/header.css",
                                         "~/Content/css/flags32.css",
@@ -141,7 +140,7 @@ namespace WeReviewApp {
                                         //"~/Content/css/ckedit-skin-bootstrap.css",
 
                                         "~/Content/css/color-fonts.css",
-                                        "~/Content/css/Spinner.css",
+                                        "~/Content/css/loader-spinner.css",
                                         "~/Content/css/star-rating.css",
                                         "~/Content/css/toastr.css",
                                         "~/Content/css/override-mvc.css",
