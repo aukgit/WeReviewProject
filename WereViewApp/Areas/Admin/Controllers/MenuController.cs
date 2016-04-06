@@ -1,6 +1,5 @@
 ﻿#region using block
 
-using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -34,7 +33,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(navigation);
         }
 
-        public ActionResult Edit(Int32 id) {
+        public ActionResult Edit(int id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -57,8 +56,8 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(navigation);
         }
 
-
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
             var navigation = db.Navigations.Find(id);

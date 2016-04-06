@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.IdentityCustomization;
@@ -12,25 +10,25 @@ namespace WereViewApp.Areas.Admin.Controllers {
     public class NavItemsController : Controller {
         private readonly ApplicationDbContext db = new ApplicationDbContext();
 
-        List<NavigationItem> GetItems(int? NavitionID = null) {
+        private List<NavigationItem> GetItems(int? NavitionID = null) {
             if (NavitionID == null) {
                 return db.NavigationItems.ToList();
-            } else {
-                return db.NavigationItems.Where(n => n.NavigationID == NavitionID).ToList();
             }
+            return db.NavigationItems.Where(n => n.NavigationID == NavitionID).ToList();
         }
-        void AddMenuName(int id) {
+
+        private void AddMenuName(int id) {
             var nav = db.Navigations.Find(id);
             ViewBag.MenuName = nav.Name;
             ViewBag.NavigationID = id;
-
         }
+
         public ActionResult List(int id) {
             AddMenuName(id);
             return View(GetItems(id));
         }
 
-        void HasDropDownAttr(NavigationItem navigationItem) {
+        private void HasDropDownAttr(NavigationItem navigationItem) {
             if (!navigationItem.HasDropDown) {
                 navigationItem.ParentNavigationID = null;
             }
@@ -57,7 +55,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(navigationItem);
         }
 
-        public ActionResult Edit(Int32 id, int NavigationID) {
+        public ActionResult Edit(int id, int NavigationID) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -70,7 +68,6 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(navigationItem);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(NavigationItem navigationItem) {
@@ -79,21 +76,20 @@ namespace WereViewApp.Areas.Admin.Controllers {
             if (ModelState.IsValid) {
                 db.Entry(navigationItem).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("List", new { id = navigationItem.NavigationID });
+                return RedirectToAction("List", new {id = navigationItem.NavigationID});
             }
             AddMenuName(navigationItem.NavigationID);
             AppConfig.Caches.RemoveAllFromCache();
             return View(navigationItem);
         }
 
-
         public ActionResult Delete(int id, int NavigationID) {
-            NavigationItem navigationItem = db.NavigationItems.Find(id);
+            var navigationItem = db.NavigationItems.Find(id);
             db.NavigationItems.Remove(navigationItem);
             db.SaveChanges();
             AddMenuName(NavigationID);
             AppConfig.Caches.RemoveAllFromCache();
-            return RedirectToAction("List", new { id = NavigationID });
+            return RedirectToAction("List", new {id = NavigationID});
         }
 
         protected override void Dispose(bool disposing) {

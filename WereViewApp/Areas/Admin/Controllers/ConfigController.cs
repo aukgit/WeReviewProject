@@ -2,7 +2,6 @@
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using DevMvcComponent;
 using WereViewApp.Filter;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.IdentityCustomization;
@@ -13,7 +12,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
         private readonly DevIdentityDbContext db = new DevIdentityDbContext();
 
         public ActionResult Index() {
-            byte id = (byte)1;
+            byte id = 1;
 
             var coreSetting = db.CoreSettings.Find(id);
             if (coreSetting == null) {
@@ -21,20 +20,19 @@ namespace WereViewApp.Areas.Admin.Controllers {
             }
             return View(coreSetting);
         }
+
         [Authorize]
         [CheckRegistrationComplete]
         public ActionResult CleanSystem() {
-        
             return View();
         }
 
         [Authorize]
-        [HasMinimumRole(MinimumRole=RoleNames.Admin)]
+        [HasMinimumRole(MinimumRole = RoleNames.Admin)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CleanSystem(string clean) {
             if (!string.IsNullOrEmpty(clean) && clean.Equals("Clean")) {
-
                 ViewBag.message = "Every thing is removed successfully.";
             }
             return View();
@@ -67,7 +65,6 @@ namespace WereViewApp.Areas.Admin.Controllers {
             AppVar.SetErrorStatus(ViewBag);
             return View(coreSetting);
         }
-
 
         protected override void Dispose(bool disposing) {
             if (disposing) {

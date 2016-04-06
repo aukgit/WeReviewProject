@@ -1101,20 +1101,16 @@ namespace WereViewApp.Controllers {
         //    return View(app);
         //}
 
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(long id) {
-        //    var app = db.Apps.Find(id);
-        //    bool viewOf = ViewTapping(ViewStates.DeletePost, app);
-        //    db.Apps.Remove(app);
-        //    bool state = SaveDatabase(ViewStates.Delete, app);
-        //    if (!state) {
-        //        AppVar.SetErrorStatus(ViewBag, _deletedError); // Failed to Save
-        //        return View(app);
-        //    }
-
-        //    return RedirectToAction("Index");
-        //}
+        public ActionResult Delete(Guid id) {
+            var app = db.Apps.FirstOrDefault(n=> n.UploadGuid == id);
+            bool viewOf = ViewTapping(ViewStates.DeletePost, app);
+            db.Apps.Remove(app);
+            bool state = SaveDatabase(ViewStates.Delete, app);
+            if (!state) {
+                return View(app);
+            }
+            return RedirectToAction("Index");
+        }
 
         #endregion
     }

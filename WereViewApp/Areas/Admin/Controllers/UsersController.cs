@@ -184,8 +184,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
                     "CountryLanguageID", "Language", applicationUser.CountryLanguageID);
         }
 
-        public void GetDropDowns(long id) {
-        }
+        public void GetDropDowns(long id) {}
 
         #endregion
 
@@ -277,7 +276,6 @@ namespace WereViewApp.Areas.Admin.Controllers {
             }
             return View("Error");
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.IdentityCustomization;
 using WereViewApp.Controllers;
+using WereViewApp.Models.POCO.IdentityCustomization;
 
 namespace WereViewApp.Areas.Admin.Controllers {
     public class FeedbackCategoriesController : BasicController {
@@ -18,17 +13,15 @@ namespace WereViewApp.Areas.Admin.Controllers {
         // mailto:info@developers-organism.com
 
         public FeedbackCategoriesController()
-            : base(true) {
-        }
+            : base(true) {}
 
-        public void GetDropDowns() {
-        }
+        public void GetDropDowns() {}
 
         public ActionResult Index() {
             return View(db.FeedbackCategories.ToList());
         }
 
-        public ActionResult Details(Byte id) {
+        public ActionResult Details(byte id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -38,7 +31,6 @@ namespace WereViewApp.Areas.Admin.Controllers {
             }
             return View(feedbackCategory);
         }
-
 
         public ActionResult Create() {
             return View();
@@ -59,7 +51,7 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(feedbackCategory);
         }
 
-        public ActionResult Edit(Byte id) {
+        public ActionResult Edit(byte id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -70,8 +62,6 @@ namespace WereViewApp.Areas.Admin.Controllers {
             GetDropDowns();
             return View(feedbackCategory);
         }
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -87,14 +77,11 @@ namespace WereViewApp.Areas.Admin.Controllers {
             return View(feedbackCategory);
         }
 
-
         public ActionResult Delete(byte id) {
             var feedbackCategory = db.FeedbackCategories.Find(id);
             db.FeedbackCategories.Remove(feedbackCategory);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-
     }
 }
