@@ -1102,12 +1102,17 @@ namespace WereViewApp.Controllers {
         //}
 
         public ActionResult Delete(Guid id) {
-            var app = db.Apps.FirstOrDefault(n=> n.UploadGuid == id);
-            bool viewOf = ViewTapping(ViewStates.DeletePost, app);
-            db.Apps.Remove(app);
-            bool state = SaveDatabase(ViewStates.Delete, app);
-            if (!state) {
-                return View(app);
+            var app = db.Apps.FirstOrDefault(n => n.UploadGuid == id);
+            if (app != null) {
+                app.Tags = "Hello";
+                var tagRelations = db.TagAppRelations.Where(n => n.AppID == app.AppID);
+                foreach (var tagRelation in tagRelations) {
+                    db.TagAppRelations.Remove(tagRelation);
+                }
+                SaveDatabase(ViewStates.Delete, app);
+                bool viewOf = ViewTapping(ViewStates.DeletePost, app);
+                db.Apps.Remove(app);
+                SaveDatabase(ViewStates.Delete, app);
             }
             return RedirectToAction("Index");
         }
