@@ -6,12 +6,6 @@
 */
 
 
-var transactionStatusHide = function () {
-    var $transactionStatus = $(".transaction-status");
-    if ($transactionStatus.length > 0) {
-        $transactionStatus.delay(1500).fadeOut(2500);
-    }
-}
 
 $.app = $.app || {};
 
@@ -70,6 +64,14 @@ $.app.run = function () {
             stopTimer();
             hideStatus();
         });
+    }
+
+    this.bootstrapTableEnable = function() {
+        // make tables look nice with pagination
+        var $tables = $(".bootstrap-table-do");
+        if ($tables.length > 0) {
+            $tables.bootstrapTable();
+        }
     }
     this.initialize();
 }

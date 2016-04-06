@@ -38,9 +38,7 @@ namespace WereViewApp {
                                     "~/Content/Scripts/moment.js",
                                     "~/Content/Scripts/bootstrap-datetimepicker.js",
                                     "~/Content/Scripts/bootstrap-select.js",
-                                    "~/Content/Scripts/bootstrap-table.js",
-                                    "~/Content/Scripts/bootstrap-table-filter.js",
-                                    "~/Content/Scripts/bootstrap-table-export.js",
+
                                     "~/Content/Scripts/Tag-it/bootstrap3-typeahead.min.js",
                                     "~/Content/Scripts/Tag-it/bootstrap-tagsinput.js",
                                     "~/Content/Scripts/jquery.elastic.source.js",
@@ -73,8 +71,11 @@ namespace WereViewApp {
                     #region Bootstrap
                     bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                                   "~/Content/Scripts/DevOrgPlugins/byId.js",
-                                  "~/Content/Scripts/DevOrgPlugins/app.run.js",
                                   "~/Content/Scripts/bootstrap.js", // 3.1.2
+                                  "~/Content/Scripts/bootstrap-table.js",
+                                  "~/Content/Scripts/bootstrap-table-filter.js",
+                                  "~/Content/Scripts/bootstrap-table-export.js",
+                                  "~/Content/Scripts/DevOrgPlugins/app.run.js",
                                   "~/Content/Scripts/star-rating.js",
                                   "~/Content/Scripts/underscore.js",
                                   "~/Content/Scripts/FrontEnd/wow.min.js",

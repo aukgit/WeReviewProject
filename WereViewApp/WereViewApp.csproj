@@ -592,6 +592,7 @@
     </Content>
     <Content Include="Content\css\seo-optimize.min.css" />
     <Content Include="Content\css\Site.css" />
+    <Content Include="Content\css\Spinner.css" />
     <Content Include="Content\css\star-rating.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
@@ -610,6 +611,7 @@
     <Content Include="Content\css\Tagit\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\css\Tagit\jquery.tagedit.css" />
     <Content Include="Content\css\Tagit\ui-lightness\jquery-ui-1.9.2.custom.min.css" />
+    <Content Include="Content\css\toastr.css" />
     <Content Include="Content\css\Upload\jquery.fileupload.css" />
     <Content Include="Content\css\utilities.css" />
     <Content Include="Content\css\utilities.min.css">
@@ -708,7 +710,10 @@
     <Content Include="Content\revolution-slider\assets\small_right_boxed.png" />
     <Content Include="Content\revolution-slider\assets\timer.png" />
     <Content Include="Content\revolution-slider\css\settings.css" />
+    <Content Include="Content\revolution-slider\font\revicons90c6.eot" />
     <Content Include="Content\revolution-slider\font\revicons90c6.svg" />
+    <Content Include="Content\revolution-slider\font\revicons90c6.ttf" />
+    <Content Include="Content\revolution-slider\font\revicons90c6.woff" />
     <Content Include="Content\revolution-slider\images\gradient\g30.png" />
     <Content Include="Content\revolution-slider\images\gradient\g40.png" />
     <Content Include="Content\revolution-slider\js\jquery.themepunch.revolution.min.js" />
@@ -818,6 +823,7 @@
     <Content Include="Content\Scripts\skins\bootstrapck\sample\js\analytics.js" />
     <Content Include="Content\Scripts\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
     <Content Include="Fonts\fontawesome-webfont.svg" />
+    <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Sitemap.xml" />
     <Content Include="Uploads\Images\Advertise\5e324a00-977d-4436-8a15-3ce9e1c424f1-0.jpg" />
     <Content Include="Uploads\Images\Advertise\7fcf1b26-c1e0-4327-ba7f-29d5fd55bd25-0.jpg" />
@@ -985,6 +991,8 @@
     <Content Include="Content\css\header.css.map">
       <DependentUpon>header.css</DependentUpon>
     </Content>
+    <Content Include="Content\Less\Spinner.less" />
+    <Content Include="Content\Less\toastr.less" />
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />
@@ -1032,7 +1040,6 @@
     <Content Include="Content\Scripts\validation.js" />
     <Content Include="ExternalDll\LinqKit.dll" />
     <Content Include="favicon.ico" />
-    <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
@@ -1103,10 +1110,6 @@
     <Content Include="Areas\Admin\Views\FeaturedImages\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\FeaturedImages\Index.cshtml" />
     <Content Include="Areas\Admin\Views\FeaturedImages\_CreateOrEdit.cshtml" />
-    <Content Include="Fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Styles\CompactCSS.css" />
     <Content Include="Styles\CompactCSS.min.css">
       <DependentUpon>CompactCSS.css</DependentUpon>
@@ -1141,9 +1144,6 @@
     <Content Include="Views\Shared\EditorTemplates\Username.cshtml" />
     <Content Include="App_Data\DataCached\Suggested\1" />
     <Content Include="App_Data\DataCached\Suggested\2" />
-    <Content Include="Content\revolution-slider\font\revicons90c6.eot" />
-    <Content Include="Content\revolution-slider\font\revicons90c6.ttf" />
-    <Content Include="Content\revolution-slider\font\revicons90c6.woff" />
     <Content Include="Content\Scripts\bootstrap.min.js.map" />
     <Content Include="Content\Scripts\jquery.unobtrusive-ajax.min.js.map">
       <DependentUpon>jquery.unobtrusive-ajax.min.js</DependentUpon>
@@ -1255,11 +1255,6 @@
     <Content Include="Views\Shared\_401.cshtml" />
     <Content Include="Views\Report\App.cshtml" />
     <Content Include="Views\Report\Review.cshtml" />
-    <Content Include="Fonts\fontawesome-webfont.woff2" />
-    <Content Include="Fonts\fontawesome-webfont.eot" />
-    <Content Include="Fonts\fontawesome-webfont.ttf" />
-    <Content Include="Fonts\fontawesome-webfont.woff" />
-    <Content Include="Fonts\FontAwesome.otf" />
     <Content Include="Content\Scripts\skins\bootstrapck\readme.md" />
     <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\gecko\editor_gecko.scss" />
     <Content Include="Content\Scripts\skins\bootstrapck\scss\browser-specific\ie7\dialog_ie7.scss" />
@@ -1285,6 +1280,15 @@
     <Content Include="Content\Scripts\skins\bootstrapck\scss\config\_config.scss" />
     <Content Include="Content\Scripts\skins\bootstrapck\scss\config\_defaults.scss" />
     <Content Include="Content\Scripts\skins\bootstrapck\scss\dialog\dialog.scss" />
+    <Content Include="Fonts\fontawesome-webfont.eot" />
+    <Content Include="Fonts\fontawesome-webfont.ttf" />
+    <Content Include="Fonts\fontawesome-webfont.woff" />
+    <Content Include="Fonts\fontawesome-webfont.woff2" />
+    <Content Include="Fonts\FontAwesome.otf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <Content Include="Views\Shared\EditorTemplates\Double.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
