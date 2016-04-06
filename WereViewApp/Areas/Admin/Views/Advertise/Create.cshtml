@@ -1,4 +1,4 @@
-﻿@model WeReviewApp.Models.EntityModel.Gallery
+﻿@model WereViewApp.Models.EntityModel.Gallery
 
 @{
     ViewBag.Title = "Adding Advertise Image";
@@ -10,7 +10,7 @@
 
 }
 
-@Html.SamePageLinkWithIcon(title, subtitle, FaIcons.Plus)
+@Html.SamePageLinkWithIcon(title, subtitle, Icons.Plus)
 <hr />
 @using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form", enctype = "multipart/form-data" })) 
 {

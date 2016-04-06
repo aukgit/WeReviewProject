@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WeReviewApp.Modules.Uploads {
+namespace WereViewApp.Modules.Uploads {
     public interface IUploadableFile {
         Guid UploadGuid { get; set; }
         //IImageCategory Category { get; }

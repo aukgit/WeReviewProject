@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Web;
-using WeReviewApp.Models.Context;
-using WeReviewApp.Modules.Session;
+using WereViewApp.Models.Context;
+using WereViewApp.Modules.Session;
 
-namespace WeReviewApp.Modules.InternetProtocolRelations {
+namespace WereViewApp.Modules.InternetProtocolRelations {
     public class IpConfigRelations {
         public static int GetCountryId(string ipAddress) {
             var value = IpToValue(ipAddress);

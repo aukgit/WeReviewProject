@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WeReviewApp.Models.POCO.IdentityCustomization {
+namespace WereViewApp.Models.POCO.IdentityCustomization {
     public class Navigation {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

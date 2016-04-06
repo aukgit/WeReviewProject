@@ -1,4 +1,4 @@
-﻿namespace WeReviewApp.Models.EntityModel.Structs {
+﻿namespace WereViewApp.Models.EntityModel.Structs {
     public struct GalleryCategoryIDs {
         #region Gallery Category IDs
 

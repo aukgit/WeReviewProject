@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace WeReviewApp.Areas.Admin {
+namespace WereViewApp.Areas.Admin {
     public class AdminAreaRegistration : AreaRegistration {
         public override string AreaName {
             get {

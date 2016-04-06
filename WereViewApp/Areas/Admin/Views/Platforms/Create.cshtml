@@ -1,4 +1,4 @@
-﻿@model WeReviewApp.Models.EntityModel.Platform
+﻿@model WereViewApp.Models.EntityModel.Platform
 
 @{
     ViewBag.Title = "Creating Platform";
@@ -11,7 +11,7 @@
 }
 
 
-@Html.SamePageLinkWithIcon(title, subtitle, FaIcons.Plus)
+@Html.SamePageLinkWithIcon(title, subtitle, Icons.Plus)
 <hr />
 @using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) 
 {

@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace WeReviewApp.Modules.Extensions {
+namespace WereViewApp.Modules.Extensions {
     public static class UrlExtension {
 
         public static string CurrentControlerAbsoluteUrl(this Controller controller) {

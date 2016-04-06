@@ -2,7 +2,7 @@
 using System.Threading;
 using DevMvcComponent;
 
-namespace WeReviewApp.Modules.Mail {
+namespace WereViewApp.Modules.Mail {
     public class MailSender {
         private readonly bool _isCompanyNameOnEmailSubject = false;
 

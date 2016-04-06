@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using WeReviewApp.Common;
+using WereViewApp.WereViewAppCommon;
 
-namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
+namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
     public static class AppExtend {
         private const string ControllerNameForapp = "Apps";
 

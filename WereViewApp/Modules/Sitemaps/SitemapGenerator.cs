@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace WeReviewApp.Modules.Sitemaps {
+namespace WereViewApp.Modules.Sitemaps {
     /// <summary>
     ///     Generating sitemaps as http://www.sitemaps.org/protocol.html
     /// </summary>

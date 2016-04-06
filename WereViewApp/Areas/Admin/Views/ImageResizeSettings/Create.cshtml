@@ -1,4 +1,4 @@
-﻿@model WeReviewApp.Models.POCO.IdentityCustomization.ImageResizeSetting
+﻿@model WereViewApp.Models.POCO.IdentityCustomization.ImageResizeSetting
 
 @{
     ViewBag.Title = "Creating ImageResizeSetting";
@@ -8,7 +8,7 @@
 }
 
 
-@Html.SamePageLinkWithIcon(title, subtitle, FaIcons.Plus)
+@Html.SamePageLinkWithIcon(title, subtitle, Icons.Plus)
 
 <hr />
 @using (Html.BeginForm("Create", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) 

@@ -1,4 +1,4 @@
-﻿namespace WeReviewApp.Modules.Validations {
+﻿namespace WereViewApp.Modules.Validations {
     public class ValidationMessage {
         /// <summary>
         /// Message if the validation is successful.

@@ -3,14 +3,14 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WeReviewApp.Controllers;
-using WeReviewApp.Models.POCO.Identity;
-using WeReviewApp.Models.ViewModels;
-using WeReviewApp.Modules.DevUser;
-using WeReviewApp.Modules.Mail;
-using WeReviewApp.Modules.Role;
+using WereViewApp.Controllers;
+using WereViewApp.Models.POCO.Identity;
+using WereViewApp.Models.ViewModels;
+using WereViewApp.Modules.DevUser;
+using WereViewApp.Modules.Mail;
+using WereViewApp.Modules.Role;
 
-namespace WeReviewApp.Areas.Admin.Controllers {
+namespace WereViewApp.Areas.Admin.Controllers {
     public class UsersController : BasicController {
         #region Constructors
 
@@ -184,7 +184,8 @@ namespace WeReviewApp.Areas.Admin.Controllers {
                     "CountryLanguageID", "Language", applicationUser.CountryLanguageID);
         }
 
-        public void GetDropDowns(long id) {}
+        public void GetDropDowns(long id) {
+        }
 
         #endregion
 
@@ -240,7 +241,8 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View("Error");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UserBlock(UserBlockViewModel model) {
             var user = db.Users.Find(model.UserId);
             if (user != null) {
@@ -276,7 +278,9 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View("Error");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EnableUserBlock(UserBlockViewModel model) {
             var user = db.Users.Find(model.UserId);
             if (user != null) {

@@ -1,10 +1,10 @@
-﻿@model WeReviewApp.Models.POCO.Identity.ApplicationRole
+﻿@model WereViewApp.Models.POCO.Identity.ApplicationRole
 @{
     ViewBag.Title = "Creating Role";
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
 }
-@Html.SamePageLinkWithIcon(title, subtitle, FaIcons.Plus)
+@Html.SamePageLinkWithIcon(title, subtitle, Icons.Plus)
 <hr />
 @using (Html.BeginForm("Create", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) 
 {

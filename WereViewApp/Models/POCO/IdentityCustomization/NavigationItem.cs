@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WeReviewApp.Models.POCO.IdentityCustomization {
+namespace WereViewApp.Models.POCO.IdentityCustomization {
     public class NavigationItem {
         public int NavigationItemID { get; set; }
         public int NavigationID { get; set; }

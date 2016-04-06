@@ -1,9 +1,10 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using WeReviewApp.Models.POCO.IdentityCustomization;
-using WeReviewApp.Modules.Extensions.Context;
+using WereViewApp.Models.POCO.IdentityCustomization;
+using WereViewApp.Modules.Extensions.Context;
 
-namespace WeReviewApp.Models.Context {
+namespace WereViewApp.Models.Context {
+
     public class DevIdentityDbContext : DevDbContext {
         public DevIdentityDbContext()
             : base("name=DefaultConnection") {
@@ -13,9 +14,9 @@ namespace WeReviewApp.Models.Context {
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
-
         public DbSet<CoreSetting> CoreSettings { get; set; }
 
         public DbSet<ImageResizeSetting> ImageResizeSettings { get; set; }
     }
+
 }

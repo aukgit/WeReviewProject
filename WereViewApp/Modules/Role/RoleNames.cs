@@ -1,4 +1,4 @@
-﻿namespace WeReviewApp.Modules.Role {
+﻿namespace WereViewApp.Modules.Role {
     public struct RoleNames {
         /// <summary>
         ///     Lower priority means higher power.

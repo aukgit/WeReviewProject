@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using WeReviewApp.Common;
+using WereViewApp.WereViewAppCommon;
 
-namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
+namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
     public static class CategoryExtend {
         private const string ControllerName = "Category";
         private const string AppControllerName = "Apps";
@@ -18,7 +18,6 @@ namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
             }
             return "";
         }
-
         /// <summary>
         ///     returns a url like "http://url/Apps/Category/@category.Slug"
         ///     and then put it in the "app.AbsUrl"
@@ -31,6 +30,8 @@ namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
             }
             return "";
         }
+
+
 
         /// <summary>
         /// </summary>

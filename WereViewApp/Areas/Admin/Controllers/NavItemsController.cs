@@ -3,38 +3,34 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
-using DevMvcComponent;
-using WeReviewApp.Controllers;
-using WeReviewApp.Models.Context;
-using WeReviewApp.Models.POCO.IdentityCustomization;
+using WereViewApp.Models.Context;
+using WereViewApp.Models.POCO.IdentityCustomization;
 
-namespace WeReviewApp.Areas.Admin.Controllers {
-    public class NavItemsController : IdentityController<ApplicationDbContext> {
-        public NavItemsController()
-            : base(true) {
+namespace WereViewApp.Areas.Admin.Controllers {
+    public class NavItemsController : Controller {
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
 
-        }
-        private List<NavigationItem> GetItems(int? NavitionID = null) {
+        List<NavigationItem> GetItems(int? NavitionID = null) {
             if (NavitionID == null) {
                 return db.NavigationItems.ToList();
             } else {
                 return db.NavigationItems.Where(n => n.NavigationID == NavitionID).ToList();
             }
         }
-
-        private void AddMenuName(int id) {
+        void AddMenuName(int id) {
             var nav = db.Navigations.Find(id);
             ViewBag.MenuName = nav.Name;
             ViewBag.NavigationID = id;
-        }
 
+        }
         public ActionResult List(int id) {
             AddMenuName(id);
             return View(GetItems(id));
         }
 
-        private void HasDropDownAttr(NavigationItem navigationItem) {
+        void HasDropDownAttr(NavigationItem navigationItem) {
             if (!navigationItem.HasDropDown) {
                 navigationItem.ParentNavigationID = null;
             }
@@ -45,7 +41,8 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View();
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Add(NavigationItem navigationItem) {
             AddMenuName(navigationItem.NavigationID);
             if (ModelState.IsValid) {
@@ -73,7 +70,9 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View(navigationItem);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(NavigationItem navigationItem) {
             ViewBag.Editing = true;
             HasDropDownAttr(navigationItem);
@@ -87,10 +86,9 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View(navigationItem);
         }
 
-      
 
         public ActionResult Delete(int id, int NavigationID) {
-            var navigationItem = db.NavigationItems.Find(id);
+            NavigationItem navigationItem = db.NavigationItems.Find(id);
             db.NavigationItems.Remove(navigationItem);
             db.SaveChanges();
             AddMenuName(NavigationID);
@@ -104,7 +102,5 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             }
             base.Dispose(disposing);
         }
-
-
     }
 }

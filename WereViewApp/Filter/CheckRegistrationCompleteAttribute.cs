@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using WeReviewApp.Modules.Extensions.IdentityExtension;
+using WereViewApp.Modules.Extensions.IdentityExtension;
 
-namespace WeReviewApp.Filter {
+namespace WereViewApp.Filter {
     public class CheckRegistrationCompleteAttribute : ActionFilterAttribute {
         public override void OnActionExecuting(ActionExecutingContext filterContext) {
             var user = filterContext.HttpContext.User;

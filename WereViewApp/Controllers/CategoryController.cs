@@ -3,18 +3,18 @@
 using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Pagination;
-using WeReviewApp.BusinessLogics;
-using WeReviewApp.Modules.Cache;
+using WereViewApp.Modules.Cache;
+using WereViewApp.WereViewAppCommon;
 
 #endregion
 
-namespace WeReviewApp.Controllers {
+namespace WereViewApp.Controllers {
     public class CategoryController : Controller {
         // GET: Category
         private const int MaxNumbersOfPagesShow = 8;
 
         public ActionResult Index() {
-            var alg = new Logics();
+            var alg = new Algorithms();
             var categories = alg.GetCategoryWiseAppsForCategoryPage();
             return View(categories);
         }
@@ -22,7 +22,7 @@ namespace WeReviewApp.Controllers {
         public ActionResult Specific(string slug, int page = 1) {
             //categoryName= Url.de
             if (!string.IsNullOrWhiteSpace(slug)) {
-                var alg = new Logics();
+                var alg = new Algorithms();
                 var pageInfo = new PaginationInfo {
                     ItemsInPage = AppConfig.Setting.PageItems,
                     PageNumber = page

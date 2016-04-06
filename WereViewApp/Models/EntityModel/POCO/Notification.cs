@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WeReviewApp.Models.EntityModel
+namespace WereViewApp.Models.EntityModel
 {
     using System;
     using System.Collections.Generic;
@@ -19,12 +19,7 @@ namespace WeReviewApp.Models.EntityModel
         public byte NotificationTypeID { get; set; }
         public string Message { get; set; }
         public System.DateTime Dated { get; set; }
-        public bool IsSeen { get; set; }
-        public DateTime? SeenDate { get; set; }
-        public bool IsUseDefaultMessage { get; set; }
-        public bool HasClicked { get; set; }
     
         public virtual NotificationType NotificationType { get; set; }
-        public virtual User User { get; set; }
     }
 }

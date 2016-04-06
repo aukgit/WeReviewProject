@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using DevMvcComponent;
 
-namespace WeReviewApp.Modules.Cache {
+namespace WereViewApp.Modules.Cache {
     public class CacheDataInFile {
         #region Fields
 

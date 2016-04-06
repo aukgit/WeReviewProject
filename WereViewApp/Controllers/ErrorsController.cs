@@ -4,7 +4,7 @@ using System.Web.Mvc;
 
 #endregion
 
-namespace WeReviewApp.Controllers {
+namespace WereViewApp.Controllers {
     [OutputCache(CacheProfile = "YearNoParam")]
     public class ErrorsController : Controller {
         // GET: Errors
@@ -18,6 +18,7 @@ namespace WeReviewApp.Controllers {
 
             return View("_" + number);
         }
+
 
         public ActionResult Error_400() {
             return View("_400");

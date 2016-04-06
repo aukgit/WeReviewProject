@@ -1,4 +1,4 @@
-﻿namespace WeReviewApp.Modules.UserError {
+﻿namespace WereViewApp.Modules.UserError {
     public struct MessageConstants {
         #region Register
 

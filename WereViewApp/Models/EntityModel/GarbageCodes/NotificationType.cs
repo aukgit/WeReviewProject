@@ -18,18 +18,14 @@ namespace WereViewApp.Models.EntityModel
         public NotificationType()
         {
             this.Notifications = new HashSet<Notification>();
-            this.NotificationSeens = new HashSet<NotificationSeen>();
         }
     
         public byte NotificationTypeID { get; set; }
         public string TypeName { get; set; }
         public bool IsGood { get; set; }
         public string DefaultMessage { get; set; }
-        public string MessageIconName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Notification> Notifications { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NotificationSeen> NotificationSeens { get; set; }
     }
 }

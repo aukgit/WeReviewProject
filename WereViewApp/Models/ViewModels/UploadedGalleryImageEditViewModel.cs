@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WeReviewApp.Models.ViewModels {
+namespace WereViewApp.Models.ViewModels {
     public class UploadedGalleryImageEditViewModel {
         public long Id { get; set; }
         public string ImageURL { get; set; }

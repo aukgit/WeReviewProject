@@ -5,20 +5,15 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using System.Web.UI;
-using WeReviewApp.Controllers;
-using WeReviewApp.Models.Context;
-using WeReviewApp.Models.POCO.IdentityCustomization;
+using WereViewApp.Models.Context;
+using WereViewApp.Models.POCO.IdentityCustomization;
 
 #endregion
 
-namespace WeReviewApp.Areas.Admin.Controllers {
-    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+namespace WereViewApp.Areas.Admin.Controllers {
+    public class MenuController : Controller {
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
 
-    public class MenuController : IdentityController<ApplicationDbContext> {
-        public MenuController() : base(true){
-                
-        }
         public ActionResult Index() {
             return View(db.Navigations.Include(n => n.NavigationItems).ToList());
         }
@@ -27,7 +22,8 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View();
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Navigation navigation) {
             if (ModelState.IsValid) {
                 db.Navigations.Add(navigation);
@@ -49,7 +45,8 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View(navigation);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(Navigation navigation) {
             if (ModelState.IsValid) {
                 db.Entry(navigation).State = EntityState.Modified;
@@ -60,7 +57,9 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View(navigation);
         }
 
-        [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
             var navigation = db.Navigations.Find(id);
             db.Navigations.Remove(navigation);

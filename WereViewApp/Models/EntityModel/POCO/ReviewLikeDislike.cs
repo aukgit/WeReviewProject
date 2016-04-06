@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WeReviewApp.Models.EntityModel
+namespace WereViewApp.Models.EntityModel
 {
     using System;
     using System.Collections.Generic;

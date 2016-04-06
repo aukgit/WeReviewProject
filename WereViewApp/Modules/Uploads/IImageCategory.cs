@@ -1,4 +1,4 @@
-﻿namespace WeReviewApp.Modules.Uploads {
+﻿namespace WereViewApp.Modules.Uploads {
     public interface IImageCategory {
         string CategoryName { get; set; }
         double Width { get; set; }

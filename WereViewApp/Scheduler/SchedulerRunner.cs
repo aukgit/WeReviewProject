@@ -4,7 +4,7 @@ using FluentScheduler;
 
 #endregion
 
-namespace WeReviewApp.Scheduler {
+namespace WereViewApp.Scheduler {
     public class SchedulerRunner : Registry {
         public SchedulerRunner() {
             // keep the site running in the pool

@@ -2,20 +2,18 @@
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using System.Web.UI;
-using WeReviewApp.BusinessLogics;
-using WeReviewApp.Filter;
-using WeReviewApp.Models.Context;
-using WeReviewApp.Models.POCO.IdentityCustomization;
-using WeReviewApp.Modules.Role;
+using DevMvcComponent;
+using WereViewApp.Filter;
+using WereViewApp.Models.Context;
+using WereViewApp.Models.POCO.IdentityCustomization;
+using WereViewApp.Modules.Role;
 
-namespace WeReviewApp.Areas.Admin.Controllers {
-    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+namespace WereViewApp.Areas.Admin.Controllers {
     public class ConfigController : Controller {
         private readonly DevIdentityDbContext db = new DevIdentityDbContext();
 
         public ActionResult Index() {
-            var id = (byte) 1;
+            byte id = (byte)1;
 
             var coreSetting = db.CoreSettings.Find(id);
             if (coreSetting == null) {
@@ -23,18 +21,21 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             }
             return View(coreSetting);
         }
-
-        [Authorize, CheckRegistrationComplete]
+        [Authorize]
+        [CheckRegistrationComplete]
         public ActionResult CleanSystem() {
+        
             return View();
         }
 
-        [Authorize, HasMinimumRole(MinimumRole = RoleNames.Admin), HttpPost, ValidateAntiForgeryToken]
+        [Authorize]
+        [HasMinimumRole(MinimumRole=RoleNames.Admin)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CleanSystem(string clean) {
             if (!string.IsNullOrEmpty(clean) && clean.Equals("Clean")) {
-                var algorithm = new Logics();
+
                 ViewBag.message = "Every thing is removed successfully.";
-                AppVar.SetErrorStatus("Sorry ! Some went wrong in the server. Please get in touch with developer.");
             }
             return View();
         }
@@ -50,7 +51,8 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return RedirectToAction("Index");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Index(CoreSetting coreSetting, string tab) {
             ViewBag.tab = tab;
 
@@ -65,6 +67,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             AppVar.SetErrorStatus(ViewBag);
             return View(coreSetting);
         }
+
 
         protected override void Dispose(bool disposing) {
             if (disposing) {

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WeReviewApp.Models.EntityModel
+namespace WereViewApp.Models.EntityModel
 {
     using System;
     using System.Collections.Generic;
@@ -17,16 +17,13 @@ namespace WeReviewApp.Models.EntityModel
         public NotificationType()
         {
             this.Notifications = new HashSet<Notification>();
-            this.NotificationSeens = new HashSet<NotificationSeen>();
         }
     
         public byte NotificationTypeID { get; set; }
         public string TypeName { get; set; }
         public bool IsGood { get; set; }
         public string DefaultMessage { get; set; }
-        public string MessageIconName { get; set; }
     
         public virtual ICollection<Notification> Notifications { get; set; }
-        public virtual ICollection<NotificationSeen> NotificationSeens { get; set; }
     }
 }

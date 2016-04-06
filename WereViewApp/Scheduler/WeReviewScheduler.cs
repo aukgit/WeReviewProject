@@ -3,12 +3,13 @@
 using System;
 using System.IO;
 using FluentScheduler;
-using WeReviewApp.Common;
-using WeReviewApp.Modules.Uploads;
+using WereViewApp.Modules.Uploads;
+using WereViewApp.WereViewAppCommon;
+using WereViewApp.WereViewAppCommon.Structs;
 
 #endregion
 
-namespace WeReviewApp.Scheduler {
+namespace WereViewApp.Scheduler {
     internal class WeReviewScheduler : ITask {
         #region ITask Members
 
@@ -19,7 +20,7 @@ namespace WeReviewApp.Scheduler {
                 //string text = DateTime.Now.ToString();
                 //UploadProcessor uploader = new UploadProcessor("");
 
-                //var appPath = uploader.GetCombinePathWithAdditionalRoots();
+                //var appPath = uploader.GetCombinationOfRootAndAdditionalRoot();
 
                 //File.WriteAllText(appPath + "done.txt", text);
             }

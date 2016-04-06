@@ -2,18 +2,19 @@
 
 using System.Web.Mvc;
 using DevMvcComponent.Error;
-using WeReviewApp.Models.Context;
+using WereViewApp.Models.Context;
 
 #endregion
 
-namespace WeReviewApp.Controllers {
+namespace WereViewApp.Controllers {
     //[CompressFilter(Order = 1)]
 
     public abstract class BasicController : Controller {
-        internal readonly ApplicationDbContext db;
         internal ErrorCollector ErrorCollector;
+        internal readonly ApplicationDbContext db;
 
-        protected BasicController() {}
+        protected BasicController() {
+        }
 
         protected BasicController(bool applicationDbContextRequried) {
             if (applicationDbContextRequried) {

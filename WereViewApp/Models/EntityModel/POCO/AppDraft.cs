@@ -1,8 +1,10 @@
 using System;
-using WeReviewApp.Models.EntityModel.Derivables;
+using WereViewApp.Models.EntityModel.Derivables;
 
-namespace WeReviewApp.Models.EntityModel {
-    public class AppDraft : IApp {
+namespace WereViewApp.Models.EntityModel
+{
+    public class AppDraft : IApp
+    {
         public long AppDraftID { get; set; }
         public string AppName { get; set; }
         public byte PlatformID { get; set; }
@@ -22,10 +24,11 @@ namespace WeReviewApp.Models.EntityModel {
         public string Url { get; set; }
 
         public DateTime? ReleaseDate { get; set; }
-        public bool IsMultipleVersion { get; set; }
-        public string TagsDisplay { get; set; }
-        public string SupportedOSVersions { get; set; }
-        public byte? AppOfferTypeID { get; set; }
-        public double? Price { get; set; }
+
+
+
+
+
+
     }
 }

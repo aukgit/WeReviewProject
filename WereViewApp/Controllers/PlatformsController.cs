@@ -2,25 +2,25 @@
 
 using System.Web.Mvc;
 using DevMvcComponent.Pagination;
-using WeReviewApp.BusinessLogics;
-using WeReviewApp.Modules.Cache;
+using WereViewApp.Modules.Cache;
+using WereViewApp.WereViewAppCommon;
 
 #endregion
 
-namespace WeReviewApp.Controllers {
+namespace WereViewApp.Controllers {
     public class PlatformsController : Controller {
         private readonly int MaxNumbersOfPagesShow = 8;
         // GET: 
 
         public ActionResult Index() {
-            var alg = new Logics();
+            var alg = new Algorithms();
             var platforms = alg.GetPlatformWiseAppsForPlatformPage();
             return View(platforms);
         }
 
         public ActionResult Specific(string platformName, int page = 1) {
             if (!string.IsNullOrWhiteSpace(platformName)) {
-                var alg = new Logics();
+                var alg = new Algorithms();
                 var pageInfo = new PaginationInfo {
                     ItemsInPage = AppConfig.Setting.PageItems,
                     PageNumber = page

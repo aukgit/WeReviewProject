@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace WeReviewApp.Models.ViewModels {
+namespace WereViewApp.Models.ViewModels {
     public class DisplayGalleryImages {
-        public Guid GalleryID { get; set; }
+        public Guid  GalleryID { get; set; }
 
         public int Sequence { get; set; }
         public string Title { get; set; }

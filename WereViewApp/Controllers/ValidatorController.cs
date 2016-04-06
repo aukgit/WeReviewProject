@@ -4,17 +4,15 @@ using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
-using System.Web.UI;
-using WeReviewApp.Common;
-using WeReviewApp.Models.EntityModel;
-using WeReviewApp.Modules.DevUser;
-using WeReviewApp.Modules.Session;
-using WeReviewApp.Modules.Validations;
+using WereViewApp.Models.EntityModel;
+using WereViewApp.Modules.DevUser;
+using WereViewApp.Modules.Session;
+using WereViewApp.Modules.Validations;
+using WereViewApp.WereViewAppCommon.Structs;
 
 #endregion
 
-namespace WeReviewApp.Controllers {
-    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+namespace WereViewApp.Controllers {
     public class ValidatorController : Controller {
         #region WereView Validators
 
@@ -35,12 +33,11 @@ namespace WeReviewApp.Controllers {
                 }
                 if (!AppVar.Setting.IsInTestingEnvironment) {
                     if (SessionNames.IsValidationExceed("GetValidUrl", maxTry)) {
-                        return Json(Validator.GetErrorValidationExceedMessage(), JsonRequestBehavior.AllowGet);
-                        // return true;
+                        return Json(Validator.GetErrorValidationExceedMessage(), JsonRequestBehavior.AllowGet); // return true;
                     }
                 }
 
-                if (id.Length >= min && id.Length <= max) {
+                if ((id.Length >= min && id.Length <= max)) {
                     var url = GetFriendlyURLFromString(id);
                     using (var db = new WereViewAppEntities()) {
                         var exist =
@@ -57,14 +54,12 @@ namespace WeReviewApp.Controllers {
             } catch (Exception ex) {
                 AppVar.Mailer.HandleError(ex, "Validate GetValidUrl App Posting");
             }
-            //found e false
-            ReturnValid:
-            return Json(Validator.GetSuccessMessage("App name is valid."), JsonRequestBehavior.AllowGet);
-            // return true;
+        //found e false
+        ReturnValid:
+            return Json(Validator.GetSuccessMessage("App name is valid."), JsonRequestBehavior.AllowGet); // return true;
 
-            ReturnInvalid:
-            return Json(Validator.GetErrorMessage("App name is already exist or not valid."),
-                JsonRequestBehavior.AllowGet);
+        ReturnInvalid:
+            return Json(Validator.GetErrorMessage("App name is already exist or not valid."), JsonRequestBehavior.AllowGet);
         }
 
         #endregion
@@ -85,12 +80,11 @@ namespace WeReviewApp.Controllers {
                 }
                 if (!AppVar.Setting.IsInTestingEnvironment) {
                     if (SessionNames.IsValidationExceed("GetValidUrl")) {
-                        return Json(Validator.GetErrorValidationExceedMessage(), JsonRequestBehavior.AllowGet);
-                        // return true;
+                        return Json(Validator.GetErrorValidationExceedMessage(), JsonRequestBehavior.AllowGet); // return true;
                     }
                 }
 
-                if (id.Length >= min && id.Length <= max) {
+                if ((id.Length >= min && id.Length <= max)) {
                     var url = GetFriendlyURLFromString(id);
                     if (app.Url != null && app.Url.Equals(url)) {
                         goto ReturnValid;
@@ -111,12 +105,11 @@ namespace WeReviewApp.Controllers {
             } catch (Exception ex) {
                 AppVar.Mailer.HandleError(ex, "Validate GetValidUrl App-Editing");
             }
-            //found e false
-            ReturnValid:
-            return Json(Validator.GetSuccessMessage("App name is already exist or not valid."),
-                JsonRequestBehavior.AllowGet); // return true;
+        //found e false
+        ReturnValid:
+            return Json(Validator.GetSuccessMessage("App name is already exist or not valid."), JsonRequestBehavior.AllowGet); // return true;
 
-            ReturnInvalid:
+        ReturnInvalid:
             return Json(Validator.GetErrorMessage("App name is not valid."), JsonRequestBehavior.AllowGet);
         }
 
@@ -152,8 +145,7 @@ namespace WeReviewApp.Controllers {
                     }
                 }
                 const string userPattern = "^([A-Za-z]|[A-Za-z0-9_.]+)$";
-                if (Regex.IsMatch(UserName, userPattern, RegexOptions.Compiled) && UserName.Length >= min &&
-                    UserName.Length <= max) {
+                if (Regex.IsMatch(UserName, userPattern, RegexOptions.Compiled) && (UserName.Length >= min && UserName.Length <= max)) {
                     if (!UserManager.IsUserNameExist(UserName)) {
                         return Json(Validator.GetSuccessMessage(message), JsonRequestBehavior.AllowGet);
                     }
@@ -161,10 +153,12 @@ namespace WeReviewApp.Controllers {
             } catch (Exception ex) {
                 AppVar.Mailer.HandleError(ex, "Validate Username");
             }
-            ReturnInvalid:
+        ReturnInvalid:
             message = "Username already exist or not valid.";
             return Json(Validator.GetErrorMessage(message), JsonRequestBehavior.AllowGet);
         }
+
+
 
         [HttpPost]
         [OutputCache(CacheProfile = "Long", VaryByParam = "Email", VaryByCustom = "byuser")]
@@ -190,8 +184,9 @@ namespace WeReviewApp.Controllers {
                 }
             } catch (Exception ex) {
                 AppVar.Mailer.HandleError(ex, "Validate Email");
+
             }
-            ReturnInvalid:
+        ReturnInvalid:
             return Json(Validator.GetErrorMessage(errorMessage), JsonRequestBehavior.AllowGet);
         }
 

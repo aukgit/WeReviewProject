@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace WeReviewApp.Models.ViewModels {
+namespace WereViewApp.Models.ViewModels {
     public class LoginViewModel {
         [Required]
         [EmailAddress]

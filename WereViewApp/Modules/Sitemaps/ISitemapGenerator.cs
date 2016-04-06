@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace WeReviewApp.Modules.Sitemaps {
+namespace WereViewApp.Modules.Sitemaps {
     public interface ISitemapGenerator {
         XDocument GenerateSiteMap(IEnumerable<ISitemapItem> items);
     }

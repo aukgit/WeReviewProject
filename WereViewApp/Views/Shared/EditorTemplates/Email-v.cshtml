@@ -9,7 +9,7 @@
         description = ViewData.ModelMetadata.Description,
         isValidate = ViewBag.isValidate ?? "false",
         templateName = "email-v",
-        icon = ViewBag.icon ?? FaIcons.EmailO;
+        icon = ViewBag.icon ?? Icons.EmailO;
 
 
     var htmlAttributes = new RouteValueDictionary();
@@ -49,7 +49,7 @@
         htmlAttributes.Add("Value", ViewBag.Value);
     }
     if (ViewBag.icon == null) {
-        ViewBag.icon = FaIcons.EmailO;
+        ViewBag.icon = Icons.EmailO;
     }
     htmlAttributes.Add("title", htmlAttributes["placeholder"]);
 

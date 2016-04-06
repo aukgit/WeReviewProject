@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WeReviewApp.Models.POCO.IdentityCustomization {
+namespace WereViewApp.Models.POCO.IdentityCustomization {
     public class FeedbackCategory {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public byte FeedbackCategoryID { get; set; }
 
+        public byte FeedbackCategoryID { get; set; }
         [Column(TypeName = "VARCHAR")]
         [Required]
         [StringLength(30)]
@@ -15,5 +15,6 @@ namespace WeReviewApp.Models.POCO.IdentityCustomization {
 
         [ForeignKey("FeedbackCategoryID")]
         public ICollection<Feedback> Feedbacks { get; set; }
+
     }
 }

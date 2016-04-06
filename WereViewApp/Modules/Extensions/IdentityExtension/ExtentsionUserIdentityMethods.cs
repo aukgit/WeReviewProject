@@ -2,11 +2,11 @@
 using System.Security.Principal;
 using System.Web;
 using Microsoft.AspNet.Identity;
-using WeReviewApp.Models.POCO.Identity;
-using WeReviewApp.Modules.DevUser;
-using WeReviewApp.Modules.Session;
+using WereViewApp.Models.POCO.Identity;
+using WereViewApp.Modules.DevUser;
+using WereViewApp.Modules.Session;
 
-namespace WeReviewApp.Modules.Extensions.IdentityExtension {
+namespace WereViewApp.Modules.Extensions.IdentityExtension {
     public static class ExtentsionUserIdentityMethods {
         public static long GetUserID(this IIdentity identity) {
             return long.Parse(identity.GetUserId());

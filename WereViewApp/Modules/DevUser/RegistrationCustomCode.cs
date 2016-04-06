@@ -1,7 +1,7 @@
-﻿using WeReviewApp.Models.EntityModel;
-using WeReviewApp.Models.POCO.Identity;
+﻿using WereViewApp.Models.EntityModel;
+using WereViewApp.Models.POCO.Identity;
 
-namespace WeReviewApp.Modules.DevUser {
+namespace WereViewApp.Modules.DevUser {
     public static class RegistrationCustomCode {
         public static void CompletionBefore(long userId, bool getRoleFromRegistration, string role = null) {
         }
@@ -23,8 +23,8 @@ namespace WeReviewApp.Modules.DevUser {
                 db.Users.Add(user);
                 if (db.SaveChanges(user) < 0) {
                     AppVar.Mailer.NotifyDeveloper(
-                        "Can't save user in the WeReviewApp Database. Id maybe already present.",
-                        "Can't save user in the WeReviewApp Database. Id maybe already present.", "Fatal Error");
+                        "Can't save user in the WereViewApp Database. Id maybe already present.",
+                        "Can't save user in the WereViewApp Database. Id maybe already present.", "Fatal Error");
                 } else {
                     UserManager.ClearUserFromSession();
                 }

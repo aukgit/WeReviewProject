@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WeReviewApp.Modules.Type {
+namespace WereViewApp.Modules.Type {
     public class DataTypeSupport {
         /// <summary>
         ///     Returns true type is primitive type or guid or string or datetime.

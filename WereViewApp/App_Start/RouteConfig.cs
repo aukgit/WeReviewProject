@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace WeReviewApp {
+namespace WereViewApp {
     public class RouteConfig {
         public static void RegisterRoutes(RouteCollection routes) {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
@@ -9,7 +9,7 @@ namespace WeReviewApp {
 
             #region Login, Register, Authentication Additional Routes
 
-            const string wereviewappControllers = "WeReviewApp.Controllers";
+            const string wereviewappControllers = "WereViewApp.Controllers";
             const string accountController = "Account";
 
             routes.MapRoute(

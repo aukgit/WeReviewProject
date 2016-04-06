@@ -11,28 +11,28 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
-using WeReviewApp.BusinessLogics;
-using WeReviewApp.Common;
-using WeReviewApp.Filter;
-using WeReviewApp.Models.EntityModel;
-using WeReviewApp.Models.EntityModel.Derivables;
-using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
-using WeReviewApp.Models.EntityModel.Structs;
-using WeReviewApp.Models.ViewModels;
-using WeReviewApp.Modules.DevUser;
-using WeReviewApp.Modules.Uploads;
+using WereViewApp.Filter;
+using WereViewApp.Models.EntityModel;
+using WereViewApp.Models.EntityModel.Derivables;
+using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WereViewApp.Models.EntityModel.Structs;
+using WereViewApp.Models.ViewModels;
+using WereViewApp.Modules.DevUser;
+using WereViewApp.Modules.Uploads;
+using WereViewApp.WereViewAppCommon;
+using WereViewApp.WereViewAppCommon.Structs;
 using FileSys = System.IO.File;
 
 #endregion
 
-namespace WeReviewApp.Controllers {
+namespace WereViewApp.Controllers {
     [Authorize]
     [CheckRegistrationComplete]
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class AppController : AdvanceController {
         #region Declaration
 
-        private readonly Logics _algorithms = new Logics();
+        private readonly Algorithms _algorithms = new Algorithms();
 
         #endregion
 
@@ -41,13 +41,14 @@ namespace WeReviewApp.Controllers {
         public AppController()
             : base(true) {
             ViewBag.controller = ControllerName;
+
         }
 
         #endregion
 
         #region Single App Display Page : site.com/Apps/Apple-8/Games/plant-vs-zombies
-
         /// <summary>
+        /// 
         /// </summary>
         /// <param name="platform"></param>
         /// <param name="platformVersion"></param>
@@ -56,8 +57,7 @@ namespace WeReviewApp.Controllers {
         /// <returns></returns>
         [AllowAnonymous]
         [OutputCache(CacheProfile = "Short", VaryByParam = "platform;platformVersion;category;url")]
-        public async Task<ActionResult> SingleAppDisplay(string platform, float? platformVersion, string category,
-            string url) {
+        public async Task<ActionResult> SingleAppDisplay(string platform, float? platformVersion, string category, string url) {
             var app = _algorithms.GetSingleAppForDisplay(platform, platformVersion, category, url, 30, db);
             if (app != null) {
                 _algorithms.IncreaseViewCount(app, db);
@@ -87,16 +87,16 @@ namespace WeReviewApp.Controllers {
                 var fileName = WereViewStatics.UProcessorGallery.GetOrganizeName(gallery, true);
                 var absPath =
                     WereViewStatics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(
-                        WereViewStatics.UProcessorGallery.GetCombinePathWithAdditionalRoots() + fileName);
-                if (FileSys.Exists(absPath)) {
-                    FileSys.Delete(absPath);
+                        WereViewStatics.UProcessorGallery.GetCombinationOfRootAndAdditionalRoot() + fileName);
+                if (System.IO.File.Exists(absPath)) {
+                    System.IO.File.Delete(absPath);
                 }
 
                 absPath =
                     WereViewStatics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(
-                        WereViewStatics.UProcessorGallery.GetCombinePathWithAdditionalRoots() + fileName);
-                if (FileSys.Exists(absPath)) {
-                    FileSys.Delete(absPath);
+                        WereViewStatics.UProcessorGallery.GetCombinationOfRootAndAdditionalRoot() + fileName);
+                if (System.IO.File.Exists(absPath)) {
+                    System.IO.File.Delete(absPath);
                 }
 
                 ResetSessionForUploadSequence(uploadGuid);
@@ -126,28 +126,26 @@ namespace WeReviewApp.Controllers {
                        WereViewStatics.UProcessorGallery.AdditionalRoots;
 
             var uploadedImages = db.Galleries
-                                   .Where(
-                                       n =>
-                                           n.GalleryCategoryID == GalleryCategoryIDs.AppPageGallery &&
-                                           n.UploadGuid == app.UploadGuid)
-                                   .OrderBy(n => n.Sequence)
-                                   .AsEnumerable()
-                                   .Select(n => new UploadedGalleryImageEditViewModel {
-                                       Tile = n.Title,
-                                       Subtitle = n.Subtitle,
-                                       Sequence = n.Sequence,
-                                       UploadGuid = n.UploadGuid,
-                                       Id = app.AppID,
-                                       ImageURL = path + UploadProcessor.GetOrganizeNameStatic(n, true, false, ""),
-                                       DeleteURL = "/" + ControllerName +
-                                                   "/DeleteGalleryImage?uploadGuid=" + n.UploadGuid +
-                                                   "&sequence=" + n.Sequence +
-                                                   "&__RequestVerificationToken=" + token
-                                       //ReUploadURL = "/" + _controllerName +
-                                       //"/ReuploadGalleryImage?uploadGuid=" + n.UploadGuid +
-                                       //"&sequence=" + n.Sequence +
-                                       //"&__RequestVerificationToken=" + token
-                                   }).ToList();
+                .Where(n => n.GalleryCategoryID == GalleryCategoryIDs.AppPageGallery && n.UploadGuid == app.UploadGuid)
+                .OrderBy(n => n.Sequence)
+                .AsEnumerable()
+                .Select(n => new UploadedGalleryImageEditViewModel {
+                    Tile = n.Title,
+                    Subtitle = n.Subtitle,
+                    Sequence = n.Sequence,
+                    UploadGuid = n.UploadGuid,
+                    Id = app.AppID,
+                    ImageURL = path + UploadProcessor.GetOrganizeNameStatic(n, true, false, ""),
+                    DeleteURL = "/" + ControllerName +
+                                "/DeleteGalleryImage?uploadGuid=" + n.UploadGuid +
+                                "&sequence=" + n.Sequence +
+                                "&__RequestVerificationToken=" + token
+                    //ReUploadURL = "/" + _controllerName +
+                    //"/ReuploadGalleryImage?uploadGuid=" + n.UploadGuid +
+                    //"&sequence=" + n.Sequence +
+                    //"&__RequestVerificationToken=" + token
+                }).ToList();
+
 
             return View(uploadedImages);
         }
@@ -247,7 +245,7 @@ namespace WeReviewApp.Controllers {
                     break;
             }
             if (app != null) {
-                app.AppName = Logics.GetAllUpperCaseTitle(app.AppName);
+                app.AppName = Algorithms.GetAllUpperCaseTitle(app.AppName);
             }
             var changes = db.SaveChanges(app);
             if (changes > 0) {
@@ -368,7 +366,7 @@ namespace WeReviewApp.Controllers {
                                 // creating tag
                                 // if tag not exist in the database then create one.
                                 tagFromDatabase = new Tag {
-                                    TagDisplay = Logics.GetAllUpperCaseTitle(tag.Trim())
+                                    TagDisplay = Algorithms.GetAllUpperCaseTitle(tag.Trim())
                                 };
                                 db2.Tags.Add(tagFromDatabase);
                             }
@@ -403,7 +401,7 @@ namespace WeReviewApp.Controllers {
 
         #region Details
 
-        public ActionResult Details(long id) {
+        public ActionResult Details(Int64 id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -519,7 +517,7 @@ namespace WeReviewApp.Controllers {
             rApp.AppName = appDraft.AppName;
             rApp.CategoryID = appDraft.CategoryID;
             rApp.PlatformID = appDraft.PlatformID;
-            rApp.PlatformVersion = (double) appDraft.PlatformVersion;
+            rApp.PlatformVersion = (double)appDraft.PlatformVersion;
             rApp.Description = appDraft.Description;
             rApp.PostedByUserID = appDraft.PostedByUserID;
             rApp.IsVideoExist = appDraft.IsVideoExist == true;
@@ -569,7 +567,7 @@ namespace WeReviewApp.Controllers {
         /// </summary>
         /// <param name="app"></param>
         private void SaveVirtualFields(App app) {
-            var alg = new Logics();
+            var alg = new Algorithms();
             alg.SaveVirtualFields(app);
         }
 
@@ -583,7 +581,7 @@ namespace WeReviewApp.Controllers {
         /// <param name="app"></param>
         /// <returns></returns>
         private App ReadVirtualFields(App app) {
-            var alg = new Logics();
+            var alg = new Algorithms();
             return alg.ReadVirtualFields(app);
         }
 
@@ -601,6 +599,7 @@ namespace WeReviewApp.Controllers {
             }
             return str;
         }
+
 
         /// <summary>
         ///     Fix youtube link
@@ -646,8 +645,7 @@ namespace WeReviewApp.Controllers {
         /// </summary>
         /// <param name="app"></param>
         private void AddNecessaryBothOnPostingNEditing(App app) {
-            app.Url = _algorithms.GenerateHyphenUrlStringValid(app.PlatformVersion, app.CategoryID, app.AppName,
-                app.PlatformID, db,
+            app.Url = _algorithms.GenerateHyphenUrlStringValid(app.PlatformVersion, app.CategoryID, app.AppName, app.PlatformID, db,
                 app.AppID);
             app.UrlWithoutEscapseSequence = _algorithms.GetUrlStringExceptEscapeSequence(app.Url);
             app.PostedByUserID = UserManager.GetLoggedUserId();
@@ -670,7 +668,7 @@ namespace WeReviewApp.Controllers {
             }
         }
 
-        public void GetDropDowns(long id) {
+        public void GetDropDowns(Int64 id) {
             ViewBag.CategoryID = new SelectList(db.Categories.ToList(), "CategoryID", "CategoryName");
             ViewBag.PlatformID = new SelectList(db.Platforms.ToList(), "PlatformID", "PlatformName");
         }
@@ -786,13 +784,13 @@ namespace WeReviewApp.Controllers {
                 max =
                     db.Galleries.Where(
                         n => n.UploadGuid == uploadGuid && n.GalleryCategoryID == GalleryCategoryIDs.AppPageGallery)
-                      .Max(n => n.Sequence);
+                        .Max(n => n.Sequence);
             }
 
             max += 2;
             Session[uploadGuid.ToString()] = max;
             max -= 1;
-            return (byte) max;
+            return (byte)max;
         }
 
         private int GetHowManyGalleryImageExist(Guid uploadGuid) {
@@ -813,6 +811,7 @@ namespace WeReviewApp.Controllers {
             max =
                 db.Galleries.Count(
                     n => n.UploadGuid == uploadGuid && n.GalleryCategoryID == GalleryCategoryIDs.AppPageGallery);
+
 
             max += 2;
             Session[sessionName] = max;
@@ -836,7 +835,7 @@ namespace WeReviewApp.Controllers {
 
                 if (nextCount > AppVar.Setting.GalleryMaxPictures) {
                     ResetSessionForUploadSequence(app.UploadGuid);
-                    return Json(new {isUploaded = false, uploadedFiles = 0, message = "You are out of your limit."},
+                    return Json(new { isUploaded = false, uploadedFiles = 0, message = "You are out of your limit." },
                         "text/html");
                 }
                 var fileName = app.UploadGuid.ToString();
@@ -865,6 +864,7 @@ namespace WeReviewApp.Controllers {
 
                         //upload app-details page gallery image
                         WereViewStatics.UProcessorGallery.UploadFile(file, fileName, nextSequence, true, true);
+
 
                         //successfully uploaded now save a gallery info
                         var galleryCategory = await db.GalleryCategories.FindAsync(GalleryCategoryIDs.AppPageGallery);
@@ -904,6 +904,7 @@ namespace WeReviewApp.Controllers {
                         // resize
                         //new Thread(() => {
 
+
                         // resize app-details page gallery image
 
                         WereViewStatics.UProcessorGallery.ResizeImageAndProcessImage(gallery, galleryCategory);
@@ -915,6 +916,7 @@ namespace WeReviewApp.Controllers {
                         // #apps detail page gallery thumbs generate
                         //WereViewStatics.uProcessorGallery.ResizeImageAndProcessImage(source, target, thumbsCategory.Width,
                         //    thumbsCategory.Height, gallery.Extension);
+
 
                         var source = "~/Uploads/Images/" + CommonVars.AdditionalRootGalleryLocation +
                                      UploadProcessor.GetOrganizeNameStatic(gallery, true, true);
@@ -936,7 +938,7 @@ namespace WeReviewApp.Controllers {
                             message = "+" + countUploaded + " files successfully done."
                         }, "text/html");
             }
-            return Json(new {isUploaded = false, uploadedFiles = 0, message = "No file send."}, "text/html");
+            return Json(new { isUploaded = false, uploadedFiles = 0, message = "No file send." }, "text/html");
         }
 
         #region Process Similar Uploads
@@ -982,9 +984,9 @@ namespace WeReviewApp.Controllers {
                     uploadProcessorSepecific.RemoveTempImage(gallery);
                     //}).Start();
                 }
-                return Json(new {isUploaded = true, message = "successfully done"}, "text/html");
+                return Json(new { isUploaded = true, message = "successfully done" }, "text/html");
             }
-            return Json(new {isUploaded = false, message = "No file send."}, "text/html");
+            return Json(new { isUploaded = false, message = "No file send." }, "text/html");
         }
 
         #endregion
@@ -1048,7 +1050,7 @@ namespace WeReviewApp.Controllers {
 
         #region Edit or modify record
 
-        public ActionResult Edit(long id) {
+        public ActionResult Edit(Int64 id) {
             var app = _algorithms.GetEditingApp(id, db);
 
             if (app == null) {
@@ -1060,6 +1062,7 @@ namespace WeReviewApp.Controllers {
             ReadVirtualFields(app);
             return View(app);
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

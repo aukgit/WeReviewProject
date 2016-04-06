@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace WeReviewApp.Modules.Extensions {
+namespace WereViewApp.Modules.Extensions {
     public static class GraphApiExtension {
         public static string GenerateAppSecretProof(this String accessToken) {
             //Creates a Facebook appsecret_proof value to be used for each graph api call when appsecret_proof has been enabled for the facebook app

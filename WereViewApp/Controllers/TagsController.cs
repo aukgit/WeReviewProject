@@ -1,32 +1,31 @@
 ﻿using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.UI;
 using DevMvcComponent.Pagination;
-using WeReviewApp.BusinessLogics;
+using WereViewApp.WereViewAppCommon;
 
-namespace WeReviewApp.Controllers {
-    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+namespace WereViewApp.Controllers {
     public class TagsController : AdvanceController {
-        // GET: Tags
-        private const int MaxNumbersOfPagesShow = 8;
-
         #region Declarations
 
-        private readonly Logics _algorithms = new Logics();
+        private readonly Algorithms _algorithms = new Algorithms();
 
         #endregion
 
         #region Constructors
 
         public TagsController()
-            : base(true) {}
+            : base(true) {
+        }
 
         #endregion
+        // GET: Tags
+        private const int MaxNumbersOfPagesShow = 8;
 
         //[OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         //[OutputCache(CacheProfile = "Hour", VaryByParam = "*")]
         public ActionResult Index(int page = 1) {
+
             ViewBag.Title = "Mobile Applications Tags";
             ViewBag.Meta = "Tags , Mobile apps, apps review, apple apps, android apps,reviews, app review site, " +
                            ViewBag.Title;
@@ -48,7 +47,6 @@ namespace WeReviewApp.Controllers {
         //public ActionResult GetTagDetail(string id, int page = 1) {
         //ViewBag.Title = "Mobile Applications Tags";
         //ViewBag.Meta = "Tags , Mobile apps, apps review, apple apps, android apps,reviews, app review site, " +
-
         //               ViewBag.Title;
         //ViewBag.Keywords = ViewBag.Meta;
         //var cacheName = "Tags.GetTagDetail." + id;

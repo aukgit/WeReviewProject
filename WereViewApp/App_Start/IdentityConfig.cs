@@ -1,5 +1,5 @@
-﻿using WeReviewApp.Models.Context;
-using WeReviewApp.Models.POCO.Identity;
+﻿using WereViewApp.Models.Context;
+using WereViewApp.Models.POCO.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -7,7 +7,7 @@ using SendGrid;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace WeReviewApp {
+namespace WereViewApp {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<ApplicationUser, long> {
 

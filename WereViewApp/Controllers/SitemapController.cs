@@ -4,15 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using WeReviewApp.BusinessLogics;
-using WeReviewApp.Common;
-using WeReviewApp.Models.EntityModel;
-using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
-using WeReviewApp.Modules.Sitemaps;
+using WereViewApp.Models.EntityModel;
+using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WereViewApp.Modules.Sitemaps;
+using WereViewApp.WereViewAppCommon;
 
 #endregion
 
-namespace WeReviewApp.Controllers {
+namespace WereViewApp.Controllers {
     [OutputCache(CacheProfile = "Day", VaryByCustom = "none")]
     public class SitemapController : Controller {
         // GET: Sitemap
@@ -34,13 +33,12 @@ namespace WeReviewApp.Controllers {
                 new SitemapItem(appUrl + "/sitemap", modifiedDate, SitemapChangeFrequency.Daily)
                 //new SitemapItem(appUrl+"/Sitemap.xml",modifiedDate, SitemapChangeFrequency.Daily),
             };
-            var algorithms = new Logics();
+            var algorithms = new Algorithms();
             using (var db = new WereViewAppEntities()) {
                 var max = db.FeaturedImages.Count();
                 var homePageGalleryApps = algorithms.GetHomePageGalleryImages(db, max);
 
-                sitemapItems.AddRange(
-                    homePageGalleryApps.Select(app => new SitemapItem(app.GetAbsoluteUrl(), modifiedDate)));
+                sitemapItems.AddRange(homePageGalleryApps.Select(app => new SitemapItem(app.GetAbsoluteUrl(), modifiedDate)));
 
                 var latestApps = algorithms.GetLatestApps(db, 50);
                 if (latestApps != null) {
@@ -52,6 +50,7 @@ namespace WeReviewApp.Controllers {
                     sitemapItems.AddRange(topApps.Select(app => new SitemapItem(app.GetAbsoluteUrl(), modifiedDate)));
                 }
 
+
                 var categories = WereViewStatics.AppCategoriesCache;
                 sitemapItems.AddRange(
                     categories.Select(
@@ -61,6 +60,7 @@ namespace WeReviewApp.Controllers {
                 sitemapItems.AddRange(
                     top30Developers.Select(
                         developer => new SitemapItem(appUrl + "/profiles/" + developer, modifiedDate)));
+
             }
 
             return new SitemapResult(sitemapItems);

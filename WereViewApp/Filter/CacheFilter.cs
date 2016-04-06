@@ -4,7 +4,7 @@ using System;
 using System.Web;
 using System.Web.Mvc;
 
-namespace WeReviewApp.Filter {
+namespace WereViewApp.Filter {
 
     public class CacheFilterAttribute : ActionFilterAttribute {
         /// <summary>

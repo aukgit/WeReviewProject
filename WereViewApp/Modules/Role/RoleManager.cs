@@ -6,12 +6,12 @@ using System.Web;
 using DevMvcComponent;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using WeReviewApp.Models.Context;
-using WeReviewApp.Models.POCO.Identity;
-using WeReviewApp.Models.POCO.IdentityCustomization;
-using WeReviewApp.Modules.DevUser;
+using WereViewApp.Models.Context;
+using WereViewApp.Models.POCO.Identity;
+using WereViewApp.Models.POCO.IdentityCustomization;
+using WereViewApp.Modules.DevUser;
 
-namespace WeReviewApp.Modules.Role {
+namespace WereViewApp.Modules.Role {
     /// <summary>
     ///     Developers Organism Role Manager
     /// </summary>

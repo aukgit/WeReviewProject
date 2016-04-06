@@ -1,4 +1,4 @@
-﻿@model WeReviewApp.Models.POCO.IdentityCustomization.Navigation
+﻿@model WereViewApp.Models.POCO.IdentityCustomization.Navigation
 
 @{
     ViewBag.Title = "Creating Navigation";
@@ -8,7 +8,7 @@
 }
 
 
-@Html.SamePageLinkWithIcon(title, subtitle, FaIcons.Plus)
+@Html.SamePageLinkWithIcon(title, subtitle, Icons.Plus)
 <hr />
 @using (Html.BeginForm("Create", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) 
 {

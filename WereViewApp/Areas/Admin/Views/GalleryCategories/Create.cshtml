@@ -1,4 +1,4 @@
-﻿@model WeReviewApp.Models.EntityModel.GalleryCategory
+﻿@model WereViewApp.Models.EntityModel.GalleryCategory
 
 @{
     ViewBag.Title = "Creating GalleryCategory";
@@ -11,7 +11,7 @@
 }
 
 
-@Html.SamePageLinkWithIcon(title, title, FaIcons.Plus)
+@Html.SamePageLinkWithIcon(title, title, Icons.Plus)
 
 <hr />
 @using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) 

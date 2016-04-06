@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using DevMvcComponent.Error;
 using Newtonsoft.Json;
-using WeReviewApp.Modules.Message;
+using WereViewApp.Modules.Message;
 
-namespace WeReviewApp.Modules.Validations {
+namespace WereViewApp.Modules.Validations {
     public abstract class Validator {
         protected ErrorCollector ErrorCollector;
         protected delegate bool RunValidation();

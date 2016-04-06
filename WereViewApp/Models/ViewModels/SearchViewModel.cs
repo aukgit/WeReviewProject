@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using WeReviewApp.Models.EntityModel;
+using WereViewApp.Models.EntityModel;
 
-namespace WeReviewApp.Models.ViewModels {
+namespace WereViewApp.Models.ViewModels {
     public class SearchViewModel {
         public string DisplayStringToUser { get; set; }
         public string SearchQuery { get; set; }
@@ -11,5 +11,6 @@ namespace WeReviewApp.Models.ViewModels {
         public bool IsAppExist {
             get { return FoundApps != null && FoundApps.Count > 0; }
         }
+
     }
 }

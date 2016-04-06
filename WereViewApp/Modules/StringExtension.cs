@@ -1,4 +1,4 @@
-﻿namespace WeReviewApp.Modules {
+﻿namespace WereViewApp.Modules {
     public static class StringExtension {
         /// <summary>
         ///     Split the string into pieces.

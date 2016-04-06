@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web;
 
-namespace WeReviewApp.Modules.Reponse {
+namespace WereViewApp.Modules.Reponse {
     public class RemoveETagModule : IHttpModule {
         public void Dispose() {
         }

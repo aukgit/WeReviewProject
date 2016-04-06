@@ -4,13 +4,14 @@ using System.Web;
 using DevMvcComponent;
 using ImageResizer;
 
-namespace WeReviewApp.Modules.Uploads {
+namespace WereViewApp.Modules.Uploads {
     public class UploadProcessor {
         private static readonly string AppPath = AppDomain.CurrentDomain.BaseDirectory;
 
         /// <summary>
         /// </summary>
-        /// <param name="additionalRoot">should contain slash. use : "~/Uploads/Images/" + AdditionalRoot</param>
+        /// <param name="AdditionalRoot">should contain slash. use : "~/Uploads/Images/" + AdditionalRoot</param>
+        /// <param name="additionalRoot"></param>
         public UploadProcessor(string additionalRoot) {
             AdditionalRoots = additionalRoot;
             RootPath = "~/Uploads/Images/";
@@ -48,7 +49,7 @@ namespace WeReviewApp.Modules.Uploads {
         ///     no ~ telda is included.
         /// </summary>
         /// <returns></returns>
-        public string GetCombinePathWithAdditionalRoots() {
+        public string GetCombinationOfRootAndAdditionalRoot() {
             return RootPath.Remove(0, 1) + AdditionalRoots;
         }
 
@@ -129,7 +130,7 @@ namespace WeReviewApp.Modules.Uploads {
             }
 
             rootPath += additinalPathWithRoot;
-            //root/private/addition path
+            //root/private/additionpath
             if (fileName == null) {
                 fileName = GetFilename(submittedFile);
             }
@@ -234,15 +235,6 @@ namespace WeReviewApp.Modules.Uploads {
                 return abs.Replace("/", "\\");
             }
             return virtualPath;
-        }
-
-        /// <summary>
-        /// Path will have a slash at the end.
-        /// </summary>
-        /// <returns></returns>
-        public string GetAbsolutePath() {
-            var absolutePath = VirtualPathtoAbsoluteServerPath(GetCombinePathWithAdditionalRoots());
-            return absolutePath;
         }
 
         /// <summary>

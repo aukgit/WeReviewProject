@@ -7,15 +7,16 @@ using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Enums;
 using FontAwesomeIcons;
-using WeReviewApp.Models.POCO.IdentityCustomization;
-using WeReviewApp.Modules.Cache;
-using WeReviewApp.Modules.DevUser;
-using WeReviewApp.Modules.Mail;
-using WeReviewApp.Modules.Menu;
-using WeReviewApp.Modules.TimeZone;
-using WeReviewApp.Modules.Uploads;
+using WereViewApp.Models.POCO.IdentityCustomization;
+using WereViewApp.Modules.Cache;
+using WereViewApp.Modules.Constants;
+using WereViewApp.Modules.DevUser;
+using WereViewApp.Modules.Mail;
+using WereViewApp.Modules.Menu;
+using WereViewApp.Modules.TimeZone;
+using WereViewApp.Modules.Uploads;
 
-namespace WeReviewApp.Helpers {
+namespace WereViewApp.Helpers {
     public static class HtmlHelpers {
         private const string Selected = "selected='selected'";
         public static int TruncateLength = AppConfig.TruncateLength;
@@ -64,9 +65,8 @@ namespace WeReviewApp.Helpers {
         public static HtmlString RouteListItemGenerate(this HtmlHelper helper, string area, string display,
             string controller, string currentController) {
             var addClass = " class='active' ";
-            if (controller != currentController) {
+            if (controller != currentController)
                 addClass = "";
-            }
             var markup = string.Format("<li{0}><a href='{1}'>{2}</a></li>", addClass, "/" + area + "/" + controller,
                 display);
             //return  new HtmlString(markup);
@@ -75,31 +75,9 @@ namespace WeReviewApp.Helpers {
 
         #endregion
 
-        #region jQueryMobile Options
-
-        /// <summary>
-        ///     JqueryMobile BackButton
-        /// </summary>
-        /// <param name="helper"></param>
-        /// <param name="buttonName"></param>
-        /// <param name="icon"></param>
-        /// <returns></returns>
-        public static HtmlString BackButton(this HtmlHelper helper, string buttonName = "Back", bool isMini = false,
-            string icon = "arrow-l") {
-            var mini = isMini
-                ? "data-mini='true'"
-                : "";
-            var backbtn = "<a href='#' data-role='button' class = 'back-button' data-rel='back' data_icon='" + icon +
-                          "' " + mini + " >" + buttonName + "</a>";
-            return new HtmlString(backbtn);
-        }
-
-        #endregion
-
         #region Confirming Buttons
-
         /// <summary>
-        ///     Confirms before submit.
+        /// Confirms before submit.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="buttonName"></param>
@@ -107,14 +85,14 @@ namespace WeReviewApp.Helpers {
         /// <returns></returns>
         public static HtmlString ConfirmingSubmitButton(this HtmlHelper helper, string buttonName = "Save",
             string alertMessage = "Are you sure about this action?") {
-            var sendbtn = string.Format(
+            var sendbtn = String.Format(
                 "<input type=\"submit\" value=\"{0}\" onClick=\"return confirm('{1}');\" />",
                 buttonName, alertMessage);
             return new HtmlString(sendbtn);
         }
 
         /// <summary>
-        ///     Renders a submit button with icon.
+        /// Renders a submit button with icon.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="buttonName"></param>
@@ -138,19 +116,19 @@ namespace WeReviewApp.Helpers {
             } else {
                 rightIcon = string.Format(iconFormt, iconClass);
             }
-            var buttonHtml = string.Format(
+            var buttonHtml = String.Format(
                 "<button type=\"{0}\"  title=\"{1}\" class=\"{2}\">{3} {4} {5}</button>",
                 btnType, tooltip, additionalClasses, leftIcon, buttonName, rightIcon);
             return new HtmlString(buttonHtml);
         }
 
         public static HtmlString SubmitButtonIconRight(this HtmlHelper helper, string buttonName = "Submit",
-            string iconClass = "fa fa-floppy-o",
-            string tooltip = "",
-            string additionalClasses = "btn btn-success",
-            bool placeIconLeft = false,
-            string btnType = "Submit"
-            ) {
+           string iconClass = "fa fa-floppy-o",
+           string tooltip = "",
+           string additionalClasses = "btn btn-success",
+           bool placeIconLeft = false,
+           string btnType = "Submit"
+           ) {
             return SubmitButton(helper, buttonName,
                 iconClass,
                 tooltip,
@@ -160,12 +138,12 @@ namespace WeReviewApp.Helpers {
         }
 
         public static HtmlString EmailButtonIconRight(this HtmlHelper helper, string buttonName = "Send",
-            string iconClass = FaIcons.EmailO,
-            string tooltip = "",
-            string additionalClasses = "btn btn-success",
-            bool placeIconLeft = false,
-            string btnType = "Submit"
-            ) {
+          string iconClass = Icons.EmailO,
+          string tooltip = "",
+          string additionalClasses = "btn btn-success",
+          bool placeIconLeft = false,
+          string btnType = "Submit"
+          ) {
             return SubmitButton(helper, buttonName,
                 iconClass,
                 tooltip,
@@ -175,7 +153,7 @@ namespace WeReviewApp.Helpers {
         }
 
         /// <summary>
-        ///     Renders a remove button with icon.
+        /// Renders a remove button with icon.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="buttonName"></param>
@@ -193,13 +171,11 @@ namespace WeReviewApp.Helpers {
             string additionalClasses = "btn btn-danger") {
             return SubmitButton(helper, buttonName, iconClass, tooltip, btnType, placeIconLeft, additionalClasses);
         }
-
         #endregion
 
         #region Null checker
-
         /// <summary>
-        ///     Returns true if all of the given parameter objects are null.
+        /// Returns true if all of the given parameter objects are null.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="objs"></param>
@@ -210,10 +186,9 @@ namespace WeReviewApp.Helpers {
             }
             return objs.All(n => n == null);
         }
-
         /// <summary>
-        ///     Returns true if any of the given object is not null.
-        ///     Does follow given parameter order.
+        /// Returns true if any of the given object is not null.
+        /// Does follow given parameter order.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="objs"></param>
@@ -224,13 +199,32 @@ namespace WeReviewApp.Helpers {
             }
             return false;
         }
+        #endregion
+
+        #region jQueryMobile Options
+
+        /// <summary>
+        ///     JqueryMobile BackButton
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="buttonName"></param>
+        /// <param name="icon"></param>
+        /// <returns></returns>
+        public static HtmlString BackButton(this HtmlHelper helper, string buttonName = "Back", bool isMini = false,
+            string icon = "arrow-l") {
+            var mini = (isMini)
+                ? "data-mini='true'"
+                : "";
+            var backbtn = "<a href='#' data-role='button' class = 'back-button' data-rel='back' data_icon='" + icon +
+                          "' " + mini + " >" + buttonName + "</a>";
+            return new HtmlString(backbtn);
+        }
 
         #endregion
 
         #region Drop Downs:  General, Country
 
         #region Country
-
         /// <summary>
         /// </summary>
         /// <param name="countries"></param>
@@ -254,7 +248,6 @@ namespace WeReviewApp.Helpers {
             sb.AppendLine("</select>");
             return sb.ToString();
         }
-
         /// <summary>
         /// </summary>
         /// <param name="helper"></param>
@@ -339,9 +332,8 @@ namespace WeReviewApp.Helpers {
         #region Truncates
 
         public static string Truncate(this HtmlHelper helper, string input, int? length, bool isShowElipseDot = true) {
-            if (string.IsNullOrEmpty(input)) {
+            if (string.IsNullOrEmpty(input))
                 return "";
-            }
             if (length == null) {
                 length = TruncateLength;
             }
@@ -355,9 +347,8 @@ namespace WeReviewApp.Helpers {
         }
 
         public static string Truncate(this HtmlHelper helper, string input, int starting, int length) {
-            if (string.IsNullOrEmpty(input)) {
+            if (string.IsNullOrEmpty(input))
                 return "";
-            }
             if (length == -1) {
                 length = input.Length;
             }
@@ -372,9 +363,8 @@ namespace WeReviewApp.Helpers {
         }
 
         public static bool IsTruncateNeeded(this HtmlHelper helper, string input, int mid) {
-            if (string.IsNullOrEmpty(input)) {
+            if (string.IsNullOrEmpty(input))
                 return false;
-            }
             if (input.Length > mid) {
                 return false;
             }
@@ -400,7 +390,7 @@ namespace WeReviewApp.Helpers {
         }
 
         /// <summary>
-        ///     Generates same page url anchor with an icon left or right
+        /// Generates same page url anchor with an icon left or right
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="linkName">Link display name</param>
@@ -427,16 +417,10 @@ namespace WeReviewApp.Helpers {
             }
             if (isLeft) {
                 //left icon
-                markup =
-                    string.Format(
-                        "<div class='header-margin-space-type-1'><a href='{0}' class='{1}' title='{2}'>{4} {3}</a></div>",
-                        uri, addClass, title, linkName, icon);
+                markup = string.Format("<div class='header-margin-space-type-1'><a href='{0}' class='{1}' title='{2}'>{4} {3}</a></div>", uri, addClass, title, linkName, icon);
             } else {
                 //right icon
-                markup =
-                    string.Format(
-                        "<div class='header-margin-space-type-1'><a href='{0}' class='{1}' title='{2}'>{3} {4}</a></div>",
-                        uri, addClass, title, linkName, icon);
+                markup = string.Format("<div class='header-margin-space-type-1'><a href='{0}' class='{1}' title='{2}'>{3} {4}</a></div>", uri, addClass, title, linkName, icon);
             }
             if (h1) {
                 markup = string.Format("<h1 title='{0}' class='h3'>{1}</h1>", title, markup);
@@ -445,12 +429,12 @@ namespace WeReviewApp.Helpers {
         }
 
         public static HtmlString HeaderWithIcon(this HtmlHelper helper,
-            string linkName,
-            string title,
-            string iconClass,
-            bool h1 = true,
-            string addClass = "",
-            bool isLeft = true) {
+           string linkName,
+           string title,
+           string iconClass,
+           bool h1 = true,
+           string addClass = "",
+           bool isLeft = true) {
             var markup = "";
             var icon = "";
             if (!string.IsNullOrEmpty(iconClass)) {
@@ -458,16 +442,10 @@ namespace WeReviewApp.Helpers {
             }
             if (isLeft) {
                 //left icon
-                markup =
-                    string.Format(
-                        "<div class='header-margin-space-type-1'><a class='{1}' title='{2}'>{4} {3}</a></div>", "",
-                        addClass, title, linkName, icon);
+                markup = string.Format("<div class='header-margin-space-type-1'><a class='{1}' title='{2}'>{4} {3}</a></div>", "", addClass, title, linkName, icon);
             } else {
                 //right icon
-                markup =
-                    string.Format(
-                        "<div class='header-margin-space-type-1'><a class='{1}' title='{2}'>{3} {4}</a></div>", "",
-                        addClass, title, linkName, icon);
+                markup = string.Format("<div class='header-margin-space-type-1'><a class='{1}' title='{2}'>{3} {4}</a></div>", "", addClass, title, linkName, icon);
             }
             if (h1) {
                 markup = string.Format("<h1 title='{0}' class='h3'>{1}</h1>", title, markup);
@@ -476,7 +454,7 @@ namespace WeReviewApp.Helpers {
         }
 
         /// <summary>
-        ///     Generates same page url anchor with an icon left or right
+        /// Generates same page url anchor with an icon left or right
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="linkDisplayName">Link display name</param>
@@ -500,7 +478,7 @@ namespace WeReviewApp.Helpers {
             bool h1 = false,
             bool isLeft = true) {
             var markup = "";
-            var uri = "";
+            string uri = "";
             var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
             if (!string.IsNullOrWhiteSpace(controllerName)) {
                 uri = urlHelper.Action(actionName, controllerName, routeValues);
@@ -517,31 +495,27 @@ namespace WeReviewApp.Helpers {
             }
             if (isLeft) {
                 //left icon
-                markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{4} {3}</a>", uri, addClass, title,
-                    linkDisplayName, icon);
+                markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{4} {3}</a>", uri, addClass, title, linkDisplayName, icon);
             } else {
                 //right icon
-                markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{3} {4}</a>", uri, addClass, title,
-                    linkDisplayName, icon);
+                markup = string.Format("<a href='{0}' class='{1}' title='{2}'>{3} {4}</a>", uri, addClass, title, linkDisplayName, icon);
             }
             if (h1) {
                 markup = string.Format("<h1 title='{0}' class='h3'>{1}</h1>", title, markup);
             }
             return new HtmlString(markup);
         }
-
         /// <summary>
-        ///     Returns url without the host name.
-        ///     Slash is included
+        /// Returns url without the host name. 
+        /// Slash is included
         /// </summary>
         /// <param name="helper"></param>
         /// <returns>Returns url without the host name.</returns>
         public static string GetCurrentUrlString(this HtmlHelper helper) {
             return HttpContext.Current.Request.RawUrl;
         }
-
         /// <summary>
-        ///     Returns url whole page url with the host name.
+        /// Returns url whole page url with the host name. 
         /// </summary>
         /// <param name="helper"></param>
         /// <returns>Returns url whole page url with the host name. </returns>
@@ -694,8 +668,8 @@ namespace WeReviewApp.Helpers {
 
         #region Date and Time Display
 
-        private static string GetDefaultTimeZoneFormat(DateTimeFormatType type = DateTimeFormatType.Date,
-            string customFormat = null) {
+
+        private static string GetDefaultTimeZoneFormat(DateTimeFormatType type = DateTimeFormatType.Date, string customFormat = null) {
             string format;
             if (!string.IsNullOrEmpty(customFormat)) {
                 return customFormat;
@@ -725,32 +699,32 @@ namespace WeReviewApp.Helpers {
         }
 
         /// <summary>
-        ///     Returns a date-time using time-zone via TimeZoneSet
+        /// Returns a date-time using time-zone via TimeZoneSet
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="timeZone">Timezone set</param>
         /// <param name="dt"></param>
         /// <param name="formatType">
-        ///     switch (type) {
+        /// switch (type) {
         ///     case DateTimeFormatType.Date:
-        ///     format = "dd-MMM-yyyy";
-        ///     break;
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
         ///     case DateTimeFormatType.DateTimeSimple:
-        ///     format = "dd-MMM-yyyy hh:mm:ss tt";
-        ///     break;
+        ///         format = "dd-MMM-yyyy hh:mm:ss tt";
+        ///         break;
         ///     case DateTimeFormatType.DateTimeFull:
-        ///     format = "MMMM dd, yyyy hh:mm:ss tt";
-        ///     break;
+        ///         format = "MMMM dd, yyyy hh:mm:ss tt";
+        ///         break;
         ///     case DateTimeFormatType.DateTimeShort:
-        ///     format = "d-MMM-yy hh:mm:ss tt";
-        ///     break;
+        ///         format = "d-MMM-yy hh:mm:ss tt";
+        ///         break;
         ///     case DateTimeFormatType.Time:
-        ///     format = "hh:mm:ss tt";
-        ///     break;
+        ///         format = "hh:mm:ss tt";
+        ///         break;
         ///     default:
-        ///     format = "dd-MMM-yyyy";
-        ///     break;
-        ///     }
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
+        /// }
         /// </param>
         /// <param name="customFormat">If anything passed then this format will be used.</param>
         /// <param name="addTimeZoneString">Add timezone string with Date. Eg. 26-Aug-2015 (GMT -07:00)</param>
@@ -767,32 +741,32 @@ namespace WeReviewApp.Helpers {
         }
 
         /// <summary>
-        ///     Returns a date-time using time-zone via UserId
+        /// Returns a date-time using time-zone via UserId
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="userId">User id</param>
         /// <param name="dt"></param>
         /// <param name="formatType">
-        ///     switch (type) {
+        /// switch (type) {
         ///     case DateTimeFormatType.Date:
-        ///     format = "dd-MMM-yyyy";
-        ///     break;
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
         ///     case DateTimeFormatType.DateTimeSimple:
-        ///     format = "dd-MMM-yyyy hh:mm:ss tt";
-        ///     break;
+        ///         format = "dd-MMM-yyyy hh:mm:ss tt";
+        ///         break;
         ///     case DateTimeFormatType.DateTimeFull:
-        ///     format = "MMMM dd, yyyy hh:mm:ss tt";
-        ///     break;
+        ///         format = "MMMM dd, yyyy hh:mm:ss tt";
+        ///         break;
         ///     case DateTimeFormatType.DateTimeShort:
-        ///     format = "d-MMM-yy hh:mm:ss tt";
-        ///     break;
+        ///         format = "d-MMM-yy hh:mm:ss tt";
+        ///         break;
         ///     case DateTimeFormatType.Time:
-        ///     format = "hh:mm:ss tt";
-        ///     break;
+        ///         format = "hh:mm:ss tt";
+        ///         break;
         ///     default:
-        ///     format = "dd-MMM-yyyy";
-        ///     break;
-        ///     }
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
+        /// }
         /// </param>
         /// <param name="customFormat">If anything passed then this format will be used.</param>
         /// <param name="addTimeZoneString">Add timezone string with Date. Eg. 26-Aug-2015 (GMT -07:00)</param>
@@ -809,31 +783,31 @@ namespace WeReviewApp.Helpers {
         }
 
         /// <summary>
-        ///     Returns a date-time using current user.
+        /// Returns a date-time using current user.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="dt"></param>
         /// <param name="formatType">
-        ///     switch (type) {
+        /// switch (type) {
         ///     case DateTimeFormatType.Date:
-        ///     format = "dd-MMM-yyyy";
-        ///     break;
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
         ///     case DateTimeFormatType.DateTimeSimple:
-        ///     format = "dd-MMM-yyyy hh:mm:ss tt";
-        ///     break;
+        ///         format = "dd-MMM-yyyy hh:mm:ss tt";
+        ///         break;
         ///     case DateTimeFormatType.DateTimeFull:
-        ///     format = "MMMM dd, yyyy hh:mm:ss tt";
-        ///     break;
+        ///         format = "MMMM dd, yyyy hh:mm:ss tt";
+        ///         break;
         ///     case DateTimeFormatType.DateTimeShort:
-        ///     format = "d-MMM-yy hh:mm:ss tt";
-        ///     break;
+        ///         format = "d-MMM-yy hh:mm:ss tt";
+        ///         break;
         ///     case DateTimeFormatType.Time:
-        ///     format = "hh:mm:ss tt";
-        ///     break;
+        ///         format = "hh:mm:ss tt";
+        ///         break;
         ///     default:
-        ///     format = "dd-MMM-yyyy";
-        ///     break;
-        ///     }
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
+        /// }
         /// </param>
         /// <param name="customFormat">If anything passed then this format will be used.</param>
         /// <param name="addTimeZoneString">Add timezone string with Date. Eg. 26-Aug-2015 (GMT -07:00)</param>
@@ -850,31 +824,31 @@ namespace WeReviewApp.Helpers {
         }
 
         /// <summary>
-        ///     Returns a date-time using current user.
+        /// Returns a date-time using current user.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="dt"></param>
         /// <param name="formatType">
-        ///     switch (type) {
+        /// switch (type) {
         ///     case DateTimeFormatType.Date:
-        ///     format = "dd-MMM-yyyy";
-        ///     break;
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
         ///     case DateTimeFormatType.DateTimeSimple:
-        ///     format = "dd-MMM-yyyy hh:mm:ss tt";
-        ///     break;
+        ///         format = "dd-MMM-yyyy hh:mm:ss tt";
+        ///         break;
         ///     case DateTimeFormatType.DateTimeFull:
-        ///     format = "MMMM dd, yyyy hh:mm:ss tt";
-        ///     break;
+        ///         format = "MMMM dd, yyyy hh:mm:ss tt";
+        ///         break;
         ///     case DateTimeFormatType.DateTimeShort:
-        ///     format = "d-MMM-yy hh:mm:ss tt";
-        ///     break;
+        ///         format = "d-MMM-yy hh:mm:ss tt";
+        ///         break;
         ///     case DateTimeFormatType.Time:
-        ///     format = "hh:mm:ss tt";
-        ///     break;
+        ///         format = "hh:mm:ss tt";
+        ///         break;
         ///     default:
-        ///     format = "dd-MMM-yyyy";
-        ///     break;
-        ///     }
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
+        /// }
         /// </param>
         /// <param name="customFormat">If anything passed then this format will be used.</param>
         /// <param name="addTimeZoneString">Add timezone string with Date. Eg. 26-Aug-2015 (GMT -07:00)</param>
@@ -889,32 +863,32 @@ namespace WeReviewApp.Helpers {
         }
 
         /// <summary>
-        ///     Returns a date-time without using any timezone.
+        /// Returns a date-time without using any timezone.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="withoutTimezone"></param>
         /// <param name="dt"></param>
         /// <param name="formatType">
-        ///     switch (type) {
+        /// switch (type) {
         ///     case DateTimeFormatType.Date:
-        ///     format = "dd-MMM-yyyy";
-        ///     break;
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
         ///     case DateTimeFormatType.DateTimeSimple:
-        ///     format = "dd-MMM-yyyy hh:mm:ss tt";
-        ///     break;
+        ///         format = "dd-MMM-yyyy hh:mm:ss tt";
+        ///         break;
         ///     case DateTimeFormatType.DateTimeFull:
-        ///     format = "MMMM dd, yyyy hh:mm:ss tt";
-        ///     break;
+        ///         format = "MMMM dd, yyyy hh:mm:ss tt";
+        ///         break;
         ///     case DateTimeFormatType.DateTimeShort:
-        ///     format = "d-MMM-yy hh:mm:ss tt";
-        ///     break;
+        ///         format = "d-MMM-yy hh:mm:ss tt";
+        ///         break;
         ///     case DateTimeFormatType.Time:
-        ///     format = "hh:mm:ss tt";
-        ///     break;
+        ///         format = "hh:mm:ss tt";
+        ///         break;
         ///     default:
-        ///     format = "dd-MMM-yyyy";
-        ///     break;
-        ///     }
+        ///         format = "dd-MMM-yyyy";
+        ///         break;
+        /// }
         /// </param>
         /// <param name="customFormat">If anything passed then this format will be used.</param>
         /// <returns>Returns a data-time without using timezone</returns>
@@ -928,98 +902,7 @@ namespace WeReviewApp.Helpers {
             return dt.HasValue ? dt.Value.ToString(format) : "";
         }
 
-        #endregion
 
-        #region Generate Url Helper
-        /// <summary>
-        /// Returns a new Url Helper based on HttpContext.Current.Request.RequestContext
-        /// </summary>
-        /// <returns></returns>
-        public static UrlHelper GetUrlHelper() {
-            return new UrlHelper(HttpContext.Current.Request.RequestContext);
-        }
-        /// <summary>
-        /// Returns a new Url Helper based on context.Request.RequestContext
-        /// </summary>
-        /// <returns></returns>
-        public static UrlHelper GetUrlHelper(this HttpContext context) {
-            return new UrlHelper(context.Request.RequestContext);
-        }
-        /// <summary>
-        /// Returns a new Url Helper based on HtmlHelper.ViewContext.RequestContext
-        /// </summary>
-        /// <returns></returns>
-        public static UrlHelper GetUrlHelper(this HtmlHelper helper) {
-            return new UrlHelper(helper.ViewContext.RequestContext);
-        }
-        #endregion
-
-        #region Get Uri string or url from UrlHelper
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="urlHelper"></param>
-        /// <param name="actionName"></param>
-        /// <param name="controllerName">Null means current controller.</param>
-        /// <param name="routeValues"></param>
-        /// <returns>Returns null if actionName is empty.</returns>
-        public static string GetUriString(this UrlHelper urlHelper, string actionName, string controllerName = null, object routeValues = null) {
-            string uri = String.Empty;
-            var isControllerEmpty = string.IsNullOrWhiteSpace(controllerName);
-            if (string.IsNullOrEmpty(actionName)) {
-                return null;
-            }
-            if (!isControllerEmpty && routeValues == null) {
-                uri = urlHelper.Action(actionName, controllerName);
-            } else if (!isControllerEmpty) {
-                uri = urlHelper.Action(actionName, controllerName, routeValues);
-            } else if (routeValues != null) {
-                uri = urlHelper.Action(actionName, routeValues);
-            } else {
-                uri = urlHelper.Action(actionName);
-            }
-            return uri;
-        }
-        #endregion
-
-        #region Generate Hidden Fields with url.
-
-        /// <summary>
-        /// Returns hidden input html tags for given actionNames parameter.
-        /// If defaultActionsAdd then must add {"Create", "Edit", "Delete", "Index"} action names internally.
-        /// Ex : Hidden fields ids and names are case sensitive to "ActionName" + "-url"
-        /// </summary>
-        /// <param name="helper"></param>
-        /// <param name="defaultActionsAdd">If true then must add {"Create", "Edit", "Delete", "Index"} these actions with given params</param>
-        /// <param name="controller">Null means current controller.</param>
-        /// <param name="actionNames">Can be null or any action name. If defaultActionsAdd then add default actions {"Create", "Edit", "Delete", "Index"} with it.</param>
-        /// <returns>Finally returns a MvcHtmlString with hidden inputs for given action names. For example : "Create" action will create hidden with Create url and named it as "Create-url" </returns>
-        public static MvcHtmlString GenerateUrlHiddenInputs(this HtmlHelper helper, bool defaultActionsAdd = true, string controller = null, params string[] actionNames) {
-            var urlHelper = helper.GetUrlHelper();
-            List<string> actionNamesList = null;
-            if (defaultActionsAdd) {
-                if (actionNames == null || actionNames.Length == 0) {
-                    actionNamesList = new List<string>(5) {"Create", "Edit", "Delete", "Index"};
-                } else {
-                    actionNamesList = new List<string>(actionNames) {"Create", "Edit", "Delete", "Index"};
-                }
-            } else {
-                actionNamesList = actionNames.ToList();
-            }
-            var sb = new StringBuilder(actionNamesList.Count + 2);
-
-            for (int i = 0; i < actionNamesList.Count; i++) {
-                string actionName = actionNamesList[i],
-                       url = urlHelper.GetUriString(actionName, controller),
-                       id = actionName + "-url" ;
-                sb.Append(string.Format("<input type=\"hidden\" value=\"{0}\" id=\"{1}\" name=\"{1}\" />", url, id));
-            }
-            var mvcHtmlString = new MvcHtmlString(sb.ToString());
-            actionNamesList = null;
-            sb = null;
-            GC.Collect();
-            return mvcHtmlString;
-        }
         #endregion
     }
 }

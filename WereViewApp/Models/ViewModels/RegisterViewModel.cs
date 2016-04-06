@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace WeReviewApp.Models.ViewModels {
+namespace WereViewApp.Models.ViewModels {
     public class RegisterViewModel {
 
         [Required(ErrorMessage = "User name is a required field.")]

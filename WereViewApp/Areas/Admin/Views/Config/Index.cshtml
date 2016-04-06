@@ -8,16 +8,43 @@
     ViewBag.backBtn = @Html.Partial("_BackSave");
     ViewBag.stateMessage = @Html.Partial("_SuccessMessage");
 }
+
+
+
 @using (Html.BeginForm("Index", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
         <h1 class="h2">
-            <span class="@FaIcons.Cogs"></span> @ViewBag.Title
+            <span class="glyphicon glyphicon-pencil"></span> @ViewBag.Title
         </h1>
         <hr />
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.Partial("_Tabs-List")
+
+        <ul class="nav nav-tabs nav-pills make-it-tab" role="tablist">
+            <li class="active">
+                <a href="#basic-tab" role="tab" data-toggle="tab">Basics</a>
+            </li>
+            <li>
+                <a href="#office-tab" role="tab" data-toggle="tab">Office</a>
+            </li>
+            <li>
+                <a href="#email-setup-tab" role="tab" data-toggle="tab">Smtp Setup</a>
+            </li>
+            <li>
+                <a href="#developers-tab" role="tab" data-toggle="tab">Office</a>
+            </li>
+            <li>
+                <a href="#external-logins-tab" role="tab" data-toggle="tab">External Login</a>
+            </li>
+            <li>
+                <a href="#urls-tab" role="tab" data-toggle="tab">Urls</a>
+            </li>
+            <li>
+                <a href="#WeReview-tab" role="tab" data-toggle="tab">Were View App</a>
+            </li>
+        </ul>
         @Html.HiddenFor(n=> n.IsFirstUserFound)
         <div class="tab-content">
             @Html.Partial("_Basic-tab")
@@ -26,11 +53,12 @@
             @Html.Partial("_Email-setup-tab")
             @Html.Partial("_developers-tab")
             @Html.Partial("_External-logins-tab")
-            @Html.Partial("_WeReview-tab")
-            <div class="top-gap"></div>
+            @Html.Partial("_WeReview-tab")           
         </div>
+
     </div>
 }
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

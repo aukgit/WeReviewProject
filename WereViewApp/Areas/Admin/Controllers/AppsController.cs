@@ -1,26 +1,27 @@
 ﻿using System;
+using DevMvcComponent.Pagination;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-using System.Web.UI;
-using DevMvcComponent.Pagination;
-using WeReviewApp.BusinessLogics;
-using WeReviewApp.BusinessLogics.Admin;
-using WeReviewApp.Controllers;
-using WeReviewApp.Models.EntityModel;
-using WeReviewApp.Models.POCO.Identity;
-using WeReviewApp.Models.ViewModels;
-using WeReviewApp.Modules.Extensions;
-using WeReviewApp.Modules.Extensions.IdentityExtension;
-using WeReviewApp.Modules.Mail;
+using WereViewApp.Controllers;
+using WereViewApp.Models.EntityModel;
+using WereViewApp.Models.POCO.Identity;
+using WereViewApp.Models.ViewModels;
+using WereViewApp.WereViewAppCommon;
+using WereViewApp.WereViewAppCommon.Structs;
+using WereViewApp.Modules.Extensions;
+using WereViewApp.Modules.Extensions.IdentityExtension;
+using WereViewApp.Modules.Mail;
 
-namespace WeReviewApp.Areas.Admin.Controllers {
-    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+namespace WereViewApp.Areas.Admin.Controllers {
     public class AppsController : AdvanceController {
+
         public AppsController()
-            : base(true) {}
+            : base(true) {
+
+        }
 
         #region TempData : Get and set from TempData dictionary to perform temporary operations.
 
@@ -33,9 +34,8 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             TempData[TempAppUserKey] = developerUser;
             TempData[TempAppFeaturedKey] = isFeaturedPreviously;
         }
-
         /// <summary>
-        ///     Returns true if app is valid.
+        /// Returns true if app is valid.
         /// </summary>
         /// <param name="app"></param>
         /// <param name="developerUser"></param>
@@ -45,19 +45,18 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             app = TempData[TempAppKey] as App;
             if (app != null) {
                 developerUser = TempData[TempAppUserKey] as ApplicationUser;
-                isFeaturedPreviously = TempData[TempAppFeaturedKey] != null && (bool) TempData[TempAppFeaturedKey];
+                isFeaturedPreviously = TempData[TempAppFeaturedKey] != null && (bool)TempData[TempAppFeaturedKey];
                 return true;
             }
             developerUser = null;
             isFeaturedPreviously = false;
             return false;
         }
-
         #endregion
 
         #region Pagination
-
         /// <summary>
+        /// 
         /// </summary>
         /// <param name="apps"></param>
         /// <param name="paginationUrl">"url/@page"</param>
@@ -72,12 +71,11 @@ namespace WeReviewApp.Areas.Admin.Controllers {
                 PageNumber = page.Value,
             };
             var pagedApps = apps.GetPageData(paginationInfo).ToList();
-            ViewBag.paginationHtml =
-                new MvcHtmlString(Pagination.GetList(paginationInfo, paginationUrl, "Apps of Page : @page"));
+            ViewBag.paginationHtml = new MvcHtmlString(Pagination.GetList(paginationInfo, paginationUrl, "Apps of Page : @page"));
             return pagedApps;
         }
-
         /// <summary>
+        /// 
         /// </summary>
         /// <param name="apps"></param>
         /// <param name="paginationUrl">"url/@page"</param>
@@ -94,11 +92,9 @@ namespace WeReviewApp.Areas.Admin.Controllers {
                 PageNumber = page.Value,
             };
             var pagedApps = apps.GetPageData(paginationInfo).ToList();
-            ViewBag.paginationHtml =
-                new MvcHtmlString(Pagination.GetList(paginationInfo, paginationUrl, "Apps of Page : @page"));
+            ViewBag.paginationHtml = new MvcHtmlString(Pagination.GetList(paginationInfo, paginationUrl, "Apps of Page : @page"));
             return pagedApps;
         }
-
         #endregion
 
         // GET: Admin/AppModerate
@@ -108,12 +104,12 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             }
             List<App> apps;
 
-            var url = this.CurrentControlerAbsoluteUrl() + "?page=@page";
+            string url = this.CurrentControlerAbsoluteUrl() + "?page=@page";
             var query = db.Apps.Include(n => n.User).Include(n => n.FeaturedImages);
 
             if (!string.IsNullOrWhiteSpace(search)) {
                 url += "&search=" + Server.UrlEncode(search);
-                var algorithms = new Logics();
+                var algorithms = new Algorithms();
                 query = algorithms.GetSimpleAppSearchResults(query, search);
                 query = query.OrderByDescending(n => n.AppID);
                 apps = GetPagedApps(query, url, page);
@@ -125,8 +121,8 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View(apps);
         }
 
-        #region Moderate
 
+        #region Moderate
         // GET: Admin/AppModerate
         public ActionResult Moderate(long id) {
             var appModerateModel = new AppModerateViewModel() {
@@ -147,7 +143,6 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             SetTempData(app, developerUser, appModerateModel.IsFeatured);
             return View(appModerateModel);
         }
-
         [HttpPost]
         public ActionResult Moderate(AppModerateViewModel model) {
             App app;
@@ -165,16 +160,16 @@ namespace WeReviewApp.Areas.Admin.Controllers {
                 if (app.IsBlocked != model.IsBlocked) {
                     // needs to update
                     if (model.IsBlocked) {
-                        ModerationLogics.BlockApp(model.AppId, true, db);
+                        ModerationAlgorithms.BlockApp(model.AppId, true, db);
                     } else {
-                        ModerationLogics.UnBlockApp(model.AppId, true, db);
+                        ModerationAlgorithms.UnBlockApp(model.AppId, true, db);
                     }
                 }
                 if (isFeaturedPreviously != model.IsFeatured) {
                     // needs to update
-                    ModerationLogics.AppFeatured(model.AppId, model.IsFeatured, true, db);
+                    ModerationAlgorithms.AppFeatured(model.AppId, model.IsFeatured, true, db);
                 }
-                var statusMessage = "You have successfully moderated '" + app.AppName + "' app.";
+                string statusMessage = "You have successfully moderated '" + app.AppName + "' app.";
 
                 if (!string.IsNullOrWhiteSpace(model.Message)) {
                     SendEmailToAppDeveloper(developerUser, model);
@@ -186,11 +181,9 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             AppVar.SetErrorStatus(ViewBag, "Sorry last transaction has been failed.");
             return View(model);
         }
-
         #endregion
 
         #region Send email/ message to Developer
-
         private void SendEmailToAppDeveloper(ApplicationUser developerUser, AppModerateViewModel model) {
             var loggedUser = User.GetUser();
             var loggedUsername = loggedUser.DisplayName;
@@ -201,10 +194,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             sb.AppendLine(MailHtml.LineBreak);
             if (model.LikeToHearFromYou) {
                 sb.AppendLine(MailHtml.LineBreak);
-                sb.AppendLine(
-                    MailHtml.GetStrongTag(
-                        "Note: ** We would like to hear back from you. Please send your replies to '" +
-                        AppVar.Setting.OfficeEmail + "' **"));
+                sb.AppendLine(MailHtml.GetStrongTag("Note: ** We would like to hear back from you. Please send your replies to '" + AppVar.Setting.OfficeEmail + "' **"));
                 sb.AppendLine(MailHtml.LineBreak);
             }
             sb.AppendLine(MailHtml.LineBreak);
@@ -213,13 +203,12 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             var message = sb.ToString();
             sb = null;
             GC.Collect();
-            var subjectToDeveloper = "A message from admin : " + loggedUsername;
-            var subjectToAdmin = "An email sent to : " + developerUser.Email + " [this mail contains the sample]";
+            string subjectToDeveloper = "A message from admin : " + loggedUsername;
+            string subjectToAdmin = "An email sent to : " + developerUser.Email + " [this mail contains the sample]";
 
             AppVar.Mailer.Send(developerUser.Email, subjectToDeveloper, message);
             AppVar.Mailer.Send(loggedUser.Email, subjectToAdmin, message);
         }
-
         #endregion
     }
 }

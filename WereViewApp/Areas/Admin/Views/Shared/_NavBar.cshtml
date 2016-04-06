@@ -12,15 +12,21 @@
             <nav>
                 <ul class="jetmenu menu seo-optimize">
                     <li>
-                        <a href="#">Admin <b class="caret"></b></a>
+                        <a href='@appUrl' title="App Review websie : Home"><strong title="App Review websie : Home">Home</strong></a>
+                    </li>
+                    <li>
+                        <a href="@AppVar.Url/Admin" title="@AppVar.Name - @AppVar.Subtitle">Admin</a>
+                    </li>
+                    <li>
+                        <a href="#">Developers Organsim <b class="caret"></b></a>
                         <ul class="dropdown animated fadeIn">
                             @Html.GetMenu("Admin")
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Settings <b class="caret"></b></a>
+                        <a href="#">ViewWereApp <b class="caret"></b></a>
                         <ul class="dropdown animated fadeIn">
-                            @Html.GetMenu("Application Settings")
+                            @Html.GetMenu("ViewWereApp")
                         </ul>
                     </li>
                     @Html.Partial("_LoginPartial")

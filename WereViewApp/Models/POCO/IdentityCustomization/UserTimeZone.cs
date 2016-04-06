@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using WeReviewApp.Models.POCO.Identity;
+using WereViewApp.Models.POCO.Identity;
 
-namespace WeReviewApp.Models.POCO.IdentityCustomization {
+namespace WereViewApp.Models.POCO.IdentityCustomization {
     public class UserTimeZone {
         [Key]
         public int UserTimeZoneID { get; set; }
-
         /// <summary>
-        ///     Windows TimeInfo ID
+        /// Windows TimeInfo ID
         /// </summary>
         [Column(TypeName = "VARCHAR")]
         [Required]
@@ -32,9 +31,8 @@ namespace WeReviewApp.Models.POCO.IdentityCustomization {
         /// UTC-10:00
         /// </summary>
         public string UTCName { get; set; }
-
         /// <summary>
-        ///     -9
+        /// -9
         /// </summary>
         public float UTCValue { get; set; }
 
@@ -46,10 +44,13 @@ namespace WeReviewApp.Models.POCO.IdentityCustomization {
         /// </summary>
         public string TimePartOnly { get; set; }
 
+
         [ForeignKey("UserTimeZoneID")]
+
         public ICollection<CountryTimezoneRelation> CountryTimezoneRelations { get; set; }
 
         [ForeignKey("UserTimeZoneID")]
         public ICollection<ApplicationUser> ApplicationUsers { get; set; }
+
     }
 }

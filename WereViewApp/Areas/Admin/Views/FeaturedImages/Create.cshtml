@@ -1,4 +1,4 @@
-﻿@model WeReviewApp.Models.EntityModel.FeaturedImage
+﻿@model WereViewApp.Models.EntityModel.FeaturedImage
 @{
     ViewBag.Title = "Creating Featured Image";
     string title = ViewBag.Title;
@@ -7,7 +7,7 @@
     string controller = (string)ViewBag.controller;
     string viewName = "Create";
 }
-@Html.SamePageLinkWithIcon(title, subtitle, FaIcons.Plus)
+@Html.SamePageLinkWithIcon(title, subtitle, Icons.Plus)
 <hr />
 @using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {
     <div class="form-horizontal">

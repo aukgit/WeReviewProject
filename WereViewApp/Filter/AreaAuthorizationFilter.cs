@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using WeReviewApp.Modules.Role;
-using WeReviewApp.Modules.Session;
+using WereViewApp.Modules.Role;
+using WereViewApp.Modules.Session;
 
-namespace WeReviewApp.Filter {
+namespace WereViewApp.Filter {
     public class AreaAuthorizeAttribute : ActionFilterAttribute {
-        private readonly string[] _restrictedAreas = { "Admin" }; // area names to protect
+        private readonly string[] _RestrictedAreas = { "Admin" }; // area names to protect
 
         public override void OnActionExecuting(ActionExecutingContext filterContext) {
             var routeData = filterContext.RouteData;
@@ -18,7 +18,7 @@ namespace WeReviewApp.Filter {
                 return;
             }
 
-            if (_restrictedAreas.All(m => m != currentArea)) {
+            if (_RestrictedAreas.All(m => m != currentArea)) {
                 return;
             }
 

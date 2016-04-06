@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
-using WeReviewApp.Models.POCO.IdentityCustomization;
-using WeReviewApp.Modules.Cache;
-using WeReviewApp.Modules.Cookie;
-using WeReviewApp.Modules.DevUser;
+using WereViewApp.Models.POCO.IdentityCustomization;
+using WereViewApp.Modules.Cache;
+using WereViewApp.Modules.Cookie;
+using WereViewApp.Modules.DevUser;
 
 #endregion
 
-namespace WeReviewApp.Modules.TimeZone {
+namespace WereViewApp.Modules.TimeZone {
     /// <summary>
     /// Timezone and date related codes.
     /// </summary>
@@ -55,7 +55,7 @@ namespace WeReviewApp.Modules.TimeZone {
 
 
         private static readonly ReadOnlyCollection<TimeZoneInfo> SystemTimeZones = TimeZoneInfo.GetSystemTimeZones();
-        private static List<UserTimeZone> dbTimeZones;
+        private static List<UserTimeZone> _dbTimeZones;
 
         #endregion
 
@@ -79,7 +79,7 @@ namespace WeReviewApp.Modules.TimeZone {
         #region Application Startup function for database
 
         public static void LoadTimeZonesIntoMemory() {
-            dbTimeZones = CachedQueriedData.GetTimezones();
+            _dbTimeZones = CachedQueriedData.GetTimezones();
         }
 
         #endregion
@@ -121,7 +121,7 @@ namespace WeReviewApp.Modules.TimeZone {
             var id = "timezone-id:" + zone.Id;
             var userTimeZone = (UserTimeZone)AppConfig.Caches.Get(id);
             if (userTimeZone == null) {
-                userTimeZone = dbTimeZones.FirstOrDefault(n => n.InfoID == zone.Id);
+                userTimeZone = _dbTimeZones.FirstOrDefault(n => n.InfoID == zone.Id);
                 AppConfig.Caches.Set(id, userTimeZone);
             }
             return userTimeZone;
@@ -142,7 +142,7 @@ namespace WeReviewApp.Modules.TimeZone {
             //if cache time zone not exist.
             var user = UserManager.GetUser(userId);
             if (user != null) {
-                var timezoneDb = dbTimeZones.FirstOrDefault(n => n.UserTimeZoneID == user.UserTimeZoneID);
+                var timezoneDb = _dbTimeZones.FirstOrDefault(n => n.UserTimeZoneID == user.UserTimeZoneID);
                 if (timezoneDb != null) {
                     timeZoneInfo = new TimeZoneSet();
                     timeZoneInfo.UserTimezone = timezoneDb;
@@ -185,7 +185,7 @@ namespace WeReviewApp.Modules.TimeZone {
             //if cache time zone not exist.
             var user = UserManager.GetUser(username);
             if (user != null) {
-                var timezoneDb = dbTimeZones.FirstOrDefault(n => n.UserTimeZoneID == user.UserTimeZoneID);
+                var timezoneDb = _dbTimeZones.FirstOrDefault(n => n.UserTimeZoneID == user.UserTimeZoneID);
                 if (timezoneDb != null) {
                     timeZoneInfo = new TimeZoneSet();
                     timeZoneInfo.UserTimezone = timezoneDb;

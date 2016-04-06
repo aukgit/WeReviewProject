@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 
-namespace WeReviewApp.Modules.Extensions.Context {
+namespace WereViewApp.Modules.Extensions.Context {
     public abstract class DevDbContext : DbContext {
         public DevDbContext() {
         }

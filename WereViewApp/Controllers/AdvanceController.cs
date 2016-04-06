@@ -1,21 +1,20 @@
 ﻿#region using block
 
 using System.Web.Mvc;
-using System.Web.UI;
 using DevMvcComponent.Error;
-using WeReviewApp.Models.EntityModel;
+using WereViewApp.Models.EntityModel;
 
 #endregion
 
-namespace WeReviewApp.Controllers {
+namespace WereViewApp.Controllers {
     //[CompressFilter]
     //[CacheFilter(Duration = 3600)]
-    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public abstract class AdvanceController : Controller {
-        internal readonly WereViewAppEntities db;
         internal ErrorCollector ErrorCollector;
+        internal readonly WereViewAppEntities db;
 
-        protected AdvanceController() {}
+        protected AdvanceController() {
+        }
 
         protected AdvanceController(bool dbContextRequried) {
             if (dbContextRequried) {

@@ -1,7 +1,7 @@
 ﻿using System.Text;
-using WeReviewApp.Models.POCO.Identity;
+using WereViewApp.Models.POCO.Identity;
 
-namespace WeReviewApp.Modules.Mail {
+namespace WereViewApp.Modules.Mail {
     public class MailHtml {
         #region Properties
 

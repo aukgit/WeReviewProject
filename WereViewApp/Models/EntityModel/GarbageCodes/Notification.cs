@@ -19,12 +19,7 @@ namespace WereViewApp.Models.EntityModel
         public byte NotificationTypeID { get; set; }
         public string Message { get; set; }
         public System.DateTime Dated { get; set; }
-        public bool IsSeen { get; set; }
-        public Nullable<System.DateTime> SeenDate { get; set; }
-        public bool IsUseDefaultMessage { get; set; }
-        public bool HasClicked { get; set; }
     
         public virtual NotificationType NotificationType { get; set; }
-        public virtual User User { get; set; }
     }
 }

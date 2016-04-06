@@ -2,19 +2,18 @@
 
 using System;
 using System.Web.Mvc;
-using System.Web.UI;
 using DevMvcComponent.Error;
-using WeReviewApp.Modules.Extensions.Context;
+using WereViewApp.Modules.Extensions.Context;
 
 #endregion
 
-namespace WeReviewApp.Controllers {
-    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-    internal abstract class GenericController<TContext> : Controller where TContext : DevDbContext, new() {
+namespace WereViewApp.Controllers {
+    internal abstract class GenericController<TContext> : Controller where TContext : DevDbContext, new(){
         internal readonly TContext db;
         internal ErrorCollector ErrorCollector;
 
-        protected GenericController() {}
+        protected GenericController() {
+        }
 
         protected GenericController(bool applicationDbContextRequried) {
             if (applicationDbContextRequried) {

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using WeReviewApp.Common;
-using WeReviewApp.Models.POCO.Enum;
-using WeReviewApp.Models.POCO.IdentityCustomization;
+using WereViewApp.Models.POCO.Enum;
+using WereViewApp.Models.POCO.IdentityCustomization;
+using WereViewApp.WereViewAppCommon;
 
-namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
+namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
     public static class FeedbackExtend {
         public static FeedbackState GetStatus(this Feedback feedback) {
             if (!feedback.IsViewed) {
@@ -44,8 +44,7 @@ namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
 
         public static string GetCategory(this Feedback feedback) {
             var feedbackCategory =
-                WereViewStatics.FeedbackCategories.FirstOrDefault(
-                    n => n.FeedbackCategoryID == feedback.FeedbackCategoryID);
+                WereViewStatics.FeedbackCategories.FirstOrDefault(n => n.FeedbackCategoryID == feedback.FeedbackCategoryID);
             if (feedbackCategory != null) {
                 return feedbackCategory.Category;
             }
@@ -53,7 +52,7 @@ namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
         }
 
         /// <summary>
-        ///     Please check the condition.
+        /// Please check the condition.
         /// </summary>
         /// <param name="feedback"></param>
         /// <param name="statusType"></param>
@@ -108,6 +107,7 @@ namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
                     feedback.IsInProcess = false;
                     feedback.IsUnSolved = false;
                     break;
+
             }
         }
     }

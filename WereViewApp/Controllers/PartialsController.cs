@@ -4,32 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using DevTrends.MvcDonutCaching;
-using WeReviewApp.BusinessLogics;
-using WeReviewApp.Models.Context;
-using WeReviewApp.Models.EntityModel;
-using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
-using WeReviewApp.Models.EntityModel.Structs;
-using WeReviewApp.Modules.Session;
+using WereViewApp.Models.Context;
+using WereViewApp.Models.EntityModel;
+using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WereViewApp.Models.EntityModel.Structs;
+using WereViewApp.Modules.Session;
+using WereViewApp.WereViewAppCommon;
 
 #endregion
 
-namespace WeReviewApp.Controllers {
+namespace WereViewApp.Controllers {
     public class PartialsController : AdvanceController {
-        #region Declarations
-
-        private readonly Logics algorithms = new Logics();
-
-        #endregion
-
-        #region Constructors
-
-        public PartialsController()
-            : base(true) {}
-
-        #endregion
 
         #region Drop downs
-
         [OutputCache(CacheProfile = "Day")]
         public ActionResult GetFeedbackCategoryID() {
             if (SessionNames.IsValidationExceed("GetFeedbackCategoryID", 100)) {
@@ -37,8 +24,8 @@ namespace WeReviewApp.Controllers {
             }
             using (var db = new ApplicationDbContext()) {
                 var categories = db.FeedbackCategories
-                                   .Select(n => new {display = n.Category, id = n.FeedbackCategoryID})
-                                   .ToList();
+                    .Select(n => new { display = n.Category, id = n.FeedbackCategoryID })
+                    .ToList();
                 return Json(categories, JsonRequestBehavior.AllowGet);
             }
         }
@@ -117,27 +104,26 @@ namespace WeReviewApp.Controllers {
             if (SessionNames.IsValidationExceed("GetTags", 500) || string.IsNullOrWhiteSpace(id)) {
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
-
+      
             using (var db = new WereViewAppEntities()) {
                 var tags = db.Tags.Where(n => n.TagDisplay.StartsWith(id))
-                             .Select(n => n.TagDisplay).Take(10).ToArray();
-
+                                  .Select(n => n.TagDisplay).Take(10).ToArray();
+               
                 var list = new List<string>(25);
                 foreach (var tag in tags) {
                     list.Add(tag);
                 }
                 if (id.Length > 3) {
-                    var tags2 =
-                        db.Tags.Where(n => n.TagDisplay.Contains(id) && tags.All(found => found != n.TagDisplay))
-                          .Select(n => n.TagDisplay).Take(10).ToArray();
+                    var tags2 = db.Tags.Where(n => n.TagDisplay.Contains(id) && tags.All(found => found != n.TagDisplay))
+                                      .Select(n => n.TagDisplay).Take(10).ToArray();
                     foreach (var tag in tags2) {
                         list.Add(tag);
                     }
                 }
                 return Json(list, JsonRequestBehavior.AllowGet);
-            }
-            ;
+            };
         }
+
 
         [OutputCache(NoStore = true, Duration = 0)]
         [HttpPost]
@@ -147,7 +133,7 @@ namespace WeReviewApp.Controllers {
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
             using (var db = new WereViewAppEntities()) {
-                var algorithms = new Logics();
+                var algorithms = new Algorithms();
 
                 app.Url = algorithms.GenerateHyphenUrlStringValid(app, db);
 
@@ -155,9 +141,23 @@ namespace WeReviewApp.Controllers {
                     url = app.GetAbsoluteUrl()
                 };
                 return Json(sender, JsonRequestBehavior.AllowGet);
-            }
-            ;
+            };
         }
+
+        #region Declarations
+
+        private readonly Algorithms algorithms = new Algorithms();
+
+        #endregion
+
+        #region Constructors
+
+        public PartialsController()
+            : base(true) {
+
+        }
+
+        #endregion
 
         #region Homepage Gallery
 
@@ -231,17 +231,18 @@ namespace WeReviewApp.Controllers {
         //[OutputCache(Duration = 86400, VaryByParam = "appID")]
         public ActionResult FeaturedApps(long? appID) {
             if (appID != null) {
-                var app = algorithms.GetAppFromStaticCache((long) appID);
+                var app = algorithms.GetAppFromStaticCache((long)appID);
                 var featuredApps = algorithms.GetFeaturedAppsWithImages(app, db, 20);
                 return PartialView(featuredApps);
             }
             return PartialView();
         }
 
+
         [OutputCache(Duration = 86400, VaryByParam = "appID")]
         public ActionResult SuggestedApps(long? appID) {
             if (appID != null) {
-                var app = algorithms.GetAppFromStaticCache((long) appID);
+                var app = algorithms.GetAppFromStaticCache((long)appID);
                 var suggestedApps = algorithms.GetFinalSuggestedAppsCache(app, db);
                 return PartialView(suggestedApps);
             }
@@ -251,13 +252,14 @@ namespace WeReviewApp.Controllers {
         [OutputCache(Duration = 86400, VaryByParam = "appID")]
         public ActionResult DevelopersApps(long? appID) {
             if (appID != null) {
-                var app = algorithms.GetAppFromStaticCache((long) appID);
+                var app = algorithms.GetAppFromStaticCache((long)appID);
                 var suggestedApps = algorithms.GetDevelopersAppsByApp(app, db); // logic needs to be written
 
                 return PartialView(suggestedApps);
             }
             return PartialView();
         }
+
 
         #endregion
     }

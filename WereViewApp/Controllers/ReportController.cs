@@ -5,23 +5,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using WeReviewApp.Models.Context;
-using WeReviewApp.Models.EntityModel;
-using WeReviewApp.Models.POCO.IdentityCustomization;
-using WeReviewApp.Models.POCO.Structs;
-using WeReviewApp.Modules.DevUser;
-using WeReviewApp.Modules.Message;
-using WeReviewApp.Modules.Role;
-using WeReviewApp.Modules.Session;
+using WereViewApp.Models.Context;
+using WereViewApp.Models.EntityModel;
+using WereViewApp.Models.POCO.IdentityCustomization;
+using WereViewApp.Models.POCO.Structs;
+using WereViewApp.Modules.DevUser;
+using WereViewApp.Modules.Message;
+using WereViewApp.Modules.Role;
+using WereViewApp.Modules.Session;
 
 #endregion
 
-namespace WeReviewApp.Controllers {
+namespace WereViewApp.Controllers {
+
     [Authorize]
     public class ReportController : AdvanceController {
+        #region Constants and variables
+
+        const string DeletedError = "Sorry for the inconvenience, last record is not removed. Please be in touch with admin.";
+        const string DeletedSaved = "Removed successfully.";
+        const string EditedSaved = "Modified successfully.";
+        const string EditedError = "Sorry for the inconvenience, transaction is failed to save into the database. Please be in touch with admin.";
+        const string CreatedError = "Sorry for the inconvenience, couldn't create the last transaction record.";
+        const string CreatedSaved = "Transaction is successfully added to the database.";
+        const string ControllerName = "Report";
+        ///Constant value for where the controller is actually visible.
+        const string ControllerVisibleUrl = "/Report/";
+        const string CurrentControllerRemoveOutputCacheUrl = "/Partials/GetReportID";
+        const string DynamicLoadPartialController = "/Partials/";
+        bool DropDownDynamic = true;
+
+
+        #endregion
+
         #region Application db
 
-        private readonly ApplicationDbContext db2 = new ApplicationDbContext();
+        private ApplicationDbContext db2 = new ApplicationDbContext();
 
         #endregion
 
@@ -31,6 +50,7 @@ namespace WeReviewApp.Controllers {
             ViewBag.dropDownDynamic = DropDownDynamic;
             ViewBag.dynamicLoadPartialController = DynamicLoadPartialController;
         }
+
 
         //public ActionResult Done() {
         //    return View();
@@ -42,7 +62,6 @@ namespace WeReviewApp.Controllers {
         public ActionResult AlreadyReported() {
             return View();
         }
-
         private bool IsAppAlreadyReported(long appId, out App app) {
             var sessionAlreadyReported = "Report/AppIsAlreadyReported-" + appId;
             var sessionApp = "Report/ReportingApp-" + appId;
@@ -51,14 +70,14 @@ namespace WeReviewApp.Controllers {
                 app = db.Apps.Find(appId);
                 var username = UserManager.GetCurrentUserName();
                 var alreadyReported = db2.Feedbacks.Any(n => n.Username == username &&
-                                                             !n.IsViewed &&
-                                                             n.FeedbackAppReviewRelations
-                                                              .Any(rel => rel.HasAppId && rel.AppID == appId));
+                                                       !n.IsViewed &&
+                                                       n.FeedbackAppReviewRelations
+                                                        .Any(rel => rel.HasAppId && rel.AppID == appId));
                 Session[sessionAlreadyReported] = alreadyReported;
                 Session[sessionApp] = app;
             }
-            app = (App) Session[sessionApp];
-            return (bool) Session[sessionAlreadyReported];
+            app = (App)Session[sessionApp];
+            return (bool)Session[sessionAlreadyReported];
         }
 
         private bool IsReviewAlreadyReported(long reviewId, out Review review, out App app) {
@@ -71,21 +90,20 @@ namespace WeReviewApp.Controllers {
                 app = db.Apps.Find(review.AppID);
                 var username = UserManager.GetCurrentUserName();
                 var alreadyReported = db2.Feedbacks
-                                         .Any(n => n.Username == username &&
-                                                   !n.IsViewed &&
-                                                   n.FeedbackAppReviewRelations
-                                                    .Any(rel => !rel.HasAppId && rel.ReviewID == reviewId));
+                                             .Any(n => n.Username == username &&
+                                                       !n.IsViewed &&
+                                                       n.FeedbackAppReviewRelations
+                                                        .Any(rel => !rel.HasAppId && rel.ReviewID == reviewId));
                 Session[sessionAlreadyReported] = alreadyReported;
                 Session[sessionReview] = review;
                 Session[sessionReviewApp] = app;
             }
-            review = (Review) Session[sessionReview];
-            app = (App) Session[sessionReviewApp];
-            return (bool) Session[sessionAlreadyReported];
+            review = (Review)Session[sessionReview];
+            app = (App)Session[sessionReviewApp];
+            return (bool)Session[sessionAlreadyReported];
         }
-
         /// <summary>
-        ///     Remove the session cache for either review or app.
+        /// Remove the session cache for either review or app.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="isApp">If false remove review cahce.</param>
@@ -98,8 +116,8 @@ namespace WeReviewApp.Controllers {
                 Session[sessionName] = null;
             }
         }
-
         /// <summary>
+        /// 
         /// </summary>
         /// <param name="id">AppId</param>
         /// <returns></returns>
@@ -133,7 +151,6 @@ namespace WeReviewApp.Controllers {
             feedback.Name = user.DisplayName;
             feedback.PostedDate = DateTime.Now;
         }
-
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<ActionResult> App(Feedback feedback, long appOrReviewId, bool hasAppId) {
@@ -174,7 +191,7 @@ namespace WeReviewApp.Controllers {
         }
 
         /// <summary>
-        ///     Attach relationship , category and common fields
+        /// Attach relationship , category and common fields
         /// </summary>
         /// <param name="feedback"></param>
         /// <param name="id"></param>
@@ -228,7 +245,6 @@ namespace WeReviewApp.Controllers {
             }
             return View("_404");
         }
-
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<ActionResult> Review(Feedback feedback, long appOrReviewId, bool hasAppId) {
@@ -274,29 +290,5 @@ namespace WeReviewApp.Controllers {
             base.Dispose(disposing);
             db2.Dispose();
         }
-
-        #region Constants and variables
-
-        private const string DeletedError =
-            "Sorry for the inconvenience, last record is not removed. Please be in touch with admin.";
-
-        private const string DeletedSaved = "Removed successfully.";
-        private const string EditedSaved = "Modified successfully.";
-
-        private const string EditedError =
-            "Sorry for the inconvenience, transaction is failed to save into the database. Please be in touch with admin.";
-
-        private const string CreatedError = "Sorry for the inconvenience, couldn't create the last transaction record.";
-        private const string CreatedSaved = "Transaction is successfully added to the database.";
-        private const string ControllerName = "Report";
-
-        /// Constant value for where the controller is actually visible.
-        private const string ControllerVisibleUrl = "/Report/";
-
-        private const string CurrentControllerRemoveOutputCacheUrl = "/Partials/GetReportID";
-        private const string DynamicLoadPartialController = "/Partials/";
-        private readonly bool DropDownDynamic = true;
-
-        #endregion
     }
 }

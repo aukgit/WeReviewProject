@@ -4,23 +4,24 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WeReviewApp.BusinessLogics;
-using WeReviewApp.Modules.DevUser;
+using WereViewApp.Modules.DevUser;
+using WereViewApp.WereViewAppCommon;
 
 #endregion
 
-namespace WeReviewApp.Controllers {
+namespace WereViewApp.Controllers {
     public class AppsController : AdvanceController {
         #region Declarations
 
-        private readonly Logics _algorithms = new Logics();
+        private readonly Algorithms _algorithms = new Algorithms();
 
         #endregion
 
         #region Constructors
 
         public AppsController()
-            : base(true) {}
+            : base(true) {
+        }
 
         #endregion
 
@@ -60,7 +61,6 @@ namespace WeReviewApp.Controllers {
             ViewBag.breadcrumbs = _algorithms.GetBredcrumbsBasedOnCurrentUrl();
             return View("Index");
         }
-
         [Authorize]
         public ActionResult Reviewed() {
             ViewBag.Title = "App Reviewed By You";
@@ -70,11 +70,11 @@ namespace WeReviewApp.Controllers {
         }
 
         /// <summary>
-        ///     Get apps filtered by :
-        ///     site.com/Apps/Apple-8/Games or
-        ///     site.com/Apps/Apple-8 or
-        ///     site.com/Apps/Apple/Games or
-        ///     site.com/Apps/Apple
+        /// Get apps filtered by : 
+        /// site.com/Apps/Apple-8/Games or 
+        /// site.com/Apps/Apple-8 or 
+        /// site.com/Apps/Apple/Games or 
+        /// site.com/Apps/Apple
         /// </summary>
         /// <param name="platform"></param>
         /// <param name="platformVersion"></param>
@@ -82,10 +82,8 @@ namespace WeReviewApp.Controllers {
         /// <param name="page"></param>
         /// <returns></returns>
         //[OutputCache(CacheProfile = "Day", VaryByParam = "platform;platformVersion;category;page")]
-        public ActionResult GetByPlatformAndCategory(string platform, double? platformVersion, string category,
-            int page = 1) {
-            var apps = _algorithms.GetAppsFilteredByPlatformAndCategory(platform, platformVersion, category, page,
-                ViewBag, db);
+        public ActionResult GetByPlatformAndCategory(string platform, double? platformVersion, string category, int page = 1) {
+            var apps = _algorithms.GetAppsFilteredByPlatformAndCategory(platform, platformVersion, category,page, ViewBag, db);
             if (apps != null) {
                 ViewBag.Title = "Apps : " + _algorithms.GetCurrentUrlWithoutHostNameWithoutSlash();
                 ViewBag.Meta = ViewBag.Title;
@@ -96,5 +94,6 @@ namespace WeReviewApp.Controllers {
             }
             return View("_AppNotFound");
         }
+
     }
 }

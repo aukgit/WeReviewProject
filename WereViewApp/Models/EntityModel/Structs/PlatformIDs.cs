@@ -1,4 +1,4 @@
-﻿namespace WeReviewApp.Models.EntityModel.Structs {
+﻿namespace WereViewApp.Models.EntityModel.Structs {
     public struct PlatformIDs {
         public const int Apple = 1;
         public const int Android = 2;

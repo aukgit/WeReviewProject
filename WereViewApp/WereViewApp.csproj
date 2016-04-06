@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WeReviewApp</RootNamespace>
-    <AssemblyName>WeReviewApp</AssemblyName>
+    <RootNamespace>WereViewApp</RootNamespace>
+    <AssemblyName>WereViewApp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -42,11 +42,10 @@
     </PublishDatabaseSettings>
     <PublishDatabases>false</PublishDatabases>
     <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
-    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
     <IncludeIisSettings>false</IncludeIisSettings>
-    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -88,8 +87,8 @@
       <HintPath>..\packages\FluentScheduler.3.1.46\lib\net40\FluentScheduler.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FontAwesomeIcons, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FontAwesomeIcons.1.0.3\lib\FontAwesomeIcons.dll</HintPath>
+    <Reference Include="FontAwesomeIcons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesomeIcons.1.0.2\lib\FontAwesomeIcons.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ImageResizer">
@@ -98,6 +97,9 @@
     <Reference Include="LinqKit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ExternalDll\LinqKit.dll</HintPath>
+    </Reference>
+    <Reference Include="MarkdownDeep">
+      <HintPath>..\packages\MarkdownDeep.Full.1.5\lib\.NetFramework 3.5\MarkdownDeep.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -241,12 +243,9 @@
   <ItemGroup>
     <Compile Include="App_Start\AppVar.cs" />
     <Compile Include="Areas\Admin\Controllers\AppsController.cs" />
-    <Compile Include="BusinessLogics\Admin\NavigationLogics.cs" />
-    <Compile Include="BusinessLogics\Component\BaseLogicComponent.cs" />
-    <Compile Include="Common\ResultsType\NavigationMessage.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\GenericController.cs" />
-    <Compile Include="Controllers\IdentityController.cs" />
+    <Compile Include="Controllers\IndentityController.cs" />
     <Compile Include="Controllers\PlatformsController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -260,18 +259,12 @@
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackState.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\TagExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\UserExtend.cs" />
-    <Compile Include="Models\EntityModel\POCO\AppOfferType.cs" />
-    <Compile Include="Models\EntityModel\POCO\AppsSearch_Result.cs" />
+    <Compile Include="Models\EntityModel\POCO\AppsSearchResult.cs" />
     <Compile Include="Models\EntityModel\POCO\CellPhone.cs" />
-    <Compile Include="Models\EntityModel\POCO\NotificationSeen.cs" />
-    <Compile Include="Models\EntityModel\POCO\Subscribe.cs" />
-    <Compile Include="Models\EntityModel\POCO\SubscribeCategory.cs" />
-    <Compile Include="Models\EntityModel\POCO\SubscribeNotifiedHistory.cs" />
     <Compile Include="Models\POCO\Enum\FeedbackStatusTypes.cs" />
     <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
     <Compile Include="Models\POCO\Structs\FeedbackCategoryIDs.cs" />
     <Compile Include="Models\ViewModels\AppModerateViewModel.cs" />
-    <Compile Include="Models\ViewModels\AppSummaryViewModel.cs" />
     <Compile Include="Models\ViewModels\EmailResendViewModel.cs" />
     <Compile Include="Models\ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
@@ -296,8 +289,7 @@
     <Compile Include="Scheduler\WeReviewDownloadScheduler.cs" />
     <Compile Include="Scheduler\WeReviewScheduler.cs" />
     <Compile Include="Scheduler\SchedulerRunner.cs" />
-    <Compile Include="BusinessLogics\Admin\AdminLogics.cs" />
-    <Compile Include="BusinessLogics\Logics.cs" />
+    <Compile Include="WereViewAppCommon\Algorithms.cs" />
     <Compile Include="App_Start\AppConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -345,9 +337,9 @@
     <Compile Include="Models\ViewModels\SearchViewModel.cs" />
     <Compile Include="Modules\Reponse\RemoveETagModule.cs" />
     <Compile Include="Modules\StringExtension.cs" />
-    <Compile Include="BusinessLogics\Admin\ModerationLogics.cs" />
-    <Compile Include="Common\Variables.cs" />
-    <Compile Include="Common\Statics.cs" />
+    <Compile Include="WereViewAppCommon\ModerationAlgorithms.cs" />
+    <Compile Include="WereViewAppCommon\Structs\CommonVars.cs" />
+    <Compile Include="WereViewAppCommon\WereViewStatics.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdvanceController.cs" />
     <Compile Include="Controllers\AppController.cs" />
@@ -377,11 +369,13 @@
     <Compile Include="Models\EntityModel\POCO\Category.cs" />
     <Compile Include="Models\EntityModel\POCO\Gallery.cs" />
     <Compile Include="Models\EntityModel\POCO\GalleryCategory.cs" />
+    <Compile Include="Models\EntityModel\POCO\LatestSeenNotification.cs" />
     <Compile Include="Models\EntityModel\POCO\Message.cs" />
     <Compile Include="Models\EntityModel\POCO\MessageSeen.cs" />
     <Compile Include="Models\EntityModel\POCO\Notification.cs" />
     <Compile Include="Models\EntityModel\POCO\NotificationType.cs" />
     <Compile Include="Models\EntityModel\POCO\Platform.cs" />
+    <Compile Include="Models\EntityModel\POCO\Report.cs" />
     <Compile Include="Models\EntityModel\POCO\Review.cs" />
     <Compile Include="Models\EntityModel\POCO\Tag.cs" />
     <Compile Include="Models\EntityModel\POCO\TagAppRelation.cs" />
@@ -598,10 +592,6 @@
     </Content>
     <Content Include="Content\css\seo-optimize.min.css" />
     <Content Include="Content\css\Site.css" />
-    <Content Include="Content\css\Spinner.css" />
-    <Content Include="Content\css\Spinner.min.css">
-      <DependentUpon>Spinner.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\star-rating.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
@@ -620,10 +610,6 @@
     <Content Include="Content\css\Tagit\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\css\Tagit\jquery.tagedit.css" />
     <Content Include="Content\css\Tagit\ui-lightness\jquery-ui-1.9.2.custom.min.css" />
-    <Content Include="Content\css\toastr.css" />
-    <Content Include="Content\css\toastr.min.css">
-      <DependentUpon>toastr.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\Upload\jquery.fileupload.css" />
     <Content Include="Content\css\utilities.css" />
     <Content Include="Content\css\utilities.min.css">
@@ -663,21 +649,6 @@
     <Content Include="Areas\Admin\Views\Apps\Index.cshtml" />
     <Content Include="Content\css\utilities.css.map">
       <DependentUpon>utilities.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\front-developer.css.map">
-      <DependentUpon>front-developer.css</DependentUpon>
-    </Content>
-    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\fonts\FontAwesome.otf" />
-    <Content Include="Areas\Admin\Views\Config\_Tabs-List.cshtml" />
-    <Content Include="Content\css\toastr.css.map">
-      <DependentUpon>toastr.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\Spinner.css.map">
-      <DependentUpon>Spinner.css</DependentUpon>
     </Content>
     <None Include="Content\Less\ckedit-skin-bootstrap.less" />
     <Content Include="Content\Less\color-fonts.less" />
@@ -751,6 +722,7 @@
     <Content Include="Content\Scripts\DevOrgPlugins\ComboOptions.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.country-phone.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.dynamicSelect.js" />
+    <Content Include="Content\Scripts\DevOrgPlugins\app.run.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\dev-component-runner.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.component.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\byId.js" />
@@ -806,8 +778,6 @@
       <DependentUpon>backend-developer.css</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\Feedbacks\Done.cshtml" />
-    <Content Include="Content\Scripts\FrontEnd\wow.js" />
-    <Content Include="Content\Scripts\jquery.blockUI.js" />
     <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog.css" />
     <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog_ie.css" />
     <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog_ie7.css" />
@@ -847,38 +817,7 @@
     <Content Include="Content\Scripts\skins\bootstrapck\sample\css\bootstrapck-sample.css" />
     <Content Include="Content\Scripts\skins\bootstrapck\sample\js\analytics.js" />
     <Content Include="Content\Scripts\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
-    <Content Include="Content\Less\toastr.less" />
-    <Content Include="Content\Less\Spinner.less" />
-    <None Include="Content\Scripts\_references.js" />
-    <Content Include="Content\Scripts\toastr.js" />
     <Content Include="Fonts\fontawesome-webfont.svg" />
-    <Content Include="JavaScript-Mvc-framework\app.config.js" />
-    <Content Include="JavaScript-Mvc-framework\app.global.js" />
-    <Content Include="JavaScript-Mvc-framework\app.initializeMethods.js" />
-    <Content Include="JavaScript-Mvc-framework\app.js" />
-    <Content Include="JavaScript-Mvc-framework\app.run.js" />
-    <Content Include="JavaScript-Mvc-framework\Areas\Admin\Controllers\NavItemsController.js" />
-    <Content Include="JavaScript-Mvc-framework\byId.js" />
-    <Content Include="JavaScript-Mvc-framework\controllers\controllers.js" />
-    <Content Include="JavaScript-Mvc-framework\controllers\homeController.js" />
-    <Content Include="JavaScript-Mvc-framework\controllers\initialize.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\clone.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\ajax.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\inputChangeTracker.js" />
-    <Content Include="JavaScript-Mvc-framework\Prototype\Array.js" />
-    <Content Include="JavaScript-Mvc-framework\schema\hashset.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\spinner.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\constants.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\initialize.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\modal.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\pagination.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\regularExp.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\selectors.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\urls.js" />
-    <Content Include="JavaScript-Mvc-framework\jQueryExtend.fn.js" />
-    <Content Include="JavaScript-Mvc-framework\jQueryExtend.js" />
-    <Content Include="JavaScript-Mvc-framework\schema\url.js" />
-    <Content Include="JavaScript-Mvc-framework\schema\schema.js" />
     <Content Include="Sitemap.xml" />
     <Content Include="Uploads\Images\Advertise\5e324a00-977d-4436-8a15-3ce9e1c424f1-0.jpg" />
     <Content Include="Uploads\Images\Advertise\7fcf1b26-c1e0-4327-ba7f-29d5fd55bd25-0.jpg" />
@@ -1033,8 +972,16 @@
     <Content Include="Uploads\Images\YoutubeCovers\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\fa1595d4-da44-4205-b3dd-6b6e524866d0-0.jpg" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Views\Config\CleanSystem.cshtml" />
     <Content Include="Areas\Admin\Views\Apps\Moderate.cshtml" />
+    <Content Include="Content\css\front-developer.css.map">
+      <DependentUpon>front-developer.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\header.css.map">
       <DependentUpon>header.css</DependentUpon>
     </Content>
@@ -1048,6 +995,7 @@
     <Content Include="Content\Scripts\FrontEnd\jquery.sticky.js" />
     <Content Include="Content\Scripts\FrontEnd\main.js" />
     <Content Include="Content\Scripts\FrontEnd\owl.carousel.min.js" />
+    <Content Include="Content\Scripts\FrontEnd\wow.min.js" />
     <None Include="Content\Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Content\Scripts\jquery-2.1.4.js" />
     <Content Include="Content\Scripts\jquery-ui.min.js" />
@@ -1196,6 +1144,7 @@
     <Content Include="Content\revolution-slider\font\revicons90c6.eot" />
     <Content Include="Content\revolution-slider\font\revicons90c6.ttf" />
     <Content Include="Content\revolution-slider\font\revicons90c6.woff" />
+    <Content Include="Content\Scripts\bootstrap.min.js.map" />
     <Content Include="Content\Scripts\jquery.unobtrusive-ajax.min.js.map">
       <DependentUpon>jquery.unobtrusive-ajax.min.js</DependentUpon>
     </Content>
@@ -1387,7 +1336,6 @@
     <Content Include="Views\Shared\_Header-1.cshtml" />
     <Content Include="Views\Tags\Index.cshtml" />
     <Content Include="Views\Tags\GetTagDetail.cshtml" />
-    <Content Include="Views\Shared\_LoadingBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DatabaseTables\" />
@@ -1396,8 +1344,8 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Services\" />
     <Folder Include="Content\Bundles\" />
-    <Folder Include="Content\Scss\" />
     <Folder Include="Models\DesignPattern\Abstracts\" />
+    <Folder Include="Models\EntityModel\GarbageCodes\" />
     <Folder Include="Models\POCO\AdditionalDatabase\" />
     <Folder Include="Models\POCO\Plugable\" />
     <Folder Include="Modules\Filters\" />
