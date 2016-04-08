@@ -9,6 +9,7 @@ using System.Web.UI;
 using DevMvcComponent.Error;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using WereViewApp.Filter;
 using WereViewApp.Models.Context;
 using WereViewApp.Models.POCO.Identity;
 using WereViewApp.Models.ViewModels;
@@ -24,6 +25,7 @@ using WereViewApp.Modules.Validations;
 
 namespace WereViewApp.Controllers {
     [Authorize]
+    [CheckRegistrationComplete]
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class AccountController : Controller {
         #region Constants and Variable
@@ -207,7 +209,12 @@ namespace WereViewApp.Controllers {
         [AllowAnonymous]
         public ActionResult Login(string returnUrl) {
             if (UserManager.IsAuthenticated()) {
-                return RedirectToActionPermanent("Manage");
+                var userCache = User.GetNewOrExistingUserCache();
+                if (userCache.IsRegistrationComplete) {
+                    return RedirectToActionPermanent("Manage");
+                } else {
+                    return RedirectToActionPermanent("Verify");
+                }
             }
             ViewBag.ReturnUrl = returnUrl;
             return View();
@@ -223,10 +230,12 @@ namespace WereViewApp.Controllers {
                 var user = await UserManager.GetUserByEmailAsync(model.Email, model.Password);
                 if (user != null) {
                     await SignInAsync(user, model.RememberMe);
-                    if (user.IsBlocked || !user.IsRegistrationComplete) {
-                        SignOutProgrammatically();
+                    if (user.IsBlocked) {
+                        SignOutProgrammaticallyNonRedirect();
                         return AppVar.GetAuthenticationError("You don't have the permission.",
-                            "Sorry you don't have the permission to authenticate right now. Please check your email inbox/spam folder for details.");
+                            "Sorry you don't have the permission to authenticate right now. Your account is blocked");
+                    } else if (!user.IsRegistrationComplete) {
+                        return RedirectToActionPermanent("Verify");
                     }
                     return RedirectToLocal(returnUrl);
                 }
@@ -243,23 +252,28 @@ namespace WereViewApp.Controllers {
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult SignOut() {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            AuthenticationManager.SignOut();
+            SignOutProgrammaticallyNonRedirect();
             return RedirectToAction("Index", "Home");
         }
         [AllowAnonymous]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult SignOutProgrammatically() {
+            SignOutProgrammaticallyNonRedirect();
+            return RedirectToAction("Index", "Home");
+        }
+
+        public void SignOutProgrammaticallyNonRedirect() {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
         }
 
         #endregion
 
         #region Check Inbox / InboxCheck
+        [AllowAnonymous]
         public ActionResult Verify() {
             //var emailResender = EmailResendViewModel.GetEmailResendViewModelFromSession();
             //if (emailResender != null) {
@@ -273,6 +287,7 @@ namespace WereViewApp.Controllers {
 
         #region Register
         [AllowAnonymous]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult Register() {
             if (UserManager.IsAuthenticated()) {
                 return AppVar.GetAuthenticationError("Authentication Failed", "");
@@ -298,6 +313,9 @@ namespace WereViewApp.Controllers {
             }
 
             if (ModelState.IsValid && validOtherConditions) {
+                model.UserName = model.UserName.Trim();
+                model.FirstName = model.FirstName.Trim();
+                model.LastName = model.LastName.Trim();
                 var user = UserManager.GetUserFromViewModel(model); // get user from view model.
                 var result = await Manager.CreateAsync(user, model.Password);
                 if (result.Succeeded) {
@@ -314,8 +332,8 @@ namespace WereViewApp.Controllers {
 
                         #endregion
 
-                        #region Sign out because registration is not complete
-                        SignOutProgrammatically();
+                        #region Redirect to verify since registration
+                        //SignOutProgrammaticallyNonRedirect();
                         return RedirectToActionPermanent("Verify");
                         #endregion
 
@@ -565,6 +583,7 @@ namespace WereViewApp.Controllers {
         }
 
         #endregion
+
         #region Account Manage
 
         public ActionResult Manage(ManageMessageId? message) {
@@ -625,6 +644,7 @@ namespace WereViewApp.Controllers {
         }
 
         #endregion
+
         #region Helpers
 
         // Used for XSRF protection when adding external logins

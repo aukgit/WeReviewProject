@@ -272,7 +272,9 @@
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Models\ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="Modules\Constants\TokenPurpose.cs" />
+    <Compile Include="Modules\Extensions\ActionExecutingContextExtension.cs" />
     <Compile Include="Modules\Extensions\GraphApiExtension.cs" />
+    <Compile Include="Modules\Type\RouteProfile.cs" />
     <Compile Include="Modules\Extensions\UrlExtension.cs" />
     <Compile Include="Modules\Extensions\ViewEngine\RenderingView.cs" />
     <Compile Include="Modules\DevUser\UserCache.cs" />
