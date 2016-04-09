@@ -120,6 +120,34 @@ namespace WeReviewApp.Modules.Extensions {
             }
         }
 
+        /// <summary>
+        /// Redirect to url only the url is not same as this.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="action"></param>
+        /// <param name="controller"></param>
+        /// <param name="area"></param>
+        public static void RedirectToActionIfDistinct(this ActionExecutingContext context, string action, string controller, string area) {
+            var isCurrentUrlIsSameAs = IsCurrentUrl(context, action, controller, area);
+            if (isCurrentUrlIsSameAs == false) {
+                RedirectTo(context, action, controller, area);
+            }
+        }
+
+        /// <summary>
+        /// Redirect to url only the url is not same as this.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="action"></param>
+        /// <param name="controller"></param>
+        /// <param name="area"></param>
+        public static void RedirectToActionPermanentIfDistinct(this ActionExecutingContext context, string action, string controller, string area) {
+            var isCurrentUrlIsSameAs = IsCurrentUrl(context, action, controller, area);
+            if (isCurrentUrlIsSameAs == false) {
+                RedirectPermanentTo(context, action, controller, area);
+            }
+        }
+
         public static bool IsCurrentUrl(this ActionExecutingContext context, string action, string controller, string area) {
             var routeValues = new RouteValueDictionary(new { controller = controller, action = action, area = area });
             return IsCurrentUrl(context, routeValues);

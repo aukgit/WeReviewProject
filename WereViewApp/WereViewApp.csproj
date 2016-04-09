@@ -273,10 +273,13 @@
     <Compile Include="Models\ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="Modules\Constants\TokenPurpose.cs" />
     <Compile Include="Modules\Extensions\ActionExecutingContextExtension.cs" />
+    <Compile Include="Modules\Extensions\HttpContextExtension.cs" />
+    <Compile Include="Modules\Extensions\HttpContextBaseExtension.cs" />
     <Compile Include="Modules\Extensions\GraphApiExtension.cs" />
     <Compile Include="Modules\Extensions\HttpSessionStateBaseExtension.cs" />
     <Compile Include="Modules\Extensions\NameValueCollectionExtension.cs" />
     <Compile Include="Modules\Type\ParametersProfile.cs" />
+    <Compile Include="Modules\Type\ParametersProfileBase.cs" />
     <Compile Include="Modules\Type\RouteProfile.cs" />
     <Compile Include="Modules\Extensions\UrlExtension.cs" />
     <Compile Include="Modules\Extensions\ViewEngine\RenderingView.cs" />
