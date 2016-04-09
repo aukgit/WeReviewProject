@@ -6,7 +6,7 @@ namespace WeReviewApp.Modules.Type {
         public string Controller { get; set; }
         public string Area { get; set; }
         public string Action { get; set; }
-        public IDictionary<string, object> Parameters { get; set; }
+        public IDictionary<string, object> ActionParameters { get; set; }
 
         public ActionDescriptor ActionDescriptor { get; set; }
     }

@@ -41,7 +41,7 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
         /// <summary>
         /// Get Application user by UserId.
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
         public static ApplicationUser GetUser(this IPrincipal user, long userId) {
             return UserManager.GetUser(userId);
@@ -60,7 +60,7 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
         /// Get Application user by UserId.
         /// </summary>
         /// <param name="user"></param>
-        /// <param name="username"></param>
+        /// <param name="email"></param>
         /// <returns></returns>
         public static ApplicationUser GetUserbyEmail(this IPrincipal user, string email) {
             return UserManager.GetUserByEmail(email);

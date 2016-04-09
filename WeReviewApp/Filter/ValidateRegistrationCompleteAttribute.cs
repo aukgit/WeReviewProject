@@ -8,7 +8,8 @@ namespace WeReviewApp.Filter {
         public override void OnActionExecuting(ActionExecutingContext filterContext) {
             var user = filterContext.HttpContext.User;
             if (user.Identity.IsAuthenticated) {
-                if (!user.IsRegistrationComplete()) {
+                var userCache = user.GetNewOrExistingUserCache();
+                if (!userCache.IsRegistrationComplete) {
                     filterContext.RedirectToActionIfDistinct("Verify", "Account", "");
                 }
             }
