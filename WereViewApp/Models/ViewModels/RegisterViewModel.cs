@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace WeReviewApp.Models.ViewModels {
     public class RegisterViewModel {
@@ -46,15 +47,16 @@ namespace WeReviewApp.Models.ViewModels {
         [Required(ErrorMessage = "(ASCII) Password is a required field.")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password", Description = "(ASCII)Minimum 6 digit, no other restriction.")]
+        [Display(Name = "Password", Description = "(ASCII) Minimum 6 digit, no other restriction.")]
         [MinLength(6)]
-
+        [AllowHtml]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "(ASCII) Confirm password is a required field.")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password", Description = "Confirm password should match the password given above.")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [AllowHtml]
         public string ConfirmPassword { get; set; }
 
         public string AccessToken { get; set; }
