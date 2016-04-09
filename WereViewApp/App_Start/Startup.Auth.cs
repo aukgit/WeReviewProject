@@ -7,14 +7,14 @@ using Owin;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Modules;
-using WereViewApp.Modules.Claims;
-//using WereViewApp.Modules.Garbage;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.POCO.Identity;
+using WeReviewApp.Modules;
+using WeReviewApp.Modules.Claims;
+//using WeReviewApp.Modules.Garbage;
 
 
-namespace WereViewApp {
+namespace WeReviewApp {
     public partial class Startup {
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app) {

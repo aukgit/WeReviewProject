@@ -10,15 +10,15 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
-using WereViewApp.Models.EntityModel.Structs;
-using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.Cache;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.WereViewAppCommon.Structs;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WeReviewApp.Models.EntityModel.Structs;
+using WeReviewApp.Models.ViewModels;
+using WeReviewApp.Modules.Cache;
+using WeReviewApp.Modules.DevUser;
+using WeReviewApp.WereViewAppCommon.Structs;
 
-namespace WereViewApp.WereViewAppCommon {
+namespace WeReviewApp.WereViewAppCommon {
     public class Algorithms {
 
         #region Viewable Apps : Apps which are published

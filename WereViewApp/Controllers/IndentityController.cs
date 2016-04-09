@@ -3,11 +3,11 @@
 using System;
 using System.Web.Mvc;
 using DevMvcComponent.Error;
-using WereViewApp.Models.Context;
+using WeReviewApp.Models.Context;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     public abstract class IndentityController<TContext> : Controller where TContext : ApplicationDbContext, new(){
         internal readonly TContext db;
         internal ErrorCollector ErrorCollector;

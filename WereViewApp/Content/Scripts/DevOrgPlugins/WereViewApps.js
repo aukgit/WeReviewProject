@@ -459,7 +459,7 @@ $.WeReviewApp = {
         /// <summary>
         /// Display app url from server, called from appNameOnBlur()
         /// </summary>
-        /// <param name="self">$.WereViewApp</param>
+        /// <param name="self">$.WeReviewApp</param>
         /// <param name="url">url to get the app titl valid url.</param>
         /// <param name="appTitle">Typed app title from user.</param>
         /// <param name="token">Token</param>

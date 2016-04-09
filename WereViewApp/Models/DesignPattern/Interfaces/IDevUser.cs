@@ -1,4 +1,4 @@
-﻿namespace WereViewApp.Models.DesignPattern.Interfaces {
+﻿namespace WeReviewApp.Models.DesignPattern.Interfaces {
     interface IDevUser {
         long UserID { get; }
         string UserName { get; set; }

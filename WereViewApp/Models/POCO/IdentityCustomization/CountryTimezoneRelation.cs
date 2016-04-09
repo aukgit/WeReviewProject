@@ -1,4 +1,4 @@
-﻿namespace WereViewApp.Models.POCO.IdentityCustomization {
+﻿namespace WeReviewApp.Models.POCO.IdentityCustomization {
     public class CountryTimezoneRelation {
         public int CountryTimezoneRelationID { get; set; }
 

@@ -7,15 +7,15 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
-using WereViewApp.Models.EntityModel.Structs;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Modules.Cache;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.Models.EntityModel.Structs;
+using WeReviewApp.Models.POCO.Identity;
+using WeReviewApp.Modules.Cache;
+using WeReviewApp.Modules.DevUser;
+using WeReviewApp.WereViewAppCommon;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class ProfilesController : AdvanceController {
 

@@ -4,14 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
-using WereViewApp.Modules.Sitemaps;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WeReviewApp.Modules.Sitemaps;
+using WeReviewApp.WereViewAppCommon;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     [OutputCache(CacheProfile = "Day", VaryByCustom = "none")]
     public class SitemapController : Controller {
         // GET: Sitemap

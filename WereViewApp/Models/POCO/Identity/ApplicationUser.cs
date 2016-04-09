@@ -6,10 +6,10 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using WereViewApp.Models.DesignPattern.Interfaces;
-using WereViewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Models.DesignPattern.Interfaces;
+using WeReviewApp.Models.POCO.IdentityCustomization;
 
-namespace WereViewApp.Models.POCO.Identity {
+namespace WeReviewApp.Models.POCO.Identity {
     public class ApplicationUser : IdentityUser<long, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>, IDevUser {
 
         #region Generate User

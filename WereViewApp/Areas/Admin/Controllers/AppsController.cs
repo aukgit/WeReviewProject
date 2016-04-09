@@ -5,16 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using DevMvcComponent.Pagination;
-using WereViewApp.Controllers;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.Extensions;
-using WereViewApp.Modules.Extensions.IdentityExtension;
-using WereViewApp.Modules.Mail;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.Controllers;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Models.POCO.Identity;
+using WeReviewApp.Models.ViewModels;
+using WeReviewApp.Modules.Extensions;
+using WeReviewApp.Modules.Extensions.IdentityExtension;
+using WeReviewApp.Modules.Mail;
+using WeReviewApp.WereViewAppCommon;
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     public class AppsController : AdvanceController {
         public AppsController()
             : base(true) {}

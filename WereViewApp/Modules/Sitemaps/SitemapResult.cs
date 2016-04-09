@@ -3,7 +3,7 @@ using System.Text;
 using System.Web.Mvc;
 using System.Xml;
 
-namespace WereViewApp.Modules.Sitemaps {
+namespace WeReviewApp.Modules.Sitemaps {
     /// <summary>
     ///     Generates an XML sitemap from a collection of <see cref="ISitemapItem" />
     /// </summary>

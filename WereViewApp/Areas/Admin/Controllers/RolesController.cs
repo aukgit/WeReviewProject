@@ -1,11 +1,11 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Modules.Role;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.POCO.Identity;
+using WeReviewApp.Modules.Role;
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     public class RolesController : Controller {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 

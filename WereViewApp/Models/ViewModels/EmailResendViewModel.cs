@@ -1,8 +1,8 @@
 ﻿using System.Web;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Modules.Session;
+using WeReviewApp.Models.POCO.Identity;
+using WeReviewApp.Modules.Session;
 
-namespace WereViewApp.Models.ViewModels {
+namespace WeReviewApp.Models.ViewModels {
     public class EmailResendViewModel {
 
         private ApplicationUser _appUser;

@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web;
-using WereViewApp.Models.EntityModel.Derivables;
-using WereViewApp.Models.ViewModels;
+using WeReviewApp.Models.EntityModel.Derivables;
+using WeReviewApp.Models.ViewModels;
 
 #endregion
 
-namespace WereViewApp.Models.EntityModel {
+namespace WeReviewApp.Models.EntityModel {
     public class App : AppSavingTextFields, IApp {
         public App() {
             FeaturedImages = new HashSet<FeaturedImage>();

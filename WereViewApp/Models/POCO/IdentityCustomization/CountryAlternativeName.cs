@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WereViewApp.Models.POCO.IdentityCustomization {
+namespace WeReviewApp.Models.POCO.IdentityCustomization {
     public class CountryAlternativeName {
         [Key]
         public int CountryAlternativeNameID { get; set; }

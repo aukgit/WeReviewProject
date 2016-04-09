@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
-using WereViewApp.Modules.Type;
+using WeReviewApp.Modules.Type;
 
-namespace WereViewApp.Modules.Extensions {
+namespace WeReviewApp.Modules.Extensions {
     public static class ActionExecutingContextExtension {
         public static string GetAreaName(this ActionExecutingContext context) {
             return (string)context.RouteData.DataTokens["area"];

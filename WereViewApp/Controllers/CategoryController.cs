@@ -3,12 +3,12 @@
 using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Pagination;
-using WereViewApp.Modules.Cache;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.Modules.Cache;
+using WeReviewApp.WereViewAppCommon;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     public class CategoryController : Controller {
         // GET: Category
         private const int MaxNumbersOfPagesShow = 8;

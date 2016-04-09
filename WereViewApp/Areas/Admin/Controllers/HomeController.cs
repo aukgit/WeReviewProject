@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     public class HomeController : Controller {
         public ActionResult Index() {
             return View();

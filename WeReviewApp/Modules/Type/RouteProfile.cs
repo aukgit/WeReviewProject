@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace WereViewApp.Modules.Type {
+namespace WeReviewApp.Modules.Type {
     public class RouteProfile {
         public string Controller { get; set; }
         public string Area { get; set; }

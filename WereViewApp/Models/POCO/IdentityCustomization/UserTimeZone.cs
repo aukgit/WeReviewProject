@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using WereViewApp.Models.POCO.Identity;
+using WeReviewApp.Models.POCO.Identity;
 
-namespace WereViewApp.Models.POCO.IdentityCustomization {
+namespace WeReviewApp.Models.POCO.IdentityCustomization {
     public class UserTimeZone {
         [Key]
         public int UserTimeZoneID { get; set; }

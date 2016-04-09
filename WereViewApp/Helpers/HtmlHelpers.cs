@@ -7,16 +7,16 @@ using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Enums;
 using FontAwesomeIcons;
-using WereViewApp.Models.POCO.IdentityCustomization;
-using WereViewApp.Modules.Cache;
-using WereViewApp.Modules.Constants;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.Mail;
-using WereViewApp.Modules.Menu;
-using WereViewApp.Modules.TimeZone;
-using WereViewApp.Modules.Uploads;
+using WeReviewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Modules.Cache;
+using WeReviewApp.Modules.Constants;
+using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.Mail;
+using WeReviewApp.Modules.Menu;
+using WeReviewApp.Modules.TimeZone;
+using WeReviewApp.Modules.Uploads;
 
-namespace WereViewApp.Helpers {
+namespace WeReviewApp.Helpers {
     public static class HtmlHelpers {
         private const string Selected = "selected='selected'";
         public static int TruncateLength = AppConfig.TruncateLength;

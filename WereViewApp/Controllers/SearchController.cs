@@ -1,10 +1,10 @@
 ﻿using System.Web.Mvc;
-using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.Session;
-using WereViewApp.WereViewAppCommon;
-using WereViewApp.WereViewAppCommon.Structs;
+using WeReviewApp.Models.ViewModels;
+using WeReviewApp.Modules.Session;
+using WeReviewApp.WereViewAppCommon;
+using WeReviewApp.WereViewAppCommon.Structs;
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     public class SearchController : Controller {
         // GET: Search
         public ActionResult Index() {

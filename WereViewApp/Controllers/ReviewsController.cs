@@ -7,16 +7,16 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Pagination;
-using WereViewApp.Filter;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Modules;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.Filter;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Models.POCO.Identity;
+using WeReviewApp.Modules;
+using WeReviewApp.Modules.DevUser;
+using WeReviewApp.WereViewAppCommon;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     public class ReviewsController : AdvanceController {
         #region Declarations
 

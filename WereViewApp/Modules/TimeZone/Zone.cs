@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
-using WereViewApp.Models.POCO.IdentityCustomization;
-using WereViewApp.Modules.Cache;
-using WereViewApp.Modules.Cookie;
-using WereViewApp.Modules.DevUser;
+using WeReviewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Modules.Cache;
+using WeReviewApp.Modules.Cookie;
+using WeReviewApp.Modules.DevUser;
 
 #endregion
 
-namespace WereViewApp.Modules.TimeZone {
+namespace WeReviewApp.Modules.TimeZone {
     /// <summary>
     /// Timezone and date related codes.
     /// </summary>

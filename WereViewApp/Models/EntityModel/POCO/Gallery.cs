@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WereViewApp.Models.EntityModel
+namespace WeReviewApp.Models.EntityModel
 {
     using System;
     using System.Collections.Generic;
     using System.Web;
-    using WereViewApp.Modules.Uploads;
+    using WeReviewApp.Modules.Uploads;
     public partial class Gallery : IUploadableFile
     {
         public Guid GalleryID { get; set; }

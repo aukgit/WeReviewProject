@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WereViewApp.Models.ViewModels {
+namespace WeReviewApp.Models.ViewModels {
     public class ForgotPasswordViewModel {
         [Required]
         [EmailAddress]

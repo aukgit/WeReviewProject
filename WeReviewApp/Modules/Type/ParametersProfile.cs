@@ -1,7 +1,7 @@
 using System.Collections.Specialized;
 using System.Web;
 
-namespace WereViewApp.Modules.Type {
+namespace WeReviewApp.Modules.Type {
     public class ParametersProfile {
         public NameValueCollection Params { get; set; }
         public HttpRequestBase Request { get; set; }

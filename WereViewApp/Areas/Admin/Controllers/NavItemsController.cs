@@ -3,10 +3,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.POCO.IdentityCustomization;
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     public class NavItemsController : Controller {
         private readonly ApplicationDbContext db = new ApplicationDbContext();
 

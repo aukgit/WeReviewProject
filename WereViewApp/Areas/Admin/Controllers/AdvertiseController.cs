@@ -5,12 +5,12 @@ using System.Net;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
-using WereViewApp.Controllers;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Modules.Uploads;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.Controllers;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Modules.Uploads;
+using WeReviewApp.WereViewAppCommon;
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     public class AdvertiseController : AdvanceController {
         #region Constructors
 

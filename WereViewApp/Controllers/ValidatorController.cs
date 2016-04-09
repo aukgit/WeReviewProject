@@ -4,15 +4,15 @@ using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.Session;
-using WereViewApp.Modules.Validations;
-using WereViewApp.WereViewAppCommon.Structs;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.Session;
+using WeReviewApp.Modules.Validations;
+using WeReviewApp.WereViewAppCommon.Structs;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     public class ValidatorController : Controller {
         #region WereView Validators
 

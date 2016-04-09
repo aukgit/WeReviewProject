@@ -1,6 +1,6 @@
 ﻿using System.Collections.Specialized;
 
-namespace WereViewApp.Modules.Extensions {
+namespace WeReviewApp.Modules.Extensions {
     public static class NameValueCollectionExtension {
         public static string Get(this NameValueCollection pair, string key, string defaultValue = "") {
             if (pair != null) {

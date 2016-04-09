@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace WereViewApp.Models.EntityModel
+namespace WeReviewApp.Models.EntityModel
 {
     public class Platform
     {

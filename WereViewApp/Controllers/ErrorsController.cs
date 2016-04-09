@@ -4,7 +4,7 @@ using System.Web.Mvc;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     [OutputCache(CacheProfile = "YearNoParam")]
     public class ErrorsController : Controller {
         // GET: Errors

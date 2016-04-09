@@ -3,11 +3,11 @@
 using System;
 using System.Web.Mvc;
 using DevMvcComponent.Error;
-using WereViewApp.Modules.Extensions.Context;
+using WeReviewApp.Modules.Extensions.Context;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     internal abstract class GenericController<TContext> : Controller where TContext : DevDbContext, new(){
         internal readonly TContext db;
         internal ErrorCollector ErrorCollector;

@@ -2,13 +2,13 @@
 using System.Linq;
 using DevMvcComponent.Error;
 using Microsoft.AspNet.Identity;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.UserError;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.POCO.Identity;
+using WeReviewApp.Models.ViewModels;
+using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.UserError;
 
-namespace WereViewApp.Modules.Validations {
+namespace WeReviewApp.Modules.Validations {
     public class DevUserValidator : Validator {
         private readonly RegisterViewModel _viewMdoel;
         private readonly ApplicationDbContext db;

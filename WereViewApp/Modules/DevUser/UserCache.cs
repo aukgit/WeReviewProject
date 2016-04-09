@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Modules.Role;
-using WereViewApp.Modules.Session;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Models.POCO.Identity;
+using WeReviewApp.Modules.Role;
+using WeReviewApp.Modules.Session;
 
-namespace WereViewApp.Modules.DevUser {
+namespace WeReviewApp.Modules.DevUser {
     public class UserCache {
         /// <summary>
         /// Creates a user cache from current logged in user.

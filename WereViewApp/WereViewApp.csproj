@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WereViewApp</RootNamespace>
-    <AssemblyName>WereViewApp</AssemblyName>
+    <RootNamespace>WeReviewApp</RootNamespace>
+    <AssemblyName>WeReviewApp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -274,7 +274,7 @@
     <Compile Include="Modules\Constants\TokenPurpose.cs" />
     <Compile Include="Modules\Extensions\ActionExecutingContextExtension.cs" />
     <Compile Include="Modules\Extensions\GraphApiExtension.cs" />
-    <Compile Include="Modules\Extensions\HttpSession.cs" />
+    <Compile Include="Modules\Extensions\HttpSessionStateBaseExtension.cs" />
     <Compile Include="Modules\Extensions\NameValueCollectionExtension.cs" />
     <Compile Include="Modules\Type\ParametersProfile.cs" />
     <Compile Include="Modules\Type\RouteProfile.cs" />

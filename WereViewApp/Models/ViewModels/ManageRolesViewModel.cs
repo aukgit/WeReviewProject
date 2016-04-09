@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using WereViewApp.Models.POCO.Identity;
+using WeReviewApp.Models.POCO.Identity;
 
-namespace WereViewApp.Models.ViewModels {
+namespace WeReviewApp.Models.ViewModels {
     public class ManageRolesViewModel {
         [Key]
         public long UserId { get; set; }

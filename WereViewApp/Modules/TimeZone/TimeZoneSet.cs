@@ -1,7 +1,7 @@
 ﻿using System;
-using WereViewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Models.POCO.IdentityCustomization;
 
-namespace WereViewApp.Modules.TimeZone {
+namespace WeReviewApp.Modules.TimeZone {
     public class TimeZoneSet {
         public TimeZoneInfo TimeZoneInfo { get; set; }
         public UserTimeZone UserTimezone { get; set; }

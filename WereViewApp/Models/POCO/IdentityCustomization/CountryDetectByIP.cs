@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WereViewApp.Models.POCO.IdentityCustomization {
+namespace WeReviewApp.Models.POCO.IdentityCustomization {
     public class CountryDetectByIP {
         [Key]
         public int CountryDetectByIPID { get; set; }

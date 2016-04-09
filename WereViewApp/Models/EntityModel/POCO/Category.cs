@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WereViewApp.Models.EntityModel
+namespace WeReviewApp.Models.EntityModel
 {
     using System;
     using System.Collections.Generic;

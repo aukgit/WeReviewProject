@@ -1,7 +1,7 @@
 ﻿
-using WereViewApp.Models.POCO.Identity;
+using WeReviewApp.Models.POCO.Identity;
 
-namespace WereViewApp.Models.EntityModel.ExtenededWithCustomMethods {
+namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
     public static class UserExtented {
         /// <summary>
         /// Gets current user's profile url.

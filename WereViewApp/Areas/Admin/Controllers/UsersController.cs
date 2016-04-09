@@ -3,14 +3,14 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WereViewApp.Controllers;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.Mail;
-using WereViewApp.Modules.Role;
+using WeReviewApp.Controllers;
+using WeReviewApp.Models.POCO.Identity;
+using WeReviewApp.Models.ViewModels;
+using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.Mail;
+using WeReviewApp.Modules.Role;
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     public class UsersController : BasicController {
         #region Constructors
 

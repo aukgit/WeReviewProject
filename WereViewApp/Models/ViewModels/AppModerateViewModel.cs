@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using WereViewApp.Models.EntityModel;
-namespace WereViewApp.Models.ViewModels {
+using WeReviewApp.Models.EntityModel;
+namespace WeReviewApp.Models.ViewModels {
     public class AppModerateViewModel {
         private long? _appId;
         private bool _isBlocked;

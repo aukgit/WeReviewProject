@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WereViewApp.Models.EntityModel.Derivables {
+namespace WeReviewApp.Models.EntityModel.Derivables {
     public interface IApp {
         string AppName { get; set; }
         byte PlatformID { get; set; }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WereViewApp.Models.POCO.IdentityCustomization {
+namespace WeReviewApp.Models.POCO.IdentityCustomization {
     public class RegisterCode {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid RegisterCodeID { get; set; }

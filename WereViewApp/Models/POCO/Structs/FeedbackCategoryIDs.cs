@@ -1,4 +1,4 @@
-﻿namespace WereViewApp.Models.POCO.Structs {
+﻿namespace WeReviewApp.Models.POCO.Structs {
     public struct FeedbackCategoryIDs {
 
         public const int AccountNotActivated = 1;

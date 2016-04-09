@@ -2,11 +2,11 @@
 
 using System.Web.Mvc;
 using DevMvcComponent.Error;
-using WereViewApp.Models.EntityModel;
+using WeReviewApp.Models.EntityModel;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     //[CompressFilter]
     //[CacheFilter(Duration = 3600)]
     public abstract class AdvanceController : Controller {

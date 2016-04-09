@@ -4,7 +4,7 @@ using System.Web;
 using DevMvcComponent;
 using ImageResizer;
 
-namespace WereViewApp.Modules.Uploads {
+namespace WeReviewApp.Modules.Uploads {
     public class UploadProcessor {
         private static readonly string AppPath = AppDomain.CurrentDomain.BaseDirectory;
 

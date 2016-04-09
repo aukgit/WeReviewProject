@@ -2,12 +2,12 @@
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using WereViewApp.Filter;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.IdentityCustomization;
-using WereViewApp.Modules.Role;
+using WeReviewApp.Filter;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Modules.Role;
 
-namespace WereViewApp.Areas.Admin.Controllers {
+namespace WeReviewApp.Areas.Admin.Controllers {
     public class ConfigController : Controller {
         private readonly DevIdentityDbContext db = new DevIdentityDbContext();
 

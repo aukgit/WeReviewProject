@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using DevTrends.MvcDonutCaching;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.EntityModel;
-using WereViewApp.Models.EntityModel.ExtenededWithCustomMethods;
-using WereViewApp.Models.EntityModel.Structs;
-using WereViewApp.Modules.Session;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.EntityModel;
+using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
+using WeReviewApp.Models.EntityModel.Structs;
+using WeReviewApp.Modules.Session;
+using WeReviewApp.WereViewAppCommon;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     public class PartialsController : AdvanceController {
 
         #region Drop downs

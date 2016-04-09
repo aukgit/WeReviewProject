@@ -1,10 +1,10 @@
 ﻿using System.Data.Entity.Core.Objects;
 
-namespace WereViewApp.Models.EntityModel {
+namespace WeReviewApp.Models.EntityModel {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using WereViewApp.Modules.Extensions.Context;
+    using WeReviewApp.Modules.Extensions.Context;
 
     public partial class WereViewAppEntities : DevDbContext {
         public WereViewAppEntities()

@@ -1,4 +1,4 @@
-﻿namespace WereViewApp.Modules.Message {
+﻿namespace WeReviewApp.Modules.Message {
     public struct Const {
         #region Error List
         /// <summary>

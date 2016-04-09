@@ -9,21 +9,21 @@ using System.Web.UI;
 using DevMvcComponent.Error;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
-using WereViewApp.Filter;
-using WereViewApp.Models.Context;
-using WereViewApp.Models.POCO.Identity;
-using WereViewApp.Models.ViewModels;
-using WereViewApp.Modules.Constants;
-using WereViewApp.Modules.DevUser;
-using WereViewApp.Modules.Extensions.IdentityExtension;
-using WereViewApp.Modules.Mail;
-using WereViewApp.Modules.Role;
-using WereViewApp.Modules.Session;
-using WereViewApp.Modules.Validations;
+using WeReviewApp.Filter;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.POCO.Identity;
+using WeReviewApp.Models.ViewModels;
+using WeReviewApp.Modules.Constants;
+using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.Extensions.IdentityExtension;
+using WeReviewApp.Modules.Mail;
+using WeReviewApp.Modules.Role;
+using WeReviewApp.Modules.Session;
+using WeReviewApp.Modules.Validations;
 
 #endregion
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     [Authorize]
     [CheckRegistrationComplete]
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]

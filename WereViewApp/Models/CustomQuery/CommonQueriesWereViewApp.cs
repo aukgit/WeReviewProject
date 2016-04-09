@@ -1,7 +1,7 @@
 ﻿using System;
-using WereViewApp.Models.EntityModel;
+using WeReviewApp.Models.EntityModel;
 
-namespace WereViewApp.Models.CustomQuery {
+namespace WeReviewApp.Models.CustomQuery {
     public class CommonQueriesWereViewApp :IDisposable {
         private readonly WereViewAppEntities db = new WereViewAppEntities();
 

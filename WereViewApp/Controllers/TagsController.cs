@@ -2,9 +2,9 @@
 using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Pagination;
-using WereViewApp.WereViewAppCommon;
+using WeReviewApp.WereViewAppCommon;
 
-namespace WereViewApp.Controllers {
+namespace WeReviewApp.Controllers {
     public class TagsController : AdvanceController {
         #region Declarations
 
