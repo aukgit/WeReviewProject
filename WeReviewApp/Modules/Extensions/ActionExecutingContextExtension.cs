@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using WereViewApp.Modules.Type;
@@ -46,7 +45,7 @@ namespace WereViewApp.Modules.Extensions {
             var value = (string)context.RouteData.DataTokens["controller"];
             return string.Equals(value, controllerName, StringComparison.OrdinalIgnoreCase);
         }
-        public static IDictionary<string,object> GetParameters(this ActionExecutingContext context) {
+        public static IDictionary<string, object> GetParameters(this ActionExecutingContext context) {
             return context.ActionParameters;
         }
 
@@ -58,10 +57,15 @@ namespace WereViewApp.Modules.Extensions {
         /// <param name="controller"></param>
         /// <param name="area"></param>
         public static void RedirectTo(this ActionExecutingContext context, string action, string controller, string area) {
-            context.Result = new RedirectToRouteResult(
-                               new RouteValueDictionary(new { controller = controller, action = action, area = area })
-                           );
-            context.Result.ExecuteResult(context.Controller.ControllerContext);
+            var httpContext = context.HttpContext;
+            if (httpContext != null && httpContext.Response != null) {
+                if (!httpContext.Response.IsRequestBeingRedirected) {
+                    context.Result = new RedirectToRouteResult(
+                        new RouteValueDictionary(new { controller = controller, action = action, area = area })
+                        );
+                    context.Result.ExecuteResult(context.Controller.ControllerContext);
+                }
+            }
         }
 
         /// <summary>
@@ -70,10 +74,15 @@ namespace WereViewApp.Modules.Extensions {
         /// <param name="context"></param>
         /// <param name="routeValueDictionary"></param>
         public static void RedirectTo(this ActionExecutingContext context, RouteValueDictionary routeValueDictionary) {
-            context.Result = new RedirectToRouteResult(
-                               new RouteValueDictionary(routeValueDictionary)
-                           );
-            context.Result.ExecuteResult(context.Controller.ControllerContext);
+            var httpContext = context.HttpContext;
+            if (httpContext != null && httpContext.Response != null) {
+                if (!httpContext.Response.IsRequestBeingRedirected) {
+                    context.Result = new RedirectToRouteResult(
+                        new RouteValueDictionary(routeValueDictionary)
+                        );
+                    context.Result.ExecuteResult(context.Controller.ControllerContext);
+                }
+            }
         }
 
         /// <summary>
@@ -84,9 +93,11 @@ namespace WereViewApp.Modules.Extensions {
         public static void RedirectPermanentTo(this ActionExecutingContext context, RouteValueDictionary routeValueDictionary) {
             var httpContext = context.HttpContext;
             if (httpContext != null && httpContext.Response != null) {
-                httpContext.Response.StatusCode = 301;
-                httpContext.Response.Status = "301 Moved Permanently";
-                RedirectTo(context, routeValueDictionary);
+                if (!httpContext.Response.IsRequestBeingRedirected) {
+                    httpContext.Response.StatusCode = 301;
+                    httpContext.Response.Status = "301 Moved Permanently";
+                    RedirectTo(context, routeValueDictionary);
+                }
             }
         }
 
@@ -100,28 +111,30 @@ namespace WereViewApp.Modules.Extensions {
         public static void RedirectPermanentTo(this ActionExecutingContext context, string action, string controller, string area) {
             var httpContext = context.HttpContext;
             if (httpContext != null && httpContext.Response != null) {
-                httpContext.Response.StatusCode = 301;
-                httpContext.Response.Status = "301 Moved Permanently";
-                RedirectTo(context, new RouteValueDictionary(new { controller = controller, action = action, area = area }));
+                if (!httpContext.Response.IsRequestBeingRedirected) {
+                    httpContext.Response.StatusCode = 301;
+                    httpContext.Response.Status = "301 Moved Permanently";
+                    RedirectTo(context,
+                        new RouteValueDictionary(new { controller = controller, action = action, area = area }));
+                }
             }
         }
 
-        public static void IsCurrentUrl(this ActionExecutingContext context, string action, string controller, string area) {
-            return IsCurrentUrl(context,
-                new Dictionary<string, string> {controller = controller, action = action, area = area});
+        public static bool IsCurrentUrl(this ActionExecutingContext context, string action, string controller, string area) {
+            var routeValues = new RouteValueDictionary(new { controller = controller, action = action, area = area });
+            return IsCurrentUrl(context, routeValues);
         }
 
-        public static bool IsCurrentUrl(this ActionExecutingContext context, Dictionary<string,string> routeValueDictionary) {
-            var controller = routeValueDictionary["controller"];
-            var area = routeValueDictionary["area"];
-            var action = routeValueDictionary["action"];
-            return (action == null || IsAction(context, action)) && (controller == null || IsController(context, controller)) && (area == null || IsArea(context, area));
+        public static bool IsCurrentUrl(this ActionExecutingContext context, RouteValueDictionary routeValueDictionary) {
+            var controller = (string)routeValueDictionary["controller"];
+            var area = (string)routeValueDictionary["area"];
+            var action = (string)routeValueDictionary["action"];
+            return (IsAction(context, action)) && (IsController(context, controller)) && (IsArea(context, area));
         }
 
         public static RouteProfile GetRouteProfile(this ActionExecutingContext context) {
             var routeProfile = new RouteProfile();
             var route = context.RouteData;
-
             routeProfile.Action = (string)route.DataTokens["action"];
             routeProfile.Controller = (string)route.DataTokens["controller"];
             routeProfile.Area = (string)route.DataTokens["area"];
@@ -129,5 +142,25 @@ namespace WereViewApp.Modules.Extensions {
             routeProfile.ActionDescriptor = context.ActionDescriptor;
             return routeProfile;
         }
+
+        public static ParametersProfile GetParametersProfile(this ActionExecutingContext context) {
+            var profile = new ParametersProfile();
+            profile.CurrentContext = context.HttpContext;
+            if (!profile.IsCurrentContextEmpty) {
+                profile.Request = context.HttpContext.Request;
+                profile.Session = context.HttpContext.Session;
+                if (!profile.IsRequestEmpty) {
+                    profile.Form = context.HttpContext.Request.Form;
+                    profile.Params = context.HttpContext.Request.Params;
+                    profile.RequestCookies = context.HttpContext.Request.Cookies;
+                }
+                profile.Response = context.HttpContext.Response;
+                if (!profile.IsResponseEmpty) {
+                    profile.ResponseCookies = context.HttpContext.Response.Cookies;
+                }
+            }
+            return profile;
+        }
+
     }
 }
