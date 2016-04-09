@@ -27,7 +27,7 @@ using FileSys = System.IO.File;
 
 namespace WeReviewApp.Controllers {
     [Authorize]
-    [RegistrationCompleteValidation]
+    [ValidateRegistrationComplete]
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class AppController : AdvanceController {
         #region Declaration

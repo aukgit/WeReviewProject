@@ -131,7 +131,7 @@ namespace WeReviewApp.Controllers {
 
         #region Like
         [Authorize]
-        [RegistrationCompleteValidation]
+        [ValidateRegistrationComplete]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult Like(long reviewId, long appId) {
@@ -170,7 +170,7 @@ namespace WeReviewApp.Controllers {
 
         #region Dilsike
         [Authorize]
-        [RegistrationCompleteValidation]
+        [ValidateRegistrationComplete]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult DisLike(long reviewId, long appId) {
@@ -209,7 +209,7 @@ namespace WeReviewApp.Controllers {
         #region Edit or modify record
 
         [Authorize]
-        [RegistrationCompleteValidation]
+        [ValidateRegistrationComplete]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Review review) {

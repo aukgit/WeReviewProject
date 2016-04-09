@@ -22,7 +22,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
         }
 
         [Authorize]
-        [RegistrationCompleteValidation]
+        [ValidateRegistrationComplete]
         public ActionResult CleanSystem() {
             return View();
         }

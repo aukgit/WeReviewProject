@@ -25,7 +25,7 @@ using WeReviewApp.Modules.Validations;
 
 namespace WeReviewApp.Controllers {
     [Authorize]
-    [RegistrationCompleteValidation]
+    [ValidateRegistrationComplete]
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class AccountController : Controller {
         #region Constants and Variable
