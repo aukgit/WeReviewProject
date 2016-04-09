@@ -1,17 +1,16 @@
 using System.Collections.Specialized;
 using System.Web;
-using System.Web.SessionState;
 
 namespace WeReviewApp.Modules.Type {
-    public class ParametersProfile {
+    public class ParametersProfileBase {
         public NameValueCollection Params { get; set; }
-        public HttpRequest Request { get; set; }
-        public HttpResponse Response { get; set; }
-        public HttpSessionState Session { get; set; }
+        public HttpRequestBase Request { get; set; }
+        public HttpResponseBase Response { get; set; }
+        public HttpSessionStateBase Session { get; set; }
         public HttpCookieCollection ResponseCookies { get; set; }
         public HttpCookieCollection RequestCookies { get; set; }
         public NameValueCollection Form { get; set; }
-        public HttpContext CurrentContext { get; set; }
+        public HttpContextBase CurrentContext { get; set; }
 
         public bool IsRequestEmpty {
             get { return Request == null; }

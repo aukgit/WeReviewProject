@@ -1,9 +1,8 @@
-﻿using System.Collections.Specialized;
-using System.Web;
+﻿using System.Web;
 
 namespace WeReviewApp.Modules.Extensions {
     public static class HttpSessionStateBaseExtension {
-        public static object Get(this HttpSessionStateBase pair, string key, object defaultValue = "") {
+        public static object Get<T>(this HttpSessionStateBase pair, string key, T defaultValue) {
             if (pair != null) {
                 var val = pair[key] ?? defaultValue;
                 return val;
@@ -11,8 +10,13 @@ namespace WeReviewApp.Modules.Extensions {
             return defaultValue;
         }
 
+        public static string GetAsString(this HttpSessionStateBase pair, string key, string defaultValue = "") {
+            return (string)Get(pair, key, defaultValue);
+        }
+
+
         public static int GetAsInt(this HttpSessionStateBase pair, string key, int defaultValue = 0) {
-            var val = (string)Get(pair, key, null);
+            var val = GetAsString(pair, key, null);
             if (val != null) {
                 var valueToReturn = 0;
                 if (int.TryParse(val, out valueToReturn)) {
@@ -23,7 +27,7 @@ namespace WeReviewApp.Modules.Extensions {
         }
 
         public static long GetAsLong(this HttpSessionStateBase pair, string key, long defaultValue = 0) {
-            var val = (string)Get(pair, key, null);
+            var val = GetAsString(pair, key, null);
             if (val != null) {
                 long valueToReturn = 0;
                 if (long.TryParse(val, out valueToReturn)) {
@@ -34,7 +38,7 @@ namespace WeReviewApp.Modules.Extensions {
         }
 
         public static decimal GetAsDecimal(this HttpSessionStateBase pair, string key, decimal defaultValue = 0) {
-            var val = (string)Get(pair, key, null);
+            var val = GetAsString(pair, key, null);
             if (val != null) {
                 decimal valueToReturn = 0;
                 if (decimal.TryParse(val, out valueToReturn)) {
@@ -45,7 +49,7 @@ namespace WeReviewApp.Modules.Extensions {
         }
 
         public static bool GetAsBool(this HttpSessionStateBase pair, string key, bool defaultValue = false) {
-            var val = (string)Get(pair, key, null);
+            var val = GetAsString(pair, key, null);
             if (val != null) {
                 bool valueToReturn;
                 if (bool.TryParse(val, out valueToReturn)) {

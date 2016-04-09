@@ -12,6 +12,7 @@ namespace WeReviewApp.Modules.Extensions {
         /// Returns BaseUrl and slash.
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="baseContext"></param>
         /// <returns></returns>
         public static string GetBaseUrl(this HttpContextBase baseContext) {
             if (baseContext != null) {

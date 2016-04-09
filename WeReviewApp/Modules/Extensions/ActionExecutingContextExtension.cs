@@ -142,24 +142,16 @@ namespace WeReviewApp.Modules.Extensions {
             routeProfile.ActionDescriptor = context.ActionDescriptor;
             return routeProfile;
         }
-
-        public static ParametersProfile GetParametersProfile(this ActionExecutingContext context) {
-            var profile = new ParametersProfile();
-            profile.CurrentContext = context.HttpContext;
-            if (!profile.IsCurrentContextEmpty) {
-                profile.Request = context.HttpContext.Request;
-                profile.Session = context.HttpContext.Session;
-                if (!profile.IsRequestEmpty) {
-                    profile.Form = context.HttpContext.Request.Form;
-                    profile.Params = context.HttpContext.Request.Params;
-                    profile.RequestCookies = context.HttpContext.Request.Cookies;
-                }
-                profile.Response = context.HttpContext.Response;
-                if (!profile.IsResponseEmpty) {
-                    profile.ResponseCookies = context.HttpContext.Response.Cookies;
-                }
+        /// <summary>
+        /// Can return null if HttpContext is null.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns>Return ParametersProfileBase or null if HttpContext is null.</returns>
+        public static ParametersProfileBase GetParametersProfile(this ActionExecutingContext context) {
+            if (context.HttpContext != null) {
+                return context.HttpContext.GetParametersProfile();
             }
-            return profile;
+            return null;
         }
 
     }
