@@ -8,7 +8,7 @@ namespace WeReviewApp.Filter {
 
         public override void OnActionExecuting(ActionExecutingContext filterContext) {
             var user = filterContext.HttpContext.User;
-            if (user != null && user.IsRegistrationComplete()) {
+            if (user != null && !user.IsRegistrationComplete()) {
                 filterContext.RedirectToActionIfDistinct("Verify", "Account", "");
             }
             base.OnActionExecuting(filterContext);
