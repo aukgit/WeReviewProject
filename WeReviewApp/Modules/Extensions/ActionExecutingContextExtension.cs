@@ -27,13 +27,16 @@ namespace WeReviewApp.Modules.Extensions {
         /// <param name="context"></param>
         /// <returns></returns>
         public static RouteProfile GetRouteProfile(this ActionExecutingContext context) {
-            var routeProfile = new RouteProfile();
-            routeProfile.Action = context.GetAreaName();
-            routeProfile.Controller = context.GetControllerName();
-            routeProfile.Area = context.GetAreaName();
-            routeProfile.ActionParameters = context.ActionParameters;
-            routeProfile.ActionDescriptor = context.ActionDescriptor;
-            return routeProfile;
+            return new RouteProfile(context);
+        }
+
+        /// <summary>
+        ///     Generates a RouteProfile consist
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static ShortRouteProfile GetShortRouteProfile(this ActionExecutingContext context) {
+            return new ShortRouteProfile(context);
         }
 
         #endregion
