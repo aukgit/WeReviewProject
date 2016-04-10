@@ -1,10 +1,11 @@
 ﻿@model WeReviewApp.Models.ViewModels.EmailResendViewModel
 @{
     ViewBag.title = "You have already registered!";
+    string icon = ViewBag.icon ?? Icons.Plane;
 }
 <div class="top-gap-2x"></div>
 <div class="f-em-23 green">
-    <i class="fa fa-paper-plane "></i> @ViewBag.title
+    <i class="@icon"></i> @ViewBag.title
 </div>
 @if (ViewBag.message == null) {
     <div class="top-gap"></div>

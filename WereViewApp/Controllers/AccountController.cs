@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Error;
+using FontAwesomeIcons;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using WeReviewApp.Filter;
@@ -142,18 +143,21 @@ namespace WeReviewApp.Controllers {
         public async Task<ActionResult> ResendConfirmationMail() {
             var lastSend = Session["last-send"] as DateTime?;
             if (lastSend == null) {
-                var user = UserManager.GetCurrentUser();
-                if (!user.IsRegistrationComplete) {
+                if (!User.IsRegistrationComplete()) {
+                    var user = User.GetUser();
                     SendConfirmationEmail(user);
                     ViewBag.message =
                         "A verification email has been sent to your email address. Please check the spam folder if necessary.";
+                    SignOutProgrammaticallyNonRedirect();
                 } else {
                     ViewBag.message =
                         "Your registration is already complete! You have confirmed your account verification successfully.";
+                    ViewBag.icon = FaIcons.CheckMark;
                 }
             } else {
                 ViewBag.message =
                     "You have already sent a verification code recently or your registration is complete.";
+                ViewBag.icon = Icons.CheckMark;
             }
             Session["last-send"] = DateTime.Now;
             return View("InboxCheck");

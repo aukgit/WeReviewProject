@@ -60,8 +60,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="DevMvcComponent, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DevMVCComponent.2.1.0\lib\DevMvcComponent.dll</HintPath>
+    <Reference Include="DevMvcComponent, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevMvcComponent.2.2.0\lib\DevMvcComponent.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DevTrends.MvcDonutCaching">
@@ -87,8 +87,8 @@
       <HintPath>..\packages\FluentScheduler.3.1.46\lib\net40\FluentScheduler.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FontAwesomeIcons, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FontAwesomeIcons.1.0.2\lib\FontAwesomeIcons.dll</HintPath>
+    <Reference Include="FontAwesomeIcons, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesomeIcons.1.0.3\lib\FontAwesomeIcons.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ImageResizer">
@@ -693,6 +693,11 @@
     <Content Include="Content\css\utilities.css.map">
       <DependentUpon>utilities.css</DependentUpon>
     </Content>
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
     <None Include="Content\Less\ckedit-skin-bootstrap.less" />
     <Content Include="Content\Less\color-fonts.less" />
     <Content Include="Content\Less\footer-fixing.less" />
@@ -866,11 +871,6 @@
     <Content Include="Fonts\fontawesome-webfont.svg" />
     <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Sitemap.xml" />
-    <Content Include="Content\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Views\Config\CleanSystem.cshtml" />
     <Content Include="Areas\Admin\Views\Apps\Moderate.cshtml" />
     <Content Include="Content\css\front-developer.css.map">
@@ -881,6 +881,19 @@
     </Content>
     <Content Include="Content\Less\Spinner.less" />
     <Content Include="Content\Less\toastr.less" />
+    <Content Include="Content\Less\FontAwesome\variables.less" />
+    <Content Include="Content\Less\FontAwesome\stacked.less" />
+    <Content Include="Content\Less\FontAwesome\rotated-flipped.less" />
+    <Content Include="Content\Less\FontAwesome\path.less" />
+    <Content Include="Content\Less\FontAwesome\mixins.less" />
+    <Content Include="Content\Less\FontAwesome\list.less" />
+    <Content Include="Content\Less\FontAwesome\larger.less" />
+    <Content Include="Content\Less\FontAwesome\icons.less" />
+    <Content Include="Content\Less\FontAwesome\font-awesome.less" />
+    <Content Include="Content\Less\FontAwesome\fixed-width.less" />
+    <Content Include="Content\Less\FontAwesome\core.less" />
+    <Content Include="Content\Less\FontAwesome\bordered-pulled.less" />
+    <Content Include="Content\Less\FontAwesome\animated.less" />
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />
@@ -1359,6 +1372,19 @@
     <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\Scss\FontAwesome\font-awesome.scss" />
+    <Content Include="Content\Scss\FontAwesome\_variables.scss" />
+    <Content Include="Content\Scss\FontAwesome\_stacked.scss" />
+    <Content Include="Content\Scss\FontAwesome\_rotated-flipped.scss" />
+    <Content Include="Content\Scss\FontAwesome\_path.scss" />
+    <Content Include="Content\Scss\FontAwesome\_mixins.scss" />
+    <Content Include="Content\Scss\FontAwesome\_list.scss" />
+    <Content Include="Content\Scss\FontAwesome\_larger.scss" />
+    <Content Include="Content\Scss\FontAwesome\_icons.scss" />
+    <Content Include="Content\Scss\FontAwesome\_fixed-width.scss" />
+    <Content Include="Content\Scss\FontAwesome\_core.scss" />
+    <Content Include="Content\Scss\FontAwesome\_bordered-pulled.scss" />
+    <Content Include="Content\Scss\FontAwesome\_animated.scss" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <Content Include="Views\Shared\EditorTemplates\Double.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
