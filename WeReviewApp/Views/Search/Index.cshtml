@@ -1,0 +1,153 @@
+﻿@using WeReviewApp.Models.EntityModel
+@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
+@model WeReviewApp.Models.ViewModels.SearchViewModel
+@{
+    string currentUrl = Html.GetCurrentUrlWithHostName();
+    ViewBag.Title = "Search app reviews";
+    bool isModelNotNull = Model != null;
+    bool isEmptySearchString = true; //isModelNotNull && ;
+
+    if (isModelNotNull) {
+        isEmptySearchString = string.IsNullOrEmpty(Model.SearchQuery);
+    }
+}
+<div class="row">
+    <div class="app-detail app-title-wrapper col-md-12">
+        <div class="app-title-row float-left">
+            <a href="@currentUrl" class="app-title" title="Search app reviews">
+                <h1 title="Search app reviews">
+                    <strong title="Search app reviews">
+                        <em title="Search app reviews">Search</em>
+                        <em class="seo-hide">
+                            <strong title="Search app reviews">
+                                Search app reviews
+                            </strong> or
+                            <strong title="search reviews for apps">search reviews for apps</strong> or
+                            <strong title="search reviews">search reviews</strong>
+                        </em>
+                    </strong>
+                </h1>
+            </a>
+            @if (!isEmptySearchString) {
+                <a class="app-category">
+                    <h2 class="category">
+                        <q class="search-quote">
+                            @Model.DisplayStringToUser
+                        </q>
+                    </h2>
+                </a>
+            }
+        </div>
+    </div>
+
+</div>
+
+<div>
+    <div class="search-box-wrapper">
+        <form role="search" action="@AppVar.Url/Search" title="Search in app review website" method="post">
+            <div class="input-group">
+                @Html.AntiForgeryToken()
+                @if (!isEmptySearchString) {
+                    <input type="text" value="@Model.SearchQuery" class="form-control" placeholder="Search for mobile apps" name="SearchQuery" autofocus>
+                } else {
+                    <input type="text" class="form-control" placeholder="Search for mobile apps" name="SearchQuery" autofocus>
+                }
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <i class="glyphicon glyphicon-search"></i>
+                        Search
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    @if (!isEmptySearchString && Model.IsAppExist) {
+        <ul class="filter">
+            <li>
+                <a class="active" href="#" data-filter="*">All</a>
+            </li>
+            <li>
+                <a href="#" data-filter="[data-app-type='fa fa-android']">
+                    <i class="fa fa-android"></i>
+                    <span class="hidden-sm hidden-xs">Android Apps</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-filter="[data-app-type='fa fa-apple']">
+                    <i class="fa fa-apple"></i>
+                    <span class="hidden-sm hidden-xs">Apple Apps</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" data-filter="[data-app-type='fa fa-windows']">
+                    <i class="fa fa-windows"></i>
+                    <span class="hidden-sm hidden-xs">Windows Apps</span>
+                </a>
+            </li>
+        </ul>
+        <div class="app-date-seperation row seo-optimize">
+            <div class="col-md-10"></div>
+            <div class="col-md-2  text-right">
+                <a href="#">
+                    <h1 class="bold-important month-seperation regular-color"></h1>
+                </a>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="archive-app-collection-wrapper">
+            <ul class="archive-app-collection-list pagination-required regular-color search-page-apps-list seo-optimize">
+                @if (isEmptySearchString || !Model.IsAppExist) {
+                    <li class="no-result slim-app-view">
+                        @if (!isEmptySearchString && Model.SearchQuery.Length < 3) {
+                            <div class="f-em-11 gray">
+                                Please extend your search text to get more appropriate results.
+                            </div>
+                        } else {
+                            <div class="f-em-11 gray">
+                                Please write in the textbox to get more appropriate results.
+                            </div>
+                        }
+                    </li>
+                } else {
+                    foreach (App app in Model.FoundApps) {
+                        Platform platform = app.GetPlatform();
+                        <li class="slim-app-view" data-app-type="@platform.Icon">
+                            <a class="app-url" href="@app.GetAbsoluteUrl()">
+                                <div class="app-icon">
+                                    <img src="@app.SearchIconLocation" alt="@app.AppName" />
+                                </div>
+                                <div class="app-content">
+                                    <h1 class="app-title">
+                                        <i class="fa @platform.Icon"></i>
+                                        @app.AppName
+                                        <span class="paragraph-end"></span>
+                                    </h1>
+                                    <h3>
+                                        @app.User.UserName
+                                        <span class="paragraph-end"></span>
+                                    </h3>
+                                    <span class="rating">
+                                        <i class="fa fa-star"></i>
+                                        @app.AvgRating/5 from @app.ReviewsCount users
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                    }
+                }
+            </ul>
+            @*@if (isModelNotNull && Model.IsAppExist) {
+                    <div class="pagination-wrapper text-center">
+                        <ul class="pagination">
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                }*@
+        </div>
+    </div>
+</div>

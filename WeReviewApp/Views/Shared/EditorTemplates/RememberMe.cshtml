@@ -1,0 +1,58 @@
+@model Boolean?
+@{    
+    bool isRequired = ViewData.ModelMetadata.IsRequired;
+    string isRequiredStar = isRequired ? "*" : "",
+        prop = ViewData.ModelMetadata.PropertyName.ToString(),
+        propLower = prop.ToLower(),
+        styleProperty = propLower,
+        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+        description = ViewData.ModelMetadata.Description,
+        templateName = "rememberme";
+    var htmlAttributes = new RouteValueDictionary();
+
+    if (ViewBag.@class != null) {
+        htmlAttributes.Add("class", ViewBag.@class);
+    }
+
+    if (ViewBag.type != null) {
+        htmlAttributes.Add("type", ViewBag.type);
+    }
+
+    if (ViewBag.label != null) {
+        displayName = ViewBag.label;
+    }
+
+    if (ViewBag.labelColumn == null) {
+        ViewBag.labelColumn = "col-md-offset-2";
+    }
+    if (ViewBag.textColumn == null) {
+        ViewBag.textColumn = "col-md-10";
+    }
+    if (ViewBag.placeholder != null) {
+        htmlAttributes.Add("placeholder", ViewBag.placeholder);
+    } else {
+        if (isRequired) {
+            htmlAttributes.Add("placeholder", displayName + isRequiredStar);
+        } else {
+            htmlAttributes.Add("placeholder", "[" + displayName + "]");
+        }
+    }
+    htmlAttributes.Add("title", htmlAttributes["placeholder"]);
+    htmlAttributes.Add("data-prop", styleProperty);
+    htmlAttributes.Add("data-template", templateName);
+}
+
+<div class="form-group form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty">
+    <div class="controls dev-plugin">
+        <div class="@ViewBag.labelColumn @ViewBag.textColumn remember-me-box">
+            <label class="control-label form-label @styleProperty" for="@styleProperty">
+                @Html.CheckBox("", Model.HasValue && Model.Value, htmlAttributes)
+                @displayName
+            </label>
+            @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
+            <div class="pull-right">
+                <button title="Sign in" class="btn btn-primary"><i class="fa fa-sign-in"></i> Login</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+﻿@using WeReviewApp.Models.EntityModel
+@model Platform
+
+@{
+	string nameOftheRecord = Html.DisplayFor(model => model.PlatformName).ToString();
+
+    ViewBag.Title = "Details of " + nameOftheRecord;
+	string title = ViewBag.Title;
+    string subtitle = ViewBag.Title;
+	string controller = (string)ViewBag.controller;
+	string viewName = "Details";
+
+}
+<h1 class="h2 top-margin-space">
+	<span class="glyphicon glyphicon-print"></span>
+	@Html.SamePageLink(title, subtitle, false)
+</h1>
+<hr />
+<h3 class="h4">To edit the details please click on the edit button.</h3>   
+<div class="form-horizontal">		
+	<div class="form-group">
+		<div class="col-md-10">
+			<div class="btn-group">
+				<a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+				<a href="@Url.Action("Edit", new { id = Model.PlatformID })" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+			</div>
+		</div>	
+		<div class="col-md-2">
+			<a href="@Url.Action("Delete", new { id = Model.PlatformID })" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>			
+		</div>	
+	</div>
+	<table class="table table-hover top-margin-space">
+		<thead>
+            <tr>
+                <th>Properties</th>
+                <th></th>
+                <th>Values</th>
+            </tr>
+        </thead>
+		<tbody>			
+	
+			
+				<tr>
+					<td class="dev-label-property">
+						@Html.DisplayNameFor(model => model.PlatformName)
+					</td>
+					<td>:</td>
+					<td class="dev-label-value">
+						@Html.DisplayFor(model => model.PlatformName)
+					</td>
+				</tr>	
+            <tr>
+                <td class="dev-label-property">
+                    @Html.DisplayNameFor(model => model.Icon)
+                </td>
+                <td>:</td>
+                <td class="dev-label-value">
+                    @Html.DisplayFor(model => model.Icon)
+                </td>
+            </tr>	
+			
+		</tbody>
+    </table> 
+	<div class="form-group">
+		<div class="col-md-10">
+			<div class="btn-group">
+				<a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+				<a href="@Url.Action("Edit", new { id = Model.PlatformID })" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+			</div>
+		</div>	
+		<div class="col-md-2">
+			<a href="@Url.Action("Delete", new { id = Model.PlatformID })" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>			
+		</div>	
+	</div>
+</div>

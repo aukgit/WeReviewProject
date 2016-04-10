@@ -1,0 +1,51 @@
+@model object
+
+@{
+    var isRequired = ViewData.ModelMetadata.IsRequired;
+    string isRequiredStar = isRequired ? "*" : "",
+        prop = ViewData.ModelMetadata.PropertyName.ToString(),
+        propLower = prop.ToLower(),
+        styleProperty = propLower,
+        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+        description = ViewData.ModelMetadata.Description,
+        templateName = "search",
+        icon = ViewBag.icon ?? "glyphicon glyphicon-search";
+
+    var htmlAttributes = new RouteValueDictionary();
+
+    if (ViewBag.@class != null) {
+        htmlAttributes.Add("class", "form-control url-input-search " + ViewBag.@class);
+    } else {
+        htmlAttributes.Add("class", "form-control url-input-search");
+    }
+
+    if (ViewBag.@type != null) {
+        htmlAttributes.Add("type", ViewBag.@type);
+    }
+    if (ViewBag.placeholder != null) {
+        htmlAttributes.Add("placeholder", ViewBag.placeholder);
+    } else {
+        htmlAttributes.Add("placeholder", "Search...");
+    }
+    if (ViewBag.Value != null) {
+        htmlAttributes.Add("Value", ViewBag.Value);
+    }
+    if (ViewBag.label != null) {
+        displayName = ViewBag.label;
+    }
+    if (ViewBag.textColumn == null) {
+        ViewBag.textColumn = "col-md-12";
+    }
+    htmlAttributes.Add("title", htmlAttributes["placeholder"]);
+    htmlAttributes.Add("data-prop", styleProperty);
+    htmlAttributes.Add("data-template", templateName);
+}
+
+<div class="form-group form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty">
+    <div class="controls dev-plugin">
+        <div class="@ViewBag.textColumn search-url-div-col">
+            @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
+            <button class="btn btn-success" title="Search..."><i class="@icon"></i> Search</button>
+        </div>
+    </div>
+</div>

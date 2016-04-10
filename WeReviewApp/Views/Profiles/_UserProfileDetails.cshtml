@@ -1,0 +1,45 @@
+﻿@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
+@using WeReviewApp.Models.POCO.Identity
+@{
+    ApplicationUser user = (ApplicationUser)ViewData["user"];
+    string username = user.UserName;
+    string urlToFirstpage = user.GetProfileUrl();
+}
+<table class="top-gap-2x ">
+    <tbody>
+        <tr>
+            <td class="bold">Name</td>
+            <td class="indent-1 red">:</td>
+            <td class="indent-1">
+                <a title="Apps of @user.DisplayName" href="@urlToFirstpage">@user.DisplayName</a>
+            </td>
+        </tr>
+        <tr>
+            <td class="bold">
+                User name
+            </td>
+            <td class="indent-1 red">:</td>
+            <td class="indent-1"> @username</td>
+        </tr>
+        <tr>
+            <td class="bold">Email</td>
+            <td class="indent-1 red">:</td>
+            <td class="indent-1"> @user.Email.Replace("@", " {at} ")</td>
+        </tr>
+        <tr>
+            <td class="bold">Member since</td>
+            <td class="indent-1 red">:</td>
+            <td class="indent-1"> @Html.DisplayDate(true, user.CreatedDate)</td>
+        </tr>
+        <tr>
+            <td class="bold">Profile Url</td>
+            <td class="indent-1 red">:</td>
+            <td class="indent-1"> <a href="@urlToFirstpage">@urlToFirstpage</a></td>
+        </tr>
+        <tr>
+            <td class="bold">Reviews</td>
+            <td class="indent-1 red">:</td>
+            <td class="indent-1"> <a href="@urlToFirstpage">@urlToFirstpage</a></td>
+        </tr>
+    </tbody>
+</table>

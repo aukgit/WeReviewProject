@@ -1,0 +1,9 @@
+﻿@model WeReviewApp.Models.POCO.IdentityCustomization.Navigation
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@Html.Partial("_SuccessMessage")
+
+
+@Html.EditorFor(m => m.Name)
+@Html.EditorFor(m => m.ElementClasses)
+@Html.EditorFor(m => m.ElementID)

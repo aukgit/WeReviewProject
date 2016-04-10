@@ -1,0 +1,35 @@
+﻿@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
+@model List<WeReviewApp.Models.EntityModel.Tag>
+@Html.SamePageLinkWithIcon("Tags", "Tags", "fa fa-tags")
+<div class="app-date-seperation row seo-optimize">
+    <div class="col-md-10"></div>
+    <div class="col-md-2  text-right">
+        <a>
+            <h1 class="bold-important month-seperation regular-color"></h1>
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="archive-app-collection-wrapper">
+        <ul class="archive-app-collection-list pagination-required regular-color search-page-apps-list seo-optimize">
+            @foreach (var tag in Model) {
+                <li class="slim-app-view tag">
+                    <a class="app-url" href="@tag.GetTagUrl()" title="mobiles apps tags with @tag.TagDisplay">
+                        <div class="app-content">
+                            <h1 class="app-title" title="mobiles apps tags with @tag.TagDisplay">
+                                <i class="fa fa-tag"></i>
+                                <strong class="bold-important" title="mobiles apps tags with @tag.TagDisplay">@tag.TagDisplay</strong>
+                            </h1>
+                        </div>
+                    </a>
+                </li>
+            }
+        </ul>
+        <div class="clear"></div>
+        <div class="pagination-wrapper text-center">
+            <ul class="pagination">
+                @ViewBag.paginationHtml
+            </ul>
+        </div>
+    </div>
+</div>

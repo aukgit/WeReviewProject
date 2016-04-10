@@ -1,0 +1,15 @@
+﻿@model CoreSetting
+@{
+    string tab = ViewBag.tab;
+}
+<div class="fade in tab-pane" id="urls-tab">
+    @ViewBag.backBtn
+    @ViewBag.stateMessage
+    @Html.Hidden("tab", tab)
+    @Html.EditorFor(model => model.LiveUrl)
+    @Html.EditorFor(model => model.TestingUrl)
+    @Html.EditorFor(model => model.ServicesControllerUrl)
+    @Html.EditorFor(model => model.ApiControllerUrl)
+    @Html.EditorFor(model => model.IsInTestingEnvironment)
+    @ViewBag.backBtn
+</div>

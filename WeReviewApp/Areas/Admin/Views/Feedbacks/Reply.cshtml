@@ -1,0 +1,122 @@
+﻿@using WeReviewApp.Models.EntityModel
+@using WeReviewApp.Models.POCO.IdentityCustomization
+@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
+@model Feedback
+
+@{
+    ViewBag.Title = "Replying to " + Html.DisplayFor(model => model.Email);
+    string title = ViewBag.Title;
+    string subtitle = ViewBag.Title;
+    var token = Html.AntiForgeryToken();
+    string controller = (string)ViewBag.controller;
+    string viewName = "Reply";
+    bool dropDownDynamic = (bool)ViewBag.dropDownDynamic;
+    string partialController = ViewBag.dynamicLoadPartialController;
+    var feedbackAppReviewRelation = (FeedbackAppReviewRelation)ViewBag.relation;
+    var status = @Model.GetStatus();
+}
+
+<div class="feedback-page">
+    @Html.SamePageLinkWithIcon(title, subtitle, "sky-blue fa fa-reply")
+    <div class="top-gap-2x"></div>
+    <hr />
+    @using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create-" + ViewBag.Title, role = "form" })) {
+        <div class="form-horizontal">
+            @token
+            @Html.Partial("_SuccessMessage")
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(n => n.Email)
+            @Html.HiddenFor(n => n.PostedDate)
+            @Html.HiddenFor(n => n.Message)
+            @Html.HiddenFor(n => n.PostedDate)
+            @Html.HiddenFor(n => n.Name)
+            @Html.HiddenFor(n => n.Username)
+            @Html.HiddenFor(n => n.RateUrgency)
+            @Html.HiddenFor(n => n.Subject)
+            @Html.HiddenFor(n => n.HasMarkedToFollowUpDate)
+            @Html.HiddenFor(n => n.IsViewed)
+            @Html.HiddenFor(n => n.HasAppOrReviewReport)
+            @Html.HiddenFor(n => n.FollowUpdateDate)
+            @Html.HiddenFor(n => n.FeedbackCategoryID)
+            @Html.HiddenFor(n => n.FeedbackID)
+
+
+            <div class="controls-left-aligned margin-l-20">
+                <div class="form-group">
+                    <div class="control-label">
+                        <i class="fa fa-mail-reply red"></i>
+                        Replying to @@"@Model.Name" &lt;<i class="fa fa-envelope deepskyblue"></i>@Model.Email&gt;
+                    </div>
+                    <div class="control-label">
+                        <span>Subject :</span> <u class="bold">@Model.Subject</u>
+                    </div>
+                    <div class="control-label">
+                        <span>Status :</span> <span class="label label-@status.StyleClass">@status.Status</span>
+                    </div>
+                    <div class="control-label">
+                        <span>Category :</span> <span class="label label-info">@Model.GetCategory()</span>
+                    </div>
+                    <q class="control-label message">
+                        @Model.Message
+                    </q>
+                    <div class="control-label">
+                        @Html.RadioButton("Status", "in-process", Model.IsInProcess)
+                        @Html.Label("Is in process")
+                        @Html.RadioButton("Status", "is-solved", Model.IsSolved)
+                        @Html.Label("Is solved")
+                        @Html.RadioButton("Status", "is-unsolved", Model.IsUnSolved)
+                        @Html.Label("Is unsolved")
+                    </div>
+                    <div class="control-label message">
+                        @Html.EditorFor(n => n.Response, "Multiline", new { @class = "big-multiline", @labelColumn = "col-md-12", @textColumn = "col-md-12" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class=" margin-l-20">
+                    @if (Model.HasAppOrReviewReport) {
+                        var app = (App)ViewBag.app;
+
+                        if (feedbackAppReviewRelation.HasAppId && app != null) {
+                            <div>Reported App : <q>@app.AppName</q></div>
+                            <a class="btn btn-info" href="@app.GetAbsoluteUrl()">View App</a>
+                            <a class="btn btn-danger" onclick=" return confirm('Are you sure you want to block this user?') " href="@Url.Action("UserBlock", "Users", new { area = "Admin", id = app.PostedByUserID })">Block User</a>
+                            <a class="btn btn-success" onclick=" return confirm('Are you sure ?') " href="/admin/@controller/UnBlockApp/@app.AppID">Unblock App</a>
+                            <a class="btn btn-danger" onclick=" return confirm('Are you sure you want to block this app(cannot be undone)?') " href="/admin/@controller/BlockApp/@app.AppID">Block app</a>
+                        } else {
+                            var review = (Review)ViewBag.review;
+                            if (review != null) {
+                                <div>Reported Review : <q>@review.Comments</q>
+                                </div>
+                                <a class="btn btn-danger" onclick=" return confirm('Are you sure?') " href="@Url.Action("UserBlock", "Users", new {area = "Admin", id = review.UserID})">Block User</a>
+                                <a class="btn btn-info" href="@app.GetAbsoluteUrl()">View App</a>
+                                <a class="btn btn-danger" onclick=" return confirm('Are you sure?') " href="/admin/@controller/BlockReview/@review.ReviewID">Delete review</a>
+                            } else {
+                                <label class="label label-info f-em-12">This review is already removed and taken care of.</label>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="btn-group">
+                        <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+                        <div class="input-group-btn inline">
+                            <button title="Save and create new one" class="btn btn-success"><i class="fa fa-reply"></i> Reply</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@Html.Partial("_ValidatorCommonForm", new ViewDataDictionary {
+    {"token",token}
+})
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

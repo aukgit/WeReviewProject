@@ -1,0 +1,82 @@
+@model object
+@{
+    bool isRequired = ViewData.ModelMetadata.IsRequired;
+    string isRequiredStar = isRequired ? "*" : "",
+        prop = ViewData.ModelMetadata.PropertyName.ToString(),
+        propLower = prop.ToLower(),
+        styleProperty = propLower,
+        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+        description = ViewData.ModelMetadata.Description,
+        templateName = "dropdown-dynamic",
+        spinnerIcon = ViewBag.spinnerIcon ?? styleProperty  + " glyphicon glyphicon-refresh glyphicon-spin",
+        loadingText = ViewBag.loadingText ?? "Requesting data...";
+
+    if (ViewBag.@class == null) {
+    	ViewBag.@class = "btn-success";
+    }
+
+    if (ViewBag.liveSearch == null) {
+        ViewBag.liveSearch = "true";
+    }
+    if (ViewBag.isPicker == null) {
+        ViewBag.isPicker = "true"; // true , false to make it selectpicker or not
+    }
+    if (ViewBag.id == null) {
+        ViewBag.id = ViewData.ModelMetadata.PropertyName;
+    }
+    if (ViewBag.dynamicLoad == null) {
+        ViewBag.dynamicLoad = "true";
+    }
+    if (ViewBag.isDependable == null) {
+        ViewBag.isDependable = "false";
+    }
+    if (ViewBag.label != null) {
+        displayName = ViewBag.label;
+    }
+    if (ViewBag.labelColumn == null) {
+        ViewBag.labelColumn = "col-md-2";
+    }
+    if (ViewBag.textColumn == null) {
+        ViewBag.textColumn = "col-md-10";
+    }
+    if (ViewBag.isHtmlRequest == null) {
+        ViewBag.isHtmlRequest = "false";
+    }
+    //ViewBag.loadingText 
+    
+    
+}
+<div data-json-combo-plugin="true" class="form-group form-row @styleProperty @templateName-type dynamic-select-container" data-type="@templateName" data-dynamic-select-container="true" data-prop="@styleProperty">
+    <div class="controls dev-plugin">
+        <label data-progress-bar="true" data-prop="@styleProperty">
+            <a data-toggle="tooltip" title="@loadingText" class="tooltip-show @styleProperty no-hover">
+                <span data-display="@displayName" class="@spinnerIcon"></span>
+            </a>
+            @loadingText
+        </label>
+        <div data-hidable="true" data-prop="@styleProperty">
+            <label data-prop="@styleProperty" class="@ViewBag.textColumn control-label" for="@styleProperty">
+                @displayName
+                <span class="red">@isRequiredStar</span>
+            </label>
+            <div class="@ViewBag.textColumn select-holding-div select-dynamic-holding-div">
+                <div class="d-select-ip-@styleProperty dynamic-select-load"
+                     data-prop="@styleProperty"
+                     data-dev-dynamic-select="@ViewBag.dynamicLoad"
+                     data-url="@ViewBag.url"
+                     data-value="@Model"
+                     data-additional-css="@(ViewBag.@class)"
+                     data-live-search="@ViewBag.liveSearch"
+                     data-dependable="@ViewBag.isDependable"
+                     data-dependable-prop-name="@styleProperty"
+                     data-id="@ViewBag.id"
+                     data-is-selectpicker="@ViewBag.isPicker">
+                </div>
+                @if (description != null) {
+                    <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show"><span class="description-icon"></span></a>
+                }
+                @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input break-line" })
+            </div>
+        </div>
+    </div>
+</div>

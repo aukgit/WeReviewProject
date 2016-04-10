@@ -1,0 +1,305 @@
+﻿@import "fonts-rimixens.less";
+
+@header-sm-height : 58px;
+@inital-logo-gap : 8px;
+
+
+.header-2 .logo {
+    .margin-top(@inital-logo-gap);
+}
+
+
+
+.h1-no-gap {
+    margin: 0;
+    padding: 0;
+}
+
+.h1-no-gap-small {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+}
+
+.website-head-title {
+    padding: 0;
+    font-size: 1.5em;
+    font-weight: normal;
+    color: black;
+    .margin(8px, 0px,0px, 0px);
+    .ubuntu-light-font;
+
+    strong {
+        font-weight: normal;
+    }
+}
+
+@media (min-width: @screen-sm) and (max-width: 990px) {
+    .website-head-title {
+        margin: 0;
+    }
+}
+
+
+
+@media (max-width: @screen-sm) {
+    .website-head-title {
+        .margin(26px, 0px,0px, 0px);
+    }
+}
+
+//menu start
+.header-2 header nav li {
+    a {
+        //.padding(16px,10px,10px,10px);
+        .padding(19px,10px,10px,10px);
+    }
+
+    @media (max-width:@screen-sm) {
+        a {
+            //.padding(16px,10px,10px,10px);
+            .padding(7px,10px,7px,10px);
+            //margin:0;
+        }
+        /*height: 32px;
+        position: relative;
+        top: 0;
+        background-color:white;*/
+    }
+    //.height(40px);
+    &.btn-type {
+        a {
+            .padding(1px, 12px);
+        }
+
+        position: relative;
+        .bottom(5px); //7 apr
+    }
+}
+
+//menu fix
+@media (min-width: 769px) {
+    .jetmenu.menu li:not(.showhide) {
+        display: inline-block !important;
+    }
+}
+
+.header-2 .jetmenu > li > .megamenu, .jetmenu ul.dropdown {
+    .top(52px);
+}
+
+.jetmenu {
+    //background-color: white;
+    h1 {
+        color: @regular-font-color;
+    }
+
+    strong {
+        font-weight: normal;
+    }
+
+    ul.dropdown li:hover > a, ul.dropdown li:hover > form > a {
+        background-color: @bg-menu-li-hover-color;
+    }
+}
+
+.menu {
+    a {
+        cursor: pointer;
+    }
+
+    .navbar-form {
+        margin: 0;
+        padding: 0;
+
+        .input-group {
+            display: table;
+        }
+    }
+
+    .btn {
+        font-size: 14px;
+        .line-height(32.5px);
+        .min-width(42px);
+        padding: 0;
+        color: @menu-btn-hover-color;
+        //.line-height(3);
+        .height(34.2px);
+    }
+    // menu button hover
+    .btn:hover {
+        color: @menu-btn-hover-color;
+        background-color: @bg-menu-btn-hover-color;
+        //font-weight: bold;
+    }
+    //post an app button
+    .post-app-btn {
+        .height(33px);
+        //line-height: 0;
+        background-color: @primary-color;
+    }
+}
+// fix the overlay from btns
+.header-2 nav li.btn-type a:after {
+    background-color: transparent;
+}
+
+.jetmenu ul.dropdown span:nth-child(2) {
+    display: inline-block;
+}
+//bigger than tab
+@media screen and (max-width: 990px) {
+    .search-bar {
+        input {
+            .max-width(134px);
+        }
+    }
+}
+
+.header-2 {
+    .is-sticky {
+        .logo {
+            margin-top: 0;
+        }
+    }
+}
+
+.is-sticky {
+    nav li a {
+        padding: 30px 13px !important;
+    }
+
+    .search-bar {
+        position: relative;
+        top: -20px;
+    }
+
+    .post-app-btn {
+        line-height: 0;
+        padding: 17px 14px !important;
+        /* margin-top: 0; */
+        position: relative;
+        .top(-20px);
+    }
+
+    .navbar-form {
+        position: relative;
+        bottom: inherit;
+    }
+
+    .website-head-title {
+        margin: 16% 0 0 0;
+    }
+}
+
+@media screen and (max-width: @screen-sm) {
+    .search-bar {
+        input {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .top(-7px);
+    }
+
+    .search-bar, .is-sticky .search-bar {
+        position: relative;
+        clear: both;
+    }
+
+    .is-sticky .search-bar {
+        top: 0;
+    }
+
+    .jetmenu {
+        //background-color: white;
+        .fa.fa-angle-right {
+            font-size: 2em;
+        }
+        /*overflow: overlay;
+        height: 310px;*/
+    }
+
+    .is-sticky {
+        nav li a {
+            padding: 10px !important;
+        }
+
+        .post-app-btn-wrapper {
+            margin-top: 10px;
+        }
+
+        .post-app-btn {
+            //.top(-7px);
+            top: 0;
+            bottom: 0;
+        }
+    }
+
+    .menu {
+        .post-app-btn {
+            //.bottom(7px);
+            bottom: 0;
+        }
+    }
+
+    .header-2 header nav li {
+        &.btn-type {
+            position: relative;
+            //bottom: 0;
+            top: 0;
+        }
+    }
+}
+
+//overriding
+@media (min-width: @screen-sm) {
+    .jetmenu ul.dropdown li a {
+        .height(34px);
+        line-height: .75;
+
+        .badge {
+            .bottom(4px);
+            position: relative;
+        }
+    }
+}
+
+@media (min-width: @screen-sm) {
+    .header-2 {
+        header {
+            &.sticky {
+                .height(@header-sm-height);
+            }
+        }
+    }
+}
+
+
+@media (max-width: @screen-md) {
+    .header-2 {
+        header {
+            &.sticky {
+                nav {
+                    .fa {
+                        display: none;
+
+                        &.fa-bars {
+                            display: inline-block;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.nav-username {
+    .max-width(114px);
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+//menu end

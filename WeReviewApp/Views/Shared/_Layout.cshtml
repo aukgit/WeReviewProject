@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="@AppConfig.Setting.GoogleMetaTag" />
+    <meta name="author" content="Alim Ul Karim">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css/styles")
+    @RenderSection("css", false)
+    @if (ViewBag.Meta != null) {
+        <meta name="description" content="@ViewBag.Meta" />
+    } else {
+        <meta name="description" content="@AppVar.Name,@AppVar.Subtitle, Review, Mobile Apps, Apple Apps, Android Apps, Reviewing website, mobile apps rating website" />
+    }
+    @if (ViewBag.Keywords != null) {
+        <meta name="keywords" content="@ViewBag.Keywords" />
+    } else {
+        <meta name="keywords" content="@AppVar.Name,@AppVar.Subtitle, Review, Mobile Apps, Apple Apps, Android Apps, Reviewing website, mobile apps rating website" />
+    }
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="@ViewBag.pageClass">
+    <!--[if lt IE 10]>
+        <div class="browser-update container-fuild">
+            <div class="row">
+                <div class="col-md-12">Warning! Your browser is too old. Please update your browser to the <a href="http://browser-update.org/update.html#3">latest version</a>.</div>
+            </div>
+        </div>
+    <![endif]-->
+    @Html.Partial("_AdditionalFields")
+    @Html.Partial("_LoadingBar")
+    <div>
+        @{ Html.RenderAction("NavBar", "Partials", true); }
+    </div>
+    <div id="wrap">
+        <div class="content">
+            <div class="container">
+                @RenderBody()
+            </div>
+            @Html.Partial("_Footer")
+        </div>
+    </div>
+    @RenderSection("featured", false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", false)
+</body>
+</html>

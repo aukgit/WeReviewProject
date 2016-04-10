@@ -1,0 +1,87 @@
+﻿@{
+    //Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
+}
+@using WeReviewApp.Models.EntityModel
+@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
+@model WeReviewApp.Models.ViewModels.SearchViewModel
+
+@{
+    var apps = (List<App>) ViewBag.Results;
+    bool isFirst = true;
+}
+<div class="wrapper_inner">
+    @{ Html.RenderAction("NavBar", "Partials"); }
+</div>
+
+<div class="mainContainerwrap">
+    <form role="form" action="@Url.Action("Search", "Apps")" method="post">
+        <div class="container toppart">
+            @if (ViewBag.isPostBack != null) {
+                <h1>
+                    Search results for <strong class="red">"</strong><strong class="black">
+                        @if (Model != null) {
+                            @Model.DisplayStringToUser
+                        }
+                    </strong><strong class="red">"</strong>
+                </h1>
+            }
+
+            @Html.EditorFor(i => i.DisplayStringToUser, "Search")
+            @Html.AntiForgeryToken()
+        </div>
+        <div class="container inner innerContainer">
+            <div class="col-md-9 col-sm-9 contenCol">
+                <div class="content">
+                    <div class="appsitemWraper">
+                        @if (apps != null && apps.Count > 0) {
+                            foreach (var app in apps) {
+                                string url = app.GetAbsoluteUrl();
+                                var platform = app.GetPlatform();
+
+                                <div class="appsitemBox row" itemscope itemtype="http://schema.org/SoftwareApplication">
+                                    <div class="col-md-2 col-sm-2 imgWrap">
+                                        <a href="@url">
+                                            <img src="@app.SearchIconLocation" class="img-responsive" alt="@app.AppName">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-10 col-sm-10 textWrap">
+                                        <div class="name">
+                                            <h1 title="@app.AppName">
+                                                <a href="@url" title="@app.AppName">
+                                                    <i class="@platform.Icon" title="@platform.PlatformName"></i> @app.AppName
+                                                </a>
+                                            </h1>
+                                        </div>
+                                        <div class="navmenu">
+                                            <ul class="app-search-subtitle-list">
+                                                <li class="first tooltipClass tooltip-show" data-toggle="tooltip" data-original-title="@app.AvgRating from @app.ReviewsCount">
+                                                    <i class="fa fa-star">
+                                                    </i> @app.AvgRating
+                                                </li>
+                                                <li class="posted_by">
+                                                    <h1>
+                                                        <a>@app.User.UserName</a>
+                                                    </h1> |
+                                                </li>
+                                                <li class="date">
+                                                    <h1>
+                                                        <a title="@app.AppName release date">Release Date: @Html.DisplayDate(app.ReleaseDate)</a>
+                                                    </h1>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <p>
+                                            @Html.Truncate(@app.Description, 100)
+                                        </p>
+
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

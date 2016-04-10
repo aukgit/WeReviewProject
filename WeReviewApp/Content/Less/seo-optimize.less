@@ -1,0 +1,91 @@
+﻿@import "fonts-rimixens.less";
+
+.seo-optimize {
+
+    h1, h2, h3, h4, h5 {
+        display: inline;
+        .font-size(1em);
+        font-weight: normal;
+    }
+
+    strong {
+        font-weight: normal;
+        //.font-size(1em);
+    }
+
+    em {
+        font-style: normal;
+        //.font-size(1em);
+    }
+
+    a:hover {
+        color: @primary-color;
+        color: #EC2736;
+
+        h1 {
+            color: inherit;
+        }
+    }
+}
+
+
+// seo application name every where
+// search engine optimize
+
+.seo-app-name {
+    color: #FAB37A;
+
+    h1, em, strong {
+        color: inherit;
+    }
+
+    &:hover {
+        .default-hyperlink-hover-color;
+    }
+}
+
+
+.white-wrapper-background {
+    .seo-app-name {
+        .default-hyperlink-color;
+    }
+}
+
+.semi-bold {
+    font-weight: 600;
+}
+
+.semi-bold-important {
+    font-weight: 600 !important;
+}
+
+.font-normal {
+    font-size: 1em;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.bold-important {
+    font-weight: 700 !important;
+}
+
+
+header {
+    .height(47px);
+}
+
+.almost-black {
+    color: #494646;
+}
+
+.seo-hide {
+    color: transparent;
+    background-color: transparent;
+
+    h1, em, strong {
+        color: transparent;
+        background-color: transparent;
+    }
+}

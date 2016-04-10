@@ -1,0 +1,130 @@
+@model IEnumerable<HttpPostedFileBase>
+@{
+    bool isRequired = ViewData.ModelMetadata.IsRequired;
+    string isRequiredStar = isRequired ? "*" : "",
+        prop = ViewData.ModelMetadata.PropertyName.ToString(),
+        propLower = prop.ToLower(),
+        styleProperty = propLower,
+        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+        description = ViewData.ModelMetadata.Description,
+        icon = ViewBag.icon ?? "glyphicon glyphicon-upload",
+        templateName = "upload-multiple"; 
+
+
+    var htmlAttributes = new RouteValueDictionary();
+    if (ViewBag.data_id != null) {
+        ViewBag.data_id_val = ViewBag.data_id;
+        ViewBag.data_id = "data-id=" + ViewBag.data_id;
+    } else {
+        ViewBag.data_id = "data-id=0";
+        ViewBag.data_id_val = 0;
+    }
+
+    if (ViewBag.data_url != null) {
+        ViewBag.data_url = "data-url=" + ViewBag.data_url;
+    }
+    if (ViewBag.data_single != null) {
+        ViewBag.data_single = "";
+    } else {
+        ViewBag.data_single = "multiple";
+    }
+
+    if (ViewBag.autoupload != null) {
+        ViewBag.autoupload = "data-is-auto=" + false + "";
+    } else {
+        ViewBag.autoupload = "data-is-auto=" + true + "";
+    }
+    if (ViewBag.data_guid != null) {
+        ViewBag.data_guid = "data-guid=" + ViewBag.data_guid;
+    } else {
+        ViewBag.data_guid = "data-guid=none";
+    }
+
+    if (ViewBag.uploadedFiles == null) {
+        ViewBag.uploadedFiles = 0;
+    }
+    if (@ViewBag.defaultShow == null) {
+        ViewBag.defaultShow = "false";
+    }
+
+    if (@ViewBag.uploadPreexist == null) {
+        ViewBag.uploadPreexist = "0";
+    }
+
+    if (ViewBag.maxUpload == null) {
+        ViewBag.maxUpload = 1;
+    }
+
+    if (ViewBag.hasEditBtn == null) {
+        ViewBag.hasEditBtn = "false";
+    }
+
+    if (ViewBag.label != null) {
+        displayName = ViewBag.label;
+    }
+    
+    if (ViewBag.labelColumn == null) {
+        ViewBag.labelColumn = "col-md-2";
+    }
+    if (ViewBag.textColumn == null) {
+        ViewBag.textColumn = "col-md-10";
+    }
+    htmlAttributes.Add("title", htmlAttributes["placeholder"]);
+    htmlAttributes.Add("data-prop", styleProperty);
+    htmlAttributes.Add("data-template", templateName);
+}
+<div data-id="@ViewBag.data_id_val" data-uploader-div-row="true" class="form-group form-row @styleProperty @templateName-type form-row-uploader" data-type="@templateName" data-prop="@styleProperty">
+    <div class="controls dev-plugin">
+        <label class="@ViewBag.labelColumn control-label form-label @styleProperty" for="@styleProperty" data-prop="@styleProperty">
+            @if (description != null) {
+                <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">
+                    <span class="description-icon"></span>
+                </a>
+            }
+        </label>
+        <div data-id="@ViewBag.data_id_val" class="@ViewBag.textColumn form-input @styleProperty">
+            <div data-id="@ViewBag.data_id_val" class="uploader uploader-@ViewBag.data_id_val">
+                <h1 data-id="@ViewBag.data_id_val" data-error-related="true" class="error-warning-label-@ViewBag.data_id_val error-warning-labels h4 red">Failed to upload:</h1>
+                <div data-id="@ViewBag.data_id_val" data-error-related="true" class="error-warning-label-@ViewBag.data_id_val error-warning-labels">Feel free to @Html.ContactFormActionLink("contact us", "contact us") any moment.</div>
+                <ul data-id="@ViewBag.data_id_val" data-error-related="true" class="error-warning-labels files-list-@ViewBag.data_id_val upload-error-list"></ul>
+                <div data-id="@ViewBag.data_id_val" class="edit-items-list-@ViewBag.data_id_val">
+                </div>
+                <a data-id="@ViewBag.data_id_val" data-edit-btn-spinner="true" data-spinner="spinner" data-toggle="tooltip" title="Show images to remove" class="spinner tooltip-show edit-btn-spinner @styleProperty no-hover">
+                    <span data-id="@ViewBag.data_id_val" data-display="@displayName" class="glyphicon glyphicon-refresh glyphicon-spin" title="Validating"></span>
+                </a>
+                <a data-id="@ViewBag.data_id_val" data-btn="edit" data-default-show="@ViewBag.defaultShow" class="edit-@ViewBag.data_id_val btn btn-info edit-btn" href="@ViewBag.editUrl">
+                    Edit
+                </a>
+                <span class="btn btn-success fileinput-button">
+                    <i class="@icon"></i>
+                    <span title="@displayName Upload">@displayName</span>
+                    <!-- The file input field used as target for the file upload widget -->
+                    <input @ViewBag.data_guid class="dev-fileupload" data-has-edit-btn="@ViewBag.hasEditBtn" @ViewBag.data_id type="file" @ViewBag.data_url name="@styleProperty" title="@displayName Upload files , @ViewData.ModelMetadata.Description" @ViewBag.autoupload @ViewBag.data_single>
+                </span>
+                <div data-id="@ViewBag.data_id_val" data-progressor-div="true" class="uploader-progress-info">
+                    <a data-id="@ViewBag.data_id_val" data-progressor-spinner="true" data-spinner="spinner" data-toggle="tooltip" title="@displayName Uploading..." class="spinner tooltip-show upload-spinner-@styleProperty no-hover">
+                        <span data-id="@ViewBag.data_id_val" data-display="@displayName" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
+                    </a>
+                    <a data-id="@ViewBag.data_id_val" data-progressor-value="true" data-toggle="tooltip" title="" class="tooltip-show upload-progressor-@styleProperty no-hover">
+                        <span data-id="@ViewBag.data_id_val" data-uploader-percent-value="" class="bold green"></span>
+                    </a>
+                </div>
+                <a data-toggle="tooltip" data-id="@ViewBag.data_id_val" data-success-icon="true" data-original-title="" title="" class="tooltip-show">
+                    <span class="glyphicon glyphicon-ok green"></span>
+                </a>
+                <a data-toggle="tooltip" data-id="@ViewBag.data_id_val" data-failed-icon="true" data-original-title="" title="" class="tooltip-show">
+                    <span class="glyphicon glyphicon-remove red"></span>
+                </a>
+
+                @if (ViewBag.uploadedFiles > 0) {
+                    <label data-id="@ViewBag.data_id_val" data-has-edit-btn="@ViewBag.hasEditBtn" data-label-file-uploaded="true" class="label label-success file-uploaded-notify-label-@ViewBag.data_id_val" data-max-upload-count="@ViewBag.maxUpload" data-uploaded-count="@ViewBag.uploadedFiles" data-upload-pre-exist-count="@ViewBag.uploadPreexist">
+                        @ViewBag.uploadedFiles files exist.
+                    </label>
+                } else {
+                    <label data-id="@ViewBag.data_id_val" data-has-edit-btn="@ViewBag.hasEditBtn" data-label-file-uploaded="true" class="label label-success file-uploaded-notify-label-@ViewBag.data_id_val" data-max-upload-count="@ViewBag.maxUpload" data-uploaded-count="@ViewBag.uploadedFiles" data-upload-pre-exist-count="@ViewBag.uploadPreexist"></label>
+                }
+            </div>
+            @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
+        </div>
+    </div>
+</div>
