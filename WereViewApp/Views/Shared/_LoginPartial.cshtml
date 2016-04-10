@@ -5,13 +5,13 @@
 @if (Request.IsAuthenticated && User.IsRegistrationComplete()) {
     <li>
         <a href="@AppVar.Url/Account/Manage" title="Manage '@username' account" class="nav-username">
-            <i class="@Icons.User"></i>
+            <i class="@FaIcons.User"></i>
             @username!
         </a>
         <ul class="animated dropdown fadeIn">
             <li>
                 <a href="@AppVar.Url/Account/Manage" title="Manage your account">
-                    <i class="@Icons.Cog"></i>
+                    <i class="@FaIcons.Cog"></i>
                     Manage
                 </a>
             </li>
@@ -30,7 +30,7 @@
 } else if (Request.IsAuthenticated && !User.IsRegistrationComplete()) {
     <li>
         <a href="@AppVar.Url/Account/ResendConfirmationMail" title="Resend confirmation" class="nav-username">
-            <i class="@Icons.Send"></i>
+            <i class="@FaIcons.Send"></i>
             Resend Validation
         </a>
     </li>
@@ -38,7 +38,7 @@
     <li title="Login in WeReviewApp.com">
         <a href="/Login" title="Login in WeReviewApp.com">
             <h1 title="Login in WeReviewApp.com">
-                <i class="@Icons.Login"></i>
+                <i class="@FaIcons.Login"></i>
                 <strong title="Login in WeReviewApp.com">
                     <em title="Login in WeReviewApp.com">
                         Login
@@ -50,7 +50,7 @@
             <li>
                 <a href="/Login" title="Login in WeReviewApp.com">
                     <h1 title="Login in WeReviewApp.com">
-                        <i class="@Icons.Login"></i>
+                        <i class="@FaIcons.Login"></i>
                         <strong title="Login in WeReviewApp.com">
                             <em title="Login in WeReviewApp.com">
                                 Login
@@ -62,7 +62,7 @@
             <li>
                 <a href="/Register" title="Register in WeReviewApp.com">
                     <h1 title="Register in WeReviewApp.com">
-                        <i class="@Icons.Register"></i>
+                        <i class="@FaIcons.Register"></i>
                         <strong title="Register in WeReviewApp.com">
                             <em title="Register in WeReviewApp.com">
                                 Register

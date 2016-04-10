@@ -21,7 +21,7 @@ namespace WeReviewApp.Helpers {
         private const string Selected = "selected='selected'";
         public static int TruncateLength = AppConfig.TruncateLength;
 
-        #region Icons generate : badge
+        #region FaIcons generate : badge
 
         public static HtmlString GetBadge(this HtmlHelper helper, long number) {
             var markup = string.Format(@"<span class='badge'>{0}</span>", number);
@@ -138,7 +138,7 @@ namespace WeReviewApp.Helpers {
         }
 
         public static HtmlString EmailButtonIconRight(this HtmlHelper helper, string buttonName = "Send",
-          string iconClass = Icons.EmailO,
+          string iconClass = FaIcons.EmailO,
           string tooltip = "",
           string additionalClasses = "btn btn-success",
           bool placeIconLeft = false,

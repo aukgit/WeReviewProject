@@ -1,7 +1,7 @@
 ﻿@model WeReviewApp.Models.ViewModels.EmailResendViewModel
 @{
     ViewBag.title = "You have already registered!";
-    string icon = ViewBag.icon ?? Icons.Plane;
+    string icon = ViewBag.icon ?? FaIcons.Plane;
 }
 <div class="top-gap-2x"></div>
 <div class="f-em-23 green">
@@ -33,7 +33,7 @@
     using (Html.BeginForm("ResendConfirmationMail", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" })) {
         @*@Html.EditorFor(n => n.Email)*@
         @Html.AntiForgeryToken()
-       <div class="right"> @Html.SubmitButton("Resend", Icons.EmailO,"","btn btn-success", false)</div>
+       <div class="right"> @Html.SubmitButton("Resend", FaIcons.EmailO,"","btn btn-success", false)</div>
     }
 }
 <div class="top-gap-2x"></div>

@@ -157,7 +157,7 @@ namespace WeReviewApp.Controllers {
             } else {
                 ViewBag.message =
                     "You have already sent a verification code recently or your registration is complete.";
-                ViewBag.icon = Icons.CheckMark;
+                ViewBag.icon = FaIcons.CheckMark;
             }
             Session["last-send"] = DateTime.Now;
             return View("InboxCheck");
