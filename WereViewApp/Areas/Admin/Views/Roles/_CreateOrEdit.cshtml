@@ -1,5 +1,5 @@
 ﻿@model WeReviewApp.Models.POCO.Identity.ApplicationRole
 @Html.EditorFor(model => model.Name)
-@Html.EditorFor(model => model.PriorityLevel, new { @Value = @ViewBag.Max })
-@Html.EditorFor(model => model.PointsRequired,"long")
+@Html.EditorFor(model => model.PriorityLevel, new {@Value = @ViewBag.Max})
+@Html.EditorFor(model => model.PointsRequired, "long")
 @Html.EditorFor(model => model.CanBeAcheivedByPoint)

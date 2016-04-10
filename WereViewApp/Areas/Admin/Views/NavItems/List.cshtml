@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WeReviewApp.Models.POCO.IdentityCustomization.NavigationItem>
+﻿@model IEnumerable<NavigationItem>
 
 @{
     ViewBag.Title = "NavigationItem";
@@ -9,75 +9,75 @@
 @Html.SamePageLinkWithIcon(title, subtitle, "fa fa-sitemap")
 
 <p class="right">
-    <a href="@Url.Action("Add", new { id = ViewBag.NavigationID })" title="Create a new item." class="btn btn-warning create-save"><span class="glyphicon glyphicon-plus"></span> Create</a>
+    <a href="@Url.Action("Add", new {id = ViewBag.NavigationID})" title="Create a new item." class="btn btn-warning create-save"><span class="glyphicon glyphicon-plus"></span> Create</a>
     <a href="@Url.Action("Index", "Menu")" title="Root menu page" class="btn btn-info create-save"><span class="glyphicon glyphicon-th-list"></span> Menu</a>
 </p>
-<table class="table table-hover bootstrap-table-do">
+<table class="bootstrap-table-do table table-hover">
     <thead>
-        <tr>
-            <th data-field="UserName">
-                Menu
-            </th>
-            <th data-field="x">
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th data-field="r">
-                @Html.DisplayNameFor(model => model.RelativeURL)
-            </th>
-            <th data-field="t">
-                Order
-            </th>
-            <th data-field="w">
-                @Html.DisplayNameFor(model => model.ElementClasses)
-            </th>
-            <th data-field="r">
-                @Html.DisplayNameFor(model => model.ElementID)
-            </th>
+    <tr>
+        <th data-field="UserName">
+            Menu
+        </th>
+        <th data-field="x">
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th data-field="r">
+            @Html.DisplayNameFor(model => model.RelativeURL)
+        </th>
+        <th data-field="t">
+            Order
+        </th>
+        <th data-field="w">
+            @Html.DisplayNameFor(model => model.ElementClasses)
+        </th>
+        <th data-field="r">
+            @Html.DisplayNameFor(model => model.ElementID)
+        </th>
 
 
-            <th data-field="q">
-                Has Drop-Down
-            </th>
+        <th data-field="q">
+            Has Drop-Down
+        </th>
 
-            <th></th>
-        </tr>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @ViewBag.MenuName
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RelativeURL)
-                </td>
-                <td>
-                    <form action="/Admin/NavItems/Ordering" method="post" class="process-ordering-in-menu-items">
-                        @Html.HiddenFor(n => item.NavigationID)
-                        @Html.TextBoxFor(n => item.Ordering, new { @class = "form-control" })
-                    </form>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ElementClasses)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ElementID)
-                </td>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @ViewBag.MenuName
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RelativeURL)
+            </td>
+            <td>
+                <form action="/Admin/NavItems/Ordering" method="post" class="process-ordering-in-menu-items">
+                    @Html.HiddenFor(n => item.NavigationID)
+                    @Html.TextBoxFor(n => item.Ordering, new {@class = "form-control"})
+                </form>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElementClasses)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElementID)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.HasDropDown)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasDropDown)
+            </td>
 
 
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.NavigationItemID, NavigationID = item.NavigationID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.NavigationItemID, NavigationID = item.NavigationID }, new { onclick = "return confirm('Are you sure?')" })
-                </td>
-            </tr>
-        }
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.NavigationItemID, item.NavigationID}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.NavigationItemID, item.NavigationID}, new {onclick = "return confirm('Are you sure?')"})
+            </td>
+        </tr>
+    }
     </tbody>
 
 </table>

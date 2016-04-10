@@ -13,28 +13,28 @@
 
 </head>
 <body class="@ViewBag.pageClass">
-    <!--[if lt IE 9]>
-        <div class="browser-update container-fuild">
-            <div class="row">
-                <div class="col-md-12">Warning! Your browser is too old. Please update your browser to the <a href="http://browser-update.org/update.html#3">latest version</a>.</div>
-            </div>
+<!--[if lt IE 9]>
+    <div class="browser-update container-fuild">
+        <div class="row">
+            <div class="col-md-12">Warning! Your browser is too old. Please update your browser to the <a href="http://browser-update.org/update.html#3">latest version</a>.</div>
         </div>
-    <![endif]-->
-    @Html.Partial("_NavBar")
-    <div id="wrap" class="home-page">
-        <div class="content">
-            <div id="admin-area">
-                <div class="container">
-                    @RenderBody()
-                </div>
-            </div>
-            @Html.Partial("_Footer")
-        </div>
-
-
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
     </div>
+<![endif]-->
+@Html.Partial("_NavBar")
+<div id="wrap" class="home-page">
+    <div class="content">
+        <div id="admin-area">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </div>
+        @Html.Partial("_Footer")
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", false)
+</div>
 </body>
 </html>
