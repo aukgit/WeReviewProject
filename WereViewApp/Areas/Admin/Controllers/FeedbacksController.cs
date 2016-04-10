@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
 using DevTrends.MvcDonutCaching;
+using WeReviewApp.BusinessLogics.Admin;
 using WeReviewApp.Controllers;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.EntityModel;
@@ -19,7 +20,7 @@ using WeReviewApp.Models.POCO.Enum;
 using WeReviewApp.Models.POCO.IdentityCustomization;
 using WeReviewApp.Modules.DevUser;
 using WeReviewApp.Modules.Mail;
-using WeReviewApp.WereViewAppCommon;
+
 //using DevTrends.MvcDonutCaching;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
@@ -418,7 +419,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
 
         public async Task<ActionResult> BlockApp(long id) {
             using (var db2 = new WereViewAppEntities()) {
-                if (ModerationAlgorithms.BlockApp(id, true, db2)) {
+                if (ModerationLogics.BlockApp(id, true, db2)) {
                     return View("Done");
                 }
             }
@@ -427,7 +428,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
 
         public async Task<ActionResult> UnBlockApp(long id) {
             using (var db2 = new WereViewAppEntities()) {
-                if (ModerationAlgorithms.UnBlockApp(id, true, db2)) {
+                if (ModerationLogics.UnBlockApp(id, true, db2)) {
                     return View("Done");
                 }
             }
@@ -437,7 +438,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
         public async Task<ActionResult> BlockReview(long id) {
             using (var db2 = new WereViewAppEntities()) {
                 Review review;
-                if (ModerationAlgorithms.BlockReview(id, true, db2, out review)) {
+                if (ModerationLogics.BlockReview(id, true, db2, out review)) {
                     ViewBag.info = "deleted review ( " + review.Comments + " ).";
                     return View("Done");
                 }

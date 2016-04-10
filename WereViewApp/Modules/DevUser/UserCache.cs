@@ -2,26 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using WeReviewApp.Models.EntityModel;
 using WeReviewApp.Models.POCO.Identity;
 using WeReviewApp.Modules.Role;
 using WeReviewApp.Modules.Session;
 
 namespace WeReviewApp.Modules.DevUser {
     public class UserCache {
+        private bool _isAdmin;
+        private bool _isAdminRoleGenerated;
+
         /// <summary>
-        /// Creates a user cache from current logged in user.
-        /// If not user exist then User will be null.
-        /// Check null before evaluating.
-        /// Note: Constructor also calls GenerateRoles() method to generate cached roles.
+        ///     Creates a user cache from current logged in user.
+        ///     If not user exist then User will be null.
+        ///     Check null before evaluating.
+        ///     Note: Constructor also calls GenerateRoles() method to generate cached roles.
         /// </summary>
         public UserCache() {
             GenerateRoles();
         }
+
         /// <summary>
-        /// Creates a user cache from current logged in user.
-        /// If not user exist then User will be null.
-        /// Check null before evaluating.
+        ///     Creates a user cache from current logged in user.
+        ///     If not user exist then User will be null.
+        ///     Check null before evaluating.
         /// </summary>
         /// <param name="rolesGenerate">True : Generates cache roles for the current user.</param>
         /// <param name="saveUserInCache">True : Saves current cache in the session.</param>
@@ -38,68 +41,17 @@ namespace WeReviewApp.Modules.DevUser {
         }
 
         /// <summary>
-        /// On creation get all the user roles to the cache.
-        /// GenerateRoles() has been called on creation.
+        ///     On creation get all the user roles to the cache.
+        ///     GenerateRoles() has been called on creation.
         /// </summary>
         public UserCache(ApplicationUser user) {
             GenerateRoles(user);
         }
-        /// <summary>
-        /// Compare and return true if UserCache user and given parameter is same with user's respective property.
-        /// </summary>
-        /// <param name="userCache"></param>
-        /// <param name="userId"></param>
-        /// <returns>Compare and return true if UserCache user and given parameter is same with user's respective property.</returns>
-        public static bool IsValidUserCache(UserCache userCache, long userId) {
-            return userCache != null && userCache.User != null && userCache.UserID == userId;
-        }
-        /// <summary>
-        /// Compare and return true if UserCache user and given parameter is same with user's respective property.
-        /// </summary>
-        /// <param name="userCache"></param>
-        /// <param name="username"></param>
-        /// <returns></returns>
-        public static bool IsValidUserCache(UserCache userCache, string username) {
-            return userCache != null && userCache.User != null && userCache.Username == username;
-        }
-        /// <summary>
-        /// Compare and return true if UserCache user and given parameter is same with user's respective property.
-        /// </summary>
-        /// <param name="userCache"></param>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public static bool IsValidUserCache(UserCache userCache, ApplicationUser user) {
-            return userCache != null && userCache.User != null && user != null && userCache.UserID == user.UserID;
-        }
-        /// <summary>
-        /// Compare and return true if UserCache user and given parameter is same with user's respective property.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public bool IsValidUserCache(ApplicationUser user) {
-            return IsValidUserCache(this, user);
-        }
-        /// <summary>
-        /// Compare and return true if UserCache user and given parameter is same with user's respective property.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public bool IsValidUserCache(long userId) {
-            return IsValidUserCache(this, userId);
-        }
-        /// <summary>
-        /// Compare and return true if UserCache user and given parameter is same with user's respective property.
-        /// </summary>
-        /// <param name="username"></param>
-        /// <returns></returns>
-        public bool IsValidUserCache(string username) {
-            return IsValidUserCache(this, username);
-        }
 
         /// <summary>
-        /// Creates a user cache from given user.
-        /// If not user exist then User will be null.
-        /// Check null before evaluating.
+        ///     Creates a user cache from given user.
+        ///     If not user exist then User will be null.
+        ///     Check null before evaluating.
         /// </summary>
         /// <param name="user"></param>
         /// <param name="rolesGenerate">True : Generates cache roles for the current user.</param>
@@ -117,9 +69,9 @@ namespace WeReviewApp.Modules.DevUser {
         }
 
         /// <summary>
-        /// Creates a user cache from given user.
-        /// If not user exist then User will be null.
-        /// Check null before evaluating.
+        ///     Creates a user cache from given user.
+        ///     If not user exist then User will be null.
+        ///     Check null before evaluating.
         /// </summary>
         /// <param name="user"></param>
         /// <param name="rolesGenerate">True : Generates cache roles for the current user.</param>
@@ -131,35 +83,7 @@ namespace WeReviewApp.Modules.DevUser {
                 IsRoleGenerated = false;
             }
         }
-        /// <summary>
-        /// Get from cache or Creates a user cache from given user.
-        /// If not user exist then User will be null.
-        /// Check null before evaluating.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="rolesGenerate">True : Generates cache roles for the current user.</param>
-        /// <param name="saveUserInCache">True : Saves current cache in the session.</param>
-        public static UserCache GetNewOrExistingUserCache(ApplicationUser user, bool rolesGenerate = true, bool saveUserInCache = true) {
-            var userCahe = GetUserCacheSession();
-            if (userCahe == null || userCahe.IsValidUserCache(user) == false) {
-                userCahe = new UserCache(user, rolesGenerate, saveUserInCache);
-            }
-            return userCahe;
-        }
 
-        /// <summary>
-        /// Get from cache or Creates a user cache from logged user.
-        /// If not user exist then User will be null.
-        /// Check null before evaluating.
-        /// </summary>
-        /// <param name="rolesGenerate">True : Generates cache roles for the current user.</param>
-        /// <param name="saveUserInCache">True : Saves current cache in the session.</param>
-        public static UserCache GetNewOrExistingUserCache(bool rolesGenerate = true, bool saveUserInCache = true) {
-            return GetNewOrExistingUserCache(UserManager.GetCurrentUser(), rolesGenerate, saveUserInCache);
-        }
-
-        private bool _isAdmin;
-        private bool _isAdminRoleGenerated;
         public ApplicationUser User { get; set; }
 
         public string Username {
@@ -182,20 +106,103 @@ namespace WeReviewApp.Modules.DevUser {
             get {
                 if (_isAdminRoleGenerated) {
                     return _isAdmin;
-                } else {
-                    _isAdmin = IsInRole(RoleNames.Admin);
-                    _isAdminRoleGenerated = true;
-                    return _isAdmin;
                 }
+                _isAdmin = IsInRole(RoleNames.Admin);
+                _isAdminRoleGenerated = true;
+                return _isAdmin;
             }
             set { _isAdmin = value; }
         }
 
         public bool IsAuth {
-            get {
-                return HttpContext.Current.User.Identity.IsAuthenticated;
-            }
+            get { return HttpContext.Current.User.Identity.IsAuthenticated; }
         }
+
+        /// <summary>
+        ///     Compare and return true if UserCache user and given parameter is same with user's respective property.
+        /// </summary>
+        /// <param name="userCache"></param>
+        /// <param name="userId"></param>
+        /// <returns>Compare and return true if UserCache user and given parameter is same with user's respective property.</returns>
+        public static bool IsValidUserCache(UserCache userCache, long userId) {
+            return userCache != null && userCache.User != null && userCache.UserID == userId;
+        }
+
+        /// <summary>
+        ///     Compare and return true if UserCache user and given parameter is same with user's respective property.
+        /// </summary>
+        /// <param name="userCache"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public static bool IsValidUserCache(UserCache userCache, string username) {
+            return userCache != null && userCache.User != null && userCache.Username == username;
+        }
+
+        /// <summary>
+        ///     Compare and return true if UserCache user and given parameter is same with user's respective property.
+        /// </summary>
+        /// <param name="userCache"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public static bool IsValidUserCache(UserCache userCache, ApplicationUser user) {
+            return userCache != null && userCache.User != null && user != null && userCache.UserID == user.UserID;
+        }
+
+        /// <summary>
+        ///     Compare and return true if UserCache user and given parameter is same with user's respective property.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public bool IsValidUserCache(ApplicationUser user) {
+            return IsValidUserCache(this, user);
+        }
+
+        /// <summary>
+        ///     Compare and return true if UserCache user and given parameter is same with user's respective property.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public bool IsValidUserCache(long userId) {
+            return IsValidUserCache(this, userId);
+        }
+
+        /// <summary>
+        ///     Compare and return true if UserCache user and given parameter is same with user's respective property.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public bool IsValidUserCache(string username) {
+            return IsValidUserCache(this, username);
+        }
+
+        /// <summary>
+        ///     Get from cache or Creates a user cache from given user.
+        ///     If not user exist then User will be null.
+        ///     Check null before evaluating.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="rolesGenerate">True : Generates cache roles for the current user.</param>
+        /// <param name="saveUserInCache">True : Saves current cache in the session.</param>
+        public static UserCache GetNewOrExistingUserCache(ApplicationUser user, bool rolesGenerate = true,
+            bool saveUserInCache = true) {
+            var userCahe = GetUserCacheSession();
+            if (userCahe == null || userCahe.IsValidUserCache(user) == false) {
+                userCahe = new UserCache(user, rolesGenerate, saveUserInCache);
+            }
+            return userCahe;
+        }
+
+        /// <summary>
+        ///     Get from cache or Creates a user cache from logged user.
+        ///     If not user exist then User will be null.
+        ///     Check null before evaluating.
+        /// </summary>
+        /// <param name="rolesGenerate">True : Generates cache roles for the current user.</param>
+        /// <param name="saveUserInCache">True : Saves current cache in the session.</param>
+        public static UserCache GetNewOrExistingUserCache(bool rolesGenerate = true, bool saveUserInCache = true) {
+            return GetNewOrExistingUserCache(UserManager.GetCurrentUser(), rolesGenerate, saveUserInCache);
+        }
+
         public bool IsInRole(string roleName) {
             ApplicationRole role;
             return IsInRole(roleName, out role);
@@ -234,15 +241,17 @@ namespace WeReviewApp.Modules.DevUser {
             IsRoleGenerated = true;
             GC.Collect();
         }
+
         /// <summary>
-        ///  Get user cache from session.
+        ///     Get user cache from session.
         /// </summary>
         /// <returns></returns>
         public static UserCache GetUserCacheSession() {
             return HttpContext.Current.Session[SessionNames.UserCache] as UserCache;
         }
+
         /// <summary>
-        /// Set user cache in session.
+        ///     Set user cache in session.
         /// </summary>
         /// <param name="userCache"></param>
         public static void SaveUserCache(UserCache userCache) {
@@ -250,19 +259,19 @@ namespace WeReviewApp.Modules.DevUser {
         }
 
         /// <summary>
-        /// Creates user cache from User and then save it in session.
+        ///     Creates user cache from User and then save it in session.
         /// </summary>
         /// <param name="user"></param>
         public static void SaveUserCache(ApplicationUser user) {
             var userCache = new UserCache(user);
             SaveUserCache(userCache);
         }
+
         /// <summary>
-        /// Clear user cache session.
+        ///     Clear user cache session.
         /// </summary>
         public static void ClearSession() {
             HttpContext.Current.Session[SessionNames.UserCache] = null;
         }
-
     }
 }

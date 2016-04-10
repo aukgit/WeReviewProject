@@ -206,7 +206,6 @@ namespace WeReviewApp.Modules.Uploads {
                     additionalRootPath = AdditionalRoots;
                 }
 
-
                 rootPath += additionalRootPath;
                 sourceFileName = GetOrganizeName(file, true, isSourceAddTemp); //soruce as temp
                 processedFileName = GetOrganizeName(file, true, false); // target

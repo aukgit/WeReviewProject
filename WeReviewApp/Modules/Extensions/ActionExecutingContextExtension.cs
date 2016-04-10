@@ -1,12 +1,58 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 using WeReviewApp.Modules.Type;
 
 namespace WeReviewApp.Modules.Extensions {
     public static class ActionExecutingContextExtension {
+        #region Get Controller Action Descriptor
+
+        public static ActionDescriptor GetControllerActionDescriptor(this ActionExecutingContext context,
+            string actionName) {
+            if (context.ActionDescriptor != null &&
+                context.ActionDescriptor.ControllerDescriptor != null) {
+                return context.ActionDescriptor.ControllerDescriptor.FindAction(context.Controller.ControllerContext,
+                    actionName);
+            }
+            return null;
+        }
+
+        #endregion
+
+        #region Getenerate Route profile
+
+        /// <summary>
+        ///     Generates a RouteProfile consist
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static RouteProfile GetRouteProfile(this ActionExecutingContext context) {
+            var routeProfile = new RouteProfile();
+            routeProfile.Action = context.GetAreaName();
+            routeProfile.Controller = context.GetControllerName();
+            routeProfile.Area = context.GetAreaName();
+            routeProfile.ActionParameters = context.ActionParameters;
+            routeProfile.ActionDescriptor = context.ActionDescriptor;
+            return routeProfile;
+        }
+
+        #endregion
+
+        #region Generate Parameters profile.
+
+        /// <summary>
+        ///     Can return null if HttpContext is null.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns>Return ParametersProfileBase or null if HttpContext is null.</returns>
+        public static ParametersProfileBase GetParametersProfile(this ActionExecutingContext context) {
+            if (context.HttpContext != null) {
+                return context.HttpContext.GetParametersProfile();
+            }
+            return null;
+        }
+
+        #endregion
 
         #region Property extension : Redirecting, Context null, Response empty , session empty etc..
 
@@ -16,6 +62,7 @@ namespace WeReviewApp.Modules.Extensions {
                    context.HttpContext.Response != null &&
                    context.HttpContext.Response.IsRequestBeingRedirected;
         }
+
         public static bool IsHttpContextEmpty(this ActionExecutingContext context) {
             return context.HttpContext == null;
         }
@@ -23,6 +70,7 @@ namespace WeReviewApp.Modules.Extensions {
         public static bool IsResponseEmpty(this ActionExecutingContext context) {
             return context.HttpContext != null && context.HttpContext.Response == null;
         }
+
         public static bool IsRequestEmpty(this ActionExecutingContext context) {
             return context.HttpContext != null && context.HttpContext.Request == null;
         }
@@ -34,9 +82,11 @@ namespace WeReviewApp.Modules.Extensions {
         #endregion
 
         #region Get : Action, Area, Controller names
+
         public static string GetAreaName(this ActionExecutingContext context) {
-            return (string)context.RouteData.DataTokens["area"];
+            return (string) context.RouteData.DataTokens["area"];
         }
+
         public static string GetControllerName(this ActionExecutingContext context) {
             return context.ActionDescriptor.ControllerDescriptor.ControllerName;
         }
@@ -51,17 +101,8 @@ namespace WeReviewApp.Modules.Extensions {
 
         #endregion
 
-        #region Get Controller Action Descriptor
-        public static ActionDescriptor GetControllerActionDescriptor(this ActionExecutingContext context, string actionName) {
-            if(context.ActionDescriptor != null &&
-                   context.ActionDescriptor.ControllerDescriptor != null) { 
-                   return context.ActionDescriptor.ControllerDescriptor.FindAction(context.Controller.ControllerContext, actionName);
-            }
-            return null;
-        }
-        #endregion
-
         #region Get : View Bag, View Data
+
         public static dynamic GetViewBag(this ActionExecutingContext context) {
             if (context.Controller != null) {
                 return context.Controller.ViewBag;
@@ -76,57 +117,76 @@ namespace WeReviewApp.Modules.Extensions {
             return null;
         }
 
-
         #endregion
 
         #region Check/ Validate : IsAction, IsController, IsArea etc...
+
         /// <summary>
-        /// Returns true if the current action is same as the given name.
+        ///     Returns true if the current action is same as the given name.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="actionName">Action name to test with current running action. Hint : context.ActionDescriptor.ActionName</param>
         /// <param name="onNullOrEmptyReturnDefault">Returns this default value if actionName parameter is null or empty string.</param>
-        /// <returns>Returns default value if parameter actionName is null or empty string. Or else returns only true if current action is same as the given one.</returns>
-        public static bool IsAction(this ActionExecutingContext context, string actionName, bool onNullOrEmptyReturnDefault = true) {
+        /// <returns>
+        ///     Returns default value if parameter actionName is null or empty string. Or else returns only true if current
+        ///     action is same as the given one.
+        /// </returns>
+        public static bool IsAction(this ActionExecutingContext context, string actionName,
+            bool onNullOrEmptyReturnDefault = true) {
             if (string.IsNullOrEmpty(actionName)) {
                 return onNullOrEmptyReturnDefault;
             }
             var action = context.ActionDescriptor.ActionName;
             return string.Equals(action, actionName, StringComparison.OrdinalIgnoreCase);
         }
+
         /// <summary>
-        /// Returns true if the current area is same as the given name.
+        ///     Returns true if the current area is same as the given name.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="areaName">Area name to test with current area name.</param>
         /// <param name="onNullOrEmptyReturnDefault">Returns this default value if areaName parameter is null or empty string.</param>
-        /// <returns>Returns default value if parameter areaName is null or empty string. Or else returns only true if current area is same as the given one.</returns>
-        public static bool IsArea(this ActionExecutingContext context, string areaName, bool onNullOrEmptyReturnDefault = true) {
+        /// <returns>
+        ///     Returns default value if parameter areaName is null or empty string. Or else returns only true if current area
+        ///     is same as the given one.
+        /// </returns>
+        public static bool IsArea(this ActionExecutingContext context, string areaName,
+            bool onNullOrEmptyReturnDefault = true) {
             if (string.IsNullOrEmpty(areaName)) {
                 return onNullOrEmptyReturnDefault;
             }
-            var value = (string)context.RouteData.DataTokens["area"];
+            var value = (string) context.RouteData.DataTokens["area"];
             return string.Equals(value, areaName, StringComparison.OrdinalIgnoreCase);
         }
+
         /// <summary>
-        /// Returns true if the current controller is same as the given name.
+        ///     Returns true if the current controller is same as the given name.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="controllerName"></param>
-        /// <param name="onNullOrEmptyReturnDefault">Returns this default value if controllerName parameter is null or empty string.</param>
-        /// <returns>Returns default value if controllerName parameter is null or empty string. Or else returns only true if current area is same as the given one.</returns>
-        public static bool IsController(this ActionExecutingContext context, string controllerName = null, bool onNullOrEmptyReturnDefault = true) {
+        /// <param name="onNullOrEmptyReturnDefault">
+        ///     Returns this default value if controllerName parameter is null or empty
+        ///     string.
+        /// </param>
+        /// <returns>
+        ///     Returns default value if controllerName parameter is null or empty string. Or else returns only true if
+        ///     current area is same as the given one.
+        /// </returns>
+        public static bool IsController(this ActionExecutingContext context, string controllerName = null,
+            bool onNullOrEmptyReturnDefault = true) {
             if (string.IsNullOrEmpty(controllerName)) {
                 return onNullOrEmptyReturnDefault;
             }
             var value = context.ActionDescriptor.ControllerDescriptor.ControllerName;
             return string.Equals(value, controllerName, StringComparison.OrdinalIgnoreCase);
         }
+
         #endregion
 
         #region Redirecting : Action, Area, Controller + Permanent Redirect.
+
         /// <summary>
-        /// Redirect to given action or url.
+        ///     Redirect to given action or url.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="action"></param>
@@ -137,7 +197,7 @@ namespace WeReviewApp.Modules.Extensions {
             if (httpContext != null && httpContext.Response != null) {
                 if (!httpContext.Response.IsRequestBeingRedirected) {
                     context.Result = new RedirectToRouteResult(
-                        new RouteValueDictionary(new { controller = controller, action = action, area = area })
+                        new RouteValueDictionary(new {controller, action, area})
                         );
                     context.Result.ExecuteResult(context.Controller.ControllerContext);
                 }
@@ -145,7 +205,7 @@ namespace WeReviewApp.Modules.Extensions {
         }
 
         /// <summary>
-        /// Redirect to given action or url.
+        ///     Redirect to given action or url.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="routeValueDictionary"></param>
@@ -160,11 +220,12 @@ namespace WeReviewApp.Modules.Extensions {
         }
 
         /// <summary>
-        /// Permanent Redirect to given action or url. Status code : 301
+        ///     Permanent Redirect to given action or url. Status code : 301
         /// </summary>
         /// <param name="context"></param>
         /// <param name="routeValueDictionary"></param>
-        public static void RedirectPermanentTo(this ActionExecutingContext context, RouteValueDictionary routeValueDictionary) {
+        public static void RedirectPermanentTo(this ActionExecutingContext context,
+            RouteValueDictionary routeValueDictionary) {
             var httpContext = context.HttpContext;
             if (!context.IsRedirecting()) {
                 httpContext.Response.StatusCode = 301;
@@ -174,13 +235,14 @@ namespace WeReviewApp.Modules.Extensions {
         }
 
         /// <summary>
-        /// Permanent Redirect to given action or url. Status code : 301
+        ///     Permanent Redirect to given action or url. Status code : 301
         /// </summary>
         /// <param name="context"></param>
         /// <param name="action"></param>
         /// <param name="controller">If not passed then current controller will be given.</param>
         /// <param name="area">If not passed then current area will be given.</param>
-        public static void RedirectPermanentTo(this ActionExecutingContext context, string action, string controller, string area) {
+        public static void RedirectPermanentTo(this ActionExecutingContext context, string action, string controller,
+            string area) {
             var httpContext = context.HttpContext;
             if (!context.IsRedirecting()) {
                 if (!httpContext.Response.IsRequestBeingRedirected) {
@@ -188,24 +250,25 @@ namespace WeReviewApp.Modules.Extensions {
                     httpContext.Response.Status = "301 Moved Permanently";
                     RedirectTo(context,
                         new RouteValueDictionary(new {
-                            controller = controller,
-                            action = action,
-                            area = area
+                            controller,
+                            action,
+                            area
                         }));
                 }
             }
         }
 
         /// <summary>
-        /// Redirect to given action or url only if the action is not same as this.
-        /// If any redirect is happing then it will not execute.
-        /// Note : This will resolve the looping of redirection.
+        ///     Redirect to given action or url only if the action is not same as this.
+        ///     If any redirect is happing then it will not execute.
+        ///     Note : This will resolve the looping of redirection.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="action"></param>
         /// <param name="controller">If not passed then current controller will be given.</param>
         /// <param name="area">If not passed then current area will be given.</param>
-        public static void RedirectToActionIfDistinct(this ActionExecutingContext context, string action, string controller = null, string area = null) {
+        public static void RedirectToActionIfDistinct(this ActionExecutingContext context, string action,
+            string controller = null, string area = null) {
             if (!context.IsRedirecting()) {
                 controller = string.IsNullOrEmpty(controller) ? GetControllerName(context) : controller;
                 area = string.IsNullOrEmpty(area) ? GetAreaName(context) : area;
@@ -216,17 +279,17 @@ namespace WeReviewApp.Modules.Extensions {
             }
         }
 
-
         /// <summary>
-        /// Permanent Redirect to given action or url only if the action is not same as this.
-        /// If any redirect is happing then it will not execute.
-        /// Note : This will resolve the looping of redirection.
+        ///     Permanent Redirect to given action or url only if the action is not same as this.
+        ///     If any redirect is happing then it will not execute.
+        ///     Note : This will resolve the looping of redirection.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="action"></param>
         /// <param name="controller">If not passed then current controller will be given.</param>
         /// <param name="area">If not passed then current area will be given.</param>
-        public static void RedirectToActionPermanentIfDistinct(this ActionExecutingContext context, string action, string controller = null, string area = null) {
+        public static void RedirectToActionPermanentIfDistinct(this ActionExecutingContext context, string action,
+            string controller = null, string area = null) {
             if (!context.IsRedirecting()) {
                 controller = string.IsNullOrEmpty(controller) ? GetControllerName(context) : controller;
                 area = string.IsNullOrEmpty(area) ? GetAreaName(context) : area;
@@ -236,33 +299,37 @@ namespace WeReviewApp.Modules.Extensions {
                 }
             }
         }
+
         #endregion
 
         #region Check / Validate/ test : Current Url
+
         /// <summary>
-        /// Is Current action url is save as given ones in the parameter.
+        ///     Is Current action url is save as given ones in the parameter.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="action"></param>
         /// <param name="controller">If not passed then current controller will be given.</param>
         /// <param name="area">If not passed then current area will be given.</param>
         /// <returns></returns>
-        public static bool IsCurrentUrl(this ActionExecutingContext context, string action, string controller = null, string area = null) {
+        public static bool IsCurrentUrl(this ActionExecutingContext context, string action, string controller = null,
+            string area = null) {
             controller = string.IsNullOrEmpty(controller) ? GetControllerName(context) : controller;
             area = string.IsNullOrEmpty(area) ? GetAreaName(context) : area;
-            var routeValues = new RouteValueDictionary(new { controller = controller, action = action, area = area });
+            var routeValues = new RouteValueDictionary(new {controller, action, area});
             return IsCurrentUrl(context, routeValues);
         }
+
         /// <summary>
-        /// Is Current action url is save as given ones in the parameter.
+        ///     Is Current action url is save as given ones in the parameter.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="routeValueDictionary"></param>
         /// <returns></returns>
         public static bool IsCurrentUrl(this ActionExecutingContext context, RouteValueDictionary routeValueDictionary) {
-            var controller = (string)routeValueDictionary["controller"];
-            var area = (string)routeValueDictionary["area"];
-            var action = (string)routeValueDictionary["action"];
+            var controller = (string) routeValueDictionary["controller"];
+            var area = (string) routeValueDictionary["area"];
+            var action = (string) routeValueDictionary["action"];
             var isActionSame = IsAction(context, action);
             var isControllerSame = IsController(context, controller);
             var isAreaSame = IsArea(context, area);
@@ -271,38 +338,7 @@ namespace WeReviewApp.Modules.Extensions {
                    isControllerSame &&
                    isAreaSame;
         }
-        #endregion
 
-        #region Getenerate Route profile
-        /// <summary>
-        /// Generates a RouteProfile consist 
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public static RouteProfile GetRouteProfile(this ActionExecutingContext context) {
-            var routeProfile = new RouteProfile();
-            routeProfile.Action = context.GetAreaName();
-            routeProfile.Controller = context.GetControllerName();
-            routeProfile.Area = context.GetAreaName();
-            routeProfile.ActionParameters = context.ActionParameters;
-            routeProfile.ActionDescriptor = context.ActionDescriptor;
-            return routeProfile;
-        }
         #endregion
-
-        #region Generate Parameters profile.
-        /// <summary>
-        /// Can return null if HttpContext is null.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns>Return ParametersProfileBase or null if HttpContext is null.</returns>
-        public static ParametersProfileBase GetParametersProfile(this ActionExecutingContext context) {
-            if (context.HttpContext != null) {
-                return context.HttpContext.GetParametersProfile();
-            }
-            return null;
-        }
-        #endregion
-
     }
 }

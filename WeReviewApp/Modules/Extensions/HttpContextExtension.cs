@@ -1,10 +1,8 @@
 ﻿using System.Web;
 using WeReviewApp.Modules.Type;
-using WeReviewApp.Modules.Extensions;
 
 namespace WeReviewApp.Modules.Extensions {
     public static class HttpContextExtension {
-
         public static ParametersProfile GetParametersProfile(this HttpContext context) {
             var profile = new ParametersProfile();
             profile.CurrentContext = context;

@@ -15,13 +15,15 @@ namespace WeReviewApp.Modules.Extensions.ViewEngine {
             bool partial = false) {
             // first find the ViewEngine for this view
             ViewEngineResult viewEngineResult = null;
-            if (partial)
+            if (partial) {
                 viewEngineResult = ViewEngines.Engines.FindPartialView(context, viewPath);
-            else
+            } else {
                 viewEngineResult = ViewEngines.Engines.FindView(context, viewPath, null);
+            }
 
-            if (viewEngineResult == null)
+            if (viewEngineResult == null) {
                 throw new FileNotFoundException("View cannot be found.");
+            }
 
             // get the view and attach the model to view data
             var view = viewEngineResult.View;

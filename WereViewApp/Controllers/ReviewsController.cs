@@ -7,12 +7,12 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using DevMvcComponent.Pagination;
+using WeReviewApp.BusinessLogics;
 using WeReviewApp.Filter;
 using WeReviewApp.Models.EntityModel;
 using WeReviewApp.Models.POCO.Identity;
 using WeReviewApp.Modules;
 using WeReviewApp.Modules.DevUser;
-using WeReviewApp.WereViewAppCommon;
 
 #endregion
 
@@ -20,7 +20,7 @@ namespace WeReviewApp.Controllers {
     public class ReviewsController : AdvanceController {
         #region Declarations
 
-        private readonly Algorithms algorithms = new Algorithms();
+        private readonly Logics _logics = new Logics();
 
         #endregion
 
@@ -98,7 +98,6 @@ namespace WeReviewApp.Controllers {
         #region Display Review: user/reviews/id
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="username">Username</param>
         /// <param name="page"></param>
@@ -108,7 +107,7 @@ namespace WeReviewApp.Controllers {
             ApplicationUser user;
             if (UserManager.IsUserNameExistWithValidation(username, out user)) {
                 var reviews = db.Reviews
-                                .Include(n=> n.User)
+                                .Include(n => n.User)
                                 .Where(n => n.UserID == user.UserID)
                                 .OrderByDescending(n => n.ReviewID);
 
@@ -122,14 +121,16 @@ namespace WeReviewApp.Controllers {
                 ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
                     maxNumbersOfPagesShow: 8));
                 ViewBag.user = user;
-                ViewBag.currentUserlikeDislikes = algorithms.GetReviewsLikeDislikeBasedOnUser(pagedReviews, db);
+                ViewBag.currentUserlikeDislikes = _logics.GetReviewsLikeDislikeBasedOnUser(pagedReviews, db);
                 return View("User", pagedReviews);
             }
             return View("_404");
         }
+
         #endregion
 
         #region Like
+
         [Authorize]
         [ValidateRegistrationComplete]
         [HttpPost]
@@ -159,16 +160,16 @@ namespace WeReviewApp.Controllers {
             }
 
             db.SaveChanges();
-            algorithms.ForceAppReviewToLoad(appId);
+            _logics.ForceAppReviewToLoad(appId);
             Thread.Sleep(1000);
 
-            return Json(new { isDone = result }, "text/html");
-
+            return Json(new {isDone = result}, "text/html");
         }
 
         #endregion
 
         #region Dilsike
+
         [Authorize]
         [ValidateRegistrationComplete]
         [HttpPost]
@@ -200,8 +201,8 @@ namespace WeReviewApp.Controllers {
 
             db.SaveChanges();
             Thread.Sleep(1000);
-            algorithms.ForceAppReviewToLoad(appId);
-            return Json(new { isDone = result }, "text/html");
+            _logics.ForceAppReviewToLoad(appId);
+            return Json(new {isDone = result}, "text/html");
         }
 
         #endregion
@@ -219,12 +220,12 @@ namespace WeReviewApp.Controllers {
                 db.Entry(review).State = EntityState.Modified;
                 var state = SaveDatabase(ViewStates.Edit, review);
                 if (state) {
-                    algorithms.AfterReviewIsSavedFixRatingNReviewCountInApp(review, false, db);
-                    algorithms.ForceAppReviewToLoad(review.AppID);
-                    return Json(new { isDone = true, msg = "Successful." }, JsonRequestBehavior.AllowGet); // return true;
+                    _logics.AfterReviewIsSavedFixRatingNReviewCountInApp(review, false, db);
+                    _logics.ForceAppReviewToLoad(review.AppID);
+                    return Json(new {isDone = true, msg = "Successful."}, JsonRequestBehavior.AllowGet); // return true;
                 }
             }
-            return Json(new { isDone = false, msg = "failed." }, JsonRequestBehavior.AllowGet); // return true;
+            return Json(new {isDone = false, msg = "failed."}, JsonRequestBehavior.AllowGet); // return true;
         }
 
         #endregion
@@ -312,7 +313,7 @@ namespace WeReviewApp.Controllers {
             if (isSameUser) {
                 return View("ReviewOwnApp");
             }
-            var review = algorithms.GetUserReviewedApp(AppID, db);
+            var review = _logics.GetUserReviewedApp(AppID, db);
             if (review == null) {
                 // not ever reviewed.
                 var viewOf = ViewTapping(ViewStates.Create);
@@ -346,20 +347,19 @@ namespace WeReviewApp.Controllers {
                 db.Reviews.Add(review);
                 var state = SaveDatabase(ViewStates.Create, review);
                 if (state) {
-                    algorithms.AfterReviewIsSavedFixRatingNReviewCountInApp(review, true, db);
-                    algorithms.ForceAppReviewToLoad(review.AppID);
+                    _logics.AfterReviewIsSavedFixRatingNReviewCountInApp(review, true, db);
+                    _logics.ForceAppReviewToLoad(review.AppID);
                     AppVar.SetSavedStatus(ViewBag, _createdSaved); // Saved Successfully.          
                 }
 
-                return Json(new { isDone = true, msg = "Successful." }, JsonRequestBehavior.AllowGet); // return true;
+                return Json(new {isDone = true, msg = "Successful."}, JsonRequestBehavior.AllowGet); // return true;
             }
 
-            return Json(new { isDone = false, msg = "failed." }, JsonRequestBehavior.AllowGet); // return true;
+            return Json(new {isDone = false, msg = "failed."}, JsonRequestBehavior.AllowGet); // return true;
         }
 
         private void AddNecessaryFields(Review review) {
             review.UserID = UserManager.GetLoggedUserId();
-
 
             if (review.Comments != null) {
                 review.Comment1 = review.Comments.GetStringCutOff(100);
@@ -368,7 +368,5 @@ namespace WeReviewApp.Controllers {
         }
 
         #endregion
-
-      
     }
 }

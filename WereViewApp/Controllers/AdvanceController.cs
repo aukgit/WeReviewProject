@@ -10,11 +10,10 @@ namespace WeReviewApp.Controllers {
     //[CompressFilter]
     //[CacheFilter(Duration = 3600)]
     public abstract class AdvanceController : Controller {
-        internal ErrorCollector ErrorCollector;
         internal readonly WereViewAppEntities db;
+        internal ErrorCollector ErrorCollector;
 
-        protected AdvanceController() {
-        }
+        protected AdvanceController() {}
 
         protected AdvanceController(bool dbContextRequried) {
             if (dbContextRequried) {

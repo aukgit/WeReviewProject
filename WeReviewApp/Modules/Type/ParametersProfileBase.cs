@@ -23,9 +23,11 @@ namespace WeReviewApp.Modules.Type {
         public bool IsRequestCookiesEmpty {
             get { return RequestCookies == null; }
         }
+
         public bool IsFormEmpty {
             get { return Form == null; }
         }
+
         public bool IsResponseEmpty {
             get { return Response == null; }
         }
@@ -37,7 +39,5 @@ namespace WeReviewApp.Modules.Type {
         public bool IsCurrentContextEmpty {
             get { return CurrentContext == null; }
         }
-
-
     }
 }

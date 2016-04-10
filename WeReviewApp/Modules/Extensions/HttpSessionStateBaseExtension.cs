@@ -11,9 +11,8 @@ namespace WeReviewApp.Modules.Extensions {
         }
 
         public static string GetAsString(this HttpSessionStateBase pair, string key, string defaultValue = "") {
-            return (string)Get(pair, key, defaultValue);
+            return (string) Get(pair, key, defaultValue);
         }
-
 
         public static int GetAsInt(this HttpSessionStateBase pair, string key, int defaultValue = 0) {
             var val = GetAsString(pair, key, null);

@@ -5,10 +5,10 @@ using System.Net;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using WeReviewApp.Common;
 using WeReviewApp.Controllers;
 using WeReviewApp.Models.EntityModel;
 using WeReviewApp.Modules.Uploads;
-using WeReviewApp.WereViewAppCommon;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
     public class AdvertiseController : AdvanceController {

@@ -1,15 +1,14 @@
 ﻿using System.Web.Mvc;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.Common;
 using WeReviewApp.Models.ViewModels;
 using WeReviewApp.Modules.Session;
-using WeReviewApp.WereViewAppCommon;
-using WeReviewApp.WereViewAppCommon.Structs;
 
 namespace WeReviewApp.Controllers {
     public class SearchController : Controller {
         // GET: Search
         public ActionResult Index() {
             return View();
-
         }
 
         [HttpPost]
@@ -19,7 +18,7 @@ namespace WeReviewApp.Controllers {
             var max = 60;
 
             var search = new SearchViewModel();
-            var algorithms = new Algorithms();
+            var algorithms = new Logics();
             //ViewBag.isPostBack = true;
             if (!string.IsNullOrWhiteSpace(SearchQuery)) {
                 if (!AppVar.Setting.IsInTestingEnvironment) {
@@ -34,7 +33,7 @@ namespace WeReviewApp.Controllers {
                 var displayList = urlGet.Split('-');
                 var displayStr = string.Join(" ", displayList);
                 var results = algorithms.GetSearchResults(SearchQuery, null, null, null,
-                                         CommonVars.SearchResultsMaxResultReturn);
+                    CommonVars.SearchResultsMaxResultReturn);
                 search.DisplayStringToUser = displayStr;
                 search.FoundApps = results;
                 return View(search);

@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using WeReviewApp.BusinessLogics;
+using WeReviewApp.Common;
 using WeReviewApp.Models.EntityModel;
 using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WeReviewApp.Modules.Sitemaps;
-using WeReviewApp.WereViewAppCommon;
 
 #endregion
 
@@ -33,12 +34,13 @@ namespace WeReviewApp.Controllers {
                 new SitemapItem(appUrl + "/sitemap", modifiedDate, SitemapChangeFrequency.Daily)
                 //new SitemapItem(appUrl+"/Sitemap.xml",modifiedDate, SitemapChangeFrequency.Daily),
             };
-            var algorithms = new Algorithms();
+            var algorithms = new Logics();
             using (var db = new WereViewAppEntities()) {
                 var max = db.FeaturedImages.Count();
                 var homePageGalleryApps = algorithms.GetHomePageGalleryImages(db, max);
 
-                sitemapItems.AddRange(homePageGalleryApps.Select(app => new SitemapItem(app.GetAbsoluteUrl(), modifiedDate)));
+                sitemapItems.AddRange(
+                    homePageGalleryApps.Select(app => new SitemapItem(app.GetAbsoluteUrl(), modifiedDate)));
 
                 var latestApps = algorithms.GetLatestApps(db, 50);
                 if (latestApps != null) {
@@ -50,7 +52,6 @@ namespace WeReviewApp.Controllers {
                     sitemapItems.AddRange(topApps.Select(app => new SitemapItem(app.GetAbsoluteUrl(), modifiedDate)));
                 }
 
-
                 var categories = WereViewStatics.AppCategoriesCache;
                 sitemapItems.AddRange(
                     categories.Select(
@@ -60,7 +61,6 @@ namespace WeReviewApp.Controllers {
                 sitemapItems.AddRange(
                     top30Developers.Select(
                         developer => new SitemapItem(appUrl + "/profiles/" + developer, modifiedDate)));
-
             }
 
             return new SitemapResult(sitemapItems);

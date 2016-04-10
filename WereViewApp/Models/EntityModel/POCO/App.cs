@@ -72,7 +72,7 @@ namespace WeReviewApp.Models.EntityModel {
         public long WebsiteClicked { get; set; }
         public long StoreClicked { get; set; }
         /// <summary>
-        /// This will be updated by Algorithms.FixRatingInApp() method
+        /// This will be updated by Logics.FixRatingInApp() method
         /// When any user rated this app. Static value field.
         /// </summary>
         public double AvgRating { get; set; }
@@ -192,7 +192,7 @@ namespace WeReviewApp.Models.EntityModel {
         /// <summary>
         /// Virtual Field : 
         /// This property is loaded from 
-        /// Algorithms.cs->LoadReviewIntoApp() method
+        /// Logics.cs->LoadReviewIntoApp() method
         /// </summary>
         public short ReviewsCount { get; set; }
 
@@ -200,7 +200,7 @@ namespace WeReviewApp.Models.EntityModel {
         /// <summary>
         /// Virtual Field : 
         /// How many reviews displaying in app-detail page.
-        /// Algorithms.cs->LoadReviewIntoApp() method
+        /// Logics.cs->LoadReviewIntoApp() method
         /// Only be updated if skip  = 0 from that method 
         /// otherwise update it from the partial controller
         /// </summary>

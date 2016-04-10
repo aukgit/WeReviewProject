@@ -8,12 +8,11 @@ using WeReviewApp.Models.Context;
 #endregion
 
 namespace WeReviewApp.Controllers {
-    public abstract class IndentityController<TContext> : Controller where TContext : ApplicationDbContext, new(){
+    public abstract class IndentityController<TContext> : Controller where TContext : ApplicationDbContext, new() {
         internal readonly TContext db;
         internal ErrorCollector ErrorCollector;
 
-        protected IndentityController() {
-        }
+        protected IndentityController() {}
 
         protected IndentityController(bool applicationDbContextRequried) {
             if (applicationDbContextRequried) {

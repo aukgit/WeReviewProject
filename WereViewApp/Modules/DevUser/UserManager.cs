@@ -1,20 +1,19 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using WeReviewApp.BusinessLogics;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.Identity;
 using WeReviewApp.Models.POCO.IdentityCustomization;
 using WeReviewApp.Models.ViewModels;
 using WeReviewApp.Modules.Role;
 using WeReviewApp.Modules.Session;
-using WeReviewApp.WereViewAppCommon;
 
 namespace WeReviewApp.Modules.DevUser {
     public static class UserManager {
@@ -32,7 +31,7 @@ namespace WeReviewApp.Modules.DevUser {
 
         public static void LinkUserWithRegistrationCode(ApplicationUser user, Guid code) {
             if (user != null) {
-                var relation = new RegisterCodeUserRelation { UserID = user.Id, RegisterCodeUserRelationID = code };
+                var relation = new RegisterCodeUserRelation {UserID = user.Id, RegisterCodeUserRelationID = code};
                 using (var db = new ApplicationDbContext()) {
                     db.RegisterCodeUserRelations.Add(relation);
                     db.SaveChanges();
@@ -96,7 +95,8 @@ namespace WeReviewApp.Modules.DevUser {
                     user.EmailConfirmed = true;
                     db2.SaveChanges(); // saved registration complete
 
-                    RegistrationCustomCode.CompletionAfter(user, getRoleFromRegistration, role); //wereviewdb user created with same id
+                    RegistrationCustomCode.CompletionAfter(user, getRoleFromRegistration, role);
+                        //wereviewdb user created with same id
                     RegistrationCustomCode.CompletionAfter(userId, getRoleFromRegistration, role);
                 }
             }
@@ -190,8 +190,9 @@ namespace WeReviewApp.Modules.DevUser {
         #endregion
 
         #region Get User
+
         /// <summary>
-        /// Username and id is same in both databases.
+        ///     Username and id is same in both databases.
         /// </summary>
         /// <param name="userid"></param>
         /// <returns></returns>
@@ -205,7 +206,7 @@ namespace WeReviewApp.Modules.DevUser {
         }
 
         /// <summary>
-        /// Username and id is same in both databases.
+        ///     Username and id is same in both databases.
         /// </summary>
         /// <param name="userName"></param>
         /// <param name="password"></param>
@@ -218,8 +219,9 @@ namespace WeReviewApp.Modules.DevUser {
             }
             return user;
         }
+
         /// <summary>
-        /// Username and id is same in both databases.
+        ///     Username and id is same in both databases.
         /// </summary>
         /// <param name="email"></param>
         /// <param name="password"></param>
@@ -230,7 +232,7 @@ namespace WeReviewApp.Modules.DevUser {
         }
 
         /// <summary>
-        /// Username and id is same in both databases.
+        ///     Username and id is same in both databases.
         /// </summary>
         /// <param name="email"></param>
         /// <param name="password"></param>
@@ -245,8 +247,9 @@ namespace WeReviewApp.Modules.DevUser {
             }
             return null;
         }
+
         /// <summary>
-        /// Username and id is same in both databases.
+        ///     Username and id is same in both databases.
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
@@ -262,11 +265,11 @@ namespace WeReviewApp.Modules.DevUser {
         public static ApplicationUser GetUserFromSession() {
             var userSession = HttpContext.Current.Session[SessionNames.User];
             if (userSession != null) {
-                return (ApplicationUser)userSession;
+                return (ApplicationUser) userSession;
             }
             userSession = HttpContext.Current.Session[SessionNames.LastUser];
             if (userSession != null) {
-                return (ApplicationUser)userSession;
+                return (ApplicationUser) userSession;
             }
             return null;
         }
@@ -276,7 +279,8 @@ namespace WeReviewApp.Modules.DevUser {
             if (user != null && user.Email != null && email != null && user.Email.ToLower() == email.ToLower()) {
                 return user;
             }
-            return null; //user will give invalid result, because it might the previous user which credentials doesn;t match.
+            return null;
+                //user will give invalid result, because it might the previous user which credentials doesn;t match.
         }
 
         public static ApplicationUser GetUserFromSession(string username) {
@@ -298,9 +302,9 @@ namespace WeReviewApp.Modules.DevUser {
 
         public static ApplicationUser GetUserFromViewModel(RegisterViewModel model) {
             var user = new ApplicationUser {
-                UserName = Algorithms.GetAllUpperCaseTitle(model.UserName),
-                FirstName = Algorithms.GetAllUpperCaseTitle(model.FirstName),
-                LastName = Algorithms.GetAllUpperCaseTitle(model.LastName),
+                UserName = Logics.GetAllUpperCaseTitle(model.UserName),
+                FirstName = Logics.GetAllUpperCaseTitle(model.FirstName),
+                LastName = Logics.GetAllUpperCaseTitle(model.LastName),
                 Email = model.Email,
                 //DateOfBirth = model.DateOfBirth,
                 CreatedDate = DateTime.Now,
@@ -312,7 +316,6 @@ namespace WeReviewApp.Modules.DevUser {
                 IsRegistrationComplete = false,
                 GeneratedGuid = Guid.NewGuid()
             };
-
 
             return user;
         }
@@ -337,17 +340,17 @@ namespace WeReviewApp.Modules.DevUser {
         }
 
         /// <summary>
-        /// Return current user in optimized fashion.
-        /// Returns -1 if not logged in.
-        /// Username and id is same in both databases.
+        ///     Return current user in optimized fashion.
+        ///     Returns -1 if not logged in.
+        ///     Username and id is same in both databases.
         /// </summary>
         /// <returns>Returns -1 if not logged in.</returns>
         public static long GetLoggedUserId() {
             if (HttpContext.Current.User.Identity.IsAuthenticated) {
                 //ApplicationUser user = null;
-                var userid = (long?)HttpContext.Current.Session[SessionNames.UserID];
+                var userid = (long?) HttpContext.Current.Session[SessionNames.UserID];
                 if (userid != null) {
-                    return (long)userid;
+                    return (long) userid;
                 }
                 return GetCurrentUser().UserID;
             }
@@ -363,8 +366,8 @@ namespace WeReviewApp.Modules.DevUser {
         }
 
         /// <summary>
-        /// Checks if is empty()
-        /// then validate using regular expression then try searching in the db.
+        ///     Checks if is empty()
+        ///     then validate using regular expression then try searching in the db.
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
@@ -375,7 +378,7 @@ namespace WeReviewApp.Modules.DevUser {
                 const int min = 3;
                 const string userPattern = "^([A-Za-z]|[A-Za-z0-9_.]+)$";
                 var regularExpressionValidation = Regex.IsMatch(username, userPattern, RegexOptions.Compiled) &&
-                                                  (username.Length >= min && username.Length <= max);
+                                                  username.Length >= min && username.Length <= max;
                 if (regularExpressionValidation) {
                     user = GetUser(username);
                     return user != null;
@@ -387,6 +390,7 @@ namespace WeReviewApp.Modules.DevUser {
         public static bool IsEmailExist(string email) {
             return Manager.Users.Any(n => n.Email == email);
         }
+
         public static bool IsEmailExistWithValidation(string email, out ApplicationUser user) {
             user = null;
             if (!string.IsNullOrWhiteSpace(email)) {
@@ -394,7 +398,7 @@ namespace WeReviewApp.Modules.DevUser {
                 const int min = 3;
                 const string emailPattern = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
                 var regularExpressionValidation = Regex.IsMatch(email, emailPattern, RegexOptions.Compiled) &&
-                                                  (email.Length >= min && email.Length <= max);
+                                                  email.Length >= min && email.Length <= max;
                 if (regularExpressionValidation) {
                     user = Manager.Users.FirstOrDefault(n => n.Email == email);
                     return user != null;

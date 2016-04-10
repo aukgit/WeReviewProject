@@ -3,9 +3,8 @@
 using System;
 using System.IO;
 using FluentScheduler;
+using WeReviewApp.Common;
 using WeReviewApp.Modules.Uploads;
-using WeReviewApp.WereViewAppCommon;
-using WeReviewApp.WereViewAppCommon.Structs;
 
 #endregion
 

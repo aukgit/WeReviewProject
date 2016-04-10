@@ -8,12 +8,11 @@ using WeReviewApp.Modules.Extensions.Context;
 #endregion
 
 namespace WeReviewApp.Controllers {
-    internal abstract class GenericController<TContext> : Controller where TContext : DevDbContext, new(){
+    internal abstract class GenericController<TContext> : Controller where TContext : DevDbContext, new() {
         internal readonly TContext db;
         internal ErrorCollector ErrorCollector;
 
-        protected GenericController() {
-        }
+        protected GenericController() {}
 
         protected GenericController(bool applicationDbContextRequried) {
             if (applicationDbContextRequried) {

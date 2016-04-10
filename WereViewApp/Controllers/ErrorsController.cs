@@ -19,7 +19,6 @@ namespace WeReviewApp.Controllers {
             return View("_" + number);
         }
 
-
         public ActionResult Error_400() {
             return View("_400");
         }

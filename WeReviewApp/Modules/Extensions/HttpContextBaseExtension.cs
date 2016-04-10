@@ -21,6 +21,5 @@ namespace WeReviewApp.Modules.Extensions {
             }
             return profile;
         }
-
     }
 }

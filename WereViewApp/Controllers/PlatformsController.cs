@@ -2,8 +2,8 @@
 
 using System.Web.Mvc;
 using DevMvcComponent.Pagination;
+using WeReviewApp.BusinessLogics;
 using WeReviewApp.Modules.Cache;
-using WeReviewApp.WereViewAppCommon;
 
 #endregion
 
@@ -13,14 +13,14 @@ namespace WeReviewApp.Controllers {
         // GET: 
 
         public ActionResult Index() {
-            var alg = new Algorithms();
+            var alg = new Logics();
             var platforms = alg.GetPlatformWiseAppsForPlatformPage();
             return View(platforms);
         }
 
         public ActionResult Specific(string platformName, int page = 1) {
             if (!string.IsNullOrWhiteSpace(platformName)) {
-                var alg = new Algorithms();
+                var alg = new Logics();
                 var pageInfo = new PaginationInfo {
                     ItemsInPage = AppConfig.Setting.PageItems,
                     PageNumber = page

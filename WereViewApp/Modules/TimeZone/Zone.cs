@@ -14,9 +14,42 @@ using WeReviewApp.Modules.DevUser;
 
 namespace WeReviewApp.Modules.TimeZone {
     /// <summary>
-    /// Timezone and date related codes.
+    ///     Timezone and date related codes.
     /// </summary>
     public class Zone {
+        #region Application Startup function for database
+
+        public static void LoadTimeZonesIntoMemory() {
+            _dbTimeZones = CachedQueriedData.GetTimezones();
+        }
+
+        #endregion
+
+        /// <summary>
+        ///     Flush cache information about user time-zone.
+        /// </summary>
+        /// <param name="log"></param>
+        public static void RemoveTimeZoneCache(string log) {
+            if (log == null) {
+                return;
+            }
+            AppConfig.Caches.Remove(CookiesNames.ZoneInfo + log);
+        }
+
+        #region Dynamic Timing
+
+        /// <summary>
+        ///     Returns a dynamic string value using time and other logics.
+        /// </summary>
+        /// <returns>Always get a unique string using date.</returns>
+        public static string GetTimeDynamic() {
+            var dynamic = DateTime.Now.Millisecond + DateTime.Now.Second + DateTime.Now.Minute +
+                          DateTime.Now.Millisecond;
+
+            return DateTime.Now.ToShortTimeString() + dynamic + (dynamic ^ dynamic);
+        }
+
+        #endregion
 
         #region Fields
 
@@ -53,7 +86,6 @@ namespace WeReviewApp.Modules.TimeZone {
             set { _defaultDateTimeFormat = value; }
         }
 
-
         private static readonly ReadOnlyCollection<TimeZoneInfo> SystemTimeZones = TimeZoneInfo.GetSystemTimeZones();
         private static List<UserTimeZone> _dbTimeZones;
 
@@ -61,8 +93,7 @@ namespace WeReviewApp.Modules.TimeZone {
 
         #region Constructor
 
-        public Zone() {
-        }
+        public Zone() {}
 
         public Zone(string timeFormat, string dateFormat = null, string dateTimeFormat = null) {
             _defaultTimeFormat = timeFormat;
@@ -76,58 +107,25 @@ namespace WeReviewApp.Modules.TimeZone {
 
         #endregion
 
-        #region Application Startup function for database
-
-        public static void LoadTimeZonesIntoMemory() {
-            _dbTimeZones = CachedQueriedData.GetTimezones();
-        }
-
-        #endregion
-
-        /// <summary>
-        ///     Flush cache information about user time-zone.
-        /// </summary>
-        /// <param name="log"></param>
-        public static void RemoveTimeZoneCache(string log) {
-            if (log == null) {
-                return;
-            }
-            AppConfig.Caches.Remove(CookiesNames.ZoneInfo + log);
-        }
-
-        #region Dynamic Timing
-        /// <summary>
-        /// Returns a dynamic string value using time and other logics.
-        /// </summary>
-        /// <returns>Always get a unique string using date.</returns>
-        public static string GetTimeDynamic() {
-            var dynamic = DateTime.Now.Millisecond + DateTime.Now.Second + DateTime.Now.Minute +
-                          DateTime.Now.Millisecond;
-
-            return DateTime.Now.ToShortTimeString() + dynamic + (dynamic ^ dynamic);
-        }
-
-        #endregion
-
-
         #region Get Zone from Cache
 
         /// <summary>
-        /// Get UserTimeZone from database using caching if possible.
+        ///     Get UserTimeZone from database using caching if possible.
         /// </summary>
         /// <param name="zone">Pass TimeZoneInfo to get the usertimezone from database.</param>
         /// <returns>Returns timezone from cache if possible if not found anywhere returns null.</returns>
         public static UserTimeZone Get(TimeZoneInfo zone) {
             var id = "timezone-id:" + zone.Id;
-            var userTimeZone = (UserTimeZone)AppConfig.Caches.Get(id);
+            var userTimeZone = (UserTimeZone) AppConfig.Caches.Get(id);
             if (userTimeZone == null) {
                 userTimeZone = _dbTimeZones.FirstOrDefault(n => n.InfoID == zone.Id);
                 AppConfig.Caches.Set(id, userTimeZone);
             }
             return userTimeZone;
         }
+
         /// <summary>
-        /// Get timezone by userid.
+        ///     Get timezone by userid.
         /// </summary>
         /// <param name="userId"></param>
         /// <returns>Returns timezone from cache if possible if not found anywhere returns null.</returns>
@@ -156,6 +154,7 @@ namespace WeReviewApp.Modules.TimeZone {
             }
             return null;
         }
+
         /// <summary>
         ///     Optimized fist check on cache then database.
         ///     Get current logged time zone from database or from cache.
@@ -200,7 +199,6 @@ namespace WeReviewApp.Modules.TimeZone {
             return null;
         }
 
-
         /// <summary>
         ///     Get time zone from save cache.
         /// </summary>
@@ -208,8 +206,8 @@ namespace WeReviewApp.Modules.TimeZone {
         /// <returns></returns>
         private static TimeZoneSet GetSavedTimeZone(string log) {
             //save to cookie 
-            if (!String.IsNullOrWhiteSpace(log)) {
-                var cZone = (TimeZoneSet)AppConfig.Caches.Get(CookiesNames.ZoneInfo + log);
+            if (!string.IsNullOrWhiteSpace(log)) {
+                var cZone = (TimeZoneSet) AppConfig.Caches.Get(CookiesNames.ZoneInfo + log);
                 return cZone; //fast
             }
             return null;
@@ -242,8 +240,8 @@ namespace WeReviewApp.Modules.TimeZone {
         #endregion
 
         #region Get times format based on zone
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="dt"></param>
@@ -283,6 +281,7 @@ namespace WeReviewApp.Modules.TimeZone {
             var zone = Get(userId);
             return GetDateTime(zone, dt, format);
         }
+
         /// <summary>
         ///     Get date to print as string.
         ///     Time zone by user logged in.
@@ -383,7 +382,6 @@ namespace WeReviewApp.Modules.TimeZone {
             return GetDateTime(timeZone, dt, format, addTimeZoneString);
         }
 
-
         /// <summary>
         ///     Get date time to print as string.
         ///     Time zone by user logged in.
@@ -428,7 +426,7 @@ namespace WeReviewApp.Modules.TimeZone {
             if (dt == null) {
                 return "";
             }
-            var dt2 = (DateTime)dt;
+            var dt2 = (DateTime) dt;
 
             if (format == null) {
                 format = DateTimeFormat;
@@ -442,7 +440,7 @@ namespace WeReviewApp.Modules.TimeZone {
             var additionalString = "";
             if (addTimeZoneString) {
                 var userZone = timeZone.UserTimezone;
-                additionalString = "(" + GmtConst  + userZone.TimePartOnly + ")";
+                additionalString = "(" + GmtConst + userZone.TimePartOnly + ")";
             }
             return newDate.ToString(format) + additionalString;
         }

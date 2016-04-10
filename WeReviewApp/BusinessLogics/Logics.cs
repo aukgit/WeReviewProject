@@ -1,7 +1,4 @@
-﻿using DevMvcComponent.Extensions;
-using DevMvcComponent.Pagination;
-using DevTrends.MvcDonutCaching;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -10,16 +7,19 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using DevMvcComponent.Extensions;
+using DevMvcComponent.Pagination;
+using DevTrends.MvcDonutCaching;
+using WeReviewApp.Common;
 using WeReviewApp.Models.EntityModel;
 using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WeReviewApp.Models.EntityModel.Structs;
 using WeReviewApp.Models.ViewModels;
 using WeReviewApp.Modules.Cache;
 using WeReviewApp.Modules.DevUser;
-using WeReviewApp.WereViewAppCommon.Structs;
 
-namespace WeReviewApp.WereViewAppCommon {
-    public class Algorithms {
+namespace WeReviewApp.BusinessLogics {
+    public class Logics {
 
         #region Viewable Apps : Apps which are published
         /// <summary>
@@ -32,7 +32,7 @@ namespace WeReviewApp.WereViewAppCommon {
             if (db == null) {
                 db = new WereViewAppEntities();
             }
-            return db.Apps.Where(n => n.IsBlocked == false && n.IsPublished == true);
+            return db.Apps.Where(n => n.IsBlocked == false && n.IsPublished);
         }
         #endregion
 

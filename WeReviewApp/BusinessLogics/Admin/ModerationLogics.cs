@@ -3,10 +3,9 @@ using WeReviewApp.Models.EntityModel;
 using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WeReviewApp.Modules.DevUser;
 using WeReviewApp.Modules.Mail;
-using WeReviewApp.Modules.Extensions.IdentityExtension;
 
-namespace WeReviewApp.WereViewAppCommon {
-    public static class ModerationAlgorithms {
+namespace WeReviewApp.BusinessLogics.Admin {
+    public static class ModerationLogics {
 
         #region Blocking app and review
 

@@ -2,13 +2,58 @@
 using System.Linq;
 using WeReviewApp.Models.EntityModel;
 
-namespace WeReviewApp.WereViewAppCommon.Structs {
+namespace WeReviewApp.Common {
     public static class CommonVars {
+        #region Reg expressions
+
+        public const string FriendlyUrlRegex = @"[^A-Za-z0-9_\.~]+";
+
+        #endregion
+
+        #region Data Saving on File
+
+        public const string AppSavingExtension = @".mdb";
+
+        #endregion
+
+        #region Truncate Len
+
+        public const int AppHomePageDescriptionTruncLen = 45;
+
+        #endregion
+
+        #region regular constants
+
+        public static string[] SearchingEscapeSequence = {
+            "is", "were", "what",
+            "i", "am", "was",
+            "have", "in", "ain't",
+            "hello", "find", "lol",
+            "has", "for", "his",
+            "her", "vs", "v",
+            "v.", "lmao", "rofl",
+            "new", "old", "vs"
+        };
+
+        #endregion
+
+        #region Apps Already Found
+
+        /// <summary>
+        ///     Will contain the recent app which is stored from App-Details page tap
+        ///     Controller : App
+        ///     Action : SingleAppDisplay
+        ///     Url : /Apps/Apple-7/Games/plant-vs-zombies
+        /// </summary>
+        public static List<App> StaticAppsList { get; set; }
+
+        #endregion
 
         #region User Points
-        static List<UserPointSetting> _userPointSettings;
 
-        public static List<UserPointSetting> UserPointSettingsCache { 
+        private static List<UserPointSetting> _userPointSettings;
+
+        public static List<UserPointSetting> UserPointSettingsCache {
             get {
                 if (_userPointSettings == null) {
                     using (var db = new WereViewAppEntities()) {
@@ -16,17 +61,15 @@ namespace WeReviewApp.WereViewAppCommon.Structs {
                     }
                 }
                 return _userPointSettings;
-
             }
-            set {
-                _userPointSettings = value;
-            }
+            set { _userPointSettings = value; }
         }
 
         #endregion
 
         #region Notification Types
-        static List<NotificationType> _notificationtypes;
+
+        private static List<NotificationType> _notificationtypes;
 
         public static List<NotificationType> NotificationTypesCache {
             get {
@@ -36,23 +79,20 @@ namespace WeReviewApp.WereViewAppCommon.Structs {
                     }
                 }
                 return _notificationtypes;
-
             }
-            set {
-                _notificationtypes = value;
-            }
+            set { _notificationtypes = value; }
         }
 
         #endregion
 
         #region Output Cache URLS
+
         public const string OutputcaheSuggestedApps = @"/Partials/SuggestedApps";
         public const string OutputcaheFeaturedappsApps = @"/Partials/FeaturedApps";
         public const string OutputcaheReviewsdisplayApps = @"/Partials/ReviewsDisplay/";
         public const string OutputcaheAdvertisegalleryApps = @"/Partials/AdvertiseGallery";
         public const string OutputcaheLatestappslistApps = @"/Partials/LatestAppsList";
         public const string OutputcaheTopappslistApps = @"/Partials/TopAppsList";
-        
 
         #endregion
 
@@ -64,76 +104,49 @@ namespace WeReviewApp.WereViewAppCommon.Structs {
 
         #endregion
 
-        #region Apps Already Found
-        /// <summary>
-        /// Will contain the recent app which is stored from App-Details page tap
-        /// Controller : App
-        /// Action : SingleAppDisplay
-        /// Url : /Apps/Apple-7/Games/plant-vs-zombies
-        /// </summary>
-        public static List<App> StaticAppsList { get; set; }
-
-        #endregion
-
-        #region Reg expressions
-        public const string FriendlyUrlRegex = @"[^A-Za-z0-9_\.~]+";
-        #endregion
-
-        #region regular constants
-        public static string[] SearchingEscapeSequence = new string[] 
-                      { "is", "were", "what", 
-                        "i", "am", "was", 
-                        "have", "in", "ain't", 
-                        "hello", "find", "lol", 
-                        "has", "for", "his", 
-                        "her", "vs", "v", 
-                        "v.","lmao","rofl",
-                        "new","old", "vs"};
-
-        #endregion
-
-        #region Data Saving on File
-
-        public const string AppSavingExtension = @".mdb";
-
-        #endregion
-
         #region Location of Images in Gallery Constants
 
         public const string AdditionalRootAdvertiseLocation = "Advertise/";
 
         /// <summary>
-        /// "Gallery/"
+        ///     "Gallery/"
         /// </summary>
         public const string AdditionalRootGalleryLocation = "Gallery/";
+
         /// <summary>
-        /// "GalleryThumbs/"
+        ///     "GalleryThumbs/"
         /// </summary>
         public const string AdditionalRootGalleryIconLocation = "GalleryThumbs/";
+
         /// <summary>
-        /// "SearchThumbs/"
+        ///     "SearchThumbs/"
         /// </summary>
         public const string AdditionalRootSearchIconLocation = "SearchThumbs/";
+
         /// <summary>
-        /// "HomePageThumbs/"
+        ///     "HomePageThumbs/"
         /// </summary>
         public const string AdditionalRootHomeIconLocation = "HomePageThumbs/";
+
         /// <summary>
-        /// "HomePageFeatured/"
+        ///     "HomePageFeatured/"
         /// </summary>
         public const string AdditionalRootHomeLocation = "HomePageFeatured/";
+
         /// <summary>
-        /// "SuggestionThumbs/"
+        ///     "SuggestionThumbs/"
         /// </summary>
         public const string AdditionalRootSuggestedIconLocation = "SuggestionThumbs/";
 
         /// <summary>
-        /// "YoutubeCovers/"
+        ///     "YoutubeCovers/"
         /// </summary>
         public const string YouTubeCoverImageLocation = "YoutubeCovers/";
+
         #endregion
 
         #region Apps Suggestions Number
+
         public const int SuggestHighestTake = 10;
         public const int SuggestHighestDisplayNumberSuggestions = 12;
         public const int SuggestHighestFromSameUser = 3;
@@ -141,11 +154,7 @@ namespace WeReviewApp.WereViewAppCommon.Structs {
         public const int SuggestHighestAndSimilarQuery = 10;
         public const int SuggestHighestOrSimilarQuery = 10;
         public const int SearchResultsMaxResultReturn = 200;
-        #endregion
 
-        #region Truncate Len
-        public const int AppHomePageDescriptionTruncLen = 45;
-        
         #endregion
 
         #region Cache in file max expire time
