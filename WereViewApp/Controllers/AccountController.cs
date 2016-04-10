@@ -254,6 +254,7 @@ namespace WeReviewApp.Controllers {
             if (!user.IsRegistrationComplete) {
                 if (result.Succeeded && foundInUser.Equals(codeHashed)) {
                     CallCompleteRegistration(userId);
+                    UserManager.ClearUserFromSession(); // clear user cache.
                     return View("ConfirmEmail");
                 }
             } else {
