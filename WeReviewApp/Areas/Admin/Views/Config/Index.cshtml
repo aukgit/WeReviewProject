@@ -1,0 +1,36 @@
+﻿@model CoreSetting
+@{
+    ViewBag.Title = "Editing CoreSetting";
+    string tab = ViewBag.tab;
+    // these two are configured for the back btn
+    ViewBag.areaName = "Admin";
+    ViewBag.controllerName = "Config";
+    ViewBag.backBtn = @Html.Partial("_BackSave");
+    ViewBag.stateMessage = @Html.Partial("_SuccessMessage");
+}
+@using (Html.BeginForm("Index", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h1 class="h2">
+            <span class="@FaIcons.Cogs"></span> @ViewBag.Title
+        </h1>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.Partial("_Tabs-List")
+        @Html.HiddenFor(n=> n.IsFirstUserFound)
+        <div class="tab-content">
+            @Html.Partial("_Basic-tab")
+            @Html.Partial("_urls-tab")
+            @Html.Partial("_Office-tab")
+            @Html.Partial("_Email-setup-tab")
+            @Html.Partial("_developers-tab")
+            @Html.Partial("_External-logins-tab")
+            @Html.Partial("_WeReview-tab")
+            <div class="top-gap"></div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,24 @@
+﻿@model WeReviewApp.Models.POCO.IdentityCustomization.NavigationItem
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@Html.Partial("_SuccessMessage")
+@if (ViewBag.NavigationID != null) {
+    @Html.Hidden("NavigationID",(int) ViewBag.NavigationID)
+}
+@if (ViewBag.Editing != null) {
+    @Html.HiddenFor(model => model.NavigationItemID)
+}
+@Html.EditorFor(model => model.Title)
+@Html.EditorFor(model => model.RelativeURL)
+@Html.EditorFor(model => model.ElementClasses)
+@Html.EditorFor(model => model.ElementID)
+<div id="menu-item-edit-page">
+    @Html.EditorFor(model => model.HasDropDown)
+    <div id="hasDropdownDiv">
+        @Html.DropDowns(valueField: "NavigationID",
+                textField: "Name",
+                htmlName: "ParentNavigationID",
+                displayName: "Drop Down Menu",
+                classes: "btn btn-success")
+    </div>
+</div>

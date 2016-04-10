@@ -1,0 +1,28 @@
+﻿@model WeReviewApp.Models.EntityModel.App
+
+@{
+    int length = 0;
+    int i = 0;
+    if (Model.AppDetailsGalleryImages != null) {
+        length = Model.AppDetailsGalleryImages.Count;
+    }
+}
+<div id="apps-preview">
+    @if (Model.YoutubeEmbedLink != null) {
+        <div class="youtube-video">
+            <div class="embed-responsive embed-responsive-16by9">
+                <a class="playable-btn" href="#playvideo">
+                    <i class="fa fa-play-circle-o"></i>
+                    <img itemprop="image" class="img-responsive" src="@Model.YoutubeCoverImageLocation" alt="@Model.AppName Youtube video cover">
+                </a>
+                @Html.Raw(Model.YoutubeEmbedLink)
+            </div>
+        </div>
+    }
+    @for (i = 0; i < length; i++) {
+        var imageDisplay = Model.AppDetailsGalleryImages[i];
+        <div>
+            <img itemprop="image" class="img-responsive" src="@imageDisplay.GalleryImageLocation" alt="@imageDisplay.Title - app @Model.AppName">
+        </div>
+    }
+</div>

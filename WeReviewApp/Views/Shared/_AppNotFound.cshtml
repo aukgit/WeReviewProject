@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Mobile application not found";
+}
+<h1 class="error-page-title-version-2 top-margin-space h1 text-danger">
+    App not found
+</h1>
+
+<div class="top-gap-2x">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="~/images/error-icon-bucket.png" alt="app not found" />
+        </div>
+        <div class="col-md-8">
+            <p>
+                Sorry for the inconvenience , your given <strong class="bold red">URL</strong> doesn't lead to a valid app. Please try again from home page or list of apps. For further information , please be in touch with admin.
+            </p>
+            <h3>Note:</h3>
+            <q>
+                Please be sure that you have already published your app or checked the policies while posting.
+            </q>
+            <div class="contactus">Please feel free to @Html.ContactFormActionLink("contact us", "Contact Us - " + @AppVar.Name).</div>
+        </div>
+    </div>
+</div>
+
+
+
+

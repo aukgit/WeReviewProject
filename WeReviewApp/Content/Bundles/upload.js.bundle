@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<bundle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://vswebessentials.com/schemas/v1/bundle.xsd">
+  <settings>
+    <!--Determines if the bundle file should be automatically optimized after creation/update.-->
+    <minify>true</minify>
+    <!--Determin whether to generate/re-generate this bundle on building the solution.-->
+    <runOnBuild>true</runOnBuild>
+    <adjustRelativePaths>true</adjustRelativePaths>
+
+    <!--Specifies a custom subfolder to save files to. By default, compiled output will be placed in the same folder and nested under the original file.-->
+    <outputDirectory>../published.scripts</outputDirectory>
+  </settings>
+  <!--The order of the <file> elements determines the order of the files in the bundle.-->
+  <files>
+    <file>/Content/Scripts/Upload/jquery.ui.widget.js</file>
+    <file>/Content/Scripts/Upload/load-image.all.min.js</file>
+    <file>/Content/Scripts/Upload/canvas-to-blob.min.js</file>
+    <file>/Content/Scripts/Upload/jquery.iframe-transport.js</file>
+
+    <file>/Content/Scripts/Upload/jquery.fileupload.js</file>
+    <file>/Content/Scripts/Upload/jquery.fileupload-process.js</file>
+    <file>/Content/Scripts/Upload/jquery.fileupload-image.js</file>
+    <file>/Content/Scripts/Upload/jquery.fileupload-audio.js</file>
+    <file>/Content/Scripts/Upload/jquery.fileupload-video.js</file>
+    <file>/Content/Scripts/Upload/jquery.fileupload-validate.js</file>
+    <file>/Content/Scripts/DevOrgPlugins/developers-organism.upload.js</file>
+  </files>
+</bundle>

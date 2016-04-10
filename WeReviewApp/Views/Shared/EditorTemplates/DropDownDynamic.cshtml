@@ -1,0 +1,99 @@
+@model object
+@{
+    var isRequired = ViewData.ModelMetadata.IsRequired;
+    var isRequiredStar = isRequired ? "*" : "";
+    var htmlAttributes = new RouteValueDictionary();
+    if (@ViewData.ModelMetadata.DisplayName == null) {
+        ViewData.ModelMetadata.DisplayName = ViewData.ModelMetadata.PropertyName;
+    }
+    if (ViewBag.@class != null) {
+        htmlAttributes.Add("class", "form-control " + ViewBag.@class);
+    } else {
+        htmlAttributes.Add("class", "form-control");
+    }
+    if (ViewBag.placeholder != null) {
+        htmlAttributes.Add("placeholder", ViewBag.placeholder);
+    } else {
+        if (isRequired) {
+            htmlAttributes.Add("placeholder", @ViewData.ModelMetadata.DisplayName + isRequiredStar);
+        } else {
+            htmlAttributes.Add("placeholder", "[" + @ViewData.ModelMetadata.DisplayName + "]");
+        }
+    }
+    if (ViewBag.Value != null) {
+        htmlAttributes.Add("Value", ViewBag.Value);
+    }
+
+    if (ViewBag.LiveSearch == null) {
+        ViewBag.LiveSearch = "true";
+    }
+
+    if (ViewBag.Style == null) {
+        ViewBag.Style = "btn-success";
+    }
+
+    if (ViewBag.isPicker == null) {
+        ViewBag.isPicker = "true"; // true , false to make it selectpicker or not
+    }
+    if (ViewBag.Id == null) {
+        ViewBag.id = ViewData.ModelMetadata.PropertyName;
+    }
+
+    if (ViewBag.DynamicLoad == null) {
+        ViewBag.DynamicLoad = "true";
+    }
+    if (ViewBag.IsDependable == null) {
+        ViewBag.IsDependable = "false";
+    }
+
+    if (ViewBag.label == null) {
+        ViewBag.label = ViewData.ModelMetadata.DisplayName;
+    }
+
+    if (ViewBag.labelColumn == null) {
+        ViewBag.labelColumn = "col-md-2";
+    }
+    if (ViewBag.textColumn == null) {
+        ViewBag.textColumn = "col-md-10";
+    }
+    if (ViewBag.IsHtmlRequest == null) {
+        ViewBag.IsHtmlRequest = "false";
+    }
+}
+<div data-json-combo-plugin="true" class="form-group form-row-@ViewData.ModelMetadata.PropertyName dynamic-select-container" data-dynamic-select-container="true">
+    @*<div class="controls">*@
+    <label data-progress-bar="true" data-prop="@ViewData.ModelMetadata.PropertyName">
+        <a data-toggle="tooltip" title="Loading request..." data-original-title="Loading request..." class="tooltip-show CustomValidation @ViewData.ModelMetadata.PropertyName no-hover">
+            <span data-display="@ViewData.ModelMetadata.DisplayName" class="@ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-spin" title="Loading request..."></span>
+        </a>
+        Loading request...
+    </label>
+    <div data-hidable="true" data-prop="@ViewData.ModelMetadata.PropertyName">
+        <label data-prop="@ViewData.ModelMetadata.PropertyName" class="@ViewBag.labelColumn control-label" for="@ViewData.ModelMetadata.PropertyName">
+            @ViewBag.label
+            <span class="red">@isRequiredStar</span>
+        </label>
+        <div class="@ViewBag.textColumn select-holding-div select-dynamic-holding-div">
+            <div class="d-select-ip-@ViewData.ModelMetadata.PropertyName dynamic-select-load"
+                 data-prop="@ViewData.ModelMetadata.PropertyName"
+                 data-dev-dynamic-select="@ViewBag.DynamicLoad"
+                 data-url="@ViewBag.Url"
+                 data-value="@Model"
+                 data-additional-css="@ViewBag.Style"
+                 data-live-search="@ViewBag.LiveSearch"
+                 data-dependable="@ViewBag.IsDependable"
+                 data-dependable-prop-name="@ViewBag.DependablePropertyName"
+                 data-id="@ViewBag.Id"
+                 data-is-selectpicker="@ViewBag.isPicker">
+
+            </div>
+            @if (@ViewData.ModelMetadata.Description != null) {
+                <a data-toggle="tooltip" data-original-title="@ViewData.ModelMetadata.Description" title="@ViewData.ModelMetadata.Description" class="tooltip-show">
+                    <span class="description-icon"></span></a>
+            }
+            <a data-toggle="tooltip" title="Validating" data-original-title="Validating" class="tooltip-show CustomValidation @ViewData.ModelMetadata.PropertyName no-hover">
+                <span data-display="@ViewData.ModelMetadata.DisplayName" class="CustomValidation @ViewData.ModelMetadata.PropertyName glyphicon glyphicon-refresh glyphicon-refresh-spin hide" title="Validating"></span>
+            </a>
+        </div>
+    </div>
+</div>

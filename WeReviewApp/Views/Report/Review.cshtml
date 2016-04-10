@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Reporting";
+    ViewBag.Subtitle = "Review ";
+    ViewBag.isAppReport = false;
+    ViewBag.appOrReviewId = ViewBag.id;
+}
+@Html.Partial("_Report")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

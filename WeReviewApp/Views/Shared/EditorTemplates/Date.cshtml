@@ -1,0 +1,78 @@
+@model DateTime?
+@{
+    bool isRequired = ViewData.ModelMetadata.IsRequired;
+    string isRequiredStar = isRequired ? "*" : "",
+        prop = ViewData.ModelMetadata.PropertyName.ToString(),
+        propLower = prop.ToLower(),
+        styleProperty = propLower,
+        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+        description = ViewData.ModelMetadata.Description,
+        icon = ViewBag.icon ?? "fa fa-calendar",
+        templateName = "date",
+        csharpDateTimeFormat = @"dd/MMM/yyyy",
+        pickerDateTimeFormat = @"DD/MMM/YYYY";
+
+
+    var htmlAttributes = new RouteValueDictionary();
+    if (ViewBag.@class != null) {
+        htmlAttributes.Add("class", "form-control date-input " + ViewBag.@class);
+    } else {
+        htmlAttributes.Add("class", "form-control date-input");
+    }
+    if (ViewBag.type != null) {
+        htmlAttributes.Add("type", ViewBag.type);
+    }
+
+
+    if (ViewBag.label != null) {
+        displayName = ViewBag.label;
+    }
+    if (ViewBag.labelColumn == null) {
+        ViewBag.labelColumn = "col-md-2";
+    }
+    if (ViewBag.textColumn == null) {
+        ViewBag.textColumn = "col-md-10";
+    }
+    
+    if (ViewBag.placeholder != null) {
+        htmlAttributes.Add("placeholder", ViewBag.placeholder);
+    } else {
+        if (isRequired) {
+            htmlAttributes.Add("placeholder", displayName + isRequiredStar);
+        } else {
+            htmlAttributes.Add("placeholder", "[" + displayName + "]");
+        }
+    }
+    
+    htmlAttributes.Add("title", htmlAttributes["placeholder"]);
+    htmlAttributes.Add("data-date-format", pickerDateTimeFormat);
+    htmlAttributes.Add("data-prop", styleProperty);
+    htmlAttributes.Add("data-template", templateName);
+}
+<div class="form-group form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty">
+    <div class="controls dev-plugin">
+        <label class="@ViewBag.labelColumn control-label form-label  @styleProperty" for="@styleProperty" data-prop="@styleProperty">
+            @displayName
+            <span class="red">@isRequiredStar</span>
+        </label>
+        <div class="@ViewBag.textColumn form-input @styleProperty" data-prop="@styleProperty">
+            <div class='input-group datepicker-start inline form-input @styleProperty' data-prop="@styleProperty">
+                @if (Model != null) {
+                    var dt = Model ?? DateTime.Now;
+                    @Html.TextBox("", dt.ToString(csharpDateTimeFormat), htmlAttributes)
+                } else {
+                    @Html.TextBox("", "", htmlAttributes)
+                }
+                <span class="input-group-addon">
+                    <span class="@icon"></span>
+                </span>
+            </div>
+            @if (description != null) {
+                <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show inline">
+                    <span class="description-icon"></span>
+                </a>
+            }
+            @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input break-line" })
+        </div>
+    </div>
+</div>

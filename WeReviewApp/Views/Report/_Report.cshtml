@@ -1,0 +1,73 @@
+﻿@using WeReviewApp.Models.EntityModel
+@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
+@using WeReviewApp.Models.POCO.Identity
+@using WeReviewApp.Modules.DevUser
+@model WeReviewApp.Models.POCO.IdentityCustomization.Feedback
+
+@{
+    string title = ViewBag.Title;
+
+    var token = Html.AntiForgeryToken();
+    string controller = (string)ViewBag.controller;
+    bool dropDownDynamic = (bool)ViewBag.dropDownDynamic;
+    string partialController = ViewBag.dynamicLoadPartialController;
+
+    // comes from controller
+    long appOrReviewId = ViewBag.appOrReviewId;
+    bool isAppReport = ViewBag.isAppReport != null && ViewBag.isAppReport;
+    string postingAction = isAppReport ? "App" : "Review";
+    ApplicationUser user = UserManager.GetCurrentUser();
+    string subtitle = ViewBag.subtitle;
+    App app = null;
+    Review review = null;
+
+}
+
+@if (isAppReport) {
+    app = ViewBag.app;
+} else {
+    app = ViewBag.app;
+    review = ViewBag.review;
+}
+
+@Html.SamePageLinkWithIcon(@title, @title, "fa fa-flag red")
+<hr />
+<!--ViewContext.RouteData.Values["Controller"].ToString()-->
+@using (Html.BeginForm(postingAction, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {
+    <div class="form-horizontal">
+        @token
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.Partial("_SuccessMessage")
+        <div class="form-group">
+            <div class="col-md-10 col-md-offset-2 controls">
+                @if (isAppReport) {
+                    <h2 class="f-em-1 h4 red">
+                        You are reporting on "<a href="@app.GetAbsoluteUrl()">@app.AppName</a>" app. Please make sure that you are not spaming.
+                    </h2>
+                } else {
+                    <h2 class="f-em-1 h4 red">
+                        You are reporting on "<a href="@app.GetAbsoluteUrl()">@review.Title</a>" review. Please make sure that you are not spamming.
+                    </h2>
+                    <q>@review.Comments</q>
+                }
+                <div class="message red bold">@ViewBag.errorMessage</div>
+            </div>
+        </div>
+        @Html.Hidden("appOrReviewId", appOrReviewId)
+        @Html.Hidden("hasAppId", isAppReport)
+        @Html.EditorFor(model => model.RateUrgency, "Rating-10")
+        @Html.EditorFor(model => model.Subject)
+        @Html.Hidden("Email", "Dynamic Email")
+        @Html.EditorFor(model => model.Message, "Multiline")
+    </div>
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-2">
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-paper-plane"></i>
+                Send
+            </button>
+            We will get back to you very shortly. Thank you.
+        </div>
+    </div>
+}
+
