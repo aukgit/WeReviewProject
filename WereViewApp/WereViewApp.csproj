@@ -252,7 +252,6 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
-    <Compile Include="Filter\PreventDuplicateCallAttribute.cs" />
     <Compile Include="Filter\ValidateRegistrationCompleteAttribute.cs" />
     <Compile Include="Filter\HasMinimumRoleAttribute.cs" />
     <Compile Include="Filter\FacebookAccessTokenAttribute.cs" />
