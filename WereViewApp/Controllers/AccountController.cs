@@ -241,7 +241,7 @@ namespace WeReviewApp.Controllers {
 
         #endregion
 
-        #region Confirm Email : Validation 
+        #region Confirm Email : Validation
 
         //[CompressFilter(Order = 1)]
         [AllowAnonymous]
@@ -261,11 +261,13 @@ namespace WeReviewApp.Controllers {
                     if (foundInUser.Equals(codeHashed)) {
                         CallCompleteRegistration(userId);
                         UserManager.ClearUserSessions(); // clear user cache.
+                        ViewBag.icon = FaIcons.CheckMark;
                         return View("ConfirmEmail");
                     }
                 } else {
                     // already registered
                     ViewBag.message = "You have already registered and confirmed your email successfully.";
+                    ViewBag.icon = FaIcons.CheckMark;
                     return View("InboxCheck");
                 }
                 #endregion
@@ -455,9 +457,9 @@ namespace WeReviewApp.Controllers {
                         CallCompleteRegistration(user.UserID, "Rookie"); // only will be called for first user.
                         return RedirectToActionPermanent("Verify");
                     }
+                    AddErrors(result);
                 }
             }
-            AddErrors(result);
             return View("Register", model);
         }
 
