@@ -268,10 +268,17 @@ namespace WeReviewApp.Modules.DevUser {
         }
 
         /// <summary>
-        ///     Clear user cache session.
+        ///     Clear usercache object session.
         /// </summary>
         public static void ClearSession() {
             HttpContext.Current.Session[SessionNames.UserCache] = null;
+        }
+
+        /// <summary>
+        ///     Clear user from session SessionNames.UserID, SessionNames.LastUser, SessionNames.UserCache
+        /// </summary>
+        public static void ClearAllSession() {
+            UserManager.ClearUserFromSession();
         }
     }
 }
