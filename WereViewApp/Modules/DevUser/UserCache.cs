@@ -278,7 +278,7 @@ namespace WeReviewApp.Modules.DevUser {
         ///     Clear user from session SessionNames.UserID, SessionNames.LastUser, SessionNames.UserCache
         /// </summary>
         public static void ClearAllSession() {
-            UserManager.ClearUserFromSession();
+            UserManager.ClearUserSessions();
         }
     }
 }

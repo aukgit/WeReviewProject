@@ -260,7 +260,7 @@ namespace WeReviewApp.Controllers {
                 if (!user.IsRegistrationComplete) {
                     if (foundInUser.Equals(codeHashed)) {
                         CallCompleteRegistration(userId);
-                        UserManager.ClearUserFromSession(); // clear user cache.
+                        UserManager.ClearUserSessions(); // clear user cache.
                         return View("ConfirmEmail");
                     }
                 } else {

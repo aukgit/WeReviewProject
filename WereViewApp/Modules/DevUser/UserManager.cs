@@ -434,7 +434,7 @@ namespace WeReviewApp.Modules.DevUser {
         /// <summary>
         /// Clear user from session SessionNames.UserID, SessionNames.LastUser, SessionNames.UserCache
         /// </summary>
-        public static void ClearUserFromSession() {
+        public static void ClearUserSessions() {
             SessionNames.RemoveKeys(new[] { SessionNames.UserID, SessionNames.LastUser, SessionNames.UserCache });
             GC.Collect();
         }
