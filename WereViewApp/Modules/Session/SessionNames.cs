@@ -28,7 +28,7 @@ namespace WeReviewApp.Modules.Session {
             var nameOfSession = Validator + methodName;
             var value = HttpContext.Current.Session[nameOfSession];
             if (isSessionExist && value != null) {
-                var count = (int) value;
+                var count = (int)value;
                 if (count <= maxTry) {
                     HttpContext.Current.Session[nameOfSession] = ++count;
                     return false;
@@ -40,5 +40,25 @@ namespace WeReviewApp.Modules.Session {
             }
             return true;
         }
+        public static void RemoveKeys(string[] keys) {
+            if (HttpContext.Current != null) {
+                var session = HttpContext.Current.Session;
+                if (session != null) {
+                    foreach (var key in keys) {
+                        session.Remove(key);
+                    }
+                }
+            }
+        }
+
+        public static void RemoveKey(string key) {
+            if (HttpContext.Current != null) {
+                var session = HttpContext.Current.Session;
+                if (session != null) {
+                    session.Remove(key);
+                }
+            }
+        }
+
     }
 }
