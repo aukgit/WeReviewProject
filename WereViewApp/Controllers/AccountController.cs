@@ -25,7 +25,6 @@ using WeReviewApp.Modules.Validations;
 
 namespace WeReviewApp.Controllers {
     [Authorize]
-    [ValidateRegistrationComplete]
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class AccountController : Controller {
         #region Constants and Variable
@@ -551,6 +550,7 @@ namespace WeReviewApp.Controllers {
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateRegistrationComplete]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model) {
             if (Session["user-reset-" + model.Email] == null) {
@@ -586,6 +586,7 @@ namespace WeReviewApp.Controllers {
 
         #region Account Manage
 
+        [ValidateRegistrationComplete]
         public ActionResult Manage(ManageMessageId? message) {
             if (UserManager.IsAuthenticated()) {
                 ViewBag.StatusMessage =
@@ -607,6 +608,7 @@ namespace WeReviewApp.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateRegistrationComplete]
         public async Task<ActionResult> Manage(ManageUserViewModel model) {
             var hasPassword = HasPassword();
             ViewBag.HasLocalPassword = hasPassword;
@@ -669,10 +671,7 @@ namespace WeReviewApp.Controllers {
             return false;
         }
 
-        private void SendEmail(string email, string callbackUrl, string subject, string message) {
-            // For information on sending mail, please visit http://go.microsoft.com/fwlink/?LinkID=320771
-        }
-
+   
         public enum ManageMessageId {
             ChangePasswordSuccess,
             SetPasswordSuccess,
