@@ -4,10 +4,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using WeReviewApp.Controllers;
 using WeReviewApp.Models.EntityModel;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class GalleryCategoriesController : AdvanceController {
         #region Constructors
 

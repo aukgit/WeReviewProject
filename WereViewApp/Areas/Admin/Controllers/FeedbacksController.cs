@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
-using DevMvcComponent.Pagination;
 using DevTrends.MvcDonutCaching;
 using WeReviewApp.BusinessLogics.Admin;
 using WeReviewApp.Controllers;
@@ -24,7 +23,7 @@ using WeReviewApp.Modules.Mail;
 //using DevTrends.MvcDonutCaching;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
-    [OutputCache(NoStore = true)]
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class FeedbacksController : IndentityController<ApplicationDbContext> {
         #region Constructors
 

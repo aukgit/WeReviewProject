@@ -7,8 +7,9 @@ namespace WeReviewApp.Models.POCO.IdentityCustomization {
     public class UserTimeZone {
         [Key]
         public int UserTimeZoneID { get; set; }
+
         /// <summary>
-        /// Windows TimeInfo ID
+        ///     Windows TimeInfo ID
         /// </summary>
         [Column(TypeName = "VARCHAR")]
         [Required]

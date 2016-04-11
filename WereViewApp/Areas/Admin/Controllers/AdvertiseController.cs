@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Web;
+using System.Web.UI;
 using System.Web.Mvc;
 using WeReviewApp.Common;
 using WeReviewApp.Controllers;
@@ -11,6 +12,7 @@ using WeReviewApp.Models.EntityModel;
 using WeReviewApp.Modules.Uploads;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class AdvertiseController : AdvanceController {
         #region Constructors
 

@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-using DevMvcComponent.Pagination;
+using System.Web.UI;
 using WeReviewApp.BusinessLogics;
 using WeReviewApp.BusinessLogics.Admin;
 using WeReviewApp.Controllers;
@@ -16,6 +16,7 @@ using WeReviewApp.Modules.Extensions.IdentityExtension;
 using WeReviewApp.Modules.Mail;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class AppsController : AdvanceController {
         public AppsController()
             : base(true) {}

@@ -1,7 +1,6 @@
 ﻿#region using block
 
 using System.Web.Mvc;
-using DevMvcComponent.Pagination;
 using WeReviewApp.BusinessLogics;
 using WeReviewApp.Modules.Cache;
 

@@ -13,7 +13,5 @@ namespace WeReviewApp.Models.POCO.IdentityCustomization {
 
         public bool IsUsed { get; set; }
         public bool IsExpired { get; set; }
-
-
     }
 }

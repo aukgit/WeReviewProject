@@ -5,6 +5,7 @@ using DevMvcComponent.Pagination;
 using WeReviewApp.BusinessLogics;
 
 namespace WeReviewApp.Controllers {
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class TagsController : AdvanceController {
         // GET: Tags
         private const int MaxNumbersOfPagesShow = 8;

@@ -4,15 +4,13 @@ using WeReviewApp.Modules.Uploads;
 
 namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
     public static class GalleryExtented {
-
-
         /// <summary>
-        /// Returns image http url.
+        ///     Returns image http url.
         /// </summary>
         /// <param name="gallery"></param>
         /// <param name="categoryId">
-        /// If category given then returns based on category not in the gallery category.
-        /// Useful while working with thumbs on gallery/ gallery icon.
+        ///     If category given then returns based on category not in the gallery category.
+        ///     Useful while working with thumbs on gallery/ gallery icon.
         /// </param>
         /// <returns></returns>
         public static string GetHtppUrl(this Gallery gallery, int? categoryId = null) {

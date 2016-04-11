@@ -21,6 +21,10 @@
     </div>
 <![endif]-->
 @Html.Partial("_NavBar")
+<div id="hidden-fields-container">
+    @RenderSection("hidden", false)
+</div>
+@Html.Partial("_LoadingBar")
 <div id="wrap" class="home-page">
     <div class="content">
         <div id="admin-area">
@@ -30,8 +34,6 @@
         </div>
         @Html.Partial("_Footer")
     </div>
-
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", false)

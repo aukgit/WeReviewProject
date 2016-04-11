@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using DevMvcComponent.Error;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.Identity;
 using WeReviewApp.Models.ViewModels;

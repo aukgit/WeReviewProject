@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using WeReviewApp.Controllers;
 using WeReviewApp.Models.EntityModel;
 using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
@@ -11,6 +12,7 @@ using WeReviewApp.Modules.DevUser;
 using WeReviewApp.Modules.Extensions.IdentityExtension;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class FeaturedImagesController : AdvanceController {
         #region Constructors
 

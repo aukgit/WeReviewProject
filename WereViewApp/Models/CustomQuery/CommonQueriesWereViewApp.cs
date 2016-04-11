@@ -8,6 +8,7 @@ namespace WeReviewApp.Models.CustomQuery {
         public GalleryCategory GetGallery(Gallery gallery) {
             return db.GalleryCategories.Find(gallery.GalleryCategoryID);
         }
+
         public GalleryCategory GetGallery(int id) {
             return db.GalleryCategories.Find(id);
         }

@@ -1,47 +1,47 @@
 ﻿@model IEnumerable<NavigationItem>
-
 @{
-    ViewBag.Title = "NavigationItem";
+    ViewBag.Title = "Navigation : " + ViewBag.MenuName;
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
 }
 
-@Html.SamePageLinkWithIcon(title, subtitle, "fa fa-sitemap")
-
-<p class="right">
-    <a href="@Url.Action("Add", new {id = ViewBag.NavigationID})" title="Create a new item." class="btn btn-warning create-save"><span class="glyphicon glyphicon-plus"></span> Create</a>
-    <a href="@Url.Action("Index", "Menu")" title="Root menu page" class="btn btn-info create-save"><span class="glyphicon glyphicon-th-list"></span> Menu</a>
-</p>
-<table class="bootstrap-table-do table table-hover">
-    <thead>
-    <tr>
-        <th data-field="UserName">
-            Menu
-        </th>
-        <th data-field="x">
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th data-field="r">
-            @Html.DisplayNameFor(model => model.RelativeURL)
-        </th>
-        <th data-field="t">
-            Order
-        </th>
-        <th data-field="w">
-            @Html.DisplayNameFor(model => model.ElementClasses)
-        </th>
-        <th data-field="r">
-            @Html.DisplayNameFor(model => model.ElementID)
-        </th>
-
-
-        <th data-field="q">
-            Has Drop-Down
-        </th>
-
-        <th></th>
-    </tr>
-    </thead>
+@Html.SamePageLinkWithIcon(title, subtitle, FaIcons.Sitemap)
+<div id="navitems-controller" data-action="list">
+    @section hidden{
+        @Html.GenerateUrlHiddenInputs(false, actionNames: new[] {"SaveOrder"})
+    }
+    <p class="right">
+        <a href="@Url.Action("Add", new {id = ViewBag.NavigationID})" title="Create a new item." class="btn btn-warning create-save"><span class="glyphicon glyphicon-plus"></span> Create</a>
+        <a id="save-order-btn" href="@Url.Action("SaveOrder", new {id = ViewBag.NavigationID})" title="Save the menu items order" class="btn btn-success create-save"><span class="fa fa-floppy-o"></span> Save Order</a>
+        <a href="@Url.Action("Index", "Menu")" title="Root menu page" class="btn btn-info create-save"><span class="glyphicon glyphicon-th-list"></span> Menu</a>
+    </p>
+    <table class="bootstrap-table-do table table-hover">
+        <thead>
+        <tr>
+            <th>
+                Menu
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RelativeURL)
+            </th>
+            <th>
+                Order
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ElementClasses)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ElementID)
+            </th>
+            <th>
+                Has Drop-Down
+            </th>
+            <th></th>
+        </tr>
+        </thead>
     <tbody>
     @foreach (var item in Model) {
         <tr>
@@ -54,12 +54,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.RelativeURL)
             </td>
-            <td>
-                <form action="/Admin/NavItems/Ordering" method="post" class="process-ordering-in-menu-items">
-                    @Html.HiddenFor(n => item.NavigationID)
-                    @Html.TextBoxFor(n => item.Ordering, new {@class = "form-control"})
-                </form>
-            </td>
+                <td>
+                    <form id="form-id-@item.NavigationItemID" method="post" class="process-ordering-in-menu-items">
+                        @Html.HiddenFor(n => item.NavigationID, new {@Name = "NavigationID"})
+                        @Html.HiddenFor(n => item.NavigationItemID, new {@Name = "NavigationItemID"})
+                        @Html.TextBoxFor(n => item.Ordering, new {@Name = "Ordering", @class = "form-control ordering-textbox", id = "navid-" + item.NavigationItemID, data_id = item.NavigationItemID})
+                    </form>
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ElementClasses)
             </td>
@@ -81,3 +82,7 @@
     </tbody>
 
 </table>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

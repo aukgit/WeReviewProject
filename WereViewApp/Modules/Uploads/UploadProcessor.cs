@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Web;
-using DevMvcComponent;
 using ImageResizer;
 
 namespace WeReviewApp.Modules.Uploads {
@@ -234,6 +233,15 @@ namespace WeReviewApp.Modules.Uploads {
                 return abs.Replace("/", "\\");
             }
             return virtualPath;
+        }
+
+        /// <summary>
+        ///     Path will have a slash at the end.
+        /// </summary>
+        /// <returns></returns>
+        public string GetAbsolutePath() {
+            var absolutePath = VirtualPathtoAbsoluteServerPath(GetCombinePathWithAdditionalRoots());
+            return absolutePath;
         }
 
         /// <summary>

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
-using DevMvcComponent.Pagination;
+using System.Web.UI;
 using WeReviewApp.BusinessLogics;
 using WeReviewApp.Filter;
 using WeReviewApp.Models.EntityModel;
@@ -17,6 +17,7 @@ using WeReviewApp.Modules.DevUser;
 #endregion
 
 namespace WeReviewApp.Controllers {
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class ReviewsController : AdvanceController {
         #region Declarations
 

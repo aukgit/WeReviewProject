@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
+using System.Web.UI;
 using WeReviewApp.Common;
 using WeReviewApp.Models.EntityModel;
 using WeReviewApp.Modules.DevUser;
@@ -13,6 +14,7 @@ using WeReviewApp.Modules.Validations;
 #endregion
 
 namespace WeReviewApp.Controllers {
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class ValidatorController : Controller {
         #region WereView Validators
 
@@ -34,7 +36,6 @@ namespace WeReviewApp.Controllers {
                 if (!AppVar.Setting.IsInTestingEnvironment) {
                     if (SessionNames.IsValidationExceed("GetValidUrl", maxTry)) {
                         return Json(Validator.GetErrorValidationExceedMessage(), JsonRequestBehavior.AllowGet);
-                            // return true;
                     }
                 }
 
@@ -58,8 +59,6 @@ namespace WeReviewApp.Controllers {
             //found e false
             ReturnValid:
             return Json(Validator.GetSuccessMessage("App name is valid."), JsonRequestBehavior.AllowGet);
-                // return true;
-
             ReturnInvalid:
             return Json(Validator.GetErrorMessage("App name is already exist or not valid."),
                 JsonRequestBehavior.AllowGet);
@@ -84,7 +83,6 @@ namespace WeReviewApp.Controllers {
                 if (!AppVar.Setting.IsInTestingEnvironment) {
                     if (SessionNames.IsValidationExceed("GetValidUrl")) {
                         return Json(Validator.GetErrorValidationExceedMessage(), JsonRequestBehavior.AllowGet);
-                            // return true;
                     }
                 }
 

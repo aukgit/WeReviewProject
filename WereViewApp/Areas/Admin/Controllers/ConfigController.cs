@@ -2,17 +2,20 @@
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.UI;
+using WeReviewApp.BusinessLogics;
 using WeReviewApp.Filter;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.IdentityCustomization;
 using WeReviewApp.Modules.Role;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class ConfigController : Controller {
         private readonly DevIdentityDbContext db = new DevIdentityDbContext();
 
         public ActionResult Index() {
-            byte id = 1;
+            var id = (byte) 1;
 
             var coreSetting = db.CoreSettings.Find(id);
             if (coreSetting == null) {

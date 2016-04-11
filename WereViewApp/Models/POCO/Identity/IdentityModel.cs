@@ -10,15 +10,18 @@ namespace WeReviewApp.Models.POCO.Identity {
 
 
     #region Login
-    public class ApplicationUserLogin : IdentityUserLogin<long> {
-    }
+
+    public class ApplicationUserLogin : IdentityUserLogin<long> {}
+
     #endregion
 
     #region Claim
+
     public class ApplicationUserClaim : IdentityUserClaim<long> {
         [DataType("VARCHAR")]
         [StringLength(20)]
         public override string ClaimType { get; set; }
+
         [DataType("VARCHAR")]
         [StringLength(80)]
         public override string ClaimValue { get; set; }

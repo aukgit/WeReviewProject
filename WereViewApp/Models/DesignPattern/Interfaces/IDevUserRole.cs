@@ -1,5 +1,5 @@
 ﻿namespace WeReviewApp.Models.DesignPattern.Interfaces {
-    interface IDevUserRole {
+    internal interface IDevUserRole {
         long Id { get; set; }
 
         string Name { get; set; }

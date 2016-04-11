@@ -2,12 +2,13 @@
 
 using System;
 using System.Web.Mvc;
-using DevMvcComponent.Error;
+using System.Web.UI;
 using WeReviewApp.Modules.Extensions.Context;
 
 #endregion
 
 namespace WeReviewApp.Controllers {
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     internal abstract class GenericController<TContext> : Controller where TContext : DevDbContext, new() {
         internal readonly TContext db;
         internal ErrorCollector ErrorCollector;
