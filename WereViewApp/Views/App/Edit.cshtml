@@ -29,7 +29,6 @@
                     <div class="btn-group">
                         <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
                         <a href="@Model.GetAbsoluteUrl()" title="View @appName" class="btn btn-warning"><span class="glyphicon glyphicon-chevron-left"></span> View</a>
-                        <a href="@Url.Action("Delete", new {id = Model.AppID})" title="Delete this record?" class="btn btn-danger" onclick=" return confirm('Are you sure?') "><span class="glyphicon glyphicon-remove"></span> Delete</a>
                         <div class="inline input-group-btn">
                             <button title="Save and create new one" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
                         </div>

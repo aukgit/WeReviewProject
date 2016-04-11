@@ -240,7 +240,8 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View("Error");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UserBlock(UserBlockViewModel model) {
             var user = db.Users.Find(model.UserId);
             if (user != null) {
@@ -276,7 +277,8 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View("Error");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EnableUserBlock(UserBlockViewModel model) {
             var user = db.Users.Find(model.UserId);
             if (user != null) {

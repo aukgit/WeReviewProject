@@ -36,7 +36,6 @@ namespace WeReviewApp.Controllers {
                 if (!AppVar.Setting.IsInTestingEnvironment) {
                     if (SessionNames.IsValidationExceed("GetValidUrl", maxTry)) {
                         return Json(Validator.GetErrorValidationExceedMessage(), JsonRequestBehavior.AllowGet);
-                        // return true;
                     }
                 }
 
@@ -60,8 +59,6 @@ namespace WeReviewApp.Controllers {
             //found e false
             ReturnValid:
             return Json(Validator.GetSuccessMessage("App name is valid."), JsonRequestBehavior.AllowGet);
-            // return true;
-
             ReturnInvalid:
             return Json(Validator.GetErrorMessage("App name is already exist or not valid."),
                 JsonRequestBehavior.AllowGet);
@@ -86,7 +83,6 @@ namespace WeReviewApp.Controllers {
                 if (!AppVar.Setting.IsInTestingEnvironment) {
                     if (SessionNames.IsValidationExceed("GetValidUrl")) {
                         return Json(Validator.GetErrorValidationExceedMessage(), JsonRequestBehavior.AllowGet);
-                        // return true;
                     }
                 }
 

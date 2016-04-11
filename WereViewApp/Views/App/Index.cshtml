@@ -61,6 +61,10 @@
                 <td>
                     <a href="@Url.Action("Edit", new { id = item.AppID })" title="@editLinkName edit..." class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
                     <a href="@item.GetAbsoluteUrl()" title="View App @editLinkName." class="btn btn-warning btn-xs"> View</a>
+                    <a href="@Url.Action("Delete", new {id = item.UploadGuid})" onclick="return confirm('Are you sure? This can\'t be undone.')" title="Revove App @editLinkName." class="btn btn-danger btn-xs">
+                        <i class="fa fa-times"></i>
+                        Remove
+                    </a>
                 </td>
             </tr>
         }

@@ -1,7 +1,7 @@
-﻿$.nestedClone = function (schema) {
+﻿$.nestedClone = function(schema) {
     /// <summary>
-    /// (Little bit slow) Created nested cloned object. It will not work for recursive pointing object.
-    /// Cloning test by Alim : http://jsperf.com/js-cloning-performance-test
+    ///     (Little bit slow) Created nested cloned object. It will not work for recursive pointing object.
+    ///     Cloning test by Alim : http://jsperf.com/js-cloning-performance-test
     /// </summary>
     /// <param name="schema" type="type"></param>
     /// <returns type=""></returns>
@@ -36,12 +36,11 @@
     }
 
     throw new Error("Unable to create the given schema type! Its type isn't supported.");
-}
-
-$.nonNestedClone = function (schema) {
+};
+$.nonNestedClone = function(schema) {
     /// <summary>
-    /// (Very fast) Created non-nested cloned object. It will not create nested json objects.
-    /// Cloning test by Alim : http://jsperf.com/js-cloning-performance-test
+    ///     (Very fast) Created non-nested cloned object. It will not create nested json objects.
+    ///     Cloning test by Alim : http://jsperf.com/js-cloning-performance-test
     /// </summary>
     /// <param name="schema" type="type"></param>
     /// <returns type=""></returns>
@@ -76,4 +75,4 @@ $.nonNestedClone = function (schema) {
     }
 
     throw new Error("Unable to create the given schema type! Its type isn't supported.");
-}
+};

@@ -1,11 +1,14 @@
-﻿Array.prototype.isEqual = function (array) {
+﻿Array.prototype.isEqual = function(array) {
     /// <summary>
-    /// Returns bool based on if both array contains same items.
+    ///     Returns bool based on if both array contains same items.
     /// </summary>
     /// <param name="array" type="type">Array list</param>
-    /// <returns type="">Returns true/false based if both of those array are same or not. If not same then false. If both empty then also return true.</returns>
+    /// <returns type="">
+    ///     Returns true/false based if both of those array are same or not. If not same then false. If both empty
+    ///     then also return true.
+    /// </returns>
     "use strict";
-    
+
     var isEmpty = this.length === 0;
     var arrayIsEmpty = array === undefined || array === null || array.length === 0;
     if (isEmpty === arrayIsEmpty && isEmpty === true) {
@@ -25,9 +28,9 @@
     }
 };
 
-Array.prototype.getDifferentIndexes = function (array) {
+Array.prototype.getDifferentIndexes = function(array) {
     /// <summary>
-    /// Returns array of indexes which are different between two arrays.
+    ///     Returns array of indexes which are different between two arrays.
     /// </summary>
     /// <param name="array" type="type">Must pass same length array. Otherwise exception will be thrown.</param>
     /// <returns type="">Return an array of indexes  which are different between two arrays</returns>
@@ -47,7 +50,7 @@ Array.prototype.getDifferentIndexes = function (array) {
                     results.push(i);
                 }
             }
-            return results; 
+            return results;
         }
     }
 };

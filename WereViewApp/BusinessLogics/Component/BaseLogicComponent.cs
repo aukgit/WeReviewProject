@@ -1,6 +1,5 @@
 ﻿#region using block
 
-using DevMvcComponent.Error;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.EntityModel;
 
@@ -22,24 +21,25 @@ namespace WeReviewApp.BusinessLogics.Component {
 
         #region Constructors
 
-        protected BaseLogicComponent() : this(false) { }
-        protected BaseLogicComponent(bool initializeErrorCollector) : this(null, null, initializeErrorCollector) { }
+        protected BaseLogicComponent() : this(false) {}
+        protected BaseLogicComponent(bool initializeErrorCollector) : this(null, null, initializeErrorCollector) {}
 
         protected BaseLogicComponent(WereViewAppEntities weReviewDb,
             bool initializeErrorCollector)
-            : this(null, weReviewDb, initializeErrorCollector) { }
+            : this(null, weReviewDb, initializeErrorCollector) {}
 
         protected BaseLogicComponent(ApplicationDbContext identityDb,
             bool initializeErrorCollector)
-            : this(identityDb, null, initializeErrorCollector) { }
+            : this(identityDb, null, initializeErrorCollector) {}
 
         protected BaseLogicComponent(ApplicationDbContext identityDb)
-            : this(identityDb, null, false) { }
+            : this(identityDb, null, false) {}
 
         protected BaseLogicComponent(bool identityDbInitialize, bool weReviewDbInitialize, bool logicInitialize,
-            bool initializeErrorCollector) { }
+            bool initializeErrorCollector) {}
+
         protected BaseLogicComponent(bool identityDbInitialize, bool weReviewDbInitialize,
-        bool initializeErrorCollector) {
+            bool initializeErrorCollector) {
             _identityDbInitialize = identityDbInitialize;
             _weReviewDbInitialize = weReviewDbInitialize;
             _initializeErrorCollector = initializeErrorCollector;
@@ -55,6 +55,7 @@ namespace WeReviewApp.BusinessLogics.Component {
                 ErrorCollector = new ErrorCollector();
             }
         }
+
         protected BaseLogicComponent(ApplicationDbContext identityDb, WereViewAppEntities weReviewDb,
             bool initializeErrorCollector) {
             _initializeErrorCollector = initializeErrorCollector;
@@ -67,10 +68,10 @@ namespace WeReviewApp.BusinessLogics.Component {
                 WeReviewDb = weReviewDb;
             }
 
-            var dbType = typeof(TContext);
-            if (dbType == typeof(WereViewAppEntities)) {
+            var dbType = typeof (TContext);
+            if (dbType == typeof (WereViewAppEntities)) {
                 db = weReviewDb as TContext;
-            } else if (dbType == typeof(ApplicationDbContext)) {
+            } else if (dbType == typeof (ApplicationDbContext)) {
                 db = identityDb as TContext;
             }
 
@@ -78,6 +79,7 @@ namespace WeReviewApp.BusinessLogics.Component {
                 ErrorCollector = new ErrorCollector();
             }
         }
+
         #endregion
     }
 }

@@ -1,17 +1,13 @@
 ﻿#region using block
 
-using System;
-using System.IO;
 using FluentScheduler;
 using WeReviewApp.Common;
-using WeReviewApp.Modules.Uploads;
 
 #endregion
 
 namespace WeReviewApp.Scheduler {
     internal class WeReviewScheduler : ITask {
         #region ITask Members
-
 
         public void Execute() {
             // keep the app running

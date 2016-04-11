@@ -5,21 +5,27 @@
     <header class="sticky">
         <div class="container">
             <a class="logo" href="@appUrl" title="wereviewapp.com: App Review websie">
-                <h1 title="wereviewapp.com" class="wereviewapp.com website-head-title">
+                <h1 title="wereviewapp.com" class="website-head-title wereviewapp.com">
                     <strong class="almost-black" title="App Review websie">we</strong><strong class="red" title="App Review websie">review</strong><strong class="orange-color" title="App Review websie">app.com</strong>
                 </h1>
             </a>
             <nav>
                 <ul class="jetmenu menu seo-optimize">
                     <li>
-                        <a href="#">Admin <b class="caret"></b></a>
-                        <ul class="dropdown animated fadeIn">
+                        <a href="#">
+                            <i class="fa fa-cog"></i>
+                            Core <b class="caret"></b>
+                        </a>
+                        <ul class="animated dropdown fadeIn">
                             @Html.GetMenu("Admin")
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Settings <b class="caret"></b></a>
-                        <ul class="dropdown animated fadeIn">
+                        <a href="#">
+                            <i class="fa fa-cogs"></i>
+                            Additional Settings <b class="caret"></b>
+                        </a>
+                        <ul class="animated dropdown fadeIn">
                             @Html.GetMenu("Application Settings")
                         </ul>
                     </li>
