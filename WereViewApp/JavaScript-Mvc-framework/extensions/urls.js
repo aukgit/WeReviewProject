@@ -11,7 +11,8 @@
 /// <reference path="D:\Working\GitHub\WereViewProject\WeReviewApp\Content/Scripts/jquery-2.1.4.js" />
 /// <reference path="D:\Working\GitHub\WereViewProject\WeReviewApp\Content/Scripts/jquery-2.1.4.intellisense.js" />
 /// <reference path="../schema/url.js" />
-; $.app = $.app || {};
+;
+$.app = $.app || {};
 $.app.urls = {
     /*
      * hostUrl will be retrieved from hidden field "#host-url"
@@ -24,10 +25,10 @@ $.app.urls = {
     emailValidation: "Email",
     timeZoneJson: "Services/GetTimeZone", // look like this /Partials/GetTimeZone/CountryID
     languageJson: "Services/GetLanguage", // look like this /Partials/GetTimeZone/CountryID
-    getHostUrl: function () {
+    getHostUrl: function() {
         /// <summary>
-        /// Retrieve host url from host-url id hidden field
-        /// Return host url with a slash at the bottom.
+        ///     Retrieve host url from host-url id hidden field
+        ///     Return host url with a slash at the bottom.
         /// </summary>
         /// <returns type="">Returns the host url.</returns>
         var self = $.app.urls;
@@ -46,9 +47,9 @@ $.app.urls = {
         return self.hostUrl;
     },
 
-    getAbsUrl: function (givenUrl) {
+    getAbsUrl: function(givenUrl) {
         /// <summary>
-        /// Given url shouldn't have any slash at the begining.
+        ///     Given url shouldn't have any slash at the begining.
         /// </summary>
         /// <param name="givenUrl">url shouldn't have any slash at the begining.</param>
         /// <returns type="">Return absolute url containing host name and url.</returns>
@@ -62,9 +63,9 @@ $.app.urls = {
     },
 
 
-    getAbsValidatorUrl: function (url) {
+    getAbsValidatorUrl: function(url) {
         /// <summary>
-        /// Returns absolute url of a validation
+        ///     Returns absolute url of a validation
         /// </summary>
         /// <param name="url"></param>
         /// <returns type="string">returns absolute url.</returns>
@@ -75,21 +76,21 @@ $.app.urls = {
 
     },
 
-    getGeneralUrlSchema: function (shouldGetDefaultSchema, otherUrlsList) {
+    getGeneralUrlSchema: function(shouldGetDefaultSchema, otherUrlsList) {
         /// <summary>
-        /// Generate a general url schema , which contains
-        /// It will look for hidden fields : edit-url, add-url, delete-url, save-url
+        ///     Generate a general url schema , which contains
+        ///     It will look for hidden fields : edit-url, add-url, delete-url, save-url
         /// </summary>
         /// <param name="shouldGetDefaultSchema" type="bool">
-        /// T/F , T/undefined : gets the default schmea.
+        ///     T/F , T/undefined : gets the default schmea.
         /// </param>
         /// <param name="otherUrlsList" type="type">
-        /// Array of list items containing new url names.
-        /// If null then only return url schema with add,edit,save,remove urls.
-        /// For example, retrieving "edit-url" hidden value pass "edit".
+        ///     Array of list items containing new url names.
+        ///     If null then only return url schema with add,edit,save,remove urls.
+        ///     For example, retrieving "edit-url" hidden value pass "edit".
         /// </param>
         /// <returns type="$.app.schema.url">
-        /// Returns a url schema object from schema folder's url (schema).
+        ///     Returns a url schema object from schema folder's url (schema).
         /// </returns>
         var urlSchema, i, urlName;
         if ($.isEmpty(shouldGetDefaultSchema) || shouldGetDefaultSchema === true) {

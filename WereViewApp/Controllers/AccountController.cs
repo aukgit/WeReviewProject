@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
-using DevMvcComponent.Error;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using WeReviewApp.Models.Context;

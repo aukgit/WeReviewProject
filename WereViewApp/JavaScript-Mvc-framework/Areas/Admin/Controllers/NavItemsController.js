@@ -16,8 +16,8 @@
 /// <reference path="../../../extensions/inputChangeTracker.js" />
 /// <reference path="../../../ProtoType/Array.js" />
 /// <reference path="../../../extensions/spinner.js" />
-
-;$.app.controllers = $.app.controllers || {};
+;
+$.app.controllers = $.app.controllers || {};
 $.app.controllers.navItemsController = {
     // any thing related to controllers.
     pageId: "navitems-controller",
@@ -28,7 +28,7 @@ $.app.controllers.navItemsController = {
         formId: "form-id-"
     },
     isDebugging: true,
-    initialize: function () {
+    initialize: function() {
         var controllers = $.app.controllers,
             current = controllers.navItemsController;
         if (controllers.isCurrentPage(current)) {
@@ -38,8 +38,8 @@ $.app.controllers.navItemsController = {
     getPage: function() {
         return $.app.controllers.navItemsController.$pageElement;
     },
-    config :  function() {
-        
+    config: function() {
+
     },
     actions: {
         /// <summary>
@@ -47,8 +47,8 @@ $.app.controllers.navItemsController = {
         /// </summary>
         list: function() {
             /// <summary>
-            /// Represents list action page.
-            /// Refers to the data-action attribute.
+            ///     Represents list action page.
+            ///     Refers to the data-action attribute.
             /// </summary>
             /// <returns type=""></returns>
             var self = $.app.controllers.navItemsController,
@@ -66,16 +66,15 @@ $.app.controllers.navItemsController = {
             self.bindEvents.onBlurInputs($allInputs, urlSchema.SaveOrder);
 
 
-
             console.log(urlSchema);
         }
     },
 
     bindEvents: {
-        onBlurInputs: function ($allInputs) {
+        onBlurInputs: function($allInputs) {
             var self = $.app.controllers.navItemsController,
                 tracker = self.prop.tracker;
-            $allInputs.on('blur', function () {
+            $allInputs.on("blur", function() {
                 var $input = $(this),
                     $tr = $input.parent().parent().parent();
                 console.log($tr);
@@ -94,7 +93,7 @@ $.app.controllers.navItemsController = {
                 tracker = prop.tracker,
                 formIdFormat = prop.formId;
 
-            var getFormsData = function (ids, formIdFormat) {
+            var getFormsData = function(ids, formIdFormat) {
                 var formArray = new Array(ids.length);
                 for (var i = 0; i < ids.length; i++) {
                     var id = ids[i],
@@ -102,8 +101,7 @@ $.app.controllers.navItemsController = {
                     formArray[i] = $.serializeToJson($form);
                 }
                 return JSON.stringify(formArray);
-            }
-
+            };
             $saveBtn.click(function(e) {
                 e.preventDefault();
                 // changed inputs ids array, only contains id values.
@@ -116,13 +114,13 @@ $.app.controllers.navItemsController = {
                     data: data, // PlainObject or String or Array
                     dataType: "JSON", //, // "Text" , "HTML", "xml", "script" 
                     contentType: "application/json", // must add this line for server json submit
-                }).done(function (response) {
+                }).done(function(response) {
                     if (isInTestingMode) {
                         console.log(response);
                     }
-                }).fail(function (jqXHR, textStatus, exceptionMessage) {
+                }).fail(function(jqXHR, textStatus, exceptionMessage) {
                     console.log("Request failed: " + exceptionMessage);
-                }).always(function () {
+                }).always(function() {
                     console.log("complete");
                 });
                 console.log(idsArray);
@@ -131,5 +129,4 @@ $.app.controllers.navItemsController = {
         }
     }
 
-}
-
+};

@@ -21,8 +21,9 @@ namespace WeReviewApp.Modules.Type {
             var checkByte = o is byte || o is byte;
 
             if (checkString || checkByte || checkLong || checkInt || checkDecimal || checkGuid || checkBool ||
-                checkDateTime)
+                checkDateTime) {
                 return true;
+            }
             return false;
         }
 

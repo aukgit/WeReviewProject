@@ -15,14 +15,14 @@
 $.fn.extend({
     getClassesList: function() {
         /// <summary>
-        /// jQuery element get all classes as an array.
+        ///     jQuery element get all classes as an array.
         /// </summary>
         /// <returns type="array">array list of classes.</returns>
         return $.getClassesList(this);
     },
     isEmpty: function() {
         /// <summary>
-        /// Compare any object to null , unidentified or empty then returns true/false.
+        ///     Compare any object to null , unidentified or empty then returns true/false.
         /// </summary>
         /// <param name="variable"> Anything can be possible.</param>
         /// <returns type="boolean">True/False</returns>
@@ -38,14 +38,14 @@ $.fn.extend({
         return this.hasAttr("disabled");
     },
     toArrayWithValues: function() {
-        var len  = this.length,
+        var len = this.length,
             array = new Array(len);
         for (var i = 0; i < len; i++) {
             array[i] = this[i].value;
         }
         return array;
     },
-    multiformSerialize: function () {
+    multiformSerialize: function() {
         var len = this.length,
             array = [];
         for (var i = 0; i < len; i++) {

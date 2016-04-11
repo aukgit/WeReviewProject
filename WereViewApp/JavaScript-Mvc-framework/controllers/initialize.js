@@ -1,8 +1,9 @@
 ﻿/// <reference path="../jQueryExtend.js" />
-;$.app.controllers = $.app.controllers || {};
-$.app.controllers.initialize = function () {
+;
+$.app.controllers = $.app.controllers || {};
+$.app.controllers.initialize = function() {
     /// <summary>
-    /// Run all modules inside controllers.
+    ///     Run all modules inside controllers.
     /// </summary>
     var self = $.app.controllers;
 
@@ -15,4 +16,4 @@ $.app.controllers.initialize = function () {
             $.executeFunction(initialize);
         }
     }
-}
+};

@@ -8,12 +8,13 @@
 /// <reference path="../detect-browser.js" />
 /// <reference path="initialize.js" />
 /// <reference path="programsearch.js" />
-;$.app = $.app || {};
+;
+$.app = $.app || {};
 $.app.controllers = {
     // any thing related to controllers.
-    isCurrentPage: function (controllerExtendedTypeObject) {
+    isCurrentPage: function(controllerExtendedTypeObject) {
         /// <summary>
-        /// Returns true/false if the page is executable or not.
+        ///     Returns true/false if the page is executable or not.
         /// </summary>
         /// <param name="controllerExtendedTypeObject">Controller extended object , which must have pageId, $pageElement prop</param>
         /// <returns type=""></returns>
@@ -23,12 +24,12 @@ $.app.controllers = {
         $page = controllerExtendedTypeObject.$pageElement;
         return !$.isEmpty($page);
     },
-    getPage: function (controllerExtendedTypeObject) {
+    getPage: function(controllerExtendedTypeObject) {
         return controllerExtendedTypeObject.$pageElement;
     },
-    getPageActionName: function (controllerExtendedTypeObject) {
+    getPageActionName: function(controllerExtendedTypeObject) {
         /// <summary>
-        /// Get which mvc action it is referring to.
+        ///     Get which mvc action it is referring to.
         /// </summary>
         /// <param name="controllerExtendedTypeObject"></param>
         /// <returns type="">String of name(i.e. Index, Edit etc... which set in the data-action attribute.)</returns>
@@ -38,9 +39,9 @@ $.app.controllers = {
         }
         return "";
     },
-    execute: function (controllerExtendedTypeObject, runAll) {
+    execute: function(controllerExtendedTypeObject, runAll) {
         /// <summary>
-        /// execute all the actions if in the same page and page is related to that action.
+        ///     execute all the actions if in the same page and page is related to that action.
         /// </summary>
         /// <param name="controllerExtendedTypeObject">Controller extended object , which must have actions array of methods.</param>
         /// <returns type=""></returns>
@@ -60,4 +61,4 @@ $.app.controllers = {
             }
         }
     }
-}
+};

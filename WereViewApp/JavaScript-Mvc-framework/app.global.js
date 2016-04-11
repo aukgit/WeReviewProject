@@ -1,4 +1,5 @@
-﻿; $.app = $.app || {};
+﻿;
+$.app = $.app || {};
 $.app.global = {
     /**
      * global methods collection 

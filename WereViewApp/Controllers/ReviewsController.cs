@@ -7,7 +7,6 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
-using DevMvcComponent.Pagination;
 using WeReviewApp.BusinessLogics;
 using WeReviewApp.Filter;
 using WeReviewApp.Models.EntityModel;

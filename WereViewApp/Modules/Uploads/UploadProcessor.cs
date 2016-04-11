@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Web;
-using DevMvcComponent;
 using ImageResizer;
 
 namespace WeReviewApp.Modules.Uploads {
@@ -205,7 +204,6 @@ namespace WeReviewApp.Modules.Uploads {
                     additionalRootPath = AdditionalRoots;
                 }
 
-
                 rootPath += additionalRootPath;
                 sourceFileName = GetOrganizeName(file, true, isSourceAddTemp); //soruce as temp
                 processedFileName = GetOrganizeName(file, true, false); // target
@@ -237,7 +235,7 @@ namespace WeReviewApp.Modules.Uploads {
         }
 
         /// <summary>
-        /// Path will have a slash at the end.
+        ///     Path will have a slash at the end.
         /// </summary>
         /// <returns></returns>
         public string GetAbsolutePath() {

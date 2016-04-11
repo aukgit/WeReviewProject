@@ -9,9 +9,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
-using DevMvcComponent;
-using DevMvcComponent.Extensions;
-using DevMvcComponent.Pagination;
 using DevTrends.MvcDonutCaching;
 using WeReviewApp.Common;
 using WeReviewApp.Models.EntityModel;
@@ -42,8 +39,9 @@ namespace WeReviewApp.BusinessLogics {
         #endregion
 
         #region Get top users
+
         /// <summary>
-        /// Get top developers usernames
+        ///     Get top developers usernames
         /// </summary>
         /// <param name="db"></param>
         /// <param name="topDevelopersLimit"></param>
@@ -442,9 +440,9 @@ namespace WeReviewApp.BusinessLogics {
             // convert any given "Hello World v2" =>  "Hello-World"
             var appHyphenUrl = GenerateHyphenUrlString(searchString);
             var appUrlEscapseString = GetUrlStringExceptEscapeSequence(appHyphenUrl);
-                // "Hello World v2" =>  "Hello-World"
+            // "Hello World v2" =>  "Hello-World"
             var urlListOfEscapseString = GetUrlListExceptEscapeSequence(appUrlEscapseString);
-                // list of words from split '-'
+            // list of words from split '-'
 
             var query = apps.Where(app =>
                 urlListOfEscapseString.All(
