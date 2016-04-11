@@ -5,7 +5,9 @@ namespace WeReviewApp.Modules.DevUser {
     public static class RegistrationCustomCode {
         public static void CompletionBefore(long userId, bool getRoleFromRegistration, string role = null) {}
 
-        public static void CompletionAfter(long userId, bool getRoleFromRegistration, string role = null) {}
+        public static void CompletionAfter(long userId, bool getRoleFromRegistration, string role = null) {
+            UserManager.ClearUserSessions();
+        }
 
         internal static void CompletionBefore(ApplicationUser userIndetity, bool getRoleFromRegistration, string role) {}
 
@@ -23,7 +25,7 @@ namespace WeReviewApp.Modules.DevUser {
                         "Can't save user in the WeReviewApp Database. Id maybe already present.",
                         "Can't save user in the WeReviewApp Database. Id maybe already present.", "Fatal Error");
                 } else {
-                    UserManager.ClearUserFromSession();
+                    UserManager.ClearUserSessions();
                 }
             }
         }

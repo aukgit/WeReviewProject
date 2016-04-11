@@ -1,5 +1,4 @@
 ﻿#region using block
-
 using System.Web.Mvc;
 using WeReviewApp.Models.Context;
 

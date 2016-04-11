@@ -26,5 +26,6 @@ namespace WeReviewApp.Models.POCO.Identity {
 
         [ForeignKey("RoleID")]
         public virtual ICollection<RegisterCode> RegisterCodes { get; set; }
+
     }
 }

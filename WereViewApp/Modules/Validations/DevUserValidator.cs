@@ -102,6 +102,5 @@ namespace WeReviewApp.Modules.Validations {
             //AddValidation(TimezoneValidate);
         }
 
-        #endregion
     }
 }
