@@ -1,12 +1,8 @@
 ﻿@model CoreSetting
 <div class="fade tab-pane" id="email-setup-tab">
-
     <div class="col-md-10 col-md-offset-2 small-bottom-gap">
-
         <h1 class="bold h5">Email &amp; Other Setup:</h1>
-
     </div>
-
     @ViewBag.backBtn
     @ViewBag.stateMessage
     @Html.EditorFor(model => model.SenderDisplay)

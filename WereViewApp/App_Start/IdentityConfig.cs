@@ -28,7 +28,7 @@ namespace WeReviewApp {
             manager.PasswordValidator = new PasswordValidator {
                 RequiredLength = 6,
                 //RequireNonLetterOrDigit = true,
-                RequireDigit = true
+                RequireDigit = false
                 //RequireLowercase = true,
                 //RequireUppercase = true,
             };

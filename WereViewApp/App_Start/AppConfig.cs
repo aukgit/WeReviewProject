@@ -141,8 +141,8 @@ namespace WeReviewApp {
         /// <returns></returns>
         public static ErrorCollector GetGlobalError() {
             if (HttpContext.Current.Session[SessionNames.Error] != null) {
-                var error = (ErrorCollector) HttpContext.Current.Session[SessionNames.Error];
-                HttpContext.Current.Session[SessionNames.Error] = null;
+                var error = (ErrorCollector)HttpContext.Current.Session[SessionNames.Error];
+                SessionNames.RemoveKey(SessionNames.Error);
                 return error;
             }
             return null;

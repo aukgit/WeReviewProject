@@ -125,7 +125,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
                               .OrderByDescending(n => n.FeedbackID);
             }
 
-            var pagedData = feedbacks.GetPageData(paginationInfo, cacheName: cacheName);
+            var pagedData = feedbacks.GetPageData(paginationInfo, cacheName);
 
             var url = ControllerVisibleUrl + actionName + "/@page";
             ViewBag.paginationHtml = Pagination.GetList(paginationInfo, url, cacheName: cacheName + ".nav.html");

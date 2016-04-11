@@ -4,6 +4,7 @@
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
 }
+
 @Html.SamePageLinkWithIcon(title, subtitle, FaIcons.Sitemap)
 <div id="navitems-controller" data-action="list">
     @section hidden{
@@ -41,18 +42,18 @@
             <th></th>
         </tr>
         </thead>
-        <tbody>
-        @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @ViewBag.MenuName
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RelativeURL)
-                </td>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @ViewBag.MenuName
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RelativeURL)
+            </td>
                 <td>
                     <form id="form-id-@item.NavigationItemID" method="post" class="process-ordering-in-menu-items">
                         @Html.HiddenFor(n => item.NavigationID, new {@Name = "NavigationID"})
@@ -60,24 +61,27 @@
                         @Html.TextBoxFor(n => item.Ordering, new {@Name = "Ordering", @class = "form-control ordering-textbox", id = "navid-" + item.NavigationItemID, data_id = item.NavigationItemID})
                     </form>
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ElementClasses)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ElementID)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElementClasses)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElementID)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.HasDropDown)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new {id = item.NavigationItemID, item.NavigationID}) |
-                    @Html.ActionLink("Delete", "Delete", new {id = item.NavigationItemID, item.NavigationID}, new {onclick = "return confirm('Are you sure?')"})
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasDropDown)
+            </td>
+
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.NavigationItemID, item.NavigationID}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.NavigationItemID, item.NavigationID}, new {onclick = "return confirm('Are you sure?')"})
+            </td>
+        </tr>
+    }
+    </tbody>
+
+</table>
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
