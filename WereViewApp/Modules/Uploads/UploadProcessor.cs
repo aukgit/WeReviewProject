@@ -129,7 +129,7 @@ namespace WeReviewApp.Modules.Uploads {
             }
 
             rootPath += additinalPathWithRoot;
-            //root/private/addition path
+            //root/private/additionpath
             if (fileName == null) {
                 fileName = GetFilename(submittedFile);
             }

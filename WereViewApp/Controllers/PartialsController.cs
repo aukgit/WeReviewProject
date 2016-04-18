@@ -17,7 +17,7 @@ namespace WeReviewApp.Controllers {
     public class PartialsController : AdvanceController {
         #region Declarations
 
-        private readonly Logics algorithms = new Logics();
+        private readonly Logics _logics = new Logics();
 
         #endregion
 
@@ -163,7 +163,7 @@ namespace WeReviewApp.Controllers {
 
         public ActionResult HomePageGallery() {
             var max = db.FeaturedImages.Count();
-            var homePageGalleryApps = algorithms.GetHomePageGalleryImages(db, max);
+            var homePageGalleryApps = _logics.GetHomePageGalleryImages(db, max);
             return PartialView(homePageGalleryApps);
         }
 
@@ -174,7 +174,7 @@ namespace WeReviewApp.Controllers {
         public ActionResult AdvertiseGallery() {
             var max = db.Galleries.Count(n => n.GalleryCategoryID == GalleryCategoryIDs.Advertise);
 
-            var advertiseImages = algorithms.GetAdvertises(db, max);
+            var advertiseImages = _logics.GetAdvertises(db, max);
             return PartialView(advertiseImages);
         }
 
@@ -184,7 +184,7 @@ namespace WeReviewApp.Controllers {
 
         [DonutOutputCache(CacheProfile = "Day", VaryByParam = "id")]
         public ActionResult ReviewsDisplay(long id) {
-            var app = algorithms.GetAppFromStaticCache(id);
+            var app = _logics.GetAppFromStaticCache(id);
             if (app != null) {
                 return PartialView(app);
             }
@@ -201,7 +201,7 @@ namespace WeReviewApp.Controllers {
         /// <returns></returns>
         [OutputCache(Duration = 600)]
         public ActionResult LatestAppsList() {
-            var latestApps = algorithms.GetLatestApps(db, 25);
+            var latestApps = _logics.GetLatestApps(db, 25);
             return PartialView(latestApps);
         }
 
@@ -211,7 +211,7 @@ namespace WeReviewApp.Controllers {
 
         [OutputCache(Duration = 86400)]
         public ActionResult TopAppsList() {
-            var topApps = algorithms.GetTopRatedApps(db, 25);
+            var topApps = _logics.GetTopRatedApps(db, 25);
             return PartialView(topApps);
         }
 
@@ -231,8 +231,8 @@ namespace WeReviewApp.Controllers {
         //[OutputCache(Duration = 86400, VaryByParam = "appID")]
         public ActionResult FeaturedApps(long? appID) {
             if (appID != null) {
-                var app = algorithms.GetAppFromStaticCache((long) appID);
-                var featuredApps = algorithms.GetFeaturedAppsWithImages(app, db, 20);
+                var app = _logics.GetAppFromStaticCache((long) appID);
+                var featuredApps = _logics.GetFeaturedAppsWithImages(app, db, 20);
                 return PartialView(featuredApps);
             }
             return PartialView();
@@ -241,8 +241,8 @@ namespace WeReviewApp.Controllers {
         [OutputCache(Duration = 86400, VaryByParam = "appID")]
         public ActionResult SuggestedApps(long? appID) {
             if (appID != null) {
-                var app = algorithms.GetAppFromStaticCache((long) appID);
-                var suggestedApps = algorithms.GetFinalSuggestedAppsCache(app, db);
+                var app = _logics.GetAppFromStaticCache((long) appID);
+                var suggestedApps = _logics.GetFinalSuggestedAppsCache(app, db);
                 return PartialView(suggestedApps);
             }
             return PartialView();
@@ -251,8 +251,8 @@ namespace WeReviewApp.Controllers {
         [OutputCache(Duration = 86400, VaryByParam = "appID")]
         public ActionResult DevelopersApps(long? appID) {
             if (appID != null) {
-                var app = algorithms.GetAppFromStaticCache((long) appID);
-                var suggestedApps = algorithms.GetDevelopersAppsByApp(app, db); // logic needs to be written
+                var app = _logics.GetAppFromStaticCache((long) appID);
+                var suggestedApps = _logics.GetDevelopersAppsByApp(app, db); // logic needs to be written
 
                 return PartialView(suggestedApps);
             }

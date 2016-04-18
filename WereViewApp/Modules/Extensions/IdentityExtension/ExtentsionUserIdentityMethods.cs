@@ -43,7 +43,7 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
         /// <summary>
         ///     Get Application user by UserId.
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
         public static ApplicationUser GetUser(this IPrincipal user, long userId) {
             return UserManager.GetUser(userId);
@@ -63,7 +63,7 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
         ///     Get Application user by UserId.
         /// </summary>
         /// <param name="user"></param>
-        /// <param name="username"></param>
+        /// <param name="email"></param>
         /// <returns></returns>
         public static ApplicationUser GetUserbyEmail(this IPrincipal user, string email) {
             return UserManager.GetUserByEmail(email);
@@ -71,11 +71,12 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
 
         /// <summary>
         ///     Is current logged user's registration is complete.
+        ///     If none logged in then returns false.
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
         public static bool IsRegistrationComplete(this IPrincipal user) {
-            var userObject = GetUser(user);
+            var userObject = UserManager.GetCurrentUser();
             if (userObject != null) {
                 return userObject.IsRegistrationComplete;
             }
@@ -178,7 +179,14 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
             ApplicationUser appUser;
             return IsUserExistInSessionByEmail(user, email, out appUser, sessionName);
         }
-
+        /// <summary>
+        /// Is User exist in the session name given.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="email"></param>
+        /// <param name="appUser"></param>
+        /// <param name="sessionName"></param>
+        /// <returns></returns>
         public static bool IsUserExistInSessionByEmail(this IPrincipal user, string email, out ApplicationUser appUser,
             string sessionName = SessionNames.UserPrincipalUserSession) {
             appUser = GetUserFromSession(user, sessionName);
@@ -187,7 +195,13 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
             }
             return false;
         }
-
+        /// <summary>
+        /// Is User exist in the session name given.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="userName"></param>
+        /// <param name="sessionName"></param>
+        /// <returns></returns>
         public static bool IsUserExistInSession(this IPrincipal user, string userName,
             string sessionName = SessionNames.UserPrincipalUserSession) {
             ApplicationUser appUser;

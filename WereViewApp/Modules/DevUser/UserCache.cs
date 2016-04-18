@@ -216,6 +216,17 @@ namespace WeReviewApp.Modules.DevUser {
             return userCahe;
         }
 
+        /// <summary>
+        ///     Get from cache or Creates a user cache from logged user.
+        ///     If not user exist then User will be null.
+        ///     Check null before evaluating.
+        /// </summary>
+        /// <param name="rolesGenerate">True : Generates cache roles for the current user.</param>
+        /// <param name="saveUserInCache">True : Saves current cache in the session.</param>
+        public static UserCache GetNewOrExistingUserCache(bool rolesGenerate = true, bool saveUserInCache = true) {
+            return GetNewOrExistingUserCache(UserManager.GetCurrentUser(), rolesGenerate, saveUserInCache);
+        }
+
         public bool IsInRole(string roleName) {
             ApplicationRole role;
             return IsInRole(roleName, out role);
@@ -281,10 +292,17 @@ namespace WeReviewApp.Modules.DevUser {
         }
 
         /// <summary>
-        ///     Clear user cache session.
+        ///     Clear usercache object session.
         /// </summary>
         public static void ClearSession() {
-            HttpContext.Current.Session[SessionNames.UserCache] = null;
+            SessionNames.RemoveKey(SessionNames.UserCache);
+        }
+
+        /// <summary>
+        ///     Clear user from session SessionNames.UserID, SessionNames.LastUser, SessionNames.UserCache
+        /// </summary>
+        public static void ClearAllSession() {
+            UserManager.ClearUserSessions();
         }
     }
 }

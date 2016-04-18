@@ -29,7 +29,7 @@ namespace WeReviewApp.Modules.DevUser {
 
         public static void LinkUserWithRegistrationCode(ApplicationUser user, Guid code) {
             if (user != null) {
-                var relation = new RegisterCodeUserRelation {UserID = user.Id, RegisterCodeUserRelationID = code};
+                var relation = new RegisterCodeUserRelation { UserID = user.Id, RegisterCodeUserRelationID = code };
                 using (var db = new ApplicationDbContext()) {
                     db.RegisterCodeUserRelations.Add(relation);
                     db.SaveChanges();
@@ -51,51 +51,53 @@ namespace WeReviewApp.Modules.DevUser {
         public static void CompleteRegistration(long userId, bool getRoleFromRegistration, string role = null) {
             using (var db2 = new ApplicationDbContext()) {
                 var user = db2.Users.Find(userId);
-                RegistrationCustomCode.CompletionBefore(user, getRoleFromRegistration, role);
-                RegistrationCustomCode.CompletionBefore(userId, getRoleFromRegistration, role);
-                if (user != null) {
-                    // here completion doesn't work
-                    if (!AppConfig.Setting.IsFirstUserFound) {
-                        // first user not found yet.
-                        // first user is admin
-                        // most likely this is the first user
+                if (!user.IsRegistrationComplete) {
+                    RegistrationCustomCode.CompletionBefore(user, getRoleFromRegistration, role);
+                    RegistrationCustomCode.CompletionBefore(userId, getRoleFromRegistration, role);
+                    if (user != null) {
+                        // here completion doesn't work
+                        if (!AppConfig.Setting.IsFirstUserFound) {
+                            // first user not found yet.
+                            // first user is admin
+                            // most likely this is the first user
 
-                        #region First User Registrations
+                            #region First User Registrations
 
-                        var getHigestPriority = db2.Roles.Min(n => n.PriorityLevel);
-                        // getting the highest priority role.
-                        var getHigestPriorityRole = db2.Roles.FirstOrDefault(n => n.PriorityLevel == getHigestPriority);
-                        // add all the roles to the  user.
-                        RoleManager.AddUnderlyingRoles(user, getHigestPriorityRole.Name);
-                        using (var db3 = new DevIdentityDbContext()) {
-                            var setting = db3.CoreSettings.FirstOrDefault();
-                            setting.IsFirstUserFound = true;
-                            db3.SaveChanges(setting);
-                            AppConfig.RefreshSetting();
-                        }
+                            var getHigestPriority = db2.Roles.Min(n => n.PriorityLevel);
+                            // getting the highest priority role.
+                            var getHigestPriorityRole = db2.Roles.FirstOrDefault(n => n.PriorityLevel == getHigestPriority);
+                            // add all the roles to the  user.
+                            RoleManager.AddUnderlyingRoles(user, getHigestPriorityRole.Name);
+                            using (var db3 = new DevIdentityDbContext()) {
+                                var setting = db3.CoreSettings.FirstOrDefault();
+                                setting.IsFirstUserFound = true;
+                                db3.SaveChanges(setting);
+                                AppConfig.RefreshSetting();
+                            }
 
-                        #endregion
-                    } else {
-                        if (getRoleFromRegistration) {
-                            if (role != null) {
-                                // role is given in the parameter specifically.
-                                RoleManager.AddUnderlyingRoles(user, role);
-                            } else {
-                                // role has been saved from the registration time.
-                                var appRole = RoleManager.ReturnRoleIdFromTempInfoAndRemoveTemp(userId);
-                                if (appRole != null) {
-                                    RoleManager.AddUnderlyingRoles(user, appRole.Result.Name);
+                            #endregion
+                        } else {
+                            if (getRoleFromRegistration) {
+                                if (role != null) {
+                                    // role is given in the parameter specifically.
+                                    RoleManager.AddUnderlyingRoles(user, role);
+                                } else {
+                                    // role has been saved from the registration time.
+                                    var appRole = RoleManager.ReturnRoleIdFromTempInfoAndRemoveTemp(userId);
+                                    if (appRole != null) {
+                                        RoleManager.AddUnderlyingRoles(user, appRole.Result.Name);
+                                    }
                                 }
                             }
                         }
-                    }
-                    user.IsRegistrationComplete = true;
-                    user.EmailConfirmed = true;
-                    db2.SaveChanges(); // saved registration complete
+                        user.IsRegistrationComplete = true;
+                        user.EmailConfirmed = true;
+                        db2.SaveChanges(); // saved registration complete
 
-                    RegistrationCustomCode.CompletionAfter(user, getRoleFromRegistration, role);
+                        RegistrationCustomCode.CompletionAfter(user, getRoleFromRegistration, role);
                         //wereviewdb user created with same id
-                    RegistrationCustomCode.CompletionAfter(userId, getRoleFromRegistration, role);
+                        RegistrationCustomCode.CompletionAfter(userId, getRoleFromRegistration, role);
+                    }
                 }
             }
         }
@@ -278,7 +280,7 @@ namespace WeReviewApp.Modules.DevUser {
                 return user;
             }
             return null;
-                //user will give invalid result, because it might the previous user which credentials doesn;t match.
+            // user will give invalid result, because it might the previous user which credentials doesn;t match.
         }
 
         public static ApplicationUser GetUserFromSession(string username) {
@@ -346,9 +348,9 @@ namespace WeReviewApp.Modules.DevUser {
         public static long GetLoggedUserId() {
             if (HttpContext.Current.User.Identity.IsAuthenticated) {
                 //ApplicationUser user = null;
-                var userid = (long?) HttpContext.Current.Session[SessionNames.UserID];
+                var userid = (long?)HttpContext.Current.Session[SessionNames.UserID];
                 if (userid != null) {
-                    return (long) userid;
+                    return (long)userid;
                 }
                 return GetCurrentUser().UserID;
             }
@@ -427,10 +429,11 @@ namespace WeReviewApp.Modules.DevUser {
         public static void SaveUserInSession(ApplicationUser user) {
             HttpContext.Current.Session[SessionNames.LastUser] = user;
         }
-
-        public static void ClearUserFromSession() {
-            HttpContext.Current.Session[SessionNames.UserID] = null;
-            HttpContext.Current.Session[SessionNames.LastUser] = null;
+        /// <summary>
+        /// Clear user from session SessionNames.UserID, SessionNames.LastUser, SessionNames.UserCache
+        /// </summary>
+        public static void ClearUserSessions() {
+            SessionNames.RemoveKeys(new[] { SessionNames.UserID, SessionNames.LastUser, SessionNames.UserCache });
             GC.Collect();
         }
 

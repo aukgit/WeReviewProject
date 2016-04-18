@@ -1,5 +1,5 @@
 ﻿@using WeReviewApp.Models.ViewModels
-@model WeReviewApp.Models.ViewModels.LoginViewModel
+@model LoginViewModel
 @{
     var title = "Log in";
     ViewBag.Title = title;
@@ -11,7 +11,7 @@
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", role = "form"})) {
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
                 @Html.AntiForgeryToken()
                 <span>
                     Use your personal credentials to login.
@@ -40,7 +40,7 @@
     </div>
     <div class="col-md-4">
         <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel {Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl})
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
         </section>
     </div>
 </div>
