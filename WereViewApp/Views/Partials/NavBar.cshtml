@@ -1,10 +1,9 @@
 ﻿@using WeReviewApp.Common
-@using WeReviewApp.Models.EntityModel
 @using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
 @{
-    string appUrl = AppVar.Url;
-    List<Category> categories = WereViewStatics.AppCategoriesCache;
-    List<Platform> platforms = WereViewStatics.AppPlatformsCache;
+    var appUrl = AppVar.Url;
+    var categories = WereViewStatics.AppCategoriesCache;
+    var platforms = WereViewStatics.AppPlatformsCache;
     //string role = ViewBag.Role;
 }
 <div class="header-2">
@@ -42,7 +41,7 @@
                                             </h1>
                                         </a>
                                     </li>
-                                    @foreach (Category category in categories) {
+                                    @foreach (var category in categories) {
                                         <li>
                                             <a href="@category.GetAbsoluteUrl()">
                                                 <h1 title="Mobile @category.CategoryName apps">
@@ -64,7 +63,7 @@
                                             </h1>
                                         </a>
                                     </li>
-                                    @foreach (Platform platform in platforms) {
+                                    @foreach (var platform in platforms) {
                                         <li title="Android Apps">
                                             <a href="@appUrl/Apps/Mobile/Platforms/@platform.PlatformName">
                                                 <h1 title="@platform.PlatformName Apps">

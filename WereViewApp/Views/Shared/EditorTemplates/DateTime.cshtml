@@ -1,17 +1,16 @@
 @model DateTime?
 @{
-    bool isRequired = ViewData.ModelMetadata.IsRequired;
+    var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
-        propLower = prop.ToLower(),
-        styleProperty = propLower,
-        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        description = ViewData.ModelMetadata.Description,
-        templateName = "datetime",
-        icon = ViewBag.icon ?? "fa fa-calendar",
-        csharpDateTimeFormat = @"dd/MMM/yyyy h:mm:ss tt",
-        pickerDateTimeFormat = @"DD/MMM/YYYY hh:mm a";
-
+           prop = ViewData.ModelMetadata.PropertyName,
+           propLower = prop.ToLower(),
+           styleProperty = propLower,
+           displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+           description = ViewData.ModelMetadata.Description,
+           templateName = "datetime",
+           icon = ViewBag.icon ?? "fa fa-calendar",
+           csharpDateTimeFormat = @"dd/MMM/yyyy h:mm:ss tt",
+           pickerDateTimeFormat = @"DD/MMM/YYYY hh:mm a";
 
     var htmlAttributes = new RouteValueDictionary();
     if (ViewBag.@class != null) {
@@ -21,8 +20,8 @@
     }
     if (ViewBag.type != null) {
         htmlAttributes.Add("type", ViewBag.type);
-    }  
-   if (ViewBag.label != null) {
+    }
+    if (ViewBag.label != null) {
         displayName = ViewBag.label;
     }
     if (ViewBag.labelColumn == null) {
@@ -31,7 +30,7 @@
     if (ViewBag.textColumn == null) {
         ViewBag.textColumn = "col-md-10";
     }
-    
+
     if (ViewBag.placeholder != null) {
         htmlAttributes.Add("placeholder", ViewBag.placeholder);
     } else {
@@ -53,7 +52,7 @@
             <span class="red">@isRequiredStar</span>
         </label>
         <div class="@ViewBag.textColumn form-input @styleProperty" data-prop="@styleProperty">
-            <div class='input-group datetimepicker-start inline form-input @styleProperty' data-prop="@styleProperty">
+            <div class="input-group datetimepicker-start inline form-input @styleProperty" data-prop="@styleProperty">
                 @if (Model != null) {
                     var dt = Model ?? DateTime.Now;
                     @Html.TextBox("", dt.ToString(csharpDateTimeFormat), htmlAttributes)
@@ -65,11 +64,11 @@
                 </span>
             </div>
             @if (description != null) {
-                <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show inline">
+                <a data-toggle="tooltip" data-original-title="@description" title="@description" class="inline tooltip-show">
                     <span class="description-icon"></span>
                 </a>
             }
         </div>
     </div>
-    @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input break-line" })
+    @Html.ValidationMessageFor(m => m, null, new {@class = "invalid-input break-line"})
 </div>

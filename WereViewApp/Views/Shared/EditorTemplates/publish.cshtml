@@ -1,14 +1,13 @@
-@model Boolean?
+@model bool?
 @{
-    bool isRequired = ViewData.ModelMetadata.IsRequired;
+    var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
-        propLower = prop.ToLower(),
-        styleProperty = propLower,
-        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        description = ViewData.ModelMetadata.Description,
-        templateName = "boolean";
-
+           prop = ViewData.ModelMetadata.PropertyName,
+           propLower = prop.ToLower(),
+           styleProperty = propLower,
+           displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+           description = ViewData.ModelMetadata.Description,
+           templateName = "boolean";
 
     var htmlAttributes = new RouteValueDictionary();
 
@@ -45,7 +44,7 @@
     htmlAttributes.Add("data-template", templateName);
 }
 <div class="form-group form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty">
-    <div class="dev-plugin controls">
+    <div class="controls dev-plugin">
         <div class="@ViewBag.textColumn @ViewBag.labelColumn">
             <div class="checkbox">
                 <label class="control-label form-input " for="@ViewData.ModelMetadata.PropertyName">
@@ -57,7 +56,7 @@
                         <span class="description-icon"></span>
                     </a>
                 }
-                @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
+                @Html.ValidationMessageFor(m => m, null, new {@class = "invalid-input"})
             </div>
         </div>
     </div>

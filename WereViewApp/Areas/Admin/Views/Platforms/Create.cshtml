@@ -2,55 +2,52 @@
 
 @{
     ViewBag.Title = "Creating Platform";
-	string title = ViewBag.Title;
+    string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-	var token = Html.AntiForgeryToken();
-	string controller = (string)ViewBag.controller;
-	string viewName = "Create";
-
+    var token = Html.AntiForgeryToken();
+    var controller = (string) ViewBag.controller;
+    var viewName = "Create";
 }
 
 
 @Html.SamePageLinkWithIcon(title, subtitle, FaIcons.Plus)
 <hr />
-@using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) 
-{
-   <div class="form-horizontal">
-		@token
-		<div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+@using (Html.BeginForm(viewName, controller, FormMethod.Post, new {@class = "form-horizontal Create-@ViewBag.Title", role = "form"})) {
+    <div class="form-horizontal">
+        @token
+        <div class="form-group">
+            <div class="col-md-10 col-md-offset-2">
                 <div class="btn-group">
                     <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                    <div class="input-group-btn inline">
+                    <div class="inline input-group-btn">
                         <button class="btn btn-success" title="Save and create a new one."><i class="glyphicon glyphicon-plus"></i> Create</button>
-                    </div>                    
-                </div>               
+                    </div>
+                </div>
             </div>
         </div>
-		@Html.Partial("_SuccessMessage")
+        @Html.Partial("_SuccessMessage")
 
-		
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-       @Html.EditorFor(model => model.PlatformName)
-       @Html.EditorFor(model => model.Icon)
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+        @Html.EditorFor(model => model.PlatformName)
+        @Html.EditorFor(model => model.Icon)
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-10 col-md-offset-2">
                 <div class="btn-group">
                     <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                    <div class="input-group-btn inline">
+                    <div class="inline input-group-btn">
                         <button class="btn btn-success" title="Save and create a new one."><i class="glyphicon glyphicon-plus"></i> Create</button>
-                    </div>                    
-                </div>               
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 }
-@Html.Partial("_ValidatorCommonForm", new ViewDataDictionary { 
-    {"token",token}
+@Html.Partial("_ValidatorCommonForm", new ViewDataDictionary {
+    {"token", token}
 })
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-

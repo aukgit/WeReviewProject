@@ -6,7 +6,6 @@ namespace WeReviewApp.Modules.TimeZone {
         public TimeZoneInfo TimeZoneInfo { get; set; }
         public UserTimeZone UserTimezone { get; set; }
 
-
         public bool IsTimeZoneInfoExist() {
             return TimeZoneInfo != null;
         }

@@ -1,21 +1,20 @@
-﻿@using WeReviewApp.Models.EntityModel
-@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
+﻿@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
 @using WeReviewApp.Modules.DevUser
-@model App
+@model WeReviewApp.Models.EntityModel.App
 @{
-    int sequenceOfReview = 0;
-    long userId = UserManager.GetLoggedUserId();
+    var sequenceOfReview = 0;
+    var userId = UserManager.GetLoggedUserId();
     Layout = null;
-    string currentUrl = @Html.GetCurrentUrlString(); // Apps/Apple-7/Games/plant-vs-zombies
-    string softwareUrl = AppVar.Url; //we review app
+    var currentUrl = @Html.GetCurrentUrlString(); // Apps/Apple-7/Games/plant-vs-zombies
+    var softwareUrl = AppVar.Url; //we review app
 
-    string appName = Model.AppName;
+    var appName = Model.AppName;
     string isRecommended, animateRightLeft;
 }
 <div class="review-collection-box seo-optimize">
     <div class="review-wrapper">
         @if (Model.Reviews != null && Model.Reviews.Count > 0) {
-            foreach (Review review in Model.Reviews) {
+            foreach (var review in Model.Reviews) {
                 isRecommended = review.IsSuggest ? "is-recommended" : "";
                 animateRightLeft = sequenceOfReview%2 == 0 ? "slideInLeft" : "slideInRight";
                 string disLikeActive = "", likeActive = "";
@@ -23,7 +22,7 @@
                 // this current user [checking]
                 if (userId > -1) {
                     // user logged in
-                    ReviewLikeDislike reviewDislike = Model.GetCurrentUserReviewLikeDislike(review, userId);
+                    var reviewDislike = Model.GetCurrentUserReviewLikeDislike(review, userId);
                     if (reviewDislike != null) {
                         // like-dislike exist
                         if (reviewDislike.IsLiked) {
@@ -39,7 +38,7 @@
                             <div class="seo-hide">
                                 <a href="@softwareUrl@currentUrl" title="@appName review">
                                     <h1 class="h1" title="@appName review">
-                                        <strong itemprop="itemReviewed"  title="@appName review" itemscope itemtype="http://schema.org/Thing">
+                                        <strong itemprop="itemReviewed" title="@appName review" itemscope itemtype="http://schema.org/Thing">
                                             <em title="@appName review" itemprop="name">@appName review</em>
                                         </strong>
                                     </h1>

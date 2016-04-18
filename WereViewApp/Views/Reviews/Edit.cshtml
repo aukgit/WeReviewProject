@@ -5,12 +5,12 @@
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
     var token = Html.AntiForgeryToken();
-    string controller = (string) ViewBag.controller;
-    string viewName = "Edit";
+    var controller = (string) ViewBag.controller;
+    var viewName = "Edit";
 }
 
 
-<h1 class="top-margin-space h2">
+<h1 class="h2 top-margin-space">
     <span class="glyphicon glyphicon-edit"></span>  
     @Html.SamePageLink(title, subtitle, false)
 </h1>

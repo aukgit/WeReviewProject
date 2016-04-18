@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<WeReviewApp.Models.ViewModels.DisplayGalleryImages>
 
 @{
-    bool isFirst = true;
+    var isFirst = true;
     Layout = null;
 }
 
@@ -9,7 +9,7 @@
 
     <div class="carousel-inner">
         @foreach (var image in Model) {
-            string classActive = isFirst ? "active" : null;
+            var classActive = isFirst ? "active" : null;
             <div class="item @classActive">
                 <h1 class="h4" title="@image.Title">@image.Title</h1>
                 <img src="@image.GalleryImageLocation" alt="@image.Title" class="img-responsive">

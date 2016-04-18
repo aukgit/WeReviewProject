@@ -3,8 +3,8 @@
 @{
     ViewBag.Title = "Edit Your Review";
     var token = Html.AntiForgeryToken();
-    string controller = (string) ViewBag.controller;
-    string viewName = "Edit";
+    var controller = (string) ViewBag.controller;
+    var viewName = "Edit";
     Layout = null;
 }
 <hr />

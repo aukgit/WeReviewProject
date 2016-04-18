@@ -1,14 +1,14 @@
 @model object
 
 @{
-    bool isRequired = ViewData.ModelMetadata.IsRequired;
+    var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
-        propLower = prop.ToLower(),
-        styleProperty = propLower,
-        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        templateName = "dropdown",
-        description = ViewData.ModelMetadata.Description;
+           prop = ViewData.ModelMetadata.PropertyName,
+           propLower = prop.ToLower(),
+           styleProperty = propLower,
+           displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+           templateName = "dropdown",
+           description = ViewData.ModelMetadata.Description;
 
     if (ViewBag.@class != null) {
         ViewBag.@class = "form-control " + ViewBag.@class;
@@ -42,7 +42,7 @@
     if (ViewBag.textColumn == null) {
         ViewBag.textColumn = "col-md-10";
     }
-    var selectListData = (IEnumerable<SelectListItem>)ViewBag.selectData;
+    var selectListData = (IEnumerable<SelectListItem>) ViewBag.selectData;
 }
 <div class="form-group form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty">
     <div class="controls dev-plugin">
@@ -51,18 +51,17 @@
             <span class="red">@isRequiredStar</span>
         </label>
         <div class="@ViewBag.textColumn select-holding-div non-dynamic-select">
-            @Html.DropDownList("", selectListData, htmlAttributes: new {
-                   @class = ViewBag.@class,
-                   data_style = ViewBag.style,
-                   data_live_search = ViewBag.liveSearch,
-                   id = ViewBag.id,
-                   data_prop = styleProperty,
-                   data_template = templateName
-               })
+            @Html.DropDownList("", selectListData, new {
+                ViewBag.@class,
+                data_style = ViewBag.style,
+                data_live_search = ViewBag.liveSearch, ViewBag.id,
+                data_prop = styleProperty,
+                data_template = templateName
+            })
             @if (description != null) {
-                <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show"><span class="description-icon"></span></a>
+                <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">
+                    <span class="description-icon"></span></a>
             }
         </div>
     </div>
 </div>
-

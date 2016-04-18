@@ -2,25 +2,25 @@
 @model WeReviewApp.Models.EntityModel.App
 @{
     //Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
-    string appName = Model.AppName;
-    string currentUrl = Html.GetCurrentUrlString(); // Apps/Apple-7/Games/plant-vs-zombies
+    var appName = Model.AppName;
+    var currentUrl = Html.GetCurrentUrlString(); // Apps/Apple-7/Games/plant-vs-zombies
     string appSubtitle = ViewBag.Title;
     ViewBag.Title = Model.Platform.PlatformName + " App : " + appName;
     ViewBag.Meta = appName + "," + Model.Tags + "," + Model.Description;
     ViewBag.Keywords = appName + "," + Model.Tags;
 
-    string platformSubtitle = Model.Platform.PlatformName + " mobile apps";
-    string categorySubtitle = Model.GetCategoryString() + " category mobile apps";
-    string softwareUrl = AppVar.Url; //we review app
-    bool isWebsiteUrlExist = !string.IsNullOrEmpty(Model.WebsiteUrl);
-    bool isStoreUrlExist = !string.IsNullOrEmpty(Model.StoreUrl);
-    bool isDotRequired = isWebsiteUrlExist && isStoreUrlExist;
+    var platformSubtitle = Model.Platform.PlatformName + " mobile apps";
+    var categorySubtitle = Model.GetCategoryString() + " category mobile apps";
+    var softwareUrl = AppVar.Url; //we review app
+    var isWebsiteUrlExist = !string.IsNullOrEmpty(Model.WebsiteUrl);
+    var isStoreUrlExist = !string.IsNullOrEmpty(Model.StoreUrl);
+    var isDotRequired = isWebsiteUrlExist && isStoreUrlExist;
     //string currentAppUrlNameOnly = Model.URL; //plant-vs-zombies
 }
 <div class="app-details-page" id="app-details-page">
     <div id="fb-root"></div>
     <script>
-        (function (d, s, id) {
+        (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s);
@@ -29,7 +29,7 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, "script", "facebook-jssdk"));
     </script>
-    <div itemscope itemtype='http://schema.org/SoftwareApplication'>
+    <div itemscope itemtype="http://schema.org/SoftwareApplication">
         <div class="row">
             <div class="app-detail app-title-wrapper col-md-12">
                 <div class="app-title-row float-left">
@@ -43,7 +43,7 @@
                     <a href="@currentUrl" class="app-title" title="@appSubtitle">
                         <h1 title="@appSubtitle">
                             <strong title="@appSubtitle">
-                                <em itemprop='name' title="@appSubtitle">
+                                <em itemprop="name" title="@appSubtitle">
                                     @appName
                                 </em>
                             </strong>
@@ -104,7 +104,8 @@
                                 </li>
                             }
                             @if (isDotRequired) {
-                                <li><span> . </span></li>
+                                <li>
+                                    <span> . </span></li>
                             }
                             @if (isStoreUrlExist) {
                                 <li>
@@ -137,7 +138,7 @@
                         @Html.Partial("_AppDescription")
                         <div id="write-review-form-container">
                         </div>
-                        @{ Html.RenderAction("ReviewsDisplay", "Partials", new { id = Model.AppID }, true); }
+                        @{ Html.RenderAction("ReviewsDisplay", "Partials", new {id = Model.AppID}, true); }
                         <div id="review-request-fields">
                             <!-- request fields to get review-form -->
                             @Html.HiddenFor(n => n.AppID)
@@ -145,9 +146,9 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        @{ Html.RenderAction("FeaturedApps", "Partials", new { appID = Model.AppID }); }
-                        @{ Html.RenderAction("DevelopersApps", "Partials", new { appID = Model.AppID }); }
-                        @{ Html.RenderAction("SuggestedApps", "Partials", new { appID = Model.AppID }); }
+                        @{ Html.RenderAction("FeaturedApps", "Partials", new {appID = Model.AppID}); }
+                        @{ Html.RenderAction("DevelopersApps", "Partials", new {appID = Model.AppID}); }
+                        @{ Html.RenderAction("SuggestedApps", "Partials", new {appID = Model.AppID}); }
                     </div>
                 </div>
             </div>

@@ -2,13 +2,13 @@
 @{
     var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
-        propLower = prop.ToLower(),
-        styleProperty = propLower,
-        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        description = ViewData.ModelMetadata.Description,
-        icon = ViewBag.icon ?? FaIcons.EmailO,
-        templateName = "sender-email";
+           prop = ViewData.ModelMetadata.PropertyName,
+           propLower = prop.ToLower(),
+           styleProperty = propLower,
+           displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+           description = ViewData.ModelMetadata.Description,
+           icon = ViewBag.icon ?? FaIcons.EmailO,
+           templateName = "sender-email";
     var htmlAttributes = new RouteValueDictionary();
     if (displayName == null) {
         displayName = ViewData.ModelMetadata.PropertyName;
@@ -46,7 +46,7 @@
     if (ViewBag.textColumn == null) {
         ViewBag.textColumn = "";
     }
-   
+
     if (ViewBag.sendingMailText == null) {
         ViewBag.sendingMailText = "Send Email";
     }
@@ -57,7 +57,7 @@
 }
 
 <div class="form-group form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty">
-    <div class="controls dev-plugin controls-vertical">
+    <div class="controls controls-vertical dev-plugin">
         <label class="@ViewBag.labelColumn form-label-@ViewData.ModelMetadata.PropertyName control-label" for="@ViewData.ModelMetadata.PropertyName">
             @displayName<span class="red">@isRequiredStar</span>
         </label>
@@ -77,7 +77,7 @@
                 </a>
             }
             <a href="@ViewBag.url" class="btn btn-info inline">@ViewBag.sendingMailText</a>
-            @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
+            @Html.ValidationMessageFor(m => m, null, new {@class = "invalid-input"})
         </div>
     </div>
 </div>

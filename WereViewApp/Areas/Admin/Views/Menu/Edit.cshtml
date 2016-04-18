@@ -1,4 +1,4 @@
-﻿@model WeReviewApp.Models.POCO.IdentityCustomization.Navigation
+﻿@model Navigation
 
 @{
     ViewBag.Title = "Editing Navigation";
@@ -9,15 +9,15 @@
 @Html.SamePageLinkWithIcon(title, subtitle, "fa fa-edit")
 
 <hr />
-@using (Html.BeginForm("Edit", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {
+@using (Html.BeginForm("Edit", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new {@class = "form-horizontal Create-@ViewBag.Title", role = "form"})) {
     <div class="form-horizontal">
         @token
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-10 col-md-offset-2">
                 <div class="btn-group">
                     <a href="@Url.Action("Index")" title="Back" class="btn btn-info"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                    <a href="@Url.Action("Delete", new { id = Model.NavigationID })" title="Delete this record?" class="btn btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>
-                    <div class="input-group-btn inline">
+                    <a href="@Url.Action("Delete", new {id = Model.NavigationID})" title="Delete this record?" class="btn btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+                    <div class="inline input-group-btn">
                         <button title="Save and create new one" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
                     </div>
                 </div>
@@ -29,11 +29,11 @@
         @Html.HiddenFor(m => m.NavigationID)
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-10 col-md-offset-2">
                 <div class="btn-group">
                     <a href="@Url.Action("Index")" title="Back" class="btn btn-info"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                    <a href="@Url.Action("Delete", new { id = Model.NavigationID })" title="Delete this record?" class="btn btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>
-                    <div class="input-group-btn inline">
+                    <a href="@Url.Action("Delete", new {id = Model.NavigationID})" title="Delete this record?" class="btn btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+                    <div class="inline input-group-btn">
                         <button title="Save and create new one" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
 }
 
 @Html.Partial("_ValidatorCommonForm", new ViewDataDictionary {
-    {"token",token}
+    {"token", token}
 })
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

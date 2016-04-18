@@ -2,9 +2,9 @@
 @model List<WeReviewApp.Models.EntityModel.Platform>
 @{
     ViewBag.Title = "Mobile App Platforms / Platform : Android, Apple, Windows, FireFox Os";
-    string allPlatformsString = "Android, Apple, Windows, FireFox OS";
-    string currentPageStaticUrl = AppVar.Url + Html.GetCurrentUrlString();
-    string titlesSubtitle = "Mobile Platform : " + allPlatformsString;
+    var allPlatformsString = "Android, Apple, Windows, FireFox OS";
+    var currentPageStaticUrl = AppVar.Url + Html.GetCurrentUrlString();
+    var titlesSubtitle = "Mobile Platform : " + allPlatformsString;
 }
 <div class="app-details-page category-listing-page category-page search-page">
     <div class="row">
@@ -30,7 +30,7 @@
     </div>
     <div class="bottom-gap category-listing-displays-with-apps-container">
         @foreach (var platform in Model) {
-            string appNonExistClass = platform.Apps == null || platform.Apps.Count == 0 ? "seo-hide" : "";
+            var appNonExistClass = platform.Apps == null || platform.Apps.Count == 0 ? "seo-hide" : "";
             <div class="row no-margin @appNonExistClass">
                 <div class="app-detail app-title-wrapper category-title col-md-12" title="Mobile App Categories">
                     <div class="app-title-row float-left">

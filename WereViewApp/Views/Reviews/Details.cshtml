@@ -1,15 +1,15 @@
 ﻿@model WeReviewApp.Models.EntityModel.Review
 
 @{
-    string nameOftheRecord = Html.DisplayFor(model => model.Title).ToString();
+    var nameOftheRecord = Html.DisplayFor(model => model.Title).ToString();
 
     ViewBag.Title = "Details of " + nameOftheRecord;
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    string controller = (string) ViewBag.controller;
-    string viewName = "Details";
+    var controller = (string) ViewBag.controller;
+    var viewName = "Details";
 }
-<h1 class="top-margin-space h2">
+<h1 class="h2 top-margin-space">
     <span class="glyphicon glyphicon-print"></span>
     @Html.SamePageLink(title, subtitle, false)
 </h1>
@@ -27,7 +27,7 @@
             <a href="@Url.Action("Delete", new {id = Model.ReviewID})" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>
         </div>
     </div>
-    <table class="top-margin-space table table-hover">
+    <table class="table table-hover top-margin-space">
         <thead>
         <tr>
             <th>Properties</th>

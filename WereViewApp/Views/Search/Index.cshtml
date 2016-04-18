@@ -1,11 +1,10 @@
-﻿@using WeReviewApp.Models.EntityModel
-@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
+﻿@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
 @model WeReviewApp.Models.ViewModels.SearchViewModel
 @{
-    string currentUrl = Html.GetCurrentUrlWithHostName();
+    var currentUrl = Html.GetCurrentUrlWithHostName();
     ViewBag.Title = "Search app reviews";
-    bool isModelNotNull = Model != null;
-    bool isEmptySearchString = true; //isModelNotNull && ;
+    var isModelNotNull = Model != null;
+    var isEmptySearchString = true; //isModelNotNull && ;
 
     if (isModelNotNull) {
         isEmptySearchString = string.IsNullOrEmpty(Model.SearchQuery);
@@ -110,8 +109,8 @@
                         }
                     </li>
                 } else {
-                    foreach (App app in Model.FoundApps) {
-                        Platform platform = app.GetPlatform();
+                    foreach (var app in Model.FoundApps) {
+                        var platform = app.GetPlatform();
                         <li class="slim-app-view" data-app-type="@platform.Icon">
                             <a class="app-url" href="@app.GetAbsoluteUrl()">
                                 <div class="app-icon">

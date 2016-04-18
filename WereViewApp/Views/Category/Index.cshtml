@@ -1,9 +1,8 @@
-﻿@using WeReviewApp.Models.EntityModel
-@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
-@model List<Category>
+﻿@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
+@model List<WeReviewApp.Models.EntityModel.Category>
 @{
     ViewBag.Title = "Mobile App Categories / Category";
-    string currentPageStaticUrl = Html.GetCurrentUrlWithHostName();
+    var currentPageStaticUrl = Html.GetCurrentUrlWithHostName();
 }
 <div class="app-details-page category-listing-page category-page search-page">
     <div class="row">
@@ -28,7 +27,7 @@
     </div>
     <div class="bottom-gap category-listing-displays-with-apps-container">
         @foreach (var category in Model) {
-            string appNonExistClass = category.Apps == null || category.Apps.Count == 0 ? "seo-hide" : "";
+            var appNonExistClass = category.Apps == null || category.Apps.Count == 0 ? "seo-hide" : "";
             <div class="row no-margin @appNonExistClass">
                 <div class="app-detail app-title-wrapper category-title col-md-12" title="Mobile App Categories">
                     <div class="app-title-row float-left">
@@ -52,7 +51,7 @@
                     <ul class="archive-app-collection-list category-listing-page-apps-list pagination-required regular-color seo-optimize">
                         @if (appNonExistClass == "") {
                             foreach (var app in category.Apps) {
-                                Platform platform = app.GetPlatform();
+                                var platform = app.GetPlatform();
                                 <li class="slim-app-view" data-app-type="@platform.Icon">
                                     <a class="app-url" href="@app.GetAbsoluteUrl()" title="App Review : @app.AppName">
                                         <div class="app-icon">

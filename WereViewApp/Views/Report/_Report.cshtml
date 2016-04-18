@@ -1,6 +1,5 @@
 ﻿@using WeReviewApp.Models.EntityModel
 @using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
-@using WeReviewApp.Models.POCO.Identity
 @using WeReviewApp.Modules.DevUser
 @model WeReviewApp.Models.POCO.IdentityCustomization.Feedback
 
@@ -8,19 +7,18 @@
     string title = ViewBag.Title;
 
     var token = Html.AntiForgeryToken();
-    string controller = (string)ViewBag.controller;
-    bool dropDownDynamic = (bool)ViewBag.dropDownDynamic;
+    var controller = (string) ViewBag.controller;
+    var dropDownDynamic = (bool) ViewBag.dropDownDynamic;
     string partialController = ViewBag.dynamicLoadPartialController;
 
     // comes from controller
     long appOrReviewId = ViewBag.appOrReviewId;
     bool isAppReport = ViewBag.isAppReport != null && ViewBag.isAppReport;
-    string postingAction = isAppReport ? "App" : "Review";
-    ApplicationUser user = UserManager.GetCurrentUser();
+    var postingAction = isAppReport ? "App" : "Review";
+    var user = UserManager.GetCurrentUser();
     string subtitle = ViewBag.subtitle;
     App app = null;
     Review review = null;
-
 }
 
 @if (isAppReport) {
@@ -33,10 +31,10 @@
 @Html.SamePageLinkWithIcon(@title, @title, "fa fa-flag red")
 <hr />
 <!--ViewContext.RouteData.Values["Controller"].ToString()-->
-@using (Html.BeginForm(postingAction, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {
+@using (Html.BeginForm(postingAction, controller, FormMethod.Post, new {@class = "form-horizontal Create-@ViewBag.Title", role = "form"})) {
     <div class="form-horizontal">
         @token
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
         @Html.Partial("_SuccessMessage")
         <div class="form-group">
             <div class="col-md-10 col-md-offset-2 controls">
@@ -50,7 +48,7 @@
                     </h2>
                     <q>@review.Comments</q>
                 }
-                <div class="message red bold">@ViewBag.errorMessage</div>
+                <div class="bold message red">@ViewBag.errorMessage</div>
             </div>
         </div>
         @Html.Hidden("appOrReviewId", appOrReviewId)
@@ -70,4 +68,3 @@
         </div>
     </div>
 }
-

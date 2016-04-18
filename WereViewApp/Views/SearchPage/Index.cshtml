@@ -1,8 +1,8 @@
 ﻿@model WeReviewApp.Models.ViewModels.SearchViewModel
 @{
-    string currentUrl = Html.GetCurrentUrlWithHostName();
+    var currentUrl = Html.GetCurrentUrlWithHostName();
     ViewBag.Title = "Search app reviews";
-    bool isEmptySearchString = string.IsNullOrEmpty(Model.SearchQuery);
+    var isEmptySearchString = string.IsNullOrEmpty(Model.SearchQuery);
 }
 <div class="row">
     <div class="app-detail app-title-wrapper col-md-12">
@@ -133,4 +133,3 @@
         </div>
     </div>
 </div>
-

@@ -14,12 +14,11 @@
                 <!-- LAYER NR. 1 -->
                 @if (Model != null) {
                     foreach (var app in Model) {
-                        string appName = @app.AppName;
-                        string absUrl = @app.GetAbsoluteUrl();
-                        string category = @app.GetCategoryString();
-                        string platform = @app.GetPlatformString();
+                        var appName = @app.AppName;
+                        var absUrl = @app.GetAbsoluteUrl();
+                        var category = @app.GetCategoryString();
+                        var platform = @app.GetPlatformString();
                         var platformO = @app.GetPlatform();
-
 
                         <li data-transition="fadetobottomfadefromtop" data-slotamount="7" data-masterspeed="2500">
                             <!-- MAIN IMAGE -->

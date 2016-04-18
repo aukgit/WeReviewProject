@@ -7,7 +7,7 @@
 
 @{
     var apps = (List<App>) ViewBag.Results;
-    bool isFirst = true;
+    var isFirst = true;
 }
 <div class="wrapper_inner">
     @{ Html.RenderAction("NavBar", "Partials"); }
@@ -35,7 +35,7 @@
                     <div class="appsitemWraper">
                         @if (apps != null && apps.Count > 0) {
                             foreach (var app in apps) {
-                                string url = app.GetAbsoluteUrl();
+                                var url = app.GetAbsoluteUrl();
                                 var platform = app.GetPlatform();
 
                                 <div class="appsitemBox row" itemscope itemtype="http://schema.org/SoftwareApplication">

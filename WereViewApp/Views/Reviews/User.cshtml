@@ -1,29 +1,28 @@
 ﻿@using WeReviewApp.Models.EntityModel
 @using WeReviewApp.Models.POCO.Identity
 @using WeReviewApp.Modules.DevUser
-@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
-@model IEnumerable<Review>
+@model IEnumerable<WeReviewApp.Models.EntityModel.Review>
 
 @{
-    var user = (ApplicationUser)ViewBag.user;
-    int sequenceOfReview = 0;
-    long userId = UserManager.GetLoggedUserId();
-    var likeDislikes = (List<ReviewLikeDislike>)ViewBag.currentUserlikeDislikes;
+    var user = (ApplicationUser) ViewBag.user;
+    var sequenceOfReview = 0;
+    var userId = UserManager.GetLoggedUserId();
+    var likeDislikes = (List<ReviewLikeDislike>) ViewBag.currentUserlikeDislikes;
     string isRecommended, animateRightLeft;
 }
 <div class="app-details-page" id="app-details-page">
     <div class="review-collection-box seo-optimize">
         <div class="review-wrapper">
             @if (Model != null) {
-                foreach (Review review in Model) {
+                foreach (var review in Model) {
                     isRecommended = review.IsSuggest ? "is-recommended" : "";
-                    animateRightLeft = sequenceOfReview % 2 == 0 ? "slideInLeft" : "slideInRight";
+                    animateRightLeft = sequenceOfReview%2 == 0 ? "slideInLeft" : "slideInRight";
                     string disLikeActive = "", likeActive = "";
                     // if this review is liked or disliked by
                     // this current user [checking]
                     if (userId > -1 && likeDislikes != null) {
                         // user logged in
-                        ReviewLikeDislike reviewDislike = likeDislikes.FirstOrDefault(m => m.ReviewID == review.ReviewID);
+                        var reviewDislike = likeDislikes.FirstOrDefault(m => m.ReviewID == review.ReviewID);
                         if (reviewDislike != null) {
                             // like-dislike exist
                             if (reviewDislike.IsLiked) {
@@ -40,7 +39,7 @@
                                 <a class="review-title-anchor" href="#">
                                     <h1 itemprop="name" class="review-title">
                                         <i class="fa fa-check-circle"></i>
-                                         @review.Title
+                                        @review.Title
                                     </h1>
                                 </a>
                                 <ul class="reviewed-by-wrapper">
@@ -114,4 +113,3 @@
         </div>
     </div>
 </div>
-
