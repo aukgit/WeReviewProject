@@ -6,11 +6,12 @@
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
     var token = Html.AntiForgeryToken();
-    var controller = (string) ViewBag.controller;
-    var viewName = "Moderate";
-    var absoluteUrl = Model.App.GetAbsoluteUrl();
+    string controller = (string)ViewBag.controller;
+    string viewName = "Moderate";
+    string absoluteUrl = Model.App.GetAbsoluteUrl();
     var app = Model.App;
     var user = ViewBag.user as ApplicationUser;
+    
 }
 @Html.SamePageLinkWithIcon(title, subtitle, FaIcons.Cogs)
 <div class="top-gap"></div>
@@ -20,26 +21,26 @@
 </a>
 <div class="top-gap"></div>
 <hr />
-@using (Html.BeginForm(viewName, controller, FormMethod.Post, new {@class = "form-horizontal", role = "form"})) {
+@using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
     <div class="form-horizontal">
         @token
         @Html.Partial("_SuccessMessage")
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-        @Html.EditorFor(model => model.Message, "Multiline", new {@class = "grow", placeholder = "Written message will be sent to '" + user.Email + "' email address. If there is no message then it will not send anything."})
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.EditorFor(model => model.Message, "Multiline", new { @class="grow" ,placeholder = "Written message will be sent to '" + user.Email +"' email address. If there is no message then it will not send anything."})
         @Html.EditorFor(model => model.IsBlocked)
         @Html.EditorFor(model => model.IsFeatured)
         @Html.EditorFor(model => model.LikeToHearFromYou)
         <div class="col-md-10 col-md-offset-2">
             <div class="form-group">
-                @Html.ActionLinkWithIcon("Back", "Index", controller, new {area = "Admin"}, "", FaIcons.ChevronCircleLeft, "btn btn-info")
-                @Html.SubmitButton("Save", FaIcons.Cog)
+                @Html.ActionLinkWithIcon("Back", "Index", controller, new { area = "Admin" }, "", FaIcons.ChevronCircleLeft, "btn btn-info")
+                @Html.SubmitButton("Save",iconClass: FaIcons.Cog)
             </div>
         </div>
     </div>
 }
 
 @Html.Partial("_ValidatorCommonForm", new ViewDataDictionary {
-    {"token", token}
+    {"token",token}
 })
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

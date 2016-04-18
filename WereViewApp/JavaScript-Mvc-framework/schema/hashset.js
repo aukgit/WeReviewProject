@@ -1,17 +1,16 @@
 ﻿/// <reference path="../extensions/clone.js" />
 
-;
-$.app = $.app || {};;
-$.app.schema.hashset = {
+; $.app = $.app || {};
+; $.app.schema.hashset = {
     capacity: 1,
     list: {
         array: null,
         ids: null,
         count: 0
     },
-    create: function(capacity) {
+    create: function (capacity) {
         /// <summary>
-        ///     create a new hash-set with the given capacity.
+        /// create a new hash-set with the given capacity.
         /// </summary>
         /// <param name="schema" type="type">Give a schema type from the schema folder.</param>
         var hashset = $.app.schema.createNestedClone($.app.schema.hashset);
@@ -25,9 +24,9 @@ $.app.schema.hashset = {
         hashset.list.ids = new Array(hashset.capacity);
         return hashset;
     },
-    setItem: function(id, items) {
+    setItem: function (id, items) {
         /// <summary>
-        ///     Add items uniquely by the given id and item is the hash item could be array or json or anything.
+        /// Add items uniquely by the given id and item is the hash item could be array or json or anything.
         /// </summary>
         /// <param name="id" type="type"></param>
         /// <param name="items" type="type"></param>
@@ -43,9 +42,9 @@ $.app.schema.hashset = {
         }
         throw new Error("No id parameter given to set.");
     },
-    setItemByIndex: function(index, id, items) {
+    setItemByIndex: function (index,id, items) {
         /// <summary>
-        ///     Add items uniquely by the given id and item is the hash item could be array or json or anything.
+        /// Add items uniquely by the given id and item is the hash item could be array or json or anything.
         /// </summary>
         /// <param name="id" type="type"></param>
         /// <param name="items" type="type"></param>
@@ -59,9 +58,9 @@ $.app.schema.hashset = {
             }
         }
     },
-    addUnique: function(id, items) {
+    addUnique: function (id, items) {
         /// <summary>
-        ///     Add items uniquely by the given id and item is the hash item could be array or json or anything.
+        /// Add items uniquely by the given id and item is the hash item could be array or json or anything.
         /// </summary>
         /// <param name="id" type="type"></param>
         /// <param name="items" type="Anything : array, json or anything else."></param>
@@ -78,9 +77,9 @@ $.app.schema.hashset = {
         }
         return false;
     },
-    add: function(id, items) {
+    add: function (id, items) {
         /// <summary>
-        ///     First parameter is id and item is the hash item could be array or json or any item.
+        /// First parameter is id and item is the hash item could be array or json or any item.
         /// </summary>
         /// <param name="args" type="type"></param>
         /// <returns type=""></returns>
@@ -106,24 +105,24 @@ $.app.schema.hashset = {
             throw new Error("No id parameter given, so can't add new item to the hash-list.");
         }
     },
-    isIdExist: function(id) {
+    isIdExist: function (id) {
         /// <summary>
-        ///     Returns true/false based on the if the id exist or not.
+        /// Returns true/false based on the if the id exist or not.
         /// </summary>
         /// <param name="id" type="type"></param>
         /// <returns type=""></returns>
         return this.list.ids.indexOf(id) > -1;
     },
-    getItemIndex: function(id) {
+    getItemIndex: function (id) {
         /// <summary>
-        ///     Find and get the item from the list by id.
+        /// Find and get the item from the list by id.
         /// </summary>
         /// <param name="id" type="type"></param>
         return this.list.ids.indexOf(id);
     },
-    getItemValue: function(id) {
+    getItemValue: function (id) {
         /// <summary>
-        ///     Find and get the item from the list by id.
+        /// Find and get the item from the list by id.
         /// </summary>
         /// <param name="id" type="type"></param>
         /// <r
@@ -134,9 +133,9 @@ $.app.schema.hashset = {
         }
         return null;
     },
-    getItemObject: function(id) {
+    getItemObject: function (id) {
         /// <summary>
-        ///     Find and get the item from the list by id.
+        /// Find and get the item from the list by id.
         /// </summary>
         /// <param name="id" type="type"></param>
         var index = this.getItemIndex(id);
@@ -151,17 +150,17 @@ $.app.schema.hashset = {
         return null;
     },
 
-    removeItem: function(id) {
+    removeItem: function (id) {
         /// <summary>
-        ///     Remove the hash item from the list.
+        /// Remove the hash item from the list.
         /// </summary>
         /// <param name="id" type="type"></param>
         /// <returns type="">
-        ///     Returns {
-        ///     value: this.list.array[index],
-        ///     index: index,
-        ///     id: id
-        ///     };
+        /// Returns {  
+        ///    value: this.list.array[index],
+        ///    index: index,
+        ///    id: id
+        /// };
         /// </returns>
         var isIdEmpty = (id === undefined || id === null);
         if (isIdEmpty === false) {
@@ -182,9 +181,9 @@ $.app.schema.hashset = {
         return null;
     },
 
-    isPossibleToAddNew: function() {
+    isPossibleToAddNew: function () {
         /// <summary>
-        ///     Private : Is it possible to add items with item in the array.
+        /// Private : Is it possible to add items with item in the array.
         /// </summary>
         /// <returns type="">Return true/false if we can add a item by count++</returns>
         var list = this.list,
@@ -193,30 +192,31 @@ $.app.schema.hashset = {
         return increment <= this.capacity;
     },
 
-    getList: function() {
+    getList: function () {
         /// <summary>
-        ///     Get this.list;
+        /// Get this.list;
         /// </summary>
         /// <returns type="">Get this.list.</returns>
         return this.list;
     },
-    getIds: function() {
+    getIds: function () {
         /// <summary>
-        ///     Get this.list;
+        /// Get this.list;
         /// </summary>
         /// <returns type="">Get this.list.</returns>
         return this.list.ids;
     },
 
-    getItems: function() {
+    getItems: function () {
         /// <summary>
-        ///     Get this.list;
+        /// Get this.list;
         /// </summary>
         /// <returns type="">Get this.list.</returns>
         return this.list.array;
     },
-    count: function() {
+    count: function () {
         /// <summary>
+        /// 
         /// </summary>
         /// <returns type="">Get this.list.count</returns>
         return this.list.count;

@@ -1,31 +1,32 @@
-﻿@model ImageResizeSetting
+﻿@model WeReviewApp.Models.POCO.IdentityCustomization.ImageResizeSetting
 
 @{
     ViewBag.Title = "Creating ImageResizeSetting";
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    var token = Html.AntiForgeryToken();
+	var token = Html.AntiForgeryToken();
 }
 
 
 @Html.SamePageLinkWithIcon(title, subtitle, FaIcons.Plus)
 
 <hr />
-@using (Html.BeginForm("Create", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new {@class = "form-horizontal Create-@ViewBag.Title", role = "form"})) {
-    <div class="form-horizontal">
-        @token
-        <div class="form-group">
-            <div class="col-md-10 col-md-offset-2">
+@using (Html.BeginForm("Create", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) 
+{
+   <div class="form-horizontal">
+		@token
+		<div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
                 <div class="btn-group">
                     <a href="@Url.Action("Index")" title="Back" class="btn btn-info"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                    <div class="inline input-group-btn">
+                    <div class="input-group-btn inline">
                         <button class="btn btn-success" title="Save and create a new one."><i class="glyphicon glyphicon-plus"></i> Create</button>
-                    </div>
-                </div>
+                    </div>                    
+                </div>               
             </div>
         </div>
-
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+		
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         @Html.EditorFor(model => model.Name)
         @Html.EditorFor(model => model.Height)
@@ -33,19 +34,19 @@
         @Html.EditorFor(model => model.Extension)
 
         <div class="form-group">
-            <div class="col-md-10 col-md-offset-2">
+            <div class="col-md-offset-2 col-md-10">
                 <div class="btn-group">
                     <a href="@Url.Action("Index")" title="Back" class="btn btn-info"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                    <div class="inline input-group-btn">
+                    <div class="input-group-btn inline">
                         <button class="btn btn-success" title="Save and create a new one."><i class="glyphicon glyphicon-plus"></i> Create</button>
-                    </div>
-                </div>
+                    </div>                    
+                </div>               
             </div>
         </div>
     </div>
 }
-@Html.Partial("_ValidatorCommonForm", new ViewDataDictionary {
-    {"token", token}
+@Html.Partial("_ValidatorCommonForm", new ViewDataDictionary { 
+    {"token",token}
 })
 
 @section Scripts {

@@ -1,11 +1,12 @@
-﻿@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
-@model IEnumerable<WeReviewApp.Models.EntityModel.App>
+﻿@using WeReviewApp.Models.EntityModel
+@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
+@model IEnumerable<App>
 @{
     ViewBag.Title = "App";
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    var controller = (string) ViewBag.controller;
-    var viewName = "Index";
+    string controller = (string)ViewBag.controller;
+    string viewName = "Index";
     string editIcon = "fa fa-pencil",
            createButtonIcon = "fa fa-plus",
            detailsIcon = "fa fa-info-circle",
@@ -14,7 +15,7 @@
 @Html.SamePageLinkWithIcon(title, subtitle, "glyphicon glyphicon-th-list")
 <div class="row">
     <div class="">
-        @using (@Html.BeginForm("Index", "Apps", new {area = "admin"}, FormMethod.Get, new {data_role = "form"})) {
+        @using (@Html.BeginForm("Index", "Apps", new { area = "admin" }, FormMethod.Get, new { data_role = "form" })) {
             <div class=" form-group ">
                 <div class="col-md-2"></div>
                 <div class="col-md-10  ">
@@ -28,69 +29,69 @@
 <div class="top-gap-2x"></div>
 <table class="bootstrap-table-do table table-hover">
     <thead>
-    <tr>
-        <th data-field="AppName">
-            @Html.DisplayNameFor(model => model.AppName)
-        </th>
-        <th data-field="Description">
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th data-field="IsPublished">
-            Published
-        </th>
-        <th data-field="ReviewsCount">
-            Reviews
-        </th>
-        <th data-field="user">
-            Username
-        </th>
-        <th data-field="featured">
-            Featured
-        </th>
-        <th data-field="blocked">
-            Blocked
-        </th>
-        <th></th>
-    </tr>
+        <tr>
+            <th data-field="AppName">
+                @Html.DisplayNameFor(model => model.AppName)
+            </th>
+            <th data-field="Description">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th data-field="IsPublished">
+                Published
+            </th>
+            <th data-field="ReviewsCount">
+                Reviews
+            </th>
+            <th data-field="user">
+                Username
+            </th>
+            <th data-field="featured">
+                Featured
+            </th>
+            <th data-field="blocked">
+                Blocked
+            </th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @{
-                    var editLinkName = item.AppName;
-                    var featured = item.User.FeaturedImages.FirstOrDefault();
-                    var isFeatured = featured != null ? featured.IsFeatured : false;
-                }
-                <a href="@Url.Action("Edit", new {id = item.AppID, Controller = "App", Area = ""})" title="@editLinkName edit...">
-                    <span class="glyphicon glyphicon-pencil"></span> @editLinkName
-                </a>
-            </td>
-            <td>
-                @Html.Truncate(item.Description, AppConfig.TruncateLength)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsPublished)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReviewsCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.UserName)
-            </td>
-            <td>
-                @Html.CheckBox("IsFeatured", isFeatured, new {disabled = "disabled"})
-            </td>
-            <td>
-                @Html.CheckBoxFor(modelItem => item.IsBlocked, new {disabled = "disabled"})
-            </td>
-            <td>
-                <a href="@Url.Action("Edit", new {id = item.AppID, Controller = "App", Area = ""})" title="@editLinkName edit..." class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-                <a href="@Url.Action("Moderate", new {id = item.AppID, Controller = "Apps", Area = "Admin"})" title="@editLinkName moderate..." class="btn btn-info btn-xs"><span class="@FaIcons.Cog"></span> Moderate</a>
-                <a href="@item.GetAbsoluteUrl()" title="View App @editLinkName." class="btn btn-warning btn-xs"> View</a>
-            </td>
-        </tr>
-    }
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @{
+                        var editLinkName = item.AppName;
+                        var featured = item.User.FeaturedImages.FirstOrDefault();
+                        var isFeatured = featured != null ? featured.IsFeatured : false;
+                    }
+                    <a href="@Url.Action("Edit", new { id = item.AppID, Controller = "App", Area = "" })" title="@editLinkName edit...">
+                        <span class="glyphicon glyphicon-pencil"></span> @editLinkName
+                    </a>
+                </td>
+                <td>
+                    @Html.Truncate(item.Description, AppConfig.TruncateLength)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsPublished)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReviewsCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.UserName)
+                </td>
+                <td>
+                    @Html.CheckBox("IsFeatured", isFeatured, new {disabled = "disabled"})
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => item.IsBlocked, new { disabled = "disabled" })
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new {id = item.AppID, Controller="App" ,Area=""})" title="@editLinkName edit..." class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                    <a href="@Url.Action("Moderate", new {id = item.AppID, Controller="Apps" ,Area="Admin"})" title="@editLinkName moderate..." class="btn btn-info btn-xs"><span class="@FaIcons.Cog"></span> Moderate</a>
+                    <a href="@item.GetAbsoluteUrl()" title="View App @editLinkName." class="btn btn-warning btn-xs"> View</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 <div class="clear"></div>

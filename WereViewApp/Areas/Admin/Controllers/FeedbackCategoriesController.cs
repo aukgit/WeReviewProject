@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -23,7 +24,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View(db.FeedbackCategories.ToList());
         }
 
-        public ActionResult Details(byte id) {
+        public ActionResult Details(Byte id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -38,8 +39,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Create(FeedbackCategory feedbackCategory) {
             GetDropDowns();
             if (ModelState.IsValid) {
@@ -53,7 +53,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View(feedbackCategory);
         }
 
-        public ActionResult Edit(byte id) {
+        public ActionResult Edit(Byte id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -65,8 +65,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View(feedbackCategory);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Edit(FeedbackCategory feedbackCategory) {
             GetDropDowns();
             if (ModelState.IsValid) {

@@ -11,9 +11,8 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
         public static long GetUserID(this IIdentity identity) {
             return long.Parse(identity.GetUserId());
         }
-
         /// <summary>
-        ///     Get logged Application user.
+        /// Get logged Application user.
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
@@ -25,32 +24,31 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
         }
 
         /// <summary>
-        ///     Get logged Application user's full name.
-        ///     If no user is logged in then empty quoted string will be send.
+        /// Get logged Application user's full name. 
+        /// If no user is logged in then empty quoted string will be send.
         /// </summary>
         /// <param name="user"></param>
         /// <param name="defaultFullName">Send a name when user is not logged in or there is no user object.</param>
         /// <returns>Returns logged Application user's full name. </returns>
         public static string GetUserFullName(this IPrincipal user, string defaultFullName = "") {
-            var returnName = defaultFullName;
+            string returnName = defaultFullName;
             var appUser = GetUser(user);
             if (appUser != null) {
                 returnName = appUser.DisplayName;
             }
             return returnName;
         }
-
         /// <summary>
-        ///     Get Application user by UserId.
+        /// Get Application user by UserId.
         /// </summary>
-        /// <param name="userId"></param>
+        /// <param name="user"></param>
         /// <returns></returns>
         public static ApplicationUser GetUser(this IPrincipal user, long userId) {
             return UserManager.GetUser(userId);
         }
 
         /// <summary>
-        ///     Get Application user by UserId.
+        /// Get Application user by UserId.
         /// </summary>
         /// <param name="user"></param>
         /// <param name="username"></param>
@@ -58,25 +56,23 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
         public static ApplicationUser GetUser(this IPrincipal user, string username) {
             return UserManager.GetUser(username);
         }
-
         /// <summary>
-        ///     Get Application user by UserId.
+        /// Get Application user by UserId.
         /// </summary>
         /// <param name="user"></param>
-        /// <param name="email"></param>
+        /// <param name="username"></param>
         /// <returns></returns>
         public static ApplicationUser GetUserbyEmail(this IPrincipal user, string email) {
             return UserManager.GetUserByEmail(email);
         }
 
         /// <summary>
-        ///     Is current logged user's registration is complete.
-        ///     If none logged in then returns false.
+        /// Is current logged user's registration is complete.
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
         public static bool IsRegistrationComplete(this IPrincipal user) {
-            var userObject = UserManager.GetCurrentUser();
+            var userObject = GetUser(user);
             if (userObject != null) {
                 return userObject.IsRegistrationComplete;
             }
@@ -84,7 +80,7 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
         }
 
         /// <summary>
-        ///     Returns -1 when user is not authenticated.
+        /// Returns -1 when user is not authenticated.
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
@@ -95,9 +91,8 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
             }
             return -1;
         }
-
         /// <summary>
-        ///     Returns a cache if user is authenticated or else null.
+        /// Returns a cache if user is authenticated or else null.
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
@@ -109,7 +104,7 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
         }
 
         /// <summary>
-        ///     Returns a cache from session if exist or else returns null.
+        /// Returns a cache from session if exist or else returns null.
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
@@ -118,7 +113,7 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
         }
 
         /// <summary>
-        ///     Returns true if session user cache exist in the system.
+        /// Returns true if session user cache exist in the system.
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
@@ -127,7 +122,7 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
         }
 
         /// <summary>
-        ///     Returns true if session user cache exist in the system.
+        /// Returns true if session user cache exist in the system.
         /// </summary>
         /// <param name="user"></param>
         /// <param name="username"></param>
@@ -138,7 +133,7 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
         }
 
         /// <summary>
-        ///     Returns true if session user cache exist in the system.
+        /// Returns true if session user cache exist in the system.
         /// </summary>
         /// <param name="user"></param>
         /// <param name="userId"></param>
@@ -149,7 +144,7 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
         }
 
         /// <summary>
-        ///     Returns true if session user cache exist in the system.
+        /// Returns true if session user cache exist in the system.
         /// </summary>
         /// <param name="user"></param>
         /// <param name="userCache"></param>
@@ -159,65 +154,45 @@ namespace WeReviewApp.Modules.Extensions.IdentityExtension {
             return userCache != null;
         }
 
-        public static void SaveUserInSession(this IPrincipal user, ApplicationUser appUser,
-            string sessionName = SessionNames.UserPrincipalUserSession) {
+
+        public static void SaveUserInSession(this IPrincipal user, ApplicationUser appUser, string sessionName = SessionNames.UserPrincipalUserSession) {
             HttpContext.Current.Session[sessionName] = appUser;
         }
 
-        public static ApplicationUser GetUserFromSession(this IPrincipal user,
-            string sessionName = SessionNames.UserPrincipalUserSession) {
+        public static ApplicationUser GetUserFromSession(this IPrincipal user, string sessionName = SessionNames.UserPrincipalUserSession) {
             return HttpContext.Current.Session[sessionName] as ApplicationUser;
         }
 
-        public static bool IsAnyUserExistInSession(this IPrincipal user,
-            string sessionName = SessionNames.UserPrincipalUserSession) {
+        public static bool IsAnyUserExistInSession(this IPrincipal user, string sessionName = SessionNames.UserPrincipalUserSession) {
             return GetUserFromSession(user, sessionName) != null;
         }
-
-        public static bool IsUserExistInSessionByEmail(this IPrincipal user, string email,
-            string sessionName = SessionNames.UserPrincipalUserSession) {
+        public static bool IsUserExistInSessionByEmail(this IPrincipal user, string email, string sessionName = SessionNames.UserPrincipalUserSession) {
             ApplicationUser appUser;
             return IsUserExistInSessionByEmail(user, email, out appUser, sessionName);
         }
-        /// <summary>
-        /// Is User exist in the session name given.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="email"></param>
-        /// <param name="appUser"></param>
-        /// <param name="sessionName"></param>
-        /// <returns></returns>
-        public static bool IsUserExistInSessionByEmail(this IPrincipal user, string email, out ApplicationUser appUser,
-            string sessionName = SessionNames.UserPrincipalUserSession) {
+
+        public static bool IsUserExistInSessionByEmail(this IPrincipal user, string email, out ApplicationUser appUser, string sessionName = SessionNames.UserPrincipalUserSession) {
             appUser = GetUserFromSession(user, sessionName);
             if (!string.IsNullOrEmpty(email) && appUser != null) {
-                return string.Compare(appUser.Email, email, StringComparison.OrdinalIgnoreCase) == 0;
+                return String.Compare(appUser.Email, email, StringComparison.OrdinalIgnoreCase) == 0;
             }
             return false;
         }
-        /// <summary>
-        /// Is User exist in the session name given.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="userName"></param>
-        /// <param name="sessionName"></param>
-        /// <returns></returns>
-        public static bool IsUserExistInSession(this IPrincipal user, string userName,
-            string sessionName = SessionNames.UserPrincipalUserSession) {
+
+        public static bool IsUserExistInSession(this IPrincipal user, string userName, string sessionName = SessionNames.UserPrincipalUserSession) {
             ApplicationUser appUser;
             return IsUserExistInSession(user, userName, out appUser, sessionName);
-        }
 
+        }
         /// <summary>
-        ///     if the user exist in the current given named session.
+        /// if the user exist in the current given named session.
         /// </summary>
         /// <param name="user"></param>
         /// <param name="userName"></param>
         /// <param name="appUser"></param>
         /// <param name="sessionName"></param>
         /// <returns></returns>
-        public static bool IsUserExistInSession(this IPrincipal user, string userName, out ApplicationUser appUser,
-            string sessionName = SessionNames.UserPrincipalUserSession) {
+        public static bool IsUserExistInSession(this IPrincipal user, string userName, out ApplicationUser appUser, string sessionName = SessionNames.UserPrincipalUserSession) {
             appUser = GetUserFromSession(user, sessionName);
             if (!string.IsNullOrEmpty(userName) && appUser != null) {
                 return appUser.UserName.Equals(userName, StringComparison.OrdinalIgnoreCase);

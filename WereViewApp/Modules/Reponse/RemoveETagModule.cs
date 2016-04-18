@@ -3,7 +3,8 @@ using System.Web;
 
 namespace WeReviewApp.Modules.Reponse {
     public class RemoveETagModule : IHttpModule {
-        public void Dispose() {}
+        public void Dispose() {
+        }
 
         public void Init(HttpApplication context) {
             context.PreSendRequestHeaders += OnPreSendRequestHeaders;
@@ -11,7 +12,8 @@ namespace WeReviewApp.Modules.Reponse {
             context.PostRequestHandlerExecute += OnPostSendRequestHeaders;
         }
 
-        private void OnRequestComplete(object sender, EventArgs e) {}
+        private void OnRequestComplete(object sender, EventArgs e) {
+        }
 
         private void OnPostSendRequestHeaders(object sender, EventArgs e) {
             HttpContext.Current.Response.Headers.Remove("ETag");

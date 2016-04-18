@@ -8,7 +8,7 @@
     ViewBag.backBtn = @Html.Partial("_BackSave");
     ViewBag.stateMessage = @Html.Partial("_SuccessMessage");
 }
-@using (Html.BeginForm("Index", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new {@class = "form-horizontal", role = "form"})) {
+@using (Html.BeginForm("Index", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
@@ -16,9 +16,9 @@
             <span class="@FaIcons.Cogs"></span> @ViewBag.Title
         </h1>
         <hr />
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.Partial("_Tabs-List")
-        @Html.HiddenFor(n => n.IsFirstUserFound)
+        @Html.HiddenFor(n=> n.IsFirstUserFound)
         <div class="tab-content">
             @Html.Partial("_Basic-tab")
             @Html.Partial("_urls-tab")

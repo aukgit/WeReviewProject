@@ -1,40 +1,42 @@
-﻿@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
-@model WeReviewApp.Models.EntityModel.FeaturedImage
+﻿@using WeReviewApp.Models.EntityModel
+@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
+@model FeaturedImage
 
 @{
     ViewBag.Title = "Editing '" + Model.App.GetAppUrlWithoutHostName() + "'";
-    string title = ViewBag.Title;
+	string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
     var token = Html.AntiForgeryToken();
-    var controller = (string) ViewBag.controller;
-    var viewName = "Edit";
+	string controller = (string)ViewBag.controller;
+	string viewName = "Edit";
 }
 @Html.SamePageLinkWithIcon(title, subtitle, "fa fa-edit")
 <hr />
-@using (Html.BeginForm(viewName, controller, FormMethod.Post, new {@class = "form-horizontal Create-@ViewBag.Title", role = "form"})) {
+@using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" }))
+{
     <div class="form-horizontal">
         @token
         <div class="form-group">
-            <div class="col-md-10 col-md-offset-2">
+            <div class="col-md-offset-2 col-md-10">
                 <div class="btn-group">
                     <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                    <a href="@Url.Action("Delete", new {id = Model.FeaturedImageID})" title="Delete this record?" class="btn btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>
-                    <div class="inline input-group-btn">
+                    <a href="@Url.Action("Delete", new { id = Model.FeaturedImageID })" title="Delete this record?" class="btn btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+                    <div class="input-group-btn inline">
                         <button title="Save and create new one" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
                     </div>
                 </div>
             </div>
         </div>
         @Html.Partial("_SuccessMessage")
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.FeaturedImageID)
         @Html.Partial("_CreateOrEdit")
         <div class="form-group">
-            <div class="col-md-10 col-md-offset-2">
+            <div class="col-md-offset-2 col-md-10">
                 <div class="btn-group">
                     <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                    <a href="@Url.Action("Delete", new {id = Model.FeaturedImageID})" title="Delete this record?" class="btn btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>
-                    <div class="inline input-group-btn">
+                    <a href="@Url.Action("Delete", new { id = Model.FeaturedImageID })" title="Delete this record?" class="btn btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+                    <div class="input-group-btn inline">
                         <button title="Save and create new one" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
                     </div>
                 </div>
@@ -43,8 +45,8 @@
     </div>
 
     @Html.Partial("_ValidatorCommonForm", new ViewDataDictionary {
-        {"token", token}
-    })
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    {"token",token}
+})
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

@@ -1,6 +1,6 @@
-﻿;
-$.app = $.app || {};;
-$.app.constants = {
+﻿;$.app = $.app || {};
+
+;$.app.constants = {
     userName: "UserName",
     email: "Email"
 };

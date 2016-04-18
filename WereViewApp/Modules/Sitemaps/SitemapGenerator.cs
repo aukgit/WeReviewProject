@@ -26,18 +26,15 @@ namespace WeReviewApp.Modules.Sitemaps {
 
             // all other elements are optional
 
-            if (item.LastModified.HasValue) {
+            if (item.LastModified.HasValue)
                 itemElement.Add(new XElement(Xmlns + "lastmod", item.LastModified.Value.ToString("yyyy-MM-dd")));
-            }
 
-            if (item.ChangeFrequency.HasValue) {
+            if (item.ChangeFrequency.HasValue)
                 itemElement.Add(new XElement(Xmlns + "changefreq", item.ChangeFrequency.Value));
-            }
 
-            if (item.Priority.HasValue) {
+            if (item.Priority.HasValue)
                 itemElement.Add(new XElement(Xmlns + "priority",
                     item.Priority.Value.ToString("F1", CultureInfo.InvariantCulture)));
-            }
 
             return itemElement;
         }

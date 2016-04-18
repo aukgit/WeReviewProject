@@ -7,10 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Error;
-using FontAwesomeIcons;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
-using WeReviewApp.Filter;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.Identity;
 using WeReviewApp.Models.ViewModels;
@@ -124,7 +122,6 @@ namespace WeReviewApp.Controllers {
 
         #region Check Inbox / InboxCheck
 
-        [AllowAnonymous]
         public ActionResult Verify() {
             //var emailResender = EmailResendViewModel.GetEmailResendViewModelFromSession();
             //if (emailResender != null) {
@@ -138,37 +135,23 @@ namespace WeReviewApp.Controllers {
         #endregion
 
         #region Re-send Confirmation Email
-        private async void SendConfirmationEmail(ApplicationUser user) {
-            var code = Manager.GenerateEmailConfirmationToken(user.Id);
-            var callbackUrl = Url.Action("ConfirmEmail", "Account",
-                new { userId = user.Id, code, codeHashed = user.GeneratedGuid }, Request.Url.Scheme);
-            var mailString = MailHtml.EmailConfirmHtml(user, callbackUrl);
-            AppVar.Mailer.Send(user.Email, "Email Confirmation", mailString);
-        }
 
         [Authorize]
         public async Task<ActionResult> ResendConfirmationMail() {
             var lastSend = Session["last-send"] as DateTime?;
             if (lastSend == null) {
-                if (!User.IsRegistrationComplete()) {
-                    var user = User.GetUser();
-                    try {
-                        SendConfirmationEmail(user);
-                    } catch (Exception) {
-                        return SignOutProgrammatically();
-                    }
+                var user = UserManager.GetCurrentUser();
+                if (!user.IsRegistrationComplete) {
+                    SendConfirmationEmail(user);
                     ViewBag.message =
                         "A verification email has been sent to your email address. Please check the spam folder if necessary.";
-                    SignOutProgrammaticallyNonRedirect();
                 } else {
                     ViewBag.message =
                         "Your registration is already complete! You have confirmed your account verification successfully.";
-                    ViewBag.icon = FaIcons.CheckMark;
                 }
             } else {
                 ViewBag.message =
                     "You have already sent a verification code recently or your registration is complete.";
-                ViewBag.icon = FaIcons.CheckMark;
             }
             Session["last-send"] = DateTime.Now;
             return View("InboxCheck");
@@ -240,7 +223,15 @@ namespace WeReviewApp.Controllers {
 
         #endregion
 
-        #region Confirm Email : Validation
+        #region Confirm Email
+
+        private async void SendConfirmationEmail(ApplicationUser user) {
+            var code = Manager.GenerateEmailConfirmationToken(user.Id);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account",
+                new {userId = user.Id, code, codeHashed = user.GeneratedGuid}, Request.Url.Scheme);
+            var mailString = MailHtml.EmailConfirmHtml(user, callbackUrl);
+            AppVar.Mailer.Send(user.Email, "Email Confirmation", mailString);
+        }
 
         //[CompressFilter(Order = 1)]
         [AllowAnonymous]
@@ -250,26 +241,19 @@ namespace WeReviewApp.Controllers {
             }
             var foundInUser = Guid.Empty;
             var result = await Manager.ConfirmEmailAsync(userId, code);
-            if (result.Succeeded) {
-                #region Complete Registration on sucess of confirmation.
             var user = UserManager.GetUser(userId);
             if (user != null) {
                 foundInUser = (Guid) user.GeneratedGuid;
             }
             if (!user.IsRegistrationComplete) {
-                    if (foundInUser.Equals(codeHashed)) {
+                if (result.Succeeded && foundInUser.Equals(codeHashed)) {
                     CallCompleteRegistration(userId);
-                        UserManager.ClearUserSessions(); // clear user cache.
-                        ViewBag.icon = FaIcons.CheckMark;
                     return View("ConfirmEmail");
                 }
             } else {
                 // already registered
                 ViewBag.message = "You have already registered and confirmed your email successfully.";
-                    ViewBag.icon = FaIcons.CheckMark;
                 return View("InboxCheck");
-                }
-                #endregion
             }
             AddErrors(result);
             return AppVar.GetFriendlyError("Confirmation is not valid.",
@@ -320,11 +304,7 @@ namespace WeReviewApp.Controllers {
         [AllowAnonymous]
         public ActionResult Login(string returnUrl) {
             if (UserManager.IsAuthenticated()) {
-                var userCache = User.GetNewOrExistingUserCache();
-                if (userCache.IsRegistrationComplete) {
-                    return RedirectToActionPermanent("Manage");
-                }
-                return RedirectToActionPermanent("Verify");
+                return RedirectToActionPermanent("Manage");
             }
             ViewBag.ReturnUrl = returnUrl;
             return View();
@@ -339,13 +319,10 @@ namespace WeReviewApp.Controllers {
                 var user = await UserManager.GetUserByEmailAsync(model.Email, model.Password);
                 if (user != null) {
                     await SignInAsync(user, model.RememberMe);
-                    if (user.IsBlocked) {
-                        SignOutProgrammaticallyNonRedirect();
+                    if (user.IsBlocked || !user.IsRegistrationComplete) {
+                        SignOutProgrammatically();
                         return AppVar.GetAuthenticationError("You don't have the permission.",
-                            "Sorry you don't have the permission to authenticate right now. Your account is blocked");
-                    }
-                    if (!user.IsRegistrationComplete) {
-                        return RedirectToActionPermanent("Verify");
+                            "Sorry you don't have the permission to authenticate right now. Please check your email inbox/spam folder for details.");
                     }
                     return RedirectToLocal(returnUrl);
                 }
@@ -362,23 +339,19 @@ namespace WeReviewApp.Controllers {
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult SignOut() {
-            SignOutProgrammaticallyNonRedirect();
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
 
         [AllowAnonymous]
-        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult SignOutProgrammatically() {
-            SignOutProgrammaticallyNonRedirect();
-            return RedirectToAction("Index", "Home");
-        }
-
-        public void SignOutProgrammaticallyNonRedirect() {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignOut();
+            return RedirectToAction("Index", "Home");
         }
 
         #endregion
@@ -386,10 +359,9 @@ namespace WeReviewApp.Controllers {
         #region Register
 
         [AllowAnonymous]
-        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult Register() {
             if (UserManager.IsAuthenticated()) {
-                return AppVar.GetAuthenticationError("You are already authenticated.", "");
+                return AppVar.GetAuthenticationError("Authentication Failed", "");
             }
             return View();
         }
@@ -397,67 +369,58 @@ namespace WeReviewApp.Controllers {
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        //[CompressFilter(Order = 1)]
         public async Task<ActionResult> Register(RegisterViewModel model) {
-            if (UserManager.IsAuthenticated()) {
-                return AppVar.GetAuthenticationError("You are already authenticated.", "");
-            }
-
-            #region Redirect if already registered successfully.
+            var errors = new ErrorCollector();
+            //External Validation.
+            var validator = new DevUserValidator(model, errors, db);
+            var validOtherConditions = validator.ValidateEveryValidations();
             var emailResender = EmailResendViewModel.GetEmailResendViewModelFromSession();
+
             if (emailResender != null) {
                 // that means user is already created successfully.
                 return RedirectToActionPermanent("Verify");
             }
-            #endregion
 
-            if (ModelState.IsValid) {
-                var errors = new ErrorCollector();
-                //External Validation.
-                var validator = new DevUserValidator(model, errors, db);
-                var validOtherConditions = validator.ValidateEveryValidations();
-                if (validOtherConditions) {
-                    model.UserName = model.UserName.Trim();
-                    model.FirstName = model.FirstName.Trim();
-                    model.LastName = model.LastName.Trim();
-                    var user = UserManager.GetUserFromViewModel(model); // get user from view model.
-                    var result = await Manager.CreateAsync(user, model.Password);
-                    if (result.Succeeded) {
-                        if (AppVar.Setting.IsConfirmMailRequired && AppVar.Setting.IsFirstUserFound) {
-                            #region For every regular user.
-                            // First user already found.
-                            // mail needs to be confirmed and first user found.
+            if (ModelState.IsValid && validOtherConditions) {
+                var user = UserManager.GetUserFromViewModel(model); // get user from view model.
+                var result = await Manager.CreateAsync(user, model.Password);
+                if (result.Succeeded) {
+                    // SignInProgrammatically(user, false);
+                    // RoleManager.AddTempRoleInfo(user, model.Role);
 
-                            #region Send an email to the user about mail confirmation
+                    if (AppVar.Setting.IsConfirmMailRequired && AppVar.Setting.IsFirstUserFound) {
+                        // First user already found.
+                        // mail needs to be confirmed and first user found.
 
-                            SendConfirmationEmail(user);
+                        #region Send an email to the user about mail confirmation
 
-                            #endregion
+                        SendConfirmationEmail(user);
 
-                            #region Redirect to verify since registration
+                        #endregion
 
-                            //SignOutProgrammaticallyNonRedirect();
-                            return RedirectToActionPermanent("Verify");
+                        #region Sign out because registration is not complete
 
-                            #endregion
-                            #endregion
-                        } else if (!AppVar.Setting.IsFirstUserFound) {
-                            #region For first user / first admin user.
-                            // first user not found or email doesn't need to be checked.
-                            // first haven't found
-                            // This is for first user.
-
-                            #region Send an email to the user about mail confirmation
-
-                            SendConfirmationEmail(user);
-
-                            #endregion
-                            #endregion
-                        }
-                        CallCompleteRegistration(user.UserID, "Rookie"); // only will be called for first user.
+                        SignOutProgrammatically();
                         return RedirectToActionPermanent("Verify");
+
+                        #endregion
                     }
-                    AddErrors(result);
+                    // first user not found or email doesn't need to be checked.
+                    if (!AppVar.Setting.IsFirstUserFound) {
+                        // first haven't found
+                        // This is for first user.
+
+                        #region Send an email to the user about mail confirmation
+
+                        SendConfirmationEmail(user);
+
+                        #endregion
+                    }
+                    CallCompleteRegistration(user.UserID, "Rookie"); // only will be called for first user.
+                    return RedirectToActionPermanent("Verify");
                 }
+                AddErrors(result);
             }
             return View("Register", model);
         }
@@ -584,7 +547,6 @@ namespace WeReviewApp.Controllers {
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateRegistrationComplete]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model) {
             if (Session["user-reset-" + model.Email] == null) {
@@ -620,7 +582,6 @@ namespace WeReviewApp.Controllers {
 
         #region Account Manage
 
-        [ValidateRegistrationComplete]
         public ActionResult Manage(ManageMessageId? message) {
             if (UserManager.IsAuthenticated()) {
                 ViewBag.StatusMessage =
@@ -642,7 +603,6 @@ namespace WeReviewApp.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidateRegistrationComplete]
         public async Task<ActionResult> Manage(ManageUserViewModel model) {
             var hasPassword = HasPassword();
             ViewBag.HasLocalPassword = hasPassword;
@@ -702,6 +662,10 @@ namespace WeReviewApp.Controllers {
                 return user.PasswordHash != null;
             }
             return false;
+        }
+
+        private void SendEmail(string email, string callbackUrl, string subject, string message) {
+            // For information on sending mail, please visit http://go.microsoft.com/fwlink/?LinkID=320771
         }
 
         public enum ManageMessageId {

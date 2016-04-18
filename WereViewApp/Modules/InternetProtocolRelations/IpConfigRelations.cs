@@ -48,13 +48,11 @@ namespace WeReviewApp.Modules.InternetProtocolRelations {
             }
             var visitorIpAddress = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
 
-            if (string.IsNullOrEmpty(visitorIpAddress)) {
+            if (string.IsNullOrEmpty(visitorIpAddress))
                 visitorIpAddress = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-            }
 
-            if (string.IsNullOrEmpty(visitorIpAddress)) {
+            if (string.IsNullOrEmpty(visitorIpAddress))
                 visitorIpAddress = HttpContext.Current.Request.UserHostAddress;
-            }
 
             if (string.IsNullOrEmpty(visitorIpAddress) || visitorIpAddress.Trim() == "::1") {
                 getLan = true;

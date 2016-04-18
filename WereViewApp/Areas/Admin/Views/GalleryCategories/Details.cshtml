@@ -1,12 +1,14 @@
-﻿@model WeReviewApp.Models.EntityModel.GalleryCategory
+﻿@using WeReviewApp.Models.EntityModel
+@model GalleryCategory
 @{
-    var nameOftheRecord = Html.DisplayFor(model => model.CategoryName).ToString();
+    string nameOftheRecord = Html.DisplayFor(model => model.CategoryName).ToString();
 
     ViewBag.Title = "Details of " + nameOftheRecord;
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    var controller = (string) ViewBag.controller;
-    var viewName = "Details";
+    string controller = (string)ViewBag.controller;
+    string viewName = "Details";
+
 }
 <h1 class="h2 top-margin-space">
     <span class="glyphicon glyphicon-print"></span>
@@ -19,60 +21,60 @@
         <div class="col-md-10">
             <div class="btn-group">
                 <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                <a href="@Url.Action("Edit", new {id = Model.GalleryCategoryID})" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                <a href="@Url.Action("Edit", new { id = Model.GalleryCategoryID })" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
             </div>
         </div>
         <div class="col-md-2">
-            <a href="@Url.Action("Delete", new {id = Model.GalleryCategoryID})" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+            <a href="@Url.Action("Delete", new { id = Model.GalleryCategoryID })" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>
         </div>
     </div>
     <table class="table table-hover top-margin-space">
         <thead>
-        <tr>
-            <th>Properties</th>
-            <th></th>
-            <th>Values</th>
-        </tr>
+            <tr>
+                <th>Properties</th>
+                <th></th>
+                <th>Values</th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <td class="dev-label-property">
-                @Html.DisplayNameFor(model => model.GalleryCategoryID)
-            </td>
-            <td>:</td>
-            <td class="dev-label-value">
-                @Html.DisplayFor(model => model.GalleryCategoryID)
-            </td>
-        </tr>
-        <tr>
-            <td class="dev-label-property">
-                @Html.DisplayNameFor(model => model.CategoryName)
-            </td>
-            <td>:</td>
-            <td class="dev-label-value">
-                @Html.DisplayFor(model => model.CategoryName)
-            </td>
-        </tr>
+            <tr>
+                <td class="dev-label-property">
+                    @Html.DisplayNameFor(model => model.GalleryCategoryID)
+                </td>
+                <td>:</td>
+                <td class="dev-label-value">
+                    @Html.DisplayFor(model => model.GalleryCategoryID)
+                </td>
+            </tr>
+            <tr>
+                <td class="dev-label-property">
+                    @Html.DisplayNameFor(model => model.CategoryName)
+                </td>
+                <td>:</td>
+                <td class="dev-label-value">
+                    @Html.DisplayFor(model => model.CategoryName)
+                </td>
+            </tr>
 
-        <tr>
-            <td class="dev-label-property">
-                @Html.DisplayNameFor(model => model.Height)
-            </td>
-            <td>:</td>
-            <td class="dev-label-value">
-                @Html.DisplayFor(model => model.Height)
-            </td>
-        </tr>
+            <tr>
+                <td class="dev-label-property">
+                    @Html.DisplayNameFor(model => model.Height)
+                </td>
+                <td>:</td>
+                <td class="dev-label-value">
+                    @Html.DisplayFor(model => model.Height)
+                </td>
+            </tr>
 
-        <tr>
-            <td class="dev-label-property">
-                @Html.DisplayNameFor(model => model.Width)
-            </td>
-            <td>:</td>
-            <td class="dev-label-value">
-                @Html.DisplayFor(model => model.Width)
-            </td>
-        </tr>
+            <tr>
+                <td class="dev-label-property">
+                    @Html.DisplayNameFor(model => model.Width)
+                </td>
+                <td>:</td>
+                <td class="dev-label-value">
+                    @Html.DisplayFor(model => model.Width)
+                </td>
+            </tr>
 
 
         </tbody>
@@ -81,11 +83,11 @@
         <div class="col-md-10">
             <div class="btn-group">
                 <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                <a href="@Url.Action("Edit", new {id = Model.GalleryCategoryID})" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                <a href="@Url.Action("Edit", new { id = Model.GalleryCategoryID })" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
             </div>
         </div>
         <div class="col-md-2">
-            <a href="@Url.Action("Delete", new {id = Model.GalleryCategoryID})" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+            <a href="@Url.Action("Delete", new { id = Model.GalleryCategoryID })" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>
         </div>
     </div>
 </div>

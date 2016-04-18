@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 using WeReviewApp.Modules.DevUser;
-using WeReviewApp.Modules.Extensions;
+using WeReviewApp.Modules.Role;
 
 namespace WeReviewApp.Filter {
     public class HasMinimumRoleAttribute : ActionFilterAttribute {
@@ -11,7 +11,11 @@ namespace WeReviewApp.Filter {
             if (!string.IsNullOrEmpty(MinimumRole)) {
                 var userCache = UserCache.GetNewOrExistingUserCache();
                 if (!userCache.HasMinimumRole(MinimumRole)) {
-                    filterContext.RedirectToActionIfDistinct("Verify", "Account", "");
+                    filterContext.Result = new RedirectToRouteResult(
+                         new RouteValueDictionary(new { controller = "Account", action = "Verify", area="" })
+                     );
+
+                    filterContext.Result.ExecuteResult(filterContext.Controller.ControllerContext);
                 }
             }
             base.OnActionExecuting(filterContext);

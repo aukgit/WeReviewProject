@@ -3,20 +3,25 @@
 namespace WeReviewApp.Areas.Admin {
     public class AdminAreaRegistration : AreaRegistration {
         public override string AreaName {
-            get { return "Admin"; }
+            get {
+                return "Admin";
+            }
         }
 
         public override void RegisterArea(AreaRegistrationContext context) {
             context.MapRoute(
-                "Admin_default",
-                "Admin/{controller}/{action}/{id}",
-                new {action = "Index", Controller = "Home", id = UrlParameter.Optional}
-                );
+      "Admin_default",
+      "Admin/{controller}/{action}/{id}",
+      new { action = "Index", Controller = "Home", id = UrlParameter.Optional }
+  );
             context.MapRoute(
-                "Admin_default_page",
-                "Admin/{controller}/{action}/{page}",
-                new {action = "Index", Controller = "Home", page = UrlParameter.Optional}
-                );
+            "Admin_default_page",
+            "Admin/{controller}/{action}/{page}",
+            new { action = "Index", Controller = "Home", page = UrlParameter.Optional }
+        );
+
+
+
         }
     }
 }

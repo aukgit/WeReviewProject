@@ -7,9 +7,8 @@
         /// <param name="length">If string len is less then return whole string. Null means whole len.</param>
         /// <returns></returns>
         public static string GetStringCutOff(this string str, int? length) {
-            if (string.IsNullOrEmpty(str)) {
+            if (string.IsNullOrEmpty(str))
                 return "";
-            }
             if (length == null) {
                 length = str.Length;
             }
@@ -26,9 +25,8 @@
         /// <param name="length">-1 means whole return last len.</param>
         /// <returns></returns>
         public static string GetStringCutOff(this string str, int starting, int length) {
-            if (string.IsNullOrEmpty(str)) {
+            if (string.IsNullOrEmpty(str))
                 return "";
-            }
             if (length == -1) {
                 length = str.Length;
             }

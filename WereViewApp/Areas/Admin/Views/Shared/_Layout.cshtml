@@ -13,30 +13,30 @@
 
 </head>
 <body class="@ViewBag.pageClass">
-<!--[if lt IE 9]>
-    <div class="browser-update container-fuild">
-        <div class="row">
-            <div class="col-md-12">Warning! Your browser is too old. Please update your browser to the <a href="http://browser-update.org/update.html#3">latest version</a>.</div>
-        </div>
-    </div>
-<![endif]-->
-@Html.Partial("_NavBar")
-<div id="hidden-fields-container">
-    @RenderSection("hidden", false)
-</div>
-@Html.Partial("_LoadingBar")
-<div id="wrap" class="home-page">
-    <div class="content">
-        <div id="admin-area">
-            <div class="container">
-                @RenderBody()
+    <!--[if lt IE 9]>
+        <div class="browser-update container-fuild">
+            <div class="row">
+                <div class="col-md-12">Warning! Your browser is too old. Please update your browser to the <a href="http://browser-update.org/update.html#3">latest version</a>.</div>
             </div>
         </div>
-        @Html.Partial("_Footer")
+    <![endif]-->
+    @Html.Partial("_NavBar")
+    <div id="hidden-fields-container">
+        @RenderSection("hidden", required: false)
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", false)
-</div>
+    @Html.Partial("_LoadingBar")
+    <div id="wrap" class="home-page">
+        <div class="content">
+            <div id="admin-area">
+                <div class="container">
+                    @RenderBody()
+                </div>
+            </div>
+            @Html.Partial("_Footer")
+        </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </div>
 </body>
 </html>

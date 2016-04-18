@@ -18,8 +18,7 @@
  * JavaScript Mvc framework works with convention :
  * JavaScript Framework how it is implemented :  http://bit.ly/1KdWSHD | http://bit.ly/1KdX0qq 
  */
-;
-$.app = $.app || {};
+; $.app = $.app || {};
 $.app = {
     isDebugging: true,
     $hiddenContainer: null,
@@ -27,7 +26,7 @@ $.app = {
     hiddenFieldNamesDictionary: [],
     initHiddenContainer: function() {
         /// <summary>
-        ///     Initialize hidden container if exist.
+        /// Initialize hidden container if exist.
         /// </summary>
         /// <returns type="">returns hidden container.</returns>
         var app = $.app;
@@ -41,10 +40,11 @@ $.app = {
     },
     _getHiddenFieldDictionary: function(nameOfHiddenField) {
         /// <summary>
-        ///     Get dictionary hidden field values.
+        /// Get dictionary hidden field values.
         /// </summary>
         /// <param name="nameOfHiddenField"></param>
         /// <returns type="return $ type object.">null or jquery obejct.</returns>
+
         if (nameOfHiddenField) {
             var namesDictionary = $.app.hiddenFieldNamesDictionary;
             for (var i = 0; i < namesDictionary.length; i++) {
@@ -58,7 +58,7 @@ $.app = {
     },
     _addHiddenFieldToDictionary: function($field) {
         /// <summary>
-        ///     Only adds the item to the dictionary ($hiddenFieldDictionary, hiddenFieldNamesDictionary)
+        /// Only adds the item to the dictionary ($hiddenFieldDictionary, hiddenFieldNamesDictionary)
         /// </summary>
         /// <param name="$field">jQuery object.</param>
         /// <returns type=""></returns>
@@ -68,8 +68,8 @@ $.app = {
     },
     getHiddenField: function(nameOfHiddenField) {
         /// <summary>
-        ///     Get the hidden field value, if possible get it from dictionary object.
-        ///     Make sure that you put every hidden field inside #hidden-fields-container container
+        /// Get the hidden field value, if possible get it from dictionary object.
+        /// Make sure that you put every hidden field inside #hidden-fields-container container
         /// </summary>
         /// <param name="nameOfHiddenField"></param>
         /// <returns type="return $ type object.">get attribute values $returnedObject.attr() or null</returns>
@@ -94,8 +94,8 @@ $.app = {
     },
     setHiddenValue: function(nameOfHiddenField, val) {
         /// <summary>
-        ///     Get the hidden field value, if possible get it from dictionary object.
-        ///     Make sure that you put every hidden field inside #hidden-fields-container container
+        /// Get the hidden field value, if possible get it from dictionary object.
+        /// Make sure that you put every hidden field inside #hidden-fields-container container
         /// </summary>
         /// <param name="nameOfHiddenField"></param>
         /// <returns type="return $ type object.">get attribute values $returnedObject.attr() or null</returns>

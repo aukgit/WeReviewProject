@@ -6,23 +6,30 @@ using System.Data.Entity.Infrastructure;
 
 namespace WeReviewApp.Modules.Extensions.Context {
     public abstract class DevDbContext : DbContext {
-        public DevDbContext() {}
+        public DevDbContext() {
+        }
 
-        public DevDbContext(string connectionStringName) : base(connectionStringName) {}
+        public DevDbContext(string connectionStringName) : base(connectionStringName) {
+        }
 
-        public DevDbContext(DbCompiledModel compiledModel) : base(compiledModel) {}
+        public DevDbContext(DbCompiledModel compiledModel) : base(compiledModel) {
+        }
 
         public DevDbContext(string connectionStringName, DbCompiledModel compiledModel)
-            : base(connectionStringName, compiledModel) {}
+            : base(connectionStringName, compiledModel) {
+        }
 
         public DevDbContext(DbConnection existingConnection, bool contextOwnsConnection)
-            : base(existingConnection, contextOwnsConnection) {}
+            : base(existingConnection, contextOwnsConnection) {
+        }
 
         public DevDbContext(ObjectContext objectContext, bool contextOwnsConnection)
-            : base(objectContext, contextOwnsConnection) {}
+            : base(objectContext, contextOwnsConnection) {
+        }
 
         public DevDbContext(DbConnection existingConnection, DbCompiledModel compiledModel, bool contextOwnsConnection)
-            : base(existingConnection, compiledModel, contextOwnsConnection) {}
+            : base(existingConnection, compiledModel, contextOwnsConnection) {
+        }
 
         /// <summary>
         ///     Save changes and sends an email to the developer if any error occurred.

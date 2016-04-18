@@ -1,8 +1,7 @@
-﻿;
-$.app = $.app || {};
+﻿; $.app = $.app || {};
 $.app.pagination = function($paginationContainer, pageCountUrl, selectedPage, pagesNumberToDisplay, additionalClass, paginationClass, onComplete) {
     /// <summary>
-    ///     render pagination numbers
+    /// render pagination numbers
     /// </summary>
     /// <param name="$paginationContainer">The jQuery container where the pagination will be created.</param>
     /// <param name="pageCountUrl">Where to retrieve the page count.</param>
@@ -101,7 +100,8 @@ $.app.pagination = function($paginationContainer, pageCountUrl, selectedPage, pa
         if (typeof onComplete === "function") {
             onComplete.apply();
         }
-    };
+    }
+
     jQuery.ajax({
         method: "POST", // by default "GET"
         url: pageCountUrl,

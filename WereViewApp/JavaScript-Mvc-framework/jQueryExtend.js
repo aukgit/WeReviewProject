@@ -13,20 +13,20 @@
 /// <reference path="../jQuery/jquery-2.1.4-vsdoc.js" />
 ;
 
-$.isEmpty = function(variable) {
+$.isEmpty = function (variable) {
     /// <summary>
-    ///     Compare any object to null , unidentified or empty then returns true/false.
+    /// Compare any object to null , unidentified or empty then returns true/false.
     /// </summary>
     /// <param name="variable"> Anything can be possible.</param>
     /// <returns type="boolean">True/False</returns>
-    return variable === undefined || variable === null || variable === "" || variable.length === 0;
+    return variable === undefined || variable === null || variable === '' || variable.length === 0;
 };
 /**
  *  @returns array of classes names.
  */
-$.getClassesList = function($jQueryObject) {
+$.getClassesList = function ($jQueryObject) {
     /// <summary>
-    ///     jQuery element get all classes as an array.
+    /// jQuery element get all classes as an array.
     /// </summary>
     /// <param name="$jQueryObject">Any jQuery object.</param>
     /// <returns type="array">array list of classes.</returns>
@@ -38,7 +38,7 @@ $.getClassesList = function($jQueryObject) {
 
 $.getArrayExcept = function(givenArray, excludingArray) {
     /// <summary>
-    ///     givenArray = ['a','b','c'] , excludingArray=['b','c'], results=['a']
+    /// givenArray = ['a','b','c'] , excludingArray=['b','c'], results=['a']
     /// </summary>
     /// <param name="givenArray" type="array">Full list of items (in array format).</param>
     /// <param name="excludingArray" type="array">List of items which needs to be excluded from the list (in array format).</param>
@@ -63,42 +63,43 @@ $.getArrayExcept = function(givenArray, excludingArray) {
 };
 
 
-$.isString = function(variable) {
+$.isString = function (variable) {
     /// <summary>
-    ///     Checks wheater it is a string type or not.
+    /// Checks wheater it is a string type or not.
     /// </summary>
     /// <param name="variable"></param>
     /// <returns type="boolean">true/false</returns>
-    return typeof variable === "string";
+    return typeof variable === 'string';
 };
 
-$.returnUrlWithSlash = function(url) {
+$.returnUrlWithSlash = function (url) {
     /// <summary>
-    ///     First checks if slash exist at the bottom or not.
+    /// First checks if slash exist at the bottom or not.
     /// </summary>
     /// <param name="url" type="string">Give an url.</param>
     /// <returns type="string">Url with slash at the bottom or empty string if type doesn't match or null or undefined.</returns>
     if ($.isEmpty(url) === false && $.isString(url)) {
         var len = url.length;
-        if (url[len - 1] !== "/") {
+        if (url[len - 1] !== '/') {
             url += "/";
             return url;
         }
     }
     return "";
 };
-$.getFriendlyUrlSlug = function(str) {
+$.getFriendlyUrlSlug = function (str) {
     /// <summary>
-    ///     Returns friendly url slug from given string
-    ///     Hello & World -> hello-world
+    /// Returns friendly url slug from given string
+    /// Hello & World -> hello-world
     /// </summary>
     /// <param name="str">Give an string "Hello & World"</param>
+
     var regularExpressions = $.app.regularExp;
     if ($.isEmpty(str) === false) {
         //"[^A-Za-z0-9_\.~]+"
         var regexString = regularExpressions.friendlyUrl;
         str = str.trim();
-        var regExp = new RegExp(regexString, "gi");
+        var regExp = new RegExp(regexString, 'gi');
         return str.replace(regExp, "-");
     }
     return "";
@@ -106,19 +107,17 @@ $.getFriendlyUrlSlug = function(str) {
 /**
  * single input IFRAME code HTML  to Square
  */
-$.htmlToSquareTag = function($jQueryInputText) {
+$.htmlToSquareTag = function ($jQueryInputText) {
     /// <summary>
-    ///     Any HTML tag to square tag inside the input text.
-    ///     <iframe width="560" height="315" src="//www.youtube.com/embed/ob-P2a6Mrjs" frameborder="0" allowfullscreen>
-    ///         to
-    ///         Square
+    /// Any HTML tag to square tag inside the input text.
+    /// <iframe width="560" height="315" src="//www.youtube.com/embed/ob-P2a6Mrjs" frameborder="0" allowfullscreen> to Square
     /// </summary>
     /// <param name="$jQueryInput">jQuery element.</param>
     var currentText = $jQueryInputText.val();
     //currentText = currentText.toLowerCase();
-    var reg = new RegExp("<" + tag, "gi");
+    var reg = new RegExp("<" + tag, 'gi');
     currentText = currentText.replace(reg, "[" + tag);
-    reg = new RegExp("</" + tag + ">", "gi");
+    reg = new RegExp("</" + tag + ">", 'gi');
     currentText = currentText.replace(reg, "[/" + tag + "]");
     currentText = currentText.replace(">", "]");
     $jQueryInputText.val(currentText);
@@ -127,17 +126,17 @@ $.htmlToSquareTag = function($jQueryInputText) {
 /**
  * single input IFRAME code Square  to HTML
  */
-$.squareToHtmlTag = function($jQueryInput, tag) {
+$.squareToHtmlTag = function ($jQueryInput, tag) {
     /// <summary>
-    ///     Any square tag to html tag inside the input text.
-    ///     [iframe width="560" height="315" src="//www.youtube.com/embed/ob-P2a6Mrjs" frameborder="0" allowfullscreen] to html
+    /// Any square tag to html tag inside the input text.
+    /// [iframe width="560" height="315" src="//www.youtube.com/embed/ob-P2a6Mrjs" frameborder="0" allowfullscreen] to html
     /// </summary>
     /// <param name="$jQueryInput">jQuery element.</param>
     var currentText = $jQueryInput.val();
     //currentText = currentText.toLowerCase();
-    var reg = new RegExp("\\[" + tag, "gi");
+    var reg = new RegExp("\\[" + tag, 'gi');
     currentText = currentText.replace(reg, "<" + tag);
-    reg = new RegExp("\\[/" + tag + "\\]", "gi");
+    reg = new RegExp("\\[/" + tag + "\\]", 'gi');
     currentText = currentText.replace(reg, "</" + tag + ">");
     currentText = currentText.replace("]", ">");
     $jQueryInput.val(currentText);
@@ -145,15 +144,12 @@ $.squareToHtmlTag = function($jQueryInput, tag) {
 //validation modification
 $.checkValidInputs = function($inputsCollection, starRatingLabel, invalidStarRatingCss) {
     /// <summary>
-    ///     Check all the inputs jQuery validations.
-    ///     Also mark to red when invalid by the default valid method.
-    ///     Bootstrap star rating is also validated in custom way.
+    /// Check all the inputs jQuery validations.
+    /// Also mark to red when invalid by the default valid method. 
+    /// Bootstrap star rating is also validated in custom way.
     /// </summary>
     /// <param name="$inputsCollection" type="jQuery element">All input collection. </param>
-    /// <param name="starRatingLabel">
-    ///     Can be null or full html for the label to be injected when star rating is not selected or
-    ///     rated.
-    /// </param>
+    /// <param name="starRatingLabel">Can be null or full html for the label to be injected when star rating is not selected or rated.</param>
     /// <param name="invalidStarRatingCss" type="json with css properties">When null: {'text-shadow': "2px 2px red"}</param>
     /// <returns type="boolean">true/false</returns>
     "use strict";
@@ -207,15 +203,15 @@ $.checkValidInputs = function($inputsCollection, starRatingLabel, invalidStarRat
     return true;
 };
 
-$.isJson = function(obj) {
-    if (!$.isEmpty(obj) && !$.isArray(obj) && typeof obj !== "string" && typeof obj !== "function") {
+$.isJson = function (obj) {
+    if (!$.isEmpty(obj) && !$.isArray(obj) && typeof obj !== 'string' && typeof obj !== 'function') {
         return Object.keys(obj).length > 0;
     }
     return false;
 };
 $.getHiddenField = function(name) {
     /// <summary>
-    ///     Get hidden field object from cache if possible.
+    /// Get hidden field object from cache if possible.
     /// </summary>
     /// <param name="name">Name of the field</param>
     /// <returns type=""></returns>
@@ -224,7 +220,7 @@ $.getHiddenField = function(name) {
 
 $.getHiddenValue = function(name) {
     /// <summary>
-    ///     Get string value of the hidden field.
+    /// Get string value of the hidden field.
     /// </summary>
     /// <param name="name">Name of the field</param>
     /// <returns type="">Get string value of the hidden field. If not found then empty string "".</returns>
@@ -237,7 +233,7 @@ $.getHiddenValue = function(name) {
 
 $.setHiddenValue = function(name, val) {
     /// <summary>
-    ///     Get string value of the hidden field.
+    /// Get string value of the hidden field.
     /// </summary>
     /// <param name="name">Name of the field</param>
     /// <param name="val">value of the field</param>
@@ -248,7 +244,7 @@ $.setHiddenValue = function(name, val) {
 
 $.isFunc = function(func) {
     /// <summary>
-    ///     Is it it a function.
+    /// Is it it a function.
     /// </summary>
     /// <param name="func">Anything</param>
     /// <returns type="">Returns true/false</returns>
@@ -256,7 +252,7 @@ $.isFunc = function(func) {
 };
 $.executeFunction = function(func) {
     /// <summary>
-    ///     Execute only if it is a function
+    /// Execute only if it is a function
     /// </summary>
     /// <param name="func">Anything</param>
     /// <returns type="">Returns true/false</returns>
@@ -265,13 +261,13 @@ $.executeFunction = function(func) {
     }
 };
 
-$.getJsonToQueryString = function(url, json, isQuestionMarkRequired) {
+$.getJsonToQueryString = function (url, json, isQuestionMarkRequired) {
     /// <summary>
-    ///     Returns a concatenated url with those json array value pair
+    /// Returns a concatenated url with those json array value pair
     /// </summary>
     /// <param name="url"></param>
     /// <param name="json">
-    ///     any json  {name: 'value', name2: 'value' },
+    ///    any json  {name: 'value', name2: 'value' },
     /// </param>
     /// <param name="isQuestionMarkRequired">add ? after given url or else add &</param>
     /// <returns type="">returns a url string.</returns>
@@ -298,10 +294,11 @@ $.getJsonToQueryString = function(url, json, isQuestionMarkRequired) {
 
 $.applyAutoResizeMultiline = function($container) {
     /// <summary>
-    ///     Apply auto size on the elements which has elastic or autosize-enabled class.
+    /// Apply auto size on the elements which has elastic or autosize-enabled class.
     /// </summary>
     /// <param name="$container">can be null, if given the filter will be done only inside that container.</param>
     /// <returns type=""></returns>
+
     var $autoSizableElements;
     var selectors = ".elastic,.autosize,.multiline-text";
     if (!$.isEmpty($container)) {
@@ -315,10 +312,11 @@ $.applyAutoResizeMultiline = function($container) {
 };
 $.hideEmptyFields = function($container) {
     /// <summary>
-    ///     Hide elements which has empty input fields.
+    /// Hide elements which has empty input fields.
     /// </summary>
     /// <param name="$container">can be null, if given the filter will be done only inside that container.</param>
     /// <returns type=""></returns>
+
     var $inputs;
     var selectors = "input[value='']";
     var $formGroups;
@@ -348,9 +346,9 @@ $.hideEmptyFields = function($container) {
  * @param {} arrayOfSelectors  : Pass array of selectors
  * @returns {} jquery elements
  */
-$.getjQueryElementsByArrayOfSelectors = function(arrayOfSelectors) {
+$.getjQueryElementsByArrayOfSelectors = function (arrayOfSelectors) {
     /// <summary>
-    ///     Get jquery elements by passing array of selectors.
+    /// Get jquery elements by passing array of selectors.
     /// </summary>
     /// <param name="arrayOfSelectors" type="type"></param>
     /// <returns type=""></returns>
@@ -364,7 +362,7 @@ $.getjQueryElementsByArrayOfSelectors = function(arrayOfSelectors) {
         }
     }
     return $(results);
-};
+}
 
 /**
  * Convert single form to json object.
@@ -379,4 +377,4 @@ $.serializeToJson = function($singleForm) {
         result[item.name] = item.value;
     }
     return result;
-};
+}

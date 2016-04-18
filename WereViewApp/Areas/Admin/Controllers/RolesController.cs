@@ -8,6 +8,7 @@ using WeReviewApp.Modules.Role;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
     public class RolesController : IdentityController<ApplicationDbContext> {
+
         public ActionResult Index() {
             var roles = RoleManager.GetRoles();
             return View(roles);
@@ -67,8 +68,9 @@ namespace WeReviewApp.Areas.Admin.Controllers {
                 RoleManager.ResetManager();
 
                 return View(relatedUsers);
+            } else {
+                RoleManager.RemoveRole(id);
             }
-            RoleManager.RemoveRole(id);
             return RedirectToActionPermanent("Index");
             //var users = UserManager.GetAllUsers();
             //return View(users);

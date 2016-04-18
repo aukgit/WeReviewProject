@@ -1,9 +1,8 @@
-﻿;
-$.app = $.app || {};;
-$.app.schema = $.app.schema || {};;
-$.app.schema.url = {
+﻿; $.app = $.app || {};
+; $.app.schema = $.app.schema || {};
+;$.app.schema.url = {
     Create: null,
     Edit: null,
     Delete: null,
-    Index: null
+    Index:null
 };

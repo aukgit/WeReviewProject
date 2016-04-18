@@ -1,14 +1,17 @@
-﻿@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
+﻿@using WeReviewApp.Models.EntityModel
+@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
+
 @model WeReviewApp.Models.EntityModel.FeaturedImage
 
 @{
-    var nameOftheRecord = Html.DisplayFor(model => model.AppID).ToString();
+    string nameOftheRecord = Html.DisplayFor(model => model.AppID).ToString();
 
     ViewBag.Title = "Details of " + nameOftheRecord;
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    var controller = (string) ViewBag.controller;
-    var viewName = "Details";
+    string controller = (string)ViewBag.controller;
+    string viewName = "Details";
+
 }
 <h1 class="h2 top-margin-space">
     <span class="glyphicon glyphicon-print"></span>
@@ -21,50 +24,50 @@
         <div class="col-md-10">
             <div class="btn-group">
                 <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                <a href="@Url.Action("Edit", new {id = Model.FeaturedImageID})" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                <a href="@Url.Action("Edit", new { id = Model.FeaturedImageID })" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
             </div>
         </div>
         <div class="col-md-2">
-            <a href="@Url.Action("Delete", new {id = Model.FeaturedImageID})" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+            <a href="@Url.Action("Delete", new { id = Model.FeaturedImageID })" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>
         </div>
     </div>
     <table class="table table-hover top-margin-space">
         <thead>
-        <tr>
-            <th>Properties</th>
-            <th></th>
-            <th>Values</th>
-        </tr>
+            <tr>
+                <th>Properties</th>
+                <th></th>
+                <th>Values</th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <td class="dev-label-property">
-                @Html.DisplayNameFor(model => model.App.AppName)
-            </td>
-            <td>:</td>
-            <td class="dev-label-value">
-                @Model.App.GetAppUrlWithoutHostName()
-            </td>
-        </tr>
+            <tr>
+                <td class="dev-label-property">
+                    @Html.DisplayNameFor(model => model.App.AppName)
+                </td>
+                <td>:</td>
+                <td class="dev-label-value">
+                    @Model.App.GetAppUrlWithoutHostName()
+                </td>
+            </tr>
 
-        <tr>
-            <td class="dev-label-property">
-                @Html.DisplayNameFor(model => model.User.FirstName)
-            </td>
-            <td>:</td>
-            <td class="dev-label-value">
-                @Html.DisplayFor(model => model.User.FirstName)
-            </td>
-        </tr>
-        <tr>
-            <td class="dev-label-property">
-                @Html.DisplayNameFor(model => model.IsFeatured)
-            </td>
-            <td>:</td>
-            <td class="dev-label-value">
-                @Html.DisplayFor(model => model.IsFeatured)
-            </td>
-        </tr>
+            <tr>
+                <td class="dev-label-property">
+                    @Html.DisplayNameFor(model => model.User.FirstName)
+                </td>
+                <td>:</td>
+                <td class="dev-label-value">
+                    @Html.DisplayFor(model => model.User.FirstName)
+                </td>
+            </tr>
+            <tr>
+                <td class="dev-label-property">
+                    @Html.DisplayNameFor(model => model.IsFeatured)
+                </td>
+                <td>:</td>
+                <td class="dev-label-value">
+                    @Html.DisplayFor(model => model.IsFeatured)
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -72,11 +75,11 @@
         <div class="col-md-10">
             <div class="btn-group">
                 <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                <a href="@Url.Action("Edit", new {id = Model.FeaturedImageID})" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                <a href="@Url.Action("Edit", new { id = Model.FeaturedImageID })" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
             </div>
         </div>
         <div class="col-md-2">
-            <a href="@Url.Action("Delete", new {id = Model.FeaturedImageID})" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+            <a href="@Url.Action("Delete", new { id = Model.FeaturedImageID })" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>
         </div>
     </div>
 </div>

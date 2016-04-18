@@ -2,64 +2,64 @@
 
 @{
     ViewBag.Title = "Adding Advertise Image";
-    string title = ViewBag.Title;
+	string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    var token = Html.AntiForgeryToken();
-    var controller = (string) ViewBag.controller;
-    var viewName = "Create";
+	var token = Html.AntiForgeryToken();
+	string controller = (string)ViewBag.controller;
+	string viewName = "Create";
+
 }
 
 @Html.SamePageLinkWithIcon(title, subtitle, FaIcons.Plus)
 <hr />
-@using (Html.BeginForm(viewName, controller, FormMethod.Post, new {@class = "form-horizontal Create-@ViewBag.Title", role = "form", enctype = "multipart/form-data"})) {
-    <div class="form-horizontal">
-        @token
-        <div class="form-group">
-            <div class="col-md-10 col-md-offset-2">
+@using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form", enctype = "multipart/form-data" })) 
+{
+   <div class="form-horizontal">
+		@token
+		<div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
                 <div class="btn-group">
                     <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                    <div class="inline input-group-btn">
+                    <div class="input-group-btn inline">
                         <button class="btn btn-success" title="Save and create a new one."><i class="glyphicon glyphicon-plus"></i> Create</button>
-                    </div>
-                </div>
+                    </div>                    
+                </div>               
             </div>
         </div>
-        @Html.Partial("_SuccessMessage")
+		@Html.Partial("_SuccessMessage")
 
+		
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-
-        <div class="form-group GalleryCategoryID-main">
-            <div class="controls">
-                <label class="col-md-2 control-label">
-                    @Html.DisplayNameFor(m => m.GalleryCategoryID)<span class="red ">*</span></label>
-                <div class="col-md-10 GalleryCategoryID-combo-div">
-                    @Html.DropDownList("GalleryCategoryID", null, new {@class = "form-control"})
-                    <a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m => m.GalleryCategoryID)." title="Please select @Html.DisplayNameFor(m => m.GalleryCategoryID)." class="tooltip-show">
-                        <span class="description-icon"></span></a>
-                </div>
-            </div>
-        </div>
-
-        @Html.HiddenFor(model => model.Sequence, new {@Value = 0})
+		<div class="form-group GalleryCategoryID-main">
+			<div class="controls">
+				<label class="col-md-2 control-label">@Html.DisplayNameFor(m=> m.GalleryCategoryID)<span class="red ">*</span></label>
+				<div class="col-md-10 GalleryCategoryID-combo-div">
+					@Html.DropDownList("GalleryCategoryID", null, htmlAttributes: new { @class = "form-control" })
+					<a href="#" data-toggle="tooltip" data-original-title="Please select @Html.DisplayNameFor(m=> m.GalleryCategoryID)." title="Please select @Html.DisplayNameFor(m=> m.GalleryCategoryID)." class="tooltip-show"><span class="description-icon"></span></a>
+				</div>
+			</div>
+		</div>
+        
+        @Html.HiddenFor(model => model.Sequence, new { @Value = 0 })
         @Html.EditorFor(model => model.Title)
         @Html.EditorFor(model => model.Subtitle)
-        @Html.EditorFor(model => model.File, "UploaderPlain", new {@single = true})
+        @Html.EditorFor(model => model.File, "UploaderPlain", new { @single = true })
 
         <div class="form-group">
-            <div class="col-md-10 col-md-offset-2">
+            <div class="col-md-offset-2 col-md-10">
                 <div class="btn-group">
                     <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                    <div class="inline input-group-btn">
+                    <div class="input-group-btn inline">
                         <button class="btn btn-success" title="Save and create a new one."><i class="glyphicon glyphicon-plus"></i> Create</button>
-                    </div>
-                </div>
+                    </div>                    
+                </div>               
             </div>
         </div>
     </div>
 }
-@Html.Partial("_ValidatorCommonForm", new ViewDataDictionary {
-    {"token", token}
+@Html.Partial("_ValidatorCommonForm", new ViewDataDictionary { 
+    {"token",token}
 })
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

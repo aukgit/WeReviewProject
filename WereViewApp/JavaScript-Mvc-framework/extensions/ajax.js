@@ -1,6 +1,6 @@
-﻿;
-$.app = $.app || {};;
-$.app.ajax = {
+﻿;$.app = $.app || {};
+
+;$.app.ajax = {
     userName: "UserName",
     email: "Email"
 };

@@ -1,7 +1,6 @@
-﻿;
-$.app = $.app || {};
+﻿;$.app = $.app || {};
 $.app.selectors = {
-    ids: {
+    ids : {
         registerForm: "register-form",
         uploadingContainer: "dev-uploader-container",
         uploadingForm: "dev-uploader-form",

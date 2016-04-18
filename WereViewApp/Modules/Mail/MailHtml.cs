@@ -3,8 +3,12 @@ using WeReviewApp.Models.POCO.Identity;
 
 namespace WeReviewApp.Modules.Mail {
     public class MailHtml {
+        #region Properties
+
+
+        #endregion
         /// <summary>
-        ///     Add the footnote to the stringbuilder
+        /// Add the footnote to the stringbuilder
         /// </summary>
         /// <param name="footerSenderName"></param>
         /// <param name="department"></param>
@@ -37,7 +41,7 @@ namespace WeReviewApp.Modules.Mail {
         }
 
         public static string PasswordResetHtml(ApplicationUser user, string callBackUrl, string footerSenderName = "",
-            string department = "Administration", string body = null) {
+       string department = "Administration", string body = null) {
             var sb = new StringBuilder(100);
             if (body == null) {
                 body = string.Format(DefaultResetAccountBody, callBackUrl, "this reset form");
@@ -129,11 +133,8 @@ namespace WeReviewApp.Modules.Mail {
             return string.Format(StrongTag, style, title, text);
         }
 
-        #region Properties
-
-        #endregion
-
         #region Declaration
+
 
         /// <summary>
         ///     We are very delighted to have you in [a href='{0}' title='{1}']{1}[/a]. [a href='{2}' title='{3}']Here[/a] is the
@@ -144,8 +145,7 @@ namespace WeReviewApp.Modules.Mail {
             "We are very delighted to have you in <a href='{0}' title='{1}'>{1}</a>. <a href='{2}' title='{3}'>Here</a> is the <a href='{2}' title='{3}'>link</a> to active your account. Or you can also copy paste the raw version below to your browser's address bar.<br><br> Raw : {3} <br><br>";
 
         /// <summary>
-        ///     You can reset your password from <a href='{0}' title='{1}'>{1}</a>. Or you can also copy paste the raw version
-        ///     below to your browser's address bar to reset your account. Raw URL: {0}
+        /// You can reset your password from <a href='{0}' title='{1}'>{1}</a>. Or you can also copy paste the raw version below to your browser's address bar to reset your account. Raw URL: {0}
         /// </summary>
         private const string DefaultResetAccountBody =
             "You can reset your password from <a href='{0}' title='{1}'>{1}</a>. Or you can also copy paste the raw version below to your browser's address bar to reset your account.<br><br> Raw URL: {0} <br><br>";

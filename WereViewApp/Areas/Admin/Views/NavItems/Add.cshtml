@@ -1,4 +1,4 @@
-﻿@model NavigationItem
+﻿@model WeReviewApp.Models.POCO.IdentityCustomization.NavigationItem
 
 @{
     ViewBag.Title = "Adding for menu '" + ViewBag.MenuName + "'";
@@ -10,15 +10,16 @@
 
 @Html.SamePageLinkWithIcon(title, subtitle, FaIcons.Plus)
 <hr />
-@using (Html.BeginForm("Add", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new {@class = "form-horizontal Create-@ViewBag.Title", role = "form"})) {
+@using (Html.BeginForm("Add", ViewContext.RouteData.Values["Controller"].ToString(), FormMethod.Post, new { @class = "form-horizontal Create-@ViewBag.Title", role = "form" })) {
+
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
         <div class="form-group">
-            <div class="col-md-10 col-md-offset-2">
+            <div class="col-md-offset-2 col-md-10">
                 <div class="btn-group">
-                    <a href="@Url.Action("List", new {id = ViewBag.NavigationID})" title="List" class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> List</a>
-                    <div class="inline input-group-btn">
+                    <a href="@Url.Action("List", new { id = ViewBag.NavigationID })" title="List" class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> List</a>
+                    <div class="input-group-btn inline">
                         <button title="Save and create new one" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Add</button>
                     </div>
                 </div>
@@ -27,10 +28,10 @@
 
         @Html.Partial("_CreateOrEdit")
         <div class="form-group">
-            <div class="col-md-10 col-md-offset-2">
+            <div class="col-md-offset-2 col-md-10">
                 <div class="btn-group">
-                    <a href="@Url.Action("List", new {id = ViewBag.NavigationID})" title="List" class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> List</a>
-                    <div class="inline input-group-btn">
+                    <a href="@Url.Action("List", new { id = ViewBag.NavigationID })" title="List" class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> List</a>
+                    <div class="input-group-btn inline">
                         <button title="Save and create new one" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Add</button>
                     </div>
                 </div>

@@ -7,9 +7,8 @@
 /// <reference path="../Controllers/programsearch.js" />
 /// <reference path="../jquery-2.1.4-vsdoc.js" />
 /// <reference path="../find-byId.js" />
-;
-$.app = $.app || {};
+; $.app = $.app || {};
 $.app.initialize = $.app.initialize || {};
-$(document).ready(function() {
+$(document).ready(function () {
     $.app.initialize(); // initialize everything
 });

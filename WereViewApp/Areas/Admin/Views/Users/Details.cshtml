@@ -1,9 +1,10 @@
-﻿@model WeReviewApp.Models.POCO.Identity.ApplicationUser
+﻿@using WeReviewApp.Models.POCO.Identity
+@model ApplicationUser
 @{
     ViewBag.Title = "Details of " + Html.DisplayFor(model => model.FirstName);
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    var controller = (string) ViewBag.controller;
+    string controller = (string)ViewBag.controller;
 }
 @Html.SamePageLinkWithIcon(title, subtitle, "fa  fa-print")
 
@@ -14,154 +15,154 @@
         <div class="col-md-12">
             <div class="btn-group">
                 <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                <a href="@Url.Action("ManageRoles", new {id = Model.Id})" title="Mange roles" class="btn btn-success"><span class="glyphicon glyphicon-chevron-down"></span> Manage Role</a>
+                <a href="@Url.Action("ManageRoles", new { id=Model.Id })" title="Mange roles" class="btn btn-success"><span class="glyphicon glyphicon-chevron-down"></span> Manage Role</a>
                 @if (!Model.IsBlocked) {
-                    <a href="@Url.Action("UserBlock", new {id = Model.Id})" title="Block" class="btn btn-danger"><i class="fa fa-square"></i> Block</a>
+                    <a href="@Url.Action("UserBlock", new { id = Model.Id })" title="Block" class="btn btn-danger"><i class="fa fa-square"></i> Block</a>
                 } else {
-                    <a href="@Url.Action("EnableUserBlock", new {id = Model.Id})" title="Enabling" class="btn btn-success"><i class="fa fa-play-circle"></i> Enabling</a>
+                    <a href="@Url.Action("EnableUserBlock", new { id = Model.Id })" title="Enabling" class="btn btn-success"><i class="fa fa-play-circle"></i> Enabling</a>
                 }
             </div>
         </div>
     </div>
     <table class="table table-hover top-margin-space">
         <thead>
-        <tr>
-            <th>Properties</th>
-            <th></th>
-            <th>Values</th>
-        </tr>
+            <tr>
+                <th>Properties</th>
+                <th></th>
+                <th>Values</th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <td class="label-property">
-                User name (login name)
-            </td>
-            <td>:</td>
-            <td class="label-value">
-                @Html.DisplayFor(model => model.UserName)
-            </td>
-        </tr>
-        <tr>
-            <td class="label-property">
-                @Html.DisplayNameFor(model => model.DisplayName)
-            </td>
-            <td>:</td>
-            <td class="label-value">
-                @Html.DisplayFor(model => model.DisplayName)
-            </td>
-        </tr>
-        <tr>
-            <td class="label-property">
-                @Html.DisplayNameFor(model => model.Email)
-            </td>
-            <td>:</td>
-            <td class="label-value">
-                @Html.EmailLink(Model.Email, "Email")
-            </td>
-        </tr>
-        <tr>
-            <td class="label-property">
-                Phone number
-            </td>
-            <td>:</td>
-            <td class="label-value">
-                @Html.PhoneNumberLink(Model.PhoneNumber, "Call")
-            </td>
-        </tr>
-        <tr>
-            <td class="label-property">
-                @Html.DisplayNameFor(model => model.DateOfBirth)
-            </td>
-            <td>:</td>
-            <td class="label-value">
-                @Html.DisplayDate(Model.DateOfBirth)
-            </td>
-        </tr>
-        <tr>
-            <td class="label-property">
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </td>
-            <td>:</td>
-            <td class="label-value">
-                @Html.DisplayDate(Model.CreatedDate)
-            </td>
-        </tr>
-        <tr>
-            <td class="label-property">
-                Guid id
-            </td>
-            <td>:</td>
-            <td class="label-value">
-                @Html.DisplayFor(model => model.GeneratedGuid)
-            </td>
-        </tr>
+            <tr>
+                <td class="label-property">
+                    User name (login name)
+                </td>
+                <td>:</td>
+                <td class="label-value">
+                    @Html.DisplayFor(model => model.UserName)
+                </td>
+            </tr>
+            <tr>
+                <td class="label-property">
+                    @Html.DisplayNameFor(model => model.DisplayName)
+                </td>
+                <td>:</td>
+                <td class="label-value">
+                    @Html.DisplayFor(model => model.DisplayName)
+                </td>
+            </tr>
+            <tr>
+                <td class="label-property">
+                    @Html.DisplayNameFor(model => model.Email)
+                </td>
+                <td>:</td>
+                <td class="label-value">
+                    @Html.EmailLink(Model.Email, "Email")
+                </td>
+            </tr>
+            <tr>
+                <td class="label-property">
+                    Phone number
+                </td>
+                <td>:</td>
+                <td class="label-value">
+                    @Html.PhoneNumberLink(Model.PhoneNumber, "Call")
+                </td>
+            </tr>
+            <tr>
+                <td class="label-property">
+                    @Html.DisplayNameFor(model => model.DateOfBirth)
+                </td>
+                <td>:</td>
+                <td class="label-value">
+                    @Html.DisplayDate(Model.DateOfBirth)
+                </td>
+            </tr>
+            <tr>
+                <td class="label-property">
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </td>
+                <td>:</td>
+                <td class="label-value">
+                    @Html.DisplayDate(Model.CreatedDate)
+                </td>
+            </tr>
+            <tr>
+                <td class="label-property">
+                    Guid id
+                </td>
+                <td>:</td>
+                <td class="label-value">
+                    @Html.DisplayFor(model => model.GeneratedGuid)
+                </td>
+            </tr>
 
-        <tr>
-            <td class="label-property">
-                @Html.DisplayNameFor(model => model.CountryID)
-            </td>
-            <td>:</td>
-            <td class="label-value">
-                @Html.DropDownList("CountryID", (SelectList) ViewBag.CountryID, new {disabled = "disabled", @class = "form-control"})
-            </td>
-        </tr>
-        <tr>
-            <td class="label-property">
+            <tr>
+                <td class="label-property">
+                    @Html.DisplayNameFor(model => model.CountryID)
+                </td>
+                <td>:</td>
+                <td class="label-value">
+                    @Html.DropDownList("CountryID", (SelectList)ViewBag.CountryID, new { disabled = "disabled", @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <td class="label-property">
 
-                @Html.DisplayNameFor(model => model.UserTimeZoneID)
+                    @Html.DisplayNameFor(model => model.UserTimeZoneID)
 
-            </td>
-            <td>:</td>
-            <td class="label-value">
-                @Html.DropDownList("UserTimeZoneID", (SelectList) ViewBag.UserTimeZoneID, new {disabled = "disabled", @class = "form-control "})
-            </td>
-        </tr>
-        <tr>
-            <td class="label-property">
-                @Html.DisplayNameFor(model => model.CountryLanguageID)
-            </td>
-            <td>:</td>
-            <td class="label-value">
-                @Html.DropDownList("CountryLanguageID", (SelectList) ViewBag.CountryLanguageID, new {disabled = "disabled", @class = "form-control "})
-            </td>
-        </tr>
-        <tr>
-            <td class="label-property">
-                Phone number confirmed
-            </td>
-            <td>:</td>
-            <td class="label-value">
-                @Html.DisplayFor(model => model.PhoneNumberConfirmed)
-            </td>
-        </tr>
-        <tr>
-            <td class="label-property">
-                Two factor enabled
-            </td>
-            <td>:</td>
-            <td class="label-value">
-                @Html.DisplayFor(model => model.TwoFactorEnabled)
-            </td>
-        </tr>
+                </td>
+                <td>:</td>
+                <td class="label-value">
+                    @Html.DropDownList("UserTimeZoneID", (SelectList)ViewBag.UserTimeZoneID, new { disabled = "disabled", @class = "form-control " })
+                </td>
+            </tr>
+            <tr>
+                <td class="label-property">
+                    @Html.DisplayNameFor(model => model.CountryLanguageID)
+                </td>
+                <td>:</td>
+                <td class="label-value">
+                    @Html.DropDownList("CountryLanguageID", (SelectList)ViewBag.CountryLanguageID, new { disabled = "disabled", @class = "form-control " })
+                </td>
+            </tr>
+            <tr>
+                <td class="label-property">
+                    Phone number confirmed
+                </td>
+                <td>:</td>
+                <td class="label-value">
+                    @Html.DisplayFor(model => model.PhoneNumberConfirmed)
+                </td>
+            </tr>
+            <tr>
+                <td class="label-property">
+                    Two factor enabled
+                </td>
+                <td>:</td>
+                <td class="label-value">
+                    @Html.DisplayFor(model => model.TwoFactorEnabled)
+                </td>
+            </tr>
 
-        <tr>
-            <td class="label-property">
-                Email Confirmed
-            </td>
-            <td>:</td>
-            <td class="label-value">
-                @Html.DisplayFor(model => model.EmailConfirmed)
-            </td>
-        </tr>
-        <tr>
-            <td class="label-property">
-                @Html.DisplayNameFor(model => model.IsRegistrationComplete)
-            </td>
-            <td>:</td>
-            <td class="label-value">
-                @Html.DisplayFor(model => model.IsRegistrationComplete)
-            </td>
-        </tr>
+            <tr>
+                <td class="label-property">
+                    Email Confirmed
+                </td>
+                <td>:</td>
+                <td class="label-value">
+                    @Html.DisplayFor(model => model.EmailConfirmed)
+                </td>
+            </tr>
+            <tr>
+                <td class="label-property">
+                    @Html.DisplayNameFor(model => model.IsRegistrationComplete)
+                </td>
+                <td>:</td>
+                <td class="label-value">
+                    @Html.DisplayFor(model => model.IsRegistrationComplete)
+                </td>
+            </tr>
 
         </tbody>
     </table>

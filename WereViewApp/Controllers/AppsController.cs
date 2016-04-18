@@ -13,7 +13,7 @@ namespace WeReviewApp.Controllers {
     public class AppsController : AdvanceController {
         #region Declarations
 
-        private readonly Logics _logics = new Logics();
+        private readonly Logics _algorithms = new Logics();
 
         #endregion
 
@@ -27,37 +27,37 @@ namespace WeReviewApp.Controllers {
         [OutputCache(CacheProfile = "Day")]
         public ActionResult Index(int page = 1) {
             HtmlString paginationHtml;
-            var archivedApps = _logics.GetLatestApps(db, true, page, out paginationHtml, false);
+            var archivedApps = _algorithms.GetLatestApps(db, true, page, out paginationHtml, false);
             ViewBag.Title = "Apps";
             ViewBag.Meta = "Latest mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
             ViewBag.Keywords = ViewBag.Meta;
             ViewBag.Apps = archivedApps;
             ViewBag.paginationHtml = paginationHtml;
-            ViewBag.breadcrumbs = _logics.GetBredcrumbsBasedOnCurrentUrl();
+            ViewBag.breadcrumbs = _algorithms.GetBredcrumbsBasedOnCurrentUrl();
             return View("Index");
         }
 
         [OutputCache(CacheProfile = "Day")]
         public ActionResult Latest() {
-            var latest = _logics.GetLatestApps(db, 60, false);
+            var latest = _algorithms.GetLatestApps(db, 60, false);
             ViewBag.Title = "Latest mobile apps";
             ViewBag.Meta = "Latest mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
             ViewBag.Keywords = ViewBag.Meta;
             ViewBag.Apps = latest;
-            ViewBag.breadcrumbs = _logics.GetBredcrumbsBasedOnCurrentUrl();
+            ViewBag.breadcrumbs = _algorithms.GetBredcrumbsBasedOnCurrentUrl();
             return View("Index");
         }
 
         [OutputCache(CacheProfile = "Day")]
         public ActionResult Top() {
-            var top = _logics.GetTopRatedApps(db, 100, false);
+            var top = _algorithms.GetTopRatedApps(db, 100, false);
             ViewBag.Title = "Top 100 mobile apps";
             ViewBag.Meta = "Latest mobile apps, apps review, apple apps, android apps, " + ViewBag.Title;
             ViewBag.Keywords = ViewBag.Meta;
             ViewBag.Apps = top;
             // the reason displaying HomeIcon instead of SearchIcon is that GetTopRatedApps() is common for home page and here
             // and it attaches HomeIcon instead of SearchIcon
-            ViewBag.breadcrumbs = _logics.GetBredcrumbsBasedOnCurrentUrl();
+            ViewBag.breadcrumbs = _algorithms.GetBredcrumbsBasedOnCurrentUrl();
             return View("Index");
         }
 
@@ -84,14 +84,14 @@ namespace WeReviewApp.Controllers {
         //[OutputCache(CacheProfile = "Day", VaryByParam = "platform;platformVersion;category;page")]
         public ActionResult GetByPlatformAndCategory(string platform, double? platformVersion, string category,
             int page = 1) {
-            var apps = _logics.GetAppsFilteredByPlatformAndCategory(platform, platformVersion, category, page, ViewBag,
-                db);
+            var apps = _algorithms.GetAppsFilteredByPlatformAndCategory(platform, platformVersion, category, page,
+                ViewBag, db);
             if (apps != null) {
-                ViewBag.Title = "Apps : " + _logics.GetCurrentUrlWithoutHostNameWithoutSlash();
+                ViewBag.Title = "Apps : " + _algorithms.GetCurrentUrlWithoutHostNameWithoutSlash();
                 ViewBag.Meta = ViewBag.Title;
                 ViewBag.Keywords = ViewBag.Meta;
                 ViewBag.Apps = apps;
-                ViewBag.breadcrumbs = _logics.GetBredcrumbsBasedOnCurrentUrl();
+                ViewBag.breadcrumbs = _algorithms.GetBredcrumbsBasedOnCurrentUrl();
                 return View("Index");
             }
             return View("_AppNotFound");

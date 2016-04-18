@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ImageResizeSetting>
+﻿@model IEnumerable<WeReviewApp.Models.POCO.IdentityCustomization.ImageResizeSetting>
 
 @{
     ViewBag.Title = "ImageResizeSetting";
@@ -27,25 +27,25 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Height)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Width)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Extension)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {id = item.ImageResizeSettingID}) |
-                @Html.ActionLink("Delete", "Delete", new {id = item.ImageResizeSettingID}, new {onclick = "return confirm('Are you sure?')"})
-            </td>
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Height)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Width)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Extension)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ImageResizeSettingID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ImageResizeSettingID }, new {  onclick="return confirm('Are you sure?')" })
+        </td>
+    </tr>
+}
 
 </table>

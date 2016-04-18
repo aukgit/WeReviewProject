@@ -1,23 +1,22 @@
-﻿;
-$.app = $.app || {};;
-$.app.spinner = {
-    id: "loading-bar",
+﻿; $.app = $.app || {};
+; $.app.spinner = {
+    id: 'loading-bar',
     $spinner: [],
     spinnerDisplayTypeId: 1,
     type: {
         HtmlTemplate: 1, // renders spinner from Html element
-        JsTemplate: 2 // render Html by generating Html from javascript.
+        JsTemplate: 2  // render Html by generating Html from javascript.
     },
-    initialize: function() {
+    initialize: function () {
         var self = $.app.spinner;
         self.$spinner = $.byId(self.id);
         if (!$.isFunc($.blockUI)) {
             throw new Error("Spinner requires jQueryUI Block + Animate.css library. Please download and add those to your project.");
         }
     },
-    setMessage: function(tooltipMessage, contentMessage) {
+    setMessage : function (tooltipMessage, contentMessage) {
         /// <summary>
-        ///     Set message on spinner
+        /// Set message on spinner
         /// </summary>
         /// <param name="tooltipMessage">tooltipMessage message</param>
         /// <param name="contentMessage">content message</param>
@@ -35,20 +34,20 @@ $.app.spinner = {
         }
 
         $anchor.attr("title", tooltipMessage)
-            .attr("data-original-title", tooltipMessage);
+               .attr("data-original-title", tooltipMessage);
         $span.attr("data-display", tooltipMessage)
-            .attr("title", tooltipMessage);
+             .attr("title", tooltipMessage);
         if ($.isEmpty(contentMessage) === false) {
             $content.attr("title", contentMessage)
-                .html(contentMessage);
+                    .html(contentMessage);
         } else {
             $content.attr("title", "")
-                .html("");
+                    .html("");
         }
     },
-    quickShow: function($blockingElement, $elementToHide, onBlockExecuteMethod) {
+    quickShow: function ($blockingElement, $elementToHide, onBlockExecuteMethod) {
         /// <summary>
-        ///     Show a spiner with default messages.
+        /// Show a spiner with default messages.
         /// </summary>
         /// <param name="$blockingElement" type="type">Element which to block.</param>
         /// <param name="$elementToHide" type="type">Element which to hide during the display of the spinner.</param>
@@ -56,18 +55,18 @@ $.app.spinner = {
         var self = $.app.spinner;
         self.show(null, null, $blockingElement, $elementToHide, onBlockExecuteMethod);
     },
-    show: function(tooltip, message, $blockingElement, $elementToHide, onBlockExecuteMethod) {
+    show: function (tooltip, message, $blockingElement, $elementToHide, onBlockExecuteMethod) {
         /// <summary>
-        ///     show spinner and block UI
+        /// show spinner and block UI
         /// </summary>
         /// <param name="message" type="type">
-        ///     set message to the loading spinner.
+        /// set message to the loading spinner.
         /// </param>
         /// <param name="$blockingElement" type="type">
-        ///     If any $element is given then UI will only be blocked $element. If none given then whole screen will be blocked.
+        /// If any $element is given then UI will only be blocked $element. If none given then whole screen will be blocked.
         /// </param>
         /// <param name="$elementToHide" type="type">
-        ///     If any $elementToHide is given then this element will be hidden when the UI is blocked.
+        /// If any $elementToHide is given then this element will be hidden when the UI is blocked.
         /// </param>
         var self = $.app.spinner,
             $spinner = self.get();
@@ -88,9 +87,9 @@ $.app.spinner = {
         }
     },
 
-    hide: function($unBlockingElement, $elementToDisplay) {
+    hide: function ($unBlockingElement, $elementToDisplay) {
         /// <summary>
-        ///     hide spinner and unblock the UI
+        /// hide spinner and unblock the UI
         /// </summary>
         /// <param name="$unBlockingElement" type="type"></param>
         /// <param name="$elementToDisplay" type="type"></param>
@@ -107,9 +106,9 @@ $.app.spinner = {
     },
 
 
-    get: function() {
+    get: function () {
         /// <summary>
-        ///     Get the spinner element.
+        /// Get the spinner element.
         /// </summary>
         /// <returns type="">Returns $.app.spinner.$spinner</returns>
         return $.app.spinner.$spinner;

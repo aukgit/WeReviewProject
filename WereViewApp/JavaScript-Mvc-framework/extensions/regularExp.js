@@ -1,5 +1,4 @@
-﻿;
-$.app = $.app || {};;
-$.app.regularExp = {
-    friendlyUrl: "[^A-Za-z0-9_\.~]+"
+﻿;$.app = $.app || {};
+;$.app.regularExp = {
+    friendlyUrl : "[^A-Za-z0-9_\.~]+"
 };

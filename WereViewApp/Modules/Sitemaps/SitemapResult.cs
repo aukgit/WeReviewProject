@@ -11,7 +11,8 @@ namespace WeReviewApp.Modules.Sitemaps {
         private readonly ISitemapGenerator generator;
         private readonly IEnumerable<ISitemapItem> items;
 
-        public SitemapResult(IEnumerable<ISitemapItem> items) : this(items, new SitemapGenerator()) {}
+        public SitemapResult(IEnumerable<ISitemapItem> items) : this(items, new SitemapGenerator()) {
+        }
 
         public SitemapResult(IEnumerable<ISitemapItem> items, ISitemapGenerator generator) {
             this.items = items;

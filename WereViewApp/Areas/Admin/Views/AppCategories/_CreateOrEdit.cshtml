@@ -1,7 +1,9 @@
-﻿@model WeReviewApp.Models.EntityModel.Category
+﻿@using WeReviewApp.Models.EntityModel
+@model Category
 
-<!-- js is written in wereviewapp.js file-->
-<div id="app-category-editing-page" data-ajax-url="@Url.Action()">
-    @Html.EditorFor(model => model.CategoryName)
-    @Html.EditorFor(model => model.Slug)
-</div>
+    <!-- js is written in wereviewapp.js file-->
+    <div id="app-category-editing-page" data-ajax-url="@Url.Action()">
+        @Html.EditorFor(model => model.CategoryName)
+        @Html.EditorFor(model => model.Slug)
+    </div>
+

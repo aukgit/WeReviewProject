@@ -71,7 +71,8 @@ namespace WeReviewApp.BusinessLogics.Admin {
         }
 
         #endregion
- 		#region Blocking app and review
+
+        #region Blocking app and review
 
         public static bool BlockApp(long appId, bool isSendEmailWhenBlockIsSuccessful, WereViewAppEntities db) {
             var app = db.Apps.Find(appId);
@@ -123,7 +124,7 @@ namespace WeReviewApp.BusinessLogics.Admin {
             }
             return false;
         }
-		
+
         #endregion
     }
 }

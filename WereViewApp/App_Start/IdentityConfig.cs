@@ -1,23 +1,24 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using WeReviewApp.Models.Context;
+using WeReviewApp.Models.POCO.Identity;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using WeReviewApp.Models.Context;
-using WeReviewApp.Models.POCO.Identity;
+using SendGrid;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace WeReviewApp {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<ApplicationUser, long> {
+
         #region Constructors
-
         public ApplicationUserManager(IUserStore<ApplicationUser, long> store)
-            : base(store) {}
-
+            : base(store) {
+        }
         #endregion
 
         #region Application UserManager Create
-
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options,
-            IOwinContext context) {
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) {
             var manager = new ApplicationUserManager(new ApplicatonUserStore(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser, long>(manager) {
@@ -28,7 +29,7 @@ namespace WeReviewApp {
             manager.PasswordValidator = new PasswordValidator {
                 RequiredLength = 6,
                 //RequireNonLetterOrDigit = true,
-                RequireDigit = false
+                RequireDigit = true,
                 //RequireLowercase = true,
                 //RequireUppercase = true,
             };
@@ -45,20 +46,16 @@ namespace WeReviewApp {
             //manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null) {
-                manager.UserTokenProvider =
-                    new DataProtectorTokenProvider<ApplicationUser, long>(
-                        dataProtectionProvider.Create("ASP.NET Identity"));
+                manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser, long>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
         }
-
         #endregion
     }
 
     #region Services
 
     #region Email
-
     //public class EmailService : IIdentityMessageService {
     //    public void SendAsync(IdentityMessage message) {
     //        // Plug in your email service here to send an email.
@@ -66,18 +63,17 @@ namespace WeReviewApp {
     //    }
 
     //}  
-
     #endregion
 
     #region SMS
-
     //public class SmsService : IIdentityMessageService {
     //    public void SendAsync(IdentityMessage message) {
 
     //    }
     //} 
-
     #endregion
 
     #endregion
+
+
 }
