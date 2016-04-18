@@ -413,7 +413,7 @@ namespace WeReviewApp.Controllers {
             if (ModelState.IsValid) {
                 var errors = new ErrorCollector();
                 //External Validation.
-                var validator = new DevUserValidator(model, errors, _db);
+                var validator = new DevUserValidator(model, errors, db);
                 var validOtherConditions = validator.ValidateEveryValidations();
                 if (validOtherConditions) {
                     model.UserName = model.UserName.Trim();

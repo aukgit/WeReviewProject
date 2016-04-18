@@ -1,5 +1,6 @@
 ﻿#region using block
 
+using DevMvcComponent.Error;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.EntityModel;
 

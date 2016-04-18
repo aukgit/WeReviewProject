@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.UI;
+using DevMvcComponent.Pagination;
 using WeReviewApp.BusinessLogics;
 using WeReviewApp.BusinessLogics.Admin;
 using WeReviewApp.Controllers;

@@ -2,6 +2,10 @@
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using DevMvcComponent;
+using DevMvcComponent.Error;
+using DevMvcComponent.Mail;
+using DevMvcComponent.Processor;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.IdentityCustomization;
 using WeReviewApp.Modules.Session;

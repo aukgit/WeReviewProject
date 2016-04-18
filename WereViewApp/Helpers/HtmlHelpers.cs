@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using DevMvcComponent.Enums;
+using FontAwesomeIcons;
 using WeReviewApp.Models.POCO.IdentityCustomization;
 using WeReviewApp.Modules.Cache;
 using WeReviewApp.Modules.DevUser;

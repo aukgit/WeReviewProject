@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using DevMvcComponent.Pagination;
 using DevTrends.MvcDonutCaching;
 using WeReviewApp.BusinessLogics.Admin;
 using WeReviewApp.Controllers;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Web;
+using DevMvcComponent;
 using ImageResizer;
 
 namespace WeReviewApp.Modules.Uploads {

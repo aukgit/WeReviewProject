@@ -9,6 +9,8 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using DevMvcComponent;
+using DevMvcComponent.Extensions;
 using DevTrends.MvcDonutCaching;
 using WeReviewApp.Common;
 using WeReviewApp.Models.EntityModel;
@@ -18,6 +20,7 @@ using WeReviewApp.Models.ViewModels;
 using WeReviewApp.Modules.Cache;
 using WeReviewApp.Modules.DevUser;
 using WeReviewApp.Modules.Uploads;
+using DevMvcComponent.Pagination;
 
 namespace WeReviewApp.BusinessLogics {
     public class Logics {

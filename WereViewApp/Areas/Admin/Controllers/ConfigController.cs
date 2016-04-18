@@ -25,7 +25,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
         }
 
         [Authorize]
-        [CheckRegistrationComplete]
+        [ValidateRegistrationComplete]
         public ActionResult CleanSystem() {
             return View();
         }

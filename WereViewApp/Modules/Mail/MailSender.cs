@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using DevMvcComponent;
 
 namespace WeReviewApp.Modules.Mail {
     /// <summary>

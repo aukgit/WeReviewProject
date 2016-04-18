@@ -2,6 +2,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
+using DevMvcComponent;
 
 namespace WeReviewApp.Modules.Cache {
     public class CacheDataInFile {
