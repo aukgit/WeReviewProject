@@ -254,6 +254,7 @@
     <Compile Include="Filter\CheckRegistrationCompleteAttribute.cs" />
     <Compile Include="Filter\HasMinimumRoleAttribute.cs" />
     <Compile Include="Filter\FacebookAccessTokenAttribute.cs" />
+    <Compile Include="Filter\PreventDuplicateCallAttribute.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\CategoryExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackState.cs" />
@@ -278,7 +279,13 @@
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Models\ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="Modules\Constants\TokenPurpose.cs" />
+    <Compile Include="Modules\Extensions\ActionExecutingContextExtension.cs" />
     <Compile Include="Modules\Extensions\GraphApiExtension.cs" />
+    <Compile Include="Modules\Extensions\HttpContextBaseExtension.cs" />
+    <Compile Include="Modules\Extensions\HttpContextExtension.cs" />
+    <Compile Include="Modules\Extensions\HttpSessionStateBaseExtension.cs" />
+    <Compile Include="Modules\Extensions\HttpSessionStateExtension.cs" />
+    <Compile Include="Modules\Extensions\NameValueCollectionExtension.cs" />
     <Compile Include="Modules\Extensions\UrlExtension.cs" />
     <Compile Include="Modules\Extensions\ViewEngine\RenderingView.cs" />
     <Compile Include="Modules\DevUser\UserCache.cs" />
@@ -289,6 +296,10 @@
     <Compile Include="Modules\Sitemaps\SitemapItem.cs" />
     <Compile Include="Modules\Sitemaps\SitemapResult.cs" />
     <Compile Include="Modules\TimeZone\TimeZoneSet.cs" />
+    <Compile Include="Modules\Type\ParametersProfile.cs" />
+    <Compile Include="Modules\Type\ParametersProfileBase.cs" />
+    <Compile Include="Modules\Type\RouteProfile.cs" />
+    <Compile Include="Modules\Type\ShortRouteProfile.cs" />
     <Compile Include="Modules\Validations\DevUserValidator.cs" />
     <Compile Include="Modules\Validations\ValidationMessage.cs" />
     <Compile Include="Modules\Validations\Validator.cs" />
