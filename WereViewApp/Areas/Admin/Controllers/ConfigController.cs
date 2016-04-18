@@ -24,16 +24,12 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return View(coreSetting);
         }
 
-        [Authorize]
-        [ValidateRegistrationComplete]
+        [Authorize, CheckRegistrationComplete]
         public ActionResult CleanSystem() {
             return View();
         }
 
-        [Authorize]
-        [HasMinimumRole(MinimumRole = RoleNames.Admin)]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Authorize, HasMinimumRole(MinimumRole = RoleNames.Admin), HttpPost, ValidateAntiForgeryToken]
         public ActionResult CleanSystem(string clean) {
             if (!string.IsNullOrEmpty(clean) && clean.Equals("Clean")) {
                 var algorithm = new Logics();
@@ -54,8 +50,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Index(CoreSetting coreSetting, string tab) {
             ViewBag.tab = tab;
 

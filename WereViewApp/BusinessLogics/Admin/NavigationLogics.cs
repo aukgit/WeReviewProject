@@ -1,8 +1,8 @@
-using DevMvcComponent;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using DevMvcComponent;
 using WeReviewApp.BusinessLogics.Component;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.IdentityCustomization;
@@ -25,8 +25,8 @@ namespace WeReviewApp.BusinessLogics.Admin {
         /// <returns>Returns true if already same order exist.</returns>
         private bool PlaceOrderToNegativeOnExistingOrderAndMarkAsChanged(NavigationItem changed,
             List<NavigationItem> cachedItems) {
-            var sameOrderItem = cachedItems.FirstOrDefault(n =>
-                n.Ordering == changed.Ordering &&
+            var sameOrderItem = cachedItems.FirstOrDefault(n => 
+                n.Ordering == changed.Ordering && 
                 n.NavigationItemID != changed.NavigationItemID);
             if (sameOrderItem != null) {
                 sameOrderItem.Ordering = -1;
@@ -68,9 +68,7 @@ namespace WeReviewApp.BusinessLogics.Admin {
                 }
             }
             var maxOrder = navigationItemsList.Max(n => n.Ordering);
-            foreach (
-                var changedNavItem in
-                    navigationItemsList.Where(n => n.Ordering <= 0).OrderByDescending(n => n.NavigationItemID)) {
+            foreach (var changedNavItem in navigationItemsList.Where(n=> n.Ordering <= 0).OrderByDescending(n=> n.NavigationItemID)) {
                 changedNavItem.Ordering = ++maxOrder;
             }
             return db.SaveChanges() > -1;

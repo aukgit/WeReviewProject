@@ -5,17 +5,16 @@ using WeReviewApp.Modules.Message;
 
 namespace WeReviewApp.Modules.Validations {
     public abstract class Validator {
-        private const string SuccessValidationMessage = "Validation successful.";
-
-        private const string FailedValidationMessage =
-            "Validation is not successful. Please check the question-mark icon for more information on validation.";
-
-        private static string ValidationExceedJson;
         protected ErrorCollector ErrorCollector;
+        protected delegate bool RunValidation();
         protected List<RunValidation> ValidationCollection;
 
+        private const string SuccessValidationMessage = "Validation successful.";
+        private const string FailedValidationMessage = "Validation is not successful. Please check the question-mark icon for more information on validation.";
+        private static string ValidationExceedJson;
+
         /// <summary>
-        ///     On initialization CollectValidation() is called to collect all the validations.
+        /// On initialization CollectValidation() is called to collect all the validations.
         /// </summary>
         /// <param name="errorCollector"></param>
         /// <param name="capacity"></param>
@@ -38,17 +37,16 @@ namespace WeReviewApp.Modules.Validations {
         }
 
         /// <summary>
-        ///     In this method all the
-        ///     validation methods
-        ///     should be added to the
-        ///     collection via AddValidation() method.
-        ///     Returns true means validation is correct.
+        /// In this method all the  
+        /// validation methods 
+        /// should be added to the 
+        /// collection via AddValidation() method.
+        /// Returns true means validation is correct.
         /// </summary>
         public abstract void CollectValidation();
-
         /// <summary>
-        ///     Run all the validation methods in order and then
-        ///     set the ErrorCollector for the session.
+        /// Run all the validation methods in order and then 
+        /// set the ErrorCollector for the session.
         /// </summary>
         /// <returns>Returns true if no error exist</returns>
         public bool ValidateEveryValidations() {
@@ -92,7 +90,5 @@ namespace WeReviewApp.Modules.Validations {
             }
             return ValidationExceedJson;
         }
-
-        protected delegate bool RunValidation();
     }
 }

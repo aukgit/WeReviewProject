@@ -22,63 +22,6 @@ namespace WeReviewApp.Areas.Admin.Controllers {
         public AppsController()
             : base(true) {}
 
-        // GET: Admin/AppModerate
-        public ActionResult Index(int? page = 1, string search = "") {
-            if (!page.HasValue) {
-                page = 1;
-            }
-            List<App> apps;
-
-            var url = this.CurrentControlerAbsoluteUrl() + "?page=@page";
-            var query = db.Apps.Include(n => n.User).Include(n => n.FeaturedImages);
-
-            if (!string.IsNullOrWhiteSpace(search)) {
-                url += "&search=" + Server.UrlEncode(search);
-                var algorithms = new Logics();
-                query = algorithms.GetSimpleAppSearchResults(query, search);
-                query = query.OrderByDescending(n => n.AppID);
-                apps = GetPagedApps(query, url, page);
-                ViewBag.Search = search;
-            } else {
-                query = query.OrderByDescending(n => n.AppID);
-                apps = GetPagedApps(query, url, page);
-            }
-            return View(apps);
-        }
-
-        #region Send email/ message to Developer
-
-        private void SendEmailToAppDeveloper(ApplicationUser developerUser, AppModerateViewModel model) {
-            var loggedUser = User.GetUser();
-            var loggedUsername = loggedUser.DisplayName;
-            var sb = new StringBuilder(50);
-            MailHtml.AddGreetingsToStringBuilder(developerUser, sb);
-            sb.AppendLine(MailHtml.LineBreak);
-            sb.AppendLine(model.Message);
-            sb.AppendLine(MailHtml.LineBreak);
-            if (model.LikeToHearFromYou) {
-                sb.AppendLine(MailHtml.LineBreak);
-                sb.AppendLine(
-                    MailHtml.GetStrongTag(
-                        "Note: ** We would like to hear back from you. Please send your replies to '" +
-                        AppVar.Setting.OfficeEmail + "' **"));
-                sb.AppendLine(MailHtml.LineBreak);
-            }
-            sb.AppendLine(MailHtml.LineBreak);
-            sb.AppendLine();
-            MailHtml.AddThanksFooterOnStringBuilder(loggedUser.DisplayName, "Administrator", sb);
-            var message = sb.ToString();
-            sb = null;
-            GC.Collect();
-            var subjectToDeveloper = "A message from admin : " + loggedUsername;
-            var subjectToAdmin = "An email sent to : " + developerUser.Email + " [this mail contains the sample]";
-
-            AppVar.Mailer.Send(developerUser.Email, subjectToDeveloper, message);
-            AppVar.Mailer.Send(loggedUser.Email, subjectToAdmin, message);
-        }
-
-        #endregion
-
         #region TempData : Get and set from TempData dictionary to perform temporary operations.
 
         private const string TempAppKey = "app-moderate";
@@ -124,9 +67,9 @@ namespace WeReviewApp.Areas.Admin.Controllers {
                 page = 1;
             }
             apps = apps.OrderByDescending(n => n.AppID);
-            var paginationInfo = new PaginationInfo {
+            var paginationInfo = new PaginationInfo() {
                 ItemsInPage = AppVar.Setting.PageItems,
-                PageNumber = page.Value
+                PageNumber = page.Value,
             };
             var pagedApps = apps.GetPageData(paginationInfo).ToList();
             ViewBag.paginationHtml =
@@ -146,9 +89,9 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             if (apps == null || apps.Count == 0) {
                 return new List<App>();
             }
-            var paginationInfo = new PaginationInfo {
+            var paginationInfo = new PaginationInfo() {
                 ItemsInPage = AppVar.Setting.PageItems,
-                PageNumber = page.Value
+                PageNumber = page.Value,
             };
             var pagedApps = apps.GetPageData(paginationInfo).ToList();
             ViewBag.paginationHtml =
@@ -158,11 +101,35 @@ namespace WeReviewApp.Areas.Admin.Controllers {
 
         #endregion
 
+        // GET: Admin/AppModerate
+        public ActionResult Index(int? page = 1, string search = "") {
+            if (!page.HasValue) {
+                page = 1;
+            }
+            List<App> apps;
+
+            var url = this.CurrentControlerAbsoluteUrl() + "?page=@page";
+            var query = db.Apps.Include(n => n.User).Include(n => n.FeaturedImages);
+
+            if (!string.IsNullOrWhiteSpace(search)) {
+                url += "&search=" + Server.UrlEncode(search);
+                var algorithms = new Logics();
+                query = algorithms.GetSimpleAppSearchResults(query, search);
+                query = query.OrderByDescending(n => n.AppID);
+                apps = GetPagedApps(query, url, page);
+                ViewBag.Search = search;
+            } else {
+                query = query.OrderByDescending(n => n.AppID);
+                apps = GetPagedApps(query, url, page);
+            }
+            return View(apps);
+        }
+
         #region Moderate
 
         // GET: Admin/AppModerate
         public ActionResult Moderate(long id) {
-            var appModerateModel = new AppModerateViewModel {
+            var appModerateModel = new AppModerateViewModel() {
                 AppId = id
             };
 
@@ -218,6 +185,39 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             }
             AppVar.SetErrorStatus(ViewBag, "Sorry last transaction has been failed.");
             return View(model);
+        }
+
+        #endregion
+
+        #region Send email/ message to Developer
+
+        private void SendEmailToAppDeveloper(ApplicationUser developerUser, AppModerateViewModel model) {
+            var loggedUser = User.GetUser();
+            var loggedUsername = loggedUser.DisplayName;
+            var sb = new StringBuilder(50);
+            MailHtml.AddGreetingsToStringBuilder(developerUser, sb);
+            sb.AppendLine(MailHtml.LineBreak);
+            sb.AppendLine(model.Message);
+            sb.AppendLine(MailHtml.LineBreak);
+            if (model.LikeToHearFromYou) {
+                sb.AppendLine(MailHtml.LineBreak);
+                sb.AppendLine(
+                    MailHtml.GetStrongTag(
+                        "Note: ** We would like to hear back from you. Please send your replies to '" +
+                        AppVar.Setting.OfficeEmail + "' **"));
+                sb.AppendLine(MailHtml.LineBreak);
+            }
+            sb.AppendLine(MailHtml.LineBreak);
+            sb.AppendLine();
+            MailHtml.AddThanksFooterOnStringBuilder(loggedUser.DisplayName, "Administrator", sb);
+            var message = sb.ToString();
+            sb = null;
+            GC.Collect();
+            var subjectToDeveloper = "A message from admin : " + loggedUsername;
+            var subjectToAdmin = "An email sent to : " + developerUser.Email + " [this mail contains the sample]";
+
+            AppVar.Mailer.Send(developerUser.Email, subjectToDeveloper, message);
+            AppVar.Mailer.Send(loggedUser.Email, subjectToAdmin, message);
         }
 
         #endregion

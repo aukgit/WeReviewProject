@@ -22,8 +22,11 @@ namespace WeReviewApp.Modules.Role {
         private static ApplicationRoleManager _roleManager;
         private static List<ApplicationRole> _cachesOfUsers = new List<ApplicationRole>(1200);
 
-        public static ApplicationRoleManager Manager {
-            get {
+
+        public static ApplicationRoleManager Manager
+        {
+            get
+            {
                 if (_roleManager == null) {
                     _roleManager = new ApplicationRoleManager(_roleStore);
                 }
@@ -176,6 +179,7 @@ namespace WeReviewApp.Modules.Role {
             return Manager.Roles.Where(n => n.Name.Contains(search)).ToList();
         }
 
+
         public static ApplicationRole GetRole(string roleName) {
             return Manager.Roles.FirstOrDefault(n => n.Name == roleName);
         }
@@ -254,6 +258,7 @@ namespace WeReviewApp.Modules.Role {
             }
             return null;
         }
+
 
         /// <summary>
         ///     Give all related roles to this user.
@@ -440,6 +445,7 @@ namespace WeReviewApp.Modules.Role {
             }
         }
 
+
         /// <summary>
         ///     Check if user in role by user name.
         /// </summary>
@@ -576,6 +582,7 @@ namespace WeReviewApp.Modules.Role {
             }
             return false;
         }
+
 
         /// <summary>
         ///     Faster

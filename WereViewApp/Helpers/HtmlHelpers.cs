@@ -37,7 +37,7 @@ namespace WeReviewApp.Helpers {
             if (isDependOnUserLogState && UserManager.IsAuthenticated()) {
                 cacheName += UserManager.GetCurrentUserName();
             }
-            var cache = (string) AppConfig.Caches.Get(cacheName);
+            var cache = (string)AppConfig.Caches.Get(cacheName);
 
             if (cache != null && !string.IsNullOrWhiteSpace(cache)) {
                 return new HtmlString(cache);
@@ -92,87 +92,6 @@ namespace WeReviewApp.Helpers {
             var backbtn = "<a href='#' data-role='button' class = 'back-button' data-rel='back' data_icon='" + icon +
                           "' " + mini + " >" + buttonName + "</a>";
             return new HtmlString(backbtn);
-        }
-
-        #endregion
-
-        #region Get Uri string or url from UrlHelper
-
-        /// <summary>
-        /// </summary>
-        /// <param name="urlHelper"></param>
-        /// <param name="actionName"></param>
-        /// <param name="controllerName">Null means current controller.</param>
-        /// <param name="routeValues"></param>
-        /// <returns>Returns null if actionName is empty.</returns>
-        public static string GetUriString(this UrlHelper urlHelper, string actionName, string controllerName = null,
-            object routeValues = null) {
-            var uri = string.Empty;
-            var isControllerEmpty = string.IsNullOrWhiteSpace(controllerName);
-            if (string.IsNullOrEmpty(actionName)) {
-                return null;
-            }
-            if (!isControllerEmpty && routeValues == null) {
-                uri = urlHelper.Action(actionName, controllerName);
-            } else if (!isControllerEmpty) {
-                uri = urlHelper.Action(actionName, controllerName, routeValues);
-            } else if (routeValues != null) {
-                uri = urlHelper.Action(actionName, routeValues);
-            } else {
-                uri = urlHelper.Action(actionName);
-            }
-            return uri;
-        }
-
-        #endregion
-
-        #region Generate Hidden Fields with url.
-
-        /// <summary>
-        ///     Returns hidden input html tags for given actionNames parameter.
-        ///     If defaultActionsAdd then must add {"Create", "Edit", "Delete", "Index"} action names internally.
-        ///     Ex : Hidden fields ids and names are case sensitive to "ActionName" + "-url"
-        /// </summary>
-        /// <param name="helper"></param>
-        /// <param name="defaultActionsAdd">
-        ///     If true then must add {"Create", "Edit", "Delete", "Index"} these actions with given
-        ///     params
-        /// </param>
-        /// <param name="controller">Null means current controller.</param>
-        /// <param name="actionNames">
-        ///     Can be null or any action name. If defaultActionsAdd then add default actions {"Create",
-        ///     "Edit", "Delete", "Index"} with it.
-        /// </param>
-        /// <returns>
-        ///     Finally returns a MvcHtmlString with hidden inputs for given action names. For example : "Create" action will
-        ///     create hidden with Create url and named it as "Create-url"
-        /// </returns>
-        public static MvcHtmlString GenerateUrlHiddenInputs(this HtmlHelper helper, bool defaultActionsAdd = true,
-            string controller = null, params string[] actionNames) {
-            var urlHelper = helper.GetUrlHelper();
-            List<string> actionNamesList = null;
-            if (defaultActionsAdd) {
-                if (actionNames == null || actionNames.Length == 0) {
-                    actionNamesList = new List<string>(5) {"Create", "Edit", "Delete", "Index"};
-                } else {
-                    actionNamesList = new List<string>(actionNames) {"Create", "Edit", "Delete", "Index"};
-                }
-            } else {
-                actionNamesList = actionNames.ToList();
-            }
-            var sb = new StringBuilder(actionNamesList.Count + 2);
-
-            for (var i = 0; i < actionNamesList.Count; i++) {
-                string actionName = actionNamesList[i],
-                       url = urlHelper.GetUriString(actionName, controller),
-                       id = actionName + "-url";
-                sb.Append(string.Format("<input type=\"hidden\" value=\"{0}\" id=\"{1}\" name=\"{1}\" />", url, id));
-            }
-            var mvcHtmlString = new MvcHtmlString(sb.ToString());
-            actionNamesList = null;
-            sb = null;
-            GC.Collect();
-            return mvcHtmlString;
         }
 
         #endregion
@@ -323,7 +242,7 @@ namespace WeReviewApp.Helpers {
             var countryOptionsGenerate = "<select class='form-control selectpicker " + classes +
                                          " country-combo' data-live-search='true' name='CountryID' " + otherAttributes +
                                          " title='Country' data-style='btn-success flag-combo fc-af'>";
-            var sb = new StringBuilder(countryOptionsGenerate, countries.Count*7);
+            var sb = new StringBuilder(countryOptionsGenerate, countries.Count * 7);
             foreach (var country in countries) {
                 sb.Append(string.Format("<option class='flag-country-combo flag {0}' title='| {1}' value='{2}'>",
                     country.Alpha2Code.ToLower(), country.DisplayCountryName, country.CountryID));
@@ -393,7 +312,7 @@ namespace WeReviewApp.Helpers {
             var countryOptionsGenerate = "<select class='form-control selectpicker " + classes +
                                          "' data-live-search='true' name='" + htmlName + "' " + otherAttributes +
                                          " title='Choose...' data-style='" + classes + "'>";
-            var dt = CachedQueriedData.GetTable(tableName, connectionType, new[] {valueField, textField});
+            var dt = CachedQueriedData.GetTable(tableName, connectionType, new[] { valueField, textField });
             if (dt != null && dt.Rows.Count > 0) {
                 var sb = new StringBuilder(countryOptionsGenerate, dt.Rows.Count + 10);
                 DataRow row;
@@ -430,9 +349,9 @@ namespace WeReviewApp.Helpers {
                 return input;
             }
             if (isShowElipseDot) {
-                return input.Substring(0, (int) length) + "...";
+                return input.Substring(0, (int)length) + "...";
             }
-            return input.Substring(0, (int) length);
+            return input.Substring(0, (int)length);
         }
 
         public static string Truncate(this HtmlHelper helper, string input, int starting, int length) {
@@ -1012,31 +931,95 @@ namespace WeReviewApp.Helpers {
         #endregion
 
         #region Generate Url Helper
-
         /// <summary>
-        ///     Returns a new Url Helper based on HttpContext.Current.Request.RequestContext
+        /// Returns a new Url Helper based on HttpContext.Current.Request.RequestContext
         /// </summary>
         /// <returns></returns>
         public static UrlHelper GetUrlHelper() {
             return new UrlHelper(HttpContext.Current.Request.RequestContext);
         }
-
         /// <summary>
-        ///     Returns a new Url Helper based on context.Request.RequestContext
+        /// Returns a new Url Helper based on context.Request.RequestContext
         /// </summary>
         /// <returns></returns>
         public static UrlHelper GetUrlHelper(this HttpContext context) {
             return new UrlHelper(context.Request.RequestContext);
         }
-
         /// <summary>
-        ///     Returns a new Url Helper based on HtmlHelper.ViewContext.RequestContext
+        /// Returns a new Url Helper based on HtmlHelper.ViewContext.RequestContext
         /// </summary>
         /// <returns></returns>
         public static UrlHelper GetUrlHelper(this HtmlHelper helper) {
             return new UrlHelper(helper.ViewContext.RequestContext);
         }
+        #endregion
 
+        #region Get Uri string or url from UrlHelper
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="urlHelper"></param>
+        /// <param name="actionName"></param>
+        /// <param name="controllerName">Null means current controller.</param>
+        /// <param name="routeValues"></param>
+        /// <returns>Returns null if actionName is empty.</returns>
+        public static string GetUriString(this UrlHelper urlHelper, string actionName, string controllerName = null, object routeValues = null) {
+            string uri = String.Empty;
+            var isControllerEmpty = string.IsNullOrWhiteSpace(controllerName);
+            if (string.IsNullOrEmpty(actionName)) {
+                return null;
+            }
+            if (!isControllerEmpty && routeValues == null) {
+                uri = urlHelper.Action(actionName, controllerName);
+            } else if (!isControllerEmpty) {
+                uri = urlHelper.Action(actionName, controllerName, routeValues);
+            } else if (routeValues != null) {
+                uri = urlHelper.Action(actionName, routeValues);
+            } else {
+                uri = urlHelper.Action(actionName);
+            }
+            return uri;
+        }
+        #endregion
+
+        #region Generate Hidden Fields with url.
+
+        /// <summary>
+        /// Returns hidden input html tags for given actionNames parameter.
+        /// If defaultActionsAdd then must add {"Create", "Edit", "Delete", "Index"} action names internally.
+        /// Ex : Hidden fields ids and names are case sensitive to "ActionName" + "-url"
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="defaultActionsAdd">If true then must add {"Create", "Edit", "Delete", "Index"} these actions with given params</param>
+        /// <param name="controller">Null means current controller.</param>
+        /// <param name="actionNames">Can be null or any action name. If defaultActionsAdd then add default actions {"Create", "Edit", "Delete", "Index"} with it.</param>
+        /// <returns>Finally returns a MvcHtmlString with hidden inputs for given action names. For example : "Create" action will create hidden with Create url and named it as "Create-url" </returns>
+        public static MvcHtmlString GenerateUrlHiddenInputs(this HtmlHelper helper, bool defaultActionsAdd = true, string controller = null, params string[] actionNames) {
+            var urlHelper = helper.GetUrlHelper();
+            List<string> actionNamesList = null;
+            if (defaultActionsAdd) {
+                if (actionNames == null || actionNames.Length == 0) {
+                    actionNamesList = new List<string>(5) {"Create", "Edit", "Delete", "Index"};
+                } else {
+                    actionNamesList = new List<string>(actionNames) {"Create", "Edit", "Delete", "Index"};
+                }
+            } else {
+                actionNamesList = actionNames.ToList();
+            }
+            var sb = new StringBuilder(actionNamesList.Count + 2);
+
+            for (int i = 0; i < actionNamesList.Count; i++) {
+                string actionName = actionNamesList[i],
+                       url = urlHelper.GetUriString(actionName, controller),
+                       id = actionName + "-url" ;
+                sb.Append(string.Format("<input type=\"hidden\" value=\"{0}\" id=\"{1}\" name=\"{1}\" />", url, id));
+            }
+            var mvcHtmlString = new MvcHtmlString(sb.ToString());
+            actionNamesList = null;
+            sb = null;
+            GC.Collect();
+            return mvcHtmlString;
+        }
         #endregion
     }
 }

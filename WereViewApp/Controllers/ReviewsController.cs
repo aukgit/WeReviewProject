@@ -22,7 +22,7 @@ namespace WeReviewApp.Controllers {
     public class ReviewsController : AdvanceController {
         #region Declarations
 
-        private readonly Logics _logics = new Logics();
+        private readonly Logics algorithms = new Logics();
 
         #endregion
 
@@ -123,7 +123,7 @@ namespace WeReviewApp.Controllers {
                 ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
                     maxNumbersOfPagesShow: 8));
                 ViewBag.user = user;
-                ViewBag.currentUserlikeDislikes = _logics.GetReviewsLikeDislikeBasedOnUser(pagedReviews, db);
+                ViewBag.currentUserlikeDislikes = algorithms.GetReviewsLikeDislikeBasedOnUser(pagedReviews, db);
                 return View("User", pagedReviews);
             }
             return View("_404");
@@ -134,7 +134,7 @@ namespace WeReviewApp.Controllers {
         #region Like
 
         [Authorize]
-        [ValidateRegistrationComplete]
+        [CheckRegistrationComplete]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult Like(long reviewId, long appId) {
@@ -162,7 +162,7 @@ namespace WeReviewApp.Controllers {
             }
 
             db.SaveChanges();
-            _logics.ForceAppReviewToLoad(appId);
+            algorithms.ForceAppReviewToLoad(appId);
             Thread.Sleep(1000);
 
             return Json(new {isDone = result}, "text/html");
@@ -173,7 +173,7 @@ namespace WeReviewApp.Controllers {
         #region Dilsike
 
         [Authorize]
-        [ValidateRegistrationComplete]
+        [CheckRegistrationComplete]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult DisLike(long reviewId, long appId) {
@@ -203,7 +203,7 @@ namespace WeReviewApp.Controllers {
 
             db.SaveChanges();
             Thread.Sleep(1000);
-            _logics.ForceAppReviewToLoad(appId);
+            algorithms.ForceAppReviewToLoad(appId);
             return Json(new {isDone = result}, "text/html");
         }
 
@@ -212,7 +212,7 @@ namespace WeReviewApp.Controllers {
         #region Edit or modify record
 
         [Authorize]
-        [ValidateRegistrationComplete]
+        [CheckRegistrationComplete]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Review review) {
@@ -222,8 +222,8 @@ namespace WeReviewApp.Controllers {
                 db.Entry(review).State = EntityState.Modified;
                 var state = SaveDatabase(ViewStates.Edit, review);
                 if (state) {
-                    _logics.AfterReviewIsSavedFixRatingNReviewCountInApp(review, false, db);
-                    _logics.ForceAppReviewToLoad(review.AppID);
+                    algorithms.AfterReviewIsSavedFixRatingNReviewCountInApp(review, false, db);
+                    algorithms.ForceAppReviewToLoad(review.AppID);
                     return Json(new {isDone = true, msg = "Successful."}, JsonRequestBehavior.AllowGet); // return true;
                 }
             }
@@ -315,7 +315,7 @@ namespace WeReviewApp.Controllers {
             if (isSameUser) {
                 return View("ReviewOwnApp");
             }
-            var review = _logics.GetUserReviewedApp(AppID, db);
+            var review = algorithms.GetUserReviewedApp(AppID, db);
             if (review == null) {
                 // not ever reviewed.
                 var viewOf = ViewTapping(ViewStates.Create);
@@ -349,8 +349,8 @@ namespace WeReviewApp.Controllers {
                 db.Reviews.Add(review);
                 var state = SaveDatabase(ViewStates.Create, review);
                 if (state) {
-                    _logics.AfterReviewIsSavedFixRatingNReviewCountInApp(review, true, db);
-                    _logics.ForceAppReviewToLoad(review.AppID);
+                    algorithms.AfterReviewIsSavedFixRatingNReviewCountInApp(review, true, db);
+                    algorithms.ForceAppReviewToLoad(review.AppID);
                     AppVar.SetSavedStatus(ViewBag, _createdSaved); // Saved Successfully.          
                 }
 

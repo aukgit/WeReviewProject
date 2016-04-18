@@ -56,9 +56,8 @@ namespace WeReviewApp.Modules.Cache {
         /// <param name="obj"></param>
         /// <returns></returns>
         public byte[] ObjectToByteArray(object obj) {
-            if (obj == null) {
+            if (obj == null)
                 return null;
-            }
             var bf = new BinaryFormatter();
             var ms = new MemoryStream();
             bf.Serialize(ms, obj);
@@ -138,6 +137,7 @@ namespace WeReviewApp.Modules.Cache {
                 }
             }).Start();
         }
+
 
         public object ReadObjectFromBinaryFile(string fileNamelocation) {
             fileNamelocation = AppPath + Root + AdditionalRoot + fileNamelocation;
