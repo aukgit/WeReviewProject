@@ -37,7 +37,7 @@ namespace WeReviewApp.Controllers {
 
         #endregion
 
-        #region Call Complete Registration
+        #region Final Registration : Call Complete Registration
 
         public void CallCompleteRegistration(long userId, string primaryRole = "Rookie") {
             UserManager.CompleteRegistration(userId, true, primaryRole);
