@@ -11,6 +11,5 @@ namespace WeReviewApp.Models.ViewModels {
         public bool IsAppExist {
             get { return FoundApps != null && FoundApps.Count > 0; }
         }
-
     }
 }

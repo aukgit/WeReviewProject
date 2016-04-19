@@ -8,40 +8,41 @@ namespace WeReviewApp.Models.ViewModels {
         [Required(ErrorMessage = "User name is a required field.")]
         [Display(Name = "User name", Description = "(ASCII) User name to login. Must be unique. Character should be in between [aA-zZ], don't use space.")]
         [RegularExpression(@"^([A-Za-z]|[A-Za-z0-9_.]+)$", ErrorMessage = "Username shouldn't contain any space or punctuation or any alphanumeric character.")]
-        [StringLength(30)]
-        [MinLength(3)]
+        [StringLength(30, ErrorMessage = "Your username should be a little less.")]
+        [MinLength(3, ErrorMessage = "Your username should be min 3 characters.")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "First name is a required field.")]
         [Display(Name = "First Name", Description = "(ASCII) Character should be in between [aA-zZ], don't use space.")]
         //[RegularExpression("^\\w+", ErrorMessage = "(ASCII)First name shouldn't contain any space or punctuation or any alphanumeric character or any number.")]
-        [StringLength(15)]
-        [MinLength(1)]
+        [StringLength(15, ErrorMessage = "Your first name should be a little less.")]
+        [MinLength(3, ErrorMessage = "Your first name should be properly written.")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Last name is a required field.")]
         [Display(Name = "Last Name", Description = "(ASCII) Character should be in between [aA-zZ], don't use space.")]
-        [RegularExpression("^\\w+$", ErrorMessage = "(ASCII)Last name shouldn't contain any space or punctuation or any alphanumeric character or any number.")]
-        [StringLength(15)]
-        [MinLength(1)]
+        [RegularExpression("^\\w+$", ErrorMessage = "(ASCII) Last name shouldn't contain any space or punctuation or any alphanumeric character or any number.")]
+        [StringLength(15, ErrorMessage = "Your last name should be a little less.")]
+        [MinLength(2, ErrorMessage = "Your last name should be written properly.")]
         public string LastName { get; set; }
 
         [Display(Name = "Role", Description = "Please select your specific role.")]
         public long Role { get; set; }
+		
         [RegularExpression(@"^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$", ErrorMessage = "Please give a valid GUID.")]
         [Display(Name = "Register Code", Description = "It should be a valid Guid. It is related to the roles.")]
-
         public Guid RegistraterCode { get; set; }
 
         //[Required(ErrorMessage = "Phone number is a required field.")]
         [Display(Name = "Phone", Description = "A valid phone number is required.")]
         [RegularExpression("^\\d+$", ErrorMessage = "Phone number should be only number digits(0-9).")]
-        [StringLength(30)]
-        [MinLength(5)]
+        [StringLength(30, ErrorMessage = "Phone number should be less than 25 digits long.")]
+        [MinLength(5, ErrorMessage = "Phone number should be atleast 5 digits long.")]
         public string Phone { get; set; }
-        [Required(ErrorMessage = "(ASCII) Email address is a required field.")]
+        
+		[Required(ErrorMessage = "(ASCII) Email address is a required field.")]
         [EmailAddress]
-        [Display(Name = "Email Address", Description = "(ASCII)A valid email address is required.")]
+        [Display(Name = "Email Address", Description = "(ASCII) A valid email address is required.")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "(ASCII) Password is a required field.")]
