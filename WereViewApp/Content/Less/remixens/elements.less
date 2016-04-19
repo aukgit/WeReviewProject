@@ -1,5 +1,6 @@
 //@import "Global.less";
-
+// LESS Elements 0.9
+// More info at: http://lesselements.com
 .bordered(@top-color: #EEE, @right-color: #EEE, @bottom-color: #EEE, @left-color: #EEE) {
     border-top: solid 1px @top-color;
     border-left: solid 1px @left-color;
@@ -23,12 +24,23 @@
     .rounded(@radius);
 }
 
-.border-radius(@top, @right,@bottom,@left){
-    -webkit-border-radius: @top @right @bottom @left;
-    -moz-border-radius: @top @right @bottom @left;
-    -ms-border-radius: @top @right @bottom @left;
-    border-radius: @top @right @bottom @left; 
-    -ms-background-clip: padding-box;
+.border-rounded-4(@radius: 4px) { 
+    .rounded(@radius);
+}
+.border-radius(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
+  -webkit-border-top-right-radius: @topright;
+  -webkit-border-bottom-right-radius: @bottomright;
+  -webkit-border-bottom-left-radius: @bottomleft;
+  -webkit-border-top-left-radius: @topleft;
+  -moz-border-radius-topright: @topright;
+  -moz-border-radius-bottomright: @bottomright;
+  -moz-border-radius-bottomleft: @bottomleft;
+  -moz-border-radius-topleft: @topleft;
+  border-top-right-radius: @topright;
+  border-bottom-right-radius: @bottomright;
+  border-bottom-left-radius: @bottomleft;
+  border-top-left-radius: @topleft;
+  .background-clip(padding-box);
 }
 
 .opacity(@opacity: 0.5) {
@@ -131,19 +143,36 @@
 
 
 .gradient(@color: #F5F5F5, @start: #EEE, @stop: #FFF) {
-    background: @color;
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, @start), color-stop(1, @stop));
-    background: -ms-linear-gradient(bottom, @start, @stop);
-    background: -moz-linear-gradient(center bottom, @start 0%, @stop 100%);
-    background: -o-linear-gradient(@stop, @start);
-    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@stop,@start));
+  background: @color;
+  background: -webkit-gradient(linear,
+                               left bottom,
+                               left top,
+                               color-stop(0, @start),
+                               color-stop(1, @stop));
+  background: -ms-linear-gradient(bottom,
+                                  @start,
+                                  @stop);
+  background: -moz-linear-gradient(center bottom,
+                                   @start 0%,
+                                   @stop 100%);
+  background: -o-linear-gradient(@stop,
+                                 @start);
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@stop,@start));
 }
-
 .bw-gradient(@color: #F5F5F5, @start: 0, @stop: 255) {
-    background: @color;
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(@start,@start,@start)), color-stop(1, rgb(@stop,@stop,@stop)));
-    background: -ms-linear-gradient(bottom, rgb(@start,@start,@start) 0%, rgb(@stop,@stop,@stop) 100%);
-    background: -moz-linear-gradient(center bottom, rgb(@start,@start,@start) 0%, rgb(@stop,@stop,@stop) 100%);
-    background: -o-linear-gradient(rgb(@stop,@stop,@stop), rgb(@start,@start,@start));
-    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",rgb(@stop,@stop,@stop),rgb(@start,@start,@start)));
+  background: @color;
+  background: -webkit-gradient(linear,
+                               left bottom,
+                               left top,
+                               color-stop(0, rgb(@start,@start,@start)),
+                               color-stop(1, rgb(@stop,@stop,@stop)));
+  background: -ms-linear-gradient(bottom,
+                                  rgb(@start,@start,@start) 0%,
+                                  rgb(@stop,@stop,@stop) 100%);
+  background: -moz-linear-gradient(center bottom,
+                                   rgb(@start,@start,@start) 0%,
+                                   rgb(@stop,@stop,@stop) 100%);
+  background: -o-linear-gradient(rgb(@stop,@stop,@stop),
+                                 rgb(@start,@start,@start));
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",rgb(@stop,@stop,@stop),rgb(@start,@start,@start)));
 }

@@ -19,6 +19,22 @@ namespace WeReviewApp.Modules.Extensions {
 
         #endregion
 
+        #region Generate Parameters profile.
+
+        /// <summary>
+        ///     Can return null if HttpContext is null.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns>Return ParametersProfileBase or null if HttpContext is null.</returns>
+        public static ParametersProfileBase GetParametersProfile(this ActionExecutingContext context) {
+            if (context.HttpContext != null) {
+                return context.HttpContext.GetParametersProfile();
+            }
+            return null;
+        }
+
+        #endregion
+
         #region Getenerate Route profile
 
         /// <summary>
@@ -37,22 +53,6 @@ namespace WeReviewApp.Modules.Extensions {
         /// <returns></returns>
         public static ShortRouteProfile GetShortRouteProfile(this ActionExecutingContext context) {
             return new ShortRouteProfile(context);
-        }
-
-        #endregion
-
-        #region Generate Parameters profile.
-
-        /// <summary>
-        ///     Can return null if HttpContext is null.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns>Return ParametersProfileBase or null if HttpContext is null.</returns>
-        public static ParametersProfileBase GetParametersProfile(this ActionExecutingContext context) {
-            if (context.HttpContext != null) {
-                return context.HttpContext.GetParametersProfile();
-            }
-            return null;
         }
 
         #endregion

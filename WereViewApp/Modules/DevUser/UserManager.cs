@@ -17,8 +17,6 @@ using WeReviewApp.Modules.Session;
 
 namespace WeReviewApp.Modules.DevUser {
     public static class UserManager {
-        public static long user { get; set; }
-
         #region Authentication
 
         public static bool IsAuthenticated() {

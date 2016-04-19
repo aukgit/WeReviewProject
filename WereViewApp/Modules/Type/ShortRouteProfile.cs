@@ -4,9 +4,8 @@ using WeReviewApp.Modules.Extensions;
 
 namespace WeReviewApp.Modules.Type {
     public class ShortRouteProfile {
-        public ShortRouteProfile() {
-            
-        }
+        public ShortRouteProfile() {}
+
         public ShortRouteProfile(ActionExecutingContext context) {
             Action = context.GetAreaName();
             Controller = context.GetControllerName();

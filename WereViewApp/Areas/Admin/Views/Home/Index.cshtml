@@ -1,10 +1,11 @@
-﻿@{
+﻿@model WeReviewApp.Models.ViewModels.AppSummaryViewModel
+@{
     ViewBag.Title = "Admin";
 }
 
 <div class="jumbotron">
     <h1>Administration</h1>
-    <p class="lead">Use links to get friendly.</p>
+    <p class="lead">You have total @Model.TotalApps, last weeks apps @Model.LastWeeksApps , last months apps @Model.LastMonthsApps</p>
     <p>
         <a href="http://developers-organism.com" class="btn btn-lg btn-primary">Learn more &raquo;</a>
     </p>

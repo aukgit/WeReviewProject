@@ -9,6 +9,7 @@ using WeReviewApp.Models.EntityModel;
 namespace WeReviewApp.Controllers {
     //[CompressFilter]
     //[CacheFilter(Duration = 3600)]
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public abstract class AdvanceController : Controller {
         internal readonly WereViewAppEntities db;
         internal ErrorCollector ErrorCollector;

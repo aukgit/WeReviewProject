@@ -3,18 +3,28 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using WeReviewApp.BusinessLogics.Admin;
+using WeReviewApp.Controllers;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.IdentityCustomization;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
     public class NavItemsController : Controller {
+	
+		private readonly NavigationLogics _navigationLogic;
         private readonly ApplicationDbContext db = new ApplicationDbContext();
+        public NavItemsController()
+            : base(true) {
+            _navigationLogic = new NavigationLogics(db);
+        }
 
         private List<NavigationItem> GetItems(int? NavitionID = null) {
+            var navs = db.NavigationItems.OrderBy(n => n.Ordering).ThenByDescending(n => n.NavigationItemID);
+
             if (NavitionID == null) {
-                return db.NavigationItems.ToList();
+                return navs.ToList();
             }
-            return db.NavigationItems.Where(n => n.NavigationID == NavitionID).ToList();
+            return navs.Where(n => n.NavigationID == NavitionID).ToList();
         }
 
         private void AddMenuName(int id) {

@@ -24,7 +24,7 @@ using WeReviewApp.Modules.Mail;
 //using DevTrends.MvcDonutCaching;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
-    [OutputCache(NoStore = true)]
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class FeedbacksController : IndentityController<ApplicationDbContext> {
         #region Constructors
 

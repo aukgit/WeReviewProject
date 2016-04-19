@@ -1,10 +1,12 @@
 ﻿using System.Web.Mvc;
+using System.Web.UI;
 using WeReviewApp.BusinessLogics;
 using WeReviewApp.Common;
 using WeReviewApp.Models.ViewModels;
 using WeReviewApp.Modules.Session;
 
 namespace WeReviewApp.Controllers {
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class SearchController : Controller {
         // GET: Search
         public ActionResult Index() {

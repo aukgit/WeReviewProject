@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using WeReviewApp.Models.EntityModel;
 using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WeReviewApp.Modules.DevUser;
@@ -6,61 +7,10 @@ using WeReviewApp.Modules.Mail;
 
 namespace WeReviewApp.BusinessLogics.Admin {
     public static class ModerationLogics {
-
-        #region Blocking app and review
-
-        public static bool BlockApp(long appId, bool isSendEmailWhenBlockIsSuccessful, WereViewAppEntities db) {
-            var app = db.Apps.Find(appId);
-            app.IsBlocked = true;
-            app.Tags = "none";
-            if (db.SaveChanges() > -1) {
-                if (isSendEmailWhenBlockIsSuccessful) {
-                    string subject = "Your app has been blocked.";
-                    string mailBody = "Sorry! Your app <a href='" + app.GetAbsoluteUrl() + "'>" + app.AppName + "</a> is inappropriate thus blocked.";
-                    SendAsyncEmailToUser(app.PostedByUserID, subject, mailBody);
-                }
-                return true;
-            }
-            return false;
-        }
-        public static bool UnBlockApp(long appId, bool isSendEmailWhenBlockIsSuccessful, WereViewAppEntities db) {
-            var app = db.Apps.Find(appId);
-            app.IsBlocked = false;
-            app.Tags = "none";
-            if (db.SaveChanges() > -1) {
-                if (isSendEmailWhenBlockIsSuccessful) {
-                    string subject = "Your app has been unblocked.";
-                    string mailBody = "Congratulations! Your app <a href='" + app.GetAbsoluteUrl() + "'>" + app.AppName + "</a> is now unblocked.";
-                    SendAsyncEmailToUser(app.PostedByUserID, subject, mailBody);
-                }
-                return true;
-            }
-            return false;
-        }
-
-        public static bool BlockReview(long reviewId, bool isSendEmailWhenBlockIsSuccessful, WereViewAppEntities db, out Review review) {
-            review = db.Reviews.Find(reviewId);
-            var likeDislikes = db.ReviewLikeDislikes.Where(n => n.ReviewID == reviewId);
-            foreach (var likeDislike in likeDislikes) {
-                db.ReviewLikeDislikes.Remove(likeDislike);
-            }
-            db.Reviews.Remove(review);
-            if (db.SaveChanges() > -1) {
-                if (isSendEmailWhenBlockIsSuccessful) {
-                    string subject = "Your review has been removed.";
-                    string mailBody = "Sorry! Your review <q>" + review.Comments + "</q> is inappropriate thus removed.";
-                    SendAsyncEmailToUser(review.UserID, subject, mailBody);
-                }
-                return true;
-            }
-            return false;
-        }
-        #endregion
-
         #region Featured App
 
         /// <summary>
-        /// Returns true when saving is successful.
+        ///     Returns true when saving is successful.
         /// </summary>
         /// <param name="appId"></param>
         /// <param name="isFeatured"></param>
@@ -72,7 +22,7 @@ namespace WeReviewApp.BusinessLogics.Admin {
                 var featured = db.FeaturedImages.FirstOrDefault(n => n.AppID == appId);
                 var user = UserManager.GetCurrentUser();
                 if (featured == null) {
-                    featured = new FeaturedImage() {
+                    featured = new FeaturedImage {
                         AppID = appId,
                         IsFeatured = isFeatured,
                         UserID = user.UserID
@@ -81,7 +31,7 @@ namespace WeReviewApp.BusinessLogics.Admin {
                 } else {
                     featured.IsFeatured = isFeatured;
                     featured.UserID = user.UserID;
-                    db.Entry(featured).State = System.Data.Entity.EntityState.Modified;
+                    db.Entry(featured).State = EntityState.Modified;
                 }
                 var saved = db.SaveChanges() != -1;
                 if (saved && isSendEmailWhenOperationIsSuccessful) {
@@ -97,7 +47,7 @@ namespace WeReviewApp.BusinessLogics.Admin {
                                    app.GetAbsoluteUrl();
                         } else {
                             subject = "Sorry ! " + appDisplayName +
-                                 " has been removed from featured app.";
+                                      " has been removed from featured app.";
                             body = "Hi , <br><br>" + appDisplayName +
                                    "has been removed from our front page featured apps list. Your app url : " +
                                    app.GetAbsoluteUrl();
@@ -112,11 +62,67 @@ namespace WeReviewApp.BusinessLogics.Admin {
         #endregion
 
         #region Quick Async Email to user by Id
+
         public static void SendAsyncEmailToUser(long userId, string subject, string mailBody) {
             var user = UserManager.GetUser(userId);
             var mailer = new MailSender();
             mailer.Send(user.Email, subject, mailBody);
         }
+
+        #endregion
+ 		#region Blocking app and review
+
+        public static bool BlockApp(long appId, bool isSendEmailWhenBlockIsSuccessful, WereViewAppEntities db) {
+            var app = db.Apps.Find(appId);
+            app.IsBlocked = true;
+            app.Tags = "none";
+            if (db.SaveChanges() > -1) {
+                if (isSendEmailWhenBlockIsSuccessful) {
+                    var subject = "Your app has been blocked.";
+                    var mailBody = "Sorry! Your app <a href='" + app.GetAbsoluteUrl() + "'>" + app.AppName +
+                                   "</a> is inappropriate thus blocked.";
+                    SendAsyncEmailToUser(app.PostedByUserID, subject, mailBody);
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public static bool UnBlockApp(long appId, bool isSendEmailWhenBlockIsSuccessful, WereViewAppEntities db) {
+            var app = db.Apps.Find(appId);
+            app.IsBlocked = false;
+            app.Tags = "none";
+            if (db.SaveChanges() > -1) {
+                if (isSendEmailWhenBlockIsSuccessful) {
+                    var subject = "Your app has been unblocked.";
+                    var mailBody = "Congratulations! Your app <a href='" + app.GetAbsoluteUrl() + "'>" + app.AppName +
+                                   "</a> is now unblocked.";
+                    SendAsyncEmailToUser(app.PostedByUserID, subject, mailBody);
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public static bool BlockReview(long reviewId, bool isSendEmailWhenBlockIsSuccessful, WereViewAppEntities db,
+            out Review review) {
+            review = db.Reviews.Find(reviewId);
+            var likeDislikes = db.ReviewLikeDislikes.Where(n => n.ReviewID == reviewId);
+            foreach (var likeDislike in likeDislikes) {
+                db.ReviewLikeDislikes.Remove(likeDislike);
+            }
+            db.Reviews.Remove(review);
+            if (db.SaveChanges() > -1) {
+                if (isSendEmailWhenBlockIsSuccessful) {
+                    var subject = "Your review has been removed.";
+                    var mailBody = "Sorry! Your review <q>" + review.Comments + "</q> is inappropriate thus removed.";
+                    SendAsyncEmailToUser(review.UserID, subject, mailBody);
+                }
+                return true;
+            }
+            return false;
+        }
+		
         #endregion
     }
 }

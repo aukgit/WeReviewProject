@@ -11,7 +11,7 @@ namespace WeReviewApp.Modules.Extensions {
         }
 
         public static string GetAsString(this HttpSessionState pair, string key, string defaultValue = "") {
-            return (string)Get(pair, key, defaultValue);
+            return (string) Get(pair, key, defaultValue);
         }
 
         public static int GetAsInt(this HttpSessionState pair, string key, int defaultValue = 0) {
@@ -66,5 +66,4 @@ namespace WeReviewApp.Modules.Extensions {
             }
         }
     }
-
 }

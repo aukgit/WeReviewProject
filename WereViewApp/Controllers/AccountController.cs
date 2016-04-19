@@ -146,7 +146,6 @@ namespace WeReviewApp.Controllers {
             AppVar.Mailer.Send(user.Email, "Email Confirmation", mailString);
         }
 
-
         [Authorize]
         public async Task<ActionResult> ResendConfirmationMail() {
             var lastSend = Session["last-send"] as DateTime?;
@@ -322,7 +321,7 @@ namespace WeReviewApp.Controllers {
         public ActionResult Login(string returnUrl) {
             if (UserManager.IsAuthenticated()) {
                 var userCache = User.GetNewOrExistingUserCache();
-                if (userCache.IsRegistrationComplete) {
+                if (userCache != null && userCache.IsRegistrationComplete) {
                     return RedirectToActionPermanent("Manage");
                 }
                 return RedirectToActionPermanent("Verify");

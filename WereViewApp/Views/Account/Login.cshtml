@@ -16,13 +16,14 @@
                 <span>
                     Use your personal credentials to login.
                     If you don't have any account please
-                </span> @Html.ActionLinkWithIcon("sign up", "Register", null, null, "", "fa fa-user-plus", "btn btn-success")
+                </span>
+                @Html.ActionLinkWithIcon("sign up", "Register", null, null, "", "fa fa-user-plus", "btn btn-success")
                 <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.EditorFor(m => m.Email, new { @class = "form-control" })
-                @Html.EditorFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                @Html.EditorFor(m => m.Email, new {@class = "form-control"})
+                @Html.EditorFor(m => m.Password, new {@class = "form-control"})
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
+                    <div class="col-md-10 col-md-offset-2">
                         <div class="login-btn-wrapper">
                             <div class="checkbox">
                                 @Html.CheckBoxFor(m => m.RememberMe)

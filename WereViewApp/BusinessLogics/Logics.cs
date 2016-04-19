@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -17,6 +19,7 @@ using WeReviewApp.Models.EntityModel.Structs;
 using WeReviewApp.Models.ViewModels;
 using WeReviewApp.Modules.Cache;
 using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.Uploads;
 
 namespace WeReviewApp.BusinessLogics {
     public class Logics {
