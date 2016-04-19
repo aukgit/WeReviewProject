@@ -1,10 +1,7 @@
 ﻿#region using block
 
-using System;
-using System.IO;
 using FluentScheduler;
 using WeReviewApp.Common;
-using WeReviewApp.Modules.Uploads;
 
 #endregion
 

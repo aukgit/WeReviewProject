@@ -15,7 +15,7 @@
     </label>
 }
 <div class="top-gap"></div>
-<div class="sky-blue f-em-13">
+<div class="f-em-13 sky-blue">
     @if (ViewBag.message == null) {
         <text>You have already registered and your account is created successfully.
             However, it is <strong class="red">not activated yet</strong>,
@@ -26,14 +26,14 @@
 </div>
 @if (ViewBag.message == null) {
     <div class="top-gap"></div>
-    <div class="sky-blue f-em-11">
+    <div class="f-em-11 sky-blue">
         You can also resend your activation code.
     </div>
     <div class="top-gap"></div>
-    using (Html.BeginForm("ResendConfirmationMail", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" })) {
+    using (Html.BeginForm("ResendConfirmationMail", "Account", FormMethod.Post, new {@class = "form-horizontal", role = "form", enctype = "multipart/form-data"})) {
         @*@Html.EditorFor(n => n.Email)*@
         @Html.AntiForgeryToken()
-       <div class="right"> @Html.SubmitButton("Resend", FaIcons.EmailO,"","btn btn-success", false)</div>
+        <div class="right"> @Html.SubmitButton("Resend", FaIcons.EmailO, "", "btn btn-success", false)</div>
     }
 }
 <div class="top-gap-2x"></div>

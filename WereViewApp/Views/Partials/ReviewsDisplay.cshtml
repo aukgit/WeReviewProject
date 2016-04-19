@@ -16,7 +16,7 @@
         @if (Model.Reviews != null && Model.Reviews.Count > 0) {
             foreach (var review in Model.Reviews) {
                 isRecommended = review.IsSuggest ? "is-recommended" : "";
-                animateRightLeft = sequenceOfReview%2 == 0 ? "slideInLeft" : "slideInRight";
+                animateRightLeft = sequenceOfReview % 2 == 0 ? "slideInLeft" : "slideInRight";
                 string disLikeActive = "", likeActive = "";
                 // if this review is liked or disliked by 
                 // this current user [checking]

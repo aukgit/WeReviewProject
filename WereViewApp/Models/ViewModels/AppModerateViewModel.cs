@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using WeReviewApp.Models.EntityModel;
-
 namespace WeReviewApp.Models.ViewModels {
     public class AppModerateViewModel {
         private long? _appId;

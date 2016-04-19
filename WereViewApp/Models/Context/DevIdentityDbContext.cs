@@ -4,6 +4,7 @@ using WeReviewApp.Models.POCO.IdentityCustomization;
 using WeReviewApp.Modules.Extensions.Context;
 
 namespace WeReviewApp.Models.Context {
+
     public class DevIdentityDbContext : DevDbContext {
         public DevIdentityDbContext()
             : base("name=DefaultConnection") {
@@ -18,4 +19,5 @@ namespace WeReviewApp.Models.Context {
 
         public DbSet<ImageResizeSetting> ImageResizeSettings { get; set; }
     }
+
 }

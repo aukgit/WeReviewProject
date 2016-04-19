@@ -4,6 +4,7 @@ using WeReviewApp.Modules.Session;
 
 namespace WeReviewApp.Models.ViewModels {
     public class EmailResendViewModel {
+
         private ApplicationUser _appUser;
         public string Email { get; set; }
 

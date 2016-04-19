@@ -25,9 +25,9 @@ namespace WeReviewApp.BusinessLogics.Admin {
         /// <returns>Returns true if already same order exist.</returns>
         private bool PlaceOrderToNegativeOnExistingOrderAndMarkAsChanged(NavigationItem changed,
             List<NavigationItem> cachedItems) {
-            var sameOrderItem = cachedItems.FirstOrDefault(n => 
-                n.Ordering == changed.Ordering && 
-                n.NavigationItemID != changed.NavigationItemID);
+            var sameOrderItem = cachedItems.FirstOrDefault(n =>
+                                                           n.Ordering == changed.Ordering &&
+                                                           n.NavigationItemID != changed.NavigationItemID);
             if (sameOrderItem != null) {
                 sameOrderItem.Ordering = -1;
                 MarkpNavigationAsChanged(sameOrderItem);
@@ -68,7 +68,8 @@ namespace WeReviewApp.BusinessLogics.Admin {
                 }
             }
             var maxOrder = navigationItemsList.Max(n => n.Ordering);
-            foreach (var changedNavItem in navigationItemsList.Where(n=> n.Ordering <= 0).OrderByDescending(n=> n.NavigationItemID)) {
+			var orderChangingItems = navigationItemsList.Where(n=> n.Ordering <= 0).OrderByDescending(n=> n.NavigationItemID);
+            foreach (var changedNavItem in orderChangingItems) {
                 changedNavItem.Ordering = ++maxOrder;
             }
             return db.SaveChanges() > -1;

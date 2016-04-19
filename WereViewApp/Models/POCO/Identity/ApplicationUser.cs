@@ -10,8 +10,8 @@ using WeReviewApp.Models.DesignPattern.Interfaces;
 using WeReviewApp.Models.POCO.IdentityCustomization;
 
 namespace WeReviewApp.Models.POCO.Identity {
-    public class ApplicationUser : IdentityUser<long, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>,
-        IDevUser {
+    public class ApplicationUser : IdentityUser<long, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>, IDevUser {
+
         #region Generate User
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(ApplicationUserManager manager) {
@@ -39,7 +39,9 @@ namespace WeReviewApp.Models.POCO.Identity {
 
         [Display(Name = "Name")]
         public string DisplayName {
-            get { return FirstName + " " + LastName; }
+            get {
+                return FirstName + " " + LastName;
+            }
         }
 
         //[Required]
@@ -60,7 +62,9 @@ namespace WeReviewApp.Models.POCO.Identity {
         public int? CountryLanguageID { get; set; }
 
         [Display(Name = "Timezone")]
+
         public int? UserTimeZoneID { get; set; }
+
 
         [ForeignKey("UserID")]
         public virtual ICollection<RegisterCodeUserRelation> RegisterCodeUserRelations { get; set; }

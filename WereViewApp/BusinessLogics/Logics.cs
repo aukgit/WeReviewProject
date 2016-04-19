@@ -42,8 +42,9 @@ namespace WeReviewApp.BusinessLogics {
         #endregion
 
         #region Get top users
+
         /// <summary>
-        /// Get top developers usernames
+        ///     Get top developers usernames
         /// </summary>
         /// <param name="db"></param>
         /// <param name="topDevelopersLimit"></param>
@@ -200,17 +201,6 @@ namespace WeReviewApp.BusinessLogics {
                 model.TotalDeveloper = db2.Users.Count();
             }
             return model;
-        }
-
-        #endregion
-
-        #region Remove Cache
-
-        public void RemoveCachingApp(long appId) {
-            RemoveSingleAppFromCacheOfStatic(appId);
-            var userId = UserManager.GetLoggedUserId();
-            var cacheId = CacheNames.EditingApp + appId + "-" + userId;
-            AppConfig.Caches[cacheId] = null;
         }
 
         #endregion
@@ -442,14 +432,14 @@ namespace WeReviewApp.BusinessLogics {
             // convert any given "Hello World v2" =>  "Hello-World"
             var appHyphenUrl = GenerateHyphenUrlString(searchString);
             var appUrlEscapseString = GetUrlStringExceptEscapeSequence(appHyphenUrl);
-                // "Hello World v2" =>  "Hello-World"
+            // "Hello World v2" =>  "Hello-World"
             var urlListOfEscapseString = GetUrlListExceptEscapeSequence(appUrlEscapseString);
-                // list of words from split '-'
+            // list of words from split '-'
 
             var query = apps.Where(app =>
-                urlListOfEscapseString.All(
-                    searchWord =>
-                        app.UrlWithoutEscapseSequence.Contains(searchWord)));
+                                   urlListOfEscapseString.All(
+                                       searchWord =>
+                                       app.UrlWithoutEscapseSequence.Contains(searchWord)));
             return query;
         }
 
@@ -515,9 +505,9 @@ namespace WeReviewApp.BusinessLogics {
                     foreach (var singleValidUrl in validUrlList) {
                         appsSimilarNameAnd = appsSimilarNameAnd
                             .Where(n =>
-                                n.UrlWithoutEscapseSequence.StartsWith(singleValidUrl + "-") ||
-                                n.UrlWithoutEscapseSequence.Contains("-" + singleValidUrl + "-") ||
-                                n.UrlWithoutEscapseSequence.EndsWith("-" + singleValidUrl)
+                                   n.UrlWithoutEscapseSequence.StartsWith(singleValidUrl + "-") ||
+                                   n.UrlWithoutEscapseSequence.Contains("-" + singleValidUrl + "-") ||
+                                   n.UrlWithoutEscapseSequence.EndsWith("-" + singleValidUrl)
                             );
                     }
                 }
@@ -527,23 +517,22 @@ namespace WeReviewApp.BusinessLogics {
                     appsSameName = viewableApps;
                 }
                 AddConditionsForSearch(ref appsSameName, tagIds, rating, platformId);
-                AddOrderingForSuggestions(ref appsSameName, true);
+                AddOrderingForSuggestions(ref appsSameName, isMosRecentOrBasedOnPopularity: true);
                 executeAppsWithSameName = appsSameName.Include(n => n.User).ToList();
 
                 var sameIds = executeAppsWithSameName.Select(n => n.AppID).ToArray();
 
                 AddConditionsForSearch(ref appsSimilarNameAnd, tagIds, rating, platformId);
-                AddOrderingForSuggestions(ref appsSimilarNameAnd, true);
+                AddOrderingForSuggestions(ref appsSimilarNameAnd, isMosRecentOrBasedOnPopularity: true);
                 AddConditionOfRemovingPreviousFoundIDs(ref appsSimilarNameAnd, sameIds, null);
 
-                var getSimilarMax = maxCount/2;
+                var getSimilarMax = maxCount / 2;
 
                 executeAppsWithSimilarNameAnd = appsSimilarNameAnd
                     .Include(n => n.User)
                     .Take(getSimilarMax)
                     .ToList();
-                return MergeSearchResultsLists(executeAppsWithSameName, executeAppsWithSimilarNameAnd, null, null,
-                    maxCount*2);
+                return MergeSearchResultsLists(executeAppsWithSameName, executeAppsWithSimilarNameAnd, null, null, maxCount * 2);
             }
             return null;
         }
@@ -795,9 +784,9 @@ namespace WeReviewApp.BusinessLogics {
                     var categoryId = categoryO.CategoryID;
                     app = CommonVars.StaticAppsList
                                     .FirstOrDefault(n =>
-                                        n.Url.Equals(url) &&
-                                        n.PlatformID == platformId &&
-                                        n.CategoryID == categoryId);
+                                                    n.Url.Equals(url) &&
+                                                    n.PlatformID == platformId &&
+                                                    n.CategoryID == categoryId);
 
                     if (app != null) {
                         // app found in  the static cache.
@@ -811,8 +800,8 @@ namespace WeReviewApp.BusinessLogics {
                             var currentUserRated =
                                 db.Reviews
                                   .FirstOrDefault(n =>
-                                      n.AppID == appId &&
-                                      n.UserID == userId);
+                                                  n.AppID == appId &&
+                                                  n.UserID == userId);
                             if (currentUserRated != null) {
                                 app.CurrentUserRatedAppValue = currentUserRated.Rating;
                             } else {
@@ -829,9 +818,9 @@ namespace WeReviewApp.BusinessLogics {
                     app = GetViewableApps(db) //means not blocked and published
                         .Include(n => n.User)
                         .FirstOrDefault(n =>
-                            n.Url.Equals(url) &&
-                            n.PlatformID == platformId &&
-                            n.CategoryID == categoryId);
+                                        n.Url.Equals(url) &&
+                                        n.PlatformID == platformId &&
+                                        n.CategoryID == categoryId);
                     if (app != null) {
                         // app  found in db.
                         app.Category = categoryO;
@@ -1150,7 +1139,7 @@ namespace WeReviewApp.BusinessLogics {
                 var finalIndex = 0;
                 foreach (var str in list) {
                     var strArray = str.ToCharArray();
-                    int mid = strArray.Length/2,
+                    int mid = strArray.Length / 2,
                         lastIndex = strArray.Length - 1;
                     ToUpper(ref strArray[0]); // uppercase
                     for (var i = 0; i < mid; i++) {
@@ -1198,14 +1187,19 @@ namespace WeReviewApp.BusinessLogics {
                     exist =
                         db.Apps.Any(
                             n =>
-                                n.PlatformVersion == platformVersion && n.CategoryID == categoryId && n.Url == title &&
-                                n.PlatformID == platformId);
+                            n.PlatformVersion == platformVersion &&
+                            n.CategoryID == categoryId &&
+                            n.Url == title &&
+                            n.PlatformID == platformId);
                 } else {
                     exist =
                         db.Apps.Any(
                             n =>
-                                n.AppID != currentAppId && n.PlatformVersion == platformVersion &&
-                                n.CategoryID == categoryId && n.Url == title && n.PlatformID == platformId);
+                            n.AppID != currentAppId &&
+                            n.PlatformVersion == platformVersion &&
+                            n.CategoryID == categoryId &&
+                            n.Url == title &&
+                            n.PlatformID == platformId);
                 }
 
                 if (exist) {
@@ -1274,8 +1268,7 @@ namespace WeReviewApp.BusinessLogics {
 
             builder.Append("<ol class=\"breadcrumb " + styleClass + "\">");
             var length = url.Length;
-            builder.Append("<li><a href=\"" + hostUrl + "\" title=\"" + AppVar.Name +
-                           "\"><i class=\"fa fa-home\"></i></a></li>");
+            builder.Append("<li><a href=\"" + hostUrl + "\" title=\"" + AppVar.Name + "\"><i class=\"fa fa-home\"></i></a></li>");
             string urlUpto,
                    currentDirectory,
                    pointingUrl;
@@ -1433,8 +1426,8 @@ namespace WeReviewApp.BusinessLogics {
             if (apps != null) {
                 var homePageIconOrSearchIconId = GalleryCategoryIDs.HomePageIcon;
                 homePageIconOrSearchIconId = !isFromHomePage
-                    ? GalleryCategoryIDs.SearchIcon
-                    : homePageIconOrSearchIconId;
+                                                 ? GalleryCategoryIDs.SearchIcon
+                                                 : homePageIconOrSearchIconId;
                 GetEmbedImagesWithApp(apps, db, max, homePageIconOrSearchIconId);
             }
             return apps;
@@ -1458,8 +1451,8 @@ namespace WeReviewApp.BusinessLogics {
             if (pagedApps != null && pagedApps.Count > 0) {
                 var homePageIconOrSearchIconId = GalleryCategoryIDs.HomePageIcon;
                 homePageIconOrSearchIconId = !isFromHomePage
-                    ? GalleryCategoryIDs.SearchIcon
-                    : homePageIconOrSearchIconId;
+                                                 ? GalleryCategoryIDs.SearchIcon
+                                                 : homePageIconOrSearchIconId;
                 GetEmbedImagesWithApp(pagedApps, db, (int) AppConfig.Setting.PageItems, homePageIconOrSearchIconId);
             }
 
@@ -1482,16 +1475,16 @@ namespace WeReviewApp.BusinessLogics {
         /// <returns></returns>
         public List<App> GetTopRatedApps(WereViewAppEntities db, int max, bool isFromHomePage = true) {
             var apps = GetViewableApps(db)
-                .Include(n => n.Platform)
-                .Include(n => n.User);
+                        .Include(n => n.Platform)
+                        .Include(n => n.User);
             //isMosRecentOrBasedOnPopularity : false means based on popularity
             AddOrderingForSuggestions(ref apps, false);
             var topRatedApps = apps.Take(max).ToList();
             if (topRatedApps != null) {
                 var homePageIconOrSearchIconId = GalleryCategoryIDs.HomePageIcon;
                 homePageIconOrSearchIconId = !isFromHomePage
-                    ? GalleryCategoryIDs.SearchIcon
-                    : homePageIconOrSearchIconId;
+                                                 ? GalleryCategoryIDs.SearchIcon
+                                                 : homePageIconOrSearchIconId;
 
                 GetEmbedImagesWithApp(topRatedApps, db, max, homePageIconOrSearchIconId);
             }
@@ -1505,7 +1498,7 @@ namespace WeReviewApp.BusinessLogics {
         public List<DisplayGalleryImages> GetAdvertises(WereViewAppEntities db, int max) {
             var galleryDisplays = db.Galleries
                                     .Where(n =>
-                                        n.GalleryCategoryID == GalleryCategoryIDs.Advertise)
+                                           n.GalleryCategoryID == GalleryCategoryIDs.Advertise)
                                     .Take(max)
                                     .AsParallel()
                                     .AsEnumerable()
@@ -1566,10 +1559,10 @@ namespace WeReviewApp.BusinessLogics {
                                               .Include(n => n.App.User)
                                               .Where(n => n.IsFeatured)
                                               .Where(feature =>
-                                                  tagsIds.Any(tagId =>
-                                                      feature.App
-                                                             .TagAppRelations
-                                                             .Any(tagRel => tagRel.TagID == tagId)))
+                                                     tagsIds.Any(tagId =>
+                                                                 feature.App
+                                                                        .TagAppRelations
+                                                                        .Any(tagRel => tagRel.TagID == tagId)))
                                               .ToList();
 
                 if (appsRelatedToHomePage != null) {
@@ -1581,8 +1574,7 @@ namespace WeReviewApp.BusinessLogics {
                     if (apps != null && apps.Count > 0) {
                         GetEmbedImagesWithApp(apps, db, max, GalleryCategoryIDs.SuggestionIcon);
                         return apps;
-                    }
-                    if (apps != null && apps.Count == 0) {
+                    } else if (apps != null && apps.Count == 0) {
                         //appsRelatedToHomePage = db.FeaturedImages
                         //               .Include(n => n.App)
                         //               .Where(n => n.IsFeatured)
@@ -1743,17 +1735,17 @@ namespace WeReviewApp.BusinessLogics {
             // add tag conditions
             AddTagFindingCondition(ref appsNameSimilariesWithAnd, tagIds);
             // add ordering
-            AddOrderingForSuggestions(ref appsNameSimilariesWithAnd, true);
+            AddOrderingForSuggestions(ref appsNameSimilariesWithAnd, isMosRecentOrBasedOnPopularity: true);
 
             var executeSimilarNamesAppsAnd = appsNameSimilariesWithAnd
                 // exclude blocked or not published
-                .Where(n => n.IsPublished && !n.IsBlocked)
-                .Take(CommonVars.SuggestHighestTake)
-                .ToList();
+                                            .Where(n => n.IsPublished && !n.IsBlocked)
+                                            .Take(CommonVars.SuggestHighestTake)
+                                            .ToList();
 
             var similarNameAndQueryIds = executeSimilarNamesAppsAnd
-                .Select(n => n.AppID)
-                .ToArray();
+                                            .Select(n => n.AppID)
+                                            .ToArray();
 
             List<App> executeSimilarAppsPostedByCurrentUser = null;
             long[] usersAppsIds = null;
@@ -1831,10 +1823,10 @@ namespace WeReviewApp.BusinessLogics {
         private void AddTagFindingCondition(ref IQueryable<App> apps, List<long> tagIds) {
             if (tagIds != null) {
                 apps = apps.Where(singleApp =>
-                    tagIds.Any(tagId =>
-                        singleApp
-                            .TagAppRelations
-                            .Any(tagRel => tagRel.TagID == tagId)));
+                                  tagIds.Any(tagId =>
+                                             singleApp
+                                                 .TagAppRelations
+                                                 .Any(tagRel => tagRel.TagID == tagId)));
             }
         }
 
@@ -1869,8 +1861,8 @@ namespace WeReviewApp.BusinessLogics {
             if (similarName != null) {
                 var conditionNumber = CommonVars.SuggestHighestSameAppName;
                 var length = similarName.Count > conditionNumber
-                    ? conditionNumber
-                    : similarName.Count;
+                                 ? conditionNumber
+                                 : similarName.Count;
 
                 for (var i = 0; i < length; i++) {
                     var current = similarName[i];
@@ -1881,8 +1873,8 @@ namespace WeReviewApp.BusinessLogics {
             if (postedByUser != null && apps.Count < CommonVars.SuggestHighestDisplayNumberSuggestions) {
                 var conditionNumber = CommonVars.SuggestHighestFromSameUser;
                 var length = postedByUser.Count > conditionNumber
-                    ? conditionNumber
-                    : postedByUser.Count;
+                                 ? conditionNumber
+                                 : postedByUser.Count;
 
                 for (var i = 0; i < length; i++) {
                     var current = postedByUser[i];
@@ -1895,8 +1887,8 @@ namespace WeReviewApp.BusinessLogics {
             if (almostSimilarNameWithAnd != null && apps.Count < CommonVars.SuggestHighestDisplayNumberSuggestions) {
                 var conditionNumber = CommonVars.SuggestHighestAndSimilarQuery;
                 var length = almostSimilarNameWithAnd.Count > conditionNumber
-                    ? conditionNumber
-                    : almostSimilarNameWithAnd.Count;
+                                 ? conditionNumber
+                                 : almostSimilarNameWithAnd.Count;
 
                 for (var i = 0; i < length; i++) {
                     var current = almostSimilarNameWithAnd[i];
@@ -1909,8 +1901,8 @@ namespace WeReviewApp.BusinessLogics {
             if (almostSimilarNameWithOr != null && apps.Count < CommonVars.SuggestHighestDisplayNumberSuggestions) {
                 var conditionNumber = CommonVars.SuggestHighestOrSimilarQuery;
                 var length = almostSimilarNameWithOr.Count > conditionNumber
-                    ? conditionNumber
-                    : almostSimilarNameWithOr.Count;
+                                 ? conditionNumber
+                                 : almostSimilarNameWithOr.Count;
 
                 for (var i = 0; i < length; i++) {
                     var current = almostSimilarNameWithOr[i];
@@ -2162,10 +2154,6 @@ namespace WeReviewApp.BusinessLogics {
             HttpResponse.RemoveOutputCacheItem("/" + app.GetAppUrlWithoutHostName());
         }
 
-        //public void RemoveOutputCacheReview(App app) {
-        //    HttpResponse.RemoveOutputCacheItem(CommonVars.OUTPUTCAHE_REVIEWSDISPLAY_APPS + app.AppID);
-        //}
-
         public void RemoveOutputCacheSuggested() {
             HttpResponse.RemoveOutputCacheItem(CommonVars.OutputcaheSuggestedApps);
         }
@@ -2196,7 +2184,17 @@ namespace WeReviewApp.BusinessLogics {
             var cacheManager = new OutputCacheManager();
             cacheManager.RemoveItems(controllerName, action, routes);
         }
+        #endregion
 
+        #region Remove Cache
+
+        public void RemoveCachingApp(long appId) {
+            RemoveSingleAppFromCacheOfStatic(appId);
+            var userId = UserManager.GetLoggedUserId();
+            var cacheId = CacheNames.EditingApp + appId + "-" + userId;
+            AppConfig.Caches[cacheId] = null;
+
+        }
         #endregion
     }
 }

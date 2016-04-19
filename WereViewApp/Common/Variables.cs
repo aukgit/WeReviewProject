@@ -26,7 +26,8 @@ namespace WeReviewApp.Common {
         #endregion
 
         #region Notification Types
-        static List<NotificationType> _notificationtypes;
+
+        private static List<NotificationType> _notificationtypes;
 
         public static List<NotificationType> NotificationTypesCache {
             get {
@@ -38,9 +39,7 @@ namespace WeReviewApp.Common {
                 return _notificationtypes;
 
             }
-            set {
-                _notificationtypes = value;
-            }
+            set { _notificationtypes = value; }
         }
 
         #endregion

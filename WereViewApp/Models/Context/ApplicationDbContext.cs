@@ -9,9 +9,8 @@ namespace WeReviewApp.Models.Context {
 
     #region Application DbContext
 
-    public class ApplicationDbContext :
-        IdentityDbContext
-            <ApplicationUser, ApplicationRole, long, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim> {
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, long, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim> {
+
         #region Required Part
 
         public ApplicationDbContext()

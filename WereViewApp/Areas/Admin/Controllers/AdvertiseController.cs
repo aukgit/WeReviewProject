@@ -4,8 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Web;
-using System.Web.Mvc;
 using System.Web.UI;
+using System.Web.Mvc;
 using WeReviewApp.Common;
 using WeReviewApp.Controllers;
 using WeReviewApp.Models.EntityModel;
@@ -78,8 +78,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
                     return true;
                 }
             } catch (Exception ex) {
-                throw new Exception("Message : " + ex.Message + " Inner Message : " +
-                                    ex.InnerException.Message);
+                throw new Exception("Message : " + ex.Message + " Inner Message : " + ex.InnerException.Message);
             }
             return false;
         }

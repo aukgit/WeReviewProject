@@ -216,7 +216,6 @@ namespace WeReviewApp.Modules.DevUser {
             return userCahe;
         }
 
-
         public bool IsInRole(string roleName) {
             ApplicationRole role;
             return IsInRole(roleName, out role);

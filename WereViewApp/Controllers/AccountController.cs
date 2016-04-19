@@ -37,7 +37,7 @@ namespace WeReviewApp.Controllers {
 
         #endregion
 
-        #region Call Complete Registration
+        #region Final Registration : Call Complete Registration
 
         public void CallCompleteRegistration(long userId, string primaryRole = "Rookie") {
             UserManager.CompleteRegistration(userId, true, primaryRole);
@@ -61,13 +61,13 @@ namespace WeReviewApp.Controllers {
         public async Task<ActionResult> LinkLoginCallback() {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
             if (loginInfo == null) {
-                return RedirectToAction("Manage", new {Message = ManageMessageId.Error});
+                return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
             }
             var result = await Manager.AddLoginAsync(User.Identity.GetUserID(), loginInfo.Login);
             if (result.Succeeded) {
                 return RedirectToAction("Manage");
             }
-            return RedirectToAction("Manage", new {Message = ManageMessageId.Error});
+            return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
         }
 
         #endregion
@@ -87,7 +87,7 @@ namespace WeReviewApp.Controllers {
             } else {
                 message = ManageMessageId.Error;
             }
-            return RedirectToAction("Manage", new {Message = message});
+            return RedirectToAction("Manage", new { Message = message });
         }
 
         #endregion
@@ -306,14 +306,14 @@ namespace WeReviewApp.Controllers {
 
         private async Task SignInAsync(ApplicationUser user, bool isPersistent) {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties {IsPersistent = isPersistent},
+            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = isPersistent },
                 await user.GenerateUserIdentityAsync(Manager));
         }
 
         private void SignInProgrammatically(ApplicationUser user, bool isPersistent) {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             var identity = UserManager.Manager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties {IsPersistent = isPersistent}, identity);
+            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = isPersistent }, identity);
         }
 
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
@@ -389,7 +389,7 @@ namespace WeReviewApp.Controllers {
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult Register() {
             if (UserManager.IsAuthenticated()) {
-                return AppVar.GetAuthenticationError("Authentication Failed", "");
+                return AppVar.GetAuthenticationError("You are already authenticated.", "");
             }
             return View();
         }
@@ -472,7 +472,7 @@ namespace WeReviewApp.Controllers {
         public ActionResult ExternalLogin(string provider, string returnUrl) {
             // Request a redirect to the external login provider
             return new ChallengeResult(provider,
-                Url.Action("ExternalLoginCallback", "Account", new {ReturnUrl = returnUrl}));
+                Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
         //
@@ -528,7 +528,8 @@ namespace WeReviewApp.Controllers {
         [ValidateAntiForgeryToken]
         //[CompressFilter(Order = 1)]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model) {
-            var isAlreadySent = !AppVar.IsInTestEnvironment && Session["forget-pass"] != null;
+            var name = "forget-pass-" + model.Email.GetHashCode().ToString();
+            var isAlreadySent = !AppVar.IsInTestEnvironment && Session[name] != null;
             if (!isAlreadySent) {
                 if (ModelState.IsValid) {
                     var user = await Manager.FindByEmailAsync(model.Email);
@@ -540,14 +541,14 @@ namespace WeReviewApp.Controllers {
             } else {
                 ViewBag.message = "You have had already sent a request just few seconds ago. Try again later.";
             }
-            Session["forget-pass"] = "set";
+            Session[name] = "set";
             return View("ForgotPasswordConfirmation");
         }
 
         private async void SendResetPasswordLinkToUser(ApplicationUser user) {
             var code = Manager.GenerateUserToken(TokenPurpose.ResetPassword, user.Id);
             var callbackUrl = Url.Action("ResetPassword", "Account",
-                new {userId = user.Id, email = user.Email, code, guid = user.GeneratedGuid}, Request.Url.Scheme);
+                new { userId = user.Id, email = user.Email, code, guid = user.GeneratedGuid }, Request.Url.Scheme);
             var mailString = MailHtml.PasswordResetHtml(user, callbackUrl);
             AppVar.Mailer.Send(user.Email, "Reset Password", mailString);
         }
@@ -558,7 +559,8 @@ namespace WeReviewApp.Controllers {
 
         [AllowAnonymous]
         public ActionResult ResetPassword(long userId, string email, string code, Guid guid) {
-            var isAlreadySent = !AppVar.IsInTestEnvironment && Session["reset-pass"] != null;
+            var name = "reset-pass-" + guid.GetHashCode().ToString();
+            var isAlreadySent = !AppVar.IsInTestEnvironment && Session[name] != null;
             if (!isAlreadySent) {
                 if (code == null || !Manager.VerifyUserToken(userId, TokenPurpose.ResetPassword, code)) {
                     return View("Error");
@@ -573,7 +575,7 @@ namespace WeReviewApp.Controllers {
                             Code = code,
                             Email = email
                         };
-                        Session["reset-pass"] = "set";
+                        Session[name] = "set";
                         return View(model);
                     }
                 }
@@ -584,10 +586,10 @@ namespace WeReviewApp.Controllers {
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateRegistrationComplete]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model) {
-            if (Session["user-reset-" + model.Email] == null) {
+            var name = "user-reset-" + model.Email.GetHashCode().ToString();
+            if (Session[name] == null) {
                 ApplicationUser user;
                 if (User.IsUserExistInSessionByEmail(model.Email, out user, SessionNames.EmailResetExecute)) {
                     if (ModelState.IsValid) {
@@ -598,7 +600,7 @@ namespace WeReviewApp.Controllers {
                         var token = Manager.GeneratePasswordResetToken(user.Id);
                         var result = await Manager.ResetPasswordAsync(user.Id, token, model.Password);
                         if (result.Succeeded) {
-                            Session["user-reset-" + model.Email] = "reset";
+                            Session[name] = "reset";
                             ViewBag.message = "Your account password has been reset successfully!";
                             return View("ResetPasswordConfirmation");
                         }
@@ -655,7 +657,7 @@ namespace WeReviewApp.Controllers {
                     if (result.Succeeded) {
                         var user = await Manager.FindByIdAsync(User.Identity.GetUserID());
                         await SignInAsync(user, false);
-                        return RedirectToAction("Manage", new {Message = ManageMessageId.ChangePasswordSuccess});
+                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
                     }
                     AddErrors(result);
                 }
@@ -669,7 +671,7 @@ namespace WeReviewApp.Controllers {
                 if (ModelState.IsValid) {
                     var result = await Manager.AddPasswordAsync(User.Identity.GetUserID(), model.NewPassword);
                     if (result.Succeeded) {
-                        return RedirectToAction("Manage", new {Message = ManageMessageId.SetPasswordSuccess});
+                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
                     }
                     AddErrors(result);
                 }
@@ -720,7 +722,7 @@ namespace WeReviewApp.Controllers {
 
         private class ChallengeResult : HttpUnauthorizedResult {
             public ChallengeResult(string provider, string redirectUri)
-                : this(provider, redirectUri, null) {}
+                : this(provider, redirectUri, null) { }
 
             public ChallengeResult(string provider, string redirectUri, string userId) {
                 LoginProvider = provider;
@@ -733,7 +735,7 @@ namespace WeReviewApp.Controllers {
             public string UserId { get; set; }
 
             public override void ExecuteResult(ControllerContext context) {
-                var properties = new AuthenticationProperties {RedirectUri = RedirectUri};
+                var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
                 if (UserId != null) {
                     properties.Dictionary[XsrfKey] = UserId;
                 }
