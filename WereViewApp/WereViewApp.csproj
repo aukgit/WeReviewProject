@@ -243,10 +243,15 @@
   <ItemGroup>
     <Compile Include="App_Start\AppVar.cs" />
     <Compile Include="Areas\Admin\Controllers\AppsController.cs" />
+    <Compile Include="BusinessLogics\Admin\AdminLogics.cs" />
     <Compile Include="BusinessLogics\Admin\ModerationLogics.cs" />
+    <Compile Include="BusinessLogics\Admin\NavigationLogics.cs" />
+    <Compile Include="BusinessLogics\Component\BaseLogicComponent.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\GenericController.cs" />
-    <Compile Include="Controllers\IndentityController.cs" />
+    <Compile Include="Controllers\IdentityController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\PlatformsController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\SearchController.cs" />

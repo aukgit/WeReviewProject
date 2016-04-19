@@ -25,7 +25,7 @@ using WeReviewApp.Modules.Mail;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-    public class FeedbacksController : IndentityController<ApplicationDbContext> {
+    public class FeedbacksController : IdentityController<ApplicationDbContext> {
         #region Constructors
 
         public FeedbacksController()

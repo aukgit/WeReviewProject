@@ -9,10 +9,9 @@ using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.IdentityCustomization;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
-    public class NavItemsController : Controller {
+    public class NavItemsController : IdentityController<ApplicationDbContext> {
 	
 		private readonly NavigationLogics _navigationLogic;
-        private readonly ApplicationDbContext db = new ApplicationDbContext();
         public NavItemsController()
             : base(true) {
             _navigationLogic = new NavigationLogics(db);

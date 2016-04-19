@@ -152,21 +152,7 @@ namespace WeReviewApp.Common {
 
         #endregion
 
-        #region Get Notification type From Cache
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="taskId">NotificationTypeIDs.AppPost</param>
-        /// <returns></returns>
-        public static NotificationType GetNotificationType(byte taskId) {
-            var type = CommonVars.NotificationTypesCache.FirstOrDefault(n => n.NotificationTypeID == taskId);
-
-            return type;
-
-        }
-        #endregion
+ 
         #region Get User Point Values From Cache
 
         /// <summary>
@@ -190,25 +176,26 @@ namespace WeReviewApp.Common {
 
             return point;
         }
+        #endregion
 
         #region Get all upload processors method
         /// <summary>
         /// Return all the upload processors
         /// </summary>
         /// <returns></returns>
-        public static UploadProcessor[] GetAllUploaderProcessor() {
-            if (_uploaderProcessors[0] == null) {
-                _uploaderProcessors[0] = UProcessorGallery;
-                _uploaderProcessors[1] = UProcessorGalleryIcons;
-                _uploaderProcessors[2] = UProcessorSearchIcons;
-                _uploaderProcessors[3] = UProcessorHomeIcons;
-                _uploaderProcessors[4] = UProcessorHomeFeatured;
-                _uploaderProcessors[5] = UProcessorSuggestionIcons;
-                _uploaderProcessors[6] = UProcessorYoutubeCover;
-                _uploaderProcessors[7] = UProcessorAdvertiseImages;
-            }
-            return _uploaderProcessors;
-        } 
+        //public static UploadProcessor[] GetAllUploaderProcessor() {
+        //    //if (_uploaderProcessors[0] == null) {
+        //    //    _uploaderProcessors[0] = UProcessorGallery;
+        //    //    _uploaderProcessors[1] = UProcessorGalleryIcons;
+        //    //    _uploaderProcessors[2] = UProcessorSearchIcons;
+        //    //    _uploaderProcessors[3] = UProcessorHomeIcons;
+        //    //    _uploaderProcessors[4] = UProcessorHomeFeatured;
+        //    //    _uploaderProcessors[5] = UProcessorSuggestionIcons;
+        //    //    _uploaderProcessors[6] = UProcessorYoutubeCover;
+        //    //    _uploaderProcessors[7] = UProcessorAdvertiseImages;
+        //    //}
+        //    //return _uploaderProcessors;
+        //} 
         #endregion
     }
 }

@@ -2,12 +2,14 @@
 
 using System;
 using System.Web.Mvc;
+using System.Web.UI;
 using DevMvcComponent.Error;
 using WeReviewApp.Models.Context;
 
 #endregion
 
 namespace WeReviewApp.Controllers {
+    [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public abstract class IdentityController<TContext> : Controller where TContext : ApplicationDbContext, new() {
         internal readonly TContext db;
         internal ErrorCollector ErrorCollector;
