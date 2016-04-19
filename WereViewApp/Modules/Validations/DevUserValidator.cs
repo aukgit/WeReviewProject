@@ -78,7 +78,7 @@ namespace WeReviewApp.Modules.Validations {
                 // first user is already registered.
                 ApplicationUser user;
                 if (UserManager.IsEmailExist(_viewMdoel.Email)) {
-                    ErrorCollector.AddHigh(MessageConstants.UserNameExist, "", "", "",
+                    ErrorCollector.AddHigh(MessageConstants.EmailExist, "", "", "",
                         MessageConstants.SolutionContactAdmin);
                     return false; // not valid
                 }

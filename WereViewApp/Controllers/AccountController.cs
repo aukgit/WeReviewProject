@@ -528,7 +528,8 @@ namespace WeReviewApp.Controllers {
         [ValidateAntiForgeryToken]
         //[CompressFilter(Order = 1)]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model) {
-            var isAlreadySent = !AppVar.IsInTestEnvironment && Session["forget-pass"] != null;
+            var name = "forget-pass-" + model.Email.GetHashCode().ToString();
+            var isAlreadySent = !AppVar.IsInTestEnvironment && Session[name] != null;
             if (!isAlreadySent) {
                 if (ModelState.IsValid) {
                     var user = await Manager.FindByEmailAsync(model.Email);
@@ -540,7 +541,7 @@ namespace WeReviewApp.Controllers {
             } else {
                 ViewBag.message = "You have had already sent a request just few seconds ago. Try again later.";
             }
-            Session["forget-pass"] = "set";
+            Session[name] = "set";
             return View("ForgotPasswordConfirmation");
         }
 
@@ -558,7 +559,8 @@ namespace WeReviewApp.Controllers {
 
         [AllowAnonymous]
         public ActionResult ResetPassword(long userId, string email, string code, Guid guid) {
-            var isAlreadySent = !AppVar.IsInTestEnvironment && Session["reset-pass"] != null;
+            var name = "reset-pass-" + guid.GetHashCode().ToString();
+            var isAlreadySent = !AppVar.IsInTestEnvironment && Session[name] != null;
             if (!isAlreadySent) {
                 if (code == null || !Manager.VerifyUserToken(userId, TokenPurpose.ResetPassword, code)) {
                     return View("Error");
@@ -573,7 +575,7 @@ namespace WeReviewApp.Controllers {
                             Code = code,
                             Email = email
                         };
-                        Session["reset-pass"] = "set";
+                        Session[name] = "set";
                         return View(model);
                     }
                 }
@@ -584,10 +586,10 @@ namespace WeReviewApp.Controllers {
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateRegistrationComplete]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model) {
-            if (Session["user-reset-" + model.Email] == null) {
+            var name = "user-reset-" + model.Email.GetHashCode().ToString();
+            if (Session[name] == null) {
                 ApplicationUser user;
                 if (User.IsUserExistInSessionByEmail(model.Email, out user, SessionNames.EmailResetExecute)) {
                     if (ModelState.IsValid) {
@@ -598,7 +600,7 @@ namespace WeReviewApp.Controllers {
                         var token = Manager.GeneratePasswordResetToken(user.Id);
                         var result = await Manager.ResetPasswordAsync(user.Id, token, model.Password);
                         if (result.Succeeded) {
-                            Session["user-reset-" + model.Email] = "reset";
+                            Session[name] = "reset";
                             ViewBag.message = "Your account password has been reset successfully!";
                             return View("ResetPasswordConfirmation");
                         }
