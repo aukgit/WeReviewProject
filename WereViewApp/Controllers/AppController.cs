@@ -87,14 +87,14 @@ namespace WeReviewApp.Controllers {
                 var fileName = WereViewStatics.UProcessorGallery.GetOrganizeName(gallery, true);
                 var absPath =
                     WereViewStatics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(
-                        WereViewStatics.UProcessorGallery.GetCombinationOfRootAndAdditionalRoot() + fileName);
+                        WereViewStatics.UProcessorGallery.GetCombinePathWithAdditionalRoots() + fileName);
                 if (FileSys.Exists(absPath)) {
                     FileSys.Delete(absPath);
                 }
 
                 absPath =
                     WereViewStatics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(
-                        WereViewStatics.UProcessorGallery.GetCombinationOfRootAndAdditionalRoot() + fileName);
+                        WereViewStatics.UProcessorGallery.GetCombinePathWithAdditionalRoots() + fileName);
                 if (FileSys.Exists(absPath)) {
                     FileSys.Delete(absPath);
                 }

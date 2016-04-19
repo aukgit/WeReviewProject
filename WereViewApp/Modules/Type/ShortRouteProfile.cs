@@ -11,11 +11,13 @@ namespace WeReviewApp.Modules.Type {
             Controller = context.GetControllerName();
             Area = context.GetAreaName();
         }
+
         public string Controller { get; set; }
         public string Area { get; set; }
         public string Action { get; set; }
+
         /// <summary>
-        /// Get Action + joiner + Controller + joiner + Area
+        ///     Get Action + joiner + Controller + joiner + Area
         /// </summary>
         /// <param name="joiner"></param>
         /// <returns></returns>

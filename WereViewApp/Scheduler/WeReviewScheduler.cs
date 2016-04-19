@@ -16,7 +16,7 @@ namespace WeReviewApp.Scheduler {
                 //string text = DateTime.Now.ToString();
                 //UploadProcessor uploader = new UploadProcessor("");
 
-                //var appPath = uploader.GetCombinationOfRootAndAdditionalRoot();
+                //var appPath = uploader.GetCombinePathWithAdditionalRoots();
 
                 //File.WriteAllText(appPath + "done.txt", text);
             }

@@ -48,7 +48,7 @@ namespace WeReviewApp.Modules.Uploads {
         ///     no ~ telda is included.
         /// </summary>
         /// <returns></returns>
-        public string GetCombinationOfRootAndAdditionalRoot() {
+        public string GetCombinePathWithAdditionalRoots() {
             return RootPath.Remove(0, 1) + AdditionalRoots;
         }
 
@@ -240,7 +240,7 @@ namespace WeReviewApp.Modules.Uploads {
         /// </summary>
         /// <returns></returns>
         public string GetAbsolutePath() {
-            var absolutePath = VirtualPathtoAbsoluteServerPath(GetCombinationOfRootAndAdditionalRoot());
+            var absolutePath = VirtualPathtoAbsoluteServerPath(GetCombinePathWithAdditionalRoots());
             return absolutePath;
         }
 

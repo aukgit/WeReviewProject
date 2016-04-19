@@ -2100,7 +2100,7 @@ namespace WeReviewApp.BusinessLogics {
         #region Clean System : Remove Everything from the system.
 
         private bool RemoveUploadFolderImages(UploadProcessor uploadProcessor) {
-            var folderAbsolutePath = WereViewStatics.UProcessorAdvertiseImages.GetCombinationOfRootAndAdditionalRoot();
+            var folderAbsolutePath = WereViewStatics.UProcessorAdvertiseImages.GetCombinePathWithAdditionalRoots();
             var allFileNames = Directory.GetFiles(folderAbsolutePath);
             var isAllFilesRemoved = true;
             foreach (var fileName in allFileNames) {
