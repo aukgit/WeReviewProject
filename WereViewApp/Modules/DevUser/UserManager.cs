@@ -265,11 +265,11 @@ namespace WeReviewApp.Modules.DevUser {
         public static ApplicationUser GetUserFromSession() {
             var userSession = HttpContext.Current.Session[SessionNames.User];
             if (userSession != null) {
-                return (ApplicationUser)userSession;
+                return (ApplicationUser) userSession;
             }
             userSession = HttpContext.Current.Session[SessionNames.LastUser];
             if (userSession != null) {
-                return (ApplicationUser)userSession;
+                return (ApplicationUser) userSession;
             }
             return null;
         }
@@ -280,7 +280,7 @@ namespace WeReviewApp.Modules.DevUser {
                 return user;
             }
             return null;
-            //user will give invalid result, because it might the previous user which credentials doesn;t match.
+            // user will give invalid result, because it might the previous user which credentials doesn;t match.
         }
 
         public static ApplicationUser GetUserFromSession(string username) {

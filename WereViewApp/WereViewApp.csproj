@@ -271,6 +271,7 @@
     <Compile Include="Models\POCO\IdentityCustomization\FeedbackCategory.cs" />
     <Compile Include="Models\POCO\Structs\FeedbackCategoryIDs.cs" />
     <Compile Include="Models\ViewModels\AppModerateViewModel.cs" />
+    <Compile Include="Models\ViewModels\AppSummaryViewModel.cs" />
     <Compile Include="Models\ViewModels\EmailResendViewModel.cs" />
     <Compile Include="Models\ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />

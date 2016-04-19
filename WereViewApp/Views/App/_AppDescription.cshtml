@@ -1,11 +1,11 @@
 ﻿@model WeReviewApp.Models.EntityModel.App
 @{
-    bool isFrist = true;
-    string[] tagsList = Model.Tags != null ? @Model.Tags.Split(',') : null;
-    string publishDate = Html.DisplayDateTime(Model.PostedByUserID, Model.CreatedDate, DateTimeFormatType.Date, addTimeZoneString: true);
-    string appName = Model.AppName;
-    string platformSubtitle = Model.Platform.PlatformName + " mobile apps";
-    string softwareUrl = AppVar.Url; //we review app
+    var isFrist = true;
+    var tagsList = Model.Tags != null ? @Model.Tags.Split(',') : null;
+    var publishDate = Html.DisplayDateTime(Model.PostedByUserID, Model.CreatedDate, DateTimeFormatType.Date, addTimeZoneString: true);
+    var appName = Model.AppName;
+    var platformSubtitle = Model.Platform.PlatformName + " mobile apps";
+    var softwareUrl = AppVar.Url; //we review app
 }
 <div class="app-description seo-optimize" title="@appName description">
     <span itemprop="description">@Html.Truncate(Model.Description, 200, false)</span>
@@ -46,4 +46,3 @@
     </div>
     <div class="clear"></div>
 </div>
-

@@ -7,9 +7,7 @@ using WeReviewApp.Models.POCO.Identity;
 using WeReviewApp.Modules.Role;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
-    public class RolesController : Controller {
-        private readonly ApplicationDbContext _db = new ApplicationDbContext();
-
+    public class RolesController : IdentityController<ApplicationDbContext> {
         public ActionResult Index() {
             var roles = RoleManager.GetRoles();
             return View(roles);
@@ -28,8 +26,8 @@ namespace WeReviewApp.Areas.Admin.Controllers {
         [HttpPost]
         public ActionResult Create(ApplicationRole role) {
             if (ModelState.IsValid) {
-                _db.Entry(role).State = EntityState.Added;
-                if (_db.SaveChanges() > -1) {
+                db.Entry(role).State = EntityState.Added;
+                if (db.SaveChanges() > -1) {
                     RoleManager.ResetManager();
                     return RedirectToAction("Index");
                 }
@@ -49,8 +47,8 @@ namespace WeReviewApp.Areas.Admin.Controllers {
         [HttpPost]
         public ActionResult Edit(ApplicationRole role) {
             if (ModelState.IsValid) {
-                _db.Entry(role).State = EntityState.Modified;
-                if (_db.SaveChanges() > -1) {
+                db.Entry(role).State = EntityState.Modified;
+                if (db.SaveChanges() > -1) {
                     RoleManager.ResetManager();
                     return RedirectToAction("Index");
                 }

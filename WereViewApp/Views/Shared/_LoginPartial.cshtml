@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 @{
-    string username = User.Identity.GetUserName();
+    var username = User.Identity.GetUserName();
 }
 @if (Request.IsAuthenticated && User.IsRegistrationComplete()) {
     <li>
@@ -20,7 +20,7 @@
             </li>
             @Html.GetMenu("AppPost")
             <li title="Sign out">
-                @using (Html.BeginForm("SignOut", "Account", new{area=""},FormMethod.Post, new { @id = "logoutForm"})) {
+                @using (Html.BeginForm("SignOut", "Account", new {area = ""}, FormMethod.Post, new {@id = "logoutForm"})) {
                     @Html.AntiForgeryToken()
                     <a href="javascript:document.getElementById('logoutForm').submit()">Sign out</a>
                 }

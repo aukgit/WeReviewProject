@@ -2,12 +2,12 @@
 @{
     var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
-        propLower = prop.ToLower(),
-        styleProperty = propLower,
-        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        templateName = "rating-10-b",
-        description = ViewData.ModelMetadata.Description;
+           prop = ViewData.ModelMetadata.PropertyName,
+           propLower = prop.ToLower(),
+           styleProperty = propLower,
+           displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+           templateName = "rating-10-b",
+           description = ViewData.ModelMetadata.Description;
     var htmlAttributes = new RouteValueDictionary();
     if (displayName == null) {
         displayName = ViewData.ModelMetadata.PropertyName;
@@ -74,13 +74,14 @@
         <label class="@ViewBag.labelColumn control-label" for="@styleProperty">
             @displayName
             @if (description != null) {
-                <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show"><span class="fa fa-question font-size-22 glyphicon-top-fix almost-white"></span></a>
+                <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">
+                    <span class="almost-white fa fa-question font-size-22 glyphicon-top-fix"></span></a>
             }
             <span class="red">@isRequiredStar</span>
         </label>
         <div class="@ViewBag.textColumn form-input @styleProperty" data-prop="@styleProperty">
             @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
-            @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
+            @Html.ValidationMessageFor(m => m, null, new {@class = "invalid-input"})
         </div>
     </div>
 </div>

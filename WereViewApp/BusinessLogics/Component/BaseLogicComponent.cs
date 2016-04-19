@@ -69,10 +69,10 @@ namespace WeReviewApp.BusinessLogics.Component {
                 WeReviewDb = weReviewDb;
             }
 
-            var dbType = typeof (TContext);
-            if (dbType == typeof (WereViewAppEntities)) {
+            var dbType = typeof(TContext);
+            if (dbType == typeof(WereViewAppEntities)) {
                 db = weReviewDb as TContext;
-            } else if (dbType == typeof (ApplicationDbContext)) {
+            } else if (dbType == typeof(ApplicationDbContext)) {
                 db = identityDb as TContext;
             }
 

@@ -2,14 +2,13 @@
 @{
     var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
-        propLower = prop.ToLower(),
-        styleProperty = propLower,
-        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        description = ViewData.ModelMetadata.Description,
-        templateName = "ckeditor";
+           prop = ViewData.ModelMetadata.PropertyName,
+           propLower = prop.ToLower(),
+           styleProperty = propLower,
+           displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+           description = ViewData.ModelMetadata.Description,
+           templateName = "ckeditor";
     var htmlAttributes = new RouteValueDictionary();
-
 
     if (ViewBag.@class != null) {
         htmlAttributes.Add("class", "form-control ckeditor-enabled " + ViewBag.@class);
@@ -65,7 +64,7 @@
         </label>
         <div class="@ViewBag.textColumn form-input @styleProperty" data-prop="@styleProperty">
             @Html.TextArea("", htmlAttributes)
-            @Html.ValidationMessageFor(m => m, null, new { @class = "table invalid-input" })
+            @Html.ValidationMessageFor(m => m, null, new {@class = "table invalid-input"})
         </div>
     </div>
 </div>

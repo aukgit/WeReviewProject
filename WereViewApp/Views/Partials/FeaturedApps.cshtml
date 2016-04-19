@@ -1,6 +1,5 @@
-﻿@using WeReviewApp.Models.EntityModel
-@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
-@model List<App>
+﻿@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
+@model List<WeReviewApp.Models.EntityModel.App>
 @{
     Layout = null;
 }
@@ -16,9 +15,9 @@
             </div>
             <div class="app-suggested-list-items featured-apps-list-items" title="featured apps of @AppVar.Name">
                 @foreach (var app in Model) {
-                    string url = app.GetAbsoluteUrl();
-                    Platform platform = @app.GetPlatform();
-                    string platformSubtitle = platform.PlatformName + " mobile apps";
+                    var url = app.GetAbsoluteUrl();
+                    var platform = @app.GetPlatform();
+                    var platformSubtitle = platform.PlatformName + " mobile apps";
                     <a class="app-box" href="@url" title="@app.AppName" itemscope itemtype="http://schema.org/SoftwareApplication">
                         <img class="app-icon" itemprop="image" src="@app.SuggestionIconLocation" alt="@app.AppName" />
                         <div class="app-description-wrapper">

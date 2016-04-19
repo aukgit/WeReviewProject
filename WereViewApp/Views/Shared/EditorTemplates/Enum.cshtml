@@ -1,16 +1,16 @@
 @model object
 @{
-    bool isRequired = ViewData.ModelMetadata.IsRequired;
+    var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
-        propLower = prop.ToLower(),
-        styleProperty = propLower,
-        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        description = ViewData.ModelMetadata.Description,
-        templateName = "enum";
+           prop = ViewData.ModelMetadata.PropertyName,
+           propLower = prop.ToLower(),
+           styleProperty = propLower,
+           displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+           description = ViewData.ModelMetadata.Description,
+           templateName = "enum";
 
     var htmlAttributes = new RouteValueDictionary();
-    
+
     if (ViewBag.@class != null) {
         htmlAttributes.Add("class", "form-control " + ViewBag.@class);
     } else {
@@ -31,7 +31,7 @@
         } else {
             htmlAttributes.Add("placeholder", "[" + displayName + "]");
         }
-    }   
+    }
     if (ViewBag.label != null) {
         displayName = ViewBag.label;
     }
@@ -54,13 +54,13 @@
             @displayName<span class="red">@isRequiredStar</span>
         </label>
         <div class="@ViewBag.textColumn form-input @styleProperty" data-prop="@styleProperty">
-            @Html.EnumDropDownListFor(m => m, new { @class = "form-control" })
+            @Html.EnumDropDownListFor(m => m, new {@class = "form-control"})
             @if (description != null) {
                 <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">
                     <span class="description-icon"></span>
                 </a>
             }
-            @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
+            @Html.ValidationMessageFor(m => m, null, new {@class = "invalid-input"})
         </div>
     </div>
 </div>

@@ -28,7 +28,7 @@ namespace WeReviewApp.Modules.Session {
             var nameOfSession = Validator + methodName;
             var value = HttpContext.Current.Session[nameOfSession];
             if (isSessionExist && value != null) {
-                var count = (int)value;
+                var count = (int) value;
                 if (count <= maxTry) {
                     HttpContext.Current.Session[nameOfSession] = ++count;
                     return false;

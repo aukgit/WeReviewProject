@@ -3,17 +3,16 @@
 @{
     var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
-        propLower = prop.ToLower(),
-        styleProperty = propLower,
-        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        description = ViewData.ModelMetadata.Description,
-        templateName = "httppostedfilebase";
+           prop = ViewData.ModelMetadata.PropertyName,
+           propLower = prop.ToLower(),
+           styleProperty = propLower,
+           displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+           description = ViewData.ModelMetadata.Description,
+           templateName = "httppostedfilebase";
     var htmlAttributes = new RouteValueDictionary();
     if (displayName == null) {
         displayName = ViewData.ModelMetadata.PropertyName;
     }
-
 
     if (ViewBag.data_id != null) {
         ViewBag.data_id_val = ViewBag.data_id;
@@ -108,7 +107,7 @@
                     <label data-id="@ViewBag.data_id_val" data-label-file-uploaded="true" class="label label-success file-uploaded-notify-label-@ViewBag.data_id_val" data-max-upload-count="@ViewBag.maxUpload" data-uploaded-count="@ViewBag.uploadedFiles" data-upload-pre-exist-count="@ViewBag.uploadPreexist"></label>
                 }
             </div>
-            @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
+            @Html.ValidationMessageFor(m => m, null, new {@class = "invalid-input"})
         </div>
     </div>
 </div>

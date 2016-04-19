@@ -1,14 +1,13 @@
-@model Boolean?
+@model bool?
 @{
-    bool isRequired = ViewData.ModelMetadata.IsRequired;
+    var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
-        propLower = prop.ToLower(),
-        styleProperty = propLower,
-        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        description = ViewData.ModelMetadata.Description,
-        templateName = "boolean-button";
-
+           prop = ViewData.ModelMetadata.PropertyName,
+           propLower = prop.ToLower(),
+           styleProperty = propLower,
+           displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+           description = ViewData.ModelMetadata.Description,
+           templateName = "boolean-button";
 
     var htmlAttributes = new RouteValueDictionary();
 
@@ -29,7 +28,7 @@
     if (ViewBag.textColumn == null) {
         ViewBag.textColumn = "col-md-10";
     }
-    
+
     if (ViewBag.placeholder != null) {
         htmlAttributes.Add("placeholder", ViewBag.placeholder);
     } else {
@@ -39,7 +38,7 @@
             htmlAttributes.Add("placeholder", "[" + displayName + "]");
         }
     }
-    
+
     htmlAttributes.Add("title", htmlAttributes["placeholder"]);
 
     htmlAttributes.Add("data-prop", styleProperty);
@@ -58,7 +57,7 @@
                         <span class="description-icon"></span>
                     </a>
                 }
-                @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
+                @Html.ValidationMessageFor(m => m, null, new {@class = "invalid-input"})
             </div>
         </div>
     </div>

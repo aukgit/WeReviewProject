@@ -1,13 +1,13 @@
-@model Single?
+@model float?
 @{
     var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
-        propLower = prop.ToLower(),
-        styleProperty = propLower,
-        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        description = ViewData.ModelMetadata.Description,
-        templateName = "rating-10";
+           prop = ViewData.ModelMetadata.PropertyName,
+           propLower = prop.ToLower(),
+           styleProperty = propLower,
+           displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+           description = ViewData.ModelMetadata.Description,
+           templateName = "rating-10";
     var htmlAttributes = new RouteValueDictionary();
     if (displayName == null) {
         displayName = ViewData.ModelMetadata.PropertyName;
@@ -59,14 +59,14 @@
     if (ViewBag.textColumn == null) {
         ViewBag.textColumn = "col-md-10";
     }
-    
+
     htmlAttributes.Add("title", htmlAttributes["placeholder"]);
     htmlAttributes.Add("min", ViewBag.min);
     htmlAttributes.Add("max", ViewBag.max);
     htmlAttributes.Add("data-size", "xs");
     htmlAttributes.Add("data-stars", ViewBag.stars);
     htmlAttributes.Add("data-step", ViewBag.step);
-    
+
     htmlAttributes.Add("data-prop", styleProperty);
     htmlAttributes.Add("data-template", templateName);
 }
@@ -84,7 +84,7 @@
         </label>
         <div class="@ViewBag.textColumn">
             @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)
-            @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
+            @Html.ValidationMessageFor(m => m, null, new {@class = "invalid-input"})
         </div>
     </div>
 </div>

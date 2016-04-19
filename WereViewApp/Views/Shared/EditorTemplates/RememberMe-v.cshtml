@@ -1,13 +1,13 @@
-@model Boolean?
+@model bool?
 @{
-    bool isRequired = ViewData.ModelMetadata.IsRequired;
+    var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
-        propLower = prop.ToLower(),
-        styleProperty = propLower,
-        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        description = ViewData.ModelMetadata.Description,
-        templateName = "rememberme-v";
+           prop = ViewData.ModelMetadata.PropertyName,
+           propLower = prop.ToLower(),
+           styleProperty = propLower,
+           displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+           description = ViewData.ModelMetadata.Description,
+           templateName = "rememberme-v";
     var htmlAttributes = new RouteValueDictionary();
 
     if (ViewBag.@class != null) {
@@ -43,13 +43,13 @@
 }
 
 <div class="form-group form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty">
-    <div class="controls dev-plugin controls-vertical">
+    <div class="controls controls-vertical dev-plugin">
         <div class="@ViewBag.labelColumn @ViewBag.textColumn remember-me-box">
             <label class="control-label form-label @styleProperty" for="@styleProperty">
                 @Html.CheckBox("", Model.HasValue && Model.Value, htmlAttributes)
                 @displayName
             </label>
-            @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
+            @Html.ValidationMessageFor(m => m, null, new {@class = "invalid-input"})
             <div class="pull-right">
                 <button title="Sign in" class="btn btn-primary"><i class="fa fa-sign-in"></i> Login</button>
             </div>

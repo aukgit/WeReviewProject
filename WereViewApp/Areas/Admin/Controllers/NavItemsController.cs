@@ -10,8 +10,8 @@ using WeReviewApp.Models.POCO.IdentityCustomization;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
     public class NavItemsController : IdentityController<ApplicationDbContext> {
-	
-		private readonly NavigationLogics _navigationLogic;
+        private readonly NavigationLogics _navigationLogic;
+
         public NavItemsController()
             : base(true) {
             _navigationLogic = new NavigationLogics(db);
@@ -26,15 +26,39 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             return navs.Where(n => n.NavigationID == NavitionID).ToList();
         }
 
-        private void AddMenuName(int id) {
-            var nav = db.Navigations.Find(id);
+        /// <summary>
+        ///     Parent Navigation Id
+        /// </summary>
+        /// <param name="navigationId"></param>
+        private void AddMenuName(int navigationId) {
+            var nav = db.Navigations.Find(navigationId);
             ViewBag.MenuName = nav.Name;
-            ViewBag.NavigationID = id;
+            ViewBag.NavigationID = navigationId;
         }
 
+        /// <summary>
+        ///     Get navigation list items with view.
+        /// </summary>
+        /// <param name="navigationId"></param>
+        /// <param name="getWholeView"></param>
+        /// <returns></returns>
+        private ActionResult GetListView(int navigationId, bool getWholeView = true) {
+            AddMenuName(navigationId);
+            var list = GetItems(navigationId);
+
+            if (getWholeView) {
+                return View("List", list);
+            }
+            return PartialView("List", list);
+        }
+
+        /// <summary>
+        ///     Public call for MVC to get the list view for expected navigation item.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult List(int id) {
-            AddMenuName(id);
-            return View(GetItems(id));
+            return GetListView(id);
         }
 
         private void HasDropDownAttr(NavigationItem navigationItem) {
@@ -90,6 +114,14 @@ namespace WeReviewApp.Areas.Admin.Controllers {
             AddMenuName(navigationItem.NavigationID);
             AppConfig.Caches.RemoveAllFromCache();
             return View(navigationItem);
+        }
+
+        public ActionResult SaveOrder(NavigationItem[] navigationItems) {
+            if (_navigationLogic.SaveOrder(navigationItems)) {
+                AppConfig.Caches.RemoveAllFromCache();
+                return GetListView(navigationItems[0].NavigationID, false);
+            }
+            return HttpNotFound();
         }
 
         public ActionResult Delete(int id, int NavigationID) {

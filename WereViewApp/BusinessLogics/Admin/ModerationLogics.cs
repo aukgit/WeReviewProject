@@ -17,7 +17,8 @@ namespace WeReviewApp.BusinessLogics.Admin {
         /// <param name="isSendEmailWhenOperationIsSuccessful"></param>
         /// <param name="db"></param>
         /// <returns></returns>
-        internal static bool AppFeatured(long appId, bool isFeatured, bool isSendEmailWhenOperationIsSuccessful, WereViewAppEntities db) {
+        internal static bool AppFeatured(long appId, bool isFeatured, bool isSendEmailWhenOperationIsSuccessful,
+            WereViewAppEntities db) {
             if (UserManager.IsAuthenticated()) {
                 var featured = db.FeaturedImages.FirstOrDefault(n => n.AppID == appId);
                 var user = UserManager.GetCurrentUser();
@@ -70,7 +71,8 @@ namespace WeReviewApp.BusinessLogics.Admin {
         }
 
         #endregion
- 		#region Blocking app and review
+
+        #region Blocking app and review
 
         public static bool BlockApp(long appId, bool isSendEmailWhenBlockIsSuccessful, WereViewAppEntities db) {
             var app = db.Apps.Find(appId);
@@ -122,7 +124,7 @@ namespace WeReviewApp.BusinessLogics.Admin {
             }
             return false;
         }
-		
+
         #endregion
     }
 }

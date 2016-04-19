@@ -2,7 +2,7 @@
 
 @{
     var isRequired = ViewData.ModelMetadata.IsRequired;
-    string isRequiredStar = isRequired ? "*" : "";
+    var isRequiredStar = isRequired ? "*" : "";
     var htmlAttributes = new RouteValueDictionary();
     if (@ViewData.ModelMetadata.DisplayName == null) {
         ViewData.ModelMetadata.DisplayName = ViewData.ModelMetadata.PropertyName;

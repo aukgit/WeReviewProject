@@ -1,7 +1,7 @@
 ﻿@model WeReviewApp.Models.EntityModel.App
 
 @{
-    bool hasRated = Model.CurrentUserRatedAppValue != null;
+    var hasRated = Model.CurrentUserRatedAppValue != null;
 }
 <div class="col-sm-8">
     <div class="rating-box-row">

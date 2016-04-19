@@ -14,6 +14,7 @@ namespace WeReviewApp.Models.Context {
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
         public DbSet<CoreSetting> CoreSettings { get; set; }
 
         public DbSet<ImageResizeSetting> ImageResizeSettings { get; set; }

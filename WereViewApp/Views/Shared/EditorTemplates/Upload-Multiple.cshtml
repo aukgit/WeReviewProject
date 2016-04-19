@@ -1,15 +1,14 @@
 @model IEnumerable<HttpPostedFileBase>
 @{
-    bool isRequired = ViewData.ModelMetadata.IsRequired;
+    var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
-        propLower = prop.ToLower(),
-        styleProperty = propLower,
-        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        description = ViewData.ModelMetadata.Description,
-        icon = ViewBag.icon ?? "glyphicon glyphicon-upload",
-        templateName = "upload-multiple"; 
-
+           prop = ViewData.ModelMetadata.PropertyName,
+           propLower = prop.ToLower(),
+           styleProperty = propLower,
+           displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+           description = ViewData.ModelMetadata.Description,
+           icon = ViewBag.icon ?? "glyphicon glyphicon-upload",
+           templateName = "upload-multiple";
 
     var htmlAttributes = new RouteValueDictionary();
     if (ViewBag.data_id != null) {
@@ -62,7 +61,7 @@
     if (ViewBag.label != null) {
         displayName = ViewBag.label;
     }
-    
+
     if (ViewBag.labelColumn == null) {
         ViewBag.labelColumn = "col-md-2";
     }
@@ -124,7 +123,7 @@
                     <label data-id="@ViewBag.data_id_val" data-has-edit-btn="@ViewBag.hasEditBtn" data-label-file-uploaded="true" class="label label-success file-uploaded-notify-label-@ViewBag.data_id_val" data-max-upload-count="@ViewBag.maxUpload" data-uploaded-count="@ViewBag.uploadedFiles" data-upload-pre-exist-count="@ViewBag.uploadPreexist"></label>
                 }
             </div>
-            @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
+            @Html.ValidationMessageFor(m => m, null, new {@class = "invalid-input"})
         </div>
     </div>
 </div>

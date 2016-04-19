@@ -240,7 +240,7 @@ namespace WeReviewApp.Modules.Uploads {
         /// </summary>
         /// <returns></returns>
         public string GetAbsolutePath() {
-            var absolutePath = VirtualPathtoAbsoluteServerPath(GetCombinePathWithAdditionalRoots());
+            var absolutePath = VirtualPathtoAbsoluteServerPath(GetCombinationOfRootAndAdditionalRoot());
             return absolutePath;
         }
 

@@ -3,8 +3,8 @@
     ViewBag.Title = "Register";
     SelectList roles = null;
     var token = Html.AntiForgeryToken();
-    string usernameValidatingUrl = "/Validator/GetUsername";
-    string emailValidatingUrl = "/Validator/GetEmail";
+    var usernameValidatingUrl = "/Validator/GetUsername";
+    var emailValidatingUrl = "/Validator/GetEmail";
 }
 
 <h1 class="h3" title="Registration page of @AppVar.Name">@ViewBag.Title</h1>
@@ -15,16 +15,16 @@
 </h1>
 <hr />
 @Html.Partial("_GlobalError")
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal register-form", role = "form", enctype = "multipart/form-data" })) {
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new {@class = "form-horizontal register-form", role = "form", enctype = "multipart/form-data"})) {
     <!--uxSlide by developers-organism and Alim Ul Karim hides everything except for first item=0, we can have more than one zeros-->
     <div id="register-form">
         <div id="server-validation-form">
             <div data-dev-slide="0" data-dev-visited='false'>
                 @token
-                @Html.EditorFor(m => m.UserName, "Username", new { url = usernameValidatingUrl, isValidate = "true", data_submit_method = "post" })
+                @Html.EditorFor(m => m.UserName, "Username", new {url = usernameValidatingUrl, isValidate = "true", data_submit_method = "post"})
                 @Html.EditorFor(m => m.FirstName)
                 @Html.EditorFor(m => m.LastName)
-                @Html.EditorFor(m => m.Email, "Email", new { url = emailValidatingUrl, isValidate = "true", data_submit_method = "post" })
+                @Html.EditorFor(m => m.Email, "Email", new {url = emailValidatingUrl, isValidate = "true", data_submit_method = "post"})
                 @Html.EditorFor(m => m.Password)
                 @Html.EditorFor(m => m.ConfirmPassword)
             </div>

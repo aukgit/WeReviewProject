@@ -2,14 +2,14 @@
 @{
     var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
-        propLower = prop.ToLower(),
-        styleProperty = propLower,
-        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        description = ViewData.ModelMetadata.Description,
-        isValidate = ViewBag.isValidate ?? "false",
-        templateName = "username",
-        icon = ViewBag.icon ?? "fa fa-user";
+           prop = ViewData.ModelMetadata.PropertyName,
+           propLower = prop.ToLower(),
+           styleProperty = propLower,
+           displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+           description = ViewData.ModelMetadata.Description,
+           isValidate = ViewBag.isValidate ?? "false",
+           templateName = "username",
+           icon = ViewBag.icon ?? "fa fa-user";
 
     var htmlAttributes = new RouteValueDictionary();
 
@@ -48,7 +48,6 @@
     }
     if (ViewBag.url != null) {
         htmlAttributes.Add("data-url", ViewBag.url);
-
     }
     htmlAttributes.Add("title", htmlAttributes["placeholder"]);
     htmlAttributes.Add("data-prop", styleProperty);
@@ -75,7 +74,7 @@
                     <span class="description-icon"></span>
                 </a>
             }
-            @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
+            @Html.ValidationMessageFor(m => m, null, new {@class = "invalid-input"})
         </div>
     </div>
 </div>

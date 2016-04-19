@@ -12,6 +12,7 @@ namespace WeReviewApp.Common {
         private static List<Category> _appCategoriesCache;
         private static List<Platform> _appPlatformsCache;
         private static List<FeedbackCategory> _feedbackCategories;
+        private static readonly UploadProcessor[] _uploaderProcessors = new UploadProcessor[8];
 
         public static List<Category> AppCategoriesCache {
             get {
@@ -103,6 +104,28 @@ namespace WeReviewApp.Common {
             return (AppSavingTextFields) textCache.ReadObjectFromBinaryFile(location);
         }
 
+        #region Get all upload processors method
+
+        /// <summary>
+        ///     Return all the upload processors
+        /// </summary>
+        /// <returns></returns>
+        public static UploadProcessor[] GetAllUploaderProcessor() {
+            if (_uploaderProcessors[0] == null) {
+                _uploaderProcessors[0] = UProcessorGallery;
+                _uploaderProcessors[1] = UProcessorGalleryIcons;
+                _uploaderProcessors[2] = UProcessorSearchIcons;
+                _uploaderProcessors[3] = UProcessorHomeIcons;
+                _uploaderProcessors[4] = UProcessorHomeFeatured;
+                _uploaderProcessors[5] = UProcessorSuggestionIcons;
+                _uploaderProcessors[6] = UProcessorYoutubeCover;
+                _uploaderProcessors[7] = UProcessorAdvertiseImages;
+            }
+            return _uploaderProcessors;
+        }
+
+        #endregion
+
         #region Declaration
 
         /// <summary>
@@ -152,7 +175,6 @@ namespace WeReviewApp.Common {
 
         #endregion
 
- 
         #region Get User Point Values From Cache
 
         /// <summary>
@@ -173,29 +195,9 @@ namespace WeReviewApp.Common {
         /// <returns></returns>
         public static UserPointSetting GetUserSettingPoint(byte taskId) {
             var point = CommonVars.UserPointSettingsCache.FirstOrDefault(n => n.UserPointSettingID == taskId);
-
             return point;
         }
-        #endregion
 
-        #region Get all upload processors method
-        /// <summary>
-        /// Return all the upload processors
-        /// </summary>
-        /// <returns></returns>
-        //public static UploadProcessor[] GetAllUploaderProcessor() {
-        //    //if (_uploaderProcessors[0] == null) {
-        //    //    _uploaderProcessors[0] = UProcessorGallery;
-        //    //    _uploaderProcessors[1] = UProcessorGalleryIcons;
-        //    //    _uploaderProcessors[2] = UProcessorSearchIcons;
-        //    //    _uploaderProcessors[3] = UProcessorHomeIcons;
-        //    //    _uploaderProcessors[4] = UProcessorHomeFeatured;
-        //    //    _uploaderProcessors[5] = UProcessorSuggestionIcons;
-        //    //    _uploaderProcessors[6] = UProcessorYoutubeCover;
-        //    //    _uploaderProcessors[7] = UProcessorAdvertiseImages;
-        //    //}
-        //    //return _uploaderProcessors;
-        //} 
         #endregion
     }
 }

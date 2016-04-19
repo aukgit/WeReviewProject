@@ -2,7 +2,7 @@
 @model WeReviewApp.Models.EntityModel.Platform
 @{
     ViewBag.Title = Model.PlatformName + " Mobile Apps";
-    string currentPageStaticUrl = AppVar.Url + Html.GetCurrentUrlString();
+    var currentPageStaticUrl = AppVar.Url + Html.GetCurrentUrlString();
     string titlesSubtitle = ViewBag.Title;
     var paginationHtml = new MvcHtmlString(ViewBag.paginationHtml);
 }

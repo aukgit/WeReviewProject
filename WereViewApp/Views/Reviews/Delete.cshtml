@@ -4,12 +4,12 @@
     ViewBag.Title = "Deleting " + Html.DisplayFor(model => model.Title);
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    string asking = "Are you sure you want to delete this?";
-    string controller = (string) ViewBag.controller;
-    string viewName = "Delete";
+    var asking = "Are you sure you want to delete this?";
+    var controller = (string) ViewBag.controller;
+    var viewName = "Delete";
     var token = Html.AntiForgeryToken();
 }
-<h1 class="top-margin-space h2">
+<h1 class="h2 top-margin-space">
     <span class="glyphicon glyphicon-trash"></span>
     @Html.SamePageLink(title, subtitle, false)
 </h1>
@@ -31,7 +31,7 @@
                 <a href="@Url.Action("Edit", new {id = Model.ReviewID})" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
             </div>
         </div>
-        <table class="top-margin-space table table-hover">
+        <table class="table table-hover top-margin-space">
             <thead>
             <tr>
                 <th>Properties</th>

@@ -13,8 +13,8 @@ using WeReviewApp.Models.POCO.IdentityCustomization;
 
 namespace WeReviewApp.Areas.Admin.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
-    public class MenuController : Controller {
-        private readonly ApplicationDbContext db = new ApplicationDbContext();
+    public class MenuController : IdentityController<ApplicationDbContext> {
+        public MenuController() : base(true) {}
 
         public ActionResult Index() {
             return View(db.Navigations.Include(n => n.NavigationItems).ToList());
