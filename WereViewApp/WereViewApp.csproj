@@ -878,6 +878,33 @@
     <Content Include="Content\Scripts\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
     <Content Include="Fonts\fontawesome-webfont.svg" />
     <Content Include="Fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="JavaScript-Mvc-framework\app.config.js" />
+    <Content Include="JavaScript-Mvc-framework\app.global.js" />
+    <Content Include="JavaScript-Mvc-framework\app.initializeMethods.js" />
+    <Content Include="JavaScript-Mvc-framework\app.js" />
+    <Content Include="JavaScript-Mvc-framework\app.run.js" />
+    <Content Include="JavaScript-Mvc-framework\Areas\Admin\Controllers\NavItemsController.js" />
+    <Content Include="JavaScript-Mvc-framework\byId.js" />
+    <Content Include="JavaScript-Mvc-framework\controllers\controllers.js" />
+    <Content Include="JavaScript-Mvc-framework\controllers\homeController.js" />
+    <Content Include="JavaScript-Mvc-framework\controllers\initialize.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\ajax.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\clone.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\constants.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\initialize.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\inputChangeTracker.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\modal.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\pagination.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\regularExp.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\selectors.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\spinner.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\urls.js" />
+    <Content Include="JavaScript-Mvc-framework\jQueryExtend.fn.js" />
+    <Content Include="JavaScript-Mvc-framework\jQueryExtend.js" />
+    <Content Include="JavaScript-Mvc-framework\Prototype\Array.js" />
+    <Content Include="JavaScript-Mvc-framework\schema\hashset.js" />
+    <Content Include="JavaScript-Mvc-framework\schema\schema.js" />
+    <Content Include="JavaScript-Mvc-framework\schema\url.js" />
     <Content Include="Sitemap.xml" />
     <Content Include="Areas\Admin\Views\Config\CleanSystem.cshtml" />
     <Content Include="Areas\Admin\Views\Apps\Moderate.cshtml" />
@@ -887,8 +914,20 @@
     <Content Include="Content\css\header.css.map">
       <DependentUpon>header.css</DependentUpon>
     </Content>
-    <Content Include="Content\Less\Spinner.less" />
     <Content Include="Content\Less\toastr.less" />
+    <Content Include="Content\Less\loader-spinner.less" />
+    <Content Include="Content\Less\Spinner\fallback.less" />
+    <Content Include="Content\Less\Spinner\load1.less" />
+    <Content Include="Content\Less\Spinner\load2.less" />
+    <Content Include="Content\Less\Spinner\load3.less" />
+    <Content Include="Content\Less\Spinner\load4.less" />
+    <Content Include="Content\Less\Spinner\load5.less" />
+    <Content Include="Content\Less\Spinner\load6.less" />
+    <Content Include="Content\Less\Spinner\load7.less" />
+    <Content Include="Content\Less\Spinner\load8.less" />
+    <Content Include="Content\Less\Spinner\loading-bar.less" />
+    <Content Include="Content\Less\Spinner\Spinner-2.less" />
+    <Content Include="Content\Less\Spinner\spinner.less" />
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />
@@ -1418,6 +1457,7 @@
     <Content Include="Views\Shared\_Header-1.cshtml" />
     <Content Include="Views\Tags\Index.cshtml" />
     <Content Include="Views\Tags\GetTagDetail.cshtml" />
+    <Content Include="Views\Shared\_Loading-bar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DatabaseTables\" />

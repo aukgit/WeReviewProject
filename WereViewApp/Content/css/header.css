@@ -13,6 +13,12 @@ body {
 body #wrap .app-details-page {
   font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
   padding-left: 15px;
