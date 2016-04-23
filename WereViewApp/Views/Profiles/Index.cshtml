@@ -16,7 +16,8 @@
             @foreach (var user in Model) {
                 <li class="slim-app-view">
                     <a class="app-url" href="@user.GetProfileUrl()" title="user apps:  @user.FirstName @user.LastName">
-                        <div class="app-content">
+                        <i class="@FaIcons.User f-em-13 left"></i>
+                        <div class="app-content right">
                             <h1 class="app-title" title="user apps:  @user.FirstName @user.LastName">
                                 <strong class="bold-important">@user.FirstName @user.LastName</strong>
                                 <span class="paragraph-end"></span>

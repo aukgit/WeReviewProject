@@ -808,6 +808,7 @@
       <DependentUpon>backend-developer.css</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\Feedbacks\Done.cshtml" />
+    <Content Include="Content\Scripts\FrontEnd\wow.js" />
     <Content Include="Content\Scripts\jquery.blockUI.js" />
     <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog.css" />
     <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog_ie.css" />
