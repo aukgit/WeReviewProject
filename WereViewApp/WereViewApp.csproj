@@ -484,35 +484,7 @@
     <Content Include="App_Data\DataCached\Database\ceaaa28e-a6bf-4dd4-9095-aaa27838bcc4-appInfo.mdb" />
     <Content Include="App_Data\DataCached\Database\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-appInfo.mdb" />
     <Content Include="App_Data\DataCached\Database\f153d3bc-4a75-478e-97ca-2af446ae5828-appInfo.mdb" />
-    <Content Include="App_Data\elmah\error-2016-03-19172450Z-431d4efa-f2e3-4912-8f3e-f5702e617390.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-19172451Z-1ab96ec6-2b72-454b-81ff-b424b0890bb2.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-19172451Z-565ef050-a131-4e02-af02-981a757dd02d.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-19172459Z-0d7d00d1-04de-4608-ab68-28c871b03f5e.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-19172459Z-1872af7f-1575-41b8-81b9-3f8f4e7d8e5a.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-19172500Z-0073bb2e-ff6a-45c2-8412-dc1fc43d0946.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-19173309Z-c9598bb0-d14d-434a-9657-e4ae01088cb3.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-19173319Z-f37f7a68-9fcc-46fa-9c48-efb11b0c534d.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-20013148Z-850ad9eb-a81c-46ab-8640-3693835a30c9.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-20034429Z-eb2b5682-41b3-4091-b425-ec5723fe3814.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-20042548Z-13341848-b84d-4af9-ab5f-07491443b9d9.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-20194004Z-8a3d292a-3921-4d43-959c-d52a252762d7.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-22191912Z-ffbfd65f-9163-49fe-bff0-c6f89ff2875a.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-22193456Z-662df107-5d41-4bd7-a321-26db16b3f808.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-22193526Z-42f98424-b2e2-481f-a5be-5eaba856a719.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-22193542Z-bcd436f1-254b-474c-b122-59364a852542.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-22193838Z-61064cd9-84d4-47d6-8f65-636f2e0e52e0.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-22193916Z-8f19efc2-f67b-48d4-87de-7c364ff2f729.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-22194348Z-fdc1cb0b-b22e-4266-abf4-7c7b2ade77ff.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-22194513Z-02343ff9-03b2-4282-88d7-a60aaef1c56e.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-22194540Z-c74b241b-09a6-49ff-8d4a-6e085ed5f6b7.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-22194923Z-052a5a8b-78a1-43ef-b47b-502a348b5c9d.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-22195444Z-44e1a5eb-b3fc-41f9-b44f-55b364bd3887.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-22195658Z-c66ee8f0-a001-4707-aa42-45acbef5800c.xml" />
-    <Content Include="App_Data\elmah\error-2016-03-22195722Z-4395d738-fa47-4f42-acce-7952ca839f61.xml" />
-    <Content Include="App_Data\elmah\error-2016-04-02110723Z-c55c565e-8b6f-4fb7-a6ab-adce44b7dd25.xml" />
-    <Content Include="App_Data\elmah\error-2016-04-02134257Z-a31212c5-e6f6-4035-adf6-6d389485db32.xml" />
-    <Content Include="App_Data\elmah\error-2016-04-02134355Z-5acd138e-a0df-4ba0-9df9-4002159295b6.xml" />
-    <Content Include="App_Data\elmah\error-2016-04-06180205Z-fec3761b-4748-4526-aba2-baa03de3d21d.xml" />
+    <Content Include="App_Data\elmah\Readme.txt" />
     <Content Include="App_Data\WereViewApp-Accounts.mdf" />
     <Content Include="App_Data\WereViewApp-Accounts_log.ldf">
       <DependentUpon>WereViewApp-Accounts.mdf</DependentUpon>
@@ -781,7 +753,6 @@
     <Content Include="Content\Scripts\DevOrgPlugins\ComboOptions.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.country-phone.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.dynamicSelect.js" />
-    <Content Include="Content\Scripts\DevOrgPlugins\app.run.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\dev-component-runner.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\developers-organism.component.js" />
     <Content Include="Content\Scripts\DevOrgPlugins\byId.js" />
@@ -837,6 +808,7 @@
       <DependentUpon>backend-developer.css</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\Feedbacks\Done.cshtml" />
+    <Content Include="Content\Scripts\jquery.blockUI.js" />
     <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog.css" />
     <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog_ie.css" />
     <Content Include="Content\Scripts\skins\bootstrapck\.temp\css\dialog_ie7.css" />
@@ -876,6 +848,7 @@
     <Content Include="Content\Scripts\skins\bootstrapck\sample\css\bootstrapck-sample.css" />
     <Content Include="Content\Scripts\skins\bootstrapck\sample\js\analytics.js" />
     <Content Include="Content\Scripts\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
+    <Content Include="Content\Scripts\toastr.js" />
     <Content Include="Fonts\fontawesome-webfont.svg" />
     <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="JavaScript-Mvc-framework\app.config.js" />
@@ -936,9 +909,7 @@
     <Content Include="Content\Scripts\FrontEnd\jquery.number.js" />
     <Content Include="Content\Scripts\FrontEnd\jquery.stellar.js" />
     <Content Include="Content\Scripts\FrontEnd\jquery.sticky.js" />
-    <Content Include="Content\Scripts\FrontEnd\main.js" />
     <Content Include="Content\Scripts\FrontEnd\owl.carousel.min.js" />
-    <Content Include="Content\Scripts\FrontEnd\wow.min.js" />
     <None Include="Content\Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Content\Scripts\jquery-2.1.4.js" />
     <Content Include="Content\Scripts\jquery-ui.min.js" />
@@ -1440,6 +1411,7 @@
     <Content Include="Views\Profiles\_UserProfileDetails.cshtml" />
     <Content Include="Views\App\_AppDescription.cshtml" />
     <Content Include="Views\Account\ConfirmationEmailResend.cshtml" />
+    <Content Include="WeReviewApp.PublishSettings" />
     <None Include="Views\Reviews\User.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AnyTypeIconWithHtml.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TextArea.cshtml" />
