@@ -560,6 +560,10 @@
     <Content Include="Content\css\flags32.png" />
     <Content Include="Content\css\font-awesome.css" />
     <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\fonts-rimixens.css" />
+    <Content Include="Content\css\fonts-rimixens.min.css">
+      <DependentUpon>fonts-rimixens.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\footer-fixing.css" />
     <Content Include="Content\css\footer-fixing.css.map">
       <DependentUpon>footer-fixing.css</DependentUpon>
@@ -578,6 +582,10 @@
       <DependentUpon>less-imports.css</DependentUpon>
     </Content>
     <Content Include="Content\css\less-imports.min.css" />
+    <Content Include="Content\css\loader-spinner.css" />
+    <Content Include="Content\css\loader-spinner.min.css">
+      <DependentUpon>loader-spinner.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\menu-fix.css" />
     <Content Include="Content\css\menu-fix.css.map">
       <DependentUpon>menu-fix.css</DependentUpon>
@@ -614,6 +622,7 @@
     <Content Include="Content\css\seo-optimize.min.css" />
     <Content Include="Content\css\Site.css" />
     <Content Include="Content\css\Spinner.css" />
+    <Content Include="Content\css\Spinner.min.css" />
     <Content Include="Content\css\star-rating.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
@@ -633,6 +642,7 @@
     <Content Include="Content\css\Tagit\jquery.tagedit.css" />
     <Content Include="Content\css\Tagit\ui-lightness\jquery-ui-1.9.2.custom.min.css" />
     <Content Include="Content\css\toastr.css" />
+    <Content Include="Content\css\toastr.min.css" />
     <Content Include="Content\css\Upload\jquery.fileupload.css" />
     <Content Include="Content\css\utilities.css" />
     <Content Include="Content\css\utilities.min.css">
@@ -678,6 +688,14 @@
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\css\loader-spinner.css.map">
+      <DependentUpon>loader-spinner.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Spinner.css.map" />
+    <Content Include="Content\css\toastr.css.map" />
+    <Content Include="Content\css\fonts-rimixens.css.map">
+      <DependentUpon>fonts-rimixens.css</DependentUpon>
+    </Content>
     <None Include="Content\Less\ckedit-skin-bootstrap.less" />
     <Content Include="Content\Less\color-fonts.less" />
     <Content Include="Content\Less\footer-fixing.less" />
