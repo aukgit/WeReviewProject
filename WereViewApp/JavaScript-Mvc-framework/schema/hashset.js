@@ -42,7 +42,7 @@
         }
         throw new Error("No id parameter given to set.");
     },
-    setItemByIndex: function (index,id, items) {
+    setItemByIndex: function (index, id, items) {
         /// <summary>
         /// Add items uniquely by the given id and item is the hash item could be array or json or anything.
         /// </summary>
@@ -58,7 +58,7 @@
             }
         }
     },
-    addUnique: function (id, items) {
+    addUnique: function (id, items, modifyIfExist) {
         /// <summary>
         /// Add items uniquely by the given id and item is the hash item could be array or json or anything.
         /// </summary>
@@ -67,9 +67,13 @@
         /// <returns type="bool">Returns if the item is added to the list. If not unique then returns false.</returns>
         var isIdEmpty = (id === undefined || id === null);
         if (isIdEmpty === false) {
-            if (this.isIdExist(id) === false) {
+            var index = this.getItemIndex(id);
+            if (index === -1) {
                 // item not found in the existing list.
                 this.add(id, items);
+                return true;
+            } else if (modifyIfExist) {
+                this.setItemByIndex(index, id, items);
                 return true;
             }
         } else {
@@ -111,14 +115,19 @@
         /// </summary>
         /// <param name="id" type="type"></param>
         /// <returns type=""></returns>
-        return this.list.ids.indexOf(id) > -1;
+        return this.getItemIndex(id) > -1;
     },
     getItemIndex: function (id) {
         /// <summary>
         /// Find and get the item from the list by id.
         /// </summary>
         /// <param name="id" type="type"></param>
-        return this.list.ids.indexOf(id);
+        for (var i = 0; i < this.list.count; i++) {
+            if (this.list.ids[i] === id) {
+                return i;
+            }
+        }
+        return -1;
     },
     getItemValue: function (id) {
         /// <summary>

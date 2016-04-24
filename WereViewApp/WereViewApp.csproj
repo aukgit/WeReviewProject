@@ -573,10 +573,9 @@
       <DependentUpon>fonts-rimixens.css</DependentUpon>
     </Content>
     <Content Include="Content\css\footer-fixing.css" />
-    <Content Include="Content\css\footer-fixing.css.map">
+    <Content Include="Content\css\footer-fixing.min.css">
       <DependentUpon>footer-fixing.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\footer-fixing.min.css" />
     <Content Include="Content\css\front-developer.css" />
     <Content Include="Content\css\front-developer.min.css">
       <DependentUpon>front-developer.css</DependentUpon>
@@ -619,6 +618,9 @@
     <Content Include="Content\css\responsive.css.map">
       <DependentUpon>responsive.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\responsive.min.css">
+      <DependentUpon>responsive.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\search-page.css" />
     <Content Include="Content\css\search-page.css.map">
       <DependentUpon>search-page.css</DependentUpon>
@@ -630,8 +632,6 @@
     </Content>
     <Content Include="Content\css\seo-optimize.min.css" />
     <Content Include="Content\css\Site.css" />
-    <Content Include="Content\css\Spinner.css" />
-    <Content Include="Content\css\Spinner.min.css" />
     <Content Include="Content\css\star-rating.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
@@ -700,7 +700,6 @@
     <Content Include="Content\css\loader-spinner.css.map">
       <DependentUpon>loader-spinner.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Spinner.css.map" />
     <Content Include="Content\css\fonts-rimixens.css.map">
       <DependentUpon>fonts-rimixens.css</DependentUpon>
     </Content>
@@ -971,6 +970,7 @@
     <Content Include="JavaScript-Mvc-framework\extensions\selectors.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\spinner.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\urls.js" />
+    <Content Include="JavaScript-Mvc-framework\getCached.js" />
     <Content Include="JavaScript-Mvc-framework\jQueryExtend.fn.js" />
     <Content Include="JavaScript-Mvc-framework\jQueryExtend.js" />
     <Content Include="JavaScript-Mvc-framework\Prototype\Array.js" />
@@ -988,20 +988,20 @@
     </Content>
     <Content Include="Content\Less\toastr.less" />
     <Content Include="Content\Less\loader-spinner.less" />
-    <Content Include="Content\Less\Spinner\fallback.less" />
-    <Content Include="Content\Less\Spinner\load1.less" />
-    <Content Include="Content\Less\Spinner\load2.less" />
-    <Content Include="Content\Less\Spinner\load3.less" />
-    <Content Include="Content\Less\Spinner\load4.less" />
-    <Content Include="Content\Less\Spinner\load5.less" />
-    <Content Include="Content\Less\Spinner\load6.less" />
-    <Content Include="Content\Less\Spinner\load7.less" />
-    <Content Include="Content\Less\Spinner\load8.less" />
-    <Content Include="Content\Less\Spinner\loading-bar.less" />
-    <Content Include="Content\Less\Spinner\spinner-2.less" />
-    <Content Include="Content\Less\Spinner\load9.less" />
-    <Content Include="Content\Less\Spinner\signal.less" />
-    <Content Include="Content\Less\Spinner\top-bar-loading.less" />
+    <Content Include="Content\Less\spinner\fallback.less" />
+    <Content Include="Content\Less\spinner\load1.less" />
+    <Content Include="Content\Less\spinner\load2.less" />
+    <Content Include="Content\Less\spinner\load3.less" />
+    <Content Include="Content\Less\spinner\load4.less" />
+    <Content Include="Content\Less\spinner\load5.less" />
+    <Content Include="Content\Less\spinner\load6.less" />
+    <Content Include="Content\Less\spinner\load7.less" />
+    <Content Include="Content\Less\spinner\load8.less" />
+    <Content Include="Content\Less\spinner\loading-bar.less" />
+    <Content Include="Content\Less\spinner\spinner-2.less" />
+    <Content Include="Content\Less\spinner\load9.less" />
+    <Content Include="Content\Less\spinner\signal.less" />
+    <Content Include="Content\Less\spinner\top-bar-loading.less" />
     <Content Include="Content\Less\font-awesome\animated.less" />
     <Content Include="Content\Less\font-awesome\bordered-pulled.less" />
     <Content Include="Content\Less\font-awesome\core.less" />
@@ -1018,6 +1018,9 @@
     <Content Include="Content\Less\font-awesome\variables.less" />
     <Content Include="Content\css\font-awesome.css.map">
       <DependentUpon>font-awesome.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\footer-fixing.css.map">
+      <DependentUpon>footer-fixing.css</DependentUpon>
     </Content>
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
