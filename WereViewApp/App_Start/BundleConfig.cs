@@ -90,11 +90,19 @@ namespace WeReviewApp {
                                   "~/Content/Scripts/jquery.blockUI.js",
 
                                   "~/JavaScript-Mvc-framework/Prototype/Array.js",
+
                                   "~/JavaScript-Mvc-framework/app.js",
+                                  "~/JavaScript-Mvc-framework/app.executeBefore.js",
+                                  "~/JavaScript-Mvc-framework/app.executeAfter.js",
+                                  "~/JavaScript-Mvc-framework/jQueryCaching.js",
+                                  "~/JavaScript-Mvc-framework/attachInitialize.js",
+
                                   "~/JavaScript-Mvc-framework/schema/schema.js",
                                   "~/JavaScript-Mvc-framework/schema/hashset.js",
                                   "~/JavaScript-Mvc-framework/schema/url.js",
+
                                   "~/JavaScript-Mvc-framework/extensions/ajax.js",
+                                  "~/JavaScript-Mvc-framework/extensions/hiddenContainer.js",
                                   "~/JavaScript-Mvc-framework/extensions/clone.js",
                                   "~/JavaScript-Mvc-framework/extensions/constants.js",
                                   "~/JavaScript-Mvc-framework/extensions/initialize.js",
@@ -105,13 +113,17 @@ namespace WeReviewApp {
                                   "~/JavaScript-Mvc-framework/extensions/selectors.js",
                                   "~/JavaScript-Mvc-framework/extensions/spinner.js",
                                   "~/JavaScript-Mvc-framework/extensions/urls.js",
+
                                   "~/JavaScript-Mvc-framework/controllers/controllers.js",
                                   "~/JavaScript-Mvc-framework/controllers/initialize.js",
+
                                   "~/JavaScript-Mvc-framework/areas/admin/controllers/NavItemsController.js",
+
                                   "~/JavaScript-Mvc-framework/jQueryExtend.js",
                                   "~/JavaScript-Mvc-framework/jQueryExtend.fn.js",
                                   "~/JavaScript-Mvc-framework/app.config.js",
-                                  "~/JavaScript-Mvc-framework/app.initializeMethods.js",
+                                  "~/JavaScript-Mvc-framework/app.global.js",
+              
                                   "~/JavaScript-Mvc-framework/app.run.js"
 
                                   ));

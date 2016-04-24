@@ -2,7 +2,10 @@
     ViewBag.Title = @AppVar.Name + " : " + AppVar.Subtitle;
     //Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
 }
-
+@section hidden{
+    @Html.Hidden("owl-carousel-component", "true")
+    @Html.Hidden("revolution-gallery-component", "true")
+}
 <div class="home-page">
     @{ Html.RenderAction("HomePageGallery", "Partials"); }
     <div class="top-gap-2x">

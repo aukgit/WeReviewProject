@@ -11,6 +11,9 @@
         isEmptySearchString = string.IsNullOrEmpty(Model.SearchQuery);
     }
 }
+@section hidden{
+    @Html.Hidden("isotop-component", "true")
+}
 <div class="row">
     <div class="app-detail app-title-wrapper col-md-12">
         <div class="app-title-row float-left">
@@ -64,22 +67,22 @@
     @if (!isEmptySearchString && Model.IsAppExist) {
         <ul class="filter">
             <li>
-                <a class="active" href="#" data-filter="*">All</a>
+                <a class="active" data-filter="*">All</a>
             </li>
             <li>
-                <a href="#" data-filter="[data-app-type='fa fa-android']">
+                <a data-filter="[data-app-type='fa fa-android']">
                     <i class="fa fa-android"></i>
                     <span class="hidden-sm hidden-xs">Android Apps</span>
                 </a>
             </li>
             <li>
-                <a href="#" data-filter="[data-app-type='fa fa-apple']">
+                <a data-filter="[data-app-type='fa fa-apple']">
                     <i class="fa fa-apple"></i>
                     <span class="hidden-sm hidden-xs">Apple Apps</span>
                 </a>
             </li>
             <li>
-                <a href="#" data-filter="[data-app-type='fa fa-windows']">
+                <a data-filter="[data-app-type='fa fa-windows']">
                     <i class="fa fa-windows"></i>
                     <span class="hidden-sm hidden-xs">Windows Apps</span>
                 </a>
@@ -88,7 +91,7 @@
         <div class="app-date-seperation row seo-optimize">
             <div class="col-md-10"></div>
             <div class="col-md-2  text-right">
-                <a href="#">
+                <a>
                     <h1 class="bold-important month-seperation regular-color"></h1>
                 </a>
             </div>
