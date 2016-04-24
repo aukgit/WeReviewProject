@@ -2,7 +2,7 @@
   Warning(.css file): Please don't modify styles from css file. Please modify the styles in the respective.less file in the less folder. CSS files will be replaced with new .less file styles.
   FYI: This file (.less file) contains styles for editor-templates.
 */
-/*.controls {
+/*.controls { 
     overflow: hidden;
 }*/
 a.tooltip-show:focus,

@@ -1,18 +1,36 @@
 ﻿@import "animate-refresh.less";
-@import "spinner/load1.less";
+/*@import "spinner/load1.less";
 @import "spinner/load2.less";
 @import "spinner/load3.less";
 @import "spinner/load4.less";
 @import "spinner/load5.less";
 @import "spinner/load6.less";
 @import "spinner/load7.less";
-@import "spinner/load8.less";
+@import "spinner/load8.less";*/
+@import "spinner/load9.less";
+@import "spinner/Signal.less";
+@import "spinner/top-bar-loading.less";
 @import "spinner/fallback.less";
 
-#loading-bar{
-    padding-top:19px;
+#loading-bar {
+    padding-top: 19px;
 }
 
-.blockUI{
+
+.blockUI {
     border: 2px solid rgb(208, 213, 218) !important;
-} 
+}
+
+.loading-bar-full-screen {
+    height: 100%;
+    position: fixed;
+    z-index: 100000;
+    width: 100%;
+    background-color: #FFC732;
+}
+.body-fixed{
+    height:100%;
+    overflow:hidden;
+    position:fixed;
+    z-index: 1;
+}
