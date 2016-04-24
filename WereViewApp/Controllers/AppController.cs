@@ -27,12 +27,12 @@ using FileSys = System.IO.File;
 
 namespace WeReviewApp.Controllers {
     [Authorize]
-    [CheckRegistrationComplete]
+    [ValidateRegistrationComplete]
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class AppController : AdvanceController {
         #region Declaration
 
-        private readonly Logics _algorithms = new Logics();
+        private readonly Logics _logics = new Logics();
 
         #endregion
 
@@ -58,10 +58,10 @@ namespace WeReviewApp.Controllers {
         [OutputCache(CacheProfile = "Short", VaryByParam = "platform;platformVersion;category;url")]
         public async Task<ActionResult> SingleAppDisplay(string platform, float? platformVersion, string category,
             string url) {
-            var app = _algorithms.GetSingleAppForDisplay(platform, platformVersion, category, url, 30, db);
+            var app = _logics.GetSingleAppForDisplay(platform, platformVersion, category, url, 30, db);
             if (app != null) {
-                _algorithms.IncreaseViewCount(app, db);
-                ViewBag.breadcrumbs = _algorithms.GetBredcrumbsBasedOnCurrentUrl("single-app");
+                _logics.IncreaseViewCount(app, db);
+                ViewBag.breadcrumbs = _logics.GetBredcrumbsBasedOnCurrentUrl("single-app");
                 return View(app);
             }
             return View("_AppNotFound");
@@ -425,6 +425,33 @@ namespace WeReviewApp.Controllers {
 
         #endregion
 
+        #region Delete or remove record
+
+        //public ActionResult Delete(long id) {
+
+        //    var app = db.Apps.Find(id);
+        //    bool viewOf = ViewTapping(ViewStates.Delete, app);
+        //    return View(app);
+        //}
+
+        public ActionResult Delete(Guid id) {
+            var app = db.Apps.FirstOrDefault(n => n.UploadGuid == id);
+            if (app != null) {
+                app.Tags = "Hello";
+                var tagRelations = db.TagAppRelations.Where(n => n.AppID == app.AppID);
+                foreach (var tagRelation in tagRelations) {
+                    db.TagAppRelations.Remove(tagRelation);
+                }
+                SaveDatabase(ViewStates.Delete, app);
+                var viewOf = ViewTapping(ViewStates.DeletePost, app);
+                db.Apps.Remove(app);
+                SaveDatabase(ViewStates.Delete, app);
+            }
+            return RedirectToAction("Index");
+        }
+
+        #endregion
+
         #region Enums
 
         internal enum ViewStates {
@@ -634,7 +661,7 @@ namespace WeReviewApp.Controllers {
         private void AddNecessaryWhenModified(App app) {
             // Set userid, last mod, save virtual fields, fix iframe, URL
             AddNecessaryBothOnPostingNEditing(app);
-            _algorithms.RemoveSingleAppFromCacheOfStatic(app.AppID);
+            _logics.RemoveSingleAppFromCacheOfStatic(app.AppID);
         }
 
         /// <summary>
@@ -646,10 +673,10 @@ namespace WeReviewApp.Controllers {
         /// </summary>
         /// <param name="app"></param>
         private void AddNecessaryBothOnPostingNEditing(App app) {
-            app.Url = _algorithms.GenerateHyphenUrlStringValid(app.PlatformVersion, app.CategoryID, app.AppName,
+            app.Url = _logics.GenerateHyphenUrlStringValid(app.PlatformVersion, app.CategoryID, app.AppName,
                 app.PlatformID, db,
                 app.AppID);
-            app.UrlWithoutEscapseSequence = _algorithms.GetUrlStringExceptEscapeSequence(app.Url);
+            app.UrlWithoutEscapseSequence = _logics.GetUrlStringExceptEscapeSequence(app.Url);
             app.PostedByUserID = UserManager.GetLoggedUserId();
             SaveVirtualFields(app);
             app.LastModifiedDate = DateTime.Now;
@@ -1049,7 +1076,7 @@ namespace WeReviewApp.Controllers {
         #region Edit or modify record
 
         public ActionResult Edit(long id) {
-            var app = _algorithms.GetEditingApp(id, db);
+            var app = _logics.GetEditingApp(id, db);
 
             if (app == null) {
                 return HttpNotFound();
@@ -1065,7 +1092,7 @@ namespace WeReviewApp.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Edit(App app) {
             var viewOf = ViewTapping(ViewStates.EditPost, app);
-            var oldApp = _algorithms.GetEditingApp(app.AppID, db);
+            var oldApp = _logics.GetEditingApp(app.AppID, db);
             app.CreatedDate = oldApp.CreatedDate;
             app.Url = oldApp.Url;
 
@@ -1075,7 +1102,7 @@ namespace WeReviewApp.Controllers {
                 var state = SaveDatabase(ViewStates.Edit, app);
                 if (state) {
                     ManageTagsInDatabase(app.AppID, app.UploadGuid, app.Tags);
-                    _algorithms.RemoveCachingApp(app.AppID);
+                    _logics.RemoveCachingApp(app.AppID);
                     AppVar.SetSavedStatus(ViewBag, EditSuccessFully(app.AppName, app.IsPublished));
                     // Saved Successfully.
                     return Redirect(app.GetAbsoluteUrl());
@@ -1086,32 +1113,6 @@ namespace WeReviewApp.Controllers {
             AppVar.SetErrorStatus(ViewBag, EditedError); // Failed to save
             return View(app);
         }
-
-        #endregion
-
-        #region Delete or remove record
-
-        //public ActionResult Delete(long id) {
-
-        //    var app = db.Apps.Find(id);
-        //    bool viewOf = ViewTapping(ViewStates.Delete, app);
-        //    return View(app);
-        //}
-
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(long id) {
-        //    var app = db.Apps.Find(id);
-        //    bool viewOf = ViewTapping(ViewStates.DeletePost, app);
-        //    db.Apps.Remove(app);
-        //    bool state = SaveDatabase(ViewStates.Delete, app);
-        //    if (!state) {
-        //        AppVar.SetErrorStatus(ViewBag, _deletedError); // Failed to Save
-        //        return View(app);
-        //    }
-
-        //    return RedirectToAction("Index");
-        //}
 
         #endregion
     }

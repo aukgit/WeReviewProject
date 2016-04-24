@@ -46,8 +46,8 @@ namespace WeReviewApp.Modules.Cache {
             using (var db = new ApplicationDbContext()) {
                 _countries =
                     db.Countries.Include(n => n.CountryLanguageRelations)
-                        .Include(n => n.CountryTimezoneRelations)
-                        .ToList();
+                      .Include(n => n.CountryTimezoneRelations)
+                      .ToList();
                 return _countries;
             }
         }

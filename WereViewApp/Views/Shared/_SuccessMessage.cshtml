@@ -4,9 +4,9 @@
 }
 @if (isAnyExist) {
     <div id="transaction-container" data-hide-duration="@hideTime">
-        <div data-wow-duration=".3s" class="wow bounceIn">
-            <div data-wow-duration=".5s" class="wow fadeIn">
-                <div data-wow-duration=".5s" data-wow-delay="4.5s" class="wow fadeOutleft">
+        <div data-wow-duration=".3s" class="bounceIn wow">
+            <div data-wow-duration=".5s" class="fadeIn wow">
+                <div data-wow-duration=".5s" data-wow-delay="4.5s" class="fadeOutleft wow">
                     <div @*data-wow-duration=".3s" data-wow-delay="4.3s" class="wow bounceOutLeft"*@>
                         <div class="row transaction-status">
                             <div class="col-md-10 col-md-offset-2">
@@ -17,7 +17,7 @@
                                         </span>
                                     </h3>
                                 } else if (ViewBag.ErrorSave != null) {
-                                    <div data-wow-duration=".5s" data-wow-iteration="2" data-wow-delay=".7s" class="wow pulse">
+                                    <div data-wow-duration=".5s" data-wow-iteration="2" data-wow-delay=".7s" class="pulse wow">
                                         <h3 class="h4">
                                             <span class="label label-danger">
                                                 <span class="@FaIcons.Times"></span> @ViewBag.ErrorSave

@@ -3,15 +3,15 @@ using System.Web.Mvc;
 
 namespace WeReviewApp.Modules.Extensions {
     public static class UrlExtension {
-
         public static string CurrentControlerAbsoluteUrl(this Controller controller) {
             return AppVar.Url + HttpContext.Current.Request.RawUrl;
         }
 
         /// <summary>
-        /// Returns BaseUrl and slash.
+        ///     Returns BaseUrl and slash.
         /// </summary>
         /// <param name="request"></param>
+        /// <param name="baseContext"></param>
         /// <returns></returns>
         public static string GetBaseUrl(this HttpContextBase baseContext) {
             if (baseContext != null) {
@@ -22,7 +22,7 @@ namespace WeReviewApp.Modules.Extensions {
         }
 
         /// <summary>
-        /// Returns BaseUrl and slash.
+        ///     Returns BaseUrl and slash.
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -32,8 +32,9 @@ namespace WeReviewApp.Modules.Extensions {
             }
             return request.Url.Scheme + "://" + request.Url.Authority + VirtualPathUtility.ToAbsolute("~/");
         }
+
         /// <summary>
-        /// Returns BaseUrl and slash.
+        ///     Returns BaseUrl and slash.
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>

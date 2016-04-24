@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using WeReviewApp.BusinessLogics;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.Identity;
@@ -18,7 +17,6 @@ using WeReviewApp.Modules.Session;
 
 namespace WeReviewApp.Modules.DevUser {
     public static class UserManager {
-
         #region Authentication
 
         public static bool IsAuthenticated() {
@@ -53,50 +51,53 @@ namespace WeReviewApp.Modules.DevUser {
         public static void CompleteRegistration(long userId, bool getRoleFromRegistration, string role = null) {
             using (var db2 = new ApplicationDbContext()) {
                 var user = db2.Users.Find(userId);
-                RegistrationCustomCode.CompletionBefore(user, getRoleFromRegistration, role);
-                RegistrationCustomCode.CompletionBefore(userId, getRoleFromRegistration, role);
-                if (user != null) {
-                    // here completion doesn't work
-                    if (!AppConfig.Setting.IsFirstUserFound) {
-                        // first user not found yet.
-                        // first user is admin
-                        // most likely this is the first user
+                if (!user.IsRegistrationComplete) {
+                    RegistrationCustomCode.CompletionBefore(user, getRoleFromRegistration, role);
+                    RegistrationCustomCode.CompletionBefore(userId, getRoleFromRegistration, role);
+                    if (user != null) {
+                        // here completion doesn't work
+                        if (!AppConfig.Setting.IsFirstUserFound) {
+                            // first user not found yet.
+                            // first user is admin
+                            // most likely this is the first user
 
-                        #region First User Registrations
+                            #region First User Registrations
 
-                        var getHigestPriority = db2.Roles.Min(n => n.PriorityLevel);
-                        // getting the highest priority role.
-                        var getHigestPriorityRole = db2.Roles.FirstOrDefault(n => n.PriorityLevel == getHigestPriority);
-                        // add all the roles to the  user.
-                        RoleManager.AddUnderlyingRoles(user, getHigestPriorityRole.Name);
-                        using (var db3 = new DevIdentityDbContext()) {
-                            var setting = db3.CoreSettings.FirstOrDefault();
-                            setting.IsFirstUserFound = true;
-                            db3.SaveChanges(setting);
-                            AppConfig.RefreshSetting();
-                        }
+                            var getHigestPriority = db2.Roles.Min(n => n.PriorityLevel);
+                            // getting the highest priority role.
+                            var getHigestPriorityRole = db2.Roles.FirstOrDefault(n => n.PriorityLevel == getHigestPriority);
+                            // add all the roles to the  user.
+                            RoleManager.AddUnderlyingRoles(user, getHigestPriorityRole.Name);
+                            using (var db3 = new DevIdentityDbContext()) {
+                                var setting = db3.CoreSettings.FirstOrDefault();
+                                setting.IsFirstUserFound = true;
+                                db3.SaveChanges(setting);
+                                AppConfig.RefreshSetting();
+                            }
 
-                        #endregion
-                    } else {
-                        if (getRoleFromRegistration) {
-                            if (role != null) {
-                                // role is given in the parameter specifically.
-                                RoleManager.AddUnderlyingRoles(user, role);
-                            } else {
-                                // role has been saved from the registration time.
-                                var appRole = RoleManager.ReturnRoleIdFromTempInfoAndRemoveTemp(userId);
-                                if (appRole != null) {
-                                    RoleManager.AddUnderlyingRoles(user, appRole.Result.Name);
+                            #endregion
+                        } else {
+                            if (getRoleFromRegistration) {
+                                if (role != null) {
+                                    // role is given in the parameter specifically.
+                                    RoleManager.AddUnderlyingRoles(user, role);
+                                } else {
+                                    // role has been saved from the registration time.
+                                    var appRole = RoleManager.ReturnRoleIdFromTempInfoAndRemoveTemp(userId);
+                                    if (appRole != null) {
+                                        RoleManager.AddUnderlyingRoles(user, appRole.Result.Name);
+                                    }
                                 }
                             }
                         }
-                    }
-                    user.IsRegistrationComplete = true;
-                    user.EmailConfirmed = true;
-                    db2.SaveChanges(); // saved registration complete
+                        user.IsRegistrationComplete = true;
+                        user.EmailConfirmed = true;
+                        db2.SaveChanges(); // saved registration complete
 
-                    RegistrationCustomCode.CompletionAfter(user, getRoleFromRegistration, role); //wereviewdb user created with same id
-                    RegistrationCustomCode.CompletionAfter(userId, getRoleFromRegistration, role);
+                        RegistrationCustomCode.CompletionAfter(user, getRoleFromRegistration, role);
+                        //wereviewdb user created with same id
+                        RegistrationCustomCode.CompletionAfter(userId, getRoleFromRegistration, role);
+                    }
                 }
             }
         }
@@ -189,8 +190,9 @@ namespace WeReviewApp.Modules.DevUser {
         #endregion
 
         #region Get User
+
         /// <summary>
-        /// Username and id is same in both databases.
+        ///     Username and id is same in both databases.
         /// </summary>
         /// <param name="userid"></param>
         /// <returns></returns>
@@ -204,7 +206,7 @@ namespace WeReviewApp.Modules.DevUser {
         }
 
         /// <summary>
-        /// Username and id is same in both databases.
+        ///     Username and id is same in both databases.
         /// </summary>
         /// <param name="userName"></param>
         /// <param name="password"></param>
@@ -217,8 +219,9 @@ namespace WeReviewApp.Modules.DevUser {
             }
             return user;
         }
+
         /// <summary>
-        /// Username and id is same in both databases.
+        ///     Username and id is same in both databases.
         /// </summary>
         /// <param name="email"></param>
         /// <param name="password"></param>
@@ -229,7 +232,7 @@ namespace WeReviewApp.Modules.DevUser {
         }
 
         /// <summary>
-        /// Username and id is same in both databases.
+        ///     Username and id is same in both databases.
         /// </summary>
         /// <param name="email"></param>
         /// <param name="password"></param>
@@ -244,8 +247,9 @@ namespace WeReviewApp.Modules.DevUser {
             }
             return null;
         }
+
         /// <summary>
-        /// Username and id is same in both databases.
+        ///     Username and id is same in both databases.
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
@@ -261,11 +265,11 @@ namespace WeReviewApp.Modules.DevUser {
         public static ApplicationUser GetUserFromSession() {
             var userSession = HttpContext.Current.Session[SessionNames.User];
             if (userSession != null) {
-                return (ApplicationUser)userSession;
+                return (ApplicationUser) userSession;
             }
             userSession = HttpContext.Current.Session[SessionNames.LastUser];
             if (userSession != null) {
-                return (ApplicationUser)userSession;
+                return (ApplicationUser) userSession;
             }
             return null;
         }
@@ -275,7 +279,8 @@ namespace WeReviewApp.Modules.DevUser {
             if (user != null && user.Email != null && email != null && user.Email.ToLower() == email.ToLower()) {
                 return user;
             }
-            return null; //user will give invalid result, because it might the previous user which credentials doesn;t match.
+            return null;
+            // user will give invalid result, because it might the previous user which credentials doesn;t match.
         }
 
         public static ApplicationUser GetUserFromSession(string username) {
@@ -312,7 +317,6 @@ namespace WeReviewApp.Modules.DevUser {
                 GeneratedGuid = Guid.NewGuid()
             };
 
-
             return user;
         }
 
@@ -336,9 +340,9 @@ namespace WeReviewApp.Modules.DevUser {
         }
 
         /// <summary>
-        /// Return current user in optimized fashion.
-        /// Returns -1 if not logged in.
-        /// Username and id is same in both databases.
+        ///     Return current user in optimized fashion.
+        ///     Returns -1 if not logged in.
+        ///     Username and id is same in both databases.
         /// </summary>
         /// <returns>Returns -1 if not logged in.</returns>
         public static long GetLoggedUserId() {
@@ -362,8 +366,8 @@ namespace WeReviewApp.Modules.DevUser {
         }
 
         /// <summary>
-        /// Checks if is empty()
-        /// then validate using regular expression then try searching in the db.
+        ///     Checks if is empty()
+        ///     then validate using regular expression then try searching in the db.
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
@@ -374,7 +378,7 @@ namespace WeReviewApp.Modules.DevUser {
                 const int min = 3;
                 const string userPattern = "^([A-Za-z]|[A-Za-z0-9_.]+)$";
                 var regularExpressionValidation = Regex.IsMatch(username, userPattern, RegexOptions.Compiled) &&
-                                                  (username.Length >= min && username.Length <= max);
+                                                  username.Length >= min && username.Length <= max;
                 if (regularExpressionValidation) {
                     user = GetUser(username);
                     return user != null;
@@ -386,6 +390,7 @@ namespace WeReviewApp.Modules.DevUser {
         public static bool IsEmailExist(string email) {
             return Manager.Users.Any(n => n.Email == email);
         }
+
         public static bool IsEmailExistWithValidation(string email, out ApplicationUser user) {
             user = null;
             if (!string.IsNullOrWhiteSpace(email)) {
@@ -393,7 +398,7 @@ namespace WeReviewApp.Modules.DevUser {
                 const int min = 3;
                 const string emailPattern = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
                 var regularExpressionValidation = Regex.IsMatch(email, emailPattern, RegexOptions.Compiled) &&
-                                                  (email.Length >= min && email.Length <= max);
+                                                  email.Length >= min && email.Length <= max;
                 if (regularExpressionValidation) {
                     user = Manager.Users.FirstOrDefault(n => n.Email == email);
                     return user != null;
@@ -424,10 +429,11 @@ namespace WeReviewApp.Modules.DevUser {
         public static void SaveUserInSession(ApplicationUser user) {
             HttpContext.Current.Session[SessionNames.LastUser] = user;
         }
-
-        public static void ClearUserFromSession() {
-            HttpContext.Current.Session[SessionNames.UserID] = null;
-            HttpContext.Current.Session[SessionNames.LastUser] = null;
+        /// <summary>
+        /// Clear user from session SessionNames.UserID, SessionNames.LastUser, SessionNames.UserCache
+        /// </summary>
+        public static void ClearUserSessions() {
+            SessionNames.RemoveKeys(new[] { SessionNames.UserID, SessionNames.LastUser, SessionNames.UserCache });
             GC.Collect();
         }
 

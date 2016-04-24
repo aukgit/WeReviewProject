@@ -3,7 +3,7 @@
 
 @{
     Layout = null;
-    string moreLink = @Url.Action("top", "Apps");
+    var moreLink = @Url.Action("top", "Apps");
 }
 @if (Model != null) {
     <div class="apps-list-header-row">
@@ -19,12 +19,12 @@
     </div>
     <div class="owl-carousel owl-list owl-theme" itemscope itemtype="http://schema.org/SoftwareApplication">
         @foreach (var app in Model) {
-            string appName = @app.AppName;
-            string absUrl = @app.GetAbsoluteUrl();
-            string category = @app.GetCategoryString();
-            string platformIcon = @app.Platform.Icon;
-            string subtitleOfApp = @app.GetPlatformString() + " mobile app : " + @appName + " (" + @category + ")";
-            string postedUserName = @app.User.UserName;
+            var appName = @app.AppName;
+            var absUrl = @app.GetAbsoluteUrl();
+            var category = @app.GetCategoryString();
+            var platformIcon = @app.Platform.Icon;
+            var subtitleOfApp = @app.GetPlatformString() + " mobile app : " + @appName + " (" + @category + ")";
+            var postedUserName = @app.User.UserName;
             <a class="app-box" itemtype="@absUrl" href="@absUrl" title="@appName">
                 <img class="app-icon" itemprop="image" src="@app.HomePageIconLocation" alt="@subtitleOfApp" />
                 <div class="app-description-wrapper" title="@subtitleOfApp">

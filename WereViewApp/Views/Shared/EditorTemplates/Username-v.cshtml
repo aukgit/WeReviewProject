@@ -2,15 +2,15 @@
 @{
     var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
-        propLower = prop.ToLower(),
-        styleProperty = propLower,
-        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        description = ViewData.ModelMetadata.Description,
-        isValidate = ViewBag.isValidate ?? "false",
-        icon = ViewBag.icon ?? "fa fa-user",
-        templateName = "username-v"; 
-        
+           prop = ViewData.ModelMetadata.PropertyName,
+           propLower = prop.ToLower(),
+           styleProperty = propLower,
+           displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+           description = ViewData.ModelMetadata.Description,
+           isValidate = ViewBag.isValidate ?? "false",
+           icon = ViewBag.icon ?? "fa fa-user",
+           templateName = "username-v";
+
     var htmlAttributes = new RouteValueDictionary();
     if (displayName == null) {
         displayName = ViewData.ModelMetadata.PropertyName;
@@ -47,9 +47,7 @@
     if (ViewBag.textColumn == null) {
         ViewBag.textColumn = "";
     }
-    if (ViewBag.icon == null) {
-        
-    }
+    if (ViewBag.icon == null) {}
     if (ViewBag.url != null) {
         htmlAttributes.Add("data-url", ViewBag.url);
     }
@@ -59,7 +57,7 @@
 }
 
 <div class="form-group form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty" data-is-validate="@isValidate">
-    <div class="controls dev-plugin controls-vertical">
+    <div class="controls controls-vertical dev-plugin">
         <label class="@ViewBag.labelColumn control-label form-label @styleProperty" for="@styleProperty" data-prop="@styleProperty">
             @displayName<span class="red">@isRequiredStar</span>
         </label>
@@ -78,7 +76,7 @@
                     <span class="description-icon"></span>
                 </a>
             }
-            @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
+            @Html.ValidationMessageFor(m => m, null, new {@class = "invalid-input"})
         </div>
     </div>
 </div>

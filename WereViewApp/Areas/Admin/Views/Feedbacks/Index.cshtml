@@ -1,15 +1,13 @@
-﻿@using WeReviewApp.Models.POCO.IdentityCustomization
-@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
-
+﻿@using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
 @model IEnumerable<Feedback>
 
 @{
     ViewBag.Title = "Feedback";
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    string controller = (string)ViewBag.controller;
-    string viewName = "Index";
-    string editLinkName = "";
+    var controller = (string) ViewBag.controller;
+    var viewName = "Index";
+    var editLinkName = "";
     string editIcon = "fa fa-reply",
            createButtonIcon = FaIcons.Plus,
            detailsIcon = "fa fa-info-circle",
@@ -26,73 +24,76 @@
 @Html.SamePageLinkWithIcon(title, subtitle, "glyphicon glyphicon-th-list")
 <div class="right">
     <ul class="list-inline">
-        <li><i class="fa-em-13 fa fa-filter"></i></li>
-        <li class="btn btn-info">@Html.ActionLink("Latest", "Index", new { page = 1 })</li>
-        <li class="btn btn-info">@Html.ActionLink("Is Viewed", "IsViewed", new { page = 1 })</li>
-        <li class="btn btn-info">@Html.ActionLink("Is in Process", "IsInProcess", new { page = 1 })</li>
-        <li class="btn btn-info">@Html.ActionLink("Solved", "Solved", new { page = 1 })</li>
-        <li class="btn btn-info">@Html.ActionLink("Unsolved", "UnSolved", new { page = 1 })</li>
-        <li class="btn btn-info">@Html.ActionLink("All", "AllFeedbacks", new { page = 1 })</li>
+        <li>
+            <i class="fa fa-em-13 fa-filter"></i>
+        </li>
+        <li class="btn btn-info">@Html.ActionLink("Latest", "Index", new {page = 1})</li>
+        <li class="btn btn-info">@Html.ActionLink("Is Viewed", "IsViewed", new {page = 1})</li>
+        <li class="btn btn-info">@Html.ActionLink("Is in Process", "IsInProcess", new {page = 1})</li>
+        <li class="btn btn-info">@Html.ActionLink("Solved", "Solved", new {page = 1})</li>
+        <li class="btn btn-info">@Html.ActionLink("Unsolved", "UnSolved", new {page = 1})</li>
+        <li class="btn btn-info">@Html.ActionLink("All", "AllFeedbacks", new {page = 1})</li>
     </ul>
 </div>
 <div class="top-gap-2x"></div>
 <div class="top-gap-2x"></div>
 
-<table class="table table-hover bootstrap-table-do">
+<table class="bootstrap-table-do table table-hover">
     <!--<caption>@viewName</caption>-->
     <thead>
-        <tr>
-            <th data-field="Email">
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th data-field="Subject">
-                @Html.DisplayNameFor(model => model.Subject)
-            </th>
-            <th data-field="RateUrgency">
-                @Html.DisplayNameFor(model => model.RateUrgency)
-            </th>
-            <th data-field="Response">
-                @Html.DisplayNameFor(model => model.Response)
-            </th>
-            <th data-field="Category">
-                Category | Status
-            </th>
-        </tr>
+    <tr>
+        <th data-field="Email">
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th data-field="Subject">
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th data-field="RateUrgency">
+            @Html.DisplayNameFor(model => model.RateUrgency)
+        </th>
+        <th data-field="Response">
+            @Html.DisplayNameFor(model => model.Response)
+        </th>
+        <th data-field="Category">
+            Category | Status
+        </th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model) {
-            <tr title="@Html.Truncate(item.Message, AppConfig.TruncateLength)">
-                <td>
-                    @{
-            editLinkName = Html.Truncate(item.Email, AppConfig.TruncateLength);
-            var idValue = item.FeedbackID;
-            var status = @item.GetStatus();
-                    }
-                    <a href="@Url.Action("Reply", new {id = idValue})" title="@editLinkName edit..."><span class="@editIcon"></span> @editLinkName</a>
-                </td>
-                <td>
-                    <span title="@Html.Truncate(item.Message, AppConfig.TruncateLength + 20)">@Html.Truncate(item.Subject, AppConfig.TruncateLength + 20)</span>
-                </td>
+    @foreach (var item in Model) {
+        <tr title="@Html.Truncate(item.Message, AppConfig.TruncateLength)">
+            <td>
+                @{
+                    editLinkName = Html.Truncate(item.Email, AppConfig.TruncateLength);
+                    var idValue = item.FeedbackID;
+                    var status = @item.GetStatus();
+                }
+                <a href="@Url.Action("Reply", new {id = idValue})" title="@editLinkName edit...">
+                    <span class="@editIcon"></span> @editLinkName</a>
+            </td>
+            <td>
+                <span title="@Html.Truncate(item.Message, AppConfig.TruncateLength + 20)">@Html.Truncate(item.Subject, AppConfig.TruncateLength + 20)</span>
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.RateUrgency)
-                </td>
-                <td>
-                    <a href="@Url.Action("Reply", new {id = idValue})" t title="Reply to @editLinkName." class="btn btn-info btn-xs">
-                        @if (string.IsNullOrEmpty(item.Response)) {
-                            <span class="@editIcon"></span>
-                            <text>Write</text>
-                        } else {
-                            <span class="@detailsIcon"></span>
-                            <span title="@item.Response">@Html.Truncate(item.Response, AppConfig.TruncateLength - 12)</span>
-                        }
-                    </a>
-                </td>
-                <td>
-                    <label class="btn btn-xs btn-info">@item.GetCategory()</label> | <label class="btn btn-xs btn-@status.StyleClass">@status.Status</label>
-                </td>
-            </tr>
-        }
+            <td>
+                @Html.DisplayFor(modelItem => item.RateUrgency)
+            </td>
+            <td>
+                <a href="@Url.Action("Reply", new {id = idValue})" t title="Reply to @editLinkName." class="btn btn-info btn-xs">
+                    @if (string.IsNullOrEmpty(item.Response)) {
+                        <span class="@editIcon"></span>
+                        <text>Write</text>
+                    } else {
+                        <span class="@detailsIcon"></span>
+                        <span title="@item.Response">@Html.Truncate(item.Response, AppConfig.TruncateLength - 12)</span>
+                    }
+                </a>
+            </td>
+            <td>
+                <label class="btn btn-info btn-xs">@item.GetCategory()</label> | <label class="btn btn-xs btn-@status.StyleClass">@status.Status</label>
+            </td>
+        </tr>
+    }
     </tbody>
 
 </table>

@@ -20,7 +20,7 @@ namespace WeReviewApp.Helpers {
         private const string Selected = "selected='selected'";
         public static int TruncateLength = AppConfig.TruncateLength;
 
-        #region Icons generate : badge
+        #region FaIcons generate : badge
 
         public static HtmlString GetBadge(this HtmlHelper helper, long number) {
             var markup = string.Format(@"<span class='badge'>{0}</span>", number);
@@ -37,7 +37,7 @@ namespace WeReviewApp.Helpers {
             if (isDependOnUserLogState && UserManager.IsAuthenticated()) {
                 cacheName += UserManager.GetCurrentUserName();
             }
-            var cache = (string)AppConfig.Caches.Get(cacheName);
+            var cache = (string) AppConfig.Caches.Get(cacheName);
 
             if (cache != null && !string.IsNullOrWhiteSpace(cache)) {
                 return new HtmlString(cache);
@@ -87,8 +87,8 @@ namespace WeReviewApp.Helpers {
         public static HtmlString BackButton(this HtmlHelper helper, string buttonName = "Back", bool isMini = false,
             string icon = "arrow-l") {
             var mini = isMini
-                ? "data-mini='true'"
-                : "";
+                           ? "data-mini='true'"
+                           : "";
             var backbtn = "<a href='#' data-role='button' class = 'back-button' data-rel='back' data_icon='" + icon +
                           "' " + mini + " >" + buttonName + "</a>";
             return new HtmlString(backbtn);
@@ -312,7 +312,7 @@ namespace WeReviewApp.Helpers {
             var countryOptionsGenerate = "<select class='form-control selectpicker " + classes +
                                          "' data-live-search='true' name='" + htmlName + "' " + otherAttributes +
                                          " title='Choose...' data-style='" + classes + "'>";
-            var dt = CachedQueriedData.GetTable(tableName, connectionType, new[] { valueField, textField });
+            var dt = CachedQueriedData.GetTable(tableName, connectionType, new[] {valueField, textField});
             if (dt != null && dt.Rows.Count > 0) {
                 var sb = new StringBuilder(countryOptionsGenerate, dt.Rows.Count + 10);
                 DataRow row;
@@ -349,9 +349,9 @@ namespace WeReviewApp.Helpers {
                 return input;
             }
             if (isShowElipseDot) {
-                return input.Substring(0, (int)length) + "...";
+                return input.Substring(0, (int) length) + "...";
             }
-            return input.Substring(0, (int)length);
+            return input.Substring(0, (int) length);
         }
 
         public static string Truncate(this HtmlHelper helper, string input, int starting, int length) {
@@ -927,26 +927,29 @@ namespace WeReviewApp.Helpers {
             var format = GetDefaultTimeZoneFormat(formatType, customFormat);
             return dt.HasValue ? dt.Value.ToString(format) : "";
         }
-
+        
         #endregion
 
         #region Generate Url Helper
+
         /// <summary>
-        /// Returns a new Url Helper based on HttpContext.Current.Request.RequestContext
+        ///     Returns a new Url Helper based on HttpContext.Current.Request.RequestContext
         /// </summary>
         /// <returns></returns>
         public static UrlHelper GetUrlHelper() {
             return new UrlHelper(HttpContext.Current.Request.RequestContext);
         }
+
         /// <summary>
-        /// Returns a new Url Helper based on context.Request.RequestContext
+        ///     Returns a new Url Helper based on context.Request.RequestContext
         /// </summary>
         /// <returns></returns>
         public static UrlHelper GetUrlHelper(this HttpContext context) {
             return new UrlHelper(context.Request.RequestContext);
         }
+
         /// <summary>
-        /// Returns a new Url Helper based on HtmlHelper.ViewContext.RequestContext
+        ///     Returns a new Url Helper based on HtmlHelper.ViewContext.RequestContext
         /// </summary>
         /// <returns></returns>
         public static UrlHelper GetUrlHelper(this HtmlHelper helper) {
@@ -980,6 +983,7 @@ namespace WeReviewApp.Helpers {
             }
             return uri;
         }
+
         #endregion
 
         #region Generate Hidden Fields with url.

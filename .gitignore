@@ -76,3 +76,5 @@ _[Ss]cripts
 WereViewApp/App_Data/elmah/*.xml
 ignored-password.txt
 WereViewApp/Properties/PublishProfiles/*.pubxml
+*.PublishSettings
+*.pubxml

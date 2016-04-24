@@ -9,8 +9,8 @@ namespace WeReviewApp.Areas.Admin.Controllers {
         public ActionResult Index() {
             var appSummaryModel = Session["admin-app-summary"] as AppSummaryViewModel;
             if (appSummaryModel == null) {
-                var algorithms = new Logics();
-                appSummaryModel = algorithms.GetAppsSummary();
+                var logics = new Logics();
+                appSummaryModel = logics.GetAppsSummary();
                 Session["admin-app-summary"] = appSummaryModel;
             }
             return View(appSummaryModel);

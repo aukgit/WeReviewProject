@@ -33,11 +33,6 @@
           <Property Name="CreatedDate" Type="date" Nullable="false" />
           <Property Name="LastModifiedDate" Type="date" />
           <Property Name="UrlWithoutEscapseSequence" Type="varchar" MaxLength="70" Nullable="false" />
-          <Property Name="IsMultipleVersion" Type="bit" Nullable="false" />
-          <Property Name="TagsDisplay" Type="varchar" MaxLength="450" Nullable="false" />
-          <Property Name="SupportedOSVersions" Type="varchar" MaxLength="120" />
-          <Property Name="AppOfferTypeID" Type="tinyint" />
-          <Property Name="Price" Type="float" />
         </EntityType>
         <EntityType Name="AppDraft">
           <Key>
@@ -61,18 +56,6 @@
           <Property Name="TotalViewed" Type="bigint" />
           <Property Name="Url" Type="varchar" MaxLength="65" />
           <Property Name="ReleaseDate" Type="date" />
-          <Property Name="IsMultipleVersion" Type="bit" Nullable="false" />
-          <Property Name="TagsDisplay" Type="varchar" MaxLength="450" Nullable="false" />
-          <Property Name="SupportedOSVersions" Type="varchar" MaxLength="80" />
-          <Property Name="AppOfferTypeID" Type="tinyint" />
-          <Property Name="Price" Type="float" />
-        </EntityType>
-        <EntityType Name="AppOfferType">
-          <Key>
-            <PropertyRef Name="AppOfferTypeID" />
-          </Key>
-          <Property Name="AppOfferTypeID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="OfferType" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -122,6 +105,16 @@
           <Property Name="Height" Type="float" Nullable="false" />
           <Property Name="IsAdvertise" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="LatestSeenNotification">
+          <Key>
+            <PropertyRef Name="LatestSeenNotificationID" />
+          </Key>
+          <Property Name="LatestSeenNotificationID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+          <Property Name="NotificationTypeID" Type="tinyint" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="50" />
+          <Property Name="Dated" Type="smalldatetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Message">
           <Key>
             <PropertyRef Name="MessageID" />
@@ -156,7 +149,6 @@
           <Property Name="LastModified" Type="smalldatetime" Nullable="false" />
           <Property Name="SentDate" Type="smalldatetime" Nullable="false" />
           <Property Name="ReceivedDate" Type="smalldatetime" Nullable="false" />
-          <Property Name="IsReceived" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -165,26 +157,8 @@
           <Property Name="NotificationID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="bigint" Nullable="false" />
           <Property Name="NotificationTypeID" Type="tinyint" Nullable="false" />
-          <Property Name="Message" Type="varchar" MaxLength="250" />
+          <Property Name="Message" Type="varchar" MaxLength="50" />
           <Property Name="Dated" Type="smalldatetime" Nullable="false" />
-          <Property Name="IsSeen" Type="bit" Nullable="false" />
-          <Property Name="SeenDate" Type="smalldatetime" />
-          <Property Name="IsUseDefaultMessage" Type="bit" Nullable="false" />
-          <Property Name="HasClicked" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="NotificationSeen">
-          <Key>
-            <PropertyRef Name="NotificationSeenID" />
-          </Key>
-          <Property Name="NotificationSeenID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="bigint" Nullable="false" />
-          <Property Name="NotificationTypeID" Type="tinyint" Nullable="false" />
-          <Property Name="Message" Type="varchar" MaxLength="250" />
-          <Property Name="Dated" Type="smalldatetime" Nullable="false" />
-          <Property Name="IsSeen" Type="bit" Nullable="false" />
-          <Property Name="SeenDate" Type="smalldatetime" />
-          <Property Name="IsUseDefaultMessage" Type="bit" Nullable="false" />
-          <Property Name="HasClicked" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="NotificationType">
           <Key>
@@ -193,8 +167,7 @@
           <Property Name="NotificationTypeID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TypeName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IsGood" Type="bit" Nullable="false" />
-          <Property Name="DefaultMessage" Type="varchar" MaxLength="250" />
-          <Property Name="MessageIconName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="DefaultMessage" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="Platform">
           <Key>
@@ -234,33 +207,6 @@
           <Property Name="IsDisliked" Type="bit" Nullable="false" />
           <Property Name="IsNone" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="Subscribe">
-          <Key>
-            <PropertyRef Name="SubscribeID" />
-          </Key>
-          <Property Name="SubscribeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="255" />
-          <Property Name="IsSubscriberMemeber" Type="bit" Nullable="false" />
-          <Property Name="SubscribeCategoryID" Type="smallint" Nullable="false" />
-          <Property Name="SubcribeToUserID" Type="bigint" />
-          <Property Name="LastNotifiedOnDate" Type="smalldatetime" />
-          <Property Name="SubscribedByUserID" Type="bigint" />
-        </EntityType>
-        <EntityType Name="SubscribeCategory">
-          <Key>
-            <PropertyRef Name="SubscribeCategoryID" />
-          </Key>
-          <Property Name="SubscribeCategoryID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="SubscribeNotifiedHistory">
-          <Key>
-            <PropertyRef Name="SubscribeNotifiedHistoryID" />
-          </Key>
-          <Property Name="SubscribeNotifiedHistoryID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SubscribeID" Type="bigint" Nullable="false" />
-          <Property Name="NotifiedOnDate" Type="smalldatetime" Nullable="false" />
-        </EntityType>
         <EntityType Name="Tag">
           <Key>
             <PropertyRef Name="TagID" />
@@ -296,10 +242,6 @@
           <Property Name="Phone" Type="varchar" MaxLength="18" />
           <Property Name="UserName" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="TotalEarnedPoints" Type="bigint" Nullable="false" />
-          <Property Name="DefaultCellPhoneID" Type="bigint" />
-          <Property Name="SubscriberCount" Type="bigint" Nullable="false" />
-          <Property Name="UploadGuid" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="HasPicture" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="UserPoint">
           <Key>
@@ -319,18 +261,6 @@
           <Property Name="TaskName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Point" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_App_AppOfferType">
-          <End Role="AppOfferType" Type="Self.AppOfferType" Multiplicity="0..1" />
-          <End Role="App" Type="Self.App" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AppOfferType">
-              <PropertyRef Name="AppOfferTypeID" />
-            </Principal>
-            <Dependent Role="App">
-              <PropertyRef Name="AppOfferTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_App_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="App" Type="Self.App" Multiplicity="*" />
@@ -429,25 +359,13 @@
         </Association>
         <Association Name="FK_LatestSeenNotification_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="NotificationSeen" Type="Self.NotificationSeen" Multiplicity="*" />
+          <End Role="LatestSeenNotification" Type="Self.LatestSeenNotification" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="NotificationSeen">
+            <Dependent Role="LatestSeenNotification">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LatestUnSeenNotification_NotificationType">
-          <End Role="NotificationType" Type="Self.NotificationType" Multiplicity="1" />
-          <End Role="NotificationSeen" Type="Self.NotificationSeen" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NotificationType">
-              <PropertyRef Name="NotificationTypeID" />
-            </Principal>
-            <Dependent Role="NotificationSeen">
-              <PropertyRef Name="NotificationTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -511,18 +429,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Notification_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Notification">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Review_App">
           <End Role="App" Type="Self.App" Multiplicity="1" />
           <End Role="Review" Type="Self.Review" Multiplicity="*" />
@@ -571,54 +477,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Subscribe_SubscribeCategory">
-          <End Role="SubscribeCategory" Type="Self.SubscribeCategory" Multiplicity="1" />
-          <End Role="Subscribe" Type="Self.Subscribe" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SubscribeCategory">
-              <PropertyRef Name="SubscribeCategoryID" />
-            </Principal>
-            <Dependent Role="Subscribe">
-              <PropertyRef Name="SubscribeCategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Subscribe_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Subscribe" Type="Self.Subscribe" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Subscribe">
-              <PropertyRef Name="SubcribeToUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Subscribe_User1">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Subscribe" Type="Self.Subscribe" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Subscribe">
-              <PropertyRef Name="SubscribedByUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SubscribeNotifiedHistory_Subscribe">
-          <End Role="Subscribe" Type="Self.Subscribe" Multiplicity="1" />
-          <End Role="SubscribeNotifiedHistory" Type="Self.SubscribeNotifiedHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subscribe">
-              <PropertyRef Name="SubscribeID" />
-            </Principal>
-            <Dependent Role="SubscribeNotifiedHistory">
-              <PropertyRef Name="SubscribeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TagAppRelation_App">
           <End Role="App" Type="Self.App" Multiplicity="1" />
           <End Role="TagAppRelation" Type="Self.TagAppRelation" Multiplicity="*" />
@@ -640,18 +498,6 @@
             </Principal>
             <Dependent Role="TagAppRelation">
               <PropertyRef Name="TagID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_CellPhone">
-          <End Role="CellPhone" Type="Self.CellPhone" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CellPhone">
-              <PropertyRef Name="CellPhoneID" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="DefaultCellPhoneID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -682,7 +528,6 @@
         <Function Name="AppsSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SearchText" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="GetAllTablesSpaceUsedInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ResetAppDrafts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ResetApps" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ResetAppsAndUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -691,33 +536,25 @@
         <EntityContainer Name="WereViewAppModelStoreContainer">
           <EntitySet Name="App" EntityType="Self.App" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppDraft" EntityType="Self.AppDraft" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AppOfferType" EntityType="Self.AppOfferType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CellPhone" EntityType="Self.CellPhone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FeaturedImage" EntityType="Self.FeaturedImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gallery" EntityType="Self.Gallery" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GalleryCategory" EntityType="Self.GalleryCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LatestSeenNotification" EntityType="Self.LatestSeenNotification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MessageSeen" EntityType="Self.MessageSeen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="NotificationSeen" EntityType="Self.NotificationSeen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NotificationType" EntityType="Self.NotificationType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Platform" EntityType="Self.Platform" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReviewLikeDislike" EntityType="Self.ReviewLikeDislike" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Subscribe" EntityType="Self.Subscribe" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SubscribeCategory" EntityType="Self.SubscribeCategory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SubscribeNotifiedHistory" EntityType="Self.SubscribeNotifiedHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TagAppRelation" EntityType="Self.TagAppRelation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TempUpload" EntityType="Self.TempUpload" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserPoint" EntityType="Self.UserPoint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserPointSetting" EntityType="Self.UserPointSetting" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_App_AppOfferType" Association="Self.FK_App_AppOfferType">
-            <End Role="AppOfferType" EntitySet="AppOfferType" />
-            <End Role="App" EntitySet="App" />
-          </AssociationSet>
           <AssociationSet Name="FK_App_Category" Association="Self.FK_App_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="App" EntitySet="App" />
@@ -752,11 +589,7 @@
           </AssociationSet>
           <AssociationSet Name="FK_LatestSeenNotification_User" Association="Self.FK_LatestSeenNotification_User">
             <End Role="User" EntitySet="User" />
-            <End Role="NotificationSeen" EntitySet="NotificationSeen" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LatestUnSeenNotification_NotificationType" Association="Self.FK_LatestUnSeenNotification_NotificationType">
-            <End Role="NotificationType" EntitySet="NotificationType" />
-            <End Role="NotificationSeen" EntitySet="NotificationSeen" />
+            <End Role="LatestSeenNotification" EntitySet="LatestSeenNotification" />
           </AssociationSet>
           <AssociationSet Name="FK_Message_User" Association="Self.FK_Message_User">
             <End Role="User" EntitySet="User" />
@@ -778,10 +611,6 @@
             <End Role="NotificationType" EntitySet="NotificationType" />
             <End Role="Notification" EntitySet="Notification" />
           </AssociationSet>
-          <AssociationSet Name="FK_Notification_User" Association="Self.FK_Notification_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Notification" EntitySet="Notification" />
-          </AssociationSet>
           <AssociationSet Name="FK_Review_App" Association="Self.FK_Review_App">
             <End Role="App" EntitySet="App" />
             <End Role="Review" EntitySet="Review" />
@@ -798,22 +627,6 @@
             <End Role="User" EntitySet="User" />
             <End Role="ReviewLikeDislike" EntitySet="ReviewLikeDislike" />
           </AssociationSet>
-          <AssociationSet Name="FK_Subscribe_SubscribeCategory" Association="Self.FK_Subscribe_SubscribeCategory">
-            <End Role="SubscribeCategory" EntitySet="SubscribeCategory" />
-            <End Role="Subscribe" EntitySet="Subscribe" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Subscribe_User" Association="Self.FK_Subscribe_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Subscribe" EntitySet="Subscribe" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Subscribe_User1" Association="Self.FK_Subscribe_User1">
-            <End Role="User" EntitySet="User" />
-            <End Role="Subscribe" EntitySet="Subscribe" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SubscribeNotifiedHistory_Subscribe" Association="Self.FK_SubscribeNotifiedHistory_Subscribe">
-            <End Role="Subscribe" EntitySet="Subscribe" />
-            <End Role="SubscribeNotifiedHistory" EntitySet="SubscribeNotifiedHistory" />
-          </AssociationSet>
           <AssociationSet Name="FK_TagAppRelation_App" Association="Self.FK_TagAppRelation_App">
             <End Role="App" EntitySet="App" />
             <End Role="TagAppRelation" EntitySet="TagAppRelation" />
@@ -821,10 +634,6 @@
           <AssociationSet Name="FK_TagAppRelation_Tag" Association="Self.FK_TagAppRelation_Tag">
             <End Role="Tag" EntitySet="Tag" />
             <End Role="TagAppRelation" EntitySet="TagAppRelation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_CellPhone" Association="Self.FK_User_CellPhone">
-            <End Role="CellPhone" EntitySet="CellPhone" />
-            <End Role="User" EntitySet="User" />
           </AssociationSet>
           <AssociationSet Name="FK_UserPoint_User" Association="Self.FK_UserPoint_User">
             <End Role="User" EntitySet="User" />
@@ -848,36 +657,27 @@
           <FunctionImport Name="ResetAppsAndUsers" />
           <FunctionImport Name="ResetReviews" />
           <FunctionImport Name="ResetWholeSystem" />
-          <FunctionImport Name="GetAllTablesSpaceUsedInformation" />
           <EntitySet Name="Apps" EntityType="WereViewAppModel.App" />
           <EntitySet Name="AppDrafts" EntityType="WereViewAppModel.AppDraft" />
-          <EntitySet Name="AppOfferTypes" EntityType="WereViewAppModel.AppOfferType" />
           <EntitySet Name="Categories" EntityType="WereViewAppModel.Category" />
           <EntitySet Name="CellPhones" EntityType="WereViewAppModel.CellPhone" />
           <EntitySet Name="FeaturedImages" EntityType="WereViewAppModel.FeaturedImage" />
           <EntitySet Name="Galleries" EntityType="WereViewAppModel.Gallery" />
           <EntitySet Name="GalleryCategories" EntityType="WereViewAppModel.GalleryCategory" />
+          <EntitySet Name="LatestSeenNotifications" EntityType="WereViewAppModel.LatestSeenNotification" />
           <EntitySet Name="Messages" EntityType="WereViewAppModel.Message" />
           <EntitySet Name="MessageSeens" EntityType="WereViewAppModel.MessageSeen" />
           <EntitySet Name="Notifications" EntityType="WereViewAppModel.Notification" />
-          <EntitySet Name="NotificationSeens" EntityType="WereViewAppModel.NotificationSeen" />
           <EntitySet Name="NotificationTypes" EntityType="WereViewAppModel.NotificationType" />
           <EntitySet Name="Platforms" EntityType="WereViewAppModel.Platform" />
           <EntitySet Name="Reviews" EntityType="WereViewAppModel.Review" />
           <EntitySet Name="ReviewLikeDislikes" EntityType="WereViewAppModel.ReviewLikeDislike" />
-          <EntitySet Name="Subscribes" EntityType="WereViewAppModel.Subscribe" />
-          <EntitySet Name="SubscribeCategories" EntityType="WereViewAppModel.SubscribeCategory" />
-          <EntitySet Name="SubscribeNotifiedHistories" EntityType="WereViewAppModel.SubscribeNotifiedHistory" />
           <EntitySet Name="Tags" EntityType="WereViewAppModel.Tag" />
           <EntitySet Name="TagAppRelations" EntityType="WereViewAppModel.TagAppRelation" />
           <EntitySet Name="TempUploads" EntityType="WereViewAppModel.TempUpload" />
           <EntitySet Name="Users" EntityType="WereViewAppModel.User" />
           <EntitySet Name="UserPoints" EntityType="WereViewAppModel.UserPoint" />
           <EntitySet Name="UserPointSettings" EntityType="WereViewAppModel.UserPointSetting" />
-          <AssociationSet Name="FK_App_AppOfferType" Association="WereViewAppModel.FK_App_AppOfferType">
-            <End Role="AppOfferType" EntitySet="AppOfferTypes" />
-            <End Role="App" EntitySet="Apps" />
-          </AssociationSet>
           <AssociationSet Name="FK_App_Category" Association="WereViewAppModel.FK_App_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="App" EntitySet="Apps" />
@@ -910,10 +710,6 @@
             <End Role="User" EntitySet="Users" />
             <End Role="CellPhone" EntitySet="CellPhones" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_CellPhone" Association="WereViewAppModel.FK_User_CellPhone">
-            <End Role="CellPhone" EntitySet="CellPhones" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
           <AssociationSet Name="FK_FeaturedImage_User" Association="WereViewAppModel.FK_FeaturedImage_User">
             <End Role="User" EntitySet="Users" />
             <End Role="FeaturedImage" EntitySet="FeaturedImages" />
@@ -921,6 +717,10 @@
           <AssociationSet Name="FK_Gallery_GalleryCategory" Association="WereViewAppModel.FK_Gallery_GalleryCategory">
             <End Role="GalleryCategory" EntitySet="GalleryCategories" />
             <End Role="Gallery" EntitySet="Galleries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LatestSeenNotification_User" Association="WereViewAppModel.FK_LatestSeenNotification_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LatestSeenNotification" EntitySet="LatestSeenNotifications" />
           </AssociationSet>
           <AssociationSet Name="FK_Message_User" Association="WereViewAppModel.FK_Message_User">
             <End Role="User" EntitySet="Users" />
@@ -942,18 +742,6 @@
             <End Role="NotificationType" EntitySet="NotificationTypes" />
             <End Role="Notification" EntitySet="Notifications" />
           </AssociationSet>
-          <AssociationSet Name="FK_Notification_User" Association="WereViewAppModel.FK_Notification_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Notification" EntitySet="Notifications" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LatestSeenNotification_User" Association="WereViewAppModel.FK_LatestSeenNotification_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="NotificationSeen" EntitySet="NotificationSeens" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LatestUnSeenNotification_NotificationType" Association="WereViewAppModel.FK_LatestUnSeenNotification_NotificationType">
-            <End Role="NotificationType" EntitySet="NotificationTypes" />
-            <End Role="NotificationSeen" EntitySet="NotificationSeens" />
-          </AssociationSet>
           <AssociationSet Name="FK_Review_User" Association="WereViewAppModel.FK_Review_User">
             <End Role="User" EntitySet="Users" />
             <End Role="Review" EntitySet="Reviews" />
@@ -965,22 +753,6 @@
           <AssociationSet Name="FK_ReviewLikeDislike_User" Association="WereViewAppModel.FK_ReviewLikeDislike_User">
             <End Role="User" EntitySet="Users" />
             <End Role="ReviewLikeDislike" EntitySet="ReviewLikeDislikes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Subscribe_SubscribeCategory" Association="WereViewAppModel.FK_Subscribe_SubscribeCategory">
-            <End Role="SubscribeCategory" EntitySet="SubscribeCategories" />
-            <End Role="Subscribe" EntitySet="Subscribes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Subscribe_User" Association="WereViewAppModel.FK_Subscribe_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Subscribe" EntitySet="Subscribes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Subscribe_User1" Association="WereViewAppModel.FK_Subscribe_User1">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Subscribe" EntitySet="Subscribes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SubscribeNotifiedHistory_Subscribe" Association="WereViewAppModel.FK_SubscribeNotifiedHistory_Subscribe">
-            <End Role="Subscribe" EntitySet="Subscribes" />
-            <End Role="SubscribeNotifiedHistory" EntitySet="SubscribeNotifiedHistories" />
           </AssociationSet>
           <AssociationSet Name="FK_TagAppRelation_Tag" Association="WereViewAppModel.FK_TagAppRelation_Tag">
             <End Role="Tag" EntitySet="Tags" />
@@ -994,7 +766,7 @@
             <End Role="UserPointSetting" EntitySet="UserPointSettings" />
             <End Role="UserPoint" EntitySet="UserPoints" />
           </AssociationSet>
-          </EntityContainer>
+        </EntityContainer>
         <ComplexType Name="AppsSearch_Result">
           <Property Type="Int32" Name="ID" Nullable="true" />
           <Property Type="String" Name="Name" Nullable="true" MaxLength="500" />
@@ -1027,12 +799,6 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="0" />
           <Property Name="UrlWithoutEscapseSequence" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
-          <Property Name="IsMultipleVersion" Type="Boolean" Nullable="false" />
-          <Property Name="TagsDisplay" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="false" />
-          <Property Name="SupportedOSVersions" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
-          <Property Name="AppOfferTypeID" Type="Byte" />
-          <Property Name="Price" Type="Double" />
-          <NavigationProperty Name="AppOfferType" Relationship="WereViewAppModel.FK_App_AppOfferType" FromRole="App" ToRole="AppOfferType" />
           <NavigationProperty Name="Category" Relationship="WereViewAppModel.FK_App_Category" FromRole="App" ToRole="Category" />
           <NavigationProperty Name="Platform" Relationship="WereViewAppModel.FK_App_Platform" FromRole="App" ToRole="Platform" />
           <NavigationProperty Name="User" Relationship="WereViewAppModel.FK_App_User" FromRole="App" ToRole="User" />
@@ -1062,19 +828,6 @@
           <Property Name="TotalViewed" Type="Int64" />
           <Property Name="Url" Type="String" MaxLength="65" FixedLength="false" Unicode="false" />
           <Property Name="ReleaseDate" Type="DateTime" Precision="0" />
-          <Property Name="IsMultipleVersion" Type="Boolean" Nullable="false" />
-          <Property Name="TagsDisplay" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="false" />
-          <Property Name="SupportedOSVersions" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
-          <Property Name="AppOfferTypeID" Type="Byte" />
-          <Property Name="Price" Type="Double" />
-        </EntityType>
-        <EntityType Name="AppOfferType">
-          <Key>
-            <PropertyRef Name="AppOfferTypeID" />
-          </Key>
-          <Property Name="AppOfferTypeID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OfferType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Apps" Relationship="WereViewAppModel.FK_App_AppOfferType" FromRole="AppOfferType" ToRole="App" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -1095,7 +848,6 @@
           <Property Name="PlatformVersion" Type="Double" Nullable="false" />
           <NavigationProperty Name="Platform" Relationship="WereViewAppModel.FK_CellPhone_Platform" FromRole="CellPhone" ToRole="Platform" />
           <NavigationProperty Name="User" Relationship="WereViewAppModel.FK_CellPhone_User" FromRole="CellPhone" ToRole="User" />
-          <NavigationProperty Name="Users" Relationship="WereViewAppModel.FK_User_CellPhone" FromRole="CellPhone" ToRole="User" />
         </EntityType>
         <EntityType Name="FeaturedImage">
           <Key>
@@ -1131,6 +883,17 @@
           <Property Name="Height" Type="Double" Nullable="false" />
           <Property Name="IsAdvertise" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Galleries" Relationship="WereViewAppModel.FK_Gallery_GalleryCategory" FromRole="GalleryCategory" ToRole="Gallery" />
+        </EntityType>
+        <EntityType Name="LatestSeenNotification">
+          <Key>
+            <PropertyRef Name="LatestSeenNotificationID" />
+          </Key>
+          <Property Name="LatestSeenNotificationID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="NotificationTypeID" Type="Byte" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Dated" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="User" Relationship="WereViewAppModel.FK_LatestSeenNotification_User" FromRole="LatestSeenNotification" ToRole="User" />
         </EntityType>
         <EntityType Name="Message">
           <Key>
@@ -1168,7 +931,6 @@
           <Property Name="LastModified" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="SentDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ReceivedDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IsReceived" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="User" Relationship="WereViewAppModel.FK_MessageSeen_User" FromRole="MessageSeen" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="WereViewAppModel.FK_MessageSeen_User1" FromRole="MessageSeen" ToRole="User" />
         </EntityType>
@@ -1179,30 +941,9 @@
           <Property Name="NotificationID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="Int64" Nullable="false" />
           <Property Name="NotificationTypeID" Type="Byte" Nullable="false" />
-          <Property Name="Message" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Dated" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IsSeen" Type="Boolean" Nullable="false" />
-          <Property Name="SeenDate" Type="DateTime" Precision="0" />
-          <Property Name="IsUseDefaultMessage" Type="Boolean" Nullable="false" />
-          <Property Name="HasClicked" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="NotificationType" Relationship="WereViewAppModel.FK_Notification_NotificationType" FromRole="Notification" ToRole="NotificationType" />
-          <NavigationProperty Name="User" Relationship="WereViewAppModel.FK_Notification_User" FromRole="Notification" ToRole="User" />
-        </EntityType>
-        <EntityType Name="NotificationSeen">
-          <Key>
-            <PropertyRef Name="NotificationSeenID" />
-          </Key>
-          <Property Name="NotificationSeenID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int64" Nullable="false" />
-          <Property Name="NotificationTypeID" Type="Byte" Nullable="false" />
-          <Property Name="Message" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Dated" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IsSeen" Type="Boolean" Nullable="false" />
-          <Property Name="SeenDate" Type="DateTime" Precision="0" />
-          <Property Name="IsUseDefaultMessage" Type="Boolean" Nullable="false" />
-          <Property Name="HasClicked" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="WereViewAppModel.FK_LatestSeenNotification_User" FromRole="NotificationSeen" ToRole="User" />
-          <NavigationProperty Name="NotificationType" Relationship="WereViewAppModel.FK_LatestUnSeenNotification_NotificationType" FromRole="NotificationSeen" ToRole="NotificationType" />
         </EntityType>
         <EntityType Name="NotificationType">
           <Key>
@@ -1211,10 +952,8 @@
           <Property Name="NotificationTypeID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsGood" Type="Boolean" Nullable="false" />
-          <Property Name="DefaultMessage" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="MessageIconName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="DefaultMessage" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Notifications" Relationship="WereViewAppModel.FK_Notification_NotificationType" FromRole="NotificationType" ToRole="Notification" />
-          <NavigationProperty Name="NotificationSeens" Relationship="WereViewAppModel.FK_LatestUnSeenNotification_NotificationType" FromRole="NotificationType" ToRole="NotificationSeen" />
         </EntityType>
         <EntityType Name="Platform">
           <Key>
@@ -1261,39 +1000,6 @@
           <NavigationProperty Name="Review" Relationship="WereViewAppModel.FK_ReviewLikeDislike_Review" FromRole="ReviewLikeDislike" ToRole="Review" />
           <NavigationProperty Name="User" Relationship="WereViewAppModel.FK_ReviewLikeDislike_User" FromRole="ReviewLikeDislike" ToRole="User" />
         </EntityType>
-        <EntityType Name="Subscribe">
-          <Key>
-            <PropertyRef Name="SubscribeID" />
-          </Key>
-          <Property Name="SubscribeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="IsSubscriberMemeber" Type="Boolean" Nullable="false" />
-          <Property Name="SubscribeCategoryID" Type="Int16" Nullable="false" />
-          <Property Name="SubcribeToUserID" Type="Int64" />
-          <Property Name="LastNotifiedOnDate" Type="DateTime" Precision="0" />
-          <Property Name="SubscribedByUserID" Type="Int64" />
-          <NavigationProperty Name="SubscribeCategory" Relationship="WereViewAppModel.FK_Subscribe_SubscribeCategory" FromRole="Subscribe" ToRole="SubscribeCategory" />
-          <NavigationProperty Name="User" Relationship="WereViewAppModel.FK_Subscribe_User" FromRole="Subscribe" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="WereViewAppModel.FK_Subscribe_User1" FromRole="Subscribe" ToRole="User" />
-          <NavigationProperty Name="SubscribeNotifiedHistories" Relationship="WereViewAppModel.FK_SubscribeNotifiedHistory_Subscribe" FromRole="Subscribe" ToRole="SubscribeNotifiedHistory" />
-        </EntityType>
-        <EntityType Name="SubscribeCategory">
-          <Key>
-            <PropertyRef Name="SubscribeCategoryID" />
-          </Key>
-          <Property Name="SubscribeCategoryID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Subscribes" Relationship="WereViewAppModel.FK_Subscribe_SubscribeCategory" FromRole="SubscribeCategory" ToRole="Subscribe" />
-        </EntityType>
-        <EntityType Name="SubscribeNotifiedHistory">
-          <Key>
-            <PropertyRef Name="SubscribeNotifiedHistoryID" />
-          </Key>
-          <Property Name="SubscribeNotifiedHistoryID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SubscribeID" Type="Int64" Nullable="false" />
-          <Property Name="NotifiedOnDate" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Subscribe" Relationship="WereViewAppModel.FK_SubscribeNotifiedHistory_Subscribe" FromRole="SubscribeNotifiedHistory" ToRole="Subscribe" />
-        </EntityType>
         <EntityType Name="Tag">
           <Key>
             <PropertyRef Name="TagID" />
@@ -1332,24 +1038,16 @@
           <Property Name="Phone" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="TotalEarnedPoints" Type="Int64" Nullable="false" />
-          <Property Name="DefaultCellPhoneID" Type="Int64" />
-          <Property Name="SubscriberCount" Type="Int64" Nullable="false" />
-          <Property Name="UploadGuid" Type="Guid" Nullable="false" />
-          <Property Name="HasPicture" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Apps" Relationship="WereViewAppModel.FK_App_User" FromRole="User" ToRole="App" />
           <NavigationProperty Name="CellPhones" Relationship="WereViewAppModel.FK_CellPhone_User" FromRole="User" ToRole="CellPhone" />
-          <NavigationProperty Name="CellPhone" Relationship="WereViewAppModel.FK_User_CellPhone" FromRole="User" ToRole="CellPhone" />
           <NavigationProperty Name="FeaturedImages" Relationship="WereViewAppModel.FK_FeaturedImage_User" FromRole="User" ToRole="FeaturedImage" />
+          <NavigationProperty Name="LatestSeenNotifications" Relationship="WereViewAppModel.FK_LatestSeenNotification_User" FromRole="User" ToRole="LatestSeenNotification" />
           <NavigationProperty Name="Messages" Relationship="WereViewAppModel.FK_Message_User" FromRole="User" ToRole="Message" />
           <NavigationProperty Name="Messages1" Relationship="WereViewAppModel.FK_Message_User1" FromRole="User" ToRole="Message" />
           <NavigationProperty Name="MessageSeens" Relationship="WereViewAppModel.FK_MessageSeen_User" FromRole="User" ToRole="MessageSeen" />
           <NavigationProperty Name="MessageSeens1" Relationship="WereViewAppModel.FK_MessageSeen_User1" FromRole="User" ToRole="MessageSeen" />
-          <NavigationProperty Name="Notifications" Relationship="WereViewAppModel.FK_Notification_User" FromRole="User" ToRole="Notification" />
-          <NavigationProperty Name="NotificationSeens" Relationship="WereViewAppModel.FK_LatestSeenNotification_User" FromRole="User" ToRole="NotificationSeen" />
           <NavigationProperty Name="Reviews" Relationship="WereViewAppModel.FK_Review_User" FromRole="User" ToRole="Review" />
           <NavigationProperty Name="ReviewLikeDislikes" Relationship="WereViewAppModel.FK_ReviewLikeDislike_User" FromRole="User" ToRole="ReviewLikeDislike" />
-          <NavigationProperty Name="Subscribes" Relationship="WereViewAppModel.FK_Subscribe_User" FromRole="User" ToRole="Subscribe" />
-          <NavigationProperty Name="Subscribes1" Relationship="WereViewAppModel.FK_Subscribe_User1" FromRole="User" ToRole="Subscribe" />
           <NavigationProperty Name="UserPoints" Relationship="WereViewAppModel.FK_UserPoint_User" FromRole="User" ToRole="UserPoint" />
         </EntityType>
         <EntityType Name="UserPoint">
@@ -1373,18 +1071,6 @@
           <Property Name="Point" Type="Int32" Nullable="false" />
           <NavigationProperty Name="UserPoints" Relationship="WereViewAppModel.FK_UserPoint_UserPointSetting" FromRole="UserPointSetting" ToRole="UserPoint" />
         </EntityType>
-        <Association Name="FK_App_AppOfferType">
-          <End Type="WereViewAppModel.AppOfferType" Role="AppOfferType" Multiplicity="0..1" />
-          <End Type="WereViewAppModel.App" Role="App" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AppOfferType">
-              <PropertyRef Name="AppOfferTypeID" />
-            </Principal>
-            <Dependent Role="App">
-              <PropertyRef Name="AppOfferTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_App_Category">
           <End Type="WereViewAppModel.Category" Role="Category" Multiplicity="1" />
           <End Type="WereViewAppModel.App" Role="App" Multiplicity="*" />
@@ -1481,18 +1167,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_CellPhone">
-          <End Type="WereViewAppModel.CellPhone" Role="CellPhone" Multiplicity="0..1" />
-          <End Type="WereViewAppModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CellPhone">
-              <PropertyRef Name="CellPhoneID" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="DefaultCellPhoneID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_FeaturedImage_User">
           <End Type="WereViewAppModel.User" Role="User" Multiplicity="1" />
           <End Type="WereViewAppModel.FeaturedImage" Role="FeaturedImage" Multiplicity="*" />
@@ -1514,6 +1188,18 @@
             </Principal>
             <Dependent Role="Gallery">
               <PropertyRef Name="GalleryCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LatestSeenNotification_User">
+          <End Type="WereViewAppModel.User" Role="User" Multiplicity="1" />
+          <End Type="WereViewAppModel.LatestSeenNotification" Role="LatestSeenNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="LatestSeenNotification">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1577,42 +1263,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Notification_User">
-          <End Type="WereViewAppModel.User" Role="User" Multiplicity="1" />
-          <End Type="WereViewAppModel.Notification" Role="Notification" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Notification">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LatestSeenNotification_User">
-          <End Type="WereViewAppModel.User" Role="User" Multiplicity="1" />
-          <End Type="WereViewAppModel.NotificationSeen" Role="NotificationSeen" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="NotificationSeen">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LatestUnSeenNotification_NotificationType">
-          <End Type="WereViewAppModel.NotificationType" Role="NotificationType" Multiplicity="1" />
-          <End Type="WereViewAppModel.NotificationSeen" Role="NotificationSeen" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NotificationType">
-              <PropertyRef Name="NotificationTypeID" />
-            </Principal>
-            <Dependent Role="NotificationSeen">
-              <PropertyRef Name="NotificationTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Review_User">
           <End Type="WereViewAppModel.User" Role="User" Multiplicity="1" />
           <End Type="WereViewAppModel.Review" Role="Review" Multiplicity="*" />
@@ -1646,54 +1296,6 @@
             </Principal>
             <Dependent Role="ReviewLikeDislike">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Subscribe_SubscribeCategory">
-          <End Type="WereViewAppModel.SubscribeCategory" Role="SubscribeCategory" Multiplicity="1" />
-          <End Type="WereViewAppModel.Subscribe" Role="Subscribe" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SubscribeCategory">
-              <PropertyRef Name="SubscribeCategoryID" />
-            </Principal>
-            <Dependent Role="Subscribe">
-              <PropertyRef Name="SubscribeCategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Subscribe_User">
-          <End Type="WereViewAppModel.User" Role="User" Multiplicity="0..1" />
-          <End Type="WereViewAppModel.Subscribe" Role="Subscribe" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Subscribe">
-              <PropertyRef Name="SubcribeToUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Subscribe_User1">
-          <End Type="WereViewAppModel.User" Role="User" Multiplicity="0..1" />
-          <End Type="WereViewAppModel.Subscribe" Role="Subscribe" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Subscribe">
-              <PropertyRef Name="SubscribedByUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SubscribeNotifiedHistory_Subscribe">
-          <End Type="WereViewAppModel.Subscribe" Role="Subscribe" Multiplicity="1" />
-          <End Type="WereViewAppModel.SubscribeNotifiedHistory" Role="SubscribeNotifiedHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subscribe">
-              <PropertyRef Name="SubscribeID" />
-            </Principal>
-            <Dependent Role="SubscribeNotifiedHistory">
-              <PropertyRef Name="SubscribeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1752,15 +1354,9 @@
           <FunctionImportMapping FunctionImportName="ResetAppsAndUsers" FunctionName="WereViewAppModel.Store.ResetAppsAndUsers" />
           <FunctionImportMapping FunctionImportName="ResetReviews" FunctionName="WereViewAppModel.Store.ResetReviews" />
           <FunctionImportMapping FunctionImportName="ResetWholeSystem" FunctionName="WereViewAppModel.Store.ResetWholeSystem" />
-          <FunctionImportMapping FunctionImportName="GetAllTablesSpaceUsedInformation" FunctionName="WereViewAppModel.Store.GetAllTablesSpaceUsedInformation" />
           <EntitySetMapping Name="Apps">
             <EntityTypeMapping TypeName="WereViewAppModel.App">
               <MappingFragment StoreEntitySet="App">
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="AppOfferTypeID" ColumnName="AppOfferTypeID" />
-                <ScalarProperty Name="SupportedOSVersions" ColumnName="SupportedOSVersions" />
-                <ScalarProperty Name="TagsDisplay" ColumnName="TagsDisplay" />
-                <ScalarProperty Name="IsMultipleVersion" ColumnName="IsMultipleVersion" />
                 <ScalarProperty Name="UrlWithoutEscapseSequence" ColumnName="UrlWithoutEscapseSequence" />
                 <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -1791,11 +1387,6 @@
           <EntitySetMapping Name="AppDrafts">
             <EntityTypeMapping TypeName="WereViewAppModel.AppDraft">
               <MappingFragment StoreEntitySet="AppDraft">
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="AppOfferTypeID" ColumnName="AppOfferTypeID" />
-                <ScalarProperty Name="SupportedOSVersions" ColumnName="SupportedOSVersions" />
-                <ScalarProperty Name="TagsDisplay" ColumnName="TagsDisplay" />
-                <ScalarProperty Name="IsMultipleVersion" ColumnName="IsMultipleVersion" />
                 <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
                 <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="TotalViewed" ColumnName="TotalViewed" />
@@ -1814,14 +1405,6 @@
                 <ScalarProperty Name="PlatformID" ColumnName="PlatformID" />
                 <ScalarProperty Name="AppName" ColumnName="AppName" />
                 <ScalarProperty Name="AppDraftID" ColumnName="AppDraftID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AppOfferTypes">
-            <EntityTypeMapping TypeName="WereViewAppModel.AppOfferType">
-              <MappingFragment StoreEntitySet="AppOfferType">
-                <ScalarProperty Name="OfferType" ColumnName="OfferType" />
-                <ScalarProperty Name="AppOfferTypeID" ColumnName="AppOfferTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1878,6 +1461,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="LatestSeenNotifications">
+            <EntityTypeMapping TypeName="WereViewAppModel.LatestSeenNotification">
+              <MappingFragment StoreEntitySet="LatestSeenNotification">
+                <ScalarProperty Name="Dated" ColumnName="Dated" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="NotificationTypeID" ColumnName="NotificationTypeID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="LatestSeenNotificationID" ColumnName="LatestSeenNotificationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Messages">
             <EntityTypeMapping TypeName="WereViewAppModel.Message">
               <MappingFragment StoreEntitySet="Message">
@@ -1900,7 +1494,6 @@
           <EntitySetMapping Name="MessageSeens">
             <EntityTypeMapping TypeName="WereViewAppModel.MessageSeen">
               <MappingFragment StoreEntitySet="MessageSeen">
-                <ScalarProperty Name="IsReceived" ColumnName="IsReceived" />
                 <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
                 <ScalarProperty Name="SentDate" ColumnName="SentDate" />
                 <ScalarProperty Name="LastModified" ColumnName="LastModified" />
@@ -1919,10 +1512,6 @@
           <EntitySetMapping Name="Notifications">
             <EntityTypeMapping TypeName="WereViewAppModel.Notification">
               <MappingFragment StoreEntitySet="Notification">
-                <ScalarProperty Name="HasClicked" ColumnName="HasClicked" />
-                <ScalarProperty Name="IsUseDefaultMessage" ColumnName="IsUseDefaultMessage" />
-                <ScalarProperty Name="SeenDate" ColumnName="SeenDate" />
-                <ScalarProperty Name="IsSeen" ColumnName="IsSeen" />
                 <ScalarProperty Name="Dated" ColumnName="Dated" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="NotificationTypeID" ColumnName="NotificationTypeID" />
@@ -1931,25 +1520,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="NotificationSeens">
-            <EntityTypeMapping TypeName="WereViewAppModel.NotificationSeen">
-              <MappingFragment StoreEntitySet="NotificationSeen">
-                <ScalarProperty Name="HasClicked" ColumnName="HasClicked" />
-                <ScalarProperty Name="IsUseDefaultMessage" ColumnName="IsUseDefaultMessage" />
-                <ScalarProperty Name="SeenDate" ColumnName="SeenDate" />
-                <ScalarProperty Name="IsSeen" ColumnName="IsSeen" />
-                <ScalarProperty Name="Dated" ColumnName="Dated" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="NotificationTypeID" ColumnName="NotificationTypeID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="NotificationSeenID" ColumnName="NotificationSeenID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="NotificationTypes">
             <EntityTypeMapping TypeName="WereViewAppModel.NotificationType">
               <MappingFragment StoreEntitySet="NotificationType">
-                <ScalarProperty Name="MessageIconName" ColumnName="MessageIconName" />
                 <ScalarProperty Name="DefaultMessage" ColumnName="DefaultMessage" />
                 <ScalarProperty Name="IsGood" ColumnName="IsGood" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
@@ -1998,36 +1571,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Subscribes">
-            <EntityTypeMapping TypeName="WereViewAppModel.Subscribe">
-              <MappingFragment StoreEntitySet="Subscribe">
-                <ScalarProperty Name="SubscribedByUserID" ColumnName="SubscribedByUserID" />
-                <ScalarProperty Name="LastNotifiedOnDate" ColumnName="LastNotifiedOnDate" />
-                <ScalarProperty Name="SubcribeToUserID" ColumnName="SubcribeToUserID" />
-                <ScalarProperty Name="SubscribeCategoryID" ColumnName="SubscribeCategoryID" />
-                <ScalarProperty Name="IsSubscriberMemeber" ColumnName="IsSubscriberMemeber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="SubscribeID" ColumnName="SubscribeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SubscribeCategories">
-            <EntityTypeMapping TypeName="WereViewAppModel.SubscribeCategory">
-              <MappingFragment StoreEntitySet="SubscribeCategory">
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="SubscribeCategoryID" ColumnName="SubscribeCategoryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SubscribeNotifiedHistories">
-            <EntityTypeMapping TypeName="WereViewAppModel.SubscribeNotifiedHistory">
-              <MappingFragment StoreEntitySet="SubscribeNotifiedHistory">
-                <ScalarProperty Name="NotifiedOnDate" ColumnName="NotifiedOnDate" />
-                <ScalarProperty Name="SubscribeID" ColumnName="SubscribeID" />
-                <ScalarProperty Name="SubscribeNotifiedHistoryID" ColumnName="SubscribeNotifiedHistoryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Tags">
             <EntityTypeMapping TypeName="WereViewAppModel.Tag">
               <MappingFragment StoreEntitySet="Tag">
@@ -2059,10 +1602,6 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="WereViewAppModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="HasPicture" ColumnName="HasPicture" />
-                <ScalarProperty Name="UploadGuid" ColumnName="UploadGuid" />
-                <ScalarProperty Name="SubscriberCount" ColumnName="SubscriberCount" />
-                <ScalarProperty Name="DefaultCellPhoneID" ColumnName="DefaultCellPhoneID" />
                 <ScalarProperty Name="TotalEarnedPoints" ColumnName="TotalEarnedPoints" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
@@ -2092,7 +1631,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          </EntityContainerMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

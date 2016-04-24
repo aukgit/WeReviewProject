@@ -1,4 +1,24 @@
-﻿footer {
+﻿html,
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#wrap {
+  min-height: 100%;
+}
+@media (min-width: 768px) {
+  #wrap {
+    min-height: 71.85%;
+  }
+}
+footer {
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  z-index: 6;
+  clear: both;
   padding: 0;
   background-color: #48505d;
 }

@@ -1,18 +1,18 @@
 @model object
 @{
-    bool isRequired = ViewData.ModelMetadata.IsRequired;
+    var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = isRequired ? "*" : "",
-        prop = ViewData.ModelMetadata.PropertyName.ToString(),
-        propLower = prop.ToLower(),
-        styleProperty = propLower,
-        displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-        description = ViewData.ModelMetadata.Description,
-        templateName = "dropdown-dynamic",
-        spinnerIcon = ViewBag.spinnerIcon ?? styleProperty  + " glyphicon glyphicon-refresh glyphicon-spin",
-        loadingText = ViewBag.loadingText ?? "Requesting data...";
+           prop = ViewData.ModelMetadata.PropertyName,
+           propLower = prop.ToLower(),
+           styleProperty = propLower,
+           displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
+           description = ViewData.ModelMetadata.Description,
+           templateName = "dropdown-dynamic",
+           spinnerIcon = ViewBag.spinnerIcon ?? styleProperty + " glyphicon glyphicon-refresh glyphicon-spin",
+           loadingText = ViewBag.loadingText ?? "Requesting data...";
 
     if (ViewBag.@class == null) {
-    	ViewBag.@class = "btn-success";
+        ViewBag.@class = "btn-success";
     }
 
     if (ViewBag.liveSearch == null) {
@@ -43,8 +43,6 @@
         ViewBag.isHtmlRequest = "false";
     }
     //ViewBag.loadingText 
-    
-    
 }
 <div data-json-combo-plugin="true" class="form-group form-row @styleProperty @templateName-type dynamic-select-container" data-type="@templateName" data-dynamic-select-container="true" data-prop="@styleProperty">
     <div class="controls dev-plugin">
@@ -73,9 +71,10 @@
                      data-is-selectpicker="@ViewBag.isPicker">
                 </div>
                 @if (description != null) {
-                    <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show"><span class="description-icon"></span></a>
+                    <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">
+                        <span class="description-icon"></span></a>
                 }
-                @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input break-line" })
+                @Html.ValidationMessageFor(m => m, null, new {@class = "invalid-input break-line"})
             </div>
         </div>
     </div>

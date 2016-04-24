@@ -814,6 +814,12 @@ div.contactus {
   padding-right: 30px;
   padding-right: 3rem;
 }
+.changed-row {
+  background-color: #ffedd3;
+}
+.content-min-height-100-percent {
+  min-height: 100%;
+}
 .regular-show-more-btn {
   clear: both;
 }

@@ -5,8 +5,8 @@
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
     var token = Html.AntiForgeryToken();
-    string controller = (string) ViewBag.controller;
-    string viewName = "Write";
+    var controller = (string) ViewBag.controller;
+    var viewName = "Write";
     Layout = null;
 }
 

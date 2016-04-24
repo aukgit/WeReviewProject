@@ -40,5 +40,25 @@ namespace WeReviewApp.Modules.Session {
             }
             return true;
         }
+        public static void RemoveKeys(string[] keys) {
+            if (HttpContext.Current != null) {
+                var session = HttpContext.Current.Session;
+                if (session != null) {
+                    foreach (var key in keys) {
+                        session.Remove(key);
+                    }
+                }
+            }
+        }
+
+        public static void RemoveKey(string key) {
+            if (HttpContext.Current != null) {
+                var session = HttpContext.Current.Session;
+                if (session != null) {
+                    session.Remove(key);
+                }
+            }
+        }
+
     }
 }

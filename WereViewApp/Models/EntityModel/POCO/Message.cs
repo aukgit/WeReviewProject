@@ -25,7 +25,8 @@ namespace WeReviewApp.Models.EntityModel
         public bool IsDraft { get; set; }
         public System.DateTime LastModified { get; set; }
         public System.DateTime SentDate { get; set; }
-        public System.DateTime? ReceivedDate { get; set; }
+
+        public Nullable<System.DateTime> ReceivedDate { get; set; }
         public bool IsReceived { get; set; }
     
         public virtual User User { get; set; }

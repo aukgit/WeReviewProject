@@ -1,14 +1,13 @@
 using System.Data.Entity.Migrations;
-using WeReviewApp.Models.Context;
 
 namespace WeReviewApp.Models.Migrations.DevIdentity {
-    internal sealed class Configuration : DbMigrationsConfiguration<DevIdentityDbContext> {
+    internal sealed class Configuration : DbMigrationsConfiguration<Context.DevIdentityDbContext> {
         public Configuration() {
             AutomaticMigrationsEnabled = true;
             MigrationsDirectory = @"Models\Migrations\DevIdentity";
         }
 
-        protected override void Seed(DevIdentityDbContext context) {
+        protected override void Seed(Context.DevIdentityDbContext context) {
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

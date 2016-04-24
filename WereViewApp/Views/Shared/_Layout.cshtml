@@ -33,18 +33,20 @@
         </div>
     <![endif]-->
     @Html.Partial("_AdditionalFields")
-    @Html.Partial("_LoadingBar")
+    @Html.Partial("_Loading-Bar")
     <div>
         @{ Html.RenderAction("NavBar", "Partials", true); }
     </div>
     <div id="wrap">
         <div class="content">
             <div class="container">
-                @RenderBody()
+                <div class="">@RenderBody()</div>
             </div>
-            @Html.Partial("_Footer")
         </div>
     </div>
+    @Html.Partial("_Footer")
+
+
     @RenderSection("featured", false)
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

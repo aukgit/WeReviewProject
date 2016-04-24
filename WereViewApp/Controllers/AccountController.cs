@@ -7,8 +7,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Error;
+using FontAwesomeIcons;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using WeReviewApp.Filter;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.Identity;
 using WeReviewApp.Models.ViewModels;
@@ -35,7 +37,7 @@ namespace WeReviewApp.Controllers {
 
         #endregion
 
-        #region Call Complete Registration
+        #region Final Registration : Call Complete Registration
 
         public void CallCompleteRegistration(long userId, string primaryRole = "Rookie") {
             UserManager.CompleteRegistration(userId, true, primaryRole);
@@ -59,13 +61,13 @@ namespace WeReviewApp.Controllers {
         public async Task<ActionResult> LinkLoginCallback() {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
             if (loginInfo == null) {
-                return RedirectToAction("Manage", new {Message = ManageMessageId.Error});
+                return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
             }
             var result = await Manager.AddLoginAsync(User.Identity.GetUserID(), loginInfo.Login);
             if (result.Succeeded) {
                 return RedirectToAction("Manage");
             }
-            return RedirectToAction("Manage", new {Message = ManageMessageId.Error});
+            return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
         }
 
         #endregion
@@ -85,7 +87,7 @@ namespace WeReviewApp.Controllers {
             } else {
                 message = ManageMessageId.Error;
             }
-            return RedirectToAction("Manage", new {Message = message});
+            return RedirectToAction("Manage", new { Message = message });
         }
 
         #endregion
@@ -116,12 +118,13 @@ namespace WeReviewApp.Controllers {
 
                 Manager = null;
             }
-            db.Dispose();
+            _db.Dispose();
             base.Dispose(disposing);
         }
 
         #region Check Inbox / InboxCheck
 
+        [AllowAnonymous]
         public ActionResult Verify() {
             //var emailResender = EmailResendViewModel.GetEmailResendViewModelFromSession();
             //if (emailResender != null) {
@@ -135,23 +138,37 @@ namespace WeReviewApp.Controllers {
         #endregion
 
         #region Re-send Confirmation Email
+        private async void SendConfirmationEmail(ApplicationUser user) {
+            var code = Manager.GenerateEmailConfirmationToken(user.Id);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account",
+                new { userId = user.Id, code, codeHashed = user.GeneratedGuid }, Request.Url.Scheme);
+            var mailString = MailHtml.EmailConfirmHtml(user, callbackUrl);
+            AppVar.Mailer.Send(user.Email, "Email Confirmation", mailString);
+        }
 
         [Authorize]
         public async Task<ActionResult> ResendConfirmationMail() {
             var lastSend = Session["last-send"] as DateTime?;
             if (lastSend == null) {
-                var user = UserManager.GetCurrentUser();
-                if (!user.IsRegistrationComplete) {
-                    SendConfirmationEmail(user);
+                if (!User.IsRegistrationComplete()) {
+                    var user = User.GetUser();
+                    try {
+                        SendConfirmationEmail(user);
+                    } catch (Exception) {
+                        return SignOutProgrammatically();
+                    }
                     ViewBag.message =
                         "A verification email has been sent to your email address. Please check the spam folder if necessary.";
+                    SignOutProgrammaticallyNonRedirect();
                 } else {
                     ViewBag.message =
                         "Your registration is already complete! You have confirmed your account verification successfully.";
+                    ViewBag.icon = FaIcons.CheckMark;
                 }
             } else {
                 ViewBag.message =
                     "You have already sent a verification code recently or your registration is complete.";
+                ViewBag.icon = FaIcons.CheckMark;
             }
             Session["last-send"] = DateTime.Now;
             return View("InboxCheck");
@@ -223,15 +240,7 @@ namespace WeReviewApp.Controllers {
 
         #endregion
 
-        #region Confirm Email
-
-        private async void SendConfirmationEmail(ApplicationUser user) {
-            var code = Manager.GenerateEmailConfirmationToken(user.Id);
-            var callbackUrl = Url.Action("ConfirmEmail", "Account",
-                new {userId = user.Id, code, codeHashed = user.GeneratedGuid}, Request.Url.Scheme);
-            var mailString = MailHtml.EmailConfirmHtml(user, callbackUrl);
-            AppVar.Mailer.Send(user.Email, "Email Confirmation", mailString);
-        }
+        #region Confirm Email : Validation
 
         //[CompressFilter(Order = 1)]
         [AllowAnonymous]
@@ -241,19 +250,26 @@ namespace WeReviewApp.Controllers {
             }
             var foundInUser = Guid.Empty;
             var result = await Manager.ConfirmEmailAsync(userId, code);
-            var user = UserManager.GetUser(userId);
-            if (user != null) {
-                foundInUser = (Guid) user.GeneratedGuid;
-            }
-            if (!user.IsRegistrationComplete) {
-                if (result.Succeeded && foundInUser.Equals(codeHashed)) {
-                    CallCompleteRegistration(userId);
-                    return View("ConfirmEmail");
+            if (result.Succeeded) {
+                #region Complete Registration on sucess of confirmation.
+                var user = UserManager.GetUser(userId);
+                if (user != null) {
+                    foundInUser = (Guid)user.GeneratedGuid;
                 }
-            } else {
-                // already registered
-                ViewBag.message = "You have already registered and confirmed your email successfully.";
-                return View("InboxCheck");
+                if (!user.IsRegistrationComplete) {
+                    if (foundInUser.Equals(codeHashed)) {
+                        CallCompleteRegistration(userId);
+                        UserManager.ClearUserSessions(); // clear user cache.
+                        ViewBag.icon = FaIcons.CheckMark;
+                        return View("ConfirmEmail");
+                    }
+                } else {
+                    // already registered
+                    ViewBag.message = "You have already registered and confirmed your email successfully.";
+                    ViewBag.icon = FaIcons.CheckMark;
+                    return View("InboxCheck");
+                }
+                #endregion
             }
             AddErrors(result);
             return AppVar.GetFriendlyError("Confirmation is not valid.",
@@ -264,7 +280,7 @@ namespace WeReviewApp.Controllers {
 
         #region Declaration
 
-        private readonly ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         private PasswordHasher _passwordHasher = new PasswordHasher();
         public ApplicationUserManager Manager { get; private set; }
@@ -290,21 +306,25 @@ namespace WeReviewApp.Controllers {
 
         private async Task SignInAsync(ApplicationUser user, bool isPersistent) {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties {IsPersistent = isPersistent},
+            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = isPersistent },
                 await user.GenerateUserIdentityAsync(Manager));
         }
 
         private void SignInProgrammatically(ApplicationUser user, bool isPersistent) {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             var identity = UserManager.Manager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties {IsPersistent = isPersistent}, identity);
+            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = isPersistent }, identity);
         }
 
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         [AllowAnonymous]
         public ActionResult Login(string returnUrl) {
             if (UserManager.IsAuthenticated()) {
-                return RedirectToActionPermanent("Manage");
+                var userCache = User.GetNewOrExistingUserCache();
+                if (userCache != null && userCache.IsRegistrationComplete) {
+                    return RedirectToActionPermanent("Manage");
+                }
+                return RedirectToActionPermanent("Verify");
             }
             ViewBag.ReturnUrl = returnUrl;
             return View();
@@ -319,10 +339,13 @@ namespace WeReviewApp.Controllers {
                 var user = await UserManager.GetUserByEmailAsync(model.Email, model.Password);
                 if (user != null) {
                     await SignInAsync(user, model.RememberMe);
-                    if (user.IsBlocked || !user.IsRegistrationComplete) {
-                        SignOutProgrammatically();
+                    if (user.IsBlocked) {
+                        SignOutProgrammaticallyNonRedirect();
                         return AppVar.GetAuthenticationError("You don't have the permission.",
-                            "Sorry you don't have the permission to authenticate right now. Please check your email inbox/spam folder for details.");
+                            "Sorry you don't have the permission to authenticate right now. Your account is blocked");
+                    }
+                    if (!user.IsRegistrationComplete) {
+                        return RedirectToActionPermanent("Verify");
                     }
                     return RedirectToLocal(returnUrl);
                 }
@@ -339,19 +362,23 @@ namespace WeReviewApp.Controllers {
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult SignOut() {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            AuthenticationManager.SignOut();
+            SignOutProgrammaticallyNonRedirect();
             return RedirectToAction("Index", "Home");
         }
 
         [AllowAnonymous]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult SignOutProgrammatically() {
+            SignOutProgrammaticallyNonRedirect();
+            return RedirectToAction("Index", "Home");
+        }
+
+        public void SignOutProgrammaticallyNonRedirect() {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
         }
 
         #endregion
@@ -359,9 +386,10 @@ namespace WeReviewApp.Controllers {
         #region Register
 
         [AllowAnonymous]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult Register() {
             if (UserManager.IsAuthenticated()) {
-                return AppVar.GetAuthenticationError("Authentication Failed", "");
+                return AppVar.GetAuthenticationError("You are already authenticated.", "");
             }
             return View();
         }
@@ -369,58 +397,67 @@ namespace WeReviewApp.Controllers {
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        //[CompressFilter(Order = 1)]
         public async Task<ActionResult> Register(RegisterViewModel model) {
-            var errors = new ErrorCollector();
-            //External Validation.
-            var validator = new DevUserValidator(model, errors, db);
-            var validOtherConditions = validator.ValidateEveryValidations();
-            var emailResender = EmailResendViewModel.GetEmailResendViewModelFromSession();
+            if (UserManager.IsAuthenticated()) {
+                return AppVar.GetAuthenticationError("You are already authenticated.", "");
+            }
 
+            #region Redirect if already registered successfully.
+            var emailResender = EmailResendViewModel.GetEmailResendViewModelFromSession();
             if (emailResender != null) {
                 // that means user is already created successfully.
                 return RedirectToActionPermanent("Verify");
             }
+            #endregion
 
-            if (ModelState.IsValid && validOtherConditions) {
-                var user = UserManager.GetUserFromViewModel(model); // get user from view model.
-                var result = await Manager.CreateAsync(user, model.Password);
-                if (result.Succeeded) {
-                    // SignInProgrammatically(user, false);
-                    // RoleManager.AddTempRoleInfo(user, model.Role);
+            if (ModelState.IsValid) {
+                var errors = new ErrorCollector();
+                //External Validation.
+                var validator = new DevUserValidator(model, errors, _db);
+                var validOtherConditions = validator.ValidateEveryValidations();
+                if (validOtherConditions) {
+                    model.UserName = model.UserName.Trim();
+                    model.FirstName = model.FirstName.Trim();
+                    model.LastName = model.LastName.Trim();
+                    var user = UserManager.GetUserFromViewModel(model); // get user from view model.
+                    var result = await Manager.CreateAsync(user, model.Password);
+                    if (result.Succeeded) {
+                        if (AppVar.Setting.IsConfirmMailRequired && AppVar.Setting.IsFirstUserFound) {
+                            #region For every regular user.
+                            // First user already found.
+                            // mail needs to be confirmed and first user found.
 
-                    if (AppVar.Setting.IsConfirmMailRequired && AppVar.Setting.IsFirstUserFound) {
-                        // First user already found.
-                        // mail needs to be confirmed and first user found.
+                            #region Send an email to the user about mail confirmation
 
-                        #region Send an email to the user about mail confirmation
+                            SendConfirmationEmail(user);
 
-                        SendConfirmationEmail(user);
+                            #endregion
 
-                        #endregion
+                            #region Redirect to verify since registration
 
-                        #region Sign out because registration is not complete
+                            //SignOutProgrammaticallyNonRedirect();
+                            return RedirectToActionPermanent("Verify");
 
-                        SignOutProgrammatically();
+                            #endregion
+                            #endregion
+                        } else if (!AppVar.Setting.IsFirstUserFound) {
+                            #region For first user / first admin user.
+                            // first user not found or email doesn't need to be checked.
+                            // first haven't found
+                            // This is for first user.
+
+                            #region Send an email to the user about mail confirmation
+
+                            SendConfirmationEmail(user);
+
+                            #endregion
+                            #endregion
+                        }
+                        CallCompleteRegistration(user.UserID, "Rookie"); // only will be called for first user.
                         return RedirectToActionPermanent("Verify");
-
-                        #endregion
                     }
-                    // first user not found or email doesn't need to be checked.
-                    if (!AppVar.Setting.IsFirstUserFound) {
-                        // first haven't found
-                        // This is for first user.
-
-                        #region Send an email to the user about mail confirmation
-
-                        SendConfirmationEmail(user);
-
-                        #endregion
-                    }
-                    CallCompleteRegistration(user.UserID, "Rookie"); // only will be called for first user.
-                    return RedirectToActionPermanent("Verify");
+                    AddErrors(result);
                 }
-                AddErrors(result);
             }
             return View("Register", model);
         }
@@ -435,7 +472,7 @@ namespace WeReviewApp.Controllers {
         public ActionResult ExternalLogin(string provider, string returnUrl) {
             // Request a redirect to the external login provider
             return new ChallengeResult(provider,
-                Url.Action("ExternalLoginCallback", "Account", new {ReturnUrl = returnUrl}));
+                Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
         //
@@ -491,7 +528,8 @@ namespace WeReviewApp.Controllers {
         [ValidateAntiForgeryToken]
         //[CompressFilter(Order = 1)]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model) {
-            var isAlreadySent = !AppVar.IsInTestEnvironment && Session["forget-pass"] != null;
+            var name = "forget-pass-" + model.Email.GetHashCode().ToString();
+            var isAlreadySent = !AppVar.IsInTestEnvironment && Session[name] != null;
             if (!isAlreadySent) {
                 if (ModelState.IsValid) {
                     var user = await Manager.FindByEmailAsync(model.Email);
@@ -503,14 +541,14 @@ namespace WeReviewApp.Controllers {
             } else {
                 ViewBag.message = "You have had already sent a request just few seconds ago. Try again later.";
             }
-            Session["forget-pass"] = "set";
+            Session[name] = "set";
             return View("ForgotPasswordConfirmation");
         }
 
         private async void SendResetPasswordLinkToUser(ApplicationUser user) {
             var code = Manager.GenerateUserToken(TokenPurpose.ResetPassword, user.Id);
             var callbackUrl = Url.Action("ResetPassword", "Account",
-                new {userId = user.Id, email = user.Email, code, guid = user.GeneratedGuid}, Request.Url.Scheme);
+                new { userId = user.Id, email = user.Email, code, guid = user.GeneratedGuid }, Request.Url.Scheme);
             var mailString = MailHtml.PasswordResetHtml(user, callbackUrl);
             AppVar.Mailer.Send(user.Email, "Reset Password", mailString);
         }
@@ -521,7 +559,8 @@ namespace WeReviewApp.Controllers {
 
         [AllowAnonymous]
         public ActionResult ResetPassword(long userId, string email, string code, Guid guid) {
-            var isAlreadySent = !AppVar.IsInTestEnvironment && Session["reset-pass"] != null;
+            var name = "reset-pass-" + guid.GetHashCode().ToString();
+            var isAlreadySent = !AppVar.IsInTestEnvironment && Session[name] != null;
             if (!isAlreadySent) {
                 if (code == null || !Manager.VerifyUserToken(userId, TokenPurpose.ResetPassword, code)) {
                     return View("Error");
@@ -536,7 +575,7 @@ namespace WeReviewApp.Controllers {
                             Code = code,
                             Email = email
                         };
-                        Session["reset-pass"] = "set";
+                        Session[name] = "set";
                         return View(model);
                     }
                 }
@@ -549,7 +588,8 @@ namespace WeReviewApp.Controllers {
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model) {
-            if (Session["user-reset-" + model.Email] == null) {
+            var name = "user-reset-" + model.Email.GetHashCode().ToString();
+            if (Session[name] == null) {
                 ApplicationUser user;
                 if (User.IsUserExistInSessionByEmail(model.Email, out user, SessionNames.EmailResetExecute)) {
                     if (ModelState.IsValid) {
@@ -560,7 +600,7 @@ namespace WeReviewApp.Controllers {
                         var token = Manager.GeneratePasswordResetToken(user.Id);
                         var result = await Manager.ResetPasswordAsync(user.Id, token, model.Password);
                         if (result.Succeeded) {
-                            Session["user-reset-" + model.Email] = "reset";
+                            Session[name] = "reset";
                             ViewBag.message = "Your account password has been reset successfully!";
                             return View("ResetPasswordConfirmation");
                         }
@@ -582,6 +622,7 @@ namespace WeReviewApp.Controllers {
 
         #region Account Manage
 
+        [ValidateRegistrationComplete]
         public ActionResult Manage(ManageMessageId? message) {
             if (UserManager.IsAuthenticated()) {
                 ViewBag.StatusMessage =
@@ -603,6 +644,7 @@ namespace WeReviewApp.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateRegistrationComplete]
         public async Task<ActionResult> Manage(ManageUserViewModel model) {
             var hasPassword = HasPassword();
             ViewBag.HasLocalPassword = hasPassword;
@@ -615,7 +657,7 @@ namespace WeReviewApp.Controllers {
                     if (result.Succeeded) {
                         var user = await Manager.FindByIdAsync(User.Identity.GetUserID());
                         await SignInAsync(user, false);
-                        return RedirectToAction("Manage", new {Message = ManageMessageId.ChangePasswordSuccess});
+                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
                     }
                     AddErrors(result);
                 }
@@ -629,7 +671,7 @@ namespace WeReviewApp.Controllers {
                 if (ModelState.IsValid) {
                     var result = await Manager.AddPasswordAsync(User.Identity.GetUserID(), model.NewPassword);
                     if (result.Succeeded) {
-                        return RedirectToAction("Manage", new {Message = ManageMessageId.SetPasswordSuccess});
+                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
                     }
                     AddErrors(result);
                 }
@@ -664,10 +706,6 @@ namespace WeReviewApp.Controllers {
             return false;
         }
 
-        private void SendEmail(string email, string callbackUrl, string subject, string message) {
-            // For information on sending mail, please visit http://go.microsoft.com/fwlink/?LinkID=320771
-        }
-
         public enum ManageMessageId {
             ChangePasswordSuccess,
             SetPasswordSuccess,
@@ -684,7 +722,7 @@ namespace WeReviewApp.Controllers {
 
         private class ChallengeResult : HttpUnauthorizedResult {
             public ChallengeResult(string provider, string redirectUri)
-                : this(provider, redirectUri, null) {}
+                : this(provider, redirectUri, null) { }
 
             public ChallengeResult(string provider, string redirectUri, string userId) {
                 LoginProvider = provider;
@@ -697,7 +735,7 @@ namespace WeReviewApp.Controllers {
             public string UserId { get; set; }
 
             public override void ExecuteResult(ControllerContext context) {
-                var properties = new AuthenticationProperties {RedirectUri = RedirectUri};
+                var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
                 if (UserId != null) {
                     properties.Dictionary[XsrfKey] = UserId;
                 }

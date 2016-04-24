@@ -5,7 +5,6 @@ namespace WeReviewApp.Models.POCO.IdentityCustomization {
     public class RegisterCode {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid RegisterCodeID { get; set; }
-
         public long RoleID { get; set; }
 
         public DateTime GeneratedDate { get; set; }
@@ -14,5 +13,7 @@ namespace WeReviewApp.Models.POCO.IdentityCustomization {
 
         public bool IsUsed { get; set; }
         public bool IsExpired { get; set; }
+
+
     }
 }

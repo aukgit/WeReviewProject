@@ -1,11 +1,11 @@
 ﻿@model WeReviewApp.Models.EntityModel.App
 @{
-    bool isFrist = true;
-    string[] tagsList = Model.Tags != null ? @Model.Tags.Split(',') : null;
-    string publishDate = Html.DisplayDateTime(Model.PostedByUserID, Model.CreatedDate, DateTimeFormatType.Date, addTimeZoneString: true);
-    string appName = Model.AppName;
-    string platformSubtitle = Model.Platform.PlatformName + " mobile apps";
-    string softwareUrl = AppVar.Url; //we review app
+    var isFrist = true;
+    var tagsList = Model.Tags != null ? @Model.Tags.Split(',') : null;
+    var publishDate = Html.DisplayDateTime(Model.PostedByUserID, Model.CreatedDate, DateTimeFormatType.Date, addTimeZoneString: true);
+    var appName = Model.AppName;
+    var platformSubtitle = Model.Platform.PlatformName + " mobile apps";
+    var softwareUrl = AppVar.Url; //we review app
 }
 <div class="app-description seo-optimize" title="@appName description">
     <span itemprop="description">@Html.Truncate(Model.Description, 200, false)</span>
@@ -18,7 +18,7 @@
         <a class="less-btn" data-ref="app-description">less</a>
         <div class="top-gap-small">
             @if (tagsList != null) {
-                <div class="inline tagbox">
+                <div class="inline tagbox padding-r-20">
                     <i class="fa fa-tag"></i> Tags:
                     @foreach (var tag in tagsList) {
                         if (!isFrist) {
@@ -36,7 +36,7 @@
                     }
                 </div>
             }
-            <div class="indent-1 inline punlished-date">
+            <div class="inline punlished-date">
                 <i class="fa fa-calendar-o"></i>
                 Published date:
                 <a href="@publishDate" title="Mobiles apps review on @publishDate">@publishDate</a>
@@ -46,4 +46,3 @@
     </div>
     <div class="clear"></div>
 </div>
-

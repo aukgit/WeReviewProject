@@ -4,18 +4,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WeReviewApp.Models.POCO.IdentityCustomization {
     public class ImageResizeSetting {
         public int ImageResizeSettingID { get; set; }
-
         [Column(TypeName = "VARCHAR")]
         [StringLength(256)]
         [Required]
         public string Name { get; set; }
-
         [Required]
-        public float Height { get; set; }
 
+        public float Height { get; set; }
         [Required]
         public float Width { get; set; }
-
         [Column(TypeName = "VARCHAR")]
         [StringLength(5)]
         [Required]

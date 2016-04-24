@@ -1,14 +1,13 @@
 using System.Data.Entity.Migrations;
-using WeReviewApp.Models.Context;
 
 namespace WeReviewApp.Models.Migrations.Indentity {
-    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext> {
+    internal sealed class Configuration : DbMigrationsConfiguration<Context.ApplicationDbContext> {
         public Configuration() {
             AutomaticMigrationsEnabled = true;
             MigrationsDirectory = @"Models\Migrations\Indentity";
         }
 
-        protected override void Seed(ApplicationDbContext context) {
+        protected override void Seed(Context.ApplicationDbContext context) {
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

@@ -1,8 +1,4 @@
-﻿using WeReviewApp.Models.Context;
-using WeReviewApp.Models.POCO.IdentityCustomization;
-using WeReviewApp.Modules.Session;
-using WeReviewApp.Modules.TimeZone;
-using System;
+﻿using System;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -10,66 +6,36 @@ using DevMvcComponent;
 using DevMvcComponent.Error;
 using DevMvcComponent.Mail;
 using DevMvcComponent.Processor;
+using WeReviewApp.Models.Context;
+using WeReviewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Modules.Session;
+using WeReviewApp.Modules.TimeZone;
 
 namespace WeReviewApp {
     /// <summary>
-    /// Application Configurations, also contains the list of roles.
+    ///     Application Configurations, also contains the list of roles.
     /// </summary>
     public static class AppConfig {
-
-        #region Public declares
-
-        public static CookieProcessor Cookies;
-        public static CacheProcessor Caches;
-        public static ErrorCollector ErrorCollection = new ErrorCollector();
-        public static readonly string[] Roles = new string[] {
-            "Admin",
-            "Moderator",
-            "Default",
-            "Guest"
-        };
-
-        #endregion
-        public static ErrorCollector GetNewErrorCollector() {
-            return new ErrorCollector();
-        }
-        private static CoreSetting _setting = null;
+        private static CoreSetting _setting;
         private static bool _initalized = false;
         private static int _truncateLength = 30;
 
-        public static int ValidationMaxNumber { get { return 10; } }
+        public static int ValidationMaxNumber {
+            get { return 10; }
+        }
 
         public static int TruncateLength {
-            get {
-                return _truncateLength;
-            }
-            set {
-                _truncateLength = value;
-            }
+            get { return _truncateLength; }
+            set { _truncateLength = value; }
         }
 
         /// <summary>
-        /// Setup DevMvcComponent
+        ///     Get few common classes from Developers Organism Component.
         /// </summary>
-        private static void SetupDevMvcComponent() {
-            // initialize DevMvcComponent
-            // Configure this with add a sender email.
-            var mailer = new CustomMailServer(Setting.SenderEmail, Setting.SenderEmailPassword,Setting.SmtpHost,Setting.SmtpMailPort, Setting.IsSmtpssl);
-            Mvc.Setup(AppVar.Name, Setting.DeveloperEmail, Assembly.GetExecutingAssembly(), mailer);
-            //Mvc.Mailer.QuickSend("devorg.bd@gmail.com", "Hello", "Hello");
-            Cookies = Mvc.Cookies;
-            Caches = Mvc.Caches;
-        }
-
-        /// <summary>
-        /// Get few common classes from Developers Organism Component.
-        /// </summary>
-
-
         public static CoreSetting Setting {
             get {
                 if (_setting == null) {
-                    using (DevIdentityDbContext db = new DevIdentityDbContext()) {
+                    using (var db = new DevIdentityDbContext()) {
                         _setting = db.CoreSettings.FirstOrDefault();
                     }
                 }
@@ -78,16 +44,34 @@ namespace WeReviewApp {
             private set { _setting = value; }
         }
 
+        public static ErrorCollector GetNewErrorCollector() {
+            return new ErrorCollector();
+        }
+
         /// <summary>
-        /// Settings will not be null. Default values will be pushed.
+        ///     Setup DevMvcComponent
+        /// </summary>
+        private static void SetupDevMvcComponent() {
+            // initialize DevMvcComponent
+            // Configure this with add a sender email.
+            var mailer = new CustomMailServer(Setting.SenderEmail, Setting.SenderEmailPassword, Setting.SmtpHost,
+                Setting.SmtpMailPort, Setting.IsSmtpssl);
+            Mvc.Setup(AppVar.Name, Setting.DeveloperEmail, Assembly.GetExecutingAssembly(), mailer);
+            //Mvc.Mailer.QuickSend("devorg.bd@gmail.com", "Hello", "Hello");
+            Cookies = Mvc.Cookies;
+            Caches = Mvc.Caches;
+        }
+
+        /// <summary>
+        ///     Settings will not be null. Default values will be pushed.
         /// </summary>
         /// <returns></returns>
         private static bool CreateDefaultCoreSetting() {
             var s = Setting;
             if (s == null) {
                 //no setting exist , need to create a default setting.
-                using (DevIdentityDbContext db = new DevIdentityDbContext()) {
-                    _setting = new CoreSetting() {
+                using (var db = new DevIdentityDbContext()) {
+                    _setting = new CoreSetting {
                         // Set the id to be auto in db.
                         CoreSettingID = 1,
                         ApplicationName = "Developers Organism Component",
@@ -131,16 +115,14 @@ namespace WeReviewApp {
                     var i = db.SaveChanges();
                     if (i >= 0) {
                         return true;
-                    } else {
-                        return false;
                     }
+                    return false;
                 }
             }
             return false;
         }
 
         public static void RefreshSetting() {
-
             using (var db = new DevIdentityDbContext()) {
                 CreateDefaultCoreSetting();
                 _setting = db.CoreSettings.FirstOrDefault();
@@ -154,31 +136,43 @@ namespace WeReviewApp {
                 SetupDevMvcComponent();
                 //if false then no email on error.
                 Config.IsNotifyDeveloper = Setting.NotifyDeveloperOnError;
-
             }
         }
 
         /// <summary>
-        /// Get error and set it to null.
+        ///     Get error and set it to null.
         /// </summary>
         /// <returns></returns>
         public static ErrorCollector GetGlobalError() {
             if (HttpContext.Current.Session[SessionNames.Error] != null) {
-                var error = (ErrorCollector)HttpContext.Current.Session[SessionNames.Error];
-                HttpContext.Current.Session[SessionNames.Error] = null;
+                var error = (ErrorCollector) HttpContext.Current.Session[SessionNames.Error];
+                SessionNames.RemoveKey(SessionNames.Error);
                 return error;
-            } else {
-                return null;
             }
+            return null;
         }
 
         /// <summary>
-        /// Set Global Error
+        ///     Set Global Error
         /// </summary>
         /// <param name="error"></param>
         public static void SetGlobalError(ErrorCollector error) {
             HttpContext.Current.Session[SessionNames.Error] = error;
         }
 
+        #region Public declares
+
+        public static CookieProcessor Cookies;
+        public static CacheProcessor Caches;
+        public static ErrorCollector ErrorCollection = new ErrorCollector();
+
+        public static readonly string[] Roles = {
+            "Admin",
+            "Moderator",
+            "Default",
+            "Guest"
+        };
+
+        #endregion
     }
 }

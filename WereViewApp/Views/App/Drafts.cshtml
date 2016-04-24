@@ -4,9 +4,9 @@
     ViewBag.Title = "App Drafts";
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    string controller = (string) ViewBag.controller;
-    string viewName = "Index";
-    string editLinkName = "";
+    var controller = (string) ViewBag.controller;
+    var viewName = "Index";
+    var editLinkName = "";
 }
 @Html.SamePageLinkWithIcon(title, subtitle, "glyphicon glyphicon-th-list")
 <p class="left-button-wrapper">

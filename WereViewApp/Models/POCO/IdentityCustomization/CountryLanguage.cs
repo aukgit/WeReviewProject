@@ -7,11 +7,9 @@ namespace WeReviewApp.Models.POCO.IdentityCustomization {
     public class CountryLanguage {
         [Key]
         public int CountryLanguageID { get; set; }
-
         [Column(TypeName = "VARCHAR")]
         [StringLength(50)]
         public string Language { get; set; }
-
         [Column(TypeName = "VARCHAR")]
         [StringLength(3)]
         public string Code { get; set; }
@@ -24,7 +22,6 @@ namespace WeReviewApp.Models.POCO.IdentityCustomization {
 
         [ForeignKey("CountryLanguageID")]
         public ICollection<CountryTranslation> CountryTranslations { get; set; }
-
         [ForeignKey("CountryLanguageID")]
         public ICollection<ApplicationUser> ApplicationUsers { get; set; }
     }

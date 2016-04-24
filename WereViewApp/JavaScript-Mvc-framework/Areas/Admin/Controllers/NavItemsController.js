@@ -63,6 +63,7 @@ $.app.controllers.navItemsController = {
 
             // bind events
             self.bindEvents.saveOrderButtonClick(urlSchema.SaveOrder);
+            self.bindEvents.onBlurInputs($allInputs, urlSchema.SaveOrder);
 
 
 
@@ -71,6 +72,20 @@ $.app.controllers.navItemsController = {
     },
 
     bindEvents: {
+        onBlurInputs: function ($allInputs) {
+            var self = $.app.controllers.navItemsController,
+                tracker = self.prop.tracker;
+            $allInputs.on('blur', function () {
+                var $input = $(this),
+                    $tr = $input.parent().parent().parent();
+                console.log($tr);
+                if (tracker.isChanged($input)) {
+                    $tr.addClass("changed-row");
+                } else {
+                    $tr.removeClass("changed-row");
+                }
+            });
+        },
         saveOrderButtonClick: function(saveingUrl) {
             var $saveBtn = $.byId("save-order-btn");
             var self = $.app.controllers.navItemsController,
