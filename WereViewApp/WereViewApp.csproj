@@ -564,6 +564,10 @@
     <Content Include="Content\css\flags32-combo.css" />
     <Content Include="Content\css\flags32.css" />
     <Content Include="Content\css\flags32.png" />
+    <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\css\font-awesome.min.css">
+      <DependentUpon>font-awesome.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\fonts-rimixens.css" />
     <Content Include="Content\css\fonts-rimixens.min.css">
       <DependentUpon>fonts-rimixens.css</DependentUpon>
@@ -777,10 +781,6 @@
       <DependentUpon>color-fonts.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\color-fonts.less" />
-    <Content Include="Content\Less\CSS\signal.css" />
-    <Content Include="Content\Less\CSS\signal.min.css">
-      <DependentUpon>signal.css</DependentUpon>
-    </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
     <Content Include="Content\Less\less-imports.less" />
@@ -949,7 +949,8 @@
     <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="JavaScript-Mvc-framework\app.config.js" />
     <Content Include="JavaScript-Mvc-framework\app.global.js" />
-    <Content Include="JavaScript-Mvc-framework\app.initializeMethods.js" />
+    <Content Include="JavaScript-Mvc-framework\app.executeAfter.js" />
+    <Content Include="JavaScript-Mvc-framework\app.executeBefore.js" />
     <Content Include="JavaScript-Mvc-framework\app.js" />
     <Content Include="JavaScript-Mvc-framework\app.run.js" />
     <Content Include="JavaScript-Mvc-framework\Areas\Admin\Controllers\NavItemsController.js" />
@@ -960,7 +961,9 @@
     <Content Include="JavaScript-Mvc-framework\extensions\ajax.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\clone.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\constants.js" />
+    <Content Include="JavaScript-Mvc-framework\extensions\hiddenContainer.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\initialize.js" />
+    <Content Include="JavaScript-Mvc-framework\attachInitialize.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\inputChangeTracker.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\modal.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\pagination.js" />
@@ -999,8 +1002,22 @@
     <Content Include="Content\Less\Spinner\load9.less" />
     <Content Include="Content\Less\Spinner\signal.less" />
     <Content Include="Content\Less\Spinner\top-bar-loading.less" />
-    <Content Include="Content\Less\CSS\signal.css.map">
-      <DependentUpon>signal.css</DependentUpon>
+    <Content Include="Content\Less\font-awesome\animated.less" />
+    <Content Include="Content\Less\font-awesome\bordered-pulled.less" />
+    <Content Include="Content\Less\font-awesome\core.less" />
+    <Content Include="Content\Less\font-awesome\fixed-width.less" />
+    <Content Include="Content\Less\font-awesome.less" />
+    <Content Include="Content\Less\font-awesome\icons.less" />
+    <Content Include="Content\Less\font-awesome\larger.less" />
+    <Content Include="Content\Less\font-awesome\list.less" />
+    <Content Include="Content\Less\font-awesome\mixins.less" />
+    <Content Include="Content\Less\font-awesome\path.less" />
+    <Content Include="Content\Less\font-awesome\rotated-flipped.less" />
+    <Content Include="Content\Less\font-awesome\screen-reader.less" />
+    <Content Include="Content\Less\font-awesome\stacked.less" />
+    <Content Include="Content\Less\font-awesome\variables.less" />
+    <Content Include="Content\css\font-awesome.css.map">
+      <DependentUpon>font-awesome.css</DependentUpon>
     </Content>
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />

@@ -75,6 +75,81 @@ lesshat-selector {
 @-o-keyframes signal-animate{ 0% { -o-transform: scale(.1); opacity: 0.0; } 50% { opacity: 1; } 100% { -o-transform: scale(1.2); opacity: 0;}}
 @keyframes signal-animate{ 0% {-webkit-transform: scale(.1);-moz-transform: scale(.1);-ms-transform: scale(.1);transform: scale(.1); opacity: 0.0; } 50% { opacity: 1; } 100% {-webkit-transform: scale(1.2);-moz-transform: scale(1.2);-ms-transform: scale(1.2);transform: scale(1.2); opacity: 0;};
 }
+/**
+  Html :
+  <div class="loading-bar-container">
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+  </div>
+*/
+.loading-bar-container {
+  position: absolute;
+  top: 43%;
+  left: 48%;
+}
+.loading-bar {
+  display: inline-block;
+  width: 4px;
+  height: 18px;
+  border-radius: 4px;
+  -webkit-animation: loading-bar .7s ease-in-out infinite;
+  -moz-animation: loading-bar .7s ease-in-out infinite;
+  -o-animation: loading-bar .7s ease-in-out infinite;
+  animation: loading-bar .7s ease-in-out infinite;
+}
+.loading-bar:nth-child(1) {
+  background-color: #3498db;
+  -webkit-animation-delay: 0;
+  -moz-animation-delay: 0;
+  -o-animation-delay: 0;
+  animation-delay: 0;
+}
+.loading-bar:nth-child(2) {
+  background-color: #c0392b;
+  -moz-animation-delay: 0.09s;
+  -o-animation-delay: 0.09s;
+  -webkit-animation-delay: 0.09s;
+  animation-delay: 0.09s;
+}
+.loading-bar:nth-child(3) {
+  background-color: #f1c40f;
+  -moz-animation-delay: .18s;
+  -o-animation-delay: .18s;
+  -webkit-animation-delay: .18s;
+  animation-delay: .18s;
+}
+.loading-bar:nth-child(4) {
+  background-color: #27ae60;
+  -moz-animation-delay: .27s;
+  -o-animation-delay: .27s;
+  -webkit-animation-delay: .27s;
+  animation-delay: .27s;
+}
+.loading-bar:nth-child(5) {
+  background-color: #494C4A;
+  -moz-animation-delay: .36s;
+  -o-animation-delay: .36s;
+  -webkit-animation-delay: .36s;
+  animation-delay: .36s;
+}
+.loading-bar:nth-child(6) {
+  background-color: #7D8DFF;
+  -moz-animation-delay: .45s;
+  -o-animation-delay: .45s;
+  -webkit-animation-delay: .45s;
+  animation-delay: .45s;
+}
+lesshat-selector {
+  -lh-property: 0; } 
+@-webkit-keyframes loading-bar{ 0% { -webkit-transform: scale(1);} 20% {-webkit-transform: scale(1, 2.2); } 40% {-webkit-transform: scale(1); }}
+@-moz-keyframes loading-bar{ 0% { -moz-transform: scale(1);} 20% {-moz-transform: scale(1, 2.2); } 40% {-moz-transform: scale(1); }}
+@-o-keyframes loading-bar{ 0% { -o-transform: scale(1);} 20% {-o-transform: scale(1, 2.2); } 40% {-o-transform: scale(1); }}
+@keyframes loading-bar{ 0% {-webkit-transform: scale(1);-moz-transform: scale(1);-ms-transform: scale(1);transform: scale(1);} 20% {-webkit-transform: scale(1, 2.2);-moz-transform: scale(1, 2.2);-ms-transform: scale(1, 2.2);transform: scale(1, 2.2); } 40% {-webkit-transform: scale(1);-moz-transform: scale(1);-ms-transform: scale(1);transform: scale(1); };
+}
 .top-bar-loading {
   height: 4px;
   width: 100%;
@@ -135,7 +210,40 @@ It means that loaders will fallback to a text state of simply saying "Loading...
   position: fixed;
   z-index: 100000;
   width: 100%;
-  background-color: #FFC732;
+  background-color: #FFFFFF;
+}
+.loading-bar-full-screen .spinner-content {
+  right: 0.9%;
+  position: absolute;
+  color: black;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: .95em;
+  margin-top: -15px;
+}
+@media (min-width: 480px) {
+  .loading-bar-full-screen .spinner-content {
+    font-size: 1.4em;
+  }
+}
+@media (max-width: 480px) {
+  .loading-bar-full-screen .spinner-content {
+    right: -3%;
+  }
+}
+@media (max-width: 768px) {
+  .loading-bar-full-screen .spinner-content {
+    right: -2%;
+  }
+}
+@media (max-height: 650px) {
+  .loading-bar-full-screen .spinner-content {
+    margin-top: 15px;
+  }
+}
+@media (max-height: 400px) {
+  .loading-bar-full-screen .spinner-content {
+    margin-top: 25px;
+  }
 }
 .body-fixed {
   height: 100%;

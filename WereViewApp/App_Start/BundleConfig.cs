@@ -91,10 +91,14 @@ namespace WeReviewApp {
 
                                   "~/JavaScript-Mvc-framework/Prototype/Array.js",
                                   "~/JavaScript-Mvc-framework/app.js",
+                                  "~/JavaScript-Mvc-framework/app.executeBefore.js",
+                                  "~/JavaScript-Mvc-framework/app.executeAfter.js",
+                                  "~/JavaScript-Mvc-framework/attachInitialize.js",
                                   "~/JavaScript-Mvc-framework/schema/schema.js",
                                   "~/JavaScript-Mvc-framework/schema/hashset.js",
                                   "~/JavaScript-Mvc-framework/schema/url.js",
                                   "~/JavaScript-Mvc-framework/extensions/ajax.js",
+                                  "~/JavaScript-Mvc-framework/extensions/hiddenContainer.js",
                                   "~/JavaScript-Mvc-framework/extensions/clone.js",
                                   "~/JavaScript-Mvc-framework/extensions/constants.js",
                                   "~/JavaScript-Mvc-framework/extensions/initialize.js",
@@ -111,7 +115,7 @@ namespace WeReviewApp {
                                   "~/JavaScript-Mvc-framework/jQueryExtend.js",
                                   "~/JavaScript-Mvc-framework/jQueryExtend.fn.js",
                                   "~/JavaScript-Mvc-framework/app.config.js",
-                                  "~/JavaScript-Mvc-framework/app.initializeMethods.js",
+              
                                   "~/JavaScript-Mvc-framework/app.run.js"
 
                                   ));

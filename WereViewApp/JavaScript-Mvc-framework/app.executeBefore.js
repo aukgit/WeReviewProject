@@ -1,21 +1,16 @@
-﻿; $.app = $.app || {};
-$.app.initializeMethods = {
+﻿/// <reference path="byId.js" />
+/// <reference path="D:\Working (SSD)\GitHub\WereViewProject\WereViewApp\Content/Scripts/toastr.js" />
+/// <reference path="D:\Working (SSD)\GitHub\WereViewProject\WereViewApp\Content/Scripts/jquery-2.1.4.js" />
+/// <reference path="D:\Working (SSD)\GitHub\WereViewProject\WereViewApp\Content/Scripts/jquery.blockUI.js" />
+/// <reference path="D:\Working (SSD)\GitHub\WereViewProject\WereViewApp\Content/Scripts/jquery-2.1.4.intellisense.js" />
+; $.app = $.app || {};
+/**
+* runs all the methods after initialize method.
+*/
+$.app.executeBefore = {
     /**
      * runs all the methods after initialize method.
      */
-    initialize: function () {
-        var self = $.app.initializeMethods;
-
-        var keys = Object.keys(self);
-        for (var i = 0; i < keys.length; i++) {
-            var key = keys[i];
-            if (key !== "initialize") {
-                // execute all other than "initialize" method
-                var functionsOrMethods = self[key];
-                $.executeFunction(functionsOrMethods);
-            }
-        }
-    },
     toasterComponentSetup: function () {
         if (!$.isEmpty(toastr)) {
             toastr.options = {
@@ -154,16 +149,6 @@ $.app.initializeMethods = {
         });
     },
     loadWow: function () {
-        //var options = {
-        //    scaleColor: false,
-        //    trackColor: 'rgba(266,144,0,0.0)',
-        //    barColor: '#ff7200',
-        //    lineWidth: 2,
-        //    lineCap: 'butt',
-        //    size: 253
-        //};
-
-
         var wow = new WOW({
             boxClass: 'wow',      // animated element css class (default is wow)
             animateClass: 'animated', // animation css class (default is animated)
