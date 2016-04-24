@@ -3,16 +3,19 @@ body {
   background: #3498db;
 }
 .spinner {
-  margin: 50px;
-  height: 28px;
-  width: 28px;
-  animation: rotate 0.8s infinite linear;
-  border: 8px solid #fff;
-  border-right-color: transparent;
-  border-radius: 50%;
+    margin: 50px;
+    height: 28px;
+    width: 28px;
+    -moz-animation: rotate 0.8s infinite linear;
+    -o-animation: rotate 0.8s infinite linear;
+    -webkit-animation: rotate 0.8s infinite linear;
+    animation: rotate 0.8s infinite linear;
+    border: 8px solid #fff;
+    border-right-color: transparent;
+    border-radius: 50%;
 }
 
-@keyframes rotate {
+@-moz-keyframes rotate {
   0%    { transform: rotate(0deg); }
   100%  { transform: rotate(360deg); }
 }

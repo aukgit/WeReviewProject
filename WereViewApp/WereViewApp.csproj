@@ -512,7 +512,9 @@
     <Content Include="Content\css\animate-refresh.css.map">
       <DependentUpon>animate-refresh.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\animate-refresh.min.css" />
+    <Content Include="Content\css\animate-refresh.min.css">
+      <DependentUpon>animate-refresh.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\animate.min.css" />
     <Content Include="Content\css\backend-developer.css" />
     <Content Include="Content\css\backend-developer.min.css">
@@ -520,7 +522,6 @@
     </Content>
     <Content Include="Content\css\base-theme-styles.css" />
     <Content Include="Content\css\blog-page.css" />
-    <Content Include="Content\css\blog-page.min.css" />
     <Content Include="Content\css\bootstrap-datetimepicker.css" />
     <Content Include="Content\css\bootstrap-datetimepicker.css.map">
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
@@ -541,7 +542,6 @@
     <Content Include="Content\css\category-page.css.map">
       <DependentUpon>category-page.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\category-page.min.css" />
     <Content Include="Content\css\ckedit-skin-bootstrap.css" />
     <Content Include="Content\css\ckedit-skin-bootstrap.min.css">
       <DependentUpon>ckedit-skin-bootstrap.css</DependentUpon>
@@ -581,7 +581,9 @@
     <Content Include="Content\css\less-imports.css.map">
       <DependentUpon>less-imports.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\less-imports.min.css" />
+    <Content Include="Content\css\less-imports.min.css">
+      <DependentUpon>less-imports.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\loader-spinner.css" />
     <Content Include="Content\css\loader-spinner.min.css">
       <DependentUpon>loader-spinner.css</DependentUpon>
@@ -601,20 +603,16 @@
     </Content>
     <Content Include="Content\css\owl.carousel.css" />
     <Content Include="Content\css\owl.custom.finalize.css" />
-    <Content Include="Content\css\owl.custom.finalize.min.css" />
     <Content Include="Content\css\owl.theme.css" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\responsive.css.map">
       <DependentUpon>responsive.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\responsive.min.css" />
     <Content Include="Content\css\search-page.css" />
     <Content Include="Content\css\search-page.css.map">
       <DependentUpon>search-page.css</DependentUpon>
     </Content>
     <Content Include="Content\css\search-page.min.css" />
-    <Content Include="Content\css\see-more-btn.css" />
-    <Content Include="Content\css\see-more-btn.min.css" />
     <Content Include="Content\css\seo-optimize.css" />
     <Content Include="Content\css\seo-optimize.css.map">
       <DependentUpon>seo-optimize.css</DependentUpon>
@@ -642,7 +640,6 @@
     <Content Include="Content\css\Tagit\jquery.tagedit.css" />
     <Content Include="Content\css\Tagit\ui-lightness\jquery-ui-1.9.2.custom.min.css" />
     <Content Include="Content\css\toastr.css" />
-    <Content Include="Content\css\toastr.min.css" />
     <Content Include="Content\css\Upload\jquery.fileupload.css" />
     <Content Include="Content\css\utilities.css" />
     <Content Include="Content\css\utilities.min.css">
@@ -660,7 +657,6 @@
     <Content Include="Areas\Admin\Views\AppCategories\_CreateOrEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_NavBar.cshtml" />
     <Content Include="Content\css\color-fonts.css.map" />
-    <Content Include="Content\css\owl.custom.finalize.css.map" />
     <Content Include="Content\Less\animate-refresh.less" />
     <Content Include="Content\Less\blog-page.less" />
     <Content Include="Content\Less\bootstrap-datetimepicker.less" />
@@ -692,12 +688,34 @@
       <DependentUpon>loader-spinner.css</DependentUpon>
     </Content>
     <Content Include="Content\css\Spinner.css.map" />
-    <Content Include="Content\css\toastr.css.map" />
     <Content Include="Content\css\fonts-rimixens.css.map">
       <DependentUpon>fonts-rimixens.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\owl.custom.finalize.css.map">
+      <DependentUpon>owl.custom.finalize.css</DependentUpon>
+    </Content>
     <None Include="Content\Less\ckedit-skin-bootstrap.less" />
     <Content Include="Content\Less\color-fonts.less" />
+    <Content Include="Content\Less\CSS\elements.css" />
+    <Content Include="Content\Less\CSS\elements.min.css">
+      <DependentUpon>elements.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\CSS\lesshat.css" />
+    <Content Include="Content\Less\CSS\lesshat.min.css">
+      <DependentUpon>lesshat.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\CSS\Signal.css" />
+    <Content Include="Content\Less\CSS\Signal.min.css">
+      <DependentUpon>Signal.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\CSS\Spinner-2.css" />
+    <Content Include="Content\Less\CSS\Spinner-2.min.css">
+      <DependentUpon>Spinner-2.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\CSS\top-bar-loading.css" />
+    <Content Include="Content\Less\CSS\top-bar-loading.min.css">
+      <DependentUpon>top-bar-loading.css</DependentUpon>
+    </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
     <Content Include="Content\Less\less-imports.less" />
@@ -804,9 +822,6 @@
       <DependentUpon>bootstrap-select.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\header.variables.less" />
-    <Content Include="Content\css\see-more-btn.css.map">
-      <DependentUpon>see-more-btn.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\validator.css.map">
       <DependentUpon>validator.css</DependentUpon>
     </Content>
@@ -918,8 +933,25 @@
     <Content Include="Content\Less\Spinner\load7.less" />
     <Content Include="Content\Less\Spinner\load8.less" />
     <Content Include="Content\Less\Spinner\loading-bar.less" />
-    <Content Include="Content\Less\Spinner\Spinner-2.less" />
-    <Content Include="Content\Less\Spinner\spinner.less" />
+    <Content Include="Content\Less\Spinner\spinner-2.less" />
+    <Content Include="Content\Less\Spinner\load9.less" />
+    <Content Include="Content\Less\Spinner\signal.less" />
+    <Content Include="Content\Less\CSS\Signal.css.map">
+      <DependentUpon>Signal.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\Spinner\top-bar-loading.less" />
+    <Content Include="Content\Less\CSS\top-bar-loading.css.map">
+      <DependentUpon>top-bar-loading.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\CSS\Spinner-2.css.map">
+      <DependentUpon>Spinner-2.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\CSS\lesshat.css.map">
+      <DependentUpon>lesshat.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\CSS\elements.css.map">
+      <DependentUpon>elements.css</DependentUpon>
+    </Content>
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />
