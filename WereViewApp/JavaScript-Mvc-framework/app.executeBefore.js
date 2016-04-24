@@ -156,5 +156,51 @@ $.app.executeBefore = {
             mobile: false        // trigger animations on mobile devices (true is default)
         });
         wow.init();
-    }
+    },
+
+    ratingComponentEnable: function () {
+        var $frontPageRatings = $.findCached(".rating-5-front");
+        if ($frontPageRatings.length > 0) {
+            $frontPageRatings.rating({
+                showClear: false,
+                showCaption: false
+            });
+        }
+
+        var $detailPageRatingDisplayItems = $.findCached(".rating-5-page-details");
+        if ($detailPageRatingDisplayItems.length > 0) {
+            $detailPageRatingDisplayItems.rating({
+                showClear: false,
+                showCaption: true,
+                starCaptions: {
+                    0: "0",
+                    0.5: "0.5",
+                    1: "1",
+                    1.5: "1.5",
+                    2: "2",
+                    2.5: "2.5",
+                    3: "3",
+                    3.5: "3.5",
+                    4: "4",
+                    4.5: "4.5",
+                    5: "5"
+                },
+                starCaptionClasses: {
+                    0: 'label label-danger',
+                    0.5: 'label label-danger',
+                    1: 'label label-danger',
+                    1.5: 'label label-warning',
+                    2: 'label label-warning',
+                    2.5: 'label label-info',
+                    3: 'label label-info',
+                    3.5: 'label label-primary',
+                    4: 'label label-primary',
+                    4.5: 'label label-success',
+                    5: 'label label-success'
+                }
+            });
+        }
+    },
+
+    
 };

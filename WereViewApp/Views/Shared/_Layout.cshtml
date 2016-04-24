@@ -35,6 +35,9 @@
     @Html.Partial("_AdditionalFields")
     @Html.Partial("_Loading-Bar")
     <div id="body-start" class="body-fixed">
+        <div id="hidden-fields-container">
+            @RenderSection("hidden", false)
+        </div>
         <div>
             @{ Html.RenderAction("NavBar", "Partials", true); }
         </div>

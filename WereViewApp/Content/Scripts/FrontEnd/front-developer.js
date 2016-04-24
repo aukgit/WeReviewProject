@@ -16,19 +16,7 @@
 $(function () {
 
 
-    var selectForYoutubeVideoOnDetailsPage = "#apps-preview";
-    var $youtubeVideoContainer = $(selectForYoutubeVideoOnDetailsPage);
-    if ($youtubeVideoContainer.length === 1) {
-        $youtubeVideoContainer.find(".playable-btn").click(function () {
-            var $iframe = $youtubeVideoContainer.find("iframe");
-            var $this = $(this);
-            if ($iframe.length === 1) {
-                $iframe[0].src += "?rel=0&controls=1&autoplay=1";
-                $this.hide("slow");
-                $this.unbind("click");//or some other way to make sure that this only happens once
-            }
-        });
-    }
+    
 
 
     $.frontEndAppDetailsPage = {
@@ -37,19 +25,7 @@ $(function () {
         $showLessBtns: $(".less-btn"),
         $moreExcert: $(".more"),
         execute: function () {
-            $("div.app-suggested-list-items-mobile:first,div.featured-apps-list-items").owlCarousel({
-                navigation: true,
-                navigationText: [
-                  "<i class='fa fa-chevron-circle-left'></i>",
-                  "<i class='fa fa-chevron-circle-right'></i>"
-                ],
-                items: 1, //10 items above 1000px browser width
-                //itemsDesktop: [1152, 6], //5 items between 1000px and 901px
-                //itemsDesktopSmall: [900, 4], // betweem 900px and 601px
-                //itemsTablet: [600, 3], //2 items between 600 and 0
-                //itemsMobile: [450, 2],
-                itemsCustom: [370, 1]
-            });
+            
 
 
             var $frontPageGallyery = $(".tp-banner");
@@ -96,47 +72,7 @@ $(function () {
 
             //});
 
-            var $frontPageRatings = $(".rating-5-front");
-            if ($frontPageRatings.length > 0) {
-                $frontPageRatings.rating({
-                    showClear: false,
-                    showCaption: false
-                });
-            }
-
-            var $detailPageRatingDisplayItems = $(".rating-5-page-details");
-            if ($detailPageRatingDisplayItems.length > 0) {
-                $detailPageRatingDisplayItems.rating({
-                    showClear: false,
-                    showCaption: true,
-                    starCaptions: {
-                        0: "0",
-                        0.5: "0.5",
-                        1: "1",
-                        1.5: "1.5",
-                        2: "2",
-                        2.5: "2.5",
-                        3: "3",
-                        3.5: "3.5",
-                        4: "4",
-                        4.5: "4.5",
-                        5: "5"
-                    },
-                    starCaptionClasses: {
-                        0: 'label label-danger',
-                        0.5: 'label label-danger',
-                        1: 'label label-danger',
-                        1.5: 'label label-warning',
-                        2: 'label label-warning',
-                        2.5: 'label label-info',
-                        3: 'label label-info',
-                        3.5: 'label label-primary',
-                        4: 'label label-primary',
-                        4.5: 'label label-success',
-                        5: 'label label-success'
-                    }
-                });
-            }
+           
             var $appsPreview = $("#apps-preview");
             if ($appsPreview.length > 0) {
                 $appsPreview.owlCarousel({

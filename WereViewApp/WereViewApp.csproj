@@ -957,6 +957,7 @@
     <Content Include="JavaScript-Mvc-framework\controllers\controllers.js" />
     <Content Include="JavaScript-Mvc-framework\controllers\homeController.js" />
     <Content Include="JavaScript-Mvc-framework\controllers\initialize.js" />
+    <Content Include="JavaScript-Mvc-framework\controllers\AppController.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\ajax.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\clone.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\constants.js" />

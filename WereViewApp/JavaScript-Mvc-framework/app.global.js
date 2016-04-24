@@ -17,6 +17,7 @@ $.app.global = {
                 $loadingBar.addClass("animated").removeClass("fadeIn").addClass("fadeOut");
                 setTimeout(function () {
                     $loadingBar.hide();
+                    $bodyStart.removeClass(fixedClass).addClass(flexible);
                 }, 1500);
             }
         }

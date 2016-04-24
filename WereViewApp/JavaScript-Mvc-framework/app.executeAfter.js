@@ -13,7 +13,7 @@ $.app.executeAfter = {
      * method which runs after all the initialization is done.
      * @returns {} 
      */
-    documentSpinnerHide : function() {
+    documentSpinnerHide: function () {
         $.app.global.documentFullSpinnerHide();
         var timer = setTimeout(function () {
             $.app.global.documentFullSpinnerHide();
@@ -28,5 +28,24 @@ $.app.executeAfter = {
             $.app.global.documentFullSpinnerShow("... Please Wait ...");
             window.location = $link.attr("href");
         });
+    },
+    owlCaroselComponentEnable: function () {
+        var ownComponentEnable = $.findCachedId("owl-carousel-component");
+        if (ownComponentEnable.length > 0) {
+            $("div.app-suggested-list-items-mobile,div.featured-apps-list-items").owlCarousel({
+                responsiveClass: true,
+                navigation: true,
+                navigationText: [
+                  "<i class='fa fa-chevron-circle-left'></i>",
+                  "<i class='fa fa-chevron-circle-right'></i>"
+                ],
+                items: 1, //10 items above 1000px browser width
+                //itemsDesktop: [1152, 6], //5 items between 1000px and 901px
+                //itemsDesktopSmall: [900, 4], // betweem 900px and 601px
+                //itemsTablet: [600, 3], //2 items between 600 and 0
+                //itemsMobile: [450, 2],
+                itemsCustom: [370, 1]
+            });
+        }
     }
 };
