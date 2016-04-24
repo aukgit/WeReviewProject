@@ -19,7 +19,6 @@ $.app.global = {
                 setTimeout(function () {
                     $loadingBar.hide();
                     $bodyStart.removeClass(fixedClass).addClass(flexible);
-                    self.owlCaroselComponentEnable();
                 }, 1500);
             }
         }

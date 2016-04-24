@@ -215,7 +215,7 @@ $.getHiddenField = function(name) {
     /// </summary>
     /// <param name="name">Name of the field</param>
     /// <returns type=""></returns>
-    return $.app.getHiddenField(name);
+    return $.app.hiddenContainer.getHiddenField(name);
 };
 
 $.getHiddenValue = function(name) {
@@ -224,7 +224,7 @@ $.getHiddenValue = function(name) {
     /// </summary>
     /// <param name="name">Name of the field</param>
     /// <returns type="">Get string value of the hidden field. If not found then empty string "".</returns>
-    var $field = $.app.getHiddenField(name);
+    var $field = $.app.hiddenContainer.getHiddenField(name);
     if (!$.isEmpty($field)) {
         return $field.val();
     }
@@ -238,7 +238,7 @@ $.setHiddenValue = function(name, val) {
     /// <param name="name">Name of the field</param>
     /// <param name="val">value of the field</param>
     /// <returns type="">Get string value of the hidden field. If not found then empty string "".</returns>
-    return $.app.setHiddenValue(name, val);
+    return $.app.hiddenContainer.setHiddenValue(name, val);
 };
 
 
