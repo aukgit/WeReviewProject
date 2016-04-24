@@ -777,6 +777,10 @@
       <DependentUpon>color-fonts.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\color-fonts.less" />
+    <Content Include="Content\Less\CSS\signal.css" />
+    <Content Include="Content\Less\CSS\signal.min.css">
+      <DependentUpon>signal.css</DependentUpon>
+    </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
     <Content Include="Content\Less\less-imports.less" />
@@ -995,6 +999,9 @@
     <Content Include="Content\Less\Spinner\load9.less" />
     <Content Include="Content\Less\Spinner\signal.less" />
     <Content Include="Content\Less\Spinner\top-bar-loading.less" />
+    <Content Include="Content\Less\CSS\signal.css.map">
+      <DependentUpon>signal.css</DependentUpon>
+    </Content>
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />
