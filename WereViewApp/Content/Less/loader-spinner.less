@@ -12,11 +12,25 @@
 @import "spinner/top-bar-loading.less";
 @import "spinner/fallback.less";
 
-#loading-bar{
-    padding-top:19px;
+#loading-bar {
+    padding-top: 19px;
 }
 
 
-.blockUI{
+.blockUI {
     border: 2px solid rgb(208, 213, 218) !important;
-} 
+}
+
+.loading-bar-full-screen {
+    height: 100%;
+    position: fixed;
+    z-index: 100000;
+    width: 100%;
+    background-color: #FFC732;
+}
+.body-fixed{
+    height:100%;
+    overflow:hidden;
+    position:fixed;
+    z-index: 1;
+}

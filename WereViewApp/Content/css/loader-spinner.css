@@ -63,10 +63,10 @@ lesshat-selector {
   position: absolute;
   top: 50%;
   width: 30px;
-  -webkit-animation: signal-animate 1s ease-out infinite;
-  -moz-animation: signal-animate 1s ease-out infinite;
-  -o-animation: signal-animate 1s ease-out infinite;
-  animation: signal-animate 1s ease-out infinite;
+  -webkit-animation: signal-animate .6s ease-out infinite;
+  -moz-animation: signal-animate .6s ease-out infinite;
+  -o-animation: signal-animate .6s ease-out infinite;
+  animation: signal-animate .6s ease-out infinite;
 }
 lesshat-selector {
   -lh-property: 0; } 
@@ -129,5 +129,18 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 }
 .blockUI {
   border: 2px solid #d0d5da !important;
+}
+.loading-bar-full-screen {
+  height: 100%;
+  position: fixed;
+  z-index: 100000;
+  width: 100%;
+  background-color: #FFC732;
+}
+.body-fixed {
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  z-index: 1;
 }
 /*# sourceMappingURL=loader-spinner.css.map */

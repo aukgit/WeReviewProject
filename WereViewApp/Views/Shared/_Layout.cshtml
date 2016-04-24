@@ -34,17 +34,19 @@
     <![endif]-->
     @Html.Partial("_AdditionalFields")
     @Html.Partial("_Loading-Bar")
-    <div>
-        @{ Html.RenderAction("NavBar", "Partials", true); }
-    </div>
-    <div id="wrap">
-        <div class="content">
-            <div class="container">
-                <div class="">@RenderBody()</div>
+    <div id="body-start" class="body-fixed">
+        <div>
+            @{ Html.RenderAction("NavBar", "Partials", true); }
+        </div>
+        <div id="wrap">
+            <div class="content">
+                <div class="container">
+                    <div class="">@RenderBody()</div>
+                </div>
             </div>
         </div>
+        @Html.Partial("_Footer")
     </div>
-    @Html.Partial("_Footer")
     @RenderSection("featured", false)
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

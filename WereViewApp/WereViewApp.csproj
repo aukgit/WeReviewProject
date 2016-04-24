@@ -515,13 +515,19 @@
     <Content Include="Content\css\animate-refresh.min.css">
       <DependentUpon>animate-refresh.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\animate.min.css" />
+    <Content Include="Content\css\animate.css" />
+    <Content Include="Content\css\animate.min.css">
+      <DependentUpon>animate.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\backend-developer.css" />
     <Content Include="Content\css\backend-developer.min.css">
       <DependentUpon>backend-developer.css</DependentUpon>
     </Content>
     <Content Include="Content\css\base-theme-styles.css" />
     <Content Include="Content\css\blog-page.css" />
+    <Content Include="Content\css\blog-page.min.css">
+      <DependentUpon>blog-page.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\bootstrap-datetimepicker.css" />
     <Content Include="Content\css\bootstrap-datetimepicker.css.map">
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
@@ -539,7 +545,7 @@
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\category-page.css" />
-    <Content Include="Content\css\category-page.css.map">
+    <Content Include="Content\css\category-page.min.css">
       <DependentUpon>category-page.css</DependentUpon>
     </Content>
     <Content Include="Content\css\ckedit-skin-bootstrap.css" />
@@ -558,8 +564,6 @@
     <Content Include="Content\css\flags32-combo.css" />
     <Content Include="Content\css\flags32.css" />
     <Content Include="Content\css\flags32.png" />
-    <Content Include="Content\css\font-awesome.css" />
-    <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\fonts-rimixens.css" />
     <Content Include="Content\css\fonts-rimixens.min.css">
       <DependentUpon>fonts-rimixens.css</DependentUpon>
@@ -603,6 +607,9 @@
     </Content>
     <Content Include="Content\css\owl.carousel.css" />
     <Content Include="Content\css\owl.custom.finalize.css" />
+    <Content Include="Content\css\owl.custom.finalize.min.css">
+      <DependentUpon>owl.custom.finalize.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\owl.theme.css" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\responsive.css.map">
@@ -640,6 +647,9 @@
     <Content Include="Content\css\Tagit\jquery.tagedit.css" />
     <Content Include="Content\css\Tagit\ui-lightness\jquery-ui-1.9.2.custom.min.css" />
     <Content Include="Content\css\toastr.css" />
+    <Content Include="Content\css\toastr.min.css">
+      <DependentUpon>toastr.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\Upload\jquery.fileupload.css" />
     <Content Include="Content\css\utilities.css" />
     <Content Include="Content\css\utilities.min.css">
@@ -656,7 +666,6 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Areas\Admin\Views\AppCategories\_CreateOrEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_NavBar.cshtml" />
-    <Content Include="Content\css\color-fonts.css.map" />
     <Content Include="Content\Less\animate-refresh.less" />
     <Content Include="Content\Less\blog-page.less" />
     <Content Include="Content\Less\bootstrap-datetimepicker.less" />
@@ -691,31 +700,83 @@
     <Content Include="Content\css\fonts-rimixens.css.map">
       <DependentUpon>fonts-rimixens.css</DependentUpon>
     </Content>
+    <Content Include="Content\Less\animate.less" />
+    <Content Include="Content\Less\Animate\animationclasses.less" />
+    <Content Include="Content\Less\Animate\bounce.less" />
+    <Content Include="Content\Less\Animate\bounceIn.less" />
+    <Content Include="Content\Less\Animate\bounceInDown.less" />
+    <Content Include="Content\Less\Animate\bounceInLeft.less" />
+    <Content Include="Content\Less\Animate\bounceInRight.less" />
+    <Content Include="Content\Less\Animate\bounceInUp.less" />
+    <Content Include="Content\Less\Animate\bounceOut.less" />
+    <Content Include="Content\Less\Animate\bounceOutDown.less" />
+    <Content Include="Content\Less\Animate\bounceOutLeft.less" />
+    <Content Include="Content\Less\Animate\bounceOutRight.less" />
+    <Content Include="Content\Less\Animate\bounceOutUp.less" />
+    <Content Include="Content\Less\Animate\fadeIn.less" />
+    <Content Include="Content\Less\Animate\fadeInDown.less" />
+    <Content Include="Content\Less\Animate\fadeInDownBig.less" />
+    <Content Include="Content\Less\Animate\fadeInLeft.less" />
+    <Content Include="Content\Less\Animate\fadeInLeftBig.less" />
+    <Content Include="Content\Less\Animate\fadeInRight.less" />
+    <Content Include="Content\Less\Animate\fadeInRightBig.less" />
+    <Content Include="Content\Less\Animate\fadeInUp.less" />
+    <Content Include="Content\Less\Animate\fadeInUpBig.less" />
+    <Content Include="Content\Less\Animate\fadeOut.less" />
+    <Content Include="Content\Less\Animate\fadeOutDown.less" />
+    <Content Include="Content\Less\Animate\fadeOutDownBig.less" />
+    <Content Include="Content\Less\Animate\fadeOutLeft.less" />
+    <Content Include="Content\Less\Animate\fadeOutLeftBig.less" />
+    <Content Include="Content\Less\Animate\fadeOutRight.less" />
+    <Content Include="Content\Less\Animate\fadeOutRightBig.less" />
+    <Content Include="Content\Less\Animate\fadeOutUp.less" />
+    <Content Include="Content\Less\Animate\fadeOutUpBig.less" />
+    <Content Include="Content\Less\Animate\flash.less" />
+    <Content Include="Content\Less\Animate\flip.less" />
+    <Content Include="Content\Less\Animate\flipInX.less" />
+    <Content Include="Content\Less\Animate\flipInY.less" />
+    <Content Include="Content\Less\Animate\flipOutX.less" />
+    <Content Include="Content\Less\Animate\flipOutY.less" />
+    <Content Include="Content\Less\Animate\hinge.less" />
+    <Content Include="Content\Less\Animate\lightSpeedIn.less" />
+    <Content Include="Content\Less\Animate\lightSpeedOut.less" />
+    <Content Include="Content\Less\Animate\mixins.less" />
+    <Content Include="Content\Less\Animate\pulse.less" />
+    <Content Include="Content\Less\Animate\rollIn.less" />
+    <Content Include="Content\Less\Animate\rollOut.less" />
+    <Content Include="Content\Less\Animate\rotateIn.less" />
+    <Content Include="Content\Less\Animate\rotateInDownLeft.less" />
+    <Content Include="Content\Less\Animate\rotateInDownRight.less" />
+    <Content Include="Content\Less\Animate\rotateInUpLeft.less" />
+    <Content Include="Content\Less\Animate\rotateInUpRight.less" />
+    <Content Include="Content\Less\Animate\rotateOut.less" />
+    <Content Include="Content\Less\Animate\rotateOutDownLeft.less" />
+    <Content Include="Content\Less\Animate\rotateOutDownRight.less" />
+    <Content Include="Content\Less\Animate\rotateOutUpLeft.less" />
+    <Content Include="Content\Less\Animate\rotateOutUpRight.less" />
+    <Content Include="Content\Less\Animate\shake.less" />
+    <Content Include="Content\Less\Animate\swing.less" />
+    <Content Include="Content\Less\Animate\tada.less" />
+    <Content Include="Content\Less\Animate\wobble.less" />
+    <Content Include="Content\css\blog-page.css.map">
+      <DependentUpon>blog-page.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\toastr.css.map">
+      <DependentUpon>toastr.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\animate.css.map">
+      <DependentUpon>animate.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\owl.custom.finalize.css.map">
       <DependentUpon>owl.custom.finalize.css</DependentUpon>
     </Content>
-    <None Include="Content\Less\ckedit-skin-bootstrap.less" />
+    <Content Include="Content\css\category-page.css.map">
+      <DependentUpon>category-page.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\color-fonts.css.map">
+      <DependentUpon>color-fonts.css</DependentUpon>
+    </Content>
     <Content Include="Content\Less\color-fonts.less" />
-    <Content Include="Content\Less\CSS\elements.css" />
-    <Content Include="Content\Less\CSS\elements.min.css">
-      <DependentUpon>elements.css</DependentUpon>
-    </Content>
-    <Content Include="Content\Less\CSS\lesshat.css" />
-    <Content Include="Content\Less\CSS\lesshat.min.css">
-      <DependentUpon>lesshat.css</DependentUpon>
-    </Content>
-    <Content Include="Content\Less\CSS\Signal.css" />
-    <Content Include="Content\Less\CSS\Signal.min.css">
-      <DependentUpon>Signal.css</DependentUpon>
-    </Content>
-    <Content Include="Content\Less\CSS\Spinner-2.css" />
-    <Content Include="Content\Less\CSS\Spinner-2.min.css">
-      <DependentUpon>Spinner-2.css</DependentUpon>
-    </Content>
-    <Content Include="Content\Less\CSS\top-bar-loading.css" />
-    <Content Include="Content\Less\CSS\top-bar-loading.min.css">
-      <DependentUpon>top-bar-loading.css</DependentUpon>
-    </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
     <Content Include="Content\Less\less-imports.less" />
@@ -828,9 +889,6 @@
     <Content Include="Content\css\bootstrap-tag.css.map">
       <DependentUpon>bootstrap-tag.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\blog-page.css.map">
-      <DependentUpon>blog-page.css</DependentUpon>
-    </Content>
     <Content Include="Content\Less\override-mvc.variables.less" />
     <Content Include="Content\css\editor-templates.css.map">
       <DependentUpon>editor-templates.css</DependentUpon>
@@ -936,22 +994,7 @@
     <Content Include="Content\Less\Spinner\spinner-2.less" />
     <Content Include="Content\Less\Spinner\load9.less" />
     <Content Include="Content\Less\Spinner\signal.less" />
-    <Content Include="Content\Less\CSS\Signal.css.map">
-      <DependentUpon>Signal.css</DependentUpon>
-    </Content>
     <Content Include="Content\Less\Spinner\top-bar-loading.less" />
-    <Content Include="Content\Less\CSS\top-bar-loading.css.map">
-      <DependentUpon>top-bar-loading.css</DependentUpon>
-    </Content>
-    <Content Include="Content\Less\CSS\Spinner-2.css.map">
-      <DependentUpon>Spinner-2.css</DependentUpon>
-    </Content>
-    <Content Include="Content\Less\CSS\lesshat.css.map">
-      <DependentUpon>lesshat.css</DependentUpon>
-    </Content>
-    <Content Include="Content\Less\CSS\elements.css.map">
-      <DependentUpon>elements.css</DependentUpon>
-    </Content>
     <None Include="Content\Scripts\Data\country-info-select-ready.json" />
     <None Include="Content\Scripts\Data\country-info.json" />
     <Content Include="Content\Scripts\FrontEnd\base-theme.js" />
