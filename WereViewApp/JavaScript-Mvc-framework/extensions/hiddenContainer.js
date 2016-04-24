@@ -54,7 +54,7 @@ $.app.hiddenContainer = {
         /// </summary>
         /// <param name="nameOfHiddenField"></param>
         /// <returns type="return $ type object.">get attribute values $returnedObject.attr() or null</returns>
-        var app = $.app.hiddenContainer;
+        var self = $.app.hiddenContainer;
         if (self.isHiddenContainerExist()) {
             var $container = self.$hiddenContainer,
                 $field = self._getHiddenFieldDictionary(nameOfHiddenField);

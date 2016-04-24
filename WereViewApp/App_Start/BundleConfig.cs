@@ -116,6 +116,7 @@ namespace WeReviewApp {
 
                                   "~/JavaScript-Mvc-framework/controllers/controllers.js",
                                   "~/JavaScript-Mvc-framework/controllers/initialize.js",
+                                  "~/JavaScript-Mvc-framework/controllers/AppController.js",
 
                                   "~/JavaScript-Mvc-framework/areas/admin/controllers/NavItemsController.js",
 
