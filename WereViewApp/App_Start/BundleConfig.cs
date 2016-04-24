@@ -94,6 +94,7 @@ namespace WeReviewApp {
                                   "~/JavaScript-Mvc-framework/app.js",
                                   "~/JavaScript-Mvc-framework/app.executeBefore.js",
                                   "~/JavaScript-Mvc-framework/app.executeAfter.js",
+                                  "~/JavaScript-Mvc-framework/jQueryCaching.js",
                                   "~/JavaScript-Mvc-framework/attachInitialize.js",
 
                                   "~/JavaScript-Mvc-framework/schema/schema.js",

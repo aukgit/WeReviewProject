@@ -88,8 +88,8 @@
         /// <param name="args" type="type"></param>
         /// <returns type=""></returns>
         var isIdEmpty = (id === undefined || id === null);
-        console.log(this);
-        console.log(this.list);
+        // console.log(this);
+        // console.log(this.list);
         if (isIdEmpty === false) {
             var list = this.list,
                 count = list.count,

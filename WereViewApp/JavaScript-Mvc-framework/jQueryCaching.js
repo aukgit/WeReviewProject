@@ -21,26 +21,57 @@ $.jQueryCaching = {
      * @returns {} 
      */
     initialize: function (capacity, force) {
+        var hashset = $.app.schema.hashset;
+
         if (!capacity) {
             capacity = 350;
         }
         var self = $.jQueryCaching;
         if (self.hashset === null || force === true) {
-            self.hashset = $.app.hashset.create(capacity);
+            self.hashset = hashset.create(capacity);
         }
     }
 }
 
-$.getC = function (selector, force) {
+$.findCached = function (selector, force) {
     /// <summary>
     /// get jquery searched items, if exist in the 
     /// </summary>
     /// <param name="selector" type="type"></param>
     var self = $.jQueryCaching;
+    var $e;
     if (force === true) {
-        var $e = $(selector);
+        $e = $(selector);
         self.hashset.addUnique(selector, $e, true);
+        return $e;
     } else {
         var item = self.hashset.getItemObject(selector);
+        if (item === null) {
+            $e = $(selector);
+            self.hashset.addUnique(selector, $e, true);
+            return $e;
+        }
+        return item.value;
+    }
+}
+$.findCachedId = function (id, force) {
+    /// <summary>
+    /// get jquery searched items, if exist in the 
+    /// </summary>
+    /// <param name="selector" type="type"></param>
+    var self = $.jQueryCaching;
+    var $e;
+    if (force === true) {
+        $e = $.byId(id);
+        self.hashset.addUnique(id, $e, true);
+        return $e;
+    } else {
+        var item = self.hashset.getItemObject(id);
+        if (item === null) {
+            $e = $.byId(id);
+            self.hashset.addUnique(id, $e, true);
+            return $e;
+        }
+        return item.value;
     }
 }

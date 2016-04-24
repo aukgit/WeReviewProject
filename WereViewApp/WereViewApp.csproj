@@ -970,7 +970,7 @@
     <Content Include="JavaScript-Mvc-framework\extensions\selectors.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\spinner.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\urls.js" />
-    <Content Include="JavaScript-Mvc-framework\getCached.js" />
+    <Content Include="JavaScript-Mvc-framework\jQueryCaching.js" />
     <Content Include="JavaScript-Mvc-framework\jQueryExtend.fn.js" />
     <Content Include="JavaScript-Mvc-framework\jQueryExtend.js" />
     <Content Include="JavaScript-Mvc-framework\Prototype\Array.js" />

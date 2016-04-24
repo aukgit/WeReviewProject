@@ -15,5 +15,18 @@ $.app.executeAfter = {
      */
     documentSpinnerHide : function() {
         $.app.global.documentFullSpinnerHide();
+        var timer = setTimeout(function () {
+            $.app.global.documentFullSpinnerHide();
+            clearTimeout(timer);
+        }, 800);
+    },
+    captureAnchorAndShowSpinner: function () {
+        var $anchors = $.findCached("a:link");
+        $anchors.click(function (e) {
+            e.preventDefault();
+            var $link = $(this);
+            $.app.global.documentFullSpinnerShow("... Please Wait ...");
+            window.location = $link.attr("href");
+        });
     }
 };

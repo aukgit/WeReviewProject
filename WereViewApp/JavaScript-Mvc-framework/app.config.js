@@ -11,7 +11,11 @@
         /// Setup all configuration.
         /// </summary>
         var app = $.app;
-        app.hiddenContainer.initialize(); // initialize hidden container module.
-        app.spinner.initialize(); // initialize spinner module.
+        var classes = [
+            app.hiddenContainer,
+            app.spinner,
+            $.jQueryCaching
+        ];
+        $.executeArrayOfInitilizeMethods(classes);
     }
 };
