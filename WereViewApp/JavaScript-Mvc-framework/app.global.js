@@ -6,6 +6,7 @@ $.app.global = {
      * ** these methods will NOT run automatically. **
      */
     documentFullSpinnerHide: function () {
+        var self = $.app.global;
         var $bodyStart = $.findCachedId("body-start");
         var fixedClass = "body-fixed";
         var flexible = "body-flexible";
@@ -18,6 +19,7 @@ $.app.global = {
                 setTimeout(function () {
                     $loadingBar.hide();
                     $bodyStart.removeClass(fixedClass).addClass(flexible);
+                    self.owlCaroselComponentEnable();
                 }, 1500);
             }
         }

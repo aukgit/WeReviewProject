@@ -69,6 +69,70 @@ $.app.controllers.appController = {
             self.bindEvents.youtubePlayBtnClick();
 
 
+
+            $.frontEndAppDetailsPage = {
+                $showMoreBtnContainer: [],
+                $showMoreBtns: [],
+                $showLessBtns: [],
+                $moreExcert: [],
+                execute: function () {
+                    this.$showMoreBtnContainer = $(".show-more-btns-container");
+                    this.$showMoreBtns = $(".see-more-btn");
+                    this.$showLessBtns = $(".less-btn");
+                    this.$moreExcert = $(".more");
+                    if (this.$moreExcert.length > 0) {
+                        this.$moreExcert.hide();
+                    }
+                 
+                    var $numberElement = $(".app-viewed-numbers");
+                    if ($numberElement.length > 0) {
+                        $numberElement.number(true);
+                    }
+
+                    this.$showMoreBtns.click(function () {
+                        var $this = $(this);
+                        var moreReference = $this.attr("data-ref");
+                        var dataId = $this.attr("data-id");
+                        var dataRefSelector;
+                        var dataIdSelector = _.isUndefined(dataId) === false ? "[data-id='" + dataId + "']" : "";
+                        if (_.isUndefined(moreReference) === false) {
+                            dataRefSelector = "[data-ref='" + moreReference + "']" + dataIdSelector + ":first";
+
+                            var $specificMoreExcertFound = $.frontEndAppDetailsPage.$moreExcert.filter(dataRefSelector);
+                            if ($specificMoreExcertFound.length > 0) {
+                                $specificMoreExcertFound.show("slow");
+                                $specificMoreExcertFound.css("display", "inline");
+                            }
+                            var $moreBtnContainer = $.frontEndAppDetailsPage.$showMoreBtnContainer.filter(dataRefSelector);
+                            if ($moreBtnContainer.length > 0) {
+                                $moreBtnContainer.hide("slow");
+                            }
+                        }
+                    });
+
+                    this.$showLessBtns.click(function () {
+                        var $this = $(this);
+                        var moreReference = $this.attr("data-ref");
+                        var dataId = $this.attr("data-id");
+                        var dataRefSelector;
+                        var dataIdSelector = _.isUndefined(dataId) === false ? "[data-id='" + dataId + "']" : "";
+                        if (_.isUndefined(moreReference) === false) {
+                            dataRefSelector = "[data-ref='" + moreReference + "']" + dataIdSelector + ":first";
+
+                            var $specificMoreExcertFound = $.frontEndAppDetailsPage.$moreExcert.filter(dataRefSelector);
+                            if ($specificMoreExcertFound.length > 0) {
+                                $specificMoreExcertFound.hide("slow");
+                            }
+                            var $moreBtnContainer = $.frontEndAppDetailsPage.$showMoreBtnContainer.filter(dataRefSelector);
+                            if ($moreBtnContainer.length > 0) {
+                                $moreBtnContainer.show("slow");
+                            }
+                        }
+                    });
+                }
+            };
+            $.frontEndAppDetailsPage.execute();
+
             // create tracker
 
         }

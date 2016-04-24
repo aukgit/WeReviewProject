@@ -247,9 +247,6 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 }
 .body-fixed {
   height: 100%;
-  overflow: hidden;
-  position: fixed;
-  z-index: 1;
 }
 .body-flexible {
   height: 100%;

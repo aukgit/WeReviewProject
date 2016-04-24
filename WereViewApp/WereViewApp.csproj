@@ -1454,7 +1454,6 @@
     <Content Include="Views\Shared\_415.cshtml" />
     <Content Include="Views\Platforms\Index.cshtml" />
     <Content Include="Views\Platforms\Specific.cshtml" />
-    <Content Include="Views\SearchPage\Index.cshtml" />
     <Content Include="Views\Shared\_429.cshtml" />
     <Content Include="Views\Shared\_400.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
