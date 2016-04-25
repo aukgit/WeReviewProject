@@ -25,29 +25,34 @@
     <![endif]-->
 </head>
 <body class="@ViewBag.pageClass">
-<!--[if lt IE 10]>
-    <div class="browser-update container-fuild">
-        <div class="row">
-            <div class="col-md-12">Warning! Your browser is too old. Please update your browser to the <a href="http://browser-update.org/update.html#3">latest version</a>.</div>
+    <!--[if lt IE 10]>
+        <div class="browser-update container-fuild">
+            <div class="row">
+                <div class="col-md-12">Warning! Your browser is too old. Please update your browser to the <a href="http://browser-update.org/update.html#3">latest version</a>.</div>
+            </div>
         </div>
-    </div>
-<![endif]-->
-@Html.Partial("_AdditionalFields")
-@Html.Partial("_LoadingBar")
-<div>
-    @{ Html.RenderAction("NavBar", "Partials", true); }
-</div>
-<div id="wrap">
-    <div class="content">
-        <div class="container">
-            @RenderBody()
+    <![endif]-->
+    @Html.Partial("_AdditionalFields")
+    @Html.Partial("_Loading-Bar")
+    <div id="body-start" class="body-fixed">
+        <div id="hidden-fields-container">
+            @RenderSection("hidden", false)
+        </div>
+        <div>
+            @{ Html.RenderAction("NavBar", "Partials", true); }
+        </div>
+        <div id="wrap">
+            <div class="content">
+                <div class="container">
+                    <div class="">@RenderBody()</div>
+                </div>
+            </div>
         </div>
         @Html.Partial("_Footer")
     </div>
-</div>
-@RenderSection("featured", false)
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", false)
+    @RenderSection("featured", false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", false)
 </body>
 </html>

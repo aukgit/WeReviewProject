@@ -1,18 +1,70 @@
-﻿@import "animate-refresh.less";
-@import "spinner/load1.less";
+﻿@import "fonts-rimixens.less";
+@import "animate-refresh.less";
+/*@import "spinner/load1.less";
 @import "spinner/load2.less";
 @import "spinner/load3.less";
 @import "spinner/load4.less";
 @import "spinner/load5.less";
 @import "spinner/load6.less";
 @import "spinner/load7.less";
-@import "spinner/load8.less";
+@import "spinner/load8.less";*/
+@import "spinner/load9.less";
+@import "spinner/Signal.less";
+@import "Spinner/loading-bar";
+@import "spinner/top-bar-loading.less";
 @import "spinner/fallback.less";
 
-#loading-bar{
-    padding-top:19px;
+#loading-bar {
+    padding-top: 19px;
 }
 
-.blockUI{
+
+.blockUI {
     border: 2px solid rgb(208, 213, 218) !important;
+}
+
+.loading-bar-full-screen {
+    height: 100%;
+    position: fixed;
+    z-index: 100000;
+    width: 100%;
+    background-color: #FFFFFF;
+
+    .spinner-content {
+        right: 0.9%;
+        position: absolute;
+        color: black;
+        .ubuntu-font();
+        font-size: .95em;
+        margin-top: -15px;
+
+        @media(min-width:@screen-xs) {
+            font-size: 1.4em;
+        }
+
+        @media(max-width:@screen-xs) {
+            right: -3%;
+        }
+
+        @media(max-width:@screen-sm) {
+            right: -2%;
+        }
+         @media(max-height: 650px) {
+            margin-top: 15px;
+        }
+        @media(max-height: 400px) {
+            margin-top: 25px;
+        }
+    }
+}
+
+.body-fixed {
+    height: 100%;
+}
+.body-flexible {
+    height: 100%;
+    min-height:100%;
+    overflow: auto;
+    position: relative;
+    z-index: 1;
 }

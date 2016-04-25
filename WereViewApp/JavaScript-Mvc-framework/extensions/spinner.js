@@ -5,7 +5,7 @@
     spinnerDisplayTypeId: 1,
     type: {
         HtmlTemplate: 1, // renders spinner from Html element
-        JsTemplate: 2  // render Html by generating Html from javascript.
+        JsTemplate: 2  // render Html by generating Html from JavaScript.
     },
     initialize: function () {
         var self = $.app.spinner;

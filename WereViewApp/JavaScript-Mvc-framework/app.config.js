@@ -1,4 +1,5 @@
-﻿; $.app = $.app || {};
+﻿/// <reference path="extensions/hiddenContainer.js" />
+; $.app = $.app || {};
 ; $.app.config = {
     /**
      * app configuration settings.
@@ -9,6 +10,12 @@
         /// <summary>
         /// Setup all configuration.
         /// </summary>
-
+        var app = $.app;
+        var classes = [
+            app.hiddenContainer,
+            app.spinner,
+            $.jQueryCaching
+        ];
+        $.executeArrayOfInitilizeMethods(classes);
     }
 };
