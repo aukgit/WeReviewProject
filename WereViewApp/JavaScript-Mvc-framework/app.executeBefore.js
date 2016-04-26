@@ -67,32 +67,37 @@ $.app.executeBefore = {
     },
     datePickerComponentEnable: function () {
         if ($.isFunc($.datetimepicker)) {
-            $(".datetimepicker-start").datetimepicker({
-                pickDate: true, //en/disables the date picker
-                pickTime: true, //en/disables the time picker
-                useMinutes: true, //en/disables the minutes picker
-                useSeconds: true, //en/disables the seconds picker
-                useCurrent: true, //when true, picker will set the value to the current date/time     
-                minuteStepping: 1, //set the minute stepping
-                defaultDate: "", //sets a default date, accepts js dates, strings and moment objects
-                disabledDates: [], //an array of dates that cannot be selected
-                enabledDates: [], //an array of dates that can be selected
-                sideBySide: true //show the date and time picker side by side
+            var $dateTimePicker = $(".datetimepicker-start");
+            if ($dateTimePicker.length > 0) {
+                $dateTimePicker.datetimepicker({
+                    pickDate: true, //en/disables the date picker
+                    pickTime: true, //en/disables the time picker
+                    useMinutes: true, //en/disables the minutes picker
+                    useSeconds: true, //en/disables the seconds picker
+                    useCurrent: true, //when true, picker will set the value to the current date/time     
+                    minuteStepping: 1, //set the minute stepping
+                    defaultDate: "", //sets a default date, accepts js dates, strings and moment objects
+                    disabledDates: [], //an array of dates that cannot be selected
+                    enabledDates: [], //an array of dates that can be selected
+                    sideBySide: true //show the date and time picker side by side
 
-            });
-
-            $(".datepicker-start").datetimepicker({
-                pickDate: true, //en/disables the date picker
-                pickTime: false, //en/disables the time picker
-                useMinutes: false, //en/disables the minutes picker
-                useSeconds: false, //en/disables the seconds picker
-                useCurrent: true, //when true, picker will set the value to the current date/time     
-                minuteStepping: 1, //set the minute stepping
-                defaultDate: "", //sets a default date, accepts js dates, strings and moment objects
-                disabledDates: [], //an array of dates that cannot be selected
-                enabledDates: [], //an array of dates that can be selected
-                sideBySide: true //show the date and time picker side by side
-            });
+                });
+            }
+            var $datePicker = $(".datepicker-start");
+            if ($datePicker.length > 0) {
+                $datePicker.datetimepicker({
+                    pickDate: true, //en/disables the date picker
+                    pickTime: false, //en/disables the time picker
+                    useMinutes: false, //en/disables the minutes picker
+                    useSeconds: false, //en/disables the seconds picker
+                    useCurrent: true, //when true, picker will set the value to the current date/time     
+                    minuteStepping: 1, //set the minute stepping
+                    defaultDate: "", //sets a default date, accepts js dates, strings and moment objects
+                    disabledDates: [], //an array of dates that cannot be selected
+                    enabledDates: [], //an array of dates that can be selected
+                    sideBySide: true //show the date and time picker side by side
+                });
+            }
         }
     },
     tagComponentEnable: function () {
@@ -148,6 +153,7 @@ $.app.executeBefore = {
             hideStatus();
         });
     },
+
     loadWow: function () {
         var wow = new WOW({
             boxClass: 'wow', // animated element css class (default is wow)
@@ -201,107 +207,4 @@ $.app.executeBefore = {
             });
         }
     },
-
-    owlCaroselComponentEnable: function () {
-        var ownComponentEnable = $.findCachedId("owl-carousel-component");
-        if (ownComponentEnable.length > 0) {
-            $("div.app-suggested-list-items-mobile,div.featured-apps-list-items").owlCarousel({
-                responsiveClass: true,
-                navigation: true,
-                navigationText: [
-                    "<i class='fa fa-chevron-circle-left'></i>",
-                    "<i class='fa fa-chevron-circle-right'></i>"
-                ],
-                items: 1, //10 items above 1000px browser width
-                //itemsDesktop: [1152, 6], //5 items between 1000px and 901px
-                //itemsDesktopSmall: [900, 4], // betweem 900px and 601px
-                //itemsTablet: [600, 3], //2 items between 600 and 0
-                //itemsMobile: [450, 2],
-                itemsCustom: [370, 1]
-            });
-
-            var $suggestionCarosel = $(".owl-list");
-            if ($suggestionCarosel.length > 0) {
-                $suggestionCarosel.owlCarousel({
-                    navigation: true,
-                    navigationText: [
-                        "<i class='fa fa-chevron-circle-left'></i>",
-                        "<i class='fa fa-chevron-circle-right'></i>"
-                    ],
-                    items: 7, //10 items above 1000px browser width
-                    itemsDesktop: [1152, 6], //5 items between 1000px and 901px
-                    itemsDesktopSmall: [966, 5], // betweem 900px and 601px
-                    itemsTabletSmall: [730, 4],
-                    itemsTablet: [600, 3], //2 items between 600 and 0
-                    //itemsCustom: [[0, 2], [435, 3], [450, 2], [600, 3], [730, 4], [900, 5],  [950, 6]], // [[740, 6], [1000, 8], [1200, 10], [1600, 16]]
-                    itemsMobile: [450, 2]
-                    //itemsScaleUp: false
-
-                });
-            }
-
-            var $appsPreview = $("#apps-preview");
-            if ($appsPreview.length > 0) {
-                $appsPreview.owlCarousel({
-                    slideSpeed: 300,
-                    paginationSpeed: 400,
-                    singleItem: true,
-                    items: 1,
-                    itemsDesktop: false,
-                    itemsDesktopSmall: false,
-                    itemsTablet: false,
-                    itemsMobile: false,
-                    stopOnHover: true,
-                    navigation: true, // Show next and prev buttons
-                    pagination: false,
-                    autoHeight: true,
-                    navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
-                });
-            }
-
-        }
-    },
-
-    revolutionGalleryComponentEnable: function () {
-        var gallery = $.findCachedId("revolution-gallery-component");
-        if (gallery.length > 0) {
-            var $frontPageGallyery = $(".tp-banner");
-            if ($frontPageGallyery.length > 0) {
-                $frontPageGallyery.show().revolution({
-                    dottedOverlay: "none",
-                    delay: 5000,
-                    startwidth: 960,
-                    startheight: 320,
-                    hideThumbs: 10,
-                    fullWidth: "off",
-                    navigationType: "bullet",
-                    navigationStyle: "preview2",
-                    forceFullWidth: "off"
-                });
-            }
-        }
-    },
-
-    enableIsotopComponent: function () {
-        //filtering through isotop
-        var $required = $.findCachedId("isotop-component");
-        if ($required.length > 0) {
-            var $isotopContainer = $("ul.search-page-apps-list");
-            if ($isotopContainer.length > 0) {
-                var $filterIsotopItems = $('.filter li a');
-                if ($filterIsotopItems.length > 0) {
-                    $filterIsotopItems.click(function () {
-                        $('.filter').find("li a").removeClass('active');
-                        $(this).addClass('active');
-                        var selector = $(this).attr('data-filter');
-
-                        $isotopContainer.isotope({
-                            filter: selector
-                        });
-                        return false;
-                    });
-                }
-            }
-        }
-    }
 };

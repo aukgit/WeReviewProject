@@ -11,11 +11,12 @@
         /// Setup all configuration.
         /// </summary>
         var app = $.app;
-        var classes = [
+        var classesToCallInitialize = [
             app.hiddenContainer,
             app.spinner,
-            $.jQueryCaching
+            $.jQueryCaching,
+            $.app.component
         ];
-        $.executeArrayOfInitilizeMethods(classes);
+        $.executeArrayOfInitilizeMethods(classesToCallInitialize);
     }
 };
