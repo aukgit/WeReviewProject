@@ -13,14 +13,14 @@
 /// <reference path="../jQuery/jquery-2.1.4-vsdoc.js" />
 ;
 $.fn.extend({
-    getClassesList: function() {
+    getClassesList: function () {
         /// <summary>
         /// jQuery element get all classes as an array.
         /// </summary>
         /// <returns type="array">array list of classes.</returns>
         return $.getClassesList(this);
     },
-    isEmpty: function() {
+    isEmpty: function () {
         /// <summary>
         /// Compare any object to null , unidentified or empty then returns true/false.
         /// </summary>
@@ -28,17 +28,17 @@ $.fn.extend({
         /// <returns type="boolean">True/False</returns>
         return $.isEmpty(this);
     },
-    disableElement: function() {
+    disableElement: function () {
         this.attr("disabled", "disabled");
     },
-    enableElement: function() {
+    enableElement: function () {
         this.removeAttr("disabled");
     },
-    isDisabledElement: function() {
+    isDisabledElement: function () {
         return this.hasAttr("disabled");
     },
-    toArrayWithValues: function() {
-        var len  = this.length,
+    toArrayWithValues: function () {
+        var len = this.length,
             array = new Array(len);
         for (var i = 0; i < len; i++) {
             array[i] = this[i].value;
@@ -53,5 +53,57 @@ $.fn.extend({
             array.push($.serializeToJson($from));
         }
         return array;
+    },
+    toggleClasses: function (classes) {
+        /// <summary>
+        /// toggle classes from the given $element, order doesn't matter..
+        /// </summary>
+        /// <param name="$element" type="type">jquery element</param>
+        /// <param name="classes" type="type">Use spaces( ) to combine and give classes names.</param>
+        if (this.length > 0) {
+            var classList = classes.split(" ");
+            for (var i = 0; i < classList.length; i++) {
+                var _class = classList[i];
+                this.toggleClass(_class);
+            }
+        }
+    },
+
+    anyClassesExist: function (classes) {
+        /// <summary>
+        /// toggle classes from the given $element, order doesn't matter..
+        /// </summary>
+        /// <param name="$element" type="type">jquery element</param>
+        /// <param name="classes" type="type">Use spaces( ) to combine and give classes names.</param>
+        if (this.length > 0) {
+            var classList = classes.split(" ");
+            for (var i = 0; i < classList.length; i++) {
+                var _class = classList[i];
+                if (this.hasClass(_class)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    },
+
+    allClassesExist: function (classes) {
+        /// <summary>
+        /// toggle classes from the given $element, order doesn't matter..
+        /// </summary>
+        /// <param name="$element" type="type">jquery element</param>
+        /// <param name="classes" type="type">Use spaces( ) to combine and give classes names.</param>
+        var result = false;
+        if (this.length > 0) {
+            result = true;
+            var classList = classes.split(" ");
+            for (var i = 0; i < classList.length; i++) {
+                var _class = classList[i];
+                if (!this.hasClass(_class)) {
+                    result = false;
+                }
+            }
+        }
+        return result;
     }
 });

@@ -973,6 +973,8 @@
     <Content Include="JavaScript-Mvc-framework\extensions\selectors.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\spinner.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\urls.js" />
+    <None Include="JavaScript-Mvc-framework\jquery-2.1.4.intellisense.js" />
+    <Content Include="JavaScript-Mvc-framework\jquery-2.1.4.js" />
     <Content Include="JavaScript-Mvc-framework\jQueryCaching.js" />
     <Content Include="JavaScript-Mvc-framework\jQueryExtend.fn.js" />
     <Content Include="JavaScript-Mvc-framework\jQueryExtend.js" />

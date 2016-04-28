@@ -1,11 +1,19 @@
-﻿; $.app = $.app || {};
-; $.app.spinner = {
+﻿/// <reference path="../jQueryExtend.fn.js" />
+/// <reference path="../jquery-2.1.4.js" />
+/// <reference path="../byId.js" />
+/// <reference path="../jquery-2.1.4.intellisense.js" />
+; $.app = $.app || {};
+;
+$.app.spinner = {
     id: 'loading-bar',
     $spinner: [],
     spinnerDisplayTypeId: 1,
     type: {
         HtmlTemplate: 1, // renders spinner from Html element
-        JsTemplate: 2  // render Html by generating Html from JavaScript.
+        JsTemplate: 2 // render Html by generating Html from JavaScript.
+    },
+    prop: {
+        spinnerClass: "fa-spin-custom fa-spinner"
     },
     initialize: function () {
         var self = $.app.spinner;
@@ -14,7 +22,7 @@
             throw new Error("Spinner requires jQueryUI Block + Animate.css library. Please download and add those to your project.");
         }
     },
-    setMessage : function (tooltipMessage, contentMessage) {
+    setMessage: function (tooltipMessage, contentMessage) {
         /// <summary>
         /// Set message on spinner
         /// </summary>
@@ -34,15 +42,15 @@
         }
 
         $anchor.attr("title", tooltipMessage)
-               .attr("data-original-title", tooltipMessage);
+            .attr("data-original-title", tooltipMessage);
         $span.attr("data-display", tooltipMessage)
-             .attr("title", tooltipMessage);
+            .attr("title", tooltipMessage);
         if ($.isEmpty(contentMessage) === false) {
             $content.attr("title", contentMessage)
-                    .html(contentMessage);
+                .html(contentMessage);
         } else {
             $content.attr("title", "")
-                    .html("");
+                .html("");
         }
     },
     quickShow: function ($blockingElement, $elementToHide, onBlockExecuteMethod) {
@@ -112,5 +120,83 @@
         /// </summary>
         /// <returns type="">Returns $.app.spinner.$spinner</returns>
         return $.app.spinner.$spinner;
+    },
+
+    toogleSpinnerClass: function ($e, newClasses, hideOnSpinnerOnSpinnerClassesRemoved) {
+        /// <summary>
+        /// Toggle spinner classes on the given $element.
+        /// </summary>
+        /// <param name="$e" type="type"></param>
+        /// <param name="newClasses" type="type">use spaces for multiple classes</param>
+        /// <param name="hideOnSpinnerOnSpinnerClassesRemoved" type="type">true/false if the spinner element should hide when removing the spinner classes.</param>
+        var self = $.app.spinner,
+            prop = self.prop,
+            spinnerClass = prop.spinnerClass;
+        if ($e.length > 0) {
+            if (!$e.hasClass("fa")) {
+                spinnerClass += " fa";
+            }
+            if (hideOnSpinnerOnSpinnerClassesRemoved === true) {
+                $e.toggleClass("hide");
+            }
+            $e.toggleClasses(spinnerClass);
+            $e.toggleClasses(newClasses);
+        }
+    },
+
+    toggleSpinnerWithBtn: function ($btn, $currentIcon, spinnerClasses, nonSpinnerClasses, right, hideOnSpinnerOnSpinnerClassesRemoved) {
+        /// <summary>
+        /// Attach spinner icon replacing a existing icon.
+        /// </summary>
+        /// <param name="$btn" type="type">Where to add the spinner.</param>
+        /// <param name="$currentIcon" type="type">$ element if any icon present in the btn.</param>
+        /// <param name="spinnerClasses" type="type">custom spinner classes.</param>
+        /// <param name="nonSpinnerClasses" type="type">custom classes to be displayed when spinner is disabled.</param>
+        /// <param name="right" type="type">if place in right or left. by default left.</param>
+        /// <param name="hideOnSpinnerOnSpinnerClassesRemoved" type="type">Hide the spiner icon when toggled.</param>
+        if ($btn.length > 0) {
+            var $spinner,
+                self = $.app.spinner,
+                prop = self.prop,
+                attr = "data-has-spinner",
+                spinnerClass = prop.spinnerClass;
+            if ($.isEmpty(spinnerClasses)) {
+                if (!$btn.hasClass("fa")) {
+                    spinnerClass += " fa";
+                }
+                spinnerClasses = spinnerClass;
+            }
+
+            if (!$.isEmpty($btn.$attachtedSpinner)) {
+                $spinner = $btn.$attachtedSpinner;
+                if (hideOnSpinnerOnSpinnerClassesRemoved === true) {
+                    $spinner.toggleClass("hide");
+                }
+                var currentlySpinnerDisplaying = $btn.attr(attr) === "1";
+                $spinner.toggleClasses(spinnerClasses);
+                if (currentlySpinnerDisplaying) {
+                    if (!$.isEmpty(nonSpinnerClasses)) {
+                        $spinner.toggleClasses(nonSpinnerClasses);
+                    }
+                    $btn.attr(attr, "0");
+                } else {
+                    $btn.attr(attr, "1");
+                }
+               
+            } else {
+                $spinner = $("<i>", { class: "spinner-icon " + spinnerClasses });
+                $btn.$attachtedSpinner = $spinner;
+                if (right === true) {
+                    $btn.append($spinner);
+                } else {
+                    $btn.prepend($spinner);
+                }
+                $btn.attr(attr, "1");
+            }
+            if (!$.isEmpty($currentIcon) && $currentIcon.length > 0) {
+                $currentIcon.toggleClass("hide");
+            }
+
+        }
     }
 };
