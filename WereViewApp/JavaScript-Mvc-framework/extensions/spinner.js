@@ -144,16 +144,17 @@ $.app.spinner = {
         }
     },
 
-    toggleSpinnerWithBtn: function ($btn, $currentIcon, spinnerClasses, nonSpinnerClasses, right, hideOnSpinnerOnSpinnerClassesRemoved) {
+    toggleSpinnerWithBtn: function ($btn, $currentIcon, spinnerClasses, nonSpinnerClasses, commonClass, right, hideOnSpinnerOnSpinnerClassesRemoved) {
         /// <summary>
         /// Attach spinner icon replacing a existing icon.
+        /// 
         /// </summary>
         /// <param name="$btn" type="type">Where to add the spinner.</param>
-        /// <param name="$currentIcon" type="type">$ element if any icon present in the btn.</param>
-        /// <param name="spinnerClasses" type="type">custom spinner classes.</param>
-        /// <param name="nonSpinnerClasses" type="type">custom classes to be displayed when spinner is disabled.</param>
+        /// <param name="$currentIcon" type="type">$ element if any icon present in the btn. This element will be hidden when spinner css is added.</param>
+        /// <param name="spinnerClasses" type="type">custom spinner classes. if not given default one will be set : fa-spin-custom fa-spinner</param>
+        /// <param name="nonSpinnerClasses" type="type">custom classes to be displayed when spinner is disabled. If not given nothing will happen. if given then it will be added with the i.spinner when by toggling</param>
         /// <param name="right" type="type">if place in right or left. by default left.</param>
-        /// <param name="hideOnSpinnerOnSpinnerClassesRemoved" type="type">Hide the spiner icon when toggled.</param>
+        /// <param name="hideOnSpinnerOnSpinnerClassesRemoved" type="type">Hide the spinner icon when toggled. If true then when spinner class is removed this spinner icon object will be hidden and nonSpinnerClasses will have no effect on the system.</param>
         if ($btn.length > 0) {
             var $spinner,
                 self = $.app.spinner,
@@ -173,18 +174,20 @@ $.app.spinner = {
                     $spinner.toggleClass("hide");
                 }
                 var currentlySpinnerDisplaying = $btn.attr(attr) === "1";
-                $spinner.toggleClasses(spinnerClasses);
+                $spinner.toggleClasses(spinnerClasses); // toggle spinner visible/invisible classes.
                 if (currentlySpinnerDisplaying) {
-                    if (!$.isEmpty(nonSpinnerClasses)) {
-                        $spinner.toggleClasses(nonSpinnerClasses);
-                    }
+                    // currently spinner is visible , now make it invisible.
                     $btn.attr(attr, "0");
                 } else {
+                    // currently spinner is not visible, make it visible.
                     $btn.attr(attr, "1");
                 }
-               
+                if (!$.isEmpty(nonSpinnerClasses)) {
+                    $spinner.toggleClasses(nonSpinnerClasses);
+                }
             } else {
-                $spinner = $("<i>", { class: "spinner-icon " + spinnerClasses });
+                // creating the spinner
+                $spinner = $("<i>", { class: "spinner-icon " + commonClass + " " + spinnerClasses });
                 $btn.$attachtedSpinner = $spinner;
                 if (right === true) {
                     $btn.append($spinner);
@@ -192,6 +195,7 @@ $.app.spinner = {
                     $btn.prepend($spinner);
                 }
                 $btn.attr(attr, "1");
+         
             }
             if (!$.isEmpty($currentIcon) && $currentIcon.length > 0) {
                 $currentIcon.toggleClass("hide");
