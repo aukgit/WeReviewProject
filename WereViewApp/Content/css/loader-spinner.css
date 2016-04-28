@@ -203,7 +203,12 @@ It means that loaders will fallback to a text state of simply saying "Loading...
   padding-top: 19px;
 }
 .blockUI {
-  border: 2px solid #d0d5da !important;
+  border: none !important;
+  color: #ffffff;
+  border: 3px solid #aaaaaa;
+  cursor: wait;
+  background-color: #ffffff;
+  border-radius: 4px;
 }
 .loading-bar-full-screen {
   height: 100%;

@@ -21,6 +21,72 @@ $.isEmpty = function (variable) {
     /// <returns type="boolean">True/False</returns>
     return variable === undefined || variable === null || variable === '' || variable.length === 0;
 };
+
+$.setDefaultOnEmpty = function (variable, defaultValue) {
+    /// <summary>
+    /// Compare any object to null , unidentified or empty then sets the default value to that object and then returns
+    /// </summary>
+    /// <param name="variable"> Anything can be possible.</param>
+    /// <returns type="boolean">True/False</returns>
+    if (variable === undefined || variable === null || variable === '' || variable.length === 0) {
+        variable = defaultValue;
+    }
+    return variable;
+};
+
+/**
+ * gets the common classes from the list.
+ * @param {} classesWithSpace1 : classes with spaces eg. "Hello world"
+ * @param {} classesWithSpace2  : classes with spaces eg "world Hello v"
+ * @returns {} return a array list of common classes eg. ["Hello",  "world"]
+ */
+$.getCommonClasses = function(classesWithSpace1, classesWithSpace2) {
+    var list1 = classesWithSpace1.split(" "),
+        list2 = classesWithSpace2.split(" "),
+        common = [];
+    var len = list1.length > list2.length ? list1.length : list2.length;
+    var workingList = list1.length > list2.length ? list1 : list2;
+    var otherList = list1.length > list2.length ? list2 : list1;
+
+    for (var i = 0; i < len; i++) {
+        var item = workingList[i];
+        if (otherList.indexof(item) > -1) {
+            // present as common
+            common.push(item);
+        }
+    }
+    return common;
+}
+
+
+/**
+ * gets the uncommon classes from the list.
+ * @param {} classesWithSpace1 : classes with spaces eg. "Hello world"
+ * @param {} classesWithSpace2  : classes with spaces eg "world Hello v"
+ * @returns {} return a array list of common classes eg. ["v"]
+ */
+$.getUnCommonClasses = function (classesWithSpace1, classesWithSpace2) {
+    var list1 = classesWithSpace1.split(" "),
+        list2 = classesWithSpace2.split(" "),
+        unCommon = [];
+    var len = list1.length > list2.length ? list1.length : list2.length;
+    var workingList = list1.length > list2.length ? list1 : list2;
+    var otherList = list1.length > list2.length ? list2 : list1;
+
+    for (var i = 0; i < len; i++) {
+        var item = workingList[i];
+        if (otherList.indexof(item) === -1) {
+            // not present uncommon
+            unCommon.push(item);
+        }
+        item = otherList.length < i ? otherList[i]  : null;
+        if (item !== null && workingList.indexof(item) === -1) {
+            // not present uncommon
+            unCommon.push(item);
+        }
+    }
+    return unCommon;
+}
 /**
  *  @returns array of classes names.
  */

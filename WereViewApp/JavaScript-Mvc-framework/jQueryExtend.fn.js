@@ -105,5 +105,54 @@ $.fn.extend({
             }
         }
         return result;
-    }
+    },
+    toggleAttrValue: function (attr) {
+        /// <summary>
+        /// toggle given attribute value to "true" => "false" or "false" => "true".
+        /// If not present then default insert true.
+        /// </summary>
+        /// <param name="attr" type="type">attribute name</param>
+        if (this.length > 0) {
+            var val = this.attr(attr);
+            if (val === "true") {
+                this.attr(attr, "false");
+            } else {
+                this.attr(attr, "true");
+            }
+        }
+    },
+    isBoolAttr: function (attr) {
+        /// <summary>
+        /// checks if the given attribute value is not "false".
+        /// If attr not present then true.
+        /// If no element present then false.
+        /// </summary>
+        /// <param name="attr" type="type">attribute name</param>
+        if (this.length > 0) {
+            var val = this.attr(attr);
+            return val !== "false";
+        }
+        return false;
+    },
+    setBoolTrueAttr: function (attr) {
+        /// <summary>
+        /// checks if the given attribute value is "false".
+        /// If attr not present then true.
+        /// </summary>
+        /// <param name="attr" type="type">attribute name</param>
+        if (this.length > 0) {
+            this.attr(attr, "true");
+        }
+    },
+    setBoolFalseAttr: function (attr) {
+        /// <summary>
+        /// checks if the given attribute value is "false".
+        /// If attr not present then true.
+        /// </summary>
+        /// <param name="attr" type="type">attribute name</param>
+        if (this.length > 0) {
+            this.attr(attr, "false");
+        }
+    },
+  
 });

@@ -20,7 +20,12 @@
 
 
 .blockUI {
-    border: 2px solid rgb(208, 213, 218) !important;
+    border: none !important;
+    color: rgb(255, 255, 255);
+    border: 3px solid rgb(170, 170, 170);
+    cursor: wait;
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
 }
 
 .loading-bar-full-screen {
@@ -49,9 +54,11 @@
         @media(max-width:@screen-sm) {
             right: -2%;
         }
-         @media(max-height: 650px) {
+
+        @media(max-height: 650px) {
             margin-top: 15px;
         }
+
         @media(max-height: 400px) {
             margin-top: 25px;
         }
@@ -61,9 +68,10 @@
 .body-fixed {
     height: 100%;
 }
+
 .body-flexible {
     height: 100%;
-    min-height:100%;
+    min-height: 100%;
     overflow: auto;
     position: relative;
     z-index: 1;
