@@ -21,7 +21,7 @@
 <div id="app-controller" data-action="SingleAppDisplay">
     @section hidden{
         @Html.GenerateUrlHiddenInputs()
-        @Html.Hidden("owl-carousel-component", "true")
+        @Html.ComponentsEnableFor("owl-carousel")
     }
     <div class="app-details-page" id="app-details-page">
         <div id="fb-root"></div>

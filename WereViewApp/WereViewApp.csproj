@@ -780,6 +780,10 @@
       <DependentUpon>color-fonts.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\color-fonts.less" />
+    <Content Include="Content\Less\CSS\lesshat.css" />
+    <Content Include="Content\Less\CSS\lesshat.min.css">
+      <DependentUpon>lesshat.css</DependentUpon>
+    </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
     <Content Include="Content\Less\less-imports.less" />
@@ -954,10 +958,12 @@
     <Content Include="JavaScript-Mvc-framework\app.run.js" />
     <Content Include="JavaScript-Mvc-framework\Areas\Admin\Controllers\NavItemsController.js" />
     <Content Include="JavaScript-Mvc-framework\byId.js" />
+    <Content Include="JavaScript-Mvc-framework\component\component.list.js" />
     <Content Include="JavaScript-Mvc-framework\controllers\controllers.js" />
     <Content Include="JavaScript-Mvc-framework\controllers\homeController.js" />
     <Content Include="JavaScript-Mvc-framework\controllers\initialize.js" />
     <Content Include="JavaScript-Mvc-framework\controllers\AppController.js" />
+    <Content Include="JavaScript-Mvc-framework\component\component.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\ajax.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\clone.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\constants.js" />
@@ -971,6 +977,13 @@
     <Content Include="JavaScript-Mvc-framework\extensions\selectors.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\spinner.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\urls.js" />
+    <Content Include="Content\Less\remixens\additional-less-functions.less" />
+    <Content Include="Content\Less\remixens\screen-size-positioning-placements.less" />
+    <Content Include="Content\Less\CSS\lesshat.css.map">
+      <DependentUpon>lesshat.css</DependentUpon>
+    </Content>
+    <None Include="JavaScript-Mvc-framework\jquery-2.1.4.intellisense.js" />
+    <Content Include="JavaScript-Mvc-framework\jquery-2.1.4.js" />
     <Content Include="JavaScript-Mvc-framework\jQueryCaching.js" />
     <Content Include="JavaScript-Mvc-framework\jQueryExtend.fn.js" />
     <Content Include="JavaScript-Mvc-framework\jQueryExtend.js" />

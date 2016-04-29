@@ -202,8 +202,41 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 #loading-bar {
   padding-top: 19px;
 }
-.blockUI {
-  border: 2px solid #d0d5da !important;
+.blockMsg {
+  border: none !important;
+  color: #ffffff;
+  border: 3px solid #aaaaaa;
+  cursor: wait;
+  background-color: #ffffff;
+  border-radius: 4px;
+  position: relative;
+  font-size: 0.95em;
+}
+@media (max-width: 480px) {
+  .blockMsg {
+    width: 282px !important;
+    width: 28.2rem !important;
+  }
+}
+@media (min-width: 480px) {
+  .blockMsg {
+    font-size: 1em;
+  }
+}
+@media (min-width: 768px) {
+  .blockMsg {
+    font-size: 1.1em;
+  }
+}
+@media (min-width: 992px) {
+  .blockMsg {
+    font-size: 1.3em;
+  }
+}
+@media (min-width: 1200px) {
+  .blockMsg {
+    font-size: 1.3em;
+  }
 }
 .loading-bar-full-screen {
   height: 100%;
@@ -214,16 +247,10 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 }
 .loading-bar-full-screen .spinner-content {
   right: 0.9%;
-  position: absolute;
+  position: abosolute;
   color: black;
   font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: .95em;
   margin-top: -15px;
-}
-@media (min-width: 480px) {
-  .loading-bar-full-screen .spinner-content {
-    font-size: 1.4em;
-  }
 }
 @media (max-width: 480px) {
   .loading-bar-full-screen .spinner-content {
@@ -238,11 +265,13 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 @media (max-height: 650px) {
   .loading-bar-full-screen .spinner-content {
     margin-top: 15px;
+    margin-top: 1.5rem;
   }
 }
 @media (max-height: 400px) {
   .loading-bar-full-screen .spinner-content {
     margin-top: 25px;
+    margin-top: 2.5rem;
   }
 }
 .body-fixed {
@@ -254,5 +283,27 @@ It means that loaders will fallback to a text state of simply saying "Loading...
   overflow: auto;
   position: relative;
   z-index: 1;
+}
+.default-loading-bar {
+  min-height: 30px;
+  min-height: 3rem;
+  padding: 10px 20px 20px 20px;
+  padding: 1rem 2rem 2rem 2rem;
+}
+.default-loading-bar .loading-bar-container {
+  position: static;
+  width: 44px;
+  width: 4.4rem;
+  margin: 0 auto;
+}
+.default-loading-bar .spinner-content {
+  right: 0.9%;
+  position: relative;
+  color: black;
+  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-top: -15px;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-top: 1rem;
 }
 /*# sourceMappingURL=loader-spinner.css.map */

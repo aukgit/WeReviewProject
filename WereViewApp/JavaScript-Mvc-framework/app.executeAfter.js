@@ -29,7 +29,7 @@ $.app.executeAfter = {
                 var startsWith = href[0];
                 if (startsWith !== "#") {
                     e.preventDefault();
-                    $.app.global.documentFullSpinnerShow("... Please Wait ...");
+                    $.app.global.documentFullSpinnerShow("...Please Wait...");
                     window.location = $link.attr("href");
                 }
             }

@@ -3,8 +3,7 @@
     //Layout = "~/Views/Shared/_LayoutFrontEnd.cshtml";
 }
 @section hidden{
-    @Html.Hidden("owl-carousel-component", "true")
-    @Html.Hidden("revolution-gallery-component", "true")
+    @Html.ComponentsEnableFor("owl-carousel,revolution-gallery")
 }
 <div class="home-page">
     @{ Html.RenderAction("HomePageGallery", "Partials"); }

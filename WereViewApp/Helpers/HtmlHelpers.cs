@@ -37,7 +37,7 @@ namespace WeReviewApp.Helpers {
             if (isDependOnUserLogState && UserManager.IsAuthenticated()) {
                 cacheName += UserManager.GetCurrentUserName();
             }
-            var cache = (string) AppConfig.Caches.Get(cacheName);
+            var cache = (string)AppConfig.Caches.Get(cacheName);
 
             if (cache != null && !string.IsNullOrWhiteSpace(cache)) {
                 return new HtmlString(cache);
@@ -312,7 +312,7 @@ namespace WeReviewApp.Helpers {
             var countryOptionsGenerate = "<select class='form-control selectpicker " + classes +
                                          "' data-live-search='true' name='" + htmlName + "' " + otherAttributes +
                                          " title='Choose...' data-style='" + classes + "'>";
-            var dt = CachedQueriedData.GetTable(tableName, connectionType, new[] {valueField, textField});
+            var dt = CachedQueriedData.GetTable(tableName, connectionType, new[] { valueField, textField });
             if (dt != null && dt.Rows.Count > 0) {
                 var sb = new StringBuilder(countryOptionsGenerate, dt.Rows.Count + 10);
                 DataRow row;
@@ -349,9 +349,9 @@ namespace WeReviewApp.Helpers {
                 return input;
             }
             if (isShowElipseDot) {
-                return input.Substring(0, (int) length) + "...";
+                return input.Substring(0, (int)length) + "...";
             }
-            return input.Substring(0, (int) length);
+            return input.Substring(0, (int)length);
         }
 
         public static string Truncate(this HtmlHelper helper, string input, int starting, int length) {
@@ -927,7 +927,7 @@ namespace WeReviewApp.Helpers {
             var format = GetDefaultTimeZoneFormat(formatType, customFormat);
             return dt.HasValue ? dt.Value.ToString(format) : "";
         }
-        
+
         #endregion
 
         #region Generate Url Helper
@@ -1003,9 +1003,9 @@ namespace WeReviewApp.Helpers {
             List<string> actionNamesList = null;
             if (defaultActionsAdd) {
                 if (actionNames == null || actionNames.Length == 0) {
-                    actionNamesList = new List<string>(5) {"Create", "Edit", "Delete", "Index"};
+                    actionNamesList = new List<string>(5) { "Create", "Edit", "Delete", "Index" };
                 } else {
-                    actionNamesList = new List<string>(actionNames) {"Create", "Edit", "Delete", "Index"};
+                    actionNamesList = new List<string>(actionNames) { "Create", "Edit", "Delete", "Index" };
                 }
             } else {
                 actionNamesList = actionNames.ToList();
@@ -1015,7 +1015,7 @@ namespace WeReviewApp.Helpers {
             for (int i = 0; i < actionNamesList.Count; i++) {
                 string actionName = actionNamesList[i],
                        url = urlHelper.GetUriString(actionName, controller),
-                       id = actionName + "-url" ;
+                       id = actionName + "-url";
                 sb.Append(string.Format("<input type=\"hidden\" value=\"{0}\" id=\"{1}\" name=\"{1}\" />", url, id));
             }
             var mvcHtmlString = new MvcHtmlString(sb.ToString());
@@ -1024,6 +1024,21 @@ namespace WeReviewApp.Helpers {
             GC.Collect();
             return mvcHtmlString;
         }
+        #endregion
+
+        #region Component Enable : Listing
+
+        public static MvcHtmlString ComponentsEnableFor(this HtmlHelper helper, params string[] componentName) {
+            var componentNames = string.Join(",", componentName);
+            return ComponentsEnableFor(helper, componentNames);
+        }
+
+        public static MvcHtmlString ComponentsEnableFor(this HtmlHelper helper, string componentNames) {
+            string id = "Component-Enable";
+            var mvcHtmlString = new MvcHtmlString(string.Format("<input type=\"hidden\" value=\"{0}\" id=\"{1}\" name=\"{1}\" />", componentNames, id));
+            return mvcHtmlString;
+        }
+
         #endregion
     }
 }

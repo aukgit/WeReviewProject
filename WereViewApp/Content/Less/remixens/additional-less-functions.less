@@ -1,0 +1,59 @@
+﻿.static() {
+    position: static;
+}
+
+.relative() {
+    position: relative;
+}
+
+.absolute() {
+    position: absolute;
+}
+
+
+.fixed() {
+    position: fixed;
+}
+
+.z-index-min(@min: 0) {
+    z-index: @min;
+}
+
+.z-index-mid(@min: 5000) {
+    z-index: @min;
+}
+
+.z-index-max(@min: 1000000) {
+    z-index: @min;
+}
+
+.overflow-hidden() {
+    overflow: hidden;
+}
+
+.overflow-auto() {
+    overflow: auto;
+}
+
+.overflow-scroll() {
+    overflow: scroll;
+}
+
+.overflow-visible() {
+    overflow: visible;
+}
+
+.position-place(@top, @right) {
+    .top(@top);
+    .right(@right);
+}
+
+.position-place(@top, @right, @bottom) {
+    .position-place(@top, @right);
+    .bottom(@right);
+}
+
+.position-place(@top, @right, @bottom, @left ) {
+    .position-place(@top, @right, @left);
+    .left(@right);
+}

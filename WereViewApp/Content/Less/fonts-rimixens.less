@@ -81,3 +81,23 @@
 
 .header-font() {
 }
+
+.screen-based-font-size(@default: .95em, @xs-font: 1em, @sm-font: 1.1em, @md-font: 1.3em, @lg-font: 1.3em) {
+    .font-size(@default);
+
+    @media(min-width:@screen-xs) {
+        .font-size(@xs-font);
+    }
+
+    @media(min-width:@screen-sm) {
+        .font-size(@sm-font);
+    }
+
+    @media(min-width:@screen-md) {
+        .font-size(@md-font);
+    }
+
+    @media(min-width:@screen-lg) {
+        .font-size(@lg-font);
+    }
+}

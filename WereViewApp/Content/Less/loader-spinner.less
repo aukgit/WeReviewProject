@@ -19,8 +19,46 @@
 }
 
 
-.blockUI {
-    border: 2px solid rgb(208, 213, 218) !important;
+.blockMsg {
+    border: none !important;
+    color: rgb(255, 255, 255);
+    border: 3px solid rgb(170, 170, 170);
+    cursor: wait;
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    position: relative;
+
+    @media(max-width:@screen-xs ) {
+        .width(282px) !important;
+    }
+
+    .screen-based-font-size();
+}
+
+.screen-size-positioning(@sm-right: -2%, @xs-right: -3%, @top-650px: 15px, @top-400px: 25px ) {
+    @media(max-width:@screen-xs) {
+        right: @xs-right;
+    }
+
+    @media(max-width:@screen-sm) {
+        right: @sm-right;
+    } 
+
+    @media(max-height: 650px) {
+        .margin-top(@top-650px);
+    }
+
+    @media(max-height: 400px) {
+        .margin-top(@top-400px);
+    }
+}
+
+.spinner-content-style(@position) {
+    right: 0.9%;
+    position: @position;
+    color: black;
+    .ubuntu-font();
+    margin-top: -15px;
 }
 
 .loading-bar-full-screen {
@@ -31,40 +69,36 @@
     background-color: #FFFFFF;
 
     .spinner-content {
-        right: 0.9%;
-        position: absolute;
-        color: black;
-        .ubuntu-font();
-        font-size: .95em;
-        margin-top: -15px;
-
-        @media(min-width:@screen-xs) {
-            font-size: 1.4em;
-        }
-
-        @media(max-width:@screen-xs) {
-            right: -3%;
-        }
-
-        @media(max-width:@screen-sm) {
-            right: -2%;
-        }
-         @media(max-height: 650px) {
-            margin-top: 15px;
-        }
-        @media(max-height: 400px) {
-            margin-top: 25px;
-        }
+        .spinner-content-style(~'abosolute');
+        .screen-size-positioning();
     }
 }
 
 .body-fixed {
     height: 100%;
 }
+
 .body-flexible {
     height: 100%;
-    min-height:100%;
+    min-height: 100%;
     overflow: auto;
     position: relative;
     z-index: 1;
+}
+
+.default-loading-bar {
+    .min-height(30px);
+    .padding(10px, 20px, 20px, 20px);
+
+    .loading-bar-container {
+        .static;
+        .width(44px);
+        margin: 0 auto;
+    }
+
+    .spinner-content {
+        .spinner-content-style(~'relative');
+        margin: 0 auto;
+        .margin-top(10px);
+    }
 }
