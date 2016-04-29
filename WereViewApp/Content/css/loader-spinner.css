@@ -215,6 +215,7 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 @media (max-width: 480px) {
   .blockMsg {
     width: 282px !important;
+    width: 28.2rem !important;
   }
 }
 @media (min-width: 480px) {
@@ -287,10 +288,12 @@ It means that loaders will fallback to a text state of simply saying "Loading...
   min-height: 30px;
   min-height: 3rem;
   padding: 10px 20px 20px 20px;
+  padding: 1rem 2rem 2rem 2rem;
 }
 .default-loading-bar .loading-bar-container {
   position: static;
   width: 44px;
+  width: 4.4rem;
   margin: 0 auto;
 }
 .default-loading-bar .spinner-content {
@@ -301,5 +304,6 @@ It means that loaders will fallback to a text state of simply saying "Loading...
   margin-top: -15px;
   margin: 0 auto;
   margin-top: 10px;
+  margin-top: 1rem;
 }
 /*# sourceMappingURL=loader-spinner.css.map */

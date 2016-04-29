@@ -29,7 +29,7 @@
     position: relative;
 
     @media(max-width:@screen-xs ) {
-        width: 282px !important;
+        .width(282px) !important;
     }
 
     .screen-based-font-size();
@@ -42,7 +42,7 @@
 
     @media(max-width:@screen-sm) {
         right: @sm-right;
-    }
+    } 
 
     @media(max-height: 650px) {
         .margin-top(@top-650px);
@@ -59,8 +59,6 @@
     color: black;
     .ubuntu-font();
     margin-top: -15px;
-
-
 }
 
 .loading-bar-full-screen {
@@ -90,17 +88,17 @@
 
 .default-loading-bar {
     .min-height(30px);
-    padding: 10px 20px 20px 20px;
+    .padding(10px, 20px, 20px, 20px);
 
     .loading-bar-container {
-        position: static;
-        width: 44px;
+        .static;
+        .width(44px);
         margin: 0 auto;
     }
 
     .spinner-content {
         .spinner-content-style(~'relative');
         margin: 0 auto;
-        margin-top: 10px;
+        .margin-top(10px);
     }
 }
