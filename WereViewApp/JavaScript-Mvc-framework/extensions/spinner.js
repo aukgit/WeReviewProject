@@ -176,7 +176,7 @@ $.app.spinner = {
         /// <param name="nonSpinnerClasses" type="type">custom classes to be displayed when spinner is disabled. If not given nothing will happen. if given then it will be added with the i.spinner when by toggling</param>
         /// <param name="right" type="type">if place in right or left. by default left.</param>
         /// <param name="hideOnSpinnerOnSpinnerClassesRemoved" type="type">Hide the spinner icon when toggled. If true then when spinner class is removed this spinner icon object will be hidden and nonSpinnerClasses will have no effect on the system.</param>
-        if ($btn.length > 0) {
+        if ($btn !== undefined && $btn.length > 0) {
             var $spinner,
                 self = $.app.spinner,
                 prop = self.prop,
@@ -223,5 +223,6 @@ $.app.spinner = {
             }
             return $btn.isBoolAttr(attr);
         }
+        return false;
     }
 };

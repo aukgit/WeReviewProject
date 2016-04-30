@@ -212,10 +212,22 @@ It means that loaders will fallback to a text state of simply saying "Loading...
   position: relative;
   font-size: 0.95em;
 }
+@media (min-width: 992px) {
+  .blockMsg {
+    left: 40% !important;
+    width: 20% !important;
+  }
+}
+@media (max-width: 768px) {
+  .blockMsg {
+    left: 35% !important;
+    width: 38% !important;
+  }
+}
 @media (max-width: 480px) {
   .blockMsg {
-    width: 282px !important;
-    width: 28.2rem !important;
+    left: 6% !important;
+    width: 84% !important;
   }
 }
 @media (min-width: 480px) {
@@ -230,12 +242,12 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 }
 @media (min-width: 992px) {
   .blockMsg {
-    font-size: 1.3em;
+    font-size: 1.12em;
   }
 }
 @media (min-width: 1200px) {
   .blockMsg {
-    font-size: 1.3em;
+    font-size: 1.18em;
   }
 }
 .loading-bar-full-screen {
@@ -292,8 +304,8 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 }
 .default-loading-bar .loading-bar-container {
   position: static;
-  width: 44px;
-  width: 4.4rem;
+  width: 51px;
+  width: 5.1rem;
   margin: 0 auto;
 }
 .default-loading-bar .spinner-content {
@@ -305,5 +317,26 @@ It means that loaders will fallback to a text state of simply saying "Loading...
   margin: 0 auto;
   margin-top: 10px;
   margin-top: 1rem;
+  font-size: 0.95em;
+}
+@media (min-width: 480px) {
+  .default-loading-bar .spinner-content {
+    font-size: 1em;
+  }
+}
+@media (min-width: 768px) {
+  .default-loading-bar .spinner-content {
+    font-size: 1.1em;
+  }
+}
+@media (min-width: 992px) {
+  .default-loading-bar .spinner-content {
+    font-size: 1.3em;
+  }
+}
+@media (min-width: 1200px) {
+  .default-loading-bar .spinner-content {
+    font-size: 1.3em;
+  }
 }
 /*# sourceMappingURL=loader-spinner.css.map */
