@@ -86,11 +86,6 @@ lesshat-selector {
       <div class="loading-bar"></div>
   </div>
 */
-.loading-bar-container {
-  position: absolute;
-  top: 43%;
-  left: 48%;
-}
 .loading-bar {
   display: inline-block;
   width: 4px;
@@ -202,6 +197,11 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 #loading-bar {
   padding-top: 19px;
 }
+.loading-bar-container {
+  position: absolute;
+  top: 44%;
+  left: 48.7%;
+}
 .blockMsg {
   border: none !important;
   color: #ffffff;
@@ -257,33 +257,65 @@ It means that loaders will fallback to a text state of simply saying "Loading...
   width: 100%;
   background-color: #FFFFFF;
 }
+@media (max-width: 992px) {
+  .loading-bar-full-screen .loading-bar-container {
+    left: 47.7%;
+  }
+}
+@media (max-width: 768px) {
+  .loading-bar-full-screen .loading-bar-container {
+    left: 47.7%;
+  }
+}
+@media (max-width: 480px) {
+  .loading-bar-full-screen .loading-bar-container {
+    left: 42.7%;
+    top: 45%;
+  }
+}
 .loading-bar-full-screen .spinner-content {
   right: 0.9%;
-  position: abosolute;
+  position: static;
   color: black;
   font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-top: -15px;
+  margin: 0 auto;
+  margin-top: -17px;
+  margin-top: -1.7rem;
+  min-width: 100px;
+  min-width: 10rem;
 }
 @media (max-width: 480px) {
   .loading-bar-full-screen .spinner-content {
-    right: -3%;
+    right: 0;
   }
 }
 @media (max-width: 768px) {
   .loading-bar-full-screen .spinner-content {
-    right: -2%;
+    right: 0;
+  }
+}
+@media (max-height: 850px) {
+  .loading-bar-full-screen .spinner-content {
+    margin-top: 8px;
+    margin-top: 0.8rem;
   }
 }
 @media (max-height: 650px) {
   .loading-bar-full-screen .spinner-content {
-    margin-top: 15px;
-    margin-top: 1.5rem;
+    margin-top: 10px;
+    margin-top: 1rem;
   }
 }
 @media (max-height: 400px) {
   .loading-bar-full-screen .spinner-content {
     margin-top: 25px;
     margin-top: 2.5rem;
+  }
+}
+@media (min-width: 480px) {
+  .loading-bar-full-screen .spinner-content {
+    font-size: 1.4em;
   }
 }
 .body-fixed {
