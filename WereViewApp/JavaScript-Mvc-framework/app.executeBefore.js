@@ -80,7 +80,6 @@ $.app.executeBefore = {
                     disabledDates: [], //an array of dates that cannot be selected
                     enabledDates: [], //an array of dates that can be selected
                     sideBySide: true //show the date and time picker side by side
-
                 });
             }
             var $datePicker = $(".datepicker-start");
