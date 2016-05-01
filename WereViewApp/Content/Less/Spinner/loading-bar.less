@@ -1,4 +1,4 @@
-﻿//@import "../fonts-rimixens.less";
+﻿@import "../fonts-rimixens.less";
 /**
   Html :
   <div class="loading-bar-container">
@@ -10,58 +10,47 @@
       <div class="loading-bar"></div>
   </div>
 */
+.animated-loading-bar() {
 
-.loading-bar {
-    display: inline-block;
-    width: 4px;
-    height: 18px;
-    border-radius: 4px;
-    .animation(~'loading-bar .7s ease-in-out infinite');
+    .loading-bar {
+        display: inline-block;
+        width: 4px;
+        height: 18px;
+        border-radius: 4px;
+        .animation(~'loading-bar .7s ease-in-out infinite');
+    }
+
+    .loading-bar:nth-child(1) {
+        background-color: #3498db;
+        .animation-delay(0);
+    }
+
+    .loading-bar:nth-child(2) {
+        background-color: #c0392b;
+        .animation-delay(0.9s);
+    }
+
+    .loading-bar:nth-child(3) {
+        background-color: #f1c40f;
+        .animation-delay(0.18s);
+    }
+
+    .loading-bar:nth-child(4) {
+        background-color: #27ae60;
+        .animation-delay(0.27s);
+    }
+
+    .loading-bar:nth-child(5) {
+        background-color: #494C4A;
+        .animation-delay(0.36s);
+    }
+
+    .loading-bar:nth-child(6) {
+        background-color: #7D8DFF;
+        .animation-delay(0.45s);
+    }
+
+    .keyframes(~'loading-bar, 0% { transform: scale(1);} 20% {transform: scale(1, 2.2); } 40% {transform: scale(1); }');
 }
 
-.loading-bar:nth-child(1) {
-    background-color: #3498db;
-    .animation-delay(~'0'); 
-}
-
-.loading-bar:nth-child(2) {
-    background-color: #c0392b;
-    -moz-animation-delay: 0.09s;
-    -o-animation-delay: 0.09s;
-    -webkit-animation-delay: 0.09s;
-    animation-delay: 0.09s;
-}
-
-.loading-bar:nth-child(3) {
-    background-color: #f1c40f;
-    -moz-animation-delay: .18s;
-    -o-animation-delay: .18s;
-    -webkit-animation-delay: .18s;
-    animation-delay: .18s;
-}
-
-.loading-bar:nth-child(4) {
-    background-color: #27ae60;
-    -moz-animation-delay: .27s;
-    -o-animation-delay: .27s;
-    -webkit-animation-delay: .27s;
-    animation-delay: .27s;
-}
-
-.loading-bar:nth-child(5) {
-    background-color: #494C4A;
-    -moz-animation-delay: .36s;
-    -o-animation-delay: .36s;
-    -webkit-animation-delay: .36s;
-    animation-delay: .36s;
-}
-
-.loading-bar:nth-child(6) {
-    background-color: #7D8DFF;
-    -moz-animation-delay: .45s;
-    -o-animation-delay: .45s;
-    -webkit-animation-delay: .45s;
-    animation-delay: .45s;
-}
-
-.keyframes(~'loading-bar, 0% { transform: scale(1);} 20% {transform: scale(1, 2.2); } 40% {transform: scale(1); }');
+.animated-loading-bar();

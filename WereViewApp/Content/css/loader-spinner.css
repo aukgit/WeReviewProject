@@ -105,38 +105,38 @@ lesshat-selector {
 }
 .loading-bar:nth-child(2) {
   background-color: #c0392b;
-  -moz-animation-delay: 0.09s;
-  -o-animation-delay: 0.09s;
-  -webkit-animation-delay: 0.09s;
-  animation-delay: 0.09s;
+  -webkit-animation-delay: 0.9s;
+  -moz-animation-delay: 0.9s;
+  -o-animation-delay: 0.9s;
+  animation-delay: 0.9s;
 }
 .loading-bar:nth-child(3) {
   background-color: #f1c40f;
-  -moz-animation-delay: .18s;
-  -o-animation-delay: .18s;
-  -webkit-animation-delay: .18s;
-  animation-delay: .18s;
+  -webkit-animation-delay: 0.18s;
+  -moz-animation-delay: 0.18s;
+  -o-animation-delay: 0.18s;
+  animation-delay: 0.18s;
 }
 .loading-bar:nth-child(4) {
   background-color: #27ae60;
-  -moz-animation-delay: .27s;
-  -o-animation-delay: .27s;
-  -webkit-animation-delay: .27s;
-  animation-delay: .27s;
+  -webkit-animation-delay: 0.27s;
+  -moz-animation-delay: 0.27s;
+  -o-animation-delay: 0.27s;
+  animation-delay: 0.27s;
 }
 .loading-bar:nth-child(5) {
   background-color: #494C4A;
-  -moz-animation-delay: .36s;
-  -o-animation-delay: .36s;
-  -webkit-animation-delay: .36s;
-  animation-delay: .36s;
+  -webkit-animation-delay: 0.36s;
+  -moz-animation-delay: 0.36s;
+  -o-animation-delay: 0.36s;
+  animation-delay: 0.36s;
 }
 .loading-bar:nth-child(6) {
   background-color: #7D8DFF;
-  -moz-animation-delay: .45s;
-  -o-animation-delay: .45s;
-  -webkit-animation-delay: .45s;
-  animation-delay: .45s;
+  -webkit-animation-delay: 0.45s;
+  -moz-animation-delay: 0.45s;
+  -o-animation-delay: 0.45s;
+  animation-delay: 0.45s;
 }
 lesshat-selector {
   -lh-property: 0; } 
