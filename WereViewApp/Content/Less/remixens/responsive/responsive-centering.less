@@ -1,5 +1,5 @@
 ﻿
-.screen-position-place-top(@default-top, @lg-top, @md-top: @lg-top, @sm-top, @xs-top ) {
+.responsive-place-top(@default-top, @lg-top, @md-top: @lg-top, @sm-top, @xs-top ) {
     .top(@default-top);
 
     @media(min-width:@screen-xs) {
@@ -19,7 +19,7 @@
     }
 }
 
-.screen-position-place-top(@default-top, @md-top, @xs-top ) {
+.responsive-place-top(@default-top, @md-top, @xs-top ) {
     .top(@default-top);
 
     @media(min-width:@screen-xs) {
@@ -32,7 +32,7 @@
 }
 
 
-.screen-position-place-top(@default-top, @md-top, @sm-top, @xs-top ) {
+.responsive-place-top(@default-top, @md-top, @sm-top, @xs-top ) {
     .top(@default-top);
 
     @media(min-width:@screen-xs) {
@@ -50,7 +50,7 @@
 
 
 
-.screen-position-place-right(@default-right, @lg-right, @md-right: @lg-right, @sm-right, @xs-right ) {
+.responsive-place-right(@default-right, @lg-right, @md-right: @lg-right, @sm-right, @xs-right ) {
     .right(@default-right);
 
     @media(min-width:@screen-xs) {
@@ -70,7 +70,7 @@
     }
 }
 
-.screen-position-place-right(@default-right, @md-right, @xs-right ) {
+.responsive-place-right(@default-right, @md-right, @xs-right ) {
     .right(@default-right);
 
     @media(min-width:@screen-xs) {
@@ -83,7 +83,7 @@
 }
 
 
-.screen-position-place-right(@default-right, @md-right, @sm-right, @xs-right ) {
+.responsive-place-right(@default-right, @md-right, @sm-right, @xs-right ) {
     .right(@default-right);
 
     @media(min-width:@screen-xs) {
@@ -100,7 +100,7 @@
 }
 
 
-.screen-position-place-top(@default-top, @md-top, @sm-top, @xs-top ) {
+.responsive-place-top(@default-top, @md-top, @sm-top, @xs-top ) {
     .right(@default-top);
 
     @media(min-width:@screen-xs) {
@@ -118,7 +118,7 @@
 
 
 
-.screen-position-place-bottom(@default-bottom, @lg-bottom, @md-bottom: @lg-bottom, @sm-bottom, @xs-bottom ) {
+.responsive-place-bottom(@default-bottom, @lg-bottom, @md-bottom: @lg-bottom, @sm-bottom, @xs-bottom ) {
     .bottom(@default-bottom);
 
     @media(min-width:@screen-xs) {
@@ -138,7 +138,7 @@
     }
 }
 
-.screen-position-place-bottom(@default-bottom, @md-bottom, @xs-bottom ) {
+.responsive-place-bottom(@default-bottom, @md-bottom, @xs-bottom ) {
     .bottom(@default-bottom);
 
     @media(min-width:@screen-xs) {
@@ -151,24 +151,7 @@
 }
 
 
-.screen-position-place-bottom(@default-bottom, @md-bottom, @sm-bottom, @xs-bottom ) {
-    .bottom(@default-bottom);
-
-    @media(min-width:@screen-xs) {
-        .bottom(@xs-bottom);
-    }
-
-    @media(min-width:@screen-sm) {
-        .bottom(@sm-bottom);
-    }
-
-    @media(min-width:@screen-md) {
-        .bottom(@md-bottom);
-    }
-}
-
-
-.screen-position-place-bottom(@default-bottom, @md-bottom, @sm-bottom, @xs-bottom ) {
+.responsive-place-bottom(@default-bottom, @md-bottom, @sm-bottom, @xs-bottom ) {
     .bottom(@default-bottom);
 
     @media(min-width:@screen-xs) {
@@ -185,8 +168,25 @@
 }
 
 
+.responsive-place-bottom(@default-bottom, @md-bottom, @sm-bottom, @xs-bottom ) {
+    .bottom(@default-bottom);
 
-.screen-position-place-left(@default-left, @lg-left, @md-left: @lg-left, @sm-left, @xs-left ) {
+    @media(min-width:@screen-xs) {
+        .bottom(@xs-bottom);
+    }
+
+    @media(min-width:@screen-sm) {
+        .bottom(@sm-bottom);
+    }
+
+    @media(min-width:@screen-md) {
+        .bottom(@md-bottom);
+    }
+}
+
+
+
+.responsive-place-left(@default-left, @lg-left, @md-left: @lg-left, @sm-left, @xs-left ) {
     .left(@default-left);
 
     @media(min-width:@screen-xs) {
@@ -206,7 +206,7 @@
     }
 }
 
-.screen-position-place-left(@default-left, @md-left, @xs-left ) {
+.responsive-place-left(@default-left, @md-left, @xs-left ) {
     .left(@default-left);
 
     @media(min-width:@screen-xs) {
@@ -219,7 +219,7 @@
 }
 
 
-.screen-position-place-left(@default-left, @md-left, @sm-left, @xs-left ) {
+.responsive-place-left(@default-left, @md-left, @sm-left, @xs-left ) {
     .left(@default-left);
 
     @media(min-width:@screen-xs) {
@@ -236,7 +236,7 @@
 }
 
 
-.screen-position-place-left(@default-left, @md-left, @sm-left, @xs-left ) {
+.responsive-place-left(@default-left, @md-left, @sm-left, @xs-left ) {
     .left(@default-left);
 
     @media(min-width:@screen-xs) {

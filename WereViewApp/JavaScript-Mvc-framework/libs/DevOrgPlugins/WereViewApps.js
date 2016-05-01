@@ -903,6 +903,8 @@ $.WeReviewApp = {
             var controllers = [
                 {
                     execute: function category() {
+                        // implement this or action.
+                        // data-or-action="creare|edit"
                         var $categoryPage = $.byId("app-category-editing-page");
                         if ($categoryPage.length > 0) {
                             var $slug = $.byId("Slug");

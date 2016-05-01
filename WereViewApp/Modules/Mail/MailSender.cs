@@ -58,14 +58,12 @@ namespace WeReviewApp.Modules.Mail {
 
         public async void HandleError(Exception exception, string method, string subject = "", object entity = null,
             string type = "", bool generateDecentSubject = true) {
-                {
-                    if (generateDecentSubject) {
-                        subject = GetSubject(subject, type);
-                    }
-                    subject += " on method [" + method + "()]";
+            if (generateDecentSubject) {
+                subject = GetSubject(subject, type);
+            }
+            subject += " on method [" + method + "()]";
 
-                    Mvc.Error.HandleBy(exception, method, subject, entity);
-                }
+            Mvc.Error.HandleBy(exception, method, subject, entity);
         }
     }
 }
