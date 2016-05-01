@@ -1,20 +1,19 @@
-﻿
-.responsive-place-top(@default-top, @lg-top, @md-top: @lg-top, @sm-top, @xs-top ) {
-    .top(@default-top);
-
-    @media(min-width:@screen-xs) {
-        .top(@xs-top);
+﻿.full-width(){
+    width:100%;
+}
+.responsive-width(@default-width,@xs-width, @sm-width, @md-width, @lg-width: @md-width) {
+    @media(min-width:@screen-md ) {
+        .left(40%) !important;
+        .width(20%) !important;
     }
 
-    @media(min-width:@screen-sm) {
-        .top(@sm-top);
+    @media(max-width:@screen-sm ) {
+        .left(35%) !important;
+        .width(38%) !important;
     }
 
-    @media(min-width:@screen-md) {
-        .top(@md-top);
-    }
-
-    @media(min-width:@screen-lg) {
-        .top(@lg-top);
+    @media(max-width:@screen-xs ) {
+        .left(6%) !important;
+        .width(84%) !important;
     }
 }

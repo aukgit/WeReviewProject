@@ -780,12 +780,24 @@
       <DependentUpon>color-fonts.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\color-fonts.less" />
+    <Content Include="Content\Less\CSS\additional-less-functions.css" />
+    <Content Include="Content\Less\CSS\additional-less-functions.min.css">
+      <DependentUpon>additional-less-functions.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\CSS\loading-bar.css" />
+    <Content Include="Content\Less\CSS\loading-bar.min.css">
+      <DependentUpon>loading-bar.css</DependentUpon>
+    </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
     <Content Include="Content\Less\less-imports.less" />
     <Content Include="Content\Less\loader-spinner.less" />
     <Content Include="Content\Less\menu-fix.less" />
     <Content Include="Content\Less\owl.custom.finalize.less" />
+    <Content Include="Content\Less\remixens\CSS\responsive-width.css" />
+    <Content Include="Content\Less\remixens\CSS\responsive-width.min.css">
+      <DependentUpon>responsive-width.css</DependentUpon>
+    </Content>
     <Content Include="Content\Less\responsive.less" />
     <Content Include="Content\Less\search-page.less" />
     <Content Include="Content\Less\see-more-btn.less" />
@@ -974,7 +986,7 @@
     <Content Include="JavaScript-Mvc-framework\extensions\spinner.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\urls.js" />
     <Content Include="Content\Less\remixens\additional-less-functions.less" />
-    <Content Include="Content\Less\remixens\screen-size-positioning-placements.less" />
+    <Content Include="Content\Less\remixens\responsive\responsive-placements.less" />
     <Content Include="JavaScript-Mvc-framework\jQueryCaching.js" />
     <Content Include="JavaScript-Mvc-framework\jQueryExtend.fn.js" />
     <Content Include="JavaScript-Mvc-framework\jQueryExtend.js" />
@@ -982,6 +994,17 @@
     <Content Include="JavaScript-Mvc-framework\schema\hashset.js" />
     <Content Include="JavaScript-Mvc-framework\schema\schema.js" />
     <Content Include="JavaScript-Mvc-framework\schema\url.js" />
+    <Content Include="Content\Less\remixens\responsive\responsive-width.less" />
+    <Content Include="Content\Less\remixens\responsive\responsive-centering.less" />
+    <Content Include="Content\Less\remixens\CSS\responsive-width.css.map">
+      <DependentUpon>responsive-width.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\CSS\loading-bar.css.map">
+      <DependentUpon>loading-bar.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\CSS\additional-less-functions.css.map">
+      <DependentUpon>additional-less-functions.css</DependentUpon>
+    </Content>
     <None Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
     <Content Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />
     <Content Include="Sitemap.xml" />

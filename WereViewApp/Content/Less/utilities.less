@@ -12,7 +12,7 @@
     display: block;
     margin: 0;
     padding: 0;
-    .padding-bottom(3px); 
+    .padding-bottom(3px);
     .padding-top(9px);
 }
 
@@ -299,19 +299,19 @@ div.contactus {
 
 // margins - 0
 .margin-t-0 {
-    margin-top: 0;
+    .margin-top-zero;
 }
 
 .margin-r-0 {
-    margin-right: 0;
+    .margin-right-zero;
 }
 
 .margin-b-0 {
-    margin-bottom: 0;
+    .margin-bottom-zero;
 }
 
 .margin-l-0 {
-    margin-left: 0;
+    .margin-left-zero;
 }
 // margins - 2
 .margin-t-2 {
@@ -421,7 +421,7 @@ div.contactus {
 }
 
 .no-margin-t {
-    margin-top: 0;
+    .margin-top-zero;
 }
 
 .no-padding-t {
@@ -680,32 +680,28 @@ div.contactus {
 }
 
 .lower, .tolower, .Tolower, .lowercase, .ToLower {
-    text-transform: lowercase;
+    .lowercase;
 }
 
 .upper, .toupper, .Toupper, .uppercase {
-    text-transform: uppercase;
+    .uppercase;
 }
 
 .capital, .capitalize, .tocapi, .capitalcase, .propercase, .each-word-capital {
-    text-transform: capitalize;
+    .capitalize;
 }
 
 .first-letter-capital:first-letter {
-    text-transform: uppercase;
+    .uppercase;
 }
 
 .no-resize {
-    resize: none;
+    .no-resize;
 }
 
 .make-distance {
     margin: 12px;
-    margin-left: 0;
-}
-
-.Hide, .hide {
-    display: none;
+    .margin-left-zero;
 }
 
 .medium-font {
@@ -717,64 +713,103 @@ div.contactus {
 }
 
 .left {
-    float: left;
+    .float-left;
 }
 
 .right {
-    float: right;
+    .float-right;
+}
+
+.float-none {
+    .float-none;
 }
 
 .center {
-    text-align: center;
+    .text-center;
 }
 
 .tleft {
-    text-align: left;
+    .tleft;
 }
 
 .tright {
-    text-align: right;
+    .tright;
 }
 
 .justify, .tjustify {
-    text-align: justify;
+   .tjustify;
 }
 
 .vertically-center-wrapper {
-    text-align: center;
+    .text-center;
 }
 
 .vertically-center-content {
-    text-align: left;
-    margin-left: auto;
-    margin-right: auto;
+    .vertically-center-content();
 }
 
 .hide {
-    display: none;
+    .hide();
 }
 
 .first-line-indent {
-    text-indent: 1.2em;
+    .first-line-indent;
 }
 
 .width-100-percent, .full-width {
-    width: 100%;
+    .width-100-percent;
 }
+
+.fifty-percent-height-width {
+    .fifty-percent-height-width;
+}
+
+.margin-auto {
+    .margin-auto;
+}
+
+.zero-top-right-bottom-left {
+    .zero-top-right-bottom-left;
+}
+
+.center-container {
+    /*
+        <div class="center-container is-table">
+          <div class="cell">
+            <div class="center-block"> //margin : auto with width (which must be modified)
+                <!-- CONTENT -->
+            </div>
+          </div>
+        </div>
+    */
+    &.is-table {
+        .display-table;
+
+        .is-table {
+            .cell {
+                .display-table-cell;
+                .vertical-middle;
+            }
+
+            .center-block {
+                .center-block;
+            }
+        }
+    }
+}
+
+
 // centering utils
 .absolute-center {
-    width: 50%;
-    height: 50%;
-    overflow: auto;
-    margin: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    .fifty-percent-height-width;
+    .margin-auto;
+    .overflow-auto;
+    .absolute;
+    .zero-top-right-bottom-left;
+    z-index: 600;
 
     &.is-fixed {
-        position: fixed;
+        .fixed;
         z-index: 999;
     }
 
@@ -784,7 +819,7 @@ div.contactus {
         text-align: right;
     }
 
-    &.is-Left {
+    &.is-left {
         right: auto;
         left: 20px;
         text-align: left;
@@ -792,42 +827,44 @@ div.contactus {
 }
 //vertically - center
 .jumbotron.vertical-center {
-    margin-bottom: 0; /* Remove the default bottom margin of .jumbotron */
+    /* Remove the default bottom margin of .jumbotron */
+    .margin-bottom-zero;
+}
+
+.vertical-center-using-translate {
+    .fifty-percent-width;
+    .margin-auto;
+    .absolute;
+    .fifty-percent-top-left;
+    .translate-minus-50-50;
 }
 
 .vertical-center {
-    min-height: 100%; /* Fallback for vh unit */
-    min-height: 100vh; /* You might also want to use
-                        'height' property instead.
-                        Note that for percentage values of
-                        'height' or 'min-height' properties,
-                        the 'height' of the parent element
-                        should be specified explicitly.
-                        In this case the parent of '.vertical-center'
-                        is the <body> element */
-    /* Make it a flex container */
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
+    /* Fallback for vh unit */
+    .min-height-100-percent;
+    /* 
+        You might also want to use
+        'height' property instead.
+        Note that for percentage values of
+        'height' or 'min-height' properties,
+        the 'height' of the parent element
+        should be specified explicitly.
+        In this case the parent of '.vertical-center'
+        is the <body> element.
+        
+        Make it a flex container .
+
+    */
+    .display-flex;
     /* Align the bootstrap's container vertically */
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
+    .align-items-center;
     /* In legacy web browsers such as Firefox 9
      we need to specify the width of the flex container */
-    width: 100%;
+    .full-width;
     /* Also 'margin: 0 auto' doesn't have any effect on flex items in such web browsers
      hence the bootstrap's container won't be aligned to the center anymore.
      Therefore, we should use the following declarations to get it centered again */
-    -webkit-box-pack: center;
-    -moz-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
+    .justify-center;
 }
 
 .controls-full-width {
@@ -842,8 +879,8 @@ div.contactus {
 
 .no-margin-controls {
     .form-group {
-        margin-bottom: 0;
-        margin-top: 0;
+        .margin-bottom-zero;
+        .margin-top-zero;
     }
 }
 
@@ -859,19 +896,21 @@ div.contactus {
         text-align: left;
     }
 }
-.relative{
-    position:relative; 
+
+.relative {
+    .relative;
 }
+
 .absolute {
-    position:absolute;
+    .absolute;
 }
- 
+
 // addons started
 .inner-addon {
-    position: relative;
+    .relative;
 
     .glyphicon, .fa {
-        position: absolute;
+        .absolute;
         /*padding: 10px;*/
         padding: 10px 11px 2px 9px;
         pointer-events: none;
@@ -900,6 +939,7 @@ div.contactus {
 }
 
 .content-min-height-100-percent {
-	min-height:100%;
+    .min-height-100-percent;
 }
+
 @import "see-more-btn.less";
