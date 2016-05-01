@@ -112,6 +112,16 @@ div.Error-List ul {
   opacity: 0.1;
   /* for all other browsers*/
 }
+.Opacity-15 {
+  -khtml-opacity: 0.15;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=15);
+  zoom: 1;
+  filter: alpha(opacity=15);
+  -webkit-opacity: 0.15;
+  -moz-opacity: 0.15;
+  opacity: 0.15;
+  /* for all other browsers*/
+}
 .Opacity-20 {
   -khtml-opacity: 0.2;
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=20);
@@ -120,6 +130,16 @@ div.Error-List ul {
   -webkit-opacity: 0.2;
   -moz-opacity: 0.2;
   opacity: 0.2;
+  /* for all other browsers*/
+}
+.Opacity-25 {
+  -khtml-opacity: 0.25;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=25);
+  zoom: 1;
+  filter: alpha(opacity=25);
+  -webkit-opacity: 0.25;
+  -moz-opacity: 0.25;
+  opacity: 0.25;
   /* for all other browsers*/
 }
 .Opacity-30 {
@@ -132,6 +152,16 @@ div.Error-List ul {
   opacity: 0.3;
   /* for all other browsers*/
 }
+.Opacity-35 {
+  -khtml-opacity: 0.35;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=35);
+  zoom: 1;
+  filter: alpha(opacity=35);
+  -webkit-opacity: 0.35;
+  -moz-opacity: 0.35;
+  opacity: 0.35;
+  /* for all other browsers*/
+}
 .Opacity-40 {
   -khtml-opacity: 0.4;
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=40);
@@ -140,6 +170,16 @@ div.Error-List ul {
   -webkit-opacity: 0.4;
   -moz-opacity: 0.4;
   opacity: 0.4;
+  /* for all other browsers*/
+}
+.Opacity-45 {
+  -khtml-opacity: 0.45;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=45);
+  zoom: 1;
+  filter: alpha(opacity=45);
+  -webkit-opacity: 0.45;
+  -moz-opacity: 0.45;
+  opacity: 0.45;
   /* for all other browsers*/
 }
 .Opacity-50 {
@@ -152,6 +192,17 @@ div.Error-List ul {
   opacity: 0.5;
   /* for all other browsers*/
 }
+.Opacity-55 {
+  -khtml-opacity: 0.55;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=55.00000000000001);
+  filter: alpha(opacity=55.00000000000001);
+  zoom: 1;
+  filter: alpha(opacity=55);
+  -webkit-opacity: 0.55;
+  -moz-opacity: 0.55;
+  opacity: 0.55;
+  /* for all other browsers*/
+}
 .Opacity-60 {
   -khtml-opacity: 0.6;
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=60);
@@ -160,6 +211,16 @@ div.Error-List ul {
   -webkit-opacity: 0.6;
   -moz-opacity: 0.6;
   opacity: 0.6;
+  /* for all other browsers*/
+}
+.Opacity-65 {
+  -khtml-opacity: 0.65;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=65);
+  zoom: 1;
+  filter: alpha(opacity=65);
+  -webkit-opacity: 0.65;
+  -moz-opacity: 0.65;
+  opacity: 0.65;
   /* for all other browsers*/
 }
 .Opacity-70 {
@@ -172,6 +233,16 @@ div.Error-List ul {
   opacity: 0.7;
   /* for all other browsers*/
 }
+.Opacity-75 {
+  -khtml-opacity: 0.75;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=75);
+  zoom: 1;
+  filter: alpha(opacity=75);
+  -webkit-opacity: 0.75;
+  -moz-opacity: 0.75;
+  opacity: 0.75;
+  /* for all other browsers*/
+}
 .Opacity-80 {
   -khtml-opacity: 0.8;
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);
@@ -182,6 +253,16 @@ div.Error-List ul {
   opacity: 0.8;
   /* for all other browsers*/
 }
+.Opacity-85 {
+  -khtml-opacity: 0.85;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=85);
+  zoom: 1;
+  filter: alpha(opacity=85);
+  -webkit-opacity: 0.85;
+  -moz-opacity: 0.85;
+  opacity: 0.85;
+  /* for all other browsers*/
+}
 .Opacity-90 {
   -khtml-opacity: 0.9;
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=90);
@@ -190,6 +271,16 @@ div.Error-List ul {
   -webkit-opacity: 0.9;
   -moz-opacity: 0.9;
   opacity: 0.9;
+  /* for all other browsers*/
+}
+.Opacity-95 {
+  -khtml-opacity: 0.95;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=95);
+  zoom: 1;
+  filter: alpha(opacity=95);
+  -webkit-opacity: 0.95;
+  -moz-opacity: 0.95;
+  opacity: 0.95;
   /* for all other browsers*/
 }
 .Opacity-100 {
@@ -210,6 +301,18 @@ div.Error-List ul {
 }
 .block {
   display: block;
+}
+.inline-table {
+  display: inline-table;
+}
+.inline-grid {
+  display: inline-grid;
+}
+.inline-flexbox {
+  display: inline-flexbox;
+}
+.hide {
+  display: none;
 }
 .display-table {
   display: table;
@@ -602,7 +705,7 @@ div.contactus {
   font-size: 3.4em;
 }
 .f-em-35 {
-  font-size: 3.6em;
+  font-size: 3.5em;
 }
 .f-em-36 {
   font-size: 3.6em;
@@ -685,9 +788,6 @@ div.contactus {
   text-align: left;
   margin-left: auto;
   margin-right: auto;
-}
-.hide {
-  display: none;
 }
 .first-line-indent {
   text-indent: 1.2em;

@@ -1,0 +1,13 @@
+﻿.alert-variation(@names; @colors; @index) when (iscolor(extract(@colors, @index))) and (@index > 0) {
+    .alert-variation(@names; @colors; (@index - 1)); // decrement.
+ 
+  @name  : extract(@names, @index);
+  @color : extract(@colors, @index);
+ 
+  .alert-@{name} {
+    border-color: darken(@color, 10%);
+    color: darken(@color, 30%);
+    background-color: @color;
+  }
+ 
+}
