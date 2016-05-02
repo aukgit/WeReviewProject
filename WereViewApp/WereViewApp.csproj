@@ -780,17 +780,9 @@
       <DependentUpon>color-fonts.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\color-fonts.less" />
-    <Content Include="Content\Less\CSS\additional-less-functions.css" />
-    <Content Include="Content\Less\CSS\additional-less-functions.min.css">
-      <DependentUpon>additional-less-functions.css</DependentUpon>
-    </Content>
     <Content Include="Content\Less\CSS\loop.css" />
     <Content Include="Content\Less\CSS\loop.min.css">
       <DependentUpon>loop.css</DependentUpon>
-    </Content>
-    <Content Include="Content\Less\CSS\opacity.css" />
-    <Content Include="Content\Less\CSS\opacity.min.css">
-      <DependentUpon>opacity.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
@@ -996,29 +988,19 @@
     <Content Include="JavaScript-Mvc-framework\schema\url.js" />
     <Content Include="Content\Less\remixens\responsive\responsive-width.less" />
     <Content Include="Content\Less\remixens\responsive\responsive-centering.less" />
-    <Content Include="Content\Less\CSS\additional-less-functions.css.map">
-      <DependentUpon>additional-less-functions.css</DependentUpon>
-    </Content>
     <Content Include="Content\Less\remixens\loop.less" />
-    <Content Include="Content\Less\CSS\loop.css.map">
-      <DependentUpon>loop.css</DependentUpon>
-    </Content>
     <Content Include="Content\Less\utilities.less" />
-    <Content Include="Content\Less\Utilities\utilities - Copy.less" />
     <Content Include="Content\Less\Utilities\margin.less" />
-    <Content Include="Content\Less\Utilities\utilities - Copy %283%29.less" />
-    <Content Include="Content\Less\Utilities\utilities - Copy %284%29.less" />
-    <Content Include="Content\Less\Utilities\utilities - Copy %285%29.less" />
-    <Content Include="Content\Less\Utilities\utilities - Copy %286%29.less" />
-    <Content Include="Content\Less\Utilities\utilities - Copy %287%29.less" />
-    <Content Include="Content\Less\Utilities\utilities - Copy %288%29.less" />
-    <Content Include="Content\Less\Utilities\utilities - Copy %289%29.less" />
+    <Content Include="Content\Less\Utilities\padding.less" />
+    <Content Include="Content\Less\Utilities\fonts.less" />
+    <Content Include="Content\Less\Utilities\alignments-center-float-margin.less" />
     <Content Include="Content\Less\Utilities\opacity.less" />
     <Content Include="Content\Less\Utilities\display.less" />
     <Content Include="Content\Less\Utilities\border-radius.less" />
     <Content Include="Content\Less\Utilities\gaps.less" />
-    <Content Include="Content\Less\CSS\opacity.css.map">
-      <DependentUpon>opacity.css</DependentUpon>
+    <Content Include="Content\Less\Utilities\indenting.less" />
+    <Content Include="Content\Less\CSS\loop.css.map">
+      <DependentUpon>loop.css</DependentUpon>
     </Content>
     <None Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
     <Content Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />
