@@ -1,19 +1,92 @@
-﻿.full-width(){
-    width:100%;
-}
-.responsive-width(@default-width,@xs-width, @sm-width, @md-width, @lg-width: @md-width) {
+﻿.responsive-width(@xs-width: 84%,@xs-left: 6%, @sm-width:38%, @sm-left: 35%, @md-width:20%, @md-left:40%, @lg-width: @md-width, @lg-left: @md-left) {
+    @media(min-width:@screen-xs ) {
+        .left(@xs-left);
+        .width(@xs-width);
+    }
+
+    @media(min-width:@screen-sm ) {
+        .left(@sm-left);
+        .width(@sm-width);
+    }
+
+
     @media(min-width:@screen-md ) {
-        .left(40%) !important;
-        .width(20%) !important;
+        .left(@md-left);
+        .width(@md-width);
     }
 
-    @media(max-width:@screen-sm ) {
-        .left(35%) !important;
-        .width(38%) !important;
-    }
-
-    @media(max-width:@screen-xs ) {
-        .left(6%) !important;
-        .width(84%) !important;
+    @media(min-width:@screen-lg ) {
+        .left(@lg-left);
+        .width(@lg-width);
     }
 }
+
+.responsive-width(@xs-width: 84%,@xs-left: 6%, @sm-width:38%, @sm-left: 35%, @md-width:20%, @md-left:40%) {
+    @media(min-width:@screen-xs ) {
+        .left(@xs-left);
+        .width(@xs-width);
+    }
+
+    @media(min-width:@screen-sm ) {
+        .left(@sm-left);
+        .width(@sm-width);
+    }
+
+
+    @media(min-width:@screen-md ) {
+        .left(@md-left);
+        .width(@md-width);
+    }
+}
+
+.responsive-width(@xs-width: 84%,@xs-left: 6%, @sm-width:38%, @sm-left: 35%, @md-width:20%, @md-left:40%) {
+    @media(min-width:@screen-xs ) {
+        .left(@xs-left);
+        .width(@xs-width);
+    }
+
+    @media(min-width:@screen-sm ) {
+        .left(@sm-left);
+        .width(@sm-width);
+    }
+
+
+    @media(min-width:@screen-md ) {
+        .left(@md-left);
+        .width(@md-width);
+    }
+}
+
+
+.responsive-width(@xs-width: 84%,@xs-left: 6%, @sm-width:38%, @sm-left: 35%, @md-width:20%, @md-left:40%) {
+    @media(min-width:@screen-xs ) {
+        .left(@xs-left);
+        .width(@xs-width);
+    }
+
+    @media(min-width:@screen-sm ) {
+        .left(@sm-left);
+        .width(@sm-width);
+    }
+
+
+    @media(min-width:@screen-md ) {
+        .left(@md-left);
+        .width(@md-width);
+    }
+}
+
+.responsive-width(@xs-width: 84%,@xs-left: 6%, @md-width:20%, @md-left:40%) {
+    @media(min-width:@screen-xs ) {
+        .left(@xs-left);
+        .width(@xs-width);
+    }
+
+    @media(min-width:@screen-md ) {
+        .left(@md-left);
+        .width(@md-width);
+    }
+}
+
+
+

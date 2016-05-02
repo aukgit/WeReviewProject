@@ -14,11 +14,11 @@ $.app.executeAfter = {
      * @returns {} 
      */
     documentSpinnerHide: function () {
-        $.app.global.documentFullSpinnerHide();
-        var timer = setTimeout(function () {
-            $.app.global.documentFullSpinnerHide();
-            clearTimeout(timer);
-        }, 2500);
+        //$.app.global.documentFullSpinnerHide();
+        //var timer = setTimeout(function () {
+        //    $.app.global.documentFullSpinnerHide();
+        //    clearTimeout(timer);
+        //}, 2500);
     },
     captureAnchorAndShowSpinner: function () {
         var $anchors = $.findCached("a:link");

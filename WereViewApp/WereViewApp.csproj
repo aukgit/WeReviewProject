@@ -780,10 +780,6 @@
       <DependentUpon>color-fonts.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\color-fonts.less" />
-    <Content Include="Content\Less\CSS\loop.css" />
-    <Content Include="Content\Less\CSS\loop.min.css">
-      <DependentUpon>loop.css</DependentUpon>
-    </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
     <Content Include="Content\Less\less-imports.less" />
@@ -794,7 +790,7 @@
     <Content Include="Content\Less\search-page.less" />
     <Content Include="Content\Less\see-more-btn.less" />
     <Content Include="Content\Less\seo-optimize.less" />
-    <Content Include="Content\Less\Utilities\input-with-others.less" />
+    <Content Include="Content\Less\utilities\input-with-others.less" />
     <Content Include="Content\Published.Scripts\front-end.js" />
     <Content Include="Content\Published.Scripts\front-end.min.js">
       <DependentUpon>front-end.js</DependentUpon>
@@ -990,18 +986,15 @@
     <Content Include="Content\Less\remixens\responsive\responsive-centering.less" />
     <Content Include="Content\Less\remixens\loop.less" />
     <Content Include="Content\Less\utilities.less" />
-    <Content Include="Content\Less\Utilities\margin.less" />
-    <Content Include="Content\Less\Utilities\padding.less" />
-    <Content Include="Content\Less\Utilities\fonts.less" />
-    <Content Include="Content\Less\Utilities\alignments-center-float-margin.less" />
-    <Content Include="Content\Less\Utilities\opacity.less" />
-    <Content Include="Content\Less\Utilities\display.less" />
-    <Content Include="Content\Less\Utilities\border-radius.less" />
-    <Content Include="Content\Less\Utilities\gaps.less" />
-    <Content Include="Content\Less\Utilities\indenting.less" />
-    <Content Include="Content\Less\CSS\loop.css.map">
-      <DependentUpon>loop.css</DependentUpon>
-    </Content>
+    <Content Include="Content\Less\utilities\margin.less" />
+    <Content Include="Content\Less\utilities\padding.less" />
+    <Content Include="Content\Less\utilities\fonts.less" />
+    <Content Include="Content\Less\utilities\alignments-center-float-margin.less" />
+    <Content Include="Content\Less\utilities\opacity.less" />
+    <Content Include="Content\Less\utilities\display.less" />
+    <Content Include="Content\Less\utilities\border-radius.less" />
+    <Content Include="Content\Less\utilities\gaps.less" />
+    <Content Include="Content\Less\utilities\indenting.less" />
     <None Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
     <Content Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />
     <Content Include="Sitemap.xml" />
