@@ -1,4 +1,12 @@
-﻿.blog-page-private .white-wrapper-background .seo-app-name:hover {
+﻿.x {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.blog-page-private .white-wrapper-background .seo-app-name:hover {
   color: deepskyblue;
   text-decoration: underline;
 }

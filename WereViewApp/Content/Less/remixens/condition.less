@@ -1,0 +1,48 @@
+﻿.if-value-present(@attribute; @value: '') {
+    .x (@value) when not (@value = '') {
+        @{attribute}: @value;
+    }
+
+    .x(@value);
+}
+
+.if-true(@attribute; @value: ''; @condition) {
+    .x (@value) when (@condition = true) {
+        @{attribute}: @value;
+    }
+
+    .x(@value);
+}
+
+.if-false(@attribute; @value: ''; @condition) {
+    .x (@value) when (@condition = false) {
+        @{attribute}: @value;
+    }
+
+    .x(@value);
+}
+
+.if-value-present-multi(@attributes; @values) {
+    .iter(@i) when (@i > 0) {
+        .iter(@i - 1);
+        // loop
+
+        @attr: extract(@attributes, @i);
+        @value: extract(@values, @i);
+
+        .if-value-present(@attr, @value);
+    }
+
+    @len: length(@values);
+    .iter(@len);
+}
+
+
+//.x {
+//  @var : c1,c2, c3;
+//  @val : v1, '', 'wddww';
+//  .if-value-present-multi(@var;@val);
+//}
+
+
+

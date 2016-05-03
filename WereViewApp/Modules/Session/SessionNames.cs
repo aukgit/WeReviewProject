@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.Web;
 
 namespace WeReviewApp.Modules.Session {
     public static class SessionNames {
@@ -40,7 +41,7 @@ namespace WeReviewApp.Modules.Session {
             }
             return true;
         }
-        public static void RemoveKeys(string[] keys) {
+        public static void RemoveKeys(IEnumerable<string> keys) {
             if (HttpContext.Current != null) {
                 var session = HttpContext.Current.Session;
                 if (session != null) {

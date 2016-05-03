@@ -1,6 +1,7 @@
 ﻿//@import "Global.less";
 //@import "lesshat.less";
 //@import "variables.less";
+@import "condition.less";
 // ===== FONT MIXINS =====
 .font-size(@value) {
     font-size: @value;
@@ -274,15 +275,19 @@
 }
 
 
-.fa() {
+.fa(@content: '') {
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
     font-size: inherit;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    .if-value-present(content, @content); 
 }
 
+.x{
+    .fa()
+}
 .ellipsis() {
     -ms-text-overflow: ellipsis;
     -o-text-overflow: ellipsis;

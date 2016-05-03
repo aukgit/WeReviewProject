@@ -1,4 +1,12 @@
-﻿/*
+﻿.x {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/*
   please don't modify styles from css file. Please modify in the respective.less file in the less folder.
   FYI: This file (.less file) contains utilities styles, lets say general padding, margin, bold, hide, show etc..
 */

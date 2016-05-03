@@ -780,9 +780,17 @@
       <DependentUpon>color-fonts.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\color-fonts.less" />
-    <Content Include="Content\Less\CSS\loop.css" />
-    <Content Include="Content\Less\CSS\loop.min.css">
-      <DependentUpon>loop.css</DependentUpon>
+    <Content Include="Content\Less\CSS\condition.css" />
+    <Content Include="Content\Less\CSS\condition.min.css">
+      <DependentUpon>condition.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\CSS\extra-remixens.css" />
+    <Content Include="Content\Less\CSS\extra-remixens.min.css">
+      <DependentUpon>extra-remixens.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\CSS\lesshat.css" />
+    <Content Include="Content\Less\CSS\lesshat.min.css">
+      <DependentUpon>lesshat.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
@@ -1000,8 +1008,15 @@
     <Content Include="Content\Less\utilities\gaps.less" />
     <Content Include="Content\Less\utilities\indenting.less" />
     <Content Include="Content\Less\spinner\google-spinner.less" />
-    <Content Include="Content\Less\CSS\loop.css.map">
-      <DependentUpon>loop.css</DependentUpon>
+    <Content Include="Content\Less\CSS\extra-remixens.css.map">
+      <DependentUpon>extra-remixens.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\remixens\condition.less" />
+    <Content Include="Content\Less\CSS\condition.css.map">
+      <DependentUpon>condition.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\CSS\lesshat.css.map">
+      <DependentUpon>lesshat.css</DependentUpon>
     </Content>
     <None Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
     <Content Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />
