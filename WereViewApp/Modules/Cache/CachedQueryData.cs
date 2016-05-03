@@ -88,7 +88,7 @@ namespace WeReviewApp.Modules.Cache {
             string sql = null) {
             //var hash = DevHash.Get(tableName, connectionString, columns, sql);
             //string CahedName = tableName + "-adapter";
-            var _sql = SQLGenerate.GetSimpleSQL(tableName, columns, sql);
+            var _sql = SqlGenerate.GetSimpleSql(tableName, columns, sql);
             var dt = new DataTable();
             using (var connection = new SqlConnection(connectionString)) {
                 using (var adapter = new SqlDataAdapter(_sql, connection)) {

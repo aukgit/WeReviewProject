@@ -4,23 +4,31 @@ namespace WeReviewApp {
     public static class BundleConfig {
         private enum BundleSelector {
             ShowEveryScript,
-            EveryScriptThroughBundle,
-            EveryScriptGzip
+            EveryScriptThroughBundle
         }
         public static void RegisterBundles(BundleCollection bundles) {
 
+
+            const BundleSelector bundleSelector = BundleSelector.ShowEveryScript;
+
+            const string jQueryVersion = "2.2.3";
+            const string jsFrameworkFolder = "~/JavaScript-Mvc-framework/";
+            const string jsLibraryFolder = jsFrameworkFolder + "libs/";
+            const string jqueryFolder = jsLibraryFolder + "jQuery/jquery-";
+            const string stylesFolder = "~/Content/css/";
+
+
             #region CDN Constants
 
-            const string jQueryVersion = "2.1.4";
             const string jQueryCdn = @"//code.jquery.com/jquery-" + jQueryVersion + ".min.js";
             //const string respondJsCDN = "http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"
             #endregion
 
-            const BundleSelector bundleSelector = BundleSelector.ShowEveryScript;
 
             #region jQuery
+            
             bundles.Add(new ScriptBundle("~/bundles/jquery", jQueryCdn)
-                        .Include("~/Content/Scripts/jquery-" + jQueryVersion + ".js") //if no CDN
+                        .Include(jqueryFolder + jQueryVersion + ".js") //if no CDN
             );
             #endregion
 
@@ -31,104 +39,104 @@ namespace WeReviewApp {
 
                     #region Validation Bundle & Form Inputs Processing
                     bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                                    "~/Content/Scripts/jquery.validate.js",
-                                    "~/Content/Scripts/ckeditor.js",
-                                    "~/Content/Scripts/ckeditor-jquery-adapter.js",
-                                    "~/Content/Scripts/jquery.validate.unobtrusive.js",
-                                    "~/Content/Scripts/moment.js",
-                                    "~/Content/Scripts/bootstrap-datetimepicker.js",
-                                    "~/Content/Scripts/bootstrap-select.js",
-                                    "~/Content/Scripts/bootstrap-table.js",
-                                    "~/Content/Scripts/bootstrap-table-filter.js",
-                                    "~/Content/Scripts/bootstrap-table-export.js",
-                                    "~/Content/Scripts/Tag-it/bootstrap3-typeahead.min.js",
-                                    "~/Content/Scripts/Tag-it/bootstrap-tagsinput.js",
-                                    "~/Content/Scripts/jquery.elastic.source.js",
-                                    "~/Content/Scripts/DevOrgPlugins/developers-organism.dynamicSelect.js",
-                                    "~/Content/Scripts/DevOrgPlugins/developers-organism.country-phone.js",
-                                    "~/Content/Scripts/DevOrgPlugins/jquery.server-validate.js",
-                                    "~/Content/Scripts/DevOrgPlugins/dev-component-runner.js",
-                                    "~/Content/Scripts/DevOrgPlugins/WeReviewApps.js"
+                                    jsLibraryFolder + "jquery.validate.js",
+                                    jsLibraryFolder + "ckeditor.js",
+                                    jsLibraryFolder + "ckeditor-jquery-adapter.js",
+                                    jsLibraryFolder + "jquery.validate.unobtrusive.js",
+                                    jsLibraryFolder + "moment.js",
+                                    jsLibraryFolder + "bootstrap-datetimepicker.js",
+                                    jsLibraryFolder + "bootstrap-select.js",
+                                    jsLibraryFolder + "bootstrap-table.js",
+                                    jsLibraryFolder + "bootstrap-table-filter.js",
+                                    jsLibraryFolder + "bootstrap-table-export.js",
+                                    jsLibraryFolder + "Tag-it/bootstrap3-typeahead.min.js",
+                                    jsLibraryFolder + "Tag-it/bootstrap-tagsinput.js",
+                                    jsLibraryFolder + "jquery.elastic.source.js",
+                                    jsLibraryFolder + "DevOrgPlugins/developers-organism.dynamicSelect.js",
+                                    jsLibraryFolder + "DevOrgPlugins/developers-organism.country-phone.js",
+                                    jsLibraryFolder + "DevOrgPlugins/jquery.server-validate.js",
+                                    jsLibraryFolder + "DevOrgPlugins/dev-component-runner.js",
+                                    jsLibraryFolder + "DevOrgPlugins/WeReviewApps.js"
 
                                    ));
                     #endregion
 
                     #region Upload
                     bundles.Add(new ScriptBundle("~/bundles/upload").Include(
-                                        "~/Content/Scripts/Upload/jquery.ui.widget.js",
-                                        "~/Content/Scripts/Upload/load-image.all.min.js",
-                                        "~/Content/Scripts/Upload/canvas-to-blob.min.js",
-                                        "~/Content/Scripts/Upload/jquery.iframe-transport.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload-process.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload-image.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload-audio.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload-video.js",
-                                        "~/Content/Scripts/Upload/jquery.fileupload-validate.js",
-                                        "~/Content/Scripts/DevOrgPlugins/developers-organism.upload.js"
+                                        jsLibraryFolder + "Upload/jquery.ui.widget.js",
+                                        jsLibraryFolder + "Upload/load-image.all.min.js",
+                                        jsLibraryFolder + "Upload/canvas-to-blob.min.js",
+                                        jsLibraryFolder + "Upload/jquery.iframe-transport.js",
+                                        jsLibraryFolder + "Upload/jquery.fileupload.js",
+                                        jsLibraryFolder + "Upload/jquery.fileupload-process.js",
+                                        jsLibraryFolder + "Upload/jquery.fileupload-image.js",
+                                        jsLibraryFolder + "Upload/jquery.fileupload-audio.js",
+                                        jsLibraryFolder + "Upload/jquery.fileupload-video.js",
+                                        jsLibraryFolder + "Upload/jquery.fileupload-validate.js",
+                                        jsLibraryFolder + "DevOrgPlugins/developers-organism.upload.js"
                                    ));
                     #endregion
 
                     #region Bootstrap
                     bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                                  "~/Content/Scripts/DevOrgPlugins/byId.js",
-                                  "~/Content/Scripts/bootstrap.js", // 3.1.2
-                                  "~/Content/Scripts/star-rating.js",
-                                  "~/Content/Scripts/toastr.js",
-                                  "~/Content/Scripts/underscore.js",
-                                  "~/Content/Scripts/FrontEnd/wow.js",
-                                  "~/Content/Scripts/FrontEnd/jquery.sticky.js",
-                                  "~/Content/Scripts/FrontEnd/jquery.stellar.js",
-                                  "~/Content/Scripts/FrontEnd/base-theme.js",
-                                  "~/Content/Scripts/FrontEnd/jquery.isotope.min.js",
-                                  "~/Content/Scripts/FrontEnd/owl.carousel.min.js",
-                                  "~/Content/Scripts/FrontEnd/jquery.number.js",
-                                  "~/Content/revolution-slider/js/jquery.themepunch.tools.min.js",
-                                  "~/Content/revolution-slider/js/jquery.themepunch.revolution.min.js",
-                                  "~/Content/Scripts/DevOrgPlugins/developers-organism.component.js",
-                                  "~/Content/Scripts/FrontEnd/front-developer.js",
-                                  "~/Content/Scripts/jquery.blockUI.js",
+                                  jsLibraryFolder + "DevOrgPlugins/byId.js",
+                                  jsLibraryFolder + "bootstrap.js", // 3.1.2
+                                  jsLibraryFolder + "star-rating.js",
+                                  jsLibraryFolder + "toastr.js",
+                                  jsLibraryFolder + "underscore.js",
+                                  jsLibraryFolder + "FrontEnd/wow.js",
+                                  jsLibraryFolder + "FrontEnd/jquery.sticky.js",
+                                  jsLibraryFolder + "FrontEnd/jquery.stellar.js",
+                                  jsLibraryFolder + "FrontEnd/base-theme.js",
+                                  jsLibraryFolder + "FrontEnd/jquery.isotope.min.js",
+                                  jsLibraryFolder + "FrontEnd/owl.carousel.min.js",
+                                  jsLibraryFolder + "FrontEnd/jquery.number.js",
+                                  jsLibraryFolder + "revolution-slider/js/jquery.themepunch.tools.min.js",
+                                  jsLibraryFolder + "revolution-slider/js/jquery.themepunch.revolution.min.js",
+                                  jsLibraryFolder + "DevOrgPlugins/developers-organism.component.js",
+                                  jsLibraryFolder + "FrontEnd/front-developer.js",
+                                  jsLibraryFolder + "jquery.blockUI.js",
 
-                                  "~/JavaScript-Mvc-framework/Prototype/Array.js",
+                                  jsFrameworkFolder + "Prototype/Array.js",
 
-                                  "~/JavaScript-Mvc-framework/app.js",
-                                  "~/JavaScript-Mvc-framework/app.executeBefore.js",
-                                  "~/JavaScript-Mvc-framework/app.executeAfter.js",
-                                  "~/JavaScript-Mvc-framework/jQueryCaching.js",
-                                  "~/JavaScript-Mvc-framework/attachInitialize.js",
+                                  jsFrameworkFolder + "app.js",
+                                  jsFrameworkFolder + "app.executeBefore.js",
+                                  jsFrameworkFolder + "app.executeAfter.js",
+                                  jsFrameworkFolder + "jQueryCaching.js",
+                                  jsFrameworkFolder + "attachInitialize.js",
 
-                                  "~/JavaScript-Mvc-framework/schema/schema.js",
-                                  "~/JavaScript-Mvc-framework/schema/hashset.js",
-                                  "~/JavaScript-Mvc-framework/schema/url.js",
+                                  jsFrameworkFolder + "schema/schema.js",
+                                  jsFrameworkFolder + "schema/hashset.js",
+                                  jsFrameworkFolder + "schema/url.js",
 
-                                  "~/JavaScript-Mvc-framework/extensions/ajax.js",
-                                  "~/JavaScript-Mvc-framework/extensions/hiddenContainer.js",
-                                  "~/JavaScript-Mvc-framework/extensions/clone.js",
-                                  "~/JavaScript-Mvc-framework/extensions/constants.js",
-                                  "~/JavaScript-Mvc-framework/extensions/initialize.js",
-                                  "~/JavaScript-Mvc-framework/extensions/inputChangeTracker.js",
-                                  "~/JavaScript-Mvc-framework/extensions/modal.js",
-                                  "~/JavaScript-Mvc-framework/extensions/pagination.js",
-                                  "~/JavaScript-Mvc-framework/extensions/regularExp.js",
-                                  "~/JavaScript-Mvc-framework/extensions/selectors.js",
-                                  "~/JavaScript-Mvc-framework/extensions/spinner.js",
-                                  "~/JavaScript-Mvc-framework/extensions/urls.js",
+                                  jsFrameworkFolder + "extensions/ajax.js",
+                                  jsFrameworkFolder + "extensions/hiddenContainer.js",
+                                  jsFrameworkFolder + "extensions/clone.js",
+                                  jsFrameworkFolder + "extensions/constants.js",
+                                  jsFrameworkFolder + "extensions/initialize.js",
+                                  jsFrameworkFolder + "extensions/inputChangeTracker.js",
+                                  jsFrameworkFolder + "extensions/modal.js",
+                                  jsFrameworkFolder + "extensions/pagination.js",
+                                  jsFrameworkFolder + "extensions/regularExp.js",
+                                  jsFrameworkFolder + "extensions/selectors.js",
+                                  jsFrameworkFolder + "extensions/spinner.js",
+                                  jsFrameworkFolder + "extensions/urls.js",
 
-                                  "~/JavaScript-Mvc-framework/controllers/controllers.js",
-                                  "~/JavaScript-Mvc-framework/controllers/initialize.js",
-                                  "~/JavaScript-Mvc-framework/controllers/AppController.js",
+                                  jsFrameworkFolder + "controllers/controllers.js",
+                                  jsFrameworkFolder + "controllers/initialize.js",
+                                  jsFrameworkFolder + "controllers/AppController.js",
 
-                                  "~/JavaScript-Mvc-framework/component/component.js",
-                                  "~/JavaScript-Mvc-framework/component/component.list.js",
+                                  jsFrameworkFolder + "component/component.js",
+                                  jsFrameworkFolder + "component/component.list.js",
 
-                                  "~/JavaScript-Mvc-framework/areas/admin/controllers/NavItemsController.js",
+                                  jsFrameworkFolder + "areas/admin/controllers/NavItemsController.js",
 
-                                  "~/JavaScript-Mvc-framework/jQueryExtend.js",
-                                  "~/JavaScript-Mvc-framework/jQueryExtend.fn.js",
-                                  "~/JavaScript-Mvc-framework/app.config.js",
-                                  "~/JavaScript-Mvc-framework/app.global.js",
+                                  jsFrameworkFolder + "jQueryExtend.js",
+                                  jsFrameworkFolder + "jQueryExtend.fn.js",
+                                  jsFrameworkFolder + "app.config.js",
+                                  jsFrameworkFolder + "app.global.js",
               
-                                  "~/JavaScript-Mvc-framework/app.run.js"
+                                  jsFrameworkFolder + "app.run.js"
 
                                   ));
                     #endregion
@@ -138,44 +146,45 @@ namespace WeReviewApp {
                     #region CSS Bundles
 
                     bundles.Add(new StyleBundle("~/Content/css/styles").Include(
-                                        "~/Content/css/bootstrap.css",
-                                        "~/Content/css/less-imports.css",
-                                        "~/Content/css/animate.min.css",
-                                        "~/Content/css/font-awesome.min.css",
-                                        "~/Content/css/site.css",
-                                        "~/Content/css/header.css",
-                                        "~/Content/css/flags32.css",
-                                        "~/Content/css/flags32-combo.css",
-                                        "~/Content/css/Upload/jquery.fileupload.css",
+                                        stylesFolder + "bootstrap.css",
+                                        stylesFolder + "less-imports.css",
+                                        stylesFolder + "animate.min.css",
+                                        stylesFolder + "font-awesome.min.css",
+                                        stylesFolder + "site.css",
+                                        stylesFolder + "header.css",
+                                        stylesFolder + "flags32.css",
+                                        stylesFolder + "flags32-combo.css",
+                                        stylesFolder + "Upload/jquery.fileupload.css",
 
-                                        "~/Content/css/bootstrap-datetimepicker.css",
-                                        "~/Content/css/bootstrap-table.css",
-                                        "~/Content/css/bootstrap-select.css",
-                                        "~/Content/css/bootstrap-tagsinput.css",
-                                        //"~/Content/css/ckedit-skin-bootstrap.css",
+                                        stylesFolder + "bootstrap-datetimepicker.css",
+                                        stylesFolder + "bootstrap-table.css",
+                                        stylesFolder + "bootstrap-select.css",
+                                        stylesFolder + "bootstrap-tagsinput.css",
+                                        //stylesFolder + "ckedit-skin-bootstrap.css",
 
-                                        "~/Content/css/color-fonts.css",
-                                        "~/Content/css/loader-spinner.css",
-                                        "~/Content/css/star-rating.css",
-                                        "~/Content/css/toastr.css",
-                                        "~/Content/css/override-mvc.css",
-                                        "~/Content/css/validator.css",
-                                        "~/Content/css/editor-templates.css",
+                                        stylesFolder + "color-fonts.css",
+                                        stylesFolder + "loader-spinner.css",
+                                        stylesFolder + "star-rating.css",
+                                        stylesFolder + "toastr.css",
+                                        stylesFolder + "override-mvc.css",
+                                        stylesFolder + "validator.css",
+                                        stylesFolder + "editor-templates.css",
 
-                                        "~/Content/css/base-theme-styles.css",
-                                        "~/Content/css/style.css",
+                                        stylesFolder + "base-theme-styles.css",
+                                        stylesFolder + "style.css",
 
-                                        "~/Content/css/responsive.css",
-                                        "~/Content/revolution-slider/css/settings.css",
+                                        stylesFolder + "responsive.css",
 
-                                        "~/Content/css/owl.carousel.css",
-                                        "~/Content/css/owl.theme.css",
-                                        "~/Content/css/owl.custom.finalize.css",
+                                        jsLibraryFolder + "revolution-slider/css/settings.css",
 
-                                        "~/Content/css/seo-optimize.css",
-                                        "~/Content/css/front-developer.css",
-                                        "~/Content/css/footer-fixing.css",
-                                        "~/Content/css/utilities.css"
+                                        stylesFolder + "owl.carousel.css",
+                                        stylesFolder + "owl.theme.css",
+                                        stylesFolder + "owl.custom.finalize.css",
+
+                                        stylesFolder + "seo-optimize.css",
+                                        stylesFolder + "front-developer.css",
+                                        stylesFolder + "footer-fixing.css",
+                                        stylesFolder + "utilities.css"
 
                     ));
 
@@ -210,39 +219,6 @@ namespace WeReviewApp {
 
                     bundles.Add(new StyleBundle("~/Content/css/styles").Include(
                                   "~/Content/Published.Styles/Styles.min.css"
-
-                    ));
-
-                    #endregion
-                    break;
-                case BundleSelector.EveryScriptGzip:
-                    #region Java Scripts Bundle
-
-                    #region Validation Bundle & Form Inputs Processing
-                    bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                                    "~/Content/Scripts/Bundles/jqueryval.min.js.gz"
-                                   ));
-                    #endregion
-
-
-                    #region Upload
-                    bundles.Add(new ScriptBundle("~/bundles/upload").Include(
-                                   "~/Content/Scripts/Bundles/UploadJs.min.js.gz"
-                                   ));
-                    #endregion
-
-                    #region Bootstrap
-                    bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                                  "~/Content/Scripts/Bundles/FrontEndJs.min.js.gz"
-                                  ));
-                    #endregion
-
-                    #endregion
-
-                    #region CSS Bundles
-
-                    bundles.Add(new StyleBundle("~/Content/css/styles").Include(
-                                  "~/Content/CompactCSS.min.css.gz"
 
                     ));
 

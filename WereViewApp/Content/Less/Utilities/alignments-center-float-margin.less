@@ -1,0 +1,243 @@
+﻿.no-resize {
+    .no-resize;
+}
+
+.make-distance {
+    margin: 12px;
+    .margin-left-zero;
+}
+
+.medium-font {
+    font-size: 122%;
+}
+
+.bigger-font {
+    font-size: 200%;
+}
+
+.left {
+    .float-left;
+}
+
+.right {
+    .float-right;
+}
+
+.float-none {
+    .float-none;
+}
+
+.center {
+    .text-center;
+}
+
+.tleft {
+    .tleft;
+}
+
+.tright {
+    .tright;
+}
+
+.justify, .tjustify {
+    .tjustify;
+}
+
+.vertically-center-wrapper {
+    .text-center;
+}
+
+.vertically-center-content {
+    .vertically-center-content();
+}
+
+
+.first-line-indent {
+    .first-line-indent;
+}
+
+.width-100-percent, .full-width {
+    .width-100-percent;
+}
+
+.fifty-percent-height-width {
+    .fifty-percent-height-width;
+}
+
+.margin-auto {
+    .margin-auto;
+}
+
+.zero-top-right-bottom-left {
+    .zero-top-right-bottom-left;
+}
+
+.center-container {
+    /*
+        <div class="center-container is-table">
+          <div class="cell">
+            <div class="center-block"> //margin : auto with width (which must be modified)
+                <!-- CONTENT -->
+            </div>
+          </div>
+        </div>
+    */
+    &.is-table {
+        .display-table;
+
+        .is-table {
+            .cell {
+                .display-table-cell;
+                .vertical-middle;
+            }
+
+            .center-block {
+                .center-block;
+            }
+        }
+    }
+}
+
+
+// centering utils
+.absolute-center {
+    .fifty-percent-height-width;
+    .margin-auto;
+    .overflow-auto;
+    .absolute;
+    .zero-top-right-bottom-left;
+    z-index: 600;
+
+    &.is-fixed {
+        .fixed;
+        z-index: 999;
+    }
+
+    &.is-right {
+        left: auto;
+        right: 20px;
+        .tright;
+    }
+
+    &.is-left {
+        right: auto;
+        left: 20px;
+        .tleft;
+    }
+}
+//vertically - center
+.jumbotron.vertical-center {
+    /* Remove the default bottom margin of .jumbotron */
+    .margin-bottom-zero;
+}
+
+.vertical-center-using-translate {
+    .fifty-percent-width;
+    .margin-auto;
+    .absolute;
+    .fifty-percent-top-left;
+    .translate-minus-50-50;
+}
+
+.vertical-center {
+    /* Fallback for vh unit */
+    .min-height-100-percent;
+    /* 
+        You might also want to use
+        'height' property instead.
+        Note that for percentage values of
+        'height' or 'min-height' properties,
+        the 'height' of the parent element
+        should be specified explicitly.
+        In this case the parent of '.vertical-center'
+        is the <body> element.
+        
+        Make it a flex container .
+
+    */
+    .display-flex;
+    /* Align the bootstrap's container vertically */
+    .align-items-center;
+    /* In legacy web browsers such as Firefox 9
+     we need to specify the width of the flex container */
+    .full-width;
+    /* Also 'margin: 0 auto' doesn't have any effect on flex items in such web browsers
+     hence the bootstrap's container won't be aligned to the center anymore.
+     Therefore, we should use the following declarations to get it centered again */
+    .justify-center;
+}
+
+.controls-full-width {
+    input,
+    select,
+    textarea,
+    a.form-control,
+    div.input-group.date.datetimepicker {
+        .max-width(none);
+    }
+}
+
+.no-margin-controls {
+    .form-group {
+        .margin-bottom-zero;
+        .margin-top-zero;
+    }
+}
+
+.controls-readonly {
+    .form-control:not(a) {
+        background-color: white;
+        cursor: text;
+    }
+}
+
+.controls-left-aligned {
+    .control-label {
+        .tleft;
+    }
+}
+
+.relative {
+    .relative;
+}
+
+.absolute {
+    .absolute;
+}
+
+// addons started
+.inner-addon {
+    .relative;
+
+    .glyphicon, .fa {
+        .absolute;
+        /*padding: 10px;*/
+        padding: 10px 11px 2px 9px;
+        pointer-events: none;
+    }
+}
+
+/* align icon */
+.left-addon .glyphicon, .left-addon .fa {
+    .zero-left;
+}
+
+.right-addon .glyphicon, .right-addon .fa {
+    .zero-right;
+}
+/* add padding  */
+.left-addon input {
+    .padding-left(30px);
+}
+
+.right-addon input {
+    .padding-right(30px);
+}
+
+.changed-row {
+    background-color: rgb(255, 237, 211);
+}
+
+.content-min-height-100-percent {
+    .min-height-100-percent;
+}

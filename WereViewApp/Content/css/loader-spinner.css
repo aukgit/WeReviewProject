@@ -1,4 +1,12 @@
-﻿/*
+﻿.x {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/*
   Warning(.css file): Please don't modify styles from css file. Please modify the styles in the respective.less file in the less folder. CSS files will be replaced with new .less file styles.
   FYI: This file (.less file) contains styles for animate spinner.
 */
@@ -86,11 +94,6 @@ lesshat-selector {
       <div class="loading-bar"></div>
   </div>
 */
-.loading-bar-container {
-  position: absolute;
-  top: 43%;
-  left: 48%;
-}
 .loading-bar {
   display: inline-block;
   width: 4px;
@@ -110,38 +113,38 @@ lesshat-selector {
 }
 .loading-bar:nth-child(2) {
   background-color: #c0392b;
-  -moz-animation-delay: 0.09s;
-  -o-animation-delay: 0.09s;
-  -webkit-animation-delay: 0.09s;
-  animation-delay: 0.09s;
+  -webkit-animation-delay: 0.9s;
+  -moz-animation-delay: 0.9s;
+  -o-animation-delay: 0.9s;
+  animation-delay: 0.9s;
 }
 .loading-bar:nth-child(3) {
   background-color: #f1c40f;
-  -moz-animation-delay: .18s;
-  -o-animation-delay: .18s;
-  -webkit-animation-delay: .18s;
-  animation-delay: .18s;
+  -webkit-animation-delay: 0.18s;
+  -moz-animation-delay: 0.18s;
+  -o-animation-delay: 0.18s;
+  animation-delay: 0.18s;
 }
 .loading-bar:nth-child(4) {
   background-color: #27ae60;
-  -moz-animation-delay: .27s;
-  -o-animation-delay: .27s;
-  -webkit-animation-delay: .27s;
-  animation-delay: .27s;
+  -webkit-animation-delay: 0.27s;
+  -moz-animation-delay: 0.27s;
+  -o-animation-delay: 0.27s;
+  animation-delay: 0.27s;
 }
 .loading-bar:nth-child(5) {
   background-color: #494C4A;
-  -moz-animation-delay: .36s;
-  -o-animation-delay: .36s;
-  -webkit-animation-delay: .36s;
-  animation-delay: .36s;
+  -webkit-animation-delay: 0.36s;
+  -moz-animation-delay: 0.36s;
+  -o-animation-delay: 0.36s;
+  animation-delay: 0.36s;
 }
 .loading-bar:nth-child(6) {
   background-color: #7D8DFF;
-  -moz-animation-delay: .45s;
-  -o-animation-delay: .45s;
-  -webkit-animation-delay: .45s;
-  animation-delay: .45s;
+  -webkit-animation-delay: 0.45s;
+  -moz-animation-delay: 0.45s;
+  -o-animation-delay: 0.45s;
+  animation-delay: 0.45s;
 }
 lesshat-selector {
   -lh-property: 0; } 
@@ -202,6 +205,13 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 #loading-bar {
   padding-top: 19px;
 }
+.loading-bar-container {
+  min-width: 200px;
+  margin: 0 auto;
+  text-align: center;
+  display: block;
+  position: static;
+}
 .blockMsg {
   border: none !important;
   color: #ffffff;
@@ -212,10 +222,22 @@ It means that loaders will fallback to a text state of simply saying "Loading...
   position: relative;
   font-size: 0.95em;
 }
+@media (min-width: 992px) {
+  .blockMsg {
+    left: 40% !important;
+    width: 20% !important;
+  }
+}
+@media (max-width: 768px) {
+  .blockMsg {
+    left: 35% !important;
+    width: 38% !important;
+  }
+}
 @media (max-width: 480px) {
   .blockMsg {
-    width: 282px !important;
-    width: 28.2rem !important;
+    left: 6% !important;
+    width: 84% !important;
   }
 }
 @media (min-width: 480px) {
@@ -230,12 +252,12 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 }
 @media (min-width: 992px) {
   .blockMsg {
-    font-size: 1.3em;
+    font-size: 1.12em;
   }
 }
 @media (min-width: 1200px) {
   .blockMsg {
-    font-size: 1.3em;
+    font-size: 1.18em;
   }
 }
 .loading-bar-full-screen {
@@ -246,32 +268,29 @@ It means that loaders will fallback to a text state of simply saying "Loading...
   background-color: #FFFFFF;
 }
 .loading-bar-full-screen .spinner-content {
-  right: 0.9%;
-  position: abosolute;
-  color: black;
-  font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin-top: -15px;
+  margin-top: 10px;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.95em;
 }
-@media (max-width: 480px) {
+@media (min-width: 480px) {
   .loading-bar-full-screen .spinner-content {
-    right: -3%;
+    font-size: 1em;
   }
 }
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .loading-bar-full-screen .spinner-content {
-    right: -2%;
+    font-size: 1.1em;
   }
 }
-@media (max-height: 650px) {
+@media (min-width: 992px) {
   .loading-bar-full-screen .spinner-content {
-    margin-top: 15px;
-    margin-top: 1.5rem;
+    font-size: 1.3em;
   }
 }
-@media (max-height: 400px) {
+@media (min-width: 1200px) {
   .loading-bar-full-screen .spinner-content {
-    margin-top: 25px;
-    margin-top: 2.5rem;
+    font-size: 1.3em;
   }
 }
 .body-fixed {
@@ -292,8 +311,8 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 }
 .default-loading-bar .loading-bar-container {
   position: static;
-  width: 44px;
-  width: 4.4rem;
+  width: 51px;
+  width: 5.1rem;
   margin: 0 auto;
 }
 .default-loading-bar .spinner-content {
@@ -302,8 +321,28 @@ It means that loaders will fallback to a text state of simply saying "Loading...
   color: black;
   font-family: Ubuntu, Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-top: -15px;
-  margin: 0 auto;
   margin-top: 10px;
   margin-top: 1rem;
+  font-size: 0.95em;
+}
+@media (min-width: 480px) {
+  .default-loading-bar .spinner-content {
+    font-size: 1em;
+  }
+}
+@media (min-width: 768px) {
+  .default-loading-bar .spinner-content {
+    font-size: 1.1em;
+  }
+}
+@media (min-width: 992px) {
+  .default-loading-bar .spinner-content {
+    font-size: 1.3em;
+  }
+}
+@media (min-width: 1200px) {
+  .default-loading-bar .spinner-content {
+    font-size: 1.3em;
+  }
 }
 /*# sourceMappingURL=loader-spinner.css.map */

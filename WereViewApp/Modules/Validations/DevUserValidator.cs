@@ -96,7 +96,7 @@ namespace WeReviewApp.Modules.Validations {
         ///     should be added to the collection via AddValidation() method.
         /// </summary>
         public override void CollectValidation() {
-            AddValidation(RegisterCodeValidate);
+            //AddValidation(RegisterCodeValidate);
             AddValidation(IsUserDoesntExist);
             AddValidation(IsEmailDoesntExist);
             //AddValidation(LanguageValidate);

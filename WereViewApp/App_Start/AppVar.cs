@@ -125,6 +125,7 @@ namespace WeReviewApp {
             var dictionary = new ViewDataDictionary {
                 {"Title", title},
                 {"ErrorMessage", message}
+                
             };
             return new ViewResult {
                 ViewName = "_AuthenticationError",

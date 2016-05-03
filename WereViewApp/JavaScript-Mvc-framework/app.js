@@ -1,7 +1,7 @@
 ﻿/*!
  * JavaScript Mvc framework.
- * Version                      : 1.5
- * Last Modified                : 21 Mar 2016  
+ * Version                      : 1.7
+ * Last Modified                : 30 Apr 2016  
  * 
  * Copyright (c) Md. Alim Ul Karim
  * Source Code Available at     : https://github.com/aukgit/JavaScript-MVC-Framework
@@ -20,5 +20,5 @@
  */
 ; $.app = $.app || {};
 $.app = {
-    isDebugging: true,
+    isDebugging: true
 };

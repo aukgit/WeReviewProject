@@ -1,6 +1,7 @@
 ﻿#region using block
 using System;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -24,6 +25,7 @@ namespace WeReviewApp {
             #endregion
 
             MvcHandler.DisableMvcResponseHeader = true;
+            AntiForgeryConfig.SuppressIdentityHeuristicChecks = true;
             TaskManager.Initialize(registry: new SchedulerRunner());
         }
 

@@ -140,16 +140,23 @@ namespace WeReviewApp {
         }
 
         /// <summary>
-        ///     Get error and set it to null.
+        ///     Get global error list from session.
         /// </summary>
         /// <returns></returns>
         public static ErrorCollector GetGlobalError() {
             if (HttpContext.Current.Session[SessionNames.Error] != null) {
                 var error = (ErrorCollector) HttpContext.Current.Session[SessionNames.Error];
-                SessionNames.RemoveKey(SessionNames.Error);
                 return error;
             }
             return null;
+        }
+
+        /// <summary>
+        ///     Remove global error list from session.
+        /// </summary>
+        /// <returns></returns>
+        public static void RemoveGlobalError() {
+            SessionNames.RemoveKey(SessionNames.Error);
         }
 
         /// <summary>

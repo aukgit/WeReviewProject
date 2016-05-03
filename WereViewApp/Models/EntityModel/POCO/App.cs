@@ -77,6 +77,7 @@ namespace WeReviewApp.Models.EntityModel {
         /// </summary>
         public double AvgRating { get; set; }
 
+        [Display(Name = "Release Date", Description = "When you actually released the app. it is different from publishing the app in this portal.")]
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
 

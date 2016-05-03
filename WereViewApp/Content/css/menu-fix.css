@@ -1,4 +1,12 @@
-﻿.header-2 .logo {
+﻿.x {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.header-2 .logo {
   margin-top: 8px;
   margin-top: 0.8rem;
 }
