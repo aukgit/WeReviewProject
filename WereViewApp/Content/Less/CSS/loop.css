@@ -1,0 +1,8 @@
+﻿/*.custom-looping-classes-2(@className; @attribute; @value; @index) when (@index > 0) {
+  .custom-looping-classes(@className; @attribute; @value; (@index - 1)); // decrement.
+ 
+  .@{className}-@{index} {
+     .@attribute(@value);
+  } 
+}*/
+/*# sourceMappingURL=loop.css.map */

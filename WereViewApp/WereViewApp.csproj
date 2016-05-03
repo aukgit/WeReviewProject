@@ -780,6 +780,10 @@
       <DependentUpon>color-fonts.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\color-fonts.less" />
+    <Content Include="Content\Less\CSS\loop.css" />
+    <Content Include="Content\Less\CSS\loop.min.css">
+      <DependentUpon>loop.css</DependentUpon>
+    </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
     <Content Include="Content\Less\less-imports.less" />
@@ -995,6 +999,10 @@
     <Content Include="Content\Less\utilities\border-radius.less" />
     <Content Include="Content\Less\utilities\gaps.less" />
     <Content Include="Content\Less\utilities\indenting.less" />
+    <Content Include="Content\Less\spinner\google-spinner.less" />
+    <Content Include="Content\Less\CSS\loop.css.map">
+      <DependentUpon>loop.css</DependentUpon>
+    </Content>
     <None Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
     <Content Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />
     <Content Include="Sitemap.xml" />

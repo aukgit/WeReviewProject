@@ -138,6 +138,7 @@ namespace WeReviewApp.Controllers {
         #endregion
 
         #region Re-send Confirmation Email
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         private async void SendConfirmationEmail(ApplicationUser user) {
             var code = Manager.GenerateEmailConfirmationToken(user.Id);
             var callbackUrl = Url.Action("ConfirmEmail", "Account",
@@ -147,6 +148,7 @@ namespace WeReviewApp.Controllers {
         }
 
         [Authorize]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public async Task<ActionResult> ResendConfirmationMail() {
             var lastSend = Session["last-send"] as DateTime?;
             if (lastSend == null) {
@@ -397,18 +399,11 @@ namespace WeReviewApp.Controllers {
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public async Task<ActionResult> Register(RegisterViewModel model) {
             if (UserManager.IsAuthenticated()) {
                 return AppVar.GetAuthenticationError("You are already authenticated.", "");
             }
-
-            #region Redirect if already registered successfully.
-            var emailResender = EmailResendViewModel.GetEmailResendViewModelFromSession();
-            if (emailResender != null) {
-                // that means user is already created successfully.
-                return RedirectToActionPermanent("Verify");
-            }
-            #endregion
 
             if (ModelState.IsValid) {
                 var errors = new ErrorCollector();
@@ -519,6 +514,7 @@ namespace WeReviewApp.Controllers {
 
         //[CompressFilter(Order = 1)]
         [AllowAnonymous]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult ForgotPassword() {
             return View();
         }
@@ -527,6 +523,7 @@ namespace WeReviewApp.Controllers {
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         //[CompressFilter(Order = 1)]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model) {
             var name = "forget-pass-" + model.Email.GetHashCode().ToString();
             var isAlreadySent = !AppVar.IsInTestEnvironment && Session[name] != null;
@@ -558,6 +555,7 @@ namespace WeReviewApp.Controllers {
         #region Password Reset
 
         [AllowAnonymous]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult ResetPassword(long userId, string email, string code, Guid guid) {
             var name = "reset-pass-" + guid.GetHashCode().ToString();
             var isAlreadySent = !AppVar.IsInTestEnvironment && Session[name] != null;
@@ -585,6 +583,7 @@ namespace WeReviewApp.Controllers {
         }
 
         [HttpPost]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model) {
@@ -614,6 +613,7 @@ namespace WeReviewApp.Controllers {
         }
 
         [AllowAnonymous]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult ResetPasswordConfirmation() {
             return View();
         }
@@ -622,6 +622,7 @@ namespace WeReviewApp.Controllers {
 
         #region Account Manage
 
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         [ValidateRegistrationComplete]
         public ActionResult Manage(ManageMessageId? message) {
             if (UserManager.IsAuthenticated()) {
@@ -645,6 +646,7 @@ namespace WeReviewApp.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateRegistrationComplete]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public async Task<ActionResult> Manage(ManageUserViewModel model) {
             var hasPassword = HasPassword();
             ViewBag.HasLocalPassword = hasPassword;

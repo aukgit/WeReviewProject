@@ -22,6 +22,7 @@ namespace WeReviewApp.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult GetValidUrl(App app) {
             var max = 60;
             var min = 3;
@@ -70,6 +71,7 @@ namespace WeReviewApp.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult GetValidUrlEditing(App app) {
             var max = 60;
             var min = 3;
@@ -132,8 +134,9 @@ namespace WeReviewApp.Controllers {
         #region Base Validators
 
         [HttpPost]
-        [OutputCache(CacheProfile = "Long", VaryByParam = "UserName", VaryByCustom = "byuser")]
+        //[OutputCache(CacheProfile = "Long", VaryByParam = "UserName", VaryByCustom = "byuser")]
         [ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult GetUsername(string UserName) {
             const int max = 30;
             const int min = 3;
@@ -163,8 +166,9 @@ namespace WeReviewApp.Controllers {
         }
 
         [HttpPost]
-        [OutputCache(CacheProfile = "Long", VaryByParam = "Email", VaryByCustom = "byuser")]
+        //[OutputCache(CacheProfile = "Long", VaryByParam = "Email", VaryByCustom = "byuser")]
         [ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult GetEmail(string Email) {
             const string errorMessage = "Email already exist or not valid.";
             if (!AppVar.Setting.IsInTestingEnvironment) {
