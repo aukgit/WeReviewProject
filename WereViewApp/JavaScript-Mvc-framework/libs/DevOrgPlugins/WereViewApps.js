@@ -652,7 +652,16 @@ $.WeReviewApp = {
         var $reviewSpinner = $.byId(self.reviewSpinnerSelector).hide();
 
         if ($reviewSpinner.length > 0) {
-            $("#WriteReviewButton").click(function () {
+            var $writeReviewBtn = $("#WriteReviewButton");
+
+            var $ratingBox = $.byId("current-app-rating-box-field");
+            if ($ratingBox.length > 0) {
+                $ratingBox.click(function (e) {
+                    e.preventDefault();
+                    $writeReviewBtn.trigger("click");
+                });
+            }
+            $writeReviewBtn.click(function () {
                 var $container = $(self.reviewFormContainerSelectorInAppPage);
                 var text = $container.text().trim();
                 if (text.length === 0) {
@@ -924,8 +933,8 @@ $.WeReviewApp = {
         }
     },
 
-    registerPage : function() {
-        
+    registerPage: function () {
+
     },
     initializeAppForms: function () {
         var self = $.WeReviewApp;

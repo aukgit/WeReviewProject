@@ -141,40 +141,49 @@ namespace WeReviewApp.Modules.Cache {
 
         public object ReadObjectFromBinaryFile(string fileNamelocation) {
             fileNamelocation = AppPath + Root + AdditionalRoot + fileNamelocation;
-            if (File.Exists(fileNamelocation)) {
-                try {
-                    var fileBytes = File.ReadAllBytes(fileNamelocation);
-                    return ReadFromBinaryObject(fileBytes);
-                } catch (Exception ex) {
-                    Mvc.Error.HandleBy(ex);
-                    return null;
+            try {
+                if (File.Exists(fileNamelocation)) {
+                    try {
+                        var fileBytes = File.ReadAllBytes(fileNamelocation);
+                        return ReadFromBinaryObject(fileBytes);
+                    } catch (Exception ex) {
+                        Mvc.Error.HandleBy(ex);
+                        return null;
+                    }
                 }
+            } catch (Exception ex) {
+                Mvc.Error.ByEmail(ex, "ReadObjectFromBinaryFile");
             }
+
             return null;
         }
 
         public object ReadObjectFromBinaryFileAsCache(string fileNamelocation, float hoursToExpire) {
             fileNamelocation = AppPath + Root + AdditionalRoot + fileNamelocation;
-            if (File.Exists(fileNamelocation)) {
-                try {
-                    var info = new FileInfo(fileNamelocation);
-                    if (info != null) {
-                        var duration = DateTime.Now - info.CreationTime;
-                        var hours = duration.Minutes/60f;
-                        if (hours > hoursToExpire) {
-                            if (File.Exists(fileNamelocation)) {
-                                File.Delete(fileNamelocation);
+            try {
+                if (File.Exists(fileNamelocation)) {
+                    try {
+                        var info = new FileInfo(fileNamelocation);
+                        if (info != null) {
+                            var duration = DateTime.Now - info.CreationTime;
+                            var hours = duration.Minutes / 60f;
+                            if (hours > hoursToExpire) {
+                                if (File.Exists(fileNamelocation)) {
+                                    File.Delete(fileNamelocation);
+                                }
+                                return null;
                             }
-                            return null;
                         }
-                    }
 
-                    var fileBytes = File.ReadAllBytes(fileNamelocation);
-                    return ReadFromBinaryObject(fileBytes);
-                } catch (Exception ex) {
-                    Mvc.Error.HandleBy(ex);
-                    return null;
+                        var fileBytes = File.ReadAllBytes(fileNamelocation);
+                        return ReadFromBinaryObject(fileBytes);
+                    } catch (Exception ex) {
+                        Mvc.Error.HandleBy(ex);
+                        return null;
+                    }
                 }
+            } catch (Exception ex) {
+                Mvc.Error.ByEmail(ex, "ReadObjectFromBinaryFileAsCache");
             }
             return null;
         }

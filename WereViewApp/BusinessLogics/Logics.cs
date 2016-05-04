@@ -59,7 +59,7 @@ namespace WeReviewApp.BusinessLogics {
                     username = n.User.UserName
                 })
                 .GroupBy(n => n.username)
-                .Select(app => new {Username = app.Key, Count = app.Count()})
+                .Select(app => new { Username = app.Key, Count = app.Count() })
                 .OrderByDescending(n => n.Count)
                 .Take(topDevelopersLimit)
                 .Select(n => n.Username)
@@ -106,7 +106,7 @@ namespace WeReviewApp.BusinessLogics {
         /// </summary>
         /// <param name="app"></param>
         /// <returns></returns>
-        public App ReadVirtualFields(App app) {
+        public bool ReadVirtualFields(ref App app) {
             var retriveFields = WereViewStatics.ReadAppFromDirectory(app.UploadGuid);
             if (retriveFields != null) {
                 app.Tags = retriveFields.Tags;
@@ -114,9 +114,20 @@ namespace WeReviewApp.BusinessLogics {
                 app.Developers = retriveFields.Developers;
                 app.Publishers = retriveFields.Publishers;
             }
-            return app;
+            return retriveFields != null;
         }
 
+        #endregion
+
+        #region Tags : Read tags from database and return it as CSV
+
+        public string GetTagsAsCsv(long appId, WereViewAppEntities db) {
+            var tags = db.Tags.Where(n => n.TagAppRelations.Any(rel => rel.AppID == appId)).Select(n => n.TagDisplay).ToArray();
+            if (tags != null && tags.Length > 0) {
+                return string.Join(",", tags);
+            }
+            return "";
+        }
         #endregion
 
         #region Add user points
@@ -782,9 +793,10 @@ namespace WeReviewApp.BusinessLogics {
                 if (platformO != null && categoryO != null) {
                     var platformId = platformO.PlatformID;
                     var categoryId = categoryO.CategoryID;
+                    // static cache search should be done with equals
                     app = CommonVars.StaticAppsList
                                     .FirstOrDefault(n =>
-                                                    n.Url.Equals(url) &&
+                                                    n.Url.Equals(url, StringComparison.OrdinalIgnoreCase) &&
                                                     n.PlatformID == platformId &&
                                                     n.CategoryID == categoryId);
 
@@ -815,10 +827,11 @@ namespace WeReviewApp.BusinessLogics {
                         return app;
                     }
                     // app not found in cache so search in db:
+                    // db search , not equals method
                     app = GetViewableApps(db) //means not blocked and published
                         .Include(n => n.User)
                         .FirstOrDefault(n =>
-                                        n.Url.Equals(url) &&
+                                        n.Url == url &&
                                         n.PlatformID == platformId &&
                                         n.CategoryID == categoryId);
                     if (app != null) {
@@ -834,7 +847,7 @@ namespace WeReviewApp.BusinessLogics {
                         // Also load app review like dislikes
                         LoadReviewAndThenReviewLikeDislikesBasedOnUserIntoApp(app, 0, maxReviewLoad, db);
 
-                        //Get current user app-rating.
+                        // Get current user app-rating.
                         if (UserManager.IsAuthenticated()) {
                             var userId = UserManager.GetLoggedUserId();
 
@@ -846,8 +859,15 @@ namespace WeReviewApp.BusinessLogics {
                                 app.CurrentUserRatedAppValue = null;
                             }
                         }
+
                         // read app virtual fields, like tags as string and so on
-                        ReadVirtualFields(app);
+                        if (!ReadVirtualFields(ref app)) {
+                            // if somehow tags were missing in the location then
+                            // get the tags from databaase and then 
+                            // finally save it in the text file again.
+                            app.Tags = GetTagsAsCsv(app.AppID, db);
+                            SaveVirtualFields(app);
+                        }
 
                         // injecting gallery images location inside the app
                         GetEmbedGalleryImagesWithCurrentApp(app, db);
@@ -1007,7 +1027,7 @@ namespace WeReviewApp.BusinessLogics {
             if (app != null) {
                 app.IsReviewAlreadyLoaded = false;
             }
-            RemoveDonutCaching("Partials", "ReviewsDisplay", new {@id = appId});
+            RemoveDonutCaching("Partials", "ReviewsDisplay", new { @id = appId });
         }
 
         #endregion
@@ -1181,7 +1201,7 @@ namespace WeReviewApp.BusinessLogics {
             if (!string.IsNullOrEmpty(title)) {
                 title = title.Trim();
                 title = Regex.Replace(title, CommonVars.FriendlyUrlRegex, "-").ToLower();
-                checkAgain:
+            checkAgain:
                 var exist = false;
                 if (currentAppId < 1) {
                     exist =

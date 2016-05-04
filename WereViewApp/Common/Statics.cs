@@ -101,7 +101,11 @@ namespace WeReviewApp.Common {
         public static AppSavingTextFields ReadAppFromDirectory(Guid uploadGuid) {
             var textCache = new CacheDataInFile(CommonVars.AppVirtualFieldsSavingAdditionalpath);
             var location = getAppLocation(uploadGuid);
-            return (AppSavingTextFields) textCache.ReadObjectFromBinaryFile(location);
+            var fileObject = textCache.ReadObjectFromBinaryFile(location);
+            if (fileObject != null) {
+                return (AppSavingTextFields) fileObject;
+            }
+            return null;
         }
 
         #region Get all upload processors method
