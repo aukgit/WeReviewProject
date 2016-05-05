@@ -8,11 +8,10 @@
     ViewBag.token = Html.AntiForgeryToken();
     var viewName = "Post";
 }
-
-@Html.SamePageLinkWithIcon(title, title, "fa fa-plus-circle")
+@Html.Partial("_CommonHidden")
+@Html.SamePageLinkWithIcon(title, subtitle, "fa fa-plus-circle")
 <hr />
 <div id="app-form" data-type="post">
-
     @using (Html.BeginForm(viewName, controller, FormMethod.Post, new {@class = "form-horizontal app-editing-page app-post Create-" + @ViewBag.Title, role = "form"})) {
         <div class="form-horizontal">
             @Html.Partial("_SuccessMessage")
@@ -36,8 +35,6 @@
         </div>
     }
 </div>
-
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/upload")

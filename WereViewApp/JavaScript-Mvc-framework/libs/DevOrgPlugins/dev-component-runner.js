@@ -85,31 +85,6 @@ $.devOrg.runner = function () {
     $.devOrg.bootstrapTabsMordernize(".make-it-tab");
 
 
-    $("textarea.big-multiline").focus(function () {
-        $(this).animate({ 'height': '300px', 'width': '630px', 'max-width': '630px' }, 400);
-    }).blur(function () {
-        $(this).animate({ 'height': 'auto', 'width': '294px', 'max-width': '294px' }, 400);
-    });
-    //making textarea's elastic
-    $("textarea").elastic().trigger('update');
-
-
-
-    var serverValidationActivate = function () {
-        var $processForm = $.byId("server-validation-form");
-        $processForm.serverValidate({
-            crossDomain: false,
-            multipleRequests: true,
-            checkValidationBeforeSendingRequest: true,
-            dontSendSameRequestTwice: false,
-            disableInputOnValidation: false,
-            focusPersistIfNotValid: false,
-            hideOnValidation: false
-        });
-    }
-
-
-    serverValidationActivate();
 }
 
 $(function () {

@@ -807,6 +807,7 @@
     <Content Include="Content\Published.Styles\Styles.min.css">
       <DependentUpon>Styles.css</DependentUpon>
     </Content>
+    <Content Include="JavaScript-Mvc-framework\controllers\AccountController.js" />
     <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\arrowleft.png" />
     <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\arrowright.png" />
     <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\arrow_left.png" />
@@ -1549,6 +1550,7 @@
     <Content Include="Views\Profiles\_UserProfileDetails.cshtml" />
     <Content Include="Views\App\_AppDescription.cshtml" />
     <Content Include="Views\Account\ConfirmationEmailResend.cshtml" />
+    <Content Include="Views\App\_CommonHidden.cshtml" />
     <None Include="Views\Reviews\User.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AnyTypeIconWithHtml.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TextArea.cshtml" />
