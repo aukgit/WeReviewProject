@@ -1,4 +1,13 @@
-﻿/*!
+﻿/// <reference path="libs/jQuery/jquery-2.2.3.js" />
+/// <reference path="libs/jQuery/jquery-2.2.3.intellisense.js" />
+/// <reference path="byId.js" />
+/// <reference path="schema/schema.js" />
+/// <reference path="schema/hashset.js" />
+/// <reference path="schema/url.js" />
+/// <reference path="extensions/constants.js" />
+/// <reference path="extensions/selectors.js" />
+
+/*!
  * JavaScript Mvc framework.
  * Version                      : 1.7
  * Last Modified                : 30 Apr 2016  
@@ -20,5 +29,16 @@
  */
 ; $.app = $.app || {};
 $.app = {
-    isDebugging: true
+    isDebugging: true,
+    getProcessForm: function () {
+        /// <summary>
+        /// Get the processing form.
+        /// </summary>
+        var app = $.app,
+              selectors = app.selectors,
+              ids = selectors.ids,
+              $processForm = $.findCachedId(ids.processForm);
+
+        return $processForm;
+    }
 };

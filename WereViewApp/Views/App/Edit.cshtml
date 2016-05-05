@@ -12,6 +12,7 @@
     ViewBag.isEditingPage = true; // make sure the url is from "/Validator/GetValidUrlEditing" or else "/Validator/GetValidUrl"
 }
 @Html.SamePageLinkWithIcon(title, title, "fa fa-edit")
+@Html.Partial("_CommonHiddenForAppEditOrPost")
 <hr />
 <div id="app-form" data-type="edit">
     @using (Html.BeginForm(viewName, controller, FormMethod.Post, new {@class = "form-horizontal app-editing-page app-edit Edit-App", role = "form"})) {

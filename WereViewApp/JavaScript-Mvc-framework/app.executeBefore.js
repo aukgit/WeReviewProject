@@ -113,23 +113,31 @@ $.app.executeBefore = {
         }
     },
     transactionStatusEnable: function () {
-        var $transaction = $.byId("transaction-container"),
-            hideTimeOut = parseInt($transaction.attr("data-hide-duration"));
+        var $transaction = $("#transaction-container"),
+            hideTimeOut = 0;
+        if ($transaction.length !== 0) {
+            if ($transaction.length > 0) {
+                hideTimeOut = parseInt($($transaction[0]).attr("data-hide-duration"));
+            }
 
-        var hideStatus = function () {
-            $transaction.attr("data-shown", "true");
-            $transaction.hide(500);
-        };
-        var timer = setTimeout(hideStatus, hideTimeOut);
+            var hideStatus = function () {
+                $transaction.each(function (index) {
+                    var $this = $(this);
+                    $this.attr("data-shown", "true")
+                        .hide(500);
+                });
+            };
+            var timer = setTimeout(hideStatus, hideTimeOut);
 
-        var stopTimer = function () {
-            clearTimeout(timer);
+            var stopTimer = function () {
+                clearTimeout(timer);
+            }
+
+            $transaction.click(function () {
+                stopTimer();
+                hideStatus();
+            });
         }
-
-        $transaction.click(function () {
-            stopTimer();
-            hideStatus();
-        });
     },
 
     loadWow: function () {
@@ -141,7 +149,7 @@ $.app.executeBefore = {
         });
         wow.init();
     },
-    
+
     ratingComponentEnable: function () {
         var $frontPageRatings = $.findCached(".rating-5-front");
         if ($frontPageRatings.length > 0) {

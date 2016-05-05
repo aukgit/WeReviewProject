@@ -1550,7 +1550,7 @@
     <Content Include="Views\Profiles\_UserProfileDetails.cshtml" />
     <Content Include="Views\App\_AppDescription.cshtml" />
     <Content Include="Views\Account\ConfirmationEmailResend.cshtml" />
-    <Content Include="Views\App\_CommonHidden.cshtml" />
+    <Content Include="Views\App\_CommonHiddenForAppEditOrPost.cshtml" />
     <None Include="Views\Reviews\User.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AnyTypeIconWithHtml.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TextArea.cshtml" />

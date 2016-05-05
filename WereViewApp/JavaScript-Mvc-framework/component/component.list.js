@@ -1,6 +1,9 @@
 ﻿/// <reference path="../libs/jQuery/jquery-2.2.3.js" />
 /// <reference path="../libs/jQuery/jquery-2.2.3.intellisense.js" />
 /// <reference path="../jQueryCaching.js" />
+/// <reference path="../app.js" />
+/// <reference path="../Prototype/Array.js" />
+/// <reference path="../extensions/selectors.js" />
 ; $.app = $.app || {};
 ; $.app.component = $.app.component || {};
 ; $.app.component.list = $.app.component.list || {};
@@ -30,7 +33,9 @@ $.app.component.list = {
         }
     },
     "form-validation": function () {
-        var $processForm = $.findCachedId("server-validation-form");
+        var app = $.app,
+            $processForm = app.getProcessForm();
+
         if ($processForm.length > 0) {
             $processForm.serverValidate({
                 crossDomain: false,
@@ -44,7 +49,9 @@ $.app.component.list = {
         }
     },
     "tag": function () {
-        var $processForm = $.findCachedId("server-validation-form");
+        var app = $.app,
+            $processForm = app.getProcessForm();
+
         if ($processForm.length > 0) {
             var $createdTags = $(".tag-inputs");
             if ($createdTags.length > 0) {
@@ -93,6 +100,35 @@ $.app.component.list = {
                     return false;
                 });
             }
+        }
+    },
+    "convert-youtube-link-to-embed": function () {
+        /// <summary>
+        /// Add id "youtube-link-convert" on input or put the input as "#server-validation-form .youtube-link-convert"
+        /// then it will work.
+        /// </summary>
+        var app = $.app,
+            id = "youtube-link-convert",
+            $anyInputs = $.findCachedId(id),
+            $processForm = app.getProcessForm(),
+            $inputs = [],
+            isGivenUrlMatchedDomain = app.global.isGivenUrlMatchedDomain;
+
+        if ($anyInputs.length > 0) {
+            $inputs = $anyInputs;
+        } else if ($processForm.length > 0) {
+            $inputs = $processForm.find("." + id);
+        }
+
+        if ($inputs.length > 0) {
+            $inputs.blur(function () {
+                var $this = $(this),
+                    text = $this.val();
+                if (!$.isEmpty(text) && isGivenUrlMatchedDomain("youtu\.be|youtube\.com")) {
+                    text.replace(/(?:https:\/\/|http:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g, '<iframe width="420" height="345" src="http://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>');
+                    $this.val(text);
+                }
+            });
         }
     },
     "owl-carousel": function () {
