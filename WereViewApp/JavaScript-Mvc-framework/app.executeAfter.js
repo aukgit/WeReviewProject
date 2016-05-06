@@ -1,8 +1,4 @@
 ﻿/// <reference path="byId.js" />
-/// <reference path="D:\Working (SSD)\GitHub\WereViewProject\WereViewApp\Content/Scripts/toastr.js" />
-/// <reference path="D:\Working (SSD)\GitHub\WereViewProject\WereViewApp\Content/Scripts/jquery-2.1.4.js" />
-/// <reference path="D:\Working (SSD)\GitHub\WereViewProject\WereViewApp\Content/Scripts/jquery.blockUI.js" />
-/// <reference path="D:\Working (SSD)\GitHub\WereViewProject\WereViewApp\Content/Scripts/jquery-2.1.4.intellisense.js" />
 /// <reference path="app.global.js" />
 ; $.app = $.app || {};
 /**
@@ -14,11 +10,11 @@ $.app.executeAfter = {
      * @returns {} 
      */
     documentSpinnerHide: function () {
-        //$.app.global.documentFullSpinnerHide();
-        //var timer = setTimeout(function () {
-        //    $.app.global.documentFullSpinnerHide();
-        //    clearTimeout(timer);
-        //}, 2500);
+        $.app.global.documentFullSpinnerHide();
+        var timer = setTimeout(function () {
+            $.app.global.documentFullSpinnerHide();
+            clearTimeout(timer);
+        }, 2500);
     },
     captureAnchorAndShowSpinner: function () {
         var $anchors = $.findCached("a:link");

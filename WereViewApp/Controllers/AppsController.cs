@@ -20,7 +20,7 @@ namespace WeReviewApp.Controllers {
         #region Constructors
 
         public AppsController()
-            : base(true) {}
+            : base(true) { }
 
         #endregion
 

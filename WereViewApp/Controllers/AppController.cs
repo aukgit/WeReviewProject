@@ -20,12 +20,16 @@ using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WeReviewApp.Models.EntityModel.Structs;
 using WeReviewApp.Models.ViewModels;
 using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.Session;
 using WeReviewApp.Modules.Uploads;
 using FileSys = System.IO.File;
 
 #endregion
 
 namespace WeReviewApp.Controllers {
+    /// <summary>
+    /// App edit/modify, add related controller + single app display logic.
+    /// </summary>
     [Authorize]
     [ValidateRegistrationComplete]
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
@@ -33,7 +37,6 @@ namespace WeReviewApp.Controllers {
         #region Declaration
 
         private readonly Logics _logics = new Logics();
-
         #endregion
 
         #region Constructors
@@ -596,8 +599,7 @@ namespace WeReviewApp.Controllers {
         /// </summary>
         /// <param name="app"></param>
         private void SaveVirtualFields(App app) {
-            var alg = new Logics();
-            alg.SaveVirtualFields(app);
+            _logics.SaveVirtualFields(app);
         }
 
         #endregion
@@ -609,9 +611,8 @@ namespace WeReviewApp.Controllers {
         /// </summary>
         /// <param name="app"></param>
         /// <returns></returns>
-        private App ReadVirtualFields(App app) {
-            var alg = new Logics();
-            return alg.ReadVirtualFields(app);
+        private bool ReadVirtualFields(App app) {
+            return _logics.ReadVirtualFields(ref app);
         }
 
         #endregion
@@ -848,13 +849,14 @@ namespace WeReviewApp.Controllers {
         }
 
         private void ResetSessionForUploadSequence(Guid uploadGuid) {
-            Session[uploadGuid.ToString()] = null;
-            Session[uploadGuid + "-count"] = null;
-            Session[uploadGuid + "-staticCount"] = null;
+            var id = uploadGuid.ToString();
+            var keysArr = new[] { id, id + "-count", id + "-staticCount" };
+            SessionNames.RemoveKeys(keysArr);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
         public async Task<JsonResult> UploadGallery(App app, IEnumerable<HttpPostedFileBase> galleries) {
             if (galleries != null && app.UploadGuid != null) {
                 //look for cache if sequence exist before
@@ -863,7 +865,7 @@ namespace WeReviewApp.Controllers {
 
                 if (nextCount > AppVar.Setting.GalleryMaxPictures) {
                     ResetSessionForUploadSequence(app.UploadGuid);
-                    return Json(new {isUploaded = false, uploadedFiles = 0, message = "You are out of your limit."},
+                    return Json(new { isUploaded = false, uploadedFiles = 0, message = "You are out of your limit." },
                         "text/html");
                 }
                 var fileName = app.UploadGuid.ToString();
@@ -963,7 +965,7 @@ namespace WeReviewApp.Controllers {
                             message = "+" + countUploaded + " files successfully done."
                         }, "text/html");
             }
-            return Json(new {isUploaded = false, uploadedFiles = 0, message = "No file send."}, "text/html");
+            return Json(new { isUploaded = false, uploadedFiles = 0, message = "No file send." }, "text/html");
         }
 
         #region Process Similar Uploads
@@ -1009,9 +1011,9 @@ namespace WeReviewApp.Controllers {
                     uploadProcessorSepecific.RemoveTempImage(gallery);
                     //}).Start();
                 }
-                return Json(new {isUploaded = true, message = "successfully done"}, "text/html");
+                return Json(new { isUploaded = true, message = "successfully done" }, "text/html");
             }
-            return Json(new {isUploaded = false, message = "No file send."}, "text/html");
+            return Json(new { isUploaded = false, message = "No file send." }, "text/html");
         }
 
         #endregion

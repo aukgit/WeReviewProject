@@ -31,6 +31,19 @@ $.app.executeBefore = {
             }
         }
     },
+    elasticTextAreas: function () {
+        var $textAreas = $("textarea");
+        if ($textAreas.length > 0) {
+            $textAreas.find(".big-multiline").focus(function () {
+                $(this).animate({ 'height': '300px', 'width': '630px', 'max-width': '630px' }, 400);
+            }).blur(function () {
+                $(this).animate({ 'height': 'auto', 'width': '294px', 'max-width': '294px' }, 400);
+            });
+            //making textarea's elastic
+            $textAreas.elastic().trigger('update');
+        }
+
+    },
     toolTipShow: function () {
         var $tooltipItems = $('.tooltip-show');
         if ($tooltipItems.length > 0) {
@@ -99,58 +112,32 @@ $.app.executeBefore = {
             }
         }
     },
-    tagComponentEnable: function () {
-        var $processForm = $.byId("server-validation-form");
-        if ($processForm.length > 0) {
-            var $createdTags = $(".tag-inputs");
-            if ($createdTags.length > 0) {
-                var $tokenField = $processForm.find("[name='__RequestVerificationToken']"),
-                    token = $tokenField.val();
-                for (var i = 0; i < $createdTags.length; i++) {
-                    var $tagsInput = $($createdTags[0]),
-                        urlToPost = $tagsInput.attr("data-url");
-                    //
-                    $tagsInput.tagsinput({
-                        freeInput: true,
-                        trimValue: true,
-                        typeahead: {
-                            source: function (query) {
-                                return $.post(urlToPost, { id: query, __RequestVerificationToken: token }).done(function (response) {
-                                    //console.log("tags:");
-                                    //console.log("response:");
-                                    //console.log(response);
-                                });
-                            }
-                        },
-                        onTagExists: function (item, $tag) {
-                            if ($.isEmpty($tag)) {
-                                $tag.hide.fadeIn();
-                            }
-                        }
-                    });
-                }
+    transactionStatusEnable: function () {
+        var $transaction = $("#transaction-container"),
+            hideTimeOut = 0;
+        if ($transaction.length !== 0) {
+            if ($transaction.length > 0) {
+                hideTimeOut = parseInt($($transaction[0]).attr("data-hide-duration"));
             }
 
+            var hideStatus = function () {
+                $transaction.each(function (index) {
+                    var $this = $(this);
+                    $this.attr("data-shown", "true")
+                        .hide(500);
+                });
+            };
+            var timer = setTimeout(hideStatus, hideTimeOut);
+
+            var stopTimer = function () {
+                clearTimeout(timer);
+            }
+
+            $transaction.click(function () {
+                stopTimer();
+                hideStatus();
+            });
         }
-    },
-    transactionStatusEnable: function () {
-        var $transaction = $.byId("transaction-container"),
-            hideTimeOut = parseInt($transaction.attr("data-hide-duration"));
-
-        var hideStatus = function () {
-            $transaction.attr("data-shown", "true");
-            $transaction.hide(500);
-        };
-        var timer = setTimeout(hideStatus, hideTimeOut);
-
-        var stopTimer = function () {
-            clearTimeout(timer);
-        }
-
-        $transaction.click(function () {
-            stopTimer();
-            hideStatus();
-        });
     },
 
     loadWow: function () {

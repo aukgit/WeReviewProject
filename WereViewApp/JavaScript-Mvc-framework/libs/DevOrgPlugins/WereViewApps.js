@@ -652,7 +652,16 @@ $.WeReviewApp = {
         var $reviewSpinner = $.byId(self.reviewSpinnerSelector).hide();
 
         if ($reviewSpinner.length > 0) {
-            $("#WriteReviewButton").click(function () {
+            var $writeReviewBtn = $("#WriteReviewButton");
+
+            var $ratingBox = $.byId("current-app-rating-box-field");
+            if ($ratingBox.length > 0) {
+                $ratingBox.click(function (e) {
+                    e.preventDefault();
+                    $writeReviewBtn.trigger("click");
+                });
+            }
+            $writeReviewBtn.click(function () {
                 var $container = $(self.reviewFormContainerSelectorInAppPage);
                 var text = $container.text().trim();
                 if (text.length === 0) {
@@ -726,85 +735,89 @@ $.WeReviewApp = {
      * App review : like-dislike functionality
      */
     reviewLikeDisLikeClicked: function () {
-        var $likeBtns = $.byId("app-details-page").find("a[data-review-like-btn=true]");
-        // Views/Reviews/ReviewsDisplay.cshtml contains that id
-        var likeUrl = "/Reviews/Like";
-        var dislikeUrl = "/Reviews/DisLike";
-        // what happens when like or dislike is clicked
-        // ajax request send
-        var $spinners = null;
+        var $appDetailsPage = $.byId("app-details-page");
+        if ($appDetailsPage.length > 0) {
+            var $likeBtns = $appDetailsPage.find("a[data-review-like-btn=true]");
+            // Views/Reviews/ReviewsDisplay.cshtml contains that id
+            var likeUrl = "/Reviews/Like";
+            var dislikeUrl = "/Reviews/DisLike";
+            // what happens when like or dislike is clicked
+            // ajax request send
+            var $spinners = null;
 
-        var btnClicked = function ($button, e, url, serializedInputs) {
-            e.preventDefault();
-            var reviewId = $button.attr("data-review-id");
-            var data = serializedInputs + "&reviewId=" + reviewId;
-            var sequence = $button.attr("data-sequence");
-            var $spinnerForthisLike = $spinners.filter("#spinner-" + sequence);
-            var isLikeBtn = $button.attr("data-review-like-btn");
-            var $otherA = null;
-            //console.log($button);
+            var btnClicked = function ($button, e, url, serializedInputs) {
+                e.preventDefault();
+                var reviewId = $button.attr("data-review-id");
+                var data = serializedInputs + "&reviewId=" + reviewId;
+                var sequence = $button.attr("data-sequence");
+                var $spinnerForthisLike = $spinners.filter("#spinner-" + sequence);
+                var isLikeBtn = $button.attr("data-review-like-btn");
+                var $otherA = null;
+                //console.log($button);
 
-            //console.log(reviewId);
+                //console.log(reviewId);
 
-            if (isLikeBtn) {
-                $otherA = $.byId("review-thumbs-down-click-" + sequence);
-            } else {
-                $otherA = $.byId("review-thumbs-up-click-" + sequence);
-            }
-            $button.hide();
-            $spinnerForthisLike.show(); // show spinner until load
-            console.log($spinnerForthisLike);
-
-            function errorExecute(jqXhr, textStatus, errorThrown) {
-                $spinnerForthisLike.hide();
-                var $clone = $spinnerForthisLike.clone();
-                var $span = $clone.find("span");
-                var failedMessage = "like/dislike request failed , please refresh page. Reason : " + errorThrown;
-
-                $span.attr("class", "fa fa-times")
-                    .attr("title", failedMessage);
-                $clone.attr("data-original-title", failedMessage)
-                    .attr("title", failedMessage)
-                    .show();
-                console.log(failedMessage);
-                $spinnerForthisLike.after($clone);
-            }
-
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: data,
-                success: function (response) {
-                    response = $.parseJSON(response);
-                    $spinnerForthisLike.hide();
-                    $button.show();
-                    $otherA.find("i").removeClass("active");
-                    if (response.isDone) {
-                        $button.find("i").toggleClass("active");
-                    } else if (!response.isDone) {
-                        $button.find("i").removeClass("active");
-                        //errorExecute(null, "Can't get the right response.", null);
-                    }
-                },
-                error: function (jqXhr, textStatus, errorThrown) {
-                    errorExecute(jqXhr, textStatus, errorThrown);
+                if (isLikeBtn) {
+                    $otherA = $.byId("review-thumbs-down-click-" + sequence);
+                } else {
+                    $otherA = $.byId("review-thumbs-up-click-" + sequence);
                 }
-            }); // ajax end
+                $button.hide();
+                $spinnerForthisLike.show(); // show spinner until load
+                console.log($spinnerForthisLike);
+
+                function errorExecute(jqXhr, textStatus, errorThrown) {
+                    $spinnerForthisLike.hide();
+                    var $clone = $spinnerForthisLike.clone();
+                    var $span = $clone.find("span");
+                    var failedMessage = "like/dislike request failed , please refresh page. Reason : " + errorThrown;
+
+                    $span.attr("class", "fa fa-times")
+                        .attr("title", failedMessage);
+                    $clone.attr("data-original-title", failedMessage)
+                        .attr("title", failedMessage)
+                        .show();
+                    console.log(failedMessage);
+                    $spinnerForthisLike.after($clone);
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data,
+                    success: function (response) {
+                        response = $.parseJSON(response);
+                        $spinnerForthisLike.hide();
+                        $button.show();
+                        $otherA.find("i").removeClass("active");
+                        if (response.isDone) {
+                            $button.find("i").toggleClass("active");
+                        } else if (!response.isDone) {
+                            $button.find("i").removeClass("active");
+                            //errorExecute(null, "Can't get the right response.", null);
+                        }
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        errorExecute(jqXhr, textStatus, errorThrown);
+                    }
+                }); // ajax end
+            }
+            if ($likeBtns.length > 0) {
+                var $disLikeBtns = $.byId("app-details-page").find("a[data-review-dislike-btn=true]");
+                var serializedData = $.byId("review-like-dislike-form-submit").serialize();
+                $spinners = $(".spinner-for-like").hide(); //like btns
+                $likeBtns.click(function (evt) {
+                    var $button = $(this);
+                    btnClicked($button, evt, likeUrl, serializedData);
+                });
+                //dislike btns
+                $disLikeBtns.click(function (evt) {
+                    var $button = $(this);
+                    btnClicked($button, evt, dislikeUrl, serializedData);
+                });
+            }
         }
-        if ($likeBtns.length > 0) {
-            var $disLikeBtns = $.byId("app-details-page").find("a[data-review-dislike-btn=true]");
-            var serializedData = $.byId("review-like-dislike-form-submit").serialize();
-            $spinners = $(".spinner-for-like").hide(); //like btns
-            $likeBtns.click(function (evt) {
-                var $button = $(this);
-                btnClicked($button, evt, likeUrl, serializedData);
-            });
-            //dislike btns
-            $disLikeBtns.click(function (evt) {
-                var $button = $(this);
-                btnClicked($button, evt, dislikeUrl, serializedData);
-            });
-        }
+
     },
 
     suggestedOrReviewLoadmoreBtnLeft: function () {
@@ -924,8 +937,8 @@ $.WeReviewApp = {
         }
     },
 
-    registerPage : function() {
-        
+    registerPage: function () {
+
     },
     initializeAppForms: function () {
         var self = $.WeReviewApp;

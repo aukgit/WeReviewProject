@@ -5,18 +5,21 @@ $.app.global = {
      * execute methods as per necessary, 
      * ** these methods will NOT run automatically. **
      */
-    documentFullSpinnerHide: function () {
-        var self = $.app.global;
-        var $bodyStart = $.findCachedId("body-start");
-        var fixedClass = "body-fixed";
-        var flexible = "body-flexible";
+    vars: {
+
+    },
+    documentFullSpinnerHide: function() {
+        var self = $.app.global,
+            $bodyStart = $.findCachedId("body-start"),
+            fixedClass = "body-fixed",
+            flexible = "body-flexible";
 
         if ($bodyStart.length > 0) {
             if ($bodyStart.hasClass(fixedClass)) {
                 var $loadingBar = $.findCachedId("loading-bar-full-screen");
                 $bodyStart.removeClass(fixedClass).addClass(flexible);
                 $loadingBar.addClass("animated").removeClass("fadeIn").addClass("fadeOut");
-                setTimeout(function () {
+                setTimeout(function() {
                     $loadingBar.hide();
                     $bodyStart.removeClass(fixedClass).addClass(flexible);
                 }, 1500);
@@ -24,7 +27,7 @@ $.app.global = {
         }
     },
 
-    documentFullSpinnerShow: function (message) {
+    documentFullSpinnerShow: function(message) {
         var $bodyStart = $.findCachedId("body-start");
         var fixedClass = "body-fixed";
         var flexible = "body-flexible";
@@ -39,5 +42,12 @@ $.app.global = {
             $loadingBar.addClass("animated").removeClass("fadeOut").addClass("fadeIn");
             $loadingBar.show();
         }
+    },
+
+    isGivenUrlMatchedDomain: function(url, domain) {
+        var regex = new RegExp("^(?:https:\/\/|http:\/\/)*(www\.)*(?:" + domain + ")+(\/)?", "ig");
+        return url.match(regex);
     }
+    
+
 };

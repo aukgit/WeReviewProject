@@ -49,7 +49,7 @@
 
 <div data-dev-slide="1" data-dev-visited="@ViewBag.ShowAllDivs">
     @Html.EditorFor(model => model.ReleaseDate, "Date")
-    @Html.EditorFor(model => model.YoutubeEmbedLink, new {@class = "url-input"})
+    @Html.EditorFor(model => model.YoutubeEmbedLink, new { @class = "url-input", id = "id" })
     @Html.EditorFor(model => model.WebsiteUrl)
     @Html.EditorFor(model => model.StoreUrl)
 </div>

@@ -151,7 +151,7 @@ namespace WeReviewApp.Controllers {
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public async Task<ActionResult> ResendConfirmationMail() {
             var lastSend = Session["last-send"] as DateTime?;
-            if (lastSend == null) {
+            if (lastSend == null || (DateTime.Now - lastSend.Value).TotalMinutes > 30) {
                 if (!User.IsRegistrationComplete()) {
                     var user = User.GetUser();
                     try {
@@ -558,8 +558,9 @@ namespace WeReviewApp.Controllers {
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult ResetPassword(long userId, string email, string code, Guid guid) {
             var name = "reset-pass-" + guid.GetHashCode().ToString();
+            var blocked = SessionNames.IsValidationExceed("Account.ResetPassword");
             var isAlreadySent = !AppVar.IsInTestEnvironment && Session[name] != null;
-            if (!isAlreadySent) {
+            if (!isAlreadySent && !blocked) {
                 if (code == null || !Manager.VerifyUserToken(userId, TokenPurpose.ResetPassword, code)) {
                     return View("Error");
                 }
