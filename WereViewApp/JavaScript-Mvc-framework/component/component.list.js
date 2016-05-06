@@ -10,7 +10,7 @@
 
 /**
  * Loads this component if this string value present in the hidden field of "Component-Enable"
- * Please add a hidden iwth id "Component-Enable"
+ * Please add a hidden with id "Component-Enable"
  * <input id="Component-Enable" value="revolution-gallery,form-validation" />
  * @returns {} 
  */
