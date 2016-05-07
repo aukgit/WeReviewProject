@@ -1,12 +1,4 @@
-﻿.x {
-  display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
-  font-size: inherit;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.archive-app-collection-list {
+﻿.archive-app-collection-list {
   margin: 5px 0px 4px 11px;
   margin: 0.5rem 0 0.4rem 1.1rem;
   width: 100%;

@@ -519,6 +519,10 @@
     <Content Include="Content\css\animate.min.css">
       <DependentUpon>animate.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\app-controller.css" />
+    <Content Include="Content\css\app-controller.min.css">
+      <DependentUpon>app-controller.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\backend-developer.css" />
     <Content Include="Content\css\backend-developer.min.css">
       <DependentUpon>backend-developer.css</DependentUpon>
@@ -533,6 +537,10 @@
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
     </Content>
     <Content Include="Content\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\css\bootstrap-select-overrides.css" />
+    <Content Include="Content\css\bootstrap-select-overrides.min.css">
+      <DependentUpon>bootstrap-select-overrides.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\bootstrap-select.css" />
     <Content Include="Content\css\bootstrap-select.min.css">
       <DependentUpon>bootstrap-select.css</DependentUpon>
@@ -541,6 +549,10 @@
     <Content Include="Content\css\bootstrap-tag.css" />
     <Content Include="Content\css\bootstrap-tag.min.css">
       <DependentUpon>bootstrap-tag.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\bootstrap-tagsinput-override.css" />
+    <Content Include="Content\css\bootstrap-tagsinput-override.min.css">
+      <DependentUpon>bootstrap-tagsinput-override.css</DependentUpon>
     </Content>
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
@@ -658,6 +670,10 @@
     <Content Include="Content\css\utilities.css" />
     <Content Include="Content\css\utilities.min.css">
       <DependentUpon>utilities.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Utitlities Full.css" />
+    <Content Include="Content\css\Utitlities Full.min.css">
+      <DependentUpon>Utitlities Full.css</DependentUpon>
     </Content>
     <Content Include="Content\css\validator.css" />
     <Content Include="Content\css\validator.min.css">
@@ -894,9 +910,6 @@
       <DependentUpon>bootstrap-tag.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\override-mvc.variables.less" />
-    <Content Include="Content\css\editor-templates.css.map">
-      <DependentUpon>editor-templates.css</DependentUpon>
-    </Content>
     <Content Include="Content\Less\bootstrap-tagsinput.less" />
     <Content Include="Content\Less\backend-developer.less" />
     <Content Include="Content\css\backend-developer.css.map">
@@ -998,6 +1011,25 @@
     <Content Include="Content\Less\utilities\indenting.less" />
     <Content Include="Content\Less\spinner\google-spinner.less" />
     <Content Include="Content\Less\remixens\condition.less" />
+    <Content Include="Content\css\editor-templates.css.map">
+      <DependentUpon>editor-templates.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Utitlities Full.css.map">
+      <DependentUpon>Utitlities Full.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\utilities\add-on.less" />
+    <Content Include="Content\Less\bootstrap-select-overrides.less" />
+    <Content Include="Content\css\bootstrap-select-overrides.css.map">
+      <DependentUpon>bootstrap-select-overrides.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\bootstrap-tagsinput-override.less" />
+    <Content Include="Content\css\bootstrap-tagsinput-override.css.map">
+      <DependentUpon>bootstrap-tagsinput-override.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\app-controller.less" />
+    <Content Include="Content\css\app-controller.css.map">
+      <DependentUpon>app-controller.css</DependentUpon>
+    </Content>
     <None Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
     <Content Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />
     <Content Include="Sitemap.xml" />

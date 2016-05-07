@@ -159,7 +159,9 @@ namespace WeReviewApp {
                                         stylesFolder + "bootstrap-datetimepicker.css",
                                         stylesFolder + "bootstrap-table.css",
                                         stylesFolder + "bootstrap-select.css",
+                                        stylesFolder + "bootstrap-select-overrides.css",
                                         stylesFolder + "bootstrap-tagsinput.css",
+                                        stylesFolder + "bootstrap-tagsinput-override.css",
                                         //stylesFolder + "ckedit-skin-bootstrap.css",
 
                                         stylesFolder + "color-fonts.css",
@@ -169,6 +171,7 @@ namespace WeReviewApp {
                                         stylesFolder + "override-mvc.css",
                                         stylesFolder + "validator.css",
                                         stylesFolder + "editor-templates.css",
+
 
                                         stylesFolder + "base-theme-styles.css",
                                         stylesFolder + "style.css",
@@ -180,6 +183,9 @@ namespace WeReviewApp {
                                         stylesFolder + "owl.carousel.css",
                                         stylesFolder + "owl.theme.css",
                                         stylesFolder + "owl.custom.finalize.css",
+
+                                        stylesFolder + "app-controller.css",
+
 
                                         stylesFolder + "seo-optimize.css",
                                         stylesFolder + "front-developer.css",

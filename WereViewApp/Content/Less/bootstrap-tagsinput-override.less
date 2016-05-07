@@ -1,0 +1,54 @@
+@import "fonts-rimixens.less";
+@import "editor-templates.variables.less";
+
+.label-info {
+    background-color: #19C234;
+}
+
+.tag-input-container {
+    display: block;
+
+    &.form-control {
+        .max-width(@inputs-max-width);
+        height: auto !important;
+        .padding(7px, 4px,7px,4px);
+    }
+
+    .bootstrap-tagsinput {
+        //display: table-row;
+        display: block;
+        padding: 0 0 5px 0;
+
+        .label-info {
+            display: inline-block;
+            font-size: .85em;
+            padding: 4px 6px;
+            margin-bottom: 3px;
+
+            [data-role="remove"] {
+                color: #E43838;
+                .fa();
+
+                &:before {
+                    content: "\f00d";
+                }
+
+                .font-size(1em);
+                cursor: pointer;
+                margin-left: 6px;
+            }
+        }
+
+        input {
+            width: auto !important;
+            .width(150px);
+            .max-width(@inputs-max-width);
+
+            &, &:hover, &:focus {
+                outline: none;
+                outline: 0;
+                border: none;
+            }
+        }
+    }
+}

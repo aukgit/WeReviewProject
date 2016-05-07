@@ -1,0 +1,53 @@
+﻿.label-info {
+  background-color: #19C234;
+}
+.tag-input-container {
+  display: block;
+}
+.tag-input-container.form-control {
+  max-width: 294px;
+  max-width: 29.4rem;
+  height: auto !important;
+  padding: 7px 4px 7px 4px;
+  padding: 0.7rem 0.4rem 0.7rem 0.4rem;
+}
+.tag-input-container .bootstrap-tagsinput {
+  display: block;
+  padding: 0 0 5px 0;
+}
+.tag-input-container .bootstrap-tagsinput .label-info {
+  display: inline-block;
+  font-size: .85em;
+  padding: 4px 6px;
+  margin-bottom: 3px;
+}
+.tag-input-container .bootstrap-tagsinput .label-info [data-role="remove"] {
+  color: #E43838;
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1em;
+  cursor: pointer;
+  margin-left: 6px;
+}
+.tag-input-container .bootstrap-tagsinput .label-info [data-role="remove"]:before {
+  content: "\f00d";
+}
+.tag-input-container .bootstrap-tagsinput input {
+  width: auto !important;
+  width: 150px;
+  width: 15rem;
+  max-width: 294px;
+  max-width: 29.4rem;
+}
+.tag-input-container .bootstrap-tagsinput input,
+.tag-input-container .bootstrap-tagsinput input:hover,
+.tag-input-container .bootstrap-tagsinput input:focus {
+  outline: none;
+  outline: 0;
+  border: none;
+}
+/*# sourceMappingURL=bootstrap-tagsinput-override.css.map */

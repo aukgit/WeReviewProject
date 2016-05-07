@@ -2,23 +2,26 @@
 
 
 html, body {
-    min-height: 100%;
-    margin: 0;
-    padding: 0; 
+    .min-height-100-percent;
+    .zero-margin;
+    .zero-padding;
 }
 
 #wrap {
-    min-height: 100%;
+    .min-height-100-percent;
+
     @media (min-width: @screen-sm) {
         min-height: 71.85%;
     }
-} 
+
+    z-index: 98;
+}
 
 footer {
     width: 100%;
-    position: relative; 
+    .relative;
     bottom: 0;
-    left: 0;
+    .zero-left;
     z-index: 6;
     clear: both;
 
@@ -39,7 +42,7 @@ footer {
     }
 
     .developers-organism {
-        display: inline;
+        .inline;
     }
 
     h1 {
@@ -74,19 +77,19 @@ footer {
 
 
 .social-icons-wrapper {
-    text-align: center;
+    .text-center;
     .font-size(2em);
-    .margin(0);
+    .zero-margin;
     .padding-top(4px);
-    margin-right: 0;
+    .margin-right-zero;
 
     a {
-        margin-left: 0;
+        .margin-left-zero;
         color: #48505d;
     }
 
     a:first-child {
-        margin-left: 0;
+        .margin-left-zero;
     }
 }
 

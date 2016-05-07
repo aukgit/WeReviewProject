@@ -34,7 +34,7 @@ $.app.executeBefore = {
     elasticTextAreas: function () {
         var $textAreas = $("textarea");
         if ($textAreas.length > 0) {
-            $textAreas.find(".big-multiline").focus(function () {
+            $textAreas.filter(".big-multiline").focus(function () {
                 $(this).animate({ 'height': '300px', 'width': '630px', 'max-width': '630px' }, 400);
             }).blur(function () {
                 $(this).animate({ 'height': 'auto', 'width': '294px', 'max-width': '294px' }, 400);
