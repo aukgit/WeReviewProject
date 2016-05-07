@@ -519,6 +519,10 @@
     <Content Include="Content\css\animate.min.css">
       <DependentUpon>animate.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\app-controller.css" />
+    <Content Include="Content\css\app-controller.min.css">
+      <DependentUpon>app-controller.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\backend-developer.css" />
     <Content Include="Content\css\backend-developer.min.css">
       <DependentUpon>backend-developer.css</DependentUpon>
@@ -545,6 +549,10 @@
     <Content Include="Content\css\bootstrap-tag.css" />
     <Content Include="Content\css\bootstrap-tag.min.css">
       <DependentUpon>bootstrap-tag.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\bootstrap-tagsinput-override.css" />
+    <Content Include="Content\css\bootstrap-tagsinput-override.min.css">
+      <DependentUpon>bootstrap-tagsinput-override.css</DependentUpon>
     </Content>
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
@@ -788,10 +796,6 @@
       <DependentUpon>color-fonts.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\color-fonts.less" />
-    <Content Include="Content\Less\CSS\additional-less-functions.css" />
-    <Content Include="Content\Less\CSS\additional-less-functions.min.css">
-      <DependentUpon>additional-less-functions.css</DependentUpon>
-    </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
     <Content Include="Content\Less\less-imports.less" />
@@ -1010,17 +1014,21 @@
     <Content Include="Content\css\editor-templates.css.map">
       <DependentUpon>editor-templates.css</DependentUpon>
     </Content>
-    <Content Include="Content\Less\Utitlities Full.less" />
     <Content Include="Content\css\Utitlities Full.css.map">
       <DependentUpon>Utitlities Full.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\utilities\add-on.less" />
-    <Content Include="Content\Less\CSS\additional-less-functions.css.map">
-      <DependentUpon>additional-less-functions.css</DependentUpon>
-    </Content>
     <Content Include="Content\Less\bootstrap-select-overrides.less" />
     <Content Include="Content\css\bootstrap-select-overrides.css.map">
       <DependentUpon>bootstrap-select-overrides.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\bootstrap-tagsinput-override.less" />
+    <Content Include="Content\css\bootstrap-tagsinput-override.css.map">
+      <DependentUpon>bootstrap-tagsinput-override.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\app-controller.less" />
+    <Content Include="Content\css\app-controller.css.map">
+      <DependentUpon>app-controller.css</DependentUpon>
     </Content>
     <None Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
     <Content Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />

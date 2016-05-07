@@ -124,9 +124,12 @@ $.app.component.list = {
             $inputs.blur(function () {
                 var $this = $(this),
                     text = $this.val();
-                if (!$.isEmpty(text) && isGivenUrlMatchedDomain("youtu\.be|youtube\.com")) {
-                    text.replace(/(?:https:\/\/|http:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g, '<iframe width="420" height="345" src="http://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>');
-                    $this.val(text);
+                if (!$.isEmpty(text) && text.indexOf("<iframe") === -1 && isGivenUrlMatchedDomain(text, "youtu\.be|youtube\.com")) {
+                    text = text.replace(/(?:https:\/\/|http:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g, '$1');
+                    var split = text.split("&");
+                    var id = split[0];
+                    var html = "<iframe src=\"//youtube.com/embed/" + id + "\" frameborder=\"0\" allowfullscreen></iframe>";
+                    $this.val(html);
                 }
             });
         }

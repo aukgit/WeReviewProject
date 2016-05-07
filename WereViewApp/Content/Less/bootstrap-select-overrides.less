@@ -7,7 +7,6 @@
         position: relative;
 
         &::after {
-            color: black;
             position: absolute;
             .right(17px);
             .top(13px);
@@ -17,10 +16,10 @@
     }
 
     .dropdown-menu {
-        /*.max-height(192px) !important;*/
+        .max-height(192px) !important;
 
         .inner {
-            /*.max-height(140px) !important;*/
+            .max-height(140px) !important;
 
             li {
                 padding: 4px 0;
@@ -44,6 +43,26 @@
             @media (min-width: @screen-md) {
                 li {
                     padding: 0;
+                }
+            }
+        }
+    }
+}
+
+
+.bootstrap-select {
+    .dropdown-menu {
+        .inner {
+            li {
+                &:hover {
+                    background-color: lighten(green, 15%);
+                    color: black;
+                }
+
+                &.active {
+                    background-color: #28b62c;
+                    color: white;
+                    font-weight:bold;
                 }
             }
         }

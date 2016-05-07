@@ -2,7 +2,6 @@
   position: relative;
 }
 .bootstrap-select .bs-searchbox::after {
-  color: black;
   position: absolute;
   right: 17px;
   right: 1.7rem;
@@ -18,10 +17,12 @@
   content: "\f002";
 }
 .bootstrap-select .dropdown-menu {
-  /*.max-height(192px) !important;*/
+  max-height: 192px !important;
+  max-height: 19.2rem !important;
 }
 .bootstrap-select .dropdown-menu .inner {
-  /*.max-height(140px) !important;*/
+  max-height: 140px !important;
+  max-height: 14rem !important;
 }
 .bootstrap-select .dropdown-menu .inner li {
   padding: 4px 0;
@@ -42,5 +43,14 @@
   .bootstrap-select .dropdown-menu .inner li {
     padding: 0;
   }
+}
+.bootstrap-select .dropdown-menu .inner li:hover {
+  background-color: #00cd00;
+  color: black;
+}
+.bootstrap-select .dropdown-menu .inner li.active {
+  background-color: #28b62c;
+  color: white;
+  font-weight: bold;
 }
 /*# sourceMappingURL=bootstrap-select-overrides.css.map */

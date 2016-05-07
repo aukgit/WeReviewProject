@@ -46,7 +46,8 @@ $.app.global = {
 
     isGivenUrlMatchedDomain: function(url, domain) {
         var regex = new RegExp("^(?:https:\/\/|http:\/\/)*(www\.)*(?:" + domain + ")+(\/)?", "ig");
-        return url.match(regex);
+        var found = url.match(regex);
+        return !$.isEmpty(found) && found.length === 1;
     }
     
 
