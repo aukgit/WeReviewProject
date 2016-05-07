@@ -1,0 +1,51 @@
+@import "fonts-rimixens.less";
+
+
+
+.bootstrap-select {
+    .bs-searchbox {
+        position: relative;
+
+        &::after {
+            color: black;
+            position: absolute;
+            .right(17px);
+            .top(13px);
+            color: gray;
+            .fa("\f002");
+        }
+    }
+
+    .dropdown-menu {
+        /*.max-height(192px) !important;*/
+
+        .inner {
+            /*.max-height(140px) !important;*/
+
+            li {
+                padding: 4px 0;
+
+                &:hover {
+                    background-color: #66c4fa;
+                    color: white;
+                }
+
+                &.active {
+                    background-color: #158cba;
+                    color: white;
+
+                    a {
+                        background-color: inherit;
+                        color: inherit;
+                    }
+                }
+            }
+
+            @media (min-width: @screen-md) {
+                li {
+                    padding: 0;
+                }
+            }
+        }
+    }
+}

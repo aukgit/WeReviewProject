@@ -159,6 +159,7 @@ namespace WeReviewApp {
                                         stylesFolder + "bootstrap-datetimepicker.css",
                                         stylesFolder + "bootstrap-table.css",
                                         stylesFolder + "bootstrap-select.css",
+                                        stylesFolder + "bootstrap-select-overrides.css",
                                         stylesFolder + "bootstrap-tagsinput.css",
                                         //stylesFolder + "ckedit-skin-bootstrap.css",
 

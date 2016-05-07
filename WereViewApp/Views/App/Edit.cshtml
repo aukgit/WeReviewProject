@@ -11,13 +11,15 @@
     var viewName = "Edit";
     ViewBag.isEditingPage = true; // make sure the url is from "/Validator/GetValidUrlEditing" or else "/Validator/GetValidUrl"
 }
+@section hidden{
+    Html.Partial("_CommonHiddenForAppEditOrPost")
+}
 @Html.SamePageLinkWithIcon(title, title, "fa fa-edit")
-@Html.Partial("_CommonHiddenForAppEditOrPost")
 <hr />
 <div id="app-form" data-type="edit">
-    @using (Html.BeginForm(viewName, controller, FormMethod.Post, new {@class = "form-horizontal app-editing-page app-edit Edit-App", role = "form"})) {
+    @using (Html.BeginForm(viewName, controller, FormMethod.Post, new { @class = "form-horizontal app-editing-page app-edit Edit-App", role = "form" })) {
         <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.AppID)
             @Html.HiddenFor(model => model.Url)
             @Html.HiddenFor(model => model.CreatedDate)

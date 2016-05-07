@@ -533,6 +533,10 @@
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
     </Content>
     <Content Include="Content\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\css\bootstrap-select-overrides.css" />
+    <Content Include="Content\css\bootstrap-select-overrides.min.css">
+      <DependentUpon>bootstrap-select-overrides.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\bootstrap-select.css" />
     <Content Include="Content\css\bootstrap-select.min.css">
       <DependentUpon>bootstrap-select.css</DependentUpon>
@@ -659,6 +663,10 @@
     <Content Include="Content\css\utilities.min.css">
       <DependentUpon>utilities.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\Utitlities Full.css" />
+    <Content Include="Content\css\Utitlities Full.min.css">
+      <DependentUpon>Utitlities Full.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\validator.css" />
     <Content Include="Content\css\validator.min.css">
       <DependentUpon>validator.css</DependentUpon>
@@ -780,6 +788,10 @@
       <DependentUpon>color-fonts.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\color-fonts.less" />
+    <Content Include="Content\Less\CSS\additional-less-functions.css" />
+    <Content Include="Content\Less\CSS\additional-less-functions.min.css">
+      <DependentUpon>additional-less-functions.css</DependentUpon>
+    </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
     <Content Include="Content\Less\less-imports.less" />
@@ -894,9 +906,6 @@
       <DependentUpon>bootstrap-tag.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\override-mvc.variables.less" />
-    <Content Include="Content\css\editor-templates.css.map">
-      <DependentUpon>editor-templates.css</DependentUpon>
-    </Content>
     <Content Include="Content\Less\bootstrap-tagsinput.less" />
     <Content Include="Content\Less\backend-developer.less" />
     <Content Include="Content\css\backend-developer.css.map">
@@ -998,6 +1007,21 @@
     <Content Include="Content\Less\utilities\indenting.less" />
     <Content Include="Content\Less\spinner\google-spinner.less" />
     <Content Include="Content\Less\remixens\condition.less" />
+    <Content Include="Content\css\editor-templates.css.map">
+      <DependentUpon>editor-templates.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\Utitlities Full.less" />
+    <Content Include="Content\css\Utitlities Full.css.map">
+      <DependentUpon>Utitlities Full.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\utilities\add-on.less" />
+    <Content Include="Content\Less\CSS\additional-less-functions.css.map">
+      <DependentUpon>additional-less-functions.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\bootstrap-select-overrides.less" />
+    <Content Include="Content\css\bootstrap-select-overrides.css.map">
+      <DependentUpon>bootstrap-select-overrides.css</DependentUpon>
+    </Content>
     <None Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
     <Content Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />
     <Content Include="Sitemap.xml" />

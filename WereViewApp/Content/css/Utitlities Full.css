@@ -2,6 +2,9 @@
   please don't modify styles from css file. Please modify in the respective.less file in the less folder.
   FYI: This file (.less file) contains utilities styles, lets say general padding, margin, bold, hide, show etc..
 */
+/*h1, h2, h3, h4, h5 {
+    display: inline;
+}*/
 .h1,
 .h2,
 .h3,
@@ -43,12 +46,6 @@ input[type="date"]:hover,
 input[type="password"]:hover,
 input[type="email"]:hover {
   border: 1px solid #ACDFEE;
-}
-input.form-control.input-validation-error {
-  border-color: #E96666;
-  outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(233, 102, 102, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(233, 102, 102, 0.6);
 }
 .editor-combo {
   width: 188px;
@@ -105,41 +102,6 @@ div.Error-List ul {
   display: block;
   padding-left: 8px;
 }
-.fixed-width-294 {
-  min-width: 294px;
-  min-width: 29.4rem;
-  width: auto;
-}
-hr {
-  margin-bottom: 8px;
-  margin-top: 8px;
-}
-a.no-hover {
-  text-decoration: none;
-}
-.glyphicon {
-  cursor: pointer;
-}
-.small-bottom-gap {
-  margin-bottom: 6px;
-}
-.unhappy {
-  font-size: 77px;
-  margin-left: -10px;
-}
-.unhappy-detail {
-  margin-left: -68px;
-  font-size: 40px;
-}
-.unhappy-page {
-  margin-top: 3px;
-}
-div.contactus {
-  font-size: 14px;
-}
-.no-resize {
-  resize: none;
-}
 .Opacity-10 {
   -khtml-opacity: 0.1;
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=10);
@@ -148,15 +110,7 @@ div.contactus {
   -webkit-opacity: 0.1;
   -moz-opacity: 0.1;
   opacity: 0.1;
-}
-.Opacity-15 {
-  -khtml-opacity: 0.15;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=15);
-  zoom: 1;
-  filter: alpha(opacity=15);
-  -webkit-opacity: 0.15;
-  -moz-opacity: 0.15;
-  opacity: 0.15;
+  /* for all other browsers*/
 }
 .Opacity-20 {
   -khtml-opacity: 0.2;
@@ -166,15 +120,7 @@ div.contactus {
   -webkit-opacity: 0.2;
   -moz-opacity: 0.2;
   opacity: 0.2;
-}
-.Opacity-25 {
-  -khtml-opacity: 0.25;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=25);
-  zoom: 1;
-  filter: alpha(opacity=25);
-  -webkit-opacity: 0.25;
-  -moz-opacity: 0.25;
-  opacity: 0.25;
+  /* for all other browsers*/
 }
 .Opacity-30 {
   -khtml-opacity: 0.3;
@@ -184,15 +130,7 @@ div.contactus {
   -webkit-opacity: 0.3;
   -moz-opacity: 0.3;
   opacity: 0.3;
-}
-.Opacity-35 {
-  -khtml-opacity: 0.35;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=35);
-  zoom: 1;
-  filter: alpha(opacity=35);
-  -webkit-opacity: 0.35;
-  -moz-opacity: 0.35;
-  opacity: 0.35;
+  /* for all other browsers*/
 }
 .Opacity-40 {
   -khtml-opacity: 0.4;
@@ -202,15 +140,7 @@ div.contactus {
   -webkit-opacity: 0.4;
   -moz-opacity: 0.4;
   opacity: 0.4;
-}
-.Opacity-45 {
-  -khtml-opacity: 0.45;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=45);
-  zoom: 1;
-  filter: alpha(opacity=45);
-  -webkit-opacity: 0.45;
-  -moz-opacity: 0.45;
-  opacity: 0.45;
+  /* for all other browsers*/
 }
 .Opacity-50 {
   -khtml-opacity: 0.5;
@@ -220,16 +150,7 @@ div.contactus {
   -webkit-opacity: 0.5;
   -moz-opacity: 0.5;
   opacity: 0.5;
-}
-.Opacity-55 {
-  -khtml-opacity: 0.55;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=55.00000000000001);
-  filter: alpha(opacity=55.00000000000001);
-  zoom: 1;
-  filter: alpha(opacity=55);
-  -webkit-opacity: 0.55;
-  -moz-opacity: 0.55;
-  opacity: 0.55;
+  /* for all other browsers*/
 }
 .Opacity-60 {
   -khtml-opacity: 0.6;
@@ -239,15 +160,7 @@ div.contactus {
   -webkit-opacity: 0.6;
   -moz-opacity: 0.6;
   opacity: 0.6;
-}
-.Opacity-65 {
-  -khtml-opacity: 0.65;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=65);
-  zoom: 1;
-  filter: alpha(opacity=65);
-  -webkit-opacity: 0.65;
-  -moz-opacity: 0.65;
-  opacity: 0.65;
+  /* for all other browsers*/
 }
 .Opacity-70 {
   -khtml-opacity: 0.7;
@@ -257,15 +170,7 @@ div.contactus {
   -webkit-opacity: 0.7;
   -moz-opacity: 0.7;
   opacity: 0.7;
-}
-.Opacity-75 {
-  -khtml-opacity: 0.75;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=75);
-  zoom: 1;
-  filter: alpha(opacity=75);
-  -webkit-opacity: 0.75;
-  -moz-opacity: 0.75;
-  opacity: 0.75;
+  /* for all other browsers*/
 }
 .Opacity-80 {
   -khtml-opacity: 0.8;
@@ -275,15 +180,7 @@ div.contactus {
   -webkit-opacity: 0.8;
   -moz-opacity: 0.8;
   opacity: 0.8;
-}
-.Opacity-85 {
-  -khtml-opacity: 0.85;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=85);
-  zoom: 1;
-  filter: alpha(opacity=85);
-  -webkit-opacity: 0.85;
-  -moz-opacity: 0.85;
-  opacity: 0.85;
+  /* for all other browsers*/
 }
 .Opacity-90 {
   -khtml-opacity: 0.9;
@@ -293,15 +190,7 @@ div.contactus {
   -webkit-opacity: 0.9;
   -moz-opacity: 0.9;
   opacity: 0.9;
-}
-.Opacity-95 {
-  -khtml-opacity: 0.95;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=95);
-  zoom: 1;
-  filter: alpha(opacity=95);
-  -webkit-opacity: 0.95;
-  -moz-opacity: 0.95;
-  opacity: 0.95;
+  /* for all other browsers*/
 }
 .Opacity-100 {
   -khtml-opacity: 1;
@@ -311,23 +200,23 @@ div.contactus {
   -webkit-opacity: 1;
   -moz-opacity: 1;
   opacity: 1;
-}
-.hide,
-.Hide {
-  display: none;
+  /* for all other browsers*/
 }
 .inline {
   display: inline;
 }
-.inline-block,
-.block {
+.inline-block {
   display: inline-block;
 }
-.display-table,
-.is-table {
+.block {
+  display: block;
+}
+.display-table {
   display: table;
 }
-.display-table-cell,
+.display-table-cell {
+  display: table-cell;
+}
 .table-cell {
   display: table-cell;
 }
@@ -376,6 +265,10 @@ div.contactus {
   -moz-border-radius: 8px;
   border-radius: 8px;
 }
+hr {
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
 .gap-from-top {
   margin-top: 55px;
   margin-top: 5.5rem;
@@ -387,6 +280,35 @@ div.contactus {
 .header-margin-space-type-1 {
   margin-top: 13px;
   margin-top: 1.3rem;
+}
+a.no-hover {
+  text-decoration: none;
+}
+.glyphicon {
+  cursor: pointer;
+}
+input.form-control.input-validation-error {
+  border-color: #E96666;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(233, 102, 102, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(233, 102, 102, 0.6);
+}
+.small-bottom-gap {
+  margin-bottom: 6px;
+}
+.unhappy {
+  font-size: 77px;
+  margin-left: -10px;
+}
+.unhappy-detail {
+  margin-left: -68px;
+  font-size: 40px;
+}
+.unhappy-page {
+  margin-top: 3px;
+}
+div.contactus {
+  font-size: 14px;
 }
 .bottom-gap {
   margin-bottom: 8px;
@@ -411,10 +333,6 @@ div.contactus {
 .top-gap-small {
   margin-top: 5px;
   margin-top: 0.5rem;
-}
-.make-distance {
-  margin: 12px;
-  margin-left: 0;
 }
 .margin-t-0 {
   margin-top: 0;
@@ -509,6 +427,9 @@ div.contactus {
 }
 .no-margin-t {
   margin-top: 0;
+}
+.no-padding-t {
+  padding-top: 0;
 }
 .indent-d-5 {
   text-indent: .5em;
@@ -681,7 +602,7 @@ div.contactus {
   font-size: 3.4em;
 }
 .f-em-35 {
-  font-size: 3.5em;
+  font-size: 3.6em;
 }
 .f-em-36 {
   font-size: 3.6em;
@@ -722,18 +643,16 @@ div.contactus {
 .first-letter-capital:first-letter {
   text-transform: uppercase;
 }
-.medium-font {
-  font-size: 122%;
-}
-.bigger-font {
-  font-size: 200%;
-}
 .no-resize {
   resize: none;
 }
 .make-distance {
   margin: 12px;
   margin-left: 0;
+}
+.Hide,
+.hide {
+  display: none;
 }
 .medium-font {
   font-size: 122%;
@@ -746,9 +665,6 @@ div.contactus {
 }
 .right {
   float: right;
-}
-.float-none {
-  float: none;
 }
 .center {
   text-align: center;
@@ -771,6 +687,9 @@ div.contactus {
   margin-left: auto;
   margin-right: auto;
 }
+.hide {
+  display: none;
+}
 .first-line-indent {
   text-indent: 1.2em;
 }
@@ -778,54 +697,16 @@ div.contactus {
 .full-width {
   width: 100%;
 }
-.fifty-percent-height-width {
-  width: 50%;
-  height: 50%;
-}
-.margin-auto {
-  margin: auto;
-}
-.zero-top-right-bottom-left {
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-.center-container {
-  /*
-        <div class="center-container is-table">
-          <div class="cell">
-            <div class="center-block"> //margin : auto with width (which must be modified)
-                <!-- CONTENT -->
-            </div>
-          </div>
-        </div>
-    */
-}
-.center-container.is-table {
-  display: table;
-}
-.center-container.is-table .is-table .cell {
-  display: table-cell;
-  vertical-align: middle;
-}
-.center-container.is-table .is-table .center-block {
-  min-width: 100px;
-  min-width: 10rem;
-  margin: 0 auto;
-  display: block;
-}
 .absolute-center {
   width: 50%;
   height: 50%;
-  margin: auto;
   overflow: auto;
+  margin: auto;
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 600;
 }
 .absolute-center.is-fixed {
   position: fixed;
@@ -836,44 +717,28 @@ div.contactus {
   right: 20px;
   text-align: right;
 }
-.absolute-center.is-left {
+.absolute-center.is-Left {
   right: auto;
   left: 20px;
   text-align: left;
 }
 .jumbotron.vertical-center {
-  /* Remove the default bottom margin of .jumbotron */
   margin-bottom: 0;
-}
-.vertical-center-using-translate {
-  width: 50%;
-  margin: auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  /* Remove the default bottom margin of .jumbotron */
 }
 .vertical-center {
-  /* Fallback for vh unit */
   min-height: 100%;
+  /* Fallback for vh unit */
   min-height: 100vh;
-  /* 
-        You might also want to use
-        'height' property instead.
-        Note that for percentage values of
-        'height' or 'min-height' properties,
-        the 'height' of the parent element
-        should be specified explicitly.
-        In this case the parent of '.vertical-center'
-        is the <body> element.
-        
-        Make it a flex container .
-
-    */
+  /* You might also want to use
+                        'height' property instead.
+                        Note that for percentage values of
+                        'height' or 'min-height' properties,
+                        the 'height' of the parent element
+                        should be specified explicitly.
+                        In this case the parent of '.vertical-center'
+                        is the <body> element */
+  /* Make it a flex container */
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -881,8 +746,8 @@ div.contactus {
   display: flex;
   /* Align the bootstrap's container vertically */
   -webkit-box-align: center;
-  -moz-box-align: center;
   -webkit-align-items: center;
+  -moz-box-align: center;
   -ms-flex-align: center;
   align-items: center;
   /* In legacy web browsers such as Firefox 9
@@ -921,7 +786,6 @@ div.contactus {
 .absolute {
   position: absolute;
 }
-/* align icon */
 .inner-addon {
   position: relative;
 }
@@ -932,6 +796,7 @@ div.contactus {
   padding: 10px 11px 2px 9px;
   pointer-events: none;
 }
+/* align icon */
 .left-addon .glyphicon,
 .left-addon .fa {
   left: 0;
@@ -954,7 +819,6 @@ div.contactus {
 }
 .content-min-height-100-percent {
   min-height: 100%;
-  min-height: 100vh;
 }
 .regular-show-more-btn {
   clear: both;
@@ -977,4 +841,4 @@ div.contactus {
     margin-bottom: 0.5rem;
   }
 }
-/*# sourceMappingURL=utilities.css.map */
+/*# sourceMappingURL=Utitlities Full.css.map */

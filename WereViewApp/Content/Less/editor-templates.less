@@ -54,15 +54,14 @@ a.tooltip-show {
 
         input {
             width: auto !important;
+            .width(150px);
+            .max-width(@inputs-max-width);
 
             &, &:hover, &:focus {
                 outline: none;
                 outline: 0;
-                border:none;
+                border: none;
             }
-
-            .width(150px);
-            .max-width(@inputs-max-width);
         }
     }
 }
