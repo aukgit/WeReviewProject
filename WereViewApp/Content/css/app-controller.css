@@ -1,1 +1,14 @@
-﻿/*# sourceMappingURL=app-controller.css.map */
+﻿#app-form .ispublished label {
+  color: #FF0202;
+  font-weight: bold;
+}
+#app-form .ispublished label input[type=checkbox]:checked + input + span,
+#app-form .ispublished label:hover {
+  color: forestgreen;
+  font-weight: normal;
+  font-style: normal;
+}
+#app-form .ispublished label:hover {
+  font-weight: bold;
+}
+/*# sourceMappingURL=app-controller.css.map */

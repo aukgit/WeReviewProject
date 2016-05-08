@@ -24,11 +24,16 @@ textarea.form-control {
   display: block;
   color: red;
 }
+.global-error-ul {
+  margin-left: 0;
+}
 .global-error-ul li span {
   margin: 5px 0 5px;
   height: 18px;
   width: auto;
   text-align: left;
+  font-size: 15px;
+  font-size: 0.9375em;
 }
 .form-group {
   margin-bottom: 9px;
