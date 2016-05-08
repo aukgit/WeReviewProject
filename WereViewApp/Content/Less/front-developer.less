@@ -1,6 +1,6 @@
 ﻿@import "fonts-rimixens.less";
 
-.regular-color { 
+.regular-color {
     color: @regular-font-color;
 }
 
@@ -19,6 +19,16 @@
 
     .btn {
         float: right;
+    }
+}
+
+label {
+    a:link {
+        color: @link-color;
+
+        &:hover {
+            color: @link-hover-color;
+        }
     }
 }
 
@@ -204,6 +214,7 @@ label.control-label {
     border: 2px solid #EAEAEA;
     .width(147px);
     .border-rounded(4px);
+
     .app-icon {
         .height(115px);
         .width(122px);
@@ -1394,6 +1405,7 @@ a {
         color: white;
         padding: 5px 14px;
         border-radius: 5px;
+
         &:hover {
             background-color: darken(#03A9F4,15%);
         }

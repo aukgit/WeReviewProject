@@ -1,6 +1,18 @@
-
 #app-form {
     .ispublished {
+        label {
+            color: #FF0202;
+            font-weight: bold;
 
+            input[type=checkbox]:checked + input + span, &:hover {
+                color: forestgreen;
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            &:hover {
+                font-weight: bold;
+            }
+        }
     }
 }

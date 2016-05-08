@@ -16,6 +16,12 @@
 .login-btn-wrapper .btn {
   float: right;
 }
+label a:link {
+  color: #337ab7;
+}
+label a:link:hover {
+  color: #23527c;
+}
 .btn {
   font-weight: normal;
   text-transform: none;

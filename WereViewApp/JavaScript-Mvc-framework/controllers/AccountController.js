@@ -1,27 +1,26 @@
-﻿/// <reference path="../../../jQueryExtend.js" />
-/// <reference path="../../../extensions/spinner.js" />
-/// <reference path="../../../extensions/ajax.js" />
-/// <reference path="../../../extensions/pagination.js" />
-/// <reference path="../../../extensions/selectors.js" />
-/// <reference path="../../../extensions/urls.js" />
-/// <reference path="../../../extensions/constants.js" />
-/// <reference path="../../../extensions/ajax.js" />
-/// <reference path="../../../controllers/controllers.js" />
-/// <reference path="../../../controllers/initialize.js" />
-/// <reference path="../../../app.global.js" />
-/// <reference path="../../../app.js" />
-/// <reference path="../../../app.run.js" />
-/// <reference path="../../../byId.js" />
-/// <reference path="../../../extensions/inputChangeTracker.js" />
-/// <reference path="../../../ProtoType/Array.js" />
-/// <reference path="../../../extensions/spinner.js" />
-/// <reference path="../app.executeAfter.js" />
-/// <reference path="../app.executeBefore.js" />
-/// <reference path="../app.global.js" />
-/// <reference path="../app.config.js" />
-/// <reference path="../jQueryCaching.js" />
-/// <reference path="../jQueryExtend.js" />
-/// <reference path="../jQueryExtend.fn.js" />
+﻿/// <reference path="../libs/jQuery/jquery-2.2.3.js" />
+/// <reference path="../libs/jQuery/jquery-2.2.3.intellisense.js" />
+/// <reference path="../libs/jquery.blockUI.js" />
+/// <reference path="../extensions/ajax.js" />
+/// <reference path="../extensions/clone.js" />
+/// <reference path="../extensions/constants.js" />
+/// <reference path="../extensions/hiddenContainer.js" />
+/// <reference path="../extensions/initialize.js" />
+/// <reference path="../extensions/inputChangeTracker.js" />
+/// <reference path="../extensions/modal.js" />
+/// <reference path="../extensions/pagination.js" />
+/// <reference path="../extensions/regularExp.js" />
+/// <reference path="../extensions/selectors.js" />
+/// <reference path="../extensions/spinner.js" />
+/// <reference path="../extensions/urls.js" />
+/// <reference path="AccountController.js" />
+/// <reference path="AppController.js" />
+/// <reference path="controllers.js" />
+/// <reference path="homeController.js" />
+/// <reference path="initialize.js" />
+/// <reference path="../component/component.list.js" />
+/// <reference path="../component/component.js" />
+
 
 ;$.app.controllers = $.app.controllers || {};
 $.app.controllers.accountController = {
@@ -64,8 +63,10 @@ $.app.controllers.accountController = {
             //$form = ;
             // urlSchema = $.app.urls.getGeneralUrlSchema(false, ["SaveOrder"]); // pass nothing will give Create,Edit,Delete,Index url
             // urlSchema.edit  will give edit url.
-
-
+            var $form = $page.find(".register-form");
+            $form.submit(function(e) {
+                e.preventDefault();
+            });
         }
     },
 
