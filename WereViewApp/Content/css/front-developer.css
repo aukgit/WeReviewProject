@@ -175,6 +175,9 @@ label.control-label {
   -webkit-border-radius: 3.5px;
   -moz-border-radius: 3.5px;
   border-radius: 3.5px;
+  -webkit-box-shadow: 1px 1px 1px rgba(105, 105, 105, 0.55);
+  -moz-box-shadow: 1px 1px 1px rgba(105, 105, 105, 0.55);
+  box-shadow: 1px 1px 1px rgba(105, 105, 105, 0.55);
 }
 .app-box .app-description-wrapper {
   background-color: white;
@@ -190,7 +193,7 @@ label.control-label {
   min-width: 12.4rem;
   width: 87%;
   position: relative;
-  margin: 0 auto;
+  margin: auto;
   padding-top: 4px;
   padding-top: 0.4rem;
 }
@@ -1283,7 +1286,8 @@ q:after {
   width: 20rem;
 }
 .slim-app-view.tag .app-title {
-  padding: 8px;
+  padding: 8px 1px;
+  padding: 0.8rem 0.1rem;
   font-size: 20px;
   font-size: 1.25em;
   -ms-text-overflow: ellipsis;

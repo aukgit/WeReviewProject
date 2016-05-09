@@ -204,11 +204,11 @@ label.control-label {
 }
 //app-box config
 .app-box {
-    display: block;
+    .block;
     .padding-top(10px);
     .margin(5px);
     background-color: #FFFFFF;
-    text-align: center;
+    .text-center;
     .height(196px);
     line-height: 1;
     border: 2px solid #EAEAEA;
@@ -219,12 +219,13 @@ label.control-label {
         .height(115px);
         .width(122px);
         .border-rounded(3.5px);
+        .box-shadow-light;
     }
 
     .app-description-wrapper {
         background-color: white;
         .height(62px);
-        width: 100%;
+        .width-100-percent;
         .margin-top(5px);
     }
 
@@ -233,15 +234,15 @@ label.control-label {
         text-align: center;
         .min-width(@app-container-width);
         width: 87%;
-        position: relative;
-        margin: 0 auto;
+        .relative;
+        .margin-auto;
         .padding-top(4px);
     }
 
     .app-title-row {
         width: 100%;
         .min-width(@app-container-width);
-        position: relative;
+        .relative;
     }
 
     .star-rating {
@@ -267,17 +268,17 @@ label.control-label {
         .min-width(@app-title-width);
         width: 100%;
         //.height(12px);
-        overflow: hidden;
+        .overflow-hidden;
         //color: black;
         color: #919191;
         .font-size(12px);
         .margin(0px,0px,0px,1px);
         //font-weight: bold;
         //text-align: left;
-        display: inline-block;
+        .inline-block;
         -webkit-font-smoothing: antialiased;
         white-space: nowrap;
-        position: relative;
+        .relative;
         .height(14px);
 
         strong {
@@ -300,13 +301,13 @@ label.control-label {
     .published-by {
         //position: absolute;
         //.top(155px);
-        width: 100%;
+        .width-100-percent;
         .min-width(@app-container-width);
         color: @published-by-color;
         .font-size(13px);
         white-space: nowrap;
         overflow: hidden;
-        position: relative;
+        .relative;
         //text-align: left;
     }
 }
@@ -398,10 +399,8 @@ label.control-label {
     .app-description {
         color: @app-description-color;
         .width(385px);
-        text-align: left;
-        -ms-text-overflow: ellipsis !important;
-        -o-text-overflow: ellipsis !important;
-        text-overflow: ellipsis !important;
+        .text-left;
+        .text-ellipsis() !important; 
         white-space: normal;
 
         p {
@@ -469,12 +468,12 @@ label.control-label {
     }
 
     a.app-platform {
-        position: relative;
+        .relative;
     }
 
     a.app-title {
         max-width: 89%;
-        position: relative;
+        .relative;
 
         .paragraph-end {
             right: 0;
@@ -527,8 +526,7 @@ label.control-label {
     }
 
     strong, em {
-        font-weight: normal;
-        font-style: normal;
+        .font(normal,normal)
     }
 
     @media(max-width:992px) {
@@ -693,7 +691,7 @@ label.control-label {
 
 @media (max-width: 770px) {
     .apps-list-header-row {
-        position: relative;
+        .relative;
 
         .title h1 {
             //float: none;
@@ -817,12 +815,12 @@ label.control-label {
 
 .review-collection-box {
     .margin-top(12px);
-    position: relative;
+    .relative;
 }
 
 .review-writer-wrapper, h1.review-title {
     display: block;
-    position: relative;
+    .relative;
 }
 
 h1.review-title {
@@ -980,7 +978,7 @@ q:after {
     }
 
     .youtube-video {
-        position: relative;
+        .relative;
         max-height: 400px;
 
         .img-responsive {
@@ -1143,7 +1141,6 @@ q:after {
 .rating-box-row {
     .margin-top(17px);
     .height(71px);
-
     .rating-container {
         font-size: .7em;
     }
@@ -1246,12 +1243,12 @@ q:after {
     overflow: hidden;
     width: 100%;
     min-width: 108px;
-    position: relative;
+    .relative;
     top: -38px;
 }
 
 .relative-position {
-    position: relative;
+    .relative;
 }
 
 .write-review-btn {
@@ -1299,7 +1296,7 @@ q:after {
 
 .app-detail.app-title-wrapper .single-app-edit-btn {
     font-size: 0.6em;
-    position: relative;
+    .relative;
     bottom: 3px;
 
     @media (min-width:@screen-sm) {

@@ -26,6 +26,7 @@ namespace WeReviewApp.Controllers {
 
         //[OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         //[OutputCache(CacheProfile = "Hour", VaryByParam = "*")]
+        [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult Index(int page = 1) {
             ViewBag.Title = "Mobile Applications Tags";
             ViewBag.Meta = "Tags , Mobile apps, apps review, apple apps, android apps,reviews, app review site, " +
@@ -36,7 +37,8 @@ namespace WeReviewApp.Controllers {
 
             // add ordered by
             var pageInfo = new PaginationInfo {
-                ItemsInPage = AppConfig.Setting.PageItems
+                ItemsInPage = 100,
+                PageNumber = page
             };
             var tagsforThisPage = tags.GetPageData(pageInfo, cacheName).ToList();
             const string eachUrl = "/tags?page=@page";
