@@ -55,11 +55,13 @@ namespace WeReviewApp.Controllers {
         //ViewBag.Title = "Mobile Applications Tags";
 
         public ActionResult GetTagDetail(string id, int page = 1) {
+            if (string.IsNullOrWhiteSpace(id)) {
+                return HttpNotFound();
+            }
             ViewBag.Keywords = ViewBag.Meta;
             var cacheName = "Tags.GetTagDetail." + id;
-            var tag = db.Tags.FirstOrDefault(n => n.TagDisplay == id);
             var apps = _logics.GetViewableApps(db)
-                                    .Where(n => n.TagAppRelations.Any(tagRel => tagRel.TagID == tag.TagID))
+                                    .Where(n => n.TagAppRelations.Any(tagRel => tagRel.Tag.TagDisplay == id))
                                     .Include(n => n.User)
                                     .OrderByDescending(n => n.AppID);
 
@@ -77,7 +79,7 @@ namespace WeReviewApp.Controllers {
             var eachUrl = "/tags/" + id + "?page=@page";
             ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
                 maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
-            return View(user);
+            return View(apps);
         }
     }
 }

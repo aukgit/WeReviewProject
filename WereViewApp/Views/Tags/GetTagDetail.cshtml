@@ -1,9 +1,9 @@
 ﻿@using WeReviewApp.Models.EntityModel
 @using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
-@model WeReviewApp.Models.EntityModel.Tag
+@model WeReviewApp.Models.EntityModel.App
 @{
     var apps = (List<App>) ViewBag.Apps;
-    var urlToFirstpage = Model.GetTagUrl();
+    var urlToFirstpage = Model.GetAbsoluteUrl();
 }
 <a href="@urlToFirstpage">
     <h2 class="h2">@Model.TagDisplay</h2>
