@@ -257,6 +257,8 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
+    <Compile Include="Filter\RedirectToHomeIfAlreadyLoggedInAttribute.cs" />
+    <Compile Include="Filter\RedirectIfAlreadyLoggedInAttribute.cs" />
     <Compile Include="Filter\ValidateRegistrationCompleteAttribute.cs" />
     <Compile Include="Filter\HasMinimumRoleAttribute.cs" />
     <Compile Include="Filter\FacebookAccessTokenAttribute.cs" />
@@ -279,6 +281,7 @@
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Models\ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="Modules\Constants\TokenPurpose.cs" />
+    <Compile Include="Modules\Extensions\ControllerExtension.cs" />
     <Compile Include="Modules\Extensions\ActionExecutingContextExtension.cs" />
     <Compile Include="Modules\Extensions\HttpContextExtension.cs" />
     <Compile Include="Modules\Extensions\HttpContextBaseExtension.cs" />
@@ -462,28 +465,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\DataCached\Database\01b72017-2869-47a8-9980-f04a5870fcff-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\0aa37ed0-3594-4129-81d5-44739dd21dff-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\0dc17da2-10bc-4c15-a172-0b0ef7bb9e39-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\1e86ed90-0bb1-46b5-9524-a8a9815daabc-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\289bdd3e-b146-4614-b3ee-9df0562e2273-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\367dea9a-dd31-434a-8b13-506f0ba36b5f-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\45040001-5666-4427-aee6-8ad3b566db51-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\5dc57933-5c3d-4b94-9d30-0a311418037e-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\60549297-af5f-45a6-8bba-7968bca99db2-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\61dd3da2-07e9-4863-ac61-50930156905e-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\6f363a57-2094-4d3a-9252-ae2e2a76a97b-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\7324f4fb-bda6-4faf-b0b2-dbfa472cf013-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\807eeca9-35fe-4899-89e0-079449e1b6db-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\8435a280-7ead-418b-9b63-f29a0816ec7a-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\89aa4dd9-d8e8-4fd4-9af7-36fc110d5188-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\8d6d1103-2304-4f92-8af5-7ff649d7b557-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\91ed301e-2541-4791-87d7-f63865ea51b5-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\a8d1a725-ec09-4c22-b483-153160780214-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\abf10899-367e-4dda-b685-d3a475d64570-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\ceaaa28e-a6bf-4dd4-9095-aaa27838bcc4-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-appInfo.mdb" />
-    <Content Include="App_Data\DataCached\Database\f153d3bc-4a75-478e-97ca-2af446ae5828-appInfo.mdb" />
     <Content Include="App_Data\elmah\Readme.txt" />
     <Content Include="App_Data\WereViewApp-Accounts.mdf" />
     <Content Include="App_Data\WereViewApp-Accounts_log.ldf">
@@ -1403,8 +1384,6 @@
     <Content Include="Views\Shared\EditorTemplates\UploaderAuto.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UploaderPlain.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Username.cshtml" />
-    <Content Include="App_Data\DataCached\Suggested\1" />
-    <Content Include="App_Data\DataCached\Suggested\2" />
     <Content Include="JavaScript-Mvc-framework\libs\jquery.unobtrusive-ajax.min.js.map">
       <DependentUpon>jquery.unobtrusive-ajax.min.js</DependentUpon>
     </Content>
@@ -1604,7 +1583,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DatabaseTables\" />
+    <Folder Include="App_Data\DataCached\Database\" />
     <Folder Include="App_Data\DataCached\SearchResult\" />
+    <Folder Include="App_Data\DataCached\Suggested\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Services\" />
     <Folder Include="Content\Bundles\" />

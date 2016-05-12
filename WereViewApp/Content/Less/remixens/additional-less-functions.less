@@ -311,6 +311,7 @@
 .zero-margin() {
     margin: 0;
 }
+
 .zero-padding() {
     padding: 0;
 }
@@ -319,4 +320,17 @@
 .fixed-width-294() {
     .min-width(294px);
     width: auto;
+}
+///
+
+.box-shadow-light(@var: 1px 1px 1px rgba(105, 105, 105, 0.55) ) {
+    .box-shadow(@var);
+}
+.ellipsis(@var : ellipsis){
+     -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+.text-ellipsis(@var: ellipsis) {
+    .ellipsis(@var);
 }

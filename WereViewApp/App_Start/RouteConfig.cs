@@ -61,6 +61,7 @@ namespace WeReviewApp {
               namespaces: new string[] { wereviewappControllers }
             );
             #endregion
+
             #region profile
             routes.MapRoute(
               name: "profiles",
@@ -70,6 +71,15 @@ namespace WeReviewApp {
             );
             #endregion
 
+            #region tag
+            routes.MapRoute(
+               name: "tag_url",
+               url: "tags/{id}",
+               defaults: new { controller = "Tags", action = "GetTagDetail", url = UrlParameter.Optional },
+               namespaces: new string[] { wereviewappControllers }
+            );
+
+            #endregion
 
             #region Search
             //routes.MapRoute(

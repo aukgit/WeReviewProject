@@ -44,7 +44,8 @@
   width: 20rem;
 }
 .slim-app-view.tag .app-title {
-  padding: 8px;
+  padding: 8px 1px;
+  padding: 0.8rem 0.1rem;
   font-size: 20px;
   font-size: 1.25em;
   -ms-text-overflow: ellipsis;

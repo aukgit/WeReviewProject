@@ -7,6 +7,7 @@
 /*!
  * jQuery Server Validate 1.0 
  * (a plugin for ASP.NET MVC or any server side programming language)
+ * Code : https://github.com/aukgit/jquery-server-validation
  * 
  * Copyright (c) 2015 by 
  * Md. Alim Ul Karim, Bangladesh, Dhaka.
@@ -38,10 +39,10 @@
             disableInputOnValidation: true,
             focusPersistIfNotValid: true,
             hideOnValidation: false,
-            clientSideValidationRegxPattern: "",
-            submitMethod: "post",
+            submitMethod: "post", // get or post
             eventsNameSpace: "jq.validate.",
             $directContainer: [],
+            eventsObject: null, //this object will collect all the events
             url: "",
             messages: {
                 requesting: "Requesting data..."
@@ -162,11 +163,11 @@
         var crossMatch = [
             { setting: "crossDomain", attr: "data-cross-domain" },
             { setting: "url", attr: "data-url" },
-            { setting: "clientSideValidationRegxPattern", attr: "data-val-regex-pattern" },
             { setting: "multipleRequests", attr: "data-is-multiple-requests" },
             { setting: "hideOnValidation", attr: "data-hide-on-success" },
             { setting: "disableInputOnValidation", attr: "data-disable-on-success" },
             { setting: "focusPersistIfNotValid", attr: "data-focus-on-fail" },
+            { setting: "eventsObject", attr: "data-events-object" },
             { setting: "dontSendSameRequestTwice", attr: "data-dont-send-same-twice" },
             { setting: "focusPersistIfNotValid", attr: "data-focus-on-fail" },
             { setting: "submitMethod", attr: "data-submit-method" }
@@ -191,7 +192,7 @@
             return variable === null || variable === undefined || variable.length === 0;
         },
         init: function ($divElement) {
-           
+
             if (this.isValidForProcessing($divElement)) {
                 this.events.bindAllEvents(this);
                 this.processDiv(this, $divElement);
@@ -236,6 +237,16 @@
             getEventsCommonAttributes: function (plugin, nameOfEvent, additionalAttributes) {
                 /// <summary>
                 /// Returns a json with a combination of additional json attributes.
+                /// event = {
+                ///     id: inputId,
+                ///     name: $input.attr("name"),
+                ///     $input: $input,
+                ///     $divContainer: $div,
+                ///     eventName: nameOfEvent,
+                ///     finalEventName: finalEventName,
+                ///     plugin: plugin,
+                ///     settings: settings
+                /// }
                 /// </summary>
                 /// <param name="nameOfEvent">Name of the event, eg. serverProcessStart</param>
                 /// <param name="additionalAttributes">Json object</param>
@@ -278,7 +289,7 @@
                     evtNames = this.names,
                     //createIconEvtName = evtNames.getName(evtNames.createIcon),
                     //hideIconEvtName = evtNames.getName(evtNames.hideIcons),
-                    serverStartEvtName = evtNames.getName(plugin,evtNames.serverProcessStart),
+                    serverStartEvtName = evtNames.getName(plugin, evtNames.serverProcessStart),
                     serverSuccessEvtName = evtNames.getName(plugin, evtNames.serverProcessSucceeded),
                     serverFailEvtName = evtNames.getName(plugin, evtNames.serverProcessFailed),
                     serverAlwaysEvtName = evtNames.getName(plugin, evtNames.serverProcessReturnedAlways);
@@ -299,6 +310,17 @@
                 var serverStartEventData = this.getEventsCommonAttributes(plugin, evtNames.serverProcessStart, {
                     url: url
                 });
+                //serverStartEventData contains a json modifed only the url property.
+                //  event = {
+                //      id: inputId,
+                //      name: $input.attr("name"),
+                //      $input: $input,
+                //      $divContainer: $div,
+                //      eventName: nameOfEvent,
+                //      finalEventName: finalEventName,
+                //      plugin: plugin,
+                //      settings: settings
+                //  }
                 $input.on(serverStartEvtName, serverStartEventData, function (evt) {
                     //console.log(evt.data.finalEventName);
                     var fields = plugin.concatAdditionalFields($input);
@@ -417,7 +439,7 @@
             var $input = this.getInput($div),
                 url = this.getUrl();
             //this.test();
-            this.inputProcessWithBlurEvent(plugin,$div, $input, url);
+            this.inputProcessWithBlurEvent(plugin, $div, $input, url);
 
         },
         test: function () {
@@ -569,7 +591,9 @@
             /// <param name="url"></param>
             /// <param name="sendingFields"></param>
             var method = self.getSubmitMethod($input),
-                events = self.getSettings().events;
+                settings = self.getSettings(),
+                isCrossDomain = settings.crossDomain,
+                events = settings.events;
             if (!self.isEmpty(events.beforeSendingRequest)) {
                 events.beforeSendingRequest($div, $input, url, sendingFields);
             }
@@ -584,15 +608,19 @@
             var evtNames = self.events.names,
                 successEventName = evtNames.getName(self, evtNames.serverProcessSucceeded),
                 failedEventName = evtNames.getName(self, evtNames.serverProcessFailed),
-                alwaysEventName = evtNames.getName(self, evtNames.serverProcessReturnedAlways);
+                alwaysEventName = evtNames.getName(self, evtNames.serverProcessReturnedAlways),
+                ajaxProperties = {
+                    method: method, // by default "GET"
+                    url: url,
+                    data: sendingFields, // PlainObject or String or Array
+                    crossDomain: isCrossDomain,
+                    dataType: "json" //, // "Text" , "HTML", "xml", "script" 
+                };
 
-            self.ajaxRequest = $.ajax({
-                method: method, // by default "GET"
-                url: url,
-                data: sendingFields, // PlainObject or String or Array
-                crossDomain: true,
-                dataType: "JSON" //, // "Text" , "HTML", "xml", "script" 
-            }).done(function (response) {
+            if (isCrossDomain == true) {
+                ajaxProperties.dataType = "jsonp";
+            }
+            self.ajaxRequest = $.ajax(ajaxProperties).done(function (response) {
                 $input.trigger(successEventName, [response]);
             }).fail(function (jqXHR, textStatus, exceptionMessage) {
                 $input.trigger(failedEventName, [jqXHR, textStatus, exceptionMessage]);

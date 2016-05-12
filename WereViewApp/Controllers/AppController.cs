@@ -366,12 +366,13 @@ namespace WeReviewApp.Controllers {
                         db2.Database.ExecuteSqlCommand("DELETE FROM TagAppRelation WHERE AppID=@p0", appId);
                         var tagsList = tagString.Split(";,".ToCharArray());
                         foreach (var tag in tagsList) {
-                            var tagFromDatabase = db2.Tags.FirstOrDefault(n => n.TagDisplay == tag);
+                            string tagDisplay = Logics.GetAllUpperCaseTitle(tag);
+                            var tagFromDatabase = db2.Tags.FirstOrDefault(n => n.TagDisplay == tagDisplay);
                             if (tagFromDatabase == null) {
                                 // creating tag
                                 // if tag not exist in the database then create one.
                                 tagFromDatabase = new Tag {
-                                    TagDisplay = Logics.GetAllUpperCaseTitle(tag.Trim())
+                                    TagDisplay = Logics.GetAllUpperCaseTitle(tagDisplay)
                                 };
                                 db2.Tags.Add(tagFromDatabase);
                             }

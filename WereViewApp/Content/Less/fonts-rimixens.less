@@ -60,6 +60,17 @@
     font-family: Tahoma, Open sans, Helvetica, Arial, sans-serif !important;
 }
 
+.font(@font-name, @weight, @style){
+    .if-value-present(font-family, @font-name);
+    .if-value-present(font-weight, @weight);
+    .if-value-present(font-style, @style);
+}
+
+
+.font(@weight, @style){
+    .if-value-present(font-weight, @weight);
+    .if-value-present(font-style, @style);
+}
 // without important attribute
 .body-font() {
     .ubuntu-font;
