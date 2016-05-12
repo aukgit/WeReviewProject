@@ -1154,6 +1154,7 @@ namespace WeReviewApp.BusinessLogics {
         /// <returns></returns>
         public static string GetAllUpperCaseTitle(string title) {
             if (!string.IsNullOrEmpty(title)) {
+                title = title.Trim();
                 var list = title.Split(" ".ToCharArray());
                 var finalizedArray = new string[list.Length];
                 var finalIndex = 0;

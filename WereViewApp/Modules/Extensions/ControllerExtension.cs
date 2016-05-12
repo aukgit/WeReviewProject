@@ -40,11 +40,11 @@ namespace WeReviewApp.Modules.Extensions {
         }
 
         public static string GetControllerName(this Controller context) {
-            return context.ControllerContext.RouteData.Values["controller"].ToString();
+            return context.GetType().Name.Replace("Controller","");
         }
 
         public static string GetActionName(this Controller context) {
-            return context.ControllerContext.RouteData.Values["action"].ToString();
+            return (string)context.ControllerContext.RouteData.Values["action"];
         }
 
         #endregion

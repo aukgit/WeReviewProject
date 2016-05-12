@@ -257,6 +257,8 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
+    <Compile Include="Filter\RedirectToHomeIfAlreadyLoggedInAttribute.cs" />
+    <Compile Include="Filter\RedirectIfAlreadyLoggedInAttribute.cs" />
     <Compile Include="Filter\ValidateRegistrationCompleteAttribute.cs" />
     <Compile Include="Filter\HasMinimumRoleAttribute.cs" />
     <Compile Include="Filter\FacebookAccessTokenAttribute.cs" />
