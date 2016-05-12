@@ -60,10 +60,11 @@ namespace WeReviewApp.Controllers {
             if (string.IsNullOrWhiteSpace(id)) {
                 return HttpNotFound();
             }
+            var tagname = Logics.GetAllUpperCaseTitle(id);
             ViewBag.Keywords = ViewBag.Meta;
             var cacheName = "Tags.GetTagDetail." + id;
             var apps = _logics.GetViewableApps(db)
-                                    .Where(n => n.TagAppRelations.Any(tagRel => tagRel.Tag.TagDisplay == id))
+                                    .Where(n => n.TagAppRelations.Any(tagRel => tagRel.Tag.TagDisplay == tagname))
                                     .Include(n => n.User)
                                     .OrderByDescending(n => n.AppID);
 
@@ -80,7 +81,7 @@ namespace WeReviewApp.Controllers {
             var eachUrl = ControllerUrl + "/" + id + "?page=@page";
             ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
                 maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
-            ViewBag.tagName = id;
+            ViewBag.tagName = tagname;
             return View();
         }
     }

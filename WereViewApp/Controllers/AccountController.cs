@@ -118,7 +118,7 @@ namespace WeReviewApp.Controllers {
 
                 Manager = null;
             }
-            _db.Dispose();
+            db.Dispose();
             base.Dispose(disposing);
         }
 
@@ -181,7 +181,6 @@ namespace WeReviewApp.Controllers {
         #region ExternalLoginConfirm : External Register
 
         [HttpPost]
-        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(RegisterViewModel model, string returnUrl) {
             if (User.Identity.IsAuthenticated) {
@@ -282,7 +281,7 @@ namespace WeReviewApp.Controllers {
 
         #region Declaration
 
-        private readonly ApplicationDbContext _db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
 
         private PasswordHasher _passwordHasher = new PasswordHasher();
         public ApplicationUserManager Manager { get; private set; }
@@ -333,6 +332,7 @@ namespace WeReviewApp.Controllers {
         }
 
         [HttpPost]
+        [RedirectIfAlreadyLoggedIn(Action="Index", Controller="Home")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
@@ -397,6 +397,7 @@ namespace WeReviewApp.Controllers {
         }
 
         [HttpPost]
+        [RedirectIfAlreadyLoggedIn(Action = "Index", Controller = "Home")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
@@ -408,7 +409,7 @@ namespace WeReviewApp.Controllers {
             if (ModelState.IsValid) {
                 var errors = new ErrorCollector();
                 //External Validation.
-                var validator = new DevUserValidator(model, errors, _db);
+                var validator = new DevUserValidator(model, errors, db);
                 var validOtherConditions = validator.ValidateEveryValidations();
                 if (validOtherConditions) {
                     model.UserName = model.UserName.Trim();
@@ -462,6 +463,7 @@ namespace WeReviewApp.Controllers {
         #region External Logins
 
         [HttpPost]
+        [RedirectIfAlreadyLoggedIn(Action = "Index", Controller = "Home")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl) {
@@ -471,6 +473,7 @@ namespace WeReviewApp.Controllers {
         }
 
         //
+        [RedirectIfAlreadyLoggedIn(Action = "Index", Controller = "Home")]
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl) {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
@@ -513,6 +516,7 @@ namespace WeReviewApp.Controllers {
         #region Forget Password
 
         //[CompressFilter(Order = 1)]
+        [RedirectIfAlreadyLoggedIn(Action = "Index", Controller = "Home")]
         [AllowAnonymous]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult ForgotPassword() {
@@ -520,6 +524,7 @@ namespace WeReviewApp.Controllers {
         }
 
         [HttpPost]
+        [RedirectIfAlreadyLoggedIn(Action = "Index", Controller = "Home")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         //[CompressFilter(Order = 1)]
@@ -554,6 +559,7 @@ namespace WeReviewApp.Controllers {
 
         #region Password Reset
 
+        [RedirectIfAlreadyLoggedIn(Action = "Index", Controller = "Home")]
         [AllowAnonymous]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         public ActionResult ResetPassword(long userId, string email, string code, Guid guid) {
@@ -584,6 +590,7 @@ namespace WeReviewApp.Controllers {
         }
 
         [HttpPost]
+        [RedirectIfAlreadyLoggedIn(Action = "Index", Controller = "Home")]
         [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
