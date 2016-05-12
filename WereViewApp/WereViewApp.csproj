@@ -279,6 +279,7 @@
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Models\ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="Modules\Constants\TokenPurpose.cs" />
+    <Compile Include="Modules\Extensions\ControllerExtension.cs" />
     <Compile Include="Modules\Extensions\ActionExecutingContextExtension.cs" />
     <Compile Include="Modules\Extensions\HttpContextExtension.cs" />
     <Compile Include="Modules\Extensions\HttpContextBaseExtension.cs" />

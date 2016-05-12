@@ -7,7 +7,7 @@ using DevMvcComponent.Pagination;
 using WeReviewApp.BusinessLogics;
 using WeReviewApp.Models.EntityModel.Structs;
 using WeReviewApp.Modules.Cache;
-
+using WeReviewApp.Modules.Extensions;
 namespace WeReviewApp.Controllers {
     [OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
     public class TagsController : AdvanceController {
@@ -23,7 +23,9 @@ namespace WeReviewApp.Controllers {
         #region Constructors
 
         public TagsController()
-            : base(true) { }
+            : base(true) {
+            ControllerUrl = "/" + this.GetControllerName();
+        }
 
         #endregion
 
@@ -44,7 +46,7 @@ namespace WeReviewApp.Controllers {
                 PageNumber = page
             };
             var tagsforThisPage = tags.GetPageData(pageInfo, cacheName).ToList();
-            const string eachUrl = "/tags?page=@page";
+            string eachUrl = ControllerUrl + "?page=@page";
             ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
                 maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
             return View(tagsforThisPage);
@@ -68,7 +70,6 @@ namespace WeReviewApp.Controllers {
             var pageInfo = new PaginationInfo {
                 ItemsInPage = AppConfig.Setting.PageItems,
                 PageNumber = page,
-                PagesExists = -1
             };
             var appsForThisPage =
                 apps.GetPageData(pageInfo, CacheNames.ProfilePaginationDataForSpecificProfile, true)
@@ -76,10 +77,11 @@ namespace WeReviewApp.Controllers {
             _logics.GetEmbedImagesWithApp(appsForThisPage, db, (int) pageInfo.ItemsInPage,
                 GalleryCategoryIDs.SearchIcon);
             ViewBag.Apps = appsForThisPage;
-            var eachUrl = "/tags/" + id + "?page=@page";
+            var eachUrl = ControllerUrl + "/" + id + "?page=@page";
             ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
                 maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
-            return View(apps);
+            ViewBag.tagName = id;
+            return View();
         }
     }
 }

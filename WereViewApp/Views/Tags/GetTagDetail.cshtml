@@ -1,13 +1,10 @@
 ﻿@using WeReviewApp.Models.EntityModel
 @using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods
-@model WeReviewApp.Models.EntityModel.App
 @{
     var apps = (List<App>) ViewBag.Apps;
-    var urlToFirstpage = Model.GetAbsoluteUrl();
+    var tagName = (string)ViewBag.tagName;
 }
-<a href="@urlToFirstpage">
-    <h2 class="h2">@Model.TagDisplay</h2>
-</a>
+@Html.SamePageLinkWithIcon(tagName, tagName, "fa fa-tag")
 <div class="app-date-seperation row seo-optimize">
     <div class="col-md-10"></div>
     <div class="col-md-2  text-right">

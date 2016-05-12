@@ -14,6 +14,7 @@ namespace WeReviewApp.Controllers {
     public abstract class AdvanceController : Controller {
         internal readonly WereViewAppEntities db;
         internal ErrorCollector ErrorCollector;
+        protected string ControllerUrl = "";
 
         protected AdvanceController() {}
 
