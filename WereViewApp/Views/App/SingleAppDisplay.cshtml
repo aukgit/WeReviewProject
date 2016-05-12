@@ -78,9 +78,9 @@
                                     By
                                     <a href="@Model.User.GetProfileUrl()">
                                         <h1 itemprop="author" itemscope itemtype="http://schema.org/Person">
-                                            <strong>
-                                                <em itemprop="name" title="@Model.User.FirstName @Model.User.LastName developer apps">
-                                                    @Html.Truncate(@Model.User.UserName, 10, false)
+                                            <strong title="Developer @Model.User.DisplayName's app is @appName">
+                                                <em itemprop="name" title="@Model.User.DisplayName developer apps">
+                                                    @Model.User.DisplayNameTruncated(10)
                                                 </em>
                                             </strong>
                                         </h1>

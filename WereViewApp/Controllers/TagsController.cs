@@ -67,20 +67,19 @@ namespace WeReviewApp.Controllers {
                                     .Where(n => n.TagAppRelations.Any(tagRel => tagRel.Tag.TagDisplay == tagname))
                                     .Include(n => n.User)
                                     .OrderByDescending(n => n.AppID);
+            int maxItems = (int)AppConfig.Setting.PageItems;
 
             var pageInfo = new PaginationInfo {
-                ItemsInPage = AppConfig.Setting.PageItems,
+                ItemsInPage = maxItems,
                 PageNumber = page,
             };
             var appsForThisPage =
                 apps.GetPageData(pageInfo, CacheNames.ProfilePaginationDataForSpecificProfile, true)
                     .ToList();
-            _logics.GetEmbedImagesWithApp(appsForThisPage, db, (int) pageInfo.ItemsInPage,
-                GalleryCategoryIDs.SearchIcon);
+            _logics.GetEmbedImagesWithApp(appsForThisPage, db, maxItems, GalleryCategoryIDs.SearchIcon);
             ViewBag.Apps = appsForThisPage;
             var eachUrl = ControllerUrl + "/" + id + "?page=@page";
-            ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "",
-                maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
+            ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "", maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
             ViewBag.tagName = tagname;
             return View();
         }

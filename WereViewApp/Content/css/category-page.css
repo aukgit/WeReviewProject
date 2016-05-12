@@ -171,6 +171,10 @@
   text-align: right;
   padding: 0;
 }
+.app-date-seperation.small-margin {
+  margin: 7px 0px 3px 0px;
+  margin: 0.7rem 0 0.3rem 0;
+}
 .category-listing-page .app-detail.app-title-wrapper {
   margin: 7px 0px 0px 0px;
   margin: 0.7rem 0 0 0;
