@@ -6,7 +6,7 @@ $.app.global = {
      * ** these methods will NOT run automatically. **
      */
     vars: {
-
+    
     },
     documentFullSpinnerHide: function() {
         var self = $.app.global,
@@ -26,7 +26,81 @@ $.app.global = {
             }
         }
     },
+    enterToNextInputFocus: function ($form, submitAtLast) {
 
+        $form.find("input:text:first-child").focus();
+
+        //var binders = formSelector + " input[type='text']:visible," +
+        //    formSelector + " input[type='password']:visible," +
+        //    formSelector + " input[type='numeric']:visible," +
+        //    formSelector + " input[type='email']:visible," +
+        //    //formSelector + " textarea:visible," +
+        //    formSelector + " button.selectpicker[type='button']:visible," +
+        //    formSelector + " select:visible";
+        var binders = "input[type='text']:visible," +
+                     "input[type='password']:visible," +
+                     "input[type='numeric']:visible," +
+                     "input[type='email']:visible," +
+                    //formSelector + " textarea:visible," +
+                     "button.selectpicker[type='button']:visible," +
+                     "select:visible";
+        $form.on("keypress", binders, function (e) {
+            // var codeAbove = d.keyCode || d.which;
+            // console.log("above code :" + codeAbove);
+            var code = e.keyCode || e.which;
+            // console.log("inside code :" + code);
+            if (code === 13) { // Enter key
+                e.preventDefault(); // Skip default behavior of the enter key
+                var n = $(binders).length;
+                var nextIndex = $(binders).index(this) + 1;
+                if (nextIndex < n) {
+                    $(binders)[nextIndex].focus();
+                } else {
+                    $(binders)[nextIndex - 1].blur();
+                    if (submitAtLast === true) {
+                        $form.submit();
+                    }
+                }
+            }
+        });
+    },
+    enterToNextInputFocusWithoutTags: function ($form, submitAtLast, isDynamicSelector) {
+
+        $form.find("input:text:first-child").focus();
+        var binders = "input[type='text']:visible," +
+                     "input[type='password']:visible," +
+                     "input[type='numeric']:visible," +
+                     "input[type='email']:visible," +
+                     ":not(.bootstrap-tagsinput input)," +
+                    //formSelector + " textarea:visible," +
+                     "button.selectpicker[type='button']:visible," +
+                     "select:visible";
+        var keyPressEvent = function (e) {
+            // var codeAbove = d.keyCode || d.which;
+            // console.log("above code :" + codeAbove);
+            var code = e.keyCode || e.which;
+            // console.log("inside code :" + code);
+            if (code === 13) { // Enter key
+                e.preventDefault(); // Skip default behavior of the enter key
+                var n = $(binders).length;
+                var nextIndex = $(binders).index(this) + 1;
+                if (nextIndex < n) {
+                    $(binders)[nextIndex].focus();
+                } else {
+                    $(binders)[nextIndex - 1].blur();
+                    if (submitAtLast === true) {
+                        $form.submit();
+                    }
+                }
+            }
+        };
+        if (isDynamicSelector) {
+            $form.on("keypress", binders, keyPressEvent);
+        } else {
+            var $inputs = $form.find(binders);
+            $inputs.on('keypress', keyPressEvent);
+        }
+    },
     documentFullSpinnerShow: function(message) {
         var $bodyStart = $.findCachedId("body-start");
         var fixedClass = "body-fixed";

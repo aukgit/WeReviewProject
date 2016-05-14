@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using WeReviewApp.Helpers;
 using WeReviewApp.Models.DesignPattern.Interfaces;
 
 namespace WeReviewApp.Models.EntityModel {
-    public class User:IDevUser {
+    public class User : IDevUser {
         public User() {
             Apps = new HashSet<App>();
             CellPhones = new HashSet<CellPhone>();
@@ -37,5 +38,29 @@ namespace WeReviewApp.Models.EntityModel {
         public virtual ICollection<Review> Reviews { get; set; }
         public virtual ICollection<ReviewLikeDislike> ReviewLikeDislikes { get; set; }
         public virtual ICollection<UserPoint> UserPoints { get; set; }
+
+
+        #region Virtual Fields : no relation with database
+
+        private string _displayName;
+
+        public string DisplayName {
+            get {
+                if (_displayName == null) {
+                    _displayName = FirstName + " " + LastName;
+                }
+                return _displayName;
+            }
+        }
+        /// <summary>
+        /// Return full name with truncated dots (if necessary).
+        /// </summary>
+        /// <param name="truncateLength"></param>
+        /// <returns></returns>
+        public string DisplayNameTruncated(int truncateLength = 15) {
+            return DisplayName.Truncate(truncateLength);
+        }
+
+        #endregion
     }
 }

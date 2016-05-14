@@ -37,7 +37,7 @@ namespace WeReviewApp.Helpers {
             if (isDependOnUserLogState && UserManager.IsAuthenticated()) {
                 cacheName += UserManager.GetCurrentUserName();
             }
-            var cache = (string)AppConfig.Caches.Get(cacheName);
+            var cache = (string) AppConfig.Caches.Get(cacheName);
 
             if (cache != null && !string.IsNullOrWhiteSpace(cache)) {
                 return new HtmlString(cache);
@@ -338,7 +338,7 @@ namespace WeReviewApp.Helpers {
 
         #region Truncates
 
-        public static string Truncate(this HtmlHelper helper, string input, int? length, bool isShowElipseDot = true) {
+        public static string Truncate(this string input, int? length, bool isShowElipseDot = true) {
             if (string.IsNullOrEmpty(input)) {
                 return "";
             }
@@ -349,12 +349,20 @@ namespace WeReviewApp.Helpers {
                 return input;
             }
             if (isShowElipseDot) {
-                return input.Substring(0, (int)length) + "...";
+                return input.Substring(0, (int) length) + "...";
             }
-            return input.Substring(0, (int)length);
+            return input.Substring(0, (int) length);
         }
 
         public static string Truncate(this HtmlHelper helper, string input, int starting, int length) {
+            return input.Truncate(starting, length);
+        }
+
+        public static string Truncate(this HtmlHelper helper, string input, int? length, bool isShowElipseDot = true) {
+            return input.Truncate(length, isShowElipseDot);
+        }
+
+        public static string Truncate(this string input, int starting, int length) {
             if (string.IsNullOrEmpty(input)) {
                 return "";
             }
