@@ -335,16 +335,16 @@ $.devOrg = {
     },
 
 
-    bootstrapComboSelectbyFindingValue: function (comboSelector, searchForvalue) {
-        $(comboSelector).selectpicker("val", searchForvalue).trigger("change");
+    bootstrapComboSelectbyFindingValue: function ($combo, searchForvalue) {
+        $combo.selectpicker("val", searchForvalue).trigger("change");
     },
-    bootstrapComboSelectIndex: function (comboSelector, index) {
-        var $combo = $(comboSelector + ">option");
-        if ($combo.length > 0 && index <= ($combo.length - 1)) {
+    bootstrapComboSelectIndex: function ($combo, index) {
+        var $options = $combo.find(">option");
+        if ($options.length > 0 && index <= ($options.length - 1)) {
 
-            var itemFound = $($combo[index]);
+            var itemFound = $($options[index]);
             var value = itemFound.val();
-            $.devOrg.bootstrapComboSelectbyFindingValue(comboSelector, value);
+            $.devOrg.bootstrapComboSelectbyFindingValue($combo, value);
         }
     },
 

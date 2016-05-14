@@ -66,18 +66,14 @@ $.devOrg.runner = function () {
         //$.devOrg.uxFriendlySlide("form.register-form", true);
 
 
-        $.devOrg.bootstrapComboSelectbyFindingValue("select.country-combo", '1');
+        //$.devOrg.bootstrapComboSelectbyFindingValue("select.country-combo", '1');
 
     }
 
-    // load dynamic and depended select or combo
-    $.devOrg.dynamicSelect.initialize();
 
     // make tables look nice with pagination
 
-    $("select.selectpicker").selectpicker();
 
-    $.devOrg.bootstrapComboSelectIndex("select.selectpicker", 0);
 
 
     ///Implement .rating-5,.rating-10

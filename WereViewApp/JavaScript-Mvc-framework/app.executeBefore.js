@@ -31,6 +31,15 @@ $.app.executeBefore = {
             }
         }
     },
+    dynamicDependedCombo: function () {
+        // load dynamic and depended select or combo
+        var $selectPickers = $(".selectpicker");
+        if ($selectPickers.length > 0) {
+            $.devOrg.dynamicSelect.initialize();
+            $selectPickers.selectpicker();
+            $.devOrg.bootstrapComboSelectIndex($selectPickers, 0);
+        }
+    },
     elasticTextAreas: function () {
         var $textAreas = $("textarea");
         if ($textAreas.length > 0) {

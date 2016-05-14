@@ -652,7 +652,7 @@ $.WeReviewApp = {
         var $reviewSpinner = $.byId(self.reviewSpinnerSelector).hide();
 
         if ($reviewSpinner.length > 0) {
-            var $writeReviewBtn = $("#WriteReviewButton");
+            var $writeReviewBtn = $.byId("WriteReviewButton");
 
             var $ratingBox = $.byId("current-app-rating-box-field");
             if ($ratingBox.length > 0) {
@@ -690,7 +690,7 @@ $.WeReviewApp = {
                             var $form = $container.find("form:first");
 
                             if ($form.length > 0) {
-                                $submittingSpinner = $("#submitting-review-spinner");
+                                $submittingSpinner = $.byId("submitting-review-spinner");
                                 $submittingSpinner.hide();
 
                                 //stop submitting and go through the processes and pages
