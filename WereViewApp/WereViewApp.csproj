@@ -1011,6 +1011,7 @@
     <Content Include="Content\css\app-controller.css.map">
       <DependentUpon>app-controller.css</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Config\_Tabs-List.cshtml" />
     <None Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
     <Content Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />
     <Content Include="Sitemap.xml" />

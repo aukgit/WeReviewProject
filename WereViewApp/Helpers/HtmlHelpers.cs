@@ -1035,9 +1035,17 @@ namespace WeReviewApp.Helpers {
         #endregion
 
         #region Component Enable : Listing
-
+        public static HtmlHelper ComponentsAdd(this HtmlHelper helper, string componentName) {
+            var seperator = "|";
+            if (helper.ViewBag.componentEnable == null) {
+                helper.ViewBag.componentEnable = componentName;
+            } else {
+                helper.ViewBag.componentEnable += seperator + componentName;
+            }
+            return helper;
+        }
         public static MvcHtmlString ComponentsEnableFor(this HtmlHelper helper, params string[] componentName) {
-            var componentNames = string.Join(",", componentName);
+            var componentNames = string.Join("|", componentName);
             return ComponentsEnableFor(helper, componentNames);
         }
 

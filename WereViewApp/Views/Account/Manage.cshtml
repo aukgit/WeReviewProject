@@ -3,7 +3,6 @@
     string title = "Manage Account";
     ViewBag.Title = title;
 }
-
 @Html.SamePageLinkWithIcon(title, title, FaIcons.Cog)
 <p class="text-success">@ViewBag.StatusMessage</p>
 <hr />
@@ -14,7 +13,6 @@
         } else {
             @Html.Partial("_SetPasswordPartial")
         }
-
         <section id="externalLogins">
             @Html.Action("RemoveAccountList")
             @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel {Action = "LinkLogin", ReturnUrl = ViewBag.ReturnUrl})
