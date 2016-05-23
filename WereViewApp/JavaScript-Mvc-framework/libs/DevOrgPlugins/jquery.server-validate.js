@@ -454,9 +454,9 @@
                 $input.on(serverAllRequestComplete, function (evt) {
                     console.log(serverAllRequestComplete);
                     plugin.hideSpinner($input);
-                    if (settings.triggerValidationBeforeFormSubmit === true && settings.$formElement.length > 0) {
-                        settings.$formElement.submit();
-                    }
+                    //if (settings.triggerValidationBeforeFormSubmit === true && settings.$formElement.length > 0) {
+                    //    settings.$formElement.submit();
+                    //}
                 });
                 $div.on(serverAlwaysEvtName, serverAlwaysEventData, function (evt) {
                     //evt.data.response = cachedResponse;
@@ -1048,8 +1048,8 @@
         /// <param name="options"></param>
         /// <returns type=""></returns>
         $selfContainer = this;
-        var isEmptyContainer = $selfContainer === undefined || $selfContainer === null || $selfContainer.length === 0;
-        var $elementContainer = this,
+        var isEmptyContainer = $selfContainer === undefined || $selfContainer === null || $selfContainer.length === 0,
+           $elementContainer = this,
            settingsTemporary = $.extend({}, defaults, options),
            selectors = settingsTemporary.selectors,
            additionalFieldsSelectorArray = selectors.additionalFields;
@@ -1093,6 +1093,7 @@
 
 
                 additionalFields = processAdditionalFields($elementContainer, additionalFieldsSelectorArray);
+                $allInputs.push($input);
                 var creatingPlugin = new plugin($divElement, $input, settings, additionalFields);
                 pluginAttacherElements[i] = {
                     plugin: creatingPlugin,
