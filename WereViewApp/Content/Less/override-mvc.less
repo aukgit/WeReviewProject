@@ -13,7 +13,7 @@ select,
 textarea,
 div.input-group.date.datetimepicker {
     .max-width(@inputs-max-width);
-}
+} 
 
 .form-control {
     input&, select&, textarea& {
@@ -27,7 +27,7 @@ div.input-group.date.datetimepicker {
 
 
 .global-error h2 {
-    display: block;
+    .block;
     color: red;
 }
 
@@ -36,11 +36,11 @@ div.input-group.date.datetimepicker {
         margin: 5px 0 5px;
         height: 18px;
         width: auto;
-        text-align: left;
+        .text-left;
         .font-size(15px);
     }
 
-    margin-left: 0;
+    margin-left: 0 !important; 
 }
 
 .form-group {
@@ -58,9 +58,9 @@ div.input-group.date.datetimepicker {
 }
 
 // select control width
-@media only screen and (min-width: 294px) {
+@media only screen and (min-width: @inputs-max-width) {
     .btn-group.bootstrap-select.form-control {
-        .width(294px);
+        .width(@inputs-max-width);
     }
 }
 
@@ -86,12 +86,15 @@ div.bs-searchbox input.input-block-level.form-control {
     background-clip: border-box;
     background-color: rgba(0, 0, 0, 0);
     background-image: none;
+    -moz-background-origin: padding-box;
     background-origin: padding-box;
     background-size: auto;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     color: #ffffff;
     cursor: auto;
-    display: block;
+    .block;
     float: left;
     .ubuntu-font();
     font-size: 18px;
@@ -101,12 +104,9 @@ div.bs-searchbox input.input-block-level.form-control {
     list-style-position: outside;
     list-style-type: none;
     margin-left: -15px;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 15px;
-    position: relative;
-    text-align: left;
+    padding: 15px;
+    .relative;
+    .text-left;
     text-decoration: none;
     width: 98.015625px;
 }
