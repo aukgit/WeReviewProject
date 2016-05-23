@@ -79,7 +79,7 @@ $.app.global = {
                      "input[type='password']:visible," +
                      "input[type='numeric']:visible," +
                      "input[type='email']:visible," +
-                     ":not(.bootstrap-tagsinput input)," +
+                     "input[type='text']:not(.bootstrap-tagsinput)," +
                     //formSelector + " textarea:visible," +
                      "button.selectpicker[type='button']:visible," +
                      "select:visible";
@@ -91,9 +91,7 @@ $.app.global = {
             // console.log("inside code :" + code);
             if (code === 13) { // Enter key
                 e.preventDefault(); // Skip default behavior of the enter key
-                if (isDynamicSelector === true) {
-                    $elements = $form.find(binders);
-                } else if ($elements.length === 0) {
+                if (isDynamicSelector === true || $elements.length === 0) {
                     $elements = $form.find(binders);
                 }
                 //console.log($elements);
