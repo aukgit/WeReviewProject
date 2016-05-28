@@ -706,9 +706,6 @@
     <Content Include="Content\css\toastr.css.map">
       <DependentUpon>toastr.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\animate.css.map">
-      <DependentUpon>animate.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\owl.custom.finalize.css.map">
       <DependentUpon>owl.custom.finalize.css</DependentUpon>
     </Content>
@@ -930,6 +927,67 @@
       <DependentUpon>app-controller.css</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\Config\_Tabs-List.cshtml" />
+    <Content Include="Content\Less\Animate\animationclasses.less" />
+    <Content Include="Content\Less\Animate\bounce.less" />
+    <Content Include="Content\Less\Animate\bounceIn.less" />
+    <Content Include="Content\Less\Animate\bounceInDown.less" />
+    <Content Include="Content\Less\Animate\bounceInLeft.less" />
+    <Content Include="Content\Less\Animate\bounceInRight.less" />
+    <Content Include="Content\Less\Animate\bounceInUp.less" />
+    <Content Include="Content\Less\Animate\bounceOut.less" />
+    <Content Include="Content\Less\Animate\bounceOutDown.less" />
+    <Content Include="Content\Less\Animate\bounceOutLeft.less" />
+    <Content Include="Content\Less\Animate\bounceOutRight.less" />
+    <Content Include="Content\Less\Animate\bounceOutUp.less" />
+    <Content Include="Content\Less\Animate\fadeIn.less" />
+    <Content Include="Content\Less\Animate\fadeInDown.less" />
+    <Content Include="Content\Less\Animate\fadeInDownBig.less" />
+    <Content Include="Content\Less\Animate\fadeInLeft.less" />
+    <Content Include="Content\Less\Animate\fadeInLeftBig.less" />
+    <Content Include="Content\Less\Animate\fadeInRight.less" />
+    <Content Include="Content\Less\Animate\fadeInRightBig.less" />
+    <Content Include="Content\Less\Animate\fadeInUp.less" />
+    <Content Include="Content\Less\Animate\fadeInUpBig.less" />
+    <Content Include="Content\Less\Animate\fadeOut.less" />
+    <Content Include="Content\Less\Animate\fadeOutDown.less" />
+    <Content Include="Content\Less\Animate\fadeOutDownBig.less" />
+    <Content Include="Content\Less\Animate\fadeOutLeft.less" />
+    <Content Include="Content\Less\Animate\fadeOutLeftBig.less" />
+    <Content Include="Content\Less\Animate\fadeOutRight.less" />
+    <Content Include="Content\Less\Animate\fadeOutRightBig.less" />
+    <Content Include="Content\Less\Animate\fadeOutUp.less" />
+    <Content Include="Content\Less\Animate\fadeOutUpBig.less" />
+    <Content Include="Content\Less\Animate\flash.less" />
+    <Content Include="Content\Less\Animate\flip.less" />
+    <Content Include="Content\Less\Animate\flipInX.less" />
+    <Content Include="Content\Less\Animate\flipInY.less" />
+    <Content Include="Content\Less\Animate\flipOutX.less" />
+    <Content Include="Content\Less\Animate\flipOutY.less" />
+    <Content Include="Content\Less\Animate\hinge.less" />
+    <Content Include="Content\Less\Animate\lightSpeedIn.less" />
+    <Content Include="Content\Less\Animate\lightSpeedOut.less" />
+    <Content Include="Content\Less\Animate\mixins.less" />
+    <Content Include="Content\Less\Animate\pulse.less" />
+    <Content Include="Content\Less\Animate\rollIn.less" />
+    <Content Include="Content\Less\Animate\rollOut.less" />
+    <Content Include="Content\Less\Animate\rotateIn.less" />
+    <Content Include="Content\Less\Animate\rotateInDownLeft.less" />
+    <Content Include="Content\Less\Animate\rotateInDownRight.less" />
+    <Content Include="Content\Less\Animate\rotateInUpLeft.less" />
+    <Content Include="Content\Less\Animate\rotateInUpRight.less" />
+    <Content Include="Content\Less\Animate\rotateOut.less" />
+    <Content Include="Content\Less\Animate\rotateOutDownLeft.less" />
+    <Content Include="Content\Less\Animate\rotateOutDownRight.less" />
+    <Content Include="Content\Less\Animate\rotateOutUpLeft.less" />
+    <Content Include="Content\Less\Animate\rotateOutUpRight.less" />
+    <Content Include="Content\Less\Animate\shake.less" />
+    <Content Include="Content\Less\Animate\swing.less" />
+    <Content Include="Content\Less\Animate\tada.less" />
+    <Content Include="Content\Less\Animate\wobble.less" />
+    <Content Include="Content\Less\animate.less" />
+    <Content Include="Content\css\animate.css.map">
+      <DependentUpon>animate.css</DependentUpon>
+    </Content>
     <None Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
     <Content Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />
     <Content Include="Sitemap.xml" />
