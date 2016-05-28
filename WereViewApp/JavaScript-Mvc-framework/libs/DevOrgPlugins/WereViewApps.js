@@ -102,7 +102,7 @@ $.WeReviewApp = {
         $jQueryInputText.val(currentText);
     },
 
-    
+
 
     /**
      * This event is called when form is submitting from app-editing page only.
@@ -266,7 +266,7 @@ $.WeReviewApp = {
         self.invertAllInputIframeDataOrSquareToHtml();
     },
 
-    
+
 
     appNameOnBlur: function () {
         /// <summary>
@@ -403,15 +403,20 @@ $.WeReviewApp = {
         // ifAnyUploadfails = false means there is no uploader which is invalid.
         var ifAnyUploadfails = false;
         var self = $.WeReviewApp;
+        var $x = [];
 
         var raiseUploaderInvalidMessage = function (failedBoolean) {
             if (failedBoolean) {
+                if ($.isEmpty($x)) {
+                    $x = $("#dwdwd");
+                }
+                var $wrapper = $.findCachedId("notify-global-info-second-wrapper");
                 self.$appPageUploaderNotifier.text("Please upload all necessary files to proceed next.");
-                var animationClass = "fadeIn";
-                setTimeout(function() {
-                    self.$appPageUploaderNotifier.removeClass(animationClass);
-                    setTimeout(function() {
-                        self.$appPageUploaderNotifier.addClass(animationClass);
+                var animationClass = "shake";
+                setTimeout(function () {
+                    $wrapper.removeClass(animationClass);
+                    setTimeout(function () {
+                        $wrapper.addClass(animationClass);
                     }, 500);
                 }, 200);
             } else {
@@ -453,24 +458,28 @@ $.WeReviewApp = {
             }
 
             self.$globalTopErrorLabel.text("");
+
             self.$uploaderContainer.show("slow"); // uploaders will be visible here.
 
             // checking uploaders if valid
-            var $uploaders2 = self.$allInputs.filter("input[type='file']");
-            // only validate uploads if any uploader exist.
-            var countUploaders = $uploaders2.length;
 
-            for (i = 0; i < countUploaders; i++) {
-                var uploaderHtml = $uploaders2[i];
-                var $uploader = $(uploaderHtml);
-                if (ifAnyUploadfails === false) { // there is no uploader invalid yet.
-                    // ifAnyUploadfails = true means uploader is invalid.
-                    ifAnyUploadfails = isInvalidateUploader($uploader);
+            var checkIfUploadersAreValid = function () {
+                var $uploaders2 = self.$allInputs.filter("input[type='file']");
+                // only validate uploads if any uploader exist.
+                var countUploaders = $uploaders2.length;
+
+                for (i = 0; i < countUploaders; i++) {
+                    var uploaderHtml = $uploaders2[i];
+                    var $uploader = $(uploaderHtml);
+                    if (ifAnyUploadfails === false) { // there is no uploader invalid yet.
+                        // ifAnyUploadfails = true means uploader is invalid.
+                        ifAnyUploadfails = isInvalidateUploader($uploader);
+                    }
                 }
-            }
-            // ifAnyUploadfails = true then it raise a invalid message and halt.
+                // ifAnyUploadfails = true then it raise a invalid message and halt.
 
-            raiseUploaderInvalidMessage(ifAnyUploadfails); // halt happens in the next if-else logic
+                raiseUploaderInvalidMessage(ifAnyUploadfails); // halt happens in the next if-else logic
+            }
 
             // ifAnyUploadfails = true then halt.
             if (!ifAnyUploadfails && self.isAppTitleValid()) {
@@ -484,8 +493,8 @@ $.WeReviewApp = {
                 console.log(data);
                 //alert(data);
                 $.ajax({
-                    //url:$.WeReviewApp.$appForm.attr("action"),
-                    url: "/App/AppPost",
+                    url: $.WeReviewApp.$appForm.attr("action"),
+                    //url: "/App/AppPost",
                     data: data,
                     success: function (response) {
                         console.log(response);

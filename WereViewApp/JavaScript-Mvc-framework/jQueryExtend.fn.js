@@ -150,6 +150,7 @@ $.fn.extend({
         /// If attr not present then true.
         /// </summary>
         /// <param name="attr" type="type">attribute name</param>
+        
         if (this.length > 0) {
             this.attr(attr, "false");
         }

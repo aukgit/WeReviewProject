@@ -400,7 +400,7 @@ label.control-label {
         color: @app-description-color;
         .width(385px);
         .text-left;
-        .text-ellipsis() !important; 
+        .text-ellipsis() !important;
         white-space: normal;
 
         p {
@@ -1141,6 +1141,7 @@ q:after {
 .rating-box-row {
     .margin-top(17px);
     .height(71px);
+
     .rating-container {
         font-size: .7em;
     }
@@ -1409,5 +1410,93 @@ a {
     }
 }
 
+.notification-label-wrapper {
+    label {
+        background-color: rgb(255, 65, 54);
+        border-bottom-left-radius: 2.625px;
+        border-bottom-right-radius: 2.625px;
+        border-top-left-radius: 2.625px;
+        border-top-right-radius: 2.625px;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        color: rgb(255, 255, 255);
+        cursor: default;
+        display: table;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 10.5px;
+        font-weight: normal;
+        //height: 15.2344px;
+        //line-height: 10.5px;
+        margin-bottom: 5px;
+        margin-right: 0;
+        margin-top: 12px;
+        max-width: 100%;
+        padding-bottom: 3.15px;
+        padding-left: 6.3px;
+        padding-right: 6.3px;
+        padding-top: 2.1px;
+        text-align: center;
+        vertical-align: baseline;
+        white-space: nowrap;
+        /*margin: 0;
+        padding: 0;*/
+        //width: 242.594px;
+        -webkit-font-smoothing: subpixel-antialiased;
+    }
+}
+
+.delete-btn-wrapper {
+    .relative;
+    width: auto;
+
+    .delete-icon {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        font-size: 1em;
+        padding: 4px 7px;
+        box-shadow: 2px 2px 3px rgba(255, 255, 255, 0.55);
+        border: 1px solid rgba(214, 208, 208, 0.46);
+
+        &:hover {
+            .gradient-red-effect;
+        }
+    }
+}
+
+.photo-collection {
+    overflow: hidden;
+
+    li {
+        float: left;
+        margin: 5px 6px 2px 0;
+        border-bottom: 3px solid #DB1212;
+        border-radius: 4px;
+        box-shadow: 2px 2px 3px rgba(255, 255, 255, 0.55);
+
+        &:hover {
+            //border: 1px solid #FF8585;
+            box-shadow: 1px 2px 2px gray;
+        }
+    }
+}
+
+.image-size-fixed-for-model {
+    height: 135px;
+    width: 178px;
+}
+
+.modal-dialog {
+    button[data-btn="close"] {
+        &:hover {
+            color:red;
+            &:not(.close) {
+                .gradient-red-effect;
+                color: white;
+            }
+        }
+    }
+}
 //last imports
 //@import "Utilities.less";

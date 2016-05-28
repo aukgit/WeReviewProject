@@ -2,34 +2,30 @@
 @{
     Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout.cshtml";
 }
-<!-- Modal -->
 <div class="fade modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-btn="close" data-dismiss="modal">
-                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
                 <h4 class="h3 modal-title">Edit Gallery Images</h4>
             </div>
             <div class="modal-body">
-                @foreach (var item in Model) {
-                    <div class="row" data-id="0" data-sequence="@item.Sequence">
-                        <div class="col-md-2">
+                <!--Must pass the data-id="0" and data-sequence="item.Sequence" to delete to work, put the attr data-btn="delete" to attach the delete event-->
+                <ul class="photo-collection">
+                    @foreach (var item in Model) {
+                        <li data-id="0" class="delete-btn-wrapper" data-sequence="@item.Sequence">
                             <img data-id="0" data-sequence="@item.Sequence" class="dev-upload-plugin-image-@item.UploadGuid-@item.Sequence image-size-fixed-for-model" src="@item.ImageURL" alt="@item.Tile" />
-                        </div>
-                        <div class="col-md-10">
-                            @*@Html.EditorFor(n => item.Tile, "String-NoLabel")
-                                @Html.EditorFor(n => item.Subtitle,"String-NoLabel")*@
-                            <a data-id="0" data-btn="delete" data-sequence="@item.Sequence" class="btn btn-danger" href="@item.DeleteURL"><i class="fa fa-remove"></i> Delete</a>
-                            @*<a class="btn btn-success" href="@item.ReUploadURL"><i class="fa fa-upload"></i> Re-upload</a>*@
-                        </div>
-                    </div>
-                }
+                            <a data-id="0" data-btn="delete" data-sequence="@item.Sequence" class="delete-icon btn btn-danger" data-url="@item.DeleteURL"><i class="fa fa-remove"></i></a>
+                        </li>
+                    }
+                </ul>
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-btn="close" data-dismiss="modal">Close</button>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>

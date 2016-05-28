@@ -716,6 +716,14 @@
       <DependentUpon>color-fonts.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\color-fonts.less" />
+    <Content Include="Content\Less\CSS\gradient.css" />
+    <Content Include="Content\Less\CSS\gradient.min.css">
+      <DependentUpon>gradient.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\CSS\lesshat.css" />
+    <Content Include="Content\Less\CSS\lesshat.min.css">
+      <DependentUpon>lesshat.css</DependentUpon>
+    </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
     <Content Include="Content\Less\less-imports.less" />
@@ -987,6 +995,13 @@
     <Content Include="Content\Less\animate.less" />
     <Content Include="Content\css\animate.css.map">
       <DependentUpon>animate.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\remixens\gradient.less" />
+    <Content Include="Content\Less\CSS\gradient.css.map">
+      <DependentUpon>gradient.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\CSS\lesshat.css.map">
+      <DependentUpon>lesshat.css</DependentUpon>
     </Content>
     <None Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
     <Content Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />
