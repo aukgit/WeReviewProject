@@ -15,18 +15,23 @@ $.WeReviewApp = {
     ///appForm represents both app-edit and app-posting form
     ///appFormSelector : form.app-editing-page
     $appFormWrapper: [],
-    $appForm: [],//$("form.app-editing-page"), // means both editing and posting
+    $appForm: [], //$("form.app-editing-page"), // means both editing and posting
     // appFormEdit selector : form.app-edit
     $appFormEdit: [], //$("form.app-edit"),
     // app form post  :form.app-post
     $appFormPost: [], //$("form.app-post"),
     // all input inside form app-port
-    $allInputs: [],// $("form.app-post input"),
+    $allInputs: [], // $("form.app-post input"),
     ajaxDraftPostUrl: "/App/SaveDraft",
     $appPageUploaderNotifier: $.byId("notify-global-info-second"),
     homePageUrl: "/",
-    selectorForUploaderRows: "#collection-uploaders .form-row-uploader",
+    selectorForUploaderRows: "#collection-uploaders", //"#collection-uploaders .form-row-uploader",
     afterDraftPostRedirectPageUrl: "/",
+    /**
+     * Uploader container not single uploaders. Single uploaders can be found by 
+     * $uploaderContainer.find(".form-row-uploader") will return single uploaders.
+     */
+    $uploaderContainer: [],
     /**
      * this variable indicates weather there is any change in the form inputs/textarea.
      * It is similar to word file change when it gets dirty it promts for saving message.
@@ -97,164 +102,7 @@ $.WeReviewApp = {
         $jQueryInputText.val(currentText);
     },
 
-    /**
-     * App post submitting event from both edit or posting page.
-     * @param {} e 
-     * @returns {} 
-     */
-    appformPostEvent: function (e) {
-        /// <summary>
-        /// this event will raise when a app submit is called or clicked on post at the bottom of the page.
-        /// validation for app posting.
-        /// </summary>
-        /// <param name="e">
-        /// Event delegate
-        /// </param>
-
-        // ifAnyUploadfails = false means there is no uploader which is invalid.
-        var ifAnyUploadfails = false;
-        var self = $.WeReviewApp;
-
-        var raiseUploaderInvalidMessage = function (failedBoolean) {
-            if (failedBoolean) {
-                self.$appPageUploaderNotifier.text("Please upload all necessary files to proceed next.");
-            } else {
-                self.$appPageUploaderNotifier.text("");
-            }
-        }
-
-        var isInvalidateUploader = function ($uploaderx) {
-            var idAttr = $uploaderx.attr("data-id"); //always use jquery to get attr
-            var loadedValues = $.devOrgUP.getCountOfHowManyFilesUploaded(idAttr);
-
-            if (loadedValues === 0) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        if (self.$appFormPost.length > 0) {
-            e.preventDefault();
-
-            // only check uploader when posting time
-
-            // first check if form is valid or not.
-            var visibleInputsExceptFile = self.$allInputs.filter("[type!=file]:visible");
-            var len = visibleInputsExceptFile.length;
-            if (!self.isAppTitleValid()) {
-                self.$globalTopErrorLabel.text("Please fill out the title correctly. It's very important for your app.");
-                self.$globalTopErrorLabel.show();
-                return;
-            }
-            var i;
-            for (i = 0; i < len; i++) {
-                var $singleInput = $(visibleInputsExceptFile[i]);
-                if (!$singleInput.valid()) {
-                    self.$globalTopErrorLabel.text("Please fill out the required fields.");
-                    return;
-                }
-            }
-
-            self.$globalTopErrorLabel.text("");
-
-            // first check if the uploaders are visible or not
-            //var $uploaderRows = self.$appForm.find(self.selectorForUploaderRows);
-
-            // visibility check
-            // there is no need to have visibility check on uploaders because 
-            // uploaders will be visible by default.
-            //for (i = 0; i < $uploaderRows.length; i++) {
-            //    var $uploaderRow = $($uploaderRows[i]);
-            //    if ($uploaderRow) {
-            //        var $currentUploader = $uploaderRow.find("input[type='file']");
-            //        ifAnyUploadfails = isInvalidateUploader($currentUploader);
-            //        if (ifAnyUploadfails) {
-            //            raiseUploaderInvalidMessage(ifAnyUploadfails);
-            //            return;
-            //        }
-            //    }
-            //    if ($uploaderRow.is(":hidden")) {
-            //        if (self.$howtoUseUploaderInfoLabel.is(":hidden")) {
-            //            self.$howtoUseUploaderInfoLabel.show();
-            //        }
-            //        raiseUploaderInvalidMessage(ifAnyUploadfails);
-
-            //        $uploaderRow.show("slow");
-            //        return;
-            //    }
-            //}
-
-
-            // checking uploaders if valid
-            var $uploaders = self.$appForm.find("#collection-uploaders");
-            if ($uploaders.length > 0) {
-                // only validate uploads if any uploader exist.
-                var countUploaders = $uploaders.length;
-
-                var $uploaders2 = $uploaders.find("input[type='file']");
-                for (i = 0; i < countUploaders; i++) {
-                    var $uploader = $($uploaders2[i]);
-                    if (ifAnyUploadfails === false) { // there is no uploader invalid yet.
-                        // ifAnyUploadfails = true means uploader is invalid.
-                        ifAnyUploadfails = isInvalidateUploader($uploader);  
-                    }
-                }
-                // ifAnyUploadfails = true then it raise a invalid message and halt.
-
-                raiseUploaderInvalidMessage(ifAnyUploadfails); // halt happens in the next if-else logic
-
-            }
-            // ifAnyUploadfails = true then halt.
-            if (!ifAnyUploadfails && self.isAppTitleValid()) {
-                // everything is successful
-                self.appInputChangesExist = false;
-
-                self.fixAllInputIframeDataOrHtmlToSquare(); //html input to square input . <tag></tag> .. [tag][/tag]
-                // all conditions fulfilled so submit the form
-
-                var data = $.WeReviewApp.$appForm.serialize();
-                console.log(data);
-                //alert(data);
-                $.ajax({
-                    //url:$.WeReviewApp.$appForm.attr("action"),
-                    url: "/App/AppPost",
-                    data: data,
-                    success: function (response) {
-                        console.log(response);
-                    }
-                });
-
-                //this.submit(); //previous submission.
-            }
-
-        }
-        //function preventDefaultInside(evt, formCanbeSent) {
-        //    if (!ifAnyUploadfails && formCanbeSent) {
-        //        // all uploads has been done.
-        //        self.appInputChangesExist = false; // no change exist on the unbin method ... direct submit.
-        //    }
-        //}
-    },
-
-    isAppTitleValid: function ($appNameInputTextbox) {
-        /// <summary>
-        /// Check if the app name or title is valid or not.
-        /// </summary>
-        /// <param name="$appNameInputTextbox"></param>
-        var $appName = $appNameInputTextbox;
-        if (_.isEmpty($appNameInputTextbox)) {
-            $appName = $("#AppName");
-        }
-        if ($appName.length > 0) {
-            var hasValidAttr = $appName.attr($.WeReviewApp.appTitleValidAttrName);
-
-            if (hasValidAttr && $appName.valid()) {
-                return true;
-            }
-        }
-        return false;
-    },
+    
 
     /**
      * This event is called when form is submitting from app-editing page only.
@@ -275,11 +123,11 @@ $.WeReviewApp = {
     fixAllInputIframeDataOrHtmlToSquare: function () {
         var inputSelectors = "input.url-input";
         var self = $.WeReviewApp;
-        var inputFields = $.WeReviewApp.$appForm.find(inputSelectors);
+        var inputFields = self.$appForm.find(inputSelectors);
         if (inputFields.length > 0) {
             for (var i = 0; i < inputFields.length; i++) {
                 var $eachInputfield = $(inputFields[i]);
-                $.WeReviewApp.fixIframeTag($eachInputfield);
+                self.fixIframeTag($eachInputfield);
             }
         }
     },
@@ -288,11 +136,12 @@ $.WeReviewApp = {
      */
     invertAllInputIframeDataOrSquareToHtml: function () {
         var inputSelectors = "input.url-input";
-        var inputFields = $.WeReviewApp.$appForm.find(inputSelectors);
+        var self = $.WeReviewApp;
+        var inputFields = self.$appForm.find(inputSelectors);
         if (inputFields.length > 0) {
             for (var i = 0; i < inputFields.length; i++) {
                 var $eachInputfield = $(inputFields[i]);
-                $.WeReviewApp.iframeSquareToActualTag($eachInputfield);
+                self.iframeSquareToActualTag($eachInputfield);
             }
         }
     },
@@ -417,6 +266,8 @@ $.WeReviewApp = {
         self.invertAllInputIframeDataOrSquareToHtml();
     },
 
+    
+
     appNameOnBlur: function () {
         /// <summary>
         /// What happens when appname field is blured
@@ -525,14 +376,151 @@ $.WeReviewApp = {
 
 
         ///hiding the uploader on the app loader page for every time before posting a new app.
-        // now let's keep all the uploaders visiable so comment out the below line.
-        // self.$appForm.find(self.selectorForUploaderRows).hide();
+        // now let's keep all the uploaders visible so comment out the below line.
+        self.$uploaderContainer = self.$appForm.find(self.selectorForUploaderRows).hide();
 
         // stop form submitting the form if any file upload is not done.
         self.$appForm.submit(self.appformPostEvent);
 
         self.appFormDraftBtnClicked();
 
+    },
+
+    /**
+     * App post submitting event from both edit or posting page.
+     * @param {} e 
+     * @returns {} 
+     */
+    appformPostEvent: function (e) {
+        /// <summary>
+        /// this event will raise when a app submit is called or clicked on post at the bottom of the page.
+        /// validation for app posting.
+        /// </summary>
+        /// <param name="e">
+        /// Event delegate
+        /// </param>
+
+        // ifAnyUploadfails = false means there is no uploader which is invalid.
+        var ifAnyUploadfails = false;
+        var self = $.WeReviewApp;
+
+        var raiseUploaderInvalidMessage = function (failedBoolean) {
+            if (failedBoolean) {
+                self.$appPageUploaderNotifier.text("Please upload all necessary files to proceed next.");
+                var animationClass = "fadeIn";
+                setTimeout(function() {
+                    self.$appPageUploaderNotifier.removeClass(animationClass);
+                    setTimeout(function() {
+                        self.$appPageUploaderNotifier.addClass(animationClass);
+                    }, 500);
+                }, 200);
+            } else {
+                self.$appPageUploaderNotifier.text("");
+            }
+        }
+
+        var isInvalidateUploader = function ($uploaderx) {
+            var idAttr = $uploaderx.attr("data-id"); //always use jquery to get attr
+            var loadedValues = $.devOrgUP.getCountOfHowManyFilesUploaded(idAttr);
+
+            if (loadedValues === 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        if (self.$appFormPost.length > 0) {
+            e.preventDefault();
+
+            // only check uploader when posting time
+
+            // first check if form is valid or not.
+            var visibleInputsExceptFile = self.$allInputs.filter("[type!=file]:visible");
+            var len = visibleInputsExceptFile.length;
+            if (!self.isAppTitleValid()) {
+                self.$globalTopErrorLabel.text("Please fill out the title correctly. It's very important for your app.");
+                self.$globalTopErrorLabel.show();
+                return;
+            }
+            var i;
+            for (i = 0; i < len; i++) {
+                var $singleInput = $(visibleInputsExceptFile[i]);
+                if (!$singleInput.valid()) {
+                    self.$globalTopErrorLabel.text("Please fill out the required fields.");
+                    return; // halt
+                }
+            }
+
+            self.$globalTopErrorLabel.text("");
+            self.$uploaderContainer.show("slow"); // uploaders will be visible here.
+
+            // checking uploaders if valid
+            var $uploaders2 = self.$allInputs.filter("input[type='file']");
+            // only validate uploads if any uploader exist.
+            var countUploaders = $uploaders2.length;
+
+            for (i = 0; i < countUploaders; i++) {
+                var uploaderHtml = $uploaders2[i];
+                var $uploader = $(uploaderHtml);
+                if (ifAnyUploadfails === false) { // there is no uploader invalid yet.
+                    // ifAnyUploadfails = true means uploader is invalid.
+                    ifAnyUploadfails = isInvalidateUploader($uploader);
+                }
+            }
+            // ifAnyUploadfails = true then it raise a invalid message and halt.
+
+            raiseUploaderInvalidMessage(ifAnyUploadfails); // halt happens in the next if-else logic
+
+            // ifAnyUploadfails = true then halt.
+            if (!ifAnyUploadfails && self.isAppTitleValid()) {
+                // everything is successful
+                self.appInputChangesExist = false;
+
+                self.fixAllInputIframeDataOrHtmlToSquare(); //html input to square input . <tag></tag> .. [tag][/tag]
+                // all conditions fulfilled so submit the form
+
+                var data = $.WeReviewApp.$appForm.serialize();
+                console.log(data);
+                //alert(data);
+                $.ajax({
+                    //url:$.WeReviewApp.$appForm.attr("action"),
+                    url: "/App/AppPost",
+                    data: data,
+                    success: function (response) {
+                        console.log(response);
+                    }
+                });
+
+                //this.submit(); //previous submission.
+            }
+
+        }
+        //function preventDefaultInside(evt, formCanbeSent) {
+        //    if (!ifAnyUploadfails && formCanbeSent) {
+        //        // all uploads has been done.
+        //        self.appInputChangesExist = false; // no change exist on the unbin method ... direct submit.
+        //    }
+        //}
+    },
+
+    isAppTitleValid: function ($appNameInputTextbox) {
+        /// <summary>
+        /// Check if the app name or title is valid or not.
+        /// </summary>
+        /// <param name="$appNameInputTextbox"></param>
+        var $appName = $appNameInputTextbox;
+        if (_.isEmpty($appNameInputTextbox)) {
+            $appName = $("#AppName");
+        }
+        if ($appName.length > 0) {
+            var hasValidAttr = $appName.attr($.WeReviewApp.appTitleValidAttrName);
+
+            if (hasValidAttr && $appName.valid()) {
+                return true;
+            }
+        }
+        return false;
     },
     /**
      * App edit or post before action.
@@ -606,7 +594,7 @@ $.WeReviewApp = {
             //});
             // triggering appname blur when change any of these.
             // Because all are related to URL generate.
-            $(".selectpicker,select").change(appTitleValidate);
+            $(".selectpicker").change(appTitleValidate);
             // to validate the app-name, triggering blur on app-name field
             $.byId("PlatformVersion").blur(appTitleValidate);
             $.byId("PlatformID").blur(appTitleValidate);
