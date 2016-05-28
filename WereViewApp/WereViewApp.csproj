@@ -700,64 +700,6 @@
     <Content Include="Content\css\fonts-rimixens.css.map">
       <DependentUpon>fonts-rimixens.css</DependentUpon>
     </Content>
-    <Content Include="Content\Less\animate.less" />
-    <Content Include="Content\Less\animate\animationclasses.less" />
-    <Content Include="Content\Less\animate\bounce.less" />
-    <Content Include="Content\Less\animate\bounceIn.less" />
-    <Content Include="Content\Less\animate\bounceInDown.less" />
-    <Content Include="Content\Less\animate\bounceInLeft.less" />
-    <Content Include="Content\Less\animate\bounceInRight.less" />
-    <Content Include="Content\Less\animate\bounceInUp.less" />
-    <Content Include="Content\Less\animate\bounceOut.less" />
-    <Content Include="Content\Less\animate\bounceOutDown.less" />
-    <Content Include="Content\Less\animate\bounceOutLeft.less" />
-    <Content Include="Content\Less\animate\bounceOutRight.less" />
-    <Content Include="Content\Less\animate\bounceOutUp.less" />
-    <Content Include="Content\Less\animate\fadeIn.less" />
-    <Content Include="Content\Less\animate\fadeInDown.less" />
-    <Content Include="Content\Less\animate\fadeInDownBig.less" />
-    <Content Include="Content\Less\animate\fadeInLeft.less" />
-    <Content Include="Content\Less\animate\fadeInLeftBig.less" />
-    <Content Include="Content\Less\animate\fadeInRight.less" />
-    <Content Include="Content\Less\animate\fadeInRightBig.less" />
-    <Content Include="Content\Less\animate\fadeInUp.less" />
-    <Content Include="Content\Less\animate\fadeInUpBig.less" />
-    <Content Include="Content\Less\animate\fadeOut.less" />
-    <Content Include="Content\Less\animate\fadeOutDown.less" />
-    <Content Include="Content\Less\animate\fadeOutDownBig.less" />
-    <Content Include="Content\Less\animate\fadeOutLeft.less" />
-    <Content Include="Content\Less\animate\fadeOutLeftBig.less" />
-    <Content Include="Content\Less\animate\fadeOutRight.less" />
-    <Content Include="Content\Less\animate\fadeOutRightBig.less" />
-    <Content Include="Content\Less\animate\fadeOutUp.less" />
-    <Content Include="Content\Less\animate\fadeOutUpBig.less" />
-    <Content Include="Content\Less\animate\flash.less" />
-    <Content Include="Content\Less\animate\flip.less" />
-    <Content Include="Content\Less\animate\flipInX.less" />
-    <Content Include="Content\Less\animate\flipInY.less" />
-    <Content Include="Content\Less\animate\flipOutX.less" />
-    <Content Include="Content\Less\animate\flipOutY.less" />
-    <Content Include="Content\Less\animate\hinge.less" />
-    <Content Include="Content\Less\animate\lightSpeedIn.less" />
-    <Content Include="Content\Less\animate\lightSpeedOut.less" />
-    <Content Include="Content\Less\animate\mixins.less" />
-    <Content Include="Content\Less\animate\pulse.less" />
-    <Content Include="Content\Less\animate\rollIn.less" />
-    <Content Include="Content\Less\animate\rollOut.less" />
-    <Content Include="Content\Less\animate\rotateIn.less" />
-    <Content Include="Content\Less\animate\rotateInDownLeft.less" />
-    <Content Include="Content\Less\animate\rotateInDownRight.less" />
-    <Content Include="Content\Less\animate\rotateInUpLeft.less" />
-    <Content Include="Content\Less\animate\rotateInUpRight.less" />
-    <Content Include="Content\Less\animate\rotateOut.less" />
-    <Content Include="Content\Less\animate\rotateOutDownLeft.less" />
-    <Content Include="Content\Less\animate\rotateOutDownRight.less" />
-    <Content Include="Content\Less\animate\rotateOutUpLeft.less" />
-    <Content Include="Content\Less\animate\rotateOutUpRight.less" />
-    <Content Include="Content\Less\animate\shake.less" />
-    <Content Include="Content\Less\animate\swing.less" />
-    <Content Include="Content\Less\animate\tada.less" />
-    <Content Include="Content\Less\animate\wobble.less" />
     <Content Include="Content\css\blog-page.css.map">
       <DependentUpon>blog-page.css</DependentUpon>
     </Content>
@@ -788,22 +730,6 @@
     <Content Include="Content\Less\see-more-btn.less" />
     <Content Include="Content\Less\seo-optimize.less" />
     <Content Include="Content\Less\utilities\input-with-others.less" />
-    <Content Include="Content\Published.Scripts\front-end.js" />
-    <Content Include="Content\Published.Scripts\front-end.min.js">
-      <DependentUpon>front-end.js</DependentUpon>
-    </Content>
-    <Content Include="Content\Published.Scripts\jqueryval.js" />
-    <Content Include="Content\Published.Scripts\jqueryval.min.js">
-      <DependentUpon>jqueryval.js</DependentUpon>
-    </Content>
-    <Content Include="Content\Published.Scripts\upload.js" />
-    <Content Include="Content\Published.Scripts\upload.min.js">
-      <DependentUpon>upload.js</DependentUpon>
-    </Content>
-    <Content Include="Content\Published.Styles\Styles.css" />
-    <Content Include="Content\Published.Styles\Styles.min.css">
-      <DependentUpon>Styles.css</DependentUpon>
-    </Content>
     <Content Include="JavaScript-Mvc-framework\controllers\AccountController.js" />
     <Content Include="JavaScript-Mvc-framework\controllers\TagsController.js" />
     <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\arrowleft.png" />
@@ -857,15 +783,6 @@
     <Content Include="JavaScript-Mvc-framework\libs\DevOrgPlugins\byId.js" />
     <Content Include="JavaScript-Mvc-framework\libs\DevOrgPlugins\jquery.server-validate.js" />
     <Content Include="JavaScript-Mvc-framework\libs\DevOrgPlugins\WeReviewApps.js" />
-    <Content Include="Content\Published.Scripts\front-end.min.js.map">
-      <DependentUpon>front-end.min.js</DependentUpon>
-    </Content>
-    <Content Include="Content\Published.Scripts\jqueryval.min.js.map">
-      <DependentUpon>jqueryval.min.js</DependentUpon>
-    </Content>
-    <Content Include="Content\Published.Scripts\upload.min.js.map">
-      <DependentUpon>upload.min.js</DependentUpon>
-    </Content>
     <Content Include="Content\Less\bootstrap-select.less" />
     <Content Include="Content\Less\bootstrap-select.variables.less" />
     <Content Include="Content\Less\editor-templates.less" />
