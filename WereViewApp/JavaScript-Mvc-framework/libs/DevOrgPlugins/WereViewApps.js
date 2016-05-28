@@ -256,7 +256,11 @@ $.WeReviewApp = {
         return false;
     },
 
-    // before app editing submit
+    /**
+     * This event is called when form is submitting from app-editing page only.
+     * @param {} e 
+     * @returns {} 
+     */
     appEditingSubmitEvent: function (e) {
         e.preventDefault();
         var self = $.WeReviewApp;
