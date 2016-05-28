@@ -31,6 +31,7 @@
     var pluginName = "serverValidate",
         $divContainers,
         $selfContainer = null,
+        $allInputs = [],
         defaults = {
             crossDomain: true,
             multipleRequests: true,
@@ -47,6 +48,7 @@
             formSelector: "",
             $formElement: [],
             triggerValidationBeforeFormSubmit: true,
+            $submitButton: [],
             messages: {
                 requesting: "Requesting data..."
             },
@@ -109,6 +111,8 @@
         this.$input = $input;
         this.settings = settings;
         this.additionalFields = additionalFields;
+
+
 
         this.events.plugin = this;
         this.events.names.plugin = this;
@@ -179,6 +183,9 @@
             { setting: "eventsObject", attr: "data-events-object" },
             { setting: "dontSendSameRequestTwice", attr: "data-dont-send-same-twice" },
             { setting: "focusPersistIfNotValid", attr: "data-focus-on-fail" },
+            { setting: "formSelector", attr: "data-form-selector" }, // selecting the form
+            { setting: "triggerValidationBeforeFormSubmit", attr: "data-trigger-validation-before-form-submit" },
+            { setting: "focusPersistIfNotValid", attr: "data-focus-on-fail" },
             { setting: "submitMethod", attr: "data-submit-method" }
         ];
         for (var i = 0; i < crossMatch.length; i++) {
@@ -230,6 +237,7 @@
                 serverProcessFailed: "serverProcessFailed",
                 serverProcessRunning: "serverProcessRunning",
                 serverProcessReturnedAlways: "serverProcessReturnedAlways",
+                serverAllRequestComplete: "serverAllRequestComplete",
                 hideIcons: "hideIcons",
                 createIcon: "createIcon",
                 showingSpinnerIcon: "showingSpinnerIcon",
@@ -301,7 +309,9 @@
                     serverStartEvtName = evtNames.getName(plugin, evtNames.serverProcessStart),
                     serverSuccessEvtName = evtNames.getName(plugin, evtNames.serverProcessSucceeded),
                     serverFailEvtName = evtNames.getName(plugin, evtNames.serverProcessFailed),
-                    serverAlwaysEvtName = evtNames.getName(plugin, evtNames.serverProcessReturnedAlways);
+                    serverAlwaysEvtName = evtNames.getName(plugin, evtNames.serverProcessReturnedAlways),
+                    serverAllRequestComplete = evtNames.getName(plugin, evtNames.serverAllRequestComplete),
+                    ajaxRequestName = pluginName + ".ajaxRequest";
 
 
 
@@ -310,7 +320,11 @@
                     $input = plugin.$input,
                     url = plugin.getUrl(),
                     sendRequest = plugin.sendRequest,
+                    settings = plugin.getSettings(),
+                    isRequstSent = false,
                     cachedResponse;
+
+
 
                 // server events
 
@@ -335,6 +349,33 @@
                     var fields = plugin.concatAdditionalFields($input);
                     sendRequest(plugin, $div, $input, url, fields);
                 });
+
+
+                // form events
+
+                if (settings.triggerValidationBeforeFormSubmit === true) {
+                    if (settings.$formElement.length > 0) {
+                        settings.$formElement.submit(function (e) {
+                            if (isRequstSent === true) {
+                                e.preventDefault();
+                                settings.$submitButton.attr("disabled", "disabled");
+                                //settings.$submitButton.addClass("somehting");
+                                if (!plugin.isInProcessingMode($div)) {
+                                    //var timer = setTimeout(function () {
+                                    //    clearTimeout(timer);
+                                    plugin.markAsProcessing($div, true);
+                                    $input.trigger(serverStartEvtName);
+                                    if (plugin.isEmpty($selfContainer[ajaxRequestName])) {
+                                        $selfContainer[ajaxRequestName] = 1;
+                                    } else {
+                                        $selfContainer[ajaxRequestName]++;
+                                    }
+                                    //}, 650);
+                                }
+                            }
+                        });
+                    }
+                }
 
                 $div.on(serverStartEvtName, serverStartEventData, function (evt) {
                     //console.log("div: " + evt.data.finalEventName);
@@ -365,6 +406,7 @@
                     evt.data.response = cachedResponse;
                     //console.log("div: " + evt.data.finalEventName);
                     //$input.trigger(serverSuccessEvtName, [response]);
+
                 });
 
                 // failed
@@ -390,10 +432,32 @@
                 });
                 $input.on(serverAlwaysEvtName, serverAlwaysEventData, function (evt) {
                     evt.data.response = cachedResponse;
+                    plugin.markAsProcessing($div, false);
+                    plugin.hideSpinner($input);
+
                     //console.log(evt.data.finalEventName);
                     //console.log(evt.data);
-                });
+                    if (settings.triggerValidationBeforeFormSubmit === true && settings.$formElement.length > 0) {
+                        setTimeout(function () {
+                            settings.$submitButton.removeAttr("disabled", "disabled");
+                        }, 1500);
+                    }
 
+                    $selfContainer[ajaxRequestName]--;
+
+                    var currentAjaxRequests = $selfContainer[ajaxRequestName];
+                    if (currentAjaxRequests <= 0) {
+                        $input.trigger(serverAllRequestComplete);
+                        $div.trigger(serverAllRequestComplete);
+                    }
+                });
+                $input.on(serverAllRequestComplete, function (evt) {
+                    console.log(serverAllRequestComplete);
+                    plugin.hideSpinner($input);
+                    //if (settings.triggerValidationBeforeFormSubmit === true && settings.$formElement.length > 0) {
+                    //    settings.$formElement.submit();
+                    //}
+                });
                 $div.on(serverAlwaysEvtName, serverAlwaysEventData, function (evt) {
                     //evt.data.response = cachedResponse;
                     //console.log("div: " + evt.data.finalEventName);
@@ -984,8 +1048,8 @@
         /// <param name="options"></param>
         /// <returns type=""></returns>
         $selfContainer = this;
-        var isEmptyContainer = $selfContainer === undefined || $selfContainer === null || $selfContainer.length === 0;
-        var $elementContainer = this,
+        var isEmptyContainer = $selfContainer === undefined || $selfContainer === null || $selfContainer.length === 0,
+           $elementContainer = this,
            settingsTemporary = $.extend({}, defaults, options),
            selectors = settingsTemporary.selectors,
            additionalFieldsSelectorArray = selectors.additionalFields;
@@ -997,13 +1061,18 @@
             }
         }
 
-        var $containers = null;
+        var $containers = null,
+            isEmpty = function (variable) {
+                return variable === undefined || variable === null || variable.length === 0 || variable === "";
+            };
         if (settingsTemporary.$directContainer.length === 0) {
             $containers = $divContainers;
         } else {
             //direct container element selected
             $containers = settingsTemporary.$directContainer;
         }
+
+
         var pluginAttacherElements = new Array($containers.length);
         for (var i = 0; i < $containers.length; i++) {
             var $divElement = $($containers[i]),
@@ -1011,7 +1080,20 @@
             if ($divElement.attr("data-is-validate") === "true") {
                 var $input = $divElement.find("input");
                 var settings = getSettingfromDiv($input, settingTemporary2);
+
+                //form selector
+                if (settings.triggerValidationBeforeFormSubmit === true) {
+                    if (settings.$formElement.length === 0 && !isEmpty(settings.formSelector)) {
+                        settings.$formElement = $(settings.formSelector);
+                    }
+                    if (settings.$formElement.length > 0 && isEmpty(settings.$submitButton)) {
+                        settings.$submitButton = settings.$formElement.find("button");
+                    }
+                }
+
+
                 additionalFields = processAdditionalFields($elementContainer, additionalFieldsSelectorArray);
+                $allInputs.push($input);
                 var creatingPlugin = new plugin($divElement, $input, settings, additionalFields);
                 pluginAttacherElements[i] = {
                     plugin: creatingPlugin,

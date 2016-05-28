@@ -1289,7 +1289,7 @@ namespace WeReviewApp.BusinessLogics {
 
             builder.Append("<ol class=\"breadcrumb " + styleClass + "\">");
             var length = url.Length;
-            builder.Append("<li><a href=\"" + hostUrl + "\" title=\"" + AppVar.Name + "\"><i class=\"fa fa-home\"></i></a></li>");
+            builder.Append("<li><a href=\"" + hostUrl + "\" title=\"" + AppVar.Name + "\"><i title=\"" + AppVar.Name + "\" class=\"fa fa-home\"></i></a></li>");
             string urlUpto,
                    currentDirectory,
                    pointingUrl;
@@ -1297,8 +1297,9 @@ namespace WeReviewApp.BusinessLogics {
             for (i = 0; i < length; i++) {
                 if (url[i] == '/') {
                     // hello/world/new
-                    urlUpto = url.Substring(0, i);
-                    currentDirectory = GetCurrentWebDirectory(urlUpto);
+                    urlUpto = url.Substring(0, i); // starts with hello, next hello/world , next hello/world/new
+                    currentDirectory = GetCurrentWebDirectory(urlUpto); // passing "hello/world/new" will return new only
+                  
                     pointingUrl = hostUrl + urlUpto;
                     builder.Append("<li><a href=\"" + pointingUrl + "\">" + currentDirectory + "</a></li>");
                 }
@@ -1306,6 +1307,11 @@ namespace WeReviewApp.BusinessLogics {
             //last index
             urlUpto = url.Substring(0, i);
             currentDirectory = GetCurrentWebDirectory(urlUpto);
+            var queryStringFoundIndex = currentDirectory.IndexOf("?", StringComparison.Ordinal);
+            if (queryStringFoundIndex > -1) {
+                // query string exist.
+                currentDirectory = currentDirectory.Substring(0, queryStringFoundIndex);
+            }
             pointingUrl = hostUrl + urlUpto;
             builder.Append("<li><a href=\"" + pointingUrl + "\">" + currentDirectory + "</a></li>");
             builder.Append("</ol>");
