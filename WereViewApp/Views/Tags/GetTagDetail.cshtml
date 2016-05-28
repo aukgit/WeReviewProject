@@ -5,64 +5,61 @@
     var tagName = (string) ViewBag.tagName;
     ViewBag.Title = "Apps (" + apps.Count + ") for tag : '" + tagName + "'";
 }
-<div>
-    @Html.SamePageLinkWithIcon("Tag : " + tagName, tagName, "fa fa-tag")
-    @ViewBag.breadcrumbs
-    <div class="app-date-seperation row seo-optimize small-margin">
-        <div class="col-md-10"></div>
-        <div class="col-md-2  text-right">
-            <a>
-                <h1 class="bold-important month-seperation regular-color"></h1>
-            </a>
-        </div>
+@Html.SamePageLinkWithIcon("Tag : " + tagName, tagName, "fa fa-tag")
+<div class="app-date-seperation row seo-optimize small-margin">
+    <div class="col-md-10"></div>
+    <div class="col-md-2  text-right">
+        <a>
+            <h1 class="bold-important month-seperation regular-color"></h1>
+        </a>
     </div>
-    <div class="row">
-        <div class="archive-app-collection-wrapper">
-            <ul class="archive-app-collection-list pagination-required regular-color search-page-apps-list seo-optimize">
-                @if (apps.Count == 0) {
-                    <li class="no-result slim-app-view">
-                        <div class="f-em-11 gray">
-                            No apps found with this tag : @tagName
-                        </div>
-                    </li>
-                } else {
-                    foreach (var app in apps) {
-                        var platform = app.GetPlatform();
-                        <li class="slim-app-view" data-app-type="@platform.Icon">
-                            <a class="app-url" href="@app.GetAbsoluteUrl()" title="App Review : @app.AppName">
-                                <div class="app-icon">
-                                    <img src="@app.SearchIconLocation" alt="app" />
-                                </div>
-                                <div class="app-content">
-                                    <h1 class="app-title" title="App Review : @app.AppName">
-                                        <i class="fa @platform.Icon"></i>
-                                        @app.AppName
-                                        <span class="paragraph-end"></span>
-                                    </h1>
-                                    <h3>
-                                        @app.User.UserName
-                                        <span class="paragraph-end"></span>
-                                    </h3>
-                                    <span class="rating">
+</div>
+<div class="row">
+    <div class="archive-app-collection-wrapper">
+        <ul class="archive-app-collection-list pagination-required regular-color search-page-apps-list seo-optimize">
+            @if (apps.Count == 0) {
+                <li class="no-result slim-app-view">
+                    <div class="f-em-11 gray">
+                        No apps found with this tag : @tagName
+                    </div>
+                </li>
+            } else {
+                foreach (var app in apps) {
+                    var platform = app.GetPlatform();
+                    <li class="slim-app-view" data-app-type="@platform.Icon">
+                        <a class="app-url" href="@app.GetAbsoluteUrl()" title="App Review : @app.AppName">
+                            <div class="app-icon">
+                                <img src="@app.SearchIconLocation" alt="app" />
+                            </div>
+                            <div class="app-content">
+                                <h1 class="app-title" title="App Review : @app.AppName">
+                                    <i class="fa @platform.Icon"></i>
+                                    @app.AppName
+                                    <span class="paragraph-end"></span>
+                                </h1>
+                                <h3>
+                                    @app.User.UserName
+                                    <span class="paragraph-end"></span>
+                                </h3>
+                                <span class="rating">
                                     <i class="fa fa-star"></i>
                                     @app.AvgRating/5 from @app.ReviewsCount users
                                 </span>
-                                </div>
-                                <div class="seo-hide">
-                                    <em title="@platform.PlatformName Mobiles App">@platform.PlatformName</em>
-                                    <em title="@app.AppName">@app.AppName</em>
-                                </div>
-                            </a>
-                        </li>
-                    }
+                            </div>
+                            <div class="seo-hide">
+                                <em title="@platform.PlatformName Mobiles App">@platform.PlatformName</em>
+                                <em title="@app.AppName">@app.AppName</em>
+                            </div>
+                        </a>
+                    </li>
                 }
+            }
+        </ul>
+        <div class="clear"></div>
+        <div class="pagination-wrapper text-center">
+            <ul class="pagination">
+                @ViewBag.paginationHtml
             </ul>
-            <div class="clear"></div>
-            <div class="pagination-wrapper text-center">
-                <ul class="pagination">
-                    @ViewBag.paginationHtml
-                </ul>
-            </div>
         </div>
     </div>
 </div>

@@ -748,7 +748,11 @@ namespace WeReviewApp.Controllers {
             var viewOf = ViewTapping(ViewStates.Create);
             return View(app);
         }
-
+        public ActionResult AppPost(string appDetails)
+        {
+            
+            return View();
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]

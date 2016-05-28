@@ -82,7 +82,7 @@ $.app.executeBefore = {
         }
     },
     bootstrapTableComponentEnable: function () {
-        var $tables = $(".bootstrap-table-do");
+        var $tables = $("table.bootstrap-table-do");
         if ($tables.length > 0) {
             $tables.bootstrapTable();
         }

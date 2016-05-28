@@ -6,9 +6,9 @@ $.app.global = {
      * ** these methods will NOT run automatically. **
      */
     vars: {
-
+    
     },
-    documentFullSpinnerHide: function () {
+    documentFullSpinnerHide: function() {
         var self = $.app.global,
             $bodyStart = $.findCachedId("body-start"),
             fixedClass = "body-fixed",
@@ -19,20 +19,15 @@ $.app.global = {
                 var $loadingBar = $.findCachedId("loading-bar-full-screen");
                 $bodyStart.removeClass(fixedClass).addClass(flexible);
                 $loadingBar.addClass("animated").removeClass("fadeIn").addClass("fadeOut");
-                setTimeout(function () {
+                setTimeout(function() {
                     $loadingBar.hide();
                     $bodyStart.removeClass(fixedClass).addClass(flexible);
                 }, 1500);
             }
         }
     },
-    enterToNextInputFocus: function ($form, submitAtLast, atLastFocusOnFirst) {
-        /// <summary>
-        /// Focus to next input if it was visible.
-        /// </summary>
-        /// <param name="$form" type="type"></param>
-        /// <param name="submitAtLast" type="type"></param>
-        /// <param name="atLastFocusOnFirst" type="type"></param>
+    enterToNextInputFocus: function ($form, submitAtLast) {
+
         $form.find("input:text:first-child").focus();
 
         //var binders = formSelector + " input[type='text']:visible," +
@@ -56,34 +51,30 @@ $.app.global = {
             // console.log("inside code :" + code);
             if (code === 13) { // Enter key
                 e.preventDefault(); // Skip default behavior of the enter key
-                var $elements = $form.find(binders);
-                //console.log($elements);
-                var n = $elements.length;
-                var nextIndex = $elements.index(this) + 1;
+                var n = $(binders).length;
+                var nextIndex = $(binders).index(this) + 1;
                 if (nextIndex < n) {
-                    $elements[nextIndex].focus();
+                    $(binders)[nextIndex].focus();
                 } else {
-                    $elements[nextIndex - 1].blur();
+                    $(binders)[nextIndex - 1].blur();
                     if (submitAtLast === true) {
                         $form.submit();
-                    } else if (atLastFocusOnFirst === true) {
-                        $elements[0].focus();
                     }
                 }
             }
         });
     },
-    enterToNextInputFocusWithoutTags: function ($form, submitAtLast, isDynamicSelector, atLastFocusOnFirst) {
+    enterToNextInputFocusWithoutTags: function ($form, submitAtLast, isDynamicSelector) {
+
         $form.find("input:text:first-child").focus();
         var binders = "input[type='text']:visible," +
                      "input[type='password']:visible," +
                      "input[type='numeric']:visible," +
                      "input[type='email']:visible," +
-                     "input[type='text']:not(.bootstrap-tagsinput)," +
+                     ":not(.bootstrap-tagsinput input)," +
                     //formSelector + " textarea:visible," +
                      "button.selectpicker[type='button']:visible," +
                      "select:visible";
-        var $elements = [];
         var keyPressEvent = function (e) {
             // var codeAbove = d.keyCode || d.which;
             // console.log("above code :" + codeAbove);
@@ -91,20 +82,14 @@ $.app.global = {
             // console.log("inside code :" + code);
             if (code === 13) { // Enter key
                 e.preventDefault(); // Skip default behavior of the enter key
-                if (isDynamicSelector === true || $elements.length === 0) {
-                    $elements = $form.find(binders);
-                }
-                //console.log($elements);
-                var n = $elements.length;
-                var nextIndex = $elements.index(this) + 1;
+                var n = $(binders).length;
+                var nextIndex = $(binders).index(this) + 1;
                 if (nextIndex < n) {
-                    $elements[nextIndex].focus();
+                    $(binders)[nextIndex].focus();
                 } else {
-                    $elements[nextIndex - 1].blur();
+                    $(binders)[nextIndex - 1].blur();
                     if (submitAtLast === true) {
                         $form.submit();
-                    } else if (atLastFocusOnFirst === true) {
-                        $elements[0].focus();
                     }
                 }
             }
@@ -116,7 +101,7 @@ $.app.global = {
             $inputs.on('keypress', keyPressEvent);
         }
     },
-    documentFullSpinnerShow: function (message) {
+    documentFullSpinnerShow: function(message) {
         var $bodyStart = $.findCachedId("body-start");
         var fixedClass = "body-fixed";
         var flexible = "body-flexible";
@@ -133,11 +118,11 @@ $.app.global = {
         }
     },
 
-    isGivenUrlMatchedDomain: function (url, domain) {
+    isGivenUrlMatchedDomain: function(url, domain) {
         var regex = new RegExp("^(?:https:\/\/|http:\/\/)*(www\.)*(?:" + domain + ")+(\/)?", "ig");
         var found = url.match(regex);
         return !$.isEmpty(found) && found.length === 1;
     }
-
+    
 
 };

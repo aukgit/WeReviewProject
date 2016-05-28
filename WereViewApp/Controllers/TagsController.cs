@@ -81,7 +81,6 @@ namespace WeReviewApp.Controllers {
             var eachUrl = ControllerUrl + "/" + id + "?page=@page";
             ViewBag.paginationHtml = new HtmlString(Pagination.GetList(pageInfo, eachUrl, "", maxNumbersOfPagesShow: MaxNumbersOfPagesShow));
             ViewBag.tagName = tagname;
-            ViewBag.breadcrumbs = _logics.GetBredcrumbsBasedOnCurrentUrl();
             return View();
         }
     }
