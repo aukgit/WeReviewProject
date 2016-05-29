@@ -23,11 +23,13 @@
     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "server-validation-form", @class = "form-horizontal register-form", role = "form", enctype = "multipart/form-data" })) {
     <!--uxSlide by developers-organism and Alim Ul Karim hides everything except for first item=0, we can have more than one zeros-->
         <div id="register-form">
-            @token
-            @Html.EditorFor(m => m.UserName, "Username", new { url = usernameValidatingUrl, isValidate = "true", data_submit_method = "post" })
-            @Html.EditorFor(m => m.FirstName)
-            @Html.EditorFor(m => m.LastName)
-            @Html.EditorFor(m => m.Email, "Email", new { url = emailValidatingUrl, isValidate = "true", data_submit_method = "post" })
+            <div id="server-validation-form">
+                @token
+                @Html.EditorFor(m => m.UserName, "Username", new { url = usernameValidatingUrl, isValidate = "true", data_submit_method = "post" })
+                @Html.EditorFor(m => m.FirstName)
+                @Html.EditorFor(m => m.LastName)
+                @Html.EditorFor(m => m.Email, "Email", new { url = emailValidatingUrl, isValidate = "true", data_submit_method = "post" })
+            </div>
             @Html.EditorFor(m => m.Password)
             @Html.EditorFor(m => m.ConfirmPassword)
             @Html.EditorFor(m => m.Phone, "Phone")

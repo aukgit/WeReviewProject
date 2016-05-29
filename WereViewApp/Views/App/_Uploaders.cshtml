@@ -8,7 +8,7 @@
         ViewBag.onePreexist = ViewBag.preexistGallery == null ? 0 : 1;
     }
     <div id="collection-uploaders">
-        <!--Visibility controlled from WereViewApps.js-->
+        <!--Visibility controlled from WereViewApps.js : (appformPostEvent method at the bottom)-->
         @Html.EditorFor(model => model.YoutubeCoverImage, "HttpPostedFileBase", new {@data_id = "5", @data_url = "/App/YoutubeCoverUpload", @data_single = "true", @uploadPreexist = @ViewBag.onePreexist})
         @Html.EditorFor(model => model.Galleries, "FileMulti", new {@data_id = "0", @data_url = "/App/UploadGallery", @maxUpload = 6, @editUrl = "/App/EditGalleryUploads", @hasEditBtn = "true", @uploadPreexist = ViewBag.preexistGallery})
         @Html.EditorFor(model => model.HomePageFeatured, "HttpPostedFileBase", new {@data_id = "1", @data_url = "/App/UploadHomeFeatured", @data_single = "true", @uploadPreexist = @ViewBag.onePreexist})

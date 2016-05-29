@@ -88,37 +88,35 @@ $.app.executeBefore = {
         }
     },
     datePickerComponentEnable: function () {
-        if ($.isFunc($.datetimepicker)) {
-            var $dateTimePicker = $(".datetimepicker-start");
-            if ($dateTimePicker.length > 0) {
-                $dateTimePicker.datetimepicker({
-                    pickDate: true, //en/disables the date picker
-                    pickTime: true, //en/disables the time picker
-                    useMinutes: true, //en/disables the minutes picker
-                    useSeconds: true, //en/disables the seconds picker
-                    useCurrent: true, //when true, picker will set the value to the current date/time     
-                    minuteStepping: 1, //set the minute stepping
-                    defaultDate: "", //sets a default date, accepts js dates, strings and moment objects
-                    disabledDates: [], //an array of dates that cannot be selected
-                    enabledDates: [], //an array of dates that can be selected
-                    sideBySide: true //show the date and time picker side by side
-                });
-            }
-            var $datePicker = $(".datepicker-start");
-            if ($datePicker.length > 0) {
-                $datePicker.datetimepicker({
-                    pickDate: true, //en/disables the date picker
-                    pickTime: false, //en/disables the time picker
-                    useMinutes: false, //en/disables the minutes picker
-                    useSeconds: false, //en/disables the seconds picker
-                    useCurrent: true, //when true, picker will set the value to the current date/time     
-                    minuteStepping: 1, //set the minute stepping
-                    defaultDate: "", //sets a default date, accepts js dates, strings and moment objects
-                    disabledDates: [], //an array of dates that cannot be selected
-                    enabledDates: [], //an array of dates that can be selected
-                    sideBySide: true //show the date and time picker side by side
-                });
-            }
+        var $dateTimePicker = $(".datetimepicker-start");
+        if ($dateTimePicker.length > 0) {
+            $dateTimePicker.datetimepicker({
+                pickDate: true, //en/disables the date picker
+                pickTime: true, //en/disables the time picker
+                useMinutes: true, //en/disables the minutes picker
+                useSeconds: true, //en/disables the seconds picker
+                useCurrent: true, //when true, picker will set the value to the current date/time     
+                minuteStepping: 1, //set the minute stepping
+                defaultDate: "", //sets a default date, accepts js dates, strings and moment objects
+                disabledDates: [], //an array of dates that cannot be selected
+                enabledDates: [], //an array of dates that can be selected
+                sideBySide: true //show the date and time picker side by side
+            });
+        }
+        var $datePicker = $(".datepicker-start");
+        if ($datePicker.length > 0) {
+            $datePicker.datetimepicker({
+                pickDate: true, //en/disables the date picker
+                pickTime: false, //en/disables the time picker
+                useMinutes: false, //en/disables the minutes picker
+                useSeconds: false, //en/disables the seconds picker
+                useCurrent: true, //when true, picker will set the value to the current date/time     
+                minuteStepping: 1, //set the minute stepping
+                defaultDate: "", //sets a default date, accepts js dates, strings and moment objects
+                disabledDates: [], //an array of dates that cannot be selected
+                enabledDates: [], //an array of dates that can be selected
+                sideBySide: true //show the date and time picker side by side
+            });
         }
     },
     transactionStatusEnable: function () {
