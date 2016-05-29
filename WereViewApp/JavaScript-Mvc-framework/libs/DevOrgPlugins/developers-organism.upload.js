@@ -367,7 +367,7 @@ $(function () {
 
 
         uploadDeleteBtnClicked: function (e, $deleteBtn, $editBtn, id, sequence, $imageRow, $uploaderLabel, $uploaderInput) {
-            var url = $deleteBtn.attr("href");
+            var url = $deleteBtn.attr("data-url");
             var count = 0;
             $.ajax({
                 type: "GET",
@@ -395,7 +395,7 @@ $(function () {
 
         uploadEditBtnClicked: function (e, $editBtn, id, $uploaderLabel, $uploaderInput) {
             e.preventDefault();
-            var url = $editBtn.attr("href");
+            var url = $editBtn.attr("data-url");
 
             var $spinner = $.devOrgUP.showEditProgressor(id);
 
@@ -412,13 +412,13 @@ $(function () {
                     $response.modal();
                     //inside modal find delete btns and bind it with delete event.
 
-                    var deleteBtns = $response.find("a[data-btn='delete']");
+                    var deleteBtns = $response.find("[data-btn='delete']");
                     deleteBtns.on('click', function (ew) {
                         ew.preventDefault();
                         var $deleteButton = $(this);
                         var sequence = $deleteButton.attr("data-sequence");
 
-                        var $imageRow = $response.find("div.row[data-id='" + id + "'][data-sequence='" + sequence + "']");
+                        var $imageRow = $response.find("[data-id='" + id + "'][data-sequence='" + sequence + "']");
 
                         $.devOrgUP.uploadDeleteBtnClicked(e, $deleteButton, $editBtn, id, sequence, $imageRow, $uploaderLabel, $uploaderInput);
                     });

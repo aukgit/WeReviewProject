@@ -11,11 +11,24 @@
 /**
  * Loads this component if this string value present in the hidden field of "Component-Enable"
  * Please add a hidden with id "Component-Enable"
- * <input id="Component-Enable" value="revolution-gallery,form-validation" />
+ * <input id="Component-Enable" value="revolution-gallery,form-validation,enter-to-focus-next(id)" />
  * @returns {} 
  */
 
 $.app.component.list = {
+    "enter-to-focus-next": function (id, submitAtLast, atLastFocusOnFirst) {
+        submitAtLast = $.setDefaultBoolOnEmpty(submitAtLast, false);
+        atLastFocusOnFirst = $.setDefaultBoolOnEmpty(atLastFocusOnFirst, true);
+        var $form = $.byId(id);
+        $.app.global.enterToNextInputFocus($form, submitAtLast, atLastFocusOnFirst);
+    },
+    "enter-to-focus-next-no-tags": function (id, submitAtLast, isDynamicSelector, atLastFocusOnFirst) {
+        submitAtLast = $.setDefaultBoolOnEmpty(submitAtLast, false);
+        isDynamicSelector = $.setDefaultBoolOnEmpty(isDynamicSelector, false);
+        atLastFocusOnFirst = $.setDefaultBoolOnEmpty(atLastFocusOnFirst, true);
+        var $form = $.byId(id);
+        $.app.global.enterToNextInputFocusWithoutTags($form, submitAtLast, isDynamicSelector, atLastFocusOnFirst);
+    },
     "revolution-gallery": function () {
         var $frontPageGallyery = $(".tp-banner");
         if ($frontPageGallyery.length > 0) {
@@ -34,9 +47,11 @@ $.app.component.list = {
     },
     "form-validation": function () {
         var app = $.app,
-            $processForm = app.getProcessForm();
+            $processForm = app.getProcessForm(); // get the form #server-validation-form
+
 
         if ($processForm.length > 0) {
+            var $submitBtn = $.byId("submit-btn");
             $processForm.serverValidate({
                 crossDomain: false,
                 multipleRequests: true,
@@ -44,7 +59,10 @@ $.app.component.list = {
                 dontSendSameRequestTwice: false,
                 disableInputOnValidation: false,
                 focusPersistIfNotValid: false,
-                hideOnValidation: false
+                hideOnValidation: false,
+                $formElement: $processForm,
+                $submitButton : $submitBtn,
+                triggerValidationBeforeFormSubmit: true
             });
         }
     },
@@ -87,10 +105,10 @@ $.app.component.list = {
     "isotop": function () {
         var $isotopContainer = $("ul.search-page-apps-list");
         if ($isotopContainer.length > 0) {
-            var $filterIsotopItems = $('.filter li a');
+            var $filterIsotopItems = $('.filter').find("li").find("a");
             if ($filterIsotopItems.length > 0) {
                 $filterIsotopItems.click(function () {
-                    $('.filter').find("li a").removeClass('active');
+                    $filterIsotopItems.removeClass('active');
                     $(this).addClass('active');
                     var selector = $(this).attr('data-filter');
 

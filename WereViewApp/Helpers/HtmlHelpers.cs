@@ -37,7 +37,7 @@ namespace WeReviewApp.Helpers {
             if (isDependOnUserLogState && UserManager.IsAuthenticated()) {
                 cacheName += UserManager.GetCurrentUserName();
             }
-            var cache = (string) AppConfig.Caches.Get(cacheName);
+            var cache = (string)AppConfig.Caches.Get(cacheName);
 
             if (cache != null && !string.IsNullOrWhiteSpace(cache)) {
                 return new HtmlString(cache);
@@ -119,16 +119,19 @@ namespace WeReviewApp.Helpers {
         /// <param name="helper"></param>
         /// <param name="buttonName"></param>
         /// <param name="iconClass"></param>
-        /// <param name="btnType"></param>
+        /// <param name="btnType">button input type</param>
         /// <param name="placeIconLeft"></param>
+        /// <param name="tooltip"></param>
         /// <param name="additionalClasses"></param>
+        /// <param name="id">html id for the button</param>
         /// <returns></returns>
         public static HtmlString SubmitButton(this HtmlHelper helper, string buttonName = "Submit",
             string iconClass = "fa fa-floppy-o",
             string tooltip = "",
             string additionalClasses = "btn btn-success",
             bool placeIconLeft = true,
-            string btnType = "Submit"
+            string btnType = "Submit",
+            string id = ""
             ) {
             const string iconFormt = "<i class=\"{0}\"></i>";
             string leftIcon = "",
@@ -138,25 +141,46 @@ namespace WeReviewApp.Helpers {
             } else {
                 rightIcon = string.Format(iconFormt, iconClass);
             }
-            var buttonHtml = string.Format(
-                "<button type=\"{0}\"  title=\"{1}\" class=\"{2}\">{3} {4} {5}</button>",
-                btnType, tooltip, additionalClasses, leftIcon, buttonName, rightIcon);
+            string buttonHtml = string.Empty;
+            if (!string.IsNullOrEmpty(id)) {
+                buttonHtml = string.Format(
+                    "<button type=\"{0}\"  title=\"{1}\" class=\"{2}\">{3} {4} {5}</button>",
+                    btnType, tooltip, additionalClasses, leftIcon, buttonName, rightIcon);
+            } else {
+                buttonHtml = string.Format(
+                   "<button type=\"{0}\"  title=\"{1}\" class=\"{2}\" id=\"{6}\">{3} {4} {5}</button>",
+                   btnType, tooltip, additionalClasses, leftIcon, buttonName, rightIcon, id);
+            }
             return new HtmlString(buttonHtml);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="buttonName"></param>
+        /// <param name="iconClass"></param>
+        /// <param name="tooltip"></param>
+        /// <param name="additionalClasses"></param>
+        /// <param name="placeIconLeft"></param>
+        /// <param name="btnType">button input type</param>
+        /// <param name="id">html id for the button</param>
+        /// <returns></returns>
         public static HtmlString SubmitButtonIconRight(this HtmlHelper helper, string buttonName = "Submit",
             string iconClass = "fa fa-floppy-o",
             string tooltip = "",
             string additionalClasses = "btn btn-success",
             bool placeIconLeft = false,
-            string btnType = "Submit"
+            string btnType = "Submit",
+            string id = ""
             ) {
-            return SubmitButton(helper, buttonName,
+            return SubmitButton(helper, 
+                buttonName,
                 iconClass,
                 tooltip,
                 additionalClasses,
                 placeIconLeft,
-                btnType);
+                btnType, 
+                id);
         }
 
         public static HtmlString EmailButtonIconRight(this HtmlHelper helper, string buttonName = "Send",
@@ -349,9 +373,9 @@ namespace WeReviewApp.Helpers {
                 return input;
             }
             if (isShowElipseDot) {
-                return input.Substring(0, (int) length) + "...";
+                return input.Substring(0, (int)length) + "...";
             }
-            return input.Substring(0, (int) length);
+            return input.Substring(0, (int)length);
         }
 
         public static string Truncate(this HtmlHelper helper, string input, int starting, int length) {
@@ -1035,9 +1059,17 @@ namespace WeReviewApp.Helpers {
         #endregion
 
         #region Component Enable : Listing
-
+        public static HtmlHelper ComponentsAdd(this HtmlHelper helper, string componentName) {
+            var seperator = "|";
+            if (helper.ViewBag.componentEnable == null) {
+                helper.ViewBag.componentEnable = componentName;
+            } else {
+                helper.ViewBag.componentEnable += seperator + componentName;
+            }
+            return helper;
+        }
         public static MvcHtmlString ComponentsEnableFor(this HtmlHelper helper, params string[] componentName) {
-            var componentNames = string.Join(",", componentName);
+            var componentNames = string.Join("|", componentName);
             return ComponentsEnableFor(helper, componentNames);
         }
 

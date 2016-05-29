@@ -8,19 +8,19 @@
 }
 @section hidden{
     @Html.GenerateUrlHiddenInputs()
-    @Html.ComponentsEnableFor("form-validation")
+    @Html.ComponentsEnableFor("form-validation",
+                                      "enter-to-focus-next-no-tags(id:server-validation-form,submitAtLast:false,atLastFocusOnFirst:true)")
 }
-<h1 class="h3" title="Registration page of @AppVar.Name">@ViewBag.Title</h1>
-<small>
-    Create a new account for <strong class="@AppVar.Name">@AppVar.Name</strong>.
-    Developers use this form to register their accounts as an app developer. If you not wish to register now
-    alternatively you can easily add your application by submitting app url email to info{at}wereviewapp.com.
-</small>
-<hr />
-
-@Html.Partial("_GlobalError")
 <div id="account-controller" data-action="register">
-    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal register-form", role = "form", enctype = "multipart/form-data" })) {
+    <h1 class="h3" title="Registration page of @AppVar.Name">@ViewBag.Title</h1>
+    <small>
+        Create a new account for <strong class="@AppVar.Name">@AppVar.Name</strong>.
+        Developers use this form to register their accounts as an app developer. If you not wish to register now
+        alternatively you can easily add your application by submitting app url email to info{at}wereviewapp.com.
+    </small>
+    <hr />
+    @Html.Partial("_GlobalError")
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "server-validation-form", @class = "form-horizontal register-form", role = "form", enctype = "multipart/form-data" })) {
     <!--uxSlide by developers-organism and Alim Ul Karim hides everything except for first item=0, we can have more than one zeros-->
         <div id="register-form">
             <div id="server-validation-form">
@@ -35,10 +35,7 @@
             @Html.EditorFor(m => m.Phone, "Phone")
             <div class="form-group">
                 <div class="col-md-10 col-md-offset-2">
-                    <button type="submit" class="btn btn-success">
-                        <i class="fa fa-user"></i>
-                        Register
-                    </button>
+                    @Html.SubmitButton("Register", FaIcons.User, id: "submit-btn")
                 </div>
             </div>
             <div class="bottom-gap-2x"></div>
