@@ -1008,27 +1008,26 @@
         },
         isInvalid: function (plugin) {
             /// <summary>
-            /// Returns true/false based on input if the input is valid or not.
+            /// Returns true/false based on input if the input  invalid.
             /// </summary>
             var $input = plugin.getInput();
-            return $input.attr("data-server-validated") === "true" && $input.valid();
+            return $input.attr("data-server-validated") !== "true" || !$input.valid();
         },
-        startServerValidation: function (plugin) {
+        sendServerValidationRequestOnlyIfInputInvalidOrNotProcessed: function (plugin) {
             /// <summary>
-            /// Send the requst to the server to validate the request.
+            /// Only send request to the server if input is not processed or invalid.
             /// </summary>
-            //var events = plugin.events,
-            //    evtNames = events.names,
-            //    serverStartEvtName = evtNames.getName(plugin, evtNames.serverProcessStart);
-
-
-            ////bind events
-            var $input = plugin.getInput(),
-                url = plugin.getUrl(),
-                sendRequest = plugin.sendRequest,
-                settings = plugin.getSettings();
-
-            $input.trigger("keypress", [0]); // trigger right away
+            /// <param name="plugin" type="type"></param>
+            /// <returns type="">Return 1 when trigers validation. Returns 0 when it is already valid.</returns>
+            var $input = plugin.getInput();
+            if (plugin.isInvalid(plugin) === true) {
+                var events = plugin.events,
+                  evtNames = events.names,
+                  serverProcessStartEventName = evtNames.getName(plugin, evtNames.serverProcessStart);
+                $input.trigger(serverProcessStartEventName); // trigger right away
+                return 1;
+            }
+            return 0;
         },
         getEventNameOfServerAlways: function (plugin) {
             /// <summary>
@@ -1078,7 +1077,7 @@
         }
 
 
-        var pluginAttacherElements = new Array($containers.length);
+        var pluginAttacherElements = [];
         var i;
         for (i = 0; i < $containers.length; i++) {
             var $divElement = $($containers[i]),
@@ -1087,21 +1086,17 @@
                 var $input = $divElement.find("input");
                 var settings = getSettingfromDiv($input, settingTemporary2);
 
-
-
-
                 additionalFields = processAdditionalFields($elementContainer, additionalFieldsSelectorArray);
                 $allInputs.push($input);
-                var creatingPlugin = new plugin($divElement, $input, settings, additionalFields);
-                pluginAttacherElements[i] = {
-                    plugin: creatingPlugin,
-                    additionalFields: additionalFields,
-                    $divContainer: $divElement,
-                    $input: $input,
-                    options: settings
-                };
-
-
+                var creatingPlugin = new plugin($divElement, $input, settings, additionalFields),
+                    pluginAttacher = {
+                        plugin: creatingPlugin,
+                        additionalFields: additionalFields,
+                        $divContainer: $divElement,
+                        $input: $input,
+                        options: settings
+                    };
+                pluginAttacherElements.push(pluginAttacher);
             }
         }
 
@@ -1113,27 +1108,34 @@
             }
         }
         //form selector
+        var $form = settingsTemporary.$formElement;
         if (settingsTemporary.triggerValidationBeforeFormSubmit === true) {
-            if (settingsTemporary.$formElement.length === 0 && !isEmpty(settingsTemporary.formSelector)) {
-                settingsTemporary.$formElement = $(settingsTemporary.formSelector);
+            if ($form.length === 0 && !isEmpty(settingsTemporary.formSelector)) {
+                $form = $(settingsTemporary.formSelector);
             }
-            if (settingsTemporary.$formElement.length > 0 && isEmpty(settingsTemporary.$submitButton)) {
-                settingsTemporary.$submitButton = settingsTemporary.$formElement.find("button");
+            if ($form.length > 0 && isEmpty(settingsTemporary.$submitButton)) {
+                settingsTemporary.$submitButton = $form.find("button");
             }
         }
+
+        var $submitbtn = settingsTemporary.$submitButton;
         // form events
         // catch form submit event ... 
-        var isFormSubmittingRequired = settingsTemporary.triggerValidationBeforeFormSubmit === true && settingsTemporary.$formElement.length > 0;
+        var isFormSubmittingRequired = settingsTemporary.triggerValidationBeforeFormSubmit === true && $form.length > 0;
 
         if (isFormSubmittingRequired) {
-            if (settingsTemporary.$formElement.length > 0) {
+            if ($form.length > 0) {
                 var allPlugins = pluginAttacherElements,
-                    pluginsCount = 0,
+                    inputsSentForValidationCount = 0,
                     submitFormDirectly = false;
-                settingsTemporary.$formElement.submit(function (e) {
+
+                // fix validation on submit
+                $form.removeData("validator").removeData("unobtrusiveValidation");
+                $.validator.unobtrusive.parse($form);
+
+                $form.submit(function (e) {
                     if (submitFormDirectly === false) {
-                        e.preventDefault();
-                        settingsTemporary.$submitButton.attr("disabled", "disabled");
+
                         //pluginAttacherElements[i] = {
                         //    plugin: creatingPlugin,
                         //    additionalFields: additionalFields,
@@ -1141,10 +1143,17 @@
                         //    $input: $input,
                         //    options: settings
                         //};
-                        pluginsCount = allPlugins.length;
+                        inputsSentForValidationCount = 0;
                         for (var j = 0; j < allPlugins.length; j++) {
                             var singlePlugin = allPlugins[j];
-                            singlePlugin.plugin.startServerValidation(singlePlugin.plugin);
+                            // Updates pluginsCount if request is send to the server.
+                            inputsSentForValidationCount += singlePlugin.plugin.sendServerValidationRequestOnlyIfInputInvalidOrNotProcessed(singlePlugin.plugin);
+                        }
+                        if (inputsSentForValidationCount > 0) {
+                            e.preventDefault();
+                            $submitbtn.attr("disabled", "disabled");
+                        } else {
+                            //this.submit();
                         }
                     } else {
                         // submitFormDirectly = true
@@ -1152,21 +1161,37 @@
                         this.submit();
                     }
                 });
+
+                //attach event for when call is returned from server validation
                 for (i = 0; i < allPlugins.length; i++) {
-                    var singlePlugin = allPlugins[i],
-                        serverAlwaysCallingEventName = singlePlugin.plugin.getEventNameOfServerAlways(singlePlugin.plugin),
-                        $inputBox = singlePlugin.$input;
+                    var singlePlugin = allPlugins[i].plugin,
+                        serverAlwaysCallingEventName = singlePlugin.getEventNameOfServerAlways(singlePlugin),
+                        $inputBox = singlePlugin.getInput();
+                    //attach event for when call is returned 
                     $inputBox.on(serverAlwaysCallingEventName, function onServerExecutionCameBack() {
-                        pluginsCount = pluginsCount - 1; // one done.
-                        if (pluginsCount <= 0) { // when all done.
+                        var $this = $(this);
+                        console.log($this);
+                        inputsSentForValidationCount = inputsSentForValidationCount - 1; // one done.
+                        if (inputsSentForValidationCount === 0) { // when all done.
                             setTimeout(function () {
-                                submitFormDirectly = true;
-                                settingsTemporary.$formElement.submit();
-                                settingsTemporary.$submitButton.removeAttr("disabled", "disabled");
+                                // if all inputs are valid then submit.
+                                var allValid = true;
+                                for (var j = 0; j < allPlugins.length; j++) {
+                                    var singlePluginObject = allPlugins[j].plugin;
+                                    if (singlePluginObject.isInvalid(singlePluginObject)) {
+                                        allValid = false;
+                                    }
+                                }
+                                if (allValid === true) {
+                                    submitFormDirectly = true;
+                                    $form.submit();
+                                }
+                                $submitbtn.removeAttr("disabled", "disabled");
                             }, 500);
                         }
                     });
                 }
+
             }
         }
 

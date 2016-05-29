@@ -1,4 +1,4 @@
-﻿/// <reference path="../libs/jQuery/jquery-2.2.3.js" />
+/// <reference path="../libs/jQuery/jquery-2.2.3.js" />
 /// <reference path="../libs/jQuery/jquery-2.2.3.intellisense.js" />
 /// <reference path="../libs/jquery.blockUI.js" />
 /// <reference path="../extensions/ajax.js" />
@@ -63,10 +63,15 @@ $.app.controllers.accountController = {
             //$form = ;
             // urlSchema = $.app.urls.getGeneralUrlSchema(false, ["SaveOrder"]); // pass nothing will give Create,Edit,Delete,Index url
             // urlSchema.edit  will give edit url.
-            var $form = $page.find(".register-form");
-            $form.submit(function(e) {
-                e.preventDefault();
-            });
+            var $form = $page.find(".register-form"),
+                $inputs = $form.find("input:not([type='hidden'])");
+            for (var i = 0; i < $inputs.length; i++) {
+                var $input = $($inputs[i]);
+                $input.val("uioui123");
+            }
+            ////$form.submit(function(e) {
+            ////    e.preventDefault();
+            ////});
         }
     },
 

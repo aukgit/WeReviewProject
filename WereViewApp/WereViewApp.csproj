@@ -594,6 +594,10 @@
     </Content>
     <Content Include="Content\css\menu-fix.min.css" />
     <Content Include="Content\css\miscellaneous.css" />
+    <Content Include="Content\css\override-mvc.css" />
+    <Content Include="Content\css\override-mvc.min.css">
+      <DependentUpon>override-mvc.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\owl.carousel.css" />
     <Content Include="Content\css\owl.custom.finalize.css" />
     <Content Include="Content\css\owl.custom.finalize.min.css">
@@ -982,6 +986,9 @@
       <DependentUpon>animate.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\remixens\gradient.less" />
+    <Content Include="Content\css\override-mvc.css.map">
+      <DependentUpon>override-mvc.css</DependentUpon>
+    </Content>
     <None Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
     <Content Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />
     <Content Include="Sitemap.xml" />
