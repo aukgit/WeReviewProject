@@ -204,29 +204,29 @@
         additionalFields: [],
         $element: null,
         $input: null,
-        isEmpty: function(variable) {
+        isEmpty: function (variable) {
             return variable === null || variable === undefined || variable.length === 0;
         },
-        init: function($divElement) {
+        init: function ($divElement) {
 
             if (this.isValidForProcessing($divElement)) {
                 this.events.bindAllEvents(this);
                 this.processDiv(this, $divElement);
             }
         },
-        getSettings: function() {
+        getSettings: function () {
             return this.settings;
         },
-        isMultipleRequestAllowed: function() {
+        isMultipleRequestAllowed: function () {
             return this.getSettings().multipleRequests;
         },
-        isDisableInputOnValidation: function() {
+        isDisableInputOnValidation: function () {
             return this.getSettings().disableInputOnValidation;
         },
-        isInputValidationRequirestoSendRequest: function() {
+        isInputValidationRequirestoSendRequest: function () {
             return this.getSettings().checkValidationBeforeSendingRequest;
         },
-        dontSendSameRequestTwice: function() {
+        dontSendSameRequestTwice: function () {
             return this.getSettings().dontSendSameRequestTwice;
         },
 
@@ -242,7 +242,7 @@
                 createIcon: "createIcon",
                 showingSpinnerIcon: "showingSpinnerIcon",
                 typingStart: "typingStart",
-                getName: function(plugin, nameOfEvent) {
+                getName: function (plugin, nameOfEvent) {
                     var settings = plugin.getSettings(),
                         nameSpace = settings.eventsNameSpace,
                         inputId = plugin.getInputNameOrId(plugin.$input),
@@ -251,7 +251,7 @@
                     return finalName;
                 }
             },
-            getEventsCommonAttributes: function(plugin, nameOfEvent, additionalAttributes) {
+            getEventsCommonAttributes: function (plugin, nameOfEvent, additionalAttributes) {
                 /// <summary>
                 /// Returns a json with a combination of additional json attributes.
                 /// event = {
@@ -296,7 +296,7 @@
 
             },
 
-            bindAllEvents: function(plugin) {
+            bindAllEvents: function (plugin) {
                 /// <summary>
                 /// Bind all events
                 /// </summary>
@@ -342,14 +342,14 @@
                 //      plugin: plugin,
                 //      settings: settings
                 //  }
-                $input.on(serverStartEvtName, serverStartEventData, function(evt) {
+                $input.on(serverStartEvtName, serverStartEventData, function (evt) {
                     //console.log(evt.data.finalEventName);
                     var fields = plugin.concatAdditionalFields($input);
                     sendRequest(plugin, $div, $input, url, fields);
                 });
 
 
-                $div.on(serverStartEvtName, serverStartEventData, function(evt) {
+                $div.on(serverStartEvtName, serverStartEventData, function (evt) {
                     //console.log("div: " + evt.data.finalEventName);
                     //$input.trigger(serverStartEvtName);
                 });
@@ -359,7 +359,7 @@
                 var serverSuccessEventData = this.getEventsCommonAttributes(plugin, evtNames.serverProcessSucceeded, {
                     url: url
                 });
-                $input.on(serverSuccessEvtName, serverSuccessEventData, function(evt, response) {
+                $input.on(serverSuccessEvtName, serverSuccessEventData, function (evt, response) {
                     //console.log(evt.data.finalEventName);
                     cachedResponse = response;
                     if (isInTestingMode) {
@@ -374,7 +374,7 @@
                     plugin.hideSpinner($input);
                 });
 
-                $div.on(serverSuccessEvtName, serverSuccessEventData, function(evt, response) {
+                $div.on(serverSuccessEvtName, serverSuccessEventData, function (evt, response) {
                     evt.data.response = cachedResponse;
                     //console.log("div: " + evt.data.finalEventName);
                     //$input.trigger(serverSuccessEvtName, [response]);
@@ -385,7 +385,7 @@
                 var serverFailEventData = this.getEventsCommonAttributes(plugin, evtNames.serverProcessFailed, {
                     url: url
                 });
-                $input.on(serverFailEvtName, serverFailEventData, function(evt, jqXHR, textStatus, exceptionMessage) {
+                $input.on(serverFailEvtName, serverFailEventData, function (evt, jqXHR, textStatus, exceptionMessage) {
                     //console.log(evt.data.finalEventName);
                     plugin.hideAllIcons($div); // hide all the icons
                     plugin.hideSpinner($input);
@@ -393,7 +393,7 @@
                     //console.log("Request failed: " + exceptionMessage + ". Url : " + url);
                 });
 
-                $div.on(serverFailEvtName, serverFailEventData, function(evt, jqXHR, textStatus, exceptionMessage) {
+                $div.on(serverFailEvtName, serverFailEventData, function (evt, jqXHR, textStatus, exceptionMessage) {
                     //console.log("div: " + evt.data.finalEventName);
                     //$input.trigger(serverFailEvtName, [jqXHR, textStatus, exceptionMessage]);
                 });
@@ -402,7 +402,7 @@
                 var serverAlwaysEventData = this.getEventsCommonAttributes(plugin, evtNames.serverProcessReturnedAlways, {
                     url: url
                 });
-                $input.on(serverAlwaysEvtName, serverAlwaysEventData, function(evt) {
+                $input.on(serverAlwaysEvtName, serverAlwaysEventData, function (evt) {
                     evt.data.response = cachedResponse;
                     plugin.markAsProcessing($div, false);
                     plugin.hideSpinner($input);
@@ -411,14 +411,14 @@
                     //console.log(evt.data);
 
                 });
-                $input.on(serverAllRequestComplete, function(evt) {
+                $input.on(serverAllRequestComplete, function (evt) {
                     console.log(serverAllRequestComplete);
                     plugin.hideSpinner($input);
                     //if (settings.triggerValidationBeforeFormSubmit === true && settings.$formElement.length > 0) {
                     //    settings.$formElement.submit();
                     //}
                 });
-                $div.on(serverAlwaysEvtName, serverAlwaysEventData, function(evt) {
+                $div.on(serverAlwaysEvtName, serverAlwaysEventData, function (evt) {
                     //evt.data.response = cachedResponse;
                     //console.log("div: " + evt.data.finalEventName);
                     //$input.trigger(serverAlwaysEvtName);
@@ -427,25 +427,25 @@
             }
         },
 
-        getAttributes: function() {
+        getAttributes: function () {
             return this.getSettings().attributes;
         },
-        getEvents: function() {
+        getEvents: function () {
             return this.getSettings().events;
         },
-        getIcons: function() {
+        getIcons: function () {
             return this.getSettings().icons;
         },
-        getIdPrefixes: function() {
+        getIdPrefixes: function () {
             return this.getSettings().iconsIdPrefixes;
         },
-        getSelectors: function() {
+        getSelectors: function () {
             return this.getSettings().selectors;
         },
-        getMessages: function() {
+        getMessages: function () {
             return this.getSettings().messages;
         },
-        isValidForProcessing: function($div) {
+        isValidForProcessing: function ($div) {
             /// <summary>
             /// if it is valid for processing
             /// </summary>
@@ -455,14 +455,14 @@
             var attrs = this.getAttributes();
             return $div.attr(attrs.isValidate) === "true";
         },
-        getInput: function() {
+        getInput: function () {
             if (this.isEmpty(this.$input)) {
                 var $div = this.$element;
                 this.$input = $div.find("input");
             }
             return this.$input;
         },
-        getUrl: function() {
+        getUrl: function () {
             if (this.isEmpty(this._url)) {
                 var attrs = this.getAttributes(),
                     $input = this.getInput();
@@ -471,7 +471,7 @@
             }
             return this._url;
         },
-        processDiv: function(plugin, $div) {
+        processDiv: function (plugin, $div) {
             //var $self = $selfContainer;
             var $input = this.getInput($div),
                 url = this.getUrl();
@@ -479,13 +479,13 @@
             this.inputProcessWithBlurEvent(plugin, $div, $input, url);
 
         },
-        test: function() {
+        test: function () {
             this.showSpinner($input);
         },
-        setCurrentTextForNexttimeChecking: function($input) {
+        setCurrentTextForNexttimeChecking: function ($input) {
             $input.attr("data-previous-submit", $input.val());
         },
-        isPreviousRequestIsSame: function($div, $input, url) {
+        isPreviousRequestIsSame: function ($div, $input, url) {
             /// <summary>
             /// Returns true/false based if it is the same request twice.
             /// Also called the event sameRequestTwice 
@@ -507,7 +507,7 @@
             }
             return returnStatement;
         },
-        hideAllIcons: function($div) {
+        hideAllIcons: function ($div) {
             var self = this,
                 $input = self.getInput();
             $div.removeAttr("data-icon-added");
@@ -519,7 +519,7 @@
         },
 
         // processing
-        inputProcessWithBlurEvent: function(self, $div, $input, url) {
+        inputProcessWithBlurEvent: function (self, $div, $input, url) {
             /// <summary>
             /// Bind keypress event with input and it will trigger server validation event
             /// if every condition from settings meets. 
@@ -533,13 +533,13 @@
                 eventsNames = self.events.names,
                 serverProcessStartEvent = eventsNames.getName(self, eventsNames.serverProcessStart);
 
-            var hideIcons = function() {
+            var hideIcons = function () {
                 if (isIconsVisible === true) {
                     self.hideAllIcons($div);
                     isIconsVisible = false;
                 }
             }
-            var blurEvent = function(event, url) {
+            var blurEvent = function (event, url) {
                 var isRequstValid = !self.isInProcessingMode($div) || self.isMultipleRequestAllowed();
                 // if we are allowing to send multiple request while one is already being processing in the server.
                 if (isRequstValid) {
@@ -571,20 +571,20 @@
 
             //});
 
-            $input.on("keypress", function(evt, delay) {
+            $input.on("keypress", function (evt, delay) {
                 if (!self.isEmpty(timeOutMethod)) {
                     clearTimeout(timeOutMethod);
                 }
                 if (self.isEmpty(delay)) {
                     delay = 750;
                 }
-                timeOutMethod = setTimeout(function() {
+                timeOutMethod = setTimeout(function () {
                     blurEvent(evt, url);
                 }, delay);
             });
         },
 
-        focusIfnotValid: function($input, force) {
+        focusIfnotValid: function ($input, force) {
             /// <summary>
             /// Focus on the input if not valid.
             /// If forced then focus anyway.
@@ -600,7 +600,7 @@
                 $input.focus();
             }
         },
-        concatAdditionalFields: function($input) {
+        concatAdditionalFields: function ($input) {
             var addFields = this.additionalFields.slice();
             var fields = {
                 name: $input.attr("name"),
@@ -609,7 +609,7 @@
             addFields.push(fields);
             return addFields;
         },
-        getSubmitMethod: function() {
+        getSubmitMethod: function () {
             /// <summary>
             /// Returns submit method is it post or get
             /// </summary>
@@ -617,7 +617,7 @@
             /// <returns type=""></returns>
             return this.getSettings().submitMethod;
         },
-        abortPreviousAjaxRequest: function($input) {
+        abortPreviousAjaxRequest: function ($input) {
             /// <summary>
             /// Abort previous ajax request and hide all the icons
             /// </summary>
@@ -630,7 +630,7 @@
                 $div.attr("data-icon-added", "true");
             }
         },
-        sendRequest: function(self, $div, $input, url, sendingFields) {
+        sendRequest: function (self, $div, $input, url, sendingFields) {
             /// <summary>
             /// 
             /// </summary>
@@ -668,16 +668,16 @@
             if (isCrossDomain == true) {
                 ajaxProperties.dataType = "jsonp";
             }
-            self.ajaxRequest = $.ajax(ajaxProperties).done(function(response) {
+            self.ajaxRequest = $.ajax(ajaxProperties).done(function (response) {
                 $input.trigger(successEventName, [response]);
-            }).fail(function(jqXHR, textStatus, exceptionMessage) {
+            }).fail(function (jqXHR, textStatus, exceptionMessage) {
                 $input.trigger(failedEventName, [jqXHR, textStatus, exceptionMessage]);
-            }).always(function() {
+            }).always(function () {
                 $input.trigger(alwaysEventName);
             });
 
         },
-        errorProcess: function($div, $input, jqXHR, textStatus, exceptionMessage, url) {
+        errorProcess: function ($div, $input, jqXHR, textStatus, exceptionMessage, url) {
             var code = jqXHR.status,
                 settings = this.getSettings(),
                 events = settings.events,
@@ -701,35 +701,35 @@
             }
 
         },
-        markAsProcessing: function($div, isProcessing) {
+        markAsProcessing: function ($div, isProcessing) {
             if (this.isDebugging) {
 
                 console.log("Making: " + isProcessing);
             }
             $div.attr("data-is-processing", isProcessing);
         },
-        isInProcessingMode: function($div) {
+        isInProcessingMode: function ($div) {
             var attr = $div.attr("data-is-processing");
             if (this.isDebugging) {
                 console.log("is Processing: " + attr);
             }
             return attr === "true";
         },
-        getInputNameOrId: function($input) {
+        getInputNameOrId: function ($input) {
             var id = $input.attr('id');
             if (this.isEmpty(id)) {
                 id = $input.attr('name');
             }
             return id;
         },
-        setMessageOnIcons: function($icon, message) {
+        setMessageOnIcons: function ($icon, message) {
             var $span = $icon.find("a").attr("title", message)
                 .attr("data-original-title", message)
                 .find("span");
             $span.attr("title", message)
                 .attr("data-display", message);
         },
-        createIcons: function($input, icon, toolTipmessage, idPrefix) {
+        createIcons: function ($input, icon, toolTipmessage, idPrefix) {
             /// <summary>
             /// Create icon and return that Icon whole container.
             /// </summary>
@@ -763,10 +763,10 @@
 
             return $created;
         },
-        getWrapperPrefix: function() {
+        getWrapperPrefix: function () {
             return "wrapper-";
         },
-        getValidator: function() {
+        getValidator: function () {
             /// <summary>
             /// Returns validator div
             /// </summary>
@@ -776,7 +776,7 @@
             }
             return this.$validator;
         },
-        getCachedIcon: function($input, iconIdPrefix) {
+        getCachedIcon: function ($input, iconIdPrefix) {
             /// <summary>
             /// Returns the icon for that specific icon id prefix
             /// If not exist then create one and then return.
@@ -814,7 +814,7 @@
             return $existingIcon;
         },
         //
-        getInvalidIcon: function($input) {
+        getInvalidIcon: function ($input) {
             /// <summary>
             /// Get invalid a tag.
             /// </summary>
@@ -825,7 +825,7 @@
             return this.$invalidMarkIcon;
         },
 
-        getValidIcon: function($input) {
+        getValidIcon: function ($input) {
             /// <summary>
             /// Get valid a tag.
             /// </summary>
@@ -835,7 +835,7 @@
             }
             return this.$validMarkIcon;
         },
-        getSpinner: function($input) {
+        getSpinner: function ($input) {
             /// <summary>
             /// Get spinner's div tag.
             /// </summary>
@@ -845,7 +845,7 @@
             }
             return this.$spinner;
         },
-        getErrorIcon: function($input) {
+        getErrorIcon: function ($input) {
             /// <summary>
             /// Get spinner's div tag.
             /// </summary>
@@ -855,51 +855,51 @@
             }
             return this.$errorIcon;
         },
-        showErrorIcon: function($input, message) {
+        showErrorIcon: function ($input, message) {
             var $icon = this.getErrorIcon($input);
             this.setMessageOnIcons($icon, message);
             this.animateOn($icon);
         },
-        showSpinner: function($input) {
+        showSpinner: function ($input) {
             var $spinner = this.getSpinner($input);
             this.animateOn($spinner);
         },
 
-        showInvalidIcon: function($input, message) {
+        showInvalidIcon: function ($input, message) {
             var $markIcon = this.getInvalidIcon($input);
             this.setMessageOnIcons($markIcon, message);
             this.animateOn($markIcon);
         },
 
-        showValidIcon: function($input, message) {
+        showValidIcon: function ($input, message) {
             var $markIcon = this.getValidIcon($input);
             this.setMessageOnIcons($markIcon, message);
             this.animateOn($markIcon);
         },
-        hideValidIcon: function($input) {
+        hideValidIcon: function ($input) {
             var $icon = this.getValidIcon($input);
             this.animateOff($icon);
         },
-        hideErrorIcon: function($input) {
+        hideErrorIcon: function ($input) {
             var $icon = this.getErrorIcon($input);
             this.animateOff($icon);
         },
-        hideInvalidIcon: function($input) {
+        hideInvalidIcon: function ($input) {
             var $icon = this.getInvalidIcon($input);
             this.animateOff($icon);
         },
-        hideSpinner: function($input) {
+        hideSpinner: function ($input) {
             var $spinner = this.getSpinner($input);
             $spinner.hide();
         },
-        animateOn: function($object) {
+        animateOn: function ($object) {
             $object.fadeIn("slow");
         },
-        animateOff: function($object) {
+        animateOff: function ($object) {
             $object.hide();
         },
 
-        processResponse: function($input, response) {
+        processResponse: function ($input, response) {
             /// <summary>
             /// 
             /// </summary>
@@ -932,7 +932,7 @@
                 events.responseProcessed($div, $input, response);
             }
         },
-        validResponse: function($input, response) {
+        validResponse: function ($input, response) {
             /// <summary>
             /// Process if response has valid = true.
             /// </summary>
@@ -976,7 +976,7 @@
                 events.validAfter($div, $input, response);
             }
         },
-        inValidResponse: function($input, response) {
+        inValidResponse: function ($input, response) {
             //response: {
             //        message: "Field is valid.",
             //        isValid: true,
@@ -1006,14 +1006,14 @@
                 events.invalidAfter($div, $input, response);
             }
         },
-        isInvalid: function(plugin) {
+        isInvalid: function (plugin) {
             /// <summary>
             /// Returns true/false based on input if the input is valid or not.
             /// </summary>
             var $input = plugin.getInput();
             return $input.attr("data-server-validated") === "true" && $input.valid();
         },
-        startServerValidation: function(plugin) {
+        startServerValidation: function (plugin) {
             /// <summary>
             /// Send the requst to the server to validate the request.
             /// </summary>
@@ -1079,7 +1079,8 @@
 
 
         var pluginAttacherElements = new Array($containers.length);
-        for (var i = 0; i < $containers.length; i++) {
+        var i;
+        for (i = 0; i < $containers.length; i++) {
             var $divElement = $($containers[i]),
                 settingTemporary2 = $.extend({}, defaults, options);
             if ($divElement.attr("data-is-validate") === "true") {
@@ -1127,39 +1128,45 @@
         if (isFormSubmittingRequired) {
             if (settingsTemporary.$formElement.length > 0) {
                 var allPlugins = pluginAttacherElements,
-                    pluginsCount = allPlugins.length;
+                    pluginsCount = 0,
+                    submitFormDirectly = false;
                 settingsTemporary.$formElement.submit(function (e) {
-                    e.preventDefault();
-                    settingsTemporary.$submitButton.attr("disabled", "disabled");
-                    //pluginAttacherElements[i] = {
-                    //    plugin: creatingPlugin,
-                    //    additionalFields: additionalFields,
-                    //    $divContainer: $divElement,
-                    //    $input: $input,
-                    //    options: settings
-                    //};
-                    pluginsCount = allPlugins.length;
-                    for (var j = 0; j < allPlugins.length; j++) {
-                        var singlePlugin = allPlugins[j];
-                        singlePlugin.plugin.startServerValidation(singlePlugin.plugin);
+                    if (submitFormDirectly === false) {
+                        e.preventDefault();
+                        settingsTemporary.$submitButton.attr("disabled", "disabled");
+                        //pluginAttacherElements[i] = {
+                        //    plugin: creatingPlugin,
+                        //    additionalFields: additionalFields,
+                        //    $divContainer: $divElement,
+                        //    $input: $input,
+                        //    options: settings
+                        //};
+                        pluginsCount = allPlugins.length;
+                        for (var j = 0; j < allPlugins.length; j++) {
+                            var singlePlugin = allPlugins[j];
+                            singlePlugin.plugin.startServerValidation(singlePlugin.plugin);
+                        }
+                    } else {
+                        // submitFormDirectly = true
+                        submitFormDirectly = false;
+                        this.submit();
                     }
-                    setTimeout(function () {
-                        settingsTemporary.$submitButton.removeAttr("disabled", "disabled");
-                    }, 1500);
-                    ////settings.$submitButton.addClass("somehting");
-                    //if (!plugin.isInProcessingMode($div)) {
-                    //    //var timer = setTimeout(function () {
-                    //    //    clearTimeout(timer);
-                    //    plugin.markAsProcessing($div, true);
-                    //    $input.trigger(serverStartEvtName);
-                    //    if (plugin.isEmpty($selfContainer[ajaxRequestName])) {
-                    //        $selfContainer[ajaxRequestName] = 1;
-                    //    } else {
-                    //        $selfContainer[ajaxRequestName]++;
-                    //    }
-                    //    //}, 650);
-                    //}
                 });
+                for (i = 0; i < allPlugins.length; i++) {
+                    var singlePlugin = allPlugins[i],
+                        serverAlwaysCallingEventName = singlePlugin.plugin.getEventNameOfServerAlways(singlePlugin.plugin),
+                        $inputBox = singlePlugin.$input;
+                    $inputBox.on(serverAlwaysCallingEventName, function onServerExecutionCameBack() {
+                        pluginsCount = pluginsCount - 1; // one done.
+                        if (pluginsCount <= 0) { // when all done.
+                            setTimeout(function () {
+                                submitFormDirectly = true;
+                                settingsTemporary.$formElement.submit();
+                                settingsTemporary.$submitButton.removeAttr("disabled", "disabled");
+                            }, 500);
+                        }
+                    });
+                }
             }
         }
 

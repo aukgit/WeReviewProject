@@ -400,9 +400,18 @@ div.contactus {
   margin-bottom: 5px;
   margin-bottom: 0.5rem;
 }
-.top-gap {
+.top-gap,
+.top-gap-1x {
   margin-top: 8px;
   margin-top: 0.8rem;
+}
+.top-gap-d-15x {
+  margin-top: 12px;
+  margin-top: 1.2rem;
+}
+.top-gap-d-12x {
+  margin-top: 9px;
+  margin-top: 0.9rem;
 }
 .top-gap-2x {
   margin-top: 16px;

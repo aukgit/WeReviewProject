@@ -1714,4 +1714,100 @@ a.link {
 a.link:hover {
   background-color: #0275a8;
 }
+.notification-label-wrapper label {
+  background-color: #ff4136;
+  border-bottom-left-radius: 2.625px;
+  border-bottom-right-radius: 2.625px;
+  border-top-left-radius: 2.625px;
+  border-top-right-radius: 2.625px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: default;
+  display: table;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10.5px;
+  font-weight: normal;
+  margin-bottom: 5px;
+  margin-right: 0;
+  margin-top: 12px;
+  max-width: 100%;
+  padding-bottom: 3.15px;
+  padding-left: 6.3px;
+  padding-right: 6.3px;
+  padding-top: 2.1px;
+  text-align: center;
+  vertical-align: baseline;
+  white-space: nowrap;
+  /*margin: 0;
+        padding: 0;*/
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+.delete-btn-wrapper {
+  position: relative;
+  width: auto;
+}
+.delete-btn-wrapper .delete-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 1em;
+  padding: 4px 7px;
+  box-shadow: 2px 2px 3px rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(214, 208, 208, 0.46);
+}
+.delete-btn-wrapper .delete-icon:hover {
+  background: -moz-linear-gradient(89deg, #800000 0%, #ff0000 100%);
+  /* ff3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff0000), color-stop(100%, #800000));
+  /* safari4+,chrome */
+  background: -webkit-linear-gradient(89deg, #800000 0%, #ff0000 100%);
+  /* safari5.1+,chrome10+ */
+  background: -o-linear-gradient(89deg, #800000 0%, #ff0000 100%);
+  /* opera 11.10+ */
+  background: -ms-linear-gradient(89deg, #800000 0%, #ff0000 100%);
+  /* ie10+ */
+  background: linear-gradient(1deg, #800000 0%, #ff0000 100%);
+  /* w3c */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF0000', endColorstr='#800000', GradientType=0);
+  /* ie6-9 */
+}
+.photo-collection {
+  overflow: hidden;
+}
+.photo-collection li {
+  float: left;
+  margin: 5px 6px 2px 0;
+  border-bottom: 3px solid #DB1212;
+  border-radius: 4px;
+  box-shadow: 2px 2px 3px rgba(255, 255, 255, 0.55);
+}
+.photo-collection li:hover {
+  box-shadow: 1px 2px 2px gray;
+}
+.image-size-fixed-for-model {
+  height: 135px;
+  width: 178px;
+}
+.modal-dialog button[data-btn="close"]:hover {
+  color: red;
+}
+.modal-dialog button[data-btn="close"]:hover:not(.close) {
+  background: -moz-linear-gradient(89deg, #800000 0%, #ff0000 100%);
+  /* ff3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff0000), color-stop(100%, #800000));
+  /* safari4+,chrome */
+  background: -webkit-linear-gradient(89deg, #800000 0%, #ff0000 100%);
+  /* safari5.1+,chrome10+ */
+  background: -o-linear-gradient(89deg, #800000 0%, #ff0000 100%);
+  /* opera 11.10+ */
+  background: -ms-linear-gradient(89deg, #800000 0%, #ff0000 100%);
+  /* ie10+ */
+  background: linear-gradient(1deg, #800000 0%, #ff0000 100%);
+  /* w3c */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF0000', endColorstr='#800000', GradientType=0);
+  /* ie6-9 */
+  color: white;
+}
 /*# sourceMappingURL=front-developer.css.map */
