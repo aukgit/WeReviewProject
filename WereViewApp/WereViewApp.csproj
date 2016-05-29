@@ -594,13 +594,6 @@
     </Content>
     <Content Include="Content\css\menu-fix.min.css" />
     <Content Include="Content\css\miscellaneous.css" />
-    <Content Include="Content\css\override-mvc.css" />
-    <Content Include="Content\css\override-mvc.css.map">
-      <DependentUpon>override-mvc.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\override-mvc.min.css">
-      <DependentUpon>override-mvc.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\owl.carousel.css" />
     <Content Include="Content\css\owl.custom.finalize.css" />
     <Content Include="Content\css\owl.custom.finalize.min.css">
@@ -716,14 +709,6 @@
       <DependentUpon>color-fonts.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\color-fonts.less" />
-    <Content Include="Content\Less\CSS\gradient.css" />
-    <Content Include="Content\Less\CSS\gradient.min.css">
-      <DependentUpon>gradient.css</DependentUpon>
-    </Content>
-    <Content Include="Content\Less\CSS\lesshat.css" />
-    <Content Include="Content\Less\CSS\lesshat.min.css">
-      <DependentUpon>lesshat.css</DependentUpon>
-    </Content>
     <Content Include="Content\Less\footer-fixing.less" />
     <Content Include="Content\Less\front-developer.less" />
     <Content Include="Content\Less\less-imports.less" />
@@ -997,12 +982,6 @@
       <DependentUpon>animate.css</DependentUpon>
     </Content>
     <Content Include="Content\Less\remixens\gradient.less" />
-    <Content Include="Content\Less\CSS\gradient.css.map">
-      <DependentUpon>gradient.css</DependentUpon>
-    </Content>
-    <Content Include="Content\Less\CSS\lesshat.css.map">
-      <DependentUpon>lesshat.css</DependentUpon>
-    </Content>
     <None Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
     <Content Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />
     <Content Include="Sitemap.xml" />
