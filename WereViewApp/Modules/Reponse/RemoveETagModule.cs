@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web;
-using WeReviewApp.Models.EntityModel;
 using DevMvcComponent.Extensions;
+
 namespace WeReviewApp.Modules.Reponse {
     public class RemoveETagModule : IHttpModule {
         private static readonly string[] StaticExtensions = {
@@ -14,7 +14,7 @@ namespace WeReviewApp.Modules.Reponse {
             ".json"
         };
 
-        public void Dispose() { }
+        public void Dispose() {}
 
         public void Init(HttpApplication context) {
             context.PreSendRequestHeaders += OnPreSendRequestHeaders;
@@ -34,13 +34,13 @@ namespace WeReviewApp.Modules.Reponse {
             HttpContext.Current.Request.Headers.Remove("X-Powered-By");
             HttpContext.Current.Request.Headers.Remove("Server");
             HttpContext.Current.Request.Headers.Add("Expires", "10000");
-            if (IsStaticContent(StaticExtensions)) {
-                HttpContext.Current.Response.Cache.SetExpires(DateTime.Now.AddYears(2));
-                HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.Public);
-                HttpContext.Current.Request.Cookies.Clear();
-                HttpContext.Current.Request.Headers.Remove("Cookie");
-                HttpContext.Current.Response.Headers.Remove("Cookie");
-            }
+            //if (IsStaticContent(StaticExtensions)) {
+            //    HttpContext.Current.Response.Cache.SetExpires(DateTime.Now.AddYears(2));
+            //    HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.Public);
+            //    HttpContext.Current.Request.Cookies.Clear();
+            //    HttpContext.Current.Request.Headers.Remove("Cookie");
+            //    HttpContext.Current.Response.Headers.Remove("Cookie");
+            //}
         }
 
         private bool IsStaticContent(string[] extensions) {
