@@ -125,6 +125,8 @@ namespace WeReviewApp {
                                   jsFrameworkFolder + "controllers/controllers.js",
                                   jsFrameworkFolder + "controllers/initialize.js",
                                   jsFrameworkFolder + "controllers/AppController.js",
+                                  jsFrameworkFolder + "controllers/AccountController.js",
+                                  jsFrameworkFolder + "controllers/TagsController.js",
 
                                   jsFrameworkFolder + "component/component.js",
                                   jsFrameworkFolder + "component/component.list.js",
