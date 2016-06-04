@@ -6,7 +6,7 @@ using WeReviewApp.Common;
 #endregion
 
 namespace WeReviewApp.Scheduler {
-    internal class WeReviewScheduler : ITask {
+    internal class WeReviewScheduler : IJob {
         #region ITask Members
 
 
