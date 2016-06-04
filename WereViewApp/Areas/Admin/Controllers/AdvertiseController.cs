@@ -286,7 +286,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
         /// </summary>
         /// <param name="gallery"></param>
         public void DoUpload(Gallery gallery) {
-            WereViewStatics.UProcessorAdvertiseImages.UploadFile(gallery.File, gallery.UploadGuid.ToString(), -1, false,
+            Statics.UProcessorAdvertiseImages.UploadFile(gallery.File, gallery.UploadGuid.ToString(), -1, false,
                 true);
             ProcessImageAsyc(gallery);
         }
@@ -298,8 +298,8 @@ namespace WeReviewApp.Areas.Admin.Controllers {
                 using (var db2 = new WereViewAppEntities()) {
                     var category = db2.GalleryCategories.Find(gallery.GalleryCategoryID);
                     if (category != null) {
-                        WereViewStatics.UProcessorAdvertiseImages.ResizeImageAndProcessImage(gallery, category);
-                        WereViewStatics.UProcessorAdvertiseImages.RemoveTempImage(gallery, true);
+                        Statics.UProcessorAdvertiseImages.ResizeImageAndProcessImage(gallery, category);
+                        Statics.UProcessorAdvertiseImages.RemoveTempImage(gallery, true);
                     }
                 }
             }).Start();
@@ -331,7 +331,7 @@ namespace WeReviewApp.Areas.Admin.Controllers {
 
                 return View(gallery);
             }
-            WereViewStatics.UProcessorAdvertiseImages.RemoveTempImage(gallery, false);
+            Statics.UProcessorAdvertiseImages.RemoveTempImage(gallery, false);
 
             return RedirectToAction("Index");
         }

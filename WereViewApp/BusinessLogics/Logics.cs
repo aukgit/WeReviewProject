@@ -73,8 +73,8 @@ namespace WeReviewApp.BusinessLogics {
         #region Get App From Cache
 
         public App GetAppFromStaticCache(long appId) {
-            if (CommonVars.StaticAppsList != null) {
-                return CommonVars.StaticAppsList.FirstOrDefault(n => n.AppID == appId);
+            if (Variables.StaticAppsList != null) {
+                return Variables.StaticAppsList.FirstOrDefault(n => n.AppID == appId);
             }
             return null;
         }
@@ -94,7 +94,7 @@ namespace WeReviewApp.BusinessLogics {
             appSavingFields.Publishers = app.Publishers;
             appSavingFields.Tags = app.Tags;
             appSavingFields.UploadGuid = app.UploadGuid;
-            WereViewStatics.SavingAppInDirectory(appSavingFields);
+            Statics.SavingAppInDirectory(appSavingFields);
         }
 
         #endregion
@@ -107,7 +107,7 @@ namespace WeReviewApp.BusinessLogics {
         /// <param name="app"></param>
         /// <returns></returns>
         public bool ReadVirtualFields(ref App app) {
-            var retriveFields = WereViewStatics.ReadAppFromDirectory(app.UploadGuid);
+            var retriveFields = Statics.ReadAppFromDirectory(app.UploadGuid);
             if (retriveFields != null) {
                 app.Tags = retriveFields.Tags;
                 app.IdeaBy = retriveFields.IdeaBy;
@@ -139,7 +139,7 @@ namespace WeReviewApp.BusinessLogics {
         /// <param name="userSettingsId">UserPointsSettingIDs.PostApp</param>
         /// <param name="db"></param>
         public void AddPoints(App app, byte userSettingsId, WereViewAppEntities db) {
-            var point = WereViewStatics.GetUserSettingPoint(userSettingsId);
+            var point = Statics.GetUserSettingPoint(userSettingsId);
             var userId = UserManager.GetLoggedUserId();
 
             var userPoint = new UserPoint();
@@ -163,14 +163,14 @@ namespace WeReviewApp.BusinessLogics {
 
         /// <summary>
         ///     Only call when an app is edited.
-        ///     Remove the app from CommonVars.StaticAppsList
+        ///     Remove the app from Variables.StaticAppsList
         /// </summary>
         /// <param name="appId"></param>
         public void RemoveSingleAppFromCacheOfStatic(long appId) {
-            if (CommonVars.StaticAppsList != null) {
-                var find = CommonVars.StaticAppsList.FirstOrDefault(n => n.AppID == appId);
+            if (Variables.StaticAppsList != null) {
+                var find = Variables.StaticAppsList.FirstOrDefault(n => n.AppID == appId);
                 if (find != null) {
-                    CommonVars.StaticAppsList.Remove(find);
+                    Variables.StaticAppsList.Remove(find);
                 }
             }
         }
@@ -230,7 +230,7 @@ namespace WeReviewApp.BusinessLogics {
                 db = new WereViewAppEntities();
             }
 
-            var platforms = WereViewStatics.AppPlatformsCache;
+            var platforms = Statics.AppPlatformsCache;
             foreach (var platform in platforms) {
                 platform.Apps = GetViewableApps(db)
                     .Include(n => n.User)
@@ -261,7 +261,7 @@ namespace WeReviewApp.BusinessLogics {
             }
 
             var platform =
-                WereViewStatics.AppPlatformsCache.FirstOrDefault(
+                Statics.AppPlatformsCache.FirstOrDefault(
                     n => n.PlatformName.Equals(platformName, StringComparison.OrdinalIgnoreCase));
             if (platform != null) {
                 var appsConditions = GetViewableApps(db)
@@ -299,7 +299,7 @@ namespace WeReviewApp.BusinessLogics {
                 db = new WereViewAppEntities();
             }
 
-            var categories = WereViewStatics.AppCategoriesCache;
+            var categories = Statics.AppCategoriesCache;
             foreach (var category in categories) {
                 category.Apps = GetViewableApps(db)
                     .Include(n => n.User)
@@ -333,7 +333,7 @@ namespace WeReviewApp.BusinessLogics {
                 db = new WereViewAppEntities();
             }
             var category =
-                WereViewStatics.AppCategoriesCache.FirstOrDefault(
+                Statics.AppCategoriesCache.FirstOrDefault(
                     n => n.Slug.Equals(slug, StringComparison.OrdinalIgnoreCase));
             if (category != null) {
                 var appsConditions = GetViewableApps(db)
@@ -469,11 +469,11 @@ namespace WeReviewApp.BusinessLogics {
                 db = new WereViewAppEntities();
             }
             //var hash = DevHash.Get(searchText, rating, platform, tags);
-            //var cacheReaderSaver = new CacheDataInFile(CommonVars.APP_SEARCH_RESULTS_ADDITIONALPATH);
-            //var cache = cacheReaderSaver.ReadObjectFromBinaryFileAsCache(hash, CommonVars.APP_SEARCH_RESULTS_EXPIRE_IN_HOURS);
+            //var cacheReaderSaver = new CacheDataInFile(Variables.APP_SEARCH_RESULTS_ADDITIONALPATH);
+            //var cache = cacheReaderSaver.ReadObjectFromBinaryFileAsCache(hash, Variables.APP_SEARCH_RESULTS_EXPIRE_IN_HOURS);
             //if (cache == null) {
             // cache doesn't exist
-            var results = AppSearchAlgorithm(searchText, rating, platform, tags, CommonVars.SearchResultsMaxResultReturn,
+            var results = AppSearchAlgorithm(searchText, rating, platform, tags, Variables.SearchResultsMaxResultReturn,
                 db);
             //cacheReaderSaver.SaveInBinaryAsync(hash, results);
             GetEmbedImagesWithApp(results, db, max, GalleryCategoryIDs.SearchIcon);
@@ -501,7 +501,7 @@ namespace WeReviewApp.BusinessLogics {
             var validUrlList = GetUrlListExceptEscapeSequence(url);
             byte? platformId = null;
             if (platform != null) {
-                var platformObject = WereViewStatics.AppPlatformsCache.FirstOrDefault(n => n.PlatformName == platform);
+                var platformObject = Statics.AppPlatformsCache.FirstOrDefault(n => n.PlatformName == platform);
                 if (platformObject != null) {
                     platformId = platformObject.PlatformID;
                 }
@@ -724,7 +724,7 @@ namespace WeReviewApp.BusinessLogics {
         /// <param name="UserSettingsId">UserPointsSettingIDs.PostApp</param>
         /// <param name="db"></param>
         public void AddNotification(long userId, byte notificationTypeId, string msg, WereViewAppEntities db) {
-            var type = WereViewStatics.GetNotificationType(notificationTypeId);
+            var type = Statics.GetNotificationType(notificationTypeId);
 
             var notify = new Notification();
             notify.UserID = userId;
@@ -780,21 +780,21 @@ namespace WeReviewApp.BusinessLogics {
         public App GetSingleAppForDisplay(string platform, float? platformVersion, string categorySlug, string url,
             int maxReviewLoad, WereViewAppEntities db) {
             if (platform != null && platformVersion != null && categorySlug != null && url != null) {
-                if (CommonVars.StaticAppsList == null) {
-                    CommonVars.StaticAppsList = new List<App>(800);
+                if (Variables.StaticAppsList == null) {
+                    Variables.StaticAppsList = new List<App>(800);
                 }
                 App app = null;
                 var platformO =
-                    WereViewStatics.AppPlatformsCache.FirstOrDefault(
+                    Statics.AppPlatformsCache.FirstOrDefault(
                         n => n.PlatformName.Equals(platform, StringComparison.OrdinalIgnoreCase));
                 var categoryO =
-                    WereViewStatics.AppCategoriesCache.FirstOrDefault(
+                    Statics.AppCategoriesCache.FirstOrDefault(
                         n => n.Slug.Equals(categorySlug, StringComparison.OrdinalIgnoreCase));
                 if (platformO != null && categoryO != null) {
                     var platformId = platformO.PlatformID;
                     var categoryId = categoryO.CategoryID;
                     // static cache search should be done with equals
-                    app = CommonVars.StaticAppsList
+                    app = Variables.StaticAppsList
                                     .FirstOrDefault(n =>
                                                     n.Url.Equals(url, StringComparison.OrdinalIgnoreCase) &&
                                                     n.PlatformID == platformId &&
@@ -875,11 +875,11 @@ namespace WeReviewApp.BusinessLogics {
                         GetEmbedImagesWithApp(ref app, db, 1, GalleryCategoryIDs.YoutubeCoverImage);
 
                         // clear few old cache if close overflowing
-                        if (CommonVars.StaticAppsList.Count > 795) {
-                            CommonVars.StaticAppsList.RemoveRange(0, 200);
+                        if (Variables.StaticAppsList.Count > 795) {
+                            Variables.StaticAppsList.RemoveRange(0, 200);
                         }
                         // saving app into the static
-                        CommonVars.StaticAppsList.Add(app);
+                        Variables.StaticAppsList.Add(app);
                         return app;
                     }
                 }
@@ -900,8 +900,8 @@ namespace WeReviewApp.BusinessLogics {
         public App GetEditingApp(long appId, WereViewAppEntities db) {
             var userId = UserManager.GetLoggedUserId();
             App app = null;
-            if (CommonVars.StaticAppsList != null) {
-                app = CommonVars.StaticAppsList.FirstOrDefault(n => n.AppID == appId && n.PostedByUserID == userId);
+            if (Variables.StaticAppsList != null) {
+                app = Variables.StaticAppsList.FirstOrDefault(n => n.AppID == appId && n.PostedByUserID == userId);
             }
 
             var cacheId = CacheNames.EditingApp + appId + "-" + userId;
@@ -1096,7 +1096,7 @@ namespace WeReviewApp.BusinessLogics {
                 var validUrl = new List<string>(urlList.Length);
 
                 foreach (var valid in urlList) {
-                    if (!CommonVars.SearchingEscapeSequence.Any(escapse => escapse.Equals(valid))) {
+                    if (!Variables.SearchingEscapeSequence.Any(escapse => escapse.Equals(valid))) {
                         var isNumber = Regex.IsMatch(valid, @"^\d+$");
                         if (!isNumber) {
                             validUrl.Add(valid);
@@ -1201,7 +1201,7 @@ namespace WeReviewApp.BusinessLogics {
             byte platformId, WereViewAppEntities db, long currentAppId) {
             if (!string.IsNullOrEmpty(title)) {
                 title = title.Trim();
-                title = Regex.Replace(title, CommonVars.FriendlyUrlRegex, "-").ToLower();
+                title = Regex.Replace(title, Variables.FriendlyUrlRegex, "-").ToLower();
             checkAgain:
                 var exist = false;
                 if (currentAppId < 1) {
@@ -1260,7 +1260,7 @@ namespace WeReviewApp.BusinessLogics {
         public string GenerateHyphenUrlString(string title) {
             if (!string.IsNullOrEmpty(title)) {
                 title = title.Trim();
-                title = Regex.Replace(title, CommonVars.FriendlyUrlRegex, "-").ToLower();
+                title = Regex.Replace(title, Variables.FriendlyUrlRegex, "-").ToLower();
                 return title;
             }
             return title;
@@ -1394,7 +1394,7 @@ namespace WeReviewApp.BusinessLogics {
             if (platform != null) {
                 //var cacheName = "GetAppsFilteredByPlatformAndCategory.names." + page + platform;
                 var platformO =
-                    WereViewStatics.AppPlatformsCache.FirstOrDefault(
+                    Statics.AppPlatformsCache.FirstOrDefault(
                         n => n.PlatformName.Equals(platform, StringComparison.OrdinalIgnoreCase));
                 if (platformO != null) {
                     platformId = platformO.PlatformID;
@@ -1406,7 +1406,7 @@ namespace WeReviewApp.BusinessLogics {
                 }
                 if (!string.IsNullOrEmpty(categorySlug)) {
                     categoryO =
-                        WereViewStatics.AppCategoriesCache.FirstOrDefault(
+                        Statics.AppCategoriesCache.FirstOrDefault(
                             n => n.Slug.Equals(categorySlug, StringComparison.OrdinalIgnoreCase));
                     categoryId = categoryO.CategoryID;
                     if (platformO != null) {
@@ -1678,8 +1678,8 @@ namespace WeReviewApp.BusinessLogics {
             //var appid = app.AppID.ToString();
             List<App> suggestedApps = null;
 
-            //var cacheReaderSaver = new CacheDataInFile(CommonVars.APP_SUGGESTED_ADDITIONALPATH);
-            //var cache = cacheReaderSaver.ReadObjectFromBinaryFileAsCache(appid, CommonVars.APP_SEARCH_RESULTS_EXPIRE_IN_HOURS);
+            //var cacheReaderSaver = new CacheDataInFile(Variables.APP_SUGGESTED_ADDITIONALPATH);
+            //var cache = cacheReaderSaver.ReadObjectFromBinaryFileAsCache(appid, Variables.APP_SEARCH_RESULTS_EXPIRE_IN_HOURS);
             //if (cache == null) {
             // cache doesn't exist
             suggestedApps = GetSuggestedApps(app, db);
@@ -1752,7 +1752,7 @@ namespace WeReviewApp.BusinessLogics {
 
             // exclude blocked or not published
             var executeAlmostSameNameApps = appsSameNameAsCurrent
-                .Take(CommonVars.SuggestHighestTake)
+                .Take(Variables.SuggestHighestTake)
                 .ToList();
 
             var sameNameIds = executeAlmostSameNameApps.Select(n => n.AppID).ToArray();
@@ -1767,7 +1767,7 @@ namespace WeReviewApp.BusinessLogics {
             var executeSimilarNamesAppsAnd = appsNameSimilariesWithAnd
                 // exclude blocked or not published
                                             .Where(n => n.IsPublished && !n.IsBlocked)
-                                            .Take(CommonVars.SuggestHighestTake)
+                                            .Take(Variables.SuggestHighestTake)
                                             .ToList();
 
             var similarNameAndQueryIds = executeSimilarNamesAppsAnd
@@ -1787,7 +1787,7 @@ namespace WeReviewApp.BusinessLogics {
                 executeSimilarAppsPostedByCurrentUser = appsNameSimilariesWithAnd
                     // exclude blocked or not published
                     .Where(n => n.PostedByUserID == userId)
-                    .Take(CommonVars.SuggestHighestTake)
+                    .Take(Variables.SuggestHighestTake)
                     .ToList();
 
                 //usersAppsIds = executeSimilarAppsPostedByCurrentUser.Select(n => n.AppID).ToArray();
@@ -1814,7 +1814,7 @@ namespace WeReviewApp.BusinessLogics {
             //    executeSimilarNamesAppsOr = appsNameSimilariesWithOr
             //        // exclude blocked or not published
             //                                .Where(n => n.IsPublished && !n.IsBlocked)
-            //                                .Take(CommonVars.SUGGEST_HIGHEST_TAKE)
+            //                                .Take(Variables.SUGGEST_HIGHEST_TAKE)
             //                                .ToList();
             //}
 
@@ -1883,10 +1883,10 @@ namespace WeReviewApp.BusinessLogics {
 
         public List<App> FormalizeAppsListFromSeveralLogics(List<App> similarName, List<App> postedByUser,
             List<App> almostSimilarNameWithAnd, List<App> almostSimilarNameWithOr) {
-            var apps = new List<App>(CommonVars.SuggestHighestDisplayNumberSuggestions + 10);
+            var apps = new List<App>(Variables.SuggestHighestDisplayNumberSuggestions + 10);
 
             if (similarName != null) {
-                var conditionNumber = CommonVars.SuggestHighestSameAppName;
+                var conditionNumber = Variables.SuggestHighestSameAppName;
                 var length = similarName.Count > conditionNumber
                                  ? conditionNumber
                                  : similarName.Count;
@@ -1897,8 +1897,8 @@ namespace WeReviewApp.BusinessLogics {
                 }
             }
 
-            if (postedByUser != null && apps.Count < CommonVars.SuggestHighestDisplayNumberSuggestions) {
-                var conditionNumber = CommonVars.SuggestHighestFromSameUser;
+            if (postedByUser != null && apps.Count < Variables.SuggestHighestDisplayNumberSuggestions) {
+                var conditionNumber = Variables.SuggestHighestFromSameUser;
                 var length = postedByUser.Count > conditionNumber
                                  ? conditionNumber
                                  : postedByUser.Count;
@@ -1911,8 +1911,8 @@ namespace WeReviewApp.BusinessLogics {
                 }
             }
 
-            if (almostSimilarNameWithAnd != null && apps.Count < CommonVars.SuggestHighestDisplayNumberSuggestions) {
-                var conditionNumber = CommonVars.SuggestHighestAndSimilarQuery;
+            if (almostSimilarNameWithAnd != null && apps.Count < Variables.SuggestHighestDisplayNumberSuggestions) {
+                var conditionNumber = Variables.SuggestHighestAndSimilarQuery;
                 var length = almostSimilarNameWithAnd.Count > conditionNumber
                                  ? conditionNumber
                                  : almostSimilarNameWithAnd.Count;
@@ -1925,8 +1925,8 @@ namespace WeReviewApp.BusinessLogics {
                 }
             }
 
-            if (almostSimilarNameWithOr != null && apps.Count < CommonVars.SuggestHighestDisplayNumberSuggestions) {
-                var conditionNumber = CommonVars.SuggestHighestOrSimilarQuery;
+            if (almostSimilarNameWithOr != null && apps.Count < Variables.SuggestHighestDisplayNumberSuggestions) {
+                var conditionNumber = Variables.SuggestHighestOrSimilarQuery;
                 var length = almostSimilarNameWithOr.Count > conditionNumber
                                  ? conditionNumber
                                  : almostSimilarNameWithOr.Count;
@@ -1969,7 +1969,7 @@ namespace WeReviewApp.BusinessLogics {
                     return;
                 }
                 var galleries = db.Database.SqlQuery<Gallery>(sql)
-                                  .Take(CommonVars.SuggestHighestDisplayNumberSuggestions)
+                                  .Take(Variables.SuggestHighestDisplayNumberSuggestions)
                                   .ToList();
 
                 foreach (var gallery in galleries) {
@@ -2127,7 +2127,7 @@ namespace WeReviewApp.BusinessLogics {
         #region Clean System : Remove Everything from the system.
 
         private bool RemoveUploadFolderImages(UploadProcessor uploadProcessor) {
-            var folderAbsolutePath = WereViewStatics.UProcessorAdvertiseImages.GetCombinePathWithAdditionalRoots();
+            var folderAbsolutePath = Statics.UProcessorAdvertiseImages.GetCombinePathWithAdditionalRoots();
             var allFileNames = Directory.GetFiles(folderAbsolutePath);
             var isAllFilesRemoved = true;
             foreach (var fileName in allFileNames) {
@@ -2159,7 +2159,7 @@ namespace WeReviewApp.BusinessLogics {
                 }
             }
             if (executed > 0) {
-                var allUploaders = WereViewStatics.GetAllUploaderProcessor();
+                var allUploaders = Statics.GetAllUploaderProcessor();
                 foreach (var uploader in allUploaders) {
                     if (uploader != null) {
                         executed = RemoveUploadFolderImages(uploader) ? 1 : 0;
@@ -2182,19 +2182,19 @@ namespace WeReviewApp.BusinessLogics {
         }
 
         public void RemoveOutputCacheSuggested() {
-            HttpResponse.RemoveOutputCacheItem(CommonVars.OutputcaheSuggestedApps);
+            HttpResponse.RemoveOutputCacheItem(Variables.OutputcaheSuggestedApps);
         }
 
         public void RemoveOutputCacheFeatured() {
-            HttpResponse.RemoveOutputCacheItem(CommonVars.OutputcaheFeaturedappsApps);
+            HttpResponse.RemoveOutputCacheItem(Variables.OutputcaheFeaturedappsApps);
         }
 
         public void RemoveOutputCacheLatest() {
-            HttpResponse.RemoveOutputCacheItem(CommonVars.OutputcaheLatestappslistApps);
+            HttpResponse.RemoveOutputCacheItem(Variables.OutputcaheLatestappslistApps);
         }
 
         public void RemoveOutputCacheTopRated() {
-            HttpResponse.RemoveOutputCacheItem(CommonVars.OutputcaheTopappslistApps);
+            HttpResponse.RemoveOutputCacheItem(Variables.OutputcaheTopappslistApps);
         }
 
         public void RemoveDonutCaching(string controllerName) {

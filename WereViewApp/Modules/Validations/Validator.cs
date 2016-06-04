@@ -88,7 +88,7 @@ namespace WeReviewApp.Modules.Validations {
 
         public static string GetErrorValidationExceedMessage() {
             if (ValidationExceedJson == null) {
-                ValidationExceedJson = JsonConvert.SerializeObject(GetErrorMessage(Const.ValidationExceeded));
+                ValidationExceedJson = JsonConvert.SerializeObject(GetErrorMessage(MessageConstants.ValidationExceeded));
             }
             return ValidationExceedJson;
         }

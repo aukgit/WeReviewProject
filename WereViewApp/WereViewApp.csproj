@@ -280,7 +280,7 @@
     <Compile Include="Models\ViewModels\ManageUserViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Models\ViewModels\ResetPasswordViewModel.cs" />
-    <Compile Include="Modules\Constants\TokenPurpose.cs" />
+    <Compile Include="Constants\TokenPurpose.cs" />
     <Compile Include="Modules\Extensions\ControllerExtension.cs" />
     <Compile Include="Modules\Extensions\ActionExecutingContextExtension.cs" />
     <Compile Include="Modules\Extensions\HttpContextExtension.cs" />
@@ -433,15 +433,15 @@
     <Compile Include="Models\ViewModels\UserBlockViewModel.cs" />
     <Compile Include="Modules\Cache\CacheDataInFile.cs" />
     <Compile Include="Modules\Cache\CachedQueryData.cs" />
-    <Compile Include="Modules\Claims\ProprietaryClaims.cs" />
+    <Compile Include="Constants\ProprietaryClaims.cs" />
     <Compile Include="Modules\DevUser\RegistrationCustomCode.cs" />
     <Compile Include="Modules\DevUser\UserManager.cs" />
     <Compile Include="Modules\Extensions\Context\DevDbContext.cs" />
     <Compile Include="Models\Context\DevIdentityDbContext.cs" />
     <Compile Include="Modules\Extensions\IdentityExtension\ExtentsionUserIdentityMethods.cs" />
     <Compile Include="Models\POCO\Identity\IdentityModel.cs" />
-    <Compile Include="Modules\Cache\CacheNames.cs" />
-    <Compile Include="Modules\Cookie\CookieNames.cs" />
+    <Compile Include="Constants\CacheNames.cs" />
+    <Compile Include="Constants\CookieNames.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Modules\DevHash.cs" />
     <Compile Include="Modules\HTMLGenerator.cs" />
@@ -449,7 +449,7 @@
     <Compile Include="Modules\Mail\MailHtml.cs" />
     <Compile Include="Modules\Mail\MailSender.cs" />
     <Compile Include="Modules\Menu\GenerateMenu.cs" />
-    <Compile Include="Modules\Message\Const.cs" />
+    <Compile Include="Modules\Message\MessageConstants.cs" />
     <Compile Include="Modules\Role\RoleManager.cs" />
     <Compile Include="Modules\Role\RoleNames.cs" />
     <Compile Include="Modules\Session\SessionNames.cs" />
@@ -1560,7 +1560,6 @@
     <Content Include="Views\Shared\_Loading-bar.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\DatabaseTables\" />
     <Folder Include="App_Data\DataCached\Database\" />
     <Folder Include="App_Data\DataCached\SearchResult\" />
     <Folder Include="App_Data\DataCached\Suggested\" />
@@ -1571,6 +1570,9 @@
     <Folder Include="Models\EntityModel\GarbageCodes\" />
     <Folder Include="Models\POCO\AdditionalDatabase\" />
     <Folder Include="Models\POCO\Plugable\" />
+    <Folder Include="Modules\Claims\" />
+    <Folder Include="Modules\Constants\" />
+    <Folder Include="Modules\Cookie\" />
     <Folder Include="Modules\Filters\" />
     <Folder Include="Modules\ViewEngine\" />
     <Folder Include="Uploads\Files\Private\" />

@@ -12,7 +12,7 @@ namespace WeReviewApp.Scheduler {
 
         public void Execute() {
             // keep the app running
-            if (WereViewStatics.AppCategoriesCache.Count > 0 || CommonVars.StaticAppsList.Count > 0) {
+            if (Statics.AppCategoriesCache.Count > 0 || Variables.StaticAppsList.Count > 0) {
                 //string text = DateTime.Now.ToString();
                 //UploadProcessor uploader = new UploadProcessor("");
 

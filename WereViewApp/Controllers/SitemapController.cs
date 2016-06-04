@@ -52,7 +52,7 @@ namespace WeReviewApp.Controllers {
                     sitemapItems.AddRange(topApps.Select(app => new SitemapItem(app.GetAbsoluteUrl(), modifiedDate)));
                 }
 
-                var categories = WereViewStatics.AppCategoriesCache;
+                var categories = Statics.AppCategoriesCache;
                 sitemapItems.AddRange(
                     categories.Select(
                         category => new SitemapItem(appUrl + "/apps/category/" + category.Slug, modifiedDate)));

@@ -150,7 +150,7 @@ namespace WeReviewApp.Controllers {
             if (isAlreadyReported == false && app != null) {
                 if (!ModelState.IsValid) {
                     // non valid message.
-                    ViewBag.errorMessage = Const.JunkMessageResult;
+                    ViewBag.errorMessage = MessageConstants.JunkMessageResult;
                     ViewBag.id = appOrReviewId;
                     ViewBag.app = app;
                     return View();
@@ -247,7 +247,7 @@ namespace WeReviewApp.Controllers {
                 // review is not reported before by this user.
                 if (!ModelState.IsValid) {
                     // non valid message.
-                    ViewBag.errorMessage = Const.JunkMessageResult;
+                    ViewBag.errorMessage = MessageConstants.JunkMessageResult;
                     ViewBag.id = appOrReviewId;
                     ViewBag.review = review;
                     ViewBag.app = app;
