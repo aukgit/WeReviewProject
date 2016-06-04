@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using DevMvcComponent.Error;
 using Newtonsoft.Json;
-using WeReviewApp.Modules.Message;
+using WeReviewApp.Constants;
 
 namespace WeReviewApp.Modules.Validations {
     public abstract class Validator {

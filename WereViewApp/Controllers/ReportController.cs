@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using WeReviewApp.Constants;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.EntityModel;
 using WeReviewApp.Models.POCO.IdentityCustomization;
 using WeReviewApp.Models.POCO.Structs;
 using WeReviewApp.Modules.DevUser;
-using WeReviewApp.Modules.Message;
 using WeReviewApp.Modules.Role;
 using WeReviewApp.Modules.Session;
 

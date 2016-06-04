@@ -449,9 +449,9 @@
     <Compile Include="Modules\Mail\MailHtml.cs" />
     <Compile Include="Modules\Mail\MailSender.cs" />
     <Compile Include="Modules\Menu\GenerateMenu.cs" />
-    <Compile Include="Modules\Message\MessageConstants.cs" />
+    <Compile Include="Constants\MessageConstants.cs" />
     <Compile Include="Modules\Role\RoleManager.cs" />
-    <Compile Include="Modules\Role\RoleNames.cs" />
+    <Compile Include="Constants\RoleNames.cs" />
     <Compile Include="Modules\Session\SessionNames.cs" />
     <Compile Include="Modules\SQLGenerate.cs" />
     <Compile Include="Modules\TestThingsStartup.cs" />

@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Web;
-using System.Web.UI.WebControls;
 
 namespace WeReviewApp.Modules.Reponse {
     public class RemoveETagModule : IHttpModule {
-        public void Dispose() {}
-
-        private static string[] _staticExtensions = {
+        private static readonly string[] _staticExtensions = {
             ".js",
             ".css",
             ".jpg",
             ".png",
             ".bmp",
             ".json",
-            ".json",
+            ".json"
         };
+
+        public void Dispose() {}
 
         public void Init(HttpApplication context) {
             context.PreSendRequestHeaders += OnPreSendRequestHeaders;
@@ -42,20 +41,19 @@ namespace WeReviewApp.Modules.Reponse {
             }
         }
 
-        private bool IsStaticContent(string [] extensions) {
+        private bool IsStaticContent(string[] extensions) {
             var url = HttpContext.Current.Request.Url.ToString();
             foreach (var extension in extensions) {
                 var extLen = extension.Length;
                 var isValid = true;
                 var k = 0;
-                for (int i = url.Length - 1; i < 0; i--) {
+                for (var i = url.Length - 1; i < 0; i--) {
                     var index = extLen - 1 - k;
                     --k;
                     if (url[i] != extension[index]) {
                         isValid = false;
                         goto nextExtension;
                     }
-
                 }
                 nextExtension:
                 if (isValid) {
