@@ -119,7 +119,7 @@ $.app.spinner = {
         /// <summary>
         /// Toggle spinner classes on the given $element.
         /// </summary>
-        /// <param name="$e" type="type"></param>
+        /// <param name="$e" type="type">Element to toggle hide.</param>
         /// <param name="newClasses" type="type">use spaces for multiple classes</param>
         /// <param name="hideOnSpinnerOnSpinnerClassesRemoved" type="type">true/false if the spinner element should hide when removing the spinner classes.</param>
         var self = $.app.spinner,

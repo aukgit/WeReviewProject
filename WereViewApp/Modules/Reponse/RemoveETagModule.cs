@@ -14,7 +14,7 @@ namespace WeReviewApp.Modules.Reponse {
             ".json"
         };
 
-        public void Dispose() {}
+        public void Dispose() { }
 
         public void Init(HttpApplication context) {
             context.PreSendRequestHeaders += OnPreSendRequestHeaders;
