@@ -744,7 +744,14 @@ $.WeReviewApp = {
                             //console.log(response);
                             $reviewSpinner.fadeOut("slow");
                         },
+                        beforeSend : function() {
+                            $.app.spinner.quickShow();
+                        },
                         error: function (xhr, status, error) {
+
+                        },
+                        always: function() {
+                            $.app.spinner.hide();
 
                         }
                     }); // ajax end

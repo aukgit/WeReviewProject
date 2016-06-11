@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using WeReviewApp.Constants;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.EntityModel;
 using WeReviewApp.Models.POCO.IdentityCustomization;
 using WeReviewApp.Models.POCO.Structs;
 using WeReviewApp.Modules.DevUser;
-using WeReviewApp.Modules.Message;
 using WeReviewApp.Modules.Role;
 using WeReviewApp.Modules.Session;
 
@@ -150,7 +150,7 @@ namespace WeReviewApp.Controllers {
             if (isAlreadyReported == false && app != null) {
                 if (!ModelState.IsValid) {
                     // non valid message.
-                    ViewBag.errorMessage = Const.JunkMessageResult;
+                    ViewBag.errorMessage = MessageConstants.JunkMessageResult;
                     ViewBag.id = appOrReviewId;
                     ViewBag.app = app;
                     return View();
@@ -247,7 +247,7 @@ namespace WeReviewApp.Controllers {
                 // review is not reported before by this user.
                 if (!ModelState.IsValid) {
                     // non valid message.
-                    ViewBag.errorMessage = Const.JunkMessageResult;
+                    ViewBag.errorMessage = MessageConstants.JunkMessageResult;
                     ViewBag.id = appOrReviewId;
                     ViewBag.review = review;
                     ViewBag.app = app;

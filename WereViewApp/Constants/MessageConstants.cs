@@ -1,5 +1,5 @@
-﻿namespace WeReviewApp.Modules.Message {
-    public struct Const {
+﻿namespace WeReviewApp.Constants {
+    public struct MessageConstants {
         #region Error List
 
         /// <summary>

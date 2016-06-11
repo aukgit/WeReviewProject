@@ -18,6 +18,7 @@ using WeReviewApp.Modules.Uploads;
 namespace WeReviewApp.Helpers {
     public static class HtmlHelpers {
         private const string Selected = "selected='selected'";
+        private const string ComponentSeperator = "|";
         public static int TruncateLength = AppConfig.TruncateLength;
 
         #region FaIcons generate : badge
@@ -1060,11 +1061,10 @@ namespace WeReviewApp.Helpers {
 
         #region Component Enable : Listing
         public static HtmlHelper ComponentsAdd(this HtmlHelper helper, string componentName) {
-            var seperator = "|";
             if (helper.ViewBag.componentEnable == null) {
                 helper.ViewBag.componentEnable = componentName;
             } else {
-                helper.ViewBag.componentEnable += seperator + componentName;
+                helper.ViewBag.componentEnable += ComponentSeperator + componentName;
             }
             return helper;
         }

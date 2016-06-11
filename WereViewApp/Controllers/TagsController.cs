@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
 using WeReviewApp.BusinessLogics;
+using WeReviewApp.Constants;
 using WeReviewApp.Models.EntityModel.Structs;
 using WeReviewApp.Modules.Cache;
 using WeReviewApp.Modules.Extensions;

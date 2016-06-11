@@ -44,7 +44,7 @@ namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
 
         public static string GetCategory(this Feedback feedback) {
             var feedbackCategory =
-                WereViewStatics.FeedbackCategories.FirstOrDefault(n => n.FeedbackCategoryID == feedback.FeedbackCategoryID);
+                Statics.FeedbackCategories.FirstOrDefault(n => n.FeedbackCategoryID == feedback.FeedbackCategoryID);
             if (feedbackCategory != null) {
                 return feedbackCategory.Category;
             }

@@ -8,7 +8,7 @@ using WeReviewApp.Modules.Cache;
 using WeReviewApp.Modules.Uploads;
 
 namespace WeReviewApp.Common {
-    public static class WereViewStatics {
+    public static class Statics {
         private static List<Category> _appCategoriesCache;
         private static List<Platform> _appPlatformsCache;
         private static List<FeedbackCategory> _feedbackCategories;
@@ -59,7 +59,7 @@ namespace WeReviewApp.Common {
         /// <param name="taskId">NotificationTypeIDs.AppPost</param>
         /// <returns></returns>
         public static NotificationType GetNotificationType(byte taskId) {
-            var type = CommonVars.NotificationTypesCache.FirstOrDefault(n => n.NotificationTypeID == taskId);
+            var type = Variables.NotificationTypesCache.FirstOrDefault(n => n.NotificationTypeID == taskId);
 
             return type;
         }
@@ -89,7 +89,7 @@ namespace WeReviewApp.Common {
         }
 
         public static void SavingAppInDirectory(AppSavingTextFields app) {
-            var textCache = new CacheDataInFile(CommonVars.AppVirtualFieldsSavingAdditionalpath);
+            var textCache = new CacheDataInFile(Variables.AppVirtualFieldsSavingAdditionalpath);
             var location = getAppLocation(app);
             textCache.SaveInBinary(location, app);
         }
@@ -99,7 +99,7 @@ namespace WeReviewApp.Common {
         }
 
         public static AppSavingTextFields ReadAppFromDirectory(Guid uploadGuid) {
-            var textCache = new CacheDataInFile(CommonVars.AppVirtualFieldsSavingAdditionalpath);
+            var textCache = new CacheDataInFile(Variables.AppVirtualFieldsSavingAdditionalpath);
             var location = getAppLocation(uploadGuid);
             var fileObject = textCache.ReadObjectFromBinaryFile(location);
             if (fileObject != null) {
@@ -135,47 +135,47 @@ namespace WeReviewApp.Common {
         /// <summary>
         ///     Icons means thumbs , "Gallery/"
         /// </summary>
-        public static UploadProcessor UProcessorGallery = new UploadProcessor(CommonVars.AdditionalRootGalleryLocation);
+        public static UploadProcessor UProcessorGallery = new UploadProcessor(Variables.AdditionalRootGalleryLocation);
 
         /// <summary>
         ///     Icons means thumbs , "GalleryThumbs/"
         /// </summary>
         public static UploadProcessor UProcessorGalleryIcons =
-            new UploadProcessor(CommonVars.AdditionalRootGalleryIconLocation);
+            new UploadProcessor(Variables.AdditionalRootGalleryIconLocation);
 
         /// <summary>
         ///     Icons means thumbs , "SearchThumbs/"
         /// </summary>
         public static UploadProcessor UProcessorSearchIcons =
-            new UploadProcessor(CommonVars.AdditionalRootSearchIconLocation);
+            new UploadProcessor(Variables.AdditionalRootSearchIconLocation);
 
         /// <summary>
         ///     Icons means thumbs , "HomePageThumbs/"
         /// </summary>
         public static UploadProcessor UProcessorHomeIcons =
-            new UploadProcessor(CommonVars.AdditionalRootHomeIconLocation);
+            new UploadProcessor(Variables.AdditionalRootHomeIconLocation);
 
         /// <summary>
         ///     "HomePageFeatured/"
         /// </summary>
-        public static UploadProcessor UProcessorHomeFeatured = new UploadProcessor(CommonVars.AdditionalRootHomeLocation);
+        public static UploadProcessor UProcessorHomeFeatured = new UploadProcessor(Variables.AdditionalRootHomeLocation);
 
         /// <summary>
         ///     Icons means thumbs ,  "SuggestionThumbs/"
         /// </summary>
         public static UploadProcessor UProcessorSuggestionIcons =
-            new UploadProcessor(CommonVars.AdditionalRootSuggestedIconLocation);
+            new UploadProcessor(Variables.AdditionalRootSuggestedIconLocation);
 
         /// <summary>
         ///     Icons means thumbs ,  "YoutubeCovers/"
         /// </summary>
-        public static UploadProcessor UProcessorYoutubeCover = new UploadProcessor(CommonVars.YouTubeCoverImageLocation);
+        public static UploadProcessor UProcessorYoutubeCover = new UploadProcessor(Variables.YouTubeCoverImageLocation);
 
         /// <summary>
         ///     Icons means thumbs ,  "Advertise/"
         /// </summary>
         public static UploadProcessor UProcessorAdvertiseImages =
-            new UploadProcessor(CommonVars.AdditionalRootAdvertiseLocation);
+            new UploadProcessor(Variables.AdditionalRootAdvertiseLocation);
 
         #endregion
 
@@ -186,7 +186,7 @@ namespace WeReviewApp.Common {
         /// <param name="taskId">UserPointsSettingIDs.AppPost</param>
         /// <returns>If not found returns 0</returns>
         public static int GetUserSettingPointValue(byte taskId) {
-            var point = CommonVars.UserPointSettingsCache.FirstOrDefault(n => n.UserPointSettingID == taskId);
+            var point = Variables.UserPointSettingsCache.FirstOrDefault(n => n.UserPointSettingID == taskId);
             if (point != null) {
                 return point.Point;
             }
@@ -198,7 +198,7 @@ namespace WeReviewApp.Common {
         /// <param name="taskId">UserPointsSettingIDs.AppPost</param>
         /// <returns></returns>
         public static UserPointSetting GetUserSettingPoint(byte taskId) {
-            var point = CommonVars.UserPointSettingsCache.FirstOrDefault(n => n.UserPointSettingID == taskId);
+            var point = Variables.UserPointSettingsCache.FirstOrDefault(n => n.UserPointSettingID == taskId);
             return point;
         }
 

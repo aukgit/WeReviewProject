@@ -87,17 +87,17 @@ namespace WeReviewApp.Controllers {
         public JsonResult DeleteGalleryImage(Guid uploadGuid, byte sequence, string requestVerificationToken) {
             var gallery = db.Galleries.FirstOrDefault(n => n.UploadGuid == uploadGuid && n.Sequence == sequence);
             if (gallery != null) {
-                var fileName = WereViewStatics.UProcessorGallery.GetOrganizeName(gallery, true);
+                var fileName = Statics.UProcessorGallery.GetOrganizeName(gallery, true);
                 var absPath =
-                    WereViewStatics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(
-                        WereViewStatics.UProcessorGallery.GetCombinePathWithAdditionalRoots() + fileName);
+                    Statics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(
+                        Statics.UProcessorGallery.GetCombinePathWithAdditionalRoots() + fileName);
                 if (FileSys.Exists(absPath)) {
                     FileSys.Delete(absPath);
                 }
 
                 absPath =
-                    WereViewStatics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(
-                        WereViewStatics.UProcessorGallery.GetCombinePathWithAdditionalRoots() + fileName);
+                    Statics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(
+                        Statics.UProcessorGallery.GetCombinePathWithAdditionalRoots() + fileName);
                 if (FileSys.Exists(absPath)) {
                     FileSys.Delete(absPath);
                 }
@@ -125,8 +125,8 @@ namespace WeReviewApp.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult EditGalleryUploads(App app) {
             var token = Request["__RequestVerificationToken"];
-            var path = AppVar.Url + WereViewStatics.UProcessorGallery.RootPath.Replace("~/", "/") +
-                       WereViewStatics.UProcessorGallery.AdditionalRoots;
+            var path = AppVar.Url + Statics.UProcessorGallery.RootPath.Replace("~/", "/") +
+                       Statics.UProcessorGallery.AdditionalRoots;
 
             var uploadedImages = db.Galleries
                                    .Where(
@@ -894,7 +894,7 @@ namespace WeReviewApp.Controllers {
                         }
 
                         //upload app-details page gallery image
-                        WereViewStatics.UProcessorGallery.UploadFile(file, fileName, nextSequence, true, true);
+                        Statics.UProcessorGallery.UploadFile(file, fileName, nextSequence, true, true);
 
                         //successfully uploaded now save a gallery info
                         var galleryCategory = await db.GalleryCategories.FindAsync(GalleryCategoryIDs.AppPageGallery);
@@ -936,22 +936,22 @@ namespace WeReviewApp.Controllers {
 
                         // resize app-details page gallery image
 
-                        WereViewStatics.UProcessorGallery.ResizeImageAndProcessImage(gallery, galleryCategory);
-                        //var source = "~/Uploads/Images/" + CommonVars.ADDITIONAL_ROOT_GALLERY_LOCATION +
+                        Statics.UProcessorGallery.ResizeImageAndProcessImage(gallery, galleryCategory);
+                        //var source = "~/Uploads/Images/" + Variables.ADDITIONAL_ROOT_GALLERY_LOCATION +
                         //             UploadProcessor.GetOrganizeNameStatic(gallery, true, true);
-                        //var target = "~/Uploads/Images/" + CommonVars.ADDITIONAL_ROOT_GALLERY_ICON_LOCATION +
+                        //var target = "~/Uploads/Images/" + Variables.ADDITIONAL_ROOT_GALLERY_ICON_LOCATION +
                         //             UploadProcessor.GetOrganizeNameStatic(gallery, true);
 
                         // #apps detail page gallery thumbs generate
-                        //WereViewStatics.uProcessorGallery.ResizeImageAndProcessImage(source, target, thumbsCategory.Width,
+                        //Statics.uProcessorGallery.ResizeImageAndProcessImage(source, target, thumbsCategory.Width,
                         //    thumbsCategory.Height, gallery.Extension);
 
-                        var source = "~/Uploads/Images/" + CommonVars.AdditionalRootGalleryLocation +
+                        var source = "~/Uploads/Images/" + Variables.AdditionalRootGalleryLocation +
                                      UploadProcessor.GetOrganizeNameStatic(gallery, true, true);
                         //removing temp image what was exact uploaded after resizing it.
-                        if (FileSys.Exists(WereViewStatics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(source))) {
+                        if (FileSys.Exists(Statics.UProcessorGallery.VirtualPathtoAbsoluteServerPath(source))) {
                             // if processed image exist then remove  the temp.
-                            WereViewStatics.UProcessorGallery.RemoveTempImage(gallery);
+                            Statics.UProcessorGallery.RemoveTempImage(gallery);
                         }
                         countDone++;
                         //}).Start();
@@ -1025,7 +1025,7 @@ namespace WeReviewApp.Controllers {
         [ValidateAntiForgeryToken]
         public JsonResult UploadHomeFeatured(App app, HttpPostedFileBase homePageFeatured) {
             return ProcessSingleUploads(app, homePageFeatured, GalleryCategoryIDs.HomePageFeatured,
-                WereViewStatics.UProcessorHomeFeatured);
+                Statics.UProcessorHomeFeatured);
         }
 
         #endregion
@@ -1036,7 +1036,7 @@ namespace WeReviewApp.Controllers {
         [ValidateAntiForgeryToken]
         public JsonResult UploadHomePageIcon(App app, HttpPostedFileBase homePageIcon) {
             return ProcessSingleUploads(app, homePageIcon, GalleryCategoryIDs.HomePageIcon,
-                WereViewStatics.UProcessorHomeIcons);
+                Statics.UProcessorHomeIcons);
         }
 
         #endregion
@@ -1047,7 +1047,7 @@ namespace WeReviewApp.Controllers {
         [ValidateAntiForgeryToken]
         public JsonResult UploadSearchIcon(App app, HttpPostedFileBase searchIcon) {
             return ProcessSingleUploads(app, searchIcon, GalleryCategoryIDs.SearchIcon,
-                WereViewStatics.UProcessorSearchIcons);
+                Statics.UProcessorSearchIcons);
         }
 
         #endregion
@@ -1058,7 +1058,7 @@ namespace WeReviewApp.Controllers {
         [ValidateAntiForgeryToken]
         public JsonResult UploadSuggestionIcon(App app, HttpPostedFileBase suggestionIcon) {
             return ProcessSingleUploads(app, suggestionIcon, GalleryCategoryIDs.SuggestionIcon,
-                WereViewStatics.UProcessorSuggestionIcons);
+                Statics.UProcessorSuggestionIcons);
         }
 
         #endregion
@@ -1069,7 +1069,7 @@ namespace WeReviewApp.Controllers {
         [ValidateAntiForgeryToken]
         public JsonResult YoutubeCoverUpload(App app, HttpPostedFileBase YoutubeCoverImage) {
             return ProcessSingleUploads(app, YoutubeCoverImage, GalleryCategoryIDs.YoutubeCoverImage,
-                WereViewStatics.UProcessorYoutubeCover);
+                Statics.UProcessorYoutubeCover);
         }
 
         #endregion

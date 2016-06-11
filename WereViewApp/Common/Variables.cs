@@ -3,7 +3,7 @@ using System.Linq;
 using WeReviewApp.Models.EntityModel;
 
 namespace WeReviewApp.Common {
-    public static class CommonVars {
+    public static class Variables {
         #region Reg expressions
 
         public const string FriendlyUrlRegex = @"[^A-Za-z0-9_\.~]+";

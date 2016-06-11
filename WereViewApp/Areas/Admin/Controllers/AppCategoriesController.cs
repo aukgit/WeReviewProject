@@ -36,18 +36,18 @@ namespace WeReviewApp.Areas.Admin.Controllers {
                 case ViewStates.Create:
                     break;
                 case ViewStates.CreatePost: // before saving it
-                    WereViewStatics.RefreshCaches();
+                    Statics.RefreshCaches();
                     break;
                 case ViewStates.Edit:
                     break;
                 case ViewStates.Details:
                     break;
                 case ViewStates.EditPost: // before saving it
-                    WereViewStatics.RefreshCaches();
+                    Statics.RefreshCaches();
 
                     break;
                 case ViewStates.Delete:
-                    WereViewStatics.RefreshCaches();
+                    Statics.RefreshCaches();
 
                     break;
             }
