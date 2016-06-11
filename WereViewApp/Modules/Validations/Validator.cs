@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using DevMvcComponent.Error;
 using Newtonsoft.Json;
-using WeReviewApp.Modules.Message;
+using WeReviewApp.Constants;
 
 namespace WeReviewApp.Modules.Validations {
     public abstract class Validator {
@@ -88,7 +88,7 @@ namespace WeReviewApp.Modules.Validations {
 
         public static string GetErrorValidationExceedMessage() {
             if (ValidationExceedJson == null) {
-                ValidationExceedJson = JsonConvert.SerializeObject(GetErrorMessage(Const.ValidationExceeded));
+                ValidationExceedJson = JsonConvert.SerializeObject(GetErrorMessage(MessageConstants.ValidationExceeded));
             }
             return ValidationExceedJson;
         }

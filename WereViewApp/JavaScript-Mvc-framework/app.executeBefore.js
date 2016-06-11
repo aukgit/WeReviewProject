@@ -68,15 +68,16 @@ $.app.executeBefore = {
     },
     menuEnable: function () {
         $().jetmenu();
-        var menuPage = $("#menu-item-edit-page");
-        if (menuPage.length > 0) {
-            var div = $("#hasDropdownDiv");
-            div.hide();
-            $("#HasDropDown").click(function () {
+        var $menuPage = $("#menu-item-edit-page");
+        if ($menuPage.length > 0) {
+            var $div = $("#hasDropdownDiv"),
+                $hasDropDown = $("#HasDropDown");
+            $div.hide();
+            $hasDropDown.click(function () {
                 if (this.checked) {
-                    div.show('slow');
+                    $div.show('slow');
                 } else {
-                    div.hide('slow');
+                    $div.hide('slow');
                 }
             });
         }
@@ -88,9 +89,8 @@ $.app.executeBefore = {
         }
     },
     datePickerComponentEnable: function () {
-        var $dateTimePicker = $(".datetimepicker-start");
-        if ($dateTimePicker.length > 0) {
-            $dateTimePicker.datetimepicker({
+        var $dateTimePicker = $(".datetimepicker-start"),
+            options = {
                 pickDate: true, //en/disables the date picker
                 pickTime: true, //en/disables the time picker
                 useMinutes: true, //en/disables the minutes picker
@@ -101,22 +101,16 @@ $.app.executeBefore = {
                 disabledDates: [], //an array of dates that cannot be selected
                 enabledDates: [], //an array of dates that can be selected
                 sideBySide: true //show the date and time picker side by side
-            });
+            };
+        if ($dateTimePicker.length > 0) {
+            $dateTimePicker.datetimepicker(options);
         }
         var $datePicker = $(".datepicker-start");
         if ($datePicker.length > 0) {
-            $datePicker.datetimepicker({
-                pickDate: true, //en/disables the date picker
-                pickTime: false, //en/disables the time picker
-                useMinutes: false, //en/disables the minutes picker
-                useSeconds: false, //en/disables the seconds picker
-                useCurrent: true, //when true, picker will set the value to the current date/time     
-                minuteStepping: 1, //set the minute stepping
-                defaultDate: "", //sets a default date, accepts js dates, strings and moment objects
-                disabledDates: [], //an array of dates that cannot be selected
-                enabledDates: [], //an array of dates that can be selected
-                sideBySide: true //show the date and time picker side by side
-            });
+            options.pickTime = false;
+            options.useMinutes = false;
+            options.useSeconds = false;
+            $datePicker.datetimepicker(options);
         }
     },
     transactionStatusEnable: function () {
@@ -147,15 +141,7 @@ $.app.executeBefore = {
         }
     },
 
-    loadWow: function () {
-        var wow = new WOW({
-            boxClass: 'wow', // animated element css class (default is wow)
-            animateClass: 'animated', // animation css class (default is animated)
-            offset: 100, // distance to the element when triggering the animation (default is 0)
-            mobile: false // trigger animations on mobile devices (true is default)
-        });
-        wow.init();
-    },
+  
 
     ratingComponentEnable: function () {
         var $frontPageRatings = $.findCached(".rating-5-front");

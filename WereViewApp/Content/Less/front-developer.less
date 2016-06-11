@@ -19,7 +19,7 @@
 
     .btn {
         float: right;
-    } 
+    }
 }
 
 label {
@@ -400,7 +400,7 @@ label.control-label {
         color: @app-description-color;
         .width(385px);
         .text-left;
-        .text-ellipsis() !important; 
+        .text-ellipsis() !important;
         white-space: normal;
 
         p {
@@ -1141,6 +1141,7 @@ q:after {
 .rating-box-row {
     .margin-top(17px);
     .height(71px);
+
     .rating-container {
         font-size: .7em;
     }
@@ -1489,7 +1490,8 @@ a {
 .modal-dialog {
     button[data-btn="close"] {
         &:hover {
-            color:red;
+            color: red;
+
             &:not(.close) {
                 .gradient-red-effect;
                 color: white;
@@ -1499,3 +1501,6 @@ a {
 }
 //last imports
 //@import "Utilities.less";
+.small-font-size {
+    font-size: 13px;
+}

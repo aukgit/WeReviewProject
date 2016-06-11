@@ -65,7 +65,7 @@ namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
         /// <param name="app"></param>
         /// <returns>Return category string from cache data empty string if not found.</returns>
         public static string GetCategoryString(this App app) {
-            var category = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.CategoryID == app.CategoryID);
+            var category = Statics.AppCategoriesCache.FirstOrDefault(n => n.CategoryID == app.CategoryID);
             if (category != null) {
                 return category.CategoryName;
             }
@@ -77,7 +77,7 @@ namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
         /// <param name="app"></param>
         /// <returns>Return category slug string from cache data empty string if not found.</returns>
         public static string GetCategorySlugString(this App app) {
-            var category = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.CategoryID == app.CategoryID);
+            var category = Statics.AppCategoriesCache.FirstOrDefault(n => n.CategoryID == app.CategoryID);
             if (category != null) {
                 return category.Slug;
             }
@@ -88,7 +88,7 @@ namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
         /// <param name="app"></param>
         /// <returns>Return category from cache data.</returns>
         public static Category GetCategory(this App app) {
-            return WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.CategoryID == app.CategoryID);
+            return Statics.AppCategoriesCache.FirstOrDefault(n => n.CategoryID == app.CategoryID);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
         /// <param name="app"></param>
         /// <returns>Return platform string from cache data empty string if not found.</returns>
         public static string GetPlatformString(this App app) {
-            var platform = WereViewStatics.AppPlatformsCache.FirstOrDefault(n => n.PlatformID == app.PlatformID);
+            var platform = Statics.AppPlatformsCache.FirstOrDefault(n => n.PlatformID == app.PlatformID);
             if (platform != null) {
                 return platform.PlatformName;
             }
@@ -104,7 +104,7 @@ namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
         }
 
         public static Platform GetPlatform(this App app) {
-            var platform = WereViewStatics.AppPlatformsCache.FirstOrDefault(n => n.PlatformID == app.PlatformID);
+            var platform = Statics.AppPlatformsCache.FirstOrDefault(n => n.PlatformID == app.PlatformID);
             if (platform != null) {
                 return platform;
             }

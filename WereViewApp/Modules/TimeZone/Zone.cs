@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
+using WeReviewApp.Constants;
 using WeReviewApp.Models.POCO.IdentityCustomization;
 using WeReviewApp.Modules.Cache;
-using WeReviewApp.Modules.Cookie;
 using WeReviewApp.Modules.DevUser;
 
 #endregion

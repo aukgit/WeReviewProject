@@ -4,7 +4,7 @@
     ViewBag.Title = "App Drafts";
     string title = ViewBag.Title;
     string subtitle = ViewBag.Title;
-    var controller = (string) ViewBag.controller;
+    var controller = (string)ViewBag.controller;
     var viewName = "Index";
     var editLinkName = "";
 }
@@ -16,43 +16,44 @@
 <table class="bootstrap-table-do table table-hover" data-show-columns="true" data-search="true" data-pagination="true">
     <!--<caption>@viewName</caption>-->
     <thead>
-    <tr>
-        <th data-field="AppName">
-            @Html.DisplayNameFor(model => model.AppName)
-        </th>
-        <th data-field="Description">
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
+        <tr>
+            <th data-field="AppName">
+                @Html.DisplayNameFor(model => model.AppName)
+            </th>
+            <th data-field="Description">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
 
-        <th data-field="IsPublished">
-            Website URL
-        </th>
+            <th data-field="IsPublished">
+                Website URL
+            </th>
 
-        <th></th>
-    </tr>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model) {
-        <tr>
+        @foreach (var item in Model) {
+            <tr>
 
-            <td>
-                @{ editLinkName = Html.DisplayFor(model => item.AppName).ToString(); }
-                <a href="@Url.Action("Draft", new {id = item.UploadGuid})" title="@editLinkName edit...">
-                    <span class="glyphicon glyphicon-pencil"></span> @editLinkName</a>
-            </td>
-            <td>
-                @Html.Truncate(item.Description, AppConfig.TruncateLength)
-                <span class="Hide">@item.Description</span>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WebsiteUrl)
-            </td>
-            <td>
-                <a href="@Url.Action("Draft", new {id = item.UploadGuid})" title="@editLinkName edit..." class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-                <a href="@Url.Action("DeleteDraft", new {id = item.UploadGuid})" title="Delete @editLinkName" class="btn btn-danger btn-xs" onclick=" return confirm('Are you sure? [Cannot revert the changes again.]') "><span class="glyphicon glyphicon-remove"></span> Delete</a>
-            </td>
-        </tr>
-    }
+                <td>
+                    @{ editLinkName = Html.DisplayFor(model => item.AppName).ToString(); }
+                    <a href="@Url.Action("Draft", new {id = item.UploadGuid})" title="@editLinkName edit...">
+                        <span class="glyphicon glyphicon-pencil"></span> @editLinkName
+                    </a>
+                </td>
+                <td>
+                    @Html.Truncate(item.Description, AppConfig.TruncateLength)
+                    <span class="Hide">@item.Description</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WebsiteUrl)
+                </td>
+                <td>
+                    <a href="@Url.Action("Draft", new {id = item.UploadGuid})" title="@editLinkName edit..." class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                    <a href="@Url.Action("DeleteDraft", new {id = item.UploadGuid})" title="Delete @editLinkName" class="btn btn-danger btn-xs" onclick=" return confirm('Are you sure? [Cannot revert the changes again.]') "><span class="glyphicon glyphicon-remove"></span> Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 
 </table>

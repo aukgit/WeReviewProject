@@ -35,7 +35,7 @@ namespace WeReviewApp.Controllers {
                 var displayList = urlGet.Split('-');
                 var displayStr = string.Join(" ", displayList);
                 var results = algorithms.GetSearchResults(SearchQuery, null, null, null,
-                    CommonVars.SearchResultsMaxResultReturn);
+                    Variables.SearchResultsMaxResultReturn);
                 search.DisplayStringToUser = displayStr;
                 search.FoundApps = results;
                 return View(search);

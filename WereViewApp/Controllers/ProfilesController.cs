@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.UI;
 using DevMvcComponent.Pagination;
 using WeReviewApp.BusinessLogics;
+using WeReviewApp.Constants;
 using WeReviewApp.Models.EntityModel.Structs;
 using WeReviewApp.Models.POCO.Identity;
 using WeReviewApp.Modules.Cache;

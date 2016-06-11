@@ -1810,4 +1810,7 @@ a.link:hover {
   /* ie6-9 */
   color: white;
 }
+.small-font-size {
+  font-size: 13px;
+}
 /*# sourceMappingURL=front-developer.css.map */
