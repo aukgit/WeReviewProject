@@ -16,6 +16,10 @@ $.app.executeAfter = {
             clearTimeout(timer);
         }, 2500);
     },
+    /**
+     * bind anchor click prevention 
+     * @returns {} 
+     */
     captureAnchorAndShowSpinner: function () {
         var $anchors = $.findCached("a:link");
         $anchors.click(function (e) {
@@ -23,7 +27,8 @@ $.app.executeAfter = {
                 href = $link.attr("href");
             if (!$.isEmpty(href)) {
                 var startsWith = href[0];
-                if (startsWith !== "#") {
+                var isInvalidUrl = href === "" || startsWith === "" || startsWith === "#" || href.indexOf("javascript") > -1;
+                if (!isInvalidUrl) {
                     e.preventDefault();
                     $.app.global.documentFullSpinnerShow("...Please Wait...");
                     window.location = $link.attr("href");

@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
+using WeReviewApp.Constants;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.Identity;
 using WeReviewApp.Models.POCO.IdentityCustomization;

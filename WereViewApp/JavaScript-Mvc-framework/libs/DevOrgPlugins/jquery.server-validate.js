@@ -890,13 +890,13 @@
         },
         hideSpinner: function ($input) {
             var $spinner = this.getSpinner($input);
-            $spinner.hide();
+            this.animateOff($spinner);
         },
         animateOn: function ($object) {
-            $object.fadeIn("slow");
+            $object.removeClass("hide");
         },
         animateOff: function ($object) {
-            $object.hide();
+            $object.addClass("hide");
         },
 
         processResponse: function ($input, response) {
@@ -966,7 +966,7 @@
                 .attr("data-message", msg);
             $input.attr("data-server-validated", validation)
                 .attr("data-message", msg);
-
+            $input.removeClass("input-validation-error");
             if (settings.hideOnValidation) {
                 $div.attr("data-is-hidden", validation);
                 $div.hide('slow');
@@ -999,6 +999,7 @@
                 .attr("data-message", msg);
             $input.attr("data-server-validated", validation)
                 .attr("data-message", msg);
+            $input.addClass("input-validation-error");
             if (settings.focusPersistIfNotValid) {
                 this.focusIfnotValid($input, true);
             }
@@ -1024,6 +1025,7 @@
                 var events = plugin.events,
                   evtNames = events.names,
                   serverProcessStartEventName = evtNames.getName(plugin, evtNames.serverProcessStart);
+                // TODO : check the other validation 
                 $input.trigger(serverProcessStartEventName); // trigger right away
                 return 1;
             }

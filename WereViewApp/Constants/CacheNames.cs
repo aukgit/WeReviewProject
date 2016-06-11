@@ -1,4 +1,4 @@
-﻿namespace WeReviewApp.Modules.Cache {
+﻿namespace WeReviewApp.Constants {
     public struct CacheNames {
         public const string ZoneInfo = "ZoneInfo";
         public const string CountryTableName = "Country";

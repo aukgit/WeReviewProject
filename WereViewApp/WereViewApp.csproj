@@ -60,8 +60,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="DevMvcComponent, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DevMVCComponent.2.3.0\lib\DevMvcComponent.dll</HintPath>
+    <Reference Include="DevMvcComponent, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevMvcComponent.2.5.0\lib\DevMvcComponent.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DevTrends.MvcDonutCaching">
@@ -83,8 +83,8 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FluentScheduler, Version=3.1.46.0, Culture=neutral, PublicKeyToken=b76503528a14ebd1, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentScheduler.3.1.46\lib\net40\FluentScheduler.dll</HintPath>
+    <Reference Include="FluentScheduler, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b76503528a14ebd1, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentScheduler.4.1.0\lib\net40\FluentScheduler.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="FontAwesomeIcons, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
@@ -150,8 +150,8 @@
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RouteDebugger">
@@ -280,7 +280,7 @@
     <Compile Include="Models\ViewModels\ManageUserViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Models\ViewModels\ResetPasswordViewModel.cs" />
-    <Compile Include="Modules\Constants\TokenPurpose.cs" />
+    <Compile Include="Constants\TokenPurpose.cs" />
     <Compile Include="Modules\Extensions\ControllerExtension.cs" />
     <Compile Include="Modules\Extensions\ActionExecutingContextExtension.cs" />
     <Compile Include="Modules\Extensions\HttpContextExtension.cs" />
@@ -433,27 +433,26 @@
     <Compile Include="Models\ViewModels\UserBlockViewModel.cs" />
     <Compile Include="Modules\Cache\CacheDataInFile.cs" />
     <Compile Include="Modules\Cache\CachedQueryData.cs" />
-    <Compile Include="Modules\Claims\ProprietaryClaims.cs" />
+    <Compile Include="Constants\ProprietaryClaims.cs" />
     <Compile Include="Modules\DevUser\RegistrationCustomCode.cs" />
     <Compile Include="Modules\DevUser\UserManager.cs" />
     <Compile Include="Modules\Extensions\Context\DevDbContext.cs" />
     <Compile Include="Models\Context\DevIdentityDbContext.cs" />
     <Compile Include="Modules\Extensions\IdentityExtension\ExtentsionUserIdentityMethods.cs" />
     <Compile Include="Models\POCO\Identity\IdentityModel.cs" />
-    <Compile Include="Modules\Cache\CacheNames.cs" />
-    <Compile Include="Modules\Cookie\CookieNames.cs" />
+    <Compile Include="Constants\CacheNames.cs" />
+    <Compile Include="Constants\CookieNames.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
-    <Compile Include="Modules\DevHash.cs" />
-    <Compile Include="Modules\HTMLGenerator.cs" />
+    <Compile Include="Modules\HtmlGenerator.cs" />
     <Compile Include="Modules\InternetProtocolRelations\IpConfigRelations.cs" />
     <Compile Include="Modules\Mail\MailHtml.cs" />
     <Compile Include="Modules\Mail\MailSender.cs" />
     <Compile Include="Modules\Menu\GenerateMenu.cs" />
-    <Compile Include="Modules\Message\Const.cs" />
+    <Compile Include="Constants\MessageConstants.cs" />
     <Compile Include="Modules\Role\RoleManager.cs" />
-    <Compile Include="Modules\Role\RoleNames.cs" />
+    <Compile Include="Constants\RoleNames.cs" />
     <Compile Include="Modules\Session\SessionNames.cs" />
-    <Compile Include="Modules\SQLGenerate.cs" />
+    <Compile Include="Modules\SqlGenerate.cs" />
     <Compile Include="Modules\TestThingsStartup.cs" />
     <Compile Include="Modules\TimeZone\Zone.cs" />
     <Compile Include="Modules\Type\DataTypeSupport.cs" />
@@ -1576,7 +1575,6 @@
     <Content Include="Views\Shared\_Loading-bar.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\DatabaseTables\" />
     <Folder Include="App_Data\DataCached\Database\" />
     <Folder Include="App_Data\DataCached\SearchResult\" />
     <Folder Include="App_Data\DataCached\Suggested\" />
@@ -1587,6 +1585,9 @@
     <Folder Include="Models\EntityModel\GarbageCodes\" />
     <Folder Include="Models\POCO\AdditionalDatabase\" />
     <Folder Include="Models\POCO\Plugable\" />
+    <Folder Include="Modules\Claims\" />
+    <Folder Include="Modules\Constants\" />
+    <Folder Include="Modules\Cookie\" />
     <Folder Include="Modules\Filters\" />
     <Folder Include="Modules\ViewEngine\" />
     <Folder Include="Uploads\Files\Private\" />

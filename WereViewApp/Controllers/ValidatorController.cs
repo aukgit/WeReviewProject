@@ -123,7 +123,7 @@ namespace WeReviewApp.Controllers {
         private string GetFriendlyURLFromString(string title) {
             if (!string.IsNullOrEmpty(title)) {
                 title = title.Trim();
-                title = Regex.Replace(title, CommonVars.FriendlyUrlRegex, "-");
+                title = Regex.Replace(title, Variables.FriendlyUrlRegex, "-");
                 return title;
             }
             return title;

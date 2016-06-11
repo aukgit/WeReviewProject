@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.Identity;
 using WeReviewApp.Modules;
-using WeReviewApp.Modules.Claims;
+
 //using WeReviewApp.Modules.Garbage;
 
 

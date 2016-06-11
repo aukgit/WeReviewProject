@@ -2,7 +2,7 @@ using System.Net;
 using FluentScheduler;
 
 namespace WeReviewApp.Scheduler {
-    internal class WeReviewDownloadScheduler : ITask {
+    internal class WeReviewDownloadScheduler : IJob {
         #region ITask Members
 
         public void Execute() {

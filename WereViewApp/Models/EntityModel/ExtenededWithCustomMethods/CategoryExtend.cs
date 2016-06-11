@@ -38,7 +38,7 @@ namespace WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods {
         /// <param name="app"></param>
         /// <returns>Return category string from cache data empty string if not found.</returns>
         public static string GetCategoryString(this Category originalCategory, App app) {
-            var category = WereViewStatics.AppCategoriesCache.FirstOrDefault(n => n.CategoryID == app.CategoryID);
+            var category = Statics.AppCategoriesCache.FirstOrDefault(n => n.CategoryID == app.CategoryID);
             if (category != null) {
                 return category.CategoryName;
             }

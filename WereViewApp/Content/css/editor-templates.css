@@ -13,4 +13,7 @@ a.tooltip-show:hover {
   margin-top: 0;
   padding-top: 0;
 }
+.form-row {
+  position: relative;
+}
 /*# sourceMappingURL=editor-templates.css.map */

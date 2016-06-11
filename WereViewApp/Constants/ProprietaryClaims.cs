@@ -1,4 +1,4 @@
-﻿namespace WeReviewApp.Modules.Claims {
+﻿namespace WeReviewApp.Constants {
     public struct ProprietaryClaims {
         public const string BIO = "Bio";
         public const string ID = "ID";

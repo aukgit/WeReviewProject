@@ -45,6 +45,15 @@ $.app.component.list = {
             });
         }
     },
+    "wow" : function() {
+        var wow = new WOW({
+            boxClass: 'wow', // animated element css class (default is wow)
+            animateClass: 'animated', // animation css class (default is animated)
+            offset: 100, // distance to the element when triggering the animation (default is 0)
+            mobile: false // trigger animations on mobile devices (true is default)
+        });
+        wow.init();
+    },
     "form-validation": function () {
         var app = $.app,
             $processForm = app.getProcessForm(); // get the form #server-validation-form
@@ -103,7 +112,7 @@ $.app.component.list = {
         }
     },
     "isotop": function () {
-        var $isotopContainer = $("ul.search-page-apps-list");
+        var $isotopContainer = $(".search-page-apps-list");
         if ($isotopContainer.length > 0) {
             var $filterIsotopItems = $('.filter').find("li").find("a");
             if ($filterIsotopItems.length > 0) {
