@@ -186,7 +186,7 @@
           <Property Name="Pros" Type="varchar" MaxLength="300" />
           <Property Name="Cons" Type="varchar" MaxLength="300" />
           <Property Name="IsSuggest" Type="bit" Nullable="false" />
-          <Property Name="Comment1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Comment1" Type="varchar" MaxLength="100" />
           <Property Name="Comment2" Type="varchar" MaxLength="500" />
           <Property Name="AppID" Type="bigint" Nullable="false" />
           <Property Name="UserID" Type="bigint" Nullable="false" />
@@ -766,7 +766,7 @@
             <End Role="UserPointSetting" EntitySet="UserPointSettings" />
             <End Role="UserPoint" EntitySet="UserPoints" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="AppsSearch_Result">
           <Property Type="Int32" Name="ID" Nullable="true" />
           <Property Type="String" Name="Name" Nullable="true" MaxLength="500" />
@@ -974,7 +974,7 @@
           <Property Name="Pros" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="Cons" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="IsSuggest" Type="Boolean" Nullable="false" />
-          <Property Name="Comment1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Comment1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Comment2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="AppID" Type="Int64" Nullable="false" />
           <Property Name="UserID" Type="Int64" Nullable="false" />
@@ -1631,7 +1631,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

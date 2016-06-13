@@ -5,27 +5,27 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d0ea2ee432d9431d8951d399be7d8a2f" Name="Diagram1">
-        <EntityTypeShape EntityType="WereViewAppModel.App" Width="1.5" PointX="9" PointY="12.875" />
-        <EntityTypeShape EntityType="WereViewAppModel.AppDraft" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="WereViewAppModel.Category" Width="1.5" PointX="6.75" PointY="18.75" />
-        <EntityTypeShape EntityType="WereViewAppModel.CellPhone" Width="1.5" PointX="3" PointY="16.125" />
-        <EntityTypeShape EntityType="WereViewAppModel.FeaturedImage" Width="1.5" PointX="11.25" PointY="15.125" />
-        <EntityTypeShape EntityType="WereViewAppModel.Gallery" Width="1.5" PointX="3" PointY="5" />
-        <EntityTypeShape EntityType="WereViewAppModel.GalleryCategory" Width="1.5" PointX="0.75" PointY="5.125" />
-        <EntityTypeShape EntityType="WereViewAppModel.LatestSeenNotification" Width="1.5" PointX="3" PointY="28.875" />
-        <EntityTypeShape EntityType="WereViewAppModel.Message" Width="1.5" PointX="3" PointY="10.625" />
-        <EntityTypeShape EntityType="WereViewAppModel.MessageSeen" Width="1.5" PointX="3" PointY="31.75" />
+        <EntityTypeShape EntityType="WereViewAppModel.App" Width="1.5" PointX="3" PointY="18.875" />
+        <EntityTypeShape EntityType="WereViewAppModel.AppDraft" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="WereViewAppModel.Category" Width="1.5" PointX="0.75" PointY="21.375" />
+        <EntityTypeShape EntityType="WereViewAppModel.CellPhone" Width="1.5" PointX="6" PointY="12.125" />
+        <EntityTypeShape EntityType="WereViewAppModel.FeaturedImage" Width="1.5" PointX="8.25" PointY="18.75" />
+        <EntityTypeShape EntityType="WereViewAppModel.Gallery" Width="1.5" PointX="8" PointY="1" />
+        <EntityTypeShape EntityType="WereViewAppModel.GalleryCategory" Width="1.5" PointX="5.75" PointY="1.125" />
+        <EntityTypeShape EntityType="WereViewAppModel.LatestSeenNotification" Width="1.5" PointX="3" PointY="33.25" />
+        <EntityTypeShape EntityType="WereViewAppModel.Message" Width="1.5" PointX="3" PointY="13.75" />
+        <EntityTypeShape EntityType="WereViewAppModel.MessageSeen" Width="1.5" PointX="3" PointY="28.875" />
         <EntityTypeShape EntityType="WereViewAppModel.Notification" Width="1.5" PointX="3" PointY="0.875" />
         <EntityTypeShape EntityType="WereViewAppModel.NotificationType" Width="1.5" PointX="0.75" PointY="1" />
-        <EntityTypeShape EntityType="WereViewAppModel.Platform" Width="1.5" PointX="6.75" PointY="12" />
-        <EntityTypeShape EntityType="WereViewAppModel.Review" Width="1.5" PointX="14.25" PointY="14.125" />
-        <EntityTypeShape EntityType="WereViewAppModel.ReviewLikeDislike" Width="1.5" PointX="16.5" PointY="15" />
-        <EntityTypeShape EntityType="WereViewAppModel.Tag" Width="1.5" PointX="9" PointY="10.375" />
-        <EntityTypeShape EntityType="WereViewAppModel.TagAppRelation" Width="1.5" PointX="11.25" PointY="12.25" />
-        <EntityTypeShape EntityType="WereViewAppModel.TempUpload" Width="1.5" PointX="5.75" PointY="6.75" />
+        <EntityTypeShape EntityType="WereViewAppModel.Platform" Width="1.5" PointX="3.75" PointY="10.25" />
+        <EntityTypeShape EntityType="WereViewAppModel.Review" Width="1.5" PointX="8.25" PointY="13.75" />
+        <EntityTypeShape EntityType="WereViewAppModel.ReviewLikeDislike" Width="1.5" PointX="10.5" PointY="14.75" />
+        <EntityTypeShape EntityType="WereViewAppModel.Tag" Width="1.5" PointX="3" PointY="26.375" />
+        <EntityTypeShape EntityType="WereViewAppModel.TagAppRelation" Width="1.5" PointX="5.25" PointY="21.25" />
+        <EntityTypeShape EntityType="WereViewAppModel.TempUpload" Width="1.5" PointX="5.75" PointY="4.75" />
         <EntityTypeShape EntityType="WereViewAppModel.User" Width="1.5" PointX="0.75" PointY="14.125" />
         <EntityTypeShape EntityType="WereViewAppModel.UserPoint" Width="1.5" PointX="6" PointY="15" />
-        <EntityTypeShape EntityType="WereViewAppModel.UserPointSetting" Width="1.5" PointX="3.75" PointY="19.375" />
+        <EntityTypeShape EntityType="WereViewAppModel.UserPointSetting" Width="1.5" PointX="3.75" PointY="7.375" />
         <AssociationConnector Association="WereViewAppModel.FK_App_Category" />
         <AssociationConnector Association="WereViewAppModel.FK_App_Platform" />
         <AssociationConnector Association="WereViewAppModel.FK_App_User" />
