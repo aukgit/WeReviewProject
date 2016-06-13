@@ -1006,7 +1006,7 @@ namespace WeReviewApp.BusinessLogics {
             if (UserManager.IsAuthenticated()) {
                 var currentUserId = UserManager.GetLoggedUserId();
                 if (reviews != null) {
-                    var reviewIdsCsv = reviews.GetAsCommaSeperatedValues(n => n.ReviewID); // all review ids
+                    var reviewIdsCsv = reviews.AsCsv(n => n.ReviewID); // all review ids
                     // getting the like dislike based on reviews those are loaded 
                     // and if and only if current user has done any.
                     var sql = string.Format("SELECT * FROM ReviewLikeDislike WHERE ReviewID IN ({0}) AND UserID = {1}",
