@@ -54,8 +54,13 @@ namespace WeReviewApp {
         private static void SetupDevMvcComponent() {
             // initialize DevMvcComponent
             // Configure this with add a sender email.
-            var mailer = new CustomMailServer(Setting.SenderEmail, Setting.SenderEmailPassword, Setting.SmtpHost,
-                Setting.SmtpMailPort, Setting.IsSmtpssl);
+            var mailer = new CustomMailServer(
+                AppVar.Name , 
+                Setting.SenderEmail, 
+                Setting.SenderEmailPassword,
+                Setting.SmtpHost,
+                Setting.SmtpMailPort, 
+                Setting.IsSmtpssl);
             Mvc.Setup(AppVar.Name, Setting.DeveloperEmail, Assembly.GetExecutingAssembly(), mailer);
             //Mvc.Mailer.QuickSend("devorg.bd@gmail.com", "Hello", "Hello");
             Cookies = Mvc.Cookies;

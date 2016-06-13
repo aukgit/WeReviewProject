@@ -4,15 +4,15 @@ using DevMvcComponent.Extensions;
 
 namespace WeReviewApp.Modules.Reponse {
     public class RemoveETagModule : IHttpModule {
-        private static readonly string[] StaticExtensions = {
-            ".js",
-            ".css",
-            ".jpg",
-            ".png",
-            ".bmp",
-            ".json",
-            ".json"
-        };
+        //private static readonly string[] StaticExtensions = {
+        //    ".js",
+        //    ".css",
+        //    ".jpg",
+        //    ".png",
+        //    ".bmp",
+        //    ".json",
+        //    ".json"
+        //};
 
         public void Dispose() { }
 
@@ -43,16 +43,16 @@ namespace WeReviewApp.Modules.Reponse {
             //}
         }
 
-        private bool IsStaticContent(string[] extensions) {
-            var url = HttpContext.Current.Request.Url.ToString();
-            var appUrlLength = AppVar.Url.Length - 2;
-            foreach (var extension in extensions) {
-                if (url.IsStringMatchfromLast(extension, appUrlLength)) {
-                    return true;
-                }
-            }
-            return false;
-        }
+        //private bool IsStaticContent(string[] extensions) {
+        //    var url = HttpContext.Current.Request.Url.ToString();
+        //    var appUrlLength = AppVar.Url.Length - 2;
+        //    foreach (var extension in extensions) {
+        //        if (url.IsStringMatchfromLast(extension, appUrlLength)) {
+        //            return true;
+        //        }
+        //    }
+        //    return false;
+        //}
 
         private void OnPreSendRequestHeaders(object sender, EventArgs e) {
             //HttpContext.Current.Request.Headers.Add("Expires", "100000");
