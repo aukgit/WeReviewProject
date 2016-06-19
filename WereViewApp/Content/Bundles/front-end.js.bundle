@@ -12,25 +12,61 @@
   </settings>
   <!--The order of the <file> elements determines the order of the files in the bundle.-->
   <files>
-    <file>/Content/Scripts/DevOrgPlugins/byId.js</file>
-    <file>/Content/Scripts/bootstrap.min.js</file>
-    <file>/Content/Scripts/star-rating.js</file>
-    <file>/Content/Scripts/underscore.js</file>
-    <file>/Content/Scripts/DevOrgPlugins/every-page.js</file>
-    <file>/Content/Scripts/FrontEnd/wow.min.js</file>
-    <file>/Content/Scripts/FrontEnd/jquery.sticky.js</file>
-    <file>/Content/Scripts/FrontEnd/jquery.stellar.js</file>
-    <file>/Content/Scripts/FrontEnd/base-theme.js</file>
-    <file>/Content/Scripts/FrontEnd/jquery.isotope.min.js</file>
-    <file>/Content/Scripts/FrontEnd/owl.carousel.min.js</file>
-    <file>/Content/Scripts/FrontEnd/main.js</file>
-    <file>/Content/Scripts/FrontEnd/jquery.number.js</file>
-    <file>/Content/revolution-slider/js/jquery.themepunch.tools.min.js</file>
-    <file>/Content/revolution-slider/js/jquery.themepunch.revolution.min.js</file>
-    
-    <file>/Content/Scripts/DevOrgPlugins/developers-organism.component.js</file>
-
-    <file>/Content/Scripts/FrontEnd/front-developer.js</file>
-    <file>/Content/Scripts/DevOrgPlugins/WeReviewApps.js</file>
+    <file>/JavaScript-Mvc-framework/libs/DevOrgPlugins/byId.js</file>
+    <file>/JavaScript-Mvc-framework/libs/bootstrap.js</file>
+    <file>/JavaScript-Mvc-framework/libs/star-rating.js</file>
+    <file>/JavaScript-Mvc-framework/libs/toastr.js</file>
+    <file>/JavaScript-Mvc-framework/libs/underscore.js</file>
+    <file>/JavaScript-Mvc-framework/libs/FrontEnd/wow.js</file>
+    <file>/JavaScript-Mvc-framework/libs/FrontEnd/jquery.sticky.js</file>
+    <file>/JavaScript-Mvc-framework/libs/FrontEnd/jquery.stellar.js</file>
+    <file>/JavaScript-Mvc-framework/libs/FrontEnd/base-theme.js</file>
+    <file>/JavaScript-Mvc-framework/libs/FrontEnd/jquery.isotope.min.js</file>
+    <file>/JavaScript-Mvc-framework/libs/FrontEnd/owl.carousel.min.js</file>
+    <file>/JavaScript-Mvc-framework/libs/FrontEnd/jquery.number.js</file>
+    <file>/JavaScript-Mvc-framework/libs/revolution-slider/js/jquery.themepunch.tools.min.js</file>
+    <file>/JavaScript-Mvc-framework/libs/revolution-slider/js/jquery.themepunch.revolution.min.js</file>
+    <file>/JavaScript-Mvc-framework/libs/DevOrgPlugins/developers-organism.component.js</file>
+    <file>/JavaScript-Mvc-framework/libs/FrontEnd/front-developer.js</file>
+    <file>/JavaScript-Mvc-framework/libs/jquery.blockUI.js</file>
+    <file>/JavaScript-Mvc-framework/libs/bootbox.js</file>"
+    <file>/JavaScript-Mvc-framework/Prototype/Array.js</file>
+    <file>/JavaScript-Mvc-framework/app.js</file>
+    <file>/JavaScript-Mvc-framework/app.executeBefore.js</file>
+    <file>/JavaScript-Mvc-framework/app.executeAfter.js</file>
+    <file>/JavaScript-Mvc-framework/jQueryCaching.js</file>
+    <file>/JavaScript-Mvc-framework/attachInitialize.js</file>
+    <file>/JavaScript-Mvc-framework/schema/schema.js</file>
+    <file>/JavaScript-Mvc-framework/schema/hashset.js</file>
+    <file>/JavaScript-Mvc-framework/schema/url.js</file>
+    <file>/JavaScript-Mvc-framework/initialize.js</file>
+    <file>/JavaScript-Mvc-framework/extensions/ajax.js</file>
+    <file>/JavaScript-Mvc-framework/extensions/hiddenContainer.js</file>
+    <file>/JavaScript-Mvc-framework/extensions/clone.js</file>
+    <file>/JavaScript-Mvc-framework/extensions/constants.js</file>
+    <file>/JavaScript-Mvc-framework/extensions/inputChangeTracker.js</file>
+    <file>/JavaScript-Mvc-framework/extensions/modal.js</file>
+    <file>/JavaScript-Mvc-framework/extensions/pagination.js</file>
+    <file>/JavaScript-Mvc-framework/extensions/regularExp.js</file>
+    <file>/JavaScript-Mvc-framework/extensions/selectors.js</file>
+    <file>/JavaScript-Mvc-framework/extensions/spinner.js</file>
+    <file>/JavaScript-Mvc-framework/extensions/urls.js</file>
+    <file>/JavaScript-Mvc-framework/controllers.js</file>
+    <file>/JavaScript-Mvc-framework/controllers/initialize.js</file>
+    <file>/JavaScript-Mvc-framework/controllers/account-controller.js</file>
+    <file>/JavaScript-Mvc-framework/controllers/app-controller.js</file>
+    <file>/JavaScript-Mvc-framework/controllers/home-controller.js</file>
+    <file>/JavaScript-Mvc-framework/controllers/reviews-controller.js</file>
+    <file>/JavaScript-Mvc-framework/controllers/tags-controller.js</file>
+    <file>/JavaScript-Mvc-framework/areas/admin/controllers/navItems-controller.js</file>
+    <file>/JavaScript-Mvc-framework/component/component.js</file>
+    <file>/JavaScript-Mvc-framework/component/component.list.js</file>
+    <file>/JavaScript-Mvc-framework/events/binding.js</file>
+    <file>/JavaScript-Mvc-framework/events/list.js</file>
+    <file>/JavaScript-Mvc-framework/jQueryExtend.js</file>
+    <file>/JavaScript-Mvc-framework/jQueryExtend.fn.js</file>
+    <file>/JavaScript-Mvc-framework/app.config.js</file>
+    <file>/JavaScript-Mvc-framework/app.global.js</file>
+    <file>/JavaScript-Mvc-framework/app.run.js</file>"
   </files>
 </bundle>

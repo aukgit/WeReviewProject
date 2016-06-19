@@ -25,10 +25,10 @@
         <th>
             @Html.DisplayNameFor(model => model.CanBeAcheivedByPoint)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.PointsRequired)
         </th>
-        <th></th>
+        <th></th>*@
     </tr>
     </thead>
     <tbody>
@@ -46,10 +46,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PointsRequired)
             </td>
-            <td>
+            @*<td>
                 @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
                 @Html.ActionLink("Delete", "Delete", new {id = item.Id}, new {onclick = "return confirm('Are you sure?')"})
-            </td>
+            </td>*@
         </tr>
     }
     </tbody>
