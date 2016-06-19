@@ -60,8 +60,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="DevMvcComponent, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DevMVCComponent.3.1.0\lib\DevMvcComponent.dll</HintPath>
+    <Reference Include="DevMvcComponent, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevMvcComponent.3.2.0\lib\DevMvcComponent.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DevTrends.MvcDonutCaching">
@@ -678,17 +678,6 @@
     <Content Include="Content\css\ckedit-skin-bootstrap.css.map">
       <DependentUpon>ckedit-skin-bootstrap.css</DependentUpon>
     </Content>
-    <Content Include="CodeTemplates\MvcControllerWithContext\Controller.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Create.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Delete.cs - Copy.t4" />
-    <Content Include="CodeTemplates\MvcView\Delete.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Details.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\DetailsNoTable.t4" />
-    <Content Include="CodeTemplates\MvcView\Edit.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Empty.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
-    <Content Include="CodeTemplates\MvcView\List.cs.t4" />
-    <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
     <Content Include="Areas\Admin\Views\Apps\Index.cshtml" />
     <Content Include="Content\css\utilities.css.map">
       <DependentUpon>utilities.css</DependentUpon>
@@ -1238,6 +1227,11 @@
     <Content Include="Uploads\Images\Gallery\ceaaa28e-a6bf-4dd4-9095-aaa27838bcc4-4.jpg" />
     <Content Include="Uploads\Images\Gallery\ceaaa28e-a6bf-4dd4-9095-aaa27838bcc4-5.jpg" />
     <Content Include="Uploads\Images\Gallery\ceaaa28e-a6bf-4dd4-9095-aaa27838bcc4-6.jpg" />
+    <Content Include="Uploads\Images\Gallery\e3fdd161-b282-4d6c-a76f-7f2b7c9ae2f5-1.jpg" />
+    <Content Include="Uploads\Images\Gallery\e3fdd161-b282-4d6c-a76f-7f2b7c9ae2f5-2.jpg" />
+    <Content Include="Uploads\Images\Gallery\e3fdd161-b282-4d6c-a76f-7f2b7c9ae2f5-3.jpg" />
+    <Content Include="Uploads\Images\Gallery\e3fdd161-b282-4d6c-a76f-7f2b7c9ae2f5-4.jpg" />
+    <Content Include="Uploads\Images\Gallery\e3fdd161-b282-4d6c-a76f-7f2b7c9ae2f5-5.jpg" />
     <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-1.jpg" />
     <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-2.jpg" />
     <Content Include="Uploads\Images\Gallery\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-3.jpg" />
@@ -1267,6 +1261,7 @@
     <Content Include="Uploads\Images\HomePageFeatured\91ed301e-2541-4791-87d7-f63865ea51b5-0.jpg" />
     <Content Include="Uploads\Images\HomePageFeatured\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
     <Content Include="Uploads\Images\HomePageFeatured\ceaaa28e-a6bf-4dd4-9095-aaa27838bcc4-0.jpg" />
+    <Content Include="Uploads\Images\HomePageFeatured\e3fdd161-b282-4d6c-a76f-7f2b7c9ae2f5-0.jpg" />
     <Content Include="Uploads\Images\HomePageFeatured\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
     <Content Include="Uploads\Images\HomePageFeatured\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
     <Content Include="Uploads\Images\HomePageFeatured\f153d3bc-4a75-478e-97ca-2af446ae5828-0.jpg" />
@@ -1288,6 +1283,7 @@
     <Content Include="Uploads\Images\HomePageThumbs\91ed301e-2541-4791-87d7-f63865ea51b5-0.jpg" />
     <Content Include="Uploads\Images\HomePageThumbs\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
     <Content Include="Uploads\Images\HomePageThumbs\ceaaa28e-a6bf-4dd4-9095-aaa27838bcc4-0.jpg" />
+    <Content Include="Uploads\Images\HomePageThumbs\e3fdd161-b282-4d6c-a76f-7f2b7c9ae2f5-0.jpg" />
     <Content Include="Uploads\Images\HomePageThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
     <Content Include="Uploads\Images\HomePageThumbs\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
     <Content Include="Uploads\Images\HomePageThumbs\f153d3bc-4a75-478e-97ca-2af446ae5828-0.jpg" />
@@ -1309,6 +1305,7 @@
     <Content Include="Uploads\Images\SearchThumbs\91ed301e-2541-4791-87d7-f63865ea51b5-0.jpg" />
     <Content Include="Uploads\Images\SearchThumbs\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
     <Content Include="Uploads\Images\SearchThumbs\ceaaa28e-a6bf-4dd4-9095-aaa27838bcc4-0.jpg" />
+    <Content Include="Uploads\Images\SearchThumbs\e3fdd161-b282-4d6c-a76f-7f2b7c9ae2f5-0.jpg" />
     <Content Include="Uploads\Images\SearchThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
     <Content Include="Uploads\Images\SearchThumbs\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
     <Content Include="Uploads\Images\SearchThumbs\f153d3bc-4a75-478e-97ca-2af446ae5828-0.jpg" />
@@ -1330,6 +1327,7 @@
     <Content Include="Uploads\Images\SuggestionThumbs\91ed301e-2541-4791-87d7-f63865ea51b5-0.jpg" />
     <Content Include="Uploads\Images\SuggestionThumbs\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
     <Content Include="Uploads\Images\SuggestionThumbs\ceaaa28e-a6bf-4dd4-9095-aaa27838bcc4-0.jpg" />
+    <Content Include="Uploads\Images\SuggestionThumbs\e3fdd161-b282-4d6c-a76f-7f2b7c9ae2f5-0.jpg" />
     <Content Include="Uploads\Images\SuggestionThumbs\e40b30a6-4be4-4c49-880e-ce67d8e1a1e7-0.jpg" />
     <Content Include="Uploads\Images\SuggestionThumbs\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
     <Content Include="Uploads\Images\SuggestionThumbs\f153d3bc-4a75-478e-97ca-2af446ae5828-0.jpg" />
@@ -1350,6 +1348,7 @@
     <Content Include="Uploads\Images\YoutubeCovers\98648fe8-8672-43d4-9767-2869c12e14da-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\c69c1955-287a-44f9-8211-5d3e1d6a1c9c-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\ceaaa28e-a6bf-4dd4-9095-aaa27838bcc4-0.jpg" />
+    <Content Include="Uploads\Images\YoutubeCovers\e3fdd161-b282-4d6c-a76f-7f2b7c9ae2f5-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\e94520fd-50d7-43e2-95f4-699e2e156806-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\f153d3bc-4a75-478e-97ca-2af446ae5828-0.jpg" />
     <Content Include="Uploads\Images\YoutubeCovers\fa1595d4-da44-4205-b3dd-6b6e524866d0-0.jpg" />
