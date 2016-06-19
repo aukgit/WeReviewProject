@@ -258,8 +258,8 @@ $.checkValidInputs = function ($inputsCollection, starRatingLabel, invalidStarRa
             $currentInput = $($inputsCollection[i]);
 
             if ($currentInput.hasClass("common-rating")) {
-                var $ratingContainer = $currentInput.closest("div.rating-container");
-                var $wholeContainer = $ratingContainer.closest("div.star-rating");
+                var $ratingContainer = $currentInput.closest(".rating-container");
+                var $wholeContainer = $ratingContainer.closest(".star-rating");
 
                 if ($currentInput.val() === "0") {
                     $ratingContainer.css(invalidStarRatingCss);
@@ -345,7 +345,9 @@ $.executeFunction = function (func) {
     /// <returns type="">Returns true/false</returns>
     if (typeof func === "function") {
         func.apply();
+        return true;
     }
+    return false;
 };
 
 $.executeFunctionWithArguments = function (func, argumentsArray) {
@@ -358,7 +360,9 @@ $.executeFunctionWithArguments = function (func, argumentsArray) {
     /// <returns type="">Returns true/false</returns>
     if (typeof func === "function") {
         func.apply(null, argumentsArray);
+        return true;
     }
+    return false;
 };
 
 

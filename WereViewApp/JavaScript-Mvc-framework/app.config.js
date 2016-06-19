@@ -18,5 +18,9 @@
             $.app.component
         ];
         $.executeArrayOfInitilizeMethods(classesToCallInitialize);
+
+        $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+            options.async = true;
+        });
     }
 };

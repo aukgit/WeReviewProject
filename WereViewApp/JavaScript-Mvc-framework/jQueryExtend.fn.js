@@ -28,6 +28,39 @@ $.fn.extend({
         /// <returns type="boolean">True/False</returns>
         return $.isEmpty(this);
     },
+    getSelectorElement: function () {
+        /// <summary>
+        /// get $(selector) element if data-selector attribute exists with the element.
+        /// </summary>
+        var selector = this.attr("data-selector");
+        if ($.isEmpty(selector) === false) {
+            //exist
+            return $(selector);
+        }
+        return [];
+    },
+    getUrlString: function () {
+        /// <summary>
+        /// get attr("data-url") property.
+        /// </summary>
+        var url = this.attr("data-url");
+        if ($.isEmpty(url) === false) {
+            //exist
+            return url;
+        }
+        return "";
+    },
+    getReferenceIdElement: function () {
+        /// <summary>
+        /// get $("#id") element if data-ref-id attribute exists.
+        /// </summary>
+        var id = this.attr("data-ref-id");
+        if ($.isEmpty(id) === false) {
+            //exist
+            return $.byId(id);
+        }
+        return [];
+    },
     disableElement: function () {
         this.attr("disabled", "disabled");
     },

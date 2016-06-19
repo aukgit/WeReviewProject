@@ -22,6 +22,9 @@ label a:link {
 label a:link:hover {
   color: #23527c;
 }
+.title-color {
+  color: #ff4d00;
+}
 .btn {
   font-weight: normal;
   text-transform: none;

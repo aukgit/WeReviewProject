@@ -1,1 +1,1 @@
-﻿a.tooltip-show:focus,a.tooltip-show:hover{text-decoration:none}.form-group.boolean-type{margin-top:0;padding-top:0}.form-row{position:relative}
+﻿.controls>a.tooltip-show{display:inline-block;width:auto;height:auto;position:relative;top:-1px;left:2px}.controls>a.tooltip-show:focus,.controls>a.tooltip-show:hover{text-decoration:none}.form-group.boolean-type{margin-top:0;padding-top:0}.form-group.boolean-type label>input{margin-top:2px}.form-group.rating .control-label{padding-top:13px}.form-row{position:relative}

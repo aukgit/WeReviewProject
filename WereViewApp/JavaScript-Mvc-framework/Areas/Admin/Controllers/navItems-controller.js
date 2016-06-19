@@ -29,11 +29,7 @@ $.app.controllers.navItemsController = {
     },
     isDebugging: true,
     initialize: function () {
-        var controllers = $.app.controllers,
-            current = controllers.navItemsController;
-        if (controllers.isCurrentPage(current)) {
-            controllers.execute(current);
-        }
+
     },
     getPage: function() {
         return $.app.controllers.navItemsController.$pageElement;

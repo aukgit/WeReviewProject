@@ -1,7 +1,7 @@
 ﻿@model WeReviewApp.Models.EntityModel.App
 @{
     var isFrist = true;
-    var tagsList = Model.Tags != null ? @Model.Tags.Split(',') : null;
+    var tagsList = Model.Tags != null ? Model.Tags.Split(',') : null;
     var publishDate = Html.DisplayDateTime(Model.PostedByUserID, Model.CreatedDate, DateTimeFormatType.Date, addTimeZoneString: true);
     var appName = Model.AppName;
     var platformSubtitle = Model.Platform.PlatformName + " mobile apps";

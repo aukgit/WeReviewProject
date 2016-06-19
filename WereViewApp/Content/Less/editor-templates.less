@@ -6,9 +6,22 @@
 /*.controls { 
     overflow: hidden;
 }*/
-a.tooltip-show {
-    &:focus, &:hover {
-        text-decoration: none;
+.controls {
+    > a {
+        &.tooltip-show {
+            display: inline-block;
+            width: auto;
+            /* overflow: hidden; */
+            height: auto;
+            /* line-height: 0.1; */
+            position: relative;
+            top: -1px;
+            left: 2px;
+
+            &:focus, &:hover {
+                text-decoration: none;
+            }
+        }
     }
 }
 
@@ -16,8 +29,19 @@ a.tooltip-show {
     &.boolean-type {
         margin-top: 0;
         padding-top: 0;
+
+        label > input {
+            margin-top: 2px;
+        }
+    }
+
+    &.rating {
+        .control-label {
+            padding-top: 13px;
+        }
     }
 }
-.form-row{
-    position:relative;
+
+.form-row {
+    position: relative;
 }

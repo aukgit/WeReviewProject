@@ -1,4 +1,6 @@
-﻿namespace WeReviewApp.Modules.Validations {
+﻿using System.Dynamic;
+
+namespace WeReviewApp.Modules.Validations {
     public class ValidationMessage {
         /// <summary>
         ///     Message if the validation is successful.
@@ -13,6 +15,13 @@
 
         public bool isError { get; set; }
         public int errorCode { get; set; }
+        /// <summary>
+        /// Error message.
+        /// </summary>
         public string errorMessage { get; set; }
+        /// <summary>
+        /// Dynamic values
+        /// </summary>
+        public ExpandoObject dynamicValues { get; set; }
     }
 }

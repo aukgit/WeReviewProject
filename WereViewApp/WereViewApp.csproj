@@ -499,10 +499,6 @@
     <Content Include="Content\css\animate.min.css">
       <DependentUpon>animate.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\app-controller.css" />
-    <Content Include="Content\css\app-controller.min.css">
-      <DependentUpon>app-controller.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\backend-developer.css" />
     <Content Include="Content\css\backend-developer.min.css">
       <DependentUpon>backend-developer.css</DependentUpon>
@@ -517,6 +513,10 @@
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
     </Content>
     <Content Include="Content\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\css\bootstrap-dialog.css" />
+    <Content Include="Content\css\bootstrap-dialog.min.css">
+      <DependentUpon>bootstrap-dialog.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\bootstrap-select-overrides.css" />
     <Content Include="Content\css\bootstrap-select-overrides.min.css">
       <DependentUpon>bootstrap-select-overrides.css</DependentUpon>
@@ -547,6 +547,10 @@
     <Content Include="Content\css\color-fonts.css" />
     <Content Include="Content\css\color-fonts.min.css">
       <DependentUpon>color-fonts.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\controllers-style.css" />
+    <Content Include="Content\css\controllers-style.min.css">
+      <DependentUpon>controllers-style.css</DependentUpon>
     </Content>
     <Content Include="Content\css\dataTables.bootstrap.css" />
     <Content Include="Content\css\editor-templates.css" />
@@ -615,6 +619,10 @@
       <DependentUpon>search-page.css</DependentUpon>
     </Content>
     <Content Include="Content\css\search-page.min.css" />
+    <Content Include="Content\css\see-more-btn.css" />
+    <Content Include="Content\css\see-more-btn.min.css">
+      <DependentUpon>see-more-btn.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\seo-optimize.css" />
     <Content Include="Content\css\seo-optimize.css.map">
       <DependentUpon>seo-optimize.css</DependentUpon>
@@ -723,8 +731,13 @@
     <Content Include="Content\Less\see-more-btn.less" />
     <Content Include="Content\Less\seo-optimize.less" />
     <Content Include="Content\Less\utilities\input-with-others.less" />
-    <Content Include="JavaScript-Mvc-framework\controllers\AccountController.js" />
-    <Content Include="JavaScript-Mvc-framework\controllers\TagsController.js" />
+    <Content Include="JavaScript-Mvc-framework\events\binding.js" />
+    <Content Include="JavaScript-Mvc-framework\events\list.js" />
+    <Content Include="JavaScript-Mvc-framework\controllers\account-controller.js" />
+    <Content Include="JavaScript-Mvc-framework\controllers\reviews-controller.js" />
+    <Content Include="JavaScript-Mvc-framework\controllers\tags-controller.js" />
+    <Content Include="JavaScript-Mvc-framework\libs\bootbox.js" />
+    <Content Include="JavaScript-Mvc-framework\libs\bootstrap-dialog.js" />
     <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\arrowleft.png" />
     <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\arrowright.png" />
     <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\arrow_left.png" />
@@ -858,19 +871,19 @@
     <Content Include="JavaScript-Mvc-framework\app.executeBefore.js" />
     <Content Include="JavaScript-Mvc-framework\app.js" />
     <Content Include="JavaScript-Mvc-framework\app.run.js" />
-    <Content Include="JavaScript-Mvc-framework\Areas\Admin\Controllers\NavItemsController.js" />
+    <Content Include="JavaScript-Mvc-framework\Areas\Admin\Controllers\navItems-controller.js" />
     <Content Include="JavaScript-Mvc-framework\byId.js" />
     <Content Include="JavaScript-Mvc-framework\component\component.list.js" />
-    <Content Include="JavaScript-Mvc-framework\controllers\controllers.js" />
-    <Content Include="JavaScript-Mvc-framework\controllers\homeController.js" />
+    <Content Include="JavaScript-Mvc-framework\controllers.js" />
+    <Content Include="JavaScript-Mvc-framework\controllers\home-controller.js" />
     <Content Include="JavaScript-Mvc-framework\controllers\initialize.js" />
-    <Content Include="JavaScript-Mvc-framework\controllers\AppController.js" />
+    <Content Include="JavaScript-Mvc-framework\controllers\app-controller.js" />
     <Content Include="JavaScript-Mvc-framework\component\component.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\ajax.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\clone.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\constants.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\hiddenContainer.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\initialize.js" />
+    <Content Include="JavaScript-Mvc-framework\initialize.js" />
     <Content Include="JavaScript-Mvc-framework\attachInitialize.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\inputChangeTracker.js" />
     <Content Include="JavaScript-Mvc-framework\extensions\modal.js" />
@@ -918,10 +931,7 @@
     <Content Include="Content\css\bootstrap-tagsinput-override.css.map">
       <DependentUpon>bootstrap-tagsinput-override.css</DependentUpon>
     </Content>
-    <Content Include="Content\Less\app-controller.less" />
-    <Content Include="Content\css\app-controller.css.map">
-      <DependentUpon>app-controller.css</DependentUpon>
-    </Content>
+    <Content Include="Content\Less\controllers-style.less" />
     <Content Include="Areas\Admin\Views\Config\_Tabs-List.cshtml" />
     <Content Include="Content\Less\Animate\animationclasses.less" />
     <Content Include="Content\Less\Animate\bounce.less" />
@@ -987,6 +997,16 @@
     <Content Include="Content\Less\remixens\gradient.less" />
     <Content Include="Content\css\override-mvc.css.map">
       <DependentUpon>override-mvc.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\bootstrap-dialog.less" />
+    <Content Include="Content\css\bootstrap-dialog.css.map">
+      <DependentUpon>bootstrap-dialog.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\controllers-style.css.map">
+      <DependentUpon>controllers-style.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\see-more-btn.css.map">
+      <DependentUpon>see-more-btn.css</DependentUpon>
     </Content>
     <None Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
     <Content Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />
@@ -1423,10 +1443,7 @@
     <Content Include="Views\App\Drafts.cshtml" />
     <Content Include="Views\App\SingleAppDisplay.cshtml" />
     <Content Include="Views\Apps\Search.cshtml" />
-    <Content Include="Views\Reviews\Write.cshtml" />
-    <Content Include="Views\Reviews\Delete.cshtml" />
-    <Content Include="Views\Reviews\Details.cshtml" />
-    <Content Include="Views\Reviews\Edit.cshtml" />
+    <Content Include="Views\Reviews\PostOrUpdate.cshtml" />
     <Content Include="Views\Apps\Reviewed.cshtml" />
     <Content Include="Views\Partials\HomePageGallery.cshtml" />
     <Content Include="Views\Partials\AdvertiseGallery.cshtml" />
@@ -1436,13 +1453,9 @@
     <Content Include="Views\Partials\ReviewsDisplay.cshtml" />
     <Content Include="Views\Partials\FeaturedApps.cshtml" />
     <Content Include="Views\App\_PublishInfo.cshtml" />
-    <Content Include="Views\App\_SuggestedApps.cshtml" />
     <Content Include="Views\App\_Gallery.cshtml" />
-    <Content Include="Views\App\_WriteReviewForm.cshtml" />
     <Content Include="Views\App\_RatingAndViewed.cshtml" />
     <Content Include="Views\App\_AppEditButton.cshtml" />
-    <Content Include="Views\Reviews\AlreadyReviewed.cshtml" />
-    <Content Include="Views\Reviews\ReviewEdit.cshtml" />
     <Content Include="Views\Shared\_AppNotFound.cshtml" />
     <Content Include="Views\Shared\_LoginUrlPage.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\FileMulti.cshtml">

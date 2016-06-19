@@ -9,8 +9,8 @@
 
 /*!
  * JavaScript Mvc framework.
- * Version                      : 1.8
- * Last Modified                : 22 May 2016  
+ * Version                      : 2.0
+ * Last Modified                : 19 Jun 2016  
  * 
  * Copyright (c) Md. Alim Ul Karim
  * Source Code Available at     : https://github.com/aukgit/JavaScript-MVC-Framework

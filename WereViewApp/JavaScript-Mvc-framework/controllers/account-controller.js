@@ -35,11 +35,9 @@ $.app.controllers.accountController = {
     },
     isDebugging: true,
     initialize: function () {
-        var controllers = $.app.controllers,
-            current = controllers.accountController;
-        if (controllers.isCurrentPage(current)) {
-            controllers.execute(current);
-        }
+        /// <summary>
+        /// config elements
+        /// </summary>
     },
     getPage: function() {
         return $.app.controllers.accountController.$pageElement;
@@ -57,18 +55,18 @@ $.app.controllers.accountController = {
             /// Refers to the data-action attribute.
             /// </summary>
             /// <returns type=""></returns>
-            var self = $.app.controllers.accountController,
-                $page = self.getPage(),
-                prop = self.prop;
+            //var self = $.app.controllers.accountController,
+            //    $page = self.getPage(),
+            //    prop = self.prop;
             //$form = ;
             // urlSchema = $.app.urls.getGeneralUrlSchema(false, ["SaveOrder"]); // pass nothing will give Create,Edit,Delete,Index url
             // urlSchema.edit  will give edit url.
-            var $form = $page.find(".register-form"),
-                $inputs = $form.find("input:not([type='hidden'])");
-            for (var i = 0; i < $inputs.length; i++) {
-                var $input = $($inputs[i]);
-                $input.val("uioui123");
-            }
+            //var $form = $page.find(".register-form"),
+            //    $inputs = $form.find("input:not([type='hidden'])");
+            //for (var i = 0; i < $inputs.length; i++) {
+            //    var $input = $($inputs[i]);
+            //    $input.val("uioui123");
+            //}
             ////$form.submit(function(e) {
             ////    e.preventDefault();
             ////});

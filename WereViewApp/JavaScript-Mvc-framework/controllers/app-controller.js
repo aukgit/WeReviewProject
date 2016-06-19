@@ -1,29 +1,33 @@
-﻿/// <reference path="../../../jQueryExtend.js" />
-/// <reference path="../../../extensions/spinner.js" />
-/// <reference path="../../../extensions/ajax.js" />
-/// <reference path="../../../extensions/pagination.js" />
-/// <reference path="../../../extensions/selectors.js" />
-/// <reference path="../../../extensions/urls.js" />
-/// <reference path="../../../extensions/constants.js" />
-/// <reference path="../../../extensions/ajax.js" />
-/// <reference path="../../../controllers/controllers.js" />
-/// <reference path="../../../controllers/initialize.js" />
-/// <reference path="../../../app.global.js" />
-/// <reference path="../../../app.js" />
-/// <reference path="../../../app.run.js" />
-/// <reference path="../../../byId.js" />
-/// <reference path="../../../extensions/inputChangeTracker.js" />
-/// <reference path="../../../ProtoType/Array.js" />
-/// <reference path="../../../extensions/spinner.js" />
-/// <reference path="../app.executeAfter.js" />
-/// <reference path="../app.executeBefore.js" />
-/// <reference path="../app.global.js" />
-/// <reference path="../app.config.js" />
+﻿/// <reference path="../extensions/ajax.js" />
+/// <reference path="../extensions/clone.js" />
+/// <reference path="../extensions/constants.js" />
+/// <reference path="../extensions/hiddenContainer.js" />
+/// <reference path="../extensions/inputChangeTracker.js" />
+/// <reference path="../extensions/modal.js" />
+/// <reference path="../extensions/pagination.js" />
+/// <reference path="../extensions/regularExp.js" />
+/// <reference path="../extensions/selectors.js" />
+/// <reference path="../extensions/spinner.js" />
+/// <reference path="../libs/DevOrgPlugins/WeReviewApps.js" />
+/// <reference path="../libs/jquery.blockUI.js" />
+/// <reference path="../extensions/urls.js" />
+/// <reference path="../libs/toastr.js" />
+/// <reference path="../libs/underscore.js" />
+/// <reference path="../byId.js" />
+/// <reference path="../controllers.js" />
 /// <reference path="../jQueryCaching.js" />
-/// <reference path="../jQueryExtend.js" />
 /// <reference path="../jQueryExtend.fn.js" />
+/// <reference path="../app.global.js" />
+/// <reference path="../jQueryExtend.js" />
+/// <reference path="../schema/hashset.js" />
+/// <reference path="../attachInitialize.js" />
+/// <reference path="../schema/schema.js" />
+/// <reference path="../libs/jQuery/jquery-2.2.3.intellisense.js" />
+/// <reference path="../schema/url.js" />
+/// <reference path="../Prototype/Array.js" />
 
-;$.app.controllers = $.app.controllers || {};
+
+//;$.app.controllers = $.app.controllers || {};
 $.app.controllers.appController = {
     // any thing related to controllers.
     pageId: "app-controller",
@@ -36,17 +40,13 @@ $.app.controllers.appController = {
     },
     isDebugging: true,
     initialize: function () {
-        var controllers = $.app.controllers,
-            current = controllers.appController;
-        if (controllers.isCurrentPage(current)) {
-            controllers.execute(current);
-        }
+        //anything to config
     },
-    getPage: function() {
+    getPage: function () {
         return $.app.controllers.appController.$pageElement;
     },
-    config :  function() {
-        
+    config: function () {
+
     },
     actions: {
         /// <summary>
@@ -64,7 +64,7 @@ $.app.controllers.appController = {
                 urlSchema = $.app.urls.getGeneralUrlSchema(false, ["SaveOrder"]); // pass nothing will give Create,Edit,Delete,Index url
             // urlSchema.edit  will give edit url.
 
-            
+
             // bind events
             self.bindEvents.youtubePlayBtnClick();
 
@@ -83,7 +83,7 @@ $.app.controllers.appController = {
                     if (this.$moreExcert.length > 0) {
                         this.$moreExcert.hide();
                     }
-                 
+
                     var $numberElement = $(".app-viewed-numbers");
                     if ($numberElement.length > 0) {
                         $numberElement.number(true);
@@ -156,8 +156,53 @@ $.app.controllers.appController = {
                     }
                 });
             }
+        },
+        getReviewForm: function (e, $this) {
+            e.preventDefault();
+            var $container = $this.getReferenceIdElement();
+            var cls = "already-embedded",
+                reviewsControllerPageId = "reviews-controller",
+                spinnerMessage = null; // 
+            if (!$container.hasClass(cls)) {
+                $container.addClass(cls);
+                $container.hide();
+                // inputs to load the review write form only via url
+                var reqVerifyFieldsArray = $("#review-request-fields").find("input").serializeArray();
+                //console.log(reqVerifyFields);
+                $.ajax({
+                    type: "POST",
+                    dataType: "html",
+                    url: $this.getUrlString(),
+                    data: reqVerifyFieldsArray,
+                    success: function (response) {
+                        //var $response = $(response);
+                        $container.html(response);
+                        $container.show("slow");
+                        //var $form = $response.filter("form");
+                        //displayModal(htmlResponse);
+                        var $form = $.byId(reviewsControllerPageId);
+                        if ($form.hasClass("write")) {
+                            //stop submitting and go through the processes and pages
+                            $.devOrg.uxFriendlySlide("#" + reviewsControllerPageId,
+                                true,
+                                true //don't submit
+                            );
+                        }
+                        $.app.controllers.initialize("reviews"); //init reviews controller.
+                        // Now from reviews controller there is form submit event in the bindEvents json
+                        // that method will take care of the rest and submit the form to the appropriate section.
+                    },
+                    beforeSend: function () {
+                        $.app.spinner.show(spinnerMessage);
+                    }
+                }).always(function () {
+                    $.app.spinner.hide();
+                });
+            } else {
+                $container.toggle("slow");
+
+            }
         }
+
     }
-
 }
-
