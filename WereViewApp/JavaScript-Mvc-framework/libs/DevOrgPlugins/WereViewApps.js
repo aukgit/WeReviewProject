@@ -481,6 +481,8 @@ $.WeReviewApp = {
                 raiseUploaderInvalidMessage(ifAnyUploadfails); // halt happens in the next if-else logic
             }
 
+            checkIfUploadersAreValid();
+
             // ifAnyUploadfails = true then halt.
             if (!ifAnyUploadfails && self.isAppTitleValid()) {
                 // everything is successful
@@ -489,28 +491,23 @@ $.WeReviewApp = {
                 self.fixAllInputIframeDataOrHtmlToSquare(); //html input to square input . <tag></tag> .. [tag][/tag]
                 // all conditions fulfilled so submit the form
 
-                var data = $.WeReviewApp.$appForm.serialize();
-                console.log(data);
-                //alert(data);
-                $.ajax({
-                    url: $.WeReviewApp.$appForm.attr("action"),
-                    //url: "/App/AppPost",
-                    data: data,
-                    success: function (response) {
-                        console.log(response);
-                    }
-                });
+                //var data = $.WeReviewApp.$appForm.serialize();
+                //console.log(data);
+                ////alert(data);
+                //$.ajax({
+                //    url: $.WeReviewApp.$appForm.attr("action"),
+                //    //url: "/App/AppPost",
+                //    data: data,
+                //    success: function (response) {
+                //        console.log(response);
+                //    }
+                //});
 
-                //this.submit(); //previous submission.
+                this.submit(); //previous submission.
             }
 
         }
-        //function preventDefaultInside(evt, formCanbeSent) {
-        //    if (!ifAnyUploadfails && formCanbeSent) {
-        //        // all uploads has been done.
-        //        self.appInputChangesExist = false; // no change exist on the unbin method ... direct submit.
-        //    }
-        //}
+
     },
 
     isAppTitleValid: function ($appNameInputTextbox) {

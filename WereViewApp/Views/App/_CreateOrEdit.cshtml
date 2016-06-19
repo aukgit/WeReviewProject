@@ -50,6 +50,7 @@
     <div data-dev-slide="1" data-dev-visited="@ViewBag.ShowAllDivs">
         @Html.EditorFor(model => model.ReleaseDate, "Date")
         @Html.EditorFor(model => model.YoutubeEmbedLink, new { @class = "url-input youtube-link-convert" })
+        @*Code is written inside component.list.js .youtube-link-convert class and "convert-youtube-link-to-embed" component attribute will convert any youtube link to embeded link*@
         @Html.EditorFor(model => model.WebsiteUrl)
         @Html.EditorFor(model => model.StoreUrl)
     </div>
