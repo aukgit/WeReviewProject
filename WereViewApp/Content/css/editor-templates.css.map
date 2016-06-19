@@ -1,1 +1,1 @@
-﻿{"version":3,"file":"editor-templates.css","sources":["../Less/editor-templates.less"],"names":[],"mappings":";;;;;;;AASI,CADH,aACI;AAAQ,CADZ,aACa;EACN,qBAAA;;AAKJ,WAAC;EACG,aAAA;EACA,cAAA;;AAGR;EACI,kBAAA"}
+﻿{"version":3,"file":"editor-templates.css","sources":["../Less/editor-templates.less"],"names":[],"mappings":";;;;;;;AAUQ,SADJ,IACK;EACG,qBAAA;EACA,WAAA;;EAEA,YAAA;;EAEA,kBAAA;EACA,SAAA;EACA,SAAA;;AAEA,SAXR,IACK,aAUI;AAAQ,SAXjB,IACK,aAUa;EACN,qBAAA;;AAOZ,WAAC;EACG,aAAA;EACA,cAAA;;AAFJ,WAAC,aAIG,MAAM;EACF,eAAA;;AAIR,WAAC,OACG;EACI,iBAAA;;AAKZ;EACI,kBAAA"}

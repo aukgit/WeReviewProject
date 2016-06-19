@@ -11,4 +11,11 @@
 #app-form .ispublished label:hover {
   font-weight: bold;
 }
-/*# sourceMappingURL=app-controller.css.map */
+.reviews-controller .form-group {
+  margin-left: 0;
+  margin-right: 0;
+}
+.reviews-controller .header-title {
+  color: #ff7200;
+}
+/*# sourceMappingURL=controllers-style.css.map */

@@ -209,28 +209,6 @@ namespace WeReviewApp.Controllers {
 
         #endregion
 
-        #region Edit or modify record
-
-        [Authorize]
-        [ValidateRegistrationComplete]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Review review) {
-            var viewOf = ViewTapping(ViewStates.EditPost, review);
-            AddNecessaryFields(review);
-            if (ModelState.IsValid) {
-                db.Entry(review).State = EntityState.Modified;
-                var state = SaveDatabase(ViewStates.Edit, review);
-                if (state) {
-                    _logics.AfterReviewIsSavedFixRatingNReviewCountInApp(review, false, db);
-                    _logics.ForceAppReviewToLoad(review.AppID);
-                    return Json(new {isDone = true, msg = "Successful."}, JsonRequestBehavior.AllowGet); // return true;
-                }
-            }
-            return Json(new {isDone = false, msg = "failed."}, JsonRequestBehavior.AllowGet); // return true;
-        }
-
-        #endregion
 
         #region Removing output cache
 
@@ -302,7 +280,11 @@ namespace WeReviewApp.Controllers {
         #endregion
 
         #region Create or Add
-
+        /// <summary>
+        /// Requesting for getting the view of writing review.
+        /// </summary>
+        /// <param name="AppID"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -315,27 +297,32 @@ namespace WeReviewApp.Controllers {
             if (isSameUser) {
                 return View("ReviewOwnApp");
             }
-            var review = _logics.GetUserReviewedApp(AppID, db);
+            // get the review if already reviewed this app by this user.
+            var review = _logics.GetUsersReviewForApp(AppID, userId, db);
             if (review == null) {
                 // not ever reviewed.
                 var viewOf = ViewTapping(ViewStates.Create);
                 review = new Review();
                 review.AppID = AppID;
                 review.Rating = 0;
-                return View("Write", review);
+                ViewBag.Title = "Write Review";
+                ViewBag.view = "write";
+            } else {
+                // already reviewed now modifying
+                ViewBag.Title = "Update Review";
+                ViewBag.edit = true;
+                ViewBag.view = "edit";
             }
-            // already reviewed the then send edit form
-            return View("ReviewEdit", review);
+            return View("PostOrUpdate", review);
         }
 
-        /*
-        public ActionResult Create(System.Int64 id) {        
-            GetDropDowns(id); // Generate hidden.
-            bool viewOf = ViewTapping(ViewStates.Create);
-            return View();
-        }
-        */
+        #region Creating or Posting new review.
 
+        /// <summary>
+        /// Post a new review.
+        /// </summary>
+        /// <param name="review"></param>
+        /// <returns></returns>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -354,20 +341,48 @@ namespace WeReviewApp.Controllers {
                     AppVar.SetSavedStatus(ViewBag, _createdSaved); // Saved Successfully.          
                 }
 
-                return Json(new {isDone = true, msg = "Successful."}, JsonRequestBehavior.AllowGet); // return true;
+                return Json(new { isDone = true, msg = "Successful." }, JsonRequestBehavior.AllowGet); // return true;
             }
 
-            return Json(new {isDone = false, msg = "failed."}, JsonRequestBehavior.AllowGet); // return true;
+            return Json(new { isDone = false, msg = "failed." }, JsonRequestBehavior.AllowGet); // return true;
+        } 
+
+        #endregion
+
+        #region Update or Modify Review
+
+        [Authorize]
+        [ValidateRegistrationComplete]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Review review) {
+            var viewOf = ViewTapping(ViewStates.EditPost, review);
+            AddNecessaryFields(review);
+            if (ModelState.IsValid) {
+                review.CreatedDate = DateTime.Now;
+                db.Entry(review).State = EntityState.Modified;
+                var state = SaveDatabase(ViewStates.Edit, review);
+                if (state) {
+                    _logics.AfterReviewIsSavedFixRatingNReviewCountInApp(review, false, db);
+                    _logics.ForceAppReviewToLoad(review.AppID);
+                    return Json(new { isDone = true, msg = "Successful." }, JsonRequestBehavior.AllowGet); // return true;
+                }
+            }
+            return Json(new { isDone = false, msg = "failed." }, JsonRequestBehavior.AllowGet); // return true;
         }
 
+        #endregion
+
+        #region Common Necessary fields
         private void AddNecessaryFields(Review review) {
             review.UserID = UserManager.GetLoggedUserId();
-
             if (review.Comments != null) {
                 review.Comment1 = review.Comments.GetStringCutOff(100);
                 review.Comment2 = review.Comments.GetStringCutOff(100, 500);
             }
-        }
+        } 
+
+        #endregion
 
         #endregion
     }

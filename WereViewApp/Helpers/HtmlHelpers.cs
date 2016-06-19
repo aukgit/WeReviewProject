@@ -1044,7 +1044,9 @@ namespace WeReviewApp.Helpers {
                 actionNamesList = actionNames.ToList();
             }
             var sb = new StringBuilder(actionNamesList.Count + 2);
-
+            //if (string.IsNullOrEmpty(controller)) {
+            //    controller = helper.ViewContext.RouteData.Values["controller"].ToString();
+            //}
             for (int i = 0; i < actionNamesList.Count; i++) {
                 string actionName = actionNamesList[i],
                        url = urlHelper.GetUriString(actionName, controller),

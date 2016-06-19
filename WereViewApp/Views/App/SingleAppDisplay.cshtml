@@ -16,9 +16,12 @@
     var isStoreUrlExist = !string.IsNullOrEmpty(Model.StoreUrl);
     var isDotRequired = isWebsiteUrlExist && isStoreUrlExist;
     //string currentAppUrlNameOnly = Model.URL; //plant-vs-zombies
+    string jsControllerName = "app-controller";
+    string searchForBindingEvents = "click";
+    string viewName = ViewBag.view;
 }
 
-<div id="app-controller" data-action="SingleAppDisplay">
+<div id="@jsControllerName" class="@jsControllerName @viewName" data-action="@viewName" data-event-binding="@searchForBindingEvents">
     @section hidden{
         @Html.ComponentsEnableFor("owl-carousel")
     }
@@ -77,27 +80,24 @@
                                 <li>
                                     By
                                     <a href="@Model.User.GetProfileUrl()">
-                                        <h1 itemprop="author" itemscope itemtype="http://schema.org/Person">
-                                            <strong title="Developer @Model.User.DisplayName's app is @appName">
-                                                <em itemprop="name" title="@Model.User.DisplayName developer apps">
-                                                    @Model.User.DisplayNameTruncated(10)
-                                                </em>
-                                            </strong>
-                                        </h1>
+                                        <strong title="Developer @Model.User.DisplayName's app is @appName" itemscope itemtype="http://schema.org/Person">
+                                            <em itemprop="name" title="@Model.User.DisplayName developer apps">
+                                                @Model.User.DisplayNameTruncated(10)
+                                            </em>
+                                        </strong>
                                     </a>
                                     <span> . </span>
                                 </li>
                                 <li>
                                     <a href="@Model.GetReportingUrl()" class="report-app">
-                                        <h1 title="Report @appName">
-                                            <strong title="Report @appName">
-                                                <em title="Report @appName">Report</em>
-                                            </strong>
-                                        </h1>
+                                        <strong title="Report @appName">
+                                            <em title="Report @appName">Report</em>
+                                        </strong>
                                     </a>
-                                    <span> . </span>
+
                                 </li>
                                 @if (isWebsiteUrlExist) {
+                                    <li> <span> . </span></li>
                                     <li>
                                         <a href="@Model.WebsiteUrl" title="Official Website for @Model.AppName">
                                             <h1 title="Official Website for @Model.AppName">
@@ -109,9 +109,7 @@
                                     </li>
                                 }
                                 @if (isDotRequired) {
-                                    <li>
-                                        <span> . </span>
-                                    </li>
+                                    <li> <span> . </span></li>
                                 }
                                 @if (isStoreUrlExist) {
                                     <li>
@@ -125,15 +123,9 @@
                                     </li>
                                 }
                                 <li class="share-btn white write-review-btn">
-                                    <a id="review-requesting-spinner" data-toggle="tooltip" title="Requesting" data-original-title="Requesting" class="tooltip-show">
-                                        <span data-display="Requesting for review" class="fa-spin-custom @FaIcons.Spinner" title="Requesting"></span>
-                                    </a>
-                                    <a title="Write Review for @appName" id="WriteReviewButton">
-                                        <h1 title="Write Review for @appName">
-                                            <strong title="Write Review for @appName">
-                                                <em title="Write Review for @appName">Write Review</em>
-                                            </strong>
-                                        </h1>
+                                    <a title="Write Review for @appName" data-url="@Url.Action("GetReviewForm", "Reviews")" data-ref-id="write-review-form-container" data-click="getReviewForm">
+                                        @*It will the review form and method will be found inside the controller.*@
+                                        Write Review
                                     </a>
                                 </li>
                                 <li class="facebook share-btn">
@@ -143,6 +135,7 @@
                             @Html.Partial("_SeoExtraPart")
                             @Html.Partial("_AppDescription")
                             <div id="write-review-form-container">
+                                <!--empty container to inject the form , by clicking getReviewForm()-->
                             </div>
                             @{ Html.RenderAction("ReviewsDisplay", "Partials", new { id = Model.AppID }, true); }
                             <div id="review-request-fields">

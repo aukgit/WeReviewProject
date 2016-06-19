@@ -1,0 +1,42 @@
+﻿@model WeReviewApp.Models.EntityModel.Review
+@{
+    var token = Html.AntiForgeryToken();
+    var controller = (string) ViewBag.controller;
+    string viewName = ViewBag.view;
+    Layout = null;
+    //use this for write or edit review
+}
+<div id="reviews-controller" class="reviews-controller @viewName" data-action="@viewName" data-event-binding="submit">
+    <hr />
+    <h4 class="h4 orange-color">
+        <i class="fa fa-edit"></i>
+        @ViewBag.Title
+    </h4>
+    @if (ViewBag.edit == true) {
+        <h5 class="h5 red">Please rate first to proceed next.</h5>
+    }
+    @using (Html.BeginForm(viewName, controller, FormMethod.Post, new { data_submit = "reviewFormSubmit", @class = "form-horizontal", role = "form", @id = "review-write-form" })) {
+        @token
+        @Html.Partial("_SuccessMessage")
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.AppID)
+        if (ViewBag.edit == true) {
+            @Html.HiddenFor(model => model.ReviewID)
+        }
+        <div data-dev-slide="0" data-dev-visited="false">
+            @Html.EditorFor(model => model.Rating, "Rating-5-b", new { @step = 1, labelColumn = "", textColumn = "" })
+            @Html.EditorFor(model => model.Title, "string", new { labelColumn = "", textColumn = "" })
+        </div>
+        <div data-dev-slide="1" data-dev-visited="false">
+            @Html.EditorFor(model => model.Comments, "Multiline", new { labelColumn = "", textColumn = "" })
+            @Html.EditorFor(model => model.Pros, "Multiline", new { labelColumn = "", textColumn = "" })
+            @Html.EditorFor(model => model.Cons, "Multiline", new { labelColumn = "", textColumn = "" })
+            @Html.EditorFor(model => model.IsSuggest, "boolean", new { labelColumn = "", textColumn = "" })
+        </div>
+        @Html.Partial("_SavingButton")
+    }
+</div>
+@Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    $(".tooltip-show").tooltip();
+</script>

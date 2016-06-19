@@ -51,7 +51,7 @@ $.WeReviewApp = {
     writeReviewFormUrl: "/Reviews/GetReviewForm",
     appUrlRetrievalUrl: "/Partials/GetAppUrl",
     reviewSpinnerSelector: "review-requesting-spinner",
-    reviewFormContainerSelectorInAppPage: "div#write-review-form-container",
+    reviewFormContainerSelectorInAppPage: "#write-review-form-container",
     reviewFormSubmitUrl: "/Reviews/Write",
     ///consist of # : "#app-details-page"
     appDetailsPageParentId: "#app-details-page",
@@ -481,6 +481,8 @@ $.WeReviewApp = {
                 raiseUploaderInvalidMessage(ifAnyUploadfails); // halt happens in the next if-else logic
             }
 
+            checkIfUploadersAreValid();
+
             // ifAnyUploadfails = true then halt.
             if (!ifAnyUploadfails && self.isAppTitleValid()) {
                 // everything is successful
@@ -489,28 +491,23 @@ $.WeReviewApp = {
                 self.fixAllInputIframeDataOrHtmlToSquare(); //html input to square input . <tag></tag> .. [tag][/tag]
                 // all conditions fulfilled so submit the form
 
-                var data = $.WeReviewApp.$appForm.serialize();
-                console.log(data);
-                //alert(data);
-                $.ajax({
-                    url: $.WeReviewApp.$appForm.attr("action"),
-                    //url: "/App/AppPost",
-                    data: data,
-                    success: function (response) {
-                        console.log(response);
-                    }
-                });
+                //var data = $.WeReviewApp.$appForm.serialize();
+                //console.log(data);
+                ////alert(data);
+                //$.ajax({
+                //    url: $.WeReviewApp.$appForm.attr("action"),
+                //    //url: "/App/AppPost",
+                //    data: data,
+                //    success: function (response) {
+                //        console.log(response);
+                //    }
+                //});
 
-                //this.submit(); //previous submission.
+                this.submit(); //previous submission.
             }
 
         }
-        //function preventDefaultInside(evt, formCanbeSent) {
-        //    if (!ifAnyUploadfails && formCanbeSent) {
-        //        // all uploads has been done.
-        //        self.appInputChangesExist = false; // no change exist on the unbin method ... direct submit.
-        //    }
-        //}
+
     },
 
     isAppTitleValid: function ($appNameInputTextbox) {
@@ -611,156 +608,6 @@ $.WeReviewApp = {
     },
 
 
-    /**
-     * Processing review submit/save button click or submission process.
-     */
-    reviewFormSubmit: function (evt, $form) {
-        evt.preventDefault(); //stop from submitting.
-        var self = $.WeReviewApp;
-        //console.log("ase");
-        var $submittingSpinner = null;
-        var $inputs, currformData = 0;
-        $submittingSpinner = $.byId("submitting-review-spinner");
-        var $failedIcon = $.byId("submitting-review-failed-icon");
-        // indicates if it is in the review posting page or in editing page\
-        // $lastDiv.length == 0 indicates it's in review edit mode
-        var $lastDiv = $form.find("div[data-last-slide=true]:visible");
-        var url = $form.attr("action");
-        var isInReviewPostingMode = (url === self.reviewFormSubmitUrl && $lastDiv.length > 0);
-        // indicates in review edit mode
-        var isFormSubmitUrlIsSameAsReviewSubmitUrl = url !== self.reviewFormSubmitUrl;
-
-        if (isInReviewPostingMode || isFormSubmitUrlIsSameAsReviewSubmitUrl) {
-            $inputs = $lastDiv.find("input");
-            var $comment = $("#Comments");
-            var commentValue = $comment.val();
-
-            if ($.devOrg.checkValidInputs($inputs) && !_.isEmpty(commentValue)) {
-                // now we can submit, all inputs are valid.
-                $submittingSpinner.fadeIn("slow");
-                currformData = $form.serializeArray();
-                console.log(currformData);
-                $.ajax({
-                    type: "POST",
-                    dataType: "json",
-                    url: url,
-                    data: currformData,
-                    success: function (response) {
-                        console.log(response);
-                        var isDone = response.isDone;
-                        var msg = response.msg;
-                        if (isDone) {
-                            // reload the page, because we can't change the review from here.
-                            location.reload(true);
-                            //$container.fadeOut("slow");
-                        } else {
-                            $failedIcon.fadeIn("slow");
-                        }
-                        $submittingSpinner.fadeOut("slow");
-                    },
-                    error: function (xhr, status, error) {
-
-                    }
-                }); // ajax end
-            }
-        }
-
-    },
-    /**
-     * After clicking on "Write Review" in app-details page.
-     * Everything stars from here.
-     */
-    askForReviewForm: function () {
-        var self = $.WeReviewApp;
-        var $reviewSpinner = $.byId(self.reviewSpinnerSelector).hide();
-
-        if ($reviewSpinner.length > 0) {
-            var $writeReviewBtn = $.byId("WriteReviewButton");
-
-            var $ratingBox = $.byId("current-app-rating-box-field");
-            if ($ratingBox.length > 0) {
-                $ratingBox.click(function (e) {
-                    e.preventDefault();
-                    $writeReviewBtn.trigger("click");
-                });
-            }
-            $writeReviewBtn.click(function () {
-                var $container = $(self.reviewFormContainerSelectorInAppPage);
-                var text = $container.text().trim();
-                if (text.length === 0) {
-                    $container.hide();
-                    $reviewSpinner.fadeIn("slow");
-                    // load write form
-                    var reqVerifyFieldsArray = $("#review-request-fields").find("input").serializeArray();
-                    //console.log(reqVerifyFields);
-                    $.ajax({
-                        type: "POST",
-                        dataType: "html",
-                        url: self.writeReviewFormUrl,
-                        data: reqVerifyFieldsArray,
-                        success: function (response) {
-                            var selectForm = self.reviewFormContainerSelectorInAppPage + " form";
-                            var $submittingSpinner = null;
-                            //var $response = $(response);
-                            $container.html(response);
-
-                            var $failedIcon = $("#submitting-review-failed-icon");
-                            $failedIcon.hide();
-
-                            $container.show("slow");
-
-                            //var $form = $response.filter("form");
-                            var $form = $container.find("form:first");
-
-                            if ($form.length > 0) {
-                                $submittingSpinner = $.byId("submitting-review-spinner");
-                                $submittingSpinner.hide();
-
-                                //stop submitting and go through the processes and pages
-                                $.devOrg.uxFriendlySlide(
-                                    selectForm,
-                                    true,
-                                    true //don't submit
-                                    );
-
-                                // stop submitting , process review submit button actions
-                                // anonymous function would be faster 
-                                // however it would be dis-organized and since
-                                // it's only be used few times so it's okay.
-                                // note : $form.submit() doesn't work ! don't know why?
-                                //        it doesn't work because (may be) it is not in the page html.
-                                $form.submit(function (evt) {
-                                    evt.preventDefault();
-                                    //var $sendingForm = $(this);
-                                    self.reviewFormSubmit(evt, $form);
-                                });
-
-                                //$container.find("button.btn.btn-success").click(function () {
-                                //    console.log("at place");
-                                //});
-
-
-                            }
-                            //console.log(response);
-                            $reviewSpinner.fadeOut("slow");
-                        },
-                        beforeSend : function() {
-                            $.app.spinner.quickShow();
-                        },
-                        error: function (xhr, status, error) {
-
-                        },
-                        always: function() {
-                            $.app.spinner.hide();
-
-                        }
-                    }); // ajax end
-                } else {
-                    $container.toggle("slow");
-                }
-            });
-        }
-    },
     /**
      * App review : like-dislike functionality
      */
@@ -1004,7 +851,7 @@ $.WeReviewApp = {
         //self.frontEndJavaScript();
 
         //data-last-slide="true"
-        self.askForReviewForm();
+        //self.askForReviewForm();
 
         self.suggestedOrReviewLoadmoreBtnLeft();
 

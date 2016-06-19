@@ -8,7 +8,7 @@
 /// <reference path="../detect-browser.js" />
 /// <reference path="initialize.js" />
 /// <reference path="programsearch.js" />
-;$.app = $.app || {};
+//; $.app = $.app || {};
 $.app.controllers = {
     // any thing related to controllers.
     isCurrentPage: function (controllerExtendedTypeObject) {
@@ -38,6 +38,21 @@ $.app.controllers = {
         }
         return "";
     },
+    getPageBindings: function (controllerExtendedTypeObject) {
+        /// <summary>
+        /// Get binding events names
+        /// </summary>
+        /// <param name="controllerExtendedTypeObject"></param>
+        /// <returns type="">String of name(i.e. Index, Edit etc... which set in the data-action attribute.)</returns>
+        var $page = $.app.controllers.getPage(controllerExtendedTypeObject);
+        if (!$.isEmpty($page)) {
+            var value = $page.attr("data-event-binding");
+            if (!$.isEmpty(value)) {
+                return value;
+            }
+        }
+        return "";
+    },
     execute: function (controllerExtendedTypeObject, runAll) {
         /// <summary>
         /// execute all the actions if in the same page and page is related to that action.
@@ -47,17 +62,21 @@ $.app.controllers = {
         var actions = controllerExtendedTypeObject.actions,
             actionNames = Object.keys(actions),
             pageAction = $.app.controllers.getPageActionName(controllerExtendedTypeObject),
-            needToStop = runAll === false;
+            needToStop = runAll === false,
+           isOneRan = false;
 
         for (var i = 0; i < actionNames.length; i++) {
             var actionName = actionNames[i],
                 action = actions[actionName];
             if (actionName === pageAction) {
-                $.executeFunction(action);
+                if ($.executeFunction(action)) {
+                    isOneRan = true;
+                }
                 if (needToStop === true) {
-                    return;
+                    return true;
                 }
             }
         }
+        return isOneRan;
     }
 }

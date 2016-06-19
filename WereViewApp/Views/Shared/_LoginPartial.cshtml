@@ -1,22 +1,23 @@
 ﻿@using Microsoft.AspNet.Identity
 @{
     var username = User.Identity.GetUserName();
+    string url = AppVar.Url;
 }
 @if (Request.IsAuthenticated && User.IsRegistrationComplete()) {
     <li>
-        <a href="@AppVar.Url/Account/Manage" title="Manage '@username' account" class="nav-username">
+        <a title="Manage '@username' account" class="nav-username">
             <i class="@FaIcons.User"></i>
             @username!
         </a>
         <ul class="animated dropdown fadeIn">
             <li>
-                <a href="@AppVar.Url/Account/Manage" title="Manage your account">
+                <a href="@url/Account/Manage" title="Manage your account">
                     <i class="@FaIcons.Cog"></i>
                     Manage
                 </a>
             </li>
             <li>
-                <a href="@AppVar.Url/Profiles/@username" title="Public profile  of @username">Public Profile</a>
+                <a href="@url/Profiles/@username" title="Public profile  of @username">Public Profile</a>
             </li>
             @Html.GetMenu("AppPost")
             <li title="Sign out">
@@ -29,14 +30,14 @@
     </li>
 } else if (Request.IsAuthenticated && !User.IsRegistrationComplete()) {
     <li>
-        <a href="@AppVar.Url/Account/ResendConfirmationMail" title="Resend confirmation" class="nav-username">
+        <a href="@url/Account/ResendConfirmationMail" title="Resend confirmation" class="nav-username">
             <i class="@FaIcons.Send"></i>
             Resend Validation
         </a>
     </li>
 } else {
     <li title="Login in WeReviewApp.com">
-        <a href="/Login" title="Login in WeReviewApp.com">
+        <a title="Login in WeReviewApp.com">
             <h1 title="Login in WeReviewApp.com">
                 <i class="@FaIcons.Login"></i>
                 <strong title="Login in WeReviewApp.com">
@@ -48,7 +49,7 @@
         </a>
         <ul class="animated dropdown fadeIn">
             <li>
-                <a href="/Login" title="Login in WeReviewApp.com">
+                <a href="@url/Login" title="Login in WeReviewApp.com">
                     <h1 title="Login in WeReviewApp.com">
                         <i class="@FaIcons.Login"></i>
                         <strong title="Login in WeReviewApp.com">
@@ -60,7 +61,7 @@
                 </a>
             </li>
             <li>
-                <a href="/Register" title="Register in WeReviewApp.com">
+                <a href="@url/Register" title="Register in WeReviewApp.com">
                     <h1 title="Register in WeReviewApp.com">
                         <i class="@FaIcons.Register"></i>
                         <strong title="Register in WeReviewApp.com">

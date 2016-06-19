@@ -58,11 +58,13 @@
 <div class="form-row-uploader form-group form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty">
     <div class="controls dev-plugin">
         <label class="col-md-2 upload-label control-label form-label-@styleProperty" for="@styleProperty">
+            @displayName
             @if (description != null) {
                 <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">
                     <span class="description-icon"></span>
                 </a>
             }
+            <span class="red">@isRequiredStar</span>
         </label>
         <div data-id="@ViewBag.data_id_val" class="col-md-10 form-input-@styleProperty">
             <div data-id="@ViewBag.data_id_val" class="uploader uploader-@ViewBag.data_id_val">
@@ -107,7 +109,7 @@
                     <label data-id="@ViewBag.data_id_val" data-label-file-uploaded="true" class="label label-success file-uploaded-notify-label-@ViewBag.data_id_val" data-max-upload-count="@ViewBag.maxUpload" data-uploaded-count="@ViewBag.uploadedFiles" data-upload-pre-exist-count="@ViewBag.uploadPreexist"></label>
                 }
             </div>
-            @Html.ValidationMessageFor(m => m, null, new {@class = "invalid-input"})
+            @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
         </div>
     </div>
 </div>

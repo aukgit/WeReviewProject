@@ -678,11 +678,11 @@ namespace WeReviewApp.BusinessLogics {
         /// <summary>
         /// </summary>
         /// <param name="appId"></param>
+        /// <param name="userId"></param>
         /// <param name="db"></param>
         /// <returns>Returns true if did review the app.</returns>
-        public Review GetUserReviewedApp(long appId, WereViewAppEntities db) {
-            var userid = UserManager.GetLoggedUserId();
-            return db.Reviews.FirstOrDefault(n => n.AppID == appId && n.UserID == userid);
+        public Review GetUsersReviewForApp(long appId, long userId, WereViewAppEntities db) {
+            return db.Reviews.FirstOrDefault(n => n.AppID == appId && n.UserID == userId);
         }
 
         #endregion

@@ -71,11 +71,13 @@
 <div data-id="@ViewBag.data_id_val" data-uploader-div-row="true" class="form-group form-row @styleProperty form-row-uploader" data-prop="@styleProperty">
     <div class="controls dev-plugin plugin-container uploader-multiple">
         <label class="@ViewBag.labelColumn control-label form-label @styleProperty" for="@styleProperty" data-prop="@styleProperty">
+            @displayName
             @if (description != null) {
                 <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">
                     <span class="description-icon"></span>
                 </a>
             }
+            <span class="red">@isRequiredStar</span>
         </label>
         <div data-id="@ViewBag.data_id_val" class="@ViewBag.textColumn form-input @styleProperty">
             <div data-id="@ViewBag.data_id_val" class="uploader uploader-@ViewBag.data_id_val">
@@ -120,7 +122,7 @@
                     <label data-id="@ViewBag.data_id_val" data-has-edit-btn="@ViewBag.hasEditBtn" data-label-file-uploaded="true" class="label label-success file-uploaded-notify-label-@ViewBag.data_id_val" data-max-upload-count="@ViewBag.maxUpload" data-uploaded-count="@ViewBag.uploadedFiles" data-upload-pre-exist-count="@ViewBag.uploadPreexist"></label>
                 }
             </div>
-            @Html.ValidationMessageFor(m => m, null, new {@class = "rounded-3 label label-danger fixed-width-294 validation-box"})
+            @Html.ValidationMessageFor(m => m, null, new { @class = "rounded-3 label label-danger fixed-width-294 validation-box" })
         </div>
     </div>
 </div>

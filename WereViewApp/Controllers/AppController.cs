@@ -65,6 +65,7 @@ namespace WeReviewApp.Controllers {
             if (app != null) {
                 _logics.IncreaseViewCount(app, db);
                 ViewBag.breadcrumbs = _logics.GetBredcrumbsBasedOnCurrentUrl("single-app");
+                ViewBag.view = "SingleAppDisplay"; // js action
                 return View(app);
             }
             return View("_AppNotFound");

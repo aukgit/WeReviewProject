@@ -23,7 +23,6 @@
 /// <reference path="../jQueryExtend.js" />
 /// <reference path="../jQueryExtend.fn.js" />
 
-;$.app.controllers = $.app.controllers || {};
 $.app.controllers.tagsController = {
     // any thing related to controllers.
     pageId: "tags-controller",
@@ -36,11 +35,9 @@ $.app.controllers.tagsController = {
     },
     isDebugging: true,
     initialize: function () {
-        var controllers = $.app.controllers,
-            current = controllers.tagsController;
-        if (controllers.isCurrentPage(current)) {
-            controllers.execute(current);
-        }
+        /// <summary>
+        /// anything to config
+        /// </summary>
     },
     getPage: function() {
         return $.app.controllers.tagsController.$pageElement;
@@ -58,14 +55,14 @@ $.app.controllers.tagsController = {
             /// Refers to the data-action attribute.
             /// </summary>
             /// <returns type=""></returns>
-            var self = $.app.controllers.tagsController,
-                $page = self.getPage(),
-                prop = self.prop;
+            //var self = $.app.controllers.tagsController,
+            //    $page = self.getPage(),
+            //    prop = self.prop;
                 //urlSchema = $.app.urls.getGeneralUrlSchema(false, ["SaveOrder"]); // pass nothing will give Create,Edit,Delete,Index url
             // urlSchema.edit  will give edit url.
 
-            console.log($page);
-            console.log($page.attr("data-hello"));
+            //console.log($page);
+            //console.log($page.attr("data-hello"));
             
             // create tracker
 

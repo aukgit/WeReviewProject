@@ -26,7 +26,7 @@ namespace WeReviewApp {
 
 
             #region jQuery
-            
+
             bundles.Add(new ScriptBundle("~/bundles/jquery", jQueryCdn)
                         .Include(jqueryFolder + jQueryVersion + ".js") //if no CDN
             );
@@ -79,66 +79,79 @@ namespace WeReviewApp {
 
                     #region Bootstrap
                     bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                                  jsLibraryFolder + "DevOrgPlugins/byId.js",
-                                  jsLibraryFolder + "bootstrap.js", // 3.1.2
-                                  jsLibraryFolder + "star-rating.js",
-                                  jsLibraryFolder + "toastr.js",
-                                  jsLibraryFolder + "underscore.js",
-                                  jsLibraryFolder + "FrontEnd/wow.js",
-                                  jsLibraryFolder + "FrontEnd/jquery.sticky.js",
-                                  jsLibraryFolder + "FrontEnd/jquery.stellar.js",
-                                  jsLibraryFolder + "FrontEnd/base-theme.js",
-                                  jsLibraryFolder + "FrontEnd/jquery.isotope.min.js",
-                                  jsLibraryFolder + "FrontEnd/owl.carousel.min.js",
-                                  jsLibraryFolder + "FrontEnd/jquery.number.js",
-                                  jsLibraryFolder + "revolution-slider/js/jquery.themepunch.tools.min.js",
-                                  jsLibraryFolder + "revolution-slider/js/jquery.themepunch.revolution.min.js",
-                                  jsLibraryFolder + "DevOrgPlugins/developers-organism.component.js",
-                                  jsLibraryFolder + "FrontEnd/front-developer.js",
-                                  jsLibraryFolder + "jquery.blockUI.js",
+                                jsLibraryFolder + "DevOrgPlugins/byId.js",
+                                jsLibraryFolder + "bootstrap.js", // 3.1.2
+                                jsLibraryFolder + "star-rating.js",
+                                jsLibraryFolder + "toastr.js",
+                                jsLibraryFolder + "underscore.js",
+                                jsLibraryFolder + "FrontEnd/wow.js",
+                                jsLibraryFolder + "FrontEnd/jquery.sticky.js",
+                                jsLibraryFolder + "FrontEnd/jquery.stellar.js",
+                                jsLibraryFolder + "FrontEnd/base-theme.js",
+                                jsLibraryFolder + "FrontEnd/jquery.isotope.min.js",
+                                jsLibraryFolder + "FrontEnd/owl.carousel.min.js",
+                                jsLibraryFolder + "FrontEnd/jquery.number.js",
+                                jsLibraryFolder + "revolution-slider/js/jquery.themepunch.tools.min.js",
+                                jsLibraryFolder + "revolution-slider/js/jquery.themepunch.revolution.min.js",
+                                jsLibraryFolder + "DevOrgPlugins/developers-organism.component.js",
+                                jsLibraryFolder + "FrontEnd/front-developer.js",
+                                jsLibraryFolder + "jquery.blockUI.js",
+                                jsLibraryFolder + "bootbox.js",//bootbox
 
-                                  jsFrameworkFolder + "Prototype/Array.js",
+                                jsFrameworkFolder + "Prototype/Array.js",
+                        //jsFrameworkFolder + "Prototype/*.*.js",
 
-                                  jsFrameworkFolder + "app.js",
-                                  jsFrameworkFolder + "app.executeBefore.js",
-                                  jsFrameworkFolder + "app.executeAfter.js",
-                                  jsFrameworkFolder + "jQueryCaching.js",
-                                  jsFrameworkFolder + "attachInitialize.js",
+                                jsFrameworkFolder + "app.js",
+                                jsFrameworkFolder + "app.executeBefore.js",
+                                jsFrameworkFolder + "app.executeAfter.js",
+                                jsFrameworkFolder + "jQueryCaching.js",
+                                jsFrameworkFolder + "attachInitialize.js",
 
-                                  jsFrameworkFolder + "schema/schema.js",
-                                  jsFrameworkFolder + "schema/hashset.js",
-                                  jsFrameworkFolder + "schema/url.js",
+                                jsFrameworkFolder + "schema/schema.js",
+                                jsFrameworkFolder + "schema/hashset.js",
+                                jsFrameworkFolder + "schema/url.js",
 
-                                  jsFrameworkFolder + "extensions/ajax.js",
-                                  jsFrameworkFolder + "extensions/hiddenContainer.js",
-                                  jsFrameworkFolder + "extensions/clone.js",
-                                  jsFrameworkFolder + "extensions/constants.js",
-                                  jsFrameworkFolder + "extensions/initialize.js",
-                                  jsFrameworkFolder + "extensions/inputChangeTracker.js",
-                                  jsFrameworkFolder + "extensions/modal.js",
-                                  jsFrameworkFolder + "extensions/pagination.js",
-                                  jsFrameworkFolder + "extensions/regularExp.js",
-                                  jsFrameworkFolder + "extensions/selectors.js",
-                                  jsFrameworkFolder + "extensions/spinner.js",
-                                  jsFrameworkFolder + "extensions/urls.js",
+                                //jsFrameworkFolder + "schema/*.*.js",
 
-                                  jsFrameworkFolder + "controllers/controllers.js",
-                                  jsFrameworkFolder + "controllers/initialize.js",
-                                  jsFrameworkFolder + "controllers/AppController.js",
-                                  jsFrameworkFolder + "controllers/AccountController.js",
-                                  jsFrameworkFolder + "controllers/TagsController.js",
+                                jsFrameworkFolder + "initialize.js",
 
-                                  jsFrameworkFolder + "component/component.js",
-                                  jsFrameworkFolder + "component/component.list.js",
+                                jsFrameworkFolder + "extensions/ajax.js",
+                                jsFrameworkFolder + "extensions/hiddenContainer.js",
+                                jsFrameworkFolder + "extensions/clone.js",
+                                jsFrameworkFolder + "extensions/constants.js",
+                                jsFrameworkFolder + "extensions/inputChangeTracker.js",
+                                jsFrameworkFolder + "extensions/modal.js",
+                                jsFrameworkFolder + "extensions/pagination.js",
+                                jsFrameworkFolder + "extensions/regularExp.js",
+                                jsFrameworkFolder + "extensions/selectors.js",
+                                jsFrameworkFolder + "extensions/spinner.js",
+                                jsFrameworkFolder + "extensions/urls.js",
+                        //jsFrameworkFolder + "extensions/*.*.js",
 
-                                  jsFrameworkFolder + "areas/admin/controllers/NavItemsController.js",
+                                jsFrameworkFolder + "controllers.js",
+                                jsFrameworkFolder + "controllers/initialize.js",
 
-                                  jsFrameworkFolder + "jQueryExtend.js",
-                                  jsFrameworkFolder + "jQueryExtend.fn.js",
-                                  jsFrameworkFolder + "app.config.js",
-                                  jsFrameworkFolder + "app.global.js",
-              
-                                  jsFrameworkFolder + "app.run.js"
+                                jsFrameworkFolder + "controllers/account-controller.js",
+                                jsFrameworkFolder + "controllers/app-controller.js",
+                                jsFrameworkFolder + "controllers/home-controller.js",
+                                jsFrameworkFolder + "controllers/reviews-controller.js",
+                                jsFrameworkFolder + "controllers/tags-controller.js",
+                        //jsFrameworkFolder + "controllers/*-controller.js",
+
+                                jsFrameworkFolder + "areas/admin/controllers/navItems-controller.js",
+
+                                jsFrameworkFolder + "component/component.js",
+                                jsFrameworkFolder + "component/component.list.js",
+
+                                jsFrameworkFolder + "events/binding.js",
+                                jsFrameworkFolder + "events/list.js",
+
+                                jsFrameworkFolder + "jQueryExtend.js",
+                                jsFrameworkFolder + "jQueryExtend.fn.js",
+                                jsFrameworkFolder + "app.config.js",
+                                jsFrameworkFolder + "app.global.js",
+
+                                jsFrameworkFolder + "app.run.js"
 
                                   ));
                     #endregion
@@ -164,7 +177,8 @@ namespace WeReviewApp {
                                         stylesFolder + "bootstrap-select-overrides.css",
                                         stylesFolder + "bootstrap-tagsinput.css",
                                         stylesFolder + "bootstrap-tagsinput-override.css",
-                                        //stylesFolder + "ckedit-skin-bootstrap.css",
+                                        stylesFolder + "bootstrap-dialog.css",
+                        //stylesFolder + "ckedit-skin-bootstrap.css",
 
                                         stylesFolder + "color-fonts.css",
                                         stylesFolder + "loader-spinner.css",
@@ -186,7 +200,7 @@ namespace WeReviewApp {
                                         stylesFolder + "owl.theme.css",
                                         stylesFolder + "owl.custom.finalize.css",
 
-                                        stylesFolder + "app-controller.css",
+                                        stylesFolder + "controllers-style.css",
 
 
                                         stylesFolder + "seo-optimize.css",

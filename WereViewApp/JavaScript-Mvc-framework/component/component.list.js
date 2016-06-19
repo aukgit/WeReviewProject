@@ -135,8 +135,8 @@ $.app.component.list = {
         /// then it will work.
         /// </summary>
         var app = $.app,
-            id = "youtube-link-convert",
-            $anyInputs = $.findCachedId(id),
+            cssClass = "youtube-link-convert",
+            $anyInputs = $.findCachedId(cssClass),
             $processForm = app.getProcessForm(),
             $inputs = [],
             isGivenUrlMatchedDomain = app.global.isGivenUrlMatchedDomain;
@@ -144,7 +144,7 @@ $.app.component.list = {
         if ($anyInputs.length > 0) {
             $inputs = $anyInputs;
         } else if ($processForm.length > 0) {
-            $inputs = $processForm.find("." + id);
+            $inputs = $processForm.find("." + cssClass);
         }
 
         if ($inputs.length > 0) {

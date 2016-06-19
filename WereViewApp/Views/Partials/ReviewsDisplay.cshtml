@@ -18,7 +18,7 @@
                 isRecommended = review.IsSuggest ? "is-recommended" : "";
                 animateRightLeft = sequenceOfReview % 2 == 0 ? "slideInLeft" : "slideInRight";
                 string disLikeActive = "", likeActive = "";
-                // if this review is liked or disliked by 
+                // if this review is liked or disliked by
                 // this current user [checking]
                 if (userId > -1) {
                     // user logged in
@@ -76,18 +76,22 @@
                             </span>
                             <div class="more" data-ref="app-review" data-id="@sequenceOfReview">
                                 @review.Comment2
-                                <a>
-                                    <h1 title="pros of @Model.AppName" class="green h5">Pros:</h1>
-                                </a>
-                                <blockquote title="pros of @Model.AppName">
-                                    @review.Pros
-                                </blockquote>
-                                <a>
-                                    <h1 title="cons of @Model.AppName" class="h5 red">Cons:</h1>
-                                </a>
-                                <blockquote title="cons of @Model.AppName">
-                                    @review.Cons
-                                </blockquote>
+                                @if (review.Pros != null) {
+                                    <a>
+                                        <h1 title="pros of @Model.AppName" class="green h5">Pros:</h1>
+                                    </a>
+                                    <blockquote title="pros of @Model.AppName">
+                                        @review.Pros
+                                    </blockquote>
+                                }
+                                @if (review.Cons != null) {
+                                    <a>
+                                        <h1 title="cons of @Model.AppName" class="h5 red">Cons:</h1>
+                                    </a>
+                                    <blockquote title="cons of @Model.AppName">
+                                        @review.Cons
+                                    </blockquote>
+                                }
                                 <a class="less-btn" data-ref="app-review" data-id="@sequenceOfReview">less</a>
                             </div>
                         </article>
@@ -113,9 +117,9 @@
                         </div>
                     </div>
                 </section>
-                {
-                    sequenceOfReview++;
-                }
+                                {
+                                    sequenceOfReview++;
+                                }
             }
         }
     </div>
