@@ -14,37 +14,38 @@
   <files>
     <file>/Content/css/bootstrap.css</file>
     <file>/Content/css/less-imports.css</file>
-    <file>/Content/css/animate.min.css</file>
-    <file>/Content/css/font-awesome.min.css</file>
-    <file>/Content/css/animate-refresh.css</file>
-
-    <file>/Content/css/site.css</file>
-    <file>/Content/css/flags32.css</file>
-    <file>/Content/css/flags32-combo.css</file>
+    <file>/Content/css/animate.css</file>
+    <file>/Content/css/font-awesome.css</file>
+    <file>/Content/css/Site.css</file>
+    <file>/Content/css/header.css</file>
+    <!--<file>/Content/css/flags32.css</file>
+    <file>/Content/css/flags32-combo.css</file>-->
     <file>/Content/css/Upload/jquery.fileupload.css</file>
-    
     <file>/Content/css/bootstrap-datetimepicker.css</file>
     <file>/Content/css/bootstrap-table.css</file>
     <file>/Content/css/bootstrap-select.css</file>
-
+    <file>/Content/css/bootstrap-select-overrides.css</file>
+    <file>/Content/css/bootstrap-tag.css</file>
+    <file>/Content/css/bootstrap-tagsinput-override.css</file>
+    <file>/Content/css/bootstrap-dialog.css</file>
     <file>/Content/css/color-fonts.css</file>
+    <file>/Content/css/loader-spinner.css</file>
     <file>/Content/css/star-rating.css</file>
+    <file>/Content/css/toastr.css</file>
     <file>/Content/css/override-mvc.css</file>
-    
+    <file>/Content/css/validator.css</file>
+    <file>/Content/css/editor-templates.css</file>
     <file>/Content/css/base-theme-styles.css</file>
     <file>/Content/css/style.css</file>
     <file>/Content/css/responsive.css</file>
-    <file>/Content/revolution-slider/css/settings.css</file>
-    
-    
+    <file>/JavaScript-Mvc-framework/libs/revolution-slider/css/settings.css</file>
     <file>/Content/css/owl.carousel.css</file>
     <file>/Content/css/owl.theme.css</file>
     <file>/Content/css/owl.custom.finalize.css</file>
-    
+    <file>/Content/css/controllers-style.css</file>
     <file>/Content/css/seo-optimize.css</file>
     <file>/Content/css/front-developer.css</file>
     <file>/Content/css/footer-fixing.css</file>
     <file>/Content/css/utilities.css</file>
-
   </files>
 </bundle>

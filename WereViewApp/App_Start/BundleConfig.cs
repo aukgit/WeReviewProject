@@ -167,8 +167,8 @@ namespace WeReviewApp {
                                         stylesFolder + "font-awesome.min.css",
                                         stylesFolder + "site.css",
                                         stylesFolder + "header.css",
-                                        stylesFolder + "flags32.css",
-                                        stylesFolder + "flags32-combo.css",
+                                        //stylesFolder + "flags32.css",
+                                        //stylesFolder + "flags32-combo.css",
                                         stylesFolder + "Upload/jquery.fileupload.css",
 
                                         stylesFolder + "bootstrap-datetimepicker.css",
