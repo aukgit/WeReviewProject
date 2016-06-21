@@ -591,12 +591,6 @@
     <Content Include="Content\css\loader-spinner.min.css">
       <DependentUpon>loader-spinner.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\menu-fix.css" />
-    <Content Include="Content\css\menu-fix.css.map">
-      <DependentUpon>menu-fix.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\menu-fix.min.css" />
-    <Content Include="Content\css\miscellaneous.css" />
     <Content Include="Content\css\override-mvc.css" />
     <Content Include="Content\css\override-mvc.min.css">
       <DependentUpon>override-mvc.css</DependentUpon>
@@ -655,10 +649,6 @@
     <Content Include="Content\css\utilities.css" />
     <Content Include="Content\css\utilities.min.css">
       <DependentUpon>utilities.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\Utitlities Full.css" />
-    <Content Include="Content\css\Utitlities Full.min.css">
-      <DependentUpon>Utitlities Full.css</DependentUpon>
     </Content>
     <Content Include="Content\css\validator.css" />
     <Content Include="Content\css\validator.min.css">
@@ -720,6 +710,22 @@
     <Content Include="Content\Less\see-more-btn.less" />
     <Content Include="Content\Less\seo-optimize.less" />
     <Content Include="Content\Less\utilities\input-with-others.less" />
+    <Content Include="Content\Published.Scripts\front-end.js" />
+    <Content Include="Content\Published.Scripts\front-end.min.js">
+      <DependentUpon>front-end.js</DependentUpon>
+    </Content>
+    <Content Include="Content\Published.Scripts\jqueryval.js" />
+    <Content Include="Content\Published.Scripts\jqueryval.min.js">
+      <DependentUpon>jqueryval.js</DependentUpon>
+    </Content>
+    <Content Include="Content\Published.Scripts\upload.js" />
+    <Content Include="Content\Published.Scripts\upload.min.js">
+      <DependentUpon>upload.js</DependentUpon>
+    </Content>
+    <Content Include="Content\Published.Styles\Styles.css" />
+    <Content Include="Content\Published.Styles\Styles.min.css">
+      <DependentUpon>Styles.css</DependentUpon>
+    </Content>
     <Content Include="JavaScript-Mvc-framework\events\binding.js" />
     <Content Include="JavaScript-Mvc-framework\events\list.js" />
     <Content Include="JavaScript-Mvc-framework\controllers\account-controller.js" />
@@ -908,9 +914,6 @@
     <Content Include="Content\css\editor-templates.css.map">
       <DependentUpon>editor-templates.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Utitlities Full.css.map">
-      <DependentUpon>Utitlities Full.css</DependentUpon>
-    </Content>
     <Content Include="Content\Less\utilities\add-on.less" />
     <Content Include="Content\Less\bootstrap-select-overrides.less" />
     <Content Include="Content\css\bootstrap-select-overrides.css.map">
@@ -996,6 +999,19 @@
     </Content>
     <Content Include="Content\css\see-more-btn.css.map">
       <DependentUpon>see-more-btn.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Bundles\Styles.css.bundle" />
+    <Content Include="Content\Bundles\upload.js.bundle" />
+    <Content Include="Content\Bundles\jqueryval.js.bundle" />
+    <Content Include="Content\Bundles\front-end.js.bundle" />
+    <Content Include="Content\Published.Scripts\front-end.min.js.map">
+      <DependentUpon>front-end.min.js</DependentUpon>
+    </Content>
+    <Content Include="Content\Published.Scripts\jqueryval.min.js.map">
+      <DependentUpon>jqueryval.min.js</DependentUpon>
+    </Content>
+    <Content Include="Content\Published.Scripts\upload.min.js.map">
+      <DependentUpon>upload.min.js</DependentUpon>
     </Content>
     <None Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
     <Content Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />
@@ -1576,7 +1592,6 @@
     <Folder Include="App_Data\DataCached\Suggested\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Services\" />
-    <Folder Include="Content\Bundles\" />
     <Folder Include="Models\DesignPattern\Abstracts\" />
     <Folder Include="Models\EntityModel\GarbageCodes\" />
     <Folder Include="Models\POCO\AdditionalDatabase\" />

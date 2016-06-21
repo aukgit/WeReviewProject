@@ -3,13 +3,13 @@
 namespace WeReviewApp {
     public static class BundleConfig {
         private enum BundleSelector {
-            ShowEveryScript,
-            EveryScriptThroughBundle
+            DebugScripts,
+            ReleaseModeBundle
         }
         public static void RegisterBundles(BundleCollection bundles) {
 
 
-            const BundleSelector bundleSelector = BundleSelector.ShowEveryScript;
+            const BundleSelector bundleSelector = BundleSelector.ReleaseModeBundle;
 
             const string jQueryVersion = "2.2.3";
             const string jsFrameworkFolder = "~/JavaScript-Mvc-framework/";
@@ -34,7 +34,7 @@ namespace WeReviewApp {
 
 
             switch (bundleSelector) {
-                case BundleSelector.ShowEveryScript:
+                case BundleSelector.DebugScripts:
                     #region JavaScripts Bundle
 
                     #region Validation Bundle & Form Inputs Processing
@@ -167,8 +167,8 @@ namespace WeReviewApp {
                                         stylesFolder + "font-awesome.min.css",
                                         stylesFolder + "site.css",
                                         stylesFolder + "header.css",
-                                        stylesFolder + "flags32.css",
-                                        stylesFolder + "flags32-combo.css",
+                                        //stylesFolder + "flags32.css",
+                                        //stylesFolder + "flags32-combo.css",
                                         stylesFolder + "Upload/jquery.fileupload.css",
 
                                         stylesFolder + "bootstrap-datetimepicker.css",
@@ -213,7 +213,7 @@ namespace WeReviewApp {
                     #endregion
 
                     break;
-                case BundleSelector.EveryScriptThroughBundle:
+                case BundleSelector.ReleaseModeBundle:
                     #region Java Scripts Bundle
 
                     #region Validation Bundle & Form Inputs Processing
