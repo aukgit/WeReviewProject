@@ -36,7 +36,7 @@
     "RtlCss": false,
     "RunOnBuild": false,
     "ShowBrowserTooltip": true,
-    "ShowInitialInherit": false,
+    "ShowInitialInherit": true,
     "ShowUnsupported": true,
     "SyncBase64ImageValues": true,
     "SyncVendorValues": true,
