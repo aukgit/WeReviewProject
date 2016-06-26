@@ -8203,7 +8203,7 @@ $(function () {
 });
 
 ///#source 1 1 /JavaScript-Mvc-framework/libs/jquery.blockUI.js
-/*!
+/*
  * jQuery blockUI plugin
  * Version 2.70.0-2014.11.23
  * Requires jQuery v1.7 or later
@@ -9875,7 +9875,7 @@ Array.prototype.getDifferentIndexes = function (array) {
 /// <reference path="extensions/constants.js" />
 /// <reference path="extensions/selectors.js" />
 
-/*!
+/*
  * JavaScript Mvc framework.
  * Version                      : 2.0
  * Last Modified                : 19 Jun 2016  

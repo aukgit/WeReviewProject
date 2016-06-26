@@ -7,7 +7,7 @@
 /// <reference path="extensions/constants.js" />
 /// <reference path="extensions/selectors.js" />
 
-/*!
+/*
  * JavaScript Mvc framework.
  * Version                      : 2.0
  * Last Modified                : 19 Jun 2016  

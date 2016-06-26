@@ -99,13 +99,13 @@
     "EvalTreatment": "MakeImmediateSafe",
     "GenerateSourceMaps": true,
     "GzipMinifiedFiles": false,
-    "LintOnBuild": false,
+    "LintOnBuild": true,
     "LintOnSave": true,
     "LintResultLocation": "Message",
     "MakeMinified": true,
     "OutputDirectory": null,
     "RootDirectory": "/Scripts/",
-    "RunOnBuild": false,
+    "RunOnBuild": true,
     "TermSemicolons": true
   },
   "Less": {
