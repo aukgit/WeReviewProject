@@ -9,7 +9,7 @@ namespace WeReviewApp {
         public static void RegisterBundles(BundleCollection bundles) {
 
 
-            const BundleSelector bundleSelector = BundleSelector.ReleaseModeBundle;
+            const BundleSelector bundleSelector = BundleSelector.DebugScripts;
 
             const string jQueryVersion = "2.2.3";
             const string jsFrameworkFolder = "~/JavaScript-Mvc-framework/";

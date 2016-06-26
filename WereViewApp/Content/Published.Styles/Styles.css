@@ -1,4 +1,4 @@
-﻿/*
+/*
  * bootswatch v3.3.1+1
  * Homepage: http://bootswatch.com
  * Copyright 2012-2014 Thomas Park
@@ -266,8 +266,8 @@ th {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url(../fonts/glyphicons-halflings-regular.eot);
-  src: url(../fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'), url(../fonts/glyphicons-halflings-regular.woff) format('woff'), url(../fonts/glyphicons-halflings-regular.ttf) format('truetype'), url(../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg');
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -10027,8 +10027,8 @@ a.list-group-item-danger.active:focus {
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url(../fonts/fontawesome-webfont.eot?v=4.6.1);
-  src: url(../fonts/fontawesome-webfont.eot?#iefix&v=4.6.1) format('embedded-opentype'), url(../fonts/fontawesome-webfont.woff2?v=4.6.1) format('woff2'), url(../fonts/fontawesome-webfont.woff?v=4.6.1) format('woff'), url(../fonts/fontawesome-webfont.ttf?v=4.6.1) format('truetype'), url(../fonts/fontawesome-webfont.svg?v=4.6.1#fontawesomeregular) format('svg');
+  src: url('../fonts/fontawesome-webfont.eot?v=4.6.1');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.6.1') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2?v=4.6.1') format('woff2'), url('../fonts/fontawesome-webfont.woff?v=4.6.1') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.6.1') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.6.1#fontawesomeregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14086,6 +14086,7 @@ It means that loaders will fallback to a text state of simply saying "Loading...
 .star-rating-rtl .caption {
     padding-right: 5px;
 }
+
 .toast-title {
   font-weight: bold;
 }
@@ -16339,6 +16340,7 @@ header-1 .jetmenu > li.active > a {
         left: 0 !important;
     }
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -24636,7 +24638,7 @@ transform: rotate(360deg);
 }
 }
 .tp-transparentimg {
-	content: "url(../assets/transparent.png)"
+	content: "url(../../JavaScript-Mvc-framework/libs/revolution-slider/assets/transparent.png)"
 }
 .tp-3d {
 	-webkit-transform-style: preserve-3d;
@@ -24650,8 +24652,8 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF, endC
 }
 @font-face {
 	font-family: 'revicons';
-	src: url(../../JavaScript-Mvc-framework/libs/revolution-slider/font/revicons90c6.eot?5510888);
-	src: url(../../JavaScript-Mvc-framework/libs/revolution-slider/font/revicons90c6.eot?5510888#iefix) format('embedded-opentype'),  url(../../JavaScript-Mvc-framework/libs/revolution-slider/font/revicons90c6.woff?5510888) format('woff'),  url(../../JavaScript-Mvc-framework/libs/revolution-slider/font/revicons90c6.ttf?5510888) format('truetype'),  url(../../JavaScript-Mvc-framework/libs/revolution-slider/font/revicons90c6.svg?5510888#revicons) format('svg');
+	src: url('../../JavaScript-Mvc-framework/libs/revolution-slider/font/revicons90c6.eot?5510888');
+	src: url('../../JavaScript-Mvc-framework/libs/revolution-slider/font/revicons90c6.eot?5510888#iefix') format('embedded-opentype'),  url('../../JavaScript-Mvc-framework/libs/revolution-slider/font/revicons90c6.woff?5510888') format('woff'),  url('../../JavaScript-Mvc-framework/libs/revolution-slider/font/revicons90c6.ttf?5510888') format('truetype'),  url('../../JavaScript-Mvc-framework/libs/revolution-slider/font/revicons90c6.svg?5510888#revicons') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -24661,7 +24663,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF, endC
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'revicons';
-    src: url('../font/revicons.svg?5510888#revicons') format('svg');
+    src: url('../../JavaScript-Mvc-framework/libs/revolution-slider/font/revicons.svg?5510888#revicons') format('svg');
   }
 }
 */
@@ -26108,6 +26110,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e33a0c', end
 	-moz-border-radius: 400px;
 	border-radius: 400px;
 }
+
 /* 
  * 	Core Owl Carousel CSS File
  *	v1.3.3
@@ -26178,6 +26181,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e33a0c', end
   -moz-transform: translate3d(0,0,0);
   -ms-transform: translate3d(0,0,0);
 }
+
+
 /*
 * 	Owl Carousel Owl Demo Theme 
 *	v1.3.3
@@ -26573,7 +26578,7 @@ pre.pre-show {
   width: 33.3333333%;
 }
 .demo-lazy .demo-slide .bg {
-  background: url(../img/AjaxLoader.gif) no-repeat center center #aebab6;
+  background: url('../img/AjaxLoader.gif') no-repeat center center #aebab6;
 }
 /* Auto Height */
 .demo-height .demo-slide {

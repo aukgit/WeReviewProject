@@ -1,4 +1,3 @@
-﻿///#source 1 1 /JavaScript-Mvc-framework/libs/jquery.validate.js
 /*
  * jQuery Validation Plugin v1.13.1
  *
@@ -1364,7 +1363,6 @@ $.extend($.fn, {
 });
 
 }));
-///#source 1 1 /JavaScript-Mvc-framework/libs/ckeditor.js
 /*
 Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or http://ckeditor.com/license
@@ -2371,7 +2369,6 @@ null},increment:function(a){this.getLast(a).inputs++},remove:function(a){a=this.
 CKEDITOR.config.wsc_customDictionaryIds||"";a.config.wsc_userDictionaryName=a.config.wsc_userDictionaryName||CKEDITOR.config.wsc_userDictionaryName||"";a.config.wsc_customLoaderScript=a.config.wsc_customLoaderScript||CKEDITOR.config.wsc_customLoaderScript;CKEDITOR.config.wsc_cmd=a.config.wsc_cmd||CKEDITOR.config.wsc_cmd||"spell";CKEDITOR.config.wsc_version="v4.3.0-master-d769233";CKEDITOR.config.wsc_removeGlobalVariable=!0},init:function(a){var b=CKEDITOR.env;this.parseConfig(a);this.parseApi(a);
 a.addCommand("checkspell",new CKEDITOR.dialogCommand("checkspell")).modes={wysiwyg:!CKEDITOR.env.opera&&!CKEDITOR.env.air&&document.domain==window.location.hostname&&!(b.ie&&(8>b.version||b.quirks))};"undefined"==typeof a.plugins.scayt&&a.ui.addButton&&a.ui.addButton("SpellChecker",{label:a.lang.wsc.toolbar,click:function(a){var b=a.elementMode==CKEDITOR.ELEMENT_MODE_INLINE?a.container.getText():a.document.getBody().getText();(b=b.replace(/\s/g,""))?a.execCommand("checkspell"):alert("Nothing to check!")},
 toolbar:"spellchecker,10"});CKEDITOR.dialog.add("checkspell",this.path+(CKEDITOR.env.ie&&7>=CKEDITOR.env.version?"dialogs/wsc_ie.js":window.postMessage?"dialogs/wsc.js":"dialogs/wsc_ie.js"))}});CKEDITOR.config.plugins='dialogui,dialog,about,a11yhelp,basicstyles,blockquote,clipboard,panel,floatpanel,menu,contextmenu,resize,button,toolbar,elementspath,enterkey,entities,popup,filebrowser,floatingspace,listblock,richcombo,format,horizontalrule,htmlwriter,wysiwygarea,image,indent,indentlist,fakeobjects,link,list,magicline,maximize,pastetext,pastefromword,removeformat,showborders,sourcearea,specialchar,menubutton,scayt,stylescombo,tab,table,tabletools,undo,wsc';CKEDITOR.config.skin='bootstrapck';(function() {var setIcons = function(icons, strip) {var path = CKEDITOR.getUrl( 'plugins/' + strip );icons = icons.split( ',' );for ( var i = 0; i < icons.length; i++ )CKEDITOR.skin.icons[ icons[ i ] ] = { path: path, offset: -icons[ ++i ], bgsize : icons[ ++i ] };};if (CKEDITOR.env.hidpi) setIcons('about,0,,bold,24,,italic,48,,strike,72,,subscript,96,,superscript,120,,underline,144,,blockquote,168,,copy-rtl,192,,copy,216,,cut-rtl,240,,cut,264,,paste-rtl,288,,paste,312,,horizontalrule,336,,image,360,,indent-rtl,384,,indent,408,,outdent-rtl,432,,outdent,456,,anchor-rtl,480,,anchor,504,,link,528,,unlink,552,,bulletedlist-rtl,576,,bulletedlist,600,,numberedlist-rtl,624,,numberedlist,648,,maximize,672,,pastetext-rtl,696,,pastetext,720,,pastefromword-rtl,744,,pastefromword,768,,removeformat,792,,source-rtl,816,,source,840,,specialchar,864,,scayt,888,,table,912,,redo-rtl,936,,redo,960,,undo-rtl,984,,undo,1008,,spellchecker,1032,','icons_hidpi.png');else setIcons('about,0,auto,bold,24,auto,italic,48,auto,strike,72,auto,subscript,96,auto,superscript,120,auto,underline,144,auto,blockquote,168,auto,copy-rtl,192,auto,copy,216,auto,cut-rtl,240,auto,cut,264,auto,paste-rtl,288,auto,paste,312,auto,horizontalrule,336,auto,image,360,auto,indent-rtl,384,auto,indent,408,auto,outdent-rtl,432,auto,outdent,456,auto,anchor-rtl,480,auto,anchor,504,auto,link,528,auto,unlink,552,auto,bulletedlist-rtl,576,auto,bulletedlist,600,auto,numberedlist-rtl,624,auto,numberedlist,648,auto,maximize,672,auto,pastetext-rtl,696,auto,pastetext,720,auto,pastefromword-rtl,744,auto,pastefromword,768,auto,removeformat,792,auto,source-rtl,816,auto,source,840,auto,specialchar,864,auto,scayt,888,auto,table,912,auto,redo-rtl,936,auto,redo,960,auto,undo-rtl,984,auto,undo,1008,auto,spellchecker,1032,auto','icons.png');})();CKEDITOR.lang.languages={"en":1,"en-gb":1};}());
-///#source 1 1 /JavaScript-Mvc-framework/libs/ckeditor-jquery-adapter.js
 /*
  Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.
  For licensing, see LICENSE.md or http://ckeditor.com/license
@@ -2382,7 +2379,6 @@ null,null,9999);else{if(d.autoUpdateElement||"undefined"==typeof d.autoUpdateEle
 [e,a.data])});e.on("getData",function(a){b.trigger("getData.ckeditor",[e,a.data])},999);e.on("destroy",function(){b.trigger("destroy.ckeditor",[e])});e.on("save",function(){a(h.form).submit();return!1},null,null,20);if(e.config.autoUpdateElementJquery&&b.is("textarea")&&a(h.form).length){var c=function(){b.ckeditor(function(){e.updateElement()})};a(h.form).submit(c);a(h.form).bind("form-pre-serialize",c);b.bind("destroy.ckeditor",function(){a(h.form).unbind("submit",c);a(h.form).unbind("form-pre-serialize",
 c)})}e.on("destroy",function(){b.removeData("ckeditorInstance")});b.removeData("_ckeditorInstanceLock");b.trigger("instanceReady.ckeditor",[e]);g&&g.apply(e,[h]);l.resolve()}else setTimeout(arguments.callee,100)},0)},null,null,9999)}});var f=new a.Deferred;this.promise=f.promise();a.when.apply(this,k).then(function(){f.resolve()});this.editor=this.eq(0).data("ckeditorInstance");return this}});CKEDITOR.config.jqueryOverrideVal&&(a.fn.val=CKEDITOR.tools.override(a.fn.val,function(g){return function(d){if(arguments.length){var m=
 this,k=[],f=this.each(function(){var b=a(this),c=b.data("ckeditorInstance");if(b.is("textarea")&&c){var f=new a.Deferred;c.setData(d,function(){f.resolve()});k.push(f.promise());return!0}return g.call(b,d)});if(k.length){var b=new a.Deferred;a.when.apply(this,k).done(function(){b.resolveWith(m)});return b.promise()}return f}var f=a(this).eq(0),c=f.data("ckeditorInstance");return f.is("textarea")&&c?c.getData():g.call(f)}}))})(window.jQuery);
-///#source 1 1 /JavaScript-Mvc-framework/libs/jquery.validate.unobtrusive.js
 /* NUGET: BEGIN LICENSE TEXT
  *
  * Microsoft grants you the right to use these script files for the sole
@@ -2793,7 +2789,6 @@ this,k=[],f=this.each(function(){var b=a(this),c=b.data("ckeditorInstance");if(b
         $jQval.unobtrusive.parse(document);
     });
 }(jQuery));
-///#source 1 1 /JavaScript-Mvc-framework/libs/moment.js
 // moment.js
 // version : 2.8.3
 // authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -5650,7 +5645,6 @@ this,k=[],f=this.each(function(){var b=a(this),c=b.data("ckeditorInstance");if(b
         makeGlobal();
     }
 }).call(this);
-///#source 1 1 /JavaScript-Mvc-framework/libs/bootstrap-datetimepicker.js
 /*
 // version : 3.1.3
 =========================================================
@@ -7039,7 +7033,6 @@ THE SOFTWARE.
         widgetParent: false
     };
 }));
-///#source 1 1 /JavaScript-Mvc-framework/libs/bootstrap-select.js
 /*
  * Bootstrap-select v1.9.3 (http://silviomoreto.github.io/bootstrap-select)
  *
@@ -8751,7 +8744,6 @@ THE SOFTWARE.
 
 }));
 
-///#source 1 1 /JavaScript-Mvc-framework/libs/bootstrap-table.js
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
  * version: 1.3.0
@@ -10178,7 +10170,6 @@ THE SOFTWARE.
 
 }(jQuery);
 
-///#source 1 1 /JavaScript-Mvc-framework/libs/bootstrap-table-filter.js
 !function ($) {
 
     'use strict';
@@ -10893,7 +10884,6 @@ THE SOFTWARE.
         'getServerUrl');
 
 }(jQuery);
-///#source 1 1 /JavaScript-Mvc-framework/libs/bootstrap-table-export.js
 /*jslint adsafe: false, bitwise: true, browser: true, cap: false, css: false,
   debug: false, devel: true, eqeqeq: true, es5: false, evil: false,
   forin: false, fragment: false, immed: true, laxbreak: false, newcap: true,
@@ -11525,9 +11515,7 @@ THE SOFTWARE.*/
         }
     };
 })(jQuery);
-///#source 1 1 /JavaScript-Mvc-framework/libs/Tag-it/bootstrap3-typeahead.min.js
 !function(a,b){"use strict";"undefined"!=typeof module&&module.exports?module.exports=b(require("jquery")):"function"==typeof define&&define.amd?define(["jquery"],function(a){return b(a)}):b(a.jQuery)}(this,function(a){"use strict";var b=function(b,c){this.$element=a(b),this.options=a.extend({},a.fn.typeahead.defaults,c),this.matcher=this.options.matcher||this.matcher,this.sorter=this.options.sorter||this.sorter,this.select=this.options.select||this.select,this.autoSelect="boolean"==typeof this.options.autoSelect?this.options.autoSelect:!0,this.highlighter=this.options.highlighter||this.highlighter,this.render=this.options.render||this.render,this.updater=this.options.updater||this.updater,this.displayText=this.options.displayText||this.displayText,this.source=this.options.source,this.delay=this.options.delay,this.$menu=a(this.options.menu),this.$appendTo=this.options.appendTo?a(this.options.appendTo):null,this.shown=!1,this.listen(),this.showHintOnFocus="boolean"==typeof this.options.showHintOnFocus?this.options.showHintOnFocus:!1,this.afterSelect=this.options.afterSelect,this.addItem=!1};b.prototype={constructor:b,select:function(){var a=this.$menu.find(".active").data("value");if(this.$element.data("active",a),this.autoSelect||a){var b=this.updater(a);this.$element.val(this.displayText(b)||b).change(),this.afterSelect(b)}return this.hide()},updater:function(a){return a},setSource:function(a){this.source=a},show:function(){var b,c=a.extend({},this.$element.position(),{height:this.$element[0].offsetHeight});return b="function"==typeof this.options.scrollHeight?this.options.scrollHeight.call():this.options.scrollHeight,(this.$appendTo?this.$menu.appendTo(this.$appendTo):this.$menu.insertAfter(this.$element)).css({top:c.top+c.height+b,left:c.left}).show(),this.shown=!0,this},hide:function(){return this.$menu.hide(),this.shown=!1,this},lookup:function(b){if(this.query="undefined"!=typeof b&&null!==b?b:this.$element.val()||"",this.query.length<this.options.minLength)return this.shown?this.hide():this;var c=a.proxy(function(){a.isFunction(this.source)?this.source(this.query,a.proxy(this.process,this)):this.source&&this.process(this.source)},this);clearTimeout(this.lookupWorker),this.lookupWorker=setTimeout(c,this.delay)},process:function(b){var c=this;return b=a.grep(b,function(a){return c.matcher(a)}),b=this.sorter(b),b.length||this.options.addItem?(b.length>0?this.$element.data("active",b[0]):this.$element.data("active",null),this.options.addItem&&b.push(this.options.addItem),"all"==this.options.items?this.render(b).show():this.render(b.slice(0,this.options.items)).show()):this.shown?this.hide():this},matcher:function(a){var b=this.displayText(a);return~b.toLowerCase().indexOf(this.query.toLowerCase())},sorter:function(a){for(var b,c=[],d=[],e=[];b=a.shift();){var f=this.displayText(b);f.toLowerCase().indexOf(this.query.toLowerCase())?~f.indexOf(this.query)?d.push(b):e.push(b):c.push(b)}return c.concat(d,e)},highlighter:function(b){var c,d,e,f,g,h=a("<div></div>"),i=this.query,j=b.toLowerCase().indexOf(i.toLowerCase());if(c=i.length,0===c)return h.text(b).html();for(;j>-1;)d=b.substr(0,j),e=b.substr(j,c),f=b.substr(j+c),g=a("<strong></strong>").text(e),h.append(document.createTextNode(d)).append(g),b=f,j=b.toLowerCase().indexOf(i.toLowerCase());return h.append(document.createTextNode(b)).html()},render:function(b){var c=this,d=this,e=!1;return b=a(b).map(function(b,f){var g=d.displayText(f);return b=a(c.options.item).data("value",f),b.find("a").html(c.highlighter(g)),g==d.$element.val()&&(b.addClass("active"),d.$element.data("active",f),e=!0),b[0]}),this.autoSelect&&!e&&(b.first().addClass("active"),this.$element.data("active",b.first().data("value"))),this.$menu.html(b),this},displayText:function(a){return a.name||a},next:function(b){var c=this.$menu.find(".active").removeClass("active"),d=c.next();d.length||(d=a(this.$menu.find("li")[0])),d.addClass("active")},prev:function(a){var b=this.$menu.find(".active").removeClass("active"),c=b.prev();c.length||(c=this.$menu.find("li").last()),c.addClass("active")},listen:function(){this.$element.on("focus",a.proxy(this.focus,this)).on("blur",a.proxy(this.blur,this)).on("keypress",a.proxy(this.keypress,this)).on("keyup",a.proxy(this.keyup,this)),this.eventSupported("keydown")&&this.$element.on("keydown",a.proxy(this.keydown,this)),this.$menu.on("click",a.proxy(this.click,this)).on("mouseenter","li",a.proxy(this.mouseenter,this)).on("mouseleave","li",a.proxy(this.mouseleave,this))},destroy:function(){this.$element.data("typeahead",null),this.$element.data("active",null),this.$element.off("focus").off("blur").off("keypress").off("keyup"),this.eventSupported("keydown")&&this.$element.off("keydown"),this.$menu.remove()},eventSupported:function(a){var b=a in this.$element;return b||(this.$element.setAttribute(a,"return;"),b="function"==typeof this.$element[a]),b},move:function(a){if(this.shown){switch(a.keyCode){case 9:case 13:case 27:a.preventDefault();break;case 38:if(a.shiftKey)return;a.preventDefault(),this.prev();break;case 40:if(a.shiftKey)return;a.preventDefault(),this.next()}a.stopPropagation()}},keydown:function(b){this.suppressKeyPressRepeat=~a.inArray(b.keyCode,[40,38,9,13,27]),this.shown||40!=b.keyCode?this.move(b):this.lookup()},keypress:function(a){this.suppressKeyPressRepeat||this.move(a)},keyup:function(a){switch(a.keyCode){case 40:case 38:case 16:case 17:case 18:break;case 9:case 13:if(!this.shown)return;this.select();break;case 27:if(!this.shown)return;this.hide();break;default:this.lookup()}a.stopPropagation(),a.preventDefault()},focus:function(a){this.focused||(this.focused=!0,this.options.showHintOnFocus&&this.lookup(""))},blur:function(a){this.focused=!1,!this.mousedover&&this.shown&&this.hide()},click:function(a){a.stopPropagation(),a.preventDefault(),this.select(),this.$element.focus()},mouseenter:function(b){this.mousedover=!0,this.$menu.find(".active").removeClass("active"),a(b.currentTarget).addClass("active")},mouseleave:function(a){this.mousedover=!1,!this.focused&&this.shown&&this.hide()}};var c=a.fn.typeahead;a.fn.typeahead=function(c){var d=arguments;return"string"==typeof c&&"getActive"==c?this.data("active"):this.each(function(){var e=a(this),f=e.data("typeahead"),g="object"==typeof c&&c;f||e.data("typeahead",f=new b(this,g)),"string"==typeof c&&(d.length>1?f[c].apply(f,Array.prototype.slice.call(d,1)):f[c]())})},a.fn.typeahead.defaults={source:[],items:8,menu:'<ul class="typeahead dropdown-menu" role="listbox"></ul>',item:'<li><a href="#" role="option"></a></li>',minLength:1,scrollHeight:0,autoSelect:!0,afterSelect:a.noop,addItem:!1,delay:0},a.fn.typeahead.Constructor=b,a.fn.typeahead.noConflict=function(){return a.fn.typeahead=c,this},a(document).on("focus.typeahead.data-api",'[data-provide="typeahead"]',function(b){var c=a(this);c.data("typeahead")||c.typeahead(c.data())})});
-///#source 1 1 /JavaScript-Mvc-framework/libs/Tag-it/bootstrap-tagsinput.js
 (function ($) {
   "use strict";
 
@@ -12146,7 +12134,6 @@ THE SOFTWARE.*/
   });
 })(window.jQuery);
 
-///#source 1 1 /JavaScript-Mvc-framework/libs/jquery.elastic.source.js
 /**
 *	@name							Elastic
 *	@descripton						Elastic is jQuery plugin that grow and shrink your textareas automatically
@@ -12309,7 +12296,6 @@ THE SOFTWARE.*/
         } 
     }); 
 })(jQuery);
-///#source 1 1 /JavaScript-Mvc-framework/libs/DevOrgPlugins/developers-organism.dynamicSelect.js
 /// <reference path="../jQuery/jquery-2.1.3.js" />
 /// <reference path="../jQuery/jquery-2.1.3.intellisense.js" />
 /// <reference path="../jQuery/jquery.number.js" />
@@ -12523,7 +12509,6 @@ $.devOrg.dynamicSelect = {
 
 }
 
-///#source 1 1 /JavaScript-Mvc-framework/libs/DevOrgPlugins/developers-organism.country-phone.js
 /// <reference path="developers-organism.component.js" />
 /// <reference path="developers-organism.dynamicSelect.js" />
 /// <reference path="developers-organism.upload.js" />
@@ -12705,7 +12690,6 @@ $.devOrg.countryTimezonePhoneComponent = {
     }
 
 }
-///#source 1 1 /JavaScript-Mvc-framework/libs/DevOrgPlugins/jquery.server-validate.js
 /// <reference path="byId.js" />
 /// <reference path="bootstrap.js" />
 /// <reference path="jquery-2.1.4.js" />
@@ -13908,7 +13892,6 @@ $.devOrg.countryTimezonePhoneComponent = {
     };
 
 })(jQuery, window, document);
-///#source 1 1 /JavaScript-Mvc-framework/libs/DevOrgPlugins/dev-component-runner.js
 /// <reference path="developers-organism.component.js" />
 /// <reference path="developers-organism.dynamicSelect.js" />
 /// <reference path="developers-organism.upload.js" />
@@ -13997,7 +13980,6 @@ $.devOrg.runner = function () {
 $(function () {
     $.devOrg.runner();
 });
-///#source 1 1 /JavaScript-Mvc-framework/libs/DevOrgPlugins/WeReviewApps.js
 /// <reference path="developers-organism.component.js" />
 /// <reference path="byId.js" />
 /// <reference path="../jquery-2.1.4.intellisense.js" />
@@ -14869,4 +14851,3 @@ $(function () {
     // this will call all the other events
     $.WeReviewApp.executeActions();
 });
-
