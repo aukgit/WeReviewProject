@@ -11,7 +11,14 @@
         <td class="bold">Name</td>
         <td class="indent-1 red">:</td>
         <td class="indent-1">
-            <a title="Apps of @user.DisplayName" href="@urlToFirstpage">@user.DisplayName</a>
+            <a title="Apps of @user.DisplayName" href="@urlToFirstpage">
+                @if (user.IsRegistrationComplete) {
+                    <i class="@FaIcons.CheckMarkCircleO green"></i>
+                } else {
+                    <i class="@FaIcons.Exclamation red"></i>
+                }
+                @user.DisplayName
+            </a>
         </td>
     </tr>
     <tr>

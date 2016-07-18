@@ -100,28 +100,28 @@ namespace WeReviewApp.Models.EntityModel {
         public string Url { get; set; }
 
         #region Virtual Propertise
-        [Required]
+        //[Required]
         [Display(Name = "Youtube video cover", Description = "[Single image 1MB] Resolution 1140x400, however whatever you upload will be resized.")]
         public HttpPostedFileBase YoutubeCoverImage { get; set; }
 
         [Display(Name = "Gallery Images", Description = "[Max number 6 each 1MB] Resolution 1140x400, however whatever you upload will be resized.")]
-        [Required]
+        //[Required]
         public IEnumerable<HttpPostedFileBase> Galleries { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Home Page (Featured big)", Description = "[Single image 1MB] Resolution 481x440, however whatever you upload will be resized. Better if you use png for this purpose.")]
         public HttpPostedFileBase HomePageFeatured { get; set; }
 
         [Display(Name = "Home Page (Icon)", Description = "[Single image 1MB] Resolution 122x115, however whatever you upload will be resized.")]
-        [Required]
+        //[Required]
         public HttpPostedFileBase HomePageIcon { get; set; }
 
         [Display(Name = "Search Icon", Description = "[Single image 1MB] Resolution 117x177, however whatever you upload will be resized.")]
-        [Required]
+        //[Required]
         public HttpPostedFileBase SearchIcon { get; set; }
 
         [Display(Name = "Suggestion Icon", Description = "[Single image 1MB] Best resolution 192x119, however whatever you upload will be resized.")]
-        [Required]
+        //[Required]
         public HttpPostedFileBase SuggestionIcon { get; set; }
 
         #endregion

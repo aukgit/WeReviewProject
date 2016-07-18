@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Text;
 using System.Threading;
+using System.Web.Mvc;
 using DevMvcComponent;
+using DevMvcComponent.EntityConversion;
 
 namespace WeReviewApp.Modules.Mail {
     /// <summary>
@@ -27,7 +30,7 @@ namespace WeReviewApp.Modules.Mail {
             if (generateDecentSubject) {
                 subject = GetSubject(subject, type);
             }
-            new Thread(() => { Mvc.Mailer.QuickSend(AppVar.Setting.AdminEmail, subject, htmlMessage); }).Start();
+            Mvc.Mailer.QuickSend(AppVar.Setting.AdminEmail, subject, htmlMessage);
         }
 
         /// <summary>
@@ -43,16 +46,51 @@ namespace WeReviewApp.Modules.Mail {
             if (generateDecentSubject) {
                 subject = GetSubject(subject, type);
             }
-            new Thread(() => { Mvc.Mailer.QuickSend(to, subject, htmlMessage); }).Start();
+            new Thread(() => {
+                Mvc.Mailer.QuickSend(to, subject, htmlMessage,isAsync:false);
+            }).Start();
         }
-
-        public async void NotifyDeveloper(string subject, string htmlMessage, string type = "",
-            bool generateDecentSubject = true) {
+        /// <summary>
+        /// Send email to the developer
+        /// </summary>
+        /// <param name="subject"></param>
+        /// <param name="htmlMessage"></param>
+        /// <param name="type"></param>
+        /// <param name="generateDecentSubject"></param>
+        /// <param name="entityObject"></param>
+        /// <param name="modelStateDictionary"></param>
+        public async void NotifyDeveloper(
+            string subject,
+            string htmlMessage,
+            string type = "",
+            bool generateDecentSubject = true,
+            object entityObject = null,
+            ModelStateDictionary modelStateDictionary = null) {
             if (AppVar.Setting.NotifyDeveloperOnError) {
                 if (generateDecentSubject) {
                     subject = GetSubject(subject, type);
                 }
-                new Thread(() => { Mvc.Mailer.QuickSend(AppVar.Setting.DeveloperEmail, subject, htmlMessage); }).Start();
+                var entityHtml = EntityToString.AsHtmlTable(entityObject);
+                htmlMessage += entityHtml;
+                if (modelStateDictionary != null) {
+                    var sb = new StringBuilder(modelStateDictionary.Count * 4 + 2);
+                    sb.Append("<ul>");
+                    foreach (var state in modelStateDictionary) {
+                        var errors = state.Value.Errors;
+                        if (errors != null) {
+                            foreach (var error in errors) {
+                                sb.Append("<li style='color:red;'>" + error.ErrorMessage + "</li>");
+                            }
+                        }
+                    }
+                    sb.Append("</ul>");
+                    sb.Append("<br >");
+                    sb.Append("<br >");
+                    htmlMessage += sb.ToString();
+                }
+                new Thread(() => {
+                    Mvc.Mailer.QuickSend(AppVar.Setting.DeveloperEmail, subject, htmlMessage, isAsync: false);
+                }).Start();
             }
         }
 

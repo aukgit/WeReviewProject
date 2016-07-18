@@ -1,5 +1,4 @@
-@model HttpPostedFileBase
-
+@model IEnumerable<HttpPostedFileBase>
 @{
     var isRequired = ViewData.ModelMetadata.IsRequired;
     string isRequiredStar = "*",
@@ -7,13 +6,9 @@
            propLower = prop.ToLower(),
            styleProperty = propLower,
            displayName = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName,
-           description = ViewData.ModelMetadata.Description,
-           templateName = "httppostedfilebase";
-    var htmlAttributes = new RouteValueDictionary();
-    if (displayName == null) {
-        displayName = ViewData.ModelMetadata.PropertyName;
-    }
+           description = ViewData.ModelMetadata.Description;
 
+    var htmlAttributes = new RouteValueDictionary();
     if (ViewBag.data_id != null) {
         ViewBag.data_id_val = ViewBag.data_id;
         ViewBag.data_id = "data-id=" + ViewBag.data_id;
@@ -30,7 +25,7 @@
     } else {
         ViewBag.data_single = "multiple";
     }
-    htmlAttributes.Add("title", htmlAttributes["placeholder"]);
+
     if (ViewBag.autoupload != null) {
         ViewBag.autoupload = "data-is-auto=" + false + "";
     } else {
@@ -52,12 +47,30 @@
     if (@ViewBag.uploadPreexist == null) {
         ViewBag.uploadPreexist = "0";
     }
-    htmlAttributes.Add("data-prop", styleProperty);
-    htmlAttributes.Add("data-template", templateName);
+
+    if (ViewBag.maxUpload == null) {
+        ViewBag.maxUpload = 1;
+    }
+
+    if (ViewBag.hasEditBtn == null) {
+        ViewBag.hasEditBtn = "false";
+    }
+
+    if (ViewBag.label == null) {
+        ViewBag.label = displayName;
+    }
+    if (ViewBag.labelColumn == null) {
+        ViewBag.labelColumn = "col-md-2";
+    }
+    if (ViewBag.textColumn == null) {
+        ViewBag.textColumn = "col-md-10";
+    }
+    htmlAttributes.Add("title", htmlAttributes["placeholder"]);
 }
-<div class="form-row-uploader form-group form-row @styleProperty @templateName-type" data-type="@templateName" data-prop="@styleProperty">
-    <div class="controls dev-plugin">
-        <label class="col-md-2 upload-label control-label form-label-@styleProperty" for="@styleProperty">
+
+<div data-id="@ViewBag.data_id_val" data-uploader-div-row="true" class="form-group form-row @styleProperty form-row-uploader" data-prop="@styleProperty">
+    <div class="controls dev-plugin plugin-container uploader-multiple">
+        <label class="@ViewBag.labelColumn control-label form-label @styleProperty" for="@styleProperty" data-prop="@styleProperty">
             @displayName
             @if (description != null) {
                 <a data-toggle="tooltip" data-original-title="@description" title="@description" class="tooltip-show">
@@ -66,7 +79,7 @@
             }
             <span class="red">@isRequiredStar</span>
         </label>
-        <div data-id="@ViewBag.data_id_val" class="col-md-10 form-input-@styleProperty">
+        <div data-id="@ViewBag.data_id_val" class="@ViewBag.textColumn form-input @styleProperty">
             <div data-id="@ViewBag.data_id_val" class="uploader uploader-@ViewBag.data_id_val">
                 <h1 data-id="@ViewBag.data_id_val" data-error-related="true" class="error-warning-label-@ViewBag.data_id_val error-warning-labels h4 red">Failed to upload:</h1>
                 <div data-id="@ViewBag.data_id_val" data-error-related="true" class="error-warning-label-@ViewBag.data_id_val error-warning-labels">Feel free to @Html.ContactFormActionLink("contact us", "contact us") any moment.</div>
@@ -74,23 +87,23 @@
                 <div data-id="@ViewBag.data_id_val" class="edit-items-list-@ViewBag.data_id_val">
 
                 </div>
-                <a data-id="@ViewBag.data_id_val" data-edit-btn-spinner="true" data-spinner="spinner" data-toggle="tooltip" title="Show images to remove" class="spinner tooltip-show edit-btn-spinner @styleProperty no-hover">
-                    <span data-id="@ViewBag.data_id_val" data-display="@displayName" class="glyphicon glyphicon-refresh glyphicon-spin" title="Validating"></span>
+                <a data-id="@ViewBag.data_id_val" data-edit-btn-spinner="true" data-spinner="spinner" data-toggle="tooltip" title="Show images to remove" class="spinner tooltip-show edit-btn-spinner @ViewData.ModelMetadata.PropertyName no-hover">
+                    <span data-id="@ViewBag.data_id_val" data-display="@ViewData.ModelMetadata.DisplayName" class="glyphicon glyphicon-refresh glyphicon-spin" title="Validating"></span>
                 </a>
-                <a data-id="@ViewBag.data_id_val" data-btn="edit" data-default-show="@ViewBag.defaultShow" class="edit-@ViewBag.data_id_val btn btn-info edit-btn" href="@ViewBag.editUrl">
+                <a data-id="@ViewBag.data_id_val" data-btn="edit" data-default-show="@ViewBag.defaultShow" class="edit-@ViewBag.data_id_val btn btn-info edit-btn" data-url="@ViewBag.editUrl">
                     Edit
                 </a>
                 <span class="btn btn-success fileinput-button">
                     <i class="glyphicon glyphicon-upload"></i>
-                    <span title="@displayName Upload">@displayName</span>
+                    <span title="@ViewData.ModelMetadata.DisplayName Upload">@ViewData.ModelMetadata.DisplayName</span>
                     <!-- The file input field used as target for the file upload widget -->
-                    <input @ViewBag.data_guid class="dev-fileupload" @ViewBag.data_id type="file" @ViewBag.data_url name="@styleProperty" title="@displayName Upload files , @ViewData.ModelMetadata.Description" @ViewBag.autoupload @ViewBag.data_single>
+                    <input @ViewBag.data_guid class="dev-fileupload" data-has-edit-btn="@ViewBag.hasEditBtn" @ViewBag.data_id type="file" @ViewBag.data_url name="@ViewData.ModelMetadata.PropertyName" title="@ViewData.ModelMetadata.DisplayName Upload files , @ViewData.ModelMetadata.Description" @ViewBag.autoupload @ViewBag.data_single>
                 </span>
                 <div data-id="@ViewBag.data_id_val" data-progressor-div="true" class="uploader-progress-info">
-                    <a data-id="@ViewBag.data_id_val" data-progressor-spinner="true" data-spinner="spinner" data-toggle="tooltip" title="@displayName Uploading..." class="spinner tooltip-show upload-spinner-@styleProperty no-hover">
-                        <span data-id="@ViewBag.data_id_val" data-display="@displayName" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
+                    <a data-id="@ViewBag.data_id_val" data-progressor-spinner="true" data-spinner="spinner" data-toggle="tooltip" title="@ViewData.ModelMetadata.DisplayName Uploading..." class="spinner tooltip-show upload-spinner-@ViewData.ModelMetadata.PropertyName no-hover">
+                        <span data-id="@ViewBag.data_id_val" data-display="@ViewData.ModelMetadata.DisplayName" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
                     </a>
-                    <a data-id="@ViewBag.data_id_val" data-progressor-value="true" data-toggle="tooltip" title="" class="tooltip-show upload-progressor-@styleProperty no-hover">
+                    <a data-id="@ViewBag.data_id_val" data-progressor-value="true" data-toggle="tooltip" title="" class="tooltip-show upload-progressor-@ViewData.ModelMetadata.PropertyName no-hover">
                         <span data-id="@ViewBag.data_id_val" data-uploader-percent-value="" class="bold green"></span>
                     </a>
                 </div>
@@ -98,18 +111,18 @@
                     <span class="glyphicon glyphicon-ok green"></span>
                 </a>
                 <a data-toggle="tooltip" data-id="@ViewBag.data_id_val" data-failed-icon="true" data-original-title="" title="" class="tooltip-show">
-                    <span class="glyphicon glyphicon-remove  red"></span>
+                    <span class="glyphicon glyphicon-remove red"></span>
                 </a>
 
                 @if (ViewBag.uploadedFiles > 0) {
-                    <label data-id="@ViewBag.data_id_val" data-label-file-uploaded="true" class="label label-success file-uploaded-notify-label-@ViewBag.data_id_val" data-max-upload-count="@ViewBag.maxUpload" data-uploaded-count="@ViewBag.uploadedFiles" data-upload-pre-exist-count="@ViewBag.uploadPreexist">
+                    <label data-id="@ViewBag.data_id_val" data-has-edit-btn="@ViewBag.hasEditBtn" data-label-file-uploaded="true" class="label label-success file-uploaded-notify-label-@ViewBag.data_id_val" data-max-upload-count="@ViewBag.maxUpload" data-uploaded-count="@ViewBag.uploadedFiles" data-upload-pre-exist-count="@ViewBag.uploadPreexist">
                         @ViewBag.uploadedFiles files exist.
                     </label>
                 } else {
-                    <label data-id="@ViewBag.data_id_val" data-label-file-uploaded="true" class="label label-success file-uploaded-notify-label-@ViewBag.data_id_val" data-max-upload-count="@ViewBag.maxUpload" data-uploaded-count="@ViewBag.uploadedFiles" data-upload-pre-exist-count="@ViewBag.uploadPreexist"></label>
+                    <label data-id="@ViewBag.data_id_val" data-has-edit-btn="@ViewBag.hasEditBtn" data-label-file-uploaded="true" class="label label-success file-uploaded-notify-label-@ViewBag.data_id_val" data-max-upload-count="@ViewBag.maxUpload" data-uploaded-count="@ViewBag.uploadedFiles" data-upload-pre-exist-count="@ViewBag.uploadPreexist"></label>
                 }
             </div>
-            @Html.ValidationMessageFor(m => m, null, new { @class = "invalid-input" })
+            @Html.ValidationMessageFor(m => m, null, new { @class = "rounded-3 label label-danger fixed-width-294 validation-box" })
         </div>
     </div>
 </div>
