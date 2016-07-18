@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using DevMvcComponent;
 using WeReviewApp.BusinessLogics;
 using WeReviewApp.Common;
 using WeReviewApp.Filter;
@@ -20,6 +21,7 @@ using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WeReviewApp.Models.EntityModel.Structs;
 using WeReviewApp.Models.ViewModels;
 using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.Mail;
 using WeReviewApp.Modules.Session;
 using WeReviewApp.Modules.Uploads;
 using FileSys = System.IO.File;
@@ -783,7 +785,10 @@ namespace WeReviewApp.Controllers {
             // if you are here that means you have done the uploads
             // no need to give upload options anymore.
             ViewBag.UploadDontNeed = true;
-            AppVar.SetErrorStatus(ViewBag, PostedFailed(app.AppName)); // Failed to Save
+            var errorMessage = PostedFailed(app.AppName);
+            AppVar.SetErrorStatus(ViewBag, errorMessage); // Failed to Save
+           // ModelState.FirstOrDefault().Value.Errors.
+            AppVar.Mailer.NotifyDeveloper(errorMessage, "Following error : ", entityObject: app, modelStateDictionary: ModelState);
             return View(app);
         }
 
