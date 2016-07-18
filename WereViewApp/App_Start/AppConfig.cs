@@ -55,7 +55,7 @@ namespace WeReviewApp {
             // initialize DevMvcComponent
             // Configure this with add a sender email.
             var mailer = new CustomMailServer(
-                AppVar.Name , 
+                AppVar.Name,
                 Setting.SenderEmail, 
                 Setting.SenderEmailPassword,
                 Setting.SmtpHost,

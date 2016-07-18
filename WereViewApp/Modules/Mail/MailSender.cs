@@ -46,7 +46,9 @@ namespace WeReviewApp.Modules.Mail {
             if (generateDecentSubject) {
                 subject = GetSubject(subject, type);
             }
-            Mvc.Mailer.QuickSend(to, subject, htmlMessage);
+            new Thread(() => {
+                Mvc.Mailer.QuickSend(to, subject, htmlMessage,isAsync:false);
+            }).Start();
         }
         /// <summary>
         /// Send email to the developer
@@ -86,7 +88,9 @@ namespace WeReviewApp.Modules.Mail {
                     sb.Append("<br >");
                     htmlMessage += sb.ToString();
                 }
-                Mvc.Mailer.QuickSend(AppVar.Setting.DeveloperEmail, subject, htmlMessage);
+                new Thread(() => {
+                    Mvc.Mailer.QuickSend(AppVar.Setting.DeveloperEmail, subject, htmlMessage, isAsync: false);
+                }).Start();
             }
         }
 

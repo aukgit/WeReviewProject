@@ -61,8 +61,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="DevMvcComponent, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DevMvcComponent.3.2.0\lib\DevMvcComponent.dll</HintPath>
+    <Reference Include="DevMvcComponent, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevMvcComponent.3.3.0\lib\DevMvcComponent.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DevTrends.MvcDonutCaching">
@@ -1386,11 +1386,15 @@
     <Content Include="Views\App\_AppDescription.cshtml" />
     <Content Include="Views\Account\ConfirmationEmailResend.cshtml" />
     <Content Include="Views\App\_CommonHiddenForAppEditOrPost.cshtml" />
+    <Content Include="Views\App\_SuggestedApps.cshtml" />
+    <Content Include="Views\App\_WriteReviewForm.cshtml" />
     <None Include="Views\Reviews\User.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AnyTypeIconWithHtml.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TextArea.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CkEditor.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Boolean-Left.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\HttpPostedFileBaseReq.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\FileMultiReq.cshtml" />
     <None Include="Views\Shared\_404.cshtml" />
     <Content Include="Views\Shared\_502.cshtml" />
     <Content Include="Views\Shared\_RequestNotValid.cshtml" />

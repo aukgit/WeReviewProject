@@ -21,6 +21,7 @@ using WeReviewApp.Models.EntityModel.ExtenededWithCustomMethods;
 using WeReviewApp.Models.EntityModel.Structs;
 using WeReviewApp.Models.ViewModels;
 using WeReviewApp.Modules.DevUser;
+using WeReviewApp.Modules.Extensions.IdentityExtension;
 using WeReviewApp.Modules.Mail;
 using WeReviewApp.Modules.Session;
 using WeReviewApp.Modules.Uploads;
@@ -755,7 +756,7 @@ namespace WeReviewApp.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
-        public ActionResult Post(App app) {
+        public async Task<ActionResult> Post(App app) {
             var viewOf = ViewTapping(ViewStates.CreatePost, app);
             var currentApp = db.Apps.FirstOrDefault(n => n.UploadGuid == app.UploadGuid);
             GetDropDowns(app);
@@ -778,6 +779,14 @@ namespace WeReviewApp.Controllers {
                     // Saved Successfully.
                     app.UploadGuid = Guid.NewGuid(); // new post can be made
                     //app.AppName = app.AppName + " 2";
+                    var userEmail = User.GetUser().Email;
+                    var title = "'" + app.AppName + "' is created successfully. ";
+                    var body = "'" + app.AppName + "' is created successfully. Available at : " + app.GetAbsoluteUrl()  + " <br> <br> Your app will be on home after 1 day. <br> Thank you.";
+                    if (!app.IsPublished) {
+                        title = "[Unpublished] " + title;
+                        body = "Your app is created successfully. However still not published. Please check the policies when you post the app or edit the app.";
+                    }
+                    AppVar.Mailer.Send(userEmail, title, body);
                     ModelState.Clear();
                     return View(app);
                 }
