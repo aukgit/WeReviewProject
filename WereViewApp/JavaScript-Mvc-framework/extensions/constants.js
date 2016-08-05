@@ -1,5 +1,3 @@
-﻿;$.app = $.app || {};
-
-;$.app.constants = {
+﻿;$.app.constants = {
     
 };

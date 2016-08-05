@@ -15,7 +15,6 @@
 /// <reference path="../jQueryExtend.fn.js" />
 /// <reference path="../ProtoType/Array.js" />
 
-; $.app = $.app || {};
 $.app.inputChangeTracker = {
     list: {
         $inputs: null, // array

@@ -1,5 +1,4 @@
-﻿; $.app = $.app || {};
-$.app.pagination = function($paginationContainer, pageCountUrl, selectedPage, pagesNumberToDisplay, additionalClass, paginationClass, onComplete) {
+﻿$.app.pagination = function($paginationContainer, pageCountUrl, selectedPage, pagesNumberToDisplay, additionalClass, paginationClass, onComplete) {
     /// <summary>
     /// render pagination numbers
     /// </summary>

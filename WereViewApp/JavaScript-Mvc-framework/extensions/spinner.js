@@ -2,9 +2,7 @@
 /// <reference path="../jquery-2.1.4.js" />
 /// <reference path="../byId.js" />
 /// <reference path="../jquery-2.1.4.intellisense.js" />
-; $.app = $.app || {};
-;
-$.app.spinner = {
+;$.app.spinner = {
     id: 'loading-bar',
     $spinner: [],
     spinnerDisplayTypeId: 1,

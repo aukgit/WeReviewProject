@@ -111,8 +111,8 @@ $.fn.extend({
         if (this.length > 0) {
             var classList = classes.split(" ");
             for (var i = 0; i < classList.length; i++) {
-                var _class = classList[i];
-                if (this.hasClass(_class)) {
+                var cssClass = classList[i];
+                if (this.hasClass(cssClass)) {
                     return true;
                 }
             }
@@ -131,8 +131,8 @@ $.fn.extend({
             result = true;
             var classList = classes.split(" ");
             for (var i = 0; i < classList.length; i++) {
-                var _class = classList[i];
-                if (!this.hasClass(_class)) {
+                var cssClass = classList[i];
+                if (!this.hasClass(cssClass)) {
                     result = false;
                 }
             }

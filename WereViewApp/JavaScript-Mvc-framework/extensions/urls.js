@@ -11,7 +11,6 @@
 /// <reference path="D:\Working\GitHub\WereViewProject\WeReviewApp\Content/Scripts/jquery-2.1.4.js" />
 /// <reference path="D:\Working\GitHub\WereViewProject\WeReviewApp\Content/Scripts/jquery-2.1.4.intellisense.js" />
 /// <reference path="../schema/url.js" />
-; $.app = $.app || {};
 $.app.urls = {
     /*
      * hostUrl will be retrieved from hidden field "#host-url"

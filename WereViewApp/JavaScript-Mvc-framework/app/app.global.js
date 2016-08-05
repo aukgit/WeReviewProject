@@ -5,7 +5,7 @@ $.app.global = {
      * execute methods as per necessary, 
      * ** these methods will NOT run automatically. **
      */
-    vars: {
+    prop: {
 
     },
     documentFullSpinnerHide: function () {

@@ -1,5 +1,4 @@
-﻿; $.app = $.app || {};
-$.app.hiddenContainer = {
+﻿$.app.hiddenContainer = {
     $hiddenContainer: null,
     $hiddenFieldDictionary: [],
     hiddenFieldNamesDictionary: [],

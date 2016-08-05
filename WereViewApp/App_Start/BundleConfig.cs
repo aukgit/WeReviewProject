@@ -101,34 +101,38 @@ namespace WeReviewApp {
                                 jsFrameworkFolder + "Prototype/Array.js",
                         //jsFrameworkFolder + "Prototype/*.*.js",
 
-                                jsFrameworkFolder + "app.js",
-                                jsFrameworkFolder + "app.executeBefore.js",
-                                jsFrameworkFolder + "app.executeAfter.js",
+                                //jsFrameworkFolder + "app.js",
+                                //jsFrameworkFolder + "app.executeBefore.js",
+                                //jsFrameworkFolder + "app.executeAfter.js",
                                 jsFrameworkFolder + "jQueryCaching.js",
-                                jsFrameworkFolder + "attachInitialize.js",
+                       
+                                //jsFrameworkFolder + "attachInitialize.js",
+
+                          
+
+                                jsFrameworkFolder + "app.js",
+                                jsFrameworkFolder + "app/*.js",
+                                jsFrameworkFolder + "service/*.js",
 
                                 jsFrameworkFolder + "schema/schema.js",
                                 jsFrameworkFolder + "schema/hashset.js",
                                 jsFrameworkFolder + "schema/url.js",
+                        //jsFrameworkFolder + "controllers.js",
 
-                                //jsFrameworkFolder + "schema/*.*.js",
+                                //jsFrameworkFolder + "extensions/ajax.js",
+                                //jsFrameworkFolder + "extensions/hiddenContainer.js",
+                                //jsFrameworkFolder + "extensions/clone.js",
+                                //jsFrameworkFolder + "extensions/constants.js",
+                                //jsFrameworkFolder + "extensions/inputChangeTracker.js",
+                                //jsFrameworkFolder + "extensions/modal.js",
+                                //jsFrameworkFolder + "extensions/pagination.js",
+                                //jsFrameworkFolder + "extensions/regularExp.js",
+                                //jsFrameworkFolder + "extensions/selectors.js",
+                                //jsFrameworkFolder + "extensions/spinner.js",
+                                //jsFrameworkFolder + "extensions/urls.js",
 
-                                jsFrameworkFolder + "initialize.js",
+                                jsFrameworkFolder + "extensions/*.js",
 
-                                jsFrameworkFolder + "extensions/ajax.js",
-                                jsFrameworkFolder + "extensions/hiddenContainer.js",
-                                jsFrameworkFolder + "extensions/clone.js",
-                                jsFrameworkFolder + "extensions/constants.js",
-                                jsFrameworkFolder + "extensions/inputChangeTracker.js",
-                                jsFrameworkFolder + "extensions/modal.js",
-                                jsFrameworkFolder + "extensions/pagination.js",
-                                jsFrameworkFolder + "extensions/regularExp.js",
-                                jsFrameworkFolder + "extensions/selectors.js",
-                                jsFrameworkFolder + "extensions/spinner.js",
-                                jsFrameworkFolder + "extensions/urls.js",
-                        //jsFrameworkFolder + "extensions/*.*.js",
-
-                                jsFrameworkFolder + "controllers.js",
                                 jsFrameworkFolder + "controllers/initialize.js",
 
                                 jsFrameworkFolder + "controllers/account-controller.js",
@@ -136,12 +140,11 @@ namespace WeReviewApp {
                                 jsFrameworkFolder + "controllers/home-controller.js",
                                 jsFrameworkFolder + "controllers/reviews-controller.js",
                                 jsFrameworkFolder + "controllers/tags-controller.js",
-                        //jsFrameworkFolder + "controllers/*-controller.js",
+                                //jsFrameworkFolder + "controllers/*-controller.js",
 
                                 jsFrameworkFolder + "areas/admin/controllers/navItems-controller.js",
 
-                                jsFrameworkFolder + "component/component.js",
-                                jsFrameworkFolder + "component/component.list.js",
+                                jsFrameworkFolder + "component/*.js",
 
                                 jsFrameworkFolder + "events/binding.js",
                                 jsFrameworkFolder + "events/list.js",

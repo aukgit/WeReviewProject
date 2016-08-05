@@ -1,6 +1,4 @@
-﻿
-; $.app = $.app || {};
-/**
+﻿/**
  * Only initialize components if it has "Component-Enable" Hidden has the named 
  */
 ; $.app.component = {

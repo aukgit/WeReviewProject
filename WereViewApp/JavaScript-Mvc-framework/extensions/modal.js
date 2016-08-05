@@ -1,5 +1,4 @@
-﻿; $.app = $.app || {};
-$.app.modal = {
+﻿$.app.modal = {
     $modalStacks: [],
     $modalIds: [],
     push: function ($modal) {

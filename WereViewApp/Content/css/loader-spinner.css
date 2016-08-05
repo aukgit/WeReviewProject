@@ -9,6 +9,13 @@
   -o-animation: spin 1000ms infinite linear;
   animation: spin 1000ms infinite linear;
 }
+lesshat-selector {
+  -lh-property: 0; } 
+@-webkit-keyframes spin{ 0% {-webkit-transform: rotate(0deg);} 100% {-webkit-transform: rotate(359deg);}}
+@-moz-keyframes spin{ 0% {-moz-transform: rotate(0deg);} 100% {-moz-transform: rotate(359deg);}}
+@-o-keyframes spin{ 0% {-o-transform: rotate(0deg);} 100% {-o-transform: rotate(359deg);}}
+@keyframes spin{ 0% {-webkit-transform: rotate(0deg);-moz-transform: rotate(0deg);-ms-transform: rotate(0deg);transform: rotate(0deg);} 100% {-webkit-transform: rotate(359deg);-moz-transform: rotate(359deg);-ms-transform: rotate(359deg);transform: rotate(359deg);};
+}
 /*@import "spinner/load1.less";
 @import "spinner/load2.less";
 @import "spinner/load3.less";
@@ -17,35 +24,6 @@
 @import "spinner/load6.less";
 @import "spinner/load7.less";
 @import "spinner/load8.less";*/
-.load9 {
-  width: 40px;
-  height: 40px;
-  margin: 100px auto;
-  background-color: #333;
-  border-radius: 100%;
-  -webkit-animation: sk-scaleout 1s infinite ease-in-out;
-  animation: sk-scaleout 1s infinite ease-in-out;
-}
-@-webkit-keyframes sk-scaleout {
-  0% {
-    -webkit-transform: scale(0);
-  }
-  100% {
-    -webkit-transform: scale(1);
-    opacity: 0;
-  }
-}
-@keyframes sk-scaleout {
-  0% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
-  }
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    opacity: 0;
-  }
-}
 .signal {
   border: 5px solid #333;
   border-radius: 30px;
@@ -60,6 +38,13 @@
   -moz-animation: signal-animate .6s ease-out infinite;
   -o-animation: signal-animate .6s ease-out infinite;
   animation: signal-animate .6s ease-out infinite;
+}
+lesshat-selector {
+  -lh-property: 0; } 
+@-webkit-keyframes signal-animate{ 0% { -webkit-transform: scale(.1); opacity: 0.0; } 50% { opacity: 1; } 100% { -webkit-transform: scale(1.2); opacity: 0;}}
+@-moz-keyframes signal-animate{ 0% { -moz-transform: scale(.1); opacity: 0.0; } 50% { opacity: 1; } 100% { -moz-transform: scale(1.2); opacity: 0;}}
+@-o-keyframes signal-animate{ 0% { -o-transform: scale(.1); opacity: 0.0; } 50% { opacity: 1; } 100% { -o-transform: scale(1.2); opacity: 0;}}
+@keyframes signal-animate{ 0% {-webkit-transform: scale(.1);-moz-transform: scale(.1);-ms-transform: scale(.1);transform: scale(.1); opacity: 0.0; } 50% { opacity: 1; } 100% {-webkit-transform: scale(1.2);-moz-transform: scale(1.2);-ms-transform: scale(1.2);transform: scale(1.2); opacity: 0;};
 }
 /**
   Html :
@@ -124,6 +109,13 @@
   -o-animation-delay: 0.45s;
   animation-delay: 0.45s;
 }
+lesshat-selector {
+  -lh-property: 0; } 
+@-webkit-keyframes loading-bar{ 0% { -webkit-transform: scale(1);} 20% {-webkit-transform: scale(1, 2.2); } 40% {-webkit-transform: scale(1); }}
+@-moz-keyframes loading-bar{ 0% { -moz-transform: scale(1);} 20% {-moz-transform: scale(1, 2.2); } 40% {-moz-transform: scale(1); }}
+@-o-keyframes loading-bar{ 0% { -o-transform: scale(1);} 20% {-o-transform: scale(1, 2.2); } 40% {-o-transform: scale(1); }}
+@keyframes loading-bar{ 0% {-webkit-transform: scale(1);-moz-transform: scale(1);-ms-transform: scale(1);transform: scale(1);} 20% {-webkit-transform: scale(1, 2.2);-moz-transform: scale(1, 2.2);-ms-transform: scale(1, 2.2);transform: scale(1, 2.2); } 40% {-webkit-transform: scale(1);-moz-transform: scale(1);-ms-transform: scale(1);transform: scale(1); };
+}
 .top-bar-loading {
   height: 4px;
   width: 100%;
@@ -143,6 +135,13 @@
   -moz-animation: top-bar-loading 2s linear infinite;
   -o-animation: top-bar-loading 2s linear infinite;
   animation: top-bar-loading 2s linear infinite;
+}
+lesshat-selector {
+  -lh-property: 0; } 
+@-webkit-keyframes top-bar-loading{ from {left: -200px; width: 30%;}  50% {width: 30%;}   70% {width: 70%;} 80% { left: 50%;} 95% {left: 120%;} to {left: 100%;}}
+@-moz-keyframes top-bar-loading{ from {left: -200px; width: 30%;}  50% {width: 30%;}   70% {width: 70%;} 80% { left: 50%;} 95% {left: 120%;} to {left: 100%;}}
+@-o-keyframes top-bar-loading{ from {left: -200px; width: 30%;}  50% {width: 30%;}   70% {width: 70%;} 80% { left: 50%;} 95% {left: 120%;} to {left: 100%;}}
+@keyframes top-bar-loading{ from {left: -200px; width: 30%;}  50% {width: 30%;}   70% {width: 70%;} 80% { left: 50%;} 95% {left: 120%;} to {left: 100%;};
 }
 /* Import this if you are using modernizr (recommended) 
 It means that loaders will fallback to a text state of simply saying "Loading..." in older browsers

@@ -1,7 +1,6 @@
 ﻿/// <reference path="../app.executeBefore.js" />
 /// <reference path="../app.executeAfter.js" />
 /// <reference path="../attachInitialize.js" />
-; $.app = $.app || {};
 
 $.app.initilizeClasses = [
     $.app.executeBefore
