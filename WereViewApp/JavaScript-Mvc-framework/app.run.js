@@ -14,7 +14,7 @@ $(document).ready(function () {
     $.app.initialize(); // initialize everything
 });
 
-window.onload= function() {
+window.onload = function () {
     var app = $.app;
     $.attachAndExecuteInitialize(app.executeAfter);
 }

@@ -612,6 +612,10 @@ $.WeReviewApp = {
      * App review : like-dislike functionality
      */
     reviewLikeDisLikeClicked: function () {
+        /// <summary>
+        /// Views : "~/Views/App/SingleAppDisplay", "~/Views/Partials/ReviewsDisplay"
+        /// </summary>
+
         var $appDetailsPage = $.byId("app-details-page");
         if ($appDetailsPage.length > 0) {
             var $likeBtns = $appDetailsPage.find("a[data-review-like-btn=true]");

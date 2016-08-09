@@ -1,5 +1,5 @@
 ﻿/**
- * Only initialize components if it has "Component-Enable" Hidden has the named 
+ * Only initialize components if it has "Component-Enable" named Hidden 
  */
 ; $.app.component = {
     id: "Component-Enable",
