@@ -8,12 +8,12 @@
         /// </summary>
         /// <returns type="">returns hidden container.</returns>
         var app = $.app.hiddenContainer;
-        self.$hiddenContainer = $.byId("hidden-fields-container");
-        self.$hiddenFieldDictionary = -1;
-        self.$hiddenFieldDictionary = [];
-        self.hiddenFieldNamesDictionary = -1;
-        self.hiddenFieldNamesDictionary = [];
-        return self.$hiddenContainer;
+        app.$hiddenContainer = $.byId("hidden-fields-container");
+        app.$hiddenFieldDictionary = -1; // call GC to remove quickly.
+        app.$hiddenFieldDictionary = [];
+        app.hiddenFieldNamesDictionary = -1;// call GC to remove quickly.
+        app.hiddenFieldNamesDictionary = []; 
+        return app.$hiddenContainer;
     },
     isHiddenContainerExist: function () {
         return !$.isEmpty($.app.hiddenContainer.$hiddenContainer);
@@ -24,13 +24,13 @@
         /// </summary>
         /// <param name="nameOfHiddenField"></param>
         /// <returns type="return $ type object.">null or jquery obejct.</returns>
-        var self = $.app.hiddenContainer;
+        var app = $.app.hiddenContainer;
         if (nameOfHiddenField) {
-            var namesDictionary = self.hiddenFieldNamesDictionary;
+            var namesDictionary = app.hiddenFieldNamesDictionary;
             for (var i = 0; i < namesDictionary.length; i++) {
                 var hiddenName = namesDictionary[i];
                 if (hiddenName === nameOfHiddenField) {
-                    return self.$hiddenFieldDictionary[i];
+                    return app.$hiddenFieldDictionary[i];
                 }
             }
         }
@@ -43,8 +43,8 @@
         /// <param name="$field">jQuery object.</param>
         /// <returns type=""></returns>
         var app = $.app.hiddenContainer;
-        self.$hiddenFieldDictionary.push($field);
-        self.hiddenFieldNamesDictionary.push($field.attr("name"));
+        app.$hiddenFieldDictionary.push($field);
+        app.hiddenFieldNamesDictionary.push($field.attr("name"));
     },
     getHiddenField: function (nameOfHiddenField) {
         /// <summary>
@@ -80,8 +80,8 @@
         /// <param name="nameOfHiddenField"></param>
         /// <returns type="return $ type object.">get attribute values $returnedObject.attr() or null</returns>
         var app = $.app.hiddenContainer;
-        if (self.isHiddenContainerExist()) {
-            var $field = self.getHiddenField(nameOfHiddenField);
+        if (app.isHiddenContainerExist()) {
+            var $field = app.getHiddenField(nameOfHiddenField);
             if ($field.length > 0) {
                 $field.val(val);
                 return $field;

@@ -8,6 +8,7 @@ using DevMvcComponent.Mail;
 using DevMvcComponent.Processor;
 using WeReviewApp.Models.Context;
 using WeReviewApp.Models.POCO.IdentityCustomization;
+using WeReviewApp.Modules;
 using WeReviewApp.Modules.Session;
 using WeReviewApp.Modules.TimeZone;
 
@@ -138,7 +139,10 @@ namespace WeReviewApp {
                 Zone.LoadTimeZonesIntoMemory();
                 AppVar.Setting = _setting;
                 AppVar.SetCommonMetaDescriptionToEmpty();
+                
                 SetupDevMvcComponent();
+                UrlRoute.HostUrl = AppVar.Url;
+
                 //if false then no email on error.
                 Config.IsNotifyDeveloper = Setting.NotifyDeveloperOnError;
             }

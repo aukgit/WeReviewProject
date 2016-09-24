@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html class="@ViewBag.pageClass">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8" />
@@ -9,14 +9,20 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css/styles")
     @RenderSection("css", false)
-    @if (ViewBag.Meta != null) {
+    @if (ViewBag.Meta != null)
+    {
         <meta name="description" content="@ViewBag.Meta" />
-    } else {
+    }
+    else
+    {
         <meta name="description" content="@AppVar.Name,@AppVar.Subtitle, Review, Mobile Apps, Apple Apps, Android Apps, Reviewing website, mobile apps rating website" />
     }
-    @if (ViewBag.Keywords != null) {
+    @if (ViewBag.Keywords != null)
+    {
         <meta name="keywords" content="@ViewBag.Keywords" />
-    } else {
+    }
+    else
+    {
         <meta name="keywords" content="@AppVar.Name,@AppVar.Subtitle, Review, Mobile Apps, Apple Apps, Android Apps, Reviewing website, mobile apps rating website" />
     }
     <!--[if lt IE 9]>
@@ -24,7 +30,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="@ViewBag.pageClass">
+<body>
     <!--[if lt IE 10]>
         <div class="browser-update container-fuild">
             <div class="row">

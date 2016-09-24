@@ -304,6 +304,7 @@
     <Compile Include="Modules\Sitemaps\SitemapItem.cs" />
     <Compile Include="Modules\Sitemaps\SitemapResult.cs" />
     <Compile Include="Modules\TimeZone\TimeZoneSet.cs" />
+    <Compile Include="Modules\UrlRoute.cs" />
     <Compile Include="Modules\Validations\DevUserValidator.cs" />
     <Compile Include="Modules\Validations\ValidationMessage.cs" />
     <Compile Include="Modules\Validations\Validator.cs" />
