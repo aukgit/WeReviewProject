@@ -1,0 +1,93 @@
+﻿@using ReviewApps.Models.EntityModel.ExtenededWithCustomMethods
+@model List<ReviewApps.Models.EntityModel.Category>
+@{
+    ViewBag.Title = "Mobile App Categories / Category";
+    var currentPageStaticUrl = Html.GetCurrentUrlWithHostName();
+}
+<div class="app-details-page category-listing-page category-page search-page">
+    <div class="row">
+        <div class="app-detail app-title-wrapper col-md-12" title="Mobile Apps Categories">
+            <div class="app-title-row float-left">
+                <a href="@currentPageStaticUrl" class="app-title">
+                    <h1 title="Mobile Apps Categories">
+                        <strong title="Mobile Apps Categories">
+                            <em title="Mobile Apps Categories">Mobile Apps</em>
+                        </strong>
+                    </h1>
+                </a>
+                <a class="app-category" href="@currentPageStaticUrl" title="Mobile Apps Categories">
+                    <h2 class="category" title="Mobile Apps Categories">
+                        <strong class="search-quote" title="Mobile App Categories">
+                            Categories
+                        </strong>
+                    </h2>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-gap category-listing-displays-with-apps-container">
+        @foreach (var category in Model) {
+            var appNonExistClass = category.Apps == null || category.Apps.Count == 0 ? "seo-hide" : "";
+            <div class="row no-margin @appNonExistClass">
+                <div class="app-detail app-title-wrapper category-title col-md-12" title="Mobile App Categories">
+                    <div class="app-title-row float-left">
+                        <a href="@currentPageStaticUrl/@category.CategoryName" title="@category.CategoryName category mobile apps" class="app-title">
+                            <h1 title="@category.CategoryName">
+                                <strong title="@category.CategoryName category mobile apps">
+                                    <em title="@category.CategoryName category mobile apps">@category.CategoryName</em>
+                                </strong>
+                            </h1>
+                            <h2 class="app-category" title="(Latest Apps)">
+                                <strong class="search-quote" title="@category.CategoryName Categories latest apps">
+                                    (Latest Apps)
+                                </strong>
+                            </h2>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row no-margin @appNonExistClass">
+                <div class="archive-app-collection-wrapper">
+                    <ul class="archive-app-collection-list category-listing-page-apps-list pagination-required regular-color seo-optimize">
+                        @if (appNonExistClass == "") {
+                            foreach (var app in category.Apps) {
+                                var platform = app.GetPlatform();
+                                <li class="slim-app-view" data-app-type="@platform.Icon">
+                                    <a class="app-url" href="@app.GetAbsoluteUrl()" title="App Review : @app.AppName">
+                                        <div class="app-icon">
+                                            <img src="@app.SearchIconLocation" alt="app" />
+                                        </div>
+                                        <div class="app-content">
+                                            <h1 class="app-title" title="App Review : @app.AppName">
+                                                <i class="fa @platform.Icon"></i>
+                                                @app.AppName
+                                                <span class="paragraph-end"></span>
+                                            </h1>
+                                            <h3>
+                                                @app.User.UserName
+                                                <span class="paragraph-end"></span>
+                                            </h3>
+                                            <span class="rating">
+                                                <i class="fa fa-star"></i>
+                                                @app.AvgRating/5 from @app.ReviewsCount users
+                                            </span>
+                                        </div>
+                                        <div class="seo-hide">
+                                            <em title="@platform.PlatformName Mobiles App">@platform.PlatformName App</em>
+                                            <em title="@app.AppName mobile app">@app.AppName App</em>
+                                            <em title="@app.AppName mobile app category is @category.CategoryName"><strong title="@app.AppName">@app.AppName</strong> mobile app category is <strong title="@category.CategoryName">@category.CategoryName</strong></em>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    <div class="regular-show-more-btn">
+                        <a href="@currentPageStaticUrl/@category.CategoryName" title="@category.CategoryName category mobile apps" class="btn more-btn pull-right white">More...</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@Html.Partial("_SeoHide")

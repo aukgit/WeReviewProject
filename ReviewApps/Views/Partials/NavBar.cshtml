@@ -1,0 +1,114 @@
+﻿@using ReviewApps.Common
+@using ReviewApps.Models.EntityModel.ExtenededWithCustomMethods
+@{
+    var appUrl = AppVar.Url;
+    var categories = Statics.AppCategoriesCache;
+    var platforms = Statics.AppPlatformsCache;
+    //string role = ViewBag.Role;
+}
+<div class="header-2">
+    <header class="sticky">
+        <div class="container">
+            <a class="logo" href="@appUrl" title="wereviewapp.com: App Review websie">
+                <h1 title="wereviewapp.com" class="website-head-title wereviewapp.com">
+                    <strong class="almost-black" title="App Review websie">we</strong><strong class="red" title="App Review websie">review</strong><strong class="orange-color" title="App Review websie">app.com</strong>
+                </h1>
+            </a>
+            <nav>
+                <ul class="jetmenu menu seo-optimize">
+                    <li>
+                        <a href="@appUrl" title="App Review websie : Home">
+                            <i class="@FaIcons.Home"></i>
+                            <strong title="App Review websie : Home">Home</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a title="Mobile Apps">
+                            <i class="@FaIcons.Mobile"></i>
+                            Apps
+                        </a>
+                        <ul class="animated dropdown fadeIn">
+                            <li>
+                                <a href="@appUrl/Apps" title="Mobile Apps">Archived Mobile Apps</a>
+                            </li>
+                            <li>
+                                <a title="Mobile Apps Category">Category</a>
+                                <ul class="animated dropdown fadeIn">
+                                    <li>
+                                        <a href="@appUrl/Apps/Category" title="Mobile Apps Category">
+                                            <h1>
+                                                <strong>All Category</strong>
+                                            </h1>
+                                        </a>
+                                    </li>
+                                    @foreach (var category in categories) {
+                                        <li>
+                                            <a href="@category.GetAbsoluteUrl()">
+                                                <h1 title="Mobile @category.CategoryName apps">
+                                                    <strong title="Mobile @category.CategoryName apps">@category.CategoryName</strong>
+                                                </h1>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                            <li>
+                                <a title="All mobile platforms : Android, Apple, Windows, FireFox OS">Platforms <em class="seo-hide">Android, Apple, Windows, FireFox OS</em></a>
+                                <ul class="animated dropdown fadeIn">
+                                    <li>
+                                        <a href="@appUrl/Apps/Mobile/Platforms">
+                                            <h1>
+                                                <strong>All Platform</strong>
+                                            </h1>
+                                        </a>
+                                    </li>
+                                    @foreach (var platform in platforms) {
+                                        <li title="Android Apps">
+                                            <a href="@appUrl/Apps/Mobile/Platforms/@platform.PlatformName">
+                                                <h1 title="@platform.PlatformName Apps">
+                                                    <i title="@platform.PlatformName Apps" class="fa @platform.Icon"></i>
+                                                    <strong title="@platform.PlatformName Apps">@platform.PlatformName Apps</strong>
+                                                </h1>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li title="Contact review website's admin">
+                        <a href="@appUrl/ContactUs" title="Contact review website's admin">
+                            <i class="@FaIcons.Comment"></i>
+                            Contact
+                        </a>
+                    </li>
+                    <li class="btn-type post-app-btn-wrapper" title="Post your mobile to app review website">
+                        <a title="Post your mobile to app review website" href="@appUrl/App/Post" class="btn btn-primary post-app-btn">
+                            <strong title="Post your mobile to app review website">
+                                <em title="Post your mobile to app review website">
+                                    <i class="@FaIcons.ChevronCircleRight"></i>
+                                    Post App
+                                </em>
+                            </strong>
+                            <em class="seo-hide" title="Post your mobile to app review website">Post your mobile to app review website</em>
+                        </a>
+                    </li>
+                    @Html.Partial("_LoginPartial")
+                    <li class="btn-type search-bar" title="Search in app review website">
+                        <form class="navbar-form" role="search" action="@AppVar.Url/Search" title="Search in app review website" method="post">
+                            <div class="input-group">
+                                @Html.AntiForgeryToken()
+                                <input type="text" class="form-control" placeholder="Search" name="SearchQuery" title="Search for app reviews" />
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+</div>

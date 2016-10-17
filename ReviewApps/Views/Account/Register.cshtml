@@ -1,0 +1,47 @@
+﻿@model ReviewApps.Models.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    SelectList roles = null;
+    var token = Html.AntiForgeryToken();
+    var usernameValidatingUrl = "/Validator/GetUsername";
+    var emailValidatingUrl = "/Validator/GetEmail";
+}
+@section hidden{
+    @Html.GenerateUrlHiddenInputs()
+    @Html.ComponentsEnableFor("form-validation",
+                                      "enter-to-focus-next-no-tags(id:server-validation-form,submitAtLast:false,atLastFocusOnFirst:true)")
+}
+<div id="account-controller" data-action="register">
+    <h1 class="h3" title="Registration page of @AppVar.Name">@ViewBag.Title</h1>
+    <small>
+        Create a new account for <strong class="@AppVar.Name">@AppVar.Name</strong>.
+        Developers use this form to register their accounts as an app developer. If you not wish to register now
+        alternatively you can easily add your application by submitting app url email to info{at}wereviewapp.com.
+    </small>
+    <hr />
+    @Html.Partial("_GlobalError")
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "server-validation-form", @class = "form-horizontal register-form", role = "form", enctype = "multipart/form-data" })) {
+    <!--uxSlide by developers-organism and Alim Ul Karim hides everything except for first item=0, we can have more than one zeros-->
+        <div id="register-form">
+            <div id="server-validation-form">
+                @token
+                @Html.EditorFor(m => m.UserName, "Username", new { url = usernameValidatingUrl, isValidate = "true", data_submit_method = "post" })
+                @Html.EditorFor(m => m.FirstName)
+                @Html.EditorFor(m => m.LastName)
+                @Html.EditorFor(m => m.Email, "Email", new { url = emailValidatingUrl, isValidate = "true", data_submit_method = "post" })
+            </div>
+            @Html.EditorFor(m => m.Password)
+            @Html.EditorFor(m => m.ConfirmPassword)
+            @Html.EditorFor(m => m.Phone, "Phone")
+            <div class="form-group">
+                <div class="col-md-10 col-md-offset-2">
+                    @Html.SubmitButton("Register", FaIcons.User, id: "submit-btn")
+                </div>
+            </div>
+            <div class="bottom-gap-2x"></div>
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

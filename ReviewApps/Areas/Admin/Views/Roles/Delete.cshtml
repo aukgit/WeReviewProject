@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ReviewApps.Models.POCO.Identity.ApplicationUser>
+
+@Html.SamePageLinkWithIcon("Roles", "Roles", "fa fa-trash")
+<h2 class="h5">
+    Do you want to detach "" role from all of these users? <label class="label label-danger">[It's permanent]</label>
+</h2>
+<a href="@Url.Action("Index", "Roles", null)" title="Cancel" class="btn btn-info "><span class="glyphicon glyphicon-chevron-left"></span> Cancel</a>
+<a href="@Url.Action("DeleteConfirmed", "Roles", new {id = ViewBag.RoleID})" title="Detach all the users from the role and remove it" onclick="return confirm('Are you sure? [Can\'t be undone.]')" class="btn btn-danger "><span class="glyphicon glyphicon-remove"></span> Delete</a>
+<table class="table table-hover top-margin-space">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DisplayName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+    </tr>
+    @if (Model != null) {
+        foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DisplayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+            </tr>
+        }
+    }
+</table>

@@ -1,0 +1,15 @@
+﻿@model ReviewApps.Models.EntityModel.FeaturedImage
+
+<div class="AppID-main form-group">
+    <div class="controls">
+        <label class="col-md-2 control-label">
+            @Html.DisplayNameFor(m => m.AppID)<span class="red ">*</span></label>
+        <div class="AppID-combo-div col-md-10">
+            @Html.DropDownList("AppID", null, new {@class = "form-control selectpicker", data_live_search = true})
+            <a href="#" data-toggle="tooltip" data-original-title="Selected app will be avilable in the homepage gallery." title="Selected app will be avilable in the homepage gallery." class="tooltip-show">
+                <span class="description-icon"></span></a>
+        </div>
+    </div>
+</div>
+
+@Html.EditorFor(model => model.IsFeatured)

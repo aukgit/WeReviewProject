@@ -1,0 +1,19 @@
+﻿@model ReviewApps.Models.EntityModel.App
+
+@if (ViewBag.UploadDontNeed != null && ViewBag.UploadDontNeed == true) {
+    //do nothing
+} else {
+    <label id="how-to-use-uploader-info" class="col-md-offset-2 label label-info right-side-label">You can use the edit button to remove gallery images. Those with one upload will be replaced with the last one.</label>
+    {
+        ViewBag.onePreexist = ViewBag.preexistGallery == null ? 0 : 1;
+    }
+    <div id="collection-uploaders">
+        <!--Visibility controlled from WereViewApps.js : (appformPostEvent method at the bottom)-->
+        @Html.EditorFor(model => model.YoutubeCoverImage, "HttpPostedFileBaseReq", new { @data_id = "5", @data_url = "/App/YoutubeCoverUpload", data_single = "true", uploadPreexist = ViewBag.onePreexist })
+        @Html.EditorFor(model => model.Galleries, "FileMultiReq", new { @data_id = "0", @data_url = "/App/UploadGallery", maxUpload = 6, editUrl = "/App/EditGalleryUploads", hasEditBtn = "true", uploadPreexist = ViewBag.preexistGallery })
+        @Html.EditorFor(model => model.HomePageFeatured, "HttpPostedFileBaseReq", new { @data_id = "1", @data_url = "/App/UploadHomeFeatured", data_single = "true", uploadPreexist = ViewBag.onePreexist })
+        @Html.EditorFor(model => model.HomePageIcon, "HttpPostedFileBaseReq", new { @data_id = "4", @data_url = "/App/UploadHomePageIcon", data_single = "true", uploadPreexist = ViewBag.onePreexist })
+        @Html.EditorFor(model => model.SuggestionIcon, "HttpPostedFileBaseReq", new { @data_id = "2", @data_url = "/App/UploadSuggestionIcon", data_single = "true", uploadPreexist = ViewBag.onePreexist })
+        @Html.EditorFor(model => model.SearchIcon, "HttpPostedFileBaseReq", new { @data_id = "3", @data_url = "/App/UploadSearchIcon", data_single = "true", uploadPreexist = @ViewBag.onePreexist })
+    </div>
+}

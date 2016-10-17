@@ -1,0 +1,79 @@
+﻿@using ReviewApps.Models.EntityModel.ExtenededWithCustomMethods
+@model IEnumerable<ReviewApps.Models.EntityModel.Review>
+
+@{
+    ViewBag.Title = "Reviewed";
+    string title = ViewBag.Title;
+    string subtitle = ViewBag.Title;
+    var viewName = "Index";
+    var editLinkName = "";
+}
+
+<h2 class="h3 top-gap">
+    <span class="glyphicon glyphicon-th-list"></span> 
+    @Html.SamePageLink(title, subtitle, false)
+</h2>
+
+
+<table class="bootstrap-table-do table table-hover" data-toggle="table" data-toolbar="#filter-bar" data-show-filter="true" data-show-columns="true" data-search="true" data-show-refresh="true" data-show-toggle="true" data-show-export="true" data-pagination="true">
+    <thead>
+    <tr>
+        <th data-field="App.AppName">
+            @Html.DisplayNameFor(model => model.App.AppName)
+        </th>
+        <th data-field="Title">
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th data-field="Pros">
+            @Html.DisplayNameFor(model => model.Pros)
+        </th>
+        <th data-field="Cons">
+            @Html.DisplayNameFor(model => model.Cons)
+        </th>
+        <th data-field="Comments">
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th data-field="LikedCount">
+            @Html.DisplayNameFor(model => model.LikedCount)
+        </th>
+        <th data-field="DisLikeCount">
+            @Html.DisplayNameFor(model => model.DisLikeCount)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @{ editLinkName = item.App.AppName; }
+                <a href="@item.App.GetAbsoluteUrl()" title="View App : @item.App.GetAbsoluteUrl()">
+                    <span class="glyphicon glyphicon-pencil"></span> @editLinkName</a>
+            </td>
+            <td>
+                @Html.Truncate(item.Title, null)
+            </td>
+            <td>
+                @Html.Truncate(item.Pros, null)
+            </td>
+            <td>
+                @Html.Truncate(item.Cons, null)
+            </td>
+
+            <td>
+                @Html.Truncate(item.Comments, null)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LikedCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisLikeCount)
+            </td>
+        </tr>
+    }
+    </tbody>
+
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

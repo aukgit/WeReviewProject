@@ -1,0 +1,37 @@
+﻿@using DevMvcComponent.Error
+@using ReviewApps.Modules.Session
+@{
+    var errors = AppConfig.GetGlobalError();
+    var auth = Session[SessionNames.AuthError];
+}
+@if (auth != null) {
+    <h1 class="h3">
+        <label class="@ErrorCollector.LowRiskCssClass"></label>
+    </h1>
+    SessionNames.RemoveKey(SessionNames.AuthError);
+}
+
+@if (errors != null) {
+    var errorList = errors.GetErrors();
+    AppConfig.RemoveGlobalError();
+    if (errorList != null) {
+        <div class="col-lg-12 col-md-12 col-sm-12 global-error">
+            <h2 class="h4">Please solve these errors:</h2>
+            <ul class="display-numbers global-error-ul">
+                @foreach (var error in errorList) {
+                    <li>
+                        <span class="@errors.GetCssClassForError(error)">@error.ErrorMessage</span>
+                        @if (@error.Solution != null) {
+                            <span class="@ErrorCollector.SolutionStateCssClass">@error.Solution</span>
+                        }
+                        @if (@error.SolutionDisplayMessage != null) {
+                            <a href="@error.SolutionLink" class="error-solution-link" title="@error.SolutionDisplayMessage">
+                                <span class="@ErrorCollector.SolutionStateLinkCssClass" title="@error.SolutionDisplayMessage">@error.SolutionDisplayMessage</span>
+                            </a>
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+}

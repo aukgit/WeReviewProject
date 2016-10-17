@@ -1,0 +1,49 @@
+﻿@model ReviewApps.Models.EntityModel.Review
+@{
+    var token = Html.AntiForgeryToken();
+    var controller = (string) ViewBag.controller;
+    string viewName = ViewBag.view;
+    Layout = null;
+    string jsControllerName = "reviews-controller";
+    string searchForBindingEvents = "submit";
+    //use this for write or edit review
+}
+<div id="@jsControllerName" class="@jsControllerName @viewName" data-action="@viewName" data-event-binding="@searchForBindingEvents">
+    <hr />
+    <div class="col-md-12">
+        <h4 class="h4 header-title">
+            <i class="fa fa-edit"></i>
+            <strong>@ViewBag.Title</strong>
+        </h4>
+        @if (ViewBag.edit != true) {
+            <div class="col-md-offset-2 col-md-10">
+                <small class="h5 red">Please rate first to proceed next.</small>
+            </div>
+        }
+    </div>
+    @using (Html.BeginForm(viewName, controller, FormMethod.Post, new { data_submit = "reviewFormSubmit", @class = "form-horizontal", role = "form", @id = "review-write-form" })) {
+        @token
+        @Html.Partial("_SuccessMessage")
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.AppID)
+        if (ViewBag.edit == true) {
+            @Html.HiddenFor(model => model.ReviewID)
+        }
+        <div data-dev-slide="0" data-dev-visited="false">
+            @Html.EditorFor(model => model.Rating, "Rating-5-b", new { @step = 1 })
+
+            @Html.EditorFor(model => model.Title, "string", new { placeHolder = "* Please give a title for your review." })
+        </div>
+        <div data-dev-slide="1" data-dev-visited="false">
+            @Html.EditorFor(model => model.Comments, "Multiline", new { placeHolder = "* Please write your thoughts about the app." })
+            @Html.EditorFor(model => model.Pros, "Multiline", new { placeHolder = "Please write pros about this app." })
+            @Html.EditorFor(model => model.Cons, "Multiline", new { placeHolder = "Please write cons about this app." })
+            @Html.EditorFor(model => model.IsSuggest, "boolean")
+        </div>
+        @Html.Partial("_SavingButton")
+    }
+</div>
+@Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    $(".tooltip-show").tooltip();
+</script>

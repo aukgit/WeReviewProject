@@ -1,0 +1,215 @@
+﻿<error errorId="8b17d56d-caf8-417e-9e05-c078da6fbcc0" application="/LM/W3SVC/2/ROOT" host="ALIM-PC" type="System.Web.HttpException" message="A public action method 'AppPost' was not found on controller 'WeReviewApp.Controllers.AppController'." source="System.Web.Mvc" detail="System.Web.HttpException (0x80004005): A public action method 'AppPost' was not found on controller 'WeReviewApp.Controllers.AppController'.&#xD;&#xA;   at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)&#xD;&#xA;   at System.Web.Mvc.Controller.&lt;BeginExecuteCore&gt;b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;BeginProcessRequest&gt;b__5(IAsyncResult asyncResult, ProcessRequestState innerState)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="developer" time="2016-05-28T12:51:06.6889623Z" statusCode="404">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_ACCEPT:*/*&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate, sdch&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-US,en;q=0.8,bn;q=0.6&#xD;&#xA;HTTP_COOKIE:__RequestVerificationToken=lS4TUEfKVqINYurasBJsOpMj914zH32Uhu5-57ne6BcSs62sZZCDykDGVxDroU_mmIIUALrJH9yi4f_ur4sXUgZJ3pJltueNYBpquiaoWKc1; ASP.NET_SessionId=funho5oatmvaptfpnenaj4r4; .AspNet.ApplicationCookie=WJbY7vM9jb71rD28szL5Y7rTYH6M1UvbKPyecsQJBgyK5-nB1aMG5UFxa4aJ8Z7xsXfbQfzJS-Ud3B7f7Vbu0XvqhWbzB8bfiZfZpRoXIWshoqQgDPPrKAdB5ZkEpvYn9yw-9MxZteGQrMmbYqaQKitAHh5t_PWDE1fAzmXWi2-qkakuCT2zC6xbSgXXvSFPh9vnfacqT1J4pVDxg3AstsSoVdeVIsezzSeMG7Vz6k0LVEjJmZge8SkyPIap9Ef5KPN5YZBQ2Zk8Hcfc3AdV8byC54ZRC5FlU0rTNphg4fv3nvyL34VYj26yH1_e0flp0QcHmQtAAfENSetaOyNgax3Ppy611WUym6T3_mZ1dpQkOI78jq9Y6uIs5LvAyeOsjl3BHj1wP84TUdoxcy77fLWTRvZYAFNazAH4dGN5z951sZuh7FM8H4VSAudgUNOmBeg3qwFAq2Xhopkzdjwu61_sJpUdtyKOyrDQ6JDooU-Ww53BNbMgIOpIcqmYSrAlR1BuOZZE0Uc1glsUpSquVn9vXyr3DMtjRMeQJEcdJfqGy4FiQnKpSLFsBYknAp8Q&#xD;&#xA;HTTP_HOST:localhost:14809&#xD;&#xA;HTTP_REFERER:http://localhost:14809/App/Post&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36&#xD;&#xA;HTTP_X_REQUESTED_WITH:XMLHttpRequest&#xD;&#xA;HTTP_DNT:1&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Accept: */*&#xD;&#xA;Accept-Encoding: gzip, deflate, sdch&#xD;&#xA;Accept-Language: en-US,en;q=0.8,bn;q=0.6&#xD;&#xA;Cookie: __RequestVerificationToken=lS4TUEfKVqINYurasBJsOpMj914zH32Uhu5-57ne6BcSs62sZZCDykDGVxDroU_mmIIUALrJH9yi4f_ur4sXUgZJ3pJltueNYBpquiaoWKc1; ASP.NET_SessionId=funho5oatmvaptfpnenaj4r4; .AspNet.ApplicationCookie=WJbY7vM9jb71rD28szL5Y7rTYH6M1UvbKPyecsQJBgyK5-nB1aMG5UFxa4aJ8Z7xsXfbQfzJS-Ud3B7f7Vbu0XvqhWbzB8bfiZfZpRoXIWshoqQgDPPrKAdB5ZkEpvYn9yw-9MxZteGQrMmbYqaQKitAHh5t_PWDE1fAzmXWi2-qkakuCT2zC6xbSgXXvSFPh9vnfacqT1J4pVDxg3AstsSoVdeVIsezzSeMG7Vz6k0LVEjJmZge8SkyPIap9Ef5KPN5YZBQ2Zk8Hcfc3AdV8byC54ZRC5FlU0rTNphg4fv3nvyL34VYj26yH1_e0flp0QcHmQtAAfENSetaOyNgax3Ppy611WUym6T3_mZ1dpQkOI78jq9Y6uIs5LvAyeOsjl3BHj1wP84TUdoxcy77fLWTRvZYAFNazAH4dGN5z951sZuh7FM8H4VSAudgUNOmBeg3qwFAq2Xhopkzdjwu61_sJpUdtyKOyrDQ6JDooU-Ww53BNbMgIOpIcqmYSrAlR1BuOZZE0Uc1glsUpSquVn9vXyr3DMtjRMeQJEcdJfqGy4FiQnKpSLFsBYknAp8Q&#xD;&#xA;Host: localhost:14809&#xD;&#xA;Referer: http://localhost:14809/App/Post&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36&#xD;&#xA;X-Requested-With: XMLHttpRequest&#xD;&#xA;DNT: 1&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/2/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="D:\Working (SSD)\GitHub\WereViewProject\WereViewApp\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="ApplicationCookie" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="developer" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="*****" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="developer" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="developer" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="off" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="2" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/2" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="::1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/App/AppPost" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="D:\Working (SSD)\GitHub\WereViewProject\WereViewApp\App\AppPost" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="__RequestVerificationToken=1kKKKmyYKpq7Lpwa0_FU3mI6gUaw9FM0mRZ1ofL0x_Nhv_toreygmzIlKuP-cEO0xQFkhVclCt70k5lQaPnRxod3kfZWspdZfHEEWgGMZw01&amp;AppName=wfefewfwe&amp;PlatformID=1&amp;PlatformVersion=0&amp;CategoryID=1&amp;Tags=wfefewfwe&amp;Description=fewefwwef&amp;ReleaseDate=28%2FMay%2F2016&amp;YoutubeEmbedLink=&amp;WebsiteUrl=&amp;StoreUrl=&amp;UploadGuid=e4a4fb37-7a01-483f-b0d3-52b605b2afdc&amp;IsPublished=false" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="::1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="::1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="9702" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/App/AppPost" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="14809" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/8.0" />
+    </item>
+    <item name="URL">
+      <value string="/App/AppPost" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="*/*" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate, sdch" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-US,en;q=0.8,bn;q=0.6" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="__RequestVerificationToken=lS4TUEfKVqINYurasBJsOpMj914zH32Uhu5-57ne6BcSs62sZZCDykDGVxDroU_mmIIUALrJH9yi4f_ur4sXUgZJ3pJltueNYBpquiaoWKc1; ASP.NET_SessionId=funho5oatmvaptfpnenaj4r4; .AspNet.ApplicationCookie=WJbY7vM9jb71rD28szL5Y7rTYH6M1UvbKPyecsQJBgyK5-nB1aMG5UFxa4aJ8Z7xsXfbQfzJS-Ud3B7f7Vbu0XvqhWbzB8bfiZfZpRoXIWshoqQgDPPrKAdB5ZkEpvYn9yw-9MxZteGQrMmbYqaQKitAHh5t_PWDE1fAzmXWi2-qkakuCT2zC6xbSgXXvSFPh9vnfacqT1J4pVDxg3AstsSoVdeVIsezzSeMG7Vz6k0LVEjJmZge8SkyPIap9Ef5KPN5YZBQ2Zk8Hcfc3AdV8byC54ZRC5FlU0rTNphg4fv3nvyL34VYj26yH1_e0flp0QcHmQtAAfENSetaOyNgax3Ppy611WUym6T3_mZ1dpQkOI78jq9Y6uIs5LvAyeOsjl3BHj1wP84TUdoxcy77fLWTRvZYAFNazAH4dGN5z951sZuh7FM8H4VSAudgUNOmBeg3qwFAq2Xhopkzdjwu61_sJpUdtyKOyrDQ6JDooU-Ww53BNbMgIOpIcqmYSrAlR1BuOZZE0Uc1glsUpSquVn9vXyr3DMtjRMeQJEcdJfqGy4FiQnKpSLFsBYknAp8Q" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:14809" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://localhost:14809/App/Post" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36" />
+    </item>
+    <item name="HTTP_X_REQUESTED_WITH">
+      <value string="XMLHttpRequest" />
+    </item>
+    <item name="HTTP_DNT">
+      <value string="1" />
+    </item>
+  </serverVariables>
+  <queryString>
+    <item name="__RequestVerificationToken">
+      <value string="1kKKKmyYKpq7Lpwa0_FU3mI6gUaw9FM0mRZ1ofL0x_Nhv_toreygmzIlKuP-cEO0xQFkhVclCt70k5lQaPnRxod3kfZWspdZfHEEWgGMZw01" />
+    </item>
+    <item name="AppName">
+      <value string="wfefewfwe" />
+    </item>
+    <item name="PlatformID">
+      <value string="1" />
+    </item>
+    <item name="PlatformVersion">
+      <value string="0" />
+    </item>
+    <item name="CategoryID">
+      <value string="1" />
+    </item>
+    <item name="Tags">
+      <value string="wfefewfwe" />
+    </item>
+    <item name="Description">
+      <value string="fewefwwef" />
+    </item>
+    <item name="ReleaseDate">
+      <value string="28/May/2016" />
+    </item>
+    <item name="YoutubeEmbedLink">
+      <value string="" />
+    </item>
+    <item name="WebsiteUrl">
+      <value string="" />
+    </item>
+    <item name="StoreUrl">
+      <value string="" />
+    </item>
+    <item name="UploadGuid">
+      <value string="e4a4fb37-7a01-483f-b0d3-52b605b2afdc" />
+    </item>
+    <item name="IsPublished">
+      <value string="false" />
+    </item>
+  </queryString>
+  <cookies>
+    <item name="__RequestVerificationToken">
+      <value string="lS4TUEfKVqINYurasBJsOpMj914zH32Uhu5-57ne6BcSs62sZZCDykDGVxDroU_mmIIUALrJH9yi4f_ur4sXUgZJ3pJltueNYBpquiaoWKc1" />
+    </item>
+    <item name="ASP.NET_SessionId">
+      <value string="funho5oatmvaptfpnenaj4r4" />
+    </item>
+    <item name=".AspNet.ApplicationCookie">
+      <value string="WJbY7vM9jb71rD28szL5Y7rTYH6M1UvbKPyecsQJBgyK5-nB1aMG5UFxa4aJ8Z7xsXfbQfzJS-Ud3B7f7Vbu0XvqhWbzB8bfiZfZpRoXIWshoqQgDPPrKAdB5ZkEpvYn9yw-9MxZteGQrMmbYqaQKitAHh5t_PWDE1fAzmXWi2-qkakuCT2zC6xbSgXXvSFPh9vnfacqT1J4pVDxg3AstsSoVdeVIsezzSeMG7Vz6k0LVEjJmZge8SkyPIap9Ef5KPN5YZBQ2Zk8Hcfc3AdV8byC54ZRC5FlU0rTNphg4fv3nvyL34VYj26yH1_e0flp0QcHmQtAAfENSetaOyNgax3Ppy611WUym6T3_mZ1dpQkOI78jq9Y6uIs5LvAyeOsjl3BHj1wP84TUdoxcy77fLWTRvZYAFNazAH4dGN5z951sZuh7FM8H4VSAudgUNOmBeg3qwFAq2Xhopkzdjwu61_sJpUdtyKOyrDQ6JDooU-Ww53BNbMgIOpIcqmYSrAlR1BuOZZE0Uc1glsUpSquVn9vXyr3DMtjRMeQJEcdJfqGy4FiQnKpSLFsBYknAp8Q" />
+    </item>
+  </cookies>
+</error>

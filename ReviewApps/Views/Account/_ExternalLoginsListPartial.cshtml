@@ -1,0 +1,25 @@
+﻿@using Microsoft.Owin.Security
+@model ReviewApps.Models.ViewModels.ExternalLoginListViewModel
+<h4>Use another service to log in.</h4>
+<hr />
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0) {
+        <div>
+            No external login service.
+        </div>
+    } else {
+        using (Html.BeginForm(Model.Action, "Account", new {Model.ReturnUrl})) {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList">
+                <p>
+                    @foreach (var p in loginProviders) {
+                        if (p.AuthenticationType == "Facebook") {
+                            <button type="submit" class="btn btn-default btn-facebook" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">facebook</button>
+                        }
+                    }
+                </p>
+            </div>
+        }
+    }
+}

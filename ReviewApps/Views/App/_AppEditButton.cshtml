@@ -1,0 +1,13 @@
+﻿@model ReviewApps.Models.EntityModel.App
+@{
+    long currentUserId = -1;
+    currentUserId = User.GetUserID();
+    var postedUserId = Model.PostedByUserID;
+    var isEditable = currentUserId == postedUserId;
+    var appName = Model.AppName;
+}
+@if (isEditable) {
+    <a href="@Url.Action("Edit", "App", new {id = Model.AppID})" title="Edit @appName" class="single-app-edit-btn">
+        <span class="glyphicon glyphicon-pencil"></span> Edit
+    </a>
+}

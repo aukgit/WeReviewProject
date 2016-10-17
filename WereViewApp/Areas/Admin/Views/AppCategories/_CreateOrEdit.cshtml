@@ -1,7 +1,0 @@
-﻿@model WeReviewApp.Models.EntityModel.Category
-
-<!-- js is written in wereviewapp.js file-->
-<div id="app-category-editing-page" data-ajax-url="@Url.Action()" data-or-action="creare|edit">
-    @Html.EditorFor(model => model.CategoryName)
-    @Html.EditorFor(model => model.Slug)
-</div>

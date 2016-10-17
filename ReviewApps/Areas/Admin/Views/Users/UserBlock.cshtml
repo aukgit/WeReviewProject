@@ -1,0 +1,53 @@
+﻿@model ReviewApps.Models.ViewModels.UserBlockViewModel
+@{
+    var title = "Blocking " + Model.UserName;
+    ViewBag.Title = title;
+    var subtitle = title;
+    var controller = (string) ViewBag.controller;
+    var viewName = "UserBlock";
+}
+@Html.SamePageLinkWithIcon(title, subtitle, "fa  fa-ban")
+<hr />
+<h4 class="h4">Do you confirm blocking this user?</h4>
+@using (Html.BeginForm(viewName, controller, FormMethod.Post, new {@class = "form-horizontal Create-@ViewBag.Title", role = "form"})) {
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()
+
+        @Html.Partial("_SuccessMessage")
+
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+
+        @Html.HiddenFor(model => model.UserId)
+        @*<div class="form-group">
+                <div class="controls">
+                    <label class="col-md-2 control-label">
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </label>
+                    <div class="col-md-10 ">
+                        @Html.DisplayFor(model => model.UserName)
+                    </div>
+                </div>
+            </div>*@
+        @Html.EditorFor(model => model.Reason, "Multiline")
+        <div class="row">
+            <div class="bold col-md-10 col-md-offset-2">
+                Note : Your user id will be attached with this record.
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10 col-md-offset-2">
+                <div class="btn-group">
+                    <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> No, back</a>
+                    <div class="inline input-group-btn">
+                        <button title="Block" class="btn btn-danger"><i class="fa fa-square"></i> Yes, Block</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

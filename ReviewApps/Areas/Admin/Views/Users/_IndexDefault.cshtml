@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ReviewApps.Models.POCO.Identity.ApplicationUser>
+
+@{
+    ViewBag.Title = "Manage User";
+    string title = ViewBag.Title;
+    string subtitle = ViewBag.Title;
+    var controller = (string) ViewBag.controller;
+    var viewName = "Index";
+    var editLinkName = "";
+}
+
+<table class="bootstrap-table-do table table-hover" data-toggle="table" data-show-columns="true" data-search="true" data-show-refresh="true" data-show-toggle="true" data-show-export="true" data-pagination="true">
+    <!--<caption>@viewName</caption>-->
+    <thead>
+    <tr>
+        <th data-field="UserName">
+            Username
+        </th>
+        <th data-field="DisplayName">
+            Name
+        </th>
+        <th data-field="Email">
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th data-field="PhoneNumber">
+            Phone number
+        </th>
+
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @{ editLinkName = Html.DisplayFor(model => item.UserName).ToString(); }
+                @editLinkName
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisplayName)
+            </td>
+            <td>
+                @Html.EmailLink(item.Email, "Email " + editLinkName)
+            </td>
+            <td>
+                @Html.PhoneNumberLink(item.PhoneNumber, "Call " + editLinkName)
+            </td>
+            <td>
+                <a href="@Url.Action("ManageRoles", new {id = item.Id})" title="Mange roles of @editLinkName." class="btn btn-success btn-xs"><span class="glyphicon glyphicon-chevron-down"></span> Manage Role</a>
+                <a href="@Url.Action("Details", new {id = item.UserID})" title="Details of @editLinkName." class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-print"></span> Details</a>
+                @if (!item.IsBlocked) {
+                    <a href="@Url.Action("UserBlock", new {id = item.UserID})" title="block @editLinkName." class="btn btn-danger btn-xs"><i class="fa fa-square"></i> Block</a>
+                } else {
+                    <a href="@Url.Action("EnableUserBlock", new {id = item.UserID})" title="Enabling @editLinkName." class="btn btn-success btn-xs"><i class="fa fa-play-circle"></i> Enabling</a>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+
+</table>

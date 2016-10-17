@@ -1,0 +1,48 @@
+﻿@model ReviewApps.Models.EntityModel.App
+@{
+    var isFrist = true;
+    var tagsList = Model.Tags != null ? Model.Tags.Split(',') : null;
+    var publishDate = Html.DisplayDateTime(Model.PostedByUserID, Model.CreatedDate, DateTimeFormatType.Date, addTimeZoneString: true);
+    var appName = Model.AppName;
+    var platformSubtitle = Model.Platform.PlatformName + " mobile apps";
+    var softwareUrl = AppVar.Url; //we review app
+}
+<div class="app-description seo-optimize" title="@appName description">
+    <span itemprop="description">@Html.Truncate(Model.Description, 200, false)</span>
+    <span class="show-more-btns-container" data-ref="app-description">
+        <span class="elipse-dot">...</span>
+        <a class="see-more-btn" data-ref="app-description">see more</a>
+    </span>
+    <div class="more" data-ref="app-description" title="@appName description">
+        @Html.Truncate(Model.Description, 200, -1)
+        <a class="less-btn" data-ref="app-description">less</a>
+        <div class="top-gap-small">
+            @if (tagsList != null) {
+                <div class="inline tagbox padding-r-20">
+                    <i class="fa fa-tag"></i> Tags:
+                    @foreach (var tag in tagsList) {
+                        if (!isFrist) {
+                            <text>,</text>
+                        }
+                        <a class="Plant tag-item" href="@softwareUrl/Tags/@tag" title="@platformSubtitle : @Model.AppName is a type of @tag">
+                            <h1 title="@platformSubtitle : @Model.AppName is a type of @tag">
+                                <em title="@Model.AppName" class="seo-hide">@Model.AppName</em>
+                                @tag
+                            </h1>
+                        </a>
+                        {
+                            isFrist = false;
+                        }
+                    }
+                </div>
+            }
+            <div class="inline punlished-date">
+                <i class="fa fa-calendar-o"></i>
+                Published date:
+                <a href="@publishDate" title="Mobiles apps review on @publishDate">@publishDate</a>
+                <meta itemprop="datePublished" content="@publishDate">
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

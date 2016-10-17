@@ -1,0 +1,194 @@
+﻿<error errorId="776631d8-7911-4b69-a14e-93b1852b5f04" application="/LM/W3SVC/2/ROOT" host="ALIM-PC" type="System.NullReferenceException" message="Object reference not set to an instance of an object." source="FoolproofValidation" detail="System.NullReferenceException: Object reference not set to an instance of an object.&#xD;&#xA;   at Foolproof.FoolproofValidator.GetMetaDataDisplayName(PropertyInfo property) in d:\Working\GitHub\Foolproof-fix\Source\Utilities\FoolproofValidator.cs:line 60&#xD;&#xA;   at Foolproof.FoolproofValidator.&lt;GetClientValidationRules&gt;d__5.MoveNext() in d:\Working\GitHub\Foolproof-fix\Source\Utilities\FoolproofValidator.cs:line 27&#xD;&#xA;   at System.Linq.Enumerable.&lt;SelectManyIterator&gt;d__16`2.MoveNext()&#xD;&#xA;   at System.Web.Mvc.UnobtrusiveValidationAttributesGenerator.GetValidationAttributes(IEnumerable`1 clientRules, IDictionary`2 results)&#xD;&#xA;   at System.Web.Mvc.HtmlHelper.GetUnobtrusiveValidationAttributes(String name, ModelMetadata metadata)&#xD;&#xA;   at System.Web.Mvc.Html.TextAreaExtensions.TextAreaHelper(HtmlHelper htmlHelper, ModelMetadata modelMetadata, String name, IDictionary`2 rowsAndColumns, IDictionary`2 htmlAttributes, String innerHtmlPrefix)&#xD;&#xA;   at System.Web.Mvc.Html.TextAreaExtensions.TextArea(HtmlHelper htmlHelper, String name, IDictionary`2 htmlAttributes)&#xD;&#xA;   at ASP._Page_Views_Shared_EditorTemplates_Multiline_cshtml.Execute() in d:\Working (SSD)\GitHub\WeReviewProject\WereViewApp\Views\Shared\EditorTemplates\Multiline.cshtml:line 68&#xD;&#xA;   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy()&#xD;&#xA;   at System.Web.Mvc.WebViewPage.ExecutePageHierarchy()&#xD;&#xA;   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)&#xD;&#xA;   at System.Web.Mvc.Html.TemplateHelpers.ExecuteTemplate(HtmlHelper html, ViewDataDictionary viewData, String templateName, DataBoundControlMode mode, GetViewNamesDelegate getViewNames, GetDefaultActionsDelegate getDefaultActions)&#xD;&#xA;   at System.Web.Mvc.Html.TemplateHelpers.TemplateHelper(HtmlHelper html, ModelMetadata metadata, String htmlFieldName, String templateName, DataBoundControlMode mode, Object additionalViewData, ExecuteTemplateDelegate executeTemplate)&#xD;&#xA;   at System.Web.Mvc.Html.TemplateHelpers.TemplateHelper(HtmlHelper html, ModelMetadata metadata, String htmlFieldName, String templateName, DataBoundControlMode mode, Object additionalViewData)&#xD;&#xA;   at System.Web.Mvc.Html.TemplateHelpers.TemplateFor[TContainer,TValue](HtmlHelper`1 html, Expression`1 expression, String templateName, String htmlFieldName, DataBoundControlMode mode, Object additionalViewData)&#xD;&#xA;   at System.Web.Mvc.Html.EditorExtensions.EditorFor[TModel,TValue](HtmlHelper`1 html, Expression`1 expression, String templateName)&#xD;&#xA;   at ASP._Page_Views_Reviews_Write_cshtml.Execute() in d:\Working (SSD)\GitHub\WeReviewProject\WereViewApp\Views\Reviews\Write.cshtml:line 26&#xD;&#xA;   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy()&#xD;&#xA;   at System.Web.Mvc.WebViewPage.ExecutePageHierarchy()&#xD;&#xA;   at System.Web.WebPages.StartPage.ExecutePageHierarchy()&#xD;&#xA;   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)&#xD;&#xA;   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass21.&lt;BeginInvokeAction&gt;b__1e(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Controller.&lt;BeginExecuteCore&gt;b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;BeginProcessRequest&gt;b__5(IAsyncResult asyncResult, ProcessRequestState innerState)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="developer" time="2016-06-13T22:00:38.7551111Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_CONTENT_LENGTH:144&#xD;&#xA;HTTP_CONTENT_TYPE:application/x-www-form-urlencoded; charset=UTF-8&#xD;&#xA;HTTP_ACCEPT:text/html, */*; q=0.01&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-US,en;q=0.8,bn;q=0.6&#xD;&#xA;HTTP_COOKIE:Hello2.bin=Time : 14-Jun-16 12:19:06 AM , min : 19; __RequestVerificationToken=wGbD34Z88SBi7Trq2KdCS2dcwcQZizlq--UCGlT1lRdX52MtmYC7jmx2L4zLfceH9Gxft9YjSPlDJs_VTn6uj_A34wd2ekUX-EytvvtbXKg1; ASP.NET_SessionId=42bc04n0lo5g0ws2ljrhay2a; .AspNet.ApplicationCookie=AOGsfw1d-VvC2LGseUS5WwNzxExJIFyp38nw_U-ci3gIe3w7rmKCQONwPs2hD4fsqoXiSOCZJXFW0wp2PVXdT_HxzNyrNwfDjTtQ6GfLVcohrqvLLUqQZnItYlIVZyZaAppWHVpVQxWXez7swaNz-bmOPTzeM4JVOz_ZIFB__AYcVUDMLnY-NGfTbxytr1F8XPHcbwLiIunXj5LhVxv35PIZywVB53hqlRku33rO6nMowDL_stwz7ebPphU_ZsA8cvIYqOTZ872N2DB4wYoBwD3m-Wghyj4__GWuNgkPG0_V0cSflBeLN0UfSbt-qad1lXjP16N4BiRBQyCDwF07z22ZtFB_UEBXF2IF7BjoJPgLdZ_CN4lkLVFH4c5QkFFEsm0Ul2ku5yi_FnwN1P_Yv7lYR1SKu7AZz94aoZe_HMO73KvrLFCvU34hmR7ax6C95Dxn09GnW6Y0hZ7UFkMWYJbJAbu-7m0WgRWgDclOKogBsjDCPV4z3VPJRE75QJWLKCAxA3OYZ6k3Kv1TOqFEsAJLRr-AT4n9ioBb9YYRth0O8kvE_owpjCbRjpKFhTmf&#xD;&#xA;HTTP_HOST:localhost:14809&#xD;&#xA;HTTP_REFERER:http://localhost:14809/Apps/Windows-12/Games/hello-world&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36&#xD;&#xA;HTTP_ORIGIN:http://localhost:14809&#xD;&#xA;HTTP_X_REQUESTED_WITH:XMLHttpRequest&#xD;&#xA;HTTP_DNT:1&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Content-Length: 144&#xD;&#xA;Content-Type: application/x-www-form-urlencoded; charset=UTF-8&#xD;&#xA;Accept: text/html, */*; q=0.01&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: en-US,en;q=0.8,bn;q=0.6&#xD;&#xA;Cookie: Hello2.bin=Time : 14-Jun-16 12:19:06 AM , min : 19; __RequestVerificationToken=wGbD34Z88SBi7Trq2KdCS2dcwcQZizlq--UCGlT1lRdX52MtmYC7jmx2L4zLfceH9Gxft9YjSPlDJs_VTn6uj_A34wd2ekUX-EytvvtbXKg1; ASP.NET_SessionId=42bc04n0lo5g0ws2ljrhay2a; .AspNet.ApplicationCookie=AOGsfw1d-VvC2LGseUS5WwNzxExJIFyp38nw_U-ci3gIe3w7rmKCQONwPs2hD4fsqoXiSOCZJXFW0wp2PVXdT_HxzNyrNwfDjTtQ6GfLVcohrqvLLUqQZnItYlIVZyZaAppWHVpVQxWXez7swaNz-bmOPTzeM4JVOz_ZIFB__AYcVUDMLnY-NGfTbxytr1F8XPHcbwLiIunXj5LhVxv35PIZywVB53hqlRku33rO6nMowDL_stwz7ebPphU_ZsA8cvIYqOTZ872N2DB4wYoBwD3m-Wghyj4__GWuNgkPG0_V0cSflBeLN0UfSbt-qad1lXjP16N4BiRBQyCDwF07z22ZtFB_UEBXF2IF7BjoJPgLdZ_CN4lkLVFH4c5QkFFEsm0Ul2ku5yi_FnwN1P_Yv7lYR1SKu7AZz94aoZe_HMO73KvrLFCvU34hmR7ax6C95Dxn09GnW6Y0hZ7UFkMWYJbJAbu-7m0WgRWgDclOKogBsjDCPV4z3VPJRE75QJWLKCAxA3OYZ6k3Kv1TOqFEsAJLRr-AT4n9ioBb9YYRth0O8kvE_owpjCbRjpKFhTmf&#xD;&#xA;Host: localhost:14809&#xD;&#xA;Referer: http://localhost:14809/Apps/Windows-12/Games/hello-world&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36&#xD;&#xA;Origin: http://localhost:14809&#xD;&#xA;X-Requested-With: XMLHttpRequest&#xD;&#xA;DNT: 1&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/2/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="D:\Working (SSD)\GitHub\WeReviewProject\WereViewApp\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="ApplicationCookie" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="developer" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="*****" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="developer" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="developer" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="144" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="application/x-www-form-urlencoded; charset=UTF-8" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="off" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="2" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/2" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Reviews/GetReviewForm" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="D:\Working (SSD)\GitHub\WeReviewProject\WereViewApp\Reviews\GetReviewForm" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="9774" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="POST" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Reviews/GetReviewForm" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="14809" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/8.0" />
+    </item>
+    <item name="URL">
+      <value string="/Reviews/GetReviewForm" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_CONTENT_LENGTH">
+      <value string="144" />
+    </item>
+    <item name="HTTP_CONTENT_TYPE">
+      <value string="application/x-www-form-urlencoded; charset=UTF-8" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="text/html, */*; q=0.01" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-US,en;q=0.8,bn;q=0.6" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="Hello2.bin=Time : 14-Jun-16 12:19:06 AM , min : 19; __RequestVerificationToken=wGbD34Z88SBi7Trq2KdCS2dcwcQZizlq--UCGlT1lRdX52MtmYC7jmx2L4zLfceH9Gxft9YjSPlDJs_VTn6uj_A34wd2ekUX-EytvvtbXKg1; ASP.NET_SessionId=42bc04n0lo5g0ws2ljrhay2a; .AspNet.ApplicationCookie=AOGsfw1d-VvC2LGseUS5WwNzxExJIFyp38nw_U-ci3gIe3w7rmKCQONwPs2hD4fsqoXiSOCZJXFW0wp2PVXdT_HxzNyrNwfDjTtQ6GfLVcohrqvLLUqQZnItYlIVZyZaAppWHVpVQxWXez7swaNz-bmOPTzeM4JVOz_ZIFB__AYcVUDMLnY-NGfTbxytr1F8XPHcbwLiIunXj5LhVxv35PIZywVB53hqlRku33rO6nMowDL_stwz7ebPphU_ZsA8cvIYqOTZ872N2DB4wYoBwD3m-Wghyj4__GWuNgkPG0_V0cSflBeLN0UfSbt-qad1lXjP16N4BiRBQyCDwF07z22ZtFB_UEBXF2IF7BjoJPgLdZ_CN4lkLVFH4c5QkFFEsm0Ul2ku5yi_FnwN1P_Yv7lYR1SKu7AZz94aoZe_HMO73KvrLFCvU34hmR7ax6C95Dxn09GnW6Y0hZ7UFkMWYJbJAbu-7m0WgRWgDclOKogBsjDCPV4z3VPJRE75QJWLKCAxA3OYZ6k3Kv1TOqFEsAJLRr-AT4n9ioBb9YYRth0O8kvE_owpjCbRjpKFhTmf" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:14809" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://localhost:14809/Apps/Windows-12/Games/hello-world" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36" />
+    </item>
+    <item name="HTTP_ORIGIN">
+      <value string="http://localhost:14809" />
+    </item>
+    <item name="HTTP_X_REQUESTED_WITH">
+      <value string="XMLHttpRequest" />
+    </item>
+    <item name="HTTP_DNT">
+      <value string="1" />
+    </item>
+  </serverVariables>
+  <form>
+    <item name="AppID">
+      <value string="15" />
+    </item>
+    <item name="__RequestVerificationToken">
+      <value string="SDOIFf5JZYXDEv4XztckIArq1a9fzXKhnN6BJRB-Ebm71EoHVZM8U8z9s6kHHhZOi1ZtNWrmxc9ja_TbEqnUCepfKuPaYgmT4XGFpAaR6Mk1" />
+    </item>
+  </form>
+  <cookies>
+    <item name="Hello2.bin">
+      <value string="Time : 14-Jun-16 12:19:06 AM , min : 19" />
+    </item>
+    <item name="__RequestVerificationToken">
+      <value string="wGbD34Z88SBi7Trq2KdCS2dcwcQZizlq--UCGlT1lRdX52MtmYC7jmx2L4zLfceH9Gxft9YjSPlDJs_VTn6uj_A34wd2ekUX-EytvvtbXKg1" />
+    </item>
+    <item name="ASP.NET_SessionId">
+      <value string="42bc04n0lo5g0ws2ljrhay2a" />
+    </item>
+    <item name=".AspNet.ApplicationCookie">
+      <value string="AOGsfw1d-VvC2LGseUS5WwNzxExJIFyp38nw_U-ci3gIe3w7rmKCQONwPs2hD4fsqoXiSOCZJXFW0wp2PVXdT_HxzNyrNwfDjTtQ6GfLVcohrqvLLUqQZnItYlIVZyZaAppWHVpVQxWXez7swaNz-bmOPTzeM4JVOz_ZIFB__AYcVUDMLnY-NGfTbxytr1F8XPHcbwLiIunXj5LhVxv35PIZywVB53hqlRku33rO6nMowDL_stwz7ebPphU_ZsA8cvIYqOTZ872N2DB4wYoBwD3m-Wghyj4__GWuNgkPG0_V0cSflBeLN0UfSbt-qad1lXjP16N4BiRBQyCDwF07z22ZtFB_UEBXF2IF7BjoJPgLdZ_CN4lkLVFH4c5QkFFEsm0Ul2ku5yi_FnwN1P_Yv7lYR1SKu7AZz94aoZe_HMO73KvrLFCvU34hmR7ax6C95Dxn09GnW6Y0hZ7UFkMWYJbJAbu-7m0WgRWgDclOKogBsjDCPV4z3VPJRE75QJWLKCAxA3OYZ6k3Kv1TOqFEsAJLRr-AT4n9ioBb9YYRth0O8kvE_owpjCbRjpKFhTmf" />
+    </item>
+  </cookies>
+</error>

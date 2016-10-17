@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d0ea2ee432d9431d8951d399be7d8a2f" Name="Diagram1">
+        <EntityTypeShape EntityType="ReviewAppsModel.App" Width="1.5" PointX="3" PointY="18.875" />
+        <EntityTypeShape EntityType="ReviewAppsModel.AppDraft" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ReviewAppsModel.Category" Width="1.5" PointX="0.75" PointY="21.375" />
+        <EntityTypeShape EntityType="ReviewAppsModel.CellPhone" Width="1.5" PointX="6" PointY="12.125" />
+        <EntityTypeShape EntityType="ReviewAppsModel.FeaturedImage" Width="1.5" PointX="8.25" PointY="18.75" />
+        <EntityTypeShape EntityType="ReviewAppsModel.Gallery" Width="1.5" PointX="8" PointY="1" />
+        <EntityTypeShape EntityType="ReviewAppsModel.GalleryCategory" Width="1.5" PointX="5.75" PointY="1.125" />
+        <EntityTypeShape EntityType="ReviewAppsModel.LatestSeenNotification" Width="1.5" PointX="3" PointY="33.25" />
+        <EntityTypeShape EntityType="ReviewAppsModel.Message" Width="1.5" PointX="3" PointY="13.75" />
+        <EntityTypeShape EntityType="ReviewAppsModel.MessageSeen" Width="1.5" PointX="3" PointY="28.875" />
+        <EntityTypeShape EntityType="ReviewAppsModel.Notification" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="ReviewAppsModel.NotificationType" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="ReviewAppsModel.Platform" Width="1.5" PointX="3.75" PointY="10.25" />
+        <EntityTypeShape EntityType="ReviewAppsModel.Review" Width="1.5" PointX="8.25" PointY="13.75" />
+        <EntityTypeShape EntityType="ReviewAppsModel.ReviewLikeDislike" Width="1.5" PointX="10.5" PointY="14.75" />
+        <EntityTypeShape EntityType="ReviewAppsModel.Tag" Width="1.5" PointX="3" PointY="26.375" />
+        <EntityTypeShape EntityType="ReviewAppsModel.TagAppRelation" Width="1.5" PointX="5.25" PointY="21.25" />
+        <EntityTypeShape EntityType="ReviewAppsModel.TempUpload" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ReviewAppsModel.User" Width="1.5" PointX="0.75" PointY="14.125" />
+        <EntityTypeShape EntityType="ReviewAppsModel.UserPoint" Width="1.5" PointX="6" PointY="15" />
+        <EntityTypeShape EntityType="ReviewAppsModel.UserPointSetting" Width="1.5" PointX="3.75" PointY="7.375" />
+        <AssociationConnector Association="ReviewAppsModel.FK_App_Category" />
+        <AssociationConnector Association="ReviewAppsModel.FK_App_Platform" />
+        <AssociationConnector Association="ReviewAppsModel.FK_App_User" />
+        <AssociationConnector Association="ReviewAppsModel.FK_FeaturedImage_App" />
+        <AssociationConnector Association="ReviewAppsModel.FK_Review_App" />
+        <AssociationConnector Association="ReviewAppsModel.FK_TagAppRelation_App" />
+        <AssociationConnector Association="ReviewAppsModel.FK_CellPhone_Platform" />
+        <AssociationConnector Association="ReviewAppsModel.FK_CellPhone_User" />
+        <AssociationConnector Association="ReviewAppsModel.FK_FeaturedImage_User" />
+        <AssociationConnector Association="ReviewAppsModel.FK_Gallery_GalleryCategory" />
+        <AssociationConnector Association="ReviewAppsModel.FK_LatestSeenNotification_User" />
+        <AssociationConnector Association="ReviewAppsModel.FK_Message_User" />
+        <AssociationConnector Association="ReviewAppsModel.FK_Message_User1" />
+        <AssociationConnector Association="ReviewAppsModel.FK_MessageSeen_User" />
+        <AssociationConnector Association="ReviewAppsModel.FK_MessageSeen_User1" />
+        <AssociationConnector Association="ReviewAppsModel.FK_Notification_NotificationType" />
+        <AssociationConnector Association="ReviewAppsModel.FK_Review_User" />
+        <AssociationConnector Association="ReviewAppsModel.FK_ReviewLikeDislike_Review" />
+        <AssociationConnector Association="ReviewAppsModel.FK_ReviewLikeDislike_User" />
+        <AssociationConnector Association="ReviewAppsModel.FK_TagAppRelation_Tag" />
+        <AssociationConnector Association="ReviewAppsModel.FK_UserPoint_User" />
+        <AssociationConnector Association="ReviewAppsModel.FK_UserPoint_UserPointSetting" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

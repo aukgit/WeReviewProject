@@ -1,0 +1,112 @@
+﻿@using ReviewApps.Models.EntityModel.ExtenededWithCustomMethods
+@model ReviewApps.Models.EntityModel.Gallery
+
+@{
+    var nameOftheRecord = Html.DisplayFor(model => model.Title).ToString();
+
+    ViewBag.Title = "Details of " + nameOftheRecord;
+    string title = ViewBag.Title;
+    string subtitle = ViewBag.Title;
+    var controller = (string) ViewBag.controller;
+    var viewName = "Details";
+}
+@Html.SamePageLinkWithIcon(title, subtitle, "fa fa-print")
+<hr />
+<h3 class="h4">To edit the details please click on the edit button.</h3>
+<div class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-10">
+            <div class="btn-group">
+                <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+                <a href="@Url.Action("Edit", new {id = Model.GalleryID})" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <a href="@Url.Action("Delete", new {id = Model.GalleryID})" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+        </div>
+    </div>
+    <table class="table table-hover top-margin-space">
+        <thead>
+        <tr>
+            <th>Properties</th>
+            <th></th>
+            <th>Values</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        <tr>
+            <td class="dev-label-property">
+                @Html.DisplayNameFor(model => model.UploadGuid)
+            </td>
+            <td>:</td>
+            <td class="dev-label-value">
+                @Html.DisplayFor(model => model.UploadGuid)
+            </td>
+        </tr>
+
+        <tr>
+            <td class="dev-label-property">
+                @Html.DisplayNameFor(model => model.Sequence)
+            </td>
+            <td>:</td>
+            <td class="dev-label-value">
+                @Html.DisplayFor(model => model.Sequence)
+            </td>
+        </tr>
+
+        <tr>
+            <td class="dev-label-property">
+                @Html.DisplayNameFor(model => model.Title)
+            </td>
+            <td>:</td>
+            <td class="dev-label-value">
+                @Html.DisplayFor(model => model.Title)
+            </td>
+        </tr>
+
+        <tr>
+            <td class="dev-label-property">
+                @Html.DisplayNameFor(model => model.Subtitle)
+            </td>
+            <td>:</td>
+            <td class="dev-label-value">
+                @Html.DisplayFor(model => model.Subtitle)
+            </td>
+        </tr>
+
+        <tr>
+            <td class="dev-label-property">
+                @Html.DisplayNameFor(model => model.GalleryCategory.CategoryName)
+            </td>
+            <td>:</td>
+            <td class="dev-label-value">
+                @Html.DisplayFor(model => model.GalleryCategory.CategoryName)
+            </td>
+        </tr>
+
+        <tr>
+            <td class="dev-label-property">
+                Image View
+            </td>
+            <td>:</td>
+            <td class="dev-label-value">
+                @Html.ImageFromAbsolutePath(@Model.GetHtppUrl(), @Model.Title)
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    <div class="form-group">
+        <div class="col-md-10">
+            <div class="btn-group">
+                <a href="@Url.Action("Index")" title="Back" class="btn btn-info dev-btn-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+                <a href="@Url.Action("Edit", new {id = Model.GalleryID})" title="Edit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <a href="@Url.Action("Delete", new {id = Model.GalleryID})" title="Delete @nameOftheRecord" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+        </div>
+    </div>
+</div>

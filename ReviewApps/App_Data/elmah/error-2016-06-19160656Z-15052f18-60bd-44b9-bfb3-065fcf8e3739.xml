@@ -1,0 +1,179 @@
+﻿<error errorId="15052f18-60bd-44b9-bfb3-065fcf8e3739" application="/LM/W3SVC/2/ROOT" host="ALIM-PC" type="System.Web.HttpException" message="The controller for path '/__browserLink/requestData/4095896bebff4fa99693378bec58a969' was not found or does not implement IController." source="System.Web.Mvc" detail="System.Web.HttpException (0x80004005): The controller for path '/__browserLink/requestData/4095896bebff4fa99693378bec58a969' was not found or does not implement IController.&#xD;&#xA;   at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)&#xD;&#xA;   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController&amp; controller, IControllerFactory&amp; factory)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="developer" time="2016-06-19T16:06:56.8953713Z" statusCode="404">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_ACCEPT:application/json, text/javascript, */*; q=0.01&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate, sdch&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-US,en;q=0.8,bn;q=0.6&#xD;&#xA;HTTP_COOKIE:__RequestVerificationToken=SLYbDOJ8OJvNfYmpS1nXavo7rQPUgxSGioEwc1wrh9D7Km_jg74414CicwbvX7hkBFCTK_fu0xPpjzkMjvy0cQjGi-s-zgxs5xFYIgiPwLY1; ASP.NET_SessionId=1s2fhesbz3aigsbszpjgaize; .AspNet.ApplicationCookie=Qh9tArytjcoyP2DQy4KWCw4zrGOC7DwQdN3YX07TTnCAdJoDePNUq4vx6TqmGKpL8glIWuHYeOGAex3ZrJig5d1c5KJzUQVUsWVXz4uDUCRuVJrQ2gdqm96OhZ75Ml8R-hSy0pXEhUaJw8c1lW90swYzAARc3S8ul03BZ9D7842_6q79GhfQeom8ZjPMAGbEEN5Zw1e8Mc_1eM0OAdSHunKT7uhvtP2nSm10M0fmIdDIdUUhLLl0W5kVouo3mpL7HQL8jxUoOGZawc_kGnjKDsbnieaoX7qxToBBaXiauPqqxdx3tGsk417ZIZtOsyZh5TPG67XWAAt1MTUBxE7vpt2K-BKYIaU24PmtwK4-IQXtSMIYYw6XBQ1REx_LmoL1FbiICU-zVe7FF9Wmo1AipfB4Y9yTcareHSpaUblhBKBPiW2FYjjmHf2UG4Zv8zYAhK7eztvXNCF2b452UWhwRCt-e4-LYmj5suMhkGZK4wIxeGhyOlFtkDqYsYRSx35ZIIguY37vyz7kpA7DkXIWkZ7WuHiXx2Gom4Ay_yJPfoFLtbrirOmhNTv-g20Y0-6i&#xD;&#xA;HTTP_HOST:localhost:14809&#xD;&#xA;HTTP_REFERER:http://localhost:14809/Apps/Apple-0/Games/adwdw&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36&#xD;&#xA;HTTP_X_REQUESTED_WITH:XMLHttpRequest&#xD;&#xA;HTTP_DNT:1&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Accept: application/json, text/javascript, */*; q=0.01&#xD;&#xA;Accept-Encoding: gzip, deflate, sdch&#xD;&#xA;Accept-Language: en-US,en;q=0.8,bn;q=0.6&#xD;&#xA;Cookie: __RequestVerificationToken=SLYbDOJ8OJvNfYmpS1nXavo7rQPUgxSGioEwc1wrh9D7Km_jg74414CicwbvX7hkBFCTK_fu0xPpjzkMjvy0cQjGi-s-zgxs5xFYIgiPwLY1; ASP.NET_SessionId=1s2fhesbz3aigsbszpjgaize; .AspNet.ApplicationCookie=Qh9tArytjcoyP2DQy4KWCw4zrGOC7DwQdN3YX07TTnCAdJoDePNUq4vx6TqmGKpL8glIWuHYeOGAex3ZrJig5d1c5KJzUQVUsWVXz4uDUCRuVJrQ2gdqm96OhZ75Ml8R-hSy0pXEhUaJw8c1lW90swYzAARc3S8ul03BZ9D7842_6q79GhfQeom8ZjPMAGbEEN5Zw1e8Mc_1eM0OAdSHunKT7uhvtP2nSm10M0fmIdDIdUUhLLl0W5kVouo3mpL7HQL8jxUoOGZawc_kGnjKDsbnieaoX7qxToBBaXiauPqqxdx3tGsk417ZIZtOsyZh5TPG67XWAAt1MTUBxE7vpt2K-BKYIaU24PmtwK4-IQXtSMIYYw6XBQ1REx_LmoL1FbiICU-zVe7FF9Wmo1AipfB4Y9yTcareHSpaUblhBKBPiW2FYjjmHf2UG4Zv8zYAhK7eztvXNCF2b452UWhwRCt-e4-LYmj5suMhkGZK4wIxeGhyOlFtkDqYsYRSx35ZIIguY37vyz7kpA7DkXIWkZ7WuHiXx2Gom4Ay_yJPfoFLtbrirOmhNTv-g20Y0-6i&#xD;&#xA;Host: localhost:14809&#xD;&#xA;Referer: http://localhost:14809/Apps/Apple-0/Games/adwdw&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36&#xD;&#xA;X-Requested-With: XMLHttpRequest&#xD;&#xA;DNT: 1&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/2/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="D:\Working (SSD)\GitHub\WeReviewProject\WereViewApp\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="ApplicationCookie" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="developer" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="*****" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="developer" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="developer" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="off" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="2" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/2" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="::1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/__browserLink/requestData/4095896bebff4fa99693378bec58a969" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="D:\Working (SSD)\GitHub\WeReviewProject\WereViewApp\__browserLink\requestData\4095896bebff4fa99693378bec58a969" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="version=2" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="::1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="::1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="9549" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/__browserLink/requestData/4095896bebff4fa99693378bec58a969" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="14809" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/8.0" />
+    </item>
+    <item name="URL">
+      <value string="/__browserLink/requestData/4095896bebff4fa99693378bec58a969" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="application/json, text/javascript, */*; q=0.01" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate, sdch" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-US,en;q=0.8,bn;q=0.6" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="__RequestVerificationToken=SLYbDOJ8OJvNfYmpS1nXavo7rQPUgxSGioEwc1wrh9D7Km_jg74414CicwbvX7hkBFCTK_fu0xPpjzkMjvy0cQjGi-s-zgxs5xFYIgiPwLY1; ASP.NET_SessionId=1s2fhesbz3aigsbszpjgaize; .AspNet.ApplicationCookie=Qh9tArytjcoyP2DQy4KWCw4zrGOC7DwQdN3YX07TTnCAdJoDePNUq4vx6TqmGKpL8glIWuHYeOGAex3ZrJig5d1c5KJzUQVUsWVXz4uDUCRuVJrQ2gdqm96OhZ75Ml8R-hSy0pXEhUaJw8c1lW90swYzAARc3S8ul03BZ9D7842_6q79GhfQeom8ZjPMAGbEEN5Zw1e8Mc_1eM0OAdSHunKT7uhvtP2nSm10M0fmIdDIdUUhLLl0W5kVouo3mpL7HQL8jxUoOGZawc_kGnjKDsbnieaoX7qxToBBaXiauPqqxdx3tGsk417ZIZtOsyZh5TPG67XWAAt1MTUBxE7vpt2K-BKYIaU24PmtwK4-IQXtSMIYYw6XBQ1REx_LmoL1FbiICU-zVe7FF9Wmo1AipfB4Y9yTcareHSpaUblhBKBPiW2FYjjmHf2UG4Zv8zYAhK7eztvXNCF2b452UWhwRCt-e4-LYmj5suMhkGZK4wIxeGhyOlFtkDqYsYRSx35ZIIguY37vyz7kpA7DkXIWkZ7WuHiXx2Gom4Ay_yJPfoFLtbrirOmhNTv-g20Y0-6i" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:14809" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://localhost:14809/Apps/Apple-0/Games/adwdw" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36" />
+    </item>
+    <item name="HTTP_X_REQUESTED_WITH">
+      <value string="XMLHttpRequest" />
+    </item>
+    <item name="HTTP_DNT">
+      <value string="1" />
+    </item>
+  </serverVariables>
+  <queryString>
+    <item name="version">
+      <value string="2" />
+    </item>
+  </queryString>
+  <cookies>
+    <item name="__RequestVerificationToken">
+      <value string="SLYbDOJ8OJvNfYmpS1nXavo7rQPUgxSGioEwc1wrh9D7Km_jg74414CicwbvX7hkBFCTK_fu0xPpjzkMjvy0cQjGi-s-zgxs5xFYIgiPwLY1" />
+    </item>
+    <item name="ASP.NET_SessionId">
+      <value string="1s2fhesbz3aigsbszpjgaize" />
+    </item>
+    <item name=".AspNet.ApplicationCookie">
+      <value string="Qh9tArytjcoyP2DQy4KWCw4zrGOC7DwQdN3YX07TTnCAdJoDePNUq4vx6TqmGKpL8glIWuHYeOGAex3ZrJig5d1c5KJzUQVUsWVXz4uDUCRuVJrQ2gdqm96OhZ75Ml8R-hSy0pXEhUaJw8c1lW90swYzAARc3S8ul03BZ9D7842_6q79GhfQeom8ZjPMAGbEEN5Zw1e8Mc_1eM0OAdSHunKT7uhvtP2nSm10M0fmIdDIdUUhLLl0W5kVouo3mpL7HQL8jxUoOGZawc_kGnjKDsbnieaoX7qxToBBaXiauPqqxdx3tGsk417ZIZtOsyZh5TPG67XWAAt1MTUBxE7vpt2K-BKYIaU24PmtwK4-IQXtSMIYYw6XBQ1REx_LmoL1FbiICU-zVe7FF9Wmo1AipfB4Y9yTcareHSpaUblhBKBPiW2FYjjmHf2UG4Zv8zYAhK7eztvXNCF2b452UWhwRCt-e4-LYmj5suMhkGZK4wIxeGhyOlFtkDqYsYRSx35ZIIguY37vyz7kpA7DkXIWkZ7WuHiXx2Gom4Ay_yJPfoFLtbrirOmhNTv-g20Y0-6i" />
+    </item>
+  </cookies>
+</error>
