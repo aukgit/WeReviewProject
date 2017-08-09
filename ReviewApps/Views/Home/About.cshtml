@@ -1,24 +1,25 @@
 ﻿@{
     ViewBag.Title = "About";
+    var url = AppVar.Url;
 }
 
 <div class="page-header">
-    <h1 title="@AppVar.Url">@AppVar.Name</h1><small>@AppVar.Setting.ApplicationDescription</small>
+    <h1 title="@url">@AppVar.Name</h1><small>@AppVar.Setting.ApplicationDescription</small>
 </div>
 <div class="justify">
-    app-reviews.co is a brand new platform for latest news, reviews, tech gossips and everything that
+    @url is a brand new platform for latest news, reviews, tech gossips and everything that
 
     relates to mobile applications. App stores are dominated by the giant publishers with strong media
 
     presence and huge follower network leaving a very litter space to the small and indie developers.
 
-    app-reviews.co is a perfect for those developers who spent time and put efforts but with the
+    @url is a perfect for those developers who spent time and put efforts but with the
 
     availability of limited budget to market their applications. Weappreview.com recognizes their hard work
 
     and helps them to reach their application to their target audience.
 
-    app-reviews.co is a network of independent app reviewers from around the world who are
+    @url is a network of independent app reviewers from around the world who are
 
     passionate about new applications and wanna be the first to try it before anyone else.
 
@@ -39,5 +40,5 @@
 
 <br />
 <div class="f-em-12 label label-info">
-    Visit <a href="@AppVar.Url/policy">policy</a>
+    Visit <a href="@url/policy">policy</a>
 </div>

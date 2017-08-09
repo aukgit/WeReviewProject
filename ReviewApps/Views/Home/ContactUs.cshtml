@@ -4,6 +4,8 @@
     string title = ViewBag.Title;
     var categories = (IEnumerable<SelectListItem>) ViewBag.FeedbackCateoryID;
     var controller = (string) ViewBag.controller;
+    var url = AppVar.Url;
+    var email = "info@" + url;
 }
 
 @Html.SamePageLinkWithIcon(title, title, "fa fa-weixin")
@@ -53,7 +55,7 @@
 }
 <div class="row">
     <div class="col-md-10 col-md-offset-2">
-        We love to hear from you. Shoot an email to <a href="mailto:info@app-reviews.co">info@app-reviews.co</a> or knock as any time to our
+        We love to hear from you. Shoot an email to <a href="mailto:@email">@email</a> or knock as any time to our
         skype name Wereviewapp. Get social with us in Facebook, Twitter & Gplus
         <div class="label label-info">
             Facebook Link: <a href="//fb.com/wereviewapp">fb.com/wereviewapp</a>

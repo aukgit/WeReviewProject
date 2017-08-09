@@ -1,28 +1,32 @@
-﻿<footer class="footer-link-fix">
+﻿@{
+    var url = AppVar.Url;
+    var appName = AppVar.Name;
+}
+<footer class="footer-link-fix">
     <div class="container-fluid">
         <div class="header row seo-optimize">
             <div class="bg-primary col-md-1 story-header">
                 <h1 title="App Reviews website">
-                    <strong title="app-reviews.co : App Reviews website">
-                        <em title="app-reviews.co : App Reviews website">
+                    <strong title="@url : App Reviews website">
+                        <em title="@url : App Reviews website">
                             Story
                         </em>
                     </strong>
                 </h1>
             </div>
             <div class="col-md-11 seo-optimize social-icons-wrapper">
-                <strong class="follow-us-header" title="Follow @AppVar.Name">Follow us:</strong>
+                <strong class="follow-us-header" title="Follow @appName">Follow us:</strong>
                 <a href="#">
-                    <i class="fa fa-facebook-square" title="@AppVar.Name facebook page"></i>
-                    <h1 title="@AppVar.Name facebook page" class="seo-hide">@AppVar.Name facebook page</h1>
+                    <i class="fa fa-facebook-square" title="@appName facebook page"></i>
+                    <h1 title="@appName facebook page" class="seo-hide">@appName facebook page</h1>
                 </a>
                 <a href="#">
-                    <i class="fa fa-twitter-square" title="@AppVar.Name twitter page"></i>
-                    <h1 title="@AppVar.Name twitter page" class="seo-hide">@AppVar.Name twitter page</h1>
+                    <i class="fa fa-twitter-square" title="@appName twitter page"></i>
+                    <h1 title="@appName twitter page" class="seo-hide">@appName twitter page</h1>
                 </a>
                 <a href="#">
-                    <i class="fa fa-google-plus-square" title="@AppVar.Name google plus"></i>
-                    <h1 title="@AppVar.Name google plus" class="seo-hide">@AppVar.Name google plus</h1>
+                    <i class="fa fa-google-plus-square" title="@appName google plus"></i>
+                    <h1 title="@appName google plus" class="seo-hide">@appName google plus</h1>
                 </a>
             </div>
         </div>
@@ -31,8 +35,8 @@
                 <div class="col-md-3">
                     <div class="logo-wrapper">
                         <a class="logo" href="#.">
-                            <h1 title="app-reviews.co : App Reviews website" class="website-head-title app-reviews.co">
-                                <span class="almost-black" title="app-reviews.co">we</span><span class="red" title="app-reviews.co">review</span><span class="orange-color" title="app-reviews.co">app.com</span>
+                            <h1 title="@url : App Reviews website" class="website-head-title @url">
+                                <span class="almost-black" title="@url">we</span><span class="red" title="@url">review</span><span class="orange-color" title="@url">app.com</span>
                             </h1>
                         </a>
                     </div>
@@ -40,30 +44,30 @@
                 <div class="app-details-page blog-page-private col-md-9">
                     <article class="about-company blog-content justify seo-optimize">
                         <section class="bottom-gap justify white-wrapper-background">
-                            <a href="@AppVar.Url" class="seo-app-name" title="app-reviews.co : App Reviews website.">
-                                <h1 title="app-reviews.co : App Reviews website.">
-                                    <strong title="app-reviews.co : App Reviews website.">
-                                        <em title="app-reviews.co : App Reviews website.">We</em>
-                                    </strong><strong title="app-reviews.co : App Reviews website.">
-                                        <em title="app-reviews.co : App Reviews website.">Review</em>
-                                    </strong><strong title="app-reviews.co : App Reviews website.">
-                                        <em title="app-reviews.co : App Reviews website.">App</em>
-                                    </strong><strong title="app-reviews.co : App Reviews website.">
-                                        <em title="app-reviews.co : App Reviews website.">.com</em>
+                            <a href="@url" class="seo-app-name" title="@url : App Reviews website.">
+                                <h1 title="@url : App Reviews website.">
+                                    <strong title="@url : App Reviews website.">
+                                        <em title="@url : App Reviews website.">We</em>
+                                    </strong><strong title="@url : App Reviews website.">
+                                        <em title="@url : App Reviews website.">Review</em>
+                                    </strong><strong title="@url : App Reviews website.">
+                                        <em title="@url : App Reviews website.">App</em>
+                                    </strong><strong title="@url : App Reviews website.">
+                                        <em title="@url : App Reviews website.">.com</em>
                                     </strong>
                                 </h1>
                             </a>
                             is great
-                            <a href="@AppVar.Url" class="seo-app-name" title="app-reviews.co : App Reviews website.">
-                                <h1 title="app-reviews.co : App Reviews website.">
-                                    <strong title="app-reviews.co : App Reviews website.">
-                                        <em title="app-reviews.co : App Reviews website.">web</em>
-                                    </strong><strong title="app-reviews.co : App Reviews website.">
-                                        <em title="app-reviews.co : App Reviews website.">site</em>
+                            <a href="@url" class="seo-app-name" title="@url : App Reviews website.">
+                                <h1 title="@url : App Reviews website.">
+                                    <strong title="@url : App Reviews website.">
+                                        <em title="@url : App Reviews website.">web</em>
+                                    </strong><strong title="@url : App Reviews website.">
+                                        <em title="@url : App Reviews website.">site</em>
                                     </strong>
                                 </h1>
                             </a> for both developers and users who use
-                            <a href="@AppVar.Url" class="seo-app-name" title="mobile Apps users">
+                            <a href="@url" class="seo-app-name" title="mobile Apps users">
                                 <h1 title="mobile Apps users">
                                     <strong title="mobile Apps users">
                                         <em title="mobile Apps users">mobile</em>
@@ -76,20 +80,20 @@
                                     </strong>
                                 </h1>
                             </a>.
-                            <a href="@AppVar.Url" class="seo-app-name" title="app-reviews.co : App Reviews website.">
-                                <h1 title="app-reviews.co : App Reviews website.">
-                                    <strong title="app-reviews.co : App Reviews website.">
-                                        <em title="app-reviews.co : App Reviews website.">We</em>
-                                    </strong><strong title="app-reviews.co : App Reviews website.">
-                                        <em title="app-reviews.co : App Reviews website.">Review</em>
-                                    </strong><strong title="app-reviews.co : App Reviews website.">
-                                        <em title="app-reviews.co : App Reviews website.">App</em>
-                                    </strong><strong title="app-reviews.co : App Reviews website.">
-                                        <em title="app-reviews.co : App Reviews website.">.com's</em>
+                            <a href="@url" class="seo-app-name" title="@url : App Reviews website.">
+                                <h1 title="@url : App Reviews website.">
+                                    <strong title="@url : App Reviews website.">
+                                        <em title="@url : App Reviews website.">We</em>
+                                    </strong><strong title="@url : App Reviews website.">
+                                        <em title="@url : App Reviews website.">Review</em>
+                                    </strong><strong title="@url : App Reviews website.">
+                                        <em title="@url : App Reviews website.">App</em>
+                                    </strong><strong title="@url : App Reviews website.">
+                                        <em title="@url : App Reviews website.">.com's</em>
                                     </strong>
                                 </h1>
                             </a> foremost goal is to bring
-                            <a href="@AppVar.Url" class="seo-app-name" title="mobile Apps users">
+                            <a href="@url" class="seo-app-name" title="mobile Apps users">
                                 <h1 title="mobile Apps users">
                                     <strong title="mobile Apps users">
                                         <em title="mobile Apps users">mobile</em>
@@ -103,7 +107,7 @@
                                 </h1>
                             </a>
                             and
-                            <a href="@AppVar.Url" class="seo-app-name" title="mobile apps developers">
+                            <a href="@url" class="seo-app-name" title="mobile apps developers">
                                 <h1 title="mobile apps developers">
                                     <strong title="mobile Apps users">
                                         <em title="mobile Apps users">mobile</em>
@@ -119,7 +123,7 @@
                             to be in a same platform and get benifited from each other. Over the years it has been observed that <strong title="mobile app users">mobile users</strong> only use their app store to get <strong title="app review">review</strong>, however there could be more that than <strong title="app review">app review</strong> or comments.
                             <span class="show-more-btns-container">
                                 <span class="elipse-dot">...</span>
-                                <a class="primary-color see-more-btn" href="@AppVar.Url/About">see more</a>
+                                <a class="primary-color see-more-btn" href="@url/About">see more</a>
                             </span>
                         </section>
                     </article>
@@ -130,44 +134,44 @@
             <div class="col-md-6">
                 <ul class="navigation-bottom">
                     <li>
-                        <a href="@AppVar.Url" title="App review website"> Home</a>
+                        <a href="@url" title="App review website"> Home</a>
                     </li>
                     <li>
-                        <a href="@AppVar.Url/apps" title="Apps reviews archieve"> Apps </a>
+                        <a href="@url/apps" title="Apps reviews archieve"> Apps </a>
                     </li>
                     <li>
-                        <a href="@AppVar.Url/profiles" title="Developers uploaded apps"> Developers </a>
+                        <a href="@url/profiles" title="Developers uploaded apps"> Developers </a>
                     </li>
                     <li>
-                        <a href="@AppVar.Url/category" title="Mobile Apps Categories"> <em class="seo-hide">Mobile Apps Categories</em> Category </a>
+                        <a href="@url/category" title="Mobile Apps Categories"> <em class="seo-hide">Mobile Apps Categories</em> Category </a>
                     </li>
                     <li>
-                        <a href="@AppVar.Url/sitemap" title="Sitemap xml file"> Sitemap </a>
+                        <a href="@url/sitemap" title="Sitemap xml file"> Sitemap </a>
                     </li>
                     <li>
-                        <a href="@AppVar.Url/search" title="Search for apps in App Reivew site"> Search </a>
+                        <a href="@url/search" title="Search for apps in App Reivew site"> Search </a>
                     </li>
                     <li>
-                        <a href="@AppVar.Url/contactus"> Contact</a>
+                        <a href="@url/contactus"> Contact</a>
                     </li>
                     <li>
-                        <a href="@AppVar.Url/about"> About Us</a>
+                        <a href="@url/about"> About Us</a>
                     </li>
                 </ul>
             </div>
 
             <div class="col-md-6 copyright text-right">
                 &copy; @DateTime.Now.Year
-                <a href="@AppVar.Url" class="seo-app-name seo-optimize" title="app-reviews.co : App Reviews website.">
-                    <h1 title="app-reviews.co : : App Reviews website.">
-                        <strong title="app-reviews.co : App Reviews website.">
-                            <em title="app-reviews.co : App Reviews website.">We</em>
-                        </strong><strong title="app-reviews.co : App Reviews website.">
-                            <em title="app-reviews.co : App Reviews website.">Review</em>
-                        </strong><strong title="app-reviews.co : App Reviews website.">
-                            <em title="app-reviews.co : App Reviews website.">App</em>
-                        </strong><strong title="app-reviews.co : App Reviews website.">
-                            <em title="app-reviews.co : App Reviews website.">.com</em>
+                <a href="@url" class="seo-app-name seo-optimize" title="@url : App Reviews website.">
+                    <h1 title="@url : : App Reviews website.">
+                        <strong title="@url : App Reviews website.">
+                            <em title="@url : App Reviews website.">We</em>
+                        </strong><strong title="@url : App Reviews website.">
+                            <em title="@url : App Reviews website.">Review</em>
+                        </strong><strong title="@url : App Reviews website.">
+                            <em title="@url : App Reviews website.">App</em>
+                        </strong><strong title="@url : App Reviews website.">
+                            <em title="@url : App Reviews website.">.com</em>
                         </strong>
                     </h1>
                 </a>
@@ -179,5 +183,4 @@
             </div>
         </div>
     </div>
-
 </footer>
