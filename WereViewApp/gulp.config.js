@@ -12,7 +12,10 @@
         minJs: "js-min.js", /* Minified JS file name */
         minJsDestination: "./lib/js/", /* Minified JS file destination */
         css: [
-            "./lib/css/*.css" /* List of css files that need to be minified */
+            "./Content/styles/*.css",
+            "./Content/styles/css/*css",
+            "./Content/styles/css/Upload/*.css",
+            "./Content/styles/css/Upload/Tagit/*.css"/* List of css files that need to be minified */
         ],
         minCss: "css-min.css", /* Minified CSS file name */
         minCssDestination: "./lib/css/" /* Minified CSS file destination */
