@@ -1017,6 +1017,8 @@
     </Content>
     <None Include="Content\scripts\JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
     <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />
+    <Content Include="gulp.config.js" />
+    <Content Include="gulpfile.js" />
     <Content Include="Sitemap.xml" />
     <Content Include="Areas\Admin\Views\Config\CleanSystem.cshtml" />
     <Content Include="Areas\Admin\Views\Apps\Moderate.cshtml" />
@@ -1342,6 +1344,7 @@
     <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\config\_config.scss" />
     <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\config\_defaults.scss" />
     <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\dialog\dialog.scss" />
+    <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <Content Include="Views\Shared\EditorTemplates\Double.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
