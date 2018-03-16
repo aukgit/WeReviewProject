@@ -1,0 +1,21 @@
+﻿module.exports = function () {
+    var config = {
+        htmlSource: [
+            "/View/Home/Index.cshtml" /* The HTML file */
+        ],
+        js: [
+            ".Content/script/published/front-end.js",
+            ".Content/script/published/jqueryval.js",
+            ".Content/script/published/upload.js"
+            /* List of js files in the order as they appear in index.html*/
+        ],
+        minJs: "js-min.js", /* Minified JS file name */
+        minJsDestination: "./lib/js/", /* Minified JS file destination */
+        css: [
+            "./lib/css/*.css" /* List of css files that need to be minified */
+        ],
+        minCss: "css-min.css", /* Minified CSS file name */
+        minCssDestination: "./lib/css/" /* Minified CSS file destination */
+    }
+    return config;
+}

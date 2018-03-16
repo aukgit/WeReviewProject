@@ -1,4 +1,4 @@
-###################
+﻿###################
 # compiled source #
 ###################
 *.com
@@ -22,6 +22,7 @@ _UpgradeReport_Files/
 ###############
 # Directories #
 ###############
+node_modules/
 bin/
 obj/
 TestResults/
@@ -78,3 +79,9 @@ ignored-password.txt
 WereViewApp/Properties/PublishProfiles/*.pubxml
 *.PublishSettings
 *.pubxml
+*.lock
+*.config
+*.ide
+*.ide-shm
+*.ide-wal
+*.config

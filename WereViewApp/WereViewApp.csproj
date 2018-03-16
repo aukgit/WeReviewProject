@@ -23,6 +23,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -258,11 +259,11 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
-    <Compile Include="Filter\RedirectToHomeIfAlreadyLoggedInAttribute.cs" />
-    <Compile Include="Filter\RedirectIfAlreadyLoggedInAttribute.cs" />
-    <Compile Include="Filter\ValidateRegistrationCompleteAttribute.cs" />
-    <Compile Include="Filter\HasMinimumRoleAttribute.cs" />
-    <Compile Include="Filter\FacebookAccessTokenAttribute.cs" />
+    <Compile Include="Utilities\Filter\RedirectToHomeIfAlreadyLoggedInAttribute.cs" />
+    <Compile Include="Utilities\Filter\RedirectIfAlreadyLoggedInAttribute.cs" />
+    <Compile Include="Utilities\Filter\ValidateRegistrationCompleteAttribute.cs" />
+    <Compile Include="Utilities\Filter\HasMinimumRoleAttribute.cs" />
+    <Compile Include="Utilities\Filter\FacebookAccessTokenAttribute.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\CategoryExtend.cs" />
     <Compile Include="Models\EntityModel\ExtenededWithCustomMethods\FeedbackState.cs" />
@@ -307,9 +308,9 @@
     <Compile Include="Modules\Validations\DevUserValidator.cs" />
     <Compile Include="Modules\Validations\ValidationMessage.cs" />
     <Compile Include="Modules\Validations\Validator.cs" />
-    <Compile Include="Scheduler\WeReviewDownloadScheduler.cs" />
-    <Compile Include="Scheduler\WeReviewScheduler.cs" />
-    <Compile Include="Scheduler\SchedulerRunner.cs" />
+    <Compile Include="Utilities\Scheduler\WeReviewDownloadScheduler.cs" />
+    <Compile Include="Utilities\Scheduler\WeReviewScheduler.cs" />
+    <Compile Include="Utilities\Scheduler\SchedulerRunner.cs" />
     <Compile Include="BusinessLogics\Logics.cs" />
     <Compile Include="App_Start\AppConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -358,8 +359,8 @@
     <Compile Include="Models\ViewModels\SearchViewModel.cs" />
     <Compile Include="Modules\Reponse\RemoveETagModule.cs" />
     <Compile Include="Modules\StringExtension.cs" />
-    <Compile Include="Common\Variables.cs" />
-    <Compile Include="Common\Statics.cs" />
+    <Compile Include="Utilities\Common\Variables.cs" />
+    <Compile Include="Utilities\Common\Statics.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdvanceController.cs" />
     <Compile Include="Controllers\AppController.cs" />
@@ -368,13 +369,13 @@
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValidatorController.cs" />
-    <Compile Include="Filter\AreaAuthorizationFilter.cs">
+    <Compile Include="Utilities\Filter\AreaAuthorizationFilter.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Filter\CacheFilter.cs">
+    <Compile Include="Utilities\Filter\CacheFilter.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Filter\CompressFilter.cs">
+    <Compile Include="Utilities\Filter\CompressFilter.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -443,7 +444,7 @@
     <Compile Include="Models\POCO\Identity\IdentityModel.cs" />
     <Compile Include="Constants\CacheNames.cs" />
     <Compile Include="Constants\CookieNames.cs" />
-    <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Utilities\Helpers\HtmlHelpers.cs" />
     <Compile Include="Modules\HtmlGenerator.cs" />
     <Compile Include="Modules\InternetProtocolRelations\IpConfigRelations.cs" />
     <Compile Include="Modules\Mail\MailHtml.cs" />
@@ -489,167 +490,168 @@
     <Content Include="Areas\Admin\Views\Config\_WeReview-tab.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Content\css\animate-refresh.css" />
-    <Content Include="Content\css\animate-refresh.min.css">
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\styles\css\animate-refresh.css" />
+    <Content Include="Content\styles\css\animate-refresh.min.css">
       <DependentUpon>animate-refresh.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\animate.css" />
-    <Content Include="Content\css\animate.min.css">
+    <Content Include="Content\styles\css\animate.css" />
+    <Content Include="Content\styles\css\animate.min.css">
       <DependentUpon>animate.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\backend-developer.css" />
-    <Content Include="Content\css\backend-developer.min.css">
+    <Content Include="Content\styles\css\backend-developer.css" />
+    <Content Include="Content\styles\css\backend-developer.min.css">
       <DependentUpon>backend-developer.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\base-theme-styles.css" />
-    <Content Include="Content\css\blog-page.css" />
-    <Content Include="Content\css\blog-page.min.css">
+    <Content Include="Content\styles\css\base-theme-styles.css" />
+    <Content Include="Content\styles\css\blog-page.css" />
+    <Content Include="Content\styles\css\blog-page.min.css">
       <DependentUpon>blog-page.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\bootstrap-datetimepicker.css" />
-    <Content Include="Content\css\bootstrap-datetimepicker.css.map">
+    <Content Include="Content\styles\css\bootstrap-datetimepicker.css" />
+    <Content Include="Content\styles\css\bootstrap-datetimepicker.css.map">
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\bootstrap-datetimepicker.min.css" />
-    <Content Include="Content\css\bootstrap-dialog.css" />
-    <Content Include="Content\css\bootstrap-dialog.min.css">
+    <Content Include="Content\styles\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\styles\css\bootstrap-dialog.css" />
+    <Content Include="Content\styles\css\bootstrap-dialog.min.css">
       <DependentUpon>bootstrap-dialog.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\bootstrap-select-overrides.css" />
-    <Content Include="Content\css\bootstrap-select-overrides.min.css">
+    <Content Include="Content\styles\css\bootstrap-select-overrides.css" />
+    <Content Include="Content\styles\css\bootstrap-select-overrides.min.css">
       <DependentUpon>bootstrap-select-overrides.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\bootstrap-select.css" />
-    <Content Include="Content\css\bootstrap-select.min.css">
+    <Content Include="Content\styles\css\bootstrap-select.css" />
+    <Content Include="Content\styles\css\bootstrap-select.min.css">
       <DependentUpon>bootstrap-select.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\bootstrap-table.css" />
-    <Content Include="Content\css\bootstrap-tag.css" />
-    <Content Include="Content\css\bootstrap-tag.min.css">
+    <Content Include="Content\styles\css\bootstrap-table.css" />
+    <Content Include="Content\styles\css\bootstrap-tag.css" />
+    <Content Include="Content\styles\css\bootstrap-tag.min.css">
       <DependentUpon>bootstrap-tag.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\bootstrap-tagsinput-override.css" />
-    <Content Include="Content\css\bootstrap-tagsinput-override.min.css">
+    <Content Include="Content\styles\css\bootstrap-tagsinput-override.css" />
+    <Content Include="Content\styles\css\bootstrap-tagsinput-override.min.css">
       <DependentUpon>bootstrap-tagsinput-override.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\bootstrap.min.css" />
-    <Content Include="Content\css\category-page.css" />
-    <Content Include="Content\css\category-page.min.css">
+    <Content Include="Content\styles\css\bootstrap.css" />
+    <Content Include="Content\styles\css\bootstrap.min.css" />
+    <Content Include="Content\styles\css\category-page.css" />
+    <Content Include="Content\styles\css\category-page.min.css">
       <DependentUpon>category-page.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\ckedit-skin-bootstrap.css" />
-    <Content Include="Content\css\ckedit-skin-bootstrap.min.css">
+    <Content Include="Content\styles\css\ckedit-skin-bootstrap.css" />
+    <Content Include="Content\styles\css\ckedit-skin-bootstrap.min.css">
       <DependentUpon>ckedit-skin-bootstrap.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\color-fonts.css" />
-    <Content Include="Content\css\color-fonts.min.css">
+    <Content Include="Content\styles\css\color-fonts.css" />
+    <Content Include="Content\styles\css\color-fonts.min.css">
       <DependentUpon>color-fonts.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\controllers-style.css" />
-    <Content Include="Content\css\controllers-style.min.css">
+    <Content Include="Content\styles\css\controllers-style.css" />
+    <Content Include="Content\styles\css\controllers-style.min.css">
       <DependentUpon>controllers-style.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\dataTables.bootstrap.css" />
-    <Content Include="Content\css\editor-templates.css" />
-    <Content Include="Content\css\editor-templates.min.css">
+    <Content Include="Content\styles\css\dataTables.bootstrap.css" />
+    <Content Include="Content\styles\css\editor-templates.css" />
+    <Content Include="Content\styles\css\editor-templates.min.css">
       <DependentUpon>editor-templates.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\flags32-combo.css" />
-    <Content Include="Content\css\flags32.css" />
-    <Content Include="Content\css\flags32.png" />
-    <Content Include="Content\css\font-awesome.css" />
-    <Content Include="Content\css\font-awesome.min.css">
+    <Content Include="Content\styles\css\flags32-combo.css" />
+    <Content Include="Content\styles\css\flags32.css" />
+    <Content Include="Content\styles\css\flags32.png" />
+    <Content Include="Content\styles\css\font-awesome.css" />
+    <Content Include="Content\styles\css\font-awesome.min.css">
       <DependentUpon>font-awesome.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\fonts-rimixens.css" />
-    <Content Include="Content\css\fonts-rimixens.min.css">
+    <Content Include="Content\styles\css\fonts-rimixens.css" />
+    <Content Include="Content\styles\css\fonts-rimixens.min.css">
       <DependentUpon>fonts-rimixens.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\footer-fixing.css" />
-    <Content Include="Content\css\footer-fixing.min.css">
+    <Content Include="Content\styles\css\footer-fixing.css" />
+    <Content Include="Content\styles\css\footer-fixing.min.css">
       <DependentUpon>footer-fixing.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\front-developer.css" />
-    <Content Include="Content\css\front-developer.min.css">
+    <Content Include="Content\styles\css\front-developer.css" />
+    <Content Include="Content\styles\css\front-developer.min.css">
       <DependentUpon>front-developer.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\header.css" />
-    <Content Include="Content\css\header.min.css">
+    <Content Include="Content\styles\css\header.css" />
+    <Content Include="Content\styles\css\header.min.css">
       <DependentUpon>header.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\less-imports.css" />
-    <Content Include="Content\css\less-imports.css.map">
+    <Content Include="Content\styles\css\less-imports.css" />
+    <Content Include="Content\styles\css\less-imports.css.map">
       <DependentUpon>less-imports.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\less-imports.min.css">
+    <Content Include="Content\styles\css\less-imports.min.css">
       <DependentUpon>less-imports.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\loader-spinner.css" />
-    <Content Include="Content\css\loader-spinner.min.css">
+    <Content Include="Content\styles\css\loader-spinner.css" />
+    <Content Include="Content\styles\css\loader-spinner.min.css">
       <DependentUpon>loader-spinner.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\override-mvc.css" />
-    <Content Include="Content\css\override-mvc.min.css">
+    <Content Include="Content\styles\css\override-mvc.css" />
+    <Content Include="Content\styles\css\override-mvc.min.css">
       <DependentUpon>override-mvc.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\owl.carousel.css" />
-    <Content Include="Content\css\owl.custom.finalize.css" />
-    <Content Include="Content\css\owl.custom.finalize.min.css">
+    <Content Include="Content\styles\css\owl.carousel.css" />
+    <Content Include="Content\styles\css\owl.custom.finalize.css" />
+    <Content Include="Content\styles\css\owl.custom.finalize.min.css">
       <DependentUpon>owl.custom.finalize.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\owl.theme.css" />
-    <Content Include="Content\css\responsive.css" />
-    <Content Include="Content\css\responsive.css.map">
+    <Content Include="Content\styles\css\owl.theme.css" />
+    <Content Include="Content\styles\css\responsive.css" />
+    <Content Include="Content\styles\css\responsive.css.map">
       <DependentUpon>responsive.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\responsive.min.css">
+    <Content Include="Content\styles\css\responsive.min.css">
       <DependentUpon>responsive.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\search-page.css" />
-    <Content Include="Content\css\search-page.css.map">
+    <Content Include="Content\styles\css\search-page.css" />
+    <Content Include="Content\styles\css\search-page.css.map">
       <DependentUpon>search-page.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\search-page.min.css" />
-    <Content Include="Content\css\see-more-btn.css" />
-    <Content Include="Content\css\see-more-btn.min.css">
+    <Content Include="Content\styles\css\search-page.min.css" />
+    <Content Include="Content\styles\css\see-more-btn.css" />
+    <Content Include="Content\styles\css\see-more-btn.min.css">
       <DependentUpon>see-more-btn.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\seo-optimize.css" />
-    <Content Include="Content\css\seo-optimize.css.map">
+    <Content Include="Content\styles\css\seo-optimize.css" />
+    <Content Include="Content\styles\css\seo-optimize.css.map">
       <DependentUpon>seo-optimize.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\seo-optimize.min.css" />
-    <Content Include="Content\css\Site.css" />
-    <Content Include="Content\css\star-rating.css" />
-    <Content Include="Content\css\style.css" />
-    <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
-    <Content Include="Content\css\Tagit\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
-    <Content Include="Content\css\Tagit\images\ui-bg_flat_10_000000_40x100.png" />
-    <Content Include="Content\css\Tagit\images\ui-bg_glass_100_f6f6f6_1x400.png" />
-    <Content Include="Content\css\Tagit\images\ui-bg_glass_100_fdf5ce_1x400.png" />
-    <Content Include="Content\css\Tagit\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\css\Tagit\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
-    <Content Include="Content\css\Tagit\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
-    <Content Include="Content\css\Tagit\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
-    <Content Include="Content\css\Tagit\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\css\Tagit\images\ui-icons_228ef1_256x240.png" />
-    <Content Include="Content\css\Tagit\images\ui-icons_ef8c08_256x240.png" />
-    <Content Include="Content\css\Tagit\images\ui-icons_ffd27a_256x240.png" />
-    <Content Include="Content\css\Tagit\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="Content\css\Tagit\jquery.tagedit.css" />
-    <Content Include="Content\css\Tagit\ui-lightness\jquery-ui-1.9.2.custom.min.css" />
-    <Content Include="Content\css\toastr.css" />
-    <Content Include="Content\css\toastr.min.css">
+    <Content Include="Content\styles\css\seo-optimize.min.css" />
+    <Content Include="Content\styles\css\Site.css" />
+    <Content Include="Content\styles\css\star-rating.css" />
+    <Content Include="Content\styles\css\style.css" />
+    <Content Include="Content\styles\css\Tagit\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Content\styles\css\Tagit\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Content\styles\css\Tagit\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Content\styles\css\Tagit\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Content\styles\css\Tagit\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Content\styles\css\Tagit\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\styles\css\Tagit\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Content\styles\css\Tagit\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Content\styles\css\Tagit\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Content\styles\css\Tagit\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\styles\css\Tagit\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Content\styles\css\Tagit\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Content\styles\css\Tagit\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Content\styles\css\Tagit\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\styles\css\Tagit\jquery.tagedit.css" />
+    <Content Include="Content\styles\css\Tagit\ui-lightness\jquery-ui-1.9.2.custom.min.css" />
+    <Content Include="Content\styles\css\toastr.css" />
+    <Content Include="Content\styles\css\toastr.min.css">
       <DependentUpon>toastr.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Upload\jquery.fileupload.css" />
-    <Content Include="Content\css\utilities.css" />
-    <Content Include="Content\css\utilities.min.css">
+    <Content Include="Content\styles\css\Upload\jquery.fileupload.css" />
+    <Content Include="Content\styles\css\utilities.css" />
+    <Content Include="Content\styles\css\utilities.min.css">
       <DependentUpon>utilities.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\validator.css" />
-    <Content Include="Content\css\validator.min.css">
+    <Content Include="Content\styles\css\validator.css" />
+    <Content Include="Content\styles\css\validator.min.css">
       <DependentUpon>validator.css</DependentUpon>
     </Content>
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
@@ -659,15 +661,15 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Areas\Admin\Views\AppCategories\_CreateOrEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_NavBar.cshtml" />
-    <Content Include="Content\Less\animate-refresh.less" />
-    <Content Include="Content\Less\blog-page.less" />
-    <Content Include="Content\Less\bootstrap-datetimepicker.less" />
-    <Content Include="Content\Less\category-page.less" />
-    <Content Include="Content\css\ckedit-skin-bootstrap.css.map">
+    <Content Include="Content\styles\Less\animate-refresh.less" />
+    <Content Include="Content\styles\Less\blog-page.less" />
+    <Content Include="Content\styles\Less\bootstrap-datetimepicker.less" />
+    <Content Include="Content\styles\Less\category-page.less" />
+    <Content Include="Content\styles\css\ckedit-skin-bootstrap.css.map">
       <DependentUpon>ckedit-skin-bootstrap.css</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\Apps\Index.cshtml" />
-    <Content Include="Content\css\utilities.css.map">
+    <Content Include="Content\styles\css\utilities.css.map">
       <DependentUpon>utilities.css</DependentUpon>
     </Content>
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
@@ -675,333 +677,331 @@
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\FontAwesome.otf" />
-    <Content Include="Content\css\fonts-rimixens.css.map">
+    <Content Include="Content\styles\css\fonts-rimixens.css.map">
       <DependentUpon>fonts-rimixens.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\blog-page.css.map">
+    <Content Include="Content\styles\css\blog-page.css.map">
       <DependentUpon>blog-page.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\toastr.css.map">
+    <Content Include="Content\styles\css\toastr.css.map">
       <DependentUpon>toastr.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\owl.custom.finalize.css.map">
+    <Content Include="Content\styles\css\owl.custom.finalize.css.map">
       <DependentUpon>owl.custom.finalize.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\category-page.css.map">
+    <Content Include="Content\styles\css\category-page.css.map">
       <DependentUpon>category-page.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\color-fonts.css.map">
+    <Content Include="Content\styles\css\color-fonts.css.map">
       <DependentUpon>color-fonts.css</DependentUpon>
     </Content>
-    <Content Include="Content\Less\color-fonts.less" />
-    <Content Include="Content\Less\footer-fixing.less" />
-    <Content Include="Content\Less\front-developer.less" />
-    <Content Include="Content\Less\less-imports.less" />
-    <Content Include="Content\Less\loader-spinner.less" />
-    <Content Include="Content\Less\menu-fix.less" />
-    <Content Include="Content\Less\owl.custom.finalize.less" />
-    <Content Include="Content\Less\responsive.less" />
-    <Content Include="Content\Less\search-page.less" />
-    <Content Include="Content\Less\see-more-btn.less" />
-    <Content Include="Content\Less\seo-optimize.less" />
-    <Content Include="Content\Less\utilities\input-with-others.less" />
-    <Content Include="Content\Published.Scripts\front-end.js" />
-    <Content Include="Content\Published.Scripts\front-end.min.js">
+    <Content Include="Content\styles\Less\color-fonts.less" />
+    <Content Include="Content\styles\Less\footer-fixing.less" />
+    <Content Include="Content\styles\Less\front-developer.less" />
+    <Content Include="Content\styles\Less\less-imports.less" />
+    <Content Include="Content\styles\Less\loader-spinner.less" />
+    <Content Include="Content\styles\Less\menu-fix.less" />
+    <Content Include="Content\styles\Less\owl.custom.finalize.less" />
+    <Content Include="Content\styles\Less\responsive.less" />
+    <Content Include="Content\styles\Less\search-page.less" />
+    <Content Include="Content\styles\Less\see-more-btn.less" />
+    <Content Include="Content\styles\Less\seo-optimize.less" />
+    <Content Include="Content\styles\Less\utilities\input-with-others.less" />
+    <Content Include="Content\published\Scripts\front-end.js" />
+    <Content Include="Content\published\Scripts\front-end.min.js">
       <DependentUpon>front-end.js</DependentUpon>
     </Content>
-    <Content Include="Content\Published.Scripts\jqueryval.js" />
-    <Content Include="Content\Published.Scripts\jqueryval.min.js">
+    <Content Include="Content\published\Scripts\jqueryval.js" />
+    <Content Include="Content\published\Scripts\jqueryval.min.js">
       <DependentUpon>jqueryval.js</DependentUpon>
     </Content>
-    <Content Include="Content\Published.Scripts\upload.js" />
-    <Content Include="Content\Published.Scripts\upload.min.js">
+    <Content Include="Content\published\Scripts\upload.js" />
+    <Content Include="Content\published\Scripts\upload.min.js">
       <DependentUpon>upload.js</DependentUpon>
     </Content>
-    <Content Include="Content\Published.Styles\Styles.css" />
-    <Content Include="Content\Published.Styles\Styles.min.css">
+    <Content Include="Content\published\Styles\Styles.css" />
+    <Content Include="Content\published\Styles\Styles.min.css">
       <DependentUpon>Styles.css</DependentUpon>
     </Content>
-    <Content Include="JavaScript-Mvc-framework\events\binding.js" />
-    <Content Include="JavaScript-Mvc-framework\events\list.js" />
-    <Content Include="JavaScript-Mvc-framework\controllers\account-controller.js" />
-    <Content Include="JavaScript-Mvc-framework\controllers\reviews-controller.js" />
-    <Content Include="JavaScript-Mvc-framework\controllers\tags-controller.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\bootbox.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\bootstrap-dialog.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\arrowleft.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\arrowright.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\arrow_left.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\arrow_left2.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\arrow_right.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\arrow_right2.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\boxed_bgtile.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\bullet.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\bullets.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\bullets2.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\bullet_boxed.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\coloredbg.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\gridtile.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\gridtile_3x3.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\gridtile_3x3_white.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\gridtile_white.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\large_left.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\large_right.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\loader.gif" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\navigdots.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\navigdots_bgtile.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\shadow1.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\shadow2.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\shadow3.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\small_left.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\small_left_boxed.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\small_right.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\small_right_boxed.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\assets\timer.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\css\settings.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\font\revicons90c6.eot" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\font\revicons90c6.svg" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\font\revicons90c6.ttf" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\font\revicons90c6.woff" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\images\gradient\g30.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\images\gradient\g40.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\js\jquery.themepunch.revolution.min.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\revolution-slider\js\jquery.themepunch.tools.min.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\bootstrap-datetimepicker.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\bootstrap-select.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\bootstrap-table.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\ckeditor-jquery-adapter.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\ckeditor.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\DevOrgPlugins\ComboOptions.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\DevOrgPlugins\developers-organism.country-phone.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\DevOrgPlugins\developers-organism.dynamicSelect.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\DevOrgPlugins\dev-component-runner.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\DevOrgPlugins\developers-organism.component.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\DevOrgPlugins\byId.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\DevOrgPlugins\jquery.server-validate.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\DevOrgPlugins\WeReviewApps.js" />
-    <Content Include="Content\Less\bootstrap-select.less" />
-    <Content Include="Content\Less\bootstrap-select.variables.less" />
-    <Content Include="Content\Less\editor-templates.less" />
-    <Content Include="Content\Less\editor-templates.variables.less" />
-    <Content Include="Content\Less\fonts-rimixens.less" />
-    <Content Include="Content\Less\footer.variables.less" />
-    <Content Include="Content\Less\front-developer.variables.less" />
-    <Content Include="Content\Less\header.less" />
-    <Content Include="Content\Less\override-mvc.less" />
-    <Content Include="Content\Less\remixens\elements.less" />
-    <Content Include="Content\Less\remixens\extra-remixens.less" />
-    <Content Include="Content\Less\remixens\global.less" />
-    <Content Include="Content\Less\remixens\lesshat.less" />
-    <Content Include="Content\Less\remixens\variables.less" />
-    <Content Include="Content\Less\validator.less" />
-    <Content Include="Content\css\bootstrap-select.css.map">
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\events\binding.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\events\list.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\controllers\account-controller.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\controllers\reviews-controller.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\controllers\tags-controller.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\bootbox.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\bootstrap-dialog.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\arrowleft.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\arrowright.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\arrow_left.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\arrow_left2.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\arrow_right.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\arrow_right2.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\boxed_bgtile.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\bullet.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\bullets.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\bullets2.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\bullet_boxed.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\coloredbg.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\gridtile.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\gridtile_3x3.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\gridtile_3x3_white.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\gridtile_white.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\large_left.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\large_right.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\loader.gif" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\navigdots.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\navigdots_bgtile.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\shadow1.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\shadow2.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\shadow3.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\small_left.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\small_left_boxed.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\small_right.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\small_right_boxed.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\assets\timer.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\css\settings.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\font\revicons90c6.eot" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\font\revicons90c6.svg" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\font\revicons90c6.ttf" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\font\revicons90c6.woff" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\images\gradient\g30.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\images\gradient\g40.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\js\jquery.themepunch.revolution.min.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\revolution-slider\js\jquery.themepunch.tools.min.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\bootstrap-datetimepicker.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\bootstrap-select.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\bootstrap-table.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\ckeditor-jquery-adapter.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\ckeditor.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\DevOrgPlugins\ComboOptions.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\DevOrgPlugins\developers-organism.country-phone.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\DevOrgPlugins\developers-organism.dynamicSelect.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\DevOrgPlugins\dev-component-runner.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\DevOrgPlugins\developers-organism.component.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\DevOrgPlugins\byId.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\DevOrgPlugins\jquery.server-validate.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\DevOrgPlugins\WeReviewApps.js" />
+    <Content Include="Content\styles\Less\bootstrap-select.less" />
+    <Content Include="Content\styles\Less\bootstrap-select.variables.less" />
+    <Content Include="Content\styles\Less\editor-templates.less" />
+    <Content Include="Content\styles\Less\editor-templates.variables.less" />
+    <Content Include="Content\styles\Less\fonts-rimixens.less" />
+    <Content Include="Content\styles\Less\footer.variables.less" />
+    <Content Include="Content\styles\Less\front-developer.variables.less" />
+    <Content Include="Content\styles\Less\header.less" />
+    <Content Include="Content\styles\Less\override-mvc.less" />
+    <Content Include="Content\styles\Less\remixens\elements.less" />
+    <Content Include="Content\styles\Less\remixens\extra-remixens.less" />
+    <Content Include="Content\styles\Less\remixens\global.less" />
+    <Content Include="Content\styles\Less\remixens\lesshat.less" />
+    <Content Include="Content\styles\Less\remixens\variables.less" />
+    <Content Include="Content\styles\Less\validator.less" />
+    <Content Include="Content\styles\css\bootstrap-select.css.map">
       <DependentUpon>bootstrap-select.css</DependentUpon>
     </Content>
-    <Content Include="Content\Less\header.variables.less" />
-    <Content Include="Content\css\validator.css.map">
+    <Content Include="Content\styles\Less\header.variables.less" />
+    <Content Include="Content\styles\css\validator.css.map">
       <DependentUpon>validator.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\bootstrap-tag.css.map">
+    <Content Include="Content\styles\css\bootstrap-tag.css.map">
       <DependentUpon>bootstrap-tag.css</DependentUpon>
     </Content>
-    <Content Include="Content\Less\override-mvc.variables.less" />
-    <Content Include="Content\Less\bootstrap-tagsinput.less" />
-    <Content Include="Content\Less\backend-developer.less" />
-    <Content Include="Content\css\backend-developer.css.map">
+    <Content Include="Content\styles\Less\override-mvc.variables.less" />
+    <Content Include="Content\styles\Less\bootstrap-tagsinput.less" />
+    <Content Include="Content\styles\Less\backend-developer.less" />
+    <Content Include="Content\styles\css\backend-developer.css.map">
       <DependentUpon>backend-developer.css</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\Feedbacks\Done.cshtml" />
-    <Content Include="JavaScript-Mvc-framework\libs\FrontEnd\wow.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\jquery.blockUI.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\dialog.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\dialog_ie.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\dialog_ie7.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\dialog_ie8.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\dialog_iequirks.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\dialog_opera.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\editor.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\editor_gecko.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\editor_ie.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\editor_ie7.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\editor_ie8.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\editor_iequirks.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\dialog.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\dialog_ie.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\dialog_ie7.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\dialog_ie8.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\dialog_iequirks.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\dialog_opera.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\editor.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\editor_gecko.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\editor_ie.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\editor_ie7.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\editor_ie8.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\editor_iequirks.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\icons.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\icons_hidpi.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\images\arrow.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\images\close.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\images\hidpi\close.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\images\hidpi\lock-open.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\images\hidpi\lock.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\images\hidpi\refresh.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\images\lock-open.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\images\lock.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\images\refresh.png" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\sample\bootstrapck-sample.html" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\sample\css\bootstrapck-sample.css" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\sample\js\analytics.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\toastr.js" />
-    <Content Include="Fonts\fontawesome-webfont.svg" />
-    <Content Include="Fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="JavaScript-Mvc-framework\app.config.js" />
-    <Content Include="JavaScript-Mvc-framework\app.global.js" />
-    <Content Include="JavaScript-Mvc-framework\app.executeAfter.js" />
-    <Content Include="JavaScript-Mvc-framework\app.executeBefore.js" />
-    <Content Include="JavaScript-Mvc-framework\app.js" />
-    <Content Include="JavaScript-Mvc-framework\app.run.js" />
-    <Content Include="JavaScript-Mvc-framework\Areas\Admin\Controllers\navItems-controller.js" />
-    <Content Include="JavaScript-Mvc-framework\byId.js" />
-    <Content Include="JavaScript-Mvc-framework\component\component.list.js" />
-    <Content Include="JavaScript-Mvc-framework\controllers.js" />
-    <Content Include="JavaScript-Mvc-framework\controllers\home-controller.js" />
-    <Content Include="JavaScript-Mvc-framework\controllers\initialize.js" />
-    <Content Include="JavaScript-Mvc-framework\controllers\app-controller.js" />
-    <Content Include="JavaScript-Mvc-framework\component\component.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\ajax.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\clone.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\constants.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\hiddenContainer.js" />
-    <Content Include="JavaScript-Mvc-framework\initialize.js" />
-    <Content Include="JavaScript-Mvc-framework\attachInitialize.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\inputChangeTracker.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\modal.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\pagination.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\regularExp.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\selectors.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\spinner.js" />
-    <Content Include="JavaScript-Mvc-framework\extensions\urls.js" />
-    <Content Include="Content\Less\remixens\additional-less-functions.less" />
-    <Content Include="Content\Less\remixens\responsive\responsive-placements.less" />
-    <Content Include="JavaScript-Mvc-framework\jQueryCaching.js" />
-    <Content Include="JavaScript-Mvc-framework\jQueryExtend.fn.js" />
-    <Content Include="JavaScript-Mvc-framework\jQueryExtend.js" />
-    <Content Include="JavaScript-Mvc-framework\Prototype\Array.js" />
-    <Content Include="JavaScript-Mvc-framework\schema\hashset.js" />
-    <Content Include="JavaScript-Mvc-framework\schema\schema.js" />
-    <Content Include="JavaScript-Mvc-framework\schema\url.js" />
-    <Content Include="Content\Less\remixens\responsive\responsive-width.less" />
-    <Content Include="Content\Less\remixens\responsive\responsive-centering.less" />
-    <Content Include="Content\Less\remixens\loop.less" />
-    <Content Include="Content\Less\utilities.less" />
-    <Content Include="Content\Less\utilities\margin.less" />
-    <Content Include="Content\Less\utilities\padding.less" />
-    <Content Include="Content\Less\utilities\fonts.less" />
-    <Content Include="Content\Less\utilities\alignments-center-float-margin.less" />
-    <Content Include="Content\Less\utilities\opacity.less" />
-    <Content Include="Content\Less\utilities\display.less" />
-    <Content Include="Content\Less\utilities\border-radius.less" />
-    <Content Include="Content\Less\utilities\gaps.less" />
-    <Content Include="Content\Less\utilities\indenting.less" />
-    <Content Include="Content\Less\spinner\google-spinner.less" />
-    <Content Include="Content\Less\remixens\condition.less" />
-    <Content Include="Content\css\editor-templates.css.map">
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\FrontEnd\wow.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\jquery.blockUI.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\dialog.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\dialog_ie.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\dialog_ie7.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\dialog_ie8.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\dialog_iequirks.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\dialog_opera.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\editor.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\editor_gecko.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\editor_ie.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\editor_ie7.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\editor_ie8.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\.temp\css\editor_iequirks.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\dialog.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\dialog_ie.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\dialog_ie7.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\dialog_ie8.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\dialog_iequirks.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\dialog_opera.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\editor.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\editor_gecko.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\editor_ie.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\editor_ie7.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\editor_ie8.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\editor_iequirks.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\icons.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\icons_hidpi.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\images\arrow.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\images\close.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\images\hidpi\close.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\images\hidpi\lock-open.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\images\hidpi\lock.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\images\hidpi\refresh.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\images\lock-open.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\images\lock.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\images\refresh.png" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\sample\bootstrapck-sample.html" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\sample\css\bootstrapck-sample.css" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\sample\js\analytics.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\toastr.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\app.config.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\app.global.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\app.executeAfter.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\app.executeBefore.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\app.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\app.run.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\Areas\Admin\Controllers\navItems-controller.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\byId.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\component\component.list.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\controllers.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\controllers\home-controller.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\controllers\initialize.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\controllers\app-controller.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\component\component.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\extensions\ajax.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\extensions\clone.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\extensions\constants.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\extensions\hiddenContainer.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\initialize.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\attachInitialize.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\extensions\inputChangeTracker.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\extensions\modal.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\extensions\pagination.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\extensions\regularExp.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\extensions\selectors.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\extensions\spinner.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\extensions\urls.js" />
+    <Content Include="Content\styles\Less\remixens\additional-less-functions.less" />
+    <Content Include="Content\styles\Less\remixens\responsive\responsive-placements.less" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\jQueryCaching.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\jQueryExtend.fn.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\jQueryExtend.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\Prototype\Array.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\schema\hashset.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\schema\schema.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\schema\url.js" />
+    <Content Include="Content\styles\Less\remixens\responsive\responsive-width.less" />
+    <Content Include="Content\styles\Less\remixens\responsive\responsive-centering.less" />
+    <Content Include="Content\styles\Less\remixens\loop.less" />
+    <Content Include="Content\styles\Less\utilities.less" />
+    <Content Include="Content\styles\Less\utilities\margin.less" />
+    <Content Include="Content\styles\Less\utilities\padding.less" />
+    <Content Include="Content\styles\Less\utilities\fonts.less" />
+    <Content Include="Content\styles\Less\utilities\alignments-center-float-margin.less" />
+    <Content Include="Content\styles\Less\utilities\opacity.less" />
+    <Content Include="Content\styles\Less\utilities\display.less" />
+    <Content Include="Content\styles\Less\utilities\border-radius.less" />
+    <Content Include="Content\styles\Less\utilities\gaps.less" />
+    <Content Include="Content\styles\Less\utilities\indenting.less" />
+    <Content Include="Content\styles\Less\spinner\google-spinner.less" />
+    <Content Include="Content\styles\Less\remixens\condition.less" />
+    <Content Include="Content\styles\css\editor-templates.css.map">
       <DependentUpon>editor-templates.css</DependentUpon>
     </Content>
-    <Content Include="Content\Less\utilities\add-on.less" />
-    <Content Include="Content\Less\bootstrap-select-overrides.less" />
-    <Content Include="Content\css\bootstrap-select-overrides.css.map">
+    <Content Include="Content\styles\Less\utilities\add-on.less" />
+    <Content Include="Content\styles\Less\bootstrap-select-overrides.less" />
+    <Content Include="Content\styles\css\bootstrap-select-overrides.css.map">
       <DependentUpon>bootstrap-select-overrides.css</DependentUpon>
     </Content>
-    <Content Include="Content\Less\bootstrap-tagsinput-override.less" />
-    <Content Include="Content\css\bootstrap-tagsinput-override.css.map">
+    <Content Include="Content\styles\Less\bootstrap-tagsinput-override.less" />
+    <Content Include="Content\styles\css\bootstrap-tagsinput-override.css.map">
       <DependentUpon>bootstrap-tagsinput-override.css</DependentUpon>
     </Content>
-    <Content Include="Content\Less\controllers-style.less" />
+    <Content Include="Content\styles\Less\controllers-style.less" />
     <Content Include="Areas\Admin\Views\Config\_Tabs-List.cshtml" />
-    <Content Include="Content\Less\Animate\animationclasses.less" />
-    <Content Include="Content\Less\Animate\bounce.less" />
-    <Content Include="Content\Less\Animate\bounceIn.less" />
-    <Content Include="Content\Less\Animate\bounceInDown.less" />
-    <Content Include="Content\Less\Animate\bounceInLeft.less" />
-    <Content Include="Content\Less\Animate\bounceInRight.less" />
-    <Content Include="Content\Less\Animate\bounceInUp.less" />
-    <Content Include="Content\Less\Animate\bounceOut.less" />
-    <Content Include="Content\Less\Animate\bounceOutDown.less" />
-    <Content Include="Content\Less\Animate\bounceOutLeft.less" />
-    <Content Include="Content\Less\Animate\bounceOutRight.less" />
-    <Content Include="Content\Less\Animate\bounceOutUp.less" />
-    <Content Include="Content\Less\Animate\fadeIn.less" />
-    <Content Include="Content\Less\Animate\fadeInDown.less" />
-    <Content Include="Content\Less\Animate\fadeInDownBig.less" />
-    <Content Include="Content\Less\Animate\fadeInLeft.less" />
-    <Content Include="Content\Less\Animate\fadeInLeftBig.less" />
-    <Content Include="Content\Less\Animate\fadeInRight.less" />
-    <Content Include="Content\Less\Animate\fadeInRightBig.less" />
-    <Content Include="Content\Less\Animate\fadeInUp.less" />
-    <Content Include="Content\Less\Animate\fadeInUpBig.less" />
-    <Content Include="Content\Less\Animate\fadeOut.less" />
-    <Content Include="Content\Less\Animate\fadeOutDown.less" />
-    <Content Include="Content\Less\Animate\fadeOutDownBig.less" />
-    <Content Include="Content\Less\Animate\fadeOutLeft.less" />
-    <Content Include="Content\Less\Animate\fadeOutLeftBig.less" />
-    <Content Include="Content\Less\Animate\fadeOutRight.less" />
-    <Content Include="Content\Less\Animate\fadeOutRightBig.less" />
-    <Content Include="Content\Less\Animate\fadeOutUp.less" />
-    <Content Include="Content\Less\Animate\fadeOutUpBig.less" />
-    <Content Include="Content\Less\Animate\flash.less" />
-    <Content Include="Content\Less\Animate\flip.less" />
-    <Content Include="Content\Less\Animate\flipInX.less" />
-    <Content Include="Content\Less\Animate\flipInY.less" />
-    <Content Include="Content\Less\Animate\flipOutX.less" />
-    <Content Include="Content\Less\Animate\flipOutY.less" />
-    <Content Include="Content\Less\Animate\hinge.less" />
-    <Content Include="Content\Less\Animate\lightSpeedIn.less" />
-    <Content Include="Content\Less\Animate\lightSpeedOut.less" />
-    <Content Include="Content\Less\Animate\mixins.less" />
-    <Content Include="Content\Less\Animate\pulse.less" />
-    <Content Include="Content\Less\Animate\rollIn.less" />
-    <Content Include="Content\Less\Animate\rollOut.less" />
-    <Content Include="Content\Less\Animate\rotateIn.less" />
-    <Content Include="Content\Less\Animate\rotateInDownLeft.less" />
-    <Content Include="Content\Less\Animate\rotateInDownRight.less" />
-    <Content Include="Content\Less\Animate\rotateInUpLeft.less" />
-    <Content Include="Content\Less\Animate\rotateInUpRight.less" />
-    <Content Include="Content\Less\Animate\rotateOut.less" />
-    <Content Include="Content\Less\Animate\rotateOutDownLeft.less" />
-    <Content Include="Content\Less\Animate\rotateOutDownRight.less" />
-    <Content Include="Content\Less\Animate\rotateOutUpLeft.less" />
-    <Content Include="Content\Less\Animate\rotateOutUpRight.less" />
-    <Content Include="Content\Less\Animate\shake.less" />
-    <Content Include="Content\Less\Animate\swing.less" />
-    <Content Include="Content\Less\Animate\tada.less" />
-    <Content Include="Content\Less\Animate\wobble.less" />
-    <Content Include="Content\Less\animate.less" />
-    <Content Include="Content\css\animate.css.map">
+    <Content Include="Content\styles\Less\Animate\animationclasses.less" />
+    <Content Include="Content\styles\Less\Animate\bounce.less" />
+    <Content Include="Content\styles\Less\Animate\bounceIn.less" />
+    <Content Include="Content\styles\Less\Animate\bounceInDown.less" />
+    <Content Include="Content\styles\Less\Animate\bounceInLeft.less" />
+    <Content Include="Content\styles\Less\Animate\bounceInRight.less" />
+    <Content Include="Content\styles\Less\Animate\bounceInUp.less" />
+    <Content Include="Content\styles\Less\Animate\bounceOut.less" />
+    <Content Include="Content\styles\Less\Animate\bounceOutDown.less" />
+    <Content Include="Content\styles\Less\Animate\bounceOutLeft.less" />
+    <Content Include="Content\styles\Less\Animate\bounceOutRight.less" />
+    <Content Include="Content\styles\Less\Animate\bounceOutUp.less" />
+    <Content Include="Content\styles\Less\Animate\fadeIn.less" />
+    <Content Include="Content\styles\Less\Animate\fadeInDown.less" />
+    <Content Include="Content\styles\Less\Animate\fadeInDownBig.less" />
+    <Content Include="Content\styles\Less\Animate\fadeInLeft.less" />
+    <Content Include="Content\styles\Less\Animate\fadeInLeftBig.less" />
+    <Content Include="Content\styles\Less\Animate\fadeInRight.less" />
+    <Content Include="Content\styles\Less\Animate\fadeInRightBig.less" />
+    <Content Include="Content\styles\Less\Animate\fadeInUp.less" />
+    <Content Include="Content\styles\Less\Animate\fadeInUpBig.less" />
+    <Content Include="Content\styles\Less\Animate\fadeOut.less" />
+    <Content Include="Content\styles\Less\Animate\fadeOutDown.less" />
+    <Content Include="Content\styles\Less\Animate\fadeOutDownBig.less" />
+    <Content Include="Content\styles\Less\Animate\fadeOutLeft.less" />
+    <Content Include="Content\styles\Less\Animate\fadeOutLeftBig.less" />
+    <Content Include="Content\styles\Less\Animate\fadeOutRight.less" />
+    <Content Include="Content\styles\Less\Animate\fadeOutRightBig.less" />
+    <Content Include="Content\styles\Less\Animate\fadeOutUp.less" />
+    <Content Include="Content\styles\Less\Animate\fadeOutUpBig.less" />
+    <Content Include="Content\styles\Less\Animate\flash.less" />
+    <Content Include="Content\styles\Less\Animate\flip.less" />
+    <Content Include="Content\styles\Less\Animate\flipInX.less" />
+    <Content Include="Content\styles\Less\Animate\flipInY.less" />
+    <Content Include="Content\styles\Less\Animate\flipOutX.less" />
+    <Content Include="Content\styles\Less\Animate\flipOutY.less" />
+    <Content Include="Content\styles\Less\Animate\hinge.less" />
+    <Content Include="Content\styles\Less\Animate\lightSpeedIn.less" />
+    <Content Include="Content\styles\Less\Animate\lightSpeedOut.less" />
+    <Content Include="Content\styles\Less\Animate\mixins.less" />
+    <Content Include="Content\styles\Less\Animate\pulse.less" />
+    <Content Include="Content\styles\Less\Animate\rollIn.less" />
+    <Content Include="Content\styles\Less\Animate\rollOut.less" />
+    <Content Include="Content\styles\Less\Animate\rotateIn.less" />
+    <Content Include="Content\styles\Less\Animate\rotateInDownLeft.less" />
+    <Content Include="Content\styles\Less\Animate\rotateInDownRight.less" />
+    <Content Include="Content\styles\Less\Animate\rotateInUpLeft.less" />
+    <Content Include="Content\styles\Less\Animate\rotateInUpRight.less" />
+    <Content Include="Content\styles\Less\Animate\rotateOut.less" />
+    <Content Include="Content\styles\Less\Animate\rotateOutDownLeft.less" />
+    <Content Include="Content\styles\Less\Animate\rotateOutDownRight.less" />
+    <Content Include="Content\styles\Less\Animate\rotateOutUpLeft.less" />
+    <Content Include="Content\styles\Less\Animate\rotateOutUpRight.less" />
+    <Content Include="Content\styles\Less\Animate\shake.less" />
+    <Content Include="Content\styles\Less\Animate\swing.less" />
+    <Content Include="Content\styles\Less\Animate\tada.less" />
+    <Content Include="Content\styles\Less\Animate\wobble.less" />
+    <Content Include="Content\styles\Less\animate.less" />
+    <Content Include="Content\styles\css\animate.css.map">
       <DependentUpon>animate.css</DependentUpon>
     </Content>
-    <Content Include="Content\Less\remixens\gradient.less" />
-    <Content Include="Content\css\override-mvc.css.map">
+    <Content Include="Content\styles\Less\remixens\gradient.less" />
+    <Content Include="Content\styles\css\override-mvc.css.map">
       <DependentUpon>override-mvc.css</DependentUpon>
     </Content>
-    <Content Include="Content\Less\bootstrap-dialog.less" />
-    <Content Include="Content\css\bootstrap-dialog.css.map">
+    <Content Include="Content\styles\Less\bootstrap-dialog.less" />
+    <Content Include="Content\styles\css\bootstrap-dialog.css.map">
       <DependentUpon>bootstrap-dialog.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\controllers-style.css.map">
+    <Content Include="Content\styles\css\controllers-style.css.map">
       <DependentUpon>controllers-style.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\see-more-btn.css.map">
+    <Content Include="Content\styles\css\see-more-btn.css.map">
       <DependentUpon>see-more-btn.css</DependentUpon>
     </Content>
-    <Content Include="Content\Published.Scripts\front-end.min.js.map">
+    <Content Include="Content\published\Scripts\front-end.min.js.map">
       <DependentUpon>front-end.min.js</DependentUpon>
     </Content>
-    <Content Include="Content\Published.Scripts\jqueryval.min.js.map">
+    <Content Include="Content\published\Scripts\jqueryval.min.js.map">
       <DependentUpon>jqueryval.min.js</DependentUpon>
     </Content>
-    <Content Include="Content\Published.Scripts\upload.min.js.map">
+    <Content Include="Content\published\Scripts\upload.min.js.map">
       <DependentUpon>upload.min.js</DependentUpon>
     </Content>
     <None Include="bundleconfig.json" />
@@ -1009,100 +1009,100 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
-    <Content Include="Content\css\animate-refresh.css.map">
+    <Content Include="Content\styles\css\animate-refresh.css.map">
       <DependentUpon>animate-refresh.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\loader-spinner.css.map">
+    <Content Include="Content\styles\css\loader-spinner.css.map">
       <DependentUpon>loader-spinner.css</DependentUpon>
     </Content>
-    <None Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />
+    <None Include="Content\scripts\JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.intellisense.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\jQuery\jquery-2.2.3.js" />
     <Content Include="Sitemap.xml" />
     <Content Include="Areas\Admin\Views\Config\CleanSystem.cshtml" />
     <Content Include="Areas\Admin\Views\Apps\Moderate.cshtml" />
-    <Content Include="Content\css\front-developer.css.map">
+    <Content Include="Content\styles\css\front-developer.css.map">
       <DependentUpon>front-developer.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\header.css.map">
+    <Content Include="Content\styles\css\header.css.map">
       <DependentUpon>header.css</DependentUpon>
     </Content>
-    <Content Include="Content\Less\toastr.less" />
-    <Content Include="Content\Less\spinner\fallback.less" />
-    <Content Include="Content\Less\spinner\load1.less" />
-    <Content Include="Content\Less\spinner\load2.less" />
-    <Content Include="Content\Less\spinner\load3.less" />
-    <Content Include="Content\Less\spinner\load4.less" />
-    <Content Include="Content\Less\spinner\load5.less" />
-    <Content Include="Content\Less\spinner\load6.less" />
-    <Content Include="Content\Less\spinner\load7.less" />
-    <Content Include="Content\Less\spinner\load8.less" />
-    <Content Include="Content\Less\spinner\loading-bar.less" />
-    <Content Include="Content\Less\spinner\spinner-2.less" />
-    <Content Include="Content\Less\spinner\load9.less" />
-    <Content Include="Content\Less\spinner\signal.less" />
-    <Content Include="Content\Less\spinner\top-bar-loading.less" />
-    <Content Include="Content\Less\font-awesome\animated.less" />
-    <Content Include="Content\Less\font-awesome\bordered-pulled.less" />
-    <Content Include="Content\Less\font-awesome\core.less" />
-    <Content Include="Content\Less\font-awesome\fixed-width.less" />
-    <Content Include="Content\Less\font-awesome.less" />
-    <Content Include="Content\Less\font-awesome\icons.less" />
-    <Content Include="Content\Less\font-awesome\larger.less" />
-    <Content Include="Content\Less\font-awesome\list.less" />
-    <Content Include="Content\Less\font-awesome\mixins.less" />
-    <Content Include="Content\Less\font-awesome\path.less" />
-    <Content Include="Content\Less\font-awesome\rotated-flipped.less" />
-    <Content Include="Content\Less\font-awesome\screen-reader.less" />
-    <Content Include="Content\Less\font-awesome\stacked.less" />
-    <Content Include="Content\Less\font-awesome\variables.less" />
-    <Content Include="Content\css\font-awesome.css.map">
+    <Content Include="Content\styles\Less\toastr.less" />
+    <Content Include="Content\styles\Less\spinner\fallback.less" />
+    <Content Include="Content\styles\Less\spinner\load1.less" />
+    <Content Include="Content\styles\Less\spinner\load2.less" />
+    <Content Include="Content\styles\Less\spinner\load3.less" />
+    <Content Include="Content\styles\Less\spinner\load4.less" />
+    <Content Include="Content\styles\Less\spinner\load5.less" />
+    <Content Include="Content\styles\Less\spinner\load6.less" />
+    <Content Include="Content\styles\Less\spinner\load7.less" />
+    <Content Include="Content\styles\Less\spinner\load8.less" />
+    <Content Include="Content\styles\Less\spinner\loading-bar.less" />
+    <Content Include="Content\styles\Less\spinner\spinner-2.less" />
+    <Content Include="Content\styles\Less\spinner\load9.less" />
+    <Content Include="Content\styles\Less\spinner\signal.less" />
+    <Content Include="Content\styles\Less\spinner\top-bar-loading.less" />
+    <Content Include="Content\styles\Less\font-awesome\animated.less" />
+    <Content Include="Content\styles\Less\font-awesome\bordered-pulled.less" />
+    <Content Include="Content\styles\Less\font-awesome\core.less" />
+    <Content Include="Content\styles\Less\font-awesome\fixed-width.less" />
+    <Content Include="Content\styles\Less\font-awesome.less" />
+    <Content Include="Content\styles\Less\font-awesome\icons.less" />
+    <Content Include="Content\styles\Less\font-awesome\larger.less" />
+    <Content Include="Content\styles\Less\font-awesome\list.less" />
+    <Content Include="Content\styles\Less\font-awesome\mixins.less" />
+    <Content Include="Content\styles\Less\font-awesome\path.less" />
+    <Content Include="Content\styles\Less\font-awesome\rotated-flipped.less" />
+    <Content Include="Content\styles\Less\font-awesome\screen-reader.less" />
+    <Content Include="Content\styles\Less\font-awesome\stacked.less" />
+    <Content Include="Content\styles\Less\font-awesome\variables.less" />
+    <Content Include="Content\styles\css\font-awesome.css.map">
       <DependentUpon>font-awesome.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\footer-fixing.css.map">
+    <Content Include="Content\styles\css\footer-fixing.css.map">
       <DependentUpon>footer-fixing.css</DependentUpon>
     </Content>
-    <None Include="JavaScript-Mvc-framework\libs\Data\country-info-select-ready.json" />
-    <None Include="JavaScript-Mvc-framework\libs\Data\country-info.json" />
-    <Content Include="JavaScript-Mvc-framework\libs\FrontEnd\base-theme.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\FrontEnd\front-developer.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\FrontEnd\jquery.isotope.min.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\FrontEnd\jquery.number.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\FrontEnd\jquery.stellar.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\FrontEnd\jquery.sticky.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\FrontEnd\owl.carousel.min.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\jquery-ui.min.js" />
+    <None Include="Content\scripts\JavaScript-Mvc-framework\libs\Data\country-info-select-ready.json" />
+    <None Include="Content\scripts\JavaScript-Mvc-framework\libs\Data\country-info.json" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\FrontEnd\base-theme.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\FrontEnd\front-developer.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\FrontEnd\jquery.isotope.min.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\FrontEnd\jquery.number.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\FrontEnd\jquery.stellar.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\FrontEnd\jquery.sticky.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\FrontEnd\owl.carousel.min.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\jquery-ui.min.js" />
     <Content Include="Content\images\loading.gif" />
-    <Content Include="JavaScript-Mvc-framework\libs\bootstrap-table-filter.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\bootstrap.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\jquery.elastic.source.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\jquery.unobtrusive-ajax.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\jquery.validate.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\jquery.validate.min.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\jquery.validate.unobtrusive.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\jquery.validate.unobtrusive.min.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\modernizr-2.8.3.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\moment.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\star-rating.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\Tag-it\bootstrap-tagsinput.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\Tag-it\bootstrap3-typeahead.min.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\Tag-it\jquery.autoGrowInput.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\underscore.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\Upload\bootstrap-progressbar.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\Upload\canvas-to-blob.min.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\DevOrgPlugins\developers-organism.upload.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\Upload\jquery.fileupload-audio.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\Upload\jquery.fileupload-image.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\Upload\jquery.fileupload-process.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\Upload\jquery.fileupload-ui.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\Upload\jquery.fileupload-validate.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\Upload\jquery.fileupload-video.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\Upload\jquery.fileupload.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\Upload\jquery.iframe-transport.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\Upload\jquery.ui.widget.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\Upload\load-image.all.min.js" />
-    <Content Include="JavaScript-Mvc-framework\libs\validation.js" />
-    <Content Include="ExternalDll\LinqKit.dll" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\bootstrap-table-filter.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\bootstrap.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\jquery.elastic.source.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\jquery.unobtrusive-ajax.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\jquery.validate.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\jquery.validate.min.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\modernizr-2.8.3.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\moment.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\star-rating.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\Tag-it\bootstrap-tagsinput.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\Tag-it\bootstrap3-typeahead.min.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\Tag-it\jquery.autoGrowInput.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\underscore.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\Upload\bootstrap-progressbar.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\Upload\canvas-to-blob.min.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\DevOrgPlugins\developers-organism.upload.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\Upload\jquery.fileupload-audio.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\Upload\jquery.fileupload-image.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\Upload\jquery.fileupload-process.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\Upload\jquery.fileupload-ui.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\Upload\jquery.fileupload-validate.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\Upload\jquery.fileupload-video.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\Upload\jquery.fileupload.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\Upload\jquery.iframe-transport.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\Upload\jquery.ui.widget.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\Upload\load-image.all.min.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\validation.js" />
+    <Content Include="Library\LinqKit.dll" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -1111,10 +1111,10 @@
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Config\Index.cshtml" />
     <Content Include="Icon.png" />
-    <Content Include="Images\error-icon-bucket.png" />
-    <Content Include="Images\slider-background-image.jpg" />
+    <Content Include="Content\images\error-icon-bucket.png" />
+    <Content Include="Content\images\slider-background-image.jpg" />
     <Content Include="robots.txt" />
-    <Content Include="JavaScript-Mvc-framework\libs\bootstrap-table-export.js" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\bootstrap-table-export.js" />
     <Content Include="Areas\Admin\Views\ImageResizeSettings\Create.cshtml" />
     <Content Include="Areas\Admin\Views\ImageResizeSettings\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\ImageResizeSettings\Details.cshtml" />
@@ -1174,8 +1174,8 @@
     <Content Include="Areas\Admin\Views\FeaturedImages\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\FeaturedImages\Index.cshtml" />
     <Content Include="Areas\Admin\Views\FeaturedImages\_CreateOrEdit.cshtml" />
-    <Content Include="Styles\CompactCSS.css" />
-    <Content Include="Styles\CompactCSS.min.css">
+    <Content Include="Content\styles\CompactCSS.css" />
+    <Content Include="Content\styles\CompactCSS.min.css">
       <DependentUpon>CompactCSS.css</DependentUpon>
     </Content>
     <Content Include="Uploads\Images\Advertise\Readme.txt" />
@@ -1215,10 +1215,10 @@
     <Content Include="Views\Shared\EditorTemplates\UploaderAuto.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UploaderPlain.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Username.cshtml" />
-    <Content Include="JavaScript-Mvc-framework\libs\jquery.unobtrusive-ajax.min.js.map">
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\jquery.unobtrusive-ajax.min.js.map">
       <DependentUpon>jquery.unobtrusive-ajax.min.js</DependentUpon>
     </Content>
-    <None Include="JavaScript-Mvc-framework\libs\jquery.validate-vsdoc.js" />
+    <None Include="Content\scripts\JavaScript-Mvc-framework\libs\jquery.validate-vsdoc.js" />
     <EntityDeploy Include="Models\EntityModel\WereViewAppModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WereViewAppModel.Designer.cs</LastGenOutput>
@@ -1226,7 +1226,7 @@
     <Content Include="Models\EntityModel\WereViewAppModel.edmx.diagram">
       <DependentUpon>WereViewAppModel.edmx</DependentUpon>
     </Content>
-    <Content Include="JavaScript-Mvc-framework\libs\jquery.validate.min.js.map">
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\jquery.validate.min.js.map">
       <DependentUpon>jquery.validate.min.js</DependentUpon>
     </Content>
     <Content Include="Web.config">
@@ -1317,40 +1317,31 @@
     <Content Include="Views\Shared\_401.cshtml" />
     <Content Include="Views\Report\App.cshtml" />
     <Content Include="Views\Report\Review.cshtml" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\readme.md" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\gecko\editor_gecko.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\ie7\dialog_ie7.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\ie7\editor_ie7.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\ie8\dialog_ie8.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\ie8\editor_ie8.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\iequirks\dialog_iequirks.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\iequirks\editor_iequirks.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\ie\dialog_ie.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\ie\editor_ie.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\opera\dialog_opera.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\editor.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_colorpanel.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_elementspath.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_mainui.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_menu.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_panel.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_presets.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_reset.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_richcombo.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_toolbar.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\config\_colors.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\config\_config.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\config\_defaults.scss" />
-    <Content Include="JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\dialog\dialog.scss" />
-    <Content Include="Fonts\fontawesome-webfont.eot" />
-    <Content Include="Fonts\fontawesome-webfont.ttf" />
-    <Content Include="Fonts\fontawesome-webfont.woff" />
-    <Content Include="Fonts\fontawesome-webfont.woff2" />
-    <Content Include="Fonts\FontAwesome.otf" />
-    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\readme.md" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\gecko\editor_gecko.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\ie7\dialog_ie7.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\ie7\editor_ie7.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\ie8\dialog_ie8.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\ie8\editor_ie8.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\iequirks\dialog_iequirks.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\iequirks\editor_iequirks.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\ie\dialog_ie.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\ie\editor_ie.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\browser-specific\opera\dialog_opera.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\editor.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_colorpanel.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_elementspath.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_mainui.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_menu.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_panel.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_presets.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_reset.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_richcombo.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\components\_toolbar.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\config\_colors.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\config\_config.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\config\_defaults.scss" />
+    <Content Include="Content\scripts\JavaScript-Mvc-framework\libs\skins\bootstrapck\scss\dialog\dialog.scss" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <Content Include="Views\Shared\EditorTemplates\Double.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
@@ -1455,7 +1446,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:14809/</IISUrl>
+          <IISUrl>http://localhost:9621/</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
           <IISAppRootUrl>http://localhost:14809/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
