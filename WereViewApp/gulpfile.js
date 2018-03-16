@@ -42,3 +42,5 @@ gulp.task("inject-min-css", function () {
         .pipe(inject(gulp.src(config.minCssDestination + config.minCss)))
         .pipe(gulp.dest("."));
 });
+
+gulp.task('default', ['min-all-js', 'min-all-css', 'inject-min-js', 'inject-min-css']);
