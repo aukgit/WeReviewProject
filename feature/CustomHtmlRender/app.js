@@ -1,6 +1,8 @@
 
 var FILELIST = [];
-var EXTENSION = '.markdown';
+var FILELOCATION = null;
+var EXTENSION = null;
+
 var path = require('path'), fs=require('fs');
 function fromDir(startPath,filter){  
 
@@ -10,17 +12,8 @@ function fromDir(startPath,filter){
     }
     var files=fs.readdirSync(startPath);
     
-    for(var i=0;i<files.length;i++){
-       // var filename=path.join(startPath,files[i]);
-       // console.log(files[i]);
-       // var stat = fs.lstatSync(filename);
-       //  if (stat.isDirectory()){
-       //     fromDir(filename,filter); //recurse
-       //  }
-       //else if (filename.indexOf(filter)>=0) {         
+    for(var i=0;i<files.length;i++){       
          	FILELIST.push(files[i]);
-           // console.log(filename);         
-       // }; 
     };
     	
 };
@@ -36,7 +29,16 @@ function printHtml ()
     }
 }
 
-fromDir('./files',EXTENSION);
+function readConfig()
+{
+    var obj = require('./config.json');
+    EXTENSION = obj.Extension;
+    FILELOCATION = obj.FileLocation;  
+    
+}
+
+readConfig();
+fromDir(FILELOCATION,EXTENSION);
 printHtml();
 
 
