@@ -4,9 +4,9 @@
             "/View/Home/Index.cshtml" /* The HTML file */
         ],
         js: [
-            ".Content/script/published/front-end.js",
-            ".Content/script/published/jqueryval.js",
-            ".Content/script/published/upload.js"
+            //".Content/script/published/front-end.js",
+            //".Content/script/published/jqueryval.js",
+            //".Content/script/published/upload.js"
             /* List of js files in the order as they appear in index.html*/
         ],
         minJs: "js-min.js", /* Minified JS file name */
