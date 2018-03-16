@@ -81,3 +81,7 @@ WereViewApp/Properties/PublishProfiles/*.pubxml
 *.pubxml
 *.lock
 *.ide
+*.config
+*.ide-shm
+*.ide-wal
+*.config
