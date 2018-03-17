@@ -1,4 +1,4 @@
-###################
+﻿###################
 # compiled source #
 ###################
 *.com
@@ -22,6 +22,8 @@ _UpgradeReport_Files/
 ###############
 # Directories #
 ###############
+.vs/
+node_modules/
 bin/
 obj/
 TestResults/
@@ -78,3 +80,7 @@ ignored-password.txt
 WereViewApp/Properties/PublishProfiles/*.pubxml
 *.PublishSettings
 *.pubxml
+feature/CustomHtmlRender/node_modules/get-caller-file/package.json
+.vs/config/applicationhost.config
+.vs/config/applicationhost.config
+*.config

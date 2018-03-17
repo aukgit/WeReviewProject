@@ -1,0 +1,31 @@
+﻿@model GenerateEmailUsingRazor.Model.UserDetail
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    
+    
+<div>
+    Name : @Model.Name
+</div>
+<div>
+   Address : @Model.Address
+</div>
+    
+
+    <div>
+        @foreach (var prod in @Model.PurchasedItems)
+        {
+            <div>
+                <b>
+                    @prod
+                </b>
+            </div>
+        }
+    </div>
+</body>
+</html>
